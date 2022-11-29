@@ -11,7 +11,7 @@ info:
 
     This API is backwards compatible with version 1. Applications created using version 1 of the API can also be managed using version 2 (this version) of the API.
   title: Application API
-  version: 2.1.3
+  version: 2.1.4
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/application.v2.yml
@@ -543,11 +543,13 @@ components:
       description: RTC / Conversation Service related configuration
       properties:
         leg_persistence_time:
+          example: 5
           format: int32
           maximum: 31
           minimum: 1
           type: integer
         signed_callbacks:
+          example: true
           type: boolean
         webhooks:
           properties:
@@ -597,6 +599,7 @@ components:
       properties:
         conversation_ttl:
           description: ttl used by the NCCO in case you’re using a conversation action (is set in hours and is 48 by default)
+          example: 30
           type: integer
         payments:
           description: encompass all the payment related fields
@@ -607,21 +610,25 @@ components:
                 properties:
                   credential:
                     description: used to identify the gateway in the credentials service
+                    example: 26f2a89e-6fcd-11ed-a1eb-0242ac120002
                     type: string
                   mode:
                     description: determines if the user has completed the integration with the gateway
                     enum:
                       - test
                       - live
+                    example: live
                     type: string
                   type:
                     description: payment gateway type (Stripe, Azure)
+                    example: Stripe
                     type: string
                 type: object
               type: array
           type: object
         signed_callbacks:
           description: verify that a request is coming from Vonage servers (a jwt token will be sent on the callback authorization header)
+          example: true
           type: boolean
         webhooks:
           properties:

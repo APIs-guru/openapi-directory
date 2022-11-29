@@ -30,7 +30,6 @@ externalDocs:
   url: https://developers.google.com/games/
 tags:
   - name: achievementConfigurations
-  - name: imageConfigurations
   - name: leaderboardConfigurations
 paths:
   "/games/v1configuration/achievements/{achievementId}":
@@ -271,53 +270,6 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - leaderboardConfigurations
-  "/games/v1configuration/images/{resourceId}/imageType/{imageType}":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Uploads an image for a resource with the given ID and image type.
-      operationId: gamesConfiguration.imageConfigurations.upload
-      parameters:
-        - description: The ID of the resource used by this method.
-          in: path
-          name: resourceId
-          required: true
-          schema:
-            type: string
-        - description: Selects which image in a resource for this method.
-          in: path
-          name: imageType
-          required: true
-          schema:
-            enum:
-              - IMAGE_TYPE_UNSPECIFIED
-              - ACHIEVEMENT_ICON
-              - LEADERBOARD_ICON
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ImageConfiguration"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/androidpublisher
-          Oauth2c:
-            - https://www.googleapis.com/auth/androidpublisher
-      tags:
-        - imageConfigurations
   "/games/v1configuration/leaderboards/{leaderboardId}":
     delete:
       description: Delete the leaderboard configuration with the given ID.
@@ -599,26 +551,6 @@ components:
         suffix:
           $ref: "#/components/schemas/GamesNumberAffixConfiguration"
           description: An optional suffix for the NUMERIC format type. These strings follow the same plural rules as all Android string resources.
-      type: object
-    ImageConfiguration:
-      description: An image configuration resource.
-      properties:
-        imageType:
-          description: The image type for the image.
-          enum:
-            - IMAGE_TYPE_UNSPECIFIED
-            - ACHIEVEMENT_ICON
-            - LEADERBOARD_ICON
-          type: string
-        kind:
-          description: Uniquely identifies the type of this resource. Value is always the fixed string `gamesConfiguration#imageConfiguration`.
-          type: string
-        resourceId:
-          description: The resource ID of resource which the image belongs to.
-          type: string
-        url:
-          description: The url for this image.
-          type: string
       type: object
     LeaderboardConfiguration:
       description: An leaderboard configuration resource.

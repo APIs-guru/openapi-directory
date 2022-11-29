@@ -622,6 +622,36 @@ components:
             $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1Promotion"
           type: array
       type: object
+    GoogleCloudPaymentsResellerSubscriptionV1GoogleOnePayload:
+      description: Payload specific to Google One products.
+      properties:
+        campaigns:
+          description: Campaign attributed to sales of this subscription.
+          items:
+            type: string
+          type: array
+        offering:
+          description: The type of offering the subscription was sold by the partner. e.g. VAS.
+          enum:
+            - OFFERING_UNSPECIFIED
+            - OFFERING_VAS_BUNDLE
+            - OFFERING_VAS_STANDALONE
+            - OFFERING_HARD_BUNDLE
+            - OFFERING_SOFT_BUNDLE
+          type: string
+        salesChannel:
+          description: The type of sales channel through which the subscription was sold.
+          enum:
+            - CHANNEL_UNSPECIFIED
+            - CHANNEL_RETAIL
+            - CHANNEL_ONLINE_WEB
+            - CHANNEL_ONLINE_ANDROID_APP
+            - CHANNEL_ONLINE_IOS_APP
+          type: string
+        storeId:
+          description: The identifier for the partner store where the subscription was sold.
+          type: string
+      type: object
     GoogleCloudPaymentsResellerSubscriptionV1ListProductsResponse:
       properties:
         nextPageToken:
@@ -683,6 +713,16 @@ components:
             $ref: "#/components/schemas/GoogleTypeLocalizedText"
           readOnly: true
           type: array
+      type: object
+    GoogleCloudPaymentsResellerSubscriptionV1ProductPayload:
+      description: Specifies product specific payload.
+      properties:
+        googleOnePayload:
+          $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1GoogleOnePayload"
+          description: Payload specific to Google One products.
+        youtubePayload:
+          $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1YoutubePayload"
+          description: Payload specific to Youtube products.
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1ProductPriceConfig:
       description: Configs the prices in an available region.
@@ -898,7 +938,7 @@ components:
           type: string
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItem:
-      description: "Individual line item definition of a subscription. Next id: 9"
+      description: Individual line item definition of a subscription.
       properties:
         description:
           description: Output only. Description of this line item.
@@ -921,6 +961,9 @@ components:
         product:
           description: Required. Product resource name that identifies one the line item The format is 'partners/{partner_id}/products/{product_id}'.
           type: string
+        productPayload:
+          $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1ProductPayload"
+          description: Optional. Product specific payload for this line item.
         recurrenceType:
           description: Output only. The recurrence type of the line item.
           enum:
@@ -995,6 +1038,15 @@ components:
         subscription:
           $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1Subscription"
           description: The updated subscription resource.
+      type: object
+    GoogleCloudPaymentsResellerSubscriptionV1YoutubePayload:
+      description: Payload specific to Youtube products.
+      properties:
+        partnerEligibilityIds:
+          description: The list of eligibility_ids which are applicable for the line item.
+          items:
+            type: string
+          type: array
       type: object
     GoogleTypeLocalizedText:
       description: Localized variant of a text in a particular language.
