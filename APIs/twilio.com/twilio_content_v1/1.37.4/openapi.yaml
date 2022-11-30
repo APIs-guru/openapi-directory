@@ -1,0 +1,273 @@
+openapi: 3.0.1
+servers:
+  - url: https://content.twilio.com
+info:
+  contact:
+    email: support@twilio.com
+    name: Twilio Support
+    url: https://support.twilio.com
+  description: This is the public Twilio REST API.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.twilio.com/legal/tos
+  title: Twilio - Content
+  version: 1.37.4
+  x-apisguru-categories:
+    - telecom
+    - messaging
+  x-logo:
+    url: https://static1.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/twilio/twilio-oai/main/spec/json/twilio_content_v1.json
+      version: "3.0"
+  x-providerName: twilio.com
+  x-serviceName: twilio_content_v1
+paths:
+  /v1/Content:
+    description: A Content resource represents rich messaging content.
+    get:
+      description: Retrieve a list of Contents belonging to the account used to make the request
+      operationId: ListContent
+      parameters:
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  contents:
+                    items:
+                      $ref: "#/components/schemas/content.v1.content"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                title: ListContentResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://content.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - date_created
+        - date_updated
+        - sid
+        - account_sid
+        - friendly_name
+        - language
+        - variables
+        - types
+      mountName: contents
+      pathType: list
+  "/v1/Content/{Sid}":
+    delete:
+      description: Deletes a Content resource
+      operationId: DeleteContent
+      parameters:
+        - description: The Twilio-provided string that uniquely identifies the Content resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^HX[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    description: A Content resource represents rich messaging content.
+    get:
+      description: Fetch a Content resource by its unique Content Sid
+      operationId: FetchContent
+      parameters:
+        - description: The Twilio-provided string that uniquely identifies the Content resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^HX[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/content.v1.content"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://content.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - date_created
+        - date_updated
+        - sid
+        - account_sid
+        - friendly_name
+        - language
+        - variables
+        - types
+      mountName: contents
+      pathType: instance
+  "/v1/Content/{Sid}/ApprovalRequests":
+    description: An Approval Fetch resource represents the approval status of a Content resource.
+    get:
+      description: Fetch a Content resource's approval status by its unique Content Sid
+      operationId: FetchApprovalFetch
+      parameters:
+        - description: The Twilio-provided string that uniquely identifies the Content resource whose approval information to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^HX[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/content.v1.content.approval_fetch"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://content.twilio.com
+    x-twilio:
+      defaultOutputProperties:
+        - sid
+        - account_sid
+        - whatsapp
+      mountName: approval_fetch
+      parent: /Content/{Sid}
+      pathType: instance
+components:
+  schemas:
+    content.v1.content:
+      properties:
+        account_sid:
+          description: The SID of the Account that created the resource
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        date_created:
+          description: The RFC 2822 date and time in GMT that the resource was created
+          format: date-time
+          nullable: true
+          type: string
+        date_updated:
+          description: The RFC 2822 date and time in GMT that the resource was last updated
+          format: date-time
+          nullable: true
+          type: string
+        friendly_name:
+          description: A string name used to describe the Content resource
+          nullable: true
+          type: string
+        language:
+          description: Two-letter language code identifying the language the Content resource is in.
+          nullable: true
+          type: string
+        links:
+          description: A list of links related to the Content resource
+          format: uri-map
+          nullable: true
+          type: object
+        sid:
+          description: The unique string that identifies the resource
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^HX[0-9a-fA-F]{32}$
+          type: string
+        types:
+          description: The Content types (e.g. twilio/text) for this Content resource
+          nullable: true
+        url:
+          description: The URL of the resource, relative to `https://content.twilio.com`
+          format: uri
+          nullable: true
+          type: string
+        variables:
+          description: Defines the default placeholder values for variables included in the Content resource
+          nullable: true
+      type: object
+    content.v1.content.approval_fetch:
+      properties:
+        account_sid:
+          description: The SID of the Account that created the Content resource
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          description: The unique string that identifies the Content resource
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^HX[0-9a-fA-F]{32}$
+          type: string
+        url:
+          description: The URL of the resource, relative to `https://content.twilio.com`
+          format: uri
+          nullable: true
+          type: string
+        whatsapp:
+          description: Contains the whatsapp approval information for the Content resource
+          nullable: true
+      type: object
+  securitySchemes:
+    accountSid_authToken:
+      scheme: basic
+      type: http
+x-maturity:
+  - description: PLEASE NOTE that this is a Preview product that is subject to change. Use it with caution. If you currently do not have developer preview access, please contact help@twilio.com.
+    name: Preview

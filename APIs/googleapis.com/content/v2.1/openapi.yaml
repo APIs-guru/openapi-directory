@@ -5613,7 +5613,7 @@ paths:
         - pubsubnotificationsettings
   "/{merchantId}/quotas":
     get:
-      description: Lists the quota limit and quota usage per method for your Merchant Center account.
+      description: Lists the daily call quota and usage per method for your Merchant Center account.
       operationId: content.quotas.list
       parameters:
         - description: Required. The ID of the account that has quota. This account must be an admin.
@@ -8172,11 +8172,11 @@ components:
       description: Fields related to the [Best Sellers reports](https://support.google.com/merchants/answer/9488679).
       properties:
         categoryId:
-          description: Google product category ID to calculate the ranking for, represented in [Google's product taxonomy](https://support.google.com/merchants/answer/6324436).
+          description: Google product category ID to calculate the ranking for, represented in [Google's product taxonomy](https://support.google.com/merchants/answer/6324436). If a `WHERE` condition on `best_sellers.category_id` is not specified in the query, rankings for all top-level categories are returned.
           format: int64
           type: string
         countryCode:
-          description: Country where the ranking is calculated.
+          description: Country where the ranking is calculated. A `WHERE` condition on `best_sellers.country_code` is required in the query.
           type: string
         previousRank:
           description: Popularity rank in the previous week or month.
@@ -8216,9 +8216,9 @@ components:
           type: string
         reportDate:
           $ref: "#/components/schemas/Date"
-          description: "Report date. The value of this field can only be one of the following: * The first day of the week (Monday) for weekly reports. * The first day of the month for monthly reports."
+          description: "Report date. The value of this field can only be one of the following: * The first day of the week (Monday) for weekly reports. * The first day of the month for monthly reports. If a `WHERE` condition on `best_sellers.report_date` is not specified in the query, the latest available weekly or monthly report is returned."
         reportGranularity:
-          description: Granularity of the report. The ranking can be done over a week or a month timeframe.
+          description: Granularity of the report. The ranking can be done over a week or a month timeframe. A `WHERE` condition on `best_sellers.report_granularity` is required in the query.
           enum:
             - REPORT_GRANULARITY_UNSPECIFIED
             - WEEKLY
@@ -8729,7 +8729,7 @@ components:
           description: Deprecated. Use `feedLabel` instead. The country where the items in the feed will be included in the search index, represented as a CLDR territory code.
           type: string
         excludedDestinations:
-          description: The list of destinations to exclude for this target (corresponds to cleared check boxes in Merchant Center).
+          description: The list of destinations to exclude for this target (corresponds to cleared check boxes in Merchant Center). Products that are excluded from all destinations for more than 7 days are automatically deleted.
           items:
             type: string
           type: array
@@ -9864,17 +9864,17 @@ components:
           type: string
       type: object
     MethodQuota:
-      description: The quota information per method in the Content API.
+      description: The quota information per method in the Content API. Includes only methods with current usage greater than zero for your account.
       properties:
         method:
-          description: The method name, for example “products.list”. Method name does not contain version because quota can be shared between different API versions of the same method.
+          description: The method name, for example `products.list`. Method name does not contain version because quota can be shared between different API versions of the same method.
           type: string
         quotaLimit:
-          description: The current quota limit, for example the maximum number of calls for the method.
+          description: The current quota limit per day, meaning the maximum number of calls for the method.
           format: int64
           type: string
         quotaUsage:
-          description: The current quota usage, for example the number of calls for the method.
+          description: The current quota usage, meaning the number of calls already made to the method.
           format: int64
           type: string
       type: object
@@ -9886,7 +9886,7 @@ components:
           format: double
           type: number
         aovMicros:
-          description: Average order value - the average value (total price of items) of all placed orders. The currency of the returned value is stored in the currency_code segment. If this metric is selected, 'segments.currency_code' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency_code segment is populated in the response. **This metric cannot be segmented by product dimensions and customer_country_code.**
+          description: Average order value in micros (1 millionth of a standard unit, 1 USD = 1000000 micros) - the average value (total price of items) of all placed orders. The currency of the returned value is stored in the currency_code segment. If this metric is selected, 'segments.currency_code' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency_code segment is populated in the response. **This metric cannot be segmented by product dimensions and customer_country_code.**
           format: double
           type: number
         clicks:
@@ -9898,7 +9898,7 @@ components:
           format: double
           type: number
         conversionValueMicros:
-          description: Value of conversions in micros attributed to the product, reported on the conversion date. The metric is currently available only for the FREE_PRODUCT_LISTING program. The currency of the returned value is stored in the currency_code segment. If this metric is selected, 'segments.currency_code' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency_code segment is populated in the response.
+          description: Value of conversions in micros (1 millionth of a standard unit, 1 USD = 1000000 micros) attributed to the product, reported on the conversion date. The metric is currently available only for the FREE_PRODUCT_LISTING program. The currency of the returned value is stored in the currency_code segment. If this metric is selected, 'segments.currency_code' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency_code segment is populated in the response.
           format: int64
           type: string
         conversions:
@@ -9926,7 +9926,7 @@ components:
           format: double
           type: number
         orderedItemSalesMicros:
-          description: Total price of ordered items. Excludes shipping, taxes (US only), and customer cancellations that happened within 30 minutes of placing the order. The currency of the returned value is stored in the currency_code segment. If this metric is selected, 'segments.currency_code' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency_code segment is populated in the response. **This metric cannot be segmented by customer_country_code.**
+          description: Total price of ordered items in micros (1 millionth of a standard unit, 1 USD = 1000000 micros). Excludes shipping, taxes (US only), and customer cancellations that happened within 30 minutes of placing the order. The currency of the returned value is stored in the currency_code segment. If this metric is selected, 'segments.currency_code' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency_code segment is populated in the response. **This metric cannot be segmented by customer_country_code.**
           format: int64
           type: string
         orderedItems:
@@ -9950,11 +9950,11 @@ components:
           format: int64
           type: string
         returnsMicros:
-          description: Total price of ordered items sent back for return, reported on the date when the merchant accepted the return. The currency of the returned value is stored in the currency_code segment. If this metric is selected, 'segments.currency_code' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency_code segment is populated in the response. **This metric cannot be segmented by customer_country_code.**
+          description: Total price of ordered items sent back for return in micros (1 millionth of a standard unit, 1 USD = 1000000 micros), reported on the date when the merchant accepted the return. The currency of the returned value is stored in the currency_code segment. If this metric is selected, 'segments.currency_code' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency_code segment is populated in the response. **This metric cannot be segmented by customer_country_code.**
           format: int64
           type: string
         shippedItemSalesMicros:
-          description: Total price of shipped items, reported on the order date. Excludes shipping and taxes (US only). The currency of the returned value is stored in the currency_code segment. If this metric is selected, 'segments.currency_code' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency_code segment is populated in the response. **This metric cannot be segmented by customer_country_code.**
+          description: Total price of shipped items in micros (1 millionth of a standard unit, 1 USD = 1000000 micros), reported on the order date. Excludes shipping and taxes (US only). The currency of the returned value is stored in the currency_code segment. If this metric is selected, 'segments.currency_code' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency_code segment is populated in the response. **This metric cannot be segmented by customer_country_code.**
           format: int64
           type: string
         shippedItems:
@@ -11939,7 +11939,7 @@ components:
           description: The price benchmark currency (ISO 4217 code).
           type: string
         benchmarkPriceMicros:
-          description: The latest available price benchmark in micros for the product's catalog in the benchmark country.
+          description: The latest available price benchmark in micros (1 millionth of a standard unit, 1 USD = 1000000 micros) for the product's catalog in the benchmark country.
           format: int64
           type: string
         countryCode:
@@ -11969,14 +11969,14 @@ components:
           description: The predicted monthly gross profit change currency (ISO 4217 code).
           type: string
         predictedMonthlyGrossProfitChangeMicros:
-          description: The predicted change in gross profit in micros after introducing the suggested price for a month compared to current active price.
+          description: The predicted change in gross profit in micros (1 millionth of a standard unit, 1 USD = 1000000 micros) after introducing the suggested price for a month compared to current active price.
           format: int64
           type: string
         suggestedPriceCurrencyCode:
           description: The suggested price currency (ISO 4217 code).
           type: string
         suggestedPriceMicros:
-          description: The latest suggested price in micros for the product.
+          description: The latest suggested price in micros (1 millionth of a standard unit, 1 USD = 1000000 micros) for the product.
           format: int64
           type: string
       type: object
@@ -12080,7 +12080,7 @@ components:
           description: The energy efficiency class as defined in EU directive 2010/30/EU.
           type: string
         excludedDestinations:
-          description: The list of destinations to exclude for this target (corresponds to cleared check boxes in Merchant Center).
+          description: The list of destinations to exclude for this target (corresponds to cleared check boxes in Merchant Center). Products that are excluded from all destinations for more than 7 days are automatically deleted.
           items:
             type: string
           type: array
@@ -12270,7 +12270,7 @@ components:
           $ref: "#/components/schemas/ProductSubscriptionCost"
           description: Number of periods (months or years) and amount of payment per period for an item with an associated subscription contract.
         targetCountry:
-          description: Required. The CLDR territory code for the item.
+          description: Required. The CLDR territory code for the item's country of sale.
           type: string
         taxCategory:
           description: The tax category of the product, used to configure detailed tax nexus in account-level tax settings.
@@ -12648,6 +12648,21 @@ components:
         brand:
           description: Brand of the product.
           type: string
+        categoryL1:
+          description: First level of the product category in [Google's product taxonomy](https://support.google.com/merchants/answer/6324436).
+          type: string
+        categoryL2:
+          description: Second level of the product category in [Google's product taxonomy](https://support.google.com/merchants/answer/6324436).
+          type: string
+        categoryL3:
+          description: Third level of the product category in [Google's product taxonomy](https://support.google.com/merchants/answer/6324436).
+          type: string
+        categoryL4:
+          description: Fourth level of the product category in [Google's product taxonomy](https://support.google.com/merchants/answer/6324436).
+          type: string
+        categoryL5:
+          description: Fifth level of the product category in [Google's product taxonomy](https://support.google.com/merchants/answer/6324436).
+          type: string
         channel:
           description: Channel of the product (online versus local).
           enum:
@@ -12691,8 +12706,23 @@ components:
           description: Merchant-provided id of the product.
           type: string
         priceMicros:
-          description: Product price specified as micros in the product currency. Absent in case the information about the price of the product is not available.
+          description: Product price specified as micros (1 millionth of a standard unit, 1 USD = 1000000 micros) in the product currency. Absent in case the information about the price of the product is not available.
           format: int64
+          type: string
+        productTypeL1:
+          description: First level of the product type in merchant's own [product taxonomy](https://support.google.com/merchants/answer/6324436).
+          type: string
+        productTypeL2:
+          description: Second level of the product type in merchant's own [product taxonomy](https://support.google.com/merchants/answer/6324436).
+          type: string
+        productTypeL3:
+          description: Third level of the product type in merchant's own [product taxonomy](https://support.google.com/merchants/answer/6324436).
+          type: string
+        productTypeL4:
+          description: Fourth level of the product type in merchant's own [product taxonomy](https://support.google.com/merchants/answer/6324436).
+          type: string
+        productTypeL5:
+          description: Fifth level of the product type in merchant's own [product taxonomy](https://support.google.com/merchants/answer/6324436).
           type: string
         shippingLabel:
           description: The normalized shipping label specified in the feed
