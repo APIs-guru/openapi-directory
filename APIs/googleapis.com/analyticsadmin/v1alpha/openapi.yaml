@@ -22,9 +22,9 @@ info:
     - format: google
       url: https://analyticsadmin.googleapis.com/$discovery/rest?version=v1alpha
       version: v1
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: analyticsadmin
-  x-preferred: false
 externalDocs:
   url: http://code.google.com/apis/analytics/docs/mgmt/home.html
 tags:
@@ -2567,6 +2567,41 @@ components:
             $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaUserLink"
           type: array
       type: object
+    GoogleAnalyticsAdminV1alphaBigQueryLink:
+      description: A link between a GA4 Property and BigQuery project.
+      properties:
+        createTime:
+          description: Output only. Time when the link was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        dailyExportEnabled:
+          description: If set true, enables daily data export to the linked Google Cloud project.
+          type: boolean
+        excludedEvents:
+          description: The list of event names that will be excluded from exports.
+          items:
+            type: string
+          type: array
+        exportStreams:
+          description: "The list of streams under the parent property for which data will be exported. Format: properties/{property_id}/dataStreams/{stream_id} Example: ['properties/1000/dataStreams/2000']"
+          items:
+            type: string
+          type: array
+        includeAdvertisingId:
+          description: If set true, exported data will include advertising identifiers for mobile app streams.
+          type: boolean
+        name:
+          description: "Output only. Resource name of this BigQuery link. Format: 'properties/{property_id}/bigQueryLinks/{bigquery_link_id}' Format: 'properties/1234/bigQueryLinks/abc567'"
+          readOnly: true
+          type: string
+        project:
+          description: "Immutable. The linked Google Cloud project. When creating a BigQueryLink, you may provide this resource name using either a project number or project ID. Once this resource has been created, the returned project will always have a project that contains a project number. Format: 'projects/{project number}' Example: 'projects/1234'"
+          type: string
+        streamingExportEnabled:
+          description: If set true, enables streaming export to the linked Google Cloud project.
+          type: boolean
+      type: object
     GoogleAnalyticsAdminV1alphaCancelDisplayVideo360AdvertiserLinkProposalRequest:
       description: Request message for CancelDisplayVideo360AdvertiserLinkProposal RPC.
       properties: {}
@@ -2601,6 +2636,9 @@ components:
         attributionSettings:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAttributionSettings"
           description: A snapshot of AttributionSettings resource in change history.
+        bigqueryLink:
+          $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaBigQueryLink"
+          description: A snapshot of a BigQuery link resource in change history.
         conversionEvent:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaConversionEvent"
           description: A snapshot of a ConversionEvent resource in change history.

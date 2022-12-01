@@ -39,7 +39,7 @@ paths:
       description: Deletes a notification config.
       operationId: securitycenter.projects.notificationConfigs.delete
       parameters:
-        - description: Required. Name of the notification config to delete. Its format is "organizations/[organization_id]/notificationConfigs/[config_id]".
+        - description: Required. Name of the notification config to delete. Its format is "organizations/[organization_id]/notificationConfigs/[config_id]", "folders/[folder_id]/notificationConfigs/[config_id]", or "projects/[project_id]/notificationConfigs/[config_id]".
           in: path
           name: name
           required: true
@@ -63,7 +63,7 @@ paths:
       description: Gets a notification config.
       operationId: securitycenter.projects.notificationConfigs.get
       parameters:
-        - description: Required. Name of the notification config to get. Its format is "organizations/[organization_id]/notificationConfigs/[config_id]".
+        - description: Required. Name of the notification config to get. Its format is "organizations/[organization_id]/notificationConfigs/[config_id]", "folders/[folder_id]/notificationConfigs/[config_id]", or "projects/[project_id]/notificationConfigs/[config_id]".
           in: path
           name: name
           required: true
@@ -270,7 +270,7 @@ paths:
       description: Lists an organization's assets.
       operationId: securitycenter.projects.assets.list
       parameters:
-        - description: Required. Name of the organization assets should belong to. Its format is "organizations/[organization_id], folders/[folder_id], or projects/[project_id]".
+        - description: Required. Name of the parent assets should belong to. Its format is "organizations/[organization_id], folders/[folder_id], or projects/[project_id]".
           in: path
           name: parent
           required: true
@@ -354,7 +354,7 @@ paths:
       description: Filters an organization's assets and groups them by their specified properties.
       operationId: securitycenter.projects.assets.group
       parameters:
-        - description: Required. Name of the organization to groupBy. Its format is "organizations/[organization_id], folders/[folder_id], or projects/[project_id]".
+        - description: Required. Name of the parent to groupBy. Its format is "organizations/[organization_id], folders/[folder_id], or projects/[project_id]".
           in: path
           name: parent
           required: true
@@ -778,7 +778,7 @@ paths:
       description: Lists notification configs.
       operationId: securitycenter.projects.notificationConfigs.list
       parameters:
-        - description: Required. Name of the organization to list notification configs. Its format is "organizations/[organization_id]", "folders/[folder_id]", or "projects/[project_id]".
+        - description: Required. Name of the parent to list notification configs. Its format is "organizations/[organization_id]", "folders/[folder_id]", or "projects/[project_id]".
           in: path
           name: parent
           required: true
@@ -1681,6 +1681,9 @@ components:
         indicator:
           $ref: "#/components/schemas/Indicator"
           description: "Represents what's commonly known as an Indicator of compromise (IoC) in computer forensics. This is an artifact observed on a network or in an operating system that, with high confidence, indicates a computer intrusion. Reference: https://en.wikipedia.org/wiki/Indicator_of_compromise"
+        kernelRootkit:
+          $ref: "#/components/schemas/KernelRootkit"
+          description: Kernel Rootkit signature.
         kubernetes:
           $ref: "#/components/schemas/Kubernetes"
           description: Kubernetes resources associated with the finding.
@@ -2327,6 +2330,37 @@ components:
             type: string
           type: array
       type: object
+    KernelRootkit:
+      description: Kernel mode rootkit signatures.
+      properties:
+        name:
+          description: Rootkit name when available.
+          type: string
+        unexpectedCodeModification:
+          description: Flag indicating unexpected modifications of kernel code memory.
+          type: boolean
+        unexpectedFtraceHandler:
+          description: Flag indicating presence of ftrace points with callbacks pointing to regions that are not in the expected kernel or module code range.
+          type: boolean
+        unexpectedInterruptHandler:
+          description: Flag indicating presence of interrupt handlers that are are not in the expected kernel, module code regions.
+          type: boolean
+        unexpectedKernelCodePages:
+          description: Flag indicating presence of kernel code pages that are not in the expected kernel, module code regions.
+          type: boolean
+        unexpectedKprobeHandler:
+          description: Flag indicating presence of kprobe points with callbacks pointing to regions that are not in the expected kernel or module code range.
+          type: boolean
+        unexpectedProcessesInRunqueue:
+          description: Flag indicating unexpected process(es) in the scheduler run-queue, those that are in the run-queue, but not in the process task-list.
+          type: boolean
+        unexpectedReadOnlyDataModification:
+          description: Flag indicating unexpected modifications of kernel read-only data memory.
+          type: boolean
+        unexpectedSystemCallHandler:
+          description: Flag indicating presence of system call handlers that are are not in the expected kernel, module code regions.
+          type: boolean
+      type: object
     Kubernetes:
       description: Kubernetes related attributes.
       properties:
@@ -2675,7 +2709,7 @@ components:
           description: The description of the notification config (max of 1024 characters).
           type: string
         name:
-          description: 'The relative resource name of this notification config. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name Example: "organizations/{organization_id}/notificationConfigs/notify_public_bucket".'
+          description: 'The relative resource name of this notification config. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name Example: "organizations/{organization_id}/notificationConfigs/notify_public_bucket", "folders/{folder_id}/notificationConfigs/notify_public_bucket", or "projects/{project_id}/notificationConfigs/notify_public_bucket".'
           type: string
         pubsubTopic:
           description: The Pub/Sub topic to send notifications to. Its format is "projects/[project_id]/topics/[topic]".

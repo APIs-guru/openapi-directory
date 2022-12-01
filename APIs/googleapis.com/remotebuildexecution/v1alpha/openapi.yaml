@@ -986,6 +986,7 @@ components:
             - DOCKER_START_RUNTIME_FILE_NOT_FOUND
             - DOCKER_CREATE_INVALID_LAYERCHAIN_JSON
             - INCOMPATIBLE_CUDA_VERSION
+            - LOCAL_WORKER_MANAGER_NOT_RUNNING
           type: string
         message:
           description: The error message.
@@ -1100,6 +1101,21 @@ components:
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy:
       description: FeaturePolicy defines features allowed to be used on RBE instances, as well as instance-wide behavior changes that take effect without opt-in or opt-out at usage time.
       properties:
+        actionHermeticity:
+          description: "Defines the hermeticity policy for actions on this instance. DO NOT USE: Experimental / unlaunched feature."
+          enum:
+            - ACTION_HERMETICITY_UNSPECIFIED
+            - ACTION_HERMETICITY_OFF
+            - ACTION_HERMETICITY_ENFORCED
+            - ACTION_HERMETICITY_BEST_EFFORT
+          type: string
+        actionIsolation:
+          description: "Defines the isolation policy for actions on this instance. DO NOT USE: Experimental / unlaunched feature."
+          enum:
+            - ACTION_ISOLATION_UNSPECIFIED
+            - ACTION_ISOLATION_OFF
+            - ACTION_ISOLATION_ENFORCED
+          type: string
         containerImageSources:
           $ref: "#/components/schemas/GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature"
           description: 'Which container image sources are allowed. Currently only RBE-supported registry (gcr.io) is allowed. One can allow all repositories under a project or one specific repository only. E.g. container_image_sources { policy: RESTRICTED allowed_values: [ "gcr.io/project-foo", "gcr.io/project-bar/repo-baz", ] } will allow any repositories under "gcr.io/project-foo" plus the repository "gcr.io/project-bar/repo-baz". Default (UNSPECIFIED) is equivalent to any source is allowed.'
@@ -1127,6 +1143,14 @@ components:
         dockerSiblingContainers:
           $ref: "#/components/schemas/GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature"
           description: Whether dockerSiblingContainers can be used.
+        linuxExecution:
+          description: "Defines how Linux actions are allowed to execute. DO NOT USE: Experimental / unlaunched feature."
+          enum:
+            - LINUX_EXECUTION_UNSPECIFIED
+            - LINUX_EXECUTION_FORBIDDEN
+            - LINUX_EXECUTION_UNRESTRICTED
+            - LINUX_EXECUTION_HARDENED_GVISOR
+          type: string
         linuxIsolation:
           description: linux_isolation allows overriding the docker runtime used for containers started on Linux.
           enum:
@@ -1134,12 +1158,25 @@ components:
             - GVISOR
             - OFF
           type: string
+        macExecution:
+          description: "Defines how Windows actions are allowed to execute. DO NOT USE: Experimental / unlaunched feature."
+          enum:
+            - MAC_EXECUTION_UNSPECIFIED
+            - MAC_EXECUTION_FORBIDDEN
+          type: string
         vmVerification:
           description: Whether to verify CreateBotSession and UpdateBotSession from the bot.
           enum:
             - VM_VERIFICATION_UNSPECIFIED
             - VM_VERIFICATION_GCP_TOKEN
             - VM_VERIFICATION_OFF
+          type: string
+        windowsExecution:
+          description: "Defines how Windows actions are allowed to execute. DO NOT USE: Experimental / unlaunched feature."
+          enum:
+            - WINDOWS_EXECUTION_UNSPECIFIED
+            - WINDOWS_EXECUTION_FORBIDDEN
+            - WINDOWS_EXECUTION_UNRESTRICTED
           type: string
       type: object
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature:

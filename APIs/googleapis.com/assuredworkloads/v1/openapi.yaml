@@ -224,6 +224,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
+  "/v1/{name}:mutatePartnerPermissions":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Update the permissions settings for an existing partner workload. For force updates don't set etag field in the Workload. Only one update operation per workload can be in progress.
+      operationId: assuredworkloads.organizations.locations.workloads.mutatePartnerPermissions
+      parameters:
+        - description: "Required. The `name` field is used to identify the workload. Format: organizations/{org_id}/locations/{location_id}/workloads/{workload_id}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1MutatePartnerPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1Workload"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   "/v1/{name}:restrictAllowedResources":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -560,6 +602,20 @@ components:
             $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1Workload"
           type: array
       type: object
+    GoogleCloudAssuredworkloadsV1MutatePartnerPermissionsRequest:
+      description: Request of updating permission settings for a partner workload.
+      properties:
+        etag:
+          description: Optional. The etag of the workload. If this is provided, it must match the server's etag.
+          type: string
+        partnerPermissions:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadPartnerPermissions"
+          description: Required. The partner permissions to be updated.
+        updateMask:
+          description: 'Required. The list of fields to be updated. E.g. update_mask { paths: "partner_permissions.data_logs_viewer"}'
+          format: google-fieldmask
+          type: string
+      type: object
     GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesRequest:
       description: Request for restricting list of available resources in Workload environment.
       properties:
@@ -829,6 +885,19 @@ components:
           description: Required. Input only. Immutable. [next_rotation_time] will be advanced by this period when the Key Management Service automatically rotates a key. Must be at least 24 hours and at most 876,000 hours.
           format: google-duration
           type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1WorkloadPartnerPermissions:
+      description: Permissions granted to the AW Partner SA account for the customer workload
+      properties:
+        dataLogsViewer:
+          description: Allow partner to view data and logs
+          type: boolean
+        remediateFolderViolations:
+          description: Allow partner to monitor folder and remediate violations
+          type: boolean
+        serviceAccessApprover:
+          description: Allow partner to approve or reject Service Access requests
+          type: boolean
       type: object
     GoogleCloudAssuredworkloadsV1WorkloadResourceInfo:
       description: Represent the resources that are children of this Workload.

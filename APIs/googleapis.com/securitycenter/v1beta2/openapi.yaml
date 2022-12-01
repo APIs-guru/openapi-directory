@@ -36,7 +36,7 @@ tags:
 paths:
   "/v1beta2/{name}":
     get:
-      description: Get the ContainerThreatDetectionSettings resource.
+      description: Get the ContainerThreatDetectionSettings resource. In the returned settings response, a missing field only indicates that it was not explicitly set, so no assumption should be made about these fields. In other words, GetContainerThreatDetectionSettings does not calculate the effective service settings for the resource, which accounts for inherited settings and defaults. Instead, use CalculateContainerThreatDetectionSettings for this purpose.
       operationId: securitycenter.projects.locations.clusters.getContainerThreatDetectionSettings
       parameters:
         - description: "Required. The name of the ContainerThreatDetectionSettings to retrieve. Formats: * organizations/{organization}/containerThreatDetectionSettings * folders/{folder}/containerThreatDetectionSettings * projects/{project}/containerThreatDetectionSettings * projects/{project}/locations/{location}/clusters/{cluster}/containerThreatDetectionSettings"
@@ -107,7 +107,7 @@ paths:
         - projects
   "/v1beta2/{name}:calculate":
     get:
-      description: Calculates the effective WebSecurityScannerSettings based on its level in the resource hierarchy and its settings.
+      description: Calculates the effective WebSecurityScannerSettings based on its level in the resource hierarchy and its settings. Settings provided closer to the target resource take precedence over those further away (e.g. folder will override organization level settings). The default SCC setting for the detector service defaults can be overridden at organization, folder and project levels. No assumptions should be made about the SCC defaults as it is considered an internal implementation detail.
       operationId: securitycenter.projects.webSecurityScannerSettings.calculate
       parameters:
         - description: "Required. The name of the WebSecurityScannerSettings to calculate. Formats: * organizations/{organization}/webSecurityScannerSettings * folders/{folder}/webSecurityScannerSettings * projects/{project}/webSecurityScannerSettings"
@@ -733,6 +733,9 @@ components:
         indicator:
           $ref: "#/components/schemas/Indicator"
           description: "Represents what's commonly known as an Indicator of compromise (IoC) in computer forensics. This is an artifact observed on a network or in an operating system that, with high confidence, indicates a computer intrusion. Reference: https://en.wikipedia.org/wiki/Indicator_of_compromise"
+        kernelRootkit:
+          $ref: "#/components/schemas/KernelRootkit"
+          description: Kernel Rootkit signature.
         kubernetes:
           $ref: "#/components/schemas/Kubernetes"
           description: Kubernetes resources associated with the finding.
@@ -1254,6 +1257,37 @@ components:
           items:
             type: string
           type: array
+      type: object
+    KernelRootkit:
+      description: Kernel mode rootkit signatures.
+      properties:
+        name:
+          description: Rootkit name when available.
+          type: string
+        unexpectedCodeModification:
+          description: Flag indicating unexpected modifications of kernel code memory.
+          type: boolean
+        unexpectedFtraceHandler:
+          description: Flag indicating presence of ftrace points with callbacks pointing to regions that are not in the expected kernel or module code range.
+          type: boolean
+        unexpectedInterruptHandler:
+          description: Flag indicating presence of interrupt handlers that are are not in the expected kernel, module code regions.
+          type: boolean
+        unexpectedKernelCodePages:
+          description: Flag indicating presence of kernel code pages that are not in the expected kernel, module code regions.
+          type: boolean
+        unexpectedKprobeHandler:
+          description: Flag indicating presence of kprobe points with callbacks pointing to regions that are not in the expected kernel or module code range.
+          type: boolean
+        unexpectedProcessesInRunqueue:
+          description: Flag indicating unexpected process(es) in the scheduler run-queue, those that are in the run-queue, but not in the process task-list.
+          type: boolean
+        unexpectedReadOnlyDataModification:
+          description: Flag indicating unexpected modifications of kernel read-only data memory.
+          type: boolean
+        unexpectedSystemCallHandler:
+          description: Flag indicating presence of system call handlers that are are not in the expected kernel, module code regions.
+          type: boolean
       type: object
     Kubernetes:
       description: Kubernetes related attributes.
