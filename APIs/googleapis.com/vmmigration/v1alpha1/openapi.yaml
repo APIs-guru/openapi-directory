@@ -1555,6 +1555,16 @@ components:
       schema:
         type: string
   schemas:
+    AccessKeyCredentials:
+      description: Message describing AWS Credentials using access key id and secret.
+      properties:
+        accessKeyId:
+          description: AWS access key ID.
+          type: string
+        secretAccessKey:
+          description: Input only. AWS secret access key.
+          type: string
+      type: object
     AdaptingOSStep:
       description: AdaptingOSStep contains specific step details.
       properties: {}
@@ -1620,6 +1630,9 @@ components:
     AwsSourceDetails:
       description: AwsSourceDetails message describes a specific source details for the AWS source type.
       properties:
+        accessKeyCreds:
+          $ref: "#/components/schemas/AccessKeyCredentials"
+          description: AWS Credentials using access key id and secret.
         accessKeyId:
           description: AWS access key ID.
           type: string
@@ -1634,6 +1647,11 @@ components:
           description: AWS security group names to limit the scope of the source inventory.
           items:
             type: string
+          type: array
+        inventoryTagList:
+          description: AWS resource tags to limit the scope of the source inventory.
+          items:
+            $ref: "#/components/schemas/Tag"
           type: array
         inventoryTags:
           additionalProperties:
@@ -2947,6 +2965,16 @@ components:
           type: array
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          type: string
+      type: object
+    Tag:
+      description: Tag is an AWS tag representation.
+      properties:
+        key:
+          description: Key of tag.
+          type: string
+        value:
+          description: Value of tag.
           type: string
       type: object
     TargetProject:

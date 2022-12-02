@@ -1215,7 +1215,7 @@ components:
           type: string
         policyTargetKey:
           $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyTargetKey"
-          description: Required. The key of the target resource on which the policies should be resolved. The target resource must point to an Org Unit.
+          description: Required. The key of the target resource on which the policies should be resolved.
       type: object
     GoogleChromePolicyVersionsV1ResolveResponse:
       description: Response message for getting the resolved policy value for a specific target.

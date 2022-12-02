@@ -13,21 +13,24 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Text-to-Speech API
   version: v1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://texttospeech.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: texttospeech
 externalDocs:
   url: https://cloud.google.com/text-to-speech/
 tags:
   - name: operations
+  - name: projects
   - name: text
   - name: voices
 paths:
@@ -220,6 +223,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - operations
+  "/v1/{parent}:SynthesizeLongAudio":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Synthesizes long form text asynchronously.
+      operationId: texttospeech.projects.locations.voices.synthesizeLongAudio
+      parameters:
+        - description: The resource states of the request in the form of projects/*/locations/*/voices/*.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SynthesizeLongAudioRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
 components:
   parameters:
     _.xgafv:
@@ -425,6 +470,22 @@ components:
           description: The raw text to be synthesized.
           type: string
       type: object
+    SynthesizeLongAudioRequest:
+      description: The top-level message sent by the client for the `SynthesizeLongAudio` method.
+      properties:
+        audioConfig:
+          $ref: "#/components/schemas/AudioConfig"
+          description: Required. The configuration of the synthesized audio.
+        input:
+          $ref: "#/components/schemas/SynthesisInput"
+          description: Required. The Synthesizer requires either plain text or SSML as input.
+        outputGcsUri:
+          description: "Specifies a Cloud Storage URI for the synthesis results. Must be specified in the format: `gs://bucket_name/object_name`, and the bucket must already exist."
+          type: string
+        voice:
+          $ref: "#/components/schemas/VoiceSelectionParams"
+          description: The desired voice of the synthesized audio.
+      type: object
     SynthesizeSpeechRequest:
       description: The top-level message sent by the client for the `SynthesizeSpeech` method.
       properties:
@@ -509,3 +570,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}
