@@ -162,7 +162,19 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - private_apps_legacy: []
+        - oauth2:
+            - cms.domains.read
+        - private_apps: []
         - hapikey: []
+        - private_apps: []
+        - oauth2:
+            - cms.domains.write
+        - private_apps_legacy: []
+        - oauth2_legacy:
+            - cms.knowledge_base.settings.write
+        - oauth2_legacy:
+            - content
       summary: Get current domains
       tags:
         - Domains
@@ -210,7 +222,19 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - private_apps_legacy: []
+        - oauth2:
+            - cms.domains.read
+        - private_apps: []
         - hapikey: []
+        - private_apps: []
+        - oauth2:
+            - cms.domains.write
+        - private_apps_legacy: []
+        - oauth2_legacy:
+            - cms.knowledge_base.settings.write
+        - oauth2_legacy:
+            - content
       summary: Get a single domain
       tags:
         - Domains
@@ -397,6 +421,32 @@ components:
     hapikey:
       in: query
       name: hapikey
+      type: apiKey
+    oauth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.hubspot.com/oauth/authorize
+          scopes:
+            cms.domains.read: Read domains.
+            cms.domains.write: Create or update domains.
+          tokenUrl: https://api.hubapi.com/oauth/v1/token
+      type: oauth2
+    oauth2_legacy:
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.hubspot.com/oauth/authorize
+          scopes:
+            cms.knowledge_base.settings.write: Update knowledge base settings
+            content: Read from and write to my Content
+          tokenUrl: https://api.hubapi.com/oauth/v1/token
+      type: oauth2
+    private_apps:
+      in: header
+      name: private-app
+      type: apiKey
+    private_apps_legacy:
+      in: header
+      name: private-app-legacy
       type: apiKey
 x-hubspot-available-client-libraries:
   - PHP

@@ -1449,6 +1449,13 @@ components:
           items:
             $ref: "#/components/schemas/Volume"
           type: array
+        workloadProfile:
+          description: The workload profile for the instance.
+          enum:
+            - WORKLOAD_PROFILE_UNSPECIFIED
+            - WORKLOAD_PROFILE_GENERIC
+            - WORKLOAD_PROFILE_HANA
+          type: string
       type: object
     InstanceConfig:
       description: Configuration parameters for a new instance.
@@ -2494,6 +2501,13 @@ components:
             - STORAGE_TYPE_UNSPECIFIED
             - SSD
             - HDD
+          type: string
+        workloadProfile:
+          description: The workload profile for the volume.
+          enum:
+            - WORKLOAD_PROFILE_UNSPECIFIED
+            - GENERIC
+            - HANA
           type: string
       type: object
     VolumeConfig:

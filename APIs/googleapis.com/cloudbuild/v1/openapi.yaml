@@ -526,7 +526,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Runs a `BuildTrigger` at a particular source revision. To run a regional or global trigger, use the POST request that includes the location endpoint in the path. The POST request that does not include the location endpoint in the path can only be used when running global triggers.
+      description: Runs a `BuildTrigger` at a particular source revision. To run a regional or global trigger, use the POST request that includes the location endpoint in the path (ex. v1/projects/{projectId}/locations/{region}/triggers/{triggerId}:run). The POST request that does not include the location endpoint in the path can only be used when running global triggers.
       operationId: cloudbuild.projects.triggers.run
       parameters:
         - description: Required. ID of the project.
@@ -1045,7 +1045,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Runs a `BuildTrigger` at a particular source revision. To run a regional or global trigger, use the POST request that includes the location endpoint in the path. The POST request that does not include the location endpoint in the path can only be used when running global triggers.
+      description: Runs a `BuildTrigger` at a particular source revision. To run a regional or global trigger, use the POST request that includes the location endpoint in the path (ex. v1/projects/{projectId}/locations/{region}/triggers/{triggerId}:run). The POST request that does not include the location endpoint in the path can only be used when running global triggers.
       operationId: cloudbuild.projects.locations.triggers.run
       parameters:
         - description: "The name of the `Trigger` to run. Format: `projects/{project}/locations/{location}/triggers/{trigger}`"
@@ -2297,7 +2297,7 @@ components:
       description: Optional arguments to enable specific features of builds.
       properties:
         diskSizeGb:
-          description: Requested disk size for the VM that runs the build. Note that this is *NOT* "disk free"; some of the space will be used by the operating system and build utilities. Also note that this is the minimum disk size that will be allocated for the build -- the build may run with a larger disk than requested. At present, the maximum disk size is 1000GB; builds that request more than the maximum are rejected with an error.
+          description: Requested disk size for the VM that runs the build. Note that this is *NOT* "disk free"; some of the space will be used by the operating system and build utilities. Also note that this is the minimum disk size that will be allocated for the build -- the build may run with a larger disk than requested. At present, the maximum disk size is 2000GB; builds that request more than the maximum are rejected with an error.
           format: int64
           type: string
         dynamicSubstitutions:
@@ -2810,7 +2810,7 @@ components:
           description: The URL of the github enterprise host the configuration is for.
           type: string
         name:
-          description: 'Optional. The full resource name for the GitHubEnterpriseConfig For example: "projects/{$project_id}/githubEnterpriseConfigs/{$config_id}"'
+          description: 'Optional. The full resource name for the GitHubEnterpriseConfig For example: "projects/{$project_id}/locations/{$location_id}/githubEnterpriseConfigs/{$config_id}"'
           type: string
         peeredNetwork:
           description: Optional. The network to be used when reaching out to the GitHub Enterprise server. The VPC network must be enabled for private service connection. This should be set if the GitHub Enterprise server is hosted on-premises and not reachable by public internet. If this field is left empty, no network peering will occur and calls to the GitHub Enterprise server will be made over the public internet. Must be in the format `projects/{project}/global/networks/{network}`, where {project} is a project number or id and {network} is the name of a VPC network in the project.
@@ -2857,7 +2857,7 @@ components:
       description: GitHubEventsConfig describes the configuration of a trigger that creates a build whenever a GitHub event is received.
       properties:
         enterpriseConfigResourceName:
-          description: 'Optional. The resource name of the github enterprise config that should be applied to this installation. For example: "projects/{$project_id}/githubEnterpriseConfigs/{$config_id}"'
+          description: 'Optional. The resource name of the github enterprise config that should be applied to this installation. For example: "projects/{$project_id}/locations/{$location_id}/githubEnterpriseConfigs/{$config_id}"'
           type: string
         installationId:
           description: The installationID that emits the GitHub event.
@@ -3201,6 +3201,9 @@ components:
           type: string
         peeredNetwork:
           description: Required. Immutable. The network definition that the workers are peered to. If this section is left empty, the workers will be peered to `WorkerPool.project_id` on the service producer network. Must be in the format `projects/{project}/global/networks/{network}`, where `{project}` is a project number, such as `12345`, and `{network}` is the name of a VPC network in the project. See [Understanding network configuration options](https://cloud.google.com/build/docs/private-pools/set-up-private-pool-environment)
+          type: string
+        peeredNetworkIpRange:
+          description: Immutable. Subnet IP range within the peered network. This is specified in CIDR notation. The IP and prefix size are both optional. If unspecified, the default value for IP is blank (will use an automatic value from the peered network), and the prefix size will default to 24 bits. e.g. `192.168.0.0/30` would specify a subnet mask of 192.168.0.0 with a prefix size of 30 bits. `192.168.0.0` would specify a subnet mask of 192.168.0.0 with a prefix size of 24 bits (the default prefix size). `/16` would specify a prefix size of 16 bits, with an unspecified IP.
           type: string
       type: object
     Notification:

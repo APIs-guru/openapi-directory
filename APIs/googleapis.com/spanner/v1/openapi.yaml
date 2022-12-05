@@ -2240,6 +2240,10 @@ components:
           items:
             type: string
           type: array
+        protoDescriptors:
+          description: Optional. Proto descriptors used by CREATE/ALTER PROTO BUNDLE statements in 'extra_statements' above. Contains a protobuf-serialized [google.protobuf.FileDescriptorSet](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.proto). To generate it, [install](https://grpc.io/docs/protoc-installation/) and run `protoc` with --include_imports and --descriptor_set_out. For example, to generate for moon/shot/app.proto, run """ $protoc --proto_path=/app_path --proto_path=/lib_path \ --include_imports \ --descriptor_set_out=descriptors.data \ moon/shot/app.proto """ For more details, see protobuffer [self description](https://developers.google.com/protocol-buffers/docs/techniques#self-description).
+          format: byte
+          type: string
       type: object
     CreateInstanceConfigMetadata:
       description: Metadata type for the operation returned by CreateInstanceConfig.
@@ -2569,6 +2573,10 @@ components:
     GetDatabaseDdlResponse:
       description: The response for GetDatabaseDdl.
       properties:
+        protoDescriptors:
+          description: Proto descriptors stored in the database. Contains a protobuf-serialized [google.protobuf.FileDescriptorSet](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.proto). For more details, see protobuffer [self description](https://developers.google.com/protocol-buffers/docs/techniques#self-description).
+          format: byte
+          type: string
         statements:
           description: A list of formatted DDL statements defining the schema of the database specified in the request.
           items:
@@ -3765,6 +3773,11 @@ components:
             - STRUCT
             - NUMERIC
             - JSON
+            - PROTO
+            - ENUM
+          type: string
+        protoTypeFqn:
+          description: If code == PROTO or code == ENUM, then `proto_type_fqn` is the fully qualified name of the proto type representing the proto/enum definition.
           type: string
         structType:
           $ref: "#/components/schemas/StructType"
@@ -3809,6 +3822,10 @@ components:
       properties:
         operationId:
           description: "If empty, the new update request is assigned an automatically-generated operation ID. Otherwise, `operation_id` is used to construct the name of the resulting Operation. Specifying an explicit operation ID simplifies determining whether the statements were executed in the event that the UpdateDatabaseDdl call is replayed, or the return value is otherwise lost: the database and `operation_id` fields can be combined to form the name of the resulting longrunning.Operation: `/operations/`. `operation_id` should be unique within the database, and must be a valid identifier: `a-z*`. Note that automatically-generated operation IDs always begin with an underscore. If the named operation already exists, UpdateDatabaseDdl returns `ALREADY_EXISTS`."
+          type: string
+        protoDescriptors:
+          description: Optional. Proto descriptors used by CREATE/ALTER PROTO BUNDLE statements. Contains a protobuf-serialized [google.protobuf.FileDescriptorSet](https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.proto). To generate it, [install](https://grpc.io/docs/protoc-installation/) and run `protoc` with --include_imports and --descriptor_set_out. For example, to generate for moon/shot/app.proto, run """ $protoc --proto_path=/app_path --proto_path=/lib_path \ --include_imports \ --descriptor_set_out=descriptors.data \ moon/shot/app.proto """ For more details, see protobuffer [self description](https://developers.google.com/protocol-buffers/docs/techniques#self-description).
+          format: byte
           type: string
         statements:
           description: Required. DDL statements to be applied to the database.

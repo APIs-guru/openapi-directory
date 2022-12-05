@@ -991,7 +991,7 @@ components:
             - DATAPROC_METASTORE
           type: string
         name:
-          description: "The relative resource name of the metastore that is being federated. The formats of the relative resource names for the currently supported metastores are listed below: Dataplex: projects/{project_id}/locations/{location}/lakes/{lake_id} BigQuery: projects/{project_id} Dataproc Metastore: projects/{project_id}/locations/{location}/services/{service_id}"
+          description: "The relative resource name of the metastore that is being federated. The formats of the relative resource names for the currently supported metastores are listed below: Dataplex projects/{project_id}/locations/{location}/lakes/{lake_id} BigQuery projects/{project_id} Dataproc Metastore projects/{project_id}/locations/{location}/services/{service_id}"
           type: string
       type: object
     Backup:
@@ -1740,6 +1740,7 @@ components:
       description: Telemetry Configuration for the Dataproc Metastore service.
       properties:
         logFormat:
+          description: The output format of the Dataproc Metastore service's logs.
           enum:
             - LOG_FORMAT_UNSPECIFIED
             - LEGACY

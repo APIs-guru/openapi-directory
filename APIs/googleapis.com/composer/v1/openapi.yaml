@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Composer API
   version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://composer.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: composer
 externalDocs:
@@ -31,6 +29,90 @@ externalDocs:
 tags:
   - name: projects
 paths:
+  "/v1/{environment}:loadSnapshot":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Loads a snapshot of a Cloud Composer environment. As a result of this operation, a snapshot of environment's specified in LoadSnapshotRequest is loaded into the environment.
+      operationId: composer.projects.locations.environments.loadSnapshot
+      parameters:
+        - description: 'The resource name of the target environment in the form: "projects/{projectId}/locations/{locationId}/environments/{environmentId}"'
+          in: path
+          name: environment
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoadSnapshotRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{environment}:saveSnapshot":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a snapshots of a Cloud Composer environment. As a result of this operation, snapshot of environment's state is stored in a location specified in the SaveSnapshotRequest.
+      operationId: composer.projects.locations.environments.saveSnapshot
+      parameters:
+        - description: 'The resource name of the source environment in the form: "projects/{projectId}/locations/{locationId}/environments/{environmentId}"'
+          in: path
+          name: environment
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SaveSnapshotRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{name}":
     delete:
       description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
@@ -542,6 +624,9 @@ components:
         privateEnvironmentConfig:
           $ref: "#/components/schemas/PrivateEnvironmentConfig"
           description: The configuration used for the Private IP Cloud Composer environment.
+        recoveryConfig:
+          $ref: "#/components/schemas/RecoveryConfig"
+          description: Optional. The Recovery settings configuration of an environment. This field is supported for Cloud Composer environments in versions composer-2.*.*-airflow-*.*.* and newer.
         softwareConfig:
           $ref: "#/components/schemas/SoftwareConfig"
           description: The configuration settings for software inside the environment.
@@ -633,6 +718,25 @@ components:
           items:
             $ref: "#/components/schemas/Operation"
           type: array
+      type: object
+    LoadSnapshotRequest:
+      description: Request to load a snapshot into a Cloud Composer environment.
+      properties:
+        skipAirflowOverridesSetting:
+          description: Whether or not to skip setting Airflow overrides when loading the environment's state.
+          type: boolean
+        skipEnvironmentVariablesSetting:
+          description: Whether or not to skip setting environment variables when loading the environment's state.
+          type: boolean
+        skipGcsDataCopying:
+          description: Whether or not to skip copying Cloud Storage data when loading the environment's state.
+          type: boolean
+        skipPypiPackagesInstallation:
+          description: Whether or not to skip installing Pypi packages when loading the environment's state.
+          type: boolean
+        snapshotPath:
+          description: 'A Cloud Storage path to a snapshot to load, e.g.: "gs://my-bucket/snapshots/project_location_environment_timestamp".'
+          type: string
       type: object
     LoadSnapshotResponse:
       description: Response to LoadSnapshotRequest.
@@ -827,11 +931,41 @@ components:
           readOnly: true
           type: string
       type: object
+    RecoveryConfig:
+      description: The Recovery settings of an environment.
+      properties:
+        scheduledSnapshotsConfig:
+          $ref: "#/components/schemas/ScheduledSnapshotsConfig"
+          description: Optional. The configuration for scheduled snapshot creation mechanism.
+      type: object
+    SaveSnapshotRequest:
+      description: Request to create a snapshot of a Cloud Composer environment.
+      properties:
+        snapshotLocation:
+          description: 'Location in a Cloud Storage where the snapshot is going to be stored, e.g.: "gs://my-bucket/snapshots".'
+          type: string
+      type: object
     SaveSnapshotResponse:
       description: Response to SaveSnapshotRequest.
       properties:
         snapshotPath:
           description: 'The fully-resolved Cloud Storage path of the created snapshot, e.g.: "gs://my-bucket/snapshots/project_location_environment_timestamp". This field is populated only if the snapshot creation was successful.'
+          type: string
+      type: object
+    ScheduledSnapshotsConfig:
+      description: The configuration for scheduled snapshot creation mechanism.
+      properties:
+        enabled:
+          description: Optional. Whether scheduled snapshots creation is enabled.
+          type: boolean
+        snapshotCreationSchedule:
+          description: Optional. The cron expression representing the time when snapshots creation mechanism runs. This field is subject to additional validation around frequency of execution.
+          type: string
+        snapshotLocation:
+          description: Optional. The Cloud Storage location for storing automatically created snapshots.
+          type: string
+        timeZone:
+          description: Optional. Time zone that sets the context to interpret snapshot_creation_schedule.
           type: string
       type: object
     SchedulerResource:
@@ -988,5 +1122,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

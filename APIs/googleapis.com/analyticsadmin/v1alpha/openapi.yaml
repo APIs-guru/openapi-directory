@@ -632,6 +632,57 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
+  "/v1alpha/{parent}/bigQueryLinks":
+    get:
+      description: Lists BigQuery Links on a property.
+      operationId: analyticsadmin.properties.bigQueryLinks.list
+      parameters:
+        - description: "Required. The name of the property to list BigQuery links under. Format: properties/{property_id} Example: properties/1234"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of resources to return. The service may return fewer than this value, even if there are additional pages. If unspecified, at most 50 resources will be returned. The maximum value is 200; (higher values will be coerced to the maximum)
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListBigQueryLinks` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListBigQueryLinks` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaListBigQueryLinksResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.readonly
+      tags:
+        - properties
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1alpha/{parent}/conversionEvents":
     get:
       description: Returns a list of conversion events in the specified parent property. Returns an empty list if no conversion events are found.
@@ -3241,6 +3292,18 @@ components:
           description: List of Audiences.
           items:
             $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAudience"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
+    GoogleAnalyticsAdminV1alphaListBigQueryLinksResponse:
+      description: Response message for ListBigQueryLinks RPC
+      properties:
+        bigqueryLinks:
+          description: List of BigQueryLinks.
+          items:
+            $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaBigQueryLink"
           type: array
         nextPageToken:
           description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.

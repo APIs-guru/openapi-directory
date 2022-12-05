@@ -1168,7 +1168,7 @@ components:
           description: The ID of the Google Workspace account that owns the Chrome OS device.
           type: string
         ownerCompanyId:
-          description: The ID of the Customer that purchased the Android device.
+          description: The ID of the Customer that purchased the device.
           format: int64
           type: string
         resellerId:
@@ -1215,7 +1215,7 @@ components:
           description: The device’s MEID number.
           type: string
         model:
-          description: The device model's name. Allowed values are listed in [Android models](/zero-touch/resources/manufacturer-names#model-names) and [Chrome OS models](https://support.google.com/chrome/a/answer/10130175?hl=en#identify_compatible).
+          description: The device model's name. Allowed values are listed in [Android models](/zero-touch/resources/manufacturer-names#model-names) and [Chrome OS models](https://support.google.com/chrome/a/answer/10130175#identify_compatible).
           type: string
         serialNumber:
           description: The manufacturer's serial number for the device. This value might not be unique across different device models.
@@ -1526,7 +1526,7 @@ components:
       description: Captures the processing status for each device in the operation.
       properties:
         deviceId:
-          description: If processing succeeds, the device ID of the Android device.
+          description: If processing succeeds, the device ID of the device.
           format: int64
           type: string
         errorIdentifier:
