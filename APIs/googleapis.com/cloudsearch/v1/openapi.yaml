@@ -2858,6 +2858,7 @@ components:
             - SCAN_SUCCEEDED_WARN
             - SCAN_SUCCEEDED_AUDIT_ONLY
             - SCAN_FAILURE_EXCEPTION
+            - SCAN_FAILURE_RULE_FETCH_FAILED
             - SCAN_FAILURE_TIMEOUT
             - SCAN_FAILURE_ALL_RULES_FAILED
             - SCAN_FAILURE_ILLEGAL_STATE_FOR_ATTACHMENTS
@@ -4736,10 +4737,6 @@ components:
           format: int32
           readOnly: true
           type: integer
-        mediaBackendInfo:
-          description: Output only. Information about the media backend for the currently ongoing conference in the meeting space. The media backend information will only be filled in for clients that are supposed to present the information. The information should be displayed in a debug panel and is only intended for internal debugging purposes. If the string is empty nothing should be displayed about the media backend. Deprecated because media backend is always MEDIA_ROUTER since Dec 2018.
-          readOnly: true
-          type: string
         organizationName:
           description: Output only. The name or description of the organization or domain that the organizer belongs to. The expected use of this in clients is to present messages like "John Doe (outside of Google.com) is trying to join this call", where "Google.com" is the organization name. The field will be empty if the organization name could not be determined, possibly because of a backend error.
           readOnly: true
@@ -5107,6 +5104,7 @@ components:
             - CO_ACTIVITY_APP_KAHOOT
             - CO_ACTIVITY_APP_GQUEUES
             - CO_ACTIVITY_APP_YOU_TUBE_MUSIC
+            - CO_ACTIVITY_APP_SAMSUNG_NOTES
           type: string
       type: object
     Collaboration:
@@ -5581,6 +5579,7 @@ components:
             - SCAN_SUCCEEDED_WARN
             - SCAN_SUCCEEDED_AUDIT_ONLY
             - SCAN_FAILURE_EXCEPTION
+            - SCAN_FAILURE_RULE_FETCH_FAILED
             - SCAN_FAILURE_TIMEOUT
             - SCAN_FAILURE_ALL_RULES_FAILED
             - SCAN_FAILURE_ILLEGAL_STATE_FOR_ATTACHMENTS
@@ -5788,6 +5787,25 @@ components:
             - LAST_30_DAYS
             - LAST_90_DAYS
           type: string
+      type: object
+    DynamiteMessagesScoringInfo:
+      description: This is the proto for holding message level scoring information. This data is used for logging in query-api server and for testing purposes.
+      properties:
+        finalScore:
+          format: double
+          type: number
+        freshnessScore:
+          format: double
+          type: number
+        joinedSpaceAffinityScore:
+          format: double
+          type: number
+        messageAgeInDays:
+          format: double
+          type: number
+        topicalityScore:
+          format: double
+          type: number
       type: object
     DynamiteSpacesScoringInfo:
       description: This is the proto for holding space level scoring information. This data is used for logging in query-api server and for testing purposes.
@@ -8868,6 +8886,7 @@ components:
             - SCAN_SUCCEEDED_WARN
             - SCAN_SUCCEEDED_AUDIT_ONLY
             - SCAN_FAILURE_EXCEPTION
+            - SCAN_FAILURE_RULE_FETCH_FAILED
             - SCAN_FAILURE_TIMEOUT
             - SCAN_FAILURE_ALL_RULES_FAILED
             - SCAN_FAILURE_ILLEGAL_STATE_FOR_ATTACHMENTS
@@ -8992,6 +9011,15 @@ components:
         retentionSettings:
           $ref: "#/components/schemas/AppsDynamiteSharedRetentionSettings"
           description: The retention settings of the message.
+        richTextFormattingType:
+          description: Used by clients to correctly log format type for message creation due to complexity with client side optimistic update (see go/content-metric-post-send-logging for details). Currently, only set by server in the message or topic creation path.
+          enum:
+            - NONE
+            - MARKDOWN
+            - FORMAT_ANNOTATIONS
+            - FORMAT_ANNOTATIONS_IGNORED
+            - FORMAT_ANNOTATIONS_IGNORED_WITH_MARKDOWN
+          type: string
         secondaryMessageKey:
           description: A client-specified string that can be used to uniquely identify a message in a space, in lieu of `id.message_id`.
           type: string
@@ -11342,6 +11370,9 @@ components:
         deletionPolicyUrl:
           description: Link to the deletion policy webpage for the bot. Configured by Pantheon, may be empty.
           type: string
+        gwmUrl:
+          description: Link to GWM page of the app. May be empty.
+          type: string
         privacyPolicyUrl:
           description: Link to the privacy policy webpage for the bot. May be empty.
           type: string
@@ -11989,15 +12020,6 @@ components:
           description: "Dimensions of the image: width."
           format: int32
           type: integer
-        linkType:
-          description: "NEXT TAG : 18"
-          enum:
-            - UNDEFINED
-            - AUTO_DETECTED_PLAIN_TEXT
-            - RICH_TEXT
-            - MARKDOWN
-            - NO_ASSOCIATED_TEXT
-          type: string
         mimeType:
           description: Mime type of the content (Currently mapped from Page Render Service ItemType) Note that this is not necessarily the mime type of the http resource. For example a text/html from youtube or vimeo may actually be classified as a video type. Then we shall mark it as video/* since we don't know exactly what type of video it is.
           type: string
@@ -12019,8 +12041,9 @@ components:
         urlSource:
           enum:
             - URL_SOURCE_UNKNOWN
-            - USER_SUPPLIED_URL
             - SERVER_SUPPLIED_POLICY_VIOLATION
+            - AUTO_DETECTED_PLAIN_TEXT
+            - RICH_TEXT
           type: string
       type: object
     User:

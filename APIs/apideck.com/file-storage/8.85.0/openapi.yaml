@@ -933,7 +933,7 @@ paths:
             }
       x-graphql-field-name: files
     post:
-      description: Upload file (max 4MB). Please use the Upload Session API to upload bigger files.
+      description: Upload file (max 100MB). Please use the [Upload Sessions API](#operation/uploadSessionsStart) to upload bigger files.
       operationId: filesUpload
       parameters:
         - $ref: "#/components/parameters/raw"
@@ -964,10 +964,17 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
+      servers:
+        - url: https://upload.apideck.com
       summary: Upload file
       tags:
         - Files
       x-apideck-api: fileStorage
+      x-apideck-gotchas:
+        - connector: onedrive
+          description: OneDrive limits file uploads to 4MB. Please use the [Upload Sessions API](#operation/uploadSessionsStart) to upload bigger files.
+        - connector: sharepoint
+          description: Sharepoint limits file uploads to 4MB. Please use the [Upload Sessions API](#operation/uploadSessionsStart) to upload bigger files.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1771,7 +1778,7 @@ paths:
             }
   /file-storage/upload-sessions:
     post:
-      description: Start Upload Session
+      description: Start an Upload Session. Upload sessions are used to upload large files, use the [Upload File](#operation/filesUpload) endpoint to upload smaller files (up to 100MB).
       operationId: uploadSessionsAdd
       parameters:
         - $ref: "#/components/parameters/raw"
@@ -1801,6 +1808,8 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
+      servers:
+        - url: https://upload.apideck.com
       summary: Start Upload Session
       tags:
         - Upload Sessions
@@ -1884,7 +1893,7 @@ paths:
               console.error(error)
             }
     get:
-      description: Get Upload Session
+      description: Get Upload Session. Use the `part_size` to split your file into parts. Upload the parts to the [Upload part of File](#operation/uploadSessionsUpload) endpoint.
       operationId: uploadSessionsOne
       parameters:
         - $ref: "#/components/parameters/id"
@@ -1909,6 +1918,8 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
+      servers:
+        - url: https://upload.apideck.com
       summary: Get Upload Session
       tags:
         - Upload Sessions
@@ -1934,7 +1945,7 @@ paths:
               console.error(error)
             }
     put:
-      description: Upload part of File to Upload Session (max 4MB). Get `part_size` from [Get Upload Session](#operation/uploadSessionsOne) first. Every File part (except the last one) uploaded to this endpoint should have Content-Length equal to `part_size`.
+      description: Upload part of File to Upload Session (max 100MB). Get `part_size` from [Get Upload Session](#operation/uploadSessionsOne) first. Every File part (except the last one) uploaded to this endpoint should have Content-Length equal to `part_size`.
       operationId: uploadSessionsUpload
       parameters:
         - $ref: "#/components/parameters/id"
@@ -1942,6 +1953,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/partNumber"
+        - $ref: "#/components/parameters/digestPart"
         - $ref: "#/components/parameters/raw"
       requestBody:
         content:
@@ -1968,10 +1980,15 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
+      servers:
+        - url: https://upload.apideck.com
       summary: Upload part of File to Upload Session
       tags:
         - Upload Sessions
       x-apideck-api: fileStorage
+      x-apideck-gotchas:
+        - connector: box
+          description: Box requires a SHA1 digest of the uploaded chunk to be sent. More info in the Box API documentation [here](https://developer.box.com/reference/put-files-upload-sessions-id/#param-digest).
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1981,7 +1998,8 @@ paths:
             const apideck = new Apideck({
               apiKey: 'REPLACE_WITH_API_KEY',
               appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+              consumerId: 'REPLACE_WITH_CONSUMER_ID',
+              digest: 'REPLACE_WITH_DIGEST'
             })
 
             const params = {
@@ -2008,6 +2026,7 @@ paths:
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/digestPart"
       requestBody:
         content:
           application/json:
@@ -2032,10 +2051,15 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
+      servers:
+        - url: https://upload.apideck.com
       summary: Finish Upload Session
       tags:
         - Upload Sessions
       x-apideck-api: fileStorage
+      x-apideck-gotchas:
+        - connector: box
+          description: Box requires a SHA1 digest of the whole file to be sent when committing the upload session. More info in the Box API documentation [here](https://developer.box.com/reference/post-files-upload-sessions-id-commit/#param-digest).
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -2045,7 +2069,8 @@ paths:
             const apideck = new Apideck({
               apiKey: 'REPLACE_WITH_API_KEY',
               appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+              consumerId: 'REPLACE_WITH_CONSUMER_ID',
+              digest: 'REPLACE_WITH_DIGEST'
             })
 
             try {
@@ -2079,6 +2104,22 @@ components:
       name: cursor
       schema:
         nullable: true
+        type: string
+    digest:
+      description: The RFC3230 message digest of the whole file. Only required for the Box connector. More information on the Box API docs [here](https://developer.box.com/reference/post-files-upload-sessions-id-commit/#param-digest)
+      in: header
+      name: digest
+      required: false
+      schema:
+        example: sha=fpRyg5eVQletdZqEKaFlqwBXJzM=
+        type: string
+    digestPart:
+      description: The RFC3230 message digest of the uploaded part. Only required for the Box connector. More information on the Box API docs [here](https://developer.box.com/reference/put-files-upload-sessions-id/#param-digest)
+      in: header
+      name: digest
+      required: false
+      schema:
+        example: sha=fpRyg5eVQletdZqEKaFlqwBXJzM=
         type: string
     driveGroupsFilter:
       description: Apply filters
