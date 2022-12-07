@@ -1117,6 +1117,7 @@ paths:
                   deceased_on: '2000-08-12'
                 },
                 division: 'Europe',
+                division_id: '12345',
                 department: 'R&D',
                 department_id: '12345',
                 team: {
@@ -1453,6 +1454,7 @@ paths:
                   deceased_on: '2000-08-12'
                 },
                 division: 'Europe',
+                division_id: '12345',
                 department: 'R&D',
                 department_id: '12345',
                 team: {
@@ -3947,6 +3949,12 @@ components:
           type: string
         division:
           $ref: "#/components/schemas/Division"
+        division_id:
+          description: Unique identifier of the division this employee belongs to.
+          example: "12345"
+          nullable: true
+          title: Division ID
+          type: string
         emails:
           items:
             $ref: "#/components/schemas/Email"
