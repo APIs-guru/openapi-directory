@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://documentai.googleapis.com/$discovery/rest?version=v1beta2
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: documentai
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/document-ai/docs/
 tags:
@@ -1004,7 +1005,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentTextChange"
           type: array
         textStyles:
-          description: Placeholder. Styles for the Document.text.
+          description: Styles for the Document.text.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentStyle"
           type: array
@@ -1079,7 +1080,7 @@ components:
           $ref: "#/components/schemas/GoogleTypeMoney"
           description: "Money value. See also: https://github.com/googleapis/googleapis/blob/master/google/type/money.proto"
         text:
-          description: Optional. An optional field to store a normalized string. For some entity types, one of respective `structured_value` fields may also be populated. Also not all the types of `structured_value` will be normalized. For example, some processors may not generate float or int normalized text by default. Below are sample formats mapped to structured values. - Money/Currency type (`money_value`) is in the ISO 4217 text format. - Date type (`date_value`) is in the ISO 8601 text format. - Datetime type (`datetime_value`) is in the ISO 8601 text format.
+          description: Optional. An optional field to store a normalized string. For some entity types, one of respective `structured_value` fields may also be populated. Also not all the types of `structured_value` will be normalized. For example, some processors may not generate `float` or `integer` normalized text by default. Below are sample formats mapped to structured values. - Money/Currency type (`money_value`) is in the ISO 4217 text format. - Date type (`date_value`) is in the ISO 8601 text format. - Datetime type (`datetime_value`) is in the ISO 8601 text format.
           type: string
       type: object
     GoogleCloudDocumentaiV1beta1DocumentEntityRelation:
@@ -1208,7 +1209,7 @@ components:
             - FORM_FIELD
           type: string
         page:
-          description: Required. Index into the Document.pages element, for example using Document.pages to locate the related page element. This field is skipped when its value is the default 0. See https://developers.google.com/protocol-buffers/docs/proto3#json.
+          description: Required. Index into the Document.pages element, for example using `Document.pages` to locate the related page element. This field is skipped when its value is the default `0`. See https://developers.google.com/protocol-buffers/docs/proto3#json.
           format: int64
           type: string
       type: object
@@ -1292,7 +1293,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageDetectedLanguage"
           type: array
         valueType:
-          description: 'If the value is non-textual, this field represents the type. Current valid values are: - blank (this indicates the field_value is normal text) - "unfilled_checkbox" - "filled_checkbox"'
+          description: "If the value is non-textual, this field represents the type. Current valid values are: - blank (this indicates the `field_value` is normal text) - `unfilled_checkbox` - `filled_checkbox`"
           type: string
       type: object
     GoogleCloudDocumentaiV1beta1DocumentPageImage:
@@ -1896,7 +1897,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentTextChange"
           type: array
         textStyles:
-          description: Placeholder. Styles for the Document.text.
+          description: Styles for the Document.text.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentStyle"
           type: array
@@ -1971,7 +1972,7 @@ components:
           $ref: "#/components/schemas/GoogleTypeMoney"
           description: "Money value. See also: https://github.com/googleapis/googleapis/blob/master/google/type/money.proto"
         text:
-          description: Optional. An optional field to store a normalized string. For some entity types, one of respective `structured_value` fields may also be populated. Also not all the types of `structured_value` will be normalized. For example, some processors may not generate float or int normalized text by default. Below are sample formats mapped to structured values. - Money/Currency type (`money_value`) is in the ISO 4217 text format. - Date type (`date_value`) is in the ISO 8601 text format. - Datetime type (`datetime_value`) is in the ISO 8601 text format.
+          description: Optional. An optional field to store a normalized string. For some entity types, one of respective `structured_value` fields may also be populated. Also not all the types of `structured_value` will be normalized. For example, some processors may not generate `float` or `integer` normalized text by default. Below are sample formats mapped to structured values. - Money/Currency type (`money_value`) is in the ISO 4217 text format. - Date type (`date_value`) is in the ISO 8601 text format. - Datetime type (`datetime_value`) is in the ISO 8601 text format.
           type: string
       type: object
     GoogleCloudDocumentaiV1beta2DocumentEntityRelation:
@@ -2114,7 +2115,7 @@ components:
             - FORM_FIELD
           type: string
         page:
-          description: Required. Index into the Document.pages element, for example using Document.pages to locate the related page element. This field is skipped when its value is the default 0. See https://developers.google.com/protocol-buffers/docs/proto3#json.
+          description: Required. Index into the Document.pages element, for example using `Document.pages` to locate the related page element. This field is skipped when its value is the default `0`. See https://developers.google.com/protocol-buffers/docs/proto3#json.
           format: int64
           type: string
       type: object
@@ -2198,7 +2199,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageDetectedLanguage"
           type: array
         valueType:
-          description: 'If the value is non-textual, this field represents the type. Current valid values are: - blank (this indicates the field_value is normal text) - "unfilled_checkbox" - "filled_checkbox"'
+          description: "If the value is non-textual, this field represents the type. Current valid values are: - blank (this indicates the `field_value` is normal text) - `unfilled_checkbox` - `filled_checkbox`"
           type: string
       type: object
     GoogleCloudDocumentaiV1beta2DocumentPageImage:

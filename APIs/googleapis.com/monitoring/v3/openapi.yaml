@@ -1577,6 +1577,99 @@ paths:
             - https://www.googleapis.com/auth/monitoring
       tags:
         - services
+  "/v3/{parent}/snoozes":
+    get:
+      description: Lists the Snoozes associated with a project. Can optionally pass in filter, which specifies predicates to match Snoozes.
+      operationId: monitoring.projects.snoozes.list
+      parameters:
+        - description: "Required. The project (https://cloud.google.com/monitoring/api/v3#project_name) whose Snoozes should be listed. The format is: projects/[PROJECT_ID_OR_NUMBER] "
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: 'Optional. Optional filter to restrict results to the given criteria. The following fields are supported. interval.start_time interval.end_timeFor example: ``` interval.start_time > "2022-03-11T00:00:00-08:00" AND interval.end_time < "2022-03-12T00:00:00-08:00" ``` '
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. The maximum number of results to return for a single query. The server may further constrain the maximum number of results returned in a single page. The value should be in the range 1, 1000. If the value given is outside this range, the server will decide the number of results to be returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The next_page_token from a previous call to ListSnoozesRequest to get the next page of results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSnoozesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/monitoring
+          Oauth2c:
+            - https://www.googleapis.com/auth/monitoring
+        - Oauth2:
+            - https://www.googleapis.com/auth/monitoring.read
+          Oauth2c:
+            - https://www.googleapis.com/auth/monitoring.read
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a Snooze that will prevent alerts, which match the provided criteria, from being opened. The Snooze applies for a specific time interval.
+      operationId: monitoring.projects.snoozes.create
+      parameters:
+        - description: "Required. The project (https://cloud.google.com/monitoring/api/v3#project_name) in which a Snooze should be created. The format is: projects/[PROJECT_ID_OR_NUMBER] "
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Snooze"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Snooze"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/monitoring
+          Oauth2c:
+            - https://www.googleapis.com/auth/monitoring
+      tags:
+        - projects
   "/v3/{parent}/uptimeCheckConfigs":
     get:
       description: Lists the existing valid Uptime check configurations for the project (leaving out any invalid configurations).
@@ -2142,6 +2235,15 @@ components:
           format: int32
           type: integer
       type: object
+    Criteria:
+      description: Criteria specific to the AlertPolicys that this Snooze applies to. The Snooze will suppress alerts that come from one of the AlertPolicys whose names are supplied.
+      properties:
+        policies:
+          description: "The specific AlertPolicy names for the alert that should be snoozed. The format is: projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[POLICY_ID] There is a limit of 10 policies per snooze. This limit is checked during snooze creation."
+          items:
+            type: string
+          type: array
+      type: object
     Custom:
       description: Use a custom service to designate a service that you want to monitor when none of the other service types (like App Engine, Cloud Run, or a GKE type) matches your intended service.
       properties: {}
@@ -2329,6 +2431,14 @@ components:
           type: boolean
         typeUrl:
           description: 'The field type URL, without the scheme, for message or enumeration types. Example: "type.googleapis.com/google.protobuf.Timestamp".'
+          type: string
+      type: object
+    ForecastOptions:
+      description: Options used when forecasting the time series and testing the predicted value against the threshold.
+      properties:
+        forecastHorizon:
+          description: Required. The length of time into the future to forecast whether a time series will violate the threshold. If the predicted value is found to violate the threshold, and the violation is observed in all forecasts made for the configured duration, then the time series is considered to be failing.
+          format: google-duration
           type: string
       type: object
     GetNotificationChannelVerificationCodeRequest:
@@ -2722,6 +2832,18 @@ components:
             $ref: "#/components/schemas/Service"
           type: array
       type: object
+    ListSnoozesResponse:
+      description: The results of a successful ListSnoozes call, containing the matching Snoozes.
+      properties:
+        nextPageToken:
+          description: Page token for repeated calls to ListSnoozes, to fetch additional pages of results. If this is empty or missing, there are no more pages.
+          type: string
+        snoozes:
+          description: Snoozes matching this list call.
+          items:
+            $ref: "#/components/schemas/Snooze"
+          type: array
+      type: object
     ListTimeSeriesResponse:
       description: The ListTimeSeries response.
       properties:
@@ -2965,6 +3087,9 @@ components:
         filter:
           description: Required. A filter (https://cloud.google.com/monitoring/api/v3/filters) that identifies which time series should be compared with the threshold.The filter is similar to the one that is specified in the ListTimeSeries request (https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that call is useful to verify the time series that will be retrieved / processed). The filter must specify the metric type and the resource type. Optionally, it can specify resource labels and metric labels. This field must not exceed 2048 Unicode characters in length.
           type: string
+        forecastOptions:
+          $ref: "#/components/schemas/ForecastOptions"
+          description: When this field is present, the MetricThreshold condition forecasts whether the time series is predicted to violate the threshold within the forecast_horizion. When this field is not set, the MetricThreshold tests the current value of the timeseries against the threshold.
         thresholdValue:
           description: A value against which to compare the time series.
           format: double
@@ -3430,6 +3555,22 @@ components:
             type: string
           description: Labels which have been used to annotate the service-level objective. Label keys must start with a letter. Label keys and values may contain lowercase letters, numbers, underscores, and dashes. Label keys and values have a maximum length of 63 characters, and must be less than 128 bytes in size. Up to 64 label entries may be stored. For labels which do not have a semantic value, the empty string may be supplied for the label value.
           type: object
+      type: object
+    Snooze:
+      description: A Snooze will prevent any alerts from being opened, and close any that are already open. The Snooze will work on alerts that match the criteria defined in the Snooze. The Snooze will be active from interval.start_time through interval.end_time.
+      properties:
+        criteria:
+          $ref: "#/components/schemas/Criteria"
+          description: Required. This defines the criteria for applying the Snooze. See Criteria for more information.
+        displayName:
+          description: Required. A display name for the Snooze. This can be, at most, 512 unicode characters.
+          type: string
+        interval:
+          $ref: "#/components/schemas/TimeInterval"
+          description: Required. The Snooze will be active from interval.start_time through interval.end_time. interval.start_time cannot be in the past. There is a 15 second clock skew to account for the time it takes for a request to reach the API from the UI.
+        name:
+          description: "Required. The name of the Snooze. The format is: projects/[PROJECT_ID_OR_NUMBER]/snoozes/[SNOOZE_ID] The ID of the Snooze will be generated by the system."
+          type: string
       type: object
     SourceContext:
       description: SourceContext represents information about the source of a protobuf element, like the file in which it is defined.

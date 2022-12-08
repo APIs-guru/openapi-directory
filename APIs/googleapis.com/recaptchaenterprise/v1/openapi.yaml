@@ -6,7 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: ""
+  description: Help protect your website from fraudulent activity, spam, and abuse without creating friction.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -590,6 +590,36 @@ components:
             type: string
           type: array
       type: object
+    GoogleCloudRecaptchaenterpriseV1AccountVerificationInfo:
+      description: Information about account verification, used for identity verification.
+      properties:
+        endpoints:
+          description: Endpoints that can be used for identity verification.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1EndpointVerificationInfo"
+          type: array
+        languageCode:
+          description: Language code preference for the verification message, set as a IETF BCP 47 language code.
+          type: string
+        latestVerificationResult:
+          description: Output only. Result of the latest account verification challenge.
+          enum:
+            - RESULT_UNSPECIFIED
+            - SUCCESS_USER_VERIFIED
+            - ERROR_USER_NOT_VERIFIED
+            - ERROR_SITE_ONBOARDING_INCOMPLETE
+            - ERROR_RECIPIENT_NOT_ALLOWED
+            - ERROR_RECIPIENT_ABUSE_LIMIT_EXHAUSTED
+            - ERROR_CRITICAL_INTERNAL
+            - ERROR_CUSTOMER_QUOTA_EXHAUSTED
+            - ERROR_VERIFICATION_BYPASSED
+            - ERROR_VERDICT_MISMATCH
+          readOnly: true
+          type: string
+        username:
+          description: Username of the account that is being verified. Deprecated. Customers should now provide the hashed account ID field in Event.
+          type: string
+      type: object
     GoogleCloudRecaptchaenterpriseV1AndroidKeySettings:
       description: Settings specific to keys that can be used by Android apps.
       properties:
@@ -650,6 +680,9 @@ components:
         accountDefenderAssessment:
           $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessment"
           description: Assessment returned by account defender when a hashed_account_id is provided.
+        accountVerification:
+          $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1AccountVerificationInfo"
+          description: Account verification information for identity verification. The assessment event must include a token and site key to use this feature.
         event:
           $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1Event"
           description: The event being assessed.
@@ -687,6 +720,25 @@ components:
         passedCount:
           description: Count of nocaptchas (successful verification without a challenge) plus submitted challenge solutions that were correct and resulted in verification.
           format: int64
+          type: string
+      type: object
+    GoogleCloudRecaptchaenterpriseV1EndpointVerificationInfo:
+      description: Information about a verification endpoint that can be used for 2FA.
+      properties:
+        emailAddress:
+          description: Email address for which to trigger a verification request.
+          type: string
+        lastVerificationTime:
+          description: Output only. Timestamp of the last successful verification for the endpoint, if any.
+          format: google-datetime
+          readOnly: true
+          type: string
+        phoneNumber:
+          description: Phone number for which to trigger a verification request. Should be given in E.164 format.
+          type: string
+        requestToken:
+          description: Output only. Token to provide to the client to trigger endpoint verification. It must be used within 15 minutes.
+          readOnly: true
           type: string
       type: object
     GoogleCloudRecaptchaenterpriseV1Event:
@@ -817,7 +869,10 @@ components:
       type: object
     GoogleCloudRecaptchaenterpriseV1MigrateKeyRequest:
       description: The migrate key request message.
-      properties: {}
+      properties:
+        skipBillingCheck:
+          description: Optional. Whether or not to do billing check. A reCAPTCHA Enterprise or migrated key behaves differently than a reCAPTCHA (non-Enterprise version) key when you reach a quota limit (see https://cloud.google.com/recaptcha-enterprise/quotas#quota_limit). To avoid any disruption of your usage, we check that a billing account is present. If your usage of reCAPTCHA is under the free quota, you can safely skip the billing check and proceed with the migration. See https://cloud.google.com/recaptcha-enterprise/docs/billing-information.
+          type: boolean
       type: object
     GoogleCloudRecaptchaenterpriseV1PrivatePasswordLeakVerification:
       description: Private password leak verification info.

@@ -100,6 +100,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/ListSpacesResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.spaces
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.spaces
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.spaces.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.spaces.readonly
       tags:
         - spaces
     parameters:
@@ -1968,6 +1977,8 @@ components:
             https://www.googleapis.com/auth/chat.messages: View, compose, send, update, and delete messages, and add, view, and delete reactions to messages.
             https://www.googleapis.com/auth/chat.messages.create: Compose and send messages in Google Chat
             https://www.googleapis.com/auth/chat.messages.readonly: View messages and reactions in Google Chat
+            https://www.googleapis.com/auth/chat.spaces: Create conversations and spaces and view or update metadata (including history settings) in Google Chat
+            https://www.googleapis.com/auth/chat.spaces.readonly: View chat and spaces in Google Chat
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -1979,5 +1990,7 @@ components:
             https://www.googleapis.com/auth/chat.messages: View, compose, send, update, and delete messages, and add, view, and delete reactions to messages.
             https://www.googleapis.com/auth/chat.messages.create: Compose and send messages in Google Chat
             https://www.googleapis.com/auth/chat.messages.readonly: View messages and reactions in Google Chat
+            https://www.googleapis.com/auth/chat.spaces: Create conversations and spaces and view or update metadata (including history settings) in Google Chat
+            https://www.googleapis.com/auth/chat.spaces.readonly: View chat and spaces in Google Chat
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

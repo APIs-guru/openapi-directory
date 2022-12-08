@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://gkehub.googleapis.com/$discovery/rest?version=v1beta
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: gkehub
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster
 tags:
@@ -725,7 +726,7 @@ components:
       description: Configuration for Config Sync
       properties:
         allowVerticalScale:
-          description: Set to true to allow the vertical scaling. Defaults to false which disallows vertical scaling.
+          description: Set to true to allow the vertical scaling. Defaults to false which disallows vertical scaling. This field is deprecated.
           type: boolean
         enabled:
           description: Enables the installation of ConfigSync. If set to true, ConfigSync resources will be created and the other ConfigSync fields will be applied if exist. If set to false, all other ConfigSync fields will be ignored, ConfigSync resources will be deleted. If omitted, ConfigSync resources will be managed depends on the presence of git field.
@@ -1527,6 +1528,9 @@ components:
         configmanagement:
           $ref: "#/components/schemas/ConfigManagementMembershipSpec"
           description: Config Management-specific spec.
+        fleetInherited:
+          description: True if value of `feature_spec` was inherited from a fleet-level default.
+          type: boolean
         fleetobservability:
           $ref: "#/components/schemas/FleetObservabilityMembershipSpec"
           description: Fleet observability membership spec

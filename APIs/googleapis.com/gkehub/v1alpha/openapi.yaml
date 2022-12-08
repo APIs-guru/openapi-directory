@@ -1118,7 +1118,7 @@ components:
       description: Configuration for Config Sync
       properties:
         allowVerticalScale:
-          description: Set to true to allow the vertical scaling. Defaults to false which disallows vertical scaling.
+          description: Set to true to allow the vertical scaling. Defaults to false which disallows vertical scaling. This field is deprecated.
           type: boolean
         enabled:
           description: Enables the installation of ConfigSync. If set to true, ConfigSync resources will be created and the other ConfigSync fields will be applied if exist. If set to false, all other ConfigSync fields will be ignored, ConfigSync resources will be deleted. If omitted, ConfigSync resources will be managed depends on the presence of git field.
@@ -2199,6 +2199,9 @@ components:
         configmanagement:
           $ref: "#/components/schemas/ConfigManagementMembershipSpec"
           description: Config Management-specific spec.
+        fleetInherited:
+          description: True if value of `feature_spec` was inherited from a fleet-level default.
+          type: boolean
         fleetobservability:
           $ref: "#/components/schemas/FleetObservabilityMembershipSpec"
           description: Fleet observability membership spec

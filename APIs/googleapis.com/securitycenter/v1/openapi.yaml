@@ -114,7 +114,7 @@ paths:
       description: Updates external system. This is for a given finding.
       operationId: securitycenter.projects.sources.findings.externalSystems.patch
       parameters:
-        - description: "External System Name e.g. jira, demisto, etc. e.g.: `organizations/1234/sources/5678/findings/123456/externalSystems/jira` `folders/1234/sources/5678/findings/123456/externalSystems/jira` `projects/1234/sources/5678/findings/123456/externalSystems/jira`"
+        - description: 'Full resource name of the external system, for example: "organizations/1234/sources/5678/findings/123456/externalSystems/jira", "folders/1234/sources/5678/findings/123456/externalSystems/jira", "projects/1234/sources/5678/findings/123456/externalSystems/jira"'
           in: path
           name: name
           required: true
@@ -198,7 +198,7 @@ paths:
       description: Updates the mute state of a finding.
       operationId: securitycenter.projects.sources.findings.setMute
       parameters:
-        - description: 'Required. The relative resource name of the finding. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name Example: "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}", "folders/{folder_id}/sources/{source_id}/findings/{finding_id}", "projects/{project_id}/sources/{source_id}/findings/{finding_id}".'
+        - description: 'Required. The [relative resource name](https://cloud.google.com/apis/design/resource_names#relative_resource_name) of the finding. Example: "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}", "folders/{folder_id}/sources/{source_id}/findings/{finding_id}", "projects/{project_id}/sources/{source_id}/findings/{finding_id}".'
           in: path
           name: name
           required: true
@@ -240,8 +240,7 @@ paths:
       description: Updates the state of a finding.
       operationId: securitycenter.projects.sources.findings.setState
       parameters:
-        - description: 'Required. The relative resource name of the finding. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name Example: "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}".'
-          in: path
+        - in: path
           name: name
           required: true
           schema:
@@ -469,10 +468,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a big query export.
+      description: Creates a BigQuery export.
       operationId: securitycenter.projects.bigQueryExports.create
       parameters:
-        - description: Required. Resource name of the new big query export's parent. Its format is "organizations/[organization_id]", "folders/[folder_id]", or "projects/[project_id]".
+        - description: Required. Resource name of the new BigQuery export's parent. Its format is "organizations/[organization_id]", "folders/[folder_id]", or "projects/[project_id]".
           in: path
           name: parent
           required: true
@@ -830,7 +829,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. Unique identifier provided by the client within the parent scope. It must be between 1 and 128 characters, and contains alphanumeric characters, underscores or hyphens only.
+        - description: Required. Unique identifier provided by the client within the parent scope. It must be between 1 and 128 characters, and contain alphanumeric characters, underscores or hyphens only.
           in: query
           name: configId
           schema:
@@ -1753,7 +1752,7 @@ components:
           type: string
         vulnerability:
           $ref: "#/components/schemas/Vulnerability"
-          description: Represents vulnerability specific fields like cve, cvss scores etc. CVE stands for Common Vulnerabilities and Exposures (https://cve.mitre.org/about/)
+          description: Represents vulnerability-specific fields like CVE and CVS scores. CVE stands for Common Vulnerabilities and Exposures (https://cve.mitre.org/about/)
       type: object
     Folder:
       description: Message that contains the resource name and display name of a folder resource.
@@ -1908,7 +1907,7 @@ components:
           description: Identifier that's used to track the given finding in the external system.
           type: string
         name:
-          description: "External System Name e.g. jira, demisto, etc. e.g.: `organizations/1234/sources/5678/findings/123456/externalSystems/jira` `folders/1234/sources/5678/findings/123456/externalSystems/jira` `projects/1234/sources/5678/findings/123456/externalSystems/jira`"
+          description: 'Full resource name of the external system, for example: "organizations/1234/sources/5678/findings/123456/externalSystems/jira", "folders/1234/sources/5678/findings/123456/externalSystems/jira", "projects/1234/sources/5678/findings/123456/externalSystems/jira"'
           type: string
         status:
           description: Most recent status of the corresponding finding's ticket/tracker in the external system.
@@ -2337,28 +2336,28 @@ components:
           description: Rootkit name when available.
           type: string
         unexpectedCodeModification:
-          description: Flag indicating unexpected modifications of kernel code memory.
+          description: True when unexpected modifications of kernel read-only data memory are present.
           type: boolean
         unexpectedFtraceHandler:
-          description: Flag indicating presence of ftrace points with callbacks pointing to regions that are not in the expected kernel or module code range.
+          description: True when `ftrace` points are present with callbacks pointing to regions that are not in the expected kernel or module code range.
           type: boolean
         unexpectedInterruptHandler:
-          description: Flag indicating presence of interrupt handlers that are are not in the expected kernel, module code regions.
+          description: True when interrupt handlers that are are not in the expected kernel or module code regions are present.
           type: boolean
         unexpectedKernelCodePages:
-          description: Flag indicating presence of kernel code pages that are not in the expected kernel, module code regions.
+          description: True when kernel code pages that are not in the expected kernel or module code regions are present.
           type: boolean
         unexpectedKprobeHandler:
-          description: Flag indicating presence of kprobe points with callbacks pointing to regions that are not in the expected kernel or module code range.
+          description: True when `kprobe` points are present with callbacks pointing to regions that are not in the expected kernel or module code range.
           type: boolean
         unexpectedProcessesInRunqueue:
-          description: Flag indicating unexpected process(es) in the scheduler run-queue, those that are in the run-queue, but not in the process task-list.
+          description: True when unexpected processes in the scheduler run queue are present. Such processes are in the run queue, but not in the process task list.
           type: boolean
         unexpectedReadOnlyDataModification:
           description: Flag indicating unexpected modifications of kernel read-only data memory.
           type: boolean
         unexpectedSystemCallHandler:
-          description: Flag indicating presence of system call handlers that are are not in the expected kernel, module code regions.
+          description: True when system call handlers that are are not in the expected kernel or module code regions are present.
           type: boolean
       type: object
     Kubernetes:
@@ -2992,7 +2991,7 @@ components:
           type: string
       type: object
     SetFindingStateRequest:
-      description: Request message for updating a finding's state.
+      description: "Request message for updating a finding's state. The [relative resource name](https://cloud.google.com/apis/design/resource_names#relative_resource_name) of the finding. Example: \"organizations/{organization_id}/sources/{source_id}/findings/{finding_id}\", \"folders/{folder_id}/sources/{source_id}/findings/{finding_id}\", \"projects/{project_id}/sources/{source_id}/findings/{finding_id}\"."
       properties:
         startTime:
           description: Required. The time at which the updated state takes effect.

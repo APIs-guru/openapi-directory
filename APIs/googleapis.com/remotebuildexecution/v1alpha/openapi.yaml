@@ -1150,6 +1150,7 @@ components:
             - LINUX_EXECUTION_FORBIDDEN
             - LINUX_EXECUTION_UNRESTRICTED
             - LINUX_EXECUTION_HARDENED_GVISOR
+            - LINUX_EXECUTION_HARDENED_GVISOR_OR_TERMINAL
           type: string
         linuxIsolation:
           description: linux_isolation allows overriding the docker runtime used for containers started on Linux.
@@ -1177,6 +1178,7 @@ components:
             - WINDOWS_EXECUTION_UNSPECIFIED
             - WINDOWS_EXECUTION_FORBIDDEN
             - WINDOWS_EXECUTION_UNRESTRICTED
+            - WINDOWS_EXECUTION_TERMINAL
           type: string
       type: object
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature:

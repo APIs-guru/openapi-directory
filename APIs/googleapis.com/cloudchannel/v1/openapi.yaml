@@ -2060,6 +2060,23 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleCloudChannelV1ConditionalOverride:
+      description: Specifies the override to conditionally apply.
+      properties:
+        adjustment:
+          $ref: "#/components/schemas/GoogleCloudChannelV1RepricingAdjustment"
+          description: Required. Information about the applied override's adjustment.
+        rebillingBasis:
+          description: Required. The RebillingBasis to use for the applied override. Shows the relative cost based on your repricing costs.
+          enum:
+            - REBILLING_BASIS_UNSPECIFIED
+            - COST_AT_LIST
+            - DIRECT_CUSTOMER_COST
+          type: string
+        repricingCondition:
+          $ref: "#/components/schemas/GoogleCloudChannelV1RepricingCondition"
+          description: Required. Specifies the condition which, if met, will apply the override.
+      type: object
     GoogleCloudChannelV1Constraints:
       description: Represents the constraints for buying the Offer.
       properties:
@@ -2959,6 +2976,10 @@ components:
         resizeUnitCount:
           description: If true and enable_renewal = true, the unit (for example seats or licenses) will be set to the number of active units at renewal time.
           type: boolean
+        scheduledRenewalOffer:
+          description: "Output only. The renewal offer resource name for which the entitlement is to be renewed. Takes the form: accounts/{account_id}/offers/{offer_id}."
+          readOnly: true
+          type: string
       type: object
     GoogleCloudChannelV1Report:
       description: The ID and description of a report that was used to generate report data. For example, "GCP Daily Spend", "Google Workspace License Activity", etc.
@@ -3056,6 +3077,13 @@ components:
           $ref: "#/components/schemas/GoogleCloudChannelV1PercentageAdjustment"
           description: Flat markup or markdown on an entire bill.
       type: object
+    GoogleCloudChannelV1RepricingCondition:
+      description: Represents the various repricing conditions you can use for a conditional override.
+      properties:
+        skuGroupCondition:
+          $ref: "#/components/schemas/GoogleCloudChannelV1SkuGroupCondition"
+          description: SKU Group condition for override.
+      type: object
     GoogleCloudChannelV1RepricingConfig:
       description: Configuration for repricing a Google bill over a period of time.
       properties:
@@ -3065,6 +3093,11 @@ components:
         channelPartnerGranularity:
           $ref: "#/components/schemas/GoogleCloudChannelV1RepricingConfigChannelPartnerGranularity"
           description: Applies the repricing configuration at the channel partner level. This is the only supported value for ChannelPartnerRepricingConfig.
+        conditionalOverrides:
+          description: The conditional overrides to apply for this configuration. If you list multiple overrides, only the first valid override is used. If you don't list any overrides, the API uses the normal adjustment and rebilling basis.
+          items:
+            $ref: "#/components/schemas/GoogleCloudChannelV1ConditionalOverride"
+          type: array
         effectiveInvoiceMonth:
           $ref: "#/components/schemas/GoogleTypeDate"
           description: Required. The YearMonth when these adjustments activate. The Day field needs to be "0" since we only accept YearMonth repricing boundaries.
@@ -3134,6 +3167,13 @@ components:
         product:
           $ref: "#/components/schemas/GoogleCloudChannelV1Product"
           description: Product the SKU is associated with.
+      type: object
+    GoogleCloudChannelV1SkuGroupCondition:
+      description: A condition that applies the override if a line item SKU is found in the SKU group.
+      properties:
+        skuGroup:
+          description: 'Specifies a SKU group (https://cloud.google.com/skus/sku-groups). Resource name of SKU group. Format: accounts/{account}/skuGroups/{sku_group}. Example: "accounts/C01234/skuGroups/3d50fd57-3157-4577-a5a9-a219b8490041".'
+          type: string
       type: object
     GoogleCloudChannelV1StartPaidServiceRequest:
       description: Request message for CloudChannelService.StartPaidService.
@@ -3588,6 +3628,10 @@ components:
         resizeUnitCount:
           description: If true and enable_renewal = true, the unit (for example seats or licenses) will be set to the number of active units at renewal time.
           type: boolean
+        scheduledRenewalOffer:
+          description: "Output only. The renewal offer resource name for which the entitlement is to be renewed. Takes the form: accounts/{account_id}/offers/{offer_id}."
+          readOnly: true
+          type: string
       type: object
     GoogleCloudChannelV1alpha1Report:
       description: The ID and description of a report that was used to generate report data. For example, "GCP Daily Spend", "Google Workspace License Activity", etc.

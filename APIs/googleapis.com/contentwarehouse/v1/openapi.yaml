@@ -2433,6 +2433,12 @@ components:
             - SKILLSSTACK_AFFINITY
             - WHOSTORY_AFFINITY
             - PHOTOS_PARTNER_SHARING_EMAIL_ONLY
+            - MEMORIZE_AFFINITY
+            - BETTANY_AFFINITY
+            - BASECAMP_AFFINITY
+            - DRIVE_SEARCH_FILTER_AFFINITY
+            - CULTURE_EVENTS_CALENDAR_AFFINITY
+            - DATABRIDGE_CONSOLE_AFFINITY
           type: string
         containerId:
           description: The ID of the container
@@ -5871,6 +5877,7 @@ components:
               - APP_DATA_USAGE
               - APP_DETAILS
               - APP_SHORTCUT
+              - APPS_NOTIFICATIONS
               - APPS_STORAGE
               - ASSISTANT_ACCOUNT
               - ASSISTANT_FACE_MATCH
@@ -5884,6 +5891,7 @@ components:
               - BATTERY_PERCENTAGE
               - BATTERY_PRESENT
               - BATTERY_SAVER
+              - BATTERY_SAVER_SCHEDULE
               - BATTERY_SHARE
               - BATTERY_USAGE
               - BIOMETRIC
@@ -5897,6 +5905,8 @@ components:
               - CAMERA_DOUBLE_TWIST
               - CAST
               - COLOR_INVERSION
+              - COLOR_CORRECTION
+              - CONVERSATIONS
               - CHARGING_SOUNDS_AND_VIBRATION
               - CHARGING_STATE
               - CONNECTED_DEVICES
@@ -5908,6 +5918,8 @@ components:
               - DATA_LIMIT_LEVEL
               - DATA_WARNING
               - DATA_WARNING_LEVEL
+              - DEFAULT_ALARM_SOUND
+              - DEFAULT_NOTIFICATION_SOUND
               - DEFAULT_APPS
               - DEVELOPER_OPTIONS
               - DEVICE_NAME
@@ -5924,13 +5936,17 @@ components:
               - EMERGENCY_ALERTS
               - EMERGENCY_INFORMATION
               - ETHERNET_TETHERING
+              - EXTRA_DIM
+              - EXTREME_BATTERY_SAVER
               - FACTORY_RESET
+              - FIND_MY_DEVICE
               - FLASHLIGHT
               - FOCUS_MODE
               - FONT_SIZE
               - FREE_UP_SPACE
               - GESTURES
               - HAPTIC_FEEDBACK_VIBRATION
+              - HARD_KEYBOARD
               - HEADS_UP
               - HIGH_REFRESH_RATE
               - HOT_SPOT
@@ -5942,6 +5958,7 @@ components:
               - KEYBOARD_SHORTCUTS
               - LIFT_CHECK_PHONE
               - LOCATION
+              - LOCATION_HISTORY
               - LOCATION_BLUETOOTH_SCANNING
               - LOCATION_WIFI_SCANNING
               - LOCK_SCREEN
@@ -5955,6 +5972,7 @@ components:
               - MANIFY_TRIPLE_TAP
               - MEDIA
               - MEDIA_VOLUME
+              - MICROPHONE_ACCESS
               - MOBILE
               - MOBILE_DATA
               - MUSIC
@@ -5968,11 +5986,15 @@ components:
               - NOTIFICATION_BADGE
               - NOTIFICATION_SOUND
               - NOTIFICATION_ON_SCREEN
+              - NOTIFICATION_HISTORY
               - NOTIFY_FOR_PUBLIC_NETWORKS
               - ONEHANDED_MODE
+              - OS_VERSION
               - PASSWORD
               - PERMISSION_MANAGER
+              - PERMISSION_USAGE
               - PERSONALIZATION
+              - PRINTING
               - PHONE_NUMBER
               - PICTURE_IN_PICTURE
               - POINTER_SPEED
@@ -5986,16 +6008,20 @@ components:
               - SCREEN_LOCKING_SOUND
               - SCREEN_MAGNIFICATION
               - SCREEN_TIMEOUT
+              - SCREEN_LOCK
+              - SCREEN_SAVER
               - SELECT_TO_SPEAK
               - SET_TIME_AUTOMATICALLY
               - SET_TIME_ZONE_AUTOMATICALLY
               - SETTINGS
               - SIM
+              - SIM_MANAGER
               - SPEECH_RATE
               - STORAGE_USAGE
               - SWIPE_FOR_NOTIFICATION
               - SWITCH_ACCESS
               - SYSTEM_UPDATE
+              - SYSTEM_NAVIGATION
               - TALKBACK_PASSWORDS
               - TEXT_TO_SPEECH
               - TIME_ZONE
@@ -6004,6 +6030,7 @@ components:
               - USB_TETHERING
               - VERBOSE_TTS
               - VIBRATE
+              - VIBRATION
               - VIBRATION_MODE
               - VOICE
               - VOLUME_LEVEL
@@ -7654,8 +7681,12 @@ components:
           type: boolean
       type: object
     AssistantApiLoggingOnlyData:
-      description: "Data which is produced for logging and debugging. Servers MUST NOT use this for any other purposes, such as branching on it. Next ID: 14"
+      description: "Data which is produced for logging and debugging. Servers MUST NOT use this for any other purposes, such as branching on it. Next ID: 15"
       properties:
+        accountIndex:
+          description: The index of the account on the device. Useful when there are multiple accounts on a device such as distinguishing primary user data from secondary users. There is no guarantee that this is a stable number but is relatively stable in practice.
+          format: int32
+          type: integer
         acpVersion:
           description: A user-readable string describing the ACP version (go/acp-version) of the client app used by the user to originate the conversation.
           type: string
@@ -8109,6 +8140,7 @@ components:
             - UNKNOWN_RENDERING_FORMAT
             - CONCISE_TEXT
             - PROTO_LAYOUT
+            - ELEMENTS
           type: string
         supportedScreenStates:
           description: The screen states that the client supports. The current screen state is specified in DeviceProperties.screen.
@@ -9359,10 +9391,10 @@ components:
           description: Whether client supports user impersonation on suggestion chip click. go/suggestion-click-impersonation
           type: boolean
         coloredChipBackgroundBorderSupported:
-          description: Whether client supports suggestion chips with colored background/border.
+          description: Whether client supports suggestion chips with colored background/border. Deprecated in favor of go/color-token-suggestion-chip.
           type: boolean
         coloredChipTextSupported:
-          description: "Whether client supports suggestion chips with colored text. See design doc: http://go/opa-suggestions-ux-eng-design."
+          description: "Whether client supports suggestion chips with colored text. See design doc: http://go/opa-suggestions-ux-eng-design. Deprecated in favor of go/color-token-suggestion-chip."
           type: boolean
         debugDataSupported:
           description: Whether client supports suggestions debug data to be displayed.
@@ -10384,19 +10416,19 @@ components:
             - EMAIL_OF_FAMILY_MEMBER
           type: string
         numAlternateNameFromFuzzyContactMatch:
-          description: Number of alternate contact names from fuzzy contact match.
+          description: Number of alternate contact names from fuzzy contact match. (Not suggest using it since it can change due to retrieval iteration)
           format: float
           type: number
         numAlternateNamesFromS3:
-          description: Number of alternate contact names from S3_HYPOTHESES.
+          description: Number of alternate contact names from S3_HYPOTHESES. (Not suggest using it since it can change due to retrieval iteration)
           format: float
           type: number
         numAlternativeNamesFromInterpretation:
-          description: Number of alternate contact names from interpretation.
+          description: Number of alternate contact names from interpretation. (Not suggest using it since it can change due to retrieval iteration)
           format: float
           type: number
         numCandidates:
-          description: Number of contacts populated by the contact Grounding Provider.
+          description: Number of contacts populated by the contact Grounding Provider. (Not suggest using it since it can change due to retrieval iteration)
           format: float
           type: number
         recognitionAlternateSource:
@@ -10930,7 +10962,6 @@ components:
             - MOVIE
             - PHOTO
             - TV_SHOW_EPISODE
-            - PODCAST_EPISODE
             - MUSIC_GENRE
             - AUDIO_BOOK
             - CHAPTER
@@ -10945,6 +10976,8 @@ components:
             - NEWS
             - NARRATED_WEB
             - AUDIO_STORY
+            - PODCAST_SERIES
+            - PODCAST_EPISODE
           type: string
         playbackState:
           description: The playback states of the session.
@@ -12720,7 +12753,7 @@ components:
           type: integer
       type: object
     CompositeDoc:
-      description: "Protocol record used for collecting together all information about a document. Please consult go/dme for two basic questions about `CompositeDoc`: - Where should I look up certain information (e.g: pagerank, language)? - What does each field in CompositeDoc mean and who should I contact if I have questions? To add a new field into CompositeDoc, or change existing field's size significantly, please file a ticket at go/dj-new-field, fill in necessary information and get approved by docjoin-access@ team. Next id: 191"
+      description: "Protocol record used for collecting together all information about a document. Please consult go/dj-explorer for two basic questions about `CompositeDoc`: - Where should I look up certain information (e.g: pagerank, language)? - What does each field in CompositeDoc mean and who should I contact if I have questions? To add a new field into CompositeDoc, or change existing field's size significantly, please file a ticket at go/dj-new-field, fill in necessary information and get approved by docjoin-access@ team. Next id: 191"
       properties:
         ContentChecksum96:
           description: Visible content checksum as computed by repository::parsehandler::checksum::Checksum96bitsParseHandler. The value is a Fprint96 in "key format" (i.e., by Fprint96::AsKey()).
@@ -15987,6 +16020,8 @@ components:
           items:
             $ref: "#/components/schemas/FatcatCompactTaxonomicClassificationCategory"
           type: array
+        classifierVersion:
+          type: string
         taxonomy:
           description: Either taxonomy will be set, using the enum above, or taxonomy_name will be set (if the taxonomy is not one of the ones in the enum) - never both
           enum:
@@ -17064,6 +17099,16 @@ components:
         price:
           $ref: "#/components/schemas/GeostorePriceRangeProto"
           description: Price of the item. There should be at most one price for any given currency.
+        priceFormat:
+          description: Represents which price format is being used by this item, which determines the usage/meaning of the “price” field above. Optional – the default value is legal and safe (represents no price if the “price” field is unset).
+          enum:
+            - PRICE_FORMAT_DEFAULT
+            - PRICE_FORMAT_VARIES
+          type: string
+        rankingHint:
+          description: Numerical score which can be provided by data sources to indicate preferred item ordering. This is purely a hint – we are not required to followed it if we have a different order we think is better. Higher scores represent items that should be shown more prominently/earlier. Optional.
+          format: float
+          type: number
       type: object
     GeostoreCountComparisonProto:
       description: A count value tagged with a comparison operator. This can be used for axle count, trailer count, etc.
@@ -17372,6 +17417,9 @@ components:
             - PROVIDER_GOOGLE_GEO_LDE
             - PROVIDER_GOOGLE_GEO_SIGNAL_TRACKING
             - PROVIDER_GOOGLE_UGC_AGGREGATION
+            - PROVIDER_GOOGLE_3D_BASEMAP
+            - PROVIDER_GOOGLE_MAPFACTS_PRIVACY
+            - PROVIDER_GOOGLE_GT_ALF
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -17891,6 +17939,7 @@ components:
             - PROVIDER_VATTENFALL
             - PROVIDER_VIETGIS
             - PROVIDER_UNITE
+            - PROVIDER_NEOGY
           type: string
         rawMetadata:
           description: For every key that is used in raw_data from this source, there must be a corresponding entry in raw_metadata that describes this key.
@@ -18501,6 +18550,7 @@ components:
             - UNKNOWN
             - BOGUS
             - PRIVATE
+            - PRIVATE_MUST_PURGE
             - SPAM
             - UNSUPPORTED
             - PENDING
@@ -19995,6 +20045,9 @@ components:
             - PROVIDER_GOOGLE_GEO_LDE
             - PROVIDER_GOOGLE_GEO_SIGNAL_TRACKING
             - PROVIDER_GOOGLE_UGC_AGGREGATION
+            - PROVIDER_GOOGLE_3D_BASEMAP
+            - PROVIDER_GOOGLE_MAPFACTS_PRIVACY
+            - PROVIDER_GOOGLE_GT_ALF
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -20514,6 +20567,7 @@ components:
             - PROVIDER_VATTENFALL
             - PROVIDER_VIETGIS
             - PROVIDER_UNITE
+            - PROVIDER_NEOGY
           type: string
       type: object
     GeostoreIntersectionGroupProto:
@@ -21150,6 +21204,9 @@ components:
             - PROVIDER_GOOGLE_GEO_LDE
             - PROVIDER_GOOGLE_GEO_SIGNAL_TRACKING
             - PROVIDER_GOOGLE_UGC_AGGREGATION
+            - PROVIDER_GOOGLE_3D_BASEMAP
+            - PROVIDER_GOOGLE_MAPFACTS_PRIVACY
+            - PROVIDER_GOOGLE_GT_ALF
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -21669,6 +21726,7 @@ components:
             - PROVIDER_VATTENFALL
             - PROVIDER_VIETGIS
             - PROVIDER_UNITE
+            - PROVIDER_NEOGY
           type: string
         sourceDataset:
           type: string
@@ -22119,6 +22177,30 @@ components:
           $ref: "#/components/schemas/GeostorePriceInfoStatus"
           description: Message containing metadata about the verified status of the PriceInfo. Only verified listings should be displayed.
       type: object
+    GeostorePriceInfoSourceDetails:
+      properties:
+        lastUpdateSources:
+          items:
+            $ref: "#/components/schemas/GeostorePriceInfoSourceDetailsSourceData"
+          type: array
+        sourceData:
+          items:
+            $ref: "#/components/schemas/GeostorePriceInfoSourceDetailsSourceData"
+          type: array
+      type: object
+    GeostorePriceInfoSourceDetailsSourceData:
+      properties:
+        clientProjectNumber:
+          description: Project number of the GMB API client. Set only if the source is EXTERNAL_GMB_API.
+          format: int64
+          type: string
+        source:
+          enum:
+            - SOURCE_UNSPECIFIED
+            - NMX_UI
+            - EXTERNAL_GMB_API
+          type: string
+      type: object
     GeostorePriceInfoStatus:
       description: Providers of PriceInfo (e.g. SinglePlatform, YEXT) send verified and unverified listings. PriceInfoStatus is used to encapsulate this information.
       properties:
@@ -22142,6 +22224,10 @@ components:
     GeostorePriceListProto:
       description: A PriceListProto can be used to represent any type of price lists, one of which is a menu of food and drinks. It contains names and descriptions, together with its source URL list if it is extracted or attributed to that URL. The names and descriptions are represented using repeated PriceListNameInfo fields to allow versions in different languages. A PriceListProto may contain multiple sections; in the context of a food menu, this would be multiple menu sections, e.g. for breakfast, lunch, dinner, prix fixe, or dinner for two, etc. At least one menu section must be present. Each section contains a number of items; for food menus, it may be FoodMenuItems defined below. At least one item must be present in each section.
       properties:
+        aggregatorId:
+          description: For third party lists, represents the ID of the aggregator which provided this data. Optional.
+          format: uint64
+          type: string
         availableTime:
           $ref: "#/components/schemas/GeostoreTimeScheduleProto"
           description: The time period when this price list is available. Establishments are not required to give available_time for any given price list, however, when this field is not set, the price list is understood as available any time the establishment is open.
@@ -22193,6 +22279,9 @@ components:
           items:
             $ref: "#/components/schemas/GeostorePriceListSectionProto"
           type: array
+        sourceDetails:
+          $ref: "#/components/schemas/GeostorePriceInfoSourceDetails"
+          description: Source of the information retrieved, could be from our own NMX UI or a third party API.
         sourceUrl:
           $ref: "#/components/schemas/GeostoreUrlListProto"
           description: Where this price list comes from. If set, this must also be a member of the price_list_url field, and represents translations of a single URL.
@@ -22222,6 +22311,7 @@ components:
               - TYPE_SERVICE
               - TYPE_PRODUCT
               - TYPE_JOB
+              - TYPE_3P_JOB
             type: string
           type: array
         media:
@@ -22486,6 +22576,9 @@ components:
             - PROVIDER_GOOGLE_GEO_LDE
             - PROVIDER_GOOGLE_GEO_SIGNAL_TRACKING
             - PROVIDER_GOOGLE_UGC_AGGREGATION
+            - PROVIDER_GOOGLE_3D_BASEMAP
+            - PROVIDER_GOOGLE_MAPFACTS_PRIVACY
+            - PROVIDER_GOOGLE_GT_ALF
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -23005,6 +23098,7 @@ components:
             - PROVIDER_VATTENFALL
             - PROVIDER_VIETGIS
             - PROVIDER_UNITE
+            - PROVIDER_NEOGY
           type: string
       type: object
     GeostoreRankDetailsProto:
@@ -26303,7 +26397,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudContentwarehouseV1PropertyFilter"
           type: array
         query:
-          description: The query string that matches against the full text of the document and the searchable properties. The maximum number of allowed characters is 255.
+          description: 'The query string that matches against the full text of the document and the searchable properties. The query partially supports [Google AIP style syntax](https://google.aip.dev/160). Specifically, the query supports literals, logical operators, negation operators, comparison operators, and functions. Literals: A bare literal value (examples: "42", "Hugo") is a value to be matched against. It searches over the full text of the document and the searchable properties. Logical operators: "AND", "and", "OR", and "or" are binary logical operators (example: "engineer OR developer"). Negation operators: "NOT" and "!" are negation operators (example: "NOT software"). Comparison operators: support the binary comparison operators =, !=, <, >, <= and >= for string, numeric, enum, boolean. Also support like operator `~~` for string. It provides semantic search functionality by parsing, stemming and doing synonyms expansion against the input query. To specify a property in the query, the left hand side expression in the comparison must be the property ID including the parent. The right hand side must be literals. For example: "\"projects/123/locations/us\".property_a < 1" matches results whose "property_a" is less than 1 in project 123 and us location. The literals and comparison expression can be connected in a single query (example: "software engineer \"projects/123/locations/us\".salary > 100"). Functions: supported functions are `LOWER([property_name])` to perform a case insensitive match and `EMPTY([property_name])` to filter on the existence of a key. Support nested expressions connected using parenthesis and logical operators. The default logical operators is `AND` if there is no operators between expressions. The query can be used with other filters e.g. `time_filters` and `folder_name_filter`. They are connected with `AND` operator under the hood. The maximum number of allowed characters is 255.'
           type: string
         queryContext:
           description: For custom synonyms. Customers provide the synonyms based on context. One customer can provide multiple set of synonyms based on different context. The search query will be expanded based on the custom synonyms of the query context set. By default, no custom synonyms wll be applied if no query context is provided. It is not supported for CMEK compliant deployment.
@@ -26359,7 +26453,7 @@ components:
           description: Schema description.
           type: string
         displayName:
-          description: Required. Name of the schema given by the user. Must be unique per customer.
+          description: Required. Name of the schema given by the user. Must be unique per project.
           type: string
         documentIsFolder:
           description: Document Type, true refers the document is a folder, otherwise it is a typical document.
@@ -26941,7 +27035,7 @@ components:
           format: int32
           type: integer
         orderBy:
-          description: 'The criteria determining how search results are sorted. For non-empty query, default is `"relevance desc"`. For empty query, default is `"upload_date desc"`. Supported options are: * `"relevance desc"`: By relevance descending, as determined by the API algorithms. * `"upload_date desc"`: By upload date descending. * `"upload_date"`: By upload date ascending. * `"update_date desc"`: By last updated date descending. * `"update_date"`: By last updated date ascending.'
+          description: 'The criteria determining how search results are sorted. For non-empty query, default is `"relevance desc"`. For empty query, default is `"upload_date desc"`. Supported options are: * `"relevance desc"`: By relevance descending, as determined by the API algorithms. * `"upload_date desc"`: By upload date descending. * `"upload_date"`: By upload date ascending. * `"update_date desc"`: By last updated date descending. * `"update_date"`: By last updated date ascending. * `"retrieval_importance desc"`: By retrieval importance of properties descending. This feature is still under development, please do not use unless otherwise instructed to do so.'
           type: string
         pageSize:
           description: A limit on the number of documents returned in the search results. Increasing this value above the default value of 10 can increase search response time. The value can be between 1 and 100.
@@ -27304,7 +27398,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentTextChange"
           type: array
         textStyles:
-          description: Placeholder. Styles for the Document.text.
+          description: Styles for the Document.text.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentStyle"
           type: array
@@ -27379,7 +27473,7 @@ components:
           $ref: "#/components/schemas/GoogleTypeMoney"
           description: "Money value. See also: https://github.com/googleapis/googleapis/blob/master/google/type/money.proto"
         text:
-          description: Optional. An optional field to store a normalized string. For some entity types, one of respective `structured_value` fields may also be populated. Also not all the types of `structured_value` will be normalized. For example, some processors may not generate float or int normalized text by default. Below are sample formats mapped to structured values. - Money/Currency type (`money_value`) is in the ISO 4217 text format. - Date type (`date_value`) is in the ISO 8601 text format. - Datetime type (`datetime_value`) is in the ISO 8601 text format.
+          description: Optional. An optional field to store a normalized string. For some entity types, one of respective `structured_value` fields may also be populated. Also not all the types of `structured_value` will be normalized. For example, some processors may not generate `float` or `integer` normalized text by default. Below are sample formats mapped to structured values. - Money/Currency type (`money_value`) is in the ISO 4217 text format. - Date type (`date_value`) is in the ISO 8601 text format. - Datetime type (`datetime_value`) is in the ISO 8601 text format.
           type: string
       type: object
     GoogleCloudDocumentaiV1DocumentEntityRelation:
@@ -27508,7 +27602,7 @@ components:
             - FORM_FIELD
           type: string
         page:
-          description: Required. Index into the Document.pages element, for example using Document.pages to locate the related page element. This field is skipped when its value is the default 0. See https://developers.google.com/protocol-buffers/docs/proto3#json.
+          description: Required. Index into the Document.pages element, for example using `Document.pages` to locate the related page element. This field is skipped when its value is the default `0`. See https://developers.google.com/protocol-buffers/docs/proto3#json.
           format: int64
           type: string
       type: object
@@ -27592,7 +27686,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentPageDetectedLanguage"
           type: array
         valueType:
-          description: 'If the value is non-textual, this field represents the type. Current valid values are: - blank (this indicates the field_value is normal text) - "unfilled_checkbox" - "filled_checkbox"'
+          description: "If the value is non-textual, this field represents the type. Current valid values are: - blank (this indicates the `field_value` is normal text) - `unfilled_checkbox` - `filled_checkbox`"
           type: string
       type: object
     GoogleCloudDocumentaiV1DocumentPageImage:
@@ -28110,6 +28204,13 @@ components:
     GoogleInternalAppsWaldoV1alphaCalendarBusy:
       description: The status indicating the user is temporarily busy and there is not a more specific status derived from calendar that applies (e.g., InMeeting or DoNotDisturb).
       properties:
+        committedUntil:
+          description: The time when the user will stop being committed, i.e., when their status will be neither of InMeeting, DoNotDisturb, Busy or OutOfOffice < Xh. Note that the goal of this field is to provide information to help users decide how to communicate with a user (see also http://shortn/_wXYXtZScgh).
+          format: google-datetime
+          type: string
+        committedUntilIsMixed:
+          description: Whether the status of the user from this status's start to committed_until has more than one status type (e.g. DoNotDisturb + InMeeting).
+          type: boolean
         eventSummary:
           description: The summary of the corresponding event in Calendar.
           type: string
@@ -28139,7 +28240,7 @@ components:
       description: The status indicating the user should not be disturbed.
       properties:
         committedUntil:
-          description: The time when the user will stop being committed, i.e., when their status will be neither of InMeeting, DoNotDisturb or OutOfOffice < Xh.
+          description: The time when the user will stop being committed, i.e., when their status will be neither of InMeeting, DoNotDisturb, Busy or OutOfOffice < Xh.
           format: google-datetime
           type: string
         committedUntilIsMixed:
@@ -28162,7 +28263,7 @@ components:
       description: The status indicating the user is in a meeting.
       properties:
         committedUntil:
-          description: The time when the user will stop being committed, i.e., when their status will be neither of InMeeting, DoNotDisturb or OutOfOffice < Xh. Note that the goal of this field is to provide information to help users decide how to communicate with a user (see also http://shortn/_wXYXtZScgh).
+          description: The time when the user will stop being committed, i.e., when their status will be neither of InMeeting, DoNotDisturb, Busy or OutOfOffice < Xh. Note that the goal of this field is to provide information to help users decide how to communicate with a user (see also http://shortn/_wXYXtZScgh).
           format: google-datetime
           type: string
         committedUntilIsMixed:
@@ -28216,11 +28317,11 @@ components:
           format: google-datetime
           type: string
         committedUntil:
-          description: The time when the user will stop being committed, i.e., when their status will be neither of InMeeting, DoNotDisturb or OutOfOffice < Xh. Note that if this OOO block is large (>Xh), committed_until will be the end of this block, not including any meetings or focus time following it.
+          description: The time when the user will stop being committed, i.e., when their status will be neither of InMeeting, DoNotDisturb, Busy or OutOfOffice < Xh. Note that if this OOO block is large (>=Xh), committed_until is not set.
           format: google-datetime
           type: string
         committedUntilIsMixed:
-          description: Whether the status of the user from this status's start to committed_until has more than one status type (e.g. DoNotDisturb + InMeeting).
+          description: Whether the status of the user from this status's start to committed_until has more than one status type (e.g. DoNotDisturb + InMeeting). Only set if committed_until is set.
           type: boolean
         eventSummary:
           description: The summary of the corresponding OOO block in Calendar. This is entered by the user, so we return it "as is" - no i18n.
@@ -28250,9 +28351,9 @@ components:
       properties:
         nextCommitmentStatus:
           $ref: "#/components/schemas/GoogleInternalAppsWaldoV1alphaUserStatus"
-          description: The status type of the commitment above. The status will be an empty instance of the corresponding type, no additional data will be provided.
+          description: The status of the commitment above.
         nextCommitmentTime:
-          description: The most relevant upcoming commitment (InMeeting, DoNotDisturb or OutOfOffice). In most cases this will be the next closest commitment event, but if there is a large OOO in less than 24h it will take precedence over earlier events.
+          description: The most relevant upcoming commitment (InMeeting, DoNotDisturb, CalendarBusy or OutOfOffice). This context is set only if there is an upcoming commitment to show, and only on non commitments. Priority is given to the next closest commitment if its start is close enough to this event, otherwise the next large OOO if there is one.
           format: google-datetime
           type: string
       type: object
@@ -29228,6 +29329,7 @@ components:
           format: int32
           type: integer
         requestHeader:
+          description: Only necessary headers are recorded. See google3/htmlrender/webkit_headless/resource_key.cc
           items:
             $ref: "#/components/schemas/HtmlrenderWebkitHeadlessProtoReferencedResourceHttpHeader"
           type: array
@@ -29512,6 +29614,7 @@ components:
           format: byte
           type: string
         requestHeader:
+          description: Only necessary headers are included in the resource key by default. See google3/htmlrender/webkit_headless/resource_key.cc
           items:
             $ref: "#/components/schemas/HtmlrenderWebkitHeadlessProtoResourceHttpHeader"
           type: array
@@ -30111,6 +30214,8 @@ components:
             - VPREVIEW_TYPE_VERTICAL_90K
             - VPREVIEW_TYPE_540K_ORIGINAL_HQ_LICENSED
             - VPREVIEW_TYPE_90K_SPORT_HIGHLIGHT
+            - VPREVIEW_TYPE_VIDEO_ANSWER_300K_15SEC
+            - VPREVIEW_TYPE_VIDEO_ANSWER_300K_6SEC
             - VPREVIEW_TENOR_250K_PREVIEW
             - VPREVIEW_TENOR_100K_OPTIMIZED_PREVIEW
             - VPREVIEW_TENOR_30K_OPTIMIZED_THUMBNAIL_PREVIEW
@@ -31377,6 +31482,7 @@ components:
             - GENUS_KARTO
             - GENUS_CONTRIB_SERVICE_SHARED
             - GENUS_CONTRIB_SERVICE_GEO_UGC
+            - GENUS_SEARCH_SPORTS
           type: string
         state:
           description: Indicates the state in Venom for this transcode type.
@@ -31908,6 +32014,7 @@ components:
             - GENUS_KARTO
             - GENUS_CONTRIB_SERVICE_SHARED
             - GENUS_CONTRIB_SERVICE_GEO_UGC
+            - GENUS_SEARCH_SPORTS
           type: string
         insertionResponseTimestampUsec:
           description: Time that VideoNotification result was received from Venom.
@@ -33217,6 +33324,8 @@ components:
         acceleratedShoppingSignal:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         chromeCounts:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        instantNavboost:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
           description: LINT.ThenChange(//depot/google3/indexing/ames/spanner/schema/websearch_main.sdl)
         localyp:
@@ -35522,9 +35631,15 @@ components:
           items:
             $ref: "#/components/schemas/NlpSemanticParsingAnnotationEvalData"
           type: array
+        neuralLocationAnnotator:
+          $ref: "#/components/schemas/KnowledgeAnswersIntentQueryArgumentProvenanceNeuralLocationAnnotator"
       type: object
     KnowledgeAnswersIntentQueryArgumentProvenanceInjectedContextualSchema:
       description: "The value is carried from injected contextual schema. Such schemas can be injected by go/qu-biasing-config for particular clients when their biasing configs are triggered for their traffic Config: (if QRewrite source == CARS_IMMERSIVE then inject LocalCarListings and Cars) Context: (QRewrite source == CARS_IMMERSIVE) U: Red [LocalCarListings(Cars() & RelatedTo(/m/red))] In this case, both LocalCarListings and Cars are spanless injected contextual schemas."
+      properties: {}
+      type: object
+    KnowledgeAnswersIntentQueryArgumentProvenanceNeuralLocationAnnotator:
+      description: The value is used for CurrentQuery.annotator and PreviousQuery.annotator to indicate what annotator annotated the argument
       properties: {}
       type: object
     KnowledgeAnswersIntentQueryArgumentProvenancePreviousQuery:
@@ -35543,6 +35658,8 @@ components:
         eventId:
           $ref: "#/components/schemas/EventIdMessage"
           description: The event ID of the query where this value was pulled from.
+        neuralLocationAnnotator:
+          $ref: "#/components/schemas/KnowledgeAnswersIntentQueryArgumentProvenanceNeuralLocationAnnotator"
         role:
           $ref: "#/components/schemas/KnowledgeAnswersIntentQueryArgumentProvenancePreviousQueryRole"
         source:
@@ -38642,8 +38759,11 @@ components:
           type: string
       type: object
     MapsQualitySpecialWordsFlags:
-      description: "Flags that describe the information about a special word. If you add another flag please add it to the special words implemenation in google3/maps/quality/internal/special_words.cc. -- Next available id: 21 --"
+      description: "Flags that describe the information about a special word. If you add another flag please add it to the special words implemenation in google3/maps/quality/internal/special_words.cc. -- Next available id: 22 --"
       properties:
+        isAlleyAffix:
+          description: An affix that indicates an alley. Alleys are unnamed, numbered routes that are always linked to a "parent street". As these parent streets can be named e.g. "7th street" and alleys might be referred to as "7th alley", we need to be able to distinguish those affixes. For more details about alleys see go/vn-alley-geocoding.
+          type: boolean
         isCommonWord:
           description: "Common words E.g.: center, park, etc."
           type: boolean
@@ -39202,99 +39322,6 @@ components:
           description: required
           format: uint32
           type: integer
-      type: object
-    NewsReconServiceLrsQ2lrs2EntryPayload:
-      description: "Next ID: 7"
-      properties:
-        isDailyMoment:
-          type: boolean
-        isMomentAnyFlavor:
-          description: "DEPRECATED as in: will be removed shortly."
-          type: boolean
-        isPlannedMoment:
-          type: boolean
-        lrsTypes:
-          description: This is meant to hold `LongRunningStory.Type`s only, unfortunately adding an import here causes a circular dependency.
-          items:
-            format: int32
-            type: integer
-          type: array
-        momentRankingScore:
-          format: int64
-          type: string
-        outKgFeatureTypes:
-          description: LRS-level feature types to be sent as triples to KG. The equivalent KG collection will be added to the LRS topic.
-          items:
-            type: string
-          type: array
-      type: object
-    NewsReconServiceLrsQ2lrs2QueryToLrsDataset:
-      properties:
-        entries:
-          description: At most one entry per (LRS, algo version) pair.
-          items:
-            $ref: "#/components/schemas/NewsReconServiceLrsQ2lrs2QueryToLrsEntry"
-          type: array
-        timeMillis:
-          format: int64
-          type: string
-      type: object
-    NewsReconServiceLrsQ2lrs2QueryToLrsEntry:
-      description: 'Each entry is specific to one LRS, and contains all the information required for matching a query with the LRS. For example: entries { lrs { mid: "/m/2024WakandaSenateElection" } qref_entities { mid: "/m/election" # The general concept of election debug_index: 0 } qref_entities { mid: "/m/senate" debug_index: 1 } qref_entities { mid: "/m/wakanda" debug_index: 2 } qref_entities { mid: "/m/WakandaSenate" debug_index: 3 } qref_entities { mid: "/m/2024" # The year 2024 debug_index: 4 } patterns { pattern: "TT***" only_in { regions: "WK" # BCP-47 region code for Wakanda } } patterns { pattern: "TTT**" } patterns { pattern: "T**T*" } algo_version: 7 } The characters in every pattern string match the `qref_entities` pairwise. For example, in the pattern "TT***", the first T corresponds to the entity /m/election, the second T to /m/senate, the first star to /m/wakanda. A query matches a pattern if all the entities marked as T (== required) are found by QRef. If QRef also finds entities marked as star (== optional), those entities will be consumed in the LRS interpretation and added to the `QueryToLrsInterpretation.consumed_qref_mids` field. A query matches an entry if either: - QRef found the LRS entity itself in the query. This is the best-case scenario, it happens when the name of the event is well defined (for example "brexit") and the query mentions it explicitly; - the query matches any of the patterns defined in the entry. Next id: 8'
-      properties:
-        algoVersion:
-          description: The value of a `AlgoVersion.Enum` constant.
-          format: int32
-          type: integer
-        entryIndex:
-          description: Index of the entry in the list of entries. This does not need to be populated in the dataset which is written to disk.
-          format: int32
-          type: integer
-        internalPayload:
-          $ref: "#/components/schemas/NewsReconServiceLrsQ2lrs2EntryPayload"
-        lrs:
-          $ref: "#/components/schemas/NewsReconServiceLrsQ2lrs2QueryToLrsEntryEntity"
-        patterns:
-          items:
-            $ref: "#/components/schemas/NewsReconServiceLrsQ2lrs2QueryToLrsEntryPattern"
-          type: array
-        qrefEntities:
-          items:
-            $ref: "#/components/schemas/NewsReconServiceLrsQ2lrs2QueryToLrsEntryEntity"
-          type: array
-      type: object
-    NewsReconServiceLrsQ2lrs2QueryToLrsEntryEntity:
-      description: "Next id: 7"
-      properties:
-        debugIndex:
-          format: int32
-          type: integer
-        debugName:
-          type: string
-        encodedMid:
-          description: This does not need to be populated in the dataset which is written to disk.
-          format: uint64
-          type: string
-        mid:
-          type: string
-      type: object
-    NewsReconServiceLrsQ2lrs2QueryToLrsEntryLocaleRestrict:
-      description: A locale satisfies the restrict if there is any match.
-      properties:
-        regions:
-          description: BCP-47 region codes, e.g. "US". There is a match if the user's locale `.region_subtag()` is found in this set, e.g. the user's locale is "es-US".
-          items:
-            type: string
-          type: array
-      type: object
-    NewsReconServiceLrsQ2lrs2QueryToLrsEntryPattern:
-      properties:
-        onlyIn:
-          $ref: "#/components/schemas/NewsReconServiceLrsQ2lrs2QueryToLrsEntryLocaleRestrict"
-          description: If set, the pattern only applies if the locale satisifes the restrict.
-        pattern:
-          description: A string containing N characters, where each character is 'T' (required) or '*' (optional), and N is the size of `qref_entities`. Characters match QRef entities pairwise.
-          type: string
       type: object
     NlpLoggingQRewriteClientCallPathInfo:
       description: "The proto that holds the complete call path info of the QRewrite client (e.g. the QUS's phase like \"RBT\",\"QBT\"; the QUS's candidate type like \"Identity\"; and the ACE's candidate type like \"FuzzyMatcher\"). Next ID: 5 ACE tags"
@@ -46828,6 +46855,11 @@ components:
             - GPAY_RELEASE_OPS
             - SKILLSSTACK
             - WHOSTORY
+            - BETTANY
+            - BASECAMP
+            - CULTURE_EVENTS_CALENDAR
+            - DATABRIDGE_CONSOLE
+            - COMMSTAR
             - DEPRECATED_QUICKSTART_FLUME
             - DUO_CLIENT
             - ALBERT
@@ -47071,7 +47103,7 @@ components:
           type: string
       type: object
     PerDocData:
-      description: "=========================================================================== # Make sure you read the comments in the bottom before you add any new field. NB: As noted in the comments, this protocol buffer is used in both indexing and serving. In mustang serving implementations we only decode perdocdata during the search phase, and so this protocol should only contain data used during search. See mustang/repos_www/attachments.proto:{MustangBasicInfo,MustangContentInfo} for protocols used during search and/or docinfo. Next available tag deprecated, use this (and look for commented out fields): blaze-bin/net/proto_compiler/protocol-compiler --freetags \\ indexer/perdocdata/perdocdata.proto Next tag: 218"
+      description: "=========================================================================== # Make sure you read the comments in the bottom before you add any new field. NB: As noted in the comments, this protocol buffer is used in both indexing and serving. In mustang serving implementations we only decode perdocdata during the search phase, and so this protocol should only contain data used during search. See mustang/repos_www/attachments.proto:{MustangBasicInfo,MustangContentInfo} for protocols used during search and/or docinfo. Next available tag deprecated, use this (and look for commented out fields): blaze-bin/net/proto_compiler/protocol-compiler --freetags \\ indexer/perdocdata/perdocdata.proto Next tag: 219"
       properties:
         BlogData:
           $ref: "#/components/schemas/BlogPerDocData"
@@ -47156,9 +47188,6 @@ components:
           description: Spamscores are represented as a 7-bit integer, going from 0 to 127.
           format: int32
           type: integer
-        ScienceData:
-          $ref: "#/components/schemas/SciencePerDocData"
-          description: science data - used only in scholar index
         SpamWordScore:
           description: The spamword score is represented in 7-bits, going from 0 to 127.
           format: int32
@@ -47435,6 +47464,9 @@ components:
         spamMuppetSignals:
           $ref: "#/components/schemas/SpamMuppetjoinsMuppetSignals"
           description: Contains hacked site signals which will be used in query time joins. As of Oct'19, the field is stored in a separate corpus. It'll only be populated for in-flight requests between retrieve and full-score in perdocdata. So no extra storage is needed on muppet side.
+        spambrainData:
+          $ref: "#/components/schemas/SpamBrainData"
+          description: Site level scores coming from spambrain.
         spambrainTotalDocSpamScore:
           description: The document total spam score identified by spambrain, going from 0 to 1.
           format: float
@@ -50542,6 +50574,27 @@ components:
         packageName:
           type: string
       type: object
+    QualityCalypsoAppsUniversalImage:
+      properties:
+        fifeUrl:
+          type: string
+        height:
+          format: int32
+          type: integer
+        width:
+          format: int32
+          type: integer
+      type: object
+    QualityCalypsoAppsUniversalImageData:
+      properties:
+        featureGraphic:
+          $ref: "#/components/schemas/QualityCalypsoAppsUniversalImage"
+          description: aka. promotional image / cover image.
+        screenshot:
+          items:
+            $ref: "#/components/schemas/QualityCalypsoAppsUniversalImage"
+          type: array
+      type: object
     QualityCopiaFireflySiteSignal:
       description: Proto message containing site-level signal for search stack. Because firefly_stats.proto depends on "//segindexer:compositedoc_proto", we cannot make perdocdata contain it.
       properties:
@@ -51770,11 +51823,32 @@ components:
           type: number
       type: object
     QualityNsrNsrDataMetadata:
-      description: Contains meta information about this data.
+      description: "Contains meta information about this data. This field is only available in docjoins (and potentially MDU shards), it is not populated offline. NOTE: This is a new field (Nov 2022) and we do not want clients to depend on this; please contact qscore-team@ if you want to use this information."
       properties:
+        goldmineLookupKeyPerField:
+          additionalProperties:
+            format: int32
+            type: integer
+          description: Same as raffia_lookup_key_per_field. Note that the goldmine_lookups have priority; if a field appears in both goldmine and raffia entries, it means it was taken from goldmine. If it's missing here but present in raffia_lookup_key_per_field, it was taken from raffia.
+          type: object
+        goldmineLookupKeys:
+          description: The lookup keys attempted by goldmine. Note that goldmine only runs for urls which can be chunked differently than raffia; in those cases, goldmine related fields are empty.
+          items:
+            type: string
+          type: array
         raffiaLookupKey:
-          description: This is an internal field set by Raffia, to indicate which lookup key this record belonged to. This is helpful in determining where the final data is coming from, as we don't populate `site_chunk` fields offline (at all), so we cannot distinguish if data is coming from host fallback, secondary chunks or something else.
           type: string
+        raffiaLookupKeyPerField:
+          additionalProperties:
+            format: int32
+            type: integer
+          description: "Returns the raffia lookup key per each field in the NsrData proto (with exclusion of the Metadata sub-message (i.e. this)). It contains information like 3 : 1, meaning that the field inside NsrData with id '3' (in this case 'host') has been taken by raffia from the raffia lookup key at index 1."
+          type: object
+        raffiaLookupKeys:
+          description: This is an internal field set by Raffia, to indicate which lookup keys have been attempted to populate the NsrData for this document. This will allow us to determine which key has been used to populate each field in the proto. The keys are ordered by lookup priority; raffia will give priority to earlier keys, and only take fields from later keys if they are missing.
+          items:
+            type: string
+          type: array
       type: object
     QualityNsrPQData:
       description: "Next id: 17"
@@ -54061,6 +54135,9 @@ components:
       type: object
     QualityTimebasedLastSignificantUpdate:
       properties:
+        adjustmentInfo:
+          $ref: "#/components/schemas/QualityTimebasedLastSignificantUpdateAdjustments"
+          description: This is stored only for debugging purposes. Please consult dates@ team before making a dependency on this field.
         date:
           description: LastSignificantUpdate as UNIX timestamp in seconds. This is the new signal (go/lsu-dd) from LSU Selector V2 (once that is enabled, see b/171879888 for status), falling back to the legacy V1 signal if the V2 signal does not exist. Please use the 'source' field to determine where the value comes from.
           format: int64
@@ -54081,6 +54158,27 @@ components:
             - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_MEDIUM_SUPPORT
             - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_HIGH_SUPPORT
             - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_FULL_SUPPORT
+          type: string
+      type: object
+    QualityTimebasedLastSignificantUpdateAdjustments:
+      properties:
+        adjustmentSource:
+          enum:
+            - UNSET
+            - PASSAGE_TIMESTAMP
+            - FIRSTSEEN
+            - CONTENT_AGE
+          type: string
+        isUpperboundTimestampPrecise:
+          description: The timestamp is precise when it's derived from existing (>March 2022) passage timestamp.
+          type: boolean
+        unadjustedTimestampInSeconds:
+          description: The timestamp that was picked up by the component indicated in the LastSignificantUpdateSource but was dropped due to exceeding the upper bound. The two following fields are present only when the adjustment took place.
+          format: int64
+          type: string
+        upperboundTimestampInSeconds:
+          description: "The upperbound value derived from passage timestamps. If present, the LSU date should never exceed this value. Design doc: go/lsu-max-passage-timestamp"
+          format: int64
           type: string
       type: object
     QualityTimebasedOldnessInfo:
@@ -54657,7 +54755,7 @@ components:
           type: string
       type: object
     RepositoryAnnotationsRdfaRdfaRichSnippetsApplication:
-      description: "This structure holds data for application information for rich snippets Next ID: 51"
+      description: "This structure holds data for application information for rich snippets Next ID: 52"
       properties:
         appTypeData:
           $ref: "#/components/schemas/RepositoryAnnotationsRdfaRdfaRichSnippetsApplicationAppTypeData"
@@ -54714,6 +54812,9 @@ components:
           type: string
         iconUrlThumbnail:
           type: string
+        imageData:
+          $ref: "#/components/schemas/QualityCalypsoAppsUniversalImageData"
+          description: Copied from google3/contentads/shared/boulder/mobile-app-data-image-data.proto.
         inAppPurchase:
           description: Whether the app offers in-app purchase.
           type: boolean
@@ -54781,6 +54882,7 @@ components:
         reviewCount:
           type: string
         screenUrlHref:
+          description: TODO(b/260128276) deprecate this field in favor of image_data.
           items:
             type: string
           type: array
@@ -55756,8 +55858,6 @@ components:
           items:
             $ref: "#/components/schemas/RepositoryWebrefGlobalNameInfo"
           type: array
-        nameSignals:
-          $ref: "#/components/schemas/RepositoryWebrefPreprocessingNameSignals"
         refconNameInfo:
           description: Contains names and names metadata used by Refcon.
           items:
@@ -56545,6 +56645,7 @@ components:
             - NEGATIVE_SUPERLATIVE
             - FACET_AUDIENCE
             - FACET_PURPOSE
+            - SUPERLATIVE
           type: string
       type: object
     RepositoryWebrefLightweightTokensPerMentionLightweightToken:
@@ -56710,8 +56811,6 @@ components:
           items:
             $ref: "#/components/schemas/RepositoryWebrefMdvcMetadataPerVertical"
           type: array
-        queryToLongRunningStoryDataset:
-          $ref: "#/components/schemas/NewsReconServiceLrsQ2lrs2QueryToLrsDataset"
         resolutionPriority:
           description: Undergoing migration into the PerVertical message. Avoid using it. Resolution priority for this entity. In case a query has many possible resolutions, only the ones with the highest resolution priority are annotated.
           format: int32
@@ -57028,8 +57127,6 @@ components:
             - RATING_SOURCE_EWOK
             - RATING_SOURCE_SAFT_GOLDEN
             - RATING_SOURCE_CROWDCOMPUTE
-            - RATING_SOURCE_CROWDCOMPUTE_RERATING
-            - RATING_SOURCE_GOLDEN
           type: string
         resultCount:
           format: int32
@@ -57206,27 +57303,14 @@ components:
             - IMPORTANT
             - VITAL
           type: string
-        deprecatedItemId:
-          format: int32
-          type: integer
-        deprecatedProjectId:
-          format: int32
-          type: integer
-        deprecatedTaskId:
-          format: int32
-          type: integer
         displayString:
           description: How this rating is displayed in the evals, pre-computed from the other fields.
           type: string
         furballUrl:
           description: "The url of the ewok task that resulted in this rating. Example: https://furball.corp.google.com/project/view-item?itemId=1&projectId=2"
           type: string
-        itemDescription:
-          type: string
         itemId:
           format: uint64
-          type: string
-        language:
           type: string
         pageIsAboutChain:
           description: If the topic is about a business chain, whether the
@@ -57238,33 +57322,18 @@ components:
             - EXACT_LOCATION_OF_TOPIC_CHAIN
             - DIFFERENT_LOCATION_OF_TOPIC_CHAIN
           type: string
-        pageNotLoaded:
-          description: If true, content_relevance is set to NONE.
-          type: boolean
         projectId:
+          description: "Metadata for task-level ratings. Not filled for aggregated doc-level ratings. "
           format: uint64
           type: string
         raterCanUnderstandTopic:
           description: Whether rater can understand the topic.
           type: boolean
-        ratingScore:
-          description: Floating point representation of the `content_relevant` field.
-          format: double
-          type: number
         taskDetails:
           $ref: "#/components/schemas/RepositoryWebrefTaskDetails"
         taskId:
           format: uint64
           type: string
-        taskStatus:
-          type: string
-        taskUser:
-          format: int32
-          type: integer
-        templateId:
-          description: "Metadata for task-level ratings. Not filled for aggregated doc-level ratings. "
-          format: int32
-          type: integer
         topicIsChain:
           description: Whether the topic is about a business chain.
           enum:
@@ -57282,23 +57351,13 @@ components:
           description: "- In topicality ratings this is Fingerprint2011() of the normalized cdoc. - In query-mention ratings this is a hash of the QueryJoin. - In doc-content-mention ratings this is a hash of a QueryJoin in which the mention rating task has been embedded. - "
           format: uint64
           type: string
-        docLevelRating:
-          $ref: "#/components/schemas/RepositoryWebrefPerDocRelevanceRating"
         entityNameRating:
           items:
             $ref: "#/components/schemas/RepositoryWebrefEntityNameRatings"
           type: array
-        listMembership:
-          items:
-            $ref: "#/components/schemas/RepositoryWebrefToprefListMembership"
-          type: array
         mentionRating:
           items:
             $ref: "#/components/schemas/RepositoryWebrefMentionRatings"
-          type: array
-        pageClassification:
-          items:
-            $ref: "#/components/schemas/RepositoryWebrefToprefPageClassification"
           type: array
         taskLevelRating:
           items:
@@ -57414,24 +57473,6 @@ components:
           format: double
           type: number
       type: object
-    RepositoryWebrefPreprocessingNameSignals:
-      description: If you add any field, make sure to add it in reffresh to the empty checks at the end of the corresponding name extractor processors (extract-*-names.cc).
-      properties:
-        normalizedNameData:
-          description: The set of name candidates and their signals for a given entity.
-          items:
-            $ref: "#/components/schemas/RepositoryWebrefPreprocessingNormalizedNameData"
-          type: array
-      type: object
-    RepositoryWebrefPreprocessingNameVariantData:
-      description: Represents a single name with all its signal, like language, sources and confidences.
-      properties:
-        variantSignals:
-          description: "Sources providing this name variant and their metadata. NOTE: by convention we only allow one proto per source."
-          items:
-            $ref: "#/components/schemas/RepositoryWebrefPreprocessingNameVariantSignals"
-          type: array
-      type: object
     RepositoryWebrefPreprocessingNameVariantSignals:
       description: "Next available tag: 33."
       properties:
@@ -57447,17 +57488,10 @@ components:
             - KG_ALIAS
             - KG_ISBN13
             - KG_GTIN
-            - KG_PRONUNCIATION
             - KG_STOCK_TICKER
             - KG_AVIATION
-            - KG_CARS
-            - KG_AWARDS
-            - KG_WEBSITE_DERIVED_NAME
-            - KG_BRACKET_STRIPPED_DERIVED_NAME
-            - KG_LOCATION_DERIVED_NAME
             - KG_TRUSTED_ALIAS
             - KG_CHEMICAL_SYMBOL
-            - KG_YEAR
             - KG_RADIO_STATION
             - KG_REVERSE_UNIQUE_PROPERTY
             - KG_TRANSIT_STATION_CODE
@@ -57470,10 +57504,7 @@ components:
             - ENTITY_NAME_TRANSLATIONS_GENERATOR
             - MAPFACTS
             - MAPFACTS_PHONENUMBER
-            - MAPFACTS_PERSON_NAME_GENERATOR
-            - MAPFACTS_PERSON_FIRST_NAME_GENERATOR
             - MAPFACTS_STREET_NAME_GENERATOR
-            - MAPFACTS_SCORER
             - MAPFACTS_FUZZY_PHONENUMBER
             - MAPFACTS_NAME_GENERATOR
             - MAPFACTS_GEOCODES_ADDRESS_LINES
@@ -57483,91 +57514,42 @@ components:
             - MAPFACTS_POSTAL_CODE_WITH_COUNTRY_CODE
             - MAPFACTS_TRANSIT_LINE_NAME_GENERATOR
             - MAPFACTS_HOUSE_ID
-            - COOC
             - CDOCS
             - CDOCS_ANCHOR
             - CDOCS_NAVBOOST
-            - CDOCS_WIKIPEDIA
             - CDOCS_REFERENCE_PAGE_URL
-            - CDOCS_SCORER
-            - CDOCS_REFERENCE_PAGE_URL_DERIVED
             - WIKIJOINS
-            - WIKIJOINS_NICKNAME
             - WIKIDATA_AKA
             - WIKIDATA_LABEL
-            - WIKIJOIN_FRAGMENT_REDIRECT
-            - WIKIJOIN_ALIAS
             - PRODUCT
             - PRODUCT_TITLE
-            - PRODUCT_TITLE_VARIATION
-            - PRODUCT_QUERY
-            - PRODUCT_STRONG_IDENTIFIER
             - PRODUCT_MANUFACTURER_PART_NUMBER
             - PRODUCT_MODEL_VARIATION
-            - PRODUCT_UNTRUSTED
             - PRODUCT_COMPANY_OR_BRAND_STRIPPING
             - PRODUCT_AGGRESSIVE_STRIP
             - PRODUCT_AGGRESSIVE_BRAND_STRIP
-            - PER_ENTITY_SCORE_AGGREGATOR
-            - PER_ENTITY_SCORE_AGGREGATOR_ENTITY_KEYED
-            - PER_ENTITY_SCORE_AGGREGATOR_NAME_KEYED
-            - PER_ENTITY_SCORE_AGGREGATOR_FINAL
             - SCORER
-            - SCORER_BEST_NAME_PICKER
-            - SCORER_COMMON_NGRAM_CONCEPT_BOOST
-            - SCORER_LEGACY_COMMON_NGRAM_CONCEPT_BOOST
-            - SCORER_SYNTACTIC_NAME_PROMOTION
             - SCORER_CATEGORICAL_NAME_SUPPRESSOR
-            - SCORER_TYPE_BASED_MULTIPLIER
-            - SCORER_NAVINESS_GUARANTEE
-            - SCORER_SINGLE_LETTER_NAME_DEMOTION
-            - SCORER_TRUST_EXTRAPOLATION
-            - SCORER_TRUST_DERIVATION
-            - SCORER_AWARDS_VERTICAL
             - SCORER_BAD_SUBNAME_DEMOTION
             - SCORER_YEAR_NAME_DEMOTION
-            - SCORER_ENTITY_NAME_RATIO
-            - SCORER_COLLECTION_PATTERN
             - SCORER_NAME_BLACKLIST
-            - SCORER_TOKEN_CLUSTERING
-            - SCORER_DEPRECATED_TOKEN_CLUSTERING
             - NAME_LEAKAGE_PREVENTION
-            - PER_ENTITY_NAME_LEAKAGE_PREVENTION
-            - PER_NAME_NAME_LEAKAGE_PREVENTION
-            - SPECIFICITY_COMPUTER
             - INCOMPATIBLE_NUMBER_DEMOTION
             - BAD_STRIPPED_NAME
             - BAD_FRINGE_NAME
             - BAD_PERSON_NAME
             - PERSON_NAME_GENERATOR
             - PERSON_NAME_GENERATOR_WITH_INITIALS
-            - HEBREW_LOCATION_NAME_INFLECTOR
             - INJECTED
-            - INJECTED_SHOWTIMES_CHAIN
-            - INJECTED_OLYMPICS
-            - MINI_COOC
-            - MORPHOLOGY
-            - LYRICS_TRUSTED_NAME
-            - NAME_ANNOTATION_PROCESSOR
-            - COMPANY_DERIVED_NAME
             - AFFIXED_NAME_GENERATOR
-            - AFFIXED_NAME_GENERATOR_TRUSTED
-            - BUSINESS_DERIVED_NAME
             - BUSINESS_SUFFIX_STRIPPED_NAME
             - CHAIN_NAME_GENERATOR
-            - DEPRECATED_LOCATION_STRIPPED_NAME
             - LOCATION_STRIPPED_NAME
-            - LOCATION_STRIPPED_NAVBOOST_NAME
-            - PARENT_NAME_GENERATOR
-            - PROPAGATE_NAMES
             - PUNCTUATION_STRIPPED_NAME
             - LEXICON_GENERATOR
-            - NAME_SYNONYMS
-            - CURATED_NAME
             - COMPOUND_NAME
             - INDIC_NORMALIZER
             - STRIP_FIRST_STOPWORD
-            - CONJUNCTION_NORMALIZE
             - MIX_CASE_NORMALIZE
             - MOVIE_YEAR
             - STRIP_IMPLICATION
@@ -57576,25 +57558,12 @@ components:
             - STRIP_WIKI
             - CIVICS_NAME_GENERATOR
             - STRIPPED_THEATER_NAME
-            - TRANSLITERATION
             - NUMBER_VARIANT_GENERATOR
             - PERSONAL_MEDIA_NAME_GENERATOR
-            - MRF_INDEXING_NAME
             - MRF_INDEXING_NAME_TV_SHOWS
-            - MATCH
             - MATCH_WITH_MIDDLE_INITIALS
-            - COMPOUND_RETRIEVAL_KEY
-            - EVENT_RETRIEVAL_KEY
+            - COMBINED
           type: string
-      type: object
-    RepositoryWebrefPreprocessingNormalizedNameData:
-      description: Aggregation of all names of an entity that normalize to the same string.
-      properties:
-        nameVariantData:
-          description: "Name variants and their signals by source. All these name variants normalize to @normalized_name given their locales. NOTE: This includes metadata aggregated for the normalized name."
-          items:
-            $ref: "#/components/schemas/RepositoryWebrefPreprocessingNameVariantData"
-          type: array
       type: object
     RepositoryWebrefPreprocessingOriginalNames:
       properties:
@@ -58204,82 +58173,6 @@ components:
         topicName:
           type: string
         topicUrl:
-          type: string
-      type: object
-    RepositoryWebrefToprefListMembership:
-      description: "Entity-level classification. Template: experimental/topref/eval_entities/template.jhtml"
-      properties:
-        member:
-          items:
-            $ref: "#/components/schemas/RepositoryWebrefToprefListMembershipListMember"
-          type: array
-        taskData:
-          $ref: "#/components/schemas/RepositoryWebrefTaskData"
-      type: object
-    RepositoryWebrefToprefListMembershipListMember:
-      properties:
-        id:
-          $ref: "#/components/schemas/RepositoryWebrefWebrefEntityId"
-        isMember:
-          enum:
-            - YES_NO_UNSURE_NONE
-            - YES
-            - NO
-            - UNSURE
-          type: string
-      type: object
-    RepositoryWebrefToprefPageClassification:
-      description: "Top-level page classification. Template: experimental/topref/eval_main/template.jhtml"
-      properties:
-        isList:
-          enum:
-            - YES_NO_UNSURE_NONE
-            - YES
-            - NO
-            - UNSURE
-          type: string
-        isListTypeCorrect:
-          enum:
-            - YES_NO_UNSURE_NONE
-            - YES
-            - NO
-            - UNSURE
-          type: string
-        isRanking:
-          enum:
-            - YES_NO_UNSURE_NONE
-            - YES
-            - NO
-            - UNSURE
-          type: string
-        isToplist:
-          enum:
-            - YES_NO_UNSURE_NONE
-            - YES
-            - NO
-            - UNSURE
-          type: string
-        listType:
-          description: A string generated based on the main collection of the list. E.g., /collection/geo/restaurant => "Restaurants" retrieved by following the /base/schemastaging/context_name/plural in KG.
-          type: string
-        ratedTitle:
-          description: '"repeated" because we potentially evaluate several (up to 5) title candidates for the page.'
-          items:
-            $ref: "#/components/schemas/RepositoryWebrefToprefPageClassificationRatedTitle"
-          type: array
-        taskData:
-          $ref: "#/components/schemas/RepositoryWebrefTaskData"
-      type: object
-    RepositoryWebrefToprefPageClassificationRatedTitle:
-      properties:
-        isGood:
-          enum:
-            - YES_NO_UNSURE_NONE
-            - YES
-            - NO
-            - UNSURE
-          type: string
-        title:
           type: string
       type: object
     RepositoryWebrefTripleAnnotation:
@@ -60069,6 +59962,7 @@ components:
             - UNKNOWN
             - RAFFIA_PROXY_SERVICE
             - SPORE_DUMP
+            - INFERRED
           type: string
         displayUrl:
           description: "The url used to display in the google search results. "
@@ -60139,6 +60033,7 @@ components:
             - UNKNOWN
             - FIELD_OF_STUDY
             - GEO
+            - ORGANIZATION
           type: string
         mid:
           description: The KG identifier of the WebrefEntity.
@@ -60268,42 +60163,6 @@ components:
           $ref: "#/components/schemas/SafesearchVideoClassifierOutput"
           description: Output of all SafeSearch video classifiers in Amarna.
       type: object
-    ScholarCitationPredictionSignal:
-      description: An input into the citation prediction model.
-      properties:
-        metricType:
-          enum:
-            - METRIC_TYPE_NONE
-            - METRIC_TYPE_MEAN
-            - METRIC_TYPE_MEDIAN
-            - METRIC_TYPE_20_80
-          type: string
-        signalType:
-          enum:
-            - SIGNAL_UNKNOWN
-            - SIGNAL_NUM_FORWARD_LINKS
-            - SIGNAL_ANY_PUBLICATION
-            - SIGNAL_PUBORG
-            - SIGNAL_AUTHOR_EMAIL_DOMAIN
-            - SIGNAL_AUTHOR_DOC_LENGTH
-            - SIGNAL_AUTHOR_TITLE_NGRAM
-            - SIGNAL_VENUE_DOC_LENGTH
-            - SIGNAL_VENUE_TITLE_NGRAM
-            - SIGNAL_ANY_PUBLICATION_AUTHOR
-            - SIGNAL_ANY_PUBLICATION_DOC_LENGTH
-            - SIGNAL_ANY_PUBLICATION_TITLE_NGRAM
-            - SIGNAL_PUBORG_DOC_LENGTH
-            - SIGNAL_HOST_NAME_TITLE_NGRAM
-            - SIGNAL_TOTAL_CITATIONS
-            - SIGNAL_LAST_YEAR_CITATIONS
-            - SIGNAL_2_YEARS_AGO_CITATIONS
-            - SIGNAL_CITATIONS_PER_YEAR
-            - SIGNAL_YEARS_WITH_NO_CITATION
-          type: string
-        value:
-          format: float
-          type: number
-      type: object
     ScienceCitation:
       properties:
         AbstractDisplay:
@@ -60378,6 +60237,11 @@ components:
           type: string
         CitationSrc:
           description: "DEPRECATED: use CitationSource"
+          type: string
+        ClearedReason:
+          enum:
+            - CLEARED_REASON_NONE
+            - CLEARED_REASON_TOC
           type: string
         ClusterDiscoveryDate:
           description: Used for logging, recommendations, and sort-by-date. Contains the earliest discovery date of the cluster, adjusted for earlier publication dates. Stored in Universal time scale (100 ns ticks since 0001 AD) because Unix timestamp would lead to negative dates for pre-1970 docs.
@@ -61160,221 +61024,116 @@ components:
           format: int32
           type: integer
       type: object
-    SciencePerDocData:
-      description: "Next tag: 43"
+    SdrEmbedding:
       properties:
-        AbstractEndPosition:
-          description: The first hit position after the end of the abstract. We index the abstract immediately after the body, so all hits between BodyEndPosition and AbstractEndPosition are from the abstract.
-          format: int32
-          type: integer
-        BodyEndPosition:
-          description: The first hit position past the last body hit.
-          format: int32
-          type: integer
-        CitationPredictionSignal:
-          description: Input features used to compute PredictedCitations.
+        values:
           items:
-            $ref: "#/components/schemas/ScholarCitationPredictionSignal"
+            format: float
+            type: number
           type: array
-        CourtLevel:
-          description: Used for sorting legal documents by court; e.g. Supreme Court > Appeals Court > Trial Court
+        version:
           format: int32
           type: integer
-        DEPRECATEDCrawlTime:
-          format: int64
-          type: string
-        DiscoveryAgeInDays:
-          description: The age in days since discovery date at the time of indexing. Used to compute PredictedCitations.
-          format: int32
-          type: integer
-        DiscoveryTimestamp:
-          description: Used for sorting articles by date, and as an input for recent-query ranking. Stored in Universal time scale (100 ns ticks since 0001 AD).
-          format: int64
-          type: string
-        IsCitationOnly:
-          description: citation-only marker - for use in scorer
-          type: boolean
-        NonScholarlinessPenalty:
-          description: Scoring penalty for non-scholarly articles. In the range [0, 1], with 0 being no penalty and 1 being the full penalty.
-          format: float
-          type: number
-        NumBackwardLinks:
-          description: Summary statistics, for display in the FE.
-          format: int32
-          type: integer
-        NumRelated:
-          format: int32
-          type: integer
-        NumTitleWords:
-          description: Used for exact title boost in Scholar, as of 1/7/2008.
-          format: int32
-          type: integer
-        NumVersions:
-          format: int32
-          type: integer
-        OffDomAnchors:
-          format: int32
-          type: integer
-        OnSiteAnchors:
-          format: int32
-          type: integer
-        PredictedCitations:
-          description: "The predicted new citations for this document once it reaches 5 years after its discovery date. Not set for: - Documents 5 years or older - Citation only documents - Patents and legal documents"
-          format: float
-          type: number
-        PredictedCitationsNext5Years:
-          description: The predicted new citations for this document over the next 5 years. This differs from the PredictedCitations field in that this is set for documents of all ages, whereas PredictedCitations is only set for new documents. This is also a prediction over a fixed time interval, whereas the time interval for PredictedCitations depends on the document's age.
-          format: float
-          type: number
-        PublicationDay:
-          format: int32
-          type: integer
-        PublicationMonth:
-          format: int32
-          type: integer
-        PublicationYear:
-          description: Publication date. Used both for ranking of recent articles and for display in the FE.
-          format: int32
-          type: integer
-        ScholarId:
-          description: For links from websearch to scholar.
-          format: uint64
-          type: string
-        Subject:
-          description: DEPRECATED e.g., fp("med")
-          format: uint32
-          type: integer
-        TitleNgrams:
-          description: A string encoding the uni-, bi-, and trigram weights in the title. This is encoded and decoded by science_search/util/title_ngrams.h.
-          format: byte
-          type: string
-        TotalAnchors:
-          description: Anchor count info for scorer
-          format: int32
-          type: integer
-        Type:
-          description: The type of the article - paper, review, patent, etc.
-          enum:
-            - FIRST_ARTICLE_TYPE
-            - PAPER
-            - BOOK
-            - BOOKLET
-            - CONFERENCE
-            - INBOOK
-            - INCOLLECTION
-            - MANUAL
-            - MS_THESIS
-            - MISC
-            - PHD_THESIS
-            - TECHREPORT
-            - UNPUBLISHED
-            - PATENT
-            - WEB_SITE
-            - BS_THESIS
-            - REVIEW_ARTICLE
-            - JOURNAL
-            - LEGAL_DOC
-            - BIBLIOGRAPHY
-            - BOOK_REVIEW
-            - RETRACTION
-            - EDITORIAL
-            - ART_PERF_REVIEW
-            - POETRY
-            - FICTION
-            - NEWS
-            - BIOGRAPHICAL
-            - LEGISLATION
-            - REFERENCE_MATERIAL
-            - STANDARD
-            - META_ANALYSIS
-            - RANDOMIZED_TRIAL
-            - NUM_ARTICLE_TYPES
-          type: string
-        author:
-          items:
-            $ref: "#/components/schemas/SciencePerDocDataAuthor"
-          type: array
-        referencediscussion:
-          items:
-            $ref: "#/components/schemas/SciencePerDocDataReferenceDiscussion"
-          type: array
-        section:
-          description: Section markers, sorted by begin_position, no overlapping.
-          items:
-            $ref: "#/components/schemas/SciencePerDocDataSection"
-          type: array
-        signal:
-          items:
-            $ref: "#/components/schemas/SciencePerDocDataSignal"
-          type: array
       type: object
-    SciencePerDocDataAuthor:
-      description: Used for exact author boost and for display in the FE.
+    SdrPageAnchorsDocInfo:
       properties:
-        IsCJK:
-          type: boolean
-        LastName:
-          type: string
-        OtherNames:
+        articleness:
+          format: float
+          type: number
+        pageAnchors:
+          items:
+            $ref: "#/components/schemas/SdrPageAnchorsSitelink"
+          type: array
+        qscore:
+          format: float
+          type: number
+        sitelinkWrapper:
+          items:
+            $ref: "#/components/schemas/SdrPageAnchorsSitelinkWrapper"
+          type: array
+        textRichness:
+          format: float
+          type: number
+      type: object
+    SdrPageAnchorsSitelink:
+      properties:
+        embedding:
+          $ref: "#/components/schemas/SdrEmbedding"
+          description: Needed for relevance scoring.
+        geometryScore:
+          description: aggregate score from Section Geometry.
+          format: float
+          type: number
+        headingAbbrvScore:
+          description: Heading Abbreviation score.
+          format: float
+          type: number
+        hpScore:
+          description: Needed for heading/passage filtering.
+          format: float
+          type: number
+        level:
+          format: int32
+          type: integer
+        scrollTo:
+          $ref: "#/components/schemas/SdrScrollTo"
+        sectionHeight:
+          description: Needed for Geometry Scoring and backoffs. from Section Geometry.
+          format: int32
+          type: integer
+        text:
+          description: Heading/Reformulated text is needed to display.
           type: string
       type: object
-    SciencePerDocDataReferenceDiscussion:
+    SdrPageAnchorsSitelinkWrapper:
+      description: This wrapper is used for passing in additional information to generate embeddings in Goldmine.
       properties:
-        Level:
-          format: int32
-          type: integer
-        TargetID:
-          format: uint64
+        abbreviatedHeadingText:
+          type: string
+        abbrvEmbedding:
+          $ref: "#/components/schemas/SdrEmbedding"
+        headingEmbedding:
+          $ref: "#/components/schemas/SdrEmbedding"
+        normalizedHeadingText:
+          type: string
+        passageEmbedding:
+          $ref: "#/components/schemas/SdrEmbedding"
+        passageText:
           type: string
       type: object
-    SciencePerDocDataSection:
+    SdrScrollTo:
+      description: "Data needed to construct a go/scroll-to text fragment. The url fragment is: #:~:text=[prefix-,]text_start,text_end"
       properties:
-        beginPosition:
-          description: The first hit position at the start of the section.
-          format: int32
-          type: integer
-        numPositions:
-          description: Delta in hit position from the start of the section to the end.
-          format: int32
-          type: integer
-        type:
-          enum:
-            - UNKNOWN
-            - REFERENCE
+        onpageMatches:
+          $ref: "#/components/schemas/SdrScrollToOnPageMatches"
+        prefix:
+          description: Prefix to help with disambiguating between multiple text matches on page. Optional.
+          type: string
+        suffix:
+          description: Suffix to help with disambiguating between multiple text matches on page. Optional.
+          type: string
+        textEnd:
+          description: End of the text span to be highlighted. Optional.
+          type: string
+        textStart:
+          description: Start of the text span to be highlighted.
           type: string
       type: object
-    SciencePerDocDataSignal:
+    SdrScrollToOnPageMatches:
+      description: Number of matches in the page when using text alone, prefix + text, text + suffix, and prefix + text + suffix. The match is case-insensitive to align with go/scroll-to behavior.
       properties:
-        avgCitations:
-          description: Values for different metrics
-          format: float
-          type: number
-        count:
-          description: Number of papers in the bucket for this paper/signal combination 16-bit value
+        text:
           format: int32
           type: integer
-        geThres1Count:
-          description: Count of papers with 10 or more citations (ge is >=) 16-bit value
+        textWithPrefix:
           format: int32
           type: integer
-        geThres2Count:
-          description: Count of papers with 50 or more citations 16-bit value
+        textWithPrefixSuffix:
           format: int32
           type: integer
-        index:
-          description: Signal type dependent (for Journals refers to the year) index must refers to years ago not absolute year. 8-bit value
+        textWithSuffix:
           format: int32
           type: integer
-        medianCitations:
-          format: float
-          type: number
-        type:
-          format: int32
-          type: integer
-        weight:
-          description: Authors own a part of a paper value. This is the cumulative weight. If all papers falling into this bucket are single author papers, then weight will be equal to 1.0. Otherwise it will be smaller.
-          format: float
-          type: number
       type: object
     SearchPolicyRankableSensitivity:
       description: Encapsulates sensitivity mode, source, and other metadata, used for ranking when there are multiple sensitivies set by default sources (eg, followon, query understanding, attentional entity).
@@ -62040,6 +61799,9 @@ components:
           items:
             $ref: "#/components/schemas/SitemapDEPRECATED_Target"
           type: array
+        pageAnchorsDocInfo:
+          $ref: "#/components/schemas/SdrPageAnchorsDocInfo"
+          description: This field is populated in the Sitemap MDU subpopulator from cdoc data. This is used to store page anchors information for TopicTagsScrolltoFlow.
         searchInSite:
           description: Enable site search.
           type: boolean
@@ -62308,6 +62070,8 @@ components:
     SnippetExtraInfoSnippetsBrainModelInfo:
       description: Log model name, partition and input processor used to generate SnippetsBrain scores, if SnippetsBrain debugging is enabled.
       properties:
+        ng3ModelName:
+          type: string
         snippetsbrainModelName:
           description: The below fields are populated by SnippetFlow in superroot.
           type: string
@@ -62678,6 +62442,8 @@ components:
           enum:
             - DISPLAY_NAME_SOURCE_UNSPECIFIED
             - LIMITED_PROFILE
+            - LIMITED_PROFILE_FULL_NAME
+            - LIMITED_PROFILE_SHORTENED_NAME
           type: string
       type: object
     SocialGraphApiProtoHostAppInfo:
@@ -62763,7 +62529,7 @@ components:
       description: "Pattern for a MONTHLY recurrence. This Monthly reccurence supports: 1. The nth specific weekday of the month. For example, the 3rd Wednesday of the month. This represents the 3rd instance of a Wednesday of the month, regardless of what weekday the month started on. It does not necessarily mean the Wednesday on the 3rd week of the month. Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService)"
       properties:
         weekDay:
-          description: The nth occurrence of week_day to match. I.e. For 3rd Wednesday of the month, week_day = WEDNESDAY and week_day_number = 3. Values beyond the end of the month are skipped. Negative values are relative from end of month (e.g. Last Friday of every month).
+          description: The nth occurrence of week_day to match. I.e. For 3rd Wednesday of the month, week_day = WEDNESDAY and week_day_number = 3. Values beyond the end of the month are skipped.
           enum:
             - DAY_OF_WEEK_UNSPECIFIED
             - MONDAY
@@ -62965,12 +62731,12 @@ components:
           type: array
       type: object
     SocialGraphApiProtoRecurrence:
-      description: "Flexible Recurrence proto to be used with People Prompts. Examples: Single recurrence that occurs on a specific date: single_recurrence { date { year: 2022 month: 11 day: 17 } } Yearly recurrence such as a birthday or anniversary: yearly_recurrence { monthly_pattern { monthly_day_recurrence { month_day: 17 } } months: JULY } Weekly reccurrence such as: every two weeks on Monday: every: 2 weekly_recurrence { week_day: MONDAY } Monthly recurrence such as: third Thursday of every month: monthly_recurrence { monthly_weekday_recurrence { week_day: THURSDAY week_day_number: 3 } } Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService) TODO(b/240850530) add link to validators when created."
+      description: "Flexible Recurrence proto to be used with People Prompts. Examples: Single recurrence that occurs on a specific date: single_recurrence { date { year: 2022 month: 11 day: 17 } } Yearly recurrence such as a birthday or anniversary: yearly_recurrence { monthly_pattern { monthly_day_recurrence { month_day: 17 } } months: JULY } Weekly reccurrence such as: every two weeks on Monday: every: 2 weekly_recurrence { week_day: MONDAY } Monthly recurrence such as: third Thursday of every month: monthly_recurrence { monthly_weekday_recurrence { week_day: THURSDAY week_day_number: 3 } } Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService) The canonical recurrence validation function is located here: http://google3/java/com/google/social/people/prompts/util/PromptValidators.java?q=func:%5CbvalidateRecurrence%5Cb"
       properties:
         dailyRecurrence:
           $ref: "#/components/schemas/SocialGraphApiProtoDailyRecurrence"
         every:
-          description: "Multiplier on the frequency of the recurrence. Use this to specify patterns that recur every X days, months, years, etc. Example: [remind me to call mom every 2nd week]. Default value will be considered 1 (every day,every week,...) and not 0. This is ignored for a SingleRecurrence. Optional."
+          description: "Multiplier on the frequency of the recurrence. Use this to specify patterns that recur every X days, months, years, etc. Must be a positive int. Example: [remind me to call mom every 2nd week]. If this field isn't set, it will default to 1 (every day,every week, etc). This field is ignored when recurrence_data is a SingleRecurrence. Optional."
           format: int32
           type: integer
         monthlyRecurrence:
@@ -62980,9 +62746,9 @@ components:
           description: Ends at abstract DateTime. (inclusive)
         recurrenceStart:
           $ref: "#/components/schemas/GoogleTypeDateTime"
-          description: The start of the recurrence can be represented as a DateTime. This is ignored for a SingleRecurrence.
+          description: The start of the recurrence can be represented as a DateTime. This field is ignored when recurrence_data is a SingleRecurrence.
         repeatCount:
-          description: Will repeat only a finite number of times. This is the original number of times the recurrence will repeat and not how many times are left for it to repeat.
+          description: Will repeat only a finite number of times. This is the original number of times the recurrence will repeat and not how many times are left for it to repeat. This end type is not currently supported.
           format: int32
           type: integer
         repeatForever:
@@ -63258,7 +63024,7 @@ components:
           type: array
       type: object
     SocialGraphApiProtoYearlyRecurrence:
-      description: 'Pattern for a YEARLY recurrence. A YEARLY recurrence is specified using a monthly pattern and a set of months the pattern applies to. Some examples: "Every January 16" : monthly_pattern { month_day: 16 } months: JANUARY "Last day of every April and August" : monthly_pattern { month_day: -1 } months: APRIL months: AUGUST Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService)'
+      description: 'Pattern for a YEARLY recurrence. A YEARLY recurrence is specified using a monthly pattern and a set of months the pattern applies to. Some examples: "Every January 16" : monthly_pattern { monthly_day_recurrence { month_day: 16 } } months: JANUARY "Fourth Thursday of November and December" : monthly_pattern { monthly_weekday_recurrence { week_day: THURSDAY week_day_number: 4 } } months: NOVEMBER months: DECEMBER Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService)'
       properties:
         monthlyPattern:
           $ref: "#/components/schemas/SocialGraphApiProtoMonthlyRecurrence"
@@ -63552,6 +63318,30 @@ components:
             - HOLD
           type: string
       type: object
+    SpamBrainData:
+      description: This holds SpamBrain values which will be populated to docjoins & muppet. Proto is copied from spam_brain::SpamBrainData and populated at sitechunked site level (as opposed to the spambrain page classifier score).
+      properties:
+        site:
+          description: Sitechunker site granularity for this result
+          type: string
+        versionedData:
+          description: Versioned scores of SB classifiers
+          items:
+            $ref: "#/components/schemas/SpamBrainScore"
+          type: array
+      type: object
+    SpamBrainScore:
+      description: Message representing versioned scores
+      properties:
+        sbScore:
+          description: The value corresponding to this version.
+          format: float
+          type: number
+        versionId:
+          description: The version id.
+          format: int32
+          type: integer
+      type: object
     SpamCookbookAction:
       description: This protocol buffer indicates actions that we take based on Cookbook recipes (see http://cookbook/) matching a particular document.
       properties:
@@ -63639,6 +63429,34 @@ components:
           description: WARNING! The feature is still under active development and the exact semantics may be subject to change pending KE Design Review. Data marked as weak will be less preferred to regular data which does not have the marker. This allows ingesting data with a lower chance of negatively affecting existing features and products, at the cost of potentially not showing the data when competing data is available. Specifically, weak data is less preferred by conflict resolution inside of Livegraph composition. Additionally, RefX triggering will prefer to trigger based on signals computed from regular data. Aside from data providers choosing to mark their data as weak, Livegraph and RefX are the only horizontal systems expected to use this information. Please contact livegraph-team@ if you see a need for this to change. See go/weak-data for more information.
           type: boolean
       type: object
+    StorageGraphBfgLmsPolicyMetadata:
+      description: Metadata fields for LMS. See go/lms-online-restrictions for details.
+      properties:
+        clientIdsAllowed:
+          items:
+            type: string
+          type: array
+        isEditorial:
+          type: boolean
+        modificationsAllowed:
+          description: Int values corresponds to the values of image_repository.licensed.api.restrictions.Modification enum.
+          items:
+            format: int64
+            type: string
+          type: array
+        regionsAllowed:
+          $ref: "#/components/schemas/KeGovernanceTypedRegions"
+        regionsDisallowed:
+          $ref: "#/components/schemas/KeGovernanceTypedRegions"
+        requiresAttribution:
+          type: boolean
+        requiresFirstPartyOnly:
+          type: boolean
+        requiresLinkback:
+          type: boolean
+        requiresShareAlike:
+          type: boolean
+      type: object
     StorageGraphBfgPolicyMetadata:
       description: Metadata about data governance policies. For more context, see go/ke-triple-dg-policy-and-metadata. If any attribute is not set, then there's no specific restrictions associated with the missing attribute. For example, if `availability_start_timestamp` is not set, the data won't be embargoed automatically; if `availability_end_timestamp` is not set, they won't expire automatically. LINT.IfChange
       properties:
@@ -63660,31 +63478,9 @@ components:
           items:
             $ref: "#/components/schemas/KeGovernanceTypedRegions"
           type: array
-        lmsClientIdsAllowed:
-          items:
-            type: string
-          type: array
-        lmsIsEditorial:
-          description: The following attributes with `lms_` prefix are for supporting LMS restrictions. See go/lms-online-restrictions for details.
-          type: boolean
-        lmsModificationsAllowed:
-          description: Int values corresponds to the values of image_repository.licensed.api.restrictions.Modification enum.
-          items:
-            format: int64
-            type: string
-          type: array
-        lmsRegionsAllowed:
-          $ref: "#/components/schemas/KeGovernanceTypedRegions"
-        lmsRegionsDisallowed:
-          $ref: "#/components/schemas/KeGovernanceTypedRegions"
-        lmsRequiresAttribution:
-          type: boolean
-        lmsRequiresFirstPartyOnly:
-          type: boolean
-        lmsRequiresLink:
-          type: boolean
-        lmsRequiresShareAlike:
-          type: boolean
+        lmsPolicyMetadata:
+          $ref: "#/components/schemas/StorageGraphBfgLmsPolicyMetadata"
+          description: Policy metadata fields for LMS data. Only expected to be used by LMS providers -- please consult ke-data-governance@ before populating this field.
         policySourceType:
           description: Policy metadata are VERTICAL by default. Vertical policy makers / providers does not need to set this field explicitly.
           enum:
@@ -66180,6 +65976,13 @@ components:
               - LIVEOPS_CLUSTER_SERP_EVENT_LEVEL
               - INLINE_DETAILS_AQUALITY_CHECK_PASS
               - INLINE_DETAILS_AQUALITY_CHECK_FAIL
+              - INLINE_DETAILS_IS_INLINE_URL_FRONTEND
+              - INLINE_DETAILS_TQUALITY_CHECK_PASS_FRONTEND
+              - INLINE_DETAILS_TQUALITY_CHECK_FAIL_FRONTEND
+              - INLINE_DETAILS_AQUALITY_CHECK_PASS_FRONTEND
+              - INLINE_DETAILS_AQUALITY_CHECK_FAIL_FRONTEND
+              - INLINE_DETAILS_CALLER_AQUALITY_CHECK_PASS_FRONTEND
+              - INLINE_DETAILS_CALLER_AQUALITY_CHECK_FAIL_FRONTEND
               - FRESH_RESULTS_SEEKING_CURRENT_YEAR_EVENT_LEVEL
               - FILTER_TQ_FAILURE_APP
               - EDITORIAL_CONTENT_CLUSTER_FHR_SERP_EVENT_LEVEL
@@ -66201,6 +66004,14 @@ components:
               - BROAD_INTENT_GAMES_TIMESPENT_EVENT_LEVEL
               - PLAY_STORE_IAP_SALES_MINI_DETAILS_PAGE_EAP_PARTNER_APPS_EVENT_LEVEL
               - GEARHEAD_ATTEMPT_USB_RECOVERY
+              - MDP_P13N_ALL_EVENT_LEVEL
+              - MDP_P13N_GAME_QUERY_L5_EVENT_LEVEL
+              - MDP_P13N_GAME_QUERY_L6_EVENT_LEVEL
+              - MDP_P13N_GAME_QUERY_L7_EVENT_LEVEL
+              - MDP_P13N_GAME_QUERY_L8_EVENT_LEVEL
+              - MDP_P13N_GAME_QUERY_L9_EVENT_LEVEL
+              - SECOND_PASS_POLARIS_RERANKING_EVENT_LEVEL
+              - SECOND_PASS_POLARIS_WITH_RANKING_CHANGE_EVENT_LEVEL
               - EVENT_LEVEL_TEST_CODE_LIMIT
               - RESERVED_4
               - RESERVED_5
@@ -66945,6 +66756,13 @@ components:
               - INLINE_DETAILS_CALLER_AQUALITY_CHECK_PASS_SESSION_LEVEL
               - INLINE_DETAILS_CALLER_AQUALITY_CHECK_FAIL_SESSION_LEVEL
               - INLINE_DETAILS_IS_INLINE_URL_SESSION_LEVEL
+              - INLINE_DETAILS_IS_INLINE_URL_FRONTEND_SESSION_LEVEL
+              - INLINE_DETAILS_TQUALITY_CHECK_PASS_FRONTEND_SESSION_LEVEL
+              - INLINE_DETAILS_TQUALITY_CHECK_FAIL_FRONTEND_SESSION_LEVEL
+              - INLINE_DETAILS_AQUALITY_CHECK_PASS_FRONTEND_SESSION_LEVEL
+              - INLINE_DETAILS_AQUALITY_CHECK_FAIL_FRONTEND_SESSION_LEVEL
+              - INLINE_DETAILS_CALLER_AQUALITY_CHECK_PASS_FRONTEND_SESSION_LEVEL
+              - INLINE_DETAILS_CALLER_AQUALITY_CHECK_FAIL_FRONTEND_SESSION_LEVEL
               - SENT_EMAIL_ENTER_GRACE_PERIOD_SESSION_LEVEL
               - SENT_EMAIL_ENTER_SUSPENDED_PERIOD_SESSION_LEVEL
               - ANALYTICS_AD_LINKING_RECOMMENDATION_ELIGIBLE_SESSION_LEVEL
@@ -67100,7 +66918,23 @@ components:
               - PLANOGRAM_MERCH_AMERICAS_GAMES_PAYPAL_SESSION_LEVEL
               - BROAD_INTENT_GAMES_TIMESPENT_SESSION_LEVEL
               - ELIGIBLE_FOR_MANAGE_IN_APP_DETAILS_SESSION_LEVEL
-              - SEE_REENGAGEMENT_ACC_SESSION_LEVEL
+              - ELIGIBLE_FOR_ACC_SESSION_LEVEL
+              - ELIGIBLE_FOR_ACQUISITION_ACC_SESSION_LEVEL
+              - ELIGIBLE_FOR_REENGAGEMENT_ACC_SESSION_LEVEL
+              - MDP_P13N_ALL_SESSION_LEVEL
+              - MDP_P13N_GAME_QUERY_L5_SESSION_LEVEL
+              - MDP_P13N_GAME_QUERY_L6_SESSION_LEVEL
+              - MDP_P13N_GAME_QUERY_L7_SESSION_LEVEL
+              - MDP_P13N_GAME_QUERY_L8_SESSION_LEVEL
+              - MDP_P13N_GAME_QUERY_L9_SESSION_LEVEL
+              - VIDEO_CAN_AUTOPLAY
+              - VIDEO_CANNOT_AUTOPLAY
+              - YOUTUBE_OPT_IN_NOTIFICATION_DRIVEN_PREFETCH_SESSION_LEVEL
+              - YOUTUBE_COUNTERFACTUAL_OPT_IN_NOTIFICATION_DRIVEN_PREFETCH_SESSION_LEVEL
+              - YOUTUBE_NOT_OPT_IN_NOTIFICATION_DRIVEN_PREFETCH_SESSION_LEVEL
+              - YOUTUBE_FROM_LANDING_PAGE_SESSION_LEVEL
+              - SECOND_PASS_POLARIS_RERANKING_SESSION_LEVEL
+              - SECOND_PASS_POLARIS_WITH_RANKING_CHANGE_SESSION_LEVEL
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - SHOULD_SEE_LIVE_OP_CLUSTER_USER_LEVEL
               - CART_ABANDONMENT_USER_LEVEL
@@ -67304,6 +67138,7 @@ components:
               - SHOULD_SEE_FIRST_PARTY_PROMO_LIVE_OP_CTA_USER_LEVEL
               - SHOULD_SEE_FIRST_PARTY_PROMO_LIVE_OP_ON_SERP_MDP_USER_LEVEL
               - SHOULD_SEE_FIRST_PARTY_PROMO_LIVE_OP_ON_APP_DETAILS_PAGE_USER_LEVEL
+              - SHOULD_SEE_FIRST_PARTY_PROMO_LIVE_OP_ON_APP_DP_USER_LEVEL
               - CART_ABANDONMENT_SUBSCRIPTION_ONE_TIME_PASS_USER_LEVEL
               - LEGOLAND_INSTANT_FOP_SCREEN_USER_LEVEL
               - LEGOLAND_INSTANT_FOP_SCREEN_WITH_PROMOTION_USER_LEVEL
@@ -67538,6 +67373,11 @@ components:
               - PLAY_ONBOARDING_QUEST_GAMES_HOME_USER_LEVEL
               - SERVED_GPP_ONBOARDING_QUEST_USER_LEVEL
               - YOUTUBE_OPTED_IN_NOTIFICATION_DRIVEN_PREFETCH_USER_LEVEL
+              - PLAY_ONBOARDING_QUEST_GAMES_HOME_SERVER_USER_LEVEL
+              - PCH_O2_WITH_CRE_USER_LEVEL
+              - MERCH_USER_JOURNEY_ROBLOX_SPEND_USER_LEVEL
+              - PBUY_FINE_TUNING_WITH_TEXT_TREAT_USER_LEVEL
+              - PLAY_GAMES_ACHIEVEMENT_LOYALTY_QUEST_USER_LEVEL
               - USER_LEVEL_TEST_CODE_LIMIT
             type: string
           type: array
@@ -67548,7 +67388,7 @@ components:
           type: array
       type: object
     VendingConsumerProtoTrustedGenomeEntity:
-      description: Proto message containing the id, localized title, score, and hierarchy level of a trusted genome entity.
+      description: "Proto message containing the id, localized title, score, and hierarchy level of a trusted genome entity. Next ID: 10"
       properties:
         categoryId:
           description: The category id matching this trusted genome entity. e.g. Action tag with id /m/025zzc matches category of id GAME_ACTION
@@ -67560,6 +67400,9 @@ components:
           description: The level of the entity. E.g. in hierarchy like Action -> Platformer > Endless Runner. Action is level 1, Platformer is level 2 and Endless Runner is level 3. Currently, only APP_TAXONOMY and GAME_TAXONOMY type may have the levels. For entity that does not have hierarchy, its level is 1. Required.
           format: int32
           type: integer
+        predicateName:
+          description: The name of the relation between the app and the entity. Required.
+          type: string
         queryText:
           description: The localized query string for this trusted genome entity. This query will be used when we want to bring users to SERP on click.
           type: string
@@ -67793,6 +67636,7 @@ components:
             - NS_KARTO
             - NS_CONTRIB_SERVICE_SHARED
             - NS_CONTRIB_SERVICE_GEO_UGC
+            - NS_SEARCH_SPORTS
           type: string
       type: object
     VideoAudioStream:
@@ -68615,6 +68459,7 @@ components:
             - SHOPPING_COLOR_INFO_V1_V2
             - SHOPPING_COLOR_INFO_V3
             - SHOPPING_COLOR_INFO_V3_WITHOUT_PER_DOMAIN_OUTPUTS
+            - SHOPPING_COLOR_SAMPLING_V1
             - FOODNET_WIC_V1
             - FOODNET_WIC_V2
             - SINGLE_IMAGE_HOLISTIC_STABLE
@@ -69910,6 +69755,8 @@ components:
             - COMMENT
             - GENERATIVE_ASR_V2
             - SUMMARY_SEGMENT
+            - OCR_EDU
+            - ASR_SPAN_EDU
           type: string
         contextText:
           description: Context text from ASR of long duration, used for longT5 models.
@@ -70163,6 +70010,8 @@ components:
             - COMMENT
             - GENERATIVE_ASR_V2
             - SUMMARY_SEGMENT
+            - OCR_EDU
+            - ASR_SPAN_EDU
           type: string
         entityGroupInfo:
           $ref: "#/components/schemas/VideoContentSearchEntityGroupInfo"
@@ -70225,6 +70074,8 @@ components:
               - COMMENT
               - GENERATIVE_ASR_V2
               - SUMMARY_SEGMENT
+              - OCR_EDU
+              - ASR_SPAN_EDU
             type: string
           type: array
         predictedQuerylessTocUsefulness:
@@ -77069,6 +76920,7 @@ components:
             - WEB_GVP_ADS
             - ANDROID_GVP_ADS
             - IOS_GVP_ADS
+            - VAST_GVP_ADS
             - GOOGLE_ASSISTANT
             - GOOGLE_LIST_RECS
             - GOOGLE_MEDIA_ACTIONS
@@ -77506,13 +77358,8 @@ components:
             - GEO_TYPES_COLLECTION_BUSINESSES
             - GEO_TYPES_COLLECTION_POTENTIALLY_SENSITIVE
             - GEO_TYPE
-            - ADDED_DURING_GEO_ENTITIES_PROMOTION
-            - GEO_TYPE_COMPOUND_BUILDING
-            - GEO_TYPE_POLITICAL
             - GEO_TYPES_COLLECTION_SMALL_POLITICALS
-            - GEO_TYPES_COLLECTION_CITY_LEVEL_POLITICALS
-            - GEO_TYPES_COLLECTION_LARGE_POLITICALS
-            - GEO_TYPES_COLLECTION_NATURAL_FEATURES
+            - ADDED_DURING_GEO_ENTITIES_PROMOTION
             - DENORM_LOCATION_TO_CONTAINING_COUNTRY
             - DENORM_LOCATION_TO_CONTAINING_REGION
             - DENORM_LOCATION_TO_CONTAINING_CITY
