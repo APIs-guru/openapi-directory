@@ -4132,7 +4132,7 @@ components:
           description: A token to request the next page of results.
           type: string
         routines:
-          description: "Routines in the requested dataset. Unless read_mask is set in the request, only the following fields are populated: etag, project_id, dataset_id, routine_id, routine_type, creation_time, last_modified_time, and language."
+          description: "Routines in the requested dataset. Unless read_mask is set in the request, only the following fields are populated: etag, project_id, dataset_id, routine_id, routine_type, creation_time, last_modified_time, language, and remote_function_options."
           items:
             $ref: "#/components/schemas/Routine"
           type: array
@@ -4158,6 +4158,9 @@ components:
       type: object
     MaterializedViewDefinition:
       properties:
+        allow_non_incremental_definition:
+          description: '[Optional] Allow non incremental materialized view definition. The default value is "false".'
+          type: boolean
         enableRefresh:
           description: '[Optional] [TrustedTester] Enable automatic refresh of the materialized view when the base table is updated. The default value is "true".'
           type: boolean
@@ -4756,7 +4759,7 @@ components:
             type: string
           type: array
         language:
-          description: Optional. Defaults to "SQL".
+          description: Optional. Defaults to "SQL" if remote_function_options field is absent, not set otherwise.
           enum:
             - LANGUAGE_UNSPECIFIED
             - SQL
@@ -4773,7 +4776,7 @@ components:
           description: Optional. Remote function specific options.
         returnTableType:
           $ref: "#/components/schemas/StandardSqlTableType"
-          description: Optional. Can be set only if routine_type = "TABLE_VALUED_FUNCTION". If absent, the return table type is inferred from definition_body at query time in each query that references this routine. If present, then the columns in the evaluated table result will be cast to match the column types specificed in return table type, at query time.
+          description: Optional. Can be set only if routine_type = "TABLE_VALUED_FUNCTION". If absent, the return table type is inferred from definition_body at query time in each query that references this routine. If present, then the columns in the evaluated table result will be cast to match the column types specified in return table type, at query time.
         returnType:
           $ref: "#/components/schemas/StandardSqlDataType"
           description: 'Optional if language = "SQL"; required otherwise. Cannot be set if routine_type = "TABLE_VALUED_FUNCTION". If absent, the return type is inferred from definition_body at query time in each query that references this routine. If present, then the evaluated result will be cast to the specified returned type at query time. For example, for the functions created with the following statements: * `CREATE FUNCTION Add(x FLOAT64, y FLOAT64) RETURNS FLOAT64 AS (x + y);` * `CREATE FUNCTION Increment(x FLOAT64) AS (Add(x, 1));` * `CREATE FUNCTION Decrement(x FLOAT64) RETURNS FLOAT64 AS (Add(x, -1));` The return_type is `{type_kind: "FLOAT64"}` for `Add` and `Decrement`, and is absent for `Increment` (inferred as FLOAT64 at query time). Suppose the function `Add` is replaced by `CREATE OR REPLACE FUNCTION Add(x INT64, y INT64) AS (x + y);` Then the inferred return type of `Increment` is automatically changed to INT64 at query time, while the return type of `Decrement` remains FLOAT64.'

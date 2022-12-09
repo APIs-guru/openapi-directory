@@ -1050,48 +1050,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:resize":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Resizes a node group in a cluster. The returned Operation.metadata is NodeGroupOperationMetadata (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#nodegroupoperationmetadata).
-      operationId: dataproc.projects.regions.clusters.nodeGroups.resize
-      parameters:
-        - description: "Required. The name of the node group to resize. Format: projects/{project}/regions/{region}/clusters/{cluster}/nodeGroups/{nodeGroup}"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ResizeNodeGroupRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v1/{parent}/autoscalingPolicies":
     get:
       description: Lists autoscaling policies in the project.
@@ -1675,16 +1633,6 @@ components:
           $ref: "#/components/schemas/InstanceGroupAutoscalingPolicyConfig"
           description: Required. Describes how the autoscaler will operate for primary workers.
       type: object
-    AuxiliaryNodeGroup:
-      description: Node group identification and configuration information.
-      properties:
-        nodeGroup:
-          $ref: "#/components/schemas/NodeGroup"
-          description: Required. Node group configuration.
-        nodeGroupId:
-          description: Optional. A node group ID. Generated if not specified.The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). Cannot begin or end with underscore or hyphen. Must consist of from 3 to 33 characters.
-          type: string
-      type: object
     AuxiliaryServicesConfig:
       description: Auxiliary services configuration for a Cluster.
       properties:
@@ -1913,11 +1861,6 @@ components:
         autoscalingConfig:
           $ref: "#/components/schemas/AutoscalingConfig"
           description: Optional. Autoscaling config for the policy associated with the cluster. Cluster does not autoscale if this field is unset.
-        auxiliaryNodeGroups:
-          description: Optional. The node group settings.
-          items:
-            $ref: "#/components/schemas/AuxiliaryNodeGroup"
-          type: array
         configBucket:
           description: Optional. A Cloud Storage bucket used to stage job dependencies, config files, and job driver console output. If you do not specify a staging bucket, Cloud Dataproc will determine a Cloud Storage location (US, ASIA, or EU) for your cluster's staging bucket according to the Compute Engine zone where your cluster is deployed, and then create and manage this project-level, per-location bucket (see Dataproc staging and temp buckets (https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/staging-bucket)). This field requires a Cloud Storage bucket name, not a gs://... URI to a Cloud Storage bucket.
           type: string
@@ -2167,18 +2110,6 @@ components:
           format: int32
           type: integer
       type: object
-    DriverSchedulingConfig:
-      description: Driver scheduling configuration.
-      properties:
-        memoryMb:
-          description: Required. The amount of memory in MB the driver is requesting.
-          format: int32
-          type: integer
-        vcores:
-          description: Required. The number of vCPUs the driver is requesting.
-          format: int32
-          type: integer
-      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } "
       properties: {}
@@ -2217,7 +2148,7 @@ components:
       description: Execution configuration for a workload.
       properties:
         idleTtl:
-          description: Optional. The duration to keep the session alive while it's idling. Passing this threshold will cause the session to be terminated. Minimum value is 10 minutes; maximum value is 14 days (see JSON representation of Duration (https://developers.google.com/protocol-buffers/docs/proto3#json)). Defaults to 4 hours if not set.
+          description: Optional. The duration to keep the session alive while it's idling. Passing this threshold will cause the session to be terminated. Minimum value is 10 minutes; maximum value is 14 days (see JSON representation of Duration (https://developers.google.com/protocol-buffers/docs/proto3#json)). Defaults to 10 minutes if not set.
           format: google-duration
           type: string
         kmsKey:
@@ -2629,9 +2560,6 @@ components:
           description: Output only. A URI pointing to the location of the stdout of the job's driver program.
           readOnly: true
           type: string
-        driverSchedulingConfig:
-          $ref: "#/components/schemas/DriverSchedulingConfig"
-          description: Optional. Driver scheduling configuration.
         hadoopJob:
           $ref: "#/components/schemas/HadoopJob"
           description: Optional. Job is a Hadoop job.
@@ -2745,11 +2673,11 @@ components:
       description: Job scheduling options.
       properties:
         maxFailuresPerHour:
-          description: "Optional. Maximum number of times per hour a driver may be restarted as a result of driver exiting with non-zero code before job is reported failed.A job may be reported as thrashing if the driver exits with a non-zero code four times within a 10-minute window.Maximum value is 10.Note: This restartable job option is not supported in Dataproc workflow templates (https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#adding_jobs_to_a_template)."
+          description: "Optional. Maximum number of times per hour a driver may be restarted as a result of driver exiting with non-zero code before job is reported failed.A job may be reported as thrashing if driver exits with non-zero code 4 times within 10 minute window.Maximum value is 10.Note: Currently, this restartable job option is not supported in Dataproc workflow template (https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#adding_jobs_to_a_template) jobs."
           format: int32
           type: integer
         maxFailuresTotal:
-          description: "Optional. Maximum total number of times a driver may be restarted as a result of the driver exiting with a non-zero code. After the maximum number is reached, the job will be reported as failed.Maximum value is 240.Note: Currently, this restartable job option is not supported in Dataproc workflow templates (https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#adding_jobs_to_a_template)."
+          description: "Optional. Maximum number of times in total a driver may be restarted as a result of driver exiting with non-zero code before job is reported failed. Maximum value is 240.Note: Currently, this restartable job option is not supported in Dataproc workflow template (https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#adding_jobs_to_a_template) jobs."
           format: int32
           type: integer
       type: object
@@ -3050,31 +2978,8 @@ components:
           description: "Optional. The target GKE cluster to deploy to. Format: 'projects/{project}/locations/{location}/clusters/{cluster_id}'"
           type: string
       type: object
-    NodeGroup:
-      description: Dataproc Node Group. The Dataproc NodeGroup resource is not related to the Dataproc NodeGroupAffinity resource.
-      properties:
-        labels:
-          additionalProperties:
-            type: string
-          description: Optional. Node group labels. Label keys must consist of from 1 to 63 characters and conform to RFC 1035 (https://www.ietf.org/rfc/rfc1035.txt). Label values can be empty. If specified, they must consist of from 1 to 63 characters and conform to RFC 1035 (https://www.ietf.org/rfc/rfc1035.txt). The node group must have no more than 32 labelsn.
-          type: object
-        name:
-          description: The Node group resource name (https://aip.dev/122).
-          type: string
-        nodeGroupConfig:
-          $ref: "#/components/schemas/InstanceGroupConfig"
-          description: Optional. The node group instance group configuration.
-        roles:
-          description: Required. Node group roles.
-          items:
-            enum:
-              - ROLE_UNSPECIFIED
-              - DRIVER
-            type: string
-          type: array
-      type: object
     NodeGroupAffinity:
-      description: Node Group Affinity for clusters using sole-tenant node groups. The Dataproc NodeGroupAffinity resource is not related to the Dataproc NodeGroup resource.
+      description: Node Group Affinity for clusters using sole-tenant node groups.
       properties:
         nodeGroupUri:
           description: "Required. The URI of a sole-tenant node group resource (https://cloud.google.com/compute/docs/reference/rest/v1/nodeGroups) that the cluster will be created on.A full URL, partial URI, or node group name are valid. Examples: https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-central1-a/nodeGroups/node-group-1 projects/[project_id]/zones/us-central1-a/nodeGroups/node-group-1 node-group-1"
@@ -3455,21 +3360,6 @@ components:
             type: string
           type: array
       type: object
-    ResizeNodeGroupRequest:
-      description: A request to resize a node group.
-      properties:
-        gracefulDecommissionTimeout:
-          description: Optional. Timeout for graceful YARN decomissioning. Graceful decommissioning (https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/scaling-clusters#graceful_decommissioning) allows the removal of nodes from the Compute Engine node group without interrupting jobs in progress. This timeout specifies how long to wait for jobs in progress to finish before forcefully removing nodes (and potentially interrupting jobs). Default timeout is 0 (for forceful decommission), and the maximum allowed timeout is 1 day. (see JSON representation of Duration (https://developers.google.com/protocol-buffers/docs/proto3#json)).Only supported on Dataproc image versions 1.2 and higher.
-          format: google-duration
-          type: string
-        requestId:
-          description: "Optional. A unique ID used to identify the request. If the server receives two ResizeNodeGroupRequest (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.ResizeNodeGroupRequests) with the same ID, the second request is ignored and the first google.longrunning.Operation created and stored in the backend is returned.Recommendation: Set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters."
-          type: string
-        size:
-          description: Required. The number of running instances for the node group to maintain. The group adds or removes instances to maintain the number of instances specified by this parameter.
-          format: int32
-          type: integer
-      type: object
     RuntimeConfig:
       description: Runtime configuration for a workload.
       properties:
@@ -3491,10 +3381,6 @@ components:
         approximateUsage:
           $ref: "#/components/schemas/UsageMetrics"
           description: Output only. Approximate workload resource usage calculated after workload finishes (see Dataproc Serverless pricing (https://cloud.google.com/dataproc-serverless/pricing)).
-          readOnly: true
-        currentUsage:
-          $ref: "#/components/schemas/UsageSnapshot"
-          description: Output only. Snapshot of current workload resource usage.
           readOnly: true
         diagnosticOutputUri:
           description: Output only. A URI pointing to the location of the diagnostics tarball.
@@ -3956,22 +3842,6 @@ components:
         shuffleStorageGbSeconds:
           description: Optional. Shuffle storage usage in (GB x seconds) (see Dataproc Serverless pricing (https://cloud.google.com/dataproc-serverless/pricing)).
           format: int64
-          type: string
-      type: object
-    UsageSnapshot:
-      description: The usage snaphot represents the resources consumed by a workload at a specified time.
-      properties:
-        milliDcu:
-          description: Optional. Milli (one-thousandth) Dataproc Compute Units (DCUs) (see Dataproc Serverless pricing (https://cloud.google.com/dataproc-serverless/pricing)).
-          format: int64
-          type: string
-        shuffleStorageGb:
-          description: Optional. Shuffle Storage in gigabytes (GB). (see Dataproc Serverless pricing (https://cloud.google.com/dataproc-serverless/pricing))
-          format: int64
-          type: string
-        snapshotTime:
-          description: Optional. The timestamp of the usage snapshot.
-          format: google-datetime
           type: string
       type: object
     ValueValidation:

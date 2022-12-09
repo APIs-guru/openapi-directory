@@ -18,7 +18,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://www.nexmo.com/terms-of-use
   title: Verify API
-  version: 1.2.3
+  version: 1.2.4
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/verify.yml
@@ -1271,6 +1271,12 @@ components:
         number:
           description: The mobile or landline phone number to verify. Unless you are setting `country` explicitly, this number must be in [E.164](https://en.wikipedia.org/wiki/E.164) format.
           example: "447700900000"
+          type: string
+        pin_code:
+          description: A custom PIN to send to the user. If a PIN is not provided, Verify will generate a random PIN for you. <b>This feature is not enabled by default</b> - please discuss with your Account Manager if you would like it enabled. If this feature is not enabled on your account, error status `20` will be returned.
+          example: AKFG-3424
+          maximum: 10
+          minimum: 4
           type: string
         pin_expiry:
           default: 300
