@@ -434,7 +434,7 @@ paths:
   "/v1/{resource}:getIamPolicy":
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-      operationId: batch.projects.locations.tasks.getIamPolicy
+      operationId: batch.projects.locations.jobs.getIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -488,7 +488,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
-      operationId: batch.projects.locations.tasks.setIamPolicy
+      operationId: batch.projects.locations.jobs.setIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -530,7 +530,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
-      operationId: batch.projects.locations.tasks.testIamPermissions
+      operationId: batch.projects.locations.jobs.testIamPermissions
       parameters:
         - description: "REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -688,11 +688,14 @@ components:
       description: AgentMetadata never changes for a single instance of VM agent.
       properties:
         creationTime:
-          description: When the VM agent started.
+          description: When the VM agent started. Use agent_startup_time instead.
           format: google-datetime
           type: string
         creator:
           description: 'Full name of the entity that created this vm. For MIG, this path is: projects/{project}/regions/{region}/InstanceGroupManagers/{igm} The value is retrieved from the vm metadata key of "created-by".'
+          type: string
+        imageVersion:
+          description: image version for the VM that this agent is installed on.
           type: string
         instance:
           description: GCP instance name (go/instance-name).
@@ -751,6 +754,22 @@ components:
         taskStatus:
           $ref: "#/components/schemas/TaskStatus"
           description: The status of the Task. If we need agent specific fields we should fork the public TaskStatus into an agent specific one. Or add them below.
+      type: object
+    AgentTimingInfo:
+      description: VM timing information
+      properties:
+        agentStartupTime:
+          description: Agent startup time
+          format: google-datetime
+          type: string
+        bootTime:
+          description: Boot timestamp of the VM OS
+          format: google-datetime
+          type: string
+        scriptStartupTime:
+          description: Startup time of the Batch VM script.
+          format: google-datetime
+          type: string
       type: object
     AllocationPolicy:
       description: A Job's resource allocation policy describes when, where, and how compute resources should be allocated for the Job.
@@ -879,10 +898,10 @@ components:
           description: Arbitrary additional options to include in the "docker run" command when running this container, e.g. "--network host".
           type: string
         password:
-          description: Optional password for logging in to a docker registry. If password matches "projects/*/secrets/*/versions/*" then Batch will read the password from the Secret Manager;
+          description: Optional password for logging in to a docker registry. If password matches `projects/*/secrets/*/versions/*` then Batch will read the password from the Secret Manager;
           type: string
         username:
-          description: Optional username for logging in to a docker registry. If username matches "projects/*/secrets/*/versions/*" then Batch will read the username from the Secret Manager.
+          description: Optional username for logging in to a docker registry. If username matches `projects/*/secrets/*/versions/*` then Batch will read the username from the Secret Manager.
           type: string
         volumes:
           description: Volumes to mount (bind mount) from the host machine files or directories into the container, formatted to match docker run's --volume option, e.g. /foo:/bar, or /foo:/bar:ro
@@ -1259,13 +1278,13 @@ components:
       description: A network interface.
       properties:
         network:
-          description: The URL of the network resource.
+          description: "The URL of an existing network resource. You can specify the network as a full or partial URL. For example, the following are all valid URLs: https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network} projects/{project}/global/networks/{network} global/networks/{network}"
           type: string
         noExternalIpAddress:
           description: Default is false (with an external IP address). Required if no external public IP address is attached to the VM. If no external public IP address, additional configuration is required to allow the VM to access Google Services. See https://cloud.google.com/vpc/docs/configure-private-google-access and https://cloud.google.com/nat/docs/gce-example#create-nat for more information.
           type: boolean
         subnetwork:
-          description: The URL of the Subnetwork resource.
+          description: "The URL of an existing subnetwork resource in the network. You can specify the subnetwork as a full or partial URL. For example, the following are all valid URLs: https://www.googleapis.com/compute/v1/projects/{project}/regions/{region}/subnetworks/{subnetwork} projects/{project}/regions/{region}/subnetworks/{subnetwork} regions/{region}/subnetworks/{subnetwork}"
           type: string
       type: object
     NetworkPolicy:
@@ -1362,6 +1381,9 @@ components:
         agentInfo:
           $ref: "#/components/schemas/AgentInfo"
           description: Agent info.
+        agentTimingInfo:
+          $ref: "#/components/schemas/AgentTimingInfo"
+          description: Agent timing info.
         metadata:
           $ref: "#/components/schemas/AgentMetadata"
           description: Agent metadata.
@@ -1369,6 +1391,10 @@ components:
     ReportAgentStateResponse:
       description: Response to ReportAgentStateRequest.
       properties:
+        minReportInterval:
+          description: Minimum report interval override
+          format: google-duration
+          type: string
         tasks:
           description: Tasks assigned to the agent
           items:
@@ -1546,7 +1572,7 @@ components:
         environments:
           additionalProperties:
             type: string
-          description: Environment variables to set before running the Task. You can set up to 100 environments.
+          description: "Deprecated: please use environment(non-plural) instead."
           type: object
         lifecyclePolicies:
           description: Lifecycle management schema when any task in a task group is failed. The valid size of lifecycle policies are [0, 10]. For each lifecycle policy, when the condition is met, the action in that policy will execute. If there are multiple policies that the task execution result matches, we use the action from the first matched policy. If task execution result does not meet with any of the defined lifecycle policy, we consider it as the default policy. Default policy means if the exit code is 0, exit task. If task ends with non-zero exit code, retry the task with max_retry_count.

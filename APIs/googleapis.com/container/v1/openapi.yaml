@@ -3524,6 +3524,13 @@ components:
         desiredShieldedNodes:
           $ref: "#/components/schemas/ShieldedNodes"
           description: Configuration for Shielded Nodes.
+        desiredStackType:
+          description: The desired stack type of the cluster. If a stack type is provided and does not match the current stack type of the cluster, update will attempt to change the stack type to the new type.
+          enum:
+            - STACK_TYPE_UNSPECIFIED
+            - IPV4
+            - IPV4_IPV6
+          type: string
         desiredVerticalPodAutoscaling:
           $ref: "#/components/schemas/VerticalPodAutoscaling"
           description: Cluster-level Vertical Pod Autoscaling configuration.

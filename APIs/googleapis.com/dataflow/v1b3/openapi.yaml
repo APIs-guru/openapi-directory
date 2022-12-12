@@ -4541,6 +4541,7 @@ components:
             - PUBSUB_TOPIC
             - PUBSUB_SUBSCRIPTION
             - BIGQUERY_TABLE
+            - JAVASCRIPT_UDF_FILE
           type: string
         regexes:
           description: Optional. Regexes that the parameter must match.
@@ -6057,6 +6058,9 @@ components:
         workerShutdownNotice:
           $ref: "#/components/schemas/WorkerShutdownNotice"
           description: Shutdown notice by workers.
+        workerThreadScalingReport:
+          $ref: "#/components/schemas/WorkerThreadScalingReport"
+          description: Thread scaling information reported by workers.
       type: object
     WorkerMessageCode:
       description: "A message code is used to report status and error messages to the service. The message codes are intended to be machine readable. The service will take care of translating these into user understandable messages if necessary. Example use cases: 1. Worker processes reporting successful startup. 2. Worker processes reporting specific errors (e.g. package staging failure)."
@@ -6082,6 +6086,9 @@ components:
         workerShutdownNoticeResponse:
           $ref: "#/components/schemas/WorkerShutdownNoticeResponse"
           description: Service's response to shutdown notice (currently empty).
+        workerThreadScalingReportResponse:
+          $ref: "#/components/schemas/WorkerThreadScalingReportResponse"
+          description: Service's thread scaling recommendation for workers.
       type: object
     WorkerPool:
       description: Describes one particular pool of Cloud Dataflow workers to be instantiated by the Cloud Dataflow service in order to perform the computations required by a job. Note that a workflow job may use multiple pools, in order to match the various computational requirements of the various stages of the job.
@@ -6212,6 +6219,22 @@ components:
     WorkerShutdownNoticeResponse:
       description: Service-side response to WorkerMessage issuing shutdown notice.
       properties: {}
+      type: object
+    WorkerThreadScalingReport:
+      description: Contains information about the thread scaling information of a worker.
+      properties:
+        currentThreadCount:
+          description: Current number of active threads in a worker.
+          format: int32
+          type: integer
+      type: object
+    WorkerThreadScalingReportResponse:
+      description: Contains the thread scaling recommendation for a worker from the backend.
+      properties:
+        recommendedThreadCount:
+          description: Recommended number of threads for a worker.
+          format: int32
+          type: integer
       type: object
     WriteInstruction:
       description: An instruction that writes records. Takes one input, produces no outputs.
