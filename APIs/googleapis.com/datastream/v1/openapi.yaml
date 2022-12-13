@@ -726,6 +726,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. If set to true, will skip validations.
+          in: query
+          name: force
+          schema:
+            type: boolean
         - description: Required. The private connectivity identifier.
           in: query
           name: privateConnectionId
@@ -1986,6 +1991,7 @@ components:
       description: A single target dataset to which all data will be streamed.
       properties:
         datasetId:
+          description: The dataset ID of the target dataset.
           type: string
       type: object
     SourceConfig:

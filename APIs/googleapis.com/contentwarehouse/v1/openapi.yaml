@@ -2439,6 +2439,10 @@ components:
             - DRIVE_SEARCH_FILTER_AFFINITY
             - CULTURE_EVENTS_CALENDAR_AFFINITY
             - DATABRIDGE_CONSOLE_AFFINITY
+            - COMMSTAR_AFFINITY
+            - CDDB_AFFINITY
+            - DATA_STUDIO_SPACES_AFFINITY
+            - SOJI_AFFINITY
           type: string
         containerId:
           description: The ID of the container
@@ -4203,6 +4207,7 @@ components:
             $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiReadOnlyProfileInfo"
           type: array
         relation:
+          description: See go/relation-vs-relationship for relation vs relationship explanation.
           items:
             $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiRelation"
           type: array
@@ -5103,7 +5108,7 @@ components:
           type: array
       type: object
     AppsPeopleOzExternalMergedpeopleapiRelation:
-      description: Relation stores the related person between the contact or profile and a third person This field currently includes RelationshipToMe data in fields value and canonical_value for ContainerType CONTACT_ANNOTATION. This will be moved to RelationshipToMe in b/221081499.
+      description: Relation stores the related person between the contact or profile and a third person. See go/relation-vs-relationship for relation vs relationship explanation. This field currently includes RelationshipToMe data in fields value and canonical_value for ContainerType CONTACT_ANNOTATION. This will be moved to RelationshipToMe in b/221081499.
       properties:
         canonicalValue:
           description: Canonicalized `value` of the relation from this person to the user. This is currently used for data from contact annotations. Possible canonical values are based from http://google3/googledata/quality/aliases/relationship_en.config.
@@ -7606,7 +7611,7 @@ components:
       description: Translation capability.
       properties:
         supportedLanguageTags:
-          description: The list of language IETF BCP 47 tags that are supported. See the full list at go/androidlanguages.
+          description: "The list of language IETF BCP 47 tags that are supported. See the full details in the comment on the equivalent field in: http://google3/java/com/google/android/apps/gsa/search/shared/service/proto/lens_service_event.proto;l=55;rcl=355512559"
           items:
             type: string
           type: array
@@ -11829,6 +11834,7 @@ components:
             - CURATED
             - ALARM
             - CUSTOM
+            - CUSTOM_SCRIPT
           type: string
         uiPayload:
           additionalProperties:
@@ -15045,6 +15051,7 @@ components:
             - VERSION_MOVING_MANUAL_0
             - VERSION_LITE_1
             - VERSION_CUSTOM
+            - VERSION_REJECTED
           type: string
         timestampMs:
           description: Thumbnail timestamp in milliseconds.
@@ -17940,6 +17947,7 @@ components:
             - PROVIDER_VIETGIS
             - PROVIDER_UNITE
             - PROVIDER_NEOGY
+            - PROVIDER_AMPUP
           type: string
         rawMetadata:
           description: For every key that is used in raw_data from this source, there must be a corresponding entry in raw_metadata that describes this key.
@@ -20568,6 +20576,7 @@ components:
             - PROVIDER_VIETGIS
             - PROVIDER_UNITE
             - PROVIDER_NEOGY
+            - PROVIDER_AMPUP
           type: string
       type: object
     GeostoreIntersectionGroupProto:
@@ -21727,6 +21736,7 @@ components:
             - PROVIDER_VIETGIS
             - PROVIDER_UNITE
             - PROVIDER_NEOGY
+            - PROVIDER_AMPUP
           type: string
         sourceDataset:
           type: string
@@ -23099,6 +23109,7 @@ components:
             - PROVIDER_VIETGIS
             - PROVIDER_UNITE
             - PROVIDER_NEOGY
+            - PROVIDER_AMPUP
           type: string
       type: object
     GeostoreRankDetailsProto:
@@ -26173,7 +26184,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1CloudAIDocumentOption"
           description: Request Option for processing Cloud AI Document in CW Document.
         createMask:
-          description: Field mask for creating Document fields. If mask path is empty, it means all fields are masked. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+          description: Field mask for creating Document fields. If mask path is empty, it means all fields are masked. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
           format: google-fieldmask
           type: string
         document:
@@ -26254,9 +26265,6 @@ components:
     GoogleCloudContentwarehouseV1Document:
       description: Defines the structure for content warehouse document proto.
       properties:
-        asyncEnabled:
-          description: If true, makes the document visible to asynchronous policies and rules.
-          type: boolean
         cloudAiDocument:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1Document"
           description: Document AI format to save the structured content, including OCR.
@@ -26322,8 +26330,11 @@ components:
         textExtractionDisabled:
           description: If true, text extraction will not be performed.
           type: boolean
+        textExtractionEnabled:
+          description: If true, text extraction will be performed.
+          type: boolean
         title:
-          description: Title that describes the document. This is usually present in the top section of the document, and is a mandatory field for the question-answering feature.
+          description: Title that describes the document. This can be the top heading or text that describes the document.
           type: string
         updateTime:
           description: Output only. The time when the document is last updated.
@@ -27052,10 +27063,10 @@ components:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1RequestMetadata"
           description: The meta information collected about the end user, used to enforce access control and improve the search quality of the service.
         requireTotalSize:
-          description: "Optional. Controls if the search document request requires the return of a total size of matched documents. See SearchDocumentsResponse.total_size. Enabling this flag may adversely impact performance. Hint: If this is used with pagination, set this flag on the initial query but set this to false on subsequent page calls (keep the total count locally). Defaults to false."
+          description: "Controls if the search document request requires the return of a total size of matched documents. See SearchDocumentsResponse.total_size. Enabling this flag may adversely impact performance. Hint: If this is used with pagination, set this flag on the initial query but set this to false on subsequent page calls (keep the total count locally). Defaults to false."
           type: boolean
         totalResultSize:
-          description: Optional. Controls if the search document request requires the return of a total size of matched documents. See SearchDocumentsResponse.total_size.
+          description: Controls if the search document request requires the return of a total size of matched documents. See SearchDocumentsResponse.total_size.
           enum:
             - TOTAL_RESULT_SIZE_UNSPECIFIED
             - ESTIMATED_SIZE
@@ -27265,6 +27276,7 @@ components:
           description: Required. The rule set to update.
       type: object
     GoogleCloudContentwarehouseV1UserInfo:
+      description: The user information.
       properties:
         groupIds:
           description: The unique group identifications which the user is belong to. The format is "group:yyyy@example.com";
@@ -31359,8 +31371,11 @@ components:
           type: array
       type: object
     ImageRepositoryAmarnaCloudSpeechSignals:
-      description: "Next Tag: 7"
+      description: "Next Tag: 8"
       properties:
+        duplicateOfYtS3Asr:
+          description: If this field is set to true, it means that Youtube already processed the ASR from S3 for the langID. Please find the ASR result from transcript_asr in google3/image/repository/proto/video_search.proto instead.
+          type: boolean
         langWithoutLocale:
           description: The language id input for creating this ASR without regional info. Same format as in go/ytlangid. This field is populated in Kronos Amarna Cloud Speech operator and passed to Amarna, but it is cleared before stored in Amarna's metadata table.
           type: string
@@ -36163,7 +36178,7 @@ components:
           type: array
       type: object
     KnowledgeAnswersIntentQueryFunctionCallSignals:
-      description: "Next ID: 34"
+      description: "Next ID: 35"
       properties:
         argumentComposingMid:
           description: The argument mid that was used to compose the entity for a concept interpretation, along with the intent_composing_mid (one of the intent's equivalent MIDs).
@@ -36233,6 +36248,9 @@ components:
           type: boolean
         isDisambiguationIntent:
           description: Denotes whether this is a sub-intent of an ambiguous SystemUncertain intent go/intent-disambiguation.
+          type: boolean
+        isNeuralCategoricalInterpretation:
+          description: Whether the interpretation was generated from the neural categorical parser.
           type: boolean
         isUiCompositionIntent:
           description: Denotes this is a sub-intent used for composing an Assistant UI response. The assistant dialog should output ui_composition_shelf in the SystemResponse if it can fulfill the intent. More info in go/davinci-design and go/davinci-di-fulfillment
@@ -43641,6 +43659,7 @@ components:
             - DIRECTOR
             - ACTOR
             - MOVIE_SERIES
+            - APP
           type: string
         image:
           description: Images of the media.
@@ -46860,6 +46879,7 @@ components:
             - CULTURE_EVENTS_CALENDAR
             - DATABRIDGE_CONSOLE
             - COMMSTAR
+            - CDDB
             - DEPRECATED_QUICKSTART_FLUME
             - DUO_CLIENT
             - ALBERT
@@ -48038,6 +48058,10 @@ components:
           description: The duration of the animation or movie (not including any looping), in milliseconds. If there is only a single frame (and thus not animated), the duration will be 0.
           format: int64
           type: string
+        loopCount:
+          description: The number of times the animation plays. If 0, the animation will loop indefinitely. If positive, this number includes the initial playthrough. For example, a value of 3 means that each frame is shown 3 times.
+          format: int32
+          type: integer
         numFrames:
           format: int64
           type: string
@@ -52225,14 +52249,16 @@ components:
           type: string
       type: object
     QualityPreviewRanklabSnippet:
-      description: "Snippet candidate related information and signal scores. Next ID: 11"
+      description: "Snippet candidate related information and signal scores. This message is used for both snippet scoring and ranklab features recording. Next ID: 12 ================== Features populated in production ======================="
       properties:
         brainFeatures:
           $ref: "#/components/schemas/QualityPreviewSnippetBrainFeatures"
+          description: Features from SnippetFlow in Superroot.
         documentFeatures:
           $ref: "#/components/schemas/QualityPreviewSnippetDocumentFeatures"
         experimentalFeatures:
           $ref: "#/components/schemas/QualityPreviewSnippetExperimentalFeatures"
+          description: For experimental usage, not populated yet.
         finalScore:
           description: The final score of this candidate.
           format: float
@@ -52251,6 +52277,9 @@ components:
         queryTermCoverageFeatures:
           $ref: "#/components/schemas/QualityPreviewSnippetQueryTermCoverageFeatures"
           description: Query term (including synonyms) coverage features.
+        radishFeatures:
+          $ref: "#/components/schemas/QualityPreviewSnippetRadishFeatures"
+          description: Radish related information.
         snippetInfo:
           $ref: "#/components/schemas/QualityPreviewChosenSnippetInfo"
           description: Information to identify current chosen snippet.
@@ -53787,7 +53816,7 @@ components:
           $ref: "#/components/schemas/ShoppingWebentityShoppingAnnotationSoriVersionId"
       type: object
     QualityShoppingShoppingAttachmentPBlock:
-      description: "Next ID: 15"
+      description: "Next ID: 18"
       properties:
         fullTitle:
           description: Field full_title may contain duplicate info from title and list_title.
@@ -53881,6 +53910,10 @@ components:
           items:
             $ref: "#/components/schemas/QualityRankembedMustangMustangRankEmbedInfo"
           type: array
+        weakGlobalProductClusterId:
+          description: Matched/Inferred weak product identity - set only if the global_product_cluster_id is missing
+          format: uint64
+          type: string
       type: object
     QualitySitemapBreadcrumbTarget:
       description: Sitelink candidates that is generated from breadcrumbs.
@@ -55434,10 +55467,6 @@ components:
         nbScore:
           format: float
           type: number
-        newConfidenceExperimentalDontUse:
-          description: Experimental. This is used for doing experiments only. For example, new entity confidence can be populated here to experiment with replacing the one re-computed by NewAnnotationConfidence().
-          format: float
-          type: number
         newsTopicalityScore:
           description: "DEPRECATED: this field is no longer set. As of early June 2018 it is referenced in hundreds of test files and is difficult to remove from the code base."
           format: float
@@ -56546,6 +56575,7 @@ components:
             - ASPECT
             - TARGET_AUDIENCE
             - TARGET_PURPOSE
+            - SETTING_BY_LOCATION
           type: string
         direction:
           description: Direction defines the relation between the measurable aspect and the facet.
@@ -56643,9 +56673,10 @@ components:
             - FEMININE_HONORIFIC
             - GENERIC_HONORIFIC
             - NEGATIVE_SUPERLATIVE
+            - SUPERLATIVE
             - FACET_AUDIENCE
             - FACET_PURPOSE
-            - SUPERLATIVE
+            - FACET_SETTING_BY_LOCATION
           type: string
       type: object
     RepositoryWebrefLightweightTokensPerMentionLightweightToken:
@@ -61377,7 +61408,7 @@ components:
           type: string
       type: object
     SecurityCredentialsPrincipalProto:
-      description: A Principal represents something to which permissions are assigned, often but not always a user or group of some kind. It is most appropriate for use in ACLs and authorization checks. Callers should prefer to use the wrapper classes in google3/security/credentials/public/principal.h google3/java/com/google/security/credentials/Principal.java google3/security/credentials/go/principal.go unless direct proto access is essential. If you update this protocol buffer, please update the wrapper classes as well.
+      description: A Principal represents something to which permissions are assigned, often but not always a user or group of some kind. It is most appropriate for use in ACLs and authorization checks. Callers should prefer to use the wrapper classes in google3/security/credentials/public/principal.h google3/java/com/google/security/credentials/Principal.java google3/security/credentials/go/principal.go unless direct proto access is essential. If you update this protocol buffer, please update the wrapper classes as well. LINT.IfChange
       properties:
         allAuthenticatedUsers:
           $ref: "#/components/schemas/SecurityCredentialsAllAuthenticatedUsersProto"
@@ -61491,7 +61522,7 @@ components:
           description: scope = ZWIEBACK_SESSION
       type: object
     SecurityCredentialsRbacRoleProto:
-      description: Principal associated with a given RBAC role. This principal is used by Sphinx Provisioning Service for RBAC (go/cedi-auth) provisionable (go/sphinx-rbacz-design).
+      description: Principal associated with a given RBAC role. This principal is used by Sphinx Provisioning Service for RBAC provisionable (go/sphinx-rbacz).
       properties:
         name:
           type: string
@@ -61501,11 +61532,11 @@ components:
           description: DEPRECATED as of 01.11.2019
           type: string
         rbacRoleName:
-          description: 'Format: "RbacNamespaceName.RbacRoleName(/field=value)*", e.g., "hr.v1.Reader", "hr.v1.Reader/language=EN_US/country=USA/room=NYC-9th-11A201".'
+          description: 'Format: "role/z?" - "role" is the Sphinx globally unique name of the Sphinx role that provisions the RBAC role. - "/z?" suffix indicates which Zanzibar environment stores the role membership data ("/zd": dev, "/zs": staging, "/zp": prod, "/zt": local test instance). Example: "mysystem_myrole/zp"'
           type: string
       type: object
     SecurityCredentialsRbacSubjectProto:
-      description: Principal associated with a given RBAC subject. This principal is used by Sphinx Provisioning Service for RBAC (go/cedi-auth) provisionable (go/sphinx-rbacz-design).
+      description: Principal associated with a given RBAC subject. This principal is used by Sphinx Provisioning Service for RBAC provisionable (go/sphinx-rbacz).
       properties:
         username:
           description: Format "username" without "@domain", e.g., "bogdand".
@@ -65840,6 +65871,10 @@ components:
               - APPS_PERSONALIZED_CATEGORICAL_GAME_SEEKING_QUERIES_EVENT_LEVEL
               - APPS_PERSONALIZED_CATEGORICAL_NON_TG_QUERIES_EVENT_LEVEL
               - APPS_PERSONALIZED_VERTICAL_RFY_CLUSTER_EVENT_LEVEL
+              - APPS_PERSONALIZED_NAVIGATIONAL_EVENT_LEVEL
+              - APPS_PERSONALIZED_NAVIGATIONAL_GAME_EVENT_LEVEL
+              - APPS_PERSONALIZED_MDP_EVENT_LEVEL
+              - APPS_PERSONALIZED_MDP_GAME_EVENT_LEVEL
               - CDP_PROMOTIONAL_IMAGE_LOCALE_MATCH
               - CDP_PROMOTIONAL_IMAGE_LOCALE_MISMATCH
               - CDP_SCREENSHOT_LOCALE_MISMATCH
@@ -66012,6 +66047,7 @@ components:
               - MDP_P13N_GAME_QUERY_L9_EVENT_LEVEL
               - SECOND_PASS_POLARIS_RERANKING_EVENT_LEVEL
               - SECOND_PASS_POLARIS_WITH_RANKING_CHANGE_EVENT_LEVEL
+              - EXPLORATORY_BOOSTING_EVENT_LEVEL
               - EVENT_LEVEL_TEST_CODE_LIMIT
               - RESERVED_4
               - RESERVED_5
@@ -66282,6 +66318,10 @@ components:
               - APPS_PERSONALIZED_CATEGORICAL_GAME_SEEKING_QUERIES_SESSION_LEVEL
               - APPS_PERSONALIZED_CATEGORICAL_NON_TG_QUERIES_SESSION_LEVEL
               - APPS_PERSONALIZED_VERTICAL_RFY_CLUSTER_SESSION_LEVEL
+              - APPS_PERSONALIZED_NAVIGATIONAL_SESSION_LEVEL
+              - APPS_PERSONALIZED_NAVIGATIONAL_GAME_SESSION_LEVEL
+              - APPS_PERSONALIZED_MDP_SESSION_LEVEL
+              - APPS_PERSONALIZED_MDP_GAME_SESSION_LEVEL
               - PLAY_STORE_SHOW_CART
               - MOVIES_RENTER
               - LOYALTY_HOME_FIRST_TAB_SESSION_LEVEL
@@ -66748,6 +66788,8 @@ components:
               - APPS_SEARCH_DISCOVERY_CLUSTER_TRIGGERED_SESSION_LEVEL
               - SUGGEST_CROSS_FORM_FACTOR_APPS_WEAR_SUGGESTIONS_ENABLED
               - SUGGEST_CROSS_FORM_FACTOR_APPS_WEAR_SUGGESTIONS_AVAILABLE
+              - SUGGEST_CROSS_FORM_FACTOR_APPS_TV_SUGGESTIONS_ENABLED
+              - SUGGEST_CROSS_FORM_FACTOR_APPS_TV_SUGGESTIONS_AVAILABLE
               - SUGGEST_APPS_SUBTEXT_SUGGESTIONS_SESSION_LEVEL
               - INLINE_DETAILS_TQUALITY_CHECK_PASS_SESSION_LEVEL
               - INLINE_DETAILS_TQUALITY_CHECK_FAIL_SESSION_LEVEL
@@ -66935,6 +66977,8 @@ components:
               - YOUTUBE_FROM_LANDING_PAGE_SESSION_LEVEL
               - SECOND_PASS_POLARIS_RERANKING_SESSION_LEVEL
               - SECOND_PASS_POLARIS_WITH_RANKING_CHANGE_SESSION_LEVEL
+              - EXPLORATORY_BOOSTING_SESSION_LEVEL
+              - PLAY_BOOKS_READING_PROGRESS_TOOLTIP_SESSION_LEVEL
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - SHOULD_SEE_LIVE_OP_CLUSTER_USER_LEVEL
               - CART_ABANDONMENT_USER_LEVEL
@@ -66978,6 +67022,10 @@ components:
               - APPS_PERSONALIZED_CATEGORICAL_GAME_SEEKING_QUERIES_USER_LEVEL
               - APPS_PERSONALIZED_CATEGORICAL_NON_TG_QUERIES_USER_LEVEL
               - APPS_PERSONALIZED_VERTICAL_RFY_CLUSTER_USER_LEVEL
+              - APPS_PERSONALIZED_NAVIGATIONAL_USER_LEVEL
+              - APPS_PERSONALIZED_NAVIGATIONAL_GAME_USER_LEVEL
+              - APPS_PERSONALIZED_MDP_USER_LEVEL
+              - APPS_PERSONALIZED_MDP_GAME_USER_LEVEL
               - SUBSCRIPTION_CANCELLATION_PROMOTION_USER_LEVEL
               - SUBSCRIPTION_UPDATE_FOP_FOR_DCB_AS_PRIMARY_SIGNUP_USER_LEVEL
               - SUBSCRIPTION_UPDATE_FOP_FOR_DCB_AS_PRIMARY_USER_LEVEL
@@ -67375,9 +67423,10 @@ components:
               - YOUTUBE_OPTED_IN_NOTIFICATION_DRIVEN_PREFETCH_USER_LEVEL
               - PLAY_ONBOARDING_QUEST_GAMES_HOME_SERVER_USER_LEVEL
               - PCH_O2_WITH_CRE_USER_LEVEL
-              - MERCH_USER_JOURNEY_ROBLOX_SPEND_USER_LEVEL
+              - MERCH_USER_JOURNEY_SPEND_USER_LEVEL
               - PBUY_FINE_TUNING_WITH_TEXT_TREAT_USER_LEVEL
               - PLAY_GAMES_ACHIEVEMENT_LOYALTY_QUEST_USER_LEVEL
+              - PLAY_BOOKS_READING_PROGRESS_TOOLTIP_USER_LEVEL
               - USER_LEVEL_TEST_CODE_LIMIT
             type: string
           type: array
@@ -69862,7 +69911,7 @@ components:
           type: array
       type: object
     VideoContentSearchVideoAnchorScoreInfo:
-      description: "Message to contain scoring / debugging information. If you want to add information which is not directly used in the final VideoAnchor data, it should be put here. Next ID: 25"
+      description: "Message to contain scoring / debugging information. If you want to add information which is not directly used in the final VideoAnchor data, it should be put here. Next ID: 27"
       properties:
         anchorCommonFeatureSet:
           $ref: "#/components/schemas/VideoContentSearchAnchorCommonFeatureSet"
@@ -69870,6 +69919,9 @@ components:
         attachments:
           $ref: "#/components/schemas/Proto2BridgeMessageSet"
           description: Additional attachments which extend MessageSet.
+        babelCheckpointPath:
+          description: The path to the particular babel checkpoint
+          type: string
         captionEntityAnchorFeatures:
           $ref: "#/components/schemas/VideoContentSearchCaptionEntityAnchorFeatures"
           description: Training features and debug info for caption entity anchors.
@@ -69917,6 +69969,12 @@ components:
         multimodalTopicTrainingFeatures:
           $ref: "#/components/schemas/VideoContentSearchMultimodalTopicTrainingFeatures"
           description: Features for a generated topic used to build training data for multimodal topics.
+        normalizedBabelEmbedding:
+          description: Normalized babel embedding of anchor.label(). If the label has more than one sentences, the embedding will be the averaged normalized embedding of each sentence.
+          items:
+            format: float
+            type: number
+          type: array
         ocrAnchorFeature:
           $ref: "#/components/schemas/VideoContentSearchOnScreenTextFeature"
           description: OCR anchor features.
@@ -76752,7 +76810,7 @@ components:
           type: string
       type: object
     YoutubeCommentsClusteringMiniStanza:
-      description: "Intended to be simpler to work with than the ExportedStanza it's derived from See documentation: https://g3doc.corp.google.com/company/teams/youtube/community_intelligence/eng_resources/data_sources.md#ministanza Next available: 75"
+      description: "Intended to be simpler to work with than the ExportedStanza it's derived from See documentation: https://g3doc.corp.google.com/company/teams/youtube/community_intelligence/eng_resources/data_sources.md#ministanza Next available: 76"
       properties:
         ansibleScores:
           additionalProperties:
@@ -77096,6 +77154,9 @@ components:
           description: Word entropy of the comment.
           format: double
           type: number
+        ytAuthorChannelId:
+          description: The youtube channel id of the comment author.
+          type: string
         ytCommentQualityScore:
           description: Existing quality corpus scores.
           format: double

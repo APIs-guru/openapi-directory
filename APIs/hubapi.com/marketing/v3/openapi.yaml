@@ -1223,6 +1223,9 @@ components:
       properties:
         name:
           type: string
+        persistenceTimestamp:
+          format: int64
+          type: integer
         requestId:
           type: string
         selectedByUser:

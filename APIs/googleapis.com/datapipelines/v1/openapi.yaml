@@ -30,48 +30,6 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{location}:computeSchema":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Computes the schema for the transform. Computation from `raw_schema` will always occur if it is set. This requires that the transform supports that encoding. If no raw schema is provided and if the transform is for an IO, then this will attempt to connect to the resource using the details provided in `config` and infer the schema from that. If the transform is not an IO, is a sink that doesn't exist yet, or is a sink with no schema requirement, then this will fall back to basing the schema off the one provided in `input_schemas`. The computed schema will be validated.
-      operationId: datapipelines.projects.locations.computeSchema
-      parameters:
-        - description: Required. The full location formatted as "projects/{your-project}/locations/{google-cloud-region}". If attempting to infer the schema from an existing Google Cloud resource, the default Data Pipelines service account for this project will be used in making requests for the resource. If the region given for "{google-cloud-region}" is different than the region where the resource is stored, then the data will be transferred to and processed in the region specified here, but it will not be persistently stored in this region.
-          in: path
-          name: location
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudDatapipelinesV1ComputeSchemaRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudDatapipelinesV1Schema"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v1/{name}":
     delete:
       description: Deletes a pipeline. If a scheduler job is attached to the pipeline, it will be deleted.
@@ -98,10 +56,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the transform description associated with the provided uniform resource name.
-      operationId: datapipelines.projects.locations.transformDescriptions.get
+      description: Looks up a single pipeline. Returns a "NOT_FOUND" error if no such pipeline exists. Returns a "FORBIDDEN" error if the caller doesn't have permission to access it.
+      operationId: datapipelines.projects.locations.pipelines.get
       parameters:
-        - description: Required. The full name formatted as "projects/{your-project}/locations/{google-cloud-region}/transformdescriptions/{uniform-resource-name}".
+        - description: "Required. The pipeline name. For example: `projects/PROJECT_ID/locations/LOCATION_ID/pipelines/PIPELINE_ID`."
           in: path
           name: name
           required: true
@@ -112,7 +70,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudDatapipelinesV1TransformDescription"
+                $ref: "#/components/schemas/GoogleCloudDatapipelinesV1Pipeline"
           description: Successful response
       security:
         - Oauth2:
@@ -392,52 +350,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/transformDescriptions:batchGet":
-    get:
-      description: Gets transform descriptions in a batch, associated with a list of provided uniform resource names.
-      operationId: datapipelines.projects.locations.transformDescriptions.batchGet
-      parameters:
-        - description: Required. The project and location shared by all transform descriptions being retrieved, formatted as "projects/{project}/locations/{location}".
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Optional. The names of the transform descriptions being retrieved, formatted as "projects/{project}/locations/{location}/transformdescriptions/{transform_description}". If no name is provided, all of the transform descriptions will be returned.
-          explode: true
-          in: query
-          name: names
-          schema:
-            items:
-              type: string
-            type: array
-          style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudDatapipelinesV1BatchGetTransformDescriptionsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:
@@ -514,93 +426,6 @@ components:
       schema:
         type: string
   schemas:
-    GoogleCloudDatapipelinesV1ArrayValue:
-      description: Represents an array of values. The elements can be of any type.
-      properties:
-        elements:
-          description: The elements of the array.
-          items:
-            $ref: "#/components/schemas/GoogleCloudDatapipelinesV1FieldValue"
-          type: array
-      type: object
-    GoogleCloudDatapipelinesV1AtomicValue:
-      description: Represents a non-dividable value.
-      properties:
-        booleanValue:
-          description: A boolean value.
-          type: boolean
-        byteValue:
-          description: An 8-bit signed value.
-          format: int32
-          type: integer
-        bytesValue:
-          description: An array of raw bytes.
-          format: byte
-          type: string
-        datetimeValue:
-          $ref: "#/components/schemas/GoogleTypeDateTime"
-          description: A datetime value.
-        decimalValue:
-          $ref: "#/components/schemas/GoogleTypeDecimal"
-          description: A large decimal value, equivalent to Java BigDecimal.
-        doubleValue:
-          description: A 64-bit floating point value.
-          format: double
-          type: number
-        floatValue:
-          description: A 32-bit floating point value.
-          format: float
-          type: number
-        int16Value:
-          description: A 16-bit signed value.
-          format: int32
-          type: integer
-        int32Value:
-          description: A 32-bit signed value.
-          format: int32
-          type: integer
-        int64Value:
-          description: A 64-bit signed value.
-          format: int64
-          type: string
-        stringValue:
-          description: A string value.
-          type: string
-      type: object
-    GoogleCloudDatapipelinesV1BatchGetTransformDescriptionsResponse:
-      description: Response message for BatchGetTransformDescriptions
-      properties:
-        transformDescriptions:
-          description: List of requested transform descriptions.
-          items:
-            $ref: "#/components/schemas/GoogleCloudDatapipelinesV1TransformDescription"
-          type: array
-      type: object
-    GoogleCloudDatapipelinesV1ComputeSchemaRequest:
-      description: Request message for ComputeSchema
-      properties:
-        config:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1ConfiguredTransform"
-          description: Required. The configuration for the transform. If this is not a source, then each input with its schema must be set. It is not required to have any outputs set.
-        inputSchemas:
-          description: Optional. In relation to the full pipeline graph, the schemas of the transforms that are used as inputs to the one for `config`. If `config` represents a transform for reading from some resource, then this should be empty. For all other transforms, at least one value must be provided.
-          items:
-            $ref: "#/components/schemas/GoogleCloudDatapipelinesV1Schema"
-          type: array
-        rawSchema:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1RawSchemaInfo"
-          description: Optional. If set, this will use the provided raw schema to compute the schema rather than connecting to any resources. Validation will still occur to make sure it is compatible with all input schemas. If the transform is an IO, the IO must support that schema type.
-      type: object
-    GoogleCloudDatapipelinesV1ConfiguredTransform:
-      description: A fully configured transform that can be validated.
-      properties:
-        config:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1Row"
-          description: Configuration values provided. These must match the schema provided in the row's schema.
-        uniformResourceName:
-          description: Unique resource name of the transform. This should be the same as the equivalent `TransformDescription` value.
-          type: string
-      type: object
     GoogleCloudDatapipelinesV1DataflowJobDetails:
       description: Pipeline job details specific to the Dataflow API. This is encapsulated here to allow for more executors to store their specific details separately.
       properties:
@@ -619,96 +444,6 @@ components:
           $ref: "#/components/schemas/GoogleCloudDatapipelinesV1SdkVersion"
           description: Output only. The SDK version used to run the job.
           readOnly: true
-      type: object
-    GoogleCloudDatapipelinesV1EnumerationValue:
-      description: Represents a selected value from an EnumerationType.
-      properties:
-        name:
-          description: Name of the enum option.
-          type: string
-      type: object
-    GoogleCloudDatapipelinesV1Field:
-      description: Info for a single field in the schema.
-      properties:
-        name:
-          description: Name of the field.
-          type: string
-        type:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1FieldType"
-          description: Type info for the field.
-      type: object
-    GoogleCloudDatapipelinesV1FieldType:
-      description: Type info about a field.
-      properties:
-        collectionElementType:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1FieldType"
-          description: If `type` is an array or iterable, this is the type contained in that array or iterable.
-        logicalType:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1LogicalType"
-          description: If `type` is a logical type, this is the info for the specific logical type.
-        mapType:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1MapType"
-          description: If `type` is a map, this is the key and value types for that map.
-        nullable:
-          description: Whether or not this field is nullable.
-          type: boolean
-        rowSchema:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1Schema"
-          description: If `type` is a row, this is the schema of that row.
-        type:
-          description: Specific type of the field. For non-atomic types, the corresponding type info for that non-atomic must be set.
-          enum:
-            - TYPE_NAME_UNSPECIFIED
-            - TYPE_NAME_BYTE
-            - TYPE_NAME_INT16
-            - TYPE_NAME_INT32
-            - TYPE_NAME_INT64
-            - TYPE_NAME_DECIMAL
-            - TYPE_NAME_FLOAT
-            - TYPE_NAME_DOUBLE
-            - TYPE_NAME_STRING
-            - TYPE_NAME_DATETIME
-            - TYPE_NAME_BOOLEAN
-            - TYPE_NAME_BYTES
-            - TYPE_NAME_ARRAY
-            - TYPE_NAME_ITERABLE
-            - TYPE_NAME_MAP
-            - TYPE_NAME_ROW
-            - TYPE_NAME_LOGICAL_TYPE
-          type: string
-      type: object
-    GoogleCloudDatapipelinesV1FieldValue:
-      description: A single value in a row. The value set must correspond to the correct type from the row's schema.
-      properties:
-        arrayValue:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1ArrayValue"
-          description: The array value of this field. Corresponds to TYPE_NAME_ARRAY in the schema.
-        atomicValue:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1AtomicValue"
-          description: The atomic value of this field. Must correspond to the correct atomic type in the schema.
-        enumValue:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1EnumerationValue"
-          description: The enum value of this field. Corresponds to TYPE_NAME_LOGICAL_TYPE in the schema if that logical type represents an `EnumerationType` type.
-        fixedBytesValue:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1FixedBytesValue"
-          description: The fixed-length byte collection of this field. Corresponds to TYPE_NAME_LOGICAL_TYPE in the schema if that logical type represents a `FixedBytes` type.
-        iterableValue:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1IterableValue"
-          description: The iterable value of this field. Corresponds to TYPE_NAME_ITERABLE in the schema.
-        mapValue:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1MapValue"
-          description: The map value of this field. Corresponds to TYPE_NAME_MAP in the schema.
-        rowValue:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1Row"
-          description: The row value of this field. Corresponds to TYPE_NAME_ROW in the schema. This row also holds to its own schema.
-      type: object
-    GoogleCloudDatapipelinesV1FixedBytesValue:
-      description: Represents a collection of bytes whose size is the same as the associated FixedBytes size value.
-      properties:
-        value:
-          description: The raw bytes. It must be exactly the size specified in the schema.
-          format: byte
-          type: string
       type: object
     GoogleCloudDatapipelinesV1FlexTemplateRuntimeEnvironment:
       description: The environment values to be set at runtime for a Flex Template.
@@ -775,15 +510,6 @@ components:
         zone:
           description: The Compute Engine [availability zone](https://cloud.google.com/compute/docs/regions-zones/regions-zones) for launching worker instances to run your pipeline. In the future, worker_zone will take precedence.
           type: string
-      type: object
-    GoogleCloudDatapipelinesV1IterableValue:
-      description: Represents an iterable of values. The elements can be of any type.
-      properties:
-        elements:
-          description: The elements of the iterable.
-          items:
-            $ref: "#/components/schemas/GoogleCloudDatapipelinesV1FieldValue"
-          type: array
       type: object
     GoogleCloudDatapipelinesV1Job:
       description: Definition of the job information maintained by the pipeline. Fields in this entity are retrieved from the executor API (e.g. Dataflow API).
@@ -935,62 +661,6 @@ components:
             $ref: "#/components/schemas/GoogleCloudDatapipelinesV1Pipeline"
           type: array
       type: object
-    GoogleCloudDatapipelinesV1LogicalType:
-      description: Represents the input for creating a specified logical type.
-      properties:
-        enumerationType:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1LogicalTypeEnumerationType"
-          description: The enum represented by this logical type.
-        fixedBytes:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1LogicalTypeFixedBytes"
-          description: The fixed-size byte collection represented by this logical type.
-      type: object
-    GoogleCloudDatapipelinesV1LogicalTypeEnumerationType:
-      description: Represents the Beam EnumerationType logical type.
-      properties:
-        values:
-          description: Names of the values. The numeric value is the same as the index.
-          items:
-            type: string
-          type: array
-      type: object
-    GoogleCloudDatapipelinesV1LogicalTypeFixedBytes:
-      description: Represents the Beam FixedBytes logical type.
-      properties:
-        sizeBytes:
-          description: Number of bytes to allocate.
-          format: int32
-          type: integer
-      type: object
-    GoogleCloudDatapipelinesV1MapType:
-      description: Represents a map in a schema.
-      properties:
-        mapKeyType:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1FieldType"
-          description: Key type of the map. Only atomic types are supported.
-        mapValueType:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1FieldType"
-          description: Value type of the map.
-      type: object
-    GoogleCloudDatapipelinesV1MapValue:
-      description: Represents a key/value pairing.
-      properties:
-        entries:
-          description: The entries in the map.
-          items:
-            $ref: "#/components/schemas/GoogleCloudDatapipelinesV1MapValueEntry"
-          type: array
-      type: object
-    GoogleCloudDatapipelinesV1MapValueEntry:
-      description: A single entry in the map. Each entry must have a unique key.
-      properties:
-        key:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1FieldValue"
-          description: The key value. Only atomic values are supported.
-        value:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1FieldValue"
-          description: The value associated with the key. It may be of any type.
-      type: object
     GoogleCloudDatapipelinesV1Pipeline:
       description: The main pipeline entity and all the necessary metadata for launching and managing linked jobs.
       properties:
@@ -1046,31 +716,6 @@ components:
         workload:
           $ref: "#/components/schemas/GoogleCloudDatapipelinesV1Workload"
           description: Workload information for creating new jobs.
-      type: object
-    GoogleCloudDatapipelinesV1RawSchemaInfo:
-      description: The raw schema and its type.
-      properties:
-        rawSchema:
-          description: The schema.
-          type: string
-        type:
-          description: The type of the schema.
-          enum:
-            - RAW_SCHEMA_TYPE_UNSPECIFIED
-            - RAW_SCHEMA_TYPE_AVRO
-          type: string
-      type: object
-    GoogleCloudDatapipelinesV1Row:
-      description: Represents an Apache Beam row, though the `Any` nature of values is replaced with more concrete representations of valid values.
-      properties:
-        schema:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1SchemaSource"
-          description: Required. The schema of the row's data.
-        values:
-          description: Required. The values of this Row. A fully built row is required to hold to the schema specified by `schema`.
-          items:
-            $ref: "#/components/schemas/GoogleCloudDatapipelinesV1FieldValue"
-          type: array
       type: object
     GoogleCloudDatapipelinesV1RunPipelineRequest:
       description: Request message for RunPipeline
@@ -1160,28 +805,6 @@ components:
           description: Timezone ID. This matches the timezone IDs used by the Cloud Scheduler API. If empty, UTC time is assumed.
           type: string
       type: object
-    GoogleCloudDatapipelinesV1Schema:
-      description: Represents a simplified Apache Beam schema.
-      properties:
-        fields:
-          description: Fields in the schema. Every field within a schema must have a unique name.
-          items:
-            $ref: "#/components/schemas/GoogleCloudDatapipelinesV1Field"
-          type: array
-        referenceId:
-          description: An identifier of the schema for looking it up in a repository. This only needs to be set if the schema is stored in a repository.
-          type: string
-      type: object
-    GoogleCloudDatapipelinesV1SchemaSource:
-      description: Holds a schema or a reference to a schema in some repository.
-      properties:
-        localSchema:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1Schema"
-          description: Schema located locally with the message.
-        referenceId:
-          description: The `reference_id` value of a schema in a repository.
-          type: string
-      type: object
     GoogleCloudDatapipelinesV1SdkVersion:
       description: The version of the SDK used to run the job.
       properties:
@@ -1204,20 +827,6 @@ components:
     GoogleCloudDatapipelinesV1StopPipelineRequest:
       description: Request message for StopPipeline.
       properties: {}
-      type: object
-    GoogleCloudDatapipelinesV1TransformDescription:
-      description: Description of a schema-aware transform, which provides info on how it can be configured.
-      properties:
-        name:
-          description: "Output only. The full name of this resource formatted as: projects/{project}/locations/{location}/transformDescriptions/{transform_description} `transform_description` is the same as the `uniform_resource_name` field."
-          readOnly: true
-          type: string
-        options:
-          $ref: "#/components/schemas/GoogleCloudDatapipelinesV1Schema"
-          description: Available options for configuring the transform.
-        uniformResourceName:
-          description: Unique resource name of the transform.
-          type: string
       type: object
     GoogleCloudDatapipelinesV1Workload:
       description: Workload details for creating the pipeline jobs.
@@ -1249,62 +858,6 @@ components:
           type: array
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
-          type: string
-      type: object
-    GoogleTypeDateTime:
-      description: "Represents civil time (or occasionally physical time). This type can represent a civil time in one of a few possible ways: * When utc_offset is set and time_zone is unset: a civil time on a calendar day with a particular offset from UTC. * When time_zone is set and utc_offset is unset: a civil time on a calendar day in a particular time zone. * When neither time_zone nor utc_offset is set: a civil time on a calendar day in local time. The date is relative to the Proleptic Gregorian Calendar. If year, month, or day are 0, the DateTime is considered not to have a specific year, month, or day respectively. This type may also be used to represent a physical time if all the date and time fields are set and either case of the `time_offset` oneof is set. Consider using `Timestamp` message for physical time instead. If your use case also would like to store the user's timezone, that can be done in another field. This type is more flexible than some applications may want. Make sure to document and validate your application's limitations."
-      properties:
-        day:
-          description: Optional. Day of month. Must be from 1 to 31 and valid for the year and month, or 0 if specifying a datetime without a day.
-          format: int32
-          type: integer
-        hours:
-          description: Optional. Hours of day in 24 hour format. Should be from 0 to 23, defaults to 0 (midnight). An API may choose to allow the value "24:00:00" for scenarios like business closing time.
-          format: int32
-          type: integer
-        minutes:
-          description: Optional. Minutes of hour of day. Must be from 0 to 59, defaults to 0.
-          format: int32
-          type: integer
-        month:
-          description: Optional. Month of year. Must be from 1 to 12, or 0 if specifying a datetime without a month.
-          format: int32
-          type: integer
-        nanos:
-          description: Optional. Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999, defaults to 0.
-          format: int32
-          type: integer
-        seconds:
-          description: Optional. Seconds of minutes of the time. Must normally be from 0 to 59, defaults to 0. An API may allow the value 60 if it allows leap-seconds.
-          format: int32
-          type: integer
-        timeZone:
-          $ref: "#/components/schemas/GoogleTypeTimeZone"
-          description: Time zone.
-        utcOffset:
-          description: "UTC offset. Must be whole seconds, between -18 hours and +18 hours. For example, a UTC offset of -4:00 would be represented as { seconds: -14400 }."
-          format: google-duration
-          type: string
-        year:
-          description: Optional. Year of date. Must be from 1 to 9999, or 0 if specifying a datetime without a year.
-          format: int32
-          type: integer
-      type: object
-    GoogleTypeDecimal:
-      description: "A representation of a decimal value, such as 2.5. Clients may convert values into language-native decimal formats, such as Java's BigDecimal or Python's decimal.Decimal. [BigDecimal]: https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html [decimal.Decimal]: https://docs.python.org/3/library/decimal.html"
-      properties:
-        value:
-          description: "The decimal value, as a string. The string representation consists of an optional sign, `+` (`U+002B`) or `-` (`U+002D`), followed by a sequence of zero or more decimal digits (\"the integer\"), optionally followed by a fraction, optionally followed by an exponent. An empty string **should** be interpreted as `0`. The fraction consists of a decimal point followed by zero or more decimal digits. The string must contain at least one digit in either the integer or the fraction. The number formed by the sign, the integer and the fraction is referred to as the significand. The exponent consists of the character `e` (`U+0065`) or `E` (`U+0045`) followed by one or more decimal digits. Services **should** normalize decimal values before storing them by: - Removing an explicitly-provided `+` sign (`+2.5` -> `2.5`). - Replacing a zero-length integer value with `0` (`.5` -> `0.5`). - Coercing the exponent character to upper-case, with explicit sign (`2.5e8` -> `2.5E+8`). - Removing an explicitly-provided zero exponent (`2.5E0` -> `2.5`). Services **may** perform additional normalization based on its own needs and the internal decimal implementation selected, such as shifting the decimal point and exponent value together (example: `2.5E-1` <-> `0.25`). Additionally, services **may** preserve trailing zeroes in the fraction to indicate increased precision, but are not required to do so. Note that only the `.` character is supported to divide the integer and the fraction; `,` **should not** be supported regardless of locale. Additionally, thousand separators **should not** be supported. If a service does support them, values **must** be normalized. The ENBF grammar is: DecimalString = '' | [Sign] Significand [Exponent]; Sign = '+' | '-'; Significand = Digits '.' | [Digits] '.' Digits; Exponent = ('e' | 'E') [Sign] Digits; Digits = { '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' }; Services **should** clearly document the range of supported values, the maximum supported precision (total number of digits), and, if applicable, the scale (number of digits after the decimal point), as well as how it behaves when receiving out-of-bounds values. Services **may** choose to accept values passed as input even when the value has a higher precision or scale than the service supports, and **should** round the value to fit the supported scale. Alternatively, the service **may** error with `400 Bad Request` (`INVALID_ARGUMENT` in gRPC) if precision would be lost. Services **should** error with `400 Bad Request` (`INVALID_ARGUMENT` in gRPC) if the service receives a value outside of the supported range."
-          type: string
-      type: object
-    GoogleTypeTimeZone:
-      description: Represents a time zone from the [IANA Time Zone Database](https://www.iana.org/time-zones).
-      properties:
-        id:
-          description: IANA Time Zone Database time zone, e.g. "America/New_York".
-          type: string
-        version:
-          description: Optional. IANA Time Zone Database version number, e.g. "2019a".
           type: string
       type: object
   securitySchemes:

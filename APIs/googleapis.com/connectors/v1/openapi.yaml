@@ -280,6 +280,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{name}:refresh":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Refresh runtime schema of a connection.
+      operationId: connectors.projects.locations.connections.connectionSchemaMetadata.refresh
+      parameters:
+        - description: "Required. Resource name. Format: projects/{project}/locations/{location}/connections/{connection}/connectionSchemaMetadata"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RefreshConnectionSchemaMetadataRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{parent}/connections":
     get:
       description: Lists Connections in a given project and location.
@@ -1186,6 +1228,7 @@ components:
             - PREVIEW
             - GA
             - DEPRECATED
+            - PRIVATE_PREVIEW
           readOnly: true
           type: string
         name:
@@ -1243,6 +1286,7 @@ components:
             - PREVIEW
             - GA
             - DEPRECATED
+            - PRIVATE_PREVIEW
           readOnly: true
           type: string
         name:
@@ -1806,6 +1850,7 @@ components:
             - PREVIEW
             - GA
             - DEPRECATED
+            - PRIVATE_PREVIEW
           readOnly: true
           type: string
         name:
@@ -1821,6 +1866,10 @@ components:
           description: Output only. Cloud storage location of icons etc consumed by UI.
           readOnly: true
           type: string
+      type: object
+    RefreshConnectionSchemaMetadataRequest:
+      description: Request message for ConnectorsService.RefreshConnectionSchemaMetadata.
+      properties: {}
       type: object
     Resource:
       description: Resource definition
