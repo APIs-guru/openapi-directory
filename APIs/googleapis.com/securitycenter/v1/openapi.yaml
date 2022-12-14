@@ -240,7 +240,8 @@ paths:
       description: Updates the state of a finding.
       operationId: securitycenter.projects.sources.findings.setState
       parameters:
-        - in: path
+        - description: 'Required. The [relative resource name](https://cloud.google.com/apis/design/resource_names#relative_resource_name) of the finding. Example: "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}", "folders/{folder_id}/sources/{source_id}/findings/{finding_id}", "projects/{project_id}/sources/{source_id}/findings/{finding_id}".'
+          in: path
           name: name
           required: true
           schema:
@@ -269,7 +270,7 @@ paths:
       description: Lists an organization's assets.
       operationId: securitycenter.projects.assets.list
       parameters:
-        - description: Required. Name of the parent assets should belong to. Its format is "organizations/[organization_id], folders/[folder_id], or projects/[project_id]".
+        - description: Required. The name of the parent that the listed assets belong to. Its format is "organizations/[organization_id], "folders/[folder_id]", or "projects/[project_id]".
           in: path
           name: parent
           required: true
@@ -353,7 +354,7 @@ paths:
       description: Filters an organization's assets and groups them by their specified properties.
       operationId: securitycenter.projects.assets.group
       parameters:
-        - description: Required. Name of the parent to groupBy. Its format is "organizations/[organization_id], folders/[folder_id], or projects/[project_id]".
+        - description: Required. The name of the parent to group the assets by. Its format is "organizations/[organization_id]", "folders/[folder_id]", or "projects/[project_id]".
           in: path
           name: parent
           required: true
@@ -471,7 +472,7 @@ paths:
       description: Creates a BigQuery export.
       operationId: securitycenter.projects.bigQueryExports.create
       parameters:
-        - description: Required. Resource name of the new BigQuery export's parent. Its format is "organizations/[organization_id]", "folders/[folder_id]", or "projects/[project_id]".
+        - description: Required. The name of the parent resource of the new BigQuery export. Its format is "organizations/[organization_id]", "folders/[folder_id]", or "projects/[project_id]".
           in: path
           name: parent
           required: true
@@ -777,7 +778,7 @@ paths:
       description: Lists notification configs.
       operationId: securitycenter.projects.notificationConfigs.list
       parameters:
-        - description: Required. Name of the parent to list notification configs. Its format is "organizations/[organization_id]", "folders/[folder_id]", or "projects/[project_id]".
+        - description: Required. The name of the parent in which to list the notification configurations. Its format is "organizations/[organization_id]", "folders/[folder_id]", or "projects/[project_id]".
           in: path
           name: parent
           required: true
@@ -829,7 +830,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. Unique identifier provided by the client within the parent scope. It must be between 1 and 128 characters, and contain alphanumeric characters, underscores or hyphens only.
+        - description: Required. Unique identifier provided by the client within the parent scope. It must be between 1 and 128 characters and contain alphanumeric characters, underscores, or hyphens only.
           in: query
           name: configId
           schema:
@@ -858,7 +859,7 @@ paths:
       description: Lists all sources belonging to an organization.
       operationId: securitycenter.projects.sources.list
       parameters:
-        - description: Required. Resource name of the parent of sources to list. Its format should be "organizations/[organization_id], folders/[folder_id], or projects/[project_id]".
+        - description: Required. Resource name of the parent of sources to list. Its format should be "organizations/[organization_id], "folders/[folder_id]", or "projects/[project_id]".
           in: path
           name: parent
           required: true
@@ -1355,10 +1356,10 @@ components:
           type: integer
       type: object
     Contact:
-      description: Representa a single contact's email address
+      description: The email address of a contact.
       properties:
         email:
-          description: An email address e.g. "person123@company.com"
+          description: An email address. For example, "`person123@company.com`".
           type: string
       type: object
     ContactDetails:
@@ -1833,7 +1834,7 @@ components:
           $ref: "#/components/schemas/Role"
           description: The Role or ClusterRole referenced by the binding.
         subjects:
-          description: Represents the subjects(s) bound to the role. Not always available for PATCH requests.
+          description: Represents one or more subjects that are bound to the role. Not always available for PATCH requests.
           items:
             $ref: "#/components/schemas/Subject"
           type: array
@@ -2306,7 +2307,7 @@ components:
           type: string
       type: object
     Indicator:
-      description: "Represents what's commonly known as an Indicator of compromise (IoC) in computer forensics. This is an artifact observed on a network or in an operating system that, with high confidence, indicates a computer intrusion. Reference: https://en.wikipedia.org/wiki/Indicator_of_compromise"
+      description: Represents what's commonly known as an _indicator of compromise_ (IoC) in computer forensics. This is an artifact observed on a network or in an operating system that, with high confidence, indicates a computer intrusion. For more information, see [Indicator of compromise](https://en.wikipedia.org/wiki/Indicator_of_compromise).
       properties:
         domains:
           description: List of domains associated to the Finding.
@@ -2314,7 +2315,7 @@ components:
             type: string
           type: array
         ipAddresses:
-          description: List of ip addresses associated to the Finding.
+          description: The list of IP addresses that are associated with the finding.
           items:
             type: string
           type: array
@@ -2336,7 +2337,7 @@ components:
           description: Rootkit name when available.
           type: string
         unexpectedCodeModification:
-          description: True when unexpected modifications of kernel read-only data memory are present.
+          description: True when unexpected modifications of kernel code memory are present.
           type: boolean
         unexpectedFtraceHandler:
           description: True when `ftrace` points are present with callbacks pointing to regions that are not in the expected kernel or module code range.
@@ -2354,14 +2355,14 @@ components:
           description: True when unexpected processes in the scheduler run queue are present. Such processes are in the run queue, but not in the process task list.
           type: boolean
         unexpectedReadOnlyDataModification:
-          description: Flag indicating unexpected modifications of kernel read-only data memory.
+          description: True when unexpected modifications of kernel read-only data memory are present.
           type: boolean
         unexpectedSystemCallHandler:
           description: True when system call handlers that are are not in the expected kernel or module code regions are present.
           type: boolean
       type: object
     Kubernetes:
-      description: Kubernetes related attributes.
+      description: Kubernetes-related attributes.
       properties:
         accessReviews:
           description: Provides information on any Kubernetes access reviews (i.e. privilege checks) relevant to the finding.
@@ -2991,7 +2992,7 @@ components:
           type: string
       type: object
     SetFindingStateRequest:
-      description: "Request message for updating a finding's state. The [relative resource name](https://cloud.google.com/apis/design/resource_names#relative_resource_name) of the finding. Example: \"organizations/{organization_id}/sources/{source_id}/findings/{finding_id}\", \"folders/{folder_id}/sources/{source_id}/findings/{finding_id}\", \"projects/{project_id}/sources/{source_id}/findings/{finding_id}\"."
+      description: Request message for updating a finding's state.
       properties:
         startTime:
           description: Required. The time at which the updated state takes effect.

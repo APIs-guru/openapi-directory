@@ -1452,6 +1452,7 @@ paths:
                     type: 'primary'
                   }
                 ],
+                email_domain: 'gmail.com',
                 custom_fields: [
                   {
                     id: '2389328923893298',
@@ -1704,6 +1705,7 @@ paths:
                     type: 'primary'
                   }
                 ],
+                email_domain: 'gmail.com',
                 custom_fields: [
                   {
                     id: '2389328923893298',
@@ -4881,6 +4883,10 @@ components:
           nullable: true
           title: Description
           type: string
+        email_domain:
+          example: gmail.com
+          nullable: true
+          type: string
         emails:
           items:
             $ref: "#/components/schemas/Email"
@@ -5023,6 +5029,7 @@ components:
         custom_fields: medium
         department: medium
         description: low
+        email_domain: edge
         emails: high
         fax: low
         first_call_at: edge-case

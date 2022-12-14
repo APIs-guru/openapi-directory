@@ -342,10 +342,10 @@ components:
           type: integer
       type: object
     Contact:
-      description: Representa a single contact's email address
+      description: The email address of a contact.
       properties:
         email:
-          description: An email address e.g. "person123@company.com"
+          description: An email address. For example, "`person123@company.com`".
           type: string
       type: object
     ContactDetails:
@@ -789,7 +789,7 @@ components:
           $ref: "#/components/schemas/Role"
           description: The Role or ClusterRole referenced by the binding.
         subjects:
-          description: Represents the subjects(s) bound to the role. Not always available for PATCH requests.
+          description: Represents one or more subjects that are bound to the role. Not always available for PATCH requests.
           items:
             $ref: "#/components/schemas/Subject"
           type: array
@@ -1153,7 +1153,7 @@ components:
           type: string
       type: object
     Indicator:
-      description: "Represents what's commonly known as an Indicator of compromise (IoC) in computer forensics. This is an artifact observed on a network or in an operating system that, with high confidence, indicates a computer intrusion. Reference: https://en.wikipedia.org/wiki/Indicator_of_compromise"
+      description: Represents what's commonly known as an _indicator of compromise_ (IoC) in computer forensics. This is an artifact observed on a network or in an operating system that, with high confidence, indicates a computer intrusion. For more information, see [Indicator of compromise](https://en.wikipedia.org/wiki/Indicator_of_compromise).
       properties:
         domains:
           description: List of domains associated to the Finding.
@@ -1161,7 +1161,7 @@ components:
             type: string
           type: array
         ipAddresses:
-          description: List of ip addresses associated to the Finding.
+          description: The list of IP addresses that are associated with the finding.
           items:
             type: string
           type: array
@@ -1183,7 +1183,7 @@ components:
           description: Rootkit name when available.
           type: string
         unexpectedCodeModification:
-          description: True when unexpected modifications of kernel read-only data memory are present.
+          description: True when unexpected modifications of kernel code memory are present.
           type: boolean
         unexpectedFtraceHandler:
           description: True when `ftrace` points are present with callbacks pointing to regions that are not in the expected kernel or module code range.
@@ -1201,14 +1201,14 @@ components:
           description: True when unexpected processes in the scheduler run queue are present. Such processes are in the run queue, but not in the process task list.
           type: boolean
         unexpectedReadOnlyDataModification:
-          description: Flag indicating unexpected modifications of kernel read-only data memory.
+          description: True when unexpected modifications of kernel read-only data memory are present.
           type: boolean
         unexpectedSystemCallHandler:
           description: True when system call handlers that are are not in the expected kernel or module code regions are present.
           type: boolean
       type: object
     Kubernetes:
-      description: Kubernetes related attributes.
+      description: Kubernetes-related attributes.
       properties:
         accessReviews:
           description: Provides information on any Kubernetes access reviews (i.e. privilege checks) relevant to the finding.

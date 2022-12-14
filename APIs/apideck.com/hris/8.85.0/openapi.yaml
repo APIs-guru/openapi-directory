@@ -1128,6 +1128,7 @@ paths:
                 company_name: 'SpaceX',
                 employment_start_date: '2021-10-26',
                 employment_end_date: '2028-10-26',
+                leaving_reason: 'active',
                 employee_number: '123456-AB',
                 employment_status: 'active',
                 employment_role: {
@@ -1465,6 +1466,7 @@ paths:
                 company_name: 'SpaceX',
                 employment_start_date: '2021-10-26',
                 employment_end_date: '2028-10-26',
+                leaving_reason: 'active',
                 employee_number: '123456-AB',
                 employment_status: 'active',
                 employment_role: {
@@ -4094,6 +4096,17 @@ components:
           type: array
         last_name:
           $ref: "#/components/schemas/LastName"
+        leaving_reason:
+          description: The reason because the employment ended
+          enum:
+            - dismissed
+            - resigned
+            - redundancy
+            - other
+          example: active
+          nullable: true
+          type: string
+          x-apideck-enum-id: employees.leaving_reason
         manager:
           properties:
             email:
@@ -4327,6 +4340,7 @@ components:
         jobs: high
         languages: low
         last_name: critical
+        leaving_reason: edge-case
         manager: medium
         marital_status: medium
         middle_name: medium

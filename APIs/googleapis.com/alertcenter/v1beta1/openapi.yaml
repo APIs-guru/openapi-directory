@@ -769,7 +769,7 @@ components:
       description: The explanation message associated with ApnsCertificationExpiring and ApnsCertificationExpired alerts.
       properties:
         appleId:
-          description: The Apple ID used for the certificate, may be blank if admins did not enter it.
+          description: The Apple ID used for the certificate may be blank if admins didn't enter it.
           type: string
         expirationTime:
           description: The expiration date of the APNS Certificate.
@@ -1496,6 +1496,45 @@ components:
           description: The serial number of the device.
           type: string
       type: object
+    TransferError:
+      description: Details for an invalid transfer or forward.
+      properties:
+        email:
+          description: User's email address. This may be unavailable if the entity was deleted.
+          type: string
+        entityType:
+          description: Type of entity being transferred to. For ring group members, this should always be USER.
+          enum:
+            - TRANSFER_ENTITY_TYPE_UNSPECIFIED
+            - TRANSFER_AUTO_ATTENDANT
+            - TRANSFER_RING_GROUP
+            - TRANSFER_USER
+          type: string
+        id:
+          description: Ring group or auto attendant ID. Not set for users.
+          type: string
+        invalidReason:
+          description: Reason for the error.
+          enum:
+            - TRANSFER_INVALID_REASON_UNSPECIFIED
+            - TRANSFER_TARGET_DELETED
+            - UNLICENSED
+            - SUSPENDED
+            - NO_PHONE_NUMBER
+          type: string
+        name:
+          description: User's full name, or the ring group / auto attendant name. This may be unavailable if the entity was deleted.
+          type: string
+      type: object
+    TransferMisconfiguration:
+      description: Error related to transferring or forwarding a phone call.
+      properties:
+        errors:
+          description: Details for each invalid transfer or forward.
+          items:
+            $ref: "#/components/schemas/TransferError"
+          type: array
+      type: object
     UndeleteAlertRequest:
       description: A request to undelete a specific alert that was marked for deletion.
       properties:
@@ -1528,6 +1567,55 @@ components:
           type: string
         resourceName:
           description: Resource name that uniquely identifies the detector.
+          type: string
+      type: object
+    VoiceMisconfiguration:
+      description: An alert triggered when Google Voice configuration becomes invalid, generally due to an external entity being modified or deleted.
+      properties:
+        entityName:
+          description: Name of the entity whose configuration is now invalid.
+          type: string
+        entityType:
+          description: Type of the entity whose configuration is now invalid.
+          enum:
+            - ENTITY_TYPE_UNSPECIFIED
+            - AUTO_ATTENDANT
+            - RING_GROUP
+          type: string
+        fixUri:
+          description: Link that the admin can follow to fix the issue.
+          type: string
+        membersMisconfiguration:
+          $ref: "#/components/schemas/TransferMisconfiguration"
+          description: Issue(s) with members of a ring group.
+        transferMisconfiguration:
+          $ref: "#/components/schemas/TransferMisconfiguration"
+          description: Issue(s) with transferring or forwarding to an external entity.
+        voicemailMisconfiguration:
+          $ref: "#/components/schemas/VoicemailMisconfiguration"
+          description: Issue(s) with sending to voicemail.
+      type: object
+    VoicemailMisconfiguration:
+      description: Issue(s) with sending to voicemail.
+      properties:
+        errors:
+          description: Issue(s) with voicemail recipients.
+          items:
+            $ref: "#/components/schemas/VoicemailRecipientError"
+          type: array
+      type: object
+    VoicemailRecipientError:
+      description: Issue(s) with a voicemail recipient.
+      properties:
+        email:
+          description: Email address of the invalid recipient. This may be unavailable if the recipient was deleted.
+          type: string
+        invalidReason:
+          description: Reason for the error.
+          enum:
+            - EMAIL_INVALID_REASON_UNSPECIFIED
+            - OUT_OF_QUOTA
+            - RECIPIENT_DELETED
           type: string
       type: object
   securitySchemes:
