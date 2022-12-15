@@ -515,6 +515,14 @@ components:
       schema:
         type: string
   schemas:
+    ABNFGrammar:
+      properties:
+        abnfStrings:
+          description: All declarations and rules of an ABNF grammar broken up into multiple strings that will end up concatenated.
+          items:
+            type: string
+          type: array
+      type: object
     ClassItem:
       description: An item of the class.
       properties:
@@ -904,6 +912,9 @@ components:
     SpeechAdaptation:
       description: Speech adaptation configuration.
       properties:
+        abnfGrammar:
+          $ref: "#/components/schemas/ABNFGrammar"
+          description: "Augmented Backus-Naur form (ABNF) is a standardized grammar notation comprised by a set of derivation rules. See specifications: https://www.w3.org/TR/speech-grammar"
         customClasses:
           description: A collection of custom classes. To specify the classes inline, leave the class' `name` blank and fill in the rest of its fields, giving it a unique `custom_class_id`. Refer to the inline defined class in phrase hints by its `custom_class_id`.
           items:

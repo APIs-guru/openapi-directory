@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Access Context Manager API
   version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://accesscontextmanager.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: accesscontextmanager
 externalDocs:
@@ -370,6 +368,82 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ReplaceAccessLevelsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - accessPolicies
+  "/v1/{parent}/authorizedOrgsDescs":
+    get:
+      description: Lists all authorized orgs descs for an access policy.
+      operationId: accesscontextmanager.accessPolicies.authorizedOrgsDescs.list
+      parameters:
+        - description: "Required. Resource name for the access policy to list Authorized Orgs Desc from. Format: `accessPolicies/{policy_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Number of Authorized Orgs Descs to include in the list. Default 100.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Next page token for the next batch of Authorized Orgs Desc instances. Defaults to the first page of results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAuthorizedOrgsDescsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - accessPolicies
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a authorized orgs desc. The long-running operation from this RPC has a successful status after the authorized orgs desc propagates to long-lasting storage. If a authorized orgs desc contains errors, an error response is returned for the first error encountered. The name of this `AuthorizedOrgsDesc` will be assigned during creation.
+      operationId: accesscontextmanager.accessPolicies.authorizedOrgsDescs.create
+      parameters:
+        - description: "Required. Resource name for the access policy which owns this Authorized Orgs Desc. Format: `accessPolicies/{policy_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthorizedOrgsDesc"
       responses:
         "200":
           content:
@@ -907,6 +981,38 @@ components:
             - DATA_READ
           type: string
       type: object
+    AuthorizedOrgsDesc:
+      description: "`AuthorizedOrgsDesc` is a resource that contains a list of organizations for a authorization type and asset type and its authorization direction."
+      properties:
+        assetType:
+          description: The asset type of this authorized orgs desc. e.g. device, credential strength.
+          enum:
+            - ASSET_TYPE_UNSPECIFIED
+            - ASSET_TYPE_DEVICE
+            - ASSET_TYPE_CREDENTIAL_STRENGTH
+          type: string
+        authorizationDirection:
+          description: Authorization direction of this authorization relationship. i.e. Whether to allow specified orgs to evaluate this org's traffic, or allow specified orgs' traffic to be evaluated by this org. Orgs specified as `AUTHORIZATION_DIRECTION_TO` in this AuthorizedOrgsDesc[com.google.identity.accesscontextmanager.v1.AuthorizedOrgsDesc] must also specify this org as the `AUTHORIZATION_DIRECTION_FROM` in their own AuthorizedOrgsDesc in order for this relationship to take effect. Orgs specified as `AUTHORIZATION_DIRECTION_FROM` in this AuthorizedOrgsDesc[com.google.identity.accesscontextmanager.v1.AuthorizedOrgsDesc] must also specify this org as the `AUTHORIZATION_DIRECTION_TO` in their own AuthorizedOrgsDesc in order for this relationship to take effect.
+          enum:
+            - AUTHORIZATION_DIRECTION_UNSPECIFIED
+            - AUTHORIZATION_DIRECTION_TO
+            - AUTHORIZATION_DIRECTION_FROM
+          type: string
+        authorizationType:
+          description: The authorization type of this authorized orgs desc. e.g.authorization, troubleshooting or logging.
+          enum:
+            - AUTHORIZATION_TYPE_UNSPECIFIED
+            - AUTHORIZATION_TYPE_TRUST
+          type: string
+        name:
+          description: 'Assigned by the server during creation. The last segment has an arbitrary length and has only URI unreserved characters (as defined by [RFC 3986 Section 2.3](https://tools.ietf.org/html/rfc3986#section-2.3)). Should not be specified by the client during creation. Example: "accessPolicies/122256/authorizedOrgs/b3-BhcX_Ud5N"'
+          type: string
+        orgs:
+          description: The list of organization ids in this AuthorizedOrgsDesc.
+          items:
+            type: string
+          type: array
+      type: object
     BasicLevel:
       description: "`BasicLevel` is an `AccessLevel` using a set of recommended features."
       properties:
@@ -1212,6 +1318,18 @@ components:
           description: The pagination token to retrieve the next page of results. If the value is empty, no further results remain.
           type: string
       type: object
+    ListAuthorizedOrgsDescsResponse:
+      description: A response to `ListAuthorizedOrgsDescsRequest`.
+      properties:
+        authorizedOrgsDescs:
+          description: List of the Authorized Orgs Desc instances.
+          items:
+            $ref: "#/components/schemas/AuthorizedOrgsDesc"
+          type: array
+        nextPageToken:
+          description: The pagination token to retrieve the next page of results. If the value is empty, no further results remain.
+          type: string
+      type: object
     ListGcpUserAccessBindingsResponse:
       description: Response of ListGcpUserAccessBindings.
       properties:
@@ -1503,5 +1621,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Text-to-Speech API
   version: v1beta1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://texttospeech.googleapis.com/$discovery/rest?version=v1beta1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: texttospeech
 externalDocs:
@@ -270,6 +272,22 @@ components:
             - OFFLINE
           type: string
       type: object
+    GoogleCloudTexttospeechV1beta1SynthesizeLongAudioMetadata:
+      description: Metadata for response returned by the `SynthesizeLongAudio` method.
+      properties:
+        lastUpdateTime:
+          description: Time of the most recent processing update.
+          format: google-datetime
+          type: string
+        progressPercentage:
+          description: The progress of the most recent processing update in percentage, ie. 70.0%.
+          format: double
+          type: number
+        startTime:
+          description: Time when the request was received.
+          format: google-datetime
+          type: string
+      type: object
     ListVoicesResponse:
       description: The message returned to the client by the `ListVoices` method.
       properties:
@@ -328,6 +346,22 @@ components:
           type: string
         text:
           description: The raw text to be synthesized.
+          type: string
+      type: object
+    SynthesizeLongAudioMetadata:
+      description: Metadata for response returned by the `SynthesizeLongAudio` method.
+      properties:
+        lastUpdateTime:
+          description: Time of the most recent processing update.
+          format: google-datetime
+          type: string
+        progressPercentage:
+          description: The progress of the most recent processing update in percentage, ie. 70.0%.
+          format: double
+          type: number
+        startTime:
+          description: Time when the request was received.
+          format: google-datetime
           type: string
       type: object
     SynthesizeLongAudioRequest:
@@ -457,3 +491,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}
