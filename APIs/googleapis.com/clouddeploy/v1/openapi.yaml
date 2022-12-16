@@ -1207,17 +1207,15 @@ components:
       description: Service-wide configuration.
       properties:
         defaultSkaffoldVersion:
-          description: Output only. Default Skaffold version that is assigned when a Release is created without specifying a Skaffold version.
-          readOnly: true
+          description: Default Skaffold version that is assigned when a Release is created without specifying a Skaffold version.
           type: string
         name:
           description: Name of the configuration.
           type: string
         supportedVersions:
-          description: Output only. All supported versions of Skaffold.
+          description: All supported versions of Skaffold.
           items:
             $ref: "#/components/schemas/SkaffoldVersion"
-          readOnly: true
           type: array
       type: object
     Date:
@@ -1766,7 +1764,10 @@ components:
           description: Details around the Pipeline's overall status.
         targetsPresentCondition:
           $ref: "#/components/schemas/TargetsPresentCondition"
-          description: Detalis around targets enumerated in the pipeline.
+          description: Details around targets enumerated in the pipeline.
+        targetsTypeCondition:
+          $ref: "#/components/schemas/TargetsTypeCondition"
+          description: Details on the whether the targets enumerated in the pipeline are of the same type.
       type: object
     PipelineReadyCondition:
       description: PipelineReadyCondition contains information around the status of the Pipeline.
@@ -2105,7 +2106,7 @@ components:
       properties:
         supportEndDate:
           $ref: "#/components/schemas/Date"
-          description: Date when this version is expected to no longer be supported.
+          description: Date when this version is expected to no longer be supported. For a more precise time, use the `support_expiration_time` field.
         version:
           description: Release version number. For example, "1.20.3".
           type: string
@@ -2281,7 +2282,7 @@ components:
       description: TargetsPresentCondition contains information on any Targets defined in the Delivery Pipeline that do not actually exist.
       properties:
         missingTargets:
-          description: The list of Target names that are missing. For example, projects/{project_id}/locations/{location_name}/targets/{target_name}.
+          description: The list of Target names that do not exist. For example, projects/{project_id}/locations/{location_name}/targets/{target_name}.
           items:
             type: string
           type: array
@@ -2292,6 +2293,16 @@ components:
           description: Last time the condition was updated.
           format: google-datetime
           type: string
+      type: object
+    TargetsTypeCondition:
+      description: TargetsTypeCondition contains information on whether the Targets defined in the Delivery Pipeline are of the same type.
+      properties:
+        errorDetails:
+          description: Human readable error message.
+          type: string
+        status:
+          description: True if the targets are all a comparable type. For example this is true if all targets are GKE clusters. This is false if some targets are Cloud Run targets and others are GKE clusters.
+          type: boolean
       type: object
     TestIamPermissionsRequest:
       description: Request message for `TestIamPermissions` method.

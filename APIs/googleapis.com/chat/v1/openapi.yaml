@@ -299,10 +299,6 @@ paths:
             - https://www.googleapis.com/auth/chat.memberships
           Oauth2c:
             - https://www.googleapis.com/auth/chat.memberships
-        - Oauth2:
-            - https://www.googleapis.com/auth/chat.memberships.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/chat.memberships.readonly
       tags:
         - spaces
     parameters:
@@ -1794,7 +1790,7 @@ components:
       description: A space in Google Chat. Spaces are conversations between two or more users or 1:1 messages between a user and a Chat app.
       properties:
         displayName:
-          description: The space's display name. Required when [creating a space](https://developers.google.com/chat/api/reference/rest/v1/spaces/create). For direct messages, this field may be empty.
+          description: The space's display name. For direct messages between humans, this field might be empty.
           type: string
         name:
           description: "Resource name of the space. Format: spaces/{space}"
@@ -1978,7 +1974,6 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/chat.memberships: View, add, and remove members from conversations in Google Chat
-            https://www.googleapis.com/auth/chat.memberships.readonly: View members in Google Chat conversations.
             https://www.googleapis.com/auth/chat.messages: View, compose, send, update, and delete messages, and add, view, and delete reactions to messages.
             https://www.googleapis.com/auth/chat.messages.create: Compose and send messages in Google Chat
             https://www.googleapis.com/auth/chat.messages.readonly: View messages and reactions in Google Chat
@@ -1992,7 +1987,6 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/chat.memberships: View, add, and remove members from conversations in Google Chat
-            https://www.googleapis.com/auth/chat.memberships.readonly: View members in Google Chat conversations.
             https://www.googleapis.com/auth/chat.messages: View, compose, send, update, and delete messages, and add, view, and delete reactions to messages.
             https://www.googleapis.com/auth/chat.messages.create: Compose and send messages in Google Chat
             https://www.googleapis.com/auth/chat.messages.readonly: View messages and reactions in Google Chat

@@ -338,10 +338,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Run an on demand execution of a DataScan.
-      operationId: dataplex.projects.locations.dataScans.run
+      description: Run an on demand execution of a Task.
+      operationId: dataplex.projects.locations.lakes.tasks.run
       parameters:
-        - description: "Required. The resource name of the DataScan: projects/{project}/locations/{location_id}/dataScans/{data_scan_id}. where {project} refers to a project_id or project_number and location_id refers to a GCP region. Only on-demand DataScans are allowed."
+        - description: "Required. The resource name of the task: projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}."
           in: path
           name: name
           required: true
@@ -351,13 +351,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudDataplexV1RunDataScanRequest"
+              $ref: "#/components/schemas/GoogleCloudDataplexV1RunTaskRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudDataplexV1RunDataScanResponse"
+                $ref: "#/components/schemas/GoogleCloudDataplexV1RunTaskResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -1951,6 +1951,13 @@ components:
         name:
           description: "Immutable. Relative name of the cloud resource that contains the data that is being managed within a lake. For example: projects/{project_number}/buckets/{bucket_id} projects/{project_number}/datasets/{dataset_id}"
           type: string
+        readAccessMode:
+          description: Optional. Determines how read permissions are handled for each asset and their associated tables. Only available to storage buckets assets.
+          enum:
+            - ACCESS_MODE_UNSPECIFIED
+            - DIRECT
+            - MANAGED
+          type: string
         type:
           description: Required. Immutable. Type of resource.
           enum:
@@ -2757,6 +2764,10 @@ components:
     GoogleCloudDataplexV1Entity:
       description: Represents tables and fileset metadata contained within a zone.
       properties:
+        access:
+          $ref: "#/components/schemas/GoogleCloudDataplexV1StorageAccess"
+          description: Output only. Identifies the access mechanism to the entity. Not user settable.
+          readOnly: true
         asset:
           description: Required. Immutable. The ID of the asset associated with the storage location containing the entity data. The entity must be with in the same zone with the asset.
           type: string
@@ -3402,6 +3413,15 @@ components:
           $ref: "#/components/schemas/GoogleCloudDataplexV1DataScanJob"
           description: DataScanJob created by RunDataScan API.
       type: object
+    GoogleCloudDataplexV1RunTaskRequest:
+      properties: {}
+      type: object
+    GoogleCloudDataplexV1RunTaskResponse:
+      properties:
+        job:
+          $ref: "#/components/schemas/GoogleCloudDataplexV1Job"
+          description: Jobs created by RunTask API.
+      type: object
     GoogleCloudDataplexV1ScannedData:
       description: The data scanned during processing (e.g. in incremental DataScan)
       properties:
@@ -3603,6 +3623,18 @@ components:
         resultSizeBytes:
           description: The size of results the query produced.
           format: int64
+          type: string
+      type: object
+    GoogleCloudDataplexV1StorageAccess:
+      description: Describes the access mechanism of the data within its storage location.
+      properties:
+        read:
+          description: Output only. Describes the read access mechanism of the data. Not user settable.
+          enum:
+            - ACCESS_MODE_UNSPECIFIED
+            - DIRECT
+            - MANAGED
+          readOnly: true
           type: string
       type: object
     GoogleCloudDataplexV1StorageFormat:
