@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Data Fusion API
   version: v1beta1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://datafusion.googleapis.com/$discovery/rest?version=v1beta1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: datafusion
 externalDocs:
@@ -892,6 +894,15 @@ components:
             - ACCELERATOR_TYPE_UNSPECIFIED
             - CDC
             - HEALTHCARE
+            - CCAI_INSIGHTS
+          type: string
+        state:
+          description: The state of the accelerator.
+          enum:
+            - STATE_UNSPECIFIED
+            - ENABLED
+            - DISABLED
+            - UNKNOWN
           type: string
       type: object
     AuditConfig:
@@ -1059,6 +1070,9 @@ components:
           type: boolean
         enableStackdriverMonitoring:
           description: Option to enable Stackdriver Monitoring.
+          type: boolean
+        enableZoneSeparation:
+          description: Option to enable zone separation.
           type: boolean
         eventPublishConfig:
           $ref: "#/components/schemas/EventPublishConfig"
@@ -1289,6 +1303,11 @@ components:
     OperationMetadata:
       description: Represents the metadata of a long-running operation.
       properties:
+        additionalStatus:
+          additionalProperties:
+            type: string
+          description: Map to hold any additional status info for the operation If there is an accelerator being enabled/disabled/deleted, this will be populated with accelerator name as key and status as ENABLING, DISABLING or DELETING
+          type: object
         apiVersion:
           description: API version used to start the operation.
           type: string
@@ -1438,3 +1457,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

@@ -685,7 +685,7 @@ components:
           type: array
       type: object
     AgentMetadata:
-      description: AgentMetadata never changes for a single instance of VM agent.
+      description: VM Agent Metadata.
       properties:
         creationTime:
           description: When the VM agent started. Use agent_startup_time instead.
@@ -704,6 +704,9 @@ components:
           description: GCP instance ID (go/instance-id).
           format: uint64
           type: string
+        instancePreemptionNoticeReceived:
+          description: If the GCP instance has received preemption notice.
+          type: boolean
         osRelease:
           additionalProperties:
             type: string
@@ -936,6 +939,14 @@ components:
     Environment:
       description: An Environment describes a collection of environment variables to set when executing Tasks.
       properties:
+        encryptedVariables:
+          $ref: "#/components/schemas/KMSEnvMap"
+          description: An encrypted JSON dictionary where the key/value pairs correspond to environment variable names and their values.
+        secretVariables:
+          additionalProperties:
+            type: string
+          description: A map of environment variable names to Secret Manager secret names. The VM will access the named secrets to set the value of each environment variable.
+          type: object
         variables:
           additionalProperties:
             type: string
@@ -1114,6 +1125,15 @@ components:
             $ref: "#/components/schemas/TaskGroupStatus"
           description: Aggregated task status for each TaskGroup in the Job. The map key is TaskGroup ID.
           type: object
+      type: object
+    KMSEnvMap:
+      properties:
+        cipherText:
+          description: The value of the cipherText response from the `encrypt` method.
+          type: string
+        keyName:
+          description: The name of the KMS key that will be used to decrypt the cipher text.
+          type: string
       type: object
     LifecyclePolicy:
       description: LifecyclePolicy describes how to deal with task failures based on different conditions.
@@ -1391,6 +1411,10 @@ components:
     ReportAgentStateResponse:
       description: Response to ReportAgentStateRequest.
       properties:
+        defaultReportInterval:
+          description: Default report interval override
+          format: google-duration
+          type: string
         minReportInterval:
           description: Minimum report interval override
           format: google-duration

@@ -2153,7 +2153,7 @@ components:
             type: string
           type: array
         env:
-          description: List of environment variables to set in the container.
+          description: List of environment variables to set in the container. EnvVar with duplicate names are generally allowed; if referencing a secret, the name must be unique for the container. For non-secret EnvVar names, the Container will only get the last-declared one.
           items:
             $ref: "#/components/schemas/EnvVar"
           type: array
@@ -2172,7 +2172,7 @@ components:
           $ref: "#/components/schemas/Probe"
           description: "Periodic probe of container liveness. Container will be restarted if the probe fails. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes"
         name:
-          description: "Name of the container specified as a DNS_LABEL. Currently unused in Cloud Run. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-label-names"
+          description: "Name of the container specified as a DNS_LABEL (RFC 1123). More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-label-names"
           type: string
         ports:
           description: List of ports to expose from the container. Only a single port can be specified. The specified ports must be listening on all interfaces (0.0.0.0) within the container to be accessible. If omitted, a port number will be chosen and passed to the container through the PORT environment variable for the container to listen on.

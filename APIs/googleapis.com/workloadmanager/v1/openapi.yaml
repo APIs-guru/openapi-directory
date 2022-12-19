@@ -25,10 +25,52 @@ info:
   x-providerName: googleapis.com
   x-serviceName: workloadmanager
 externalDocs:
-  url: https://g3doc.corp.google.com/company/teams/compute-fe/index.md?cl=head
+  url: https://cloud.google.com/workload-manager/docs
 tags:
   - name: projects
 paths:
+  "/v1/{location}/insights:writeInsight":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Write the data insights to workload manager data warehouse.
+      operationId: workloadmanager.projects.locations.insights.writeInsight
+      parameters:
+        - description: "Required. The GCP location. The format is: projects/{project}/locations/{location}."
+          in: path
+          name: location
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WriteInsightRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WriteInsightResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{name}":
     delete:
       description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
@@ -468,6 +510,21 @@ components:
             type: string
           type: array
       type: object
+    Insight:
+      description: A presentation of host resource usage where the workload runs.
+      properties:
+        sapDiscovery:
+          $ref: "#/components/schemas/SapDiscovery"
+          description: The insights data for sap system discovery. This is a copy of SAP System proto and should get updated whenever that one changes.
+        sapValidation:
+          $ref: "#/components/schemas/SapValidation"
+          description: The insights data for the sap workload validation.
+        sentTime:
+          description: Output only. [Output only] Create time stamp
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     ListEvaluationsResponse:
       description: Message for response to listing Evaluations
       properties:
@@ -628,6 +685,118 @@ components:
             - DELETING
           type: string
       type: object
+    SapDiscovery:
+      description: The schema of SAP system discovery data.
+      properties:
+        applicationLayer:
+          $ref: "#/components/schemas/SapDiscoveryComponent"
+          description: An SAP system may run without an application layer.
+        databaseLayer:
+          $ref: "#/components/schemas/SapDiscoveryComponent"
+          description: An SAP System must have a database.
+        metadata:
+          $ref: "#/components/schemas/SapDiscoveryMetadata"
+          description: The metadata for SAP system discovery data.
+        systemId:
+          description: A combination of database SID, database instance URI and tenant DB name to make a unique identifier per-system.
+          type: string
+        updateTime:
+          description: Unix timestamp this system has been updated last.
+          format: google-datetime
+          type: string
+      type: object
+    SapDiscoveryComponent:
+      description: Message describing the system component.
+      properties:
+        applicationType:
+          description: The component is a SAP application.
+          type: string
+        databaseType:
+          description: The component is a SAP database.
+          type: string
+        hostProject:
+          description: Pantheon Project in which the resources reside.
+          type: string
+        resources:
+          description: The resources in a component.
+          items:
+            $ref: "#/components/schemas/SapDiscoveryResource"
+          type: array
+        sid:
+          description: The sap identifier, used by the SAP software and helps differentiate systems for customers.
+          type: string
+      type: object
+    SapDiscoveryMetadata:
+      description: Message describing SAP discovery system metadata
+      properties:
+        customerRegion:
+          description: Customer region string for customer's use. Does not represent GCP region.
+          type: string
+        definedSystem:
+          description: Customer defined, something like "E-commerce pre prod"
+          type: string
+        environmentType:
+          description: Should be "prod", "QA", "dev", "staging", etc.
+          type: string
+        sapProduct:
+          description: This sap product name
+          type: string
+      type: object
+    SapDiscoveryResource:
+      description: Message describing a resource.
+      properties:
+        relatedResources:
+          description: A list of resource URIs related to this resource.
+          items:
+            type: string
+          type: array
+        resourceKind:
+          description: ComputeInstance, ComputeDisk, VPC, Bare Metal server, etc.
+          type: string
+        resourceType:
+          description: The type of this resource.
+          enum:
+            - RESOURCE_TYPE_UNSPECIFIED
+            - COMPUTE
+            - STORAGE
+            - NETWORK
+          type: string
+        resourceUri:
+          description: URI of the resource, includes project, location, and name.
+          type: string
+        updateTime:
+          description: Unix timestamp of when this resource last had its discovery data updated.
+          format: google-datetime
+          type: string
+      type: object
+    SapValidation:
+      description: A presentation of SAP workload insight. The schema of SAP workloads validation related data.
+      properties:
+        validationDetails:
+          description: A list of SAP validation metrics data.
+          items:
+            $ref: "#/components/schemas/SapValidationValidationDetail"
+          type: array
+      type: object
+    SapValidationValidationDetail:
+      description: Message describing the SAP validation metrics.
+      properties:
+        details:
+          additionalProperties:
+            type: string
+          description: "The pairs of metrics data: field name & field value."
+          type: object
+        sapValidationType:
+          description: The SAP system that the validation data is from.
+          enum:
+            - SAP_VALIDATION_TYPE_UNSPECIFIED
+            - SYSTEM
+            - COROSYNC
+            - PACEMAKER
+            - HANA
+            - NETWEAVER
+          type: string
+      type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
       properties:
@@ -645,6 +814,20 @@ components:
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
+      type: object
+    WriteInsightRequest:
+      description: Request for sending the data insights.
+      properties:
+        insight:
+          $ref: "#/components/schemas/Insight"
+          description: Required. The metrics data details.
+        requestId:
+          description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and t he request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          type: string
+      type: object
+    WriteInsightResponse:
+      description: The response for write insights request.
+      properties: {}
       type: object
   securitySchemes:
     Oauth2:

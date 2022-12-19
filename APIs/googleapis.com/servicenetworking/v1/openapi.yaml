@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Service Networking API
   version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://servicenetworking.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: servicenetworking
 externalDocs:
@@ -1111,7 +1109,7 @@ components:
           description: Optional. Description of the subnet.
           type: string
         ipPrefixLength:
-          description: Required. The prefix length of the subnet's IP address range. Use CIDR range notation, such as `30` to provision a subnet with an `x.x.x.x/30` CIDR range. The IP address range is drawn from a pool of available ranges in the service consumer's allocated range.
+          description: Required. The prefix length of the subnet's IP address range. Use CIDR range notation, such as `29` to provision a subnet with an `x.x.x.x/29` CIDR range. The IP address range is drawn from a pool of available ranges in the service consumer's allocated range. GCE disallows subnets with prefix_length > 29
           format: int32
           type: integer
         outsideAllocationPublicIpRange:
@@ -2469,7 +2467,7 @@ components:
       description: Represents a range reservation.
       properties:
         ipPrefixLength:
-          description: Required. The size of the desired subnet. Use usual CIDR range notation. For example, '30' to find unused x.x.x.x/30 CIDR range. The goal is to determine if one of the allocated ranges has enough free space for a subnet of the requested size.
+          description: Required. The size of the desired subnet. Use usual CIDR range notation. For example, '29' to find unused x.x.x.x/29 CIDR range. The goal is to determine if one of the allocated ranges has enough free space for a subnet of the requested size. GCE disallows subnets with prefix_length > 29
           format: int32
           type: integer
         requestedRanges:
@@ -2478,7 +2476,7 @@ components:
             type: string
           type: array
         secondaryRangeIpPrefixLengths:
-          description: Optional. The size of the desired secondary ranges for the subnet. Use usual CIDR range notation. For example, '30' to find unused x.x.x.x/30 CIDR range. The goal is to determine that the allocated ranges have enough free space for all the requested secondary ranges.
+          description: Optional. The size of the desired secondary ranges for the subnet. Use usual CIDR range notation. For example, '29' to find unused x.x.x.x/29 CIDR range. The goal is to determine that the allocated ranges have enough free space for all the requested secondary ranges. GCE disallows subnets with prefix_length > 29
           items:
             format: int32
             type: integer
@@ -2942,5 +2940,3 @@ components:
             https://www.googleapis.com/auth/service.management: Manage your Google API service configuration
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

@@ -787,7 +787,7 @@ components:
           type: boolean
       type: object
     GoogleCloudRunV2CloudSqlInstance:
-      description: Represents a specific Cloud SQL instance.
+      description: Represents a set of Cloud SQL instances. Each one will be available under /cloudsql/[instance]. Visit https://cloud.google.com/sql/docs/mysql/connect-run for more information on how to connect Cloud SQL and Cloud Run.
       properties:
         instances:
           description: "The Cloud SQL instance connection names, as can be found in https://console.cloud.google.com/sql/instances. Visit https://cloud.google.com/sql/docs/mysql/connect-run for more information on how to connect Cloud SQL and Cloud Run. Format: {project}:{location}:{instance}"
@@ -895,7 +895,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudRunV2Probe"
           description: "Periodic probe of container liveness. Container will be restarted if the probe fails. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes"
         name:
-          description: Name of the container specified as a DNS_LABEL.
+          description: Name of the container specified as a DNS_LABEL (RFC 1123).
           type: string
         ports:
           description: List of ports to expose from the container. Only a single port can be specified. The specified ports must be listening on all interfaces (0.0.0.0) within the container to be accessible. If omitted, a port number will be chosen and passed to the container through the PORT environment variable for the container to listen on.
@@ -1384,6 +1384,17 @@ components:
           type: string
         encryptionKey:
           description: A reference to a customer managed encryption key (CMEK) to use to encrypt this container image. For more information, go to https://cloud.google.com/run/docs/securing/using-cmek
+          type: string
+        encryptionKeyRevocationAction:
+          description: The action to take if the encryption key is revoked.
+          enum:
+            - ENCRYPTION_KEY_REVOCATION_ACTION_UNSPECIFIED
+            - PREVENT_NEW
+            - SHUTDOWN
+          type: string
+        encryptionKeyShutdownDuration:
+          description: If encryption_key_revocation_action is SHUTDOWN, the duration before shutting down all instances. The minimum increment is 1 hour.
+          format: google-duration
           type: string
         etag:
           description: Output only. A system-generated fingerprint for this version of the resource. May be used to detect modification conflict during updates.

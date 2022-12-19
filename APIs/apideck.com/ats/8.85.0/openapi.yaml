@@ -443,6 +443,14 @@ paths:
                     type: 'primary'
                   }
                 ],
+                custom_fields: [
+                  {
+                    id: '2389328923893298',
+                    name: 'employee_level',
+                    description: 'Employee Level',
+                    value: 'Uses Salesforce and Marketo'
+                  }
+                ],
                 phone_numbers: [
                   {
                     id: '12345',
@@ -1036,6 +1044,10 @@ components:
           $ref: "#/components/schemas/CreatedAt"
         created_by:
           $ref: "#/components/schemas/CreatedBy"
+        custom_fields:
+          items:
+            $ref: "#/components/schemas/CustomField"
+          type: array
         cv_url:
           example: https://recruitee-main.s3.eu-central-1.amazonaws.com/candidates/36615291/pdf_cv_38swhu4w42k1.pdf?response-content-disposition=inline&response-content-type=application%2Fpdf&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYHB7CA5RLR4Y3ON%2F20220514%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20220514T235654Z&X-Amz-Expires=36000&X-Amz-SignedHeaders=host&X-Amz-Signature=72c0621f5976db75b54de487eb821a8e73480d7f2a6a4a9713ab997944b0561f
           readOnly: true
@@ -1223,6 +1235,7 @@ components:
         cover_letter: low
         created_at: medium
         created_by: edge-case
+        custom_fields: edge-case
         cv_url: high
         deleted: medium
         deleted_at: medium
