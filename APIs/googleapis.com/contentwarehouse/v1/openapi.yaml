@@ -11,7 +11,7 @@ info:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
-  title: contentwarehouse API
+  title: Document AI Warehouse API
   version: v1
   x-apisguru-categories:
     - analytics
@@ -2443,6 +2443,7 @@ components:
             - CDDB_AFFINITY
             - DATA_STUDIO_SPACES_AFFINITY
             - SOJI_AFFINITY
+            - PLAY_MOVIES_ANDROID_AFFINITY
           type: string
         containerId:
           description: The ID of the container
@@ -2747,6 +2748,22 @@ components:
           items:
             $ref: "#/components/schemas/SocialGraphApiProtoPrompt"
           type: array
+      type: object
+    AppsPeopleOzExternalMergedpeopleapiContactCreateContextInfo:
+      description: Contact creation timestamps and related metadata. See go/contact-edit-history. This message is a pure wrapper of the shared ContactCreactionContext message so that it can be a top-level person field. No other fields should be added to the message.
+      properties:
+        contactCreateContext:
+          $ref: "#/components/schemas/SocialGraphApiProtoContactCreateContext"
+        metadata:
+          $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiPersonFieldMetadata"
+      type: object
+    AppsPeopleOzExternalMergedpeopleapiContactEditContextInfo:
+      description: Contact edit timestamps and related metadata. See go/contact-edit-history. This message is a pure wrapper of the shared ContactCreactionContext message so that it can be a top-level person field. No other fields should be added to the message.
+      properties:
+        contactEditContext:
+          $ref: "#/components/schemas/SocialGraphApiProtoContactEditContext"
+        metadata:
+          $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiPersonFieldMetadata"
       type: object
     AppsPeopleOzExternalMergedpeopleapiContactGroupMembership:
       description: A membership that the person has. The person can be a member of multiple circles and multiple contact-groups. A circle membership is created by adding a person to a circle by person-id or by email. A contact-group membership is created by adding a contact to a contact-group.
@@ -4015,6 +4032,14 @@ components:
           description: Reminder to connect with a Contact (part of go/people-prompts). Also contains contact-level prompts settings. Each Contact can have a single `connection_reminder` (but can have multiple Prompts inside of it). Field is repeated per PeopleAPI data model go/people-api-concepts#repeated. Only supported for CONTACT container.
           items:
             $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiConnectionReminder"
+          type: array
+        contactCreateContextInfo:
+          items:
+            $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiContactCreateContextInfo"
+          type: array
+        contactEditContextInfo:
+          items:
+            $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiContactEditContextInfo"
           type: array
         contactGroupMembership:
           description: Contact groups that this person is a member of.
@@ -6026,6 +6051,7 @@ components:
               - SWIPE_FOR_NOTIFICATION
               - SWITCH_ACCESS
               - SYSTEM_UPDATE
+              - SYSTEM_UPDATES
               - SYSTEM_NAVIGATION
               - TALKBACK_PASSWORDS
               - TEXT_TO_SPEECH
@@ -9490,8 +9516,11 @@ components:
           type: integer
       type: object
     AssistantApiSupportedClientOpSupportedExecution:
-      description: Additional properties that client can support for executing the client op.
+      description: Additional properties that client can support for executing the client op. They are surface-specific execution properties and are unrelated to the execution model.
       properties:
+        supportsPartialFulfillment:
+          description: "ClientOp execution supports special rendering behavior while the user is in the middle of expressing their query. This behavior includes: 1) New partial output always over-writes prior partial output. 2) Canceling the interaction removes partial fulfilment from any user visible interaction history. If this is true, whether to apply the special rendering behavior will be determined by PartialFulfillmentRenderingParams. More details can be found at go/ma-natcon-pf-api."
+          type: boolean
         supportsSynchronousExecution:
           description: Client can support synchronous execution of the client op. For tts.OUTPUT client op it means that client would honor |synchronous_playback_args| argument. Please see more at go/synchronous-sounds-design.
           type: boolean
@@ -10458,8 +10487,14 @@ components:
           $ref: "#/components/schemas/AssistantGroundingRankerProviderGroundingProviderFeatures"
       type: object
     AssistantGroundingRankerMediaGroundingProviderFeatures:
-      description: "Features to be passed from Media GP to HGR. Next ID: 2"
+      description: "Features to be passed from Media GP to HGR. Next ID: 4"
       properties:
+        isSeedRadio:
+          description: True if the media deeplink has tag SEED_RADIO.
+          type: boolean
+        isSeedRadioRequest:
+          description: True if the user requests seed radio.
+          type: boolean
         mscRate:
           description: "MSC(Media Short Click) rate. MSC rate = total number of MSC events / total number of MSC candidates The event is considered as MSC candidate if the event is a media seeking query(excluding follow-ons) and the media result is successfully fulfilled. The event is MSC event if any of the following is in the following queries within 30 secs: FOLLOWED_BY_DUPLICATE FOLLOWED_BY_ADD_OR_DELETE_MANUAL_REFINEMENT FOLLOWED_BY_SAME_VERTICAL (MEDIA) FOLLOWED_BY_STOP More details: go/media-ranking, go/billboard-navboost, go/magma-music-actions-efrac"
           format: float
@@ -11154,6 +11189,7 @@ components:
             - NO_DEVICE_MEETS_STADIA_GAMING_CAPABILITY
             - MEDIA_STATES_MISSING
             - NO_DEVICE_SATISFIES_CAPABILITIES_REQUIREMENT
+            - HYBRID_DEVICE_NOT_QUALIFIED
           type: string
         processorInfo:
           description: The log for each stage of Lumos, showing the number of eliminated devices from each processor.
@@ -22187,30 +22223,6 @@ components:
           $ref: "#/components/schemas/GeostorePriceInfoStatus"
           description: Message containing metadata about the verified status of the PriceInfo. Only verified listings should be displayed.
       type: object
-    GeostorePriceInfoSourceDetails:
-      properties:
-        lastUpdateSources:
-          items:
-            $ref: "#/components/schemas/GeostorePriceInfoSourceDetailsSourceData"
-          type: array
-        sourceData:
-          items:
-            $ref: "#/components/schemas/GeostorePriceInfoSourceDetailsSourceData"
-          type: array
-      type: object
-    GeostorePriceInfoSourceDetailsSourceData:
-      properties:
-        clientProjectNumber:
-          description: Project number of the GMB API client. Set only if the source is EXTERNAL_GMB_API.
-          format: int64
-          type: string
-        source:
-          enum:
-            - SOURCE_UNSPECIFIED
-            - NMX_UI
-            - EXTERNAL_GMB_API
-          type: string
-      type: object
     GeostorePriceInfoStatus:
       description: Providers of PriceInfo (e.g. SinglePlatform, YEXT) send verified and unverified listings. PriceInfoStatus is used to encapsulate this information.
       properties:
@@ -22289,9 +22301,6 @@ components:
           items:
             $ref: "#/components/schemas/GeostorePriceListSectionProto"
           type: array
-        sourceDetails:
-          $ref: "#/components/schemas/GeostorePriceInfoSourceDetails"
-          description: Source of the information retrieved, could be from our own NMX UI or a third party API.
         sourceUrl:
           $ref: "#/components/schemas/GeostoreUrlListProto"
           description: Where this price list comes from. If set, this must also be a member of the price_list_url field, and represents translations of a single URL.
@@ -26182,7 +26191,7 @@ components:
       properties:
         cloudAiDocumentOption:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1CloudAIDocumentOption"
-          description: Request Option for processing Cloud AI Document in CW Document.
+          description: Request Option for processing Cloud AI Document in Document Warehouse. This field offers limited support for mapping entities from Cloud AI Document to Warehouse Document. Please consult with product team before using this field and other available options.
         createMask:
           description: Field mask for creating Document fields. If mask path is empty, it means all fields are masked. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
           format: google-fieldmask
@@ -26192,7 +26201,7 @@ components:
           description: Required. The document to create.
         policy:
           $ref: "#/components/schemas/GoogleIamV1Policy"
-          description: Default document policy during creation. Conditions defined in the policy will be ignored.
+          description: Default document policy during creation. This refers to an Identity and Access (IAM) policy, which specifies access controls for the Document. Conditions defined in the policy will be ignored.
         requestMetadata:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1RequestMetadata"
           description: The meta information collected about the end user, used to enforce access control for the service.
@@ -26323,9 +26332,6 @@ components:
           type: string
         referenceId:
           description: The reference ID set by customers. Must be unique per project and location.
-          type: string
-        structuredContentUri:
-          description: A path linked to structured content file.
           type: string
         textExtractionDisabled:
           description: If true, text extraction will not be performed.
@@ -26837,7 +26843,7 @@ components:
           description: Whether the property can be filtered. If this is a sub-property, all the parent properties must be marked filterable.
           type: boolean
         isMetadata:
-          description: Whether the property is user supplied metadata.
+          description: Whether the property is user supplied metadata. This out-of-the box placeholder setting can be used to tag derived properties. Its value and interpretation logic should be implemented by API user.
           type: boolean
         isRepeatable:
           description: Whether the property can have multiple values.
@@ -27115,7 +27121,7 @@ components:
       properties:
         policy:
           $ref: "#/components/schemas/GoogleIamV1Policy"
-          description: "Required. REQUIRED: The complete policy to be applied to the `resource`. The size of the policy is limited to a few 10s of KB."
+          description: "Required. REQUIRED: The complete policy to be applied to the `resource`. The size of the policy is limited to a few 10s of KB. This refers to an Identity and Access (IAM) policy, which specifies access controls for the Document."
         projectOwner:
           description: For Set Project ACL only. Authorization check for end user will be ignored when project_owner=true.
           type: boolean
@@ -27216,7 +27222,7 @@ components:
       properties:
         cloudAiDocumentOption:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1CloudAIDocumentOption"
-          description: Request Option for processing Cloud AI Document in CW Document.
+          description: Request Option for processing Cloud AI Document in Document Warehouse. This field offers limited support for mapping entities from Cloud AI Document to Warehouse Document. Please consult with product team before using this field and other available options.
         document:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1Document"
           description: Required. The document to update.
@@ -37999,9 +38005,6 @@ components:
           description: The area ratio of the most iconic person to the whole image discretized into range [0, 100].
           format: int32
           type: integer
-        iconicPersonBoundingBox:
-          $ref: "#/components/schemas/PhotosVisionGroundtruthdbNormalizedBoundingBox"
-          description: Normalized bounding box of the most iconic person in the image. The x,y coordinates are in the range [0, 1]. Deprecated to comply with CDS requirements (b/228535076).
         personBoundingBox:
           $ref: "#/components/schemas/LensDiscoveryStyleBoundingBox"
           description: Bounding box of the most iconic person in the image.
@@ -38072,9 +38075,6 @@ components:
         boundingBox:
           $ref: "#/components/schemas/LensDiscoveryStyleBoundingBox"
           description: Bounding box of the detected person.
-        normalizedBoundingBox:
-          $ref: "#/components/schemas/PhotosVisionGroundtruthdbNormalizedBoundingBox"
-          description: Normalized bounding box of the detected person. The x,y coordinates are in the range [0, 1]. Deprecated to comply with CDS requirements (b/228535076).
       type: object
     LensDiscoveryStyleStyleImageTypeSignals:
       description: "Prediction of a style image type: Stage, Stock, Street or Outfits. Check http://go/styleai-indexing-g3doc#style-image-type-classifier for more details about the Style AI Style Image Type Classifier."
@@ -39301,6 +39301,9 @@ components:
     MustangSnippetsRenderedToken:
       description: Tidbit token rendered in generating snippet/title.
       properties:
+        bolded:
+          description: Is the rendered token bolded (insided )
+          type: boolean
         byteOffsetBegin:
           description: Byte offset range in the rendered text that corresponds to this token. [byte_offset_begin, byte_offset_end) inclusive
           format: int32
@@ -50536,6 +50539,7 @@ components:
             - IAP_SKU_SALE
             - OFFER
             - IAP_SKU_DEALS
+            - FEATURED_PRODUCTS
           type: string
         eventUrl:
           description: ios
@@ -51664,7 +51668,7 @@ components:
           type: integer
       type: object
     QualityNsrNsrData:
-      description: "NOTE: When adding a new field to be propagated to Raffia check if NsrPatternSignalSpec needs to be updated. Next ID: 50"
+      description: "NOTE: When adding a new field to be propagated to Raffia check if NsrPatternSignalSpec needs to be updated. Next ID: 51"
       properties:
         articleScore:
           description: Score from article classification of the site.
@@ -51739,6 +51743,9 @@ components:
         nsr:
           format: float
           type: number
+        nsrEpoch:
+          description: The epoch from which this NSR value is coming from.
+          type: string
         nsrOverrideBid:
           description: This signal is used to unconditionally override NSR as a bid in Q*. Should only be used in case of emergency (see go/nsr-override-bid). To have any effect, the value should be present and greater than 0.001.
           format: float
@@ -54166,6 +54173,34 @@ components:
             $ref: "#/components/schemas/QualitySitemapTarget"
           type: array
       type: object
+    QualitySnippetsTruncationSnippetBoldedRange:
+      description: A bolded range in printed snippet lines.
+      properties:
+        begin:
+          $ref: "#/components/schemas/QualitySnippetsTruncationSnippetBoldedRangePosition"
+          description: Bolded range [begin, end)
+        end:
+          $ref: "#/components/schemas/QualitySnippetsTruncationSnippetBoldedRangePosition"
+        text:
+          description: Only populated for debugging.
+          type: string
+        type:
+          enum:
+            - TYPE_UNSPECIFIED
+            - QUERY_TERM_MATCH
+            - RADISH
+            - BRAIN
+          type: string
+      type: object
+    QualitySnippetsTruncationSnippetBoldedRangePosition:
+      properties:
+        byteOffset:
+          format: int32
+          type: integer
+        index:
+          format: int32
+          type: integer
+      type: object
     QualityTimebasedLastSignificantUpdate:
       properties:
         adjustmentInfo:
@@ -54788,7 +54823,7 @@ components:
           type: string
       type: object
     RepositoryAnnotationsRdfaRdfaRichSnippetsApplication:
-      description: "This structure holds data for application information for rich snippets Next ID: 52"
+      description: "This structure holds data for application information for rich snippets Next ID: 53"
       properties:
         appTypeData:
           $ref: "#/components/schemas/RepositoryAnnotationsRdfaRdfaRichSnippetsApplicationAppTypeData"
@@ -54862,6 +54897,8 @@ components:
         liveOpDetails:
           $ref: "#/components/schemas/QualityCalypsoAppsUniversalAuLiveOpsDetailInfo"
           description: Unified proto for android LiveOps and iOS LiveEvents.
+        localizedTrustedGenome:
+          $ref: "#/components/schemas/RepositoryAnnotationsRdfaRdfaRichSnippetsApplicationLocalizedTrustedGenome"
         marketplace:
           description: Market Android or itunes
           type: string
@@ -54974,6 +55011,15 @@ components:
         price:
           description: Price string converted from double value in a standard currency unit, like '199.35' or '1400'.
           type: string
+      type: object
+    RepositoryAnnotationsRdfaRdfaRichSnippetsApplicationLocalizedTrustedGenome:
+      properties:
+        language:
+          description: The chosen language
+          type: string
+        localizedTg:
+          $ref: "#/components/schemas/VendingConsumerProtoTrustedGenomeAnnotation"
+          description: The TG tags matching the locale of the doc, if available
       type: object
     RepositoryAnnotationsRdfaRdfaRichSnippetsApplicationRank:
       properties:
@@ -62034,8 +62080,13 @@ components:
           description: SnippetsBrain model information for snippets popup debug.
       type: object
     SnippetExtraInfoSnippetCandidateInfo:
-      description: "Next ID: 12"
+      description: "Next ID: 13"
       properties:
+        boldedRanges:
+          description: Bolded ranges in the printed snippet lines.
+          items:
+            $ref: "#/components/schemas/QualitySnippetsTruncationSnippetBoldedRange"
+          type: array
         id:
           description: "Candidate identifier number, unique among all snippet candidates under each document in each request. What does this number mean: - Muppet candidates: This equals to the candidate's rank by Muppet snippets scorer. - Superroot candidates: No specific meaning, this number should be larger than that of Muppet candidates. This field is used to: - Verify whether snippet brain chooses a different snippet from Muppet (the one chosen by Muppet is always in id 0). - Print debugging information and sort candidates in debug output."
           format: int32
@@ -62386,12 +62437,24 @@ components:
             - BIRTHDAY_DECORATION_VISIBILITY_SAME_AS_BIRTHDAY_VISIBILITY
           type: string
       type: object
+    SocialGraphApiProtoContactCreateContext:
+      description: The ContactEditContext message is a wrapper around the generic ContactMutationContext data to represent when and where a contact create was performed.
+      properties:
+        mutationContext:
+          $ref: "#/components/schemas/SocialGraphApiProtoContactMutationContext"
+      type: object
     SocialGraphApiProtoContactDeletionContext:
       description: "The ContactDeletionContext message is a wrapper around the generic ContactMutationContext data, and will include any needed delete specific data. NOTE: Before using this message please review go/people-api-contact-deletion-context"
       properties:
         mutationContext:
           $ref: "#/components/schemas/SocialGraphApiProtoContactMutationContext"
           description: The general mutation context data
+      type: object
+    SocialGraphApiProtoContactEditContext:
+      description: The ContactEditContext message is a wrapper around the generic ContactMutationContext data to represent when and where a contact edit was performed.
+      properties:
+        mutationContext:
+          $ref: "#/components/schemas/SocialGraphApiProtoContactMutationContext"
       type: object
     SocialGraphApiProtoContactMutationContext:
       description: This message is the generic mutation message which will encapsulate the fields which are shared between the create, update, and delete actions, including source of change, timestamp, and metadata messages passed in from the source for any source specific data (such as phone name/model from FSA).
@@ -62621,13 +62684,16 @@ components:
           type: string
       type: object
     SocialGraphApiProtoPartialNameOptionsParsedDisplayNameSpec:
-      description: "These options use more sophisticated logic from a location-aware name detector to parse the full name of a user into structured parts and operate on those parts. For more information on how names are parsed, see the NameOccurrence proto definition: http://google3/quality/peoplesearch/namedetector/detector/proto/name_occurrence.proto?l=50&rcl=334484707 Next ID: 7"
+      description: 'These options use more sophisticated logic from a location-aware name detector to parse the full name of a user into structured parts and operate on those parts. For more information on how names are parsed, see the NameOccurrence proto definition: http://google3/quality/peoplesearch/namedetector/detector/proto/name_occurrence.proto?l=50&rcl=334484707 In general, when parsing display names the following rules will apply to *all* specs: - Hyphenated names are broken down: "Angelina Jollie-Pit" is pre-processed as "Angelina Jollie Pitt"; - Prefixes are ignored: "Prof. Albus Dumbledore" is pre-processed as "Albus Dumbledore"; - Auxiliaries are ignored: "Luís de Camões" is pre-processed as "Luís Camões". Next ID: 8'
       properties:
         allInitialsFromParsedName:
-          description: 'Extract an initial from each parsed name. For example, "Niels Henrik David Bohr" yields "N. H. D. B.". Other special cases are treated as follows: - Hyphenated names are broken down: "Angelina Jollie-Pit" yields "A. J. P."; - Prefixes are ignored: "Prof. Albus Dumbledore" yields "A. D."; - Auxiliaries are ignored: "Luís de Camões" yields "L. C.".'
+          description: 'Extract an initial from each parsed name. For example, "Niels Henrik David Bohr" yields "N. H. D. B.". Other special cases are treated as follows:'
+          type: boolean
+        firstInitialAndFirstLastName:
+          description: Show the initial of the very first name and the first last name, e.g. "Hugo Daniel Hernandez Garcia" yields "H. Hernandez".
           type: boolean
         firstInitialAndVeryLastName:
-          description: 'Show the initial of the very first name and the very last name, e.g. "Ana Maria Silva" yields "A. Silva". - Hyphenated names are broken down: "Angelina Jollie-Pitt" yields "A. Pitt"; - Prefixes are ignored: "Prof. Albus Dumbledore" yields "A. Dumbledore"; - Auxiliaries are ignored: "Luís de Camões" yields "L. Camões".'
+          description: Show the initial of the very first name and the very last name, e.g. "Ana Maria Silva" yields "A. Silva".
           type: boolean
         knowledgeGraphNameShortening:
           description: Shorten the display name using the Knowledge Graph name shortener (go/short-names).
@@ -62640,10 +62706,10 @@ components:
             - PERIOD
           type: string
         veryFirstNameAndAllInitials:
-          description: 'Show the full very first name and all the other initials, e.g. "Ana Maria Silva" yields "Ana M. S.". - Hyphenated names are broken down: "Angelina Jollie-Pit" yields "Angelina J. P."; - Prefixes are ignored: "Prof. Albus Dumbledore" yields "Albus D."; - Auxiliaries are ignored: "Luís de Camões" yields "Luís C.".'
+          description: Show the full very first name and all the other initials, e.g. "Ana Maria Silva" yields "Ana M. S.".
           type: boolean
         veryFirstNameOnly:
-          description: 'Show the very first name only, e.g. "Ana Maria Silva" yields "Ana". - Hyphenated names are broken down: "Mary-Kate Smith" yields "Mary"; - Prefixes are ignored: "Prof. Albus Dumbledore" yields "Albus";'
+          description: Show the very first name only, e.g. "Ana Maria Silva" yields "Ana".
           type: boolean
       type: object
     SocialGraphApiProtoPartialNameOptionsTwoPartNameSpec:
@@ -63492,11 +63558,11 @@ components:
       description: Metadata about data governance policies. For more context, see go/ke-triple-dg-policy-and-metadata. If any attribute is not set, then there's no specific restrictions associated with the missing attribute. For example, if `availability_start_timestamp` is not set, the data won't be embargoed automatically; if `availability_end_timestamp` is not set, they won't expire automatically. LINT.IfChange
       properties:
         availabilityEndTimestamp:
-          description: "Timestamp after which data with this policy cannot be used. This value must be strictly larger/later than availability_start_time, if both are set. WARNING: This field is WIP and please do not populate it without reading go/ke-dg-tape and consulting ke-data-governance@."
+          description: Timestamp after which data with this policy cannot be used. This value must be strictly larger/later than availability_start_time, if both are set.
           format: google-datetime
           type: string
         availabilityStartTimestamp:
-          description: "Timestamp before which data with this policy cannot be used. This value must be strictly smaller/earlier than availability_end_time, if both are set. WARNING: This field is WIP and please do not populate it without reading go/ke-dg-tape and consulting ke-data-governance@."
+          description: Timestamp before which data with this policy cannot be used. This value must be strictly smaller/earlier than availability_end_time, if both are set.
           format: google-datetime
           type: string
         legalAllowedRegions:
@@ -63726,6 +63792,7 @@ components:
             - RIGHTS_MANAGEMENT_102
             - DICTIONARY_DATA_OXFORD
             - DICTIONARY_DATA_LE_ROBERT
+            - ENTITY_TEXT_FEATURES
             - AR_ONBOARDING_TEST
             - AR_ONBOARDING_TEST_2
             - MATERIALIZED_ENRICHER_INTERNAL
@@ -65745,72 +65812,25 @@ components:
               - TC_IN_PSS_CHECK_A
               - TC_IN_PSS_CHECK_B
               - QUERY_IS_BOOTS_ELIGIBLE
-              - ENTERTAINMENT_CLUSTER_SPELLING_CORRECTION
               - QUERY_HAS_SELECTED_BOOTS_CHIP
               - QUERY_HAS_ONLY_UNSELECTED_BOOTS_CHIPS
               - SPONSORED_ADS_CLUSTER
-              - SPONSORED_ADS_CLUSTER_ATLEAST_ONE_AD
-              - INSPIRED_BY
-              - MOVIE_DUPLICATES_WITHIN_3_DOCS
-              - MOVIE_DUPLICATES_WITHIN_5_DOCS
-              - MOVIE_DUPLICATES_WITHIN_7_DOCS
-              - SHOULD_SEE_LIVE_OP_CLUSTER
               - BOOKS_QUERY_HAS_LANGUAGE_INTENT
-              - REWARD_RIBBON_IMPRESSION
               - IRON_THRONE_QUERY
-              - FAMILY_LIBRARY_SHARED_DESTINATION
               - GUIDED_DISCOVERY
               - BOOKS_AUTHOR_QUERY
-              - HOME_SPONSORED_ADS_CLUSTER
-              - HOME_SPONSORED_ADS_CLUSTER_GAP_OPTOUT
-              - FAMILY_FRAUD_CHALLENGE
-              - BOOKS_MONETIZABLE_QUERY
-              - BOOKS_NONMONETIZABLE_QUERY
-              - NON_BOOKS_QUERY
               - BOOTS_PROD_V1_QUERY
-              - BOOTS_TAG_OVERRIDE_QUERY
-              - BOOTS_KG_ANNOTATION_QUERY
-              - EDITORIAL_REVIEW_CARD_ELIGIBLE
-              - BOOTS_DEST_QUERY_100_INSTALLS_QUERY
-              - BOOTS_DEST_QUERY_150_INSTALLS_QUERY
               - SHOULD_SEE_LIVE_OP_CLUSTER_CANDIDATES
-              - REV_BOOST_V2_TEST_CODE
               - ENTERTAINMENT_CLUSTER_TRIGGERING
-              - BOOTS_MIN_TAGS_2
               - BOOTS_EN_IN
               - BOOTS_EN_GB
               - BOOTS_EN_PH
               - BOOTS_EN_CA
-              - BOOTS_EN_AU
-              - BOOTS_EN_I18N
-              - BOOTS_V2_STAGING
-              - OFFLINE_APP_SEARCH
               - ENTERTAINMENT_CLUSTER_CONTAINER_SEARCH_ENABLED
-              - BEST_SELLER_CART_TAG
-              - BOOTS_DEST_QUERY_50_INSTALLS_QUERY
-              - BOOTS_SAFT_SPEC2
               - SEARCH_NAV_SPONSORED_ADS_CLUSTER
-              - BOOTS_ISTA
-              - BOOTS_EN_GLOBAL
               - TOP_CHART_RANKING_INFO
               - CLIENT_TEST_CODE_VERIFICATION
               - APPS_PUB_QUERY
-              - BOOTS_V2
-              - HAS_BOOKS_BIGPOOL_RECS
-              - TESTING_BOTH
-              - TESTING_EVENT
-              - BOOTS_MORE_CHIPS
-              - BOOTS_TAG_CONVERSION_BASED_RERANKING
-              - BOOTS_KG_FILTERS
-              - BOOTS_JP_KR
-              - BOOTS_ISTA_V2
-              - BOOTS_FILTERS
-              - BOOTS_EN_GLOBAL_V2
-              - BOOTS_ISTA_V2_WITH_BOOTS_V2
-              - BOOTS_ISTA_JP_KR
-              - BOOTS_VS_ISTA_JP_KR
-              - CHURNED_LIVE_OP_CANDIDATES_EVENT
-              - CHURNED_LIVE_OP_EVENT
               - ABUSIVE_QUERY_SQUASHING_EVENT
               - HOME_SPONSORED_ADS_RE_ENGAGEMENT_CLUSTER_EVENT_LEVEL
               - SEARCH_LIVE_OP_QUERY_EVENT
@@ -66009,6 +66029,7 @@ components:
               - EDITORS_CHOICE_CLUSTER_SERP_EVENT_LEVEL
               - BESTK_CLUSTER_SERP_EVENT_LEVEL
               - LIVEOPS_CLUSTER_SERP_EVENT_LEVEL
+              - QUICKPICKS_CLUSTER_SERP_EVENT_LEVEL
               - INLINE_DETAILS_AQUALITY_CHECK_PASS
               - INLINE_DETAILS_AQUALITY_CHECK_FAIL
               - INLINE_DETAILS_IS_INLINE_URL_FRONTEND
@@ -66029,6 +66050,12 @@ components:
               - DETAILS_PAGE_AQUALITY_PASSED_EVENT_LEVEL
               - INLINE_DETAILS_CALLER_AQUALITY_CHECK_PASS
               - INLINE_DETAILS_CALLER_AQUALITY_CHECK_FAIL
+              - HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_UNKNOWN
+              - HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_PASS
+              - HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_FAIL
+              - HSDP_INDEPENDENT_APP_CALLER_TABLET_AQUALITY_CHECK_UNKNOWN
+              - HSDP_INDEPENDENT_APP_CALLER_TABLET_AQUALITY_CHECK_PASS
+              - HSDP_INDEPENDENT_APP_CALLER_TABLET_AQUALITY_CHECK_FAIL
               - PTP_CLUSTER_SERP_P13N_RANKING_EVENT_LEVEL
               - BROAD_INTENT_REWEIGHTING_EVENT_LEVEL
               - QUERY_DEPENDENT_SNIPPET_EVENT_LEVEL
@@ -66048,6 +66075,7 @@ components:
               - SECOND_PASS_POLARIS_RERANKING_EVENT_LEVEL
               - SECOND_PASS_POLARIS_WITH_RANKING_CHANGE_EVENT_LEVEL
               - EXPLORATORY_BOOSTING_EVENT_LEVEL
+              - GEARHEAD_TOOLTIP_COOLWALK_DASHBOARD_UNAVAILABLE
               - EVENT_LEVEL_TEST_CODE_LIMIT
               - RESERVED_4
               - RESERVED_5
@@ -66782,6 +66810,7 @@ components:
               - EDITORS_CHOICE_CLUSTER_SERP_SESSION_LEVEL
               - BESTK_CLUSTER_SERP_SESSION_LEVEL
               - LIVEOPS_CLUSTER_SERP_SESSION_LEVEL
+              - QUICKPICKS_CLUSTER_SERP_SESSION_LEVEL
               - WIDE_MEDIA_CLUSTER_INVALID_VIDEO_ASSET_SESSION_LEVEL
               - ALTERNATE_DEVICE_PRESENT_SESSION_LEVEL
               - MULTIPLE_ALTERNATE_DEVICES_PER_FORM_FACTOR_SESSION_LEVEL
@@ -66797,6 +66826,12 @@ components:
               - INLINE_DETAILS_AQUALITY_CHECK_FAIL_SESSION_LEVEL
               - INLINE_DETAILS_CALLER_AQUALITY_CHECK_PASS_SESSION_LEVEL
               - INLINE_DETAILS_CALLER_AQUALITY_CHECK_FAIL_SESSION_LEVEL
+              - HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_UNKNOWN_SESSION_LEVEL
+              - HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_PASS_SESSION_LEVEL
+              - HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_FAIL_SESSION_LEVEL
+              - HSDP_INDEPENDENT_APP_CALLER_TABLET_AQUALITY_CHECK_UNKNOWN_SESSION_LEVEL
+              - HSDP_INDEPENDENT_APP_CALLER_TABLET_AQUALITY_CHECK_PASS_SESSION_LEVEL
+              - HSDP_INDEPENDENT_APP_CALLER_TABLET_AQUALITY_CHECK_FAIL_SESSION_LEVEL
               - INLINE_DETAILS_IS_INLINE_URL_SESSION_LEVEL
               - INLINE_DETAILS_IS_INLINE_URL_FRONTEND_SESSION_LEVEL
               - INLINE_DETAILS_TQUALITY_CHECK_PASS_FRONTEND_SESSION_LEVEL

@@ -22,9 +22,9 @@ info:
     - format: google
       url: https://integrations.googleapis.com/$discovery/rest?version=v1
       version: v1
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: integrations
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/application-integration
 tags:
@@ -3811,6 +3811,8 @@ components:
       properties:
         resolvedBy:
           type: string
+        resolvedByCpi:
+          type: string
         timestamp:
           format: google-datetime
           type: string
@@ -6457,35 +6459,7 @@ components:
             $ref: "#/components/schemas/EnterpriseCrmFrontendsEventbusProtoTaskEntity"
           type: array
       type: object
-    GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequest:
-      description: The request to get data for monarch connector config.
-      properties:
-        duration:
-          description: 'How long the series data range: "1h","1d",etc.'
-          format: google-duration
-          type: string
-        endTime:
-          description: Final time to query over, or the current time if left unset.
-          format: google-datetime
-          type: string
-        mashQuery:
-          $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestMashQuery"
-          description: Required. Query for searching data in monarch.
-        metricFieldTable:
-          description: Returns a table of all possible metric field values within the specified duration, ignoring any data samples. Useful for autocomplete functionality.
-          type: boolean
-        outputPeriod:
-          description: The output period for the query. Must be set if there is a window operation within the query and unset otherwise.
-          format: google-duration
-          type: string
-        responseTemplate:
-          description: Required. Template for response.
-          enum:
-            - DATA_FORMAT_UNSPECIFIED
-            - TABLE_CONFIG
-            - APLOSE_SERIES_LIST_CONFIG
-          type: string
-      type: object
+    GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequest: {}
     GoogleCloudIntegrationsV1alphaMonitorExecutionStatsRequestGroupBy:
       description: MashQuery GroupBy parameters.
       properties:
@@ -6571,16 +6545,7 @@ components:
           description: Optional. optional, reduce function
           type: string
       type: object
-    GoogleCloudIntegrationsV1alphaMonitorExecutionStatsResponse:
-      description: The response for getting Execution stats.
-      properties:
-        aplosSeriesListData:
-          $ref: "#/components/schemas/EnterpriseCrmCardsTemplatesAplosSeriesListData"
-          description: List of points.
-        tableData:
-          $ref: "#/components/schemas/EnterpriseCrmCardsTabularData"
-          description: Data in form of table.
-      type: object
+    GoogleCloudIntegrationsV1alphaMonitorExecutionStatsResponse: {}
     GoogleCloudIntegrationsV1alphaNextTask:
       description: The task that is next in line to be executed, if the condition specified evaluated to true.
       properties:

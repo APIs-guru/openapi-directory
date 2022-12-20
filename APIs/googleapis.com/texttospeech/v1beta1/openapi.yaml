@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Text-to-Speech API
   version: v1beta1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://texttospeech.googleapis.com/$discovery/rest?version=v1beta1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: texttospeech
 externalDocs:
@@ -104,96 +102,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}":
-    get:
-      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-      operationId: texttospeech.projects.locations.operations.get
-      parameters:
-        - description: The name of the operation resource.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}/operations":
-    get:
-      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
-      operationId: texttospeech.projects.locations.operations.list
-      parameters:
-        - description: The name of the operation's parent resource.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-        - description: The standard list filter.
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: The standard list page size.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListOperationsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}:synthesizeLongAudio":
+  "/v1beta1/{parent}:SynthesizeLongAudio":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -208,9 +117,9 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Synthesizes long form text asynchronously.
-      operationId: texttospeech.projects.locations.synthesizeLongAudio
+      operationId: texttospeech.projects.locations.voices.synthesizeLongAudio
       parameters:
-        - description: The resource states of the request in the form of `projects/*/locations/*/voices/*`.
+        - description: The resource states of the request in the form of projects/*/locations/*/voices/*.
           in: path
           name: parent
           required: true
@@ -361,17 +270,21 @@ components:
             - OFFLINE
           type: string
       type: object
-    ListOperationsResponse:
-      description: The response message for Operations.ListOperations.
+    GoogleCloudTexttospeechV1beta1SynthesizeLongAudioMetadata:
+      description: Metadata for response returned by the `SynthesizeLongAudio` method.
       properties:
-        nextPageToken:
-          description: The standard List next-page token.
+        lastUpdateTime:
+          description: Time of the most recent processing update.
+          format: google-datetime
           type: string
-        operations:
-          description: A list of operations that matches the specified filter in the request.
-          items:
-            $ref: "#/components/schemas/Operation"
-          type: array
+        progressPercentage:
+          description: The progress of the most recent processing update in percentage, ie. 70.0%.
+          format: double
+          type: number
+        startTime:
+          description: Time when the request was received.
+          format: google-datetime
+          type: string
       type: object
     ListVoicesResponse:
       description: The message returned to the client by the `ListVoices` method.
@@ -431,6 +344,22 @@ components:
           type: string
         text:
           description: The raw text to be synthesized.
+          type: string
+      type: object
+    SynthesizeLongAudioMetadata:
+      description: Metadata for response returned by the `SynthesizeLongAudio` method.
+      properties:
+        lastUpdateTime:
+          description: Time of the most recent processing update.
+          format: google-datetime
+          type: string
+        progressPercentage:
+          description: The progress of the most recent processing update in percentage, ie. 70.0%.
+          format: double
+          type: number
+        startTime:
+          description: Time when the request was received.
+          format: google-datetime
           type: string
       type: object
     SynthesizeLongAudioRequest:
@@ -560,5 +489,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}
