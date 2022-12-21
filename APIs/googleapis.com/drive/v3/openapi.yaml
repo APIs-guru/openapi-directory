@@ -152,7 +152,7 @@ paths:
           name: restrictToMyDrive
           schema:
             type: boolean
-        - description: A comma-separated list of spaces to query within the user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'.
+        - description: A comma-separated list of spaces to query within the corpora. Supported values are 'drive' and 'appDataFolder'.
           in: query
           name: spaces
           schema:
@@ -355,7 +355,7 @@ paths:
           name: restrictToMyDrive
           schema:
             type: boolean
-        - description: A comma-separated list of spaces to query within the user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'.
+        - description: A comma-separated list of spaces to query within the corpora. Supported values are 'drive' and 'appDataFolder'.
           in: query
           name: spaces
           schema:
@@ -523,7 +523,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Creates a new shared drive.
+      description: Creates a shared drive.
       operationId: drive.drives.create
       parameters:
         - description: An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a shared drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same shared drive. If the shared drive already exists a 409 error will be returned.
@@ -788,7 +788,7 @@ paths:
           name: q
           schema:
             type: string
-        - description: A comma-separated list of spaces to query within the corpus. Supported values are 'drive' and 'appDataFolder'.
+        - description: A comma-separated list of spaces to query within the corpora. Supported values are 'drive' and 'appDataFolder'.
           in: query
           name: spaces
           schema:
@@ -855,7 +855,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Creates a new file.
+      description: Creates a file.
       operationId: drive.files.create
       parameters:
         - description: Deprecated. Creating files in multiple folders is no longer supported.
@@ -1294,7 +1294,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Creates a new comment on a file.
+      description: Creates a comment on a file.
       operationId: drive.comments.create
       parameters:
         - description: The ID of the file.
@@ -1512,7 +1512,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Creates a new reply to a comment.
+      description: Creates a reply to a comment.
       operationId: drive.replies.create
       parameters:
         - description: The ID of the file.
