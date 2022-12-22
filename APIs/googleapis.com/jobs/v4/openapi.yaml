@@ -1852,7 +1852,7 @@ components:
             type: integer
           type: array
         disableAutomaticEnrollmentSelection:
-          description: If true, disable automatic enrollment selection (at all diversion points). Automatic enrollment selection means experiment selection process based on the experiment's automatic enrollment condition. This does not disable selection of forced experiments. Setting this filed to false does not change anything in experiment selection process.
+          description: If true, disable automatic enrollment selection (at all diversion points). Automatic enrollment selection means experiment selection process based on the experiment's automatic enrollment condition. This does not disable selection of forced experiments. Setting this field to false does not change anything in the experiment selection process.
           type: boolean
         disableExpNames:
           description: Set of experiment names to be disabled. If an experiment is disabled, it is never selected nor forced. If an aggregate experiment is disabled, its partitions are disabled together. If an experiment with an enrollment is disabled, the enrollment is disabled together. If a name corresponds to a domain, the domain itself and all descendant experiments and domains are disabled together.
@@ -1871,10 +1871,10 @@ components:
             type: integer
           type: array
         disableManualEnrollmentSelection:
-          description: If true, disable manual enrollment selection (at all diversion points). Manual enrollment selection means experiment selection process based on the request's manual enrollment states (a.k.a. opt-in experiments). This does not disable selection of forced experiments. Setting this filed to false does not change anything in experiment selection process.
+          description: If true, disable manual enrollment selection (at all diversion points). Manual enrollment selection means experiment selection process based on the request's manual enrollment states (a.k.a. opt-in experiments). This does not disable selection of forced experiments. Setting this field to false does not change anything in the experiment selection process.
           type: boolean
         disableOrganicSelection:
-          description: If true, disable organic experiment selection (at all diversion points). Organic selection means experiment selection process based on traffic allocation and diversion condition evaluation. This does not disable selection of forced experiments. This is useful in cases when it is not known whether experiment selection behavior is responsible for a error or breakage. Disabling organic selection may help to isolate the cause of a given problem. Setting this filed to false does not change anything in experiment selection process.
+          description: If true, disable organic experiment selection (at all diversion points). Organic selection means experiment selection process based on traffic allocation and diversion condition evaluation. This does not disable selection of forced experiments. This is useful in cases when it is not known whether experiment selection behavior is responsible for a error or breakage. Disabling organic selection may help to isolate the cause of a given problem. Setting this field to false does not change anything in the experiment selection process.
           type: boolean
         forcedFlags:
           additionalProperties:
@@ -1887,7 +1887,7 @@ components:
           description: Rollouts to force in a particular experiment state. Map from rollout name to rollout value.
           type: object
         testingMode:
-          description: If set to ALL_OFF, organic selection will be disabled; if set to ALL_ON, organic selection will be disabled, and only select launch experiments will receive traffic. See go/mendel-aoao-runtime-design.
+          description: Sets different testing modes. See the documentation in the TestingMode message for more information.
           enum:
             - TESTING_MODE_UNSPECIFIED
             - TESTING_MODE_ALL_OFF
