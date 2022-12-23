@@ -1939,12 +1939,59 @@ components:
           example: native
           type: string
         subscription_level:
-          description: Received events are scoped to consumer or across integration.
+          description: Received events are scoped to connection or across integration.
           enum:
-            - consumer
+            - connection
             - integration
           example: integration
           type: string
+        virtual_webhooks:
+          additionalProperties: false
+          description: Virtual webhook config for the connector.
+          properties:
+            request_rate:
+              additionalProperties: false
+              description: The rate at which requests for resources will be made to downstream.
+              properties:
+                rate:
+                  description: The number of requests per window unit.
+                  title: Rate
+                  type: integer
+                size:
+                  description: Size of request window.
+                  title: Size of rate window
+                  type: integer
+                unit:
+                  description: The window unit for the rate.
+                  enum:
+                    - second
+                    - minute
+                    - hour
+                    - day
+                  title: Unit
+                  type: string
+              required:
+                - rate
+                - size
+                - unit
+              title: Request Rate
+              type: object
+            resources:
+              description: The resources that will be requested from downstream.
+              title: Resources
+              type: object
+              x-patternProperties:
+                ^.*$:
+                  properties:
+                    events:
+                      items:
+                        type: string
+                      type: array
+                  type: object
+          required:
+            - request_rate
+          title: Virtual Webhooks
+          type: object
       type: object
       x-apideck-schema-id: WebhookSupport
   securitySchemes:
