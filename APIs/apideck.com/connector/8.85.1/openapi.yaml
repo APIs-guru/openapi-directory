@@ -1278,10 +1278,7 @@ components:
             type: object
           type: array
         webhook_support:
-          description: How webhooks are supported for the connector. Sometimes the connector natively supports webhooks, other times Apideck virtualizes them based on polling.
-          items:
-            $ref: "#/components/schemas/WebhookSupport"
-          type: object
+          $ref: "#/components/schemas/WebhookSupport"
         website_url:
           description: Link to the connector's website.
           example: https://www.salesforce.com
@@ -1922,6 +1919,7 @@ components:
       example: owner_id
       type: string
     WebhookSupport:
+      description: How webhooks are supported for the connector. Sometimes the connector natively supports webhooks, other times Apideck virtualizes them based on polling.
       properties:
         managed_via:
           description: How the subscription is managed in the downstream.

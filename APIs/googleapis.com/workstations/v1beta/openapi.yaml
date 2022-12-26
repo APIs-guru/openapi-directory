@@ -31,7 +31,7 @@ tags:
 paths:
   "/v1beta/{name}":
     delete:
-      description: Deletes the specified workstation.
+      description: Deletes the specified Workstation.
       operationId: workstations.projects.locations.workstationClusters.workstationConfigs.workstations.delete
       parameters:
         - description: Required. Name of the workstation to delete.
@@ -65,7 +65,7 @@ paths:
       tags:
         - projects
     get:
-      description: Returns the requested workstation.
+      description: Returns the requested Workstation.
       operationId: workstations.projects.locations.workstationClusters.workstationConfigs.workstations.get
       parameters:
         - description: Required. Name of the requested resource.
@@ -101,7 +101,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates an existing workstation.
+      description: Updates an existing Workstation.
       operationId: workstations.projects.locations.workstationClusters.workstationConfigs.workstations.patch
       parameters:
         - description: Full name of this resource.
@@ -324,7 +324,7 @@ paths:
         - projects
   "/v1beta/{parent}/workstationClusters":
     get:
-      description: Returns all workstation clusters in the specified location.
+      description: Returns all WorkstationClusters in the specified location.
       operationId: workstations.projects.locations.workstationClusters.list
       parameters:
         - description: Required. Parent resource name.
@@ -370,7 +370,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new workstation cluster.
+      description: Creates a new WorkstationCluster.
       operationId: workstations.projects.locations.workstationClusters.create
       parameters:
         - description: Required. Parent resource name.
@@ -410,7 +410,7 @@ paths:
         - projects
   "/v1beta/{parent}/workstationConfigs":
     get:
-      description: Returns all workstation configurations in the specified cluster.
+      description: Returns all WorkstationConfigs in the specified cluster.
       operationId: workstations.projects.locations.workstationClusters.workstationConfigs.list
       parameters:
         - description: Required. Parent resource name.
@@ -456,7 +456,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new workstation configuration.
+      description: Creates a new WorkstationConfig.
       operationId: workstations.projects.locations.workstationClusters.workstationConfigs.create
       parameters:
         - description: Required. Parent resource name.
@@ -496,7 +496,7 @@ paths:
         - projects
   "/v1beta/{parent}/workstationConfigs:listUsable":
     get:
-      description: Returns all workstation configurations in the specified cluster on which the caller has the "workstations.workstation.create" permission.
+      description: Returns all WorkstationConfigs in the specified cluster on which the caller has the "workstations.workstation.create" permission.
       operationId: workstations.projects.locations.workstationClusters.workstationConfigs.listUsable
       parameters:
         - description: Required. Parent resource name.
@@ -589,7 +589,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new workstation.
+      description: Creates a new Workstation.
       operationId: workstations.projects.locations.workstationClusters.workstationConfigs.workstations.create
       parameters:
         - description: Required. Parent resource name.
@@ -1016,14 +1016,14 @@ components:
           type: string
       type: object
     GceConfidentialInstanceConfig:
-      description: A set of Compute Engine Confidential VM instance options.
+      description: A set of Confidential Google Compute Engine Instance option.
       properties:
         enableConfidentialCompute:
           description: Whether the instance has confidential compute enabled.
           type: boolean
       type: object
     GceInstance:
-      description: A runtime using a Compute Engine instance.
+      description: A runtime using a Google Compute Engine Instance.
       properties:
         bootDiskSizeGb:
           description: Size of the boot disk in GB.
@@ -1031,15 +1031,15 @@ components:
           type: integer
         confidentialInstanceConfig:
           $ref: "#/components/schemas/GceConfidentialInstanceConfig"
-          description: A set of Compute Engine Confidential VM instance options.
+          description: A set of Confidential Google Compute Engine Instance option.
         disablePublicIpAddresses:
           description: Whether instances have no public IP address.
           type: boolean
         machineType:
-          description: The name of a Compute Engine machine type.
+          description: The name of a Google Compute Engine machine type.
           type: string
         poolSize:
-          description: Number of instances to pool for faster workstation starup.
+          description: Number of instances to pool for faster Workstation starup.
           format: int32
           type: integer
         serviceAccount:
@@ -1047,9 +1047,9 @@ components:
           type: string
         shieldedInstanceConfig:
           $ref: "#/components/schemas/GceShieldedInstanceConfig"
-          description: A set of Compute Engine Shielded instance options.
+          description: A set of Shielded Google Compute Engine Instance options.
         tags:
-          description: Network tags to add to the Compute Engine machines backing the Workstations.
+          description: Network tags to add to the Google Compute Engine machines backing the Workstations.
           items:
             type: string
           type: array
@@ -1061,10 +1061,10 @@ components:
           description: Type of the disk to use.
           type: string
         fsType:
-          description: Type of file system that the disk should be formatted with. The workstation image must support this file system type. Must be empty if source_snapshot is set.
+          description: Type of file system that the disk should be formatted with. The Workstation image must support this file system type. Must be empty if source_snapshot is set.
           type: string
         reclaimPolicy:
-          description: What should happen to the disk after the workstation is deleted. Defaults to DELETE.
+          description: What should happen to the disk after the Workstation is deleted. Defaults to DELETE.
           enum:
             - RECLAIM_POLICY_UNSPECIFIED
             - DELETE
@@ -1076,7 +1076,7 @@ components:
           type: integer
       type: object
     GceShieldedInstanceConfig:
-      description: A set of Compute Engine Shielded instance options.
+      description: A set of Shielded Google Compute Engine Instance options.
       properties:
         enableIntegrityMonitoring:
           description: Whether the instance has integrity monitoring enabled.
@@ -1112,11 +1112,11 @@ components:
           type: string
       type: object
     Host:
-      description: Runtime host for a workstation.
+      description: The system will attempt to keep enough computational resources on standby Runtime host for a Workstation.
       properties:
         gceInstance:
           $ref: "#/components/schemas/GceInstance"
-          description: Specifies a Compute Engine instance as the host.
+          description: Specifies a Google Compute Engine Instance as the host.
       type: object
     ListOperationsResponse:
       description: The response message for Operations.ListOperations.
@@ -1273,13 +1273,13 @@ components:
           type: string
       type: object
     PersistentDirectory:
-      description: A directory to persist across workstation sessions.
+      description: A directory persisted across Workstation sessions.
       properties:
         gcePd:
           $ref: "#/components/schemas/GceRegionalPersistentDisk"
           description: A PersistentDirectory backed by a Compute Engine persistent disk.
         mountPath:
-          description: Location of this directory in the running workstation.
+          description: Location of this directory in the running Workstation.
           type: string
       type: object
     Policy:
@@ -1308,14 +1308,14 @@ components:
       description: Configuration options for private clusters.
       properties:
         clusterHostname:
-          description: Output only. Hostname for the workstation cluster. This field will be populated only when private endpoint is enabled. To access workstations in the cluster, create a new DNS zone mapping this domain name to an internal IP address and a forwarding rule mapping that address to the service attachment.
+          description: Output only. Hostname for the Workstation Cluster. This field will be populated only when private endpoint is enabled. To access workstations in the cluster, create a new DNS zone mapping this domain name to an internal IP address and a forwarding rule mapping that address to the service attachment.
           readOnly: true
           type: string
         enablePrivateEndpoint:
           description: Whether Workstations endpoint is private.
           type: boolean
         serviceAttachmentUri:
-          description: Output only. Service attachment URI for the workstation cluster. The service attachemnt is created when private endpoint is enabled. To access workstations in the cluster, configure access to the managed service using (Private Service Connect)[https://cloud.google.com/vpc/docs/configure-private-service-connect-services].
+          description: Output only. Service attachment URI for the Workstation Cluster. The service attachemnt is created when private endpoint is enabled. To access workstations in the cluster, configure access to the managed service using (Private Service Connect)[https://cloud.google.com/vpc/docs/configure-private-service-connect-services].
           readOnly: true
           type: string
       type: object
@@ -1442,7 +1442,7 @@ components:
           type: string
       type: object
     WorkstationCluster:
-      description: A grouping of workstation configurations and the associated workstations in that region.
+      description: A grouping of WorkstationConfigs and their associated Workstations in a region.
       properties:
         annotations:
           additionalProperties:
@@ -1502,7 +1502,7 @@ components:
           type: string
       type: object
     WorkstationConfig:
-      description: A set of configuration options describing how a workstation will be run. Workstation configurations are intended to be shared across multiple workstations.
+      description: A set of configuration options describing how a workstation will be run. WorkstationConfigs are intended to be shared across multiple workstations.
       properties:
         annotations:
           additionalProperties:
@@ -1517,7 +1517,7 @@ components:
           type: array
         container:
           $ref: "#/components/schemas/Container"
-          description: Container that will be run for each workstation using this configuration when that workstation is started.
+          description: Container that will be run for each Workstation using this config when that Workstation is started.
         createTime:
           description: Output only. Time when this resource was created.
           format: google-datetime
@@ -1540,7 +1540,7 @@ components:
           type: string
         host:
           $ref: "#/components/schemas/Host"
-          description: Runtime host for the workstation.
+          description: Runtime host for the Workstation.
         idleTimeout:
           description: How long to wait before automatically stopping an instance that hasn't received any user traffic. A value of 0 indicates that this instance should never time out due to idleness. Defaults to 20 minutes.
           format: google-duration
@@ -1549,7 +1549,7 @@ components:
           description: Full name of this resource.
           type: string
         persistentDirectories:
-          description: Directories to persist across workstation sessions.
+          description: Directories to persist across Workstation sessions.
           items:
             $ref: "#/components/schemas/PersistentDirectory"
           type: array

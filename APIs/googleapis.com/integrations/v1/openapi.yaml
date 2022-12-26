@@ -5194,7 +5194,7 @@ components:
           type: string
         nodeConfig:
           $ref: "#/components/schemas/GoogleCloudConnectorsV1NodeConfig"
-          description: Optional. Configuration for the connection.
+          description: Optional. Node configuration for the connection.
         serviceAccount:
           description: Optional. Service account needed for runtime plane to access GCP resources.
           type: string
@@ -5272,7 +5272,7 @@ components:
           type: string
       type: object
     GoogleCloudConnectorsV1NodeConfig:
-      description: Configuration for the connection.
+      description: Node configuration for the connection.
       properties:
         maxNodeCount:
           description: Maximum number of nodes in the runtime nodes.
