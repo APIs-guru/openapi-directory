@@ -1,18 +1,18 @@
 openapi: 3.0.0
 servers:
-  - url: https://workflows.googleapis.com/
+  - url: https://contactcenteraiplatform.googleapis.com/
 info:
   contact:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: Manage workflow definitions. To execute workflows and manage executions, see the Workflows Executions API.
+  description: ""
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
-  title: Workflows API
-  version: v1
+  title: Contact Center AI Platform API
+  version: v1alpha1
   x-apisguru-categories:
     - analytics
     - media
@@ -20,21 +20,50 @@ info:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - format: google
-      url: https://workflows.googleapis.com/$discovery/rest?version=v1
+      url: https://contactcenteraiplatform.googleapis.com/$discovery/rest?version=v1alpha1
       version: v1
   x-providerName: googleapis.com
-  x-serviceName: workflows
+  x-serviceName: contactcenteraiplatform
 externalDocs:
-  url: https://cloud.google.com/workflows
+  url: https://cloud.google.com/solutions/contact-center-ai-platform
 tags:
   - name: projects
 paths:
-  "/v1/{name}":
+  "/v1alpha1/{name}":
     delete:
-      description: Deletes a workflow with the specified name. This method also cancels and deletes all running executions of the workflow.
-      operationId: workflows.projects.locations.workflows.delete
+      description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: contactcenteraiplatform.projects.locations.operations.delete
       parameters:
-        - description: "Required. Name of the workflow to be deleted. Format: projects/{project}/locations/{location}/workflows/{workflow}"
+        - description: The name of the operation resource to be deleted.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and t he request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    get:
+      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+      operationId: contactcenteraiplatform.projects.locations.operations.get
+      parameters:
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -46,30 +75,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    get:
-      description: Gets details of a single workflow.
-      operationId: workflows.projects.locations.workflows.get
-      parameters:
-        - description: "Required. Name of the workflow for which information should be retrieved. Format: projects/{project}/locations/{location}/workflows/{workflow}"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Workflow"
           description: Successful response
       security:
         - Oauth2:
@@ -91,16 +96,21 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates an existing workflow. Running this method has no impact on already running executions of the workflow. A new revision of the workflow might be created as a result of a successful update operation. In that case, the new revision is used in new workflow executions.
-      operationId: workflows.projects.locations.workflows.patch
+      description: Updates the parameters of a single ContactCenter.
+      operationId: contactcenteraiplatform.projects.locations.contactCenters.patch
       parameters:
-        - description: "The resource name of the workflow. Format: projects/{project}/locations/{location}/workflows/{workflow}"
+        - description: name of resource
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: List of fields to be updated. If not present, the entire workflow will be updated.
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and t he request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+        - description: Required. Field mask is used to specify the fields to be overwritten in the ContactCenter resource by the update. The fields specified in the update_mask are relative to the resource, not the full request. A field will be overwritten if it is in the mask. If the user does not provide a mask then all fields will be overwritten.
           in: query
           name: updateMask
           schema:
@@ -109,7 +119,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Workflow"
+              $ref: "#/components/schemas/ContactCenter"
       responses:
         "200":
           content:
@@ -124,10 +134,10 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}/locations":
+  "/v1alpha1/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
-      operationId: workflows.projects.locations.list
+      operationId: contactcenteraiplatform.projects.locations.list
       parameters:
         - description: The resource that owns the locations collection, if applicable.
           in: path
@@ -176,10 +186,10 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/operations":
+  "/v1alpha1/{name}/operations":
     get:
       description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
-      operationId: workflows.projects.locations.operations.list
+      operationId: contactcenteraiplatform.projects.locations.operations.list
       parameters:
         - description: The name of the operation's parent resource.
           in: path
@@ -228,33 +238,75 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/workflows":
-    get:
-      description: Lists workflows in a given project and location. The default order is not specified.
-      operationId: workflows.projects.locations.workflows.list
+  "/v1alpha1/{name}:cancel":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+      operationId: contactcenteraiplatform.projects.locations.operations.cancel
       parameters:
-        - description: "Required. Project and location from which the workflows should be listed. Format: projects/{project}/locations/{location}"
+        - description: The name of the operation resource to be cancelled.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CancelOperationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1alpha1/{parent}/contactCenters":
+    get:
+      description: Lists ContactCenters in a given project and location.
+      operationId: contactcenteraiplatform.projects.locations.contactCenters.list
+      parameters:
+        - description: Required. Parent value for ListContactCentersRequest
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Filter to restrict results to specific workflows.
+        - description: Filtering results
           in: query
           name: filter
           schema:
             type: string
-        - description: Comma-separated list of fields that specify the order of the results. Default sorting order for a field is ascending. To specify descending order for a field, append a "desc" suffix. If not specified, the results are returned in an unspecified order.
+        - description: Hint for how to order the results
           in: query
           name: orderBy
           schema:
             type: string
-        - description: Maximum number of workflows to return per call. The service might return fewer than this value even if not at the end of the collection. If a value is not specified, a default value of 500 is used. The maximum permitted value is 1000 and values greater than 1000 are coerced down to 1000.
+        - description: Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A page token, received from a previous `ListWorkflows` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListWorkflows` must match the call that provided the page token.
+        - description: A token identifying a page of results the server should return.
           in: query
           name: pageToken
           schema:
@@ -264,7 +316,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListWorkflowsResponse"
+                $ref: "#/components/schemas/ListContactCentersResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -286,25 +338,30 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new workflow. If a workflow with the specified name already exists in the specified project and location, the long running operation returns a ALREADY_EXISTS error.
-      operationId: workflows.projects.locations.workflows.create
+      description: Creates a new ContactCenter in a given project and location.
+      operationId: contactcenteraiplatform.projects.locations.contactCenters.create
       parameters:
-        - description: "Required. Project and location in which the workflow should be created. Format: projects/{project}/locations/{location}"
+        - description: Required. Value for parent.
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: "Required. The ID of the workflow to be created. It has to fulfill the following requirements: * Must contain only letters, numbers, underscores and hyphens. * Must start with a letter. * Must be between 1-64 characters. * Must end with a number or a letter. * Must be unique within the customer project and location."
+        - description: Required. Id of the requesting object If auto-generating Id server-side, remove this field and contact_center_id from the method_signature of Create RPC
           in: query
-          name: workflowId
+          name: contactCenterId
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and t he request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
           schema:
             type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Workflow"
+              $ref: "#/components/schemas/ContactCenter"
       responses:
         "200":
           content:
@@ -319,6 +376,85 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1alpha1/{parent}/locations/{locationsId}:queryContactCenterQuota":
+    get:
+      description: Queries the contact center quota, an aggregation over all the projects, that belongs to the billing account, which the input project belongs to.
+      operationId: contactcenteraiplatform.projects.locations.queryContactCenterQuota
+      parameters:
+        - description: Required. Parent project resource id.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: locationsId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactCenterQuota"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1alpha1/{parent}:queryContactCenterQuota":
+    get:
+      description: Queries the contact center quota, an aggregation over all the projects, that belongs to the billing account, which the input project belongs to.
+      operationId: contactcenteraiplatform.projects.queryContactCenterQuota
+      parameters:
+        - description: Required. Parent project resource id.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactCenterQuota"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:
@@ -395,9 +531,110 @@ components:
       schema:
         type: string
   schemas:
+    CancelOperationRequest:
+      description: The request message for Operations.CancelOperation.
+      properties: {}
+      type: object
+    ContactCenter:
+      description: Message describing ContactCenter object
+      properties:
+        ccaipManagedUsers:
+          description: Optional. Whether to enable users to be created in the CCAIP-instance concurrently to having users in Cloud identity
+          type: boolean
+        createTime:
+          description: Output only. [Output only] Create time stamp
+          format: google-datetime
+          readOnly: true
+          type: string
+        customerDomainPrefix:
+          description: Required. Immutable. At least 2 and max 16 char long, must conform to [RFC 1035](https://www.ietf.org/rfc/rfc1035.txt).
+          type: string
+        displayName:
+          description: Required. A user friendly name for the ContactCenter.
+          type: string
+        instanceConfig:
+          $ref: "#/components/schemas/InstanceConfig"
+          description: The configuration of this instance, it is currently immutable once created.
+        labels:
+          additionalProperties:
+            type: string
+          description: Labels as key value pairs
+          type: object
+        name:
+          description: name of resource
+          type: string
+        samlParams:
+          $ref: "#/components/schemas/SAMLParams"
+          description: Optional. Params that sets up Google as IdP.
+        state:
+          description: Output only. The state of this contact center.
+          enum:
+            - STATE_UNSPECIFIED
+            - STATE_DEPLOYING
+            - STATE_DEPLOYED
+            - STATE_TERMINATING
+            - STATE_FAILED
+            - STATE_TERMINATING_FAILED
+            - STATE_TERMINATED
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. [Output only] Update time stamp
+          format: google-datetime
+          readOnly: true
+          type: string
+        uris:
+          $ref: "#/components/schemas/URIs"
+          description: Output only. URIs to access the deployed ContactCenters.
+          readOnly: true
+        userEmail:
+          description: Optional. Email address of the first admin users.
+          type: string
+      type: object
+    ContactCenterQuota:
+      description: Represents a quota for contact centers.
+      properties:
+        contactCenterCountLimit:
+          description: Reflects the count limit of contact centers on a billing account.
+          format: int32
+          type: integer
+        contactCenterCountSum:
+          description: Reflects the count sum of contact centers on a billing account.
+          format: int32
+          type: integer
+      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
+      type: object
+    InstanceConfig:
+      description: Message storing the instance configuration.
+      properties:
+        instanceSize:
+          description: The instance size of this the instance configuration.
+          enum:
+            - INSTANCE_SIZE_UNSPECIFIED
+            - STANDARD_SMALL
+            - STANDARD_MEDIUM
+            - STANDARD_LARGE
+          type: string
+      type: object
+    ListContactCentersResponse:
+      description: Message for response to listing ContactCenters
+      properties:
+        contactCenters:
+          description: The list of ContactCenter
+          items:
+            $ref: "#/components/schemas/ContactCenter"
+          type: array
+        nextPageToken:
+          description: A token identifying a page of results the server should return.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
       type: object
     ListLocationsResponse:
       description: The response message for Locations.ListLocations.
@@ -421,23 +658,6 @@ components:
           description: A list of operations that matches the specified filter in the request.
           items:
             $ref: "#/components/schemas/Operation"
-          type: array
-      type: object
-    ListWorkflowsResponse:
-      description: Response for the ListWorkflows method.
-      properties:
-        nextPageToken:
-          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
-          type: string
-        unreachable:
-          description: Unreachable resources.
-          items:
-            type: string
-          type: array
-        workflows:
-          description: The workflows that match the request.
-          items:
-            $ref: "#/components/schemas/Workflow"
           type: array
       type: object
     Location:
@@ -490,21 +710,53 @@ components:
       description: Represents the metadata of the long-running operation.
       properties:
         apiVersion:
-          description: API version used to start the operation.
+          description: Output only. API version used to start the operation.
+          readOnly: true
           type: string
+        contactCenter:
+          $ref: "#/components/schemas/ContactCenter"
+          description: Contact center information for this request
         createTime:
-          description: The time the operation was created.
+          description: Output only. The time the operation was created.
           format: google-datetime
+          readOnly: true
           type: string
         endTime:
-          description: The time the operation finished running.
+          description: Output only. The time the operation finished running.
           format: google-datetime
+          readOnly: true
+          type: string
+        requestedCancellation:
+          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          readOnly: true
+          type: boolean
+        statusMessage:
+          description: Output only. Human-readable status of the operation, if any.
+          readOnly: true
           type: string
         target:
-          description: Server-defined resource path for the target of the operation.
+          description: Output only. Server-defined resource path for the target of the operation.
+          readOnly: true
           type: string
         verb:
-          description: Name of the verb executed by the operation.
+          description: Output only. Name of the verb executed by the operation.
+          readOnly: true
+          type: string
+      type: object
+    SAMLParams:
+      description: Message storing SAML params to enable Google as IDP.
+      properties:
+        certificate:
+          description: SAML certificate
+          type: string
+        entityId:
+          description: Entity id URL
+          type: string
+        ssoUri:
+          description: Single sign-on URL
+          type: string
+        userEmail:
+          description: Email address of the first admin users.
           type: string
       type: object
     Status:
@@ -525,51 +777,20 @@ components:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
-    Workflow:
-      description: Workflow program to be executed by Workflows.
+    URIs:
+      description: Message storing the URIs of the ContactCenter.
       properties:
-        createTime:
-          description: Output only. The timestamp for when the workflow was created.
-          format: google-datetime
-          readOnly: true
+        chatBotUri:
+          description: Chat Bot Uri of the ContactCenter
           type: string
-        description:
-          description: Description of the workflow provided by the user. Must be at most 1000 unicode characters long.
+        mediaUri:
+          description: Media Uri of the ContactCenter.
           type: string
-        labels:
-          additionalProperties:
-            type: string
-          description: Labels associated with this workflow. Labels can contain at most 64 entries. Keys and values can be no longer than 63 characters and can only contain lowercase letters, numeric characters, underscores, and dashes. Label keys must start with a letter. International characters are allowed.
-          type: object
-        name:
-          description: "The resource name of the workflow. Format: projects/{project}/locations/{location}/workflows/{workflow}"
+        rootUri:
+          description: Root Uri of the ContactCenter.
           type: string
-        revisionCreateTime:
-          description: Output only. The timestamp for the latest revision of the workflow's creation.
-          format: google-datetime
-          readOnly: true
-          type: string
-        revisionId:
-          description: 'Output only. The revision of the workflow. A new revision of a workflow is created as a result of updating the following properties of a workflow: - Service account - Workflow code to be executed The format is "000001-a4d", where the first 6 characters define the zero-padded revision ordinal number. They are followed by a hyphen and 3 hexadecimal random characters.'
-          readOnly: true
-          type: string
-        serviceAccount:
-          description: "The service account associated with the latest workflow version. This service account represents the identity of the workflow and determines what permissions the workflow has. Format: projects/{project}/serviceAccounts/{account} or {account} Using `-` as a wildcard for the `{project}` or not providing one at all will infer the project from the account. The `{account}` value can be the `email` address or the `unique_id` of the service account. If not provided, workflow will use the project's default service account. Modifying this field for an existing workflow results in a new workflow revision."
-          type: string
-        sourceContents:
-          description: Workflow code to be executed. The size limit is 128KB.
-          type: string
-        state:
-          description: Output only. State of the workflow deployment.
-          enum:
-            - STATE_UNSPECIFIED
-            - ACTIVE
-          readOnly: true
-          type: string
-        updateTime:
-          description: Output only. The timestamp for when the workflow was last updated.
-          format: google-datetime
-          readOnly: true
+        virtualAgentStreamingServiceUri:
+          description: Virtual Agent Streaming Service Uri of the ContactCenter.
           type: string
       type: object
   securitySchemes:

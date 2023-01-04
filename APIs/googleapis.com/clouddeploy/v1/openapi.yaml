@@ -1326,6 +1326,7 @@ components:
             - CLOUD_BUILD_UNAVAILABLE
             - EXECUTION_FAILED
             - DEADLINE_EXCEEDED
+            - CLOUD_BUILD_REQUEST_FAILED
           readOnly: true
           type: string
         failureMessage:
@@ -1990,6 +1991,7 @@ components:
             - RELEASE_FAILED
             - RELEASE_ABANDONED
             - VERIFICATION_CONFIG_NOT_FOUND
+            - CLOUD_BUILD_REQUEST_FAILED
           readOnly: true
           type: string
         deployStartTime:
@@ -2258,6 +2260,7 @@ components:
             - FAILURE_CAUSE_UNSPECIFIED
             - CLOUD_BUILD_UNAVAILABLE
             - EXECUTION_FAILED
+            - CLOUD_BUILD_REQUEST_FAILED
           readOnly: true
           type: string
         failureMessage:
@@ -2349,6 +2352,7 @@ components:
             - EXECUTION_FAILED
             - DEADLINE_EXCEEDED
             - VERIFICATION_CONFIG_NOT_FOUND
+            - CLOUD_BUILD_REQUEST_FAILED
           readOnly: true
           type: string
         failureMessage:

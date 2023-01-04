@@ -5673,6 +5673,21 @@ components:
                 type: string
             type: object
           type: array
+        deprovisionReason:
+          description: (Read-only) Deprovision reason.
+          enum:
+            - deprovisionReasonUnspecified
+            - deprovisionReasonSameModelReplacement
+            - deprovisionReasonUpgrade
+            - deprovisionReasonDomainMove
+            - deprovisionReasonServiceExpiration
+            - deprovisionReasonOther
+            - deprovisionReasonDifferentModelReplacement
+            - deprovisionReasonRetiringDevice
+            - deprovisionReasonUpgradeTransfer
+            - deprovisionReasonNotRequired
+            - deprovisionReasonRepairCenter
+          type: string
         deviceFiles:
           description: A list of device files to download (Read-only)
           items:
@@ -5739,6 +5754,9 @@ components:
         kind:
           default: admin#directory#chromeosdevice
           description: The type of resource. For the Chromeosdevices resource, the value is `admin#directory#chromeosdevice`.
+          type: string
+        lastDeprovisionTimestamp:
+          description: (Read-only) Date and time for the last deprovision of the device.
           type: string
         lastEnrollmentTime:
           description: Date and time the device was last enrolled (Read-only)
@@ -6040,11 +6058,15 @@ components:
             - SET_VOLUME
             - WIPE_USERS
             - REMOTE_POWERWASH
+            - DEVICE_START_CRD_SESSION
           type: string
       type: object
     DirectoryChromeosdevicesCommandResult:
       description: The result of executing a command.
       properties:
+        commandResultPayload:
+          description: 'The payload for the command result. The following commands respond with a payload: - DEVICE_START_CRD_SESSION: Payload is a stringified JSON object in the form: { "url": url }. The URL provides a link to the CRD session.'
+          type: string
         errorMessage:
           description: The error message with a short explanation as to why the command failed. Only present if the command failed.
           type: string
@@ -6073,9 +6095,10 @@ components:
             - SET_VOLUME
             - WIPE_USERS
             - REMOTE_POWERWASH
+            - DEVICE_START_CRD_SESSION
           type: string
         payload:
-          description: 'The payload for the command, provide it only if command supports it. The following commands support adding payload: - SET_VOLUME: Payload is a stringified JSON object in the form: { "volume": 50 }. The volume has to be an integer in the range [0,100].'
+          description: 'The payload for the command, provide it only if command supports it. The following commands support adding payload: - SET_VOLUME: Payload is a stringified JSON object in the form: { "volume": 50 }. The volume has to be an integer in the range [0,100]. - DEVICE_START_CRD_SESSION: Payload is optionally a stringified JSON object in the form: { "ackedUserPresence": true }. ackedUserPresence is a boolean. If a device is being used, ackedUserPresence must be set to true to acknowledge that you want to start a CRD session anyways. It is false by default, so a CRD command will fail if used on an active device without this field.'
           type: string
       type: object
     DirectoryChromeosdevicesIssueCommandResponse:
@@ -6252,7 +6275,7 @@ components:
           type: string
       type: object
     Group:
-      description: Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
+      description: "Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](https://developers.google.com/admin-sdk/directory/v1/guides/manage-groups). For information about other types of groups, see the [Cloud Identity Groups API documentation](https://cloud.google.com/identity/docs/groups). Note: The user calling the API (or being impersonated by a service account) must have an assigned [role](https://developers.google.com/admin-sdk/directory/v1/guides/manage-roles) that includes Admin API Groups permissions, such as Super Admin or Groups Admin."
       properties:
         adminCreated:
           description: Read-only. Value is `true` if this group was created by an administrator rather than a user.
