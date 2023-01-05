@@ -10625,6 +10625,10 @@ components:
             - EXCHANGE_TAPJOY
             - EXCHANGE_VISTAR
             - EXCHANGE_DAX
+            - EXCHANGE_JCD
+            - EXCHANGE_PLACE_EXCHANGE
+            - EXCHANGE_APPLOVIN
+            - EXCHANGE_CONNATIX
           type: string
       type: object
     ExchangeConfig:
@@ -10711,6 +10715,10 @@ components:
             - EXCHANGE_TAPJOY
             - EXCHANGE_VISTAR
             - EXCHANGE_DAX
+            - EXCHANGE_JCD
+            - EXCHANGE_PLACE_EXCHANGE
+            - EXCHANGE_APPLOVIN
+            - EXCHANGE_CONNATIX
           type: string
         googleAdManagerAgencyId:
           description: Output only. Agency ID of Google Ad Manager. The field is only relevant when Google Ad Manager is the enabled exchange.
@@ -10800,6 +10808,10 @@ components:
             - EXCHANGE_TAPJOY
             - EXCHANGE_VISTAR
             - EXCHANGE_DAX
+            - EXCHANGE_JCD
+            - EXCHANGE_PLACE_EXCHANGE
+            - EXCHANGE_APPLOVIN
+            - EXCHANGE_CONNATIX
           type: string
         status:
           description: Status of the exchange review.
@@ -10885,6 +10897,10 @@ components:
             - EXCHANGE_TAPJOY
             - EXCHANGE_VISTAR
             - EXCHANGE_DAX
+            - EXCHANGE_JCD
+            - EXCHANGE_PLACE_EXCHANGE
+            - EXCHANGE_APPLOVIN
+            - EXCHANGE_CONNATIX
           readOnly: true
           type: string
       type: object
@@ -11429,6 +11445,10 @@ components:
             - EXCHANGE_TAPJOY
             - EXCHANGE_VISTAR
             - EXCHANGE_DAX
+            - EXCHANGE_JCD
+            - EXCHANGE_PLACE_EXCHANGE
+            - EXCHANGE_APPLOVIN
+            - EXCHANGE_CONNATIX
           type: string
         guaranteedOrderId:
           description: Output only. The unique identifier of the guaranteed order. The guaranteed order IDs have the format `{exchange}-{legacy_guaranteed_order_id}`.
@@ -11916,6 +11936,10 @@ components:
             - EXCHANGE_TAPJOY
             - EXCHANGE_VISTAR
             - EXCHANGE_DAX
+            - EXCHANGE_JCD
+            - EXCHANGE_PLACE_EXCHANGE
+            - EXCHANGE_APPLOVIN
+            - EXCHANGE_CONNATIX
           type: string
         guaranteedOrderId:
           description: Immutable. The ID of the guaranteed order that this inventory source belongs to. Only applicable when commitment is `INVENTORY_SOURCE_COMMITMENT_GUARANTEED`.
@@ -14298,6 +14322,47 @@ components:
           readOnly: true
           type: string
       type: object
+    VideoAdSequenceSettings:
+      description: Settings related to VideoAdSequence.
+      properties:
+        minimumDuration:
+          description: The minimum time interval before the same user sees this sequence again.
+          enum:
+            - VIDEO_AD_SEQUENCE_MINIMUM_DURATION_UNSPECIFIED
+            - VIDEO_AD_SEQUENCE_MINIMUM_DURATION_WEEK
+            - VIDEO_AD_SEQUENCE_MINIMUM_DURATION_MONTH
+          type: string
+        steps:
+          description: The steps of which the sequence consists.
+          items:
+            $ref: "#/components/schemas/VideoAdSequenceStep"
+          type: array
+      type: object
+    VideoAdSequenceStep:
+      description: The detail of a single step in a VideoAdSequence.
+      properties:
+        adGroupId:
+          description: The ID of the corresponding ad group of the step.
+          format: int64
+          type: string
+        interactionType:
+          description: The interaction on the previous step that will lead the viewer to this step. The first step does not have interaction_type.
+          enum:
+            - INTERACTION_TYPE_UNSPECIFIED
+            - INTERACTION_TYPE_PAID_VIEW
+            - INTERACTION_TYPE_SKIP
+            - INTERACTION_TYPE_IMPRESSION
+            - INTERACTION_TYPE_ENGAGED_IMPRESSION
+          type: string
+        previousStepId:
+          description: The ID of the previous step. The first step does not have previous step.
+          format: int64
+          type: string
+        stepId:
+          description: The ID of the step.
+          format: int64
+          type: string
+      type: object
     VideoPlayerSizeAssignedTargetingOptionDetails:
       description: Video player size targeting option details. This will be populated in the video_player_size_details field when targeting_type is `TARGETING_TYPE_VIDEO_PLAYER_SIZE`. Explicitly targeting all options is not supported. Remove all video player size targeting options to achieve this effect.
       properties:
@@ -14414,6 +14479,9 @@ components:
         thirdPartyMeasurementSettings:
           $ref: "#/components/schemas/YoutubeAndPartnersThirdPartyMeasurementSettings"
           description: The third-party measurement settings of the line item.
+        videoAdSequenceSettings:
+          $ref: "#/components/schemas/VideoAdSequenceSettings"
+          description: The settings related to VideoAdSequence.
         viewFrequencyCap:
           $ref: "#/components/schemas/FrequencyCap"
           description: The view frequency cap settings of the line item. The max_views field in this settings object must be used if assigning a limited cap.

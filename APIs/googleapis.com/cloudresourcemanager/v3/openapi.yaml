@@ -13,20 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Resource Manager API
   version: v3
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://cloudresourcemanager.googleapis.com/$discovery/rest?version=v3
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: cloudresourcemanager
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/resource-manager
 tags:
@@ -105,7 +102,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Required. The resource name of the organization or folder whose folders are being listed. Must be of the form `folders/{folder_id}` or `organizations/{org_id}`. Access to this method is controlled by checking the `resourcemanager.folders.list` permission on the `parent`.
+        - description: Required. The name of the parent resource whose folders are being listed. Only children of this parent resource are listed; descendants are not listed. If the parent is a folder, use the value `folders/{folder_id}`. If the parent is an organization, use the value `organizations/{org_id}`. Access to this method is controlled by checking the `resourcemanager.folders.list` permission on the `parent`.
           in: query
           name: parent
           schema:
@@ -358,7 +355,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Required. The name of the parent resource to list projects under. For example, setting this field to 'folders/1234' would list all projects directly under that folder.
+        - description: Required. The name of the parent resource whose projects are being listed. Only children of this parent resource are listed; descendants are not listed. If the parent is a folder, use the value `folders/{folder_id}`. If the parent is an organization, use the value `organizations/{org_id}`.
           in: query
           name: parent
           schema:
@@ -641,7 +638,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Required. Resource name for TagKey, parent of the TagValues to be listed, in the format `tagKeys/123`.
+        - description: Required.
           in: query
           name: parent
           schema:
@@ -1740,7 +1737,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: 'Optional. The labels associated with this project. Label keys must be between 1 and 63 characters long and must conform to the following regular expression: \[a-z\](\[-a-z0-9\]*\[a-z0-9\])?. Label values must be between 0 and 63 characters long and must conform to the regular expression (\[a-z\](\[-a-z0-9\]*\[a-z0-9\])?)?. No more than 256 labels can be associated with a given resource. Clients should store labels in a representation such as JSON that does not depend on specific characters being disallowed. Example: `"myBusinessDimension" : "businessValue"`'
+          description: 'Optional. The labels associated with this project. Label keys must be between 1 and 63 characters long and must conform to the following regular expression: \[a-z\](\[-a-z0-9\]*\[a-z0-9\])?. Label values must be between 0 and 63 characters long and must conform to the regular expression (\[a-z\](\[-a-z0-9\]*\[a-z0-9\])?)?. No more than 64 labels can be associated with a given resource. Clients should store labels in a representation such as JSON that does not depend on specific characters being disallowed. Example: `"myBusinessDimension" : "businessValue"`'
           type: object
         name:
           description: 'Output only. The unique resource name of the project. It is an int64 generated number prefixed by "projects/". Example: `projects/415104041262`'
@@ -2032,5 +2029,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud services and see the email address of your Google Account
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

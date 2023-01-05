@@ -5401,6 +5401,16 @@ components:
           description: Named properties associated with the step. Each kind of predefined step has its own required set of properties. Must be provided on Create. Only retrieved with JOB_VIEW_ALL.
           type: object
       type: object
+    Straggler:
+      description: Information for a straggler.
+      properties:
+        batchStraggler:
+          $ref: "#/components/schemas/StragglerInfo"
+          description: Batch straggler identification and debugging information.
+        streamingStraggler:
+          $ref: "#/components/schemas/StreamingStragglerInfo"
+          description: Streaming straggler identification and debugging information.
+      type: object
     StragglerDebuggingInfo:
       description: Information useful for debugging a straggler. Each type will provide specialized debugging information relevant for a particular cause. The StragglerDebuggingInfo will be 1:1 mapping to the StragglerCause enum.
       properties:
@@ -5424,6 +5434,11 @@ components:
     StragglerSummary:
       description: Summarized straggler identification details.
       properties:
+        recentStragglers:
+          description: The most recent stragglers.
+          items:
+            $ref: "#/components/schemas/Straggler"
+          type: array
         stragglerCauseCount:
           additionalProperties:
             format: int64
@@ -5586,6 +5601,29 @@ components:
       properties:
         streamId:
           description: Identifies the particular stream within the streaming Dataflow job.
+          type: string
+      type: object
+    StreamingStragglerInfo:
+      description: Information useful for streaming straggler identification and debugging.
+      properties:
+        dataWatermarkLag:
+          description: The event-time watermark lag at the time of the straggler detection.
+          format: google-duration
+          type: string
+        endTime:
+          description: End time of this straggler.
+          format: google-datetime
+          type: string
+        startTime:
+          description: Start time of this straggler.
+          format: google-datetime
+          type: string
+        systemWatermarkLag:
+          description: The system watermark lag at the time of the straggler detection.
+          format: google-duration
+          type: string
+        workerName:
+          description: Name of the worker where the straggler was detected.
           type: string
       type: object
     StringList:

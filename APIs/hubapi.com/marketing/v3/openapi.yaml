@@ -18,6 +18,8 @@ info:
   x-providerName: hubapi.com
   x-serviceName: marketing
 tags:
+  - description: Endpoints that allow you to search for Marketing Events in HubSpot.
+    name: Search
   - description: Operations to mark HubSpot contacts as registered, attended or cancelled a registration to a Marketing Event.
     name: Attendance Subscriber State Changes
   - name: Marketing_Events_External
@@ -171,9 +173,11 @@ paths:
         - Marketing_Events_External
   /marketing/v3/marketing-events/events/search:
     get:
+      description: Search for marketing events that have an event id that starts with the query string
       operationId: get-/marketing/v3/marketing-events/events/search_doSearch
       parameters:
-        - explode: true
+        - description: The id of the marketing event in the external event application
+          explode: true
           in: query
           name: q
           required: true
@@ -193,8 +197,9 @@ paths:
         - oauth2_legacy:
             - crm.objects.marketing_events.read
         - private_apps_legacy: []
+      summary: Search for marketing events
       tags:
-        - Marketing_Events_External
+        - Search
   /marketing/v3/marketing-events/events/upsert:
     post:
       operationId: post-/marketing/v3/marketing-events/events/upsert_doUpsert
@@ -1333,6 +1338,8 @@ components:
         updatedByUserId:
           format: int32
           type: integer
+        useTimestampAsPersistenceTimestamp:
+          type: boolean
         value:
           type: string
       required:

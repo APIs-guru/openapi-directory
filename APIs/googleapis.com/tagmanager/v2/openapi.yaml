@@ -297,6 +297,7 @@ paths:
                 - serverPageLocationUrl
                 - serverPageLocationPath
                 - serverPageLocationHostname
+                - visitorRegion
               type: string
             type: array
           style: form
@@ -1566,6 +1567,7 @@ paths:
                 - serverPageLocationUrl
                 - serverPageLocationPath
                 - serverPageLocationHostname
+                - visitorRegion
               type: string
             type: array
           style: form
@@ -1803,6 +1805,7 @@ paths:
               - serverPageLocationUrl
               - serverPageLocationPath
               - serverPageLocationHostname
+              - visitorRegion
             type: string
       responses:
         "200":
@@ -2746,6 +2749,7 @@ components:
             - serverPageLocationUrl
             - serverPageLocationPath
             - serverPageLocationHostname
+            - visitorRegion
           type: string
         workspaceId:
           description: GTM Workspace ID.
