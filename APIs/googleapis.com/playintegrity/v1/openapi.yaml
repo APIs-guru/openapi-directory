@@ -233,7 +233,10 @@ components:
       description: Contains the integrity request information.
       properties:
         nonce:
-          description: Required. Nonce that was provided in the request (which is base64 web-safe no-wrap).
+          description: Nonce that was provided in the request (which is base64 web-safe no-wrap).
+          type: string
+        requestHash:
+          description: Request hash that was provided in the request.
           type: string
         requestPackageName:
           description: "Required. Application package name this attestation was requested for. Note: This field makes no guarantees or promises on the caller integrity. For details on application integrity, check application_integrity."

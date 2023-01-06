@@ -122,6 +122,52 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
+  "/v2/{conversation}/suggestions:suggestConversationSummary":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Suggests summary for a conversation based on specific historical messages. The range of the messages to be used for summary can be specified in the request.
+      operationId: dialogflow.projects.locations.conversations.suggestions.suggestConversationSummary
+      parameters:
+        - description: "Required. The conversation to fetch suggestion for. Format: `projects//locations//conversations/`."
+          in: path
+          name: conversation
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowV2SuggestConversationSummaryRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2SuggestConversationSummaryResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
   "/v2/{name}":
     delete:
       description: "Deletes the specified document. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: KnowledgeOperationMetadata - `response`: An [Empty message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)"
@@ -3137,6 +3183,13 @@ components:
             type: string
           type: array
       type: object
+    GoogleCloudDialogflowCxV3ConversationSignals:
+      description: This message is used to hold all the Conversation Signals data, which will be converted to JSON and exported to BigQuery.
+      properties:
+        turnSignals:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TurnSignals"
+          description: Required. Turn signals for the current turn.
+      type: object
     GoogleCloudDialogflowCxV3ConversationTurn:
       description: One interaction between a human and virtual agent. The human provides some input and the virtual agent provides a response.
       properties:
@@ -4080,6 +4133,42 @@ components:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Fulfillment"
           description: The fulfillment to call when the condition is satisfied. At least one of `trigger_fulfillment` and `target` must be specified. When both are defined, `trigger_fulfillment` is executed first.
       type: object
+    GoogleCloudDialogflowCxV3TurnSignals:
+      description: Collection of all signals that were extracted for a single turn of the conversation.
+      properties:
+        agentEscalated:
+          description: Whether agent responded with LiveAgentHandoff fulfillment.
+          type: boolean
+        dtmfUsed:
+          description: Whether user was using DTMF input.
+          type: boolean
+        failureReasons:
+          description: Failure reasons of the turn.
+          items:
+            enum:
+              - FAILURE_REASON_UNSPECIFIED
+              - FAILED_INTENT
+              - FAILED_WEBHOOK
+            type: string
+          type: array
+        noMatch:
+          description: Whether NLU predicted NO_MATCH.
+          type: boolean
+        noUserInput:
+          description: Whether user provided no input.
+          type: boolean
+        reachedEndPage:
+          description: Whether turn resulted in End Session page.
+          type: boolean
+        userEscalated:
+          description: Whether user was specifically asking for a live agent.
+          type: boolean
+        webhookStatuses:
+          description: Human-readable statuses of the webhooks triggered during this turn.
+          items:
+            type: string
+          type: array
+      type: object
     GoogleCloudDialogflowCxV3UpdateDocumentOperationMetadata:
       description: Metadata for UpdateDocument operation.
       properties:
@@ -4329,6 +4418,13 @@ components:
           items:
             type: string
           type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1ConversationSignals:
+      description: This message is used to hold all the Conversation Signals data, which will be converted to JSON and exported to BigQuery.
+      properties:
+        turnSignals:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TurnSignals"
+          description: Required. Turn signals for the current turn.
       type: object
     GoogleCloudDialogflowCxV3beta1ConversationTurn:
       description: One interaction between a human and virtual agent. The human provides some input and the virtual agent provides a response.
@@ -5273,6 +5369,42 @@ components:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Fulfillment"
           description: The fulfillment to call when the condition is satisfied. At least one of `trigger_fulfillment` and `target` must be specified. When both are defined, `trigger_fulfillment` is executed first.
       type: object
+    GoogleCloudDialogflowCxV3beta1TurnSignals:
+      description: Collection of all signals that were extracted for a single turn of the conversation.
+      properties:
+        agentEscalated:
+          description: Whether agent responded with LiveAgentHandoff fulfillment.
+          type: boolean
+        dtmfUsed:
+          description: Whether user was using DTMF input.
+          type: boolean
+        failureReasons:
+          description: Failure reasons of the turn.
+          items:
+            enum:
+              - FAILURE_REASON_UNSPECIFIED
+              - FAILED_INTENT
+              - FAILED_WEBHOOK
+            type: string
+          type: array
+        noMatch:
+          description: Whether NLU predicted NO_MATCH.
+          type: boolean
+        noUserInput:
+          description: Whether user provided no input.
+          type: boolean
+        reachedEndPage:
+          description: Whether turn resulted in End Session page.
+          type: boolean
+        userEscalated:
+          description: Whether user was specifically asking for a live agent.
+          type: boolean
+        webhookStatuses:
+          description: Human-readable statuses of the webhooks triggered during this turn.
+          items:
+            type: string
+          type: array
+      type: object
     GoogleCloudDialogflowCxV3beta1UpdateDocumentOperationMetadata:
       description: Metadata for UpdateDocument operation.
       properties:
@@ -5551,6 +5683,24 @@ components:
             - DOCUMENT_EFFICIENCY_UNSPECIFIED
             - INEFFICIENT
             - EFFICIENT
+          type: string
+        summarizationFeedback:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2AgentAssistantFeedbackSummarizationFeedback"
+          description: Optional. Feedback for conversation summarization.
+      type: object
+    GoogleCloudDialogflowV2AgentAssistantFeedbackSummarizationFeedback:
+      description: Feedback for conversation summarization.
+      properties:
+        startTime:
+          description: Timestamp when composing of the summary starts.
+          format: google-datetime
+          type: string
+        submitTime:
+          description: Timestamp when the summary was submitted.
+          format: google-datetime
+          type: string
+        summaryText:
+          description: Text of actual submitted summary.
           type: string
       type: object
     GoogleCloudDialogflowV2AgentAssistantRecord:
@@ -8347,6 +8497,46 @@ components:
           description: "The name of the latest conversation message used to compile suggestion for. Format: `projects//locations//conversations//messages/`."
           type: string
       type: object
+    GoogleCloudDialogflowV2SuggestConversationSummaryRequest:
+      description: The request message for Conversations.SuggestConversationSummary.
+      properties:
+        contextSize:
+          description: Max number of messages prior to and including [latest_message] to use as context when compiling the suggestion. By default 500 and at most 1000.
+          format: int32
+          type: integer
+        latestMessage:
+          description: "The name of the latest conversation message used as context for compiling suggestion. If empty, the latest message of the conversation will be used. Format: `projects//locations//conversations//messages/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowV2SuggestConversationSummaryResponse:
+      description: The response message for Conversations.SuggestConversationSummary.
+      properties:
+        contextSize:
+          description: Number of messages prior to and including last_conversation_message used to compile the suggestion. It may be smaller than the SuggestSummaryRequest.context_size field in the request if there weren't that many messages in the conversation.
+          format: int32
+          type: integer
+        latestMessage:
+          description: "The name of the latest conversation message used as context for compiling suggestion. Format: `projects//locations//conversations//messages/`."
+          type: string
+        summary:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2SuggestConversationSummaryResponseSummary"
+          description: Generated summary.
+      type: object
+    GoogleCloudDialogflowV2SuggestConversationSummaryResponseSummary:
+      description: Generated summary for a conversation.
+      properties:
+        answerRecord:
+          description: 'The name of the answer record. Format: "projects//answerRecords/"'
+          type: string
+        text:
+          description: The summary content that is concatenated into one string.
+          type: string
+        textSections:
+          additionalProperties:
+            type: string
+          description: The summary content that is divided into sections. The key is the section's name and the value is the section's content. There is no specific format for the key or value.
+          type: object
+      type: object
     GoogleCloudDialogflowV2SuggestFaqAnswersRequest:
       description: The request message for Participants.SuggestFaqAnswers.
       properties:
@@ -10074,6 +10264,13 @@ components:
           description: Optional. A custom field used to identify the webhook source. Arbitrary strings are supported. When provided, Dialogflow uses this field to populate QueryResult.webhook_source sent to the integration or API caller.
           type: string
       type: object
+    GoogleCloudDialogflowV3alpha1ConversationSignals:
+      description: This message is used to hold all the Conversation Signals data, which will be converted to JSON and exported to BigQuery.
+      properties:
+        turnSignals:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV3alpha1TurnSignals"
+          description: Required. Turn signals for the current turn.
+      type: object
     GoogleCloudDialogflowV3alpha1CreateDocumentOperationMetadata:
       description: Metadata for CreateDocument operation.
       properties:
@@ -10123,6 +10320,45 @@ components:
         genericMetadata:
           $ref: "#/components/schemas/GoogleCloudDialogflowV3alpha1GenericKnowledgeOperationMetadata"
           description: The generic information of the operation.
+      type: object
+    GoogleCloudDialogflowV3alpha1TurnSignals:
+      description: Collection of all signals that were extracted for a single turn of the conversation.
+      properties:
+        agentEscalated:
+          description: Whether agent responded with LiveAgentHandoff fulfillment.
+          type: boolean
+        dtmfUsed:
+          description: Whether user was using DTMF input.
+          type: boolean
+        failureReasons:
+          description: Failure reasons of the turn.
+          items:
+            enum:
+              - FAILURE_REASON_UNSPECIFIED
+              - FAILED_INTENT
+              - FAILED_WEBHOOK
+            type: string
+          type: array
+        noMatch:
+          description: Whether NLU predicted NO_MATCH.
+          type: boolean
+        noUserInput:
+          description: Whether user provided no input.
+          type: boolean
+        reachedEndPage:
+          description: Whether turn resulted in End Session page.
+          type: boolean
+        triggeredAbandonmentEvent:
+          description: Whether agent has triggered the event corresponding to user abandoning the conversation.
+          type: boolean
+        userEscalated:
+          description: Whether user was specifically asking for a live agent.
+          type: boolean
+        webhookStatuses:
+          description: Human-readable statuses of the webhooks triggered during this turn.
+          items:
+            type: string
+          type: array
       type: object
     GoogleCloudDialogflowV3alpha1UpdateDocumentOperationMetadata:
       description: Metadata for UpdateDocument operation.
