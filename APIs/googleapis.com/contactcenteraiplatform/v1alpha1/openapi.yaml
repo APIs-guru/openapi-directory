@@ -376,52 +376,10 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/locations/{locationsId}:queryContactCenterQuota":
-    get:
-      description: Queries the contact center quota, an aggregation over all the projects, that belongs to the billing account, which the input project belongs to.
-      operationId: contactcenteraiplatform.projects.locations.queryContactCenterQuota
-      parameters:
-        - description: Required. Parent project resource id.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: locationsId
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ContactCenterQuota"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
   "/v1alpha1/{parent}:queryContactCenterQuota":
     get:
       description: Queries the contact center quota, an aggregation over all the projects, that belongs to the billing account, which the input project belongs to.
-      operationId: contactcenteraiplatform.projects.queryContactCenterQuota
+      operationId: contactcenteraiplatform.projects.locations.queryContactCenterQuota
       parameters:
         - description: Required. Parent project resource id.
           in: path

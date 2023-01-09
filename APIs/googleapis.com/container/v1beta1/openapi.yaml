@@ -3286,6 +3286,9 @@ components:
         endpoint:
           description: "[Output only] The IP address of this cluster's master endpoint. The endpoint can be accessed from the internet at `https://username:password@endpoint/`. See the `masterAuth` property of this resource for username and password information."
           type: string
+        etag:
+          description: This checksum is computed by the server based on the value of cluster fields, and may be sent on update requests to ensure the client has an up-to-date value before proceeding.
+          type: string
         expireTime:
           description: "[Output only] The time the cluster will be automatically deleted in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format."
           type: string
@@ -3654,6 +3657,9 @@ components:
         desiredWorkloadIdentityConfig:
           $ref: "#/components/schemas/WorkloadIdentityConfig"
           description: Configuration for Workload Identity.
+        etag:
+          description: The current etag of the cluster. If an etag is provided and does not match the current etag of the cluster, update will be blocked and an ABORTED error will be returned.
+          type: string
       type: object
     CompleteIPRotationRequest:
       description: CompleteIPRotationRequest moves the cluster master back into single-IP mode.
@@ -3822,6 +3828,14 @@ components:
       properties:
         localSsdCount:
           description: Number of local SSDs to use to back ephemeral storage. Uses NVMe interfaces. Each local SSD is 375 GB in size. If zero, it means to disable using local SSDs as ephemeral storage.
+          format: int32
+          type: integer
+      type: object
+    EphemeralStorageLocalSsdConfig:
+      description: EphemeralStorageLocalSsdConfig contains configuration for the node ephemeral storage using Local SSDs.
+      properties:
+        localSsdCount:
+          description: "Number of local SSDs to use to back ephemeral storage. Uses NVMe interfaces. Each local SSD is 375 GB in size. If zero, it means to disable using local SSDs as ephemeral storage. The limit for this value is dependent upon the maximum number of disks available on a machine per zone. See: https://cloud.google.com/compute/docs/disks/local-ssd for more information."
           format: int32
           type: integer
       type: object
@@ -4209,6 +4223,14 @@ components:
             $ref: "#/components/schemas/UsableSubnetwork"
           type: array
       type: object
+    LocalNvmeSsdBlockConfig:
+      description: LocalNvmeSsdBlockConfig contains configuration for using raw-block local NVMe SSDs
+      properties:
+        localSsdCount:
+          description: "The number of raw-block local NVMe SSD disks to be attached to the node. Each local SSD is 375 GB in size. If zero, it means no raw-block local NVMe SSD disks to be attached to the node. The limit for this value is dependent upon the maximum number of disks available on a machine per zone. See: https://cloud.google.com/compute/docs/disks/local-ssd for more information."
+          format: int32
+          type: integer
+      type: object
     Location:
       description: Location returns the location name, and if the location is recommended for GKE cluster scheduling.
       properties:
@@ -4517,6 +4539,9 @@ components:
         ephemeralStorageConfig:
           $ref: "#/components/schemas/EphemeralStorageConfig"
           description: Parameters for the ephemeral storage filesystem. If unspecified, ephemeral storage is backed by the boot disk.
+        ephemeralStorageLocalSsdConfig:
+          $ref: "#/components/schemas/EphemeralStorageLocalSsdConfig"
+          description: Parameters for the node ephemeral storage using Local SSDs. If unspecified, ephemeral storage is backed by the boot disk. This field is functionally equivalent to the ephemeral_storage_config
         fastSocket:
           $ref: "#/components/schemas/FastSocket"
           description: Enable or disable NCCL fast socket for the node pool.
@@ -4540,6 +4565,9 @@ components:
         linuxNodeConfig:
           $ref: "#/components/schemas/LinuxNodeConfig"
           description: Parameters that can be configured on Linux nodes.
+        localNvmeSsdBlockConfig:
+          $ref: "#/components/schemas/LocalNvmeSsdBlockConfig"
+          description: Parameters for using raw-block Local NVMe SSDs.
         localSsdCount:
           description: "The number of local SSD disks to be attached to the node. The limit for this value is dependent upon the maximum number of disks available on a machine per zone. See: https://cloud.google.com/compute/docs/disks/local-ssd for more information."
           format: int32
@@ -4599,6 +4627,9 @@ components:
           items:
             $ref: "#/components/schemas/NodeTaint"
           type: array
+        windowsNodeConfig:
+          $ref: "#/components/schemas/WindowsNodeConfig"
+          description: Parameters that can be configured on Windows nodes.
         workloadMetadataConfig:
           $ref: "#/components/schemas/WorkloadMetadataConfig"
           description: The workload metadata configuration for this node.
@@ -4685,6 +4716,9 @@ components:
         config:
           $ref: "#/components/schemas/NodeConfig"
           description: The node configuration of the pool.
+        etag:
+          description: This checksum is computed by the server based on the value of node pool fields, and may be sent on update requests to ensure the client has an up-to-date value before proceeding.
+          type: string
         initialNodeCount:
           description: The initial node count for the pool. You must ensure that your Compute Engine [resource quota](https://cloud.google.com/compute/quotas) is sufficient for this number of instances. You must also have available firewall and routes quota.
           format: int32
@@ -5683,6 +5717,9 @@ components:
         confidentialNodes:
           $ref: "#/components/schemas/ConfidentialNodes"
           description: Confidential nodes config. All the nodes in the node pool will be Confidential VM once enabled.
+        etag:
+          description: The current etag of the node pool. If an etag is provided and does not match the current etag of the node pool, update will be blocked and an ABORTED error will be returned.
+          type: string
         fastSocket:
           $ref: "#/components/schemas/FastSocket"
           description: Enable or disable NCCL fast socket for the node pool.
@@ -5739,6 +5776,9 @@ components:
         upgradeSettings:
           $ref: "#/components/schemas/UpgradeSettings"
           description: Upgrade settings control disruption and speed of the upgrade.
+        windowsNodeConfig:
+          $ref: "#/components/schemas/WindowsNodeConfig"
+          description: Parameters that can be configured on Windows nodes.
         workloadMetadataConfig:
           $ref: "#/components/schemas/WorkloadMetadataConfig"
           description: The desired workload metadata config for the node pool.
@@ -5871,6 +5911,17 @@ components:
         enabled:
           description: Whether gVNIC features are enabled in the node pool.
           type: boolean
+      type: object
+    WindowsNodeConfig:
+      description: Parameters that can be configured on Windows nodes. Windows Node Config that define the parameters that will be used to configure the Windows node pool settings
+      properties:
+        osVersion:
+          description: OSVersion specifies the Windows node config to be used on the node
+          enum:
+            - OS_VERSION_UNSPECIFIED
+            - OS_VERSION_LTSC2019
+            - OS_VERSION_LTSC2022
+          type: string
       type: object
     WindowsVersion:
       description: Windows server version.

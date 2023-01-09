@@ -965,6 +965,7 @@ components:
             - TIMED_OUT_WHILE_SCANNING
             - TOO_MANY_REDIRECTS
             - TOO_MANY_HTTP_ERRORS
+            - STARTING_URLS_CRAWL_HTTP_ERRORS
           type: string
         mostCommonHttpErrorCode:
           description: Output only. If the scan encounters TOO_MANY_HTTP_ERRORS, this field indicates the most common HTTP error code, if such is available. For example, if this code is 404, the scan has encountered too many NOT_FOUND responses.
