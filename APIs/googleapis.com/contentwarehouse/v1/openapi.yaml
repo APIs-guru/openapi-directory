@@ -739,7 +739,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Sets the access control policy for a resource. Replaces any existing policy.
+      description: 'Sets the access control policy for a resource. Replaces any existing policy. You can set ACL with condition for projects only. Supported operators are: `=`, `!=`, `<`, `<=`, `>`, and `>=` where the left of the operator is `DocumentSchemaId` or property name and the right of the operator is a number or a quoted string. You must escape backslash (\\) and quote (\") characters. Boolean expressions (AND/OR) are supported up to 3 levels of nesting (for example, "((A AND B AND C) OR D) AND E"), a maximum of 10 comparisons are allowed in the expression. The expression must be < 6000 bytes in length. Sample condition: `"DocumentSchemaId = \"some schema id\" " OR SchemaId.floatPropertyName >= 10`'
       operationId: contentwarehouse.projects.locations.documents.setAcl
       parameters:
         - description: "Required. REQUIRED: The resource for which the policy is being requested. Format for document: projects/{project_number}/locations/{location}/documents/{document_id}. Format for project: projects/{project_number}."
@@ -8137,8 +8137,12 @@ components:
           description: Start date of the range.
       type: object
     AssistantApiScreenCapabilities:
-      description: "These capabilities represent the tactile features associated with the device. This includes, for example, whether the device has a screen, how big the screen is, and privacy of the screen. Next ID: 10"
+      description: "These capabilities represent the tactile features associated with the device. This includes, for example, whether the device has a screen, how big the screen is, and privacy of the screen. Next ID: 11"
       properties:
+        fontScaleFactor:
+          description: The scale factor used to convert Scalable Pixel (SP) units to Density-independent Pixel (DP) units (DP = SP * scale factor). Fonts are measured in units of SP, and on some platforms such as Android the SP to DP scale factor can be affected by the font size a user selects in accessibility settings.
+          format: float
+          type: number
         inputType:
           description: The types of input that this screen supports. Note that this can be empty in which case the screen's input type is unknown.
           items:
@@ -11545,10 +11549,14 @@ components:
           type: string
       type: object
     AssistantPrefulfillmentRankerPrefulfillmentSignals:
-      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 34"
+      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 36"
       properties:
         bindingSetAuis:
           description: Assistant User Interaction Score for binding set.
+          format: float
+          type: number
+        bindingSetPauis:
+          description: Pauis score for the binding set
           format: float
           type: number
         calibratedParsingScore:
@@ -11594,6 +11602,10 @@ components:
         maskCandidateLevelFeatures:
           description: This feature is always false / no-op in serving time. In training time, this feature may be set true on specific examples for weighted training where when this signal is true, only cross-intent level features are used for training and other candidate level features are masked (set as missing).
           type: boolean
+        maxHgrScoreAcrossBindingSets:
+          description: The maximum score assigned by the Horizontal Grounding Ranker (HGR) across all of the intent's binding sets.
+          format: double
+          type: number
         numAlternativeHypothesis:
           description: Number of alternative hypotheses from speech recognition(S3).
           format: float
@@ -11968,7 +11980,7 @@ components:
           type: array
       type: object
     AssistantVerticalsHomeautomationProtoHomeAutomation_MetaData:
-      description: "Next ID: 42"
+      description: "Next ID: 43"
       properties:
         actionProjectConfigs:
           description: Custom actions that this item supports.
@@ -12001,6 +12013,11 @@ components:
         gcmExecutionAddress:
           description: GCM address for cloud execution across google cloud messaging rather than 3p cloud; for future use.
           type: string
+        groupIds:
+          description: List of parent group IDs, if the device is added to one or multiple device groups (see go/home-groups). Will be consumed by Smart Home APIs and (in the future) Assistant CTF to populate the group member list of device groups.
+          items:
+            type: string
+          type: array
         hashValue:
           description: The hash value from go/de-consistency-check
           type: string
@@ -12674,7 +12691,7 @@ components:
           type: integer
       type: object
     ClassifierPornSiteData:
-      description: "Next ID: 51"
+      description: "Next ID: 52"
       properties:
         avgPedoPageScore:
           description: The average pedo page score for the site.
@@ -12690,6 +12707,9 @@ components:
         numberOfPedoPages:
           description: The number of pages with pedo restrict.
           format: uint64
+          type: string
+        site:
+          description: Sitechunk used to compute the signals. The field is present only for data created after December 2022.
           type: string
         sitePornRatio:
           description: The ratio of porn/softporn of the site this page belongs to.
@@ -22230,7 +22250,7 @@ components:
           type: boolean
       type: object
     GeostorePriceListNameInfoProto:
-      description: A PriceListNameInfoProto is used by PriceListProto and fields and messages contained in it for storing names, descriptions, languages, and IDs. The name field and the description field must be in the same language, as specified by the language field. None of the fields in this proto is required, although it is not expected to have the language field set unless there is a name or description. When the language field is not set, it is understood to be the preferred language of the locale where the establishment is located. An empty string for any of the fields is treated the same as having the fields not set.
+      description: A PriceListNameInfoProto is used by PriceListProto and fields and messages contained in it for storing names, descriptions, languages, and IDs. The name field and the description field must be in the same language, as specified by the language field. None of the fields in this proto is required, although it is not expected to have the language field set unless there is a name or description. When the language field is not set, it is understood to be the preferred language of the locale where the establishment is located. An empty string for any of the fields is not allowed (as enforced by lints).
       properties:
         description:
           type: string
@@ -22333,6 +22353,9 @@ components:
               - TYPE_3P_JOB
             type: string
           type: array
+        language:
+          description: The external form of a Google International Identifiers Initiative (III) LanguageCode object. See google3/i18n/identifiers/languagecode.h for details. We place extra restrictions on languages in addition to what the III library requires. See go/geo-schema-reference/feature-properties/languages. When set, represents the language of the section and its items. Any section and item level name infos must match this language. Optional.
+          type: string
         media:
           description: One or more media items (photos, videos, etc.) describing this section / category.
           items:
@@ -25857,6 +25880,10 @@ components:
         dimensions:
           $ref: "#/components/schemas/GoogleAssistantAccessoryV1ScreenOutConfigDimensions"
           description: Device dimensions.
+        fontScaleFactor:
+          description: The scale factor used to convert Scalable Pixel (SP) units to Density-independent Pixel (DP) units (DP = SP * scale factor). Fonts are measured in units of SP, and on some platforms such as Android the SP to DP scale factor can be affected by the font size a user selects in accessibility settings.
+          format: float
+          type: number
       type: object
     GoogleAssistantAccessoryV1ScreenOutConfigDimensions:
       description: This contains physical and logical characteristics about the device (e.g. screen size and DPI, etc).
@@ -26219,6 +26246,15 @@ components:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1RuleEngineOutput"
           description: "Output from Rule Engine recording the rule evaluator and action executor's output. Refer format in: google/cloud/contentwarehouse/v1/rule_engine.proto"
       type: object
+    GoogleCloudContentwarehouseV1CustomWeightsMetadata:
+      description: To support the custom weighting across document schemas.
+      properties:
+        weightedSchemaProperties:
+          description: List of schema and property name. Allows a maximum of 10 schemas to be specified for relevance boosting.
+          items:
+            $ref: "#/components/schemas/GoogleCloudContentwarehouseV1WeightedSchemaProperty"
+          type: array
+      type: object
     GoogleCloudContentwarehouseV1DataUpdateAction:
       description: Represents the action responsible for properties update operations.
       properties:
@@ -26389,6 +26425,9 @@ components:
         customPropertyFilter:
           description: 'This filter specifies a structured syntax to match against the [PropertyDefinition].is_filterable marked as `true`. The syntax for this expression is a subset of SQL syntax. Supported operators are: `=`, `!=`, `<`, `<=`, `>`, and `>=` where the left of the operator is a property name and the right of the operator is a number or a quoted string. You must escape backslash (\\) and quote (\") characters. Supported functions are `LOWER([property_name])` to perform a case insensitive match and `EMPTY([property_name])` to filter on the existence of a key. Boolean expressions (AND/OR/NOT) are supported up to 3 levels of nesting (for example, "((A AND B AND C) OR NOT D) AND E"), a maximum of 100 comparisons or functions are allowed in the expression. The expression must be < 6000 bytes in length. Sample Query: `(LOWER(driving_license)="class \"a\"" OR EMPTY(driving_license)) AND driving_years > 10`'
           type: string
+        customWeightsMetadata:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1CustomWeightsMetadata"
+          description: To support the custom weighting across document schemas, customers need to provide the properties to be used to boost the ranking in the search request. For a search query with CustomWeightsMetadata specified, only the RetrievalImportance for the properties in the CustomWeightsMetadata will be honored.
         documentCreatorFilter:
           description: The exact creator(s) of the documents to search against. If a value isn't specified, documents within the search results are associated with any creator. If multiple values are specified, documents within the search results may be associated with any of the specified creators.
           items:
@@ -26633,6 +26672,14 @@ components:
             - DB_INFRA_SPANNER
             - DB_CLOUD_SQL_POSTGRES
           type: string
+        documentCreatorDefaultRole:
+          description: Optional. The default role for the person who create a document.
+          enum:
+            - DOCUMENT_CREATOR_DEFAULT_ROLE_UNSPECIFIED
+            - DOCUMENT_ADMIN
+            - DOCUMENT_EDITOR
+            - DOCUMENT_VIEWER
+          type: string
         kmsKey:
           description: Optional. The KMS key used for CMEK encryption. It is required that the kms key is in the same region as the endpoint. The same key will be used for all provisioned resources, if encryption is available. If the kms_key is left empty, no encryption will be enforced.
           type: string
@@ -26863,6 +26910,17 @@ components:
         propertyTypeOptions:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1PropertyTypeOptions"
           description: Nested structured data property.
+        retrievalImportance:
+          description: The retrieval importance of the property during search.
+          enum:
+            - RETRIEVAL_IMPORTANCE_UNSPECIFIED
+            - HIGHEST
+            - HIGHER
+            - HIGH
+            - MEDIUM
+            - LOW
+            - LOWEST
+          type: string
         textTypeOptions:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1TextTypeOptions"
           description: Text/string property.
@@ -27319,6 +27377,18 @@ components:
         timestampValue:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1TimestampValue"
           description: Represents a timestamp value.
+      type: object
+    GoogleCloudContentwarehouseV1WeightedSchemaProperty:
+      description: Specifies the schema property name.
+      properties:
+        documentSchemaName:
+          description: The document schema name.
+          type: string
+        propertyNames:
+          description: The property definition names in the schema.
+          items:
+            type: string
+          type: array
       type: object
     GoogleCloudContentwarehouseV1beta1CreateDocumentMetadata:
       description: Metadata object for CreateDocument request (currently empty).
@@ -28856,7 +28926,7 @@ components:
           description: Set to true for a non-local trait.
           type: boolean
         trait:
-          description: Trait name, e.g., "action.devices.traits.MediaInitiation". See [device traits](https://developers.google.com/assistant/smarthome/traits). See java/com/google/home/graph/common/devices/config/protoconf.pi for the exhaustive list of trait-strings.
+          description: Trait name, e.g., "action.devices.traits.MediaInitiation". See [device traits](https://developers.home.google.com/cloud-to-cloud/traits). See java/com/google/home/graph/common/devices/config/protoconf.pi for the exhaustive list of trait-strings.
           type: string
       type: object
     HtmlrenderWebkitHeadlessProtoAnonTimingStatPair:
@@ -32086,6 +32156,12 @@ components:
         venomMutationGeneration:
           description: The generation number returned by Venom.
           format: int64
+          type: string
+        videoVenomSetting:
+          description: This field is not persisted anywhere. It is only used in deletion service for converying the VideoVenomSetting when deleting Venom data.
+          enum:
+            - VIDEO_VENOM_SETTING_COMMON
+            - VIDEO_VENOM_SETTING_VINEYARD
           type: string
       type: object
     ImageRepositoryVideoIndexingInfo:
@@ -37449,6 +37525,7 @@ components:
             - ALL_COMPOSITION
             - PRIMITIVES_ONLY_COMPOSITION
             - PRIMITIVES_AND_OPERATORS_OF_PRIMITIVES_COMPOSITION
+            - PRIMITIVES_AND_SEMANTIC_TYPES_COMPOSITION
           type: string
         measurementType:
           $ref: "#/components/schemas/KnowledgeAnswersMeasurementType"
@@ -38965,7 +39042,7 @@ components:
           description: All xtags used in the generation of the preview. The same frame generated from the same preview with different xtags will likely have different bytes (such as, for example, resulting from a different aspect ratio).
       type: object
     MediaIndexRegion:
-      description: "Metadata associated with a region in an image. NEXT_ID: 13"
+      description: "Metadata associated with a region in an image. NEXT_ID: 14"
       properties:
         boundingBox:
           $ref: "#/components/schemas/MediaIndexBoundingbox"
@@ -39015,6 +39092,8 @@ components:
             type: string
           type: array
         starburstV4:
+          $ref: "#/components/schemas/ImageContentStarburstVersionGroup"
+        starburstV5:
           $ref: "#/components/schemas/ImageContentStarburstVersionGroup"
       type: object
     MediaIndexSparseFloatVector:
@@ -42183,6 +42262,10 @@ components:
             - COMPLETE
             - LIKELY_COMPLETE
           type: string
+        textCompletenessProbability:
+          description: Completeness probability as calculated by the parser's completeness layer.
+          format: float
+          type: number
       type: object
     NlpSemanticParsingLocalAmenities:
       description: A list of amenity constraints. There is an implicit AND relationship between the different constraints.
@@ -42421,6 +42504,7 @@ components:
           enum:
             - UNKNOWN_CHARGING_SPEED
             - FAST_CHARGING_SPEED
+            - VERY_FAST_CHARGING_SPEED
           type: string
       type: object
     NlpSemanticParsingLocalExtent:
@@ -49571,14 +49655,8 @@ components:
           type: integer
       type: object
     PtokenPToken:
-      description: "PToken expresses policy-relevant properties of the data objects being processed and stored in Google's production systems. See go/ptoken to learn more. Next ID: 8"
-      properties:
-        compoundPtokenData:
-          format: byte
-          type: string
-        ptokenData:
-          format: byte
-          type: string
+      description: "PToken expresses policy-relevant properties of the data objects being processed and stored in Google's production systems. See go/ptoken to learn more. PTokens are intentionally opaque: go/ptokens-are-opaque. The following should be considered implementation details. Next ID: 8 INTERNAL: If both the Scalar and the Compound extensions are populated, we use the Compound and discard the Scalar. In principle, this should never happen."
+      properties: {}
       type: object
     QualityActionsAppInfo:
       description: Information of the app to be annotated for the query. It contains the name of the app, the package name associated with it. It also contains the confidence associated with {app, package} pair. This confidence is calculated from different signals like navboost, ranking etc. which later is used for ranking the apps for a particular query. The source of this app information is also indicated. This app info can either be from installed app (collected from device content) or from the fastmap. LINT.IfChange
@@ -50006,8 +50084,6 @@ components:
             - PERSONAL_INTELLIGENCE_NOTIFICATION
             - PERSONAL_INTELLIGENCE_LIVE_CARD
             - LENS_REMINDER
-            - AUTOBOT_TRANSACTION
-            - AUTOBOT_CSAT
             - IQS_NOTIFICATION
             - ASSISTANT_SURVEY
             - ASSISTANT_SURVEY_IMPORTANCE_MIN
@@ -51856,6 +51932,10 @@ components:
     QualityNsrNsrDataMetadata:
       description: "Contains meta information about this data. This field is only available in docjoins (and potentially MDU shards), it is not populated offline. NOTE: This is a new field (Nov 2022) and we do not want clients to depend on this; please contact qscore-team@ if you want to use this information."
       properties:
+        encodedLookupInformation:
+          description: Encoded lookup information. The fields set above are expensive to store. Storing them in docjoins is fine, but we cannot store them in MDU shards. In order for the MDU shards to display field provenance information, we store them as a bitfield. For details about the encoding and decoding scheme, see quality_nsr::util::EncodeMetadataLookupInformation. We expect this to occupy 8 bytes as long as there are less than 64 fields in NsrData proto, 12 bytes between 64 and 92 fields, etc.
+          format: byte
+          type: string
         goldmineLookupKeyPerField:
           additionalProperties:
             format: int32
@@ -52943,6 +53023,7 @@ components:
       description: The message represents a field in the query candidate Id.
       properties:
         index:
+          description: If needed, a servlet can use this field to assign an ID to distinguish between different candidates of the same CandidateType.
           format: int32
           type: integer
         type:
@@ -53498,9 +53579,9 @@ components:
             - V4_2
             - V5
             - V5_1
+            - V5_2
             - V1_BODYONLY
             - V2_BODYONLY
-            - RENAME_ME_TO_ADD_NEW_ENUM_15
             - RENAME_ME_TO_ADD_NEW_ENUM_16
             - RENAME_ME_TO_ADD_NEW_ENUM_17
             - RENAME_ME_TO_ADD_NEW_ENUM_18
@@ -53510,6 +53591,7 @@ components:
             - RENAME_ME_TO_ADD_NEW_ENUM_22
             - RENAME_ME_TO_ADD_NEW_ENUM_23
             - RENAME_ME_TO_ADD_NEW_ENUM_24
+            - RENAME_ME_TO_ADD_NEW_ENUM_25
           type: string
       type: object
     QualitySalientTermsSignalData:
@@ -54231,6 +54313,7 @@ components:
     QualityTimebasedLastSignificantUpdateAdjustments:
       properties:
         adjustmentSource:
+          description: If the selected LSU has been adjusted, i.e. the maximum passage timestamp, firstseen or contentage were assigned to LSU, the adjustment source is stored here.
           enum:
             - UNSET
             - PASSAGE_TIMESTAMP
@@ -54240,9 +54323,26 @@ components:
         isUpperboundTimestampPrecise:
           description: The timestamp is precise when it's derived from existing (>March 2022) passage timestamp.
           type: boolean
-        unadjustedTimestampInSeconds:
-          description: The timestamp that was picked up by the component indicated in the LastSignificantUpdateSource but was dropped due to exceeding the upper bound. The two following fields are present only when the adjustment took place.
+        unboundedTimestampInSeconds:
+          description: The timestamp that was picked up by the component indicated in the LastSignificantUpdateSource but was dropped due to exceeding the upper bound. Set only if it's not equal to final LSU.
           format: int64
+          type: string
+        unboundedTimestampSource:
+          description: The source that produced the unbounded timestamp.
+          enum:
+            - UNSET
+            - LSU_V1
+            - LSU_V2_UPDATE_MARKUP_SUPPORTED_BY_CONTENTAGE
+            - LSU_V2_UPDATE_MARKUP_SUPPORTED_BY_ANNOTATION
+            - LSU_V2_ANNOTATION_WITH_UPDATE_TAG
+            - LSU_V2_PUBLICATION_MARKUP_SUPPORTED_BY_CONTENTAGE
+            - LSU_V2_PUBLICATION_MARKUP_SUPPORTED_BY_ANNOTATION
+            - LSU_V2_ANNOTATION_WITH_PATTERN_BYLINE_TAG
+            - LSU_V2_RELIABLE_CONTENT_AGE_SUPPORTED_BY_ANNOTATION
+            - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_LOW_SUPPORT
+            - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_MEDIUM_SUPPORT
+            - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_HIGH_SUPPORT
+            - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_FULL_SUPPORT
           type: string
         upperboundTimestampInSeconds:
           description: "The upperbound value derived from passage timestamps. If present, the LSU date should never exceed this value. Design doc: go/lsu-max-passage-timestamp"
@@ -56948,20 +57048,14 @@ components:
             - PRODUCTS
             - SYMPTOMS
             - CHAINS
-            - SYMPTOMS_PATTERN
             - MOVIES
             - SPORTS_TEAM
             - EXAMS
             - MOTORCYCLES
-            - TOURNAMENTS
             - PRIMEREF
             - SONGS
-            - AWARDS
             - EDUCATION
             - EVENTS
-            - OLYMPICS
-            - BIG_MOMENTS
-            - DISASTERS
           type: string
       type: object
     RepositoryWebrefMention:
@@ -57932,10 +58026,6 @@ components:
           description: Stores score for later offline voting to choose reference pages. If zero, it's not a good book reference page.
           format: float
           type: number
-        explainedNormalizedTopicality:
-          description: Fraction of importance_ratio (IR) that is explained by this entity and implied entities. E.g. a page about a song with IR 0.2 for the song and 0.5 for the artist actually has explained_normalized_topicality 0.7 for the song.
-          format: float
-          type: number
         firstScore:
           description: The raw topicality score of the primary entity.
           format: float
@@ -57953,10 +58043,6 @@ components:
           type: number
         referencePageScore:
           description: Reference page score used to select the reference page owner.
-          format: float
-          type: number
-        referencePageSelectionScore:
-          description: The score used to sort reference pages for a given entity. This score tries to assign higher scores to reference pages that are more useful to the model building.
           format: float
           type: number
         selected:
@@ -59686,6 +59772,12 @@ components:
         locationName:
           description: The original name for the area covered by the dataset.
           type: string
+        locationResource:
+          enum:
+            - UNKNOWN
+            - METADATA
+            - WEBREF
+          type: string
         pointCoordinates:
           description: Latitude and longitude for a single point in the form of "lat,long".
           type: string
@@ -60112,6 +60204,11 @@ components:
             - GEO
             - ORGANIZATION
           type: string
+        kgCollection:
+          description: HRID of the KG collections
+          items:
+            type: string
+          type: array
         mid:
           description: The KG identifier of the WebrefEntity.
           type: string
@@ -62080,7 +62177,7 @@ components:
           description: SnippetsBrain model information for snippets popup debug.
       type: object
     SnippetExtraInfoSnippetCandidateInfo:
-      description: "Next ID: 13"
+      description: "Next ID: 14"
       properties:
         boldedRanges:
           description: Bolded ranges in the printed snippet lines.
@@ -62102,6 +62199,11 @@ components:
           description: List information for this candidate, only populated for RADISH_LIST snippets.
         scoringInfo:
           $ref: "#/components/schemas/SnippetExtraInfoSnippetScoringInfo"
+        sentenceStarts:
+          description: Sentence starting positions in the printed snippet lines.
+          items:
+            $ref: "#/components/schemas/QualitySnippetsTruncationSnippetBoldedRangePosition"
+          type: array
         snippet:
           description: Muppet fills snippet lines in `snippet` field.
           items:
@@ -63775,6 +63877,7 @@ components:
             - ISOLATION_PKG_YOUTUBE_PRIVATE_PLAYLISTS
             - ISOLATION_PKG_YOUTUBE_PUBLIC_AND_PRIVATE_PLAYLISTS
             - ISOLATION_S3_CREATOR_PRESENCE
+            - ISOLATION_S12Y_RECIPE_INGREDIENT_INSIGHTS
             - UMP_TESTING_ONLY
             - INTENTJOINS_NB_SIGNALS
             - ADS_INTEGRITY_ANNOTATION
@@ -67462,6 +67565,10 @@ components:
               - PBUY_FINE_TUNING_WITH_TEXT_TREAT_USER_LEVEL
               - PLAY_GAMES_ACHIEVEMENT_LOYALTY_QUEST_USER_LEVEL
               - PLAY_BOOKS_READING_PROGRESS_TOOLTIP_USER_LEVEL
+              - IAP_SKU_DEALS_LIVE_OP_GAMES_HOME_USER_LEVEL1
+              - POST_PURCHASE_OFFER_POST_PURCHASE_CONFIRMATION_DIALOG_SERVER_USER_LEVEL
+              - POST_PURCHASE_OFFER_POST_PURCHASE_OFFER_SAVED_DIALOG_SERVER_USER_LEVEL
+              - POST_PURCHASE_OFFER_VALUE_PROMOTION_DIALOG_SHOWN_SERVER_USER_LEVEL
               - USER_LEVEL_TEST_CODE_LIMIT
             type: string
           type: array
@@ -67680,7 +67787,7 @@ components:
           format: byte
           type: string
         ns:
-          description: LINT.ThenChange( //depot/google3/googledata/production/playbooks/video-assets/clients.md ) REQUIRED.
+          description: LINT.ThenChange( //depot/google3/googledata/production/playbooks/video-assets/clients.md, //depot/google3/video/assets/venom/proto/namespace.proto ) REQUIRED.
           enum:
             - NS_UNKNOWN
             - NS_YOUTUBE

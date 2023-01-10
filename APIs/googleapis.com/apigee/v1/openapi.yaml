@@ -49,7 +49,7 @@ paths:
       description: Creates an Apigee organization. See [Create an Apigee organization](https://cloud.google.com/apigee/docs/api-platform/get-started/create-org).
       operationId: apigee.organizations.create
       parameters:
-        - description: "Required. Name of the GCP project in which to associate the Apigee organization. Pass the information as a query parameter using the following structure in your request: `projects/`"
+        - description: "Required. Name of the Google Cloud project in which to associate the Apigee organization. Pass the information as a query parameter using the following structure in your request: `projects/`"
           in: query
           name: parent
           schema:
@@ -1255,7 +1255,7 @@ paths:
         - organizations
   "/v1/{parent}":
     get:
-      description: Lists the Apigee organizations and associated GCP projects that you have permission to access. See [Understanding organizations](https://cloud.google.com/apigee/docs/api-platform/fundamentals/organization-structure).
+      description: Lists the Apigee organizations and associated Google Cloud projects that you have permission to access. See [Understanding organizations](https://cloud.google.com/apigee/docs/api-platform/fundamentals/organization-structure).
       operationId: apigee.organizations.list
       parameters:
         - description: "Required. Use the following structure in your request: `organizations`"
@@ -7153,7 +7153,7 @@ components:
     GoogleCloudApigeeV1ListOrganizationsResponse:
       properties:
         organizations:
-          description: List of Apigee organizations and associated GCP projects.
+          description: List of Apigee organizations and associated Google Cloud projects.
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1OrganizationProjectMapping"
           type: array
@@ -7455,7 +7455,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudApigeeV1AddonsConfig"
           description: Addon configurations of the Apigee organization.
         analyticsRegion:
-          description: "Required. DEPRECATED: This field will be deprecated once Apigee supports DRZ. Primary GCP region for analytics data storage. For valid values, see [Create an Apigee organization](https://cloud.google.com/apigee/docs/api-platform/get-started/create-org)."
+          description: "Required. DEPRECATED: This field will be deprecated once Apigee supports DRZ. Primary Google Cloud region for analytics data storage. For valid values, see [Create an Apigee organization](https://cloud.google.com/apigee/docs/api-platform/get-started/create-org)."
           type: string
         apigeeProjectId:
           description: Output only. Apigee Project ID associated with the organization. Use this project to allowlist Apigee in the Service Attachment when using private service connect with Apigee.
@@ -7573,7 +7573,7 @@ components:
           description: Name of the Apigee organization.
           type: string
         projectId:
-          description: GCP project associated with the Apigee organization
+          description: Google Cloud project associated with the Apigee organization
           type: string
         projectIds:
           description: "DEPRECATED: Use `project_id`. An Apigee Organization is mapped to a single project."

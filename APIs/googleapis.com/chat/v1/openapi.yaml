@@ -32,9 +32,7 @@ info:
 externalDocs:
   url: https://developers.google.com/hangouts/chat
 tags:
-  - name: dms
   - name: media
-  - name: rooms
   - name: spaces
 paths:
   "/v1/media/{resourceName}":
@@ -385,67 +383,6 @@ paths:
             - https://www.googleapis.com/auth/chat.messages.create
           Oauth2c:
             - https://www.googleapis.com/auth/chat.messages.create
-      tags:
-        - spaces
-  "/v1/{parent}/webhooks":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Legacy path for creating message. Calling these will result in a BadRequest response.
-      operationId: chat.spaces.webhooks
-      parameters:
-        - description: "Required. The resource name of the space in which to create a message. Format: spaces/{space}"
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Optional. A custom name for a Chat message assigned at creation. Must start with `client-` and contain only lowercase letters, numbers, and hyphens up to 63 characters in length. Specify this field to get, update, or delete the message with the specified value. For example usage, see [Name a created message](https://developers.google.com/chat/api/guides/crudl/messages#name_a_created_message).
-          in: query
-          name: messageId
-          schema:
-            type: string
-        - description: Optional. Specifies whether a message starts a thread or replies to one. Only supported in named spaces.
-          in: query
-          name: messageReplyOption
-          schema:
-            enum:
-              - MESSAGE_REPLY_OPTION_UNSPECIFIED
-              - REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD
-              - REPLY_MESSAGE_OR_FAIL
-            type: string
-        - description: Optional. A unique request ID for this message. Specifying an existing request ID returns the message created with that ID instead of creating a new message.
-          in: query
-          name: requestId
-          schema:
-            type: string
-        - description: "Optional. Deprecated: Use thread.thread_key instead. Opaque thread identifier. To start or add to a thread, create a message and specify a `threadKey` or the thread.name. For example usage, see [Start or reply to a message thread](/chat/api/guides/crudl/messages#start_or_reply_to_a_message_thread)."
-          in: query
-          name: threadKey
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Message"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Message"
-          description: Successful response
       tags:
         - spaces
 components:
