@@ -2188,18 +2188,18 @@ components:
     BiEngineReason:
       properties:
         code:
-          default: ""
+          default: $(reason.code)
           description: "[Output-only] High-level BI Engine reason for partial or disabled acceleration."
           type: string
         message:
-          default: ""
+          default: $(reason.message)
           description: "[Output-only] Free form human-readable reason for partial or disabled acceleration."
           type: string
       type: object
     BiEngineStatistics:
       properties:
         biEngineMode:
-          default: ""
+          default: $(stats.bi_engine_mode)
           description: "[Output-only] Specifies which mode of BI Engine acceleration was performed (if any)."
           type: string
         biEngineReasons:

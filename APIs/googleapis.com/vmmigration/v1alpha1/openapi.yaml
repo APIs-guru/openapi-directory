@@ -11,7 +11,7 @@ info:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
-  title: Migrate to Virtual Machines API
+  title: VM Migration API
   version: v1alpha1
   x-apisguru-categories:
     - analytics
@@ -1633,9 +1633,6 @@ components:
         accessKeyCreds:
           $ref: "#/components/schemas/AccessKeyCredentials"
           description: AWS Credentials using access key id and secret.
-        accessKeyId:
-          description: AWS access key ID.
-          type: string
         awsRegion:
           description: Immutable. The AWS region that the source VMs will be migrated from.
           type: string
@@ -1653,11 +1650,6 @@ components:
           items:
             $ref: "#/components/schemas/Tag"
           type: array
-        inventoryTags:
-          additionalProperties:
-            type: string
-          description: "Deprecated: AWS resource tags to limit the scope of the source inventory. Use inventory_tag_list instead."
-          type: object
         migrationResourcesUserTags:
           additionalProperties:
             type: string
@@ -1666,9 +1658,6 @@ components:
         publicIp:
           description: Output only. The source's public IP. All communication initiated by this source will originate from this IP.
           readOnly: true
-          type: string
-        secretAccessKey:
-          description: Input only. AWS secret access key.
           type: string
         state:
           description: Output only. State of the source as determined by the health check.

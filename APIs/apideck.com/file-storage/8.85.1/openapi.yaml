@@ -892,6 +892,7 @@ paths:
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/filesFilter"
         - $ref: "#/components/parameters/filesSort"
+        - $ref: "#/components/parameters/passthrough"
       responses:
         "200":
           $ref: "#/components/responses/GetFilesResponse"
@@ -1006,6 +1007,7 @@ paths:
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/passthrough"
       requestBody:
         content:
           application/json:
@@ -2189,6 +2191,19 @@ components:
         maximum: 10000
         minimum: 0
         type: number
+    passthrough:
+      description: Optional unmapped key/values that will be passed through to downstream as query parameters
+      explode: true
+      in: query
+      name: pass_through
+      schema:
+        additionalProperties: true
+        properties:
+          example_downstream_property:
+            description: All passthrough query parameters are passed along to the connector as is (?pass_through[search]=leads becomes ?search=leads)
+            type: string
+        type: object
+      style: deepObject
     raw:
       description: Include raw response. Mostly used for debugging purposes
       in: query
