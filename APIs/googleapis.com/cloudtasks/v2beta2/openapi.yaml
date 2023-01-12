@@ -13,20 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Tasks API
   version: v2beta2
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://cloudtasks.googleapis.com/$discovery/rest?version=v2beta2
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: cloudtasks
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/tasks/
 tags:
@@ -1370,6 +1367,13 @@ components:
           description: "[Service account email](https://cloud.google.com/iam/docs/service-accounts) to be used for generating OIDC token. The service account must be within the same project as the queue. The caller must have iam.serviceAccounts.actAs permission for the service account."
           type: string
       type: object
+    PathOverride:
+      description: PathOverride. Path message defines path override for HTTP targets.
+      properties:
+        path:
+          description: The URI path (e.g., a/b/c). Default is Empty string.
+          type: string
+      type: object
     PauseQueueRequest:
       description: Request message for PauseQueue.
       properties: {}
@@ -1409,6 +1413,13 @@ components:
     PurgeQueueRequest:
       description: Request message for PurgeQueue.
       properties: {}
+      type: object
+    QueryOverride:
+      description: QueryOverride. Query message defines query override for HTTP targets.
+      properties:
+        queryParams:
+          description: The query parameters (e.g., qparam1=123&qparam2=456). Default is Empty string.
+          type: string
       type: object
     Queue:
       description: A queue is a container of related tasks. Queues are configured to manage how those tasks are dispatched. Configurable properties include rate limits, retry options, target types, and others.
@@ -1661,27 +1672,27 @@ components:
       description: Uri Override. When specified, all the HTTP tasks inside the queue will be partially or fully overridden depending on the configured values.
       properties:
         host:
-          description: Host override. When specified, the host part of url will be overridden. For example, if the original Uri is "https://www.google.com", and host is set to "example.net", the overridden Uri will be "https://example.net".
+          description: Host override. When specified, will replace the host part of the task URL. For example, if the task URL is "https://www.google.com", and host value is set to "example.net", the overridden URI will be changed to "https://example.net". Host value cannot be an empty string.
           type: string
-        path:
-          description: Uri path. Will be used as the path for the current Uri (replaces any existing path of the task url).
-          type: string
+        pathOverride:
+          $ref: "#/components/schemas/PathOverride"
+          description: URI path. When specified, will replace the existing path of the task URL. Setting the path value to an empty string clears the URI path segment.
         port:
-          description: Port override. When specified, the port part of Uri will be replaced by the provided value. For instance, for a Uri http://www.google.com/foo and port=123 the overridden Uri becomes http://www.google.com:123/foo.
+          description: Port override. When specified, will replace the port part of the task URI. For instance, for a URI http://www.google.com/foo and port=123, the overridden URI becomes http://www.google.com:123/foo. Note that the port value must be a positive integer. Setting the port to 0 (Zero) clears the URI port.
           format: int64
           type: string
-        query:
-          description: Uri Query. Will replace the query part of the task uri.
-          type: string
+        queryOverride:
+          $ref: "#/components/schemas/QueryOverride"
+          description: URI Query. When specified, will replace the query part of the task URI. Setting the query value to an empty string clears the URI query segment.
         scheme:
-          description: Scheme override. When specified, the Uri scheme is replaced by the provided value.
+          description: Scheme override. When specified, the task URI scheme is replaced by the provided value (HTTP or HTTPS).
           enum:
             - SCHEME_UNSPECIFIED
             - HTTP
             - HTTPS
           type: string
         uriOverrideEnforceMode:
-          description: Uri Override Enforce Mode Determines the Target UriOverride mode.
+          description: URI Override Enforce Mode When specified, determines the Target UriOverride mode. If not specified, it defaults to ALWAYS.
           enum:
             - URI_OVERRIDE_ENFORCE_MODE_UNSPECIFIED
             - IF_NOT_EXISTS
@@ -1706,5 +1717,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}
