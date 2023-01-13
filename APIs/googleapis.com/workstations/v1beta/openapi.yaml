@@ -1312,7 +1312,7 @@ components:
           readOnly: true
           type: string
         enablePrivateEndpoint:
-          description: Whether Workstations endpoint is private.
+          description: Immutable. Whether Workstations endpoint is private.
           type: boolean
         serviceAttachmentUri:
           description: Output only. Service attachment URI for the workstation cluster. The service attachemnt is created when private endpoint is enabled. To access workstations in the cluster, configure access to the managed service using (Private Service Connect)[https://cloud.google.com/vpc/docs/configure-private-service-connect-services].
@@ -1414,6 +1414,11 @@ components:
           description: Output only. Host to which clients can send HTTPS traffic that will be received by the workstation. Authorized traffic will be received to the workstation as HTTP on port 80. To send traffic to a different port, clients may prefix the host with the destination port in the format "{port}-{host}".
           readOnly: true
           type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Client-specified labels that are applied to the resource and that are also propagated to the underlying Compute Engine resources.
+          type: object
         name:
           description: Full name of this resource.
           type: string
@@ -1475,11 +1480,16 @@ components:
         etag:
           description: Checksum computed by the server. May be sent on update and delete requests to ensure that the client has an up-to-date value before proceeding.
           type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Client-specified labels that are applied to the resource and that are also propagated to the underlying Compute Engine resources.
+          type: object
         name:
           description: Full name of this resource.
           type: string
         network:
-          description: Name of the Compute Engine network in which instances associated with this cluster will be created.
+          description: Immutable. Name of the Compute Engine network in which instances associated with this cluster will be created.
           type: string
         privateClusterConfig:
           $ref: "#/components/schemas/PrivateClusterConfig"
@@ -1489,7 +1499,7 @@ components:
           readOnly: true
           type: boolean
         subnetwork:
-          description: Name of the Compute Engine subnetwork in which instances associated with this cluster will be created. Must be part of the subnetwork specified for this cluster.
+          description: Immutable. Name of the Compute Engine subnetwork in which instances associated with this cluster will be created. Must be part of the subnetwork specified for this cluster.
           type: string
         uid:
           description: Output only. A system-assigned unique identified for this resource.
@@ -1545,6 +1555,11 @@ components:
           description: How long to wait before automatically stopping an instance that hasn't received any user traffic. A value of 0 indicates that this instance should never time out due to idleness. Defaults to 20 minutes.
           format: google-duration
           type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Client-specified labels that are applied to the resource and that are also propagated to the underlying Compute Engine resources.
+          type: object
         name:
           description: Full name of this resource.
           type: string

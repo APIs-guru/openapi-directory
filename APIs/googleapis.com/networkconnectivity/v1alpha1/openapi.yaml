@@ -379,7 +379,7 @@ paths:
         - projects
   "/v1alpha1/{parent}/internalRanges":
     get:
-      description: Lists InternalRanges in a given project and location.
+      description: Lists internal ranges in a given project and location.
       operationId: networkconnectivity.projects.locations.internalRanges.list
       parameters:
         - description: Required. The parent resource's name.
@@ -435,7 +435,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new InternalRange in a given project and location.
+      description: Creates a new internal range in a given project and location.
       operationId: networkconnectivity.projects.locations.internalRanges.create
       parameters:
         - description: Required. The parent resource's name of the InternalRange.
@@ -449,7 +449,7 @@ paths:
           name: internalRangeId
           schema:
             type: string
-        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and t he request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and t he request times out. If you make the request again with the same request ID, the server can check if the original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
           in: query
           name: requestId
           schema:
@@ -936,17 +936,17 @@ components:
           type: string
       type: object
     InternalRange:
-      description: "The InternalRange resource for IPAM operations within a VPC network. Used to represent a private address range along with behavioral characterstics of that range (it's usage and peering behavior). Networking resources can link to this range if they are created as belonging to it. Next id: 14"
+      description: The internal range resource for IPAM operations within a VPC network. Used to represent a private address range along with behavioral characterstics of that range (its usage and peering behavior). Networking resources can link to this range if they are created as belonging to it.
       properties:
         createTime:
-          description: Time when the InternalRange was created.
+          description: Time when the internal range was created.
           format: google-datetime
           type: string
         description:
           description: A description of this resource.
           type: string
         ipCidrRange:
-          description: IP range that this InternalRange defines.
+          description: IP range that this internal range defines.
           type: string
         labels:
           additionalProperties:
@@ -954,13 +954,13 @@ components:
           description: User-defined labels.
           type: object
         name:
-          description: "Immutable. The name of a InternalRange. Format: projects/{project}/locations/{location}/internalRanges/{internal_range} See: https://google.aip.dev/122#fields-representing-resource-names"
+          description: "Immutable. The name of an internal range. Format: projects/{project}/locations/{location}/internalRanges/{internal_range} See: https://google.aip.dev/122#fields-representing-resource-names"
           type: string
         network:
-          description: "The URL or resource ID of the network in which to reserve the Internal Range. The network cannot be deleted if there are any reserved Internal Ranges referring to it. Legacy network is not supported. This can only be specified for a global internal address. Example: - URL: /compute/v1/projects/{project}/global/networks/{resourceId} - ID: network123"
+          description: "The URL or resource ID of the network in which to reserve the internal range. The network cannot be deleted if there are any reserved internal ranges referring to it. Legacy networks are not supported. This can only be specified for a global internal address. Example: - URL: /compute/v1/projects/{project}/global/networks/{resourceId} - ID: network123"
           type: string
         overlaps:
-          description: Optional. Types of resources that are allowed to overlap with the current InternalRange.
+          description: Optional. Types of resources that are allowed to overlap with the current internal range.
           items:
             enum:
               - OVERLAP_UNSPECIFIED
@@ -968,7 +968,7 @@ components:
             type: string
           type: array
         peering:
-          description: The type of peering set for this InternalRange.
+          description: The type of peering set for this internal range.
           enum:
             - PEERING_UNSPECIFIED
             - FOR_SELF
@@ -976,7 +976,7 @@ components:
             - NOT_SHARED
           type: string
         prefixLength:
-          description: An alternate to ip_cidr_range. Can be set when trying to create a reservation that automatically finds a free range of the given size. If both ip_cidr_range and prefix_length are set, it's an error if the range sizes don't match. Can also be used during updates to change the range size.
+          description: An alternative to ip_cidr_range. Can be set when trying to create a reservation that automatically finds a free range of the given size. If both ip_cidr_range and prefix_length are set, there is an error if the range sizes do not match. Can also be used during updates to change the range size.
           format: int32
           type: integer
         targetCidrRange:
@@ -985,18 +985,18 @@ components:
             type: string
           type: array
         updateTime:
-          description: Time when the InternalRange was updated.
+          description: Time when the internal range was updated.
           format: google-datetime
           type: string
         usage:
-          description: The type of usage set for this InternalRange.
+          description: The type of usage set for this internal range.
           enum:
             - USAGE_UNSPECIFIED
             - FOR_VPC
             - EXTERNAL_TO_VPC
           type: string
         users:
-          description: Output only. The list of resources that refer to this internal range. Resources that use the InternalRange for their range allocation are referred to as users of the range. Other resources mark themselves as users while doing so by creating a reference to this InternalRange. Having a user, based on this reference, prevents deletion of the InternalRange referred to. Can be empty.
+          description: Output only. The list of resources that refer to this internal range. Resources that use the internal range for their range allocation are referred to as users of the range. Other resources mark themselves as users while doing so by creating a reference to this internal range. Having a user, based on this reference, prevents deletion of the internal range that is referred to. Can be empty.
           items:
             type: string
           readOnly: true
@@ -1023,7 +1023,7 @@ components:
       description: Response for InternalRange.ListInternalRanges
       properties:
         internalRanges:
-          description: InternalRanges to be returned.
+          description: Internal range to be returned.
           items:
             $ref: "#/components/schemas/InternalRange"
           type: array

@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://datamigration.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: datamigration
 externalDocs:
@@ -1027,7 +1027,7 @@ paths:
           name: connectionProfileId
           schema:
             type: string
-        - description: A unique id used to identify the request. If the server receives two requests with the same id, then the second request will be ignored. It is recommended to always set this value to a UUID. The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.
+        - description: Optional. A unique id used to identify the request. If the server receives two requests with the same id, then the second request will be ignored. It is recommended to always set this value to a UUID. The id must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.
           in: query
           name: requestId
           schema:
@@ -1367,6 +1367,11 @@ paths:
           name: requestId
           schema:
             type: string
+        - description: Optional. If set to true, will skip validations.
+          in: query
+          name: skipValidation
+          schema:
+            type: boolean
       requestBody:
         content:
           application/json:

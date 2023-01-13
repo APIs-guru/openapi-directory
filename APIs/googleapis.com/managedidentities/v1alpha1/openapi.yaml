@@ -116,6 +116,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1alpha1/{domain}:domainJoinMachine":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: DomainJoinMachine API joins a Compute Engine VM to the domain
+      operationId: managedidentities.projects.locations.global.domains.domainJoinMachine
+      parameters:
+        - description: "Required. The domain resource name using the form: projects/{project_id}/locations/global/domains/{domain_name}"
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DomainJoinMachineRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DomainJoinMachineResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1alpha1/{domain}:enableMigration":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1525,6 +1567,23 @@ components:
           format: google-datetime
           type: string
       type: object
+    DomainJoinMachineRequest:
+      description: DomainJoinMachineRequest is the request message for DomainJoinMachine method
+      properties:
+        ouName:
+          description: Optional. OU name where the VM needs to be domain joined
+          type: string
+        vmIdToken:
+          description: "Required. Full instance id token of compute engine VM to verify instance identity. More about this: https://cloud.google.com/compute/docs/instances/verifying-instance-identity#request_signature"
+          type: string
+      type: object
+    DomainJoinMachineResponse:
+      description: DomainJoinMachineResponse is the response message for DomainJoinMachine method
+      properties:
+        domainJoinBlob:
+          description: Offline domain join blob as the response
+          type: string
+      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
@@ -1993,7 +2052,7 @@ components:
           type: string
       type: object
     MaintenancePolicy:
-      description: Defines policies to service maintenance events.
+      description: LINT.IfChange Defines policies to service maintenance events.
       properties:
         createTime:
           description: Output only. The time when the resource was created.

@@ -2490,6 +2490,9 @@ components:
             - CANCELING
           readOnly: true
           type: string
+        workflowConfig:
+          description: Immutable. The name of the workflow config to invoke. Must be in the format `projects/*/locations/*/repositories/*/workflowConfigs/*`.
+          type: string
       type: object
     WorkflowInvocationAction:
       description: Represents a single action in a workflow invocation.
