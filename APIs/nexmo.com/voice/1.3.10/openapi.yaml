@@ -8,7 +8,7 @@ info:
     url: https://developer.nexmo.com/
   description: The Voice API lets you create outbound calls, control in-progress calls and get information about historical calls. More information about the Voice API can be found at <https://developer.nexmo.com/voice/voice-api/overview>.
   title: Voice API
-  version: 1.3.9
+  version: 1.3.10
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/voice.yml
@@ -664,6 +664,10 @@ components:
           default: 1
           description: The number of times to repeat the text the file, 0 for infinite
           type: integer
+        premium:
+          default: false
+          description: Set to true to use the premium version of the specified style if available, otherwise the standard version will be used. The default value is false. You can find more information about Premium Voices in the [Text-To-Speech guide](/voice/voice-api/guides/text-to-speech#premium-voices).
+          type: boolean
         style:
           $ref: "#/components/schemas/style"
         text:

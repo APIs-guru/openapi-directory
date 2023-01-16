@@ -49,6 +49,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/GooglePlayDeveloperReportingV1alpha1StuckBackgroundWakelockRateMetricSet"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/playdeveloperreporting
+          Oauth2c:
+            - https://www.googleapis.com/auth/playdeveloperreporting
       tags:
         - vitals
     parameters:
@@ -98,6 +103,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/GooglePlayDeveloperReportingV1alpha1QueryStuckBackgroundWakelockRateMetricSetResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/playdeveloperreporting
+          Oauth2c:
+            - https://www.googleapis.com/auth/playdeveloperreporting
       tags:
         - vitals
   "/v1alpha1/{parent}/anomalies":
@@ -133,6 +143,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/GooglePlayDeveloperReportingV1alpha1ListAnomaliesResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/playdeveloperreporting
+          Oauth2c:
+            - https://www.googleapis.com/auth/playdeveloperreporting
       tags:
         - anomalies
     parameters:
@@ -280,6 +295,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/GooglePlayDeveloperReportingV1alpha1SearchErrorIssuesResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/playdeveloperreporting
+          Oauth2c:
+            - https://www.googleapis.com/auth/playdeveloperreporting
       tags:
         - vitals
     parameters:
@@ -427,6 +447,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/GooglePlayDeveloperReportingV1alpha1SearchErrorReportsResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/playdeveloperreporting
+          Oauth2c:
+            - https://www.googleapis.com/auth/playdeveloperreporting
       tags:
         - vitals
     parameters:
@@ -1006,3 +1031,21 @@ components:
           description: Optional. IANA Time Zone Database version number, e.g. "2019a".
           type: string
       type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/playdeveloperreporting: See metrics and data about the apps in your Google Play Developer account
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/playdeveloperreporting: See metrics and data about the apps in your Google Play Developer account
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

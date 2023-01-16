@@ -327,7 +327,7 @@ paths:
       description: Starts a node.
       operationId: tpu.projects.locations.nodes.start
       parameters:
-        - description: The resource name.
+        - description: Required. The resource name.
           in: path
           name: name
           required: true
@@ -369,7 +369,7 @@ paths:
       description: Stops a node. This operation is only available with single TPU nodes.
       operationId: tpu.projects.locations.nodes.stop
       parameters:
-        - description: The resource name.
+        - description: Required. The resource name.
           in: path
           name: name
           required: true

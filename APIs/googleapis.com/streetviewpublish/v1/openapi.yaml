@@ -871,6 +871,26 @@ components:
           format: float
           type: number
       type: object
+    NoOverlapGpsFailureDetails:
+      description: Details related to PhotoSequenceProcessingFailureReason#NO_OVERLAP_GPS.
+      properties:
+        gpsEndTime:
+          description: Time of last recorded GPS point.
+          format: google-datetime
+          type: string
+        gpsStartTime:
+          description: Time of first recorded GPS point.
+          format: google-datetime
+          type: string
+        videoEndTime:
+          description: End time of video.
+          format: google-datetime
+          type: string
+        videoStartTime:
+          description: Start time of video.
+          format: google-datetime
+          type: string
+      type: object
     NotOutdoorsFailureDetails:
       description: Details related to ProcessingFailureReason#NOT_OUTDOORS. If there are multiple indoor frames found, the first frame is recorded here.
       properties:
@@ -1151,6 +1171,9 @@ components:
         insufficientGpsDetails:
           $ref: "#/components/schemas/InsufficientGpsFailureDetails"
           description: See InsufficientGpsFailureDetails.
+        noOverlapGpsDetails:
+          $ref: "#/components/schemas/NoOverlapGpsFailureDetails"
+          description: See NoOverlapGpsFailureDetails.
         notOutdoorsDetails:
           $ref: "#/components/schemas/NotOutdoorsFailureDetails"
           description: See NotOutdoorsFailureDetails.
