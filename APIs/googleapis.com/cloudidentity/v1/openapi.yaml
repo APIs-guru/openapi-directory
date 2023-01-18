@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Identity API
   version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://cloudidentity.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: cloudidentity
 externalDocs:
@@ -32,6 +30,8 @@ tags:
   - name: customers
   - name: devices
   - name: groups
+  - name: inboundSamlSsoProfiles
+  - name: inboundSsoAssignments
 paths:
   /v1/devices:
     get:
@@ -341,12 +341,148 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1/inboundSamlSsoProfiles:
+    get:
+      description: Lists InboundSamlSsoProfiles for a customer.
+      operationId: cloudidentity.inboundSamlSsoProfiles.list
+      parameters:
+        - description: 'A [Common Expression Language](https://github.com/google/cel-spec) expression to filter the results. The only currently-supported filter is filtering by customer. For example: `customer=="customers/C0123abc"`. Omitting the filter or specifying a filter of `customer=="customers/my_customer"` will return the profiles for the customer that the caller (authenticated user) belongs to.'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of InboundSamlSsoProfiles to return. The service may return fewer than this value. If omitted (or defaulted to zero) the server will use a sensible default. This default may change over time. The maximum allowed value is 100. Requests with page_size greater than that will be silently interpreted as having this maximum value.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListInboundSamlSsoProfiles` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListInboundSamlSsoProfiles` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListInboundSamlSsoProfilesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - inboundSamlSsoProfiles
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates an InboundSamlSsoProfile for a customer.
+      operationId: cloudidentity.inboundSamlSsoProfiles.create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InboundSamlSsoProfile"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - inboundSamlSsoProfiles
+  /v1/inboundSsoAssignments:
+    get:
+      description: Lists the InboundSsoAssignments for a `Customer`.
+      operationId: cloudidentity.inboundSsoAssignments.list
+      parameters:
+        - description: "A CEL expression to filter the results. The only currently-supported filter is filtering by customer. For example: `customer==customers/C0123abc`. Omitting the filter or specifying a filter of `customer==customers/my_customer` will return the assignments for the customer that the caller (authenticated user) belongs to."
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of assignments to return. The service may return fewer than this value. If omitted (or defaulted to zero) the server will use a sensible default. This default may change over time. The maximum allowed value is 100, though requests with page_size greater than that will be silently interpreted as having this maximum value. This may increase in the futue.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListInboundSsoAssignments` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListInboundSsoAssignments` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListInboundSsoAssignmentsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - inboundSsoAssignments
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates an InboundSsoAssignment for users and devices in a `Customer` under a given `Group` or `OrgUnit`.
+      operationId: cloudidentity.inboundSsoAssignments.create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InboundSsoAssignment"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - inboundSsoAssignments
   "/v1/{name}":
     delete:
-      description: Deletes a `Membership`.
-      operationId: cloudidentity.groups.memberships.delete
+      description: Deletes an InboundSsoAssignment. To disable SSO, Create (or Update) an assignment that has `sso_mode` == `SSO_OFF`.
+      operationId: cloudidentity.inboundSsoAssignments.delete
       parameters:
-        - description: Required. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Membership` to delete. Must be of the form `groups/{group}/memberships/{membership}`
+        - description: "Required. The [resource name](https://cloud.google.com/apis/design/resource_names) of the InboundSsoAssignment to delete. Format: `inboundSsoAssignments/{assignment}`"
           in: path
           name: name
           required: true
@@ -366,20 +502,20 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/cloud-identity.groups
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - https://www.googleapis.com/auth/cloud-identity.groups
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - groups
+        - inboundSsoAssignments
     get:
-      description: Retrieves a `Membership`.
-      operationId: cloudidentity.groups.memberships.get
+      description: Gets an InboundSsoAssignment.
+      operationId: cloudidentity.inboundSsoAssignments.get
       parameters:
-        - description: Required. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Membership` to retrieve. Must be of the form `groups/{group}/memberships/{membership}`.
+        - description: "Required. The [resource name](https://cloud.google.com/apis/design/resource_names) of the InboundSsoAssignment to fetch. Format: `inboundSsoAssignments/{assignment}`"
           in: path
           name: name
           required: true
@@ -395,13 +531,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Membership"
+                $ref: "#/components/schemas/InboundSsoAssignment"
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/cloud-identity.groups
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - https://www.googleapis.com/auth/cloud-identity.groups
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-identity.groups.readonly
           Oauth2c:
@@ -411,7 +547,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - groups
+        - inboundSsoAssignments
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -425,16 +561,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Update Security Settings
-      operationId: cloudidentity.groups.updateSecuritySettings
+      description: 'Updates an InboundSsoAssignment. The body of this request is the `inbound_sso_assignment` field and the `update_mask` is relative to that. For example: a PATCH to `/v1/inboundSsoAssignments/0abcdefg1234567&update_mask=rank` with a body of `{ "rank": 1 }` moves that (presumably group-targeted) SSO assignment to the highest priority and shifts any other group-targeted assignments down in priority.'
+      operationId: cloudidentity.inboundSsoAssignments.patch
       parameters:
-        - description: Output only. The resource name of the security settings. Shall be of the form `groups/{group_id}/securitySettings`.
+        - description: Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Inbound SSO Assignment.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: "Required. The fully-qualified names of fields to update. May only contain the following field: `member_restriction.query`."
+        - description: Required. The list of fields to be updated.
           in: query
           name: updateMask
           schema:
@@ -443,7 +579,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SecuritySettings"
+              $ref: "#/components/schemas/InboundSsoAssignment"
       responses:
         "200":
           content:
@@ -453,15 +589,15 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/cloud-identity.groups
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - https://www.googleapis.com/auth/cloud-identity.groups
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - groups
+        - inboundSsoAssignments
   "/v1/{name}:approve":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -909,6 +1045,95 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/idpCredentials":
+    get:
+      description: Returns a list of IdpCredentials in an InboundSamlSsoProfile.
+      operationId: cloudidentity.inboundSamlSsoProfiles.idpCredentials.list
+      parameters:
+        - description: "Required. The parent, which owns this collection of `IdpCredential`s. Format: `inboundSamlSsoProfiles/{sso_profile_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of `IdpCredential`s to return. The service may return fewer than this value.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListIdpCredentials` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListIdpCredentials` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListIdpCredentialsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - inboundSamlSsoProfiles
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/idpCredentials:add":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Adds an IdpCredential. Up to 2 credentials are allowed.
+      operationId: cloudidentity.inboundSamlSsoProfiles.idpCredentials.add
+      parameters:
+        - description: "Required. The InboundSamlSsoProfile that owns the IdpCredential. Format: `inboundSamlSsoProfiles/{sso_profile_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddIdpCredentialRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - inboundSamlSsoProfiles
   "/v1/{parent}/memberships":
     get:
       description: Lists the `Membership`s within a `Group`.
@@ -1466,6 +1691,17 @@ components:
       schema:
         type: string
   schemas:
+    AddIdpCredentialOperationMetadata:
+      description: LRO response metadata for InboundSamlSsoProfilesService.AddIdpCredential.
+      properties: {}
+      type: object
+    AddIdpCredentialRequest:
+      description: The request for creating an IdpCredential with its associated payload. An InboundSamlSsoProfile can own up to 2 credentials.
+      properties:
+        pemData:
+          description: PEM encoded x509 certificate containing the public key for verifying IdP signatures.
+          type: string
+      type: object
     CancelUserInvitationRequest:
       description: Request to cancel sent invitation for target email in UserInvitation.
       properties: {}
@@ -1481,6 +1717,14 @@ components:
       description: Metadata for CreateGroup LRO.
       properties: {}
       type: object
+    CreateInboundSamlSsoProfileOperationMetadata:
+      description: LRO response metadata for InboundSamlSsoProfilesService.CreateInboundSamlSsoProfile.
+      properties: {}
+      type: object
+    CreateInboundSsoAssignmentOperationMetadata:
+      description: LRO response metadata for InboundSsoAssignmentsService.CreateInboundSsoAssignment.
+      properties: {}
+      type: object
     CreateMembershipMetadata:
       description: Metadata for CreateMembership LRO.
       properties: {}
@@ -1489,9 +1733,29 @@ components:
       description: Metadata for DeleteGroup LRO.
       properties: {}
       type: object
+    DeleteIdpCredentialOperationMetadata:
+      description: LRO response metadata for InboundSamlSsoProfilesService.DeleteIdpCredential.
+      properties: {}
+      type: object
+    DeleteInboundSamlSsoProfileOperationMetadata:
+      description: LRO response metadata for InboundSamlSsoProfilesService.DeleteInboundSamlSsoProfile.
+      properties: {}
+      type: object
+    DeleteInboundSsoAssignmentOperationMetadata:
+      description: LRO response metadata for InboundSsoAssignmentsService.DeleteInboundSsoAssignment.
+      properties: {}
+      type: object
     DeleteMembershipMetadata:
       description: Metadata for DeleteMembership LRO.
       properties: {}
+      type: object
+    DsaPublicKeyInfo:
+      description: Information of a DSA public key.
+      properties:
+        keySize:
+          description: Key size in bits (size of parameter P).
+          format: int32
+          type: integer
       type: object
     DynamicGroupMetadata:
       description: Dynamic group metadata like queries and status.
@@ -2145,6 +2409,82 @@ components:
             $ref: "#/components/schemas/TransitiveMembershipRole"
           type: array
       type: object
+    IdpCredential:
+      description: Credential for verifying signatures produced by the Identity Provider.
+      properties:
+        dsaKeyInfo:
+          $ref: "#/components/schemas/DsaPublicKeyInfo"
+          description: Output only. Information of a DSA public key.
+          readOnly: true
+        name:
+          description: Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the credential.
+          readOnly: true
+          type: string
+        rsaKeyInfo:
+          $ref: "#/components/schemas/RsaPublicKeyInfo"
+          description: Output only. Information of a RSA public key.
+          readOnly: true
+        updateTime:
+          description: Output only. Time when the `IdpCredential` was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    InboundSamlSsoProfile:
+      description: A [SAML 2.0](https://www.oasis-open.org/standards#samlv2.0) federation between a Google enterprise customer and a SAML identity provider.
+      properties:
+        customer:
+          description: "Immutable. The customer. For example: `customers/C0123abc`."
+          type: string
+        displayName:
+          description: Human-readable name of the SAML SSO profile.
+          type: string
+        idpConfig:
+          $ref: "#/components/schemas/SamlIdpConfig"
+          description: SAML identity provider configuration.
+        name:
+          description: Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the SAML SSO profile.
+          readOnly: true
+          type: string
+        spConfig:
+          $ref: "#/components/schemas/SamlSpConfig"
+          description: SAML service provider configuration for this SAML SSO profile. These are the service provider details provided by Google that should be configured on the corresponding identity provider.
+      type: object
+    InboundSsoAssignment:
+      description: Targets with "set" SSO assignments and their respective assignments.
+      properties:
+        customer:
+          description: "Immutable. The customer. For example: `customers/C0123abc`."
+          type: string
+        name:
+          description: Output only. [Resource name](https://cloud.google.com/apis/design/resource_names) of the Inbound SSO Assignment.
+          readOnly: true
+          type: string
+        rank:
+          description: Must be zero (which is the default value so it can be omitted) for assignments with `target_org_unit` set and must be greater-than-or-equal-to one for assignments with `target_group` set.
+          format: int32
+          type: integer
+        samlSsoInfo:
+          $ref: "#/components/schemas/SamlSsoInfo"
+          description: SAML SSO details. Must be set if and only if `sso_mode` is set to `SAML_SSO`.
+        signInBehavior:
+          $ref: "#/components/schemas/SignInBehavior"
+          description: Assertions about users assigned to an IdP will always be accepted from that IdP. This controls whether/when Google should redirect a user to the IdP. Unset (defaults) is the recommended configuration.
+        ssoMode:
+          description: Inbound SSO behavior.
+          enum:
+            - SSO_MODE_UNSPECIFIED
+            - SSO_OFF
+            - SAML_SSO
+            - DOMAIN_WIDE_SAML_IF_ENABLED
+          type: string
+        targetGroup:
+          description: Immutable. Must be of the form `groups/{group}`.
+          type: string
+        targetOrgUnit:
+          description: Immutable. Must be of the form `orgUnits/{org_unit}`.
+          type: string
+      type: object
     IsInvitableUserResponse:
       description: Response for IsInvitableUser RPC.
       properties:
@@ -2162,6 +2502,42 @@ components:
           type: array
         nextPageToken:
           description: Token to retrieve the next page of results, or empty if there are no more results available for listing.
+          type: string
+      type: object
+    ListIdpCredentialsResponse:
+      description: Response of the InboundSamlSsoProfilesService.ListIdpCredentials method.
+      properties:
+        idpCredentials:
+          description: The IdpCredentials from the specified InboundSamlSsoProfile.
+          items:
+            $ref: "#/components/schemas/IdpCredential"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
+    ListInboundSamlSsoProfilesResponse:
+      description: Response of the InboundSamlSsoProfilesService.ListInboundSamlSsoProfiles method.
+      properties:
+        inboundSamlSsoProfiles:
+          description: List of InboundSamlSsoProfiles.
+          items:
+            $ref: "#/components/schemas/InboundSamlSsoProfile"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
+    ListInboundSsoAssignmentsResponse:
+      description: Response of the InboundSsoAssignmentsService.ListInboundSsoAssignments method.
+      properties:
+        inboundSsoAssignments:
+          description: The assignments.
+          items:
+            $ref: "#/components/schemas/InboundSsoAssignment"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
       type: object
     ListMembershipsResponse:
@@ -2383,6 +2759,49 @@ components:
           $ref: "#/components/schemas/MembershipRoleRestrictionEvaluation"
           description: Evaluation of the member restriction applied to this membership. Empty if the user lacks permission to view the restriction evaluation.
       type: object
+    RsaPublicKeyInfo:
+      description: Information of a RSA public key.
+      properties:
+        keySize:
+          description: Key size in bits (size of the modulus).
+          format: int32
+          type: integer
+      type: object
+    SamlIdpConfig:
+      description: SAML IDP (identity provider) configuration.
+      properties:
+        changePasswordUri:
+          description: The **Change Password URL** of the identity provider. Users will be sent to this URL when changing their passwords at `myaccount.google.com`. This takes precedence over the change password URL configured at customer-level. Must use `HTTPS`.
+          type: string
+        entityId:
+          description: Required. The SAML **Entity ID** of the identity provider.
+          type: string
+        logoutRedirectUri:
+          description: The **Logout Redirect URL** (sign-out page URL) of the identity provider. When a user clicks the sign-out link on a Google page, they will be redirected to this URL. This is a pure redirect with no attached SAML `LogoutRequest` i.e. SAML single logout is currently not supported. Must use `HTTPS`.
+          type: string
+        singleSignOnServiceUri:
+          description: Required. The `SingleSignOnService` endpoint location (sign-in page URL) of the identity provider. This is the URL where the `AuthnRequest` will be sent. Must use `HTTPS`. Currently assumed to accept the `HTTP-Redirect` binding.
+          type: string
+      type: object
+    SamlSpConfig:
+      description: SAML SP (service provider) configuration.
+      properties:
+        assertionConsumerServiceUri:
+          description: Output only. The SAML **Assertion Consumer Service (ACS) URL** to be used for the IDP-initiated login. Currently assumed to accept response messages via the `HTTP-POST` binding.
+          readOnly: true
+          type: string
+        entityId:
+          description: Output only. The SAML **Entity ID** for this service provider.
+          readOnly: true
+          type: string
+      type: object
+    SamlSsoInfo:
+      description: Details that are applicable when `sso_mode` == `SAML_SSO`.
+      properties:
+        inboundSamlSsoProfile:
+          description: "Required. Name of the `InboundSamlSsoProfile` to use. Must be of the form `inboundSamlSsoProfiles/{inbound_saml_sso_profile}`. "
+          type: string
+      type: object
     SearchGroupsResponse:
       description: The response message for GroupsService.SearchGroups.
       properties:
@@ -2434,6 +2853,16 @@ components:
       description: A request to send email for inviting target user corresponding to the UserInvitation.
       properties: {}
       type: object
+    SignInBehavior:
+      description: Controls sign-in behavior.
+      properties:
+        redirectCondition:
+          description: When to redirect sign-ins to the IdP.
+          enum:
+            - REDIRECT_CONDITION_UNSPECIFIED
+            - NEVER
+          type: string
+      type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
       properties:
@@ -2461,6 +2890,14 @@ components:
       type: object
     UpdateGroupMetadata:
       description: Metadata for UpdateGroup LRO.
+      properties: {}
+      type: object
+    UpdateInboundSamlSsoProfileOperationMetadata:
+      description: LRO response metadata for InboundSamlSsoProfilesService.UpdateInboundSamlSsoProfile.
+      properties: {}
+      type: object
+    UpdateInboundSsoAssignmentOperationMetadata:
+      description: LRO response metadata for InboundSsoAssignmentsService.UpdateInboundSsoAssignment.
       properties: {}
       type: object
     UpdateMembershipMetadata:
@@ -2530,5 +2967,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

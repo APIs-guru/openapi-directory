@@ -19,12 +19,11 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://gkehub.googleapis.com/$discovery/rest?version=v1beta
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: gkehub
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster
 tags:
@@ -1691,6 +1690,21 @@ components:
           format: int32
           type: integer
       type: object
+    PolicyControllerBundleInstallSpec:
+      description: BundleInstallSpec is the specification configuration for a single managed bundle.
+      properties:
+        exemptedNamespaces:
+          description: the set of namespaces to be exempted from the bundle
+          items:
+            type: string
+          type: array
+        management:
+          description: Management specifies how the bundle will be managed by the controller.
+          enum:
+            - MANAGEMENT_UNSPECIFIED
+            - INSTALLED
+          type: string
+      type: object
     PolicyControllerHubConfig:
       description: Configuration for Policy Controller
       properties:
@@ -1720,6 +1734,9 @@ components:
         mutationEnabled:
           description: Enables the ability to mutate resources using Policy Controller.
           type: boolean
+        policyContent:
+          $ref: "#/components/schemas/PolicyControllerPolicyContentSpec"
+          description: Specifies the desired policy content on the cluster
         referentialRulesEnabled:
           description: Enables the ability to use Constraint Templates that reference to objects other than the object currently being evaluated.
           type: boolean
@@ -1743,7 +1760,12 @@ components:
         componentStates:
           additionalProperties:
             $ref: "#/components/schemas/PolicyControllerOnClusterState"
-          description: 'Currently these include (also serving as map keys): 1. "admission" 2. "audit" 3. "mutation" 4. "constraint template library"'
+          description: 'Currently these include (also serving as map keys): 1. "admission" 2. "audit" 3. "mutation"'
+          type: object
+        contentStates:
+          additionalProperties:
+            $ref: "#/components/schemas/PolicyControllerOnClusterState"
+          description: The state of the template library and any bundles included in the chosen version of the manifest
           type: object
         state:
           description: The overall Policy Controller lifecycle state observed by the Hub Feature controller.
@@ -1791,6 +1813,15 @@ components:
             - HUB_ERROR
             - SUSPENDED
           type: string
+      type: object
+    PolicyControllerPolicyContentSpec:
+      description: PolicyContentSpec defines the user's desired content configuration on the cluster.
+      properties:
+        bundles:
+          additionalProperties:
+            $ref: "#/components/schemas/PolicyControllerBundleInstallSpec"
+          description: map of bundle name to BundleInstallSpec. The bundle name maps to the `bundleName` key in the `policycontroller.gke.io/constraintData` annotation on a constraint.
+          type: object
       type: object
     PolicyControllerTemplateLibraryConfig:
       description: The config specifying which default library templates to install.

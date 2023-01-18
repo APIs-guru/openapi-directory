@@ -177,6 +177,204 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
+  "/v1/{name}:commit":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Commits a new schema revision to an existing schema.
+      operationId: pubsub.projects.schemas.commit
+      parameters:
+        - description: Required. The name of the schema we are revising. Format is `projects/{project}/schemas/{schema}`.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CommitSchemaRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Schema"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/pubsub
+          Oauth2c:
+            - https://www.googleapis.com/auth/pubsub
+      tags:
+        - projects
+  "/v1/{name}:deleteRevision":
+    delete:
+      description: Deletes a specific schema revision.
+      operationId: pubsub.projects.schemas.deleteRevision
+      parameters:
+        - description: "Required. The name of the schema revision to be deleted, with a revision ID explicitly included. Example: projects/123/schemas/my-schema@c7cfa2a8"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: "Required. The revision ID to roll back to. It must be a revision of the same schema. Example: c7cfa2a8"
+          in: query
+          name: revisionId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Schema"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/pubsub
+          Oauth2c:
+            - https://www.googleapis.com/auth/pubsub
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{name}:listRevisions":
+    get:
+      description: Lists all schema revisions for the named schema.
+      operationId: pubsub.projects.schemas.listRevisions
+      parameters:
+        - description: Required. The name of the schema to list revisions for.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of revisions to return per page.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The page token, received from a previous ListSchemaRevisions call. Provide this to retrieve the subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: The set of Schema fields to return in the response. If not set, returns Schemas with `name` and `type`, but not `definition`. Set to `FULL` to retrieve all fields.
+          in: query
+          name: view
+          schema:
+            enum:
+              - SCHEMA_VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSchemaRevisionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/pubsub
+          Oauth2c:
+            - https://www.googleapis.com/auth/pubsub
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{name}:rollback":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new schema revision that is a copy of the provided revision_id.
+      operationId: pubsub.projects.schemas.rollback
+      parameters:
+        - description: Required. The schema being rolled back with revision id.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RollbackSchemaRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Schema"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/pubsub
+          Oauth2c:
+            - https://www.googleapis.com/auth/pubsub
+      tags:
+        - projects
   "/v1/{parent}/schemas":
     get:
       description: Lists schemas in a project.
@@ -1410,6 +1608,13 @@ components:
           description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
       type: object
+    CommitSchemaRequest:
+      description: Request for CommitSchema method.
+      properties:
+        schema:
+          $ref: "#/components/schemas/Schema"
+          description: Required. The schema revision to commit.
+      type: object
     CreateSnapshotRequest:
       description: Request for the `CreateSnapshot` method.
       properties:
@@ -1464,6 +1669,18 @@ components:
         title:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
+      type: object
+    ListSchemaRevisionsResponse:
+      description: Response for the `ListSchemaRevisions` method.
+      properties:
+        nextPageToken:
+          description: A token that can be sent as `page_token` to retrieve the next page. If this field is empty, there are no subsequent pages.
+          type: string
+        schemas:
+          description: The revisions of the schema.
+          items:
+            $ref: "#/components/schemas/Schema"
+          type: array
       type: object
     ListSchemasResponse:
       description: Response for the `ListSchemas` method.
@@ -1692,6 +1909,13 @@ components:
         minimumBackoff:
           description: The minimum delay between consecutive deliveries of a given message. Value should be between 0 and 600 seconds. Defaults to 10 seconds.
           format: google-duration
+          type: string
+      type: object
+    RollbackSchemaRequest:
+      description: Request for the `RollbackSchema` method.
+      properties:
+        revisionId:
+          description: "Required. The revision ID to roll back to. It must be a revision of the same schema. Example: c7cfa2a8"
           type: string
       type: object
     Schema:
