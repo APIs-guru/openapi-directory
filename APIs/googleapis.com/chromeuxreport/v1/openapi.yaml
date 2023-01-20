@@ -209,7 +209,7 @@ components:
           type: array
         percentiles:
           $ref: "#/components/schemas/Percentiles"
-          description: Common useful percentiles of the Metric. The value type for the percentiles will be the same as the value types given for the Histogram bins.
+          description: Commonly useful percentiles of the Metric. The value type for the percentiles will be the same as the value types given for the Histogram bins.
       type: object
     Percentiles:
       description: Percentiles contains synthetic values of a metric at a given statistical percentile. These are used for estimating a metric's value as experienced by a percentage of users out of the total number of users.
@@ -265,7 +265,7 @@ components:
         metrics:
           additionalProperties:
             $ref: "#/components/schemas/Metric"
-          description: 'Metrics is the map of user experience data available for the record defined in the key field. Metrics are keyed on the metric name. Allowed key values: ["first_contentful_paint", "first_input_delay", "largest_contentful_paint", "cumulative_layout_shift"]'
+          description: 'Metrics is the map of user experience data available for the record defined in the key field. Metrics are keyed on the metric name. Allowed key values: ["first_contentful_paint", "first_input_delay", "largest_contentful_paint", "cumulative_layout_shift", "experimental_time_to_first_byte", "experimental_interaction_to_next_paint"]'
           type: object
       type: object
     UrlNormalization:

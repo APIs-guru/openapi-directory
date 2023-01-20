@@ -63857,6 +63857,9 @@ components:
             - UNSPECIFIED_NIC_TYPE
             - VIRTIO_NET
           type: string
+        parentNicName:
+          description: Name of the parent network interface of a VLAN based nic. If this field is specified, vlan must be set.
+          type: string
         queueCount:
           description: The networking queue count that's specified by users for the network interface. Both Rx and Tx queues will be set to this number. It'll be empty if not specified by the users.
           format: int32
@@ -63875,6 +63878,10 @@ components:
         subnetwork:
           description: "The URL of the Subnetwork resource for this instance. If the network resource is in legacy mode, do not specify this field. If the network is in auto subnet mode, specifying the subnetwork is optional. If the network is in custom subnet mode, specifying the subnetwork is required. If you specify this field, you can specify the subnetwork as a full or partial URL. For example, the following are all valid URLs: - https://www.googleapis.com/compute/v1/projects/project/regions/region /subnetworks/subnetwork - regions/region/subnetworks/subnetwork "
           type: string
+        vlan:
+          description: VLAN tag of a VLAN based network interface, must be in range from 2 to 4094 inclusively. This field is mandatory if the parent network interface name is set.
+          format: int32
+          type: integer
       type: object
     NetworkInterfaceSubInterface:
       properties:
@@ -72357,7 +72364,7 @@ components:
       description: A specification of the parameters to use when creating the instance template from a source instance.
       properties:
         diskConfigs:
-          description: "Attached disks configuration. If not provided, defaults are applied: For boot disk and any other R/W disks, new custom images will be created from each disk. For read-only disks, they will be attached in read-only mode. Local SSD disks will be created as blank volumes."
+          description: "Attached disks configuration. If not provided, defaults are applied: For boot disk and any other R/W disks, the source images for each disk will be used. For read-only disks, they will be attached in read-only mode. Local SSD disks will be created as blank volumes."
           items:
             $ref: "#/components/schemas/DiskInstantiationConfig"
           type: array

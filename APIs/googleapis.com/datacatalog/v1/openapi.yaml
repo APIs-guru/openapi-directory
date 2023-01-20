@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Google Cloud Data Catalog API
   version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://datacatalog.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: datacatalog
 externalDocs:
@@ -1024,6 +1022,11 @@ paths:
           in: path
           name: parent
           required: true
+          schema:
+            type: string
+        - description: "Supported field for filter is 'service' and value is 'dataplex'. Eg: service=dataplex."
+          in: query
+          name: filter
           schema:
             type: string
         - description: The maximum number of items to return. Must be a value between 1 and 1000 inclusively. If not set, defaults to 50.
@@ -2626,10 +2629,28 @@ components:
           format: int32
           readOnly: true
           type: integer
+        service:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1TaxonomyService"
+          description: Output only. Identity of the service which owns the Taxonomy. This field is only populated when the taxonomy is created by a GCP service. Currently only 'DATAPLEX' is supported.
+          readOnly: true
         taxonomyTimestamps:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1SystemTimestamps"
           description: Output only. Creation and modification timestamps of this taxonomy.
           readOnly: true
+      type: object
+    GoogleCloudDatacatalogV1TaxonomyService:
+      description: The source system of the Taxonomy.
+      properties:
+        identity:
+          description: P4SA Identity of the service.
+          type: string
+        name:
+          description: The GCP service name.
+          enum:
+            - MANAGING_SYSTEM_UNSPECIFIED
+            - MANAGING_SYSTEM_DATAPLEX
+            - MANAGING_SYSTEM_OTHER
+          type: string
       type: object
     GoogleCloudDatacatalogV1UnstarEntryRequest:
       description: Request message for UnstarEntry.
@@ -2803,5 +2824,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}
