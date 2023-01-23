@@ -906,14 +906,14 @@ paths:
                 last_name: 'Musk',
                 bank_accounts: [
                   {
+                    account_number: '123465',
+                    account_name: 'SPACEX LLC',
+                    account_type: 'credit_card',
                     iban: 'CH2989144532982975332',
                     bic: 'AUDSCHGGXXX',
                     bsb_number: '062-001',
                     branch_identifier: '001',
                     bank_code: 'BNH',
-                    account_number: '123465',
-                    account_name: 'SPACEX LLC',
-                    account_type: 'credit_card',
                     currency: 'USD'
                   }
                 ],
@@ -1174,14 +1174,14 @@ paths:
                 last_name: 'Musk',
                 bank_accounts: [
                   {
+                    account_number: '123465',
+                    account_name: 'SPACEX LLC',
+                    account_type: 'credit_card',
                     iban: 'CH2989144532982975332',
                     bic: 'AUDSCHGGXXX',
                     bsb_number: '062-001',
                     branch_identifier: '001',
                     bank_code: 'BNH',
-                    account_number: '123465',
-                    account_name: 'SPACEX LLC',
-                    account_type: 'credit_card',
                     currency: 'USD'
                   }
                 ],
@@ -4570,8 +4570,14 @@ components:
       type: object
       x-apideck-schema-id: BankAccount
       x-apideck-weights:
+        account_name: medium
         account_number: critical
+        account_type: medium
+        bank_code: low
+        bic: medium
+        branch_identifier: low
         bsb_number: edge-case
+        currency: medium
         iban: high
     CompaniesFilter:
       additionalProperties: false

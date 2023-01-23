@@ -1121,8 +1121,14 @@ components:
       type: object
       x-apideck-schema-id: BankAccount
       x-apideck-weights:
+        account_name: medium
         account_number: critical
+        account_type: medium
+        bank_code: low
+        bic: medium
+        branch_identifier: low
         bsb_number: edge-case
+        currency: medium
         iban: high
     CreateLeadResponse:
       properties:

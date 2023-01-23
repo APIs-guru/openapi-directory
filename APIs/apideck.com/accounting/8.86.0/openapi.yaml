@@ -507,6 +507,7 @@ paths:
 
             const params = {
               bill: {
+                bill_number: '10001',
                 supplier: {
                   id: '12345',
                   display_name: 'Windsurf Shop',
@@ -588,7 +589,6 @@ paths:
                   nominal_code: 'N091',
                   code: '453'
                 },
-                bill_number: '10001',
                 row_version: '1-12345'
               }
             }
@@ -751,6 +751,7 @@ paths:
             const params = {
               id: 'id_example',
               bill: {
+                bill_number: '10001',
                 supplier: {
                   id: '12345',
                   display_name: 'Windsurf Shop',
@@ -832,7 +833,6 @@ paths:
                   nominal_code: 'N091',
                   code: '453'
                 },
-                bill_number: '10001',
                 row_version: '1-12345'
               }
             }
@@ -1465,14 +1465,14 @@ paths:
                 currency: 'USD',
                 bank_accounts: [
                   {
+                    account_number: '123465',
+                    account_name: 'SPACEX LLC',
+                    account_type: 'credit_card',
                     iban: 'CH2989144532982975332',
                     bic: 'AUDSCHGGXXX',
                     bsb_number: '062-001',
                     branch_identifier: '001',
                     bank_code: 'BNH',
-                    account_number: '123465',
-                    account_name: 'SPACEX LLC',
-                    account_type: 'credit_card',
                     currency: 'USD'
                   }
                 ],
@@ -1707,14 +1707,14 @@ paths:
                 currency: 'USD',
                 bank_accounts: [
                   {
+                    account_number: '123465',
+                    account_name: 'SPACEX LLC',
+                    account_type: 'credit_card',
                     iban: 'CH2989144532982975332',
                     bic: 'AUDSCHGGXXX',
                     bsb_number: '062-001',
                     branch_identifier: '001',
                     bank_code: 'BNH',
-                    account_number: '123465',
-                    account_name: 'SPACEX LLC',
-                    account_type: 'credit_card',
                     currency: 'USD'
                   }
                 ],
@@ -2699,14 +2699,14 @@ paths:
                 status: 'active',
                 header: true,
                 bank_account: {
+                  account_number: '123465',
+                  account_name: 'SPACEX LLC',
+                  account_type: 'credit_card',
                   iban: 'CH2989144532982975332',
                   bic: 'AUDSCHGGXXX',
                   bsb_number: '062-001',
                   branch_identifier: '001',
                   bank_code: 'BNH',
-                  account_number: '123465',
-                  account_name: 'SPACEX LLC',
-                  account_type: 'credit_card',
                   currency: 'USD'
                 },
                 parent_account: {
@@ -2899,14 +2899,14 @@ paths:
                 status: 'active',
                 header: true,
                 bank_account: {
+                  account_number: '123465',
+                  account_name: 'SPACEX LLC',
+                  account_type: 'credit_card',
                   iban: 'CH2989144532982975332',
                   bic: 'AUDSCHGGXXX',
                   bsb_number: '062-001',
                   branch_identifier: '001',
                   bank_code: 'BNH',
-                  account_number: '123465',
-                  account_name: 'SPACEX LLC',
-                  account_type: 'credit_card',
                   currency: 'USD'
                 },
                 parent_account: {
@@ -3529,14 +3529,14 @@ paths:
                 ],
                 bank_accounts: [
                   {
+                    account_number: '123465',
+                    account_name: 'SPACEX LLC',
+                    account_type: 'credit_card',
                     iban: 'CH2989144532982975332',
                     bic: 'AUDSCHGGXXX',
                     bsb_number: '062-001',
                     branch_identifier: '001',
                     bank_code: 'BNH',
-                    account_number: '123465',
-                    account_name: 'SPACEX LLC',
-                    account_type: 'credit_card',
                     currency: 'USD'
                   }
                 ],
@@ -3774,14 +3774,14 @@ paths:
                 ],
                 bank_accounts: [
                   {
+                    account_number: '123465',
+                    account_name: 'SPACEX LLC',
+                    account_type: 'credit_card',
                     iban: 'CH2989144532982975332',
                     bic: 'AUDSCHGGXXX',
                     bsb_number: '062-001',
                     branch_identifier: '001',
                     bank_code: 'BNH',
-                    account_number: '123465',
-                    account_name: 'SPACEX LLC',
-                    account_type: 'credit_card',
                     currency: 'USD'
                   }
                 ],
@@ -5251,8 +5251,14 @@ components:
       type: object
       x-apideck-schema-id: BankAccount
       x-apideck-weights:
+        account_name: medium
         account_number: critical
+        account_type: medium
+        bank_code: low
+        bic: medium
+        branch_identifier: low
         bsb_number: edge-case
+        currency: medium
         iban: high
     Bill:
       additionalProperties: false
@@ -6522,7 +6528,7 @@ components:
         row_version:
           $ref: "#/components/schemas/RowVersion"
         status:
-          description: Status of payment
+          description: Status of credit notes
           enum:
             - draft
             - authorised
@@ -6532,7 +6538,7 @@ components:
           example: authorised
           title: Credit Note status
           type: string
-          x-apideck-enum-id: payments.status
+          x-apideck-enum-id: credit-notes.status
           x-graphql-type-name: CreditNoteStatus
         sub_total:
           description: Sub-total amount, normally before tax.

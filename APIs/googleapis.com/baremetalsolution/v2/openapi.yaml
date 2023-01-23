@@ -2461,6 +2461,9 @@ components:
             - DELETING
             - UPDATING
           type: string
+        storageAggregatePool:
+          description: Input only. Name of the storage aggregate pool to allocate the volume in. Can be used only for VOLUME_PERFORMANCE_TIER_ASSIGNED volumes.
+          type: string
         storageType:
           description: The storage type for this volume.
           enum:
@@ -2526,6 +2529,9 @@ components:
         snapshotsEnabled:
           description: Whether snapshots should be enabled.
           type: boolean
+        storageAggregatePool:
+          description: Input only. Name of the storage aggregate pool to allocate the volume in. Can be used only for VOLUME_PERFORMANCE_TIER_ASSIGNED volumes.
+          type: string
         type:
           description: The type of this Volume.
           enum:

@@ -375,6 +375,11 @@ paths:
           name: currentDocument.updateTime
           schema:
             type: string
+        - description: If set, will free the database_id associated with this database. uid will be used as the resource id to identify this deleted database.
+          in: query
+          name: freeId
+          schema:
+            type: boolean
         - description: If set, validate the request and preview the response, but do not actually delete the database.
           in: query
           name: validateOnly
@@ -1817,6 +1822,11 @@ components:
           description: The time this operation completed. Will be unset if operation still in progress.
           format: google-datetime
           type: string
+        namespaceIds:
+          description: Which namespace ids are being exported.
+          items:
+            type: string
+          type: array
         operationState:
           description: The state of the export operation.
           enum:
@@ -1830,7 +1840,7 @@ components:
             - CANCELLED
           type: string
         outputUriPrefix:
-          description: Where the entities are being exported to.
+          description: Where the documents are being exported to.
           type: string
         progressBytes:
           $ref: "#/components/schemas/GoogleFirestoreAdminV1Progress"
@@ -1936,6 +1946,11 @@ components:
         inputUriPrefix:
           description: The location of the documents being imported.
           type: string
+        namespaceIds:
+          description: Which namespace ids are being imported.
+          items:
+            type: string
+          type: array
         operationState:
           description: The state of the import operation.
           enum:

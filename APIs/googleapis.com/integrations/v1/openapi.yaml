@@ -4571,7 +4571,7 @@ components:
           type: array
       type: object
     EnterpriseCrmFrontendsEventbusProtoTaskConfig:
-      description: The task configuration details. This is not the implementation of Task. There might be multiple TaskConfigs for the same Task.
+      description: "The task configuration details. This is not the implementation of Task. There might be multiple TaskConfigs for the same Task. Next available id: 27"
       properties:
         alertConfigs:
           description: Alert configurations on error rate, warning rate, number of runs, durations, etc.
@@ -4666,7 +4666,7 @@ components:
           description: "REQUIRED: the identifier of this task within its parent event config, specified by the client. This should be unique among all the tasks belong to the same event config. We use this field as the identifier to find next tasks (via field `next_tasks.task_number`)."
           type: string
         taskSpec:
-          description: A string template that allows user to configure task parameters (with either literal default values or tokens which will be resolved at execution time) for the task. It will eventually replace the old "parameters" field.
+          description: A string template that allows user to configure task parameters (with either literal default values or tokens which will be resolved at execution time) for the task. It will eventually replace the old "parameters" field. Please refer to go/eventbus-task-spec-example for detailed usage example.
           type: string
         taskTemplateName:
           description: Used to define task-template name if task is of type task-template

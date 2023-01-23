@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://metastore.googleapis.com/$discovery/rest?version=v1alpha
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: metastore
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/dataproc-metastore/docs
 tags:
@@ -1146,7 +1147,7 @@ components:
             - DATAPROC_METASTORE
           type: string
         name:
-          description: "The relative resource name of the metastore that is being federated. The formats of the relative resource names for the currently supported metastores are listed below: Dataplex projects/{project_id}/locations/{location}/lakes/{lake_id} BigQuery projects/{project_id} Dataproc Metastore projects/{project_id}/locations/{location}/services/{service_id}"
+          description: "The relative resource name of the metastore that is being federated. The formats of the relative resource names for the currently supported metastores are listed below: BigQuery projects/{project_id} Dataproc Metastore projects/{project_id}/locations/{location}/services/{service_id}"
           type: string
       type: object
     Backup:

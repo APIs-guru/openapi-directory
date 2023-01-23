@@ -1022,6 +1022,9 @@ components:
           items:
             $ref: "#/components/schemas/Mutation"
           type: array
+        singleUseTransaction:
+          $ref: "#/components/schemas/TransactionOptions"
+          description: Options for beginning a new transaction for this request. The transaction is committed when the request completes. If specified, TransactionOptions.mode must be TransactionOptions.ReadWrite.
         transaction:
           description: The identifier of the transaction associated with the commit. A transaction identifier is returned by a call to Datastore.BeginTransaction.
           format: byte
@@ -1654,6 +1657,10 @@ components:
           description: The time at which these entities were read or found missing.
           format: google-datetime
           type: string
+        transaction:
+          description: The identifier of the transaction that was started as part of this Lookup request. Set only when ReadOptions.begin_transaction was set in LookupRequest.read_options.
+          format: byte
+          type: string
       type: object
     Mutation:
       description: A mutation to apply to an entity.
@@ -1880,6 +1887,9 @@ components:
     ReadOptions:
       description: The options shared by read requests.
       properties:
+        newTransaction:
+          $ref: "#/components/schemas/TransactionOptions"
+          description: Options for beginning a new transaction for this request. The new transaction identifier will be returned in the corresponding response as either LookupResponse.transaction or RunQueryResponse.transaction.
         readConsistency:
           description: The non-transactional read consistency to use.
           enum:
@@ -1963,6 +1973,10 @@ components:
         query:
           $ref: "#/components/schemas/AggregationQuery"
           description: The parsed form of the `GqlQuery` from the request, if it was set.
+        transaction:
+          description: The identifier of the transaction that was started as part of this RunAggregationQuery request. Set only when ReadOptions.begin_transaction was set in RunAggregationQueryRequest.read_options.
+          format: byte
+          type: string
       type: object
     RunQueryRequest:
       description: The request for Datastore.RunQuery.
@@ -1992,6 +2006,10 @@ components:
         query:
           $ref: "#/components/schemas/Query"
           description: The parsed form of the `GqlQuery` from the request, if it was set.
+        transaction:
+          description: The identifier of the transaction that was started as part of this RunQuery request. Set only when ReadOptions.begin_transaction was set in RunQueryRequest.read_options.
+          format: byte
+          type: string
       type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
