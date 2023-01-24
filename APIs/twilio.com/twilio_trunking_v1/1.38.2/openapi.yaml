@@ -1182,38 +1182,38 @@ components:
     trunking.v1.trunk:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Trunk resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         auth_type:
-          description: The types of authentication mapped to the domain
+          description: "The types of authentication mapped to the domain. Can be: `IP_ACL` and `CREDENTIAL_LIST`. If both are mapped, the values are returned in a comma delimited list. If empty, the domain will not receive any traffic."
           nullable: true
           type: string
         auth_type_set:
-          description: Reserved
+          description: Reserved.
           items:
             type: string
           nullable: true
           type: array
         cnam_lookup_enabled:
-          description: Whether Caller ID Name (CNAM) lookup is enabled for the trunk
+          description: Whether Caller ID Name (CNAM) lookup is enabled for the trunk. If enabled, all inbound calls to the SIP Trunk from the United States and Canada automatically perform a CNAM Lookup and display Caller ID data on your phone. See [CNAM Lookups](https://www.twilio.com/docs/sip-trunking#CNAM) for more information.
           nullable: true
           type: boolean
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         disaster_recovery_method:
-          description: The HTTP method we use to call the disaster_recovery_url
+          description: "The HTTP method we use to call the `disaster_recovery_url`. Can be: `GET` or `POST`."
           enum:
             - HEAD
             - GET
@@ -1225,32 +1225,32 @@ components:
           nullable: true
           type: string
         disaster_recovery_url:
-          description: The HTTP URL that we call if an error occurs while sending SIP traffic towards your configured Origination URL
+          description: The URL we call using the `disaster_recovery_method` if an error occurs while sending SIP traffic towards the configured Origination URL. We retrieve TwiML from this URL and execute the instructions like any other normal TwiML call. See [Disaster Recovery](https://www.twilio.com/docs/sip-trunking#disaster-recovery) for more information.
           format: uri
           nullable: true
           type: string
         domain_name:
-          description: The unique address you reserve on Twilio to which you route your SIP traffic
+          description: The unique address you reserve on Twilio to which you route your SIP traffic. Domain names can contain letters, digits, and `-` and must end with `pstn.twilio.com`. See [Termination Settings](https://www.twilio.com/docs/sip-trunking#termination) for more information.
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         recording:
-          description: The recording settings for the trunk
+          description: "The recording settings for the trunk. Can be: `do-not-record`, `record-from-ringing`, `record-from-answer`. If set to `record-from-ringing` or `record-from-answer`, all calls going through the trunk will be recorded. The only way to change recording parameters is on a sub-resource of a Trunk after it has been created. e.g.`/Trunks/[Trunk_SID]/Recording -XPOST -d'Mode=record-from-answer'`. See [Recording](https://www.twilio.com/docs/sip-trunking#recording) for more information."
           nullable: true
         secure:
-          description: Whether Secure Trunking is enabled for the trunk
+          description: Whether Secure Trunking is enabled for the trunk. If enabled, all calls going through the trunk will be secure using SRTP for media and TLS for signaling. If disabled, then RTP will be used for media. See [Secure Trunking](https://www.twilio.com/docs/sip-trunking#securetrunking) for more information.
           nullable: true
           type: boolean
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Trunk resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1258,16 +1258,16 @@ components:
           type: string
         transfer_caller_id:
           $ref: "#/components/schemas/trunk_enum_transfer_caller_id"
-          description: Caller Id for transfer target
+          description: "Caller Id for transfer target. Can be: `from-transferee` (default) or `from-transferor`."
           nullable: true
           type: string
         transfer_mode:
           $ref: "#/components/schemas/trunk_enum_transfer_setting"
-          description: The call transfer settings for the trunk
+          description: "The call transfer settings for the trunk. Can be: `enable-all`, `sip-only` and `disable-all`. See [Transfer](https://www.twilio.com/docs/sip-trunking/call-transfer) for more information."
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -1275,42 +1275,42 @@ components:
     trunking.v1.trunk.credential_list:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the CredentialList resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the CredentialList resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^CL[0-9a-fA-F]{32}$
           type: string
         trunk_sid:
-          description: The SID of the Trunk the credential list in associated with
+          description: The SID of the Trunk the credential list in associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^TK[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -1318,42 +1318,42 @@ components:
     trunking.v1.trunk.ip_access_control_list:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the IpAccessControlList resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the IpAccessControlList resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AL[0-9a-fA-F]{32}$
           type: string
         trunk_sid:
-          description: The SID of the Trunk the resource is associated with
+          description: The SID of the Trunk the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^TK[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -1361,67 +1361,67 @@ components:
     trunking.v1.trunk.origination_url:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the OriginationUrl resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         enabled:
-          description: Whether the URL is enabled
+          description: Whether the URL is enabled. The default is `true`.
           nullable: true
           type: boolean
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         priority:
-          description: The relative importance of the URI
+          description: The relative importance of the URI. Can be an integer from 0 to 65535, inclusive, and the default is 10. The lowest number represents the most important URI.
           nullable: true
           type: integer
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the OriginationUrl resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^OU[0-9a-fA-F]{32}$
           type: string
         sip_url:
-          description: The SIP address you want Twilio to route your Origination calls to
+          description: The SIP address you want Twilio to route your Origination calls to. This must be a `sip:` schema.
           format: uri
           nullable: true
           type: string
         trunk_sid:
-          description: The SID of the Trunk that owns the Origination URL
+          description: The SID of the Trunk that owns the Origination URL.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^TK[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
         weight:
-          description: The value that determines the relative load the URI should receive compared to others with the same priority
+          description: The value that determines the relative share of the load the URI should receive compared to other URIs with the same priority. Can be an integer from 1 to 65535, inclusive, and the default is 10. URLs with higher values receive more load than those with lower ones with the same priority.
           nullable: true
           type: integer
       type: object
     trunking.v1.trunk.phone_number:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the PhoneNumber resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1429,62 +1429,62 @@ components:
           type: string
         address_requirements:
           $ref: "#/components/schemas/phone_number_enum_address_requirement"
-          description: Whether the phone number requires an Address registered with Twilio
+          description: "Whether the phone number requires an [Address](https://www.twilio.com/docs/usage/api/address) registered with Twilio and, if so, what type. Can be: `none`, `any`, `local`, or `foreign`."
           nullable: true
           type: string
         api_version:
-          description: The API version used to start a new TwiML session
+          description: The API version used to start a new TwiML session.
           nullable: true
           type: string
         beta:
-          description: Whether the phone number is new to the Twilio platform
+          description: "Whether the phone number is new to the Twilio platform. Can be: `true` or `false`."
           nullable: true
           type: boolean
         capabilities:
-          description: Indicate if a phone can receive calls or messages
+          description: "The set of Boolean properties that indicate whether a phone number can receive calls or messages.  Capabilities are  `Voice`, `SMS`, and `MMS` and each capability can be: `true` or `false`."
           format: string-map
           nullable: true
           type: object
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         phone_number:
-          description: The phone number in E.164 format
+          description: The phone number in [E.164](https://www.twilio.com/docs/glossary/what-e164) format, which consists of a + followed by the country code and subscriber number.
           format: phone-number
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the PhoneNumber resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^PN[0-9a-fA-F]{32}$
           type: string
         sms_application_sid:
-          description: The SID of the application that handles SMS messages sent to the phone number
+          description: The SID of the application that handles SMS messages sent to the phone number. If an `sms_application_sid` is present, we ignore all `sms_*_url` values and use those of the application.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AP[0-9a-fA-F]{32}$
           type: string
         sms_fallback_method:
-          description: The HTTP method used with sms_fallback_url
+          description: "The HTTP method we use to call `sms_fallback_url`. Can be: `GET` or `POST`."
           enum:
             - HEAD
             - GET
@@ -1496,12 +1496,12 @@ components:
           nullable: true
           type: string
         sms_fallback_url:
-          description: The URL that we call when an error occurs while retrieving or executing the TwiML
+          description: The URL that we call using the `sms_fallback_method` when an error occurs while retrieving or executing the TwiML from `sms_url`.
           format: uri
           nullable: true
           type: string
         sms_method:
-          description: The HTTP method to use with sms_url
+          description: "The HTTP method we use to call `sms_url`. Can be: `GET` or `POST`."
           enum:
             - HEAD
             - GET
@@ -1513,17 +1513,17 @@ components:
           nullable: true
           type: string
         sms_url:
-          description: The URL we call when the phone number receives an incoming SMS message
+          description: The URL we call using the `sms_method` when the phone number receives an incoming SMS message.
           format: uri
           nullable: true
           type: string
         status_callback:
-          description: The URL to send status information to your application
+          description: The URL we call using the `status_callback_method` to send status information to your application.
           format: uri
           nullable: true
           type: string
         status_callback_method:
-          description: The HTTP method we use to call status_callback
+          description: "The HTTP method we use to call `status_callback`. Can be: `GET` or `POST`."
           enum:
             - HEAD
             - GET
@@ -1535,30 +1535,30 @@ components:
           nullable: true
           type: string
         trunk_sid:
-          description: The SID of the Trunk that handles calls to the phone number
+          description: The SID of the Trunk that handles calls to the phone number. If a `trunk_sid` is present, we ignore all of the voice URLs and voice applications and use those set on the Trunk. Setting a `trunk_sid` will automatically delete your `voice_application_sid` and vice versa.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^TK[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
         voice_application_sid:
-          description: The SID of the application that handles calls to the phone number
+          description: The SID of the application that handles calls to the phone number. If a `voice_application_sid` is present, we ignore all of the voice URLs and use those set on the application. Setting a `voice_application_sid` will automatically delete your `trunk_sid` and vice versa.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AP[0-9a-fA-F]{32}$
           type: string
         voice_caller_id_lookup:
-          description: Whether to lookup the caller's name
+          description: "Whether we look up the caller's caller-ID name from the CNAM database ($0.01 per look up). Can be: `true` or `false`."
           nullable: true
           type: boolean
         voice_fallback_method:
-          description: The HTTP method that we use to call voice_fallback_url
+          description: "The HTTP method that we use to call `voice_fallback_url`. Can be: `GET` or `POST`."
           enum:
             - HEAD
             - GET
@@ -1570,12 +1570,12 @@ components:
           nullable: true
           type: string
         voice_fallback_url:
-          description: The URL we call when an error occurs in TwiML
+          description: The URL that we call using the `voice_fallback_method` when an error occurs retrieving or executing the TwiML requested by `url`.
           format: uri
           nullable: true
           type: string
         voice_method:
-          description: The HTTP method used with the voice_url
+          description: "The HTTP method we use to call `voice_url`. Can be: `GET` or `POST`."
           enum:
             - HEAD
             - GET
@@ -1587,7 +1587,7 @@ components:
           nullable: true
           type: string
         voice_url:
-          description: The URL we call when the phone number receives a call
+          description: The URL we call using the `voice_method` when the phone number receives a call. The `voice_url` is not be used if a `voice_application_sid` or a `trunk_sid` is set.
           format: uri
           nullable: true
           type: string
@@ -1596,12 +1596,12 @@ components:
       properties:
         mode:
           $ref: "#/components/schemas/recording_enum_recording_mode"
-          description: The recording mode for the trunk.
+          description: The recording mode for the trunk. Can be do-not-record (default), record-from-ringing, record-from-answer, record-from-ringing-dual, or record-from-answer-dual.
           nullable: true
           type: string
         trim:
           $ref: "#/components/schemas/recording_enum_recording_trim"
-          description: The recording trim setting for the trunk.
+          description: The recording trim setting for the trunk. Can be do-not-trim (default) or trim-silence.
           nullable: true
           type: string
       type: object

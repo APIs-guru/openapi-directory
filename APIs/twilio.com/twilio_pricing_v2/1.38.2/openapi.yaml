@@ -320,16 +320,16 @@ components:
     pricing.v2.trunking_country:
       properties:
         country:
-          description: The name of the country
+          description: The name of the country.
           nullable: true
           type: string
         iso_country:
-          description: The ISO country code
+          description: The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
           format: iso-country-code
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -337,16 +337,16 @@ components:
     pricing.v2.trunking_country-instance:
       properties:
         country:
-          description: The name of the country
+          description: The name of the country.
           nullable: true
           type: string
         iso_country:
-          description: The ISO country code
+          description: The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
           format: iso-country-code
           nullable: true
           type: string
         originating_call_prices:
-          description: The list of OriginatingCallPrice records
+          description: The list of [OriginatingCallPrice](https://www.twilio.com/docs/voice/pricing#inbound-call-price) records.
           items:
             format: inbound-call-price
             properties:
@@ -360,12 +360,12 @@ components:
           nullable: true
           type: array
         price_unit:
-          description: The currency in which prices are measured, in ISO 4127 format (e.g. usd, eur, jpy)
+          description: The currency in which prices are measured, specified in [ISO 4127](https://www.iso.org/iso/home/standards/currency_codes.htm) format (e.g. `usd`, `eur`, `jpy`).
           format: currency
           nullable: true
           type: string
         terminating_prefix_prices:
-          description: The list of TerminatingPrefixPrice records
+          description: The list of [TerminatingPrefixPrice](https://www.twilio.com/docs/voice/pricing#outbound-prefix-price-with-origin) records.
           items:
             format: outbound-prefix-price-with-origin
             properties:
@@ -387,7 +387,7 @@ components:
           nullable: true
           type: array
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -395,21 +395,21 @@ components:
     pricing.v2.trunking_number:
       properties:
         country:
-          description: The name of the country
+          description: The name of the country.
           nullable: true
           type: string
         destination_number:
-          description: The destination phone number, in E.164 format
+          description: The destination phone number in [E.164](https://www.twilio.com/docs/glossary/what-e164) format, which consists of a + followed by the country code and subscriber number.
           format: phone-number
           nullable: true
           type: string
         iso_country:
-          description: The ISO country code
+          description: The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
           format: iso-country-code
           nullable: true
           type: string
         originating_call_price:
-          description: The OriginatingCallPrice record
+          description: The [OriginatingCallPrice](https://www.twilio.com/docs/voice/pricing#inbound-call-price) record.
           format: inbound-call-price
           nullable: true
           properties:
@@ -421,12 +421,12 @@ components:
               type: string
           type: object
         origination_number:
-          description: The origination phone number, in E.164 format
+          description: The origination phone number in [[E.164](https://www.twilio.com/docs/glossary/what-e164) format, which consists of a + followed by the country code and subscriber number.
           format: phone-number
           nullable: true
           type: string
         price_unit:
-          description: The currency in which prices are measured, in ISO 4127 format (e.g. usd, eur, jpy)
+          description: The currency in which prices are measured, specified in [ISO 4127](https://www.iso.org/iso/home/standards/currency_codes.htm) format (e.g. `usd`, `eur`, `jpy`).
           format: currency
           nullable: true
           type: string
@@ -452,7 +452,7 @@ components:
           nullable: true
           type: array
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -460,16 +460,16 @@ components:
     pricing.v2.voice:
       properties:
         links:
-          description: The URLs of the related Countries and Numbers resources
+          description: The URLs of the related Countries and Numbers resources.
           format: uri-map
           nullable: true
           type: object
         name:
-          description: The resource name
+          description: The resource name.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -477,16 +477,16 @@ components:
     pricing.v2.voice.voice_country:
       properties:
         country:
-          description: The name of the country
+          description: The name of the country.
           nullable: true
           type: string
         iso_country:
-          description: The ISO country code
+          description: The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
           format: iso-country-code
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -494,11 +494,11 @@ components:
     pricing.v2.voice.voice_country-instance:
       properties:
         country:
-          description: The name of the country
+          description: The name of the country.
           nullable: true
           type: string
         inbound_call_prices:
-          description: The list of InboundCallPrice records
+          description: The list of [InboundCallPrice](https://www.twilio.com/docs/voice/pricing#inbound-call-price) records.
           items:
             format: inbound-call-price
             properties:
@@ -512,12 +512,12 @@ components:
           nullable: true
           type: array
         iso_country:
-          description: The ISO country code
+          description: The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
           format: iso-country-code
           nullable: true
           type: string
         outbound_prefix_prices:
-          description: The list of OutboundPrefixPriceWithOrigin records
+          description: The list of [OutboundPrefixPriceWithOrigin](https://www.twilio.com/docs/voice/pricing#outbound-prefix-price-with-origin) records.
           items:
             format: outbound-prefix-price-with-origin
             properties:
@@ -539,12 +539,12 @@ components:
           nullable: true
           type: array
         price_unit:
-          description: The currency in which prices are measured, in ISO 4127 format (e.g. usd, eur, jpy)
+          description: The currency in which prices are measured, specified in [ISO 4127](https://www.iso.org/iso/home/standards/currency_codes.htm) format (e.g. `usd`, `eur`, `jpy`).
           format: currency
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -552,16 +552,16 @@ components:
     pricing.v2.voice.voice_number:
       properties:
         country:
-          description: The name of the country
+          description: The name of the country.
           nullable: true
           type: string
         destination_number:
-          description: The destination phone number, in E.164 format
+          description: The destination phone number in [E.164](https://www.twilio.com/docs/glossary/what-e164) format, which consists of a + followed by the country code and subscriber number.
           format: phone-number
           nullable: true
           type: string
         inbound_call_price:
-          description: The InboundCallPrice record
+          description: The [InboundCallPrice](https://www.twilio.com/docs/voice/pricing#inbound-call-price) record.
           format: inbound-call-price
           nullable: true
           properties:
@@ -573,17 +573,17 @@ components:
               type: string
           type: object
         iso_country:
-          description: The ISO country code
+          description: The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
           format: iso-country-code
           nullable: true
           type: string
         origination_number:
-          description: The origination phone number, in E.164 format
+          description: The origination phone number in [[E.164](https://www.twilio.com/docs/glossary/what-e164) format, which consists of a + followed by the country code and subscriber number.
           format: phone-number
           nullable: true
           type: string
         outbound_call_prices:
-          description: The list of OutboundCallPriceWithOrigin records
+          description: The list of [OutboundCallPriceWithOrigin](https://www.twilio.com/docs/voice/pricing#outbound-call-price-with-origin) records.
           items:
             format: outbound-call-price-with-origin
             properties:
@@ -599,12 +599,12 @@ components:
           nullable: true
           type: array
         price_unit:
-          description: The currency in which prices are measured, in ISO 4127 format (e.g. usd, eur, jpy)
+          description: The currency in which prices are measured, specified in [ISO 4127](https://www.iso.org/iso/home/standards/currency_codes.htm) format (e.g. `usd`, `eur`, `jpy`).
           format: currency
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string

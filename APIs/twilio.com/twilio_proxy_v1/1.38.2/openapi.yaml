@@ -1638,76 +1638,76 @@ components:
     proxy.v1.service:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Service resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         callback_url:
-          description: The URL we call when the interaction status changes
+          description: The URL we call when the interaction status changes.
           format: uri
           nullable: true
           type: string
         chat_instance_sid:
-          description: The SID of the Chat Service Instance
+          description: The SID of the Chat Service Instance managed by Proxy Service. The Chat Service enables Proxy to forward SMS and channel messages to this chat instance. This is a one-to-one relationship.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time in GMT when the resource was created.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time in GMT when the resource was last updated.
           format: date-time
           nullable: true
           type: string
         default_ttl:
-          description: Default TTL for a Session, in seconds
+          description: The default `ttl` value for Sessions created in the Service. The TTL (time to live) is measured in seconds after the Session's last create or last Interaction. The default value of `0` indicates an unlimited Session length. You can override a Session's default TTL value by setting its `ttl` value.
           nullable: true
           type: integer
         geo_match_level:
           $ref: "#/components/schemas/service_enum_geo_match_level"
-          description: Where a proxy number must be located relative to the participant identifier
+          description: "Where a proxy number must be located relative to the participant identifier. Can be: `country`, `area-code`, or `extended-area-code`. The default value is `country` and more specific areas than `country` are only available in North America."
           nullable: true
           type: string
         intercept_callback_url:
-          description: The URL we call on each interaction
+          description: The URL we call on each interaction. If we receive a 403 status, we block the interaction; otherwise the interaction continues.
           format: uri
           nullable: true
           type: string
         links:
-          description: The URLs of resources related to the Service
+          description: The URLs of resources related to the Service.
           format: uri-map
           nullable: true
           type: object
         number_selection_behavior:
           $ref: "#/components/schemas/service_enum_number_selection_behavior"
-          description: The preference for Proxy Number selection for the Service instance
+          description: "The preference for Proxy Number selection in the Service instance. Can be: `prefer-sticky` or `avoid-sticky`. `prefer-sticky` means that we will try and select the same Proxy Number for a given participant if they have previous [Sessions](https://www.twilio.com/docs/proxy/api/session), but we will not fail if that Proxy Number cannot be used.  `avoid-sticky` means that we will try to use different Proxy Numbers as long as that is possible within a given pool rather than try and use a previously assigned number."
           nullable: true
           type: string
         out_of_session_callback_url:
-          description: The URL we call when an inbound call or SMS action occurs on a closed or non-existent Session
+          description: The URL we call when an inbound call or SMS action occurs on a closed or non-existent Session. If your server (or a Twilio [function](https://www.twilio.com/functions)) responds with valid [TwiML](https://www.twilio.com/docs/voice/twiml), we will process it. This means it is possible, for example, to play a message for a call, send an automated text message response, or redirect a call to another Phone Number. See [Out-of-Session Callback Response Guide](https://www.twilio.com/docs/proxy/out-session-callback-response-guide) for more information.
           format: uri
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Service resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^KS[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. This value must be 191 characters or fewer in length and be unique. Supports UTF-8 characters. **This value should not have PII.**
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Service resource
+          description: The absolute URL of the Service resource.
           format: uri
           nullable: true
           type: string
@@ -1715,14 +1715,14 @@ components:
     proxy.v1.service.phone_number:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the PhoneNumber resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         capabilities:
-          description: The capabilities of the phone number
+          description: The capabilities of the phone number.
           format: phone-number-capabilities
           nullable: true
           properties:
@@ -1736,52 +1736,52 @@ components:
               type: boolean
           type: object
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time in GMT when the resource was created.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time in GMT when the resource was last updated.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         in_use:
-          description: The number of open session assigned to the number.
+          description: The number of open session assigned to the number. See the [How many Phone Numbers do I need?](https://www.twilio.com/docs/proxy/phone-numbers-needed) guide for more information.
           nullable: true
           type: integer
         is_reserved:
-          description: Reserve the phone number for manual assignment to participants only
+          description: Whether the phone number should be reserved and not be assigned to a participant using proxy pool logic. See [Reserved Phone Numbers](https://www.twilio.com/docs/proxy/reserved-phone-numbers) for more information.
           nullable: true
           type: boolean
         iso_country:
-          description: The ISO Country Code
+          description: The ISO Country Code for the phone number.
           nullable: true
           type: string
         phone_number:
-          description: The phone number in E.164 format
+          description: The phone number in [E.164](https://www.twilio.com/docs/glossary/what-e164) format, which consists of a + followed by the country code and subscriber number.
           format: phone-number
           nullable: true
           type: string
         service_sid:
-          description: The SID of the PhoneNumber resource's parent Service resource
+          description: The SID of the PhoneNumber resource's parent [Service](https://www.twilio.com/docs/proxy/api/service) resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^KS[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the PhoneNumber resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^PN[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the PhoneNumber resource
+          description: The absolute URL of the PhoneNumber resource.
           format: uri
           nullable: true
           type: string
@@ -1789,65 +1789,65 @@ components:
     proxy.v1.service.session:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Session resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         closed_reason:
-          description: The reason the Session ended
+          description: The reason the Session ended.
           nullable: true
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time in GMT when the resource was created.
           format: date-time
           nullable: true
           type: string
         date_ended:
-          description: The ISO 8601 date when the Session ended
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date when the Session ended.
           format: date-time
           nullable: true
           type: string
         date_expiry:
-          description: The ISO 8601 date when the Session should expire
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date when the Session should expire. If this is value is present, it overrides the `ttl` value.
           format: date-time
           nullable: true
           type: string
         date_last_interaction:
-          description: The ISO 8601 date when the Session last had an interaction
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date when the Session last had an interaction.
           format: date-time
           nullable: true
           type: string
         date_started:
-          description: The ISO 8601 date when the Session started
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date when the Session started.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time in GMT when the resource was last updated.
           format: date-time
           nullable: true
           type: string
         links:
-          description: The URLs of resources related to the Session
+          description: The URLs of resources related to the Session.
           format: uri-map
           nullable: true
           type: object
         mode:
           $ref: "#/components/schemas/session_enum_mode"
-          description: The Mode of the Session
+          description: "The Mode of the Session. Can be: `message-only`, `voice-only`, or `voice-and-message`."
           nullable: true
           type: string
         service_sid:
-          description: The SID of the resource's parent Service
+          description: The SID of the [Service](https://www.twilio.com/docs/proxy/api/service) the session is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^KS[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Session resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1855,19 +1855,19 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/session_enum_status"
-          description: The status of the Session
+          description: "The status of the Session. Can be: `open`, `in-progress`, `closed`, `failed`, or `unknown`."
           nullable: true
           type: string
         ttl:
-          description: When the session will expire
+          description: The time, in seconds, when the session will expire. The time is measured from the last Session create or the Session's last Interaction.
           nullable: true
           type: integer
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. This value must be 191 characters or fewer in length and be unique. Supports UTF-8 characters. **This value should not have PII.**
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Session resource
+          description: The absolute URL of the Session resource.
           format: uri
           nullable: true
           type: string
@@ -1875,35 +1875,35 @@ components:
     proxy.v1.service.session.interaction:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Interaction resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         data:
-          description: A JSON string that includes the message body of message interactions
+          description: 'A JSON string that includes the message body of message interactions (e.g. `{"body": "hello"}`) or the call duration (when available) of a call (e.g. `{"duration": "5"}`).'
           nullable: true
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the Interaction was created
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time in GMT when the Interaction was created.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time in GMT when the resource was last updated.
           format: date-time
           nullable: true
           type: string
         inbound_participant_sid:
-          description: The SID of the inbound Participant resource
+          description: The SID of the inbound [Participant](https://www.twilio.com/docs/proxy/api/participant) resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^KP[0-9a-fA-F]{32}$
           type: string
         inbound_resource_sid:
-          description: The SID of the inbound resource
+          description: The SID of the inbound resource; either the [Call](https://www.twilio.com/docs/voice/api/call-resource) or [Message](https://www.twilio.com/docs/sms/api/message.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1911,11 +1911,11 @@ components:
           type: string
         inbound_resource_status:
           $ref: "#/components/schemas/interaction_enum_resource_status"
-          description: The inbound resource status of the Interaction
+          description: The inbound resource status of the Interaction. Will always be `delivered` for messages and `in-progress` for calls.
           nullable: true
           type: string
         inbound_resource_type:
-          description: The inbound resource type
+          description: The inbound resource type. Can be [Call](https://www.twilio.com/docs/voice/api/call-resource) or [Message](https://www.twilio.com/docs/sms/api/message-resource).
           nullable: true
           type: string
         inbound_resource_url:
@@ -1924,14 +1924,14 @@ components:
           nullable: true
           type: string
         outbound_participant_sid:
-          description: The SID of the outbound Participant
+          description: The SID of the outbound [Participant](https://www.twilio.com/docs/proxy/api/participant)).
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^KP[0-9a-fA-F]{32}$
           type: string
         outbound_resource_sid:
-          description: The SID of the outbound resource
+          description: The SID of the outbound resource; either the [Call](https://www.twilio.com/docs/voice/api/call-resource) or [Message](https://www.twilio.com/docs/sms/api/message-resource).
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1939,34 +1939,34 @@ components:
           type: string
         outbound_resource_status:
           $ref: "#/components/schemas/interaction_enum_resource_status"
-          description: The outbound resource status of the Interaction
+          description: "The outbound resource status of the Interaction. Can be: `accepted`, `canceled`, `deleted`, `delivered`, `delivery-unknown`, `failed`, `partially-delivered`, `queued`, `read`, `received`, `receiving`, `scheduled`, `sending`, `sent`, `undelivered`, or `unknown` for messages.  Can be `initiated` or `completed` or `unknown` for calls."
           nullable: true
           type: string
         outbound_resource_type:
-          description: The outbound resource type
+          description: "The outbound resource type. Can be: [Call](https://www.twilio.com/docs/voice/api/call-resource) or [Message](https://www.twilio.com/docs/sms/api/message-resource)."
           nullable: true
           type: string
         outbound_resource_url:
-          description: The URL of the Twilio outbound resource
+          description: The URL of the Twilio outbound resource.
           format: uri
           nullable: true
           type: string
         service_sid:
-          description: The SID of the resource's parent Service
+          description: The SID of the parent [Service](https://www.twilio.com/docs/proxy/api/service) resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^KS[0-9a-fA-F]{32}$
           type: string
         session_sid:
-          description: The SID of the resource's parent Session
+          description: The SID of the parent [Session](https://www.twilio.com/docs/proxy/api/session) resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^KC[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Interaction resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1974,11 +1974,11 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/interaction_enum_type"
-          description: The Type of the Interaction
+          description: "The Type of the Interaction. Can be: `message`, `voice` or `unknown`."
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Interaction resource
+          description: The absolute URL of the Interaction resource.
           format: uri
           nullable: true
           type: string
@@ -1986,74 +1986,74 @@ components:
     proxy.v1.service.session.participant:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Participant resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time in GMT when the resource was created.
           format: date-time
           nullable: true
           type: string
         date_deleted:
-          description: The ISO 8601 date the Participant was removed
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date when the Participant was removed from the session.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time in GMT when the resource was last updated.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the participant
+          description: The string that you assigned to describe the participant. This value must be 255 characters or fewer. Supports UTF-8 characters. **This value should not have PII.**
           nullable: true
           type: string
         identifier:
-          description: The phone number or channel identifier of the Participant
+          description: The phone number or channel identifier of the Participant. This value must be 191 characters or fewer. Supports UTF-8 characters.
           nullable: true
           type: string
         links:
-          description: The URLs to resources related the participant
+          description: The URLs to resources related the participant.
           format: uri-map
           nullable: true
           type: object
         proxy_identifier:
-          description: The phone number or short code of the participant's partner
+          description: The phone number or short code (masked number) of the participant's partner. The participant will call or message the partner participant at this number.
           nullable: true
           type: string
         proxy_identifier_sid:
-          description: The SID of the Proxy Identifier assigned to the Participant
+          description: The SID of the Proxy Identifier assigned to the Participant.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^PN[0-9a-fA-F]{32}$
           type: string
         service_sid:
-          description: The SID of the resource's parent Service
+          description: The SID of the resource's parent [Service](https://www.twilio.com/docs/proxy/api/service) resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^KS[0-9a-fA-F]{32}$
           type: string
         session_sid:
-          description: The SID of the resource's parent Session
+          description: The SID of the parent [Session](https://www.twilio.com/docs/proxy/api/session) resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^KC[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Participant resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^KP[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the Participant resource
+          description: The absolute URL of the Participant resource.
           format: uri
           nullable: true
           type: string
@@ -2061,35 +2061,35 @@ components:
     proxy.v1.service.session.participant.message_interaction:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the MessageInteraction resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         data:
-          description: A JSON string that includes the message body sent to the participant
+          description: 'A JSON string that includes the message body sent to the participant. (e.g. `{"body": "hello"}`)'
           nullable: true
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time in GMT when the resource was created.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time in GMT when the resource was last updated.
           format: date-time
           nullable: true
           type: string
         inbound_participant_sid:
-          description: Always empty for Message Interactions
+          description: Always empty for created Message Interactions.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^KP[0-9a-fA-F]{32}$
           type: string
         inbound_resource_sid:
-          description: Always empty for Message Interactions
+          description: Always empty for created Message Interactions.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2097,27 +2097,27 @@ components:
           type: string
         inbound_resource_status:
           $ref: "#/components/schemas/message_interaction_enum_resource_status"
-          description: Always empty for Message Interactions
+          description: Always empty for created Message Interactions.
           nullable: true
           type: string
         inbound_resource_type:
-          description: Always empty for Message Interactions
+          description: Always empty for created Message Interactions.
           nullable: true
           type: string
         inbound_resource_url:
-          description: Always empty for Message Interactions
+          description: Always empty for created Message Interactions.
           format: uri
           nullable: true
           type: string
         outbound_participant_sid:
-          description: The SID of the outbound Participant resource
+          description: The SID of the outbound [Participant](https://www.twilio.com/docs/proxy/api/participant) resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^KP[0-9a-fA-F]{32}$
           type: string
         outbound_resource_sid:
-          description: The SID of the outbound Message resource
+          description: The SID of the outbound [Message](https://www.twilio.com/docs/sms/api/message-resource) resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2125,41 +2125,41 @@ components:
           type: string
         outbound_resource_status:
           $ref: "#/components/schemas/message_interaction_enum_resource_status"
-          description: The outbound resource status
+          description: "The outbound message resource status. Can be: `accepted`, `deleted`, `delivered`, `delivery-unknown`, `failed`, `queued`, `received`, `receiving`, `scheduled`, `sending`, `sent`, `undelivered`, or `unknown`."
           nullable: true
           type: string
         outbound_resource_type:
-          description: The outbound resource type
+          description: The outbound resource type. This value is always `Message`.
           nullable: true
           type: string
         outbound_resource_url:
-          description: The URL of the Twilio message resource
+          description: The URL of the Twilio message resource.
           format: uri
           nullable: true
           type: string
         participant_sid:
-          description: The SID of the Participant resource
+          description: The SID of the [Participant](https://www.twilio.com/docs/proxy/api/participant) resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^KP[0-9a-fA-F]{32}$
           type: string
         service_sid:
-          description: The SID of the resource's parent Service
+          description: The SID of the parent [Service](https://www.twilio.com/docs/proxy/api/service) resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^KS[0-9a-fA-F]{32}$
           type: string
         session_sid:
-          description: The SID of the resource's parent Session
+          description: The SID of the parent [Session](https://www.twilio.com/docs/proxy/api/session) resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^KC[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the MessageInteraction resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2167,11 +2167,11 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/message_interaction_enum_type"
-          description: The Type of Message Interaction
+          description: The Type of Message Interaction. This value is always `message`.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the MessageInteraction resource
+          description: The absolute URL of the MessageInteraction resource.
           format: uri
           nullable: true
           type: string
@@ -2179,14 +2179,14 @@ components:
     proxy.v1.service.short_code:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the ShortCode resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         capabilities:
-          description: The capabilities of the short code
+          description: The capabilities of the short code.
           format: phone-number-capabilities
           nullable: true
           properties:
@@ -2200,43 +2200,43 @@ components:
               type: boolean
           type: object
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time in GMT when the resource was created.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time in GMT when the resource was last updated.
           format: date-time
           nullable: true
           type: string
         is_reserved:
-          description: Whether the short code should be reserved for manual assignment to participants only
+          description: Whether the short code should be reserved and not be assigned to a participant using proxy pool logic. See [Reserved Phone Numbers](https://www.twilio.com/docs/proxy/reserved-phone-numbers) for more information.
           nullable: true
           type: boolean
         iso_country:
-          description: The ISO Country Code
+          description: The ISO Country Code for the short code.
           nullable: true
           type: string
         service_sid:
-          description: The SID of the resource's parent Service
+          description: The SID of the ShortCode resource's parent [Service](https://www.twilio.com/docs/proxy/api/service) resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^KS[0-9a-fA-F]{32}$
           type: string
         short_code:
-          description: The short code's number
+          description: The short code's number.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the ShortCode resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^SC[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the ShortCode resource
+          description: The absolute URL of the ShortCode resource.
           format: uri
           nullable: true
           type: string

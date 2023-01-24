@@ -264,35 +264,35 @@ components:
     microvisor.v1.app:
       properties:
         account_sid:
-          description: The Account SID.
+          description: The unique SID identifier of the Account.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The date that this App was created.
+          description: The date that this App was created, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date that this App was last updated.
+          description: The date that this App was last updated, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         hash:
-          description: App manifest hash represented as hash_algorithm:hash_value.
+          description: App manifest hash represented as `hash_algorithm:hash_value`.
           nullable: true
           type: string
         sid:
-          description: A string that uniquely identifies this App.
+          description: A 34-character string that uniquely identifies this App.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^KA[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: An developer-defined string that uniquely identifies the App.
+          description: A developer-defined string that uniquely identifies the App. This value must be unique for all Apps on this Account. The `unique_name` value may be used as an alternative to the `sid` in the URL path to address the resource.
           nullable: true
           type: string
         url:
@@ -304,42 +304,42 @@ components:
     microvisor.v1.device:
       properties:
         account_sid:
-          description: Account SID.
+          description: The unique SID identifier of the Account.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         app:
-          description: Information about the target App and the App reported by this Device.
+          description: Information about the target App and the App reported by this Device. Contains the properties `target_sid`, `date_targeted`, `update_status` (one of `up-to-date`, `pending` and `error`), `update_error_code`, `reported_sid` and `date_reported`.
           nullable: true
         date_created:
-          description: The date that this Device was created.
+          description: The date that this Device was created, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date that this Device was last updated.
+          description: The date that this Device was last updated, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         links:
-          description: The absolute URLs of related resources
+          description: The absolute URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         logging:
-          description: Object specifying whether application logging is enabled for this Device.
+          description: Object specifying whether application logging is enabled for this Device. Contains the properties `enabled` and `date_expires`.
           nullable: true
         sid:
-          description: A string that uniquely identifies this Device.
+          description: A 34-character string that uniquely identifies this Device.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UV[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: A developer-defined string that uniquely identifies the Device.
+          description: A developer-defined string that uniquely identifies the Device. This value must be unique for all Devices on this Account. The `unique_name` value may be used as an alternative to the `sid` in the URL path to address the resource.
           nullable: true
           type: string
         url:

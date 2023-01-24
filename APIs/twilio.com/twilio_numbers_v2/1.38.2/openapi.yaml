@@ -1491,44 +1491,44 @@ components:
     numbers.v2.regulatory_compliance.bundle:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Bundle resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         email:
-          description: The email address
+          description: The email address that will receive updates when the Bundle resource changes status.
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         links:
-          description: The URLs of the Assigned Items of the Bundle resource
+          description: The URLs of the Assigned Items of the Bundle resource.
           format: uri-map
           nullable: true
           type: object
         regulation_sid:
-          description: The unique string of a regulation.
+          description: The unique string of a regulation that is associated to the Bundle resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RN[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource.
+          description: The unique string that we created to identify the Bundle resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1536,7 +1536,7 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/bundle_enum_status"
-          description: The verification status of the Bundle resource
+          description: The verification status of the Bundle resource.
           nullable: true
           type: string
         status_callback:
@@ -1545,12 +1545,12 @@ components:
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Bundle resource
+          description: The absolute URL of the Bundle resource.
           format: uri
           nullable: true
           type: string
         valid_until:
-          description: The ISO 8601 date and time in GMT when the resource will be valid until.
+          description: The date and time in GMT in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format when the resource will be valid until.
           format: date-time
           nullable: true
           type: string
@@ -1558,39 +1558,39 @@ components:
     numbers.v2.regulatory_compliance.bundle.bundle_copy:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Bundle resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         email:
-          description: The email address
+          description: The email address that will receive updates when the Bundle resource changes status.
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         regulation_sid:
-          description: The unique string of a regulation
+          description: The unique string of a regulation that is associated to the Bundle resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RN[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Bundle resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1598,16 +1598,16 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/bundle_copy_enum_status"
-          description: The verification status of the Bundle resource
+          description: The verification status of the Bundle resource.
           nullable: true
           type: string
         status_callback:
-          description: The URL we call to inform your application of status changes
+          description: The URL we call to inform your application of status changes.
           format: uri
           nullable: true
           type: string
         valid_until:
-          description: The ISO 8601 date and time in GMT when the resource will be valid until
+          description: The date and time in GMT in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format when the resource will be valid until.
           format: date-time
           nullable: true
           type: string
@@ -1615,14 +1615,14 @@ components:
     numbers.v2.regulatory_compliance.bundle.evaluation:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Bundle resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         bundle_sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Bundle resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1633,19 +1633,19 @@ components:
           nullable: true
           type: string
         regulation_sid:
-          description: The unique string of a regulation
+          description: The unique string of a regulation that is associated to the Bundle resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RN[0-9a-fA-F]{32}$
           type: string
         results:
-          description: The results of the Evaluation resource
+          description: The results of the Evaluation which includes the valid and invalid attributes.
           items: {}
           nullable: true
           type: array
         sid:
-          description: The unique string that identifies the Evaluation resource
+          description: The unique string that identifies the Evaluation resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1653,7 +1653,7 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/evaluation_enum_status"
-          description: The compliance status of the Evaluation resource
+          description: The compliance status of the Evaluation resource.
           nullable: true
           type: string
         url:
@@ -1664,40 +1664,40 @@ components:
     numbers.v2.regulatory_compliance.bundle.item_assignment:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Item Assignment resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         bundle_sid:
-          description: The unique string that identifies the Bundle resource.
+          description: The unique string that we created to identify the Bundle resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^BU[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         object_sid:
-          description: The sid of an object bag
+          description: The SID of an object bag that holds information of the different items.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^[a-zA-Z]{2}[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Item Assignment resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^BV[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the Identity resource
+          description: The absolute URL of the Identity resource.
           format: uri
           nullable: true
           type: string
@@ -1705,39 +1705,39 @@ components:
     numbers.v2.regulatory_compliance.bundle.replace_items:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Bundle resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         email:
-          description: The email address
+          description: The email address that will receive updates when the Bundle resource changes status.
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         regulation_sid:
-          description: The unique string of a regulation
+          description: The unique string of a regulation that is associated to the Bundle resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RN[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Bundle resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1745,16 +1745,16 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/replace_items_enum_status"
-          description: The verification status of the Bundle resource
+          description: The verification status of the Bundle resource.
           nullable: true
           type: string
         status_callback:
-          description: The URL we call to inform your application of status changes
+          description: The URL we call to inform your application of status changes.
           format: uri
           nullable: true
           type: string
         valid_until:
-          description: The ISO 8601 date and time in GMT when the resource will be valid until
+          description: The date and time in GMT in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format when the resource will be valid until.
           format: date-time
           nullable: true
           type: string
@@ -1762,31 +1762,31 @@ components:
     numbers.v2.regulatory_compliance.end_user:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the End User resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         attributes:
-          description: The set of parameters that compose the End Users resource
+          description: The set of parameters that are the attributes of the End Users resource which are listed in the End User Types.
           nullable: true
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string created by Twilio to identify the End User resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1794,11 +1794,11 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/end_user_enum_type"
-          description: The type of end user of the Bundle resource
+          description: The type of end user of the Bundle resource - can be `individual` or `business`.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the End User resource
+          description: The absolute URL of the End User resource.
           format: uri
           nullable: true
           type: string
@@ -1806,27 +1806,27 @@ components:
     numbers.v2.regulatory_compliance.end_user_type:
       properties:
         fields:
-          description: The required information for creating an End-User.
+          description: The required information for creating an End-User. The required fields will change as regulatory needs change and will differ for businesses and individuals.
           items: {}
           nullable: true
           type: array
         friendly_name:
-          description: A human-readable description of the End-User Type resource
+          description: A human-readable description that is assigned to describe the End-User Type resource. Examples can include first name, last name, email, business name, etc
           nullable: true
           type: string
         machine_name:
-          description: A machine-readable description of the End-User Type resource
+          description: A machine-readable description of the End-User Type resource. Examples can include first_name, last_name, email, business_name, etc.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the End-User Type resource
+          description: The unique string that identifies the End-User Type resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^OY[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the End-User Type resource
+          description: The absolute URL of the End-User Type resource.
           format: uri
           nullable: true
           type: string
@@ -1835,33 +1835,33 @@ components:
       properties:
         end_user_type:
           $ref: "#/components/schemas/regulation_enum_end_user_type"
-          description: The type of End User of the Regulation resource
+          description: The type of End User the regulation requires - can be `individual` or `business`.
           nullable: true
           type: string
         friendly_name:
-          description: A human-readable description of the Regulation resource
+          description: "A human-readable description that is assigned to describe the Regulation resource. Examples can include Germany: Mobile - Business."
           nullable: true
           type: string
         iso_country:
-          description: The ISO country code of the phone number's country
+          description: The ISO country code of the phone number's country.
           nullable: true
           type: string
         number_type:
-          description: The type of phone number restricted by the regulatory requirement
+          description: The type of phone number restricted by the regulatory requirement. For example, Germany mobile phone numbers provisioned by businesses require a business name with commercial register proof from the Handelsregisterauszug and a proof of address from Handelsregisterauszug or a trade license by Gewerbeanmeldung.
           nullable: true
           type: string
         requirements:
-          description: The sid of a regulation object that dictates requirements
+          description: The SID of an object that holds the regulatory information of the phone number country, phone number type, and end user type.
           nullable: true
         sid:
-          description: The unique string that identifies the Regulation resource
+          description: The unique string that identifies the Regulation resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RN[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the Regulation resource
+          description: The absolute URL of the Regulation resource.
           format: uri
           nullable: true
           type: string
@@ -1869,22 +1869,22 @@ components:
     numbers.v2.regulatory_compliance.supporting_document:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Document resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         attributes:
-          description: The set of parameters that compose the Supporting Documents resource
+          description: The set of parameters that are the attributes of the Supporting Documents resource which are listed in the Supporting Document Types.
           nullable: true
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
@@ -1893,15 +1893,15 @@ components:
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         mime_type:
-          description: The image type of the file
+          description: The image type uploaded in the Supporting Document container.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string created by Twilio to identify the Supporting Document resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1909,15 +1909,15 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/supporting_document_enum_status"
-          description: The verification status of the Supporting Document resource
+          description: The verification status of the Supporting Document resource.
           nullable: true
           type: string
         type:
-          description: The type of the Supporting Document
+          description: The type of the Supporting Document.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Supporting Document resource
+          description: The absolute URL of the Supporting Document resource.
           format: uri
           nullable: true
           type: string
@@ -1925,27 +1925,27 @@ components:
     numbers.v2.regulatory_compliance.supporting_document_type:
       properties:
         fields:
-          description: The required information for creating a Supporting Document
+          description: The required information for creating a Supporting Document. The required fields will change as regulatory needs change and will differ for businesses and individuals.
           items: {}
           nullable: true
           type: array
         friendly_name:
-          description: A human-readable description of the Supporting Document Type resource
+          description: A human-readable description of the Supporting Document Type resource.
           nullable: true
           type: string
         machine_name:
-          description: The machine-readable description of the Supporting Document Type resource
+          description: The machine-readable description of the Supporting Document Type resource.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the Supporting Document Type resource
+          description: The unique string that identifies the Supporting Document Type resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^OY[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the Supporting Document Type resource
+          description: The absolute URL of the Supporting Document Type resource.
           format: uri
           nullable: true
           type: string

@@ -990,68 +990,68 @@ components:
     wireless.v1.account_usage_record:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the AccountUsageRecord resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         commands:
-          description: An object that describes the aggregated Commands usage for all SIMs during the specified period
+          description: An object that describes the aggregated Commands usage for all SIMs during the specified period. See [Commands Usage Object](https://www.twilio.com/docs/wireless/api/account-usagerecord-resource#commands-usage-object).
           nullable: true
         data:
-          description: An object that describes the aggregated Data usage for all SIMs over the period
+          description: An object that describes the aggregated Data usage for all SIMs over the period. See [Data Usage Object](https://www.twilio.com/docs/wireless/api/account-usagerecord-resource#data-usage-object).
           nullable: true
         period:
-          description: The time period for which usage is reported
+          description: The time period for which usage is reported. Contains `start` and `end` properties that describe the period using GMT date-time values specified in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format.
           nullable: true
       type: object
     wireless.v1.command:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Command resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         command:
-          description: The message being sent to or from the SIM
+          description: The message being sent to or from the SIM. For text mode messages, this can be up to 160 characters. For binary mode messages, this is a series of up to 140 bytes of data encoded using base64.
           nullable: true
           type: string
         command_mode:
           $ref: "#/components/schemas/command_enum_command_mode"
-          description: The mode used to send the SMS message
+          description: "The mode used to send the SMS message. Can be: `text` or `binary`. The default SMS mode is `text`."
           nullable: true
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated format
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format.
           format: date-time
           nullable: true
           type: string
         delivery_receipt_requested:
-          description: Whether to request a delivery receipt
+          description: Whether to request a delivery receipt.
           nullable: true
           type: boolean
         direction:
           $ref: "#/components/schemas/command_enum_direction"
-          description: The direction of the Command
+          description: The direction of the Command. Can be `to_sim` or `from_sim`. The value of `to_sim` is synonymous with the term `mobile terminated`, and `from_sim` is synonymous with the term `mobile originated`.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Command resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^DC[0-9a-fA-F]{32}$
           type: string
         sim_sid:
-          description: The SID of the Sim resource that the Command was sent to or from
+          description: The SID of the [Sim resource](https://www.twilio.com/docs/wireless/api/sim-resource) that the Command was sent to or from.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1059,16 +1059,16 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/command_enum_status"
-          description: The status of the Command
+          description: "The status of the Command. Can be: `queued`, `sent`, `delivered`, `received`, or `failed`. See [Status Values](https://www.twilio.com/docs/wireless/api/command-resource#status-values) for a description of each state."
           nullable: true
           type: string
         transport:
           $ref: "#/components/schemas/command_enum_transport"
-          description: The type of transport used
+          description: "The type of transport used. Can be: `sms` or `ip`."
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -1076,92 +1076,92 @@ components:
     wireless.v1.rate_plan:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the RatePlan resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         data_enabled:
-          description: Whether SIMs can use GPRS/3G/4G/LTE data connectivity
+          description: Whether SIMs can use GPRS/3G/4G/LTE data connectivity.
           nullable: true
           type: boolean
         data_limit:
-          description: The total data usage in Megabytes that the Network allows during one month on the home network
+          description: The total data usage (download and upload combined) in Megabytes that the Network allows during one month on the home network (T-Mobile USA). The metering period begins the day of activation and ends on the same day in the following month. Can be up to 2TB.
           nullable: true
           type: integer
         data_metering:
-          description: The model used to meter data usage
+          description: "The model used to meter data usage. Can be: `payg` and `quota-1`, `quota-10`, and `quota-50`. Learn more about the available [data metering models](https://www.twilio.com/docs/wireless/api/rateplan-resource#payg-vs-quota-data-plans)."
           nullable: true
           type: string
         date_created:
-          description: The date when the resource was created, given as GMT in ISO 8601 format
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date when the resource was last updated, given as GMT in ISO 8601 format
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         international_roaming:
-          description: The services that SIMs capable of using GPRS/3G/4G/LTE data connectivity can use outside of the United States
+          description: "The list of services that SIMs capable of using GPRS/3G/4G/LTE data connectivity can use outside of the United States. Can contain: `data` and `messaging`."
           items:
             type: string
           nullable: true
           type: array
         international_roaming_data_limit:
-          description: The total data usage (download and upload combined) in Megabytes that the Network allows during one month when roaming outside the United States
+          description: The total data usage (download and upload combined) in Megabytes that the Network allows during one month when roaming outside the United States. Can be up to 2TB.
           nullable: true
           type: integer
         messaging_enabled:
-          description: Whether SIMs can make, send, and receive SMS using Commands
+          description: Whether SIMs can make, send, and receive SMS using [Commands](https://www.twilio.com/docs/wireless/api/command-resource).
           nullable: true
           type: boolean
         national_roaming_data_limit:
-          description: The total data usage in Megabytes that the Network allows during one month on non-home networks in the United States
+          description: The total data usage (download and upload combined) in Megabytes that the Network allows during one month on non-home networks in the United States. The metering period begins the day of activation and ends on the same day in the following month. Can be up to 2TB.
           nullable: true
           type: integer
         national_roaming_enabled:
-          description: Whether SIMs can roam on networks other than the home network in the United States
+          description: Whether SIMs can roam on networks other than the home network (T-Mobile USA) in the United States. See [national roaming](https://www.twilio.com/docs/wireless/api/rateplan-resource#national-roaming).
           nullable: true
           type: boolean
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the RatePlan resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WP[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
         voice_enabled:
-          description: Deprecated. Whether SIMs can make and receive voice calls
+          description: Deprecated. Whether SIMs can make and receive voice calls.
           nullable: true
           type: boolean
       type: object
     wireless.v1.sim:
       properties:
         account_sid:
-          description: The SID of the Account to which the Sim resource belongs
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) to which the Sim resource belongs.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         commands_callback_method:
-          description: The HTTP method we use to call commands_callback_url
+          description: "The HTTP method we use to call `commands_callback_url`.  Can be: `POST` or `GET`. Default is `POST`."
           enum:
             - HEAD
             - GET
@@ -1173,43 +1173,43 @@ components:
           nullable: true
           type: string
         commands_callback_url:
-          description: The URL we call when the SIM originates a machine-to-machine Command
+          description: The URL we call using the `commands_callback_method` when the SIM originates a machine-to-machine [Command](https://www.twilio.com/docs/wireless/api/command-resource). Your server should respond with an HTTP status code in the 200 range; any response body will be ignored.
           format: uri
           nullable: true
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the Sim resource was last updated
+          description: The date and time in GMT when the Sim resource was last updated specified in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format.
           format: date-time
           nullable: true
           type: string
         e_id:
-          description: Deprecated
+          description: Deprecated.
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the Sim resource
+          description: The string that you assigned to describe the Sim resource.
           nullable: true
           type: string
         iccid:
-          description: The ICCID associated with the SIM
+          description: The [ICCID](https://en.wikipedia.org/wiki/SIM_card#ICCID) associated with the SIM.
           nullable: true
           type: string
         ip_address:
-          description: Deprecated
+          description: Deprecated.
           nullable: true
           type: string
         links:
-          description: The URLs of related subresources
+          description: The URLs of related subresources.
           format: uri-map
           nullable: true
           type: object
         rate_plan_sid:
-          description: The SID of the RatePlan resource to which the Sim resource is assigned.
+          description: The SID of the [RatePlan resource](https://www.twilio.com/docs/wireless/api/rateplan-resource) to which the Sim resource is assigned.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1217,18 +1217,18 @@ components:
           type: string
         reset_status:
           $ref: "#/components/schemas/sim_enum_reset_status"
-          description: The connectivity reset status of the SIM
+          description: "The connectivity reset status of the SIM. Can be: null or `resetting`. When a connectivity reset is initiated on a SIM, this property is `resetting`. After the reset completes, it is null."
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the Sim resource
+          description: The unique string that we created to identify the Sim resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^DE[0-9a-fA-F]{32}$
           type: string
         sms_fallback_method:
-          description: Deprecated
+          description: Deprecated.
           enum:
             - HEAD
             - GET
@@ -1240,12 +1240,12 @@ components:
           nullable: true
           type: string
         sms_fallback_url:
-          description: Deprecated
+          description: Deprecated.
           format: uri
           nullable: true
           type: string
         sms_method:
-          description: Deprecated
+          description: Deprecated.
           enum:
             - HEAD
             - GET
@@ -1257,26 +1257,26 @@ components:
           nullable: true
           type: string
         sms_url:
-          description: Deprecated
+          description: Deprecated.
           format: uri
           nullable: true
           type: string
         status:
           $ref: "#/components/schemas/sim_enum_status"
-          description: The status of the Sim resource
+          description: "The status of the Sim resource. Can be: `new`, `ready`, `active`, `deactivated`, `canceled`, `deleted`, `scheduled`, or `updating`. See [Status Values](https://www.twilio.com/docs/wireless/api/sim-resource#status-values) for the description of each status."
           nullable: true
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
         voice_fallback_method:
-          description: Deprecated. The HTTP method we use to call voice_fallback_url
+          description: "Deprecated. The HTTP method we use to call `voice_fallback_url`. Can be: `GET` or `POST`. Default is `POST`."
           enum:
             - HEAD
             - GET
@@ -1288,12 +1288,12 @@ components:
           nullable: true
           type: string
         voice_fallback_url:
-          description: Deprecated. The URL we call when an error occurs while retrieving or executing the TwiML requested from voice_url
+          description: Deprecated. The URL we call using the `voice_fallback_method` when an error occurs while retrieving or executing the TwiML requested from `voice_url`.
           format: uri
           nullable: true
           type: string
         voice_method:
-          description: Deprecated. The HTTP method we use to call voice_url
+          description: "Deprecated. The HTTP method we use to call `voice_url`. Can be: `GET` or `POST`. Default is `POST`."
           enum:
             - HEAD
             - GET
@@ -1305,7 +1305,7 @@ components:
           nullable: true
           type: string
         voice_url:
-          description: Deprecated. The URL we call when the SIM-connected device makes a voice call
+          description: Deprecated. The URL we call using the `voice_method` when the SIM-connected device makes a voice call.
           format: uri
           nullable: true
           type: string
@@ -1313,71 +1313,71 @@ components:
     wireless.v1.sim.data_session:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the DataSession resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         cell_id:
-          description: The unique ID of the cellular tower that the device was attached to at the moment when the Data Session was last updated
+          description: The unique ID of the cellular tower that the device was attached to at the moment when the Data Session was last updated.
           nullable: true
           type: string
         cell_location_estimate:
-          description: An object with the estimated location where the device's Data Session took place
+          description: "An object that describes the estimated location in latitude and longitude where the device's Data Session took place. The location is derived from the `cell_id` when the Data Session was last updated. See [Cell Location Estimate Object](https://www.twilio.com/docs/wireless/api/datasession-resource#cell-location-estimate-object). "
           nullable: true
         end:
-          description: The date that the record ended, given as GMT in ISO 8601 format
+          description: The date that the record ended, given as GMT in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format.
           format: date-time
           nullable: true
           type: string
         imei:
-          description: The unique ID of the device using the SIM to connect
+          description: "The 'international mobile equipment identity' is the unique ID of the device using the SIM to connect. An IMEI is a 15-digit string: 14 digits for the device identifier plus a check digit calculated using the Luhn formula."
           nullable: true
           type: string
         last_updated:
-          description: The date that the resource was last updated, given as GMT in ISO 8601 format
+          description: The date that the resource was last updated, given as GMT in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format.
           format: date-time
           nullable: true
           type: string
         operator_country:
-          description: The three letter country code representing where the device's Data Session took place
+          description: The three letter country code representing where the device's Data Session took place. This is determined by looking up the `operator_mcc`.
           nullable: true
           type: string
         operator_mcc:
-          description: The 'mobile country code' is the unique ID of the home country where the Data Session took place
+          description: "The 'mobile country code' is the unique ID of the home country where the Data Session took place. See: [MCC/MNC lookup](http://mcc-mnc.com/)."
           nullable: true
           type: string
         operator_mnc:
-          description: The 'mobile network code' is the unique ID specific to the mobile operator network where the Data Session took place
+          description: The 'mobile network code' is the unique ID specific to the mobile operator network where the Data Session took place.
           nullable: true
           type: string
         operator_name:
-          description: The friendly name of the mobile operator network that the SIM-connected device is attached to
+          description: The friendly name of the mobile operator network that the [SIM](https://www.twilio.com/docs/wireless/api/sim-resource)-connected device is attached to. This is determined by looking up the `operator_mnc`.
           nullable: true
           type: string
         packets_downloaded:
-          description: The number of packets downloaded by the device between the start time and when the Data Session was last updated
+          description: The number of packets downloaded by the device between the `start` time and when the Data Session was last updated.
           nullable: true
           type: integer
         packets_uploaded:
-          description: The number of packets uploaded by the device between the start time and when the Data Session was last updated
+          description: The number of packets uploaded by the device between the `start` time and when the Data Session was last updated.
           nullable: true
           type: integer
         radio_link:
-          description: The generation of wireless technology that the device was using
+          description: The generation of wireless technology that the device was using.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the DataSession resource.
           nullable: true
           type: string
         sim_sid:
-          description: The SID of the Sim resource that the Data Session is for
+          description: The SID of the [Sim resource](https://www.twilio.com/docs/wireless/api/sim-resource) that the Data Session is for.
           nullable: true
           type: string
         start:
-          description: The date that the Data Session started, given as GMT in ISO 8601 format
+          description: The date that the Data Session started, given as GMT in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format.
           format: date-time
           nullable: true
           type: string
@@ -1385,23 +1385,23 @@ components:
     wireless.v1.sim.usage_record:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the UsageRecord resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         commands:
-          description: An object that describes the SIM's usage of Commands during the specified period
+          description: An object that describes the SIM's usage of Commands during the specified period. See [Commands Usage Object](https://www.twilio.com/docs/wireless/api/sim-usagerecord-resource#commands-usage-object).
           nullable: true
         data:
-          description: An object that describes the SIM's data usage during the specified period
+          description: An object that describes the SIM's data usage during the specified period. See [Data Usage Object](https://www.twilio.com/docs/wireless/api/sim-usagerecord-resource#data-usage-object).
           nullable: true
         period:
-          description: The time period for which the usage is reported
+          description: The time period for which the usage is reported. Contains `start` and `end` datetime values given as GMT in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format.
           nullable: true
         sim_sid:
-          description: The SID of the Sim resource that this Usage Record is for
+          description: The SID of the [Sim resource](https://www.twilio.com/docs/wireless/api/sim-resource) that this Usage Record is for.
           nullable: true
           type: string
       type: object

@@ -5256,41 +5256,41 @@ components:
     conversations.v1.configuration:
       properties:
         account_sid:
-          description: The SID of the Account responsible for this configuration.
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this configuration.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         default_chat_service_sid:
-          description: The SID of the default Conversation Service that every new conversation is associated with.
+          description: The SID of the default [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) used when creating a conversation.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         default_closed_timer:
-          description: Default ISO8601 duration when conversation will be switched to `closed` state.
+          description: Default ISO8601 duration when conversation will be switched to `closed` state. Minimum value for this timer is 10 minutes.
           nullable: true
           type: string
         default_inactive_timer:
-          description: Default ISO8601 duration when conversation will be switched to `inactive` state.
+          description: Default ISO8601 duration when conversation will be switched to `inactive` state. Minimum value for this timer is 1 minute.
           nullable: true
           type: string
         default_messaging_service_sid:
-          description: The SID of the default Messaging Service that every new conversation is associated with.
+          description: The SID of the default [Messaging Service](https://www.twilio.com/docs/sms/services/api) used when creating a conversation.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^MG[0-9a-fA-F]{32}$
           type: string
         links:
-          description: Absolute URLs to access the webhook and default service configurations.
+          description: Contains absolute API resource URLs to access the webhook and default service configurations.
           format: uri-map
           nullable: true
           type: object
         url:
-          description: An absolute URL for this global configuration.
+          description: An absolute API resource URL for this global configuration.
           format: uri
           nullable: true
           type: string
@@ -5298,14 +5298,14 @@ components:
     conversations.v1.configuration.configuration_webhook:
       properties:
         account_sid:
-          description: The unique ID of the Account responsible for this conversation.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this conversation.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         filters:
-          description: The list of webhook event triggers that are enabled for this Service.
+          description: "The list of webhook event triggers that are enabled for this Service: `onMessageAdded`, `onMessageUpdated`, `onMessageRemoved`, `onConversationUpdated`, `onConversationRemoved`, `onParticipantAdded`, `onParticipantUpdated`, `onParticipantRemoved`"
           items:
             type: string
           nullable: true
@@ -5325,11 +5325,11 @@ components:
           type: string
         target:
           $ref: "#/components/schemas/configuration_webhook_enum_target"
-          description: The routing target of the webhook.
+          description: The routing target of the webhook. Can be ordinary or route internally to Flex
           nullable: true
           type: string
         url:
-          description: An absolute URL for this webhook.
+          description: An absolute API resource API resource URL for this webhook.
           format: uri
           nullable: true
           type: string
@@ -5337,14 +5337,14 @@ components:
     conversations.v1.configuration_address:
       properties:
         account_sid:
-          description: The unique ID of the Account the address belongs to.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) the address belongs to
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         address:
-          description: The unique address to be configured.
+          description: The unique address to be configured. The address can be a whatsapp address or phone number
           nullable: true
           type: string
         auto_creation:
@@ -5361,7 +5361,7 @@ components:
           nullable: true
           type: string
         friendly_name:
-          description: The human-readable name of this configuration.
+          description: The human-readable name of this configuration, limited to 256 characters. Optional.
           nullable: true
           type: string
         sid:
@@ -5372,11 +5372,11 @@ components:
           pattern: ^IG[0-9a-fA-F]{32}$
           type: string
         type:
-          description: Type of Address.
+          description: Type of Address, value can be `whatsapp` or `sms`.
           nullable: true
           type: string
         url:
-          description: An absolute URL for this address configuration.
+          description: An absolute API resource URL for this address configuration.
           format: uri
           nullable: true
           type: string
@@ -5384,20 +5384,20 @@ components:
     conversations.v1.conversation:
       properties:
         account_sid:
-          description: The unique ID of the Account responsible for this conversation.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this conversation.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         attributes:
-          description: An optional string metadata field you can use to store any data you wish.
+          description: An optional string metadata field you can use to store any data you wish. The string value must contain structurally valid JSON if specified.  **Note** that if the attributes are not set "{}" will be returned.
           nullable: true
           type: string
         bindings:
           nullable: true
         chat_service_sid:
-          description: The unique ID of the Conversation Service this conversation belongs to.
+          description: The unique ID of the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) this conversation belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5414,16 +5414,16 @@ components:
           nullable: true
           type: string
         friendly_name:
-          description: The human-readable name of this conversation.
+          description: The human-readable name of this conversation, limited to 256 characters. Optional.
           nullable: true
           type: string
         links:
-          description: Absolute URLs to access the participants, messages and webhooks of this conversation.
+          description: Contains absolute URLs to access the [participants](https://www.twilio.com/docs/conversations/api/conversation-participant-resource), [messages](https://www.twilio.com/docs/conversations/api/conversation-message-resource) and [webhooks](https://www.twilio.com/docs/conversations/api/conversation-scoped-webhook-resource) of this conversation.
           format: uri-map
           nullable: true
           type: object
         messaging_service_sid:
-          description: The unique ID of the Messaging Service this conversation belongs to.
+          description: The unique ID of the [Messaging Service](https://www.twilio.com/docs/sms/services/api) this conversation belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5438,18 +5438,18 @@ components:
           type: string
         state:
           $ref: "#/components/schemas/conversation_enum_state"
-          description: Current state of this conversation.
+          description: Current state of this conversation. Can be either `active`, `inactive` or `closed` and defaults to `active`
           nullable: true
           type: string
         timers:
-          description: Timer date values for this conversation.
+          description: Timer date values representing state update for this conversation.
           nullable: true
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used to address the resource in place of the resource's `sid` in the URL.
           nullable: true
           type: string
         url:
-          description: An absolute URL for this conversation.
+          description: An absolute API resource URL for this conversation.
           format: uri
           nullable: true
           type: string
@@ -5457,33 +5457,33 @@ components:
     conversations.v1.conversation.conversation_message:
       properties:
         account_sid:
-          description: The unique ID of the Account responsible for this message.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this message.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         attributes:
-          description: A string metadata field you can use to store any data you wish.
+          description: A string metadata field you can use to store any data you wish. The string value must contain structurally valid JSON if specified.  **Note** that if the attributes are not set "{}" will be returned.
           nullable: true
           type: string
         author:
-          description: The channel specific identifier of the message's author.
+          description: The channel specific identifier of the message's author. Defaults to `system`.
           nullable: true
           type: string
         body:
-          description: The content of the message.
+          description: The content of the message, can be up to 1,600 characters long.
           nullable: true
           type: string
         content_sid:
-          description: The unique ID of the multi-channel Rich Content template.
+          description: The unique ID of the multi-channel [Rich Content](https://www.twilio.com/docs/content-api) template.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HX[0-9a-fA-F]{32}$
           type: string
         conversation_sid:
-          description: The unique ID of the Conversation for this message.
+          description: The unique ID of the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) for this message.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5495,7 +5495,7 @@ components:
           nullable: true
           type: string
         date_updated:
-          description: The date that this resource was last updated.
+          description: The date that this resource was last updated. `null` if the message has not been edited.
           format: date-time
           nullable: true
           type: string
@@ -5503,21 +5503,21 @@ components:
           description: An object that contains the summary of delivery statuses for the message to non-chat participants.
           nullable: true
         index:
-          description: The index of the message within the Conversation.
+          description: The index of the message within the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource).  Indices may skip numbers, but will always be in order of when the message was received.
           nullable: true
           type: integer
         links:
-          description: Absolute URL to access the receipts of this message.
+          description: Contains an absolute API resource URL to access the delivery & read receipts of this message.
           format: uri-map
           nullable: true
           type: object
         media:
-          description: An array of objects that describe the Message's media if attached, otherwise, null.
+          description: "An array of objects that describe the Message's media, if the message contains media. Each object contains these fields: `content_type` with the MIME type of the media, `filename` with the name of the media, `sid` with the SID of the Media resource, and `size` with the media object's file size in bytes. If the Message has no media, this value is `null`."
           items: {}
           nullable: true
           type: array
         participant_sid:
-          description: The unique ID of messages's author participant.
+          description: The unique ID of messages's author participant. Null in case of `system` sent message.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5531,7 +5531,7 @@ components:
           pattern: ^IM[0-9a-fA-F]{32}$
           type: string
         url:
-          description: An absolute API URL for this message.
+          description: An absolute API resource API URL for this message.
           format: uri
           nullable: true
           type: string
@@ -5539,21 +5539,21 @@ components:
     conversations.v1.conversation.conversation_message.conversation_message_receipt:
       properties:
         account_sid:
-          description: The unique ID of the Account responsible for this participant.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this participant.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         channel_message_sid:
-          description: A messaging channel-specific identifier for the message delivered to participant
+          description: "A messaging channel-specific identifier for the message delivered to participant e.g. `SMxx` for SMS, `WAxx` for Whatsapp etc. "
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^[a-zA-Z]{2}[0-9a-fA-F]{32}$
           type: string
         conversation_sid:
-          description: The unique ID of the Conversation for this message.
+          description: The unique ID of the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) for this message.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5565,16 +5565,16 @@ components:
           nullable: true
           type: string
         date_updated:
-          description: The date that this resource was last updated.
+          description: The date that this resource was last updated. `null` if the delivery receipt has not been updated.
           format: date-time
           nullable: true
           type: string
         error_code:
-          description: The message [delivery error code](https://www.twilio.com/docs/sms/api/message-resource#delivery-related-errors) for a `failed` status
+          description: "The message [delivery error code](https://www.twilio.com/docs/sms/api/message-resource#delivery-related-errors) for a `failed` status, "
           nullable: true
           type: integer
         message_sid:
-          description: The SID of the message the delivery receipt belongs to
+          description: The SID of the message within a [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) the delivery receipt belongs to
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5596,11 +5596,11 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/conversation_message_receipt_enum_delivery_status"
-          description: The message delivery status
+          description: The message delivery status, can be `read`, `failed`, `delivered`, `undelivered`, `sent` or null.
           nullable: true
           type: string
         url:
-          description: An absolute URL for this delivery receipt.
+          description: An absolute API resource URL for this delivery receipt.
           format: uri
           nullable: true
           type: string
@@ -5608,18 +5608,18 @@ components:
     conversations.v1.conversation.conversation_participant:
       properties:
         account_sid:
-          description: The unique ID of the Account responsible for this participant.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this participant.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         attributes:
-          description: An optional string metadata field you can use to store any data you wish.
+          description: An optional string metadata field you can use to store any data you wish. The string value must contain structurally valid JSON if specified.  **Note** that if the attributes are not set "{}" will be returned.
           nullable: true
           type: string
         conversation_sid:
-          description: The unique ID of the Conversation for this participant.
+          description: The unique ID of the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) for this participant.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5636,22 +5636,22 @@ components:
           nullable: true
           type: string
         identity:
-          description: A unique string identifier for the conversation participant as Conversation User.
+          description: A unique string identifier for the conversation participant as [Conversation User](https://www.twilio.com/docs/conversations/api/user-resource). This parameter is non-null if (and only if) the participant is using the Conversations SDK to communicate. Limited to 256 characters.
           nullable: true
           type: string
         last_read_message_index:
-          description: Index of last “read” message in the Conversation for the Participant.
+          description: Index of last “read” message in the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) for the Participant.
           nullable: true
           type: integer
         last_read_timestamp:
-          description: Timestamp of last “read” message in the Conversation for the Participant.
+          description: Timestamp of last “read” message in the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) for the Participant.
           nullable: true
           type: string
         messaging_binding:
-          description: Information about how this participant exchanges messages with the conversation.
+          description: Information about how this participant exchanges messages with the conversation. A JSON parameter consisting of type and address fields of the participant.
           nullable: true
         role_sid:
-          description: The SID of a conversation-level Role to assign to the participant
+          description: The SID of a conversation-level [Role](https://www.twilio.com/docs/conversations/api/role-resource) to assign to the participant.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5665,7 +5665,7 @@ components:
           pattern: ^MB[0-9a-fA-F]{32}$
           type: string
         url:
-          description: An absolute URL for this participant.
+          description: An absolute API resource URL for this participant.
           format: uri
           nullable: true
           type: string
@@ -5673,17 +5673,17 @@ components:
     conversations.v1.conversation.conversation_scoped_webhook:
       properties:
         account_sid:
-          description: The unique ID of the Account responsible for this conversation.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this conversation.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         configuration:
-          description: The configuration of this webhook.
+          description: The configuration of this webhook. Is defined based on target.
           nullable: true
         conversation_sid:
-          description: The unique ID of the Conversation for this webhook.
+          description: The unique ID of the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) for this webhook.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5707,11 +5707,11 @@ components:
           pattern: ^WH[0-9a-fA-F]{32}$
           type: string
         target:
-          description: The target of this webhook.
+          description: "The target of this webhook: `webhook`, `studio`, `trigger`"
           nullable: true
           type: string
         url:
-          description: An absolute URL for this webhook.
+          description: An absolute API resource URL for this webhook.
           format: uri
           nullable: true
           type: string
@@ -5719,7 +5719,7 @@ components:
     conversations.v1.credential:
       properties:
         account_sid:
-          description: The unique ID of the Account responsible for this credential.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this credential.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5736,11 +5736,11 @@ components:
           nullable: true
           type: string
         friendly_name:
-          description: The human-readable name of this credential.
+          description: The human-readable name of this credential, limited to 64 characters. Optional.
           nullable: true
           type: string
         sandbox:
-          description: "[APN only] Whether to send the credential to sandbox APNs."
+          description: "[APN only] Whether to send the credential to sandbox APNs. Can be `true` to send to sandbox APNs or `false` to send to production."
           nullable: true
           type: string
         sid:
@@ -5752,11 +5752,11 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/credential_enum_push_type"
-          description: The type of push-notification service the credential is for.
+          description: "The type of push-notification service the credential is for. Can be: `fcm`, `gcm`, or `apn`."
           nullable: true
           type: string
         url:
-          description: An absolute URL for this credential.
+          description: An absolute API resource URL for this credential.
           format: uri
           nullable: true
           type: string
@@ -5764,43 +5764,43 @@ components:
     conversations.v1.participant_conversation:
       properties:
         account_sid:
-          description: The unique ID of the Account responsible for this conversation.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this conversation.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         chat_service_sid:
-          description: The unique ID of the Conversation Service this conversation belongs to.
+          description: The unique ID of the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) this conversation belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         conversation_attributes:
-          description: An optional string metadata field you can use to store any data you wish.
+          description: An optional string metadata field you can use to store any data you wish. The string value must contain structurally valid JSON if specified.  **Note** that if the attributes are not set "{}" will be returned.
           nullable: true
           type: string
         conversation_created_by:
-          description: Creator of this conversation.
+          description: Identity of the creator of this Conversation.
           nullable: true
           type: string
         conversation_date_created:
-          description: The date that this conversation was created.
+          description: The date that this conversation was created, given in ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         conversation_date_updated:
-          description: The date that this conversation was last updated.
+          description: The date that this conversation was last updated, given in ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         conversation_friendly_name:
-          description: The human-readable name of this conversation.
+          description: The human-readable name of this conversation, limited to 256 characters. Optional.
           nullable: true
           type: string
         conversation_sid:
-          description: The unique ID of the Conversation this Participant belongs to.
+          description: The unique ID of the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) this Participant belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5808,37 +5808,37 @@ components:
           type: string
         conversation_state:
           $ref: "#/components/schemas/participant_conversation_enum_state"
-          description: The current state of this User Conversation
+          description: The current state of this User Conversation. One of `inactive`, `active` or `closed`.
           nullable: true
           type: string
         conversation_timers:
-          description: Timer date values for this conversation.
+          description: Timer date values representing state update for this conversation.
           nullable: true
         conversation_unique_name:
-          description: An application-defined string that uniquely identifies the Conversation resource
+          description: An application-defined string that uniquely identifies the Conversation resource.
           nullable: true
           type: string
         links:
-          description: Absolute URLs to access the participant and conversation of this Participant Conversation.
+          description: Contains absolute URLs to access the [participant](https://www.twilio.com/docs/conversations/api/conversation-participant-resource) and [conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) of this conversation.
           format: uri-map
           nullable: true
           type: object
         participant_identity:
-          description: A unique string identifier for the conversation participant as Conversation User.
+          description: A unique string identifier for the conversation participant as [Conversation User](https://www.twilio.com/docs/conversations/api/user-resource). This parameter is non-null if (and only if) the participant is using the Conversations SDK to communicate. Limited to 256 characters.
           nullable: true
           type: string
         participant_messaging_binding:
-          description: Information about how this participant exchanges messages with the conversation.
+          description: Information about how this participant exchanges messages with the conversation. A JSON parameter consisting of type and address fields of the participant.
           nullable: true
         participant_sid:
-          description: The unique ID of the Participant.
+          description: The unique ID of the [Participant](https://www.twilio.com/docs/conversations/api/conversation-participant-resource).
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^MB[0-9a-fA-F]{32}$
           type: string
         participant_user_sid:
-          description: The unique ID for the conversation participant as Conversation User.
+          description: The unique string that identifies the conversation participant as [Conversation User](https://www.twilio.com/docs/conversations/api/user-resource).
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5848,41 +5848,41 @@ components:
     conversations.v1.role:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Role resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         chat_service_sid:
-          description: The SID of the Conversation Service that the resource is associated with
+          description: The SID of the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) the Role resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         permissions:
-          description: An array of the permissions the role has been granted
+          description: An array of the permissions the role has been granted.
           items:
             type: string
           nullable: true
           type: array
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Role resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5890,11 +5890,11 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/role_enum_role_type"
-          description: The type of role
+          description: "The type of role. Can be: `conversation` for [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) roles or `service` for [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) roles."
           nullable: true
           type: string
         url:
-          description: An absolute URL for this user role.
+          description: An absolute API resource URL for this user role.
           format: uri
           nullable: true
           type: string
@@ -5902,7 +5902,7 @@ components:
     conversations.v1.service:
       properties:
         account_sid:
-          description: The unique ID of the Account responsible for this service.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this service.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5919,11 +5919,11 @@ components:
           nullable: true
           type: string
         friendly_name:
-          description: The human-readable name of this service.
+          description: The human-readable name of this service, limited to 256 characters. Optional.
           nullable: true
           type: string
         links:
-          description: Absolute URLs to access the conversations, users, roles, bindings and configuration of this service.
+          description: Contains absolute API resource URLs to access conversations, users, roles, bindings and configuration of this service.
           format: uri-map
           nullable: true
           type: object
@@ -5935,7 +5935,7 @@ components:
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         url:
-          description: An absolute URL for this service.
+          description: An absolute API resource URL for this service.
           format: uri
           nullable: true
           type: string
@@ -5943,7 +5943,7 @@ components:
     conversations.v1.service.service_binding:
       properties:
         account_sid:
-          description: The unique ID of the Account responsible for this binding.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this binding.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5951,18 +5951,18 @@ components:
           type: string
         binding_type:
           $ref: "#/components/schemas/service_binding_enum_binding_type"
-          description: The push technology to use for the binding.
+          description: "The push technology to use for the Binding. Can be: `apn`, `gcm`, or `fcm`.  See [push notification configuration](https://www.twilio.com/docs/chat/push-notification-configuration) for more info."
           nullable: true
           type: string
         chat_service_sid:
-          description: The SID of the Conversation Service that the resource is associated with.
+          description: The SID of the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) the Binding resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         credential_sid:
-          description: The SID of the Credential for the binding.
+          description: The SID of the [Credential](https://www.twilio.com/docs/conversations/api/credential-resource) for the binding. See [push notification configuration](https://www.twilio.com/docs/chat/push-notification-configuration) for more info.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5979,15 +5979,15 @@ components:
           nullable: true
           type: string
         endpoint:
-          description: The unique endpoint identifier for the Binding.
+          description: The unique endpoint identifier for the Binding. The format of this value depends on the `binding_type`.
           nullable: true
           type: string
         identity:
-          description: The identity of Conversation User associated with this binding.
+          description: The application-defined string that uniquely identifies the [Conversation User](https://www.twilio.com/docs/conversations/api/user-resource) within the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource). See [access tokens](https://www.twilio.com/docs/conversations/create-tokens) for more info.
           nullable: true
           type: string
         message_types:
-          description: The Conversation message types the binding is subscribed to.
+          description: The [Conversation message types](https://www.twilio.com/docs/chat/push-notification-configuration#push-types) the binding is subscribed to.
           items:
             type: string
           nullable: true
@@ -6000,7 +6000,7 @@ components:
           pattern: ^BS[0-9a-fA-F]{32}$
           type: string
         url:
-          description: An absolute URL for this binding.
+          description: An absolute API resource URL for this binding.
           format: uri
           nullable: true
           type: string
@@ -6008,44 +6008,44 @@ components:
     conversations.v1.service.service_configuration:
       properties:
         chat_service_sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Service configuration resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         default_chat_service_role_sid:
-          description: The service role assigned to users when they are added to the service
+          description: The service-level role assigned to users when they are added to the service. See the [Conversation Role](https://www.twilio.com/docs/conversations/api/role-resource) for more info about roles.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RL[0-9a-fA-F]{32}$
           type: string
         default_conversation_creator_role_sid:
-          description: The role assigned to a conversation creator user when they join a new conversation
+          description: The conversation-level role assigned to a conversation creator user when they join a new conversation. See the [Conversation Role](https://www.twilio.com/docs/conversations/api/role-resource) for more info about roles.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RL[0-9a-fA-F]{32}$
           type: string
         default_conversation_role_sid:
-          description: The role assigned to users when they are added to a conversation
+          description: The conversation-level role assigned to users when they are added to a conversation. See the [Conversation Role](https://www.twilio.com/docs/conversations/api/role-resource) for more info about roles.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RL[0-9a-fA-F]{32}$
           type: string
         links:
-          description: Absolute URL to access the push notifications configuration of this service.
+          description: Contains an absolute API resource URL to access the push notifications configuration of this service.
           format: uri-map
           nullable: true
           type: object
         reachability_enabled:
-          description: Whether the Reachability Indicator feature is enabled for this Conversations Service
+          description: Whether the [Reachability Indicator](https://www.twilio.com/docs/chat/reachability-indicator) is enabled for this Conversations Service. The default is `false`.
           nullable: true
           type: boolean
         url:
-          description: An absolute URL for this service configuration.
+          description: An absolute API resource URL for this service configuration.
           format: uri
           nullable: true
           type: string
@@ -6053,7 +6053,7 @@ components:
     conversations.v1.service.service_configuration.service_notification:
       properties:
         account_sid:
-          description: The unique ID of the Account responsible for this configuration.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this configuration.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -6063,7 +6063,7 @@ components:
           description: The Push Notification configuration for being added to a Conversation.
           nullable: true
         chat_service_sid:
-          description: The SID of the Conversation Service that the Configuration applies to.
+          description: The SID of the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) the Configuration applies to.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -6080,7 +6080,7 @@ components:
           description: The Push Notification configuration for being removed from a Conversation.
           nullable: true
         url:
-          description: An absolute URL for this configuration.
+          description: An absolute API resource URL for this configuration.
           format: uri
           nullable: true
           type: string
@@ -6088,7 +6088,7 @@ components:
     conversations.v1.service.service_configuration.service_webhook_configuration:
       properties:
         account_sid:
-          description: The unique ID of the Account responsible for this service.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this service.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -6102,14 +6102,14 @@ components:
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         filters:
-          description: The list of events that your configured webhook targets will receive. Events not configured here will not fire.
+          description: The list of events that your configured webhook targets will receive. Events not configured here will not fire. Possible values are `onParticipantAdd`, `onParticipantAdded`, `onDeliveryUpdated`, `onConversationUpdated`, `onConversationRemove`, `onParticipantRemove`, `onConversationUpdate`, `onMessageAdd`, `onMessageRemoved`, `onParticipantUpdated`, `onConversationAdded`, `onMessageAdded`, `onConversationAdd`, `onConversationRemoved`, `onParticipantUpdate`, `onMessageRemove`, `onMessageUpdated`, `onParticipantRemoved`, `onMessageUpdate` or `onConversationStateUpdated`.
           items:
             type: string
           nullable: true
           type: array
         method:
           $ref: "#/components/schemas/service_webhook_configuration_enum_method"
-          description: The HTTP method to be used when sending a webhook request
+          description: The HTTP method to be used when sending a webhook request. One of `GET` or `POST`.
           nullable: true
           type: string
         post_webhook_url:
@@ -6123,7 +6123,7 @@ components:
           nullable: true
           type: string
         url:
-          description: An absolute URL for this webhook.
+          description: An absolute API resource URL for this webhook.
           format: uri
           nullable: true
           type: string
@@ -6131,20 +6131,20 @@ components:
     conversations.v1.service.service_conversation:
       properties:
         account_sid:
-          description: The unique ID of the Account responsible for this conversation.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this conversation.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         attributes:
-          description: An optional string metadata field you can use to store any data you wish.
+          description: An optional string metadata field you can use to store any data you wish. The string value must contain structurally valid JSON if specified.  **Note** that if the attributes are not set "{}" will be returned.
           nullable: true
           type: string
         bindings:
           nullable: true
         chat_service_sid:
-          description: The unique ID of the Conversation Service this conversation belongs to.
+          description: The unique ID of the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) this conversation belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -6161,16 +6161,16 @@ components:
           nullable: true
           type: string
         friendly_name:
-          description: The human-readable name of this conversation.
+          description: The human-readable name of this conversation, limited to 256 characters. Optional.
           nullable: true
           type: string
         links:
-          description: Absolute URLs to access the participants, messages and webhooks of this conversation.
+          description: Contains absolute URLs to access the [participants](https://www.twilio.com/docs/conversations/api/conversation-participant-resource), [messages](https://www.twilio.com/docs/conversations/api/conversation-message-resource) and [webhooks](https://www.twilio.com/docs/conversations/api/conversation-scoped-webhook-resource) of this conversation.
           format: uri-map
           nullable: true
           type: object
         messaging_service_sid:
-          description: The unique ID of the Messaging Service this conversation belongs to.
+          description: The unique ID of the [Messaging Service](https://www.twilio.com/docs/sms/services/api) this conversation belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -6185,18 +6185,18 @@ components:
           type: string
         state:
           $ref: "#/components/schemas/service_conversation_enum_state"
-          description: Current state of this conversation.
+          description: Current state of this conversation. Can be either `active`, `inactive` or `closed` and defaults to `active`
           nullable: true
           type: string
         timers:
-          description: Timer date values for this conversation.
+          description: Timer date values representing state update for this conversation.
           nullable: true
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used to address the resource in place of the resource's `sid` in the URL.
           nullable: true
           type: string
         url:
-          description: An absolute URL for this conversation.
+          description: An absolute API resource URL for this conversation.
           format: uri
           nullable: true
           type: string
@@ -6204,40 +6204,40 @@ components:
     conversations.v1.service.service_conversation.service_conversation_message:
       properties:
         account_sid:
-          description: The unique ID of the Account responsible for this message.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this message.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         attributes:
-          description: A string metadata field you can use to store any data you wish.
+          description: A string metadata field you can use to store any data you wish. The string value must contain structurally valid JSON if specified.  **Note** that if the attributes are not set "{}" will be returned.
           nullable: true
           type: string
         author:
-          description: The channel specific identifier of the message's author.
+          description: The channel specific identifier of the message's author. Defaults to `system`.
           nullable: true
           type: string
         body:
-          description: The content of the message.
+          description: The content of the message, can be up to 1,600 characters long.
           nullable: true
           type: string
         chat_service_sid:
-          description: The SID of the Conversation Service that the resource is associated with.
+          description: The SID of the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) the Participant resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         content_sid:
-          description: The unique ID of the multi-channel Rich Content template.
+          description: The unique ID of the multi-channel [Rich Content](https://www.twilio.com/docs/content-api) template.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HX[0-9a-fA-F]{32}$
           type: string
         conversation_sid:
-          description: The unique ID of the Conversation for this message.
+          description: The unique ID of the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) for this message.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -6249,7 +6249,7 @@ components:
           nullable: true
           type: string
         date_updated:
-          description: The date that this resource was last updated.
+          description: The date that this resource was last updated. `null` if the message has not been edited.
           format: date-time
           nullable: true
           type: string
@@ -6257,21 +6257,21 @@ components:
           description: An object that contains the summary of delivery statuses for the message to non-chat participants.
           nullable: true
         index:
-          description: The index of the message within the Conversation.
+          description: The index of the message within the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource).
           nullable: true
           type: integer
         links:
-          description: Absolute URL to access the receipts of this message.
+          description: Contains an absolute API resource URL to access the delivery & read receipts of this message.
           format: uri-map
           nullable: true
           type: object
         media:
-          description: An array of objects that describe the Message's media if attached, otherwise, null.
+          description: "An array of objects that describe the Message's media, if the message contains media. Each object contains these fields: `content_type` with the MIME type of the media, `filename` with the name of the media, `sid` with the SID of the Media resource, and `size` with the media object's file size in bytes. If the Message has no media, this value is `null`."
           items: {}
           nullable: true
           type: array
         participant_sid:
-          description: The unique ID of messages's author participant.
+          description: The unique ID of messages's author participant. Null in case of `system` sent message.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -6285,7 +6285,7 @@ components:
           pattern: ^IM[0-9a-fA-F]{32}$
           type: string
         url:
-          description: An absolute URL for this message.
+          description: An absolute API resource URL for this message.
           format: uri
           nullable: true
           type: string
@@ -6293,28 +6293,28 @@ components:
     conversations.v1.service.service_conversation.service_conversation_message.service_conversation_message_receipt:
       properties:
         account_sid:
-          description: The unique ID of the Account responsible for this participant.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this participant.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         channel_message_sid:
-          description: A messaging channel-specific identifier for the message delivered to participant
+          description: "A messaging channel-specific identifier for the message delivered to participant e.g. `SMxx` for SMS, `WAxx` for Whatsapp etc. "
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^[a-zA-Z]{2}[0-9a-fA-F]{32}$
           type: string
         chat_service_sid:
-          description: The SID of the Conversation Service that the resource is associated with.
+          description: The SID of the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) the Message resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         conversation_sid:
-          description: The unique ID of the Conversation for this message.
+          description: The unique ID of the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) for this message.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -6326,16 +6326,16 @@ components:
           nullable: true
           type: string
         date_updated:
-          description: The date that this resource was last updated.
+          description: The date that this resource was last updated. `null` if the delivery receipt has not been updated.
           format: date-time
           nullable: true
           type: string
         error_code:
-          description: The message [delivery error code](https://www.twilio.com/docs/sms/api/message-resource#delivery-related-errors) for a `failed` status
+          description: "The message [delivery error code](https://www.twilio.com/docs/sms/api/message-resource#delivery-related-errors) for a `failed` status, "
           nullable: true
           type: integer
         message_sid:
-          description: The SID of the message the delivery receipt belongs to
+          description: The SID of the message within a [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) the delivery receipt belongs to
           maxLength: 34
           minLength: 34
           nullable: true
@@ -6357,11 +6357,11 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/service_conversation_message_receipt_enum_delivery_status"
-          description: The message delivery status
+          description: The message delivery status, can be `read`, `failed`, `delivered`, `undelivered`, `sent` or null.
           nullable: true
           type: string
         url:
-          description: An absolute URL for this delivery receipt.
+          description: An absolute API resource URL for this delivery receipt.
           format: uri
           nullable: true
           type: string
@@ -6369,25 +6369,25 @@ components:
     conversations.v1.service.service_conversation.service_conversation_participant:
       properties:
         account_sid:
-          description: The unique ID of the Account responsible for this participant.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this participant.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         attributes:
-          description: An optional string metadata field you can use to store any data you wish.
+          description: An optional string metadata field you can use to store any data you wish. The string value must contain structurally valid JSON if specified.  **Note** that if the attributes are not set "{}" will be returned.
           nullable: true
           type: string
         chat_service_sid:
-          description: The SID of the Conversation Service that the resource is associated with.
+          description: The SID of the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) the Participant resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         conversation_sid:
-          description: The unique ID of the Conversation for this participant.
+          description: The unique ID of the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) for this participant.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -6404,22 +6404,22 @@ components:
           nullable: true
           type: string
         identity:
-          description: A unique string identifier for the conversation participant as Conversation User.
+          description: A unique string identifier for the conversation participant as [Conversation User](https://www.twilio.com/docs/conversations/api/user-resource). This parameter is non-null if (and only if) the participant is using the Conversation SDK to communicate. Limited to 256 characters.
           nullable: true
           type: string
         last_read_message_index:
-          description: Index of last “read” message in the Conversation for the Participant.
+          description: Index of last “read” message in the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) for the Participant.
           nullable: true
           type: integer
         last_read_timestamp:
-          description: Timestamp of last “read” message in the Conversation for the Participant.
+          description: Timestamp of last “read” message in the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) for the Participant.
           nullable: true
           type: string
         messaging_binding:
-          description: Information about how this participant exchanges messages with the conversation.
+          description: Information about how this participant exchanges messages with the conversation. A JSON parameter consisting of type and address fields of the participant.
           nullable: true
         role_sid:
-          description: The SID of a conversation-level Role to assign to the participant
+          description: The SID of a conversation-level [Role](https://www.twilio.com/docs/conversations/api/role-resource) to assign to the participant.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -6433,7 +6433,7 @@ components:
           pattern: ^MB[0-9a-fA-F]{32}$
           type: string
         url:
-          description: An absolute URL for this participant.
+          description: An absolute API resource URL for this participant.
           format: uri
           nullable: true
           type: string
@@ -6441,24 +6441,24 @@ components:
     conversations.v1.service.service_conversation.service_conversation_scoped_webhook:
       properties:
         account_sid:
-          description: The unique ID of the Account responsible for this conversation.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this conversation.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         chat_service_sid:
-          description: The SID of the Conversation Service that the resource is associated with.
+          description: The SID of the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) the Participant resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         configuration:
-          description: The configuration of this webhook.
+          description: The configuration of this webhook. Is defined based on target.
           nullable: true
         conversation_sid:
-          description: The unique ID of the Conversation for this webhook.
+          description: The unique ID of the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) for this webhook.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -6482,11 +6482,11 @@ components:
           pattern: ^WH[0-9a-fA-F]{32}$
           type: string
         target:
-          description: The target of this webhook.
+          description: "The target of this webhook: `webhook`, `studio`, `trigger`"
           nullable: true
           type: string
         url:
-          description: An absolute URL for this webhook.
+          description: An absolute API resource URL for this webhook.
           format: uri
           nullable: true
           type: string
@@ -6494,43 +6494,43 @@ components:
     conversations.v1.service.service_participant_conversation:
       properties:
         account_sid:
-          description: The unique ID of the Account responsible for this conversation.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this conversation.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         chat_service_sid:
-          description: The unique ID of the Conversation Service this conversation belongs to.
+          description: The unique ID of the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) this conversation belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         conversation_attributes:
-          description: An optional string metadata field you can use to store any data you wish.
+          description: An optional string metadata field you can use to store any data you wish. The string value must contain structurally valid JSON if specified.  **Note** that if the attributes are not set "{}" will be returned.
           nullable: true
           type: string
         conversation_created_by:
-          description: Creator of this conversation.
+          description: Identity of the creator of this Conversation.
           nullable: true
           type: string
         conversation_date_created:
-          description: The date that this conversation was created.
+          description: The date that this conversation was created, given in ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         conversation_date_updated:
-          description: The date that this conversation was last updated.
+          description: The date that this conversation was last updated, given in ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         conversation_friendly_name:
-          description: The human-readable name of this conversation.
+          description: The human-readable name of this conversation, limited to 256 characters. Optional.
           nullable: true
           type: string
         conversation_sid:
-          description: The unique ID of the Conversation this Participant belongs to.
+          description: The unique ID of the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) this Participant belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -6538,37 +6538,37 @@ components:
           type: string
         conversation_state:
           $ref: "#/components/schemas/service_participant_conversation_enum_state"
-          description: The current state of this User Conversation
+          description: The current state of this User Conversation. One of `inactive`, `active` or `closed`.
           nullable: true
           type: string
         conversation_timers:
-          description: Timer date values for this conversation.
+          description: Timer date values representing state update for this conversation.
           nullable: true
         conversation_unique_name:
           description: An application-defined string that uniquely identifies the Conversation resource.
           nullable: true
           type: string
         links:
-          description: Absolute URLs to access the participant and conversation of this Participant Conversation.
+          description: Contains absolute URLs to access the [participant](https://www.twilio.com/docs/conversations/api/conversation-participant-resource) and [conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) of this conversation.
           format: uri-map
           nullable: true
           type: object
         participant_identity:
-          description: A unique string identifier for the conversation participant as Conversation User.
+          description: A unique string identifier for the conversation participant as [Conversation User](https://www.twilio.com/docs/conversations/api/user-resource). This parameter is non-null if (and only if) the participant is using the Conversations SDK to communicate. Limited to 256 characters.
           nullable: true
           type: string
         participant_messaging_binding:
-          description: Information about how this participant exchanges messages with the conversation.
+          description: Information about how this participant exchanges messages with the conversation. A JSON parameter consisting of type and address fields of the participant.
           nullable: true
         participant_sid:
-          description: The unique ID of the Participant.
+          description: The unique ID of the [Participant](https://www.twilio.com/docs/conversations/api/conversation-participant-resource).
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^MB[0-9a-fA-F]{32}$
           type: string
         participant_user_sid:
-          description: The unique ID for the conversation participant as Conversation User.
+          description: The unique string that identifies the conversation participant as [Conversation User](https://www.twilio.com/docs/conversations/api/user-resource).
           maxLength: 34
           minLength: 34
           nullable: true
@@ -6578,41 +6578,41 @@ components:
     conversations.v1.service.service_role:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Role resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         chat_service_sid:
-          description: The SID of the Conversation Service that the resource is associated with
+          description: The SID of the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) the Role resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         permissions:
-          description: An array of the permissions the role has been granted
+          description: An array of the permissions the role has been granted.
           items:
             type: string
           nullable: true
           type: array
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Role resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -6620,11 +6620,11 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/service_role_enum_role_type"
-          description: The type of role
+          description: "The type of role. Can be: `conversation` for [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) roles or `service` for [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) roles."
           nullable: true
           type: string
         url:
-          description: An absolute URL for this user role.
+          description: An absolute API resource URL for this user role.
           format: uri
           nullable: true
           type: string
@@ -6632,47 +6632,47 @@ components:
     conversations.v1.service.service_user:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the User resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         attributes:
-          description: The JSON Object string that stores application-specific data
+          description: The JSON Object string that stores application-specific data. If attributes have not been set, `{}` is returned.
           nullable: true
           type: string
         chat_service_sid:
-          description: The SID of the Conversation Service that the resource is associated with
+          description: The SID of the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) the User resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         identity:
-          description: The string that identifies the resource's User
+          description: The application-defined string that uniquely identifies the resource's User within the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource). This value is often a username or an email address, and is case-sensitive.
           nullable: true
           type: string
         is_notifiable:
-          description: Whether the User has a potentially valid Push Notification registration for this Conversations Service
+          description: Whether the User has a potentially valid Push Notification registration (APN or GCM) for this Conversations Service. If at least one registration exists, `true`; otherwise `false`. This value is only returned by Fetch actions that return a single resource and `null` is always returned by a Read action. This value is `null` if the Service's `reachability_enabled` is `false`, and if the User has never had a notification registration, even if the Service's `reachability_enabled` is `true`.
           nullable: true
           type: boolean
         is_online:
-          description: Whether the User is actively connected to this Conversations Service and online
+          description: Whether the User is actively connected to this Conversations Service and online. This value is only returned by Fetch actions that return a single resource and `null` is always returned by a Read action. This value is `null` if the Service's `reachability_enabled` is `false`, if the User has never been online for this Conversations Service, even if the Service's `reachability_enabled` is `true`.
           nullable: true
           type: boolean
         links:
@@ -6680,21 +6680,21 @@ components:
           nullable: true
           type: object
         role_sid:
-          description: The SID of a service-level Role assigned to the user
+          description: The SID of a service-level [Role](https://www.twilio.com/docs/conversations/api/role-resource) assigned to the user.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RL[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the User resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^US[0-9a-fA-F]{32}$
           type: string
         url:
-          description: An absolute URL for this user.
+          description: An absolute API resource URL for this user.
           format: uri
           nullable: true
           type: string
@@ -6702,25 +6702,25 @@ components:
     conversations.v1.service.service_user.service_user_conversation:
       properties:
         account_sid:
-          description: The unique ID of the Account responsible for this conversation.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this conversation.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         attributes:
-          description: An optional string metadata field you can use to store any data you wish.
+          description: An optional string metadata field you can use to store any data you wish. The string value must contain structurally valid JSON if specified.  **Note** that if the attributes are not set "{}" will be returned.
           nullable: true
           type: string
         chat_service_sid:
-          description: The unique ID of the Conversation Service this conversation belongs to.
+          description: The unique ID of the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) this conversation belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         conversation_sid:
-          description: The unique ID of the Conversation for this User Conversation.
+          description: The unique ID of the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) for this User Conversation.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -6728,57 +6728,57 @@ components:
           type: string
         conversation_state:
           $ref: "#/components/schemas/service_user_conversation_enum_state"
-          description: The current state of this User Conversation
+          description: The current state of this User Conversation. One of `inactive`, `active` or `closed`.
           nullable: true
           type: string
         created_by:
-          description: Creator of this conversation.
+          description: Identity of the creator of this Conversation.
           nullable: true
           type: string
         date_created:
-          description: The date that this conversation was created.
+          description: The date that this conversation was created, given in ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date that this conversation was last updated.
+          description: The date that this conversation was last updated, given in ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The human-readable name of this conversation.
+          description: The human-readable name of this conversation, limited to 256 characters. Optional.
           nullable: true
           type: string
         last_read_message_index:
-          description: The index of the last read Message .
+          description: The index of the last Message in the Conversation that the Participant has read.
           nullable: true
           type: integer
         links:
-          description: Absolute URLs to access the participant and conversation of this user conversation.
+          description: Contains absolute URLs to access the [participant](https://www.twilio.com/docs/conversations/api/conversation-participant-resource) and [conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) of this conversation.
           format: uri-map
           nullable: true
           type: object
         notification_level:
           $ref: "#/components/schemas/service_user_conversation_enum_notification_level"
-          description: The Notification Level of this User Conversation.
+          description: The Notification Level of this User Conversation. One of `default` or `muted`.
           nullable: true
           type: string
         participant_sid:
-          description: Participant Sid.
+          description: The unique ID of the [participant](https://www.twilio.com/docs/conversations/api/conversation-participant-resource) the user conversation belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^MB[0-9a-fA-F]{32}$
           type: string
         timers:
-          description: Timer date values for this conversation.
+          description: Timer date values representing state update for this conversation.
           nullable: true
         unique_name:
-          description: An application-defined string that uniquely identifies the Conversation resource.
+          description: An application-defined string that uniquely identifies the Conversation resource. It can be used to address the resource in place of the resource's `conversation_sid` in the URL.
           nullable: true
           type: string
         unread_messages_count:
-          description: The number of unread Messages in the Conversation.
+          description: The number of unread Messages in the Conversation for the Participant.
           nullable: true
           type: integer
         url:
@@ -6786,7 +6786,7 @@ components:
           nullable: true
           type: string
         user_sid:
-          description: The unique ID for the User.
+          description: The unique string that identifies the [User resource](https://www.twilio.com/docs/conversations/api/user-resource).
           maxLength: 34
           minLength: 34
           nullable: true
@@ -6796,47 +6796,47 @@ components:
     conversations.v1.user:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the User resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         attributes:
-          description: The JSON Object string that stores application-specific data
+          description: The JSON Object string that stores application-specific data. If attributes have not been set, `{}` is returned.
           nullable: true
           type: string
         chat_service_sid:
-          description: The SID of the Conversation Service that the resource is associated with
+          description: The SID of the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) the User resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         identity:
-          description: The string that identifies the resource's User
+          description: The application-defined string that uniquely identifies the resource's User within the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource). This value is often a username or an email address, and is case-sensitive.
           nullable: true
           type: string
         is_notifiable:
-          description: Whether the User has a potentially valid Push Notification registration for this Conversations Service
+          description: Whether the User has a potentially valid Push Notification registration (APN or GCM) for this Conversations Service. If at least one registration exists, `true`; otherwise `false`. This value is only returned by Fetch actions that return a single resource and `null` is always returned by a Read action. This value is `null` if the Service's `reachability_enabled` is `false`, and if the User has never had a notification registration, even if the Service's `reachability_enabled` is `true`.
           nullable: true
           type: boolean
         is_online:
-          description: Whether the User is actively connected to this Conversations Service and online
+          description: Whether the User is actively connected to this Conversations Service and online. This value is only returned by Fetch actions that return a single resource and `null` is always returned by a Read action. This value is `null` if the Service's `reachability_enabled` is `false`, if the User has never been online for this Conversations Service, even if the Service's `reachability_enabled` is `true`.
           nullable: true
           type: boolean
         links:
@@ -6844,21 +6844,21 @@ components:
           nullable: true
           type: object
         role_sid:
-          description: The SID of a service-level Role assigned to the user
+          description: The SID of a service-level [Role](https://www.twilio.com/docs/conversations/api/role-resource) assigned to the user.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RL[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the User resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^US[0-9a-fA-F]{32}$
           type: string
         url:
-          description: An absolute URL for this user.
+          description: An absolute API resource URL for this user.
           format: uri
           nullable: true
           type: string
@@ -6866,25 +6866,25 @@ components:
     conversations.v1.user.user_conversation:
       properties:
         account_sid:
-          description: The unique ID of the Account responsible for this conversation.
+          description: The unique ID of the [Account](https://www.twilio.com/docs/iam/api/account) responsible for this conversation.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         attributes:
-          description: An optional string metadata field you can use to store any data you wish.
+          description: An optional string metadata field you can use to store any data you wish. The string value must contain structurally valid JSON if specified.  **Note** that if the attributes are not set "{}" will be returned.
           nullable: true
           type: string
         chat_service_sid:
-          description: The unique ID of the Conversation Service this conversation belongs to.
+          description: The unique ID of the [Conversation Service](https://www.twilio.com/docs/conversations/api/service-resource) this conversation belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         conversation_sid:
-          description: The unique ID of the Conversation for this User Conversation.
+          description: The unique ID of the [Conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) for this User Conversation.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -6892,57 +6892,57 @@ components:
           type: string
         conversation_state:
           $ref: "#/components/schemas/user_conversation_enum_state"
-          description: The current state of this User Conversation
+          description: The current state of this User Conversation. One of `inactive`, `active` or `closed`.
           nullable: true
           type: string
         created_by:
-          description: Creator of this conversation.
+          description: Identity of the creator of this Conversation.
           nullable: true
           type: string
         date_created:
-          description: The date that this conversation was created.
+          description: The date that this conversation was created, given in ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date that this conversation was last updated.
+          description: The date that this conversation was last updated, given in ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The human-readable name of this conversation.
+          description: The human-readable name of this conversation, limited to 256 characters. Optional.
           nullable: true
           type: string
         last_read_message_index:
-          description: The index of the last read Message .
+          description: The index of the last Message in the Conversation that the Participant has read.
           nullable: true
           type: integer
         links:
-          description: Absolute URLs to access the participant and conversation of this user conversation.
+          description: Contains absolute URLs to access the [participant](https://www.twilio.com/docs/conversations/api/conversation-participant-resource) and [conversation](https://www.twilio.com/docs/conversations/api/conversation-resource) of this conversation.
           format: uri-map
           nullable: true
           type: object
         notification_level:
           $ref: "#/components/schemas/user_conversation_enum_notification_level"
-          description: The Notification Level of this User Conversation.
+          description: The Notification Level of this User Conversation. One of `default` or `muted`.
           nullable: true
           type: string
         participant_sid:
-          description: Participant Sid.
+          description: The unique ID of the [participant](https://www.twilio.com/docs/conversations/api/conversation-participant-resource) the user conversation belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^MB[0-9a-fA-F]{32}$
           type: string
         timers:
-          description: Timer date values for this conversation.
+          description: Timer date values representing state update for this conversation.
           nullable: true
         unique_name:
-          description: An application-defined string that uniquely identifies the Conversation resource.
+          description: An application-defined string that uniquely identifies the Conversation resource. It can be used to address the resource in place of the resource's `conversation_sid` in the URL.
           nullable: true
           type: string
         unread_messages_count:
-          description: The number of unread Messages in the Conversation.
+          description: The number of unread Messages in the Conversation for the Participant.
           nullable: true
           type: integer
         url:
@@ -6950,7 +6950,7 @@ components:
           nullable: true
           type: string
         user_sid:
-          description: The unique ID for the User.
+          description: The unique string that identifies the [User resource](https://www.twilio.com/docs/conversations/api/user-resource).
           maxLength: 34
           minLength: 34
           nullable: true

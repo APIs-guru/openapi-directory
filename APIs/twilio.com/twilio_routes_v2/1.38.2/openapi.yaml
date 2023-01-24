@@ -225,39 +225,39 @@ components:
     routes.v2.phone_number:
       properties:
         account_sid:
-          description: Account Sid.
+          description: The unique SID identifier of the Account.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The date that this phone number was assigned an Inbound Processing Region.
+          description: The date that this phone number was assigned an Inbound Processing Region, given in ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date that the Inbound Processing Region was updated for this phone number.
+          description: The date that the Inbound Processing Region was updated for this phone number, given in ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: A human readable description of the Inbound Processing Region assignments for this phone number.
+          description: A human readable description of the Inbound Processing Region assignments for this phone number, up to 64 characters.
           nullable: true
           type: string
         phone_number:
-          description: The phone number
+          description: The phone number in E.164 format
           nullable: true
           type: string
         sid:
-          description: A string that uniquely identifies the Inbound Processing Region assignments for this phone number.
+          description: A 34 character string that uniquely identifies the Inbound Processing Region assignments for this phone number.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^QQ[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -305,39 +305,39 @@ components:
     routes.v2.trunks:
       properties:
         account_sid:
-          description: Account Sid.
+          description: The unique SID identifier of the Account.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The date that this SIP Trunk was assigned an Inbound Processing Region.
+          description: The date that this SIP Trunk was assigned an Inbound Processing Region, given in ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date that the Inbound Processing Region was updated for this SIP Trunk.
+          description: The date that the Inbound Processing Region was updated for this SIP Trunk, given in ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: A human readable description of the Inbound Processing Region assignments for this SIP Trunk.
+          description: A human readable description of the Inbound Processing Region assignments for this SIP Trunk, up to 64 characters.
           nullable: true
           type: string
         sid:
-          description: A string that uniquely identifies the Inbound Processing Region assignments for this SIP Trunk.
+          description: A 34 character string that uniquely identifies the Inbound Processing Region assignments for this SIP Trunk.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^QQ[0-9a-fA-F]{32}$
           type: string
         sip_trunk_domain:
-          description: The SIP Trunk
+          description: The absolute URL of the SIP Trunk
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string

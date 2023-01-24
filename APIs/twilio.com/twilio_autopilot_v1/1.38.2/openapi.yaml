@@ -2285,28 +2285,28 @@ components:
     autopilot.v1.assistant:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Assistant resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         callback_events:
-          description: Reserved
+          description: Reserved.
           nullable: true
           type: string
         callback_url:
-          description: Reserved
+          description: Reserved.
           format: uri
           nullable: true
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
@@ -2315,42 +2315,42 @@ components:
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource. It is not unique and can be up to 255 characters long.
           nullable: true
           type: string
         latest_model_build_sid:
-          description: Reserved
+          description: Reserved.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UG[0-9a-fA-F]{32}$
           type: string
         links:
-          description: A list of the URLs of the Assistant's related resources
+          description: A list of the URLs of the Assistant's related resources.
           format: uri-map
           nullable: true
           type: object
         log_queries:
-          description: Whether queries should be logged and kept after training
+          description: "Whether queries should be logged and kept after training. Can be: `true` or `false` and defaults to `true`. If `true`, queries are stored for 30 days, and then deleted. If `false`, no queries are stored."
           nullable: true
           type: boolean
         needs_model_build:
-          description: Whether model needs to be rebuilt
+          description: Whether model needs to be rebuilt.
           nullable: true
           type: boolean
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Assistant resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UA[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource. It can be up to 64 characters long.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Assistant resource
+          description: The absolute URL of the Assistant resource.
           format: uri
           nullable: true
           type: string
@@ -2358,24 +2358,24 @@ components:
     autopilot.v1.assistant.defaults:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Defaults resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         assistant_sid:
-          description: The SID of the Assistant that is the parent of the resource
+          description: The SID of the [Assistant](https://www.twilio.com/docs/autopilot/api/assistant) that is the parent of the resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UA[0-9a-fA-F]{32}$
           type: string
         data:
-          description: The JSON string that describes the default task links
+          description: The JSON string that describes the default task links for the `assistant_initiation`, `collect`, and `fallback` situations.
           nullable: true
         url:
-          description: The absolute URL of the Defaults resource
+          description: The absolute URL of the Defaults resource.
           format: uri
           nullable: true
           type: string
@@ -2383,31 +2383,31 @@ components:
     autopilot.v1.assistant.dialogue:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Dialogue resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         assistant_sid:
-          description: The SID of the Assistant that is the parent of the resource
+          description: The SID of the [Assistant](https://www.twilio.com/docs/autopilot/api/assistant) that is the parent of the resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UA[0-9a-fA-F]{32}$
           type: string
         data:
-          description: The JSON string that describes the dialogue session object
+          description: The JSON string that describes the dialogue session object.
           nullable: true
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Dialogue resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UK[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the Dialogue resource
+          description: The absolute URL of the Dialogue resource.
           format: uri
           nullable: true
           type: string
@@ -2415,51 +2415,51 @@ components:
     autopilot.v1.assistant.field_type:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the FieldType resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         assistant_sid:
-          description: The SID of the Assistant that is the parent of the resource
+          description: The SID of the [Assistant](https://www.twilio.com/docs/autopilot/api/assistant) that is the parent of the resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UA[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource. It is not unique and can be up to 255 characters long.
           nullable: true
           type: string
         links:
-          description: A list of the URLs of related resources
+          description: A list of the URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the FieldType resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UB[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the FieldType resource
+          description: The absolute URL of the FieldType resource.
           format: uri
           nullable: true
           type: string
@@ -2467,100 +2467,100 @@ components:
     autopilot.v1.assistant.field_type.field_value:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the FieldValue resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         assistant_sid:
-          description: The SID of the Assistant that is the parent of the FieldType associated with the resource
+          description: The SID of the [Assistant](https://www.twilio.com/docs/autopilot/api/assistant) that is the parent of the FieldType associated with the resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UA[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         field_type_sid:
-          description: The SID of the Field Type associated with the Field Value
+          description: The SID of the Field Type associated with the Field Value.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UB[0-9a-fA-F]{32}$
           type: string
         language:
-          description: The ISO language-country tag that identifies the language of the value
+          description: "The [ISO language-country](https://docs.oracle.com/cd/E13214_01/wli/docs92/xref/xqisocodes.html) tag that specifies the language of the value. Currently supported tags: `en-US`"
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the FieldValue resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UC[0-9a-fA-F]{32}$
           type: string
         synonym_of:
-          description: The word for which the field value is a synonym of
+          description: The word for which the field value is a synonym of.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UC[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the FieldValue resource
+          description: The absolute URL of the FieldValue resource.
           format: uri
           nullable: true
           type: string
         value:
-          description: The Field Value data
+          description: The Field Value data.
           nullable: true
           type: string
       type: object
     autopilot.v1.assistant.model_build:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the ModelBuild resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         assistant_sid:
-          description: The SID of the Assistant that is the parent of the resource
+          description: The SID of the [Assistant](https://www.twilio.com/docs/autopilot/api/assistant) that is the parent of the resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UA[0-9a-fA-F]{32}$
           type: string
         build_duration:
-          description: The time in seconds it took to build the model
+          description: The time in seconds it took to build the model.
           nullable: true
           type: integer
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         error_code:
-          description: More information about why the model build failed, if `status` is `failed`
+          description: If the `status` for the model build is `failed`, this value is a code to more information about the failure. This value will be null for all other statuses. See [error code dictionary](https://www.twilio.com/docs/api/errors) for a description of the error.
           nullable: true
           type: integer
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the ModelBuild resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2568,15 +2568,15 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/model_build_enum_status"
-          description: The status of the model build process
+          description: "The status of the model build process. Can be: `enqueued`, `building`, `completed`, or `failed`"
           nullable: true
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used as an alternative to the `sid` in the URL path to address the resource.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the ModelBuild resource
+          description: The absolute URL of the ModelBuild resource.
           format: uri
           nullable: true
           type: string
@@ -2584,26 +2584,26 @@ components:
     autopilot.v1.assistant.query:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Query resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         assistant_sid:
-          description: The SID of the Assistant that is the parent of the resource
+          description: The SID of the [Assistant](https://www.twilio.com/docs/autopilot/api/assistant) that is the parent of the resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UA[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
@@ -2615,47 +2615,47 @@ components:
           pattern: ^UK[0-9a-fA-F]{32}$
           type: string
         language:
-          description: The ISO language-country string that specifies the language used by the Query
+          description: "The [ISO language-country](https://docs.oracle.com/cd/E13214_01/wli/docs92/xref/xqisocodes.html) string that specifies the language used by the Query. For example: `en-US`."
           nullable: true
           type: string
         model_build_sid:
-          description: The SID of the [Model Build](https://www.twilio.com/docs/autopilot/api/model-build) queried
+          description: The SID of the [Model Build](https://www.twilio.com/docs/autopilot/api/model-build) queried.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UG[0-9a-fA-F]{32}$
           type: string
         query:
-          description: The end-user's natural language input
+          description: The end-user's natural language input.
           nullable: true
           type: string
         results:
-          description: The natural language analysis results that include the Task recognized and a list of identified Fields
+          description: The natural language analysis results that include the [Task](https://www.twilio.com/docs/autopilot/api/task) recognized and a list of identified [Fields](https://www.twilio.com/docs/autopilot/api/task-field).
           nullable: true
         sample_sid:
-          description: The SID of an optional reference to the Sample created from the query
+          description: The SID of an optional reference to the [Sample](https://www.twilio.com/docs/autopilot/api/task-sample) created from the query.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UF[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Query resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UH[0-9a-fA-F]{32}$
           type: string
         source_channel:
-          description: The communication channel from where the end-user input came
+          description: The communication channel from where the end-user input came.
           nullable: true
           type: string
         status:
-          description: The status of the Query
+          description: "The status of the Query. Can be: `pending-review`, `reviewed`, or `discarded`"
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Query resource
+          description: The absolute URL of the Query resource.
           format: uri
           nullable: true
           type: string
@@ -2663,24 +2663,24 @@ components:
     autopilot.v1.assistant.style_sheet:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the StyleSheet resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         assistant_sid:
-          description: The SID of the Assistant that is the parent of the resource
+          description: The SID of the [Assistant](https://www.twilio.com/docs/autopilot/api/assistant) that is the parent of the resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UA[0-9a-fA-F]{32}$
           type: string
         data:
-          description: The JSON string that describes the style sheet object
+          description: The JSON string that describes the style sheet object.
           nullable: true
         url:
-          description: The absolute URL of the StyleSheet resource
+          description: The absolute URL of the StyleSheet resource.
           format: uri
           nullable: true
           type: string
@@ -2688,56 +2688,56 @@ components:
     autopilot.v1.assistant.task:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Task resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         actions_url:
-          description: The URL from which the Assistant can fetch actions
+          description: The URL from which the Assistant can fetch actions.
           format: uri
           nullable: true
           type: string
         assistant_sid:
-          description: The SID of the Assistant that is the parent of the resource
+          description: The SID of the [Assistant](https://www.twilio.com/docs/autopilot/api/assistant) that is the parent of the resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UA[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource. It is not unique and can be up to 255 characters long.
           nullable: true
           type: string
         links:
-          description: A list of the URLs of related resources
+          description: A list of the URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Task resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UD[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Task resource
+          description: The absolute URL of the Task resource.
           format: uri
           nullable: true
           type: string
@@ -2745,53 +2745,53 @@ components:
     autopilot.v1.assistant.task.field:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Field resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         assistant_sid:
-          description: The SID of the Assistant that is the parent of the Task associated with the resource
+          description: The SID of the [Assistant](https://www.twilio.com/docs/autopilot/api/assistant) that is the parent of the Task associated with the resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UA[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         field_type:
-          description: The Field Type of the field
+          description: "The Field Type of the field. Can be: a [Built-in Field Type](https://www.twilio.com/docs/autopilot/built-in-field-types), the unique_name, or the SID of a custom Field Type."
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Field resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UE[0-9a-fA-F]{32}$
           type: string
         task_sid:
-          description: The SID of the [Task](https://www.twilio.com/docs/autopilot/api/task) resource associated with this Field
+          description: The SID of the [Task](https://www.twilio.com/docs/autopilot/api/task) resource associated with this Field.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UD[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Field resource
+          description: The absolute URL of the Field resource.
           format: uri
           nullable: true
           type: string
@@ -2799,57 +2799,57 @@ components:
     autopilot.v1.assistant.task.sample:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Sample resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         assistant_sid:
-          description: The SID of the Assistant that is the parent of the Task associated with the resource
+          description: The SID of the [Assistant](https://www.twilio.com/docs/autopilot/api/assistant) that is the parent of the Task associated with the resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UA[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         language:
-          description: An ISO language-country string that specifies the language used for the sample
+          description: "The [ISO language-country](https://docs.oracle.com/cd/E13214_01/wli/docs92/xref/xqisocodes.html) string that specifies the language used for the sample. For example: `en-US`."
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Sample resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UF[0-9a-fA-F]{32}$
           type: string
         source_channel:
-          description: The communication channel from which the sample was captured
+          description: "The communication channel from which the sample was captured. Can be: `voice`, `sms`, `chat`, `alexa`, `google-assistant`, `slack`, or null if not included."
           nullable: true
           type: string
         tagged_text:
-          description: The text example of how end users might express the task
+          description: The text example of how end users might express the task. The sample can contain [Field tag blocks](https://www.twilio.com/docs/autopilot/api/task-sample#field-tagging).
           nullable: true
           type: string
         task_sid:
-          description: The SID of the Task associated with the resource
+          description: The SID of the [Task](https://www.twilio.com/docs/autopilot/api/task) associated with the resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UD[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the Sample resource
+          description: The absolute URL of the Sample resource.
           format: uri
           nullable: true
           type: string
@@ -2857,31 +2857,31 @@ components:
     autopilot.v1.assistant.task.task_actions:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the TaskActions resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         assistant_sid:
-          description: The SID of the Assistant that is the parent of the Task associated with the resource
+          description: The SID of the [Assistant](https://www.twilio.com/docs/autopilot/api/assistant) that is the parent of the Task associated with the resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UA[0-9a-fA-F]{32}$
           type: string
         data:
-          description: The JSON string that specifies the actions that instruct the Assistant on how to perform the task
+          description: The JSON string that specifies the [actions](https://www.twilio.com/docs/autopilot/actions) that instruct the Assistant on how to perform the task.
           nullable: true
         task_sid:
-          description: The SID of the Task associated with the resource
+          description: The SID of the [Task](https://www.twilio.com/docs/autopilot/api/task) associated with the resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UD[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the TaskActions resource
+          description: The absolute URL of the TaskActions resource.
           format: uri
           nullable: true
           type: string
@@ -2889,36 +2889,36 @@ components:
     autopilot.v1.assistant.task.task_statistics:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the TaskStatistics resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         assistant_sid:
-          description: The SID of the Assistant that is the parent of the Task associated with the resource
+          description: The SID of the [Assistant](https://www.twilio.com/docs/autopilot/api/assistant) that is the parent of the Task associated with the resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UA[0-9a-fA-F]{32}$
           type: string
         fields_count:
-          description: The total number of Fields associated with the Task
+          description: The total number of [Fields](https://www.twilio.com/docs/autopilot/api/task-field) associated with the Task.
           nullable: true
           type: integer
         samples_count:
-          description: The total number of Samples associated with the Task
+          description: The total number of [Samples](https://www.twilio.com/docs/autopilot/api/task-sample) associated with the Task.
           nullable: true
           type: integer
         task_sid:
-          description: The SID of the Task for which the statistics were collected
+          description: The SID of the [Task](https://www.twilio.com/docs/autopilot/api/task) for which the statistics were collected.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UD[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the TaskStatistics resource
+          description: The absolute URL of the TaskStatistics resource.
           format: uri
           nullable: true
           type: string
@@ -2926,26 +2926,26 @@ components:
     autopilot.v1.assistant.webhook:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Webhook resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         assistant_sid:
-          description: The SID of the Assistant that is the parent of the resource
+          description: The SID of the [Assistant](https://www.twilio.com/docs/autopilot/api/assistant) that is the parent of the resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UA[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
@@ -2954,18 +2954,18 @@ components:
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Webhook resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UM[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Webhook resource
+          description: The absolute URL of the Webhook resource.
           format: uri
           nullable: true
           type: string
@@ -2982,28 +2982,28 @@ components:
     autopilot.v1.restore_assistant:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Assistant resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         callback_events:
-          description: Reserved
+          description: Reserved.
           nullable: true
           type: string
         callback_url:
-          description: Reserved
+          description: Reserved.
           format: uri
           nullable: true
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
@@ -3012,33 +3012,33 @@ components:
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource. It is not unique and can be up to 255 characters long.
           nullable: true
           type: string
         latest_model_build_sid:
-          description: Reserved
+          description: Reserved.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UG[0-9a-fA-F]{32}$
           type: string
         log_queries:
-          description: Whether queries should be logged and kept after training
+          description: "Whether queries should be logged and kept after training. Can be: `true` or `false` and defaults to `true`. If `true`, queries are stored for 30 days, and then deleted. If `false`, no queries are stored."
           nullable: true
           type: boolean
         needs_model_build:
-          description: Whether model needs to be rebuilt
+          description: Whether model needs to be rebuilt.
           nullable: true
           type: boolean
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Assistant resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UA[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource.
           nullable: true
           type: string
       type: object

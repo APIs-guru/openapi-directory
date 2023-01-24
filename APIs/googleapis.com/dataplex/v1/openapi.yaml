@@ -509,6 +509,102 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{parent}/attributes":
+    get:
+      description: Lists Data Attribute resources in a DataTaxonomy.
+      operationId: dataplex.projects.locations.dataTaxonomies.attributes.list
+      parameters:
+        - description: "Required. The resource name of the DataTaxonomy: projects/{project_number}/locations/{location_id}/dataTaxonomies/{data_taxonomy_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Filter request.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Order by fields for the result.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. Maximum number of DataAttributes to return. The service may return fewer than this value. If unspecified, at most 10 dataAttributes will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Page token received from a previous ListDataAttributes call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to ListDataAttributes must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDataplexV1ListDataAttributesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create a DataAttribute resource.
+      operationId: dataplex.projects.locations.dataTaxonomies.attributes.create
+      parameters:
+        - description: Required. The resource name of the parent data taxonomy projects/{project_number}/locations/{location_id}/dataTaxonomies/{data_taxonomy_id}
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. DataAttribute identifier. * Must contain only lowercase letters, numbers and hyphens. * Must start with a letter. * Must be between 1-63 characters. * Must end with a number or a letter. * Must be unique within the DataTaxonomy.
+          in: query
+          name: dataAttributeId
+          schema:
+            type: string
+        - description: Optional. Only validate the request, but do not perform mutations. The default is false.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDataplexV1DataAttribute"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{parent}/content":
     get:
       description: List content.
@@ -681,6 +777,102 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{parent}/dataAttributeBindings":
+    get:
+      description: Lists DataAttributeBinding resources in a project and location.
+      operationId: dataplex.projects.locations.dataAttributeBindings.list
+      parameters:
+        - description: "Required. The resource name of the Location: projects/{project_number}/locations/{location_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: 'Optional. Filter request. Filter using resource: filter=resource:"resource-name" Filter using attribute: filter=attributes:"attribute-name" Filter using attribute in paths list: filter=paths.attributes:"attribute-name"'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Order by fields for the result.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. Maximum number of DataAttributeBindings to return. The service may return fewer than this value. If unspecified, at most 10 DataAttributeBindings will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Page token received from a previous ListDataAttributeBindings call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to ListDataAttributeBindings must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDataplexV1ListDataAttributeBindingsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create a DataAttributeBinding resource.
+      operationId: dataplex.projects.locations.dataAttributeBindings.create
+      parameters:
+        - description: Required. The resource name of the parent data taxonomy projects/{project_number}/locations/{location_id}
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. DataAttributeBinding identifier. * Must contain only lowercase letters, numbers and hyphens. * Must start with a letter. * Must be between 1-63 characters. * Must end with a number or a letter. * Must be unique within the Location.
+          in: query
+          name: dataAttributeBindingId
+          schema:
+            type: string
+        - description: Optional. Only validate the request, but do not perform mutations. The default is false.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDataplexV1DataAttributeBinding"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{parent}/dataScans":
     get:
       description: Lists DataScans.
@@ -758,6 +950,102 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/GoogleCloudDataplexV1DataScan"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/dataTaxonomies":
+    get:
+      description: Lists DataTaxonomy resources in a project and location.
+      operationId: dataplex.projects.locations.dataTaxonomies.list
+      parameters:
+        - description: "Required. The resource name of the DataTaxonomy location, of the form: projects/{project_number}/locations/{location_id} where location_id refers to a GCP region."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Filter request.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Order by fields for the result.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. Maximum number of DataTaxonomies to return. The service may return fewer than this value. If unspecified, at most 10 DataTaxonomies will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Page token received from a previous ListDataTaxonomies call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to ListDataTaxonomies must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDataplexV1ListDataTaxonomiesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create a DataTaxonomy resource.
+      operationId: dataplex.projects.locations.dataTaxonomies.create
+      parameters:
+        - description: "Required. The resource name of the data taxonomy location, of the form: projects/{project_number}/locations/{location_id} where location_id refers to a GCP region."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. DataTaxonomy identifier. * Must contain only lowercase letters, numbers and hyphens. * Must start with a letter. * Must be between 1-63 characters. * Must end with a number or a letter. * Must be unique within the Project.
+          in: query
+          name: dataTaxonomyId
+          schema:
+            type: string
+        - description: Optional. Only validate the request, but do not perform mutations. The default is false.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDataplexV1DataTaxonomy"
       responses:
         "200":
           content:
@@ -2085,6 +2373,126 @@ components:
             - SPARK
           type: string
       type: object
+    GoogleCloudDataplexV1DataAccessSpec:
+      description: "DataAccessSpec holds the access control configuration to be enforced on data stored within resources (eg: rows, columns in BigQuery Tables). When associated with data,the data is only accessible to principals explicitly granted access through the DataAttribute. Principals with access to the containing resource are not implicitly granted access."
+      properties:
+        readers:
+          description: Optional. The format of strings follows the pattern followed by IAM in the bindings. user:{email}, serviceAccount:{email} group:{email}. The set of principals to be granted reader role on data stored within resources.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudDataplexV1DataAttribute:
+      description: "Denotes one dataAttribute in a dataTaxonomy, for example, PII. DataAttribute resources can be defined in a hierarchy. A single dataAttribute resource can contain specs of multiple types PII - ResourceAccessSpec : - readers :foo@bar.com - DataAccessSpec : - readers :bar@foo.com "
+      properties:
+        attributeCount:
+          description: Output only. The number of child attributes present for this attribute.
+          format: int32
+          readOnly: true
+          type: integer
+        createTime:
+          description: Output only. The time when the DataAttribute was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        dataAccessSpec:
+          $ref: "#/components/schemas/GoogleCloudDataplexV1DataAccessSpec"
+          description: "Optional. Specified when applied to data stored on the resource (eg: rows, columns in BigQuery Tables)."
+        description:
+          description: Optional. Description of the DataAttribute.
+          type: string
+        displayName:
+          description: Optional. User friendly display name.
+          type: string
+        etag:
+          description: This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. User-defined labels for the DataAttribute.
+          type: object
+        name:
+          description: "Output only. The relative resource name of the dataAttribute, of the form: projects/{project_number}/locations/{location_id}/dataTaxonomies/{dataTaxonomy}/attributes/{data_attribute_id}."
+          readOnly: true
+          type: string
+        parentId:
+          description: Optional. The ID of the parent DataAttribute resource, should belong to the same data taxonomy. Circular dependency in parent chain is not valid. Maximum depth of the hierarchy allowed is 4. a -> b -> c -> d -> e, depth = 4
+          type: string
+        resourceAccessSpec:
+          $ref: "#/components/schemas/GoogleCloudDataplexV1ResourceAccessSpec"
+          description: "Optional. Specified when applied to a resource (eg: Cloud Storage bucket, BigQuery dataset, BigQuery table)."
+        uid:
+          description: Output only. System generated globally unique ID for the DataAttribute. This ID will be different if the DataAttribute is deleted and re-created with the same name.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The time when the DataAttribute was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudDataplexV1DataAttributeBinding:
+      description: "DataAttributeBinding represents binding of attributes to resources. Eg: Bind 'CustomerInfo' entity with 'PII' attribute."
+      properties:
+        attributes:
+          description: "Optional. List of attributes to be associated with the resource, provided in the form: projects/{project}/locations/{location}/dataTaxonomies/{dataTaxonomy}/attributes/{data_attribute_id}"
+          items:
+            type: string
+          type: array
+        createTime:
+          description: Output only. The time when the DataAttributeBinding was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Optional. Description of the DataAttributeBinding.
+          type: string
+        displayName:
+          description: Optional. User friendly display name.
+          type: string
+        etag:
+          description: This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding. Etags must be used when calling the DeleteDataAttributeBinding and the UpdateDataAttributeBinding method.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. User-defined labels for the DataAttributeBinding.
+          type: object
+        name:
+          description: "Output only. The relative resource name of the Data Attribute Binding, of the form: projects/{project_number}/locations/{location}/dataAttributeBindings/{data_attribute_binding_id}"
+          readOnly: true
+          type: string
+        paths:
+          description: Optional. The list of paths for items within the associated resource (eg. columns within a table) along with attribute bindings.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDataplexV1DataAttributeBindingPath"
+          type: array
+        resource:
+          description: "Optional. Immutable. The resource name of the resource that is binded to attributes. Presently, only entity resource is supported in the form: projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity_id} Must belong in the same project and region as the attribute binding, and there can only exist one active binding for a resource."
+          type: string
+        uid:
+          description: Output only. System generated globally unique ID for the DataAttributeBinding. This ID will be different if the DataAttributeBinding is deleted and re-created with the same name.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The time when the DataAttributeBinding was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudDataplexV1DataAttributeBindingPath:
+      description: Represents a subresource of a given resource, and associated bindings with it.
+      properties:
+        attributes:
+          description: "Optional. List of attributes to be associated with the path of the resource, provided in the form: projects/{project}/locations/{location}/dataTaxonomies/{dataTaxonomy}/attributes/{data_attribute_id}"
+          items:
+            type: string
+          type: array
+        name:
+          description: "Required. The name identifier of the path. Nested columns should be of the form: 'country.state.city'."
+          type: string
+      type: object
     GoogleCloudDataplexV1DataProfileResult:
       description: DataProfileResult defines the output of DataProfileScan. Each field of the table will have field type specific profile result.
       properties:
@@ -2670,6 +3078,47 @@ components:
           description: "Immutable. The Dataplex entity that represents the data source (e.g. BigQuery table) for DataScan, of the form: projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}."
           type: string
       type: object
+    GoogleCloudDataplexV1DataTaxonomy:
+      description: "DataTaxonomy represents a set of hierarchical DataAttributes resources, grouped with a common theme Eg: 'SensitiveDataTaxonomy' can have attributes to manage PII data. It is defined at project level."
+      properties:
+        attributeCount:
+          description: Output only. The number of attributes in the DataTaxonomy.
+          format: int32
+          readOnly: true
+          type: integer
+        createTime:
+          description: Output only. The time when the DataTaxonomy was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Optional. Description of the DataTaxonomy.
+          type: string
+        displayName:
+          description: Optional. User friendly display name.
+          type: string
+        etag:
+          description: This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. User-defined labels for the DataTaxonomy.
+          type: object
+        name:
+          description: "Output only. The relative resource name of the DataTaxonomy, of the form: projects/{project_number}/locations/{location_id}/dataTaxonomies/{data_taxonomy_id}."
+          readOnly: true
+          type: string
+        uid:
+          description: Output only. System generated globally unique ID for the dataTaxonomy. This ID will be different if the DataTaxonomy is deleted and re-created with the same name.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The time when the DataTaxonomy was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     GoogleCloudDataplexV1DiscoveryEvent:
       description: The payload associated with Discovery data processing.
       properties:
@@ -3222,6 +3671,40 @@ components:
           description: Token to retrieve the next page of results, or empty if there are no more results in the list.
           type: string
       type: object
+    GoogleCloudDataplexV1ListDataAttributeBindingsResponse:
+      description: List DataAttributeBindings response.
+      properties:
+        dataAttributeBindings:
+          description: DataAttributeBindings under the given parent Location.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDataplexV1DataAttributeBinding"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        unreachableLocations:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudDataplexV1ListDataAttributesResponse:
+      description: List DataAttributes response.
+      properties:
+        dataAttributes:
+          description: DataAttributes under the given parent DataTaxonomy.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDataplexV1DataAttribute"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        unreachableLocations:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
     GoogleCloudDataplexV1ListDataScanJobsResponse:
       description: List DataScanJobs response.
       properties:
@@ -3246,6 +3729,23 @@ components:
           description: Token to retrieve the next page of results, or empty if there are no more results in the list.
           type: string
         unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudDataplexV1ListDataTaxonomiesResponse:
+      description: List DataTaxonomies response.
+      properties:
+        dataTaxonomies:
+          description: DataTaxonomies under the given parent location.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDataplexV1DataTaxonomy"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        unreachableLocations:
           description: Locations that could not be reached.
           items:
             type: string
@@ -3406,6 +3906,25 @@ components:
           type: string
         values:
           description: Required. Immutable. The set of values representing the partition, which correspond to the partition schema defined in the parent entity.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudDataplexV1ResourceAccessSpec:
+      description: ResourceAccessSpec holds the access control configuration to be enforced on the resources, for example, Cloud Storage bucket, BigQuery dataset, BigQuery table.
+      properties:
+        owners:
+          description: Optional. The set of principals to be granted owner role on the resource.
+          items:
+            type: string
+          type: array
+        readers:
+          description: Optional. The format of strings follows the pattern followed by IAM in the bindings. user:{email}, serviceAccount:{email} group:{email}. The set of principals to be granted reader role on the resource.
+          items:
+            type: string
+          type: array
+        writers:
+          description: Optional. The set of principals to be granted writer role on the resource.
           items:
             type: string
           type: array

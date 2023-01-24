@@ -125,51 +125,51 @@ components:
     lookups.v2.phone_number:
       properties:
         call_forwarding:
-          description: An object that contains call forwarding status information
+          description: An object that contains information on the unconditional call forwarding status of mobile phone number.
           nullable: true
         caller_name:
-          description: An object that contains caller name information
+          description: An object that contains caller name information based on [CNAM](https://support.twilio.com/hc/en-us/articles/360051670533-Getting-Started-with-CNAM-Caller-ID).
           nullable: true
         calling_country_code:
-          description: International dialing prefix
+          description: International dialing prefix of the phone number defined in the E.164 standard.
           nullable: true
           type: string
         country_code:
-          description: Phone number's ISO country code
+          description: The phone number's [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
           nullable: true
           type: string
         identity_match:
-          description: An object that contains identity match information
+          description: An object that contains identity match information. The result of comparing user-provided information including name, address, date of birth, national ID, against authoritative phone-based data sources
           nullable: true
         line_type_intelligence:
-          description: An object that contains line type information
+          description: An object that contains line type information including the carrier name, mobile country code, and mobile network code.
           nullable: true
         live_activity:
-          description: An object that contains live activity information
+          description: An object that contains live activity information for a mobile phone number.
           nullable: true
         national_format:
-          description: Phone number in national format
+          description: The phone number in [national format](https://en.wikipedia.org/wiki/National_conventions_for_writing_telephone_numbers).
           nullable: true
           type: string
         phone_number:
-          description: Phone number in E.164 format
+          description: The phone number in [E.164](https://www.twilio.com/docs/glossary/what-e164) format, which consists of a + followed by the country code and subscriber number.
           format: phone-number
           nullable: true
           type: string
         sim_swap:
-          description: An object that contains SIM swap information
+          description: An object that contains information on the last date the subscriber identity module (SIM) was changed for a mobile phone number.
           nullable: true
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
         valid:
-          description: Boolean which indicates if the phone number is valid
+          description: Boolean which indicates if the phone number is in a valid range that can be freely assigned by a carrier to a user.
           nullable: true
           type: boolean
         validation_errors:
-          description: Contains reasons why a phone number is invalid
+          description: "Contains reasons why a phone number is invalid. Possible values: TOO_SHORT, TOO_LONG, INVALID_BUT_POSSIBLE, INVALID_COUNTRY_CODE, INVALID_LENGTH, NOT_A_NUMBER."
           items:
             $ref: "#/components/schemas/phone_number_enum_validation_error"
             type: string

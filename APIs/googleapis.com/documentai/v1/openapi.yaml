@@ -1055,13 +1055,6 @@ components:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
           description: The basic metadata of the long running operation.
       type: object
-    GoogleCloudDocumentaiUiv1beta3DeleteDataLabelingJobOperationMetadata:
-      description: The long running operation metadata for DeleteDataLabelingJob.
-      properties:
-        commonMetadata:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
-      type: object
     GoogleCloudDocumentaiUiv1beta3DeleteLabelerPoolOperationMetadata:
       description: The long running operation metadata for DeleteLabelerPool.
       properties:
@@ -1263,6 +1256,20 @@ components:
     GoogleCloudDocumentaiUiv1beta3ImportDocumentsResponse:
       description: Response of the import document operation.
       properties: {}
+      type: object
+    GoogleCloudDocumentaiUiv1beta3ImportProcessorVersionMetadata:
+      description: The long running operation metadata for the ImportProcessorVersion method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata for the long running operation.
+      type: object
+    GoogleCloudDocumentaiUiv1beta3ImportProcessorVersionResponse:
+      description: The response message for the ImportProcessorVersion method.
+      properties:
+        processorVersion:
+          description: The destination processor version name.
+          type: string
       type: object
     GoogleCloudDocumentaiUiv1beta3ResyncDatasetMetadata:
       description: The metadata proto of ResyncDataset method.

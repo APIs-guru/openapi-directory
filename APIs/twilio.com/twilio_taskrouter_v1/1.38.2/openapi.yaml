@@ -4043,80 +4043,80 @@ components:
     taskrouter.v1.workspace:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Workspace resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         default_activity_name:
-          description: The name of the default activity
+          description: The name of the default activity.
           nullable: true
           type: string
         default_activity_sid:
-          description: The SID of the Activity that will be used when new Workers are created in the Workspace
+          description: The SID of the Activity that will be used when new Workers are created in the Workspace.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WA[0-9a-fA-F]{32}$
           type: string
         event_callback_url:
-          description: The URL we call when an event occurs
+          description: The URL we call when an event occurs. If provided, the Workspace will publish events to this URL, for example, to collect data for reporting. See [Workspace Events](https://www.twilio.com/docs/taskrouter/api/event) for more information. This parameter supports Twilio's [Webhooks (HTTP callbacks) Connection Overrides](https://www.twilio.com/docs/usage/webhooks/webhooks-connection-overrides).
           format: uri
           nullable: true
           type: string
         events_filter:
-          description: The list of Workspace events for which to call event_callback_url
+          description: The list of Workspace events for which to call `event_callback_url`. For example, if `EventsFilter=task.created, task.canceled, worker.activity.update`, then TaskRouter will call event_callback_url only when a task is created, canceled, or a Worker activity is updated.
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the Workspace resource
+          description: The string that you assigned to describe the Workspace resource. For example `Customer Support` or `2014 Election Campaign`.
           nullable: true
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         multi_task_enabled:
-          description: Whether multi-tasking is enabled
+          description: Whether multi-tasking is enabled. The default is `true`, which enables multi-tasking. Multi-tasking allows Workers to handle multiple Tasks simultaneously. When enabled (`true`), each Worker can receive parallel reservations up to the per-channel maximums defined in the Workers section. In single-tasking each Worker would only receive a new reservation when the previous task is completed. Learn more at [Multitasking](https://www.twilio.com/docs/taskrouter/multitasking).
           nullable: true
           type: boolean
         prioritize_queue_order:
           $ref: "#/components/schemas/workspace_enum_queue_order"
-          description: The type of TaskQueue to prioritize when Workers are receiving Tasks from both types of TaskQueues
+          description: "The type of TaskQueue to prioritize when Workers are receiving Tasks from both types of TaskQueues. Can be: `LIFO` or `FIFO` and the default is `FIFO`. For more information, see [Queue Ordering](https://www.twilio.com/docs/taskrouter/queue-ordering-last-first-out-lifo)."
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Workspace resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WS[0-9a-fA-F]{32}$
           type: string
         timeout_activity_name:
-          description: The name of the timeout activity
+          description: The name of the timeout activity.
           nullable: true
           type: string
         timeout_activity_sid:
-          description: The SID of the Activity that will be assigned to a Worker when a Task reservation times out without a response
+          description: The SID of the Activity that will be assigned to a Worker when a Task reservation times out without a response.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WA[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the Workspace resource
+          description: The absolute URL of the Workspace resource.
           format: uri
           nullable: true
           type: string
@@ -4124,28 +4124,28 @@ components:
     taskrouter.v1.workspace.activity:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Activity resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         available:
-          description: Whether the Worker should be eligible to receive a Task when it occupies the Activity
+          description: Whether the Worker is eligible to receive a Task when it occupies the Activity. A value of `true`, `1`, or `yes` indicates the Activity is available. All other values indicate that it is not. The value cannot be changed after the Activity is created.
           nullable: true
           type: boolean
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the Activity resource
+          description: The string that you assigned to describe the Activity resource.
           nullable: true
           type: string
         links:
@@ -4153,19 +4153,19 @@ components:
           nullable: true
           type: object
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Activity resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WA[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the Activity resource
+          description: The absolute URL of the Activity resource.
           format: uri
           nullable: true
           type: string
         workspace_sid:
-          description: The SID of the Workspace that contains the Activity
+          description: The SID of the Workspace that contains the Activity.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -4175,87 +4175,87 @@ components:
     taskrouter.v1.workspace.event:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Event resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         actor_sid:
-          description: The SID of the resource that triggered the event
+          description: The SID of the resource that triggered the event.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^[a-zA-Z]{2}[0-9a-fA-F]{32}$
           type: string
         actor_type:
-          description: The type of resource that triggered the event
+          description: The type of resource that triggered the event.
           nullable: true
           type: string
         actor_url:
-          description: The absolute URL of the resource that triggered the event
+          description: The absolute URL of the resource that triggered the event.
           format: uri
           nullable: true
           type: string
         description:
-          description: A description of the event
+          description: A description of the event.
           nullable: true
           type: string
         event_data:
-          description: Data about the event
+          description: Data about the event. For more information, see [Event types](https://www.twilio.com/docs/taskrouter/api/event#event-types).
           nullable: true
         event_date:
-          description: The time the event was sent
+          description: The time the event was sent, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         event_date_ms:
-          description: The time the event was sent in milliseconds
+          description: The time the event was sent in milliseconds.
           format: int64
           nullable: true
           type: integer
         event_type:
-          description: The identifier for the event
+          description: The identifier for the event.
           nullable: true
           type: string
         resource_sid:
-          description: The SID of the object the event is most relevant to
+          description: The SID of the object the event is most relevant to, such as a TaskSid, ReservationSid, or a  WorkerSid.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^[a-zA-Z]{2}[0-9a-fA-F]{32}$
           type: string
         resource_type:
-          description: The type of object the event is most relevant to
+          description: The type of object the event is most relevant to, such as a Task, Reservation, or a Worker).
           nullable: true
           type: string
         resource_url:
-          description: The URL of the resource the event is most relevant to
+          description: The URL of the resource the event is most relevant to.
           format: uri
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Event resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^EV[0-9a-fA-F]{32}$
           type: string
         source:
-          description: Where the Event originated
+          description: Where the Event originated.
           nullable: true
           type: string
         source_ip_address:
-          description: The IP from which the Event originated
+          description: The IP from which the Event originated.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Event resource
+          description: The absolute URL of the Event resource.
           format: uri
           nullable: true
           type: string
         workspace_sid:
-          description: The SID of the Workspace that contains the Event
+          description: The SID of the Workspace that contains the Event.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -4265,108 +4265,108 @@ components:
     taskrouter.v1.workspace.task:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Task resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         addons:
-          description: An object that contains the addon data for all installed addons
+          description: An object that contains the [addon](https://www.twilio.com/docs/taskrouter/marketplace) data for all installed addons.
           nullable: true
           type: string
         age:
-          description: The number of seconds since the Task was created
+          description: The number of seconds since the Task was created.
           nullable: true
           type: integer
         assignment_status:
           $ref: "#/components/schemas/task_enum_status"
-          description: The current status of the Task's assignment
+          description: "The current status of the Task's assignment. Can be: `pending`, `reserved`, `assigned`, `canceled`, `wrapping`, or `completed`."
           nullable: true
           type: string
         attributes:
-          description: The JSON string with custom attributes of the work
+          description: The JSON string with custom attributes of the work. **Note** If this property has been assigned a value, it will only be displayed in FETCH action that returns a single resource. Otherwise, it will be null.
           nullable: true
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         priority:
-          description: Retrieve the list of all Tasks in the Workspace with the specified priority
+          description: The current priority score of the Task as assigned to a Worker by the workflow. Tasks with higher priority values will be assigned before Tasks with lower values.
           nullable: true
           type: integer
         reason:
-          description: The reason the Task was canceled or completed
+          description: The reason the Task was canceled or completed, if applicable.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Task resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WT[0-9a-fA-F]{32}$
           type: string
         task_channel_sid:
-          description: The SID of the TaskChannel
+          description: The SID of the TaskChannel.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^TC[0-9a-fA-F]{32}$
           type: string
         task_channel_unique_name:
-          description: The unique name of the TaskChannel
+          description: The unique name of the TaskChannel.
           nullable: true
           type: string
         task_queue_entered_date:
-          description: The ISO 8601 date and time in GMT when the Task entered the TaskQueue.
+          description: The date and time in GMT when the Task entered the TaskQueue, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         task_queue_friendly_name:
-          description: The friendly name of the TaskQueue
+          description: The friendly name of the TaskQueue.
           nullable: true
           type: string
         task_queue_sid:
-          description: The SID of the TaskQueue
+          description: The SID of the TaskQueue.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WQ[0-9a-fA-F]{32}$
           type: string
         timeout:
-          description: The amount of time in seconds that the Task can live before being assigned
+          description: The amount of time in seconds that the Task can live before being assigned.
           nullable: true
           type: integer
         url:
-          description: The absolute URL of the Task resource
+          description: The absolute URL of the Task resource.
           format: uri
           nullable: true
           type: string
         workflow_friendly_name:
-          description: The friendly name of the Workflow that is controlling the Task
+          description: The friendly name of the Workflow that is controlling the Task.
           nullable: true
           type: string
         workflow_sid:
-          description: The SID of the Workflow that is controlling the Task
+          description: The SID of the Workflow that is controlling the Task.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WW[0-9a-fA-F]{32}$
           type: string
         workspace_sid:
-          description: The SID of the Workspace that contains the Task
+          description: The SID of the Workspace that contains the Task.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -4376,57 +4376,57 @@ components:
     taskrouter.v1.workspace.task.task_reservation:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the TaskReservation resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         reservation_status:
           $ref: "#/components/schemas/task_reservation_enum_status"
-          description: The current status of the reservation
+          description: "The current status of the reservation. Can be: `pending`, `accepted`, `rejected`, or `timeout`."
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the TaskReservation resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WR[0-9a-fA-F]{32}$
           type: string
         task_sid:
-          description: The SID of the reserved Task resource
+          description: The SID of the reserved Task resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WT[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the TaskReservation reservation
+          description: The absolute URL of the TaskReservation reservation.
           format: uri
           nullable: true
           type: string
         worker_name:
-          description: The friendly_name of the Worker that is reserved
+          description: The `friendly_name` of the Worker that is reserved.
           nullable: true
           type: string
         worker_sid:
-          description: The SID of the reserved Worker resource
+          description: The SID of the reserved Worker resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -4443,53 +4443,53 @@ components:
     taskrouter.v1.workspace.task_channel:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Task Channel resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         channel_optimized_routing:
-          description: Whether the Task Channel will prioritize Workers that have been idle
+          description: Whether the Task Channel will prioritize Workers that have been idle. When `true`, Workers that have been idle the longest are prioritized.
           nullable: true
           type: boolean
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Task Channel resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^TC[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the Task Channel
+          description: An application-defined string that uniquely identifies the Task Channel, such as `voice` or `sms`.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Task Channel resource
+          description: The absolute URL of the Task Channel resource.
           format: uri
           nullable: true
           type: string
         workspace_sid:
-          description: The SID of the Workspace that contains the Task Channel
+          description: The SID of the Workspace that contains the Task Channel.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -4499,80 +4499,80 @@ components:
     taskrouter.v1.workspace.task_queue:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the TaskQueue resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         assignment_activity_name:
-          description: The name of the Activity to assign Workers when a task is assigned for them
+          description: The name of the Activity to assign Workers when a task is assigned for them.
           nullable: true
           type: string
         assignment_activity_sid:
-          description: The SID of the Activity to assign Workers when a task is assigned for them
+          description: The SID of the Activity to assign Workers when a task is assigned for them.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WA[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         max_reserved_workers:
-          description: The maximum number of Workers to reserve
+          description: The maximum number of Workers to reserve for the assignment of a task in the queue. Can be an integer between 1 and 50, inclusive and defaults to 1.
           nullable: true
           type: integer
         reservation_activity_name:
-          description: The name of the Activity to assign Workers once a task is reserved for them
+          description: The name of the Activity to assign Workers once a task is reserved for them.
           nullable: true
           type: string
         reservation_activity_sid:
-          description: The SID of the Activity to assign Workers once a task is reserved for them
+          description: The SID of the Activity to assign Workers once a task is reserved for them.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WA[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the TaskQueue resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WQ[0-9a-fA-F]{32}$
           type: string
         target_workers:
-          description: A string describing the Worker selection criteria for any Tasks that enter the TaskQueue
+          description: A string describing the Worker selection criteria for any Tasks that enter the TaskQueue. For example `'"language" == "spanish"'` If no TargetWorkers parameter is provided, Tasks will wait in the TaskQueue until they are either deleted or moved to another TaskQueue. Additional examples on how to describing Worker selection criteria below. Defaults to 1==1.
           nullable: true
           type: string
         task_order:
           $ref: "#/components/schemas/task_queue_enum_task_order"
-          description: How Tasks will be assigned to Workers
+          description: How Tasks will be assigned to Workers. Set this parameter to `LIFO` to assign most recently created Task first or `FIFO` to assign the oldest Task. Default is FIFO. [Click here](https://www.twilio.com/docs/taskrouter/queue-ordering-last-first-out-lifo) to learn more.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the TaskQueue resource
+          description: The absolute URL of the TaskQueue resource.
           format: uri
           nullable: true
           type: string
         workspace_sid:
-          description: The SID of the Workspace that contains the TaskQueue
+          description: The SID of the Workspace that contains the TaskQueue.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -4582,96 +4582,96 @@ components:
     taskrouter.v1.workspace.task_queue.task_queue_cumulative_statistics:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the TaskQueue resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         avg_task_acceptance_time:
-          description: The average time in seconds between Task creation and acceptance
+          description: The average time in seconds between Task creation and acceptance.
           nullable: true
           type: integer
         end_time:
-          description: The end of the interval during which these statistics were calculated
+          description: The end of the interval during which these statistics were calculated, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         reservations_accepted:
-          description: The total number of Reservations accepted for Tasks in the TaskQueue
+          description: The total number of Reservations accepted for Tasks in the TaskQueue.
           nullable: true
           type: integer
         reservations_canceled:
-          description: The total number of Reservations canceled for Tasks in the TaskQueue
+          description: The total number of Reservations canceled for Tasks in the TaskQueue.
           nullable: true
           type: integer
         reservations_created:
-          description: The total number of Reservations created for Tasks in the TaskQueue
+          description: The total number of Reservations created for Tasks in the TaskQueue.
           nullable: true
           type: integer
         reservations_rejected:
-          description: The total number of Reservations rejected for Tasks in the TaskQueue
+          description: The total number of Reservations rejected for Tasks in the TaskQueue.
           nullable: true
           type: integer
         reservations_rescinded:
-          description: The total number of Reservations rescinded
+          description: The total number of Reservations rescinded.
           nullable: true
           type: integer
         reservations_timed_out:
-          description: The total number of Reservations that timed out for Tasks in the TaskQueue
+          description: The total number of Reservations that timed out for Tasks in the TaskQueue.
           nullable: true
           type: integer
         split_by_wait_time:
-          description: A list of objects that describe the Tasks canceled and reservations accepted above and below the specified thresholds
+          description: A list of objects that describe the number of Tasks canceled and reservations accepted above and below the thresholds specified in seconds.
           nullable: true
         start_time:
-          description: The beginning of the interval during which these statistics were calculated
+          description: The beginning of the interval during which these statistics were calculated, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         task_queue_sid:
-          description: The SID of the TaskQueue from which these statistics were calculated
+          description: The SID of the TaskQueue from which these statistics were calculated.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WQ[0-9a-fA-F]{32}$
           type: string
         tasks_canceled:
-          description: The total number of Tasks canceled in the TaskQueue
+          description: The total number of Tasks canceled in the TaskQueue.
           nullable: true
           type: integer
         tasks_completed:
-          description: The total number of Tasks completed in the TaskQueue
+          description: The total number of Tasks completed in the TaskQueue.
           nullable: true
           type: integer
         tasks_deleted:
-          description: The total number of Tasks deleted in the TaskQueue
+          description: The total number of Tasks deleted in the TaskQueue.
           nullable: true
           type: integer
         tasks_entered:
-          description: The total number of Tasks entered into the TaskQueue
+          description: The total number of Tasks entered into the TaskQueue.
           nullable: true
           type: integer
         tasks_moved:
-          description: The total number of Tasks that were moved from one queue to another
+          description: The total number of Tasks that were moved from one queue to another.
           nullable: true
           type: integer
         url:
-          description: The absolute URL of the TaskQueue statistics resource
+          description: The absolute URL of the TaskQueue statistics resource.
           format: uri
           nullable: true
           type: string
         wait_duration_in_queue_until_accepted:
-          description: The relative wait duration statistics for Tasks accepted while in the TaskQueue
+          description: The relative wait duration statistics (`avg`, `min`, `max`, `total`) for Tasks accepted while in the TaskQueue. Calculation is based on the time when the Tasks entered the TaskQueue.
           nullable: true
         wait_duration_until_accepted:
-          description: The wait duration statistics for Tasks accepted while in the TaskQueue
+          description: The wait duration statistics (`avg`, `min`, `max`, `total`) for Tasks accepted while in the TaskQueue. Calculation is based on the time when the Tasks were created. For transfers, the wait duration is counted from the moment ***the Task was created***, and not from when the transfer was initiated.
           nullable: true
         wait_duration_until_canceled:
-          description: The wait duration statistics for Tasks canceled while in the TaskQueue
+          description: The wait duration statistics (`avg`, `min`, `max`, `total`) for Tasks canceled while in the TaskQueue.
           nullable: true
         workspace_sid:
-          description: The SID of the Workspace that contains the TaskQueue
+          description: The SID of the Workspace that contains the TaskQueue.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -4681,71 +4681,71 @@ components:
     taskrouter.v1.workspace.task_queue.task_queue_real_time_statistics:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the TaskQueue resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         activity_statistics:
-          description: The number of current Workers by Activity
+          description: The number of current Workers by Activity.
           items: {}
           nullable: true
           type: array
         longest_relative_task_age_in_queue:
-          description: The relative age in the TaskQueue for the longest waiting Task.
+          description: The relative age in the TaskQueue for the longest waiting Task. Calculation is based on the time when the Task entered the TaskQueue.
           nullable: true
           type: integer
         longest_relative_task_sid_in_queue:
-          description: The SID of the Task waiting in the TaskQueue the longest.
+          description: The Task SID of the Task waiting in the TaskQueue the longest. Calculation is based on the time when the Task entered the TaskQueue.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WT[0-9a-fA-F]{32}$
           type: string
         longest_task_waiting_age:
-          description: The age of the longest waiting Task
+          description: The age of the longest waiting Task.
           nullable: true
           type: integer
         longest_task_waiting_sid:
-          description: The SID of the longest waiting Task
+          description: The SID of the longest waiting Task.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WT[0-9a-fA-F]{32}$
           type: string
         task_queue_sid:
-          description: The SID of the TaskQueue from which these statistics were calculated
+          description: The SID of the TaskQueue from which these statistics were calculated.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WQ[0-9a-fA-F]{32}$
           type: string
         tasks_by_priority:
-          description: The number of Tasks by priority
+          description: 'The number of Tasks by priority. For example: `{"0": "10", "99": "5"}` shows 10 Tasks at priority 0 and 5 at priority 99.'
           nullable: true
         tasks_by_status:
-          description: The number of Tasks by their current status
+          description: 'The number of Tasks by their current status. For example: `{"pending": "1", "reserved": "3", "assigned": "2", "completed": "5"}`.'
           nullable: true
         total_available_workers:
-          description: The total number of Workers available for Tasks in the TaskQueue
+          description: The total number of Workers available for Tasks in the TaskQueue.
           nullable: true
           type: integer
         total_eligible_workers:
-          description: The total number of Workers eligible for Tasks in the TaskQueue, independent of their Activity state
+          description: The total number of Workers eligible for Tasks in the TaskQueue, independent of their Activity state.
           nullable: true
           type: integer
         total_tasks:
-          description: The total number of Tasks
+          description: The total number of Tasks.
           nullable: true
           type: integer
         url:
-          description: The absolute URL of the TaskQueue statistics resource
+          description: The absolute URL of the TaskQueue statistics resource.
           format: uri
           nullable: true
           type: string
         workspace_sid:
-          description: The SID of the Workspace that contains the TaskQueue
+          description: The SID of the Workspace that contains the TaskQueue.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -4755,32 +4755,32 @@ components:
     taskrouter.v1.workspace.task_queue.task_queue_statistics:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the TaskQueue resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         cumulative:
-          description: An object that contains the cumulative statistics for the TaskQueue
+          description: An object that contains the cumulative statistics for the TaskQueue.
           nullable: true
         realtime:
-          description: An object that contains the real-time statistics for the TaskQueue
+          description: An object that contains the real-time statistics for the TaskQueue.
           nullable: true
         task_queue_sid:
-          description: The SID of the TaskQueue from which these statistics were calculated
+          description: The SID of the TaskQueue from which these statistics were calculated.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WQ[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the TaskQueue statistics resource
+          description: The absolute URL of the TaskQueue statistics resource.
           format: uri
           nullable: true
           type: string
         workspace_sid:
-          description: The SID of the Workspace that contains the TaskQueue
+          description: The SID of the Workspace that contains the TaskQueue.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -4790,27 +4790,27 @@ components:
     taskrouter.v1.workspace.task_queue.task_queues_statistics:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the TaskQueue resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         cumulative:
-          description: An object that contains the cumulative statistics for the TaskQueues
+          description: An object that contains the cumulative statistics for the TaskQueues.
           nullable: true
         realtime:
-          description: An object that contains the real-time statistics for the TaskQueues
+          description: An object that contains the real-time statistics for the TaskQueues.
           nullable: true
         task_queue_sid:
-          description: The SID of the TaskQueue from which these statistics were calculated
+          description: The SID of the TaskQueue from which these statistics were calculated.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WQ[0-9a-fA-F]{32}$
           type: string
         workspace_sid:
-          description: The SID of the Workspace that contains the TaskQueues
+          description: The SID of the Workspace that contains the TaskQueues.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -4820,69 +4820,69 @@ components:
     taskrouter.v1.workspace.worker:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Worker resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         activity_name:
-          description: The friendly_name of the Worker's current Activity
+          description: The `friendly_name` of the Worker's current Activity.
           nullable: true
           type: string
         activity_sid:
-          description: The SID of the Worker's current Activity
+          description: The SID of the Worker's current Activity.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WA[0-9a-fA-F]{32}$
           type: string
         attributes:
-          description: The JSON string that describes the Worker
+          description: 'The JSON string that describes the Worker. For example: `{ "email": "Bob@example.com", "phone": "+5095551234" }`. **Note** If this property has been assigned a value, it will only be displayed in FETCH actions that return a single resource. Otherwise, this property will be null, even if it has a value. This data is passed to the `assignment_callback_url` when TaskRouter assigns a Task to the Worker.'
           nullable: true
           type: string
         available:
-          description: Whether the Worker is available to perform tasks
+          description: Whether the Worker is available to perform tasks.
           nullable: true
           type: boolean
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_status_changed:
-          description: The date and time in GMT of the last change to the Worker's activity
+          description: The date and time in GMT of the last change to the Worker's activity specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. Used to calculate Workflow statistics.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource. Friendly names are case insensitive, and unique within the TaskRouter Workspace.
           nullable: true
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Worker resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WK[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the Worker resource
+          description: The absolute URL of the Worker resource.
           format: uri
           nullable: true
           type: string
         workspace_sid:
-          description: The SID of the Workspace that contains the Worker
+          description: The SID of the Workspace that contains the Worker.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -4892,70 +4892,70 @@ components:
     taskrouter.v1.workspace.worker.worker_channel:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Worker resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         assigned_tasks:
-          description: The total number of Tasks assigned to Worker for the TaskChannel type
+          description: The total number of Tasks assigned to Worker for the TaskChannel type.
           nullable: true
           type: integer
         available:
-          description: Whether the Worker should receive Tasks of the TaskChannel type
+          description: Whether the Worker should receive Tasks of the TaskChannel type.
           nullable: true
           type: boolean
         available_capacity_percentage:
-          description: The current available capacity between 0 to 100 for the TaskChannel
+          description: The current percentage of capacity the TaskChannel has available. Can be a number between `0` and `100`. A value of `0` indicates that TaskChannel has no capacity available and a value of `100` means the  Worker is available to receive any Tasks of this TaskChannel type.
           nullable: true
           type: integer
         configured_capacity:
-          description: The current configured capacity for the WorkerChannel
+          description: The current configured capacity for the WorkerChannel. TaskRouter will not create any reservations after the assigned Tasks for the Worker reaches the value.
           nullable: true
           type: integer
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the WorkerChannel resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WC[0-9a-fA-F]{32}$
           type: string
         task_channel_sid:
-          description: The SID of the TaskChannel
+          description: The SID of the TaskChannel.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^TC[0-9a-fA-F]{32}$
           type: string
         task_channel_unique_name:
-          description: The unique name of the TaskChannel, such as 'voice' or 'sms'
+          description: The unique name of the TaskChannel, such as `voice` or `sms`.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the WorkerChannel resource
+          description: The absolute URL of the WorkerChannel resource.
           format: uri
           nullable: true
           type: string
         worker_sid:
-          description: The SID of the Worker that contains the WorkerChannel
+          description: The SID of the Worker that contains the WorkerChannel.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WK[0-9a-fA-F]{32}$
           type: string
         workspace_sid:
-          description: The SID of the Workspace that contains the WorkerChannel
+          description: The SID of the Workspace that contains the WorkerChannel.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -4965,29 +4965,29 @@ components:
     taskrouter.v1.workspace.worker.worker_instance_statistics:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Worker resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         cumulative:
-          description: An object that contains the cumulative statistics for the Worker
+          description: An object that contains the cumulative statistics for the Worker.
           nullable: true
         url:
-          description: The absolute URL of the WorkerChannel statistics resource
+          description: The absolute URL of the WorkerChannel statistics resource.
           format: uri
           nullable: true
           type: string
         worker_sid:
-          description: The SID of the Worker that contains the WorkerChannel
+          description: The SID of the Worker that contains the WorkerChannel.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WK[0-9a-fA-F]{32}$
           type: string
         workspace_sid:
-          description: The SID of the Workspace that contains the WorkerChannel
+          description: The SID of the Workspace that contains the WorkerChannel.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -4997,57 +4997,57 @@ components:
     taskrouter.v1.workspace.worker.worker_reservation:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the WorkerReservation resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         reservation_status:
           $ref: "#/components/schemas/worker_reservation_enum_status"
-          description: The current status of the reservation
+          description: "The current status of the reservation. Can be: `pending`, `accepted`, `rejected`, `timeout`, `canceled`, or `rescinded`."
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the WorkerReservation resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WR[0-9a-fA-F]{32}$
           type: string
         task_sid:
-          description: The SID of the reserved Task resource
+          description: The SID of the reserved Task resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WT[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the WorkerReservation resource
+          description: The absolute URL of the WorkerReservation resource.
           format: uri
           nullable: true
           type: string
         worker_name:
-          description: The friendly_name of the Worker that is reserved
+          description: The `friendly_name` of the Worker that is reserved.
           nullable: true
           type: string
         worker_sid:
-          description: The SID of the reserved Worker resource
+          description: The SID of the reserved Worker resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5064,25 +5064,25 @@ components:
     taskrouter.v1.workspace.worker.worker_statistics:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Worker resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         cumulative:
-          description: An object that contains the cumulative statistics for the Worker
+          description: An object that contains the cumulative statistics for the Worker.
           nullable: true
         realtime:
-          description: An object that contains the real-time statistics for the Worker
+          description: An object that contains the real-time statistics for the Worker.
           nullable: true
         url:
-          description: The absolute URL of the Worker statistics resource
+          description: The absolute URL of the Worker statistics resource.
           format: uri
           nullable: true
           type: string
         workspace_sid:
-          description: The SID of the Workspace that contains the Worker
+          description: The SID of the Workspace that contains the Worker.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5092,58 +5092,58 @@ components:
     taskrouter.v1.workspace.worker.workers_cumulative_statistics:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Worker resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         activity_durations:
-          description: The minimum, average, maximum, and total time that Workers spent in each Activity
+          description: The minimum, average, maximum, and total time (in seconds) that Workers spent in each Activity.
           items: {}
           nullable: true
           type: array
         end_time:
-          description: The end of the interval during which these statistics were calculated
+          description: The end of the interval during which these statistics were calculated, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         reservations_accepted:
-          description: The total number of Reservations that were accepted
+          description: The total number of Reservations that were accepted.
           nullable: true
           type: integer
         reservations_canceled:
-          description: The total number of Reservations that were canceled
+          description: The total number of Reservations that were canceled.
           nullable: true
           type: integer
         reservations_created:
-          description: The total number of Reservations that were created
+          description: The total number of Reservations that were created.
           nullable: true
           type: integer
         reservations_rejected:
-          description: The total number of Reservations that were rejected
+          description: The total number of Reservations that were rejected.
           nullable: true
           type: integer
         reservations_rescinded:
-          description: The total number of Reservations that were rescinded
+          description: The total number of Reservations that were rescinded.
           nullable: true
           type: integer
         reservations_timed_out:
-          description: The total number of Reservations that were timed out
+          description: The total number of Reservations that were timed out.
           nullable: true
           type: integer
         start_time:
-          description: The beginning of the interval during which these statistics were calculated
+          description: The beginning of the interval during which these statistics were calculated, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Workers statistics resource
+          description: The absolute URL of the Workers statistics resource.
           format: uri
           nullable: true
           type: string
         workspace_sid:
-          description: The SID of the Workspace that contains the Workers
+          description: The SID of the Workspace that contains the Workers.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5153,28 +5153,28 @@ components:
     taskrouter.v1.workspace.worker.workers_real_time_statistics:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Worker resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         activity_statistics:
-          description: The number of current Workers by Activity
+          description: The number of current Workers by Activity.
           items: {}
           nullable: true
           type: array
         total_workers:
-          description: The total number of Workers
+          description: The total number of Workers.
           nullable: true
           type: integer
         url:
-          description: The absolute URL of the Workers statistics resource
+          description: The absolute URL of the Workers statistics resource.
           format: uri
           nullable: true
           type: string
         workspace_sid:
-          description: The SID of the Workspace that contains the Workers
+          description: The SID of the Workspace that contains the Workers.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5184,67 +5184,67 @@ components:
     taskrouter.v1.workspace.workflow:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Workflow resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         assignment_callback_url:
-          description: The URL that we call when a task managed by the Workflow is assigned to a Worker
+          description: The URL that we call when a task managed by the Workflow is assigned to a Worker. See Assignment Callback URL for more information.
           format: uri
           nullable: true
           type: string
         configuration:
-          description: A JSON string that contains the Workflow's configuration
+          description: A JSON string that contains the Workflow's configuration. See [Configuring Workflows](https://www.twilio.com/docs/taskrouter/workflow-configuration) for more information.
           nullable: true
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         document_content_type:
-          description: The MIME type of the document
+          description: The MIME type of the document.
           nullable: true
           type: string
         fallback_assignment_callback_url:
-          description: The URL that we call when a call to the `assignment_callback_url` fails
+          description: The URL that we call when a call to the `assignment_callback_url` fails.
           format: uri
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the Workflow resource
+          description: The string that you assigned to describe the Workflow resource. For example, `Customer Support` or `2014 Election Campaign`.
           nullable: true
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Workflow resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WW[0-9a-fA-F]{32}$
           type: string
         task_reservation_timeout:
-          description: How long TaskRouter will wait for a confirmation response from your application after it assigns a Task to a Worker
+          description: How long TaskRouter will wait for a confirmation response from your application after it assigns a Task to a Worker. Can be up to `86,400` (24 hours) and the default is `120`.
           nullable: true
           type: integer
         url:
-          description: The absolute URL of the Workflow resource
+          description: The absolute URL of the Workflow resource.
           format: uri
           nullable: true
           type: string
         workspace_sid:
-          description: The SID of the Workspace that contains the Workflow
+          description: The SID of the Workspace that contains the Workflow.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5254,90 +5254,90 @@ components:
     taskrouter.v1.workspace.workflow.workflow_cumulative_statistics:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Workflow resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         avg_task_acceptance_time:
-          description: The average time in seconds between Task creation and acceptance
+          description: The average time in seconds between Task creation and acceptance.
           nullable: true
           type: integer
         end_time:
-          description: The end of the interval during which these statistics were calculated
+          description: The end of the interval during which these statistics were calculated, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         reservations_accepted:
-          description: The total number of Reservations accepted by Workers
+          description: The total number of Reservations accepted by Workers.
           nullable: true
           type: integer
         reservations_canceled:
-          description: The total number of Reservations that were canceled
+          description: The total number of Reservations that were canceled.
           nullable: true
           type: integer
         reservations_created:
-          description: The total number of Reservations that were created for Workers
+          description: The total number of Reservations that were created for Workers.
           nullable: true
           type: integer
         reservations_rejected:
-          description: The total number of Reservations that were rejected
+          description: The total number of Reservations that were rejected.
           nullable: true
           type: integer
         reservations_rescinded:
-          description: The total number of Reservations that were rescinded
+          description: The total number of Reservations that were rescinded.
           nullable: true
           type: integer
         reservations_timed_out:
-          description: The total number of Reservations that were timed out
+          description: The total number of Reservations that were timed out.
           nullable: true
           type: integer
         split_by_wait_time:
-          description: A list of objects that describe the Tasks canceled and reservations accepted above and below the specified thresholds
+          description: A list of objects that describe the number of Tasks canceled and reservations accepted above and below the thresholds specified in seconds.
           nullable: true
         start_time:
-          description: The beginning of the interval during which these statistics were calculated
+          description: The beginning of the interval during which these statistics were calculated, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         tasks_canceled:
-          description: The total number of Tasks that were canceled
+          description: The total number of Tasks that were canceled.
           nullable: true
           type: integer
         tasks_completed:
-          description: The total number of Tasks that were completed
+          description: The total number of Tasks that were completed.
           nullable: true
           type: integer
         tasks_deleted:
-          description: The total number of Tasks that were deleted
+          description: The total number of Tasks that were deleted.
           nullable: true
           type: integer
         tasks_entered:
-          description: The total number of Tasks that entered the Workflow
+          description: The total number of Tasks that entered the Workflow.
           nullable: true
           type: integer
         tasks_moved:
-          description: The total number of Tasks that were moved from one queue to another
+          description: The total number of Tasks that were moved from one queue to another.
           nullable: true
           type: integer
         tasks_timed_out_in_workflow:
-          description: The total number of Tasks that were timed out of their Workflows
+          description: The total number of Tasks that were timed out of their Workflows (and deleted).
           nullable: true
           type: integer
         url:
-          description: The absolute URL of the Workflow statistics resource
+          description: The absolute URL of the Workflow statistics resource.
           format: uri
           nullable: true
           type: string
         wait_duration_until_accepted:
-          description: The wait duration statistics for Tasks that were accepted
+          description: The wait duration statistics (`avg`, `min`, `max`, `total`) for Tasks that were accepted.
           nullable: true
         wait_duration_until_canceled:
-          description: The wait duration statistics for Tasks that were canceled
+          description: The wait duration statistics (`avg`, `min`, `max`, `total`) for Tasks that were canceled.
           nullable: true
         workflow_sid:
-          description: Returns the list of Tasks that are being controlled by the Workflow with the specified Sid value
+          description: Returns the list of Tasks that are being controlled by the Workflow with the specified Sid value.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5354,40 +5354,40 @@ components:
     taskrouter.v1.workspace.workflow.workflow_real_time_statistics:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Workflow resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         longest_task_waiting_age:
-          description: The age of the longest waiting Task
+          description: The age of the longest waiting Task.
           nullable: true
           type: integer
         longest_task_waiting_sid:
-          description: The SID of the longest waiting Task
+          description: The SID of the longest waiting Task.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WT[0-9a-fA-F]{32}$
           type: string
         tasks_by_priority:
-          description: The number of Tasks by priority
+          description: 'The number of Tasks by priority. For example: `{"0": "10", "99": "5"}` shows 10 Tasks at priority 0 and 5 at priority 99.'
           nullable: true
         tasks_by_status:
-          description: The number of Tasks by their current status
+          description: 'The number of Tasks by their current status. For example: `{"pending": "1", "reserved": "3", "assigned": "2", "completed": "5"}`.'
           nullable: true
         total_tasks:
-          description: The total number of Tasks
+          description: The total number of Tasks.
           nullable: true
           type: integer
         url:
-          description: The absolute URL of the Workflow statistics resource
+          description: The absolute URL of the Workflow statistics resource.
           format: uri
           nullable: true
           type: string
         workflow_sid:
-          description: Returns the list of Tasks that are being controlled by the Workflow with the specified SID value
+          description: Returns the list of Tasks that are being controlled by the Workflow with the specified SID value.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5404,32 +5404,32 @@ components:
     taskrouter.v1.workspace.workflow.workflow_statistics:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Workflow resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         cumulative:
-          description: An object that contains the cumulative statistics for the Workflow
+          description: An object that contains the cumulative statistics for the Workflow.
           nullable: true
         realtime:
-          description: An object that contains the real-time statistics for the Workflow
+          description: An object that contains the real-time statistics for the Workflow.
           nullable: true
         url:
-          description: The absolute URL of the Workflow statistics resource
+          description: The absolute URL of the Workflow statistics resource.
           format: uri
           nullable: true
           type: string
         workflow_sid:
-          description: Returns the list of Tasks that are being controlled by the Workflow with the specified SID value
+          description: Returns the list of Tasks that are being controlled by the Workflow with the specified SID value.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WW[0-9a-fA-F]{32}$
           type: string
         workspace_sid:
-          description: The SID of the Workspace that contains the Workflow
+          description: The SID of the Workspace that contains the Workflow.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5439,90 +5439,90 @@ components:
     taskrouter.v1.workspace.workspace_cumulative_statistics:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Workspace resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         avg_task_acceptance_time:
-          description: The average time in seconds between Task creation and acceptance
+          description: The average time in seconds between Task creation and acceptance.
           nullable: true
           type: integer
         end_time:
-          description: The end of the interval during which these statistics were calculated
+          description: The end of the interval during which these statistics were calculated, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         reservations_accepted:
-          description: The total number of Reservations accepted by Workers
+          description: The total number of Reservations accepted by Workers.
           nullable: true
           type: integer
         reservations_canceled:
-          description: The total number of Reservations that were canceled
+          description: The total number of Reservations that were canceled.
           nullable: true
           type: integer
         reservations_created:
-          description: The total number of Reservations that were created for Workers
+          description: The total number of Reservations that were created for Workers.
           nullable: true
           type: integer
         reservations_rejected:
-          description: The total number of Reservations that were rejected
+          description: The total number of Reservations that were rejected.
           nullable: true
           type: integer
         reservations_rescinded:
-          description: The total number of Reservations that were rescinded
+          description: The total number of Reservations that were rescinded.
           nullable: true
           type: integer
         reservations_timed_out:
-          description: The total number of Reservations that were timed out
+          description: The total number of Reservations that were timed out.
           nullable: true
           type: integer
         split_by_wait_time:
-          description: A list of objects that describe the Tasks canceled and reservations accepted above and below the specified thresholds
+          description: A list of objects that describe the number of Tasks canceled and reservations accepted above and below the thresholds specified in seconds.
           nullable: true
         start_time:
-          description: The beginning of the interval during which these statistics were calculated
+          description: The beginning of the interval during which these statistics were calculated, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         tasks_canceled:
-          description: The total number of Tasks that were canceled
+          description: The total number of Tasks that were canceled.
           nullable: true
           type: integer
         tasks_completed:
-          description: The total number of Tasks that were completed
+          description: The total number of Tasks that were completed.
           nullable: true
           type: integer
         tasks_created:
-          description: The total number of Tasks created
+          description: The total number of Tasks created.
           nullable: true
           type: integer
         tasks_deleted:
-          description: The total number of Tasks that were deleted
+          description: The total number of Tasks that were deleted.
           nullable: true
           type: integer
         tasks_moved:
-          description: The total number of Tasks that were moved from one queue to another
+          description: The total number of Tasks that were moved from one queue to another.
           nullable: true
           type: integer
         tasks_timed_out_in_workflow:
-          description: The total number of Tasks that were timed out of their Workflows
+          description: The total number of Tasks that were timed out of their Workflows (and deleted).
           nullable: true
           type: integer
         url:
-          description: The absolute URL of the Workspace statistics resource
+          description: The absolute URL of the Workspace statistics resource.
           format: uri
           nullable: true
           type: string
         wait_duration_until_accepted:
-          description: The wait duration statistics for Tasks that were accepted
+          description: The wait duration statistics (`avg`, `min`, `max`, `total`) for Tasks that were accepted.
           nullable: true
         wait_duration_until_canceled:
-          description: The wait duration statistics for Tasks that were canceled
+          description: The wait duration statistics (`avg`, `min`, `max`, `total`) for Tasks that were canceled.
           nullable: true
         workspace_sid:
-          description: The SID of the Workspace
+          description: The SID of the Workspace.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5532,49 +5532,49 @@ components:
     taskrouter.v1.workspace.workspace_real_time_statistics:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Workspace resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         activity_statistics:
-          description: The number of current Workers by Activity
+          description: The number of current Workers by Activity.
           items: {}
           nullable: true
           type: array
         longest_task_waiting_age:
-          description: The age of the longest waiting Task
+          description: The age of the longest waiting Task.
           nullable: true
           type: integer
         longest_task_waiting_sid:
-          description: The SID of the longest waiting Task
+          description: The SID of the longest waiting Task.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WT[0-9a-fA-F]{32}$
           type: string
         tasks_by_priority:
-          description: The number of Tasks by priority
+          description: 'The number of Tasks by priority. For example: `{"0": "10", "99": "5"}` shows 10 Tasks at priority 0 and 5 at priority 99.'
           nullable: true
         tasks_by_status:
-          description: The number of Tasks by their current status
+          description: 'The number of Tasks by their current status. For example: `{"pending": "1", "reserved": "3", "assigned": "2", "completed": "5"}`.'
           nullable: true
         total_tasks:
-          description: The total number of Tasks
+          description: The total number of Tasks.
           nullable: true
           type: integer
         total_workers:
-          description: The total number of Workers in the Workspace
+          description: The total number of Workers in the Workspace.
           nullable: true
           type: integer
         url:
-          description: The absolute URL of the Workspace statistics resource
+          description: The absolute URL of the Workspace statistics resource.
           format: uri
           nullable: true
           type: string
         workspace_sid:
-          description: The SID of the Workspace
+          description: The SID of the Workspace.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5584,25 +5584,25 @@ components:
     taskrouter.v1.workspace.workspace_statistics:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Workspace resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         cumulative:
-          description: An object that contains the cumulative statistics for the Workspace
+          description: An object that contains the cumulative statistics for the Workspace.
           nullable: true
         realtime:
-          description: n object that contains the real-time statistics for the Workspace
+          description: An object that contains the real-time statistics for the Workspace.
           nullable: true
         url:
-          description: The absolute URL of the Workspace statistics resource
+          description: The absolute URL of the Workspace statistics resource.
           format: uri
           nullable: true
           type: string
         workspace_sid:
-          description: The SID of the Workspace
+          description: The SID of the Workspace.
           maxLength: 34
           minLength: 34
           nullable: true

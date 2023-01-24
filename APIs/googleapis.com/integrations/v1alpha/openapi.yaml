@@ -731,6 +731,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1alpha/{name}:unpublish":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Sets the status of the ACTIVE integration to SNAPSHOT with a new tag "PREVIOUSLY_PUBLISHED" after validating it. The "HEAD" and "PUBLISH_REQUESTED" tags do not change. This RPC throws an exception if the version being snapshot is not ACTIVE. Audit fields added include action, action_by, action_timestamp.
+      operationId: integrations.projects.locations.products.integrations.versions.unpublish
+      parameters:
+        - description: "Required. The version to deactivate. Format: projects/{project}/locations/{location}/integrations/{integration}/versions/{version}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaUnpublishIntegrationVersionRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleProtobufEmpty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1alpha/{name}:updateBundle":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -4277,7 +4319,7 @@ components:
           type: array
       type: object
     EnterpriseCrmFrontendsEventbusProtoTaskConfig:
-      description: "The task configuration details. This is not the implementation of Task. There might be multiple TaskConfigs for the same Task. Next available id: 27"
+      description: The task configuration details. This is not the implementation of Task. There might be multiple TaskConfigs for the same Task.
       properties:
         alertConfigs:
           description: Alert configurations on error rate, warning rate, number of runs, durations, etc.
@@ -4372,7 +4414,7 @@ components:
           description: "REQUIRED: the identifier of this task within its parent event config, specified by the client. This should be unique among all the tasks belong to the same event config. We use this field as the identifier to find next tasks (via field `next_tasks.task_number`)."
           type: string
         taskSpec:
-          description: A string template that allows user to configure task parameters (with either literal default values or tokens which will be resolved at execution time) for the task. It will eventually replace the old "parameters" field. Please refer to go/eventbus-task-spec-example for detailed usage example.
+          description: A string template that allows user to configure task parameters (with either literal default values or tokens which will be resolved at execution time) for the task. It will eventually replace the old "parameters" field.
           type: string
         taskTemplateName:
           description: Used to define task-template name if task is of type task-template
@@ -6647,6 +6689,10 @@ components:
             - SFDC_CDC_CHANNEL
             - CLOUD_SCHEDULER
           type: string
+      type: object
+    GoogleCloudIntegrationsV1alphaUnpublishIntegrationVersionRequest:
+      description: Request for UnpublishIntegrationVersion.
+      properties: {}
       type: object
     GoogleCloudIntegrationsV1alphaUpdateBundleRequest:
       description: THIS METHOD WILL BE MOVED TO A SEPARATE SERVICE. Request message for Bundle update

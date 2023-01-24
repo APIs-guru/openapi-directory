@@ -6803,51 +6803,51 @@ components:
     preview.deployed_devices.fleet:
       properties:
         account_sid:
-          description: The unique SID that identifies this Account.
+          description: Speicifies the unique string identifier of the Account responsible for this Fleet.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The date this Fleet was created.
+          description: Specifies the date this Fleet was created, given in UTC ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date this Fleet was updated.
+          description: Specifies the date this Fleet was last updated, given in UTC ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         default_deployment_sid:
-          description: The unique SID that identifies this Fleet's default Deployment.
+          description: Contains the string identifier of the automatically provisioned default Deployment of this Fleet.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^DL[0-9a-fA-F]{32}$
           type: string
         friendly_name:
-          description: A human readable description for this Fleet.
+          description: Contains a human readable descriptive text for this Fleet, up to 256 characters long.
           nullable: true
           type: string
         links:
-          description: Nested resource URLs.
+          description: Contains a dictionary of URL links to nested resources of this Fleet.
           format: uri-map
           nullable: true
           type: object
         sid:
-          description: A string that uniquely identifies this Fleet.
+          description: Contains a 34 character string that uniquely identifies this Fleet resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^TH[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: A unique, addressable name of this Fleet.
+          description: Contains a unique and addressable name of this Fleet, e.g. 'default', up to 128 characters long.
           nullable: true
           type: string
         url:
-          description: URL of this Fleet.
+          description: Contains an absolute URL for this Fleet resource.
           format: uri
           nullable: true
           type: string
@@ -6855,50 +6855,50 @@ components:
     preview.deployed_devices.fleet.certificate:
       properties:
         account_sid:
-          description: The unique SID that identifies this Account.
+          description: Specifies the unique string identifier of the Account responsible for this Certificate credential.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The date this Certificate was created.
+          description: Specifies the date this Certificate credential was created, given in UTC ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date this Certificate was updated.
+          description: Specifies the date this Certificate credential was last updated, given in UTC ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         device_sid:
-          description: The unique identifier of a mapped Device.
+          description: Specifies the unique string identifier of a Device authenticated with this Certificate credential.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^TH[0-9a-fA-F]{32}$
           type: string
         fleet_sid:
-          description: The unique identifier of the Fleet.
+          description: Specifies the unique string identifier of the Fleet that the given Certificate credential belongs to.
           nullable: true
           type: string
         friendly_name:
-          description: A human readable description for this Certificate.
+          description: Contains a human readable descriptive text for this Certificate credential, up to 256 characters long.
           nullable: true
           type: string
         sid:
-          description: A string that uniquely identifies this Certificate.
+          description: Contains a 34 character string that uniquely identifies this Certificate credential resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^CY[0-9a-fA-F]{32}$
           type: string
         thumbprint:
-          description: A Certificate unique payload hash.
+          description: Contains a unique hash of the payload of this Certificate credential, used to authenticate the Device.
           nullable: true
           type: string
         url:
-          description: URL of this Certificate.
+          description: Contains an absolute URL for this Certificate credential resource.
           format: uri
           nullable: true
           type: string
@@ -6906,46 +6906,46 @@ components:
     preview.deployed_devices.fleet.deployment:
       properties:
         account_sid:
-          description: The unique SID that identifies this Account.
+          description: Specifies the unique string identifier of the Account responsible for this Deployment.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The date this Deployment was created.
+          description: Specifies the date this Deployment was created, given in UTC ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date this Deployment was updated.
+          description: Specifies the date this Deployment was last updated, given in UTC ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         fleet_sid:
-          description: The unique identifier of the Fleet.
+          description: Specifies the unique string identifier of the Fleet that the given Deployment belongs to.
           nullable: true
           type: string
         friendly_name:
-          description: A human readable description for this Deployment
+          description: Contains a human readable descriptive text for this Deployment, up to 64 characters long
           nullable: true
           type: string
         sid:
-          description: A string that uniquely identifies this Deployment.
+          description: Contains a 34 character string that uniquely identifies this Deployment resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^DL[0-9a-fA-F]{32}$
           type: string
         sync_service_sid:
-          description: The unique identifier of the Sync service instance.
+          description: Specifies the unique string identifier of the Twilio Sync service instance linked to and accessible by this Deployment.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         url:
-          description: URL of this Deployment.
+          description: Contains an absolute URL for this Deployment resource.
           format: uri
           nullable: true
           type: string
@@ -6953,63 +6953,63 @@ components:
     preview.deployed_devices.fleet.device:
       properties:
         account_sid:
-          description: The unique SID that identifies this Account.
+          description: Specifies the unique string identifier of the Account responsible for this Device.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_authenticated:
-          description: The date this Device was authenticated.
+          description: Specifies the date this Device was last authenticated, given in UTC ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         date_created:
-          description: The date this Device was created.
+          description: Specifies the date this Device was created, given in UTC ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date this Device was updated.
+          description: Specifies the date this Device was last updated, given in UTC ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         deployment_sid:
-          description: The unique SID of the Deployment group.
+          description: Specifies the unique string identifier of the Deployment group that this Device is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^DL[0-9a-fA-F]{32}$
           type: string
         enabled:
-          description: Device enabled flag.
+          description: Contains a boolean flag indicating whether the device is enabled or not, blocks device connectivity if set to false.
           nullable: true
           type: boolean
         fleet_sid:
-          description: The unique identifier of the Fleet.
+          description: Specifies the unique string identifier of the Fleet that the given Device belongs to.
           nullable: true
           type: string
         friendly_name:
-          description: A human readable description for this Device
+          description: Contains a human readable descriptive text for this Device, up to 256 characters long
           nullable: true
           type: string
         identity:
-          description: An identifier of the Device user.
+          description: Contains an arbitrary string identifier representing a human user associated with this Device, assigned by the developer, up to 256 characters long.
           nullable: true
           type: string
         sid:
-          description: A string that uniquely identifies this Device.
+          description: Contains a 34 character string that uniquely identifies this Device resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^TH[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: A unique, addressable name of this Device.
+          description: Contains a unique and addressable name of this Device, assigned by the developer, up to 128 characters long.
           nullable: true
           type: string
         url:
-          description: URL of this Device.
+          description: Contains an absolute URL for this Device resource.
           format: uri
           nullable: true
           type: string
@@ -7017,50 +7017,50 @@ components:
     preview.deployed_devices.fleet.key:
       properties:
         account_sid:
-          description: The unique SID that identifies this Account.
+          description: Specifies the unique string identifier of the Account responsible for this Key credential.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The date this Key credential was created.
+          description: Specifies the date this Key credential was created, given in UTC ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date this Key credential was updated.
+          description: Specifies the date this Key credential was last updated, given in UTC ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         device_sid:
-          description: The unique identifier of a mapped Device.
+          description: Specifies the unique string identifier of a Device authenticated with this Key credential.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^TH[0-9a-fA-F]{32}$
           type: string
         fleet_sid:
-          description: The unique identifier of the Fleet.
+          description: Specifies the unique string identifier of the Fleet that the given Key credential belongs to.
           nullable: true
           type: string
         friendly_name:
-          description: A human readable description for this Key.
+          description: Contains a human readable descriptive text for this Key credential, up to 256 characters long.
           nullable: true
           type: string
         secret:
-          description: The key secret.
+          description: Contains the automatically generated secret belonging to this Key credential, used to authenticate the Device.
           nullable: true
           type: string
         sid:
-          description: A string that uniquely identifies this Key.
+          description: Contains a 34 character string that uniquely identifies this Key credential resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^KY[0-9a-fA-F]{32}$
           type: string
         url:
-          description: URL of this Key.
+          description: Contains an absolute URL for this Key credential resource.
           format: uri
           nullable: true
           type: string
@@ -7068,30 +7068,30 @@ components:
     preview.hosted_numbers.authorization_document:
       properties:
         address_sid:
-          description: Address sid.
+          description: A 34 character string that uniquely identifies the Address resource that is associated with this AuthorizationDocument.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AD[0-9a-fA-F]{32}$
           type: string
         cc_emails:
-          description: A list of emails.
+          description: Email recipients who will be informed when an Authorization Document has been sent and signed.
           items:
             type: string
           nullable: true
           type: array
         date_created:
-          description: The date this AuthorizationDocument was created.
+          description: The date this resource was created, given as [GMT RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date this AuthorizationDocument was updated.
+          description: The date that this resource was updated, given as [GMT RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         email:
-          description: Email.
+          description: Email that this AuthorizationDocument will be sent to for signing.
           nullable: true
           type: string
         links:
@@ -7099,7 +7099,7 @@ components:
           nullable: true
           type: object
         sid:
-          description: AuthorizationDocument sid.
+          description: A 34 character string that uniquely identifies this AuthorizationDocument.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -7107,7 +7107,7 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/authorization_document_enum_status"
-          description: The Status of this AuthorizationDocument.
+          description: "Status of an instance resource. It can hold one of the values: 1. opened 2. signing, 3. signed LOA, 4. canceled, 5. failed. See the section entitled [Status Values](https://www.twilio.com/docs/api/phone-numbers/hosted-number-authorization-documents#status-values) for more information on each of these statuses."
           nullable: true
           type: string
         url:
@@ -7118,25 +7118,25 @@ components:
     preview.hosted_numbers.authorization_document.dependent_hosted_number_order:
       properties:
         account_sid:
-          description: Account sid.
+          description: The unique SID identifier of the Account.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         address_sid:
-          description: Address sid.
+          description: A 34 character string that uniquely identifies the Address resource that represents the address of the owner of this phone number.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AD[0-9a-fA-F]{32}$
           type: string
         call_delay:
-          description: Seconds (0-30) to delay ownership verification call by.
+          description: A value between 0-30 specifying the number of seconds to delay initiating the ownership verification call.
           nullable: true
           type: integer
         capabilities:
-          description: A mapping of phone number capabilities.
+          description: A mapping of capabilities this hosted phone number will have enabled on Twilio's platform.
           format: phone-number-capabilities
           nullable: true
           properties:
@@ -7150,58 +7150,58 @@ components:
               type: boolean
           type: object
         cc_emails:
-          description: A list of emails.
+          description: Email recipients who will be informed when an Authorization Document has been sent and signed
           items:
             type: string
           nullable: true
           type: array
         date_created:
-          description: The date this HostedNumberOrder was created.
+          description: The date this resource was created, given as [GMT RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date this HostedNumberOrder was updated.
+          description: The date that this resource was updated, given as [GMT RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         email:
-          description: Email.
+          description: Email of the owner of this phone number that is being hosted.
           nullable: true
           type: string
         extension:
-          description: Phone extension to use for ownership verification call.
+          description: A numerical extension to be used when making the ownership verification call.
           nullable: true
           type: string
         failure_reason:
-          description: Why a hosted_number_order reached status "action-required"
+          description: A message that explains why a hosted_number_order went to status "action-required"
           nullable: true
           type: string
         friendly_name:
-          description: A human readable description of this resource.
+          description: A human readable description of this resource, up to 64 characters.
           nullable: true
           type: string
         incoming_phone_number_sid:
-          description: IncomingPhoneNumber sid.
+          description: A 34 character string that uniquely identifies the IncomingPhoneNumber resource created by this HostedNumberOrder.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^PN[0-9a-fA-F]{32}$
           type: string
         phone_number:
-          description: An E164 formatted phone number.
+          description: An E164 formatted phone number hosted by this HostedNumberOrder.
           format: phone-number
           nullable: true
           type: string
         sid:
-          description: HostedNumberOrder sid.
+          description: A 34 character string that uniquely identifies this Authorization Document
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HR[0-9a-fA-F]{32}$
           type: string
         signing_document_sid:
-          description: LOA document sid.
+          description: A 34 character string that uniquely identifies the LOA document associated with this HostedNumberOrder.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -7209,19 +7209,19 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/dependent_hosted_number_order_enum_status"
-          description: The Status of this HostedNumberOrder.
+          description: "Status of an instance resource. It can hold one of the values: 1. opened 2. signing, 3. signed LOA, 4. canceled, 5. failed. See the section entitled [Status Values](https://www.twilio.com/docs/api/phone-numbers/hosted-number-authorization-documents#status-values) for more information on each of these statuses."
           nullable: true
           type: string
         unique_name:
-          description: A unique, developer assigned name of this HostedNumberOrder.
+          description: Provides a unique and addressable name to be assigned to this HostedNumberOrder, assigned by the developer, to be optionally used in addition to SID.
           nullable: true
           type: string
         verification_attempts:
-          description: The number of attempts made to verify ownership of the phone number.
+          description: The number of attempts made to verify ownership of the phone number that is being hosted.
           nullable: true
           type: integer
         verification_call_sids:
-          description: List of IDs for ownership verification calls.
+          description: A list of 34 character strings that are unique identifiers for the calls placed as part of ownership verification.
           items:
             type: string
           nullable: true
@@ -7231,7 +7231,7 @@ components:
           nullable: true
           type: string
         verification_document_sid:
-          description: Verification Document Sid.
+          description: A 34 character string that uniquely identifies the Identity Document resource that represents the document for verifying ownership of the number to be hosted.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -7239,32 +7239,32 @@ components:
           type: string
         verification_type:
           $ref: "#/components/schemas/dependent_hosted_number_order_enum_verification_type"
-          description: The method used for verifying ownership of the number to be hosted.
+          description: The method used for verifying ownership of the number to be hosted. One of phone-call (default) or phone-bill.
           nullable: true
           type: string
       type: object
     preview.hosted_numbers.hosted_number_order:
       properties:
         account_sid:
-          description: Account Sid.
+          description: A 34 character string that uniquely identifies the account.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         address_sid:
-          description: Address sid.
+          description: A 34 character string that uniquely identifies the Address resource that represents the address of the owner of this phone number.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AD[0-9a-fA-F]{32}$
           type: string
         call_delay:
-          description: Seconds (0-30) to delay ownership verification call by.
+          description: A value between 0-30 specifying the number of seconds to delay initiating the ownership verification call.
           nullable: true
           type: integer
         capabilities:
-          description: A mapping of phone number capabilities.
+          description: Set of booleans describing the capabilities hosted on Twilio's platform. SMS is currently only supported.
           format: phone-number-capabilities
           nullable: true
           properties:
@@ -7278,58 +7278,58 @@ components:
               type: boolean
           type: object
         cc_emails:
-          description: A list of emails.
+          description: A list of emails that LOA document for this HostedNumberOrder will be carbon copied to.
           items:
             type: string
           nullable: true
           type: array
         date_created:
-          description: The date this HostedNumberOrder was created.
+          description: The date this resource was created, given as [GMT RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date this HostedNumberOrder was updated.
+          description: The date that this resource was updated, given as [GMT RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         email:
-          description: Email.
+          description: Email of the owner of this phone number that is being hosted.
           nullable: true
           type: string
         extension:
-          description: Phone extension to use for ownership verification call.
+          description: A numerical extension to be used when making the ownership verification call.
           nullable: true
           type: string
         failure_reason:
-          description: Why a hosted_number_order reached status "action-required"
+          description: A message that explains why a hosted_number_order went to status "action-required"
           nullable: true
           type: string
         friendly_name:
-          description: A human readable description of this resource.
+          description: A 64 character string that is a human-readable text that describes this resource.
           nullable: true
           type: string
         incoming_phone_number_sid:
-          description: IncomingPhoneNumber sid.
+          description: A 34 character string that uniquely identifies the [IncomingPhoneNumber](https://www.twilio.com/docs/api/rest/incoming-phone-numbers) resource that represents the phone number being hosted.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^PN[0-9a-fA-F]{32}$
           type: string
         phone_number:
-          description: An E164 formatted phone number.
+          description: Phone number to be hosted. This must be in [E.164](https://en.wikipedia.org/wiki/E.164) format, e.g., +16175551212
           format: phone-number
           nullable: true
           type: string
         sid:
-          description: HostedNumberOrder sid.
+          description: A 34 character string that uniquely identifies this HostedNumberOrder.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HR[0-9a-fA-F]{32}$
           type: string
         signing_document_sid:
-          description: LOA document sid.
+          description: A 34 character string that uniquely identifies the [Authorization Document](https://www.twilio.com/docs/api/phone-numbers/hosted-number-authorization-documents) the user needs to sign.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -7337,11 +7337,11 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/hosted_number_order_enum_status"
-          description: The Status of this HostedNumberOrder.
+          description: "Status of this resource. It can hold one of the values: 1. Twilio Processing 2. Received, 3. Pending LOA, 4. Carrier Processing, 5. Completed, 6. Action Required, 7. Failed. See the [HostedNumberOrders Status Values](https://www.twilio.com/docs/api/phone-numbers/hosted-numbers#status-values) section for more information on each of these statuses."
           nullable: true
           type: string
         unique_name:
-          description: A unique, developer assigned name of this HostedNumberOrder.
+          description: Provides a unique and addressable name to be assigned to this HostedNumberOrder, assigned by the developer, to be optionally used in addition to SID.
           nullable: true
           type: string
         url:
@@ -7350,21 +7350,21 @@ components:
           nullable: true
           type: string
         verification_attempts:
-          description: The number of attempts made to verify ownership of the phone number.
+          description: The number of attempts made to verify ownership of the phone number that is being hosted.
           nullable: true
           type: integer
         verification_call_sids:
-          description: List of IDs for ownership verification calls.
+          description: A list of 34 character strings that are unique identifiers for the calls placed as part of ownership verification.
           items:
             type: string
           nullable: true
           type: array
         verification_code:
-          description: The digits passed during the ownership verification call.
+          description: A verification code provided in the response for a user to enter when they pick up the phone call.
           nullable: true
           type: string
         verification_document_sid:
-          description: Verification Document Sid.
+          description: A 34 character string that uniquely identifies the Identity Document resource that represents the document for verifying ownership of the number to be hosted.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -7372,41 +7372,41 @@ components:
           type: string
         verification_type:
           $ref: "#/components/schemas/hosted_number_order_enum_verification_type"
-          description: The method used for verifying ownership of the number to be hosted.
+          description: The type of ownership verification required to move the number to a `verified` state. The verification methods are `phone-call` or `phone-bill`.
           nullable: true
           type: string
       type: object
     preview.marketplace.available_add_on:
       properties:
         configuration_schema:
-          description: The JSON object with the configuration that must be provided when installing a given Add-on
+          description: The JSON object with the configuration that must be provided when installing a given Add-on.
           nullable: true
         description:
-          description: A short description of the Add-on's functionality
+          description: A short description of the Add-on's functionality.
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         pricing_type:
-          description: How customers are charged for using this Add-on
+          description: How customers are charged for using this Add-on.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the AvailableAddOn resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^XB[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -7414,33 +7414,33 @@ components:
     preview.marketplace.available_add_on.available_add_on_extension:
       properties:
         available_add_on_sid:
-          description: The SID of the AvailableAddOn resource to which this extension applies
+          description: The SID of the AvailableAddOn resource to which this extension applies.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^XB[0-9a-fA-F]{32}$
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         product_name:
-          description: The name of the Extension's Product
+          description: The name of the Product this Extension is used within.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the AvailableAddOnExtension resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^XF[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -7448,51 +7448,51 @@ components:
     preview.marketplace.installed_add_on:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the InstalledAddOn resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         configuration:
-          description: The JSON object that represents the current configuration of installed Add-on
+          description: The JSON object that represents the current configuration of installed Add-on.
           nullable: true
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         description:
-          description: A short description of the Add-on's functionality
+          description: A short description of the Add-on's functionality.
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the InstalledAddOn resource. This Sid can also be found in the Console on that specific Add-ons page as the 'Available Add-on Sid'.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^XE[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -7500,37 +7500,37 @@ components:
     preview.marketplace.installed_add_on.installed_add_on_extension:
       properties:
         enabled:
-          description: Whether the Extension will be invoked
+          description: Whether the Extension will be invoked.
           nullable: true
           type: boolean
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         installed_add_on_sid:
-          description: The SID of the InstalledAddOn resource to which this extension applies
+          description: The SID of the InstalledAddOn resource to which this extension applies.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^XE[0-9a-fA-F]{32}$
           type: string
         product_name:
-          description: The name of the Extension's Product
+          description: The name of the Product this Extension is used within.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the InstalledAddOn Extension resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^XF[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -7630,45 +7630,45 @@ components:
     preview.sync.service.document.document_permission:
       properties:
         account_sid:
-          description: Twilio Account SID.
+          description: The unique SID identifier of the Twilio Account.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         document_sid:
-          description: Sync Document SID.
+          description: The unique SID identifier of the Sync Document to which the Permission applies.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^ET[0-9a-fA-F]{32}$
           type: string
         identity:
-          description: Identity of the user to whom the Sync Document Permission applies.
+          description: Arbitrary string identifier representing a human user associated with an FPA token, assigned by the developer.
           nullable: true
           type: string
         manage:
-          description: Manage access.
+          description: Boolean flag specifying whether the identity can delete the Sync Document.
           nullable: true
           type: boolean
         read:
-          description: Read access.
+          description: Boolean flag specifying whether the identity can read the Sync Document.
           nullable: true
           type: boolean
         service_sid:
-          description: Sync Service Instance SID.
+          description: The unique SID identifier of the Sync Service Instance.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         url:
-          description: URL of this Sync Document Permission.
+          description: Contains an absolute URL for this Sync Document Permission.
           format: uri
           nullable: true
           type: string
         write:
-          description: Write access.
+          description: Boolean flag specifying whether the identity can update the Sync Document.
           nullable: true
           type: boolean
       type: object
@@ -7765,45 +7765,45 @@ components:
     preview.sync.service.sync_list.sync_list_permission:
       properties:
         account_sid:
-          description: Twilio Account SID.
+          description: The unique SID identifier of the Twilio Account.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         identity:
-          description: Identity of the user to whom the Sync List Permission applies.
+          description: Arbitrary string identifier representing a human user associated with an FPA token, assigned by the developer.
           nullable: true
           type: string
         list_sid:
-          description: Sync List SID.
+          description: The unique SID identifier of the Sync List to which the Permission applies.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^ES[0-9a-fA-F]{32}$
           type: string
         manage:
-          description: Manage access.
+          description: Boolean flag specifying whether the identity can delete the Sync List.
           nullable: true
           type: boolean
         read:
-          description: Read access.
+          description: Boolean flag specifying whether the identity can read the Sync List and its Items.
           nullable: true
           type: boolean
         service_sid:
-          description: Sync Service Instance SID.
+          description: The unique SID identifier of the Sync Service Instance.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         url:
-          description: URL of this Sync List Permission.
+          description: Contains an absolute URL for this Sync List Permission.
           format: uri
           nullable: true
           type: string
         write:
-          description: Write access.
+          description: Boolean flag specifying whether the identity can create, update and delete Items of the Sync List.
           nullable: true
           type: boolean
       type: object
@@ -7900,45 +7900,45 @@ components:
     preview.sync.service.sync_map.sync_map_permission:
       properties:
         account_sid:
-          description: Twilio Account SID.
+          description: The unique SID identifier of the Twilio Account.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         identity:
-          description: Identity of the user to whom the Sync Map Permission applies.
+          description: Arbitrary string identifier representing a human user associated with an FPA token, assigned by the developer.
           nullable: true
           type: string
         manage:
-          description: Manage access.
+          description: Boolean flag specifying whether the identity can delete the Sync Map.
           nullable: true
           type: boolean
         map_sid:
-          description: Sync Map SID.
+          description: The unique SID identifier of the Sync Map to which the Permission applies.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^MP[0-9a-fA-F]{32}$
           type: string
         read:
-          description: Read access.
+          description: Boolean flag specifying whether the identity can read the Sync Map and its Items.
           nullable: true
           type: boolean
         service_sid:
-          description: Sync Service Instance SID.
+          description: The unique SID identifier of the Sync Service Instance.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         url:
-          description: URL of this Sync Map Permission.
+          description: Contains an absolute URL for this Sync Map Permission.
           format: uri
           nullable: true
           type: string
         write:
-          description: Write access.
+          description: Boolean flag specifying whether the identity can create, update and delete Items of the Sync Map.
           nullable: true
           type: boolean
       type: object
@@ -8419,7 +8419,7 @@ components:
           nullable: true
           type: string
         field_type:
-          description: The Field Type of this field. It can be any Built-in Field Type or unique_name or the Field Type sid of a custom Field Type.
+          description: The Field Type of this field. It can be any [Built-in Field Type](https://www.twilio.com/docs/assistant/api/built-in-field-types) or the unique_name or sid of a custom Field Type.
           nullable: true
           type: string
         sid:
@@ -8483,7 +8483,7 @@ components:
           pattern: ^UF[0-9a-fA-F]{32}$
           type: string
         source_channel:
-          description: "The communication channel the sample was captured. It can be: voice, sms, chat, alexa, google-assistant, or slack. If not included the value will be null"
+          description: "The communication channel the sample was captured. It can be: *voice*, *sms*, *chat*, *alexa*, *google-assistant*, or *slack*. If not included the value will be null"
           nullable: true
           type: string
         tagged_text:

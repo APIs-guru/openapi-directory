@@ -2271,133 +2271,133 @@ components:
     sync.v1.service:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Service resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         acl_enabled:
-          description: Whether token identities in the Service must be granted access to Sync objects by using the Permissions resource
+          description: Whether token identities in the Service must be granted access to Sync objects by using the [Permissions](https://www.twilio.com/docs/sync/api/sync-permissions) resource. It is disabled (false) by default.
           nullable: true
           type: boolean
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         reachability_debouncing_enabled:
-          description: Whether every endpoint_disconnected event occurs after a configurable delay
+          description: Whether every `endpoint_disconnected` event should occur after a configurable delay. The default is `false`, where the `endpoint_disconnected` event occurs immediately after disconnection. When `true`, intervening reconnections can prevent the `endpoint_disconnected` event.
           nullable: true
           type: boolean
         reachability_debouncing_window:
-          description: The reachability event delay in milliseconds
+          description: The reachability event delay in milliseconds if `reachability_debouncing_enabled` = `true`.  Must be between 1,000 and 30,000 and defaults to 5,000. This is the number of milliseconds after the last running client disconnects, and a Sync identity is declared offline, before `webhook_url` is called, if all endpoints remain offline. A reconnection from the same identity by any endpoint during this interval prevents the reachability event from occurring.
           nullable: true
           type: integer
         reachability_webhooks_enabled:
-          description: Whether the service instance calls webhook_url when client endpoints connect to Sync
+          description: Whether the service instance calls `webhook_url` when client endpoints connect to Sync. The default is `false`.
           nullable: true
           type: boolean
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Service resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource. It is a read-only property, it cannot be assigned using REST API.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Service resource
+          description: The absolute URL of the Service resource.
           format: uri
           nullable: true
           type: string
         webhook_url:
-          description: The URL we call when Sync objects are manipulated
+          description: The URL we call when Sync objects are manipulated.
           format: uri
           nullable: true
           type: string
         webhooks_from_rest_enabled:
-          description: Whether the Service instance should call webhook_url when the REST API is used to update Sync objects
+          description: Whether the Service instance should call `webhook_url` when the REST API is used to update Sync objects. The default is `false`.
           nullable: true
           type: boolean
       type: object
     sync.v1.service.document:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Document resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         created_by:
-          description: The identity of the Sync Document's creator
+          description: The identity of the Sync Document's creator. If the Sync Document is created from the client SDK, the value matches the Access Token's `identity` field. If the Sync Document was created from the REST API, the value is `system`.
           nullable: true
           type: string
         data:
-          description: An arbitrary, schema-less object that the Sync Document stores
+          description: An arbitrary, schema-less object that the Sync Document stores. Can be up to 16 KiB in length.
           nullable: true
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_expires:
-          description: The ISO 8601 date and time in GMT when the Sync Document expires
+          description: The date and time in GMT when the Sync Document expires and will be deleted, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. If the Sync Document does not expire, this value is `null`. The Document resource might not be deleted immediately after it expires.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         links:
-          description: The URLs of resources related to the Sync Document
+          description: The URLs of resources related to the Sync Document.
           format: uri-map
           nullable: true
           type: object
         revision:
-          description: The current revision of the Sync Document, represented by a string identifier
+          description: The current revision of the Sync Document, represented as a string. The `revision` property is used with conditional updates to ensure data consistency.
           nullable: true
           type: string
         service_sid:
-          description: The SID of the Sync Service that the resource is associated with
+          description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Document resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^ET[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource and can be up to 320 characters long.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Document resource
+          description: The absolute URL of the Document resource.
           format: uri
           nullable: true
           type: string
@@ -2405,105 +2405,105 @@ components:
     sync.v1.service.document.document_permission:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Document Permission resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         document_sid:
-          description: The Sync Document SID
+          description: The SID of the Sync Document to which the Document Permission applies.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^ET[0-9a-fA-F]{32}$
           type: string
         identity:
-          description: The identity of the user to whom the Sync Document Permission applies
+          description: The application-defined string that uniquely identifies the resource's User within the Service to an FPA token.
           nullable: true
           type: string
         manage:
-          description: Manage access
+          description: Whether the identity can delete the Sync Document.
           nullable: true
           type: boolean
         read:
-          description: Read access
+          description: Whether the identity can read the Sync Document.
           nullable: true
           type: boolean
         service_sid:
-          description: The SID of the Sync Service that the resource is associated with
+          description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the Sync Document Permission resource
+          description: The absolute URL of the Sync Document Permission resource.
           format: uri
           nullable: true
           type: string
         write:
-          description: Write access
+          description: Whether the identity can update the Sync Document.
           nullable: true
           type: boolean
       type: object
     sync.v1.service.sync_list:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Sync List resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         created_by:
-          description: The identity of the Sync List's creator
+          description: The identity of the Sync List's creator. If the Sync List is created from the client SDK, the value matches the Access Token's `identity` field. If the Sync List was created from the REST API, the value is `system`.
           nullable: true
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_expires:
-          description: The ISO 8601 date and time in GMT when the Sync List expires
+          description: The date and time in GMT when the Sync List expires and will be deleted, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. If the Sync List does not expire, this value is `null`. The Sync List might not be deleted immediately after it expires.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         links:
-          description: The URLs of the Sync List's nested resources
+          description: The URLs of the Sync List's nested resources.
           format: uri-map
           nullable: true
           type: object
         revision:
-          description: The current revision of the Sync List, represented as a string
+          description: The current revision of the Sync List, represented as a string.
           nullable: true
           type: string
         service_sid:
-          description: The SID of the Sync Service that the resource is associated with
+          description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Sync List resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^ES[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Sync List resource
+          description: The absolute URL of the Sync List resource.
           format: uri
           nullable: true
           type: string
@@ -2511,58 +2511,58 @@ components:
     sync.v1.service.sync_list.sync_list_item:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the List Item resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         created_by:
-          description: The identity of the List Item's creator
+          description: The identity of the List Item's creator. If the item is created from the client SDK, the value matches the Access Token's `identity` field. If the item was created from the REST API, the value is `system`.
           nullable: true
           type: string
         data:
-          description: An arbitrary, schema-less object that the List Item stores
+          description: An arbitrary, schema-less object that the List Item stores. Can be up to 16 KiB in length.
           nullable: true
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_expires:
-          description: The ISO 8601 date and time in GMT when the List Item expires
+          description: The date and time in GMT when the List Item expires and will be deleted, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. If the List Item does not expire, this value is `null`. The List Item resource might not be deleted immediately after it expires.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         index:
-          description: The automatically generated index of the List Item
+          description: The automatically generated index of the List Item. The `index` values of the List Items in a Sync List can have gaps in their sequence.
           nullable: true
           type: integer
         list_sid:
-          description: The SID of the Sync List that contains the List Item
+          description: The SID of the Sync List that contains the List Item.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^ES[0-9a-fA-F]{32}$
           type: string
         revision:
-          description: The current revision of the item, represented as a string
+          description: The current revision of the item, represented as a string.
           nullable: true
           type: string
         service_sid:
-          description: The SID of the Sync Service that the resource is associated with
+          description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the List Item resource
+          description: The absolute URL of the List Item resource.
           format: uri
           nullable: true
           type: string
@@ -2570,105 +2570,105 @@ components:
     sync.v1.service.sync_list.sync_list_permission:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Sync List Permission resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         identity:
-          description: The identity of the user to whom the Sync List Permission applies
+          description: The application-defined string that uniquely identifies the resource's User within the Service to an FPA token.
           nullable: true
           type: string
         list_sid:
-          description: The SID of the Sync List to which the Permission applies
+          description: The SID of the Sync List to which the Permission applies.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^ES[0-9a-fA-F]{32}$
           type: string
         manage:
-          description: Manage access
+          description: Whether the identity can delete the Sync List.
           nullable: true
           type: boolean
         read:
-          description: Read access
+          description: Whether the identity can read the Sync List and its Items.
           nullable: true
           type: boolean
         service_sid:
-          description: The SID of the Sync Service that the resource is associated with
+          description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the Sync List Permission resource
+          description: The absolute URL of the Sync List Permission resource.
           format: uri
           nullable: true
           type: string
         write:
-          description: Write access
+          description: Whether the identity can create, update, and delete Items in the Sync List.
           nullable: true
           type: boolean
       type: object
     sync.v1.service.sync_map:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Sync Map resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         created_by:
-          description: The identity of the Sync Map's creator
+          description: The identity of the Sync Map's creator. If the Sync Map is created from the client SDK, the value matches the Access Token's `identity` field. If the Sync Map was created from the REST API, the value is `system`.
           nullable: true
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_expires:
-          description: The ISO 8601 date and time in GMT when the Sync Map expires
+          description: The date and time in GMT when the Sync Map expires and will be deleted, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. If the Sync Map does not expire, this value is `null`. The Sync Map might not be deleted immediately after it expires.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         links:
-          description: The URLs of the Sync Map's nested resources
+          description: The URLs of the Sync Map's nested resources.
           format: uri-map
           nullable: true
           type: object
         revision:
-          description: The current revision of the Sync Map, represented as a string
+          description: The current revision of the Sync Map, represented as a string.
           nullable: true
           type: string
         service_sid:
-          description: The SID of the Sync Service that the resource is associated with
+          description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Sync Map resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^MP[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Sync Map resource
+          description: The absolute URL of the Sync Map resource.
           format: uri
           nullable: true
           type: string
@@ -2676,58 +2676,58 @@ components:
     sync.v1.service.sync_map.sync_map_item:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Map Item resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         created_by:
-          description: The identity of the Map Item's creator
+          description: The identity of the Map Item's creator. If the Map Item is created from the client SDK, the value matches the Access Token's `identity` field. If the Map Item was created from the REST API, the value is `system`.
           nullable: true
           type: string
         data:
-          description: An arbitrary, schema-less object that the Map Item stores
+          description: An arbitrary, schema-less object that the Map Item stores. Can be up to 16 KiB in length.
           nullable: true
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_expires:
-          description: The ISO 8601 date and time in GMT when the Map Item expires
+          description: The date and time in GMT when the Map Item expires and will be deleted, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. If the Map Item does not expire, this value is `null`.  The Map Item might not be deleted immediately after it expires.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         key:
-          description: The unique, user-defined key for the Map Item
+          description: The unique, user-defined key for the Map Item.
           nullable: true
           type: string
         map_sid:
-          description: The SID of the Sync Map that contains the Map Item
+          description: The SID of the Sync Map that contains the Map Item.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^MP[0-9a-fA-F]{32}$
           type: string
         revision:
-          description: The current revision of the Map Item, represented as a string
+          description: The current revision of the Map Item, represented as a string.
           nullable: true
           type: string
         service_sid:
-          description: The SID of the Sync Service that the resource is associated with
+          description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the Map Item resource
+          description: The absolute URL of the Map Item resource.
           format: uri
           nullable: true
           type: string
@@ -2735,101 +2735,101 @@ components:
     sync.v1.service.sync_map.sync_map_permission:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Sync Map Permission resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         identity:
-          description: The identity of the user to whom the Sync Document Permission applies
+          description: The application-defined string that uniquely identifies the resource's User within the Service to an FPA token.
           nullable: true
           type: string
         manage:
-          description: Manage access
+          description: Whether the identity can delete the Sync Map.
           nullable: true
           type: boolean
         map_sid:
-          description: Sync Map SID
+          description: The SID of the Sync Map to which the Permission applies.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^MP[0-9a-fA-F]{32}$
           type: string
         read:
-          description: Read access
+          description: Whether the identity can read the Sync Map and its Items.
           nullable: true
           type: boolean
         service_sid:
-          description: The SID of the Sync Service that the resource is associated with
+          description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the Sync Map Permission resource
+          description: The absolute URL of the Sync Map Permission resource.
           format: uri
           nullable: true
           type: string
         write:
-          description: Write access
+          description: Whether the identity can create, update, and delete Items in the Sync Map.
           nullable: true
           type: boolean
       type: object
     sync.v1.service.sync_stream:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Sync Stream resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         created_by:
-          description: The Identity of the Stream's creator
+          description: The identity of the Stream's creator. If the Stream is created from the client SDK, the value matches the Access Token's `identity` field. If the Stream was created from the REST API, the value is 'system'.
           nullable: true
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_expires:
-          description: The ISO 8601 date and time in GMT when the Message Stream expires
+          description: The date and time in GMT when the Message Stream expires and will be deleted, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. If the Message Stream does not expire, this value is `null`. The Stream might not be deleted immediately after it expires.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         links:
-          description: The URLs of the Stream's nested resources
+          description: The URLs of the Stream's nested resources.
           format: uri-map
           nullable: true
           type: object
         service_sid:
-          description: The SID of the Sync Service that the resource is associated with
+          description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Sync Stream resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^TO[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Message Stream resource
+          description: The absolute URL of the Message Stream resource.
           format: uri
           nullable: true
           type: string
@@ -2837,10 +2837,10 @@ components:
     sync.v1.service.sync_stream.stream_message:
       properties:
         data:
-          description: Stream Message body
+          description: An arbitrary, schema-less object that contains the Stream Message body. Can be up to 4 KiB in length.
           nullable: true
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Stream Message resource.
           maxLength: 34
           minLength: 34
           nullable: true

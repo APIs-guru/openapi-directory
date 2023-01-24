@@ -1398,50 +1398,50 @@ components:
     flex.v1.channel:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource and owns this Workflow
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Channel resource and owns this Workflow.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the Flex chat channel was created
+          description: The date and time in GMT when the Flex chat channel was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the Flex chat channel was last updated
+          description: The date and time in GMT when the Flex chat channel was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         flex_flow_sid:
-          description: The SID of the Flex Flow
+          description: The SID of the Flex Flow.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FO[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Channel resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^CH[0-9a-fA-F]{32}$
           type: string
         task_sid:
-          description: The SID of the TaskRouter Task
+          description: The SID of the TaskRouter Task. Only valid when integration type is `task`. `null` for integration types `studio` & `external`
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WT[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the Flex chat channel resource
+          description: The absolute URL of the Flex chat channel resource.
           format: uri
           nullable: true
           type: string
         user_sid:
-          description: The SID of the chat user
+          description: The SID of the chat user.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1451,86 +1451,86 @@ components:
     flex.v1.configuration:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Configuration resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         attributes:
-          description: An object that contains application-specific data
+          description: An object that contains application-specific data.
           nullable: true
         call_recording_enabled:
-          description: Whether call recording is enabled
+          description: Whether call recording is enabled.
           nullable: true
           type: boolean
         call_recording_webhook_url:
-          description: The call recording webhook URL
+          description: The call recording webhook URL.
           format: uri
           nullable: true
           type: string
         channel_configs:
-          description: Flex Conversations channels' attachments configurations
+          description: Settings for different limits for Flex Conversations channels attachments.
           items: {}
           nullable: true
           type: array
         chat_service_instance_sid:
-          description: The SID of the chat service this user belongs to
+          description: The SID of the chat service this user belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         crm_attributes:
-          description: An object that contains the CRM attributes
+          description: An object that contains the CRM attributes.
           nullable: true
         crm_callback_url:
-          description: The CRM Callback URL
+          description: The CRM Callback URL.
           format: uri
           nullable: true
           type: string
         crm_enabled:
-          description: Whether CRM is present for Flex
+          description: Whether CRM is present for Flex.
           nullable: true
           type: boolean
         crm_fallback_url:
-          description: The CRM Fallback URL
+          description: The CRM Fallback URL.
           format: uri
           nullable: true
           type: string
         crm_type:
-          description: The CRM Type
+          description: The CRM type.
           nullable: true
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the Configuration resource was created
+          description: The date and time in GMT when the Configuration resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the Configuration resource was last updated
+          description: The date and time in GMT when the Configuration resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         debugger_integration:
-          description: Configurable parameters for Debugger Integration
+          description: Configurable parameters for Debugger Integration.
           nullable: true
         flex_insights_drilldown:
-          description: Setting to enable Flex UI redirection
+          description: Setting this to true will redirect Flex UI to the URL set in flex_url
           nullable: true
           type: boolean
         flex_insights_hr:
-          description: Object that controls workspace reporting
+          description: Object with enabled/disabled flag with list of workspaces.
           nullable: true
         flex_service_instance_sid:
-          description: The SID of the Flex service instance
+          description: The SID of the Flex service instance.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         flex_ui_status_report:
-          description: Configurable parameters for Flex UI Status report
+          description: Configurable parameters for Flex UI Status report.
           nullable: true
         flex_url:
           description: URL to redirect to in case drilldown is enabled.
@@ -1538,46 +1538,46 @@ components:
           nullable: true
           type: string
         integrations:
-          description: A list of objects that contain the configurations for the Integrations supported in this configuration
+          description: A list of objects that contain the configurations for the Integrations supported in this configuration.
           items: {}
           nullable: true
           type: array
         markdown:
-          description: Configurable parameters for Markdown
+          description: Configurable parameters for Markdown.
           nullable: true
         messaging_service_instance_sid:
-          description: The SID of the Messaging service instance
+          description: The SID of the Messaging service instance.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^MG[0-9a-fA-F]{32}$
           type: string
         notifications:
-          description: Configurable parameters for Notifications
+          description: Configurable parameters for Notifications.
           nullable: true
         outbound_call_flows:
-          description: The list of outbound call flows
+          description: The list of outbound call flows.
           nullable: true
         plugin_service_attributes:
-          description: The plugin service attributes
+          description: The plugin service attributes.
           nullable: true
         plugin_service_enabled:
-          description: Whether the plugin service enabled
+          description: Whether the plugin service enabled.
           nullable: true
           type: boolean
         public_attributes:
-          description: The list of public attributes
+          description: The list of public attributes, which are visible to unauthenticated clients.
           nullable: true
         queue_stats_configuration:
-          description: Configurable parameters for Queues Statistics
+          description: Configurable parameters for Queues Statistics.
           nullable: true
         runtime_domain:
-          description: The URL where the Flex instance is hosted
+          description: The URL where the Flex instance is hosted.
           format: uri
           nullable: true
           type: string
         serverless_service_sids:
-          description: The list of serverless service SIDs
+          description: The list of serverless service SIDs.
           items:
             maxLength: 34
             minLength: 34
@@ -1586,74 +1586,74 @@ components:
           nullable: true
           type: array
         service_version:
-          description: The Flex Service version
+          description: The Flex Service version.
           nullable: true
           type: string
         status:
           $ref: "#/components/schemas/configuration_enum_status"
-          description: The status of the Flex onboarding
+          description: "The status of the Flex onboarding. Can be: `ok`, `inprogress`,`notstarted`."
           nullable: true
           type: string
         taskrouter_offline_activity_sid:
-          description: The TaskRouter SID of the offline activity
+          description: The TaskRouter SID of the offline activity.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WA[0-9a-fA-F]{32}$
           type: string
         taskrouter_skills:
-          description: The Skill description for TaskRouter workers
+          description: The Skill description for TaskRouter workers.
           items: {}
           nullable: true
           type: array
         taskrouter_target_taskqueue_sid:
-          description: The SID of the TaskRouter Target TaskQueue
+          description: The SID of the TaskRouter Target TaskQueue.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WQ[0-9a-fA-F]{32}$
           type: string
         taskrouter_target_workflow_sid:
-          description: The SID of the TaskRouter target Workflow
+          description: The SID of the TaskRouter target Workflow.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WW[0-9a-fA-F]{32}$
           type: string
         taskrouter_taskqueues:
-          description: The list of TaskRouter TaskQueues
+          description: The list of TaskRouter TaskQueues.
           items: {}
           nullable: true
           type: array
         taskrouter_worker_attributes:
-          description: The TaskRouter Worker attributes
+          description: The TaskRouter Worker attributes.
           nullable: true
         taskrouter_worker_channels:
-          description: The TaskRouter default channel capacities and availability for workers
+          description: The TaskRouter default channel capacities and availability for workers.
           nullable: true
         taskrouter_workspace_sid:
-          description: The SID of the TaskRouter Workspace
+          description: The SID of the TaskRouter Workspace.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^WS[0-9a-fA-F]{32}$
           type: string
         ui_attributes:
-          description: The object that describes Flex UI characteristics and settings
+          description: The object that describes Flex UI characteristics and settings.
           nullable: true
         ui_dependencies:
-          description: The object that defines the NPM packages and versions to be used in Hosted Flex
+          description: The object that defines the NPM packages and versions to be used in Hosted Flex.
           nullable: true
         ui_language:
-          description: The primary language of the Flex UI
+          description: The primary language of the Flex UI.
           nullable: true
           type: string
         ui_version:
-          description: The Pinned UI version
+          description: The Pinned UI version.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Configuration resource
+          description: The absolute URL of the Configuration resource.
           format: uri
           nullable: true
           type: string
@@ -1661,7 +1661,7 @@ components:
     flex.v1.flex_flow:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Flex Flow resource and owns this Workflow.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1669,63 +1669,63 @@ components:
           type: string
         channel_type:
           $ref: "#/components/schemas/flex_flow_enum_channel_type"
-          description: The channel type
+          description: The channel type. One of `web`, `facebook`, `sms`, `whatsapp`, `line` or `custom`. By default, Studio’s Send to Flex widget passes it on to the Task attributes for Tasks created based on this Flex Flow. The Task attributes will be used by the Flex UI to render the respective Task as appropriate (applying channel-specific design and length limits). If `channelType` is `facebook`, `whatsapp` or `line`, the Send to Flex widget should set the Task Channel to Programmable Chat.
           nullable: true
           type: string
         chat_service_sid:
-          description: The SID of the chat service
+          description: The SID of the chat service.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         contact_identity:
-          description: The channel contact's Identity
+          description: The channel contact's Identity.
           nullable: true
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         enabled:
-          description: Whether the Flex Flow is enabled
+          description: Whether the Flex Flow is enabled.
           nullable: true
           type: boolean
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         integration:
-          description: An object that contains specific parameters for the integration
+          description: An object that contains specific parameters for the integration.
           nullable: true
         integration_type:
           $ref: "#/components/schemas/flex_flow_enum_integration_type"
-          description: The software that will handle inbound messages.
+          description: "The software that will handle inbound messages. [Integration Type](https://www.twilio.com/docs/flex/developer/messaging/manage-flows#integration-types) can be: `studio`, `external`,  or `task`."
           nullable: true
           type: string
         janitor_enabled:
-          description: Remove active Proxy sessions if the corresponding Task is deleted.
+          description: When enabled, the Messaging Channel Janitor will remove active Proxy sessions if the associated Task is deleted outside of the Flex UI. Defaults to `false`.
           nullable: true
           type: boolean
         long_lived:
-          description: Re-use this chat channel for future interactions with a contact
+          description: When enabled, Flex will keep the chat channel active so that it may be used for subsequent interactions with a contact identity. Defaults to `false`.
           nullable: true
           type: boolean
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Flex Flow resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FO[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the Flex Flow resource
+          description: The absolute URL of the Flex Flow resource.
           format: uri
           nullable: true
           type: string
@@ -1733,15 +1733,15 @@ components:
     flex.v1.gooddata:
       properties:
         base_url:
-          description: Base URL to fetch reports and dashboards
+          description: The base URL to fetch reports and dashboards
           nullable: true
           type: string
         session_expiry:
-          description: The session expiry date and time
+          description: The session expiry date and time, given in ISO 8601 format.
           nullable: true
           type: string
         session_id:
-          description: Unique session ID
+          description: The unique ID for the session
           nullable: true
           type: string
         url:
@@ -1757,17 +1757,19 @@ components:
     flex.v1.interaction:
       properties:
         channel:
-          description: The Interaction's channel
+          description: A JSON object that defines the Interaction’s communication channel and includes details about the channel. See the [Outbound SMS](https://www.twilio.com/docs/flex/developer/conversations/interactions-api/interactions#agent-initiated-outbound-interactions) and [inbound (API-initiated)](https://www.twilio.com/docs/flex/developer/conversations/interactions-api/interactions#api-initiated-contact) Channel object examples.
           nullable: true
         links:
           format: uri-map
           nullable: true
           type: object
         routing:
-          description: A JSON Object representing the routing rules for the Interaction Channel
+          description: |-
+            A JSON Object representing the routing rules for the Interaction Channel. See [Outbound SMS Example](https://www.twilio.com/docs/flex/developer/conversations/interactions-api/interactions#agent-initiated-outbound-interactions) for an example Routing object. The Interactions resource uses TaskRouter for all routing functionality. 
+             All attributes in the Routing object on your Interaction request body are added “as is” to the task. For a list of known attributes consumed by the Flex UI and/or Flex Insights, see [Known Task Attributes](https://www.twilio.com/docs/flex/developer/conversations/interactions-api#task-attributes).
           nullable: true
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string created by Twilio to identify an Interaction resource, prefixed with KD.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1789,7 +1791,7 @@ components:
           nullable: true
           type: string
         interaction_sid:
-          description: The unique string that identifies the resource.
+          description: The unique string created by Twilio to identify an Interaction resource, prefixed with KD.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1800,7 +1802,7 @@ components:
           nullable: true
           type: object
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string created by Twilio to identify an Interaction Channel resource, prefixed with UO.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1813,7 +1815,9 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/interaction_channel_enum_type"
-          description: The Interaction Channel's type.
+          description: |-
+            The Interaction Channel's type. Can be: `sms`, `email`, `chat`, `whatsapp`, `web`. 
+             **Note:** These can be different from the task channel type specified in the Routing attributes. Task channel type corresponds to channel capacity while this channel type is the actual media type
           nullable: true
           type: string
         url:
@@ -1824,24 +1828,26 @@ components:
     flex.v1.interaction.interaction_channel.interaction_channel_invite:
       properties:
         channel_sid:
-          description: The Channel SID for this Invite
+          description: The Channel SID for this Invite.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^UO[0-9a-fA-F]{32}$
           type: string
         interaction_sid:
-          description: The Interaction SID for this Channel
+          description: The Interaction SID for this Channel.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^KD[0-9a-fA-F]{32}$
           type: string
         routing:
-          description: A JSON object representing the routing rules for the Interaction Channel
+          description: |-
+            A JSON object representing the routing rules for the Interaction Channel. See [Outbound SMS Example](https://www.twilio.com/docs/flex/developer/conversations/interactions-api/interactions#agent-initiated-outbound-interactions) for an example Routing object. The Interactions resource uses TaskRouter for all routing functionality. 
+             All attributes in the Routing object on your Interaction request body are added “as is” to the task. For a list of known attributes consumed by the Flex UI and/or Flex Insights, see [Known Task Attributes](https://www.twilio.com/docs/flex/developer/conversations/interactions-api#task-attributes).
           nullable: true
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string created by Twilio to identify an Interaction Channel Invite resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1869,7 +1875,7 @@ components:
           pattern: ^KD[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string created by Twilio to identify an Interaction Channel Participant resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1877,7 +1883,7 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/interaction_channel_participant_enum_type"
-          description: Participant type.
+          description: "Participant type. Can be: `agent`, `customer`, `supervisor`, `external`, `unknown`"
           nullable: true
           type: string
         url:
@@ -1901,38 +1907,38 @@ components:
     flex.v1.web_channel:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource and owns this Workflow
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the WebChannel resource and owns this Workflow.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         flex_flow_sid:
-          description: The SID of the Flex Flow
+          description: The SID of the Flex Flow.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FO[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the WebChannel resource
+          description: The unique string that we created to identify the WebChannel resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^CH[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the WebChannel resource
+          description: The absolute URL of the WebChannel resource.
           format: uri
           nullable: true
           type: string

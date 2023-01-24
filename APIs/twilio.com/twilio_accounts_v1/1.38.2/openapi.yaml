@@ -471,23 +471,23 @@ components:
     accounts.v1.auth_token_promotion:
       properties:
         account_sid:
-          description: The SID of the Account that the secondary Auth Token was created for
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that the secondary Auth Token was created for.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         auth_token:
-          description: The promoted Auth Token
+          description: The promoted Auth Token that must be used to authenticate future API requests.
           nullable: true
           type: string
         date_created:
-          description: The ISO 8601 formatted date and time in UTC when the resource was created
+          description: The date and time in UTC when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 formatted date and time in UTC when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
@@ -503,28 +503,28 @@ components:
     accounts.v1.credential.credential_aws:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the AWS resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the AWS resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -539,28 +539,28 @@ components:
     accounts.v1.credential.credential_public_key:
       properties:
         account_sid:
-          description: The SID of the Account that created the Credential that the PublicKey resource belongs to
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Credential that the PublicKey resource belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that that we created to identify the PublicKey resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -575,24 +575,24 @@ components:
     accounts.v1.secondary_auth_token:
       properties:
         account_sid:
-          description: The SID of the Account that the secondary Auth Token was created for
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that the secondary Auth Token was created for.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 formatted date and time in UTC when the resource was created
+          description: The date and time in UTC when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 formatted date and time in UTC when the resource was last updated
+          description: The date and time in UTC when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         secondary_auth_token:
-          description: The generated secondary Auth Token
+          description: The generated secondary Auth Token that can be used to authenticate future API requests.
           nullable: true
           type: string
         url:

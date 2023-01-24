@@ -2320,32 +2320,32 @@ components:
     chat.v1.credential:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/api/rest/account) that created the Credential resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         sandbox:
-          description: "[APN only] Whether to send the credential to sandbox APNs"
+          description: "[APN only] Whether to send the credential to sandbox APNs. Can be `true` to send to sandbox APNs or `false` to send to production."
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Credential resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2353,11 +2353,11 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/credential_enum_push_service"
-          description: The type of push-notification service the credential is for
+          description: "The type of push-notification service the credential is for. Can be: `gcm`, `fcm`, or `apn`."
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Credential resource
+          description: The absolute URL of the Credential resource.
           format: uri
           nullable: true
           type: string
@@ -2365,161 +2365,161 @@ components:
     chat.v1.service:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/api/rest/account) that created the Service resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         consumption_report_interval:
-          description: DEPRECATED
+          description: DEPRECATED. The interval in seconds between consumption reports submission batches from client endpoints.
           nullable: true
           type: integer
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         default_channel_creator_role_sid:
-          description: The channel role assigned to a channel creator when they join a new channel
+          description: The channel role assigned to a channel creator when they join a new channel. See the [Roles endpoint](https://www.twilio.com/docs/chat/api/roles) for more details.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RL[0-9a-fA-F]{32}$
           type: string
         default_channel_role_sid:
-          description: The channel role assigned to users when they are added to a channel
+          description: The channel role assigned to users when they are added to a channel. See the [Roles endpoint](https://www.twilio.com/docs/chat/api/roles) for more details.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RL[0-9a-fA-F]{32}$
           type: string
         default_service_role_sid:
-          description: The service role assigned to users when they are added to the service
+          description: The service role assigned to users when they are added to the service. See the [Roles endpoint](https://www.twilio.com/docs/chat/api/roles) for more details.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RL[0-9a-fA-F]{32}$
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         limits:
-          description: An object that describes the limits of the service instance
+          description: An object that describes the limits of the service instance. The `limits` object contains  `channel_members` to describe the members/channel limit and `user_channels` to describe the channels/user limit. `channel_members` can be 1,000 or less, with a default of 250. `user_channels` can be 1,000 or less, with a default value of 100.
           nullable: true
         links:
-          description: The absolute URLs of the Service's Channels, Roles, and Users
+          description: The absolute URLs of the Service's [Channels](https://www.twilio.com/docs/chat/api/channels), [Roles](https://www.twilio.com/docs/chat/api/roles), and [Users](https://www.twilio.com/docs/chat/api/users).
           format: uri-map
           nullable: true
           type: object
         notifications:
-          description: The notification configuration for the Service instance
+          description: The notification configuration for the Service instance. See [Push Notification Configuration](https://www.twilio.com/docs/chat/push-notification-configuration) for more information.
           nullable: true
         post_webhook_url:
-          description: The URL for post-event webhooks
+          description: The URL for post-event webhooks, which are called by using the `webhook_method`. See [Webhook Events](https://www.twilio.com/docs/api/chat/webhooks) for more details.
           nullable: true
           type: string
         pre_webhook_url:
-          description: The webhook URL for pre-event webhooks
+          description: The URL for pre-event webhooks, which are called by using the `webhook_method`. See [Webhook Events](https://www.twilio.com/docs/api/chat/webhooks) for more details.
           nullable: true
           type: string
         reachability_enabled:
-          description: Whether the Reachability Indicator feature is enabled for this Service instance
+          description: Whether the [Reachability Indicator](https://www.twilio.com/docs/chat/reachability-indicator) is enabled for this Service instance. The default is `false`.
           nullable: true
           type: boolean
         read_status_enabled:
-          description: Whether the Message Consumption Horizon feature is enabled
+          description: Whether the [Message Consumption Horizon](https://www.twilio.com/docs/chat/consumption-horizon) feature is enabled. The default is `true`.
           nullable: true
           type: boolean
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Service resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         typing_indicator_timeout:
-          description: How long in seconds to wait before assuming the user is no longer typing
+          description: How long in seconds after a `started typing` event until clients should assume that user is no longer typing, even if no `ended typing` message was received.  The default is 5 seconds.
           nullable: true
           type: integer
         url:
-          description: The absolute URL of the Service resource
+          description: The absolute URL of the Service resource.
           format: uri
           nullable: true
           type: string
         webhook_filters:
-          description: The list of WebHook events that are enabled for this Service instance
+          description: The list of WebHook events that are enabled for this Service instance. See [Webhook Events](https://www.twilio.com/docs/chat/webhook-events) for more details.
           items:
             type: string
           nullable: true
           type: array
         webhook_method:
-          description: The HTTP method  to use for both PRE and POST webhooks
+          description: "The HTTP method to use for calls to the `pre_webhook_url` and `post_webhook_url` webhooks.  Can be: `POST` or `GET` and the default is `POST`. See [Webhook Events](https://www.twilio.com/docs/chat/webhook-events) for more details."
           nullable: true
           type: string
         webhooks:
-          description: An object that contains information about the webhooks configured for this service
+          description: An object that contains information about the webhooks configured for this service.
           nullable: true
       type: object
     chat.v1.service.channel:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/api/rest/account) that created the Channel resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         attributes:
-          description: The JSON string that stores application-specific data
+          description: The JSON string that stores application-specific data. **Note** If this property has been assigned a value, it's only  displayed in a FETCH action that returns a single resource; otherwise, it's null. If the attributes have not been set, `{}` is returned.
           nullable: true
           type: string
         created_by:
-          description: The identity of the User that created the channel
+          description: The `identity` of the User that created the channel. If the Channel was created by using the API, the value is `system`.
           nullable: true
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         links:
-          description: Absolute URLs to access the Members, Messages , Invites and, if it exists, the last Message for the Channel
+          description: The absolute URLs of the [Members](https://www.twilio.com/docs/chat/api/members), [Messages](https://www.twilio.com/docs/chat/api/messages) , [Invites](https://www.twilio.com/docs/chat/api/invites) and, if it exists, the last [Message](https://www.twilio.com/docs/chat/api/messages) for the Channel.
           format: uri-map
           nullable: true
           type: object
         members_count:
-          description: The number of Members in the Channel
+          description: The number of Members in the Channel.
           nullable: true
           type: integer
         messages_count:
-          description: The number of Messages in the Channel
+          description: The number of Messages in the Channel.
           nullable: true
           type: integer
         service_sid:
-          description: The SID of the Service that the resource is associated with
+          description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Channel resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2527,15 +2527,15 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/channel_enum_channel_type"
-          description: "The visibility of the channel. Can be: `public` or `private`"
+          description: "The visibility of the channel. Can be: `public` or `private`."
           nullable: true
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used to address the resource in place of the resource's `sid` in the URL.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Channel resource
+          description: The absolute URL of the Channel resource.
           format: uri
           nullable: true
           type: string
@@ -2543,60 +2543,60 @@ components:
     chat.v1.service.channel.invite:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/api/rest/account) that created the Invite resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         channel_sid:
-          description: The SID of the Channel the new resource belongs to
+          description: The SID of the [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the resource belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^CH[0-9a-fA-F]{32}$
           type: string
         created_by:
-          description: The identity of the User that created the invite
+          description: The `identity` of the User that created the invite.
           nullable: true
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         identity:
-          description: The string that identifies the resource's User
+          description: The application-defined string that uniquely identifies the resource's [User](https://www.twilio.com/docs/api/chat/rest/users) within the [Service](https://www.twilio.com/docs/api/chat/rest/services). See [access tokens](https://www.twilio.com/docs/api/chat/guides/create-tokens) for more info.
           nullable: true
           type: string
         role_sid:
-          description: The SID of the Role assigned to the member
+          description: The SID of the [Role](https://www.twilio.com/docs/api/chat/rest/roles) assigned to the resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RL[0-9a-fA-F]{32}$
           type: string
         service_sid:
-          description: The SID of the Service that the resource is associated with
+          description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Invite resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IN[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the Invite resource
+          description: The absolute URL of the Invite resource.
           format: uri
           nullable: true
           type: string
@@ -2604,65 +2604,65 @@ components:
     chat.v1.service.channel.member:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/api/rest/account) that created the Member resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         channel_sid:
-          description: The unique ID of the Channel for the member
+          description: The unique ID of the [Channel](https://www.twilio.com/docs/api/chat/rest/channels) for the member.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^CH[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         identity:
-          description: The string that identifies the resource's User
+          description: The application-defined string that uniquely identifies the resource's [User](https://www.twilio.com/docs/api/chat/rest/users) within the [Service](https://www.twilio.com/docs/api/chat/rest/services). See [access tokens](https://www.twilio.com/docs/api/chat/guides/create-tokens) for more info.
           nullable: true
           type: string
         last_consumed_message_index:
-          description: The index of the last Message that the Member has read within the Channel
+          description: The index of the last [Message](https://www.twilio.com/docs/api/chat/rest/messages) in the [Channel](https://www.twilio.com/docs/api/chat/rest/channels) that the Member has read.
           nullable: true
           type: integer
         last_consumption_timestamp:
-          description: The ISO 8601 based timestamp string that represents the date-time of the last Message read event for the Member within the Channel
+          description: The ISO 8601 timestamp string that represents the date-time of the last [Message](https://www.twilio.com/docs/api/chat/rest/messages) read event for the Member within the [Channel](https://www.twilio.com/docs/api/chat/rest/channels).
           format: date-time
           nullable: true
           type: string
         role_sid:
-          description: The SID of the Role assigned to the member
+          description: The SID of the [Role](https://www.twilio.com/docs/api/chat/rest/roles) assigned to the member.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RL[0-9a-fA-F]{32}$
           type: string
         service_sid:
-          description: The SID of the Service that the resource is associated with
+          description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Member resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^MB[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the Member resource
+          description: The absolute URL of the Member resource.
           format: uri
           nullable: true
           type: string
@@ -2670,114 +2670,114 @@ components:
     chat.v1.service.channel.message:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/api/rest/account) that created the Message resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         attributes:
-          description: The JSON string that stores application-specific data
+          description: The JSON string that stores application-specific data. **Note** If this property has been assigned a value, it's only  displayed in a FETCH action that returns a single resource; otherwise, it's null. If the attributes have not been set, `{}` is returned.
           nullable: true
           type: string
         body:
-          description: The content of the message
+          description: The content of the message.
           nullable: true
           type: string
         channel_sid:
-          description: The unique ID of the Channel the Message resource belongs to
+          description: The unique ID of the [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the Message resource belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^CH[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         from:
-          description: The identity of the message's author
+          description: The [identity](https://www.twilio.com/docs/api/chat/guides/identity) of the message's author. The default value is `system`.
           nullable: true
           type: string
         index:
-          description: The index of the message within the Channel
+          description: The index of the message within the [Channel](https://www.twilio.com/docs/chat/api/channels).
           nullable: true
           type: integer
         service_sid:
-          description: The SID of the Service that the resource is associated with
+          description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Message resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IM[0-9a-fA-F]{32}$
           type: string
         to:
-          description: The SID of the Channel that the message was sent to
+          description: The SID of the [Channel](https://www.twilio.com/docs/chat/api/channels) that the message was sent to.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^CH[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the Message resource
+          description: The absolute URL of the Message resource.
           format: uri
           nullable: true
           type: string
         was_edited:
-          description: Whether the message has been edited since  it was created
+          description: Whether the message has been edited since it was created.
           nullable: true
           type: boolean
       type: object
     chat.v1.service.role:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/api/rest/account) that created the Role resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         permissions:
-          description: An array of the permissions the role has been granted
+          description: An array of the permissions the role has been granted, formatted as a JSON string.
           items:
             type: string
           nullable: true
           type: array
         service_sid:
-          description: The SID of the Service that the resource is associated with
+          description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Role resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2785,11 +2785,11 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/role_enum_role_type"
-          description: The type of role
+          description: "The type of role. Can be: `channel` for [Channel](https://www.twilio.com/docs/chat/api/channels) roles or `deployment` for [Service](https://www.twilio.com/docs/chat/api/services) roles."
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Role resource
+          description: The absolute URL of the Role resource.
           format: uri
           nullable: true
           type: string
@@ -2797,74 +2797,74 @@ components:
     chat.v1.service.user:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/api/rest/account) that created the User resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         attributes:
-          description: The JSON string that stores application-specific data
+          description: The JSON string that stores application-specific data. **Note** If this property has been assigned a value, it's only  displayed in a FETCH action that returns a single resource; otherwise, it's null. If the attributes have not been set, `{}` is returned.
           nullable: true
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](http://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         identity:
-          description: The string that identifies the resource's User
+          description: The application-defined string that uniquely identifies the resource's User within the [Service](https://www.twilio.com/docs/api/chat/rest/services). This value is often a username or an email address. See [access tokens](https://www.twilio.com/docs/api/chat/guides/create-tokens) for more info.
           nullable: true
           type: string
         is_notifiable:
-          description: Whether the User has a potentially valid Push Notification registration for the Service instance
+          description: Whether the User has a potentially valid Push Notification registration (APN or GCM) for the Service instance. If at least one registration exists, `true`; otherwise `false`. This value is only returned by Fetch actions that return a single resource and `null` is always returned by a Read action. This value is `null` if the Service's `reachability_enabled` is `false`, and if the User has never had a notification registration, even if the Service's `reachability_enabled` is `true`.
           nullable: true
           type: boolean
         is_online:
-          description: Whether the User is actively connected to the Service instance and online
+          description: Whether the User is actively connected to the Service instance and online. This value is only returned by Fetch actions that return a single resource and `null` is always returned by a Read action. This value is `null` if the Service's `reachability_enabled` is `false`, if the User has never been online for the Service instance, even if the Service's `reachability_enabled` is `true`.
           nullable: true
           type: boolean
         joined_channels_count:
-          description: The number of Channels this User is a Member of
+          description: The number of Channels this User is a Member of.
           nullable: true
           type: integer
         links:
-          description: The absolute URLs of the Channel and Binding resources related to the user
+          description: The absolute URLs of the [Channel](https://www.twilio.com/docs/chat/api/channels) and [Binding](https://www.twilio.com/docs/chat/rest/bindings-resource) resources related to the user.
           format: uri-map
           nullable: true
           type: object
         role_sid:
-          description: The SID of the assigned to the user
+          description: The SID of the [Role](https://www.twilio.com/docs/api/chat/rest/roles) assigned to the user.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RL[0-9a-fA-F]{32}$
           type: string
         service_sid:
-          description: The SID of the Service that the resource is associated with
+          description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the User resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^US[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the User resource
+          description: The absolute URL of the User resource.
           format: uri
           nullable: true
           type: string
@@ -2872,37 +2872,37 @@ components:
     chat.v1.service.user.user_channel:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/api/rest/account) that created the User Channel resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         channel_sid:
-          description: The SID of the Channel the resource belongs to
+          description: The SID of the [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the resource belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^CH[0-9a-fA-F]{32}$
           type: string
         last_consumed_message_index:
-          description: The index of the last Message in the Channel the Member has read
+          description: The index of the last [Message](https://www.twilio.com/docs/api/chat/rest/messages) in the [Channel](https://www.twilio.com/docs/api/chat/rest/channels) that the Member has read.
           nullable: true
           type: integer
         links:
-          description: Absolute URLs to access the Members, Messages , Invites and, if it exists, the last Message for the Channel
+          description: The absolute URLs of the [Members](https://www.twilio.com/docs/chat/api/members), [Messages](https://www.twilio.com/docs/chat/api/messages) , [Invites](https://www.twilio.com/docs/chat/api/invites) and, if it exists, the last [Message](https://www.twilio.com/docs/chat/api/messages) for the Channel.
           format: uri-map
           nullable: true
           type: object
         member_sid:
-          description: The SID of the User as a Member in the Channel
+          description: The SID of a [Member](https://www.twilio.com/docs/api/chat/rest/members) that represents the User on the Channel.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^MB[0-9a-fA-F]{32}$
           type: string
         service_sid:
-          description: The SID of the Service that the resource is associated with
+          description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2910,11 +2910,11 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/user_channel_enum_channel_status"
-          description: The status of the User on the Channel
+          description: "The status of the User on the Channel. Can be: `joined`, `invited`, or `not_participating`."
           nullable: true
           type: string
         unread_messages_count:
-          description: The number of unread Messages in the Channel for the User
+          description: The number of unread Messages in the Channel for the User. Note that retrieving messages on a client endpoint does not mean that messages are consumed or read. See [Consumption Horizon feature](/docs/api/chat/guides/consumption-horizon) to learn how to mark messages as consumed.
           nullable: true
           type: integer
       type: object

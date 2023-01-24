@@ -3093,15 +3093,15 @@ components:
     verify.v2.form:
       properties:
         form_meta:
-          description: Additional information for the available forms for this type.
+          description: Additional information for the available forms for this type. E.g. The separator string used for `binding` in a Factor push.
           nullable: true
         form_type:
           $ref: "#/components/schemas/form_enum_form_types"
-          description: The Type of this Form
+          description: The Type of this Form. Currently only `form-push` is supported.
           nullable: true
           type: string
         forms:
-          description: Object that contains the available forms for this type.
+          description: Object that contains the available forms for this type. This available forms are given in the standard [JSON Schema](https://json-schema.org/) format
           nullable: true
         url:
           description: The URL to access the forms for this type.
@@ -3116,7 +3116,7 @@ components:
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource.
+          description: The unique string that we created to identify the SafeList resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -3131,27 +3131,27 @@ components:
     verify.v2.service:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Service resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         code_length:
-          description: The length of the verification code
+          description: The length of the verification code to generate.
           nullable: true
           type: integer
         custom_code_enabled:
-          description: Whether to allow sending verifications with a custom code.
+          description: Whether to allow sending verifications with a custom code instead of a randomly generated one. Not available for all customers.
           nullable: true
           type: boolean
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
@@ -3162,53 +3162,53 @@ components:
           pattern: ^HJ[0-9a-fA-F]{32}$
           type: string
         do_not_share_warning_enabled:
-          description: Whether to add a security warning at the end of an SMS.
+          description: "Whether to add a security warning at the end of an SMS verification body. Disabled by default and applies only to SMS. Example SMS body: `Your AppName verification code is: 1234. Don’t share this code with anyone; our employees will never ask for the code`"
           nullable: true
           type: boolean
         dtmf_input_required:
-          description: Whether to ask the user to press a number before delivering the verify code in a phone call
+          description: Whether to ask the user to press a number before delivering the verify code in a phone call.
           nullable: true
           type: boolean
         friendly_name:
-          description: The string that you assigned to describe the verification service
+          description: The string that you assigned to describe the verification service. **This value should not contain PII.**
           nullable: true
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         lookup_enabled:
-          description: Whether to perform a lookup with each verification
+          description: Whether to perform a lookup with each verification started and return info about the phone number.
           nullable: true
           type: boolean
         psd2_enabled:
-          description: Whether to pass PSD2 transaction parameters when starting a verification
+          description: Whether to pass PSD2 transaction parameters when starting a verification.
           nullable: true
           type: boolean
         push:
-          description: The service level configuration of factor push type.
+          description: Configurations for the Push factors (channel) created under this Service.
           nullable: true
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Service resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^VA[0-9a-fA-F]{32}$
           type: string
         skip_sms_to_landlines:
-          description: Whether to skip sending SMS verifications to landlines
+          description: Whether to skip sending SMS verifications to landlines. Requires `lookup_enabled`.
           nullable: true
           type: boolean
         totp:
-          description: The service level configuration of factor TOTP type.
+          description: Configurations for the TOTP factors (channel) created under this Service.
           nullable: true
         tts_name:
-          description: The name of an alternative text-to-speech service to use in phone calls
+          description: The name of an alternative text-to-speech service to use in phone calls. Applies only to TTS languages.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -3216,50 +3216,50 @@ components:
     verify.v2.service.access_token:
       properties:
         account_sid:
-          description: Account Sid.
+          description: The unique SID identifier of the Account.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The date this access token was created
+          description: The date that this access token was created, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         entity_identity:
-          description: Unique external identifier of the Entity
+          description: The unique external identifier for the Entity of the Service.
           nullable: true
           type: string
         factor_friendly_name:
-          description: A human readable description of this factor.
+          description: A human readable description of this factor, up to 64 characters. For a push factor, this can be the device's name.
           nullable: true
           type: string
         factor_type:
           $ref: "#/components/schemas/access_token_enum_factor_types"
-          description: The Type of the Factor
+          description: The Type of the Factor. Currently only `push` is supported.
           nullable: true
           type: string
         service_sid:
-          description: Verify Service Sid.
+          description: The unique SID identifier of the Verify Service.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^VA[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: A string that uniquely identifies this Access Token.
+          description: A 34 character string that uniquely identifies this Access Token.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^YK[0-9a-fA-F]{32}$
           type: string
         token:
-          description: Generated access token.
+          description: The access token generated for enrollment, this is an encrypted json web token.
           nullable: true
           type: string
         ttl:
-          description: How long, in seconds, the access token is valid.
+          description: "How long, in seconds, the access token is valid. Max: 5 minutes"
           nullable: true
           type: integer
         url:
@@ -3271,40 +3271,40 @@ components:
     verify.v2.service.entity:
       properties:
         account_sid:
-          description: Account Sid.
+          description: The unique SID identifier of the Account.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The date this Entity was created
+          description: The date that this Entity was created, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date this Entity was updated
+          description: The date that this Entity was updated, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         identity:
-          description: Unique external identifier of the Entity
+          description: The unique external identifier for the Entity of the Service. This identifier should be immutable, not PII, length between 8 and 64 characters, and generated by your external system, such as your user's UUID, GUID, or SID. It can only contain dash (-) separated alphanumeric characters.
           nullable: true
           type: string
         links:
-          description: Nested resource URLs.
+          description: Contains a dictionary of URL links to nested resources of this Entity.
           format: uri-map
           nullable: true
           type: object
         service_sid:
-          description: Service Sid.
+          description: The unique SID identifier of the Service.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^VA[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: A string that uniquely identifies this Entity.
+          description: A 34 character string that uniquely identifies this Entity.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -3319,44 +3319,44 @@ components:
     verify.v2.service.entity.challenge:
       properties:
         account_sid:
-          description: Account Sid.
+          description: The unique SID identifier of the Account.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The date this Challenge was created
+          description: The date that this Challenge was created, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_responded:
-          description: The date this Challenge was responded
+          description: The date that this Challenge was responded, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date this Challenge was updated
+          description: The date that this Challenge was updated, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         details:
-          description: Details about the Challenge.
+          description: Details provided to give context about the Challenge. Intended to be shown to the end user.
           nullable: true
         entity_sid:
-          description: Entity Sid.
+          description: The unique SID identifier of the Entity.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^YE[0-9a-fA-F]{32}$
           type: string
         expiration_date:
-          description: The date-time when this Challenge expires
+          description: The date-time when this Challenge expires, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. The default value is five (5) minutes after Challenge creation. The max value is sixty (60) minutes after creation.
           format: date-time
           nullable: true
           type: string
         factor_sid:
-          description: Factor Sid.
+          description: The unique SID identifier of the Factor.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -3364,38 +3364,38 @@ components:
           type: string
         factor_type:
           $ref: "#/components/schemas/challenge_enum_factor_types"
-          description: The Factor Type of this Challenge
+          description: The Factor Type of this Challenge. Currently `push` and `totp` are supported.
           nullable: true
           type: string
         hidden_details:
-          description: Hidden details about the Challenge
+          description: 'Details provided to give context about the Challenge. Intended to be hidden from the end user. It must be a stringified JSON with only strings values eg. `{"ip": "172.168.1.234"}`'
           nullable: true
         identity:
-          description: Unique external identifier of the Entity
+          description: Customer unique identity for the Entity owner of the Challenge. This identifier should be immutable, not PII, length between 8 and 64 characters, and generated by your external system, such as your user's UUID, GUID, or SID. It can only contain dash (-) separated alphanumeric characters.
           nullable: true
           type: string
         links:
-          description: Nested resource URLs.
+          description: Contains a dictionary of URL links to nested resources of this Challenge.
           format: uri-map
           nullable: true
           type: object
         metadata:
-          description: Metadata of the challenge.
+          description: 'Custom metadata associated with the challenge. This is added by the Device/SDK directly to allow for the inclusion of device information. It must be a stringified JSON with only strings values eg. `{"os": "Android"}`. Can be up to 1024 characters in length.'
           nullable: true
         responded_reason:
           $ref: "#/components/schemas/challenge_enum_challenge_reasons"
-          description: The Reason of this Challenge `status`
+          description: Reason for the Challenge to be in certain `status`. One of `none`, `not_needed` or `not_requested`.
           nullable: true
           type: string
         service_sid:
-          description: Service Sid.
+          description: The unique SID identifier of the Service.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^VA[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: A string that uniquely identifies this Challenge.
+          description: A 34 character string that uniquely identifies this Challenge.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -3403,7 +3403,7 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/challenge_enum_challenge_statuses"
-          description: The Status of this Challenge
+          description: The Status of this Challenge. One of `pending`, `expired`, `approved` or `denied`.
           nullable: true
           type: string
         url:
@@ -3415,82 +3415,82 @@ components:
     verify.v2.service.entity.challenge.notification:
       properties:
         account_sid:
-          description: Account Sid.
+          description: The unique SID identifier of the Account.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         challenge_sid:
-          description: Challenge Sid.
+          description: The unique SID identifier of the Challenge.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^YC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The date this Notification was created
+          description: The date that this Notification was created, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         entity_sid:
-          description: Entity Sid.
+          description: The unique SID identifier of the Entity.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^YE[0-9a-fA-F]{32}$
           type: string
         identity:
-          description: Unique external identifier of the Entity
+          description: Customer unique identity for the Entity owner of the Challenge. This identifier should be immutable, not PII, length between 8 and 64 characters, and generated by your external system, such as your user's UUID, GUID, or SID. It can only contain dash (-) separated alphanumeric characters.
           nullable: true
           type: string
         priority:
-          description: The priority of the notification.
+          description: The priority of the notification. For `push` Challenges it's always `high` which sends the notification immediately, and can wake up a sleeping device.
           nullable: true
           type: string
         service_sid:
-          description: Service Sid.
+          description: The unique SID identifier of the Service.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^VA[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: A string that uniquely identifies this Notification.
+          description: A 34 character string that uniquely identifies this Notification.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^NT[0-9a-fA-F]{32}$
           type: string
         ttl:
-          description: How long, in seconds, the notification is valid.
+          description: "How long, in seconds, the notification is valid. Max: 5 minutes"
           nullable: true
           type: integer
       type: object
     verify.v2.service.entity.factor:
       properties:
         account_sid:
-          description: Account Sid.
+          description: The unique SID identifier of the Account.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         config:
-          description: Configurations for a `factor_type`.
+          description: An object that contains configurations specific to a `factor_type`.
           nullable: true
         date_created:
-          description: The date this Factor was created
+          description: The date that this Factor was created, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date this Factor was updated
+          description: The date that this Factor was updated, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         entity_sid:
-          description: Entity Sid.
+          description: The unique SID identifier of the Entity.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -3498,29 +3498,29 @@ components:
           type: string
         factor_type:
           $ref: "#/components/schemas/factor_enum_factor_types"
-          description: The Type of this Factor
+          description: The Type of this Factor. Currently `push` and `totp` are supported.
           nullable: true
           type: string
         friendly_name:
-          description: A human readable description of this resource.
+          description: A human readable description of this resource, up to 64 characters. For a push factor, this can be the device's name.
           nullable: true
           type: string
         identity:
-          description: Unique external identifier of the Entity
+          description: Customer unique identity for the Entity owner of the Factor. This identifier should be immutable, not PII, length between 8 and 64 characters, and generated by your external system, such as your user's UUID, GUID, or SID. It can only contain dash (-) separated alphanumeric characters.
           nullable: true
           type: string
         metadata:
-          description: Metadata of the factor.
+          description: 'Custom metadata associated with the factor. This is added by the Device/SDK directly to allow for the inclusion of device information. It must be a stringified JSON with only strings values eg. `{"os": "Android"}`. Can be up to 1024 characters in length.'
           nullable: true
         service_sid:
-          description: Service Sid.
+          description: The unique SID identifier of the Service.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^VA[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: A string that uniquely identifies this Factor.
+          description: A 34 character string that uniquely identifies this Factor.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -3528,7 +3528,7 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/factor_enum_factor_statuses"
-          description: The Status of this Factor
+          description: The Status of this Factor. One of `unverified` or `verified`.
           nullable: true
           type: string
         url:
@@ -3540,30 +3540,36 @@ components:
     verify.v2.service.entity.new_factor:
       properties:
         account_sid:
-          description: Account Sid.
+          description: The unique SID identifier of the Account.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         binding:
-          description: Binding of the factor
+          description: |-
+            Contains the `factor_type` specific secret and metadata.
+            For push, this is `binding.public_key` and `binding.alg`.
+            For totp, this is `binding.secret` and `binding.uri`. The `binding.uri` property is generated following the [google authenticator key URI format](https://github.com/google/google-authenticator/wiki/Key-Uri-Format), and `Factor.friendly_name` is used for the “accountname” value and `Service.friendly_name` or `Service.totp.issuer` is used for the `issuer` value.
+
+
+            The Binding property is ONLY returned upon Factor creation.
           nullable: true
         config:
-          description: Configurations for a `factor_type`.
+          description: An object that contains configurations specific to a `factor_type`.
           nullable: true
         date_created:
-          description: The date this Factor was created
+          description: The date that this Factor was created, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date this Factor was updated
+          description: The date that this Factor was updated, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         entity_sid:
-          description: Entity Sid.
+          description: The unique SID identifier of the Entity.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -3571,29 +3577,33 @@ components:
           type: string
         factor_type:
           $ref: "#/components/schemas/new_factor_enum_factor_types"
-          description: The Type of this Factor
+          description: The Type of this Factor. Currently `push` and `totp` are supported.
           nullable: true
           type: string
         friendly_name:
-          description: A human readable description of this resource.
+          description: |-
+            The friendly name of this Factor. This can be any string up to 64 characters, meant for humans to distinguish between Factors.
+            For `factor_type` `push`, this could be a device name.
+            For `factor_type` `totp`, this value is used as the “account name” in constructing the `binding.uri` property.
+            At the same time, we recommend avoiding providing PII.
           nullable: true
           type: string
         identity:
-          description: Unique external identifier of the Entity
+          description: Customer unique identity for the Entity owner of the Factor. This identifier should be immutable, not PII, length between 8 and 64 characters, and generated by your external system, such as your user's UUID, GUID, or SID. It can only contain dash (-) separated alphanumeric characters.
           nullable: true
           type: string
         metadata:
-          description: Metadata of the factor.
+          description: 'Custom metadata associated with the factor. This is added by the Device/SDK directly to allow for the inclusion of device information. It must be a stringified JSON with only strings values eg. `{"os": "Android"}`. Can be up to 1024 characters in length.'
           nullable: true
         service_sid:
-          description: Service Sid.
+          description: The unique SID identifier of the Service.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^VA[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: A string that uniquely identifies this Factor.
+          description: A 34 character string that uniquely identifies this Factor.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -3601,7 +3611,7 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/new_factor_enum_factor_statuses"
-          description: The Status of this Factor
+          description: The Status of this Factor. One of `unverified` or `verified`.
           nullable: true
           type: string
         url:
@@ -3613,35 +3623,35 @@ components:
     verify.v2.service.messaging_configuration:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Service resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         country:
-          description: The ISO-3166-1 country code of the country or `all`.
+          description: The [ISO-3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code of the country this configuration will be applied to. If this is a global configuration, Country will take the value `all`.
           nullable: true
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         messaging_service_sid:
-          description: The SID of the Messaging Service used for this configuration.
+          description: The SID of the [Messaging Service](https://www.twilio.com/docs/sms/services/api) to be used to send SMS to the country of this configuration.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^MG[0-9a-fA-F]{32}$
           type: string
         service_sid:
-          description: The SID of the Service that the resource is associated with
+          description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) that the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -3656,19 +3666,19 @@ components:
     verify.v2.service.rate_limit:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Rate Limit resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
@@ -3677,26 +3687,26 @@ components:
           nullable: true
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         service_sid:
-          description: The SID of the Service that the resource is associated with
+          description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^VA[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: A string that uniquely identifies this Rate Limit.
+          description: A 34 character string that uniquely identifies this Rate Limit.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RK[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: A unique, developer assigned name of this Rate Limit.
+          description: Provides a unique and addressable name to be assigned to this Rate Limit, assigned by the developer, to be optionally used in addition to SID. **This value should not contain PII.**
           nullable: true
           type: string
         url:
@@ -3708,19 +3718,19 @@ components:
     verify.v2.service.rate_limit.bucket:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Rate Limit resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
@@ -3729,25 +3739,25 @@ components:
           nullable: true
           type: integer
         max:
-          description: Max number of requests.
+          description: Maximum number of requests permitted in during the interval.
           nullable: true
           type: integer
         rate_limit_sid:
-          description: Rate Limit Sid.
+          description: The Twilio-provided string that uniquely identifies the Rate Limit resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RK[0-9a-fA-F]{32}$
           type: string
         service_sid:
-          description: The SID of the Service that the resource is associated with
+          description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^VA[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: A string that uniquely identifies this Bucket.
+          description: A 34 character string that uniquely identifies this Bucket.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -3762,180 +3772,180 @@ components:
     verify.v2.service.verification:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Verification resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         amount:
-          description: The amount of the associated PSD2 compliant transaction.
+          description: The amount of the associated PSD2 compliant transaction. Requires the PSD2 Service flag enabled.
           nullable: true
           type: string
         channel:
           $ref: "#/components/schemas/verification_enum_channel"
-          description: The verification method used.
+          description: "The verification method used. One of: [`email`](https://www.twilio.com/docs/verify/email), `sms`, `whatsapp`, `call`, or `sna`."
           nullable: true
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         lookup:
-          description: Information about the phone number being verified
+          description: Information about the phone number being verified.
           nullable: true
         payee:
-          description: The payee of the associated PSD2 compliant transaction
+          description: The payee of the associated PSD2 compliant transaction. Requires the PSD2 Service flag enabled.
           nullable: true
           type: string
         send_code_attempts:
-          description: An array of verification attempt objects.
+          description: An array of verification attempt objects containing the channel attempted and the channel-specific transaction SID.
           items: {}
           nullable: true
           type: array
         service_sid:
-          description: The SID of the Service that the resource is associated with
+          description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^VA[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Verification resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^VE[0-9a-fA-F]{32}$
           type: string
         sna:
-          description: The set of fields used for a silent network auth (`sna`) verification
+          description: The set of fields used for a silent network auth (`sna`) verification. Contains a single field with the URL to be invoked to verify the phone number.
           nullable: true
         status:
-          description: The status of the verification resource
+          description: "The status of the verification. One of: `pending`, `approved`, or `canceled`"
           nullable: true
           type: string
         to:
-          description: The phone number or email being verified
+          description: The phone number or [email](https://www.twilio.com/docs/verify/email) being verified. Phone numbers must be in [E.164 format](https://www.twilio.com/docs/glossary/what-e164).
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Verification resource
+          description: The absolute URL of the Verification resource.
           format: uri
           nullable: true
           type: string
         valid:
-          description: Whether the verification was successful
+          description: Use "status" instead. Legacy property indicating whether the verification was successful.
           nullable: true
           type: boolean
       type: object
     verify.v2.service.verification_check:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the VerificationCheck resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         amount:
-          description: The amount of the associated PSD2 compliant transaction.
+          description: The amount of the associated PSD2 compliant transaction. Requires the PSD2 Service flag enabled.
           nullable: true
           type: string
         channel:
           $ref: "#/components/schemas/verification_check_enum_channel"
-          description: The verification method to use
+          description: "The verification method to use. One of: [`email`](https://www.twilio.com/docs/verify/email), `sms`, `whatsapp`, `call`, or `sna`."
           nullable: true
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the Verification Check resource was created
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time in GMT when the Verification Check resource was created.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the Verification Check resource was last updated
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time in GMT when the Verification Check resource was last updated.
           format: date-time
           nullable: true
           type: string
         payee:
-          description: The payee of the associated PSD2 compliant transaction
+          description: The payee of the associated PSD2 compliant transaction. Requires the PSD2 Service flag enabled.
           nullable: true
           type: string
         service_sid:
-          description: The SID of the Service that the resource is associated with
+          description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) the resource is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^VA[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the VerificationCheck resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^VE[0-9a-fA-F]{32}$
           type: string
         sna_attempts_error_codes:
-          description: List of error codes as a result of attempting a verification using the `sna` channel.
+          description: List of error codes as a result of attempting a verification using the `sna` channel. The error codes are chronologically ordered, from the first attempt to the latest attempt. This will be an empty list if no errors occured or `null` if the last channel used wasn't `sna`.
           items: {}
           nullable: true
           type: array
         status:
-          description: The status of the verification resource
+          description: "The status of the verification. Can be: `pending`, `approved`, or `canceled`."
           nullable: true
           type: string
         to:
-          description: The phone number or email being verified
+          description: The phone number or [email](https://www.twilio.com/docs/verify/email) being verified. Phone numbers must be in [E.164 format](https://www.twilio.com/docs/glossary/what-e164).
           nullable: true
           type: string
         valid:
-          description: Whether the verification was successful
+          description: Use "status" instead. Legacy property indicating whether the verification was successful.
           nullable: true
           type: boolean
       type: object
     verify.v2.service.webhook:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Service resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         event_types:
-          description: The array of events that this Webhook is subscribed to.
+          description: "The array of events that this Webhook is subscribed to. Possible event types: `*, factor.deleted, factor.created, factor.verified, challenge.approved, challenge.denied`"
           items:
             type: string
           nullable: true
           type: array
         friendly_name:
-          description: The string that you assigned to describe the webhook
+          description: The string that you assigned to describe the webhook. **This value should not contain PII.**
           nullable: true
           type: string
         service_sid:
-          description: Service Sid.
+          description: The unique SID identifier of the Service.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^VA[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Webhook resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -3943,22 +3953,22 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/webhook_enum_status"
-          description: The webhook status
+          description: "The webhook status. Default value is `enabled`. One of: `enabled` or `disabled`"
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Webhook resource
+          description: The absolute URL of the Webhook resource.
           format: uri
           nullable: true
           type: string
         version:
           $ref: "#/components/schemas/webhook_enum_version"
-          description: The webhook version
+          description: The webhook version. Default value is `v2` which includes all the latest fields. Version `v1` is legacy and may be removed in the future.
           nullable: true
           type: string
         webhook_method:
           $ref: "#/components/schemas/webhook_enum_methods"
-          description: The method used when calling the webhook's URL.
+          description: The method to be used when calling the webhook's URL.
           nullable: true
           type: string
         webhook_url:
@@ -3970,7 +3980,7 @@ components:
     verify.v2.verification_attempt:
       properties:
         account_sid:
-          description: The SID of the Account that created the verification.
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Verification resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -3978,7 +3988,7 @@ components:
           type: string
         channel:
           $ref: "#/components/schemas/verification_attempt_enum_channels"
-          description: Communication channel used for the attempt.
+          description: A string specifying the communication channel used for the verification attempt. i.e SMS, CALL, etc.
           nullable: true
           type: string
         channel_data:
@@ -3986,31 +3996,31 @@ components:
           nullable: true
         conversion_status:
           $ref: "#/components/schemas/verification_attempt_enum_conversion_status"
-          description: Status of the conversion for the verification.
+          description: A string specifying the conversion status of the verification. A conversion happens when the user is able to provide the correct code. Possible values are `CONVERTED` and `UNCONVERTED`.
           nullable: true
           type: string
         date_created:
-          description: The date this Attempt was created
+          description: The date that this Attempt was created, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date this Attempt was updated
+          description: The date that this Attempt was updated, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         price:
-          description: An object containing the charge for this verification attempt.
+          description: An object containing the charge for this verification attempt related to the channel costs and the currency used. The costs related to the succeeded verifications are not included. May not be immediately available. More information on pricing is available [here](https://www.twilio.com/verify/pricing).
           nullable: true
         service_sid:
-          description: The SID of the verify service that generated this attempt.
+          description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) used to generate the attempt.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^VA[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The SID that uniquely identifies the verification attempt.
+          description: The SID that uniquely identifies the verification attempt resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -4021,7 +4031,7 @@ components:
           nullable: true
           type: string
         verification_sid:
-          description: The SID of the verification that generated this attempt.
+          description: The SID of the [Verification](https://www.twilio.com/docs/verify/api/verification) that generated the attempt.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -4031,19 +4041,19 @@ components:
     verify.v2.verification_attempts_summary:
       properties:
         conversion_rate_percentage:
-          description: Percentage of the confirmed messages over the total.
+          description: "Percentage of the confirmed messages over the total, defined by (total_converted/total_attempts)*100. "
           nullable: true
           type: number
         total_attempts:
-          description: Total of attempts made.
+          description: Total of attempts made according to the provided filters
           nullable: true
           type: integer
         total_converted:
-          description: Total of attempts confirmed by the end user.
+          description: Total of  attempts made that were confirmed by the end user, according to the provided filters.
           nullable: true
           type: integer
         total_unconverted:
-          description: Total of attempts made that were not confirmed by the end user.
+          description: Total of attempts made that were not confirmed by the end user, according to the provided filters.
           nullable: true
           type: integer
         url:
@@ -4054,31 +4064,31 @@ components:
     verify.v2.verification_template:
       properties:
         account_sid:
-          description: Account Sid
+          description: The unique SID identifier of the Account.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         channels:
-          description: A list of channels that support the Template
+          description: "A list of channels that support the Template. Can include: sms, voice"
           items:
             type: string
           nullable: true
           type: array
         friendly_name:
-          description: A string to describe the verification template
+          description: A descriptive string that you create to describe a Template.
           nullable: true
           type: string
         sid:
-          description: A string that uniquely identifies this Template
+          description: A 34 character string that uniquely identifies a Verification Template.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HJ[0-9a-fA-F]{32}$
           type: string
         translations:
-          description: Object with the template translations.
+          description: An object that contains the different translations of the template. Every translation is identified by the language short name and contains its respective information as the approval status, text and created/modified date.
           nullable: true
       type: object
     webhook_enum_methods:

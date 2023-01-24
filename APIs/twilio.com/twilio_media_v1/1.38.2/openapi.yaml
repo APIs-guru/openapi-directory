@@ -626,40 +626,40 @@ components:
     media.v1.media_processor:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the MediaProcessor resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         ended_reason:
-          description: The reason why a MediaProcessor ended
+          description: The reason why a MediaProcessor ended. When a MediaProcessor is in progress, will be `null`. When a MediaProcessor is completed, can be `ended-via-api`, `max-duration-exceeded`, `error-loading-extension`, `error-streaming-media` or `internal-service-error`. See [ended reasons](/docs/live/api/mediaprocessors#mediaprocessor-ended-reason-values) for more details.
           nullable: true
           type: string
         extension:
-          description: The Media Extension name or URL
+          description: "The [Media Extension](/docs/live/api/media-extensions-overview) name or URL. Ex: `video-composer-v2`"
           nullable: true
           type: string
         extension_context:
-          description: The Media Extension context
+          description: The context of the Media Extension, represented as a JSON dictionary. See the documentation for the specific [Media Extension](/docs/live/api/media-extensions-overview) you are using for more information about the context to send.
           nullable: true
           type: string
         max_duration:
-          description: Maximum MediaProcessor duration in seconds
+          description: The maximum time, in seconds, that the MediaProcessor can run before automatically ends. The default value is 300 seconds, and the maximum value is 90000 seconds. Once this maximum duration is reached, Twilio will end the MediaProcessor, regardless of whether media is still streaming.
           nullable: true
           type: integer
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string generated to identify the MediaProcessor resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -667,16 +667,16 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/media_processor_enum_status"
-          description: The status of the MediaProcessor
+          description: "The status of the MediaProcessor. Can be: `started`, `ended` or `failed`."
           nullable: true
           type: string
         status_callback:
-          description: The URL to which Twilio will send MediaProcessor event updates
+          description: The URL to which Twilio will send asynchronous webhook requests for every MediaProcessor event. See [Status Callbacks](/docs/live/status-callbacks) for details.
           format: uri
           nullable: true
           type: string
         status_callback_method:
-          description: The HTTP method Twilio should use to call the `status_callback` URL
+          description: The HTTP method Twilio should use to call the `status_callback` URL. Can be `POST` or `GET` and the default is `POST`.
           enum:
             - HEAD
             - GET
@@ -688,7 +688,7 @@ components:
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -696,61 +696,61 @@ components:
     media.v1.media_recording:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the MediaRecording resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         duration:
-          description: The duration of the MediaRecording
+          description: The duration of the MediaRecording in seconds.
           nullable: true
           type: integer
         format:
           $ref: "#/components/schemas/media_recording_enum_format"
-          description: The format of the MediaRecording
+          description: The format of the MediaRecording, either `mp4` or `webm`.
           nullable: true
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         media_size:
-          description: The size of the recording media
+          description: The size of the recording media in bytes.
           format: int64
           nullable: true
           type: integer
         processor_sid:
-          description: The SID of the MediaProcessor
+          description: The SID of the MediaProcessor resource which produced the MediaRecording.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^ZX[0-9a-fA-F]{32}$
           type: string
         resolution:
-          description: The dimensions of the video image in pixels
+          description: The dimensions of the video image in pixels expressed as columns (width) and rows (height).
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string generated to identify the MediaRecording resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^KV[0-9a-fA-F]{32}$
           type: string
         source_sid:
-          description: The SID of the resource that generated the original media
+          description: The SID of the resource that generated the original media track(s) of the MediaRecording.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -758,16 +758,16 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/media_recording_enum_status"
-          description: The status of the MediaRecording
+          description: "The status of the MediaRecording. Can be: `processing`, `completed`, `deleted`, or `failed`."
           nullable: true
           type: string
         status_callback:
-          description: The URL to which Twilio will send MediaRecording event updates
+          description: The URL to which Twilio will send asynchronous webhook requests for every MediaRecording event. See [Status Callbacks](/docs/live/status-callbacks) for more details.
           format: uri
           nullable: true
           type: string
         status_callback_method:
-          description: The HTTP method Twilio should use to call the `status_callback` URL
+          description: The HTTP method Twilio should use to call the `status_callback` URL. Can be `POST` or `GET` and the default is `POST`.
           enum:
             - HEAD
             - GET
@@ -779,7 +779,7 @@ components:
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -787,38 +787,38 @@ components:
     media.v1.player_streamer:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the PlayerStreamer resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         ended_reason:
           $ref: "#/components/schemas/player_streamer_enum_ended_reason"
-          description: The reason why a PlayerStreamer ended
+          description: The reason why a PlayerStreamer ended. When a PlayerStreamer is in progress, will be `null`. When a PlayerStreamer is completed, can be `ended-via-api`, `max-duration-exceeded`, `stream-disconnected-by-source` or `unexpected-failure`. See [ended reasons](/docs/live/api/playerstreamers#ended-reason) for more details.
           nullable: true
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         max_duration:
-          description: Maximum PlayerStreamer duration in seconds
+          description: The maximum time, in seconds, that the PlayerStreamer is active (`created` or `started`) before automatically ends. The default value is 300 seconds, and the maximum value is 90000 seconds. Once this maximum duration is reached, Twilio will end the PlayerStreamer, regardless of whether media is still streaming.
           nullable: true
           type: integer
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string generated to identify the PlayerStreamer resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -826,16 +826,16 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/player_streamer_enum_status"
-          description: The status of the PlayerStreamer
+          description: "The status of the PlayerStreamer. Can be: `created`, `started`, `ended`, or `failed`. See [status](/docs/live/api/playerstreamers#status) for more information."
           nullable: true
           type: string
         status_callback:
-          description: The URL to which Twilio will send PlayerStreamer event updates
+          description: The URL to which Twilio will send asynchronous webhook requests for every PlayerStreamer event. See [Status Callbacks](/docs/live/status-callbacks) for more details.
           format: uri
           nullable: true
           type: string
         status_callback_method:
-          description: The HTTP method Twilio should use to call the `status_callback` URL
+          description: The HTTP method Twilio should use to call the `status_callback` URL. Can be `POST` or `GET` and the default is `POST`.
           enum:
             - HEAD
             - GET
@@ -847,26 +847,26 @@ components:
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
         video:
-          description: Whether the PlayerStreamer is configured to stream video
+          description: Specifies whether the PlayerStreamer is configured to stream video. Defaults to `true`.
           nullable: true
           type: boolean
       type: object
     media.v1.player_streamer.player_streamer_playback_grant:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created this resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
@@ -874,14 +874,14 @@ components:
           description: The grant that authorizes the player sdk to connect to the livestream
           nullable: true
         sid:
-          description: The unique string that identifies the PlayerStreamer associated with this PlaybackGrant.
+          description: The unique string generated to identify the PlayerStreamer resource that this PlaybackGrant authorizes views for.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^VJ[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string

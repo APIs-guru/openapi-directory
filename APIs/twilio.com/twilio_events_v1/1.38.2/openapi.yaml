@@ -981,17 +981,17 @@ components:
     events.v1.event_type:
       properties:
         date_created:
-          description: The date this Event Type was created.
+          description: The date that this Event Type was created, given in ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date this Event Type was updated.
+          description: The date that this Event Type was updated, given in ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         description:
-          description: Event Type description.
+          description: A human readable description for this Event Type.
           nullable: true
           type: string
         links:
@@ -999,11 +999,11 @@ components:
           nullable: true
           type: object
         schema_id:
-          description: The Schema identifier for this Event Type.
+          description: A string that uniquely identifies the Schema this Event Type adheres to.
           nullable: true
           type: string
         type:
-          description: The Event Type identifier.
+          description: A string that uniquely identifies this Event Type.
           nullable: true
           type: string
         url:
@@ -1015,20 +1015,20 @@ components:
     events.v1.schema:
       properties:
         id:
-          description: Schema Identifier.
+          description: The unique identifier of the schema. Each schema can have multiple versions, that share the same id.
           nullable: true
           type: string
         latest_version:
-          description: Latest schema version.
+          description: The latest version published of this schema.
           nullable: true
           type: integer
         latest_version_date_created:
-          description: The date that the latest schema version was created.
+          description: The date that the latest schema version was created, given in ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         links:
-          description: Nested resource URLs.
+          description: Contains a dictionary of URL links to nested resources of this schema.
           format: uri-map
           nullable: true
           type: object
@@ -1041,12 +1041,12 @@ components:
     events.v1.schema.schema_version:
       properties:
         date_created:
-          description: The date the schema version was created.
+          description: The date the schema version was created, given in ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         id:
-          description: The unique identifier of the schema.
+          description: The unique identifier of the schema. Each schema can have multiple versions, that share the same id.
           nullable: true
           type: string
         raw:
@@ -1066,42 +1066,42 @@ components:
     events.v1.sink:
       properties:
         date_created:
-          description: The date this Sink was created
+          description: The date that this Sink was created, given in ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date this Sink was updated
+          description: The date that this Sink was updated, given in ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         description:
-          description: Sink Description
+          description: A human readable description for the Sink
           nullable: true
           type: string
         links:
-          description: Nested resource URLs.
+          description: Contains a dictionary of URL links to nested resources of this Sink.
           format: uri-map
           nullable: true
           type: object
         sid:
-          description: A string that uniquely identifies this Sink.
+          description: A 34 character string that uniquely identifies this Sink.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^DG[0-9a-fA-F]{32}$
           type: string
         sink_configuration:
-          description: JSON Sink configuration.
+          description: The information required for Twilio to connect to the provided Sink encoded as JSON.
           nullable: true
         sink_type:
           $ref: "#/components/schemas/sink_enum_sink_type"
-          description: Sink type.
+          description: The Sink type. Can only be "kinesis" or "webhook" currently.
           nullable: true
           type: string
         status:
           $ref: "#/components/schemas/sink_enum_status"
-          description: The Status of this Sink
+          description: The Status of this Sink. One of `initialized`, `validating`, `active` or `failed`.
           nullable: true
           type: string
         url:
@@ -1127,40 +1127,40 @@ components:
     events.v1.subscription:
       properties:
         account_sid:
-          description: Account SID.
+          description: The unique SID identifier of the Account.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The date this Subscription was created
+          description: The date that this Subscription was created, given in ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date this Subscription was updated
+          description: The date that this Subscription was updated, given in ISO 8601 format.
           format: date-time
           nullable: true
           type: string
         description:
-          description: Subscription description
+          description: A human readable description for the Subscription
           nullable: true
           type: string
         links:
-          description: Nested resource URLs.
+          description: Contains a dictionary of URL links to nested resources of this Subscription.
           format: uri-map
           nullable: true
           type: object
         sid:
-          description: A string that uniquely identifies this Subscription.
+          description: A 34 character string that uniquely identifies this Subscription.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^DF[0-9a-fA-F]{32}$
           type: string
         sink_sid:
-          description: Sink SID.
+          description: The SID of the sink that events selected by this subscription should be sent to. Sink must be active for the subscription to be created.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1175,7 +1175,7 @@ components:
     events.v1.subscription.subscribed_event:
       properties:
         account_sid:
-          description: Account SID.
+          description: The unique SID identifier of the Account.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1186,7 +1186,7 @@ components:
           nullable: true
           type: integer
         subscription_sid:
-          description: Subscription SID.
+          description: The unique SID identifier of the Subscription.
           maxLength: 34
           minLength: 34
           nullable: true

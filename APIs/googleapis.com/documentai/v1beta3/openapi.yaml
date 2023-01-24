@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://documentai.googleapis.com/$discovery/rest?version=v1beta3
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: documentai
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/document-ai/docs/
 tags:
@@ -1053,13 +1054,6 @@ components:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
           description: The basic metadata of the long running operation.
       type: object
-    GoogleCloudDocumentaiUiv1beta3DeleteDataLabelingJobOperationMetadata:
-      description: The long running operation metadata for DeleteDataLabelingJob.
-      properties:
-        commonMetadata:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
-      type: object
     GoogleCloudDocumentaiUiv1beta3DeleteLabelerPoolOperationMetadata:
       description: The long running operation metadata for DeleteLabelerPool.
       properties:
@@ -1261,6 +1255,20 @@ components:
     GoogleCloudDocumentaiUiv1beta3ImportDocumentsResponse:
       description: Response of the import document operation.
       properties: {}
+      type: object
+    GoogleCloudDocumentaiUiv1beta3ImportProcessorVersionMetadata:
+      description: The long running operation metadata for the ImportProcessorVersion method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata for the long running operation.
+      type: object
+    GoogleCloudDocumentaiUiv1beta3ImportProcessorVersionResponse:
+      description: The response message for the ImportProcessorVersion method.
+      properties:
+        processorVersion:
+          description: The destination processor version name.
+          type: string
       type: object
     GoogleCloudDocumentaiUiv1beta3ResyncDatasetMetadata:
       description: The metadata proto of ResyncDataset method.

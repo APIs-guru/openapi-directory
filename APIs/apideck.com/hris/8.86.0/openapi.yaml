@@ -1009,6 +1009,7 @@ paths:
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/employeesFilter"
+        - $ref: "#/components/parameters/employeesSort"
       responses:
         "200":
           $ref: "#/components/responses/GetEmployeesResponse"
@@ -2341,6 +2342,14 @@ components:
       name: filter
       schema:
         $ref: "#/components/schemas/EmployeesFilter"
+      style: deepObject
+    employeesSort:
+      description: Apply sorting
+      explode: true
+      in: query
+      name: sort
+      schema:
+        $ref: "#/components/schemas/EmployeesSort"
       style: deepObject
     id:
       description: ID of the record you are acting upon.
@@ -4465,6 +4474,28 @@ components:
       type: object
       x-apideck-schema-id: EmployeesFilter
       x-graphql-type-name: EmployeesFilter
+    EmployeesSort:
+      additionalProperties: false
+      example:
+        by: created_at
+        direction: desc
+      properties:
+        by:
+          description: The field on which to sort the Employees
+          enum:
+            - first_name
+            - last_name
+            - created_at
+            - updated_at
+          example: created_at
+          type: string
+          x-apideck-enum-id: Employees.sort_by
+          x-graphql-type-name: EmployeesSortBy
+        direction:
+          $ref: "#/components/schemas/SortDirection"
+      type: object
+      x-apideck-schema-id: EmployeesSort
+      x-graphql-type-name: EmployeesSort
     FirstName:
       example: Elon
       nullable: true
@@ -5677,6 +5708,16 @@ components:
         id: critical
         start_date: critical
         work_pattern: critical
+    SortDirection:
+      default: asc
+      description: The direction in which to sort the results
+      enum:
+        - asc
+        - desc
+      type: string
+      x-apideck-enum-id: sort_direction
+      x-apideck-schema-id: SortDirection
+      x-graphql-type-name: SortDirection
     Tax:
       properties:
         amount:

@@ -75,14 +75,14 @@ components:
     flex.v2.web_channel:
       properties:
         conversation_sid:
-          description: The unique string representing the Conversation resource created
+          description: The unique string representing the [Conversation resource](https://www.twilio.com/docs/conversations/api/conversation-resource) created.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^CH[0-9a-fA-F]{32}$
           type: string
         identity:
-          description: The unique string representing the User created
+          description: The unique string representing the User created and should be authorized to participate in the Conversation. For more details, see [User Identity & Access Tokens](https://www.twilio.com/docs/conversations/identity).
           nullable: true
           type: string
       type: object

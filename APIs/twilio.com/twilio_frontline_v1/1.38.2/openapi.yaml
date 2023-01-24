@@ -101,23 +101,23 @@ components:
     frontline.v1.user:
       properties:
         avatar:
-          description: The avatar URL which will be shown in Frontline application
+          description: The avatar URL which will be shown in Frontline application.
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the User
+          description: The string that you assigned to describe the User.
           nullable: true
           type: string
         identity:
-          description: The string that identifies the resource's User
+          description: The application-defined string that uniquely identifies the resource's User. This value is often a username or an email address, and is case-sensitive.
           nullable: true
           type: string
         is_available:
-          description: Whether the User is available for new conversations
+          description: Whether the User is available for new conversations. Defaults to `false` for new users.
           nullable: true
           type: boolean
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the User resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -125,11 +125,11 @@ components:
           type: string
         state:
           $ref: "#/components/schemas/user_enum_state_type"
-          description: Current state of this user
+          description: Current state of this user. Can be either `active` or `deactivated` and defaults to `active`
           nullable: true
           type: string
         url:
-          description: An absolute URL for this user.
+          description: An absolute API resource URL for this user.
           format: uri
           nullable: true
           type: string

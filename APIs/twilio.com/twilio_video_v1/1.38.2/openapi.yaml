@@ -1972,97 +1972,97 @@ components:
     video.v1.composition:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Composition resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         audio_sources:
-          description: The array of track names to include in the composition
+          description: The array of track names to include in the composition. The composition includes all audio sources specified in `audio_sources` except those specified in `audio_sources_excluded`. The track names in this property can include an asterisk as a wild card character, which matches zero or more characters in a track name. For example, `student*` includes tracks named `student` as well as `studentTeam`.
           items:
             type: string
           nullable: true
           type: array
         audio_sources_excluded:
-          description: The array of track names to exclude from the composition
+          description: The array of track names to exclude from the composition. The composition includes all audio sources specified in `audio_sources` except for those specified in `audio_sources_excluded`. The track names in this property can include an asterisk as a wild card character, which matches zero or more characters in a track name. For example, `student*` excludes `student` as well as `studentTeam`. This parameter can also be empty.
           items:
             type: string
           nullable: true
           type: array
         bitrate:
-          description: The average bit rate of the composition's media
+          description: The average bit rate of the composition's media.
           nullable: true
           type: integer
         date_completed:
-          description: Date when the media processing task finished
+          description: The date and time in GMT when the composition's media processing task finished, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_deleted:
-          description: The ISO 8601 date and time in GMT when the composition generated media was deleted
+          description: The date and time in GMT when the composition generated media was deleted, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         duration:
-          description: The duration of the composition's media file in seconds
+          description: The duration of the composition's media file in seconds.
           nullable: true
           type: integer
         format:
           $ref: "#/components/schemas/composition_enum_format"
-          description: The container format of the composition's media files as specified in the POST request that created the Composition resource
+          description: The container format of the composition's media files as specified in the POST request that created the Composition resource. See [POST Parameters](https://www.twilio.com/docs/video/api/compositions-resource#http-post-parameters) for more information.
           nullable: true
           type: string
         links:
-          description: The URL of the media file associated with the composition
+          description: The URL of the media file associated with the composition.
           format: uri-map
           nullable: true
           type: object
         media_external_location:
-          description: The URL of the media file associated with the composition when stored externally
+          description: The URL of the media file associated with the composition when stored externally. See [External S3 Compositions](/docs/video/api/external-s3-compositions) for more details.
           format: uri
           nullable: true
           type: string
         resolution:
-          description: The dimensions of the video image in pixels expressed as columns (width) and rows (height)
+          description: The dimensions of the video image in pixels expressed as columns (width) and rows (height). The string's format is `{width}x{height}`, such as `640x480`.
           nullable: true
           type: string
         room_sid:
-          description: The SID of the Group Room that generated the audio and video tracks used in the composition
+          description: The SID of the Group Room that generated the audio and video tracks used in the composition. All media sources included in a composition must belong to the same Group Room.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RM[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Composition resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^CJ[0-9a-fA-F]{32}$
           type: string
         size:
-          description: The size of the composed media file in bytes
+          description: The size of the composed media file in bytes.
           format: int64
           nullable: true
           type: integer
         status:
           $ref: "#/components/schemas/composition_enum_status"
-          description: The status of the composition
+          description: "The status of the composition. Can be: `enqueued`, `processing`, `completed`, `deleted` or `failed`. `enqueued` is the initial state and indicates that the composition request has been received and is scheduled for processing; `processing` indicates the composition is being processed; `completed` indicates the composition has been completed and is available for download; `deleted` means the composition media has been deleted from the system, but its metadata is still available for 30 days; `failed` indicates the composition failed to execute the media processing task."
           nullable: true
           type: string
         status_callback:
-          description: The URL called to send status information on every composition event.
+          description: The URL called using the `status_callback_method` to send status information on every composition event.
           format: uri
           nullable: true
           type: string
         status_callback_method:
-          description: The HTTP method used to call `status_callback`
+          description: "The HTTP method used to call `status_callback`. Can be: `POST` or `GET`, defaults to `POST`."
           enum:
             - HEAD
             - GET
@@ -2074,80 +2074,80 @@ components:
           nullable: true
           type: string
         trim:
-          description: Whether to remove intervals with no media
+          description: Whether to remove intervals with no media, as specified in the POST request that created the composition. Compositions with `trim` enabled are shorter when the Room is created and no Participant joins for a while as well as if all the Participants leave the room and join later, because those gaps will be removed. See [Specifying Video Layouts](https://www.twilio.com/docs/video/api/compositions-resource#specifying-video-layouts) for more info.
           nullable: true
           type: boolean
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
         video_layout:
-          description: An object that describes the video layout of the composition
+          description: An object that describes the video layout of the composition in terms of regions. See [Specifying Video Layouts](https://www.twilio.com/docs/video/api/compositions-resource#specifying-video-layouts) for more info.
           nullable: true
       type: object
     video.v1.composition_hook:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the CompositionHook resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         audio_sources:
-          description: The array of track names to include in the compositions created by the composition hook
+          description: The array of track names to include in the compositions created by the composition hook. A composition triggered by the composition hook includes all audio sources specified in `audio_sources` except those specified in `audio_sources_excluded`. The track names in this property can include an asterisk as a wild card character, which matches zero or more characters in a track name. For example, `student*` includes tracks named `student` as well as `studentTeam`. Please, be aware that either video_layout or audio_sources have to be provided to get a valid creation request
           items:
             type: string
           nullable: true
           type: array
         audio_sources_excluded:
-          description: The array of track names to exclude from the compositions created by the composition hook
+          description: The array of track names to exclude from the compositions created by the composition hook. A composition triggered by the composition hook includes all audio sources specified in `audio_sources` except for those specified in `audio_sources_excluded`. The track names in this property can include an asterisk as a wild card character, which matches zero or more characters in a track name. For example, `student*` excludes `student` as well as `studentTeam`. This parameter can also be empty.
           items:
             type: string
           nullable: true
           type: array
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         enabled:
-          description: Whether the CompositionHook is active
+          description: Whether the CompositionHook is active. When `true`, the CompositionHook is triggered for every completed Group Room on the account. When `false`, the CompositionHook is never triggered.
           nullable: true
           type: boolean
         format:
           $ref: "#/components/schemas/composition_hook_enum_format"
-          description: The container format of the media files used by the compositions created by the composition hook
+          description: The container format of the media files used by the compositions created by the composition hook. If `mp4` or `webm`, `audio_sources` must have one or more tracks and/or a `video_layout` element must contain a valid `video_sources` list, otherwise an error occurs.
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource. Can be up to 100 characters long and must be unique within the account.
           nullable: true
           type: string
         resolution:
-          description: The dimensions of the video image in pixels expressed as columns (width) and rows (height)
+          description: The dimensions of the video image in pixels expressed as columns (width) and rows (height). The string's format is `{width}x{height}`, such as `640x480`.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the CompositionHook resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HK[0-9a-fA-F]{32}$
           type: string
         status_callback:
-          description: The URL to send status information to your application
+          description: The URL we call using the `status_callback_method` to send status information to your application.
           format: uri
           nullable: true
           type: string
         status_callback_method:
-          description: The HTTP method we should use to call status_callback
+          description: The HTTP method we should use to call `status_callback`. Can be `POST` or `GET` and defaults to `POST`.
           enum:
             - HEAD
             - GET
@@ -2159,60 +2159,60 @@ components:
           nullable: true
           type: string
         trim:
-          description: Whether intervals with no media are clipped
+          description: Whether intervals with no media are clipped, as specified in the POST request that created the CompositionHook resource. Compositions with `trim` enabled are shorter when the Room is created and no Participant joins for a while as well as if all the Participants leave the room and join later, because those gaps will be removed. See [Specifying Video Layouts](https://www.twilio.com/docs/video/api/compositions-resource#specifying-video-layouts) for more info.
           nullable: true
           type: boolean
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
         video_layout:
-          description: A JSON object that describes the video layout of the Composition
+          description: A JSON object that describes the video layout of the composition in terms of regions as specified in the HTTP POST request that created the CompositionHook resource. See [POST Parameters](https://www.twilio.com/docs/video/api/compositions-resource#http-post-parameters) for more information. Please, be aware that either video_layout or audio_sources have to be provided to get a valid creation request
           nullable: true
       type: object
     video.v1.composition_settings:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the CompositionSettings resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         aws_credentials_sid:
-          description: The SID of the stored Credential resource
+          description: The SID of the stored Credential resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^CR[0-9a-fA-F]{32}$
           type: string
         aws_s3_url:
-          description: The URL of the AWS S3 bucket where the compositions are stored
+          description: The URL of the AWS S3 bucket where the compositions are stored. We only support DNS-compliant URLs like `https://documentation-example-twilio-bucket/compositions`, where `compositions` is the path in which you want the compositions to be stored. This URL accepts only URI-valid characters, as described in the <a href='https://tools.ietf.org/html/rfc3986#section-2'>RFC 3986</a>.
           format: uri
           nullable: true
           type: string
         aws_storage_enabled:
-          description: Whether all compositions are written to the aws_s3_url
+          description: Whether all compositions are written to the `aws_s3_url`. When `false`, all compositions are stored in our cloud.
           nullable: true
           type: boolean
         encryption_enabled:
-          description: Whether all compositions are stored in an encrypted form
+          description: Whether all compositions are stored in an encrypted form. The default is `false`.
           nullable: true
           type: boolean
         encryption_key_sid:
-          description: The SID of the Public Key resource used for encryption
+          description: The SID of the Public Key resource used for encryption.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^CR[0-9a-fA-F]{32}$
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource and that will be shown in the console
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -2220,7 +2220,7 @@ components:
     video.v1.recording:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Recording resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2228,55 +2228,55 @@ components:
           type: string
         codec:
           $ref: "#/components/schemas/recording_enum_codec"
-          description: The codec used to encode the track
+          description: "The codec used to encode the track. Can be: `VP8`, `H264`, `OPUS`, and `PCMU`."
           nullable: true
           type: string
         container_format:
           $ref: "#/components/schemas/recording_enum_format"
-          description: The file format for the recording
+          description: "The file format for the recording. Can be: `mka` or `mkv`. Video Room recordings are captured in [Matroska container format](https://matroska.org/), `mka` is for audio files and `mkv` for video files."
           nullable: true
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         duration:
-          description: The duration of the recording in seconds
+          description: The duration of the recording in seconds rounded to the nearest second. Sub-second tracks have a `Duration` property of 1 second
           nullable: true
           type: integer
         grouping_sids:
-          description: A list of SIDs related to the recording
+          description: A list of SIDs related to the recording. Includes the `room_sid` and `participant_sid`.
           nullable: true
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         media_external_location:
-          description: The URL of the media file associated with the recording when stored externally
+          description: The URL of the media file associated with the recording when stored externally. See [External S3 Recordings](/docs/video/api/external-s3-recordings) for more details.
           format: uri
           nullable: true
           type: string
         offset:
-          description: The number of milliseconds between a point in time that is common to all rooms in a group and when the source room of the recording started
+          description: The time in milliseconds elapsed between an arbitrary point in time, common to all group rooms, and the moment when the source room of this track started. This information provides a synchronization mechanism for recordings belonging to the same room.
           format: int64
           nullable: true
           type: integer
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Recording resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RT[0-9a-fA-F]{32}$
           type: string
         size:
-          description: The size of the recorded track, in bytes
+          description: The size of the recorded track, in bytes.
           format: int64
           nullable: true
           type: integer
         source_sid:
-          description: The SID of the recording source
+          description: The SID of the recording source. For a Room Recording, this value is a `track_sid`.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2284,16 +2284,16 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/recording_enum_status"
-          description: The status of the recording
+          description: "The status of the recording. Can be: `processing`, `completed`, or `deleted`. `processing` indicates the recording is still being captured; `completed` indicates the recording has been captured and is now available for download. `deleted` means the recording media has been deleted from the system, but its metadata is still available."
           nullable: true
           type: string
         status_callback:
-          description: The URL called to send status information on every recording event.
+          description: The URL called using the `status_callback_method` to send status information on every recording event.
           format: uri
           nullable: true
           type: string
         status_callback_method:
-          description: The HTTP method used to call `status_callback`
+          description: "The HTTP method used to call `status_callback`. Can be: `POST` or `GET`, defaults to `POST`."
           enum:
             - HEAD
             - GET
@@ -2305,16 +2305,16 @@ components:
           nullable: true
           type: string
         track_name:
-          description: The name that was given to the source track of the recording
+          description: The name that was given to the source track of the recording. If no name is given, the `source_sid` is used.
           nullable: true
           type: string
         type:
           $ref: "#/components/schemas/recording_enum_type"
-          description: The recording's media type
+          description: "The recording's media type. Can be: `audio` or `video`."
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -2322,45 +2322,45 @@ components:
     video.v1.recording_settings:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the RecordingSettings resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         aws_credentials_sid:
-          description: The SID of the stored Credential resource
+          description: The SID of the stored Credential resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^CR[0-9a-fA-F]{32}$
           type: string
         aws_s3_url:
-          description: The URL of the AWS S3 bucket where the recordings are stored
+          description: The URL of the AWS S3 bucket where the recordings are stored. We only support DNS-compliant URLs like `https://documentation-example-twilio-bucket/recordings`, where `recordings` is the path in which you want the recordings to be stored. This URL accepts only URI-valid characters, as described in the <a href='https://tools.ietf.org/html/rfc3986#section-2'>RFC 3986</a>.
           format: uri
           nullable: true
           type: string
         aws_storage_enabled:
-          description: Whether all recordings are written to the aws_s3_url
+          description: Whether all recordings are written to the `aws_s3_url`. When `false`, all recordings are stored in our cloud.
           nullable: true
           type: boolean
         encryption_enabled:
-          description: Whether all recordings are stored in an encrypted form
+          description: Whether all recordings are stored in an encrypted form. The default is `false`.
           nullable: true
           type: boolean
         encryption_key_sid:
-          description: The SID of the Public Key resource used for encryption
+          description: The SID of the Public Key resource used for encryption.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^CR[0-9a-fA-F]{32}$
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource and show the user in the console
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -2368,40 +2368,40 @@ components:
     video.v1.room:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Room resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         audio_only:
-          description: Indicates whether the room will only contain audio track participants for group rooms.
+          description: When set to true, indicates that the participants in the room will only publish audio. No video tracks will be allowed. Group rooms only.
           nullable: true
           type: boolean
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         duration:
-          description: The duration of the room in seconds
+          description: The duration of the room in seconds.
           nullable: true
           type: integer
         empty_room_timeout:
-          description: The time a room will remain active after last participant leaves.
+          description: Specifies how long (in minutes) a room will remain active after last participant leaves. Can be configured when creating a room via REST API. For Ad-Hoc rooms this value cannot be changed.
           nullable: true
           type: integer
         enable_turn:
-          description: Enable Twilio's Network Traversal TURN service
+          description: Deprecated, now always considered to be true.
           nullable: true
           type: boolean
         end_time:
-          description: The UTC end time of the room in UTC ISO 8601 format
+          description: The UTC end time of the room in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#UTC) format.
           format: date-time
           nullable: true
           type: string
@@ -2410,32 +2410,32 @@ components:
           nullable: true
           type: boolean
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         max_concurrent_published_tracks:
-          description: The maximum number of published tracks allowed in the room at the same time
+          description: The maximum number of published audio, video, and data tracks all participants combined are allowed to publish in the room at the same time. Check [Programmable Video Limits](https://www.twilio.com/docs/video/programmable-video-limits) for more details. If it is set to 0 it means unconstrained.
           nullable: true
           type: integer
         max_participant_duration:
-          description: The maximum number of seconds a Participant can be connected to the room
+          description: The maximum number of seconds a Participant can be connected to the room. The maximum possible value is 86400 seconds (24 hours). The default is 14400 seconds (4 hours).
           nullable: true
           type: integer
         max_participants:
-          description: The maximum number of concurrent Participants allowed in the room
+          description: "The maximum number of concurrent Participants allowed in the room. "
           nullable: true
           type: integer
         media_region:
-          description: The region for the media server in Group Rooms
+          description: "The region for the media server in Group Rooms.  Can be: one of the [available Media Regions](https://www.twilio.com/docs/video/ip-address-whitelisting#media-servers). ***This feature is not available in `peer-to-peer` rooms.***"
           nullable: true
           type: string
         record_participants_on_connect:
-          description: Whether to start recording when Participants connect
+          description: Whether to start recording when Participants connect. ***This feature is not available in `peer-to-peer` rooms.***
           nullable: true
           type: boolean
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Room resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2443,16 +2443,16 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/room_enum_room_status"
-          description: The status of the room
+          description: "The status of the room. Can be: `in-progress`, `failed`, or `completed`."
           nullable: true
           type: string
         status_callback:
-          description: The URL to send status information to your application
+          description: The URL we call using the `status_callback_method` to send status information to your application on every room event. See [Status Callbacks](https://www.twilio.com/docs/video/api/status-callbacks) for more info.
           format: uri
           nullable: true
           type: string
         status_callback_method:
-          description: The HTTP method we use to call status_callback
+          description: The HTTP method we use to call `status_callback`. Can be `POST` or `GET` and defaults to `POST`.
           enum:
             - HEAD
             - GET
@@ -2465,24 +2465,24 @@ components:
           type: string
         type:
           $ref: "#/components/schemas/room_enum_room_type"
-          description: The type of room
+          description: "The type of room. Can be: `go`, `peer-to-peer`, `group-small`, or `group`. The default value is `group`."
           nullable: true
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used as a `room_sid` in place of the resource's `sid` in the URL to address the resource, assuming it does not contain any [reserved characters](https://tools.ietf.org/html/rfc3986#section-2.2) that would need to be URL encoded. This value is unique for `in-progress` rooms. SDK clients can use this name to connect to the room. REST API clients can use this name in place of the Room SID to interact with the room as long as the room is `in-progress`.
           nullable: true
           type: string
         unused_room_timeout:
-          description: The time a room will remain active when no one joins.
+          description: Specifies how long (in minutes) a room will remain active if no one joins. Can be configured when creating a room via REST API. For Ad-Hoc rooms this value cannot be changed.
           nullable: true
           type: integer
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
         video_codecs:
-          description: An array of the video codecs that are supported when publishing a track in the room
+          description: "An array of the video codecs that are supported when publishing a track in the room.  Can be: `VP8` and `H264`.  ***This feature is not available in `peer-to-peer` rooms***"
           items:
             $ref: "#/components/schemas/room_enum_video_codec"
             type: string
@@ -2492,66 +2492,66 @@ components:
     video.v1.room.room_participant:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the RoomParticipant resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         duration:
-          description: Duration of time in seconds the participant was connected
+          description: The duration in seconds that the participant was `connected`. Populated only after the participant is `disconnected`.
           nullable: true
           type: integer
         end_time:
-          description: The time when the participant disconnected from the room in ISO 8601 format
+          description: The time when the participant disconnected from the room in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#UTC) format.
           format: date-time
           nullable: true
           type: string
         identity:
-          description: The string that identifies the resource's User
+          description: "The application-defined string that uniquely identifies the resource's User within a Room. If a client joins with an existing Identity, the existing client is disconnected. See [access tokens](https://www.twilio.com/docs/video/tutorials/user-identity-access-tokens) and [limits](https://www.twilio.com/docs/video/programmable-video-limits) for more info. "
           nullable: true
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         room_sid:
-          description: The SID of the participant's room
+          description: The SID of the participant's room.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RM[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the RoomParticipant resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^PA[0-9a-fA-F]{32}$
           type: string
         start_time:
-          description: The time of participant connected to the room in ISO 8601 format
+          description: The time of participant connected to the room in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#UTC) format.
           format: date-time
           nullable: true
           type: string
         status:
           $ref: "#/components/schemas/room_participant_enum_status"
-          description: The status of the Participant
+          description: "The status of the Participant. Can be: `connected` or `disconnected`."
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -2559,64 +2559,64 @@ components:
     video.v1.room.room_participant.room_participant_anonymize:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the RoomParticipant resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         duration:
-          description: Duration of time in seconds the participant was connected
+          description: The duration in seconds that the participant was `connected`. Populated only after the participant is `disconnected`.
           nullable: true
           type: integer
         end_time:
-          description: The time when the participant disconnected from the room in ISO 8601 format
+          description: The time when the participant disconnected from the room in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#UTC) format.
           format: date-time
           nullable: true
           type: string
         identity:
-          description: The SID of the participant
+          description: The SID of the participant.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^PA[0-9a-fA-F]{32}$
           type: string
         room_sid:
-          description: The SID of the participant's room
+          description: The SID of the participant's room.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RM[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the RoomParticipant resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^PA[0-9a-fA-F]{32}$
           type: string
         start_time:
-          description: The time of participant connected to the room in ISO 8601 format
+          description: The time of participant connected to the room in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#UTC) format.
           format: date-time
           nullable: true
           type: string
         status:
           $ref: "#/components/schemas/room_participant_anonymize_enum_status"
-          description: The status of the Participant
+          description: "The status of the Participant. Can be: `connected` or `disconnected`."
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -2624,51 +2624,51 @@ components:
     video.v1.room.room_participant.room_participant_published_track:
       properties:
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         enabled:
-          description: Whether the track is enabled
+          description: Whether the track is enabled.
           nullable: true
           type: boolean
         kind:
           $ref: "#/components/schemas/room_participant_published_track_enum_kind"
-          description: The track type
+          description: "The track type. Can be: `audio`, `video` or `data`."
           nullable: true
           type: string
         name:
-          description: The track name
+          description: The track name. Must be no more than 128 characters, and be unique among the participant's published tracks.
           nullable: true
           type: string
         participant_sid:
-          description: The SID of the Participant resource with the published track
+          description: The SID of the Participant resource with the published track.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^PA[0-9a-fA-F]{32}$
           type: string
         room_sid:
-          description: The SID of the Room resource where the track is published
+          description: The SID of the Room resource where the track is published.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RM[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the RoomParticipantPublishedTrack resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^MT[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -2676,17 +2676,17 @@ components:
     video.v1.room.room_participant.room_participant_subscribe_rule:
       properties:
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         participant_sid:
-          description: The SID of the Participant resource for the Subscribe Rules
+          description: The SID of the Participant resource for the Subscribe Rules.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2700,7 +2700,7 @@ components:
           pattern: ^RM[0-9a-fA-F]{32}$
           type: string
         rules:
-          description: A collection of Subscribe Rules that describe how to include or exclude matching tracks
+          description: A collection of Subscribe Rules that describe how to include or exclude matching tracks. See the [Specifying Subscribe Rules](https://www.twilio.com/docs/video/api/track-subscriptions#specifying-sr) section for further information.
           items:
             format: subscribe-rule
             properties:
@@ -2723,58 +2723,58 @@ components:
     video.v1.room.room_participant.room_participant_subscribed_track:
       properties:
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         enabled:
-          description: Whether the track is enabled
+          description: Whether the track is enabled.
           nullable: true
           type: boolean
         kind:
           $ref: "#/components/schemas/room_participant_subscribed_track_enum_kind"
-          description: The track type
+          description: "The track type. Can be: `audio`, `video` or `data`."
           nullable: true
           type: string
         name:
-          description: The track name
+          description: The track name. Must have no more than 128 characters and be unique among the participant's published tracks.
           nullable: true
           type: string
         participant_sid:
-          description: The SID of the participant that subscribes to the track
+          description: The SID of the participant that subscribes to the track.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^PA[0-9a-fA-F]{32}$
           type: string
         publisher_sid:
-          description: The SID of the participant that publishes the track
+          description: The SID of the participant that publishes the track.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^PA[0-9a-fA-F]{32}$
           type: string
         room_sid:
-          description: The SID of the room where the track is published
+          description: The SID of the room where the track is published.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RM[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the RoomParticipantSubscribedTrack resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^MT[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -2782,7 +2782,7 @@ components:
     video.v1.room.room_recording:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the RoomRecording resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2790,62 +2790,62 @@ components:
           type: string
         codec:
           $ref: "#/components/schemas/room_recording_enum_codec"
-          description: The codec used for the recording
+          description: "The codec used for the recording. Can be: `VP8` or `H264`."
           nullable: true
           type: string
         container_format:
           $ref: "#/components/schemas/room_recording_enum_format"
-          description: The file format for the recording
+          description: "The file format for the recording. Can be: `mka` or `mkv`. Video Room recordings are captured in [Matroska container format](https://matroska.org/), `mka` is for audio files and `mkv` for video files."
           nullable: true
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         duration:
-          description: The duration of the recording in seconds
+          description: The duration of the recording rounded to the nearest second. Sub-second duration tracks have a `duration` of 1 second
           nullable: true
           type: integer
         grouping_sids:
-          description: A list of SIDs related to the Recording
+          description: A list of SIDs related to the Recording. Includes the `room_sid` and `participant_sid`.
           nullable: true
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         media_external_location:
-          description: The URL of the media file associated with the recording when stored externally
+          description: The URL of the media file associated with the recording when stored externally. See [External S3 Recordings](/docs/video/api/external-s3-recordings) for more details.
           format: uri
           nullable: true
           type: string
         offset:
-          description: The number of milliseconds between a point in time that is common to all rooms in a group and when the source room of the recording started
+          description: The time in milliseconds elapsed between an arbitrary point in time, common to all group rooms, and the moment when the source room of this track started. This information provides a synchronization mechanism for recordings belonging to the same room.
           format: int64
           nullable: true
           type: integer
         room_sid:
-          description: The SID of the Room resource the recording is associated with
+          description: The SID of the Room resource the recording is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RM[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the RoomRecording resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^RT[0-9a-fA-F]{32}$
           type: string
         size:
-          description: The size of the recorded track in bytes
+          description: The size of the recorded track in bytes.
           format: int64
           nullable: true
           type: integer
         source_sid:
-          description: The SID of the recording source
+          description: The SID of the recording source. For a Room Recording, this value is a `track_sid`.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2853,20 +2853,20 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/room_recording_enum_status"
-          description: The status of the recording
+          description: "The status of the recording. Can be: `processing`, `completed`, or `deleted`. `processing` indicates the Recording is still being captured. `completed` indicates the Recording has been captured and is now available for download. `deleted` means the recording media has been deleted from the system, but its metadata is still available for historical purposes."
           nullable: true
           type: string
         track_name:
-          description: The name that was given to the source track of the recording
+          description: The name that was given to the source track of the recording. If no name is given, the `source_sid` is used.
           nullable: true
           type: string
         type:
           $ref: "#/components/schemas/room_recording_enum_type"
-          description: The recording's media type
+          description: "The recording's media type. Can be: `audio` or `video`."
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -2874,12 +2874,12 @@ components:
     video.v1.room.room_recording_rule:
       properties:
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
@@ -2891,7 +2891,7 @@ components:
           pattern: ^RM[0-9a-fA-F]{32}$
           type: string
         rules:
-          description: A collection of recording Rules that describe how to include or exclude matching tracks for recording
+          description: A collection of Recording Rules that describe how to include or exclude matching tracks for recording
           items:
             format: recording-rule
             properties:

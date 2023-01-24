@@ -1758,64 +1758,64 @@ components:
     supersim.v1.esim_profile:
       properties:
         account_sid:
-          description: The SID of the Account to which the eSIM Profile resource belongs
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) to which the eSIM Profile resource belongs.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         eid:
-          description: Identifier of the eUICC that can claim the eSIM Profile
+          description: Identifier of the eUICC that can claim the eSIM Profile.
           nullable: true
           type: string
         error_code:
-          description: Code indicating the failure if the download of the SIM Profile failed and the eSIM Profile is in `failed` state
+          description: Code indicating the failure if the download of the SIM Profile failed and the eSIM Profile is in `failed` state.
           nullable: true
           type: string
         error_message:
-          description: Error message describing the failure if the download of the SIM Profile failed and the eSIM Profile is in `failed` state
+          description: Error message describing the failure if the download of the SIM Profile failed and the eSIM Profile is in `failed` state.
           nullable: true
           type: string
         iccid:
-          description: The ICCID associated with the Sim resource
+          description: The [ICCID](https://en.wikipedia.org/wiki/Subscriber_identity_module#ICCID) associated with the Sim resource.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the eSIM Profile resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HP[0-9a-fA-F]{32}$
           type: string
         sim_sid:
-          description: The SID of the Sim resource that this eSIM Profile controls
+          description: The SID of the [Sim](https://www.twilio.com/docs/wireless/api/sim-resource) resource that this eSIM Profile controls.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HS[0-9a-fA-F]{32}$
           type: string
         smdp_plus_address:
-          description: Address of the SM-DP+ server from which the Profile will be downloaded
+          description: Address of the SM-DP+ server from which the Profile will be downloaded. The URL will appear once the eSIM Profile reaches the status `available`.
           format: uri
           nullable: true
           type: string
         status:
           $ref: "#/components/schemas/esim_profile_enum_status"
-          description: The status of the eSIM Profile
+          description: "The status of the eSIM Profile. Can be: `reserving`, `available`, `downloaded`, `installed` or `failed`. See the [eSIM Profile Status Values](https://www.twilio.com/docs/iot/supersim/api/esimprofile-resource#status-values) for a description of each."
           nullable: true
           type: string
         url:
-          description: The absolute URL of the eSIM Profile resource
+          description: The absolute URL of the eSIM Profile resource.
           format: uri
           nullable: true
           type: string
@@ -1823,37 +1823,37 @@ components:
     supersim.v1.fleet:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Fleet resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         data_enabled:
-          description: Defines whether SIMs in the Fleet are capable of using data connectivity
+          description: Defines whether SIMs in the Fleet are capable of using 2G/3G/4G/LTE/CAT-M data connectivity. Defaults to `true`.
           nullable: true
           type: boolean
         data_limit:
-          description: The total data usage (download and upload combined) in Megabytes that each Super SIM assigned to the Fleet can consume
+          description: The total data usage (download and upload combined) in Megabytes that each Super SIM assigned to the Fleet can consume during a billing period (normally one month). Value must be between 1MB (1) and 2TB (2,000,000). Defaults to 1GB (1,000).
           nullable: true
           type: integer
         data_metering:
           $ref: "#/components/schemas/fleet_enum_data_metering"
-          description: The model by which a SIM is metered and billed
+          description: The model by which a SIMs usage is metered and billed. Defaults to `payg`.
           nullable: true
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         ip_commands_method:
-          description: A string representing the HTTP method to use when making a request to `ip_commands_url`
+          description: A string representing the HTTP method to use when making a request to `ip_commands_url`. Can be one of `POST` or `GET`. Defaults to `POST`.
           enum:
             - HEAD
             - GET
@@ -1865,30 +1865,30 @@ components:
           nullable: true
           type: string
         ip_commands_url:
-          description: The URL that will receive a webhook when a Super SIM in the Fleet is used to send an IP Command from your device
+          description: The URL that will receive a webhook when a Super SIM in the Fleet is used to send an IP Command from your device to a special IP address. Your server should respond with an HTTP status code in the 200 range; any response body will be ignored.
           format: uri
           nullable: true
           type: string
         network_access_profile_sid:
-          description: The SID of the Network Access Profile of the Fleet
+          description: The SID of the Network Access Profile that controls which cellular networks the Fleet's SIMs can connect to.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HA[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Fleet resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HF[0-9a-fA-F]{32}$
           type: string
         sms_commands_enabled:
-          description: Defines whether SIMs in the Fleet are capable of sending and receiving machine-to-machine SMS via Commands
+          description: Defines whether SIMs in the Fleet are capable of sending and receiving machine-to-machine SMS via Commands. Defaults to `true`.
           nullable: true
           type: boolean
         sms_commands_method:
-          description: A string representing the HTTP method to use when making a request to `sms_commands_url`
+          description: A string representing the HTTP method to use when making a request to `sms_commands_url`. Can be one of `POST` or `GET`. Defaults to `POST`.
           enum:
             - HEAD
             - GET
@@ -1900,16 +1900,16 @@ components:
           nullable: true
           type: string
         sms_commands_url:
-          description: The URL that will receive a webhook when a Super SIM in the Fleet is used to send an SMS from your device to the SMS Commands number
+          description: The URL that will receive a webhook when a Super SIM in the Fleet is used to send an SMS from your device to the SMS Commands number. Your server should respond with an HTTP status code in the 200 range; any response body will be ignored.
           format: uri
           nullable: true
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Fleet resource
+          description: The absolute URL of the Fleet resource.
           format: uri
           nullable: true
           type: string
@@ -1917,57 +1917,62 @@ components:
     supersim.v1.ip_command:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the IP Command resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         device_ip:
-          description: The IP address of the device that the IP Command was sent to or received from
+          description: The IP address of the device that the IP Command was sent to or received from. For an IP Command sent to a Super SIM, `device_ip` starts out as `null`, and once the IP Command is “sent”, the `device_ip` will be filled out. An IP Command sent from a Super SIM have its `device_ip` always set.
           nullable: true
           type: string
         device_port:
-          description: The port that the IP Command either originated from or was sent to
+          description: For an IP Command sent to a Super SIM, it would be the destination port of the IP message. For an IP Command sent from a Super SIM, it would be the source port of the IP message.
           nullable: true
           type: integer
         direction:
           $ref: "#/components/schemas/ip_command_enum_direction"
-          description: The direction of the IP Command
+          description: Either `to_sim` or `from_sim`. Indicates whether the IP Command resource was sent from or to the Super SIM.
           nullable: true
           type: string
         payload:
-          description: The payload of the IP Command sent to or from the Super SIM
+          description: |-
+            The payload that is carried in the IP/UDP message. The payload can be encoded in either text or binary format. For text payload, UTF-8 encoding must be used.
+
+            For an IP Command sent to a Super SIM, the payload is appended to the IP/UDP message “as is”. The payload should not exceed 1300 bytes.
+
+            For an IP Command sent from a Super SIM, the payload from the received IP/UDP message is extracted and sent in binary encoding. For an IP Command sent from a Super SIM, the payload should not exceed 1300 bytes. If it is larger than 1300 bytes, there might be fragmentation on the upstream and the message may appear truncated.
           nullable: true
           type: string
         payload_type:
           $ref: "#/components/schemas/ip_command_enum_payload_type"
-          description: The payload type of the IP Command
+          description: Either “text” or “binary”. For an IP Command sent to a Super SIM, `payload_type` is configurable. For an IP Command sent from a Super SIM, `payload_type` is always “binary”.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the IP Command resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HG[0-9a-fA-F]{32}$
           type: string
         sim_iccid:
-          description: The ICCID of the Super SIM that this IP Command was sent to or from
+          description: The [ICCID](https://en.wikipedia.org/wiki/Subscriber_identity_module#ICCID) of the [Super SIM](https://www.twilio.com/docs/iot/supersim/api/sim-resource) that this IP Command was sent to or from.
           nullable: true
           type: string
         sim_sid:
-          description: The SID of the Super SIM that this IP Command was sent to or from
+          description: The SID of the [Super SIM](https://www.twilio.com/docs/iot/supersim/api/sim-resource) that this IP Command was sent to or from.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1975,11 +1980,11 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/ip_command_enum_status"
-          description: The status of the IP Command
+          description: "The delivery status of the IP Command. This is one of the following: “queued”, “sent”, “failed” or “received”."
           nullable: true
           type: string
         url:
-          description: The absolute URL of the IP Command resource
+          description: The absolute URL of the IP Command resource.
           format: uri
           nullable: true
           type: string
@@ -1987,27 +1992,27 @@ components:
     supersim.v1.network:
       properties:
         friendly_name:
-          description: A human readable identifier of this resource
+          description: A human readable identifier of this resource.
           nullable: true
           type: string
         identifiers:
-          description: The MCC/MNCs included in the Network resource
+          description: Array of objects identifying the [MCC-MNCs](https://en.wikipedia.org/wiki/Mobile_country_code) that are included in the Network resource.
           items: {}
           nullable: true
           type: array
         iso_country:
-          description: The ISO country code of the Network resource
+          description: The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the Network resource.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Network resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HW[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the Network resource
+          description: The absolute URL of the Network resource.
           format: uri
           nullable: true
           type: string
@@ -2015,19 +2020,19 @@ components:
     supersim.v1.network_access_profile:
       properties:
         account_sid:
-          description: The SID of the Account that the Network Access Profile belongs to
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that the Network Access Profile belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
@@ -2036,18 +2041,18 @@ components:
           nullable: true
           type: object
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that identifies the Network Access Profile resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HA[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the Network Access Profile resource.
           format: uri
           nullable: true
           type: string
@@ -2055,34 +2060,34 @@ components:
     supersim.v1.network_access_profile.network_access_profile_network:
       properties:
         friendly_name:
-          description: A human readable identifier of this resource
+          description: A human readable identifier of the Network this resource refers to.
           nullable: true
           type: string
         identifiers:
-          description: The MCC/MNCs included in the resource
+          description: Array of objects identifying the [MCC-MNCs](https://en.wikipedia.org/wiki/Mobile_country_code) that are included in the Network resource.
           items: {}
           nullable: true
           type: array
         iso_country:
-          description: The ISO country code of the Network resource
+          description: The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the Network resource.
           nullable: true
           type: string
         network_access_profile_sid:
-          description: The unique string that identifies the Network Access Profile resource
+          description: The unique string that identifies the Network resource's Network Access Profile resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HA[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that identifies the Network resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HW[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the Network resource.
           format: uri
           nullable: true
           type: string
@@ -2090,38 +2095,38 @@ components:
     supersim.v1.settings_update:
       properties:
         date_completed:
-          description: The time when the update successfully completed and the new settings were applied to the SIM
+          description: The time, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format, when the update successfully completed and the new settings were applied to the SIM.
           format: date-time
           nullable: true
           type: string
         date_created:
-          description: The date this Settings Update was created
+          description: The date that this Settings Update was created, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date this Settings Update was last updated
+          description: The date that this Settings Update was updated, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         iccid:
-          description: The ICCID associated with the SIM
+          description: The [ICCID](https://en.wikipedia.org/wiki/SIM_card#ICCID) associated with the SIM.
           nullable: true
           type: string
         packages:
-          description: Array containing the different Settings Packages that will be applied to the SIM after the update completes
+          description: Array containing the different Settings Packages that will be applied to the SIM after the update completes. Each object within the array indicates the name and the version of the Settings Package that will be on the SIM if the update is successful.
           items: {}
           nullable: true
           type: array
         sid:
-          description: The unique identifier of this Settings Update
+          description: The unique identifier of this Settings Update.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^OB[0-9a-fA-F]{32}$
           type: string
         sim_sid:
-          description: The SID of the Super SIM to which this Settings Update was applied
+          description: The SID of the Super SIM to which this Settings Update was applied.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2129,38 +2134,38 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/settings_update_enum_status"
-          description: The Status of this Settings Update
+          description: The Status of this Settings Update. One of `scheduled`, `in-progress`, `successful` or `failed`.
           nullable: true
           type: string
       type: object
     supersim.v1.sim:
       properties:
         account_sid:
-          description: The SID of the Account that the Super SIM belongs to
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that the Super SIM belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         fleet_sid:
-          description: The unique ID of the Fleet configured for this SIM
+          description: The unique ID of the Fleet configured for this SIM.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HF[0-9a-fA-F]{32}$
           type: string
         iccid:
-          description: The ICCID associated with the SIM
+          description: The [ICCID](https://en.wikipedia.org/wiki/Subscriber_identity_module#ICCID) associated with the SIM.
           nullable: true
           type: string
         links:
@@ -2168,7 +2173,7 @@ components:
           nullable: true
           type: object
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that identifies the Sim resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2176,15 +2181,15 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/sim_enum_status"
-          description: The status of the Super SIM
+          description: The status of the Super SIM. Can be `new`, `ready`, `active`, `inactive`, or `scheduled`. See the [Super SIM Status Values](https://www.twilio.com/docs/iot/supersim/api/sim-resource#status-values) for a description of each.
           nullable: true
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the resource
+          description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the Sim Resource
+          description: The absolute URL of the Sim Resource.
           format: uri
           nullable: true
           type: string
@@ -2192,48 +2197,48 @@ components:
     supersim.v1.sim.billing_period:
       properties:
         account_sid:
-          description: The SID of the Account the Super SIM belongs to
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) the Super SIM belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         end_time:
-          description: The end time of the Billing Period
+          description: The end time of the Billing Period specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         period_type:
           $ref: "#/components/schemas/billing_period_enum_bp_type"
-          description: The type of the Billing Period
+          description: The type of Billing Period. Can be `ready` or `active`.
           nullable: true
           type: string
         sid:
-          description: The SID of the Billing Period
+          description: The SID of the Billing Period.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HB[0-9a-fA-F]{32}$
           type: string
         sim_sid:
-          description: The SID of the Super SIM the Billing Period belongs to
+          description: The SID of the Super SIM the Billing Period belongs to.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HS[0-9a-fA-F]{32}$
           type: string
         start_time:
-          description: The start time of the Billing Period
+          description: The start time of the Billing Period specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
@@ -2246,47 +2251,47 @@ components:
           type: string
         ip_address_version:
           $ref: "#/components/schemas/sim_ip_address_enum_ip_address_version"
-          description: IP address version
+          description: IP address version of the corresponding IP address
           nullable: true
           type: string
       type: object
     supersim.v1.sms_command:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the SMS Command resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         direction:
           $ref: "#/components/schemas/sms_command_enum_direction"
-          description: The direction of the SMS Command
+          description: The direction of the SMS Command. Can be `to_sim` or `from_sim`. The value of `to_sim` is synonymous with the term `mobile terminated`, and `from_sim` is synonymous with the term `mobile originated`.
           nullable: true
           type: string
         payload:
-          description: The message body of the SMS Command sent to or from the SIM
+          description: The message body of the SMS Command sent to or from the SIM. For text mode messages, this can be up to 160 characters.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the SMS Command resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HC[0-9a-fA-F]{32}$
           type: string
         sim_sid:
-          description: The SID of the SIM that this SMS Command was sent to or from
+          description: The SID of the [SIM](https://www.twilio.com/docs/iot/supersim/api/sim-resource) that this SMS Command was sent to or from.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2294,11 +2299,11 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/sms_command_enum_status"
-          description: The status of the SMS Command
+          description: "The status of the SMS Command. Can be: `queued`, `sent`, `delivered`, `received` or `failed`. See the [SMS Command Status Values](https://www.twilio.com/docs/wireless/api/smscommand-resource#status-values) for a description of each."
           nullable: true
           type: string
         url:
-          description: The absolute URL of the SMS Command resource
+          description: The absolute URL of the SMS Command resource.
           format: uri
           nullable: true
           type: string
@@ -2306,14 +2311,14 @@ components:
     supersim.v1.usage_record:
       properties:
         account_sid:
-          description: The SID of the Account that incurred the usage.
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that incurred the usage.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         billed_unit:
-          description: The currency in which the billed amounts are measured, specified in the 3 letter ISO 4127 format (e.g. `USD`, `EUR`, `JPY`).
+          description: The currency in which the billed amounts are measured, specified in the 3 letter ISO 4127 format (e.g. `USD`, `EUR`, `JPY`). This can be null when data_toal_billed is 0 and we do not yet have billing information for the corresponding data usage. Refer to [Data Usage Processing](https://www.twilio.com/docs/iot/supersim/api/usage-record-resource#data-usage-processing) for more details.
           format: currency
           nullable: true
           type: string
@@ -2328,7 +2333,7 @@ components:
           nullable: true
           type: integer
         data_total_billed:
-          description: Total amount in the `billed_unit` that was charged for the data uploaded or downloaded.
+          description: Total amount in the `billed_unit` that was charged for the data uploaded or downloaded. Will return 0 for usage prior to February 1, 2022. Value may be 0 despite `data_total` being greater than 0 if the data usage is still being processed by Twilio's billing system. Refer to [Data Usage Processing](https://www.twilio.com/docs/iot/supersim/api/usage-record-resource#data-usage-processing) for more details.
           nullable: true
           type: number
         data_upload:
@@ -2337,29 +2342,29 @@ components:
           nullable: true
           type: integer
         fleet_sid:
-          description: SID of the Fleet resource on which the usage occurred.
+          description: SID of the Fleet resource the usage occurred on. Value will only be present when either a value for the `Fleet` query parameter is provided or when UsageRecords are grouped by `fleet`. Otherwise, the value will be `null`.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HF[0-9a-fA-F]{32}$
           type: string
         iso_country:
-          description: Alpha-2 ISO Country Code of the country the usage occurred in.
+          description: Alpha-2 ISO Country Code that the usage occurred in. Value will only be present when either a value for the `IsoCountry` query parameter is provided or when UsageRecords are grouped by `isoCountry`. Otherwise, the value will be `null`.
           format: iso-country-code
           nullable: true
           type: string
         network_sid:
-          description: SID of the Network resource on which the usage occurred.
+          description: SID of the Network resource the usage occurred on. Value will only be present when either a value for the `Network` query parameter is provided or when UsageRecords are grouped by `network`. Otherwise, the value will be `null`.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^HW[0-9a-fA-F]{32}$
           type: string
         period:
-          description: The time period for which the usage is reported.
+          description: The time period for which the usage is reported. The period is represented as a pair of `start_time` and `end_time` timestamps specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           nullable: true
         sim_sid:
-          description: SID of a Sim resource to which the UsageRecord belongs.
+          description: SID of a Sim resource to which the UsageRecord belongs. Value will only be present when either a value for the `Sim` query parameter is provided or when UsageRecords are grouped by `sim`. Otherwise, the value will be `null`.
           maxLength: 34
           minLength: 34
           nullable: true

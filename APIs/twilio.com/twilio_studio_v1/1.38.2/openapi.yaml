@@ -1061,33 +1061,33 @@ components:
     studio.v1.flow:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Flow resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the Flow
+          description: The string that you assigned to describe the Flow.
           nullable: true
           type: string
         links:
-          description: Nested resource URLs
+          description: The URLs of the Flow's nested resources.
           format: uri-map
           nullable: true
           type: object
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Flow resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1095,66 +1095,66 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/flow_enum_status"
-          description: The status of the Flow
+          description: "The status of the Flow. Can be: `draft` or `published`."
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
         version:
-          description: The latest version number of the Flow's definition
+          description: The latest version number of the Flow's definition.
           nullable: true
           type: integer
       type: object
     studio.v1.flow.engagement:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Engagement resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         contact_channel_address:
-          description: The phone number, SIP address or Client identifier that triggered this Engagement
+          description: The phone number, SIP address or Client identifier that triggered this Engagement. Phone numbers are in E.164 format (+16175551212). SIP addresses are formatted as `name@company.com`. Client identifiers are formatted `client:name`.
           nullable: true
           type: string
         contact_sid:
-          description: The SID of the Contact
+          description: The SID of the Contact.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FC[0-9a-fA-F]{32}$
           type: string
         context:
-          description: The current state of the execution flow
+          description: The current state of the execution flow. As your flow executes, we save the state in a flow context. Your widgets can access the data in the flow context as variables, either in configuration fields or in text areas as variable substitution.
           nullable: true
         date_created:
-          description: The ISO 8601 date and time in GMT when the Engagement was created
+          description: The date and time in GMT when the Engagement was created in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the Engagement was last updated
+          description: The date and time in GMT when the Engagement was updated in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         flow_sid:
-          description: The SID of the Flow
+          description: The SID of the Flow.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FW[0-9a-fA-F]{32}$
           type: string
         links:
-          description: The URLs of the Engagement's nested resources
+          description: The URLs of the Engagement's nested resources.
           format: uri-map
           nullable: true
           type: object
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Engagement resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1162,11 +1162,11 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/engagement_enum_status"
-          description: The status of the Engagement
+          description: "The status of the Engagement. Can be: `active` or `ended`."
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -1174,31 +1174,31 @@ components:
     studio.v1.flow.engagement.engagement_context:
       properties:
         account_sid:
-          description: Account SID
+          description: The SID of the Account.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         context:
-          description: Flow state
+          description: As your flow executes, we save the state in what's called the Flow Context. Any data in the flow context can be accessed by your widgets as variables, either in configuration fields or in text areas as variable substitution.
           nullable: true
         engagement_sid:
-          description: Engagement SID
+          description: The SID of the Engagement.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FN[0-9a-fA-F]{32}$
           type: string
         flow_sid:
-          description: Flow SID
+          description: The SID of the Flow.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FW[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The URL of the resource
+          description: The URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -1206,65 +1206,65 @@ components:
     studio.v1.flow.engagement.step:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Step resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         context:
-          description: The current state of the flow
+          description: The current state of the Flow's Execution. As a flow executes, we save its state in this context. We save data that your widgets can access as variables in configuration fields or in text areas as variable substitution.
           nullable: true
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         engagement_sid:
-          description: The SID of the Engagement
+          description: The SID of the Engagement.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FN[0-9a-fA-F]{32}$
           type: string
         flow_sid:
-          description: The SID of the Flow
+          description: The SID of the Flow.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FW[0-9a-fA-F]{32}$
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         name:
-          description: The event that caused the Flow to transition to the Step
+          description: The event that caused the Flow to transition to the Step.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Step resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FT[0-9a-fA-F]{32}$
           type: string
         transitioned_from:
-          description: The Widget that preceded the Widget for the Step
+          description: The Widget that preceded the Widget for the Step.
           nullable: true
           type: string
         transitioned_to:
-          description: The Widget that will follow the Widget for the Step
+          description: The Widget that will follow the Widget for the Step.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -1272,38 +1272,38 @@ components:
     studio.v1.flow.engagement.step.step_context:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the StepContext resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         context:
-          description: The current state of the flow
+          description: The current state of the Flow's Execution. As a flow executes, we save its state in this context. We save data that your widgets can access as variables in configuration fields or in text areas as variable substitution.
           nullable: true
         engagement_sid:
-          description: The SID of the Engagement
+          description: The SID of the Engagement.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FN[0-9a-fA-F]{32}$
           type: string
         flow_sid:
-          description: The SID of the Flow
+          description: The SID of the Flow.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FW[0-9a-fA-F]{32}$
           type: string
         step_sid:
-          description: Step SID
+          description: The SID of the Step the context is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FT[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -1311,50 +1311,50 @@ components:
     studio.v1.flow.execution:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Execution resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         contact_channel_address:
-          description: The phone number, SIP address or Client identifier that triggered the Execution
+          description: The phone number, SIP address or Client identifier that triggered the Execution. Phone numbers are in E.164 format (e.g. +16175551212). SIP addresses are formatted as `name@company.com`. Client identifiers are formatted `client:name`.
           nullable: true
           type: string
         contact_sid:
-          description: The SID of the Contact
+          description: The SID of the Contact.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FC[0-9a-fA-F]{32}$
           type: string
         context:
-          description: The current state of the flow
+          description: The current state of the Flow's Execution. As a flow executes, we save its state in this context. We save data that your widgets can access as variables in configuration fields or in text areas as variable substitution.
           nullable: true
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         flow_sid:
-          description: The SID of the Flow
+          description: The SID of the Flow.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FW[0-9a-fA-F]{32}$
           type: string
         links:
-          description: Nested resource URLs
+          description: The URLs of nested resources.
           format: uri-map
           nullable: true
           type: object
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Execution resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1362,11 +1362,11 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/execution_enum_status"
-          description: The status of the Execution
+          description: "The status of the Execution. Can be: `active` or `ended`."
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -1374,31 +1374,31 @@ components:
     studio.v1.flow.execution.execution_context:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the ExecutionContext resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         context:
-          description: The current state of the flow
+          description: The current state of the Flow's Execution. As a flow executes, we save its state in this context. We save data that your widgets can access as variables in configuration fields or in text areas as variable substitution.
           nullable: true
         execution_sid:
-          description: The SID of the Execution
+          description: The SID of the context's Execution resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FN[0-9a-fA-F]{32}$
           type: string
         flow_sid:
-          description: The SID of the Flow
+          description: The SID of the Flow.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FW[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -1406,65 +1406,65 @@ components:
     studio.v1.flow.execution.execution_step:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the ExecutionStep resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         context:
-          description: The current state of the flow
+          description: The current state of the Flow's Execution. As a flow executes, we save its state in this context. We save data that your widgets can access as variables in configuration fields or in text areas as variable substitution.
           nullable: true
         date_created:
-          description: The ISO 8601 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           format: date-time
           nullable: true
           type: string
         execution_sid:
-          description: The SID of the Execution
+          description: The SID of the Step's Execution resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FN[0-9a-fA-F]{32}$
           type: string
         flow_sid:
-          description: The SID of the Flow
+          description: The SID of the Flow.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FW[0-9a-fA-F]{32}$
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         name:
-          description: The event that caused the Flow to transition to the Step
+          description: The event that caused the Flow to transition to the Step.
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the ExecutionStep resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FT[0-9a-fA-F]{32}$
           type: string
         transitioned_from:
-          description: The Widget that preceded the Widget for the Step
+          description: The Widget that preceded the Widget for the Step.
           nullable: true
           type: string
         transitioned_to:
-          description: The Widget that will follow the Widget for the Step
+          description: The Widget that will follow the Widget for the Step.
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -1472,38 +1472,38 @@ components:
     studio.v1.flow.execution.execution_step.execution_step_context:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the ExecutionStepContext resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         context:
-          description: The current state of the flow
+          description: The current state of the Flow's Execution. As a flow executes, we save its state in this context. We save data that your widgets can access as variables in configuration fields or in text areas as variable substitution.
           nullable: true
         execution_sid:
-          description: The SID of the Execution
+          description: The SID of the context's Execution resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FN[0-9a-fA-F]{32}$
           type: string
         flow_sid:
-          description: The SID of the Flow
+          description: The SID of the Flow.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FW[0-9a-fA-F]{32}$
           type: string
         step_sid:
-          description: Step SID
+          description: The SID of the Step that the context is associated with.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^FT[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string

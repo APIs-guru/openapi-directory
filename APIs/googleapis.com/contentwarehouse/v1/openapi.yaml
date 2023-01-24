@@ -245,6 +245,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{name}:runPipeline":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Run a predefined pipeline.
+      operationId: contentwarehouse.projects.locations.runPipeline
+      parameters:
+        - description: "Required. The resource name which owns the resources of the pipeline. Format: projects/{project_number}/locations/{location}."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudContentwarehouseV1RunPipelineRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{parent}/documentLinks":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2444,6 +2486,7 @@ components:
             - DATA_STUDIO_SPACES_AFFINITY
             - SOJI_AFFINITY
             - PLAY_MOVIES_ANDROID_AFFINITY
+            - DATA_STUDIO_DOMAIN_ONLY_AFFINITY
           type: string
         containerId:
           description: The ID of the container
@@ -3026,7 +3069,7 @@ components:
           type: string
       type: object
     AppsPeopleOzExternalMergedpeopleapiEmailCertificate:
-      description: Represents a hosted S/MIME certificate config for use with Gmail. See //caribou/smime/proto/certificate_status.proto. There can be zero or more certificates associated with an email address, be it profile email or contact email.
+      description: Represents a S/MIME certificate config for use with Gmail. See //caribou/smime/proto/certificate_status.proto. There can be zero or more certificates associated with an email address, be it profile email or contact email.
       properties:
         configurationName:
           description: The name of this certificate configuration. Examples could be "High security level" or "For domain emails only".
@@ -4223,6 +4266,7 @@ components:
             $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiProfileUrl"
           type: array
         pronoun:
+          description: Pronouns are not supported for consumer profiles. See go/pronouns-in-people-system-prd for more details.
           items:
             $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiPronoun"
           type: array
@@ -4719,6 +4763,11 @@ components:
       type: object
     AppsPeopleOzExternalMergedpeopleapiPhoto:
       properties:
+        decoration:
+          description: Read-only. Use UpdatePersonPhoto to change photo decorations. If this photo is decorated, this field contains information about its decorations. For now, this will contain at most one entry.
+          items:
+            $ref: "#/components/schemas/SocialGraphApiProtoDecorationOverlay"
+          type: array
         emojiAvatarUrl:
           description: "URL of an emoji avatar as an image. See go/emoji-cdn. PeopleAPI will return the SVG format so that it can be scaled client side and so that the images will not be animated. All clients that use this field must also have fall-back handling for using the `Photo.url` field if this is empty. When we have FIFE-compatible emoji-image URLs we will drop this field and return the Photo.url instead. Clients that have their own go/emoji-rendering integration may prefer to render the emoji-avatar from `Photo.glyph` field using their rendering system so that the emoji version/style match the rest of the application. For further background, see go/chatroom-avatar-as-roster-metadata. This field will only be populated if all of: - The PersonFieldMetadata `container_type` for the Photo is NAMED_CHAT_ROOM - The chat room has an emoji type avatar image set"
           type: string
@@ -4741,6 +4790,9 @@ components:
         monogramBackground:
           description: When is_monogram=true, this is the background color of the monogram photo as a hex RGB formatted string "RRGGBB".
           type: string
+        originalPhoto:
+          $ref: "#/components/schemas/SocialGraphApiProtoImageReference"
+          description: Read-only. A reference to the original, undecorated profile photo in storage. This field is not stored. It is populated by a live read to /SocialGraphImageService.GetActiveProfilePhoto. This field is only returned when "person.photo.original_photo" is specified in the request mask.
         photoId:
           $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiPhotoPhotoStorageId"
           description: For writes only. Indicates photo content for person photo-field update. Currently only used for profile-photo updates (not contact photos yet).
@@ -7365,7 +7417,7 @@ components:
           $ref: "#/components/schemas/AssistantApiOutputRestrictions"
           description: These are user configured restrictions indicating what the device is allowed to output from the privacy point of view.
         popOnLockscreenCapability:
-          description: Capability to support Pop on lockscreen. TODO(b/230626444) this is for short term workaround for TNG MA DF. Should be deprecated when long term solution is available. go/pop-on-lockscreen-for-tng-ma.
+          description: Capability to support Pop on lockscreen.
           enum:
             - POP_ON_LOCKSCREEN_DEFAULT
             - POP_ON_LOCKSCREEN_ENABLED
@@ -11431,6 +11483,14 @@ components:
           format: int32
           type: integer
       type: object
+    AssistantLogsProviderAnnotationLog:
+      description: Provider annotation annotated from the query.
+      properties:
+        packageNames:
+          items:
+            type: string
+          type: array
+      type: object
     AssistantLogsQueryAnnotationLog:
       description: Log about the query requirements
       properties:
@@ -11442,6 +11502,9 @@ components:
           items:
             $ref: "#/components/schemas/AssistantLogsDeviceAnnotationLog"
           type: array
+        providerAnnotation:
+          $ref: "#/components/schemas/AssistantLogsProviderAnnotationLog"
+          description: Log the provider annotations annotated from the query.
         roomAnnotation:
           $ref: "#/components/schemas/AssistantLogsRoomAnnotationLog"
           description: TODO(b/171250187) Deprecates the optional RoomAnnotationLog and DeviceAnnotationLog. Deprecated, please use device_annotations.
@@ -15797,95 +15860,6 @@ components:
       description: Transient generic data that will not be saved on the server.
       properties: {}
       type: object
-    EntitySignalsClassificationOutput:
-      description: Output of the classifier.
-      properties:
-        labels:
-          description: Filled if used logistic regression (see ewok.proto for available labels).
-          items:
-            $ref: "#/components/schemas/EntitySignalsWeightedRelevanceRating"
-          type: array
-        relevanceScore:
-          description: If using linear regression, this is the output value of the regression. If using logistic regression, this is the weighted aggregated rating. See http://go/entitymetric
-          format: float
-          type: number
-      type: object
-    EntitySignalsEntityClassification:
-      description: Collection of input, extracted features and classification output.
-      properties:
-        entityId:
-          description: Entity id.
-          type: string
-        features:
-          description: Input features used in classification.
-          items:
-            $ref: "#/components/schemas/EntitySignalsEntityFeature"
-          type: array
-        output:
-          $ref: "#/components/schemas/EntitySignalsClassificationOutput"
-          description: Classification output.
-      type: object
-    EntitySignalsEntityFeature:
-      properties:
-        code:
-          enum:
-            - INVALID
-            - NO_FEATURE_ENUM
-            - WEBREF__ANCHOR_SCORE
-            - WEBREF__BODY_SCORE
-            - WEBREF__BUCKETIZED_TOPICALITY__0
-            - WEBREF__BUCKETIZED_TOPICALITY__1
-            - WEBREF__BUCKETIZED_TOPICALITY__2
-            - WEBREF__BUCKETIZED_TOPICALITY__3
-            - WEBREF__BUCKETIZED_TOPICALITY__4
-            - WEBREF__CONFIDENCE_SCORE
-            - WEBREF__CONNECTEDNESS
-            - WEBREF__MENTION__MENTION_SCORE_AVG__BODY
-            - WEBREF__MENTION__MENTION_SCORE_AVG__ANCHOR
-            - WEBREF__MENTION__MENTION_SCORE_AVG__QUERY
-            - WEBREF__MENTION__SUPPORT_SCORE_AVG__ANCHOR
-            - WEBREF__MENTION__SUPPORT_SCORE_AVG__BODY
-            - WEBREF__MENTION__SUPPORT_SCORE_AVG__QUERY
-            - WEBREF__MENTION__TOKEN_WEIGHT_SUM__ANCHOR
-            - WEBREF__MENTION__TOKEN_WEIGHT_SUM__BODY
-            - WEBREF__MENTION__TOKEN_WEIGHT_SUM__QUERY
-            - WEBREF__NB_SCORE
-            - WEBREF__NORMALIZED_TOPICALITY
-            - WEBREF__TOPICALITY
-            - WEBREF__TOPICALITY_BUCKET__0
-            - WEBREF__TOPICALITY_BUCKET__1
-            - WEBREF__TOPICALITY_BUCKET__2
-            - WEBREF__TOPICALITY_BUCKET__3
-            - WEBREF__TOPICALITY_BUCKET__4
-            - WEBREF__TOTAL_CANDIDATE_COUNT
-            - ENTITY_SIGNALS__OTM__MAX
-            - ENTITY_SIGNALS__OTM__GEO__AUTO
-            - ENTITY_SIGNALS__OTM__GEO__HUMAN
-            - ENTITY_SIGNALS__OTM__VERTICALS4__AUTO
-            - ENTITY_SIGNALS__OTM__VERTICALS4__HUMAN
-          type: string
-        name:
-          description: Name of the feature. For a completely list of available features, please check http://go/entityclassifierfeatures
-          type: string
-        value:
-          description: Value of the feature.
-          format: float
-          type: number
-      type: object
-    EntitySignalsWeightedRelevanceRating:
-      properties:
-        rating:
-          enum:
-            - UNRATED
-            - NOT_RELEVANT
-            - BARELY_RELEVANT
-            - RELEVANT
-            - IMPORTANT
-          type: string
-        weight:
-          format: float
-          type: number
-      type: object
     EventIdMessage:
       description: "An EventId is a 128 bit identifier that uniquely identifies an event, such as a query. The event time recorded to the nearest microsecond, along with information about the process generating the event, ensures that all EventIds are unique. Details of this EventId are described in a design document: http://www/eng/designdocs/sawmill/adlogs.html"
       properties:
@@ -16519,7 +16493,7 @@ components:
           format: int32
           type: integer
         ContentType:
-          description: See enum ContentType in webutil/http/content-type.proto.
+          description: See enum ContentType in //depot/google3/webutil/http/content-type.proto.
           format: int32
           type: integer
         CrawlTime:
@@ -18004,6 +17978,8 @@ components:
             - PROVIDER_UNITE
             - PROVIDER_NEOGY
             - PROVIDER_AMPUP
+            - PROVIDER_LOOP
+            - PROVIDER_ZEST
           type: string
         rawMetadata:
           description: For every key that is used in raw_data from this source, there must be a corresponding entry in raw_metadata that describes this key.
@@ -18677,7 +18653,7 @@ components:
           type: array
         replacedBy:
           $ref: "#/components/schemas/GeostoreFeatureIdListProto"
-          description: If the feature has been REPLACED by one or more other feature(s), this is the list of feature IDs of the replacement feature(s). Note that the other features may themselves be removed.
+          description: DEPRECATED - Use feature.metadata.feature_replacement_info instead. This field was never populated.
         transitivelyDuplicateOf:
           $ref: "#/components/schemas/GeostoreFeatureIdProto"
           description: If the feature has been transitively marked as a DUPLICATE of another feature (via a chain of size >= 1), this is the feature ID of that other feature which is the end of the chain. The field is always set even if the chain is of size 1. Note that the other feature may itself be removed. This field is only set in case (3).
@@ -19043,7 +19019,7 @@ components:
           type: number
         geopoliticalGeometry:
           $ref: "#/components/schemas/GeostoreGeopoliticalGeometryProto"
-          description: RESERVED
+          description: Geopolitical (unsimplified) polygons for a feature for different geopolitical use cases.
         htmlText:
           description: "** DEPRECATED ** Features can have zero or more HTML texts associated with them. These might be HTML balloons used by Google Earth, for example."
           items:
@@ -19611,7 +19587,7 @@ components:
           description: Represents vertical ordering for this feature relative to other geometrically-overlaping features. See go/aboutgrades for more information about distinction among different levels.
         waterRemovedPolygon:
           $ref: "#/components/schemas/GeostorePolygonProto"
-          description: RESERVED
+          description: A version of the geometry which has water removed but is not simplified (thus having equal or more vertices than polygon_for_display).
         website:
           description: The official website of this feature. Stored as a repeated field to allow for multilingual official websites (see comments in url.proto).
           items:
@@ -20633,6 +20609,8 @@ components:
             - PROVIDER_UNITE
             - PROVIDER_NEOGY
             - PROVIDER_AMPUP
+            - PROVIDER_LOOP
+            - PROVIDER_ZEST
           type: string
       type: object
     GeostoreIntersectionGroupProto:
@@ -21793,6 +21771,8 @@ components:
             - PROVIDER_UNITE
             - PROVIDER_NEOGY
             - PROVIDER_AMPUP
+            - PROVIDER_LOOP
+            - PROVIDER_ZEST
           type: string
         sourceDataset:
           type: string
@@ -23142,6 +23122,8 @@ components:
             - PROVIDER_UNITE
             - PROVIDER_NEOGY
             - PROVIDER_AMPUP
+            - PROVIDER_LOOP
+            - PROVIDER_ZEST
           type: string
       type: object
     GeostoreRankDetailsProto:
@@ -26187,6 +26169,24 @@ components:
             type: string
           type: array
       type: object
+    GoogleCloudContentwarehouseV1ClassifySplitAndExtractPipeline:
+      description: The configuration of the document classify/split and entity/kvp extraction pipeline.
+      properties:
+        classifySplitProcessorInfos:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
+          description: The classify or split processor information.
+        extractProcessorInfos:
+          description: The entity or key-value pair extracting processor information.
+          items:
+            $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
+          type: array
+        inputPath:
+          description: "The input Cloud Storage folder. All files under this folder will be imported to Document Warehouse. Format: gs:///."
+          type: string
+        processorResultsFolderPath:
+          description: "The Cloud Storage folder path used to store the raw results from processors. Format: gs:///."
+          type: string
+      type: object
     GoogleCloudContentwarehouseV1CloudAIDocumentOption:
       description: Request Option for processing Cloud AI Document in CW Document.
       properties:
@@ -26556,6 +26556,21 @@ components:
           description: String value of the enum field. This must match defined set of enums in document schema using EnumTypeOptions.
           type: string
       type: object
+    GoogleCloudContentwarehouseV1ExportToCdwPipeline:
+      description: The configuration of exporting documents from the Document Warehouse to CDW pipeline.
+      properties:
+        documentIds:
+          description: The list of all the documents to be processed.
+          items:
+            type: string
+          type: array
+        exportFolderPath:
+          description: "The Cloud Storage folder path used to store the exported documents before being sent to CDW. Format: gs:///."
+          type: string
+        processorInfo:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
+          description: The CDW processor information.
+      type: object
     GoogleCloudContentwarehouseV1FetchAclRequest:
       description: Request message for DocumentService.FetchAcl
       properties:
@@ -26601,6 +26616,16 @@ components:
     GoogleCloudContentwarehouseV1FloatTypeOptions:
       description: Configurations for a float property.
       properties: {}
+      type: object
+    GoogleCloudContentwarehouseV1GcsIngestPipeline:
+      description: The configuration of the Cloud Storage ingestion pipeline.
+      properties:
+        inputPath:
+          description: "The input Cloud Storage folder. All files under this folder will be imported to Document Warehouse. Format: gs:///."
+          type: string
+        schemaName:
+          description: "The Document schema resource name. All documents processed by this processor will use this schema. Format: projects/{project_number}/locations/{location}/documentSchemas/{document_schema_id}."
+          type: string
       type: object
     GoogleCloudContentwarehouseV1GetDocumentRequest:
       description: Request message for DocumentService.GetDocument.
@@ -26827,6 +26852,19 @@ components:
         replaceRepeatedFields:
           description: When merging repeated fields, the default behavior is to append entries from the source repeated field to the destination repeated field. If you instead want to keep only the entries from the source repeated field, set this flag to true. If you want to replace a repeated field within a message field on the destination message, you must set both replace_repeated_fields and replace_message_fields to true, otherwise the repeated fields will be appended.
           type: boolean
+      type: object
+    GoogleCloudContentwarehouseV1ProcessorInfo:
+      description: The DocAI processor information.
+      properties:
+        documentType:
+          description: The processor will process the documents with this document type.
+          type: string
+        processorName:
+          description: The processor resource name. Format is `projects/{project}/locations/{location}/processors/{processor}`, or `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
+          type: string
+        schemaName:
+          description: "The Document schema resource name. All documents processed by this processor will use this schema. Format: projects/{project_number}/locations/{location}/documentSchemas/{document_schema_id}."
+          type: string
       type: object
     GoogleCloudContentwarehouseV1Property:
       description: Property of a document.
@@ -27093,6 +27131,19 @@ components:
         source:
           description: Source of the rules i.e., customer name.
           type: string
+      type: object
+    GoogleCloudContentwarehouseV1RunPipelineRequest:
+      description: Request message for DocumentService.RunPipeline.
+      properties:
+        classifySplitAndExtractPipeline:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ClassifySplitAndExtractPipeline"
+          description: Classify/split and entity/kvp extraction pipeline.
+        exportCdwPipeline:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ExportToCdwPipeline"
+          description: Export docuemnts from Document Warehouseing to CDW for training purpose.
+        gcsIngestPipeline:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1GcsIngestPipeline"
+          description: Cloud Storage ingestion pipeline.
       type: object
     GoogleCloudContentwarehouseV1SearchDocumentsRequest:
       description: Request message for DocumentService.SearchDocuments.
@@ -37378,6 +37429,14 @@ components:
             - MODIFY_LIST
             - SHOW_NOTE
             - MODIFY_NOTE
+            - READ_SLEEP
+            - WRITE_SLEEP
+            - READ_ACTIVITY
+            - WRITE_ACTIVITY
+            - READ_NUTRITION
+            - WRITE_NUTRITION
+            - READ_WELLNESS
+            - WRITE_WELLNESS
           type: string
         myActivityRedactionKey:
           description: This field will be translated by footprints and is used to describe the content that was redacted that will be displayed to the user in MyActivity.
@@ -51744,7 +51803,7 @@ components:
           type: integer
       type: object
     QualityNsrNsrData:
-      description: "NOTE: When adding a new field to be propagated to Raffia check if NsrPatternSignalSpec needs to be updated. Next ID: 51"
+      description: "NOTE: When adding a new field to be propagated to Raffia check if NsrPatternSignalSpec needs to be updated. Next ID: 52"
       properties:
         articleScore:
           description: Score from article classification of the site.
@@ -51897,6 +51956,11 @@ components:
           type: number
         url:
           type: string
+        versionedAsrData:
+          description: Versioned map of ASR (authenticity) values.
+          items:
+            $ref: "#/components/schemas/QualityNsrVersionedFloatSignal"
+          type: array
         versionedData:
           description: Versioned map of NSR values for experimenting with the next release.
           items:
@@ -51947,6 +52011,17 @@ components:
           items:
             type: string
           type: array
+        lastTimeProcessedGoldmineInSeconds:
+          format: int64
+          type: string
+        lastTimeProcessedMduInSeconds:
+          description: This field is populated only during MDU population, so it's *not* present in docjoins, but it's present in production so that it can be displayed.
+          format: int64
+          type: string
+        lastTimeProcessedRaffiaInSeconds:
+          description: Records the last time each system has processed the proto. These are recorded as seconds from the unix epoch. Ideally these fields would be google.protobuf.Timestamp, but the scoring bundle (which depends on this proto) does not understand proto3 syntax. See cl/500942047 for details.
+          format: int64
+          type: string
         raffiaLookupKey:
           type: string
         raffiaLookupKeyPerField:
@@ -54289,13 +54364,25 @@ components:
           $ref: "#/components/schemas/QualityTimebasedLastSignificantUpdateAdjustments"
           description: This is stored only for debugging purposes. Please consult dates@ team before making a dependency on this field.
         date:
-          description: LastSignificantUpdate as UNIX timestamp in seconds. This is the new signal (go/lsu-dd) from LSU Selector V2 (once that is enabled, see b/171879888 for status), falling back to the legacy V1 signal if the V2 signal does not exist. Please use the 'source' field to determine where the value comes from.
+          description: LastSignificantUpdate as UNIX timestamp in seconds. This is the new signal (go/lsu-dd) from LSU Selector V2 (once that is enabled, see b/171879888 for status), falling back to the legacy V1 signal if the HIGH_PRECISION signal does not exist. Please use the 'source' field to determine where the value comes from.
           format: int64
           type: string
         source:
           description: The source the signal comes from.
           enum:
             - UNSET
+            - LSU_LOW_PRECISION
+            - LSU_HIGH_PRECISION_UPDATE_MARKUP_SUPPORTED_BY_CONTENTAGE
+            - LSU_HIGH_PRECISION_UPDATE_MARKUP_SUPPORTED_BY_ANNOTATION
+            - LSU_HIGH_PRECISION_ANNOTATION_WITH_UPDATE_TAG
+            - LSU_HIGH_PRECISION_PUBLICATION_MARKUP_SUPPORTED_BY_CONTENTAGE
+            - LSU_HIGH_PRECISION_PUBLICATION_MARKUP_SUPPORTED_BY_ANNOTATION
+            - LSU_HIGH_PRECISION_ANNOTATION_WITH_PATTERN_BYLINE_TAG
+            - LSU_HIGH_PRECISION_RELIABLE_CONTENT_AGE_SUPPORTED_BY_ANNOTATION
+            - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_LOW_SUPPORT
+            - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_MEDIUM_SUPPORT
+            - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_HIGH_SUPPORT
+            - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_FULL_SUPPORT
             - LSU_V1
             - LSU_V2_UPDATE_MARKUP_SUPPORTED_BY_CONTENTAGE
             - LSU_V2_UPDATE_MARKUP_SUPPORTED_BY_ANNOTATION
@@ -54304,10 +54391,6 @@ components:
             - LSU_V2_PUBLICATION_MARKUP_SUPPORTED_BY_ANNOTATION
             - LSU_V2_ANNOTATION_WITH_PATTERN_BYLINE_TAG
             - LSU_V2_RELIABLE_CONTENT_AGE_SUPPORTED_BY_ANNOTATION
-            - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_LOW_SUPPORT
-            - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_MEDIUM_SUPPORT
-            - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_HIGH_SUPPORT
-            - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_FULL_SUPPORT
           type: string
       type: object
     QualityTimebasedLastSignificantUpdateAdjustments:
@@ -54324,13 +54407,25 @@ components:
           description: The timestamp is precise when it's derived from existing (>March 2022) passage timestamp.
           type: boolean
         unboundedTimestampInSeconds:
-          description: The timestamp that was picked up by the component indicated in the LastSignificantUpdateSource but was dropped due to exceeding the upper bound. Set only if it's not equal to final LSU.
+          description: The timestamp that was picked up by the component indicated in the LastSignificantUpdateSource but was dropped due to exceeding the upper bound. Set only if it is not equal to final LSU.
           format: int64
           type: string
         unboundedTimestampSource:
           description: The source that produced the unbounded timestamp.
           enum:
             - UNSET
+            - LSU_LOW_PRECISION
+            - LSU_HIGH_PRECISION_UPDATE_MARKUP_SUPPORTED_BY_CONTENTAGE
+            - LSU_HIGH_PRECISION_UPDATE_MARKUP_SUPPORTED_BY_ANNOTATION
+            - LSU_HIGH_PRECISION_ANNOTATION_WITH_UPDATE_TAG
+            - LSU_HIGH_PRECISION_PUBLICATION_MARKUP_SUPPORTED_BY_CONTENTAGE
+            - LSU_HIGH_PRECISION_PUBLICATION_MARKUP_SUPPORTED_BY_ANNOTATION
+            - LSU_HIGH_PRECISION_ANNOTATION_WITH_PATTERN_BYLINE_TAG
+            - LSU_HIGH_PRECISION_RELIABLE_CONTENT_AGE_SUPPORTED_BY_ANNOTATION
+            - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_LOW_SUPPORT
+            - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_MEDIUM_SUPPORT
+            - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_HIGH_SUPPORT
+            - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_FULL_SUPPORT
             - LSU_V1
             - LSU_V2_UPDATE_MARKUP_SUPPORTED_BY_CONTENTAGE
             - LSU_V2_UPDATE_MARKUP_SUPPORTED_BY_ANNOTATION
@@ -54339,10 +54434,6 @@ components:
             - LSU_V2_PUBLICATION_MARKUP_SUPPORTED_BY_ANNOTATION
             - LSU_V2_ANNOTATION_WITH_PATTERN_BYLINE_TAG
             - LSU_V2_RELIABLE_CONTENT_AGE_SUPPORTED_BY_ANNOTATION
-            - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_LOW_SUPPORT
-            - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_MEDIUM_SUPPORT
-            - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_HIGH_SUPPORT
-            - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_FULL_SUPPORT
           type: string
         upperboundTimestampInSeconds:
           description: "The upperbound value derived from passage timestamps. If present, the LSU date should never exceed this value. Design doc: go/lsu-max-passage-timestamp"
@@ -55184,15 +55275,7 @@ components:
       description: Debug info about the concept annotations. Note that it might not be present in the output.
       properties:
         description:
-          type: string
-        infoString:
-          items:
-            type: string
-          type: array
-        rawClassification:
-          $ref: "#/components/schemas/EntitySignalsEntityClassification"
-          description: Raw classification output from relevance classifier for classifier training and debugging. See http://go/entityclassifier for details on the classifier.
-        url:
+          description: Only use for debugging, this should not be displayed to user or used for any kind of logic/processing.
           type: string
       type: object
     RepositoryWebrefAnnotationRatings:
@@ -55266,6 +55349,7 @@ components:
             - VIDEO_TRANSCRIPT
             - VIDEO_OCR
             - IMAGE_OCR
+            - LENS
             - ONLY_LOOKUP_METADATA
             - EMBEDDED_CONTENT
           type: string
@@ -55578,13 +55662,6 @@ components:
     RepositoryWebrefDetailedEntityScores:
       description: "Detailed scores about the topicality of an entity. Next available tag: 16"
       properties:
-        anchorScore:
-          description: Additional info regarding how the score of an annotation was obtained. These will no longer be set once the feature `topic2_detailed_scores` is enabled (Q4 2017).
-          format: float
-          type: number
-        bodyScore:
-          format: float
-          type: number
         connectedness:
           description: "Represents how much the entity is connected/related to the other entities in the document. This signal partially influences the topicality score, but it is not totally aligned with it: an entity can be very related to the rest of the document, but not central for understanding it. Likewise, an entity can be central to understand a document, but not very related to the rest of the document. The value is in [0, 1]."
           format: float
@@ -55610,13 +55687,6 @@ components:
           description: If the annotation corresponds to a local entity, this is populated with LocalEntityAnnotations::Instance::location_confidence.
           format: float
           type: number
-        nbScore:
-          format: float
-          type: number
-        newsTopicalityScore:
-          description: "DEPRECATED: this field is no longer set. As of early June 2018 it is referenced in hundreds of test files and is difficult to remove from the code base."
-          format: float
-          type: number
         normalizedTopicality:
           description: Representation of the topicality score that is normalized in [0, 1] and which sum over all entities in the document is 1. It represents the "proportion" of the document that talks about the entity. This score is less human interpretable as the bucketized topicality score (EntityAnnotations.topicality_score), but is more suited for some usages like aggregations.
           format: float
@@ -55631,14 +55701,6 @@ components:
       type: object
     RepositoryWebrefDetailedMentionScores:
       properties:
-        patternInfo:
-          items:
-            $ref: "#/components/schemas/RepositoryWebrefPatternInfo"
-          type: array
-        posteriorForLearning:
-          description: "How much confidence that a entity is annotated on a given name. NOTE: it's slightly different with normal annotation confidence."
-          format: float
-          type: number
         resultEntityScore:
           description: How much support this mention received from the results for PostRef. This is populated only if explicitly requested and different from 0.
           format: float
@@ -56101,6 +56163,9 @@ components:
       type: object
     RepositoryWebrefEntityNameRatingsEntityNameRating:
       properties:
+        comment:
+          description: Comment left by the rater to justify the rating decision.
+          type: string
         label:
           enum:
             - LABEL_UNSPECIFIED
@@ -56487,6 +56552,7 @@ components:
             - VIDEO_TRANSCRIPT
             - VIDEO_OCR
             - IMAGE_OCR
+            - LENS
             - ONLY_LOOKUP_METADATA
             - EMBEDDED_CONTENT
           type: string
@@ -57448,19 +57514,6 @@ components:
           $ref: "#/components/schemas/GeostoreOntologyRawGConceptInstanceContainerProto"
           description: "Geo Ontology GConcept Instances from the FeatureProto. - Design doc linked off http://wiki/Main/GeoOntology - Use the accessor library to read this field: geostore/base/public/gconcept_instance.h"
       type: object
-    RepositoryWebrefPatternInfo:
-      properties:
-        matchProbability:
-          description: The confidence we can trust this pattern.
-          format: float
-          type: number
-        otherSlotsMentioned:
-          description: Whether other slots is mentioned in annotator. If they is no other slot, it is set to true.
-          type: boolean
-        pattern:
-          description: The corresponding patterns matched on this candidate, which contains the pattern string and the slot number of the candidate in this pattern, such as [|/athletes|vs|/athletes|]_1.
-          type: string
-      type: object
     RepositoryWebrefPerDocRelevanceRating:
       description: "Per document ratings relevance ratings. Next id: 21."
       properties:
@@ -57953,6 +58006,7 @@ components:
               - VIDEO_TRANSCRIPT
               - VIDEO_OCR
               - IMAGE_OCR
+              - LENS
             type: string
           type: array
         shortToken:
@@ -58087,6 +58141,7 @@ components:
             - VIDEO_TRANSCRIPT
             - VIDEO_OCR
             - IMAGE_OCR
+            - LENS
           type: string
       type: object
     RepositoryWebrefSegmentMentions:
@@ -58114,6 +58169,7 @@ components:
             - VIDEO_TRANSCRIPT
             - VIDEO_OCR
             - IMAGE_OCR
+            - LENS
           type: string
       type: object
     RepositoryWebrefSemanticDateRange:
@@ -59964,7 +60020,7 @@ components:
             type: string
           type: array
         isInferred:
-          description: Indicates whether the metadata was inferred using an ML model rather than from the schema.org fields.
+          description: Indicates whether the metadata was inferred using an ML model rather than from the schema.org fields. Use optional so that explicitly setting to false will ensure the value is passed along to the KG instead of being indistinguisable from being unset and thus not set in the KG. This field was originally non-optional; changing to optional is backwards compatible, but protos created prior to being optional won't have has_is_inferred() (go/proto-proposals/proto3-presence#wire-format-semantic-changes).
           type: boolean
         keyword:
           description: Keywords describing the dataset.
@@ -61120,12 +61176,6 @@ components:
       type: object
     ScienceIndexSignal:
       properties:
-        HoldingsId:
-          description: "Subscriber Access feature: List of Holdings IDs associated with this document. Should be present only for the documents with 'VisiblePrefixTerms' being set."
-          items:
-            format: uint64
-            type: string
-          type: array
         HtmlTitleFp:
           description: Fingerprint of the html title of the page. This is useful for checking if we have the same version of the page as websearch.
           format: int64
@@ -62625,6 +62675,16 @@ components:
       description: Pattern for a DAILY (or every N day) recurrence. Time of the day that the notification will occur is taken from the Prompt that owns this recurrence. Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService)
       properties: {}
       type: object
+    SocialGraphApiProtoDecorationOverlay:
+      description: Settings that control how a SIBS decoration overlay is displayed.
+      properties:
+        overlay:
+          $ref: "#/components/schemas/SocialGraphApiProtoPhotoOverlay"
+          description: Settings that describe how the decoration should be overlaid on the photo.
+        sibsId:
+          description: SIBS ID of the decoration that is overlaid on the photo.
+          type: string
+      type: object
     SocialGraphApiProtoDelegatedGroupId:
       description: Represents a delegated group id, delegated groups refer to groups that are owned by another gaiaId, but this user has access to.
       properties:
@@ -62646,6 +62706,13 @@ components:
       properties:
         hostAppName:
           description: This string will represent the info for the host app to the Companion sidebar
+          type: string
+      type: object
+    SocialGraphApiProtoImageReference:
+      description: A reference to a photo in either Photos Backend or SGI storage. This message should be treated as an opaque blob to avoid a dependency on a specific storage backend.
+      properties:
+        mediaId:
+          description: Unique identifier for the photo. For now, this will always be a Photos Backend media key.
           type: string
       type: object
     SocialGraphApiProtoLimitedProfileNameSettings:
@@ -62822,6 +62889,16 @@ components:
         givenNameSpec:
           $ref: "#/components/schemas/SocialGraphApiProtoPartialNameOptionsNamePartSpec"
       type: object
+    SocialGraphApiProtoPhotoOverlay:
+      description: Settings that control how a photo overlay is displayed.
+      properties:
+        relativePosition:
+          $ref: "#/components/schemas/SocialGraphApiProtoRelativePosition"
+          description: Top left position of the overlay relative to the user's avatar.
+        relativeScale:
+          $ref: "#/components/schemas/SocialGraphApiProtoRelativeScale"
+          description: Scale of the overlay relative to the user's avatar.
+      type: object
     SocialGraphApiProtoPrompt:
       description: Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService)
       properties:
@@ -62963,6 +63040,26 @@ components:
     SocialGraphApiProtoRecurrenceRepeatForever:
       description: An internal message to signal that this recurrence has no end date.
       properties: {}
+      type: object
+    SocialGraphApiProtoRelativePosition:
+      description: Position relative to the user's avatar. 0 = top/left, 1 = bottom/right.
+      properties:
+        x:
+          format: float
+          type: number
+        y:
+          format: float
+          type: number
+      type: object
+    SocialGraphApiProtoRelativeScale:
+      description: Scale relative to the user's avatar. x and y range from 0 (exclusive) to 1 (inclusive).
+      properties:
+        x:
+          format: float
+          type: number
+        y:
+          format: float
+          type: number
       type: object
     SocialGraphApiProtoSearchProfileData:
       description: Data contained in every search profile. go/janata-profile-in-sgbe.
@@ -66179,6 +66276,10 @@ components:
               - SECOND_PASS_POLARIS_WITH_RANKING_CHANGE_EVENT_LEVEL
               - EXPLORATORY_BOOSTING_EVENT_LEVEL
               - GEARHEAD_TOOLTIP_COOLWALK_DASHBOARD_UNAVAILABLE
+              - TIMESLICED_SAFE_SELF_UPDATE
+              - NORMAL_SELF_UPDATE
+              - SECOND_PASS_BROAD_INTENT_QUERY_EVENT_LEVEL
+              - SECOND_PASS_REWEIGHTING_TRIGGERED_EVENT_LEVEL
               - EVENT_LEVEL_TEST_CODE_LIMIT
               - RESERVED_4
               - RESERVED_5
@@ -66766,6 +66867,7 @@ components:
               - IAP_HAS_UNREDEEMED_PROMOTIONS_CLIENT_SESSION_LEVEL
               - SUBSCRIPTION_UPDATE_FOP_FOR_DCB_AS_PRIMARY_SIGNUP_SESSION_LEVEL
               - SUBSCRIPTION_UPDATE_FOP_FOR_DCB_AS_PRIMARY_SUB_CENTER_SESSION_LEVEL
+              - SUBS_PRICE_CHANGE_VERSION_TIME_CHECK_SESSION_LEVEL
               - RENEW_TASK_DELAYED_SUBSCRIPTION_TARGETED
               - RENEW_TASK_DELAYED_SUBSCRIPTION_NOT_TARGETED
               - PRE_AUTH_TASK_DELAYED_SUBSCRIPTION_TARGETED
@@ -67117,6 +67219,10 @@ components:
               - SECOND_PASS_POLARIS_WITH_RANKING_CHANGE_SESSION_LEVEL
               - EXPLORATORY_BOOSTING_SESSION_LEVEL
               - PLAY_BOOKS_READING_PROGRESS_TOOLTIP_SESSION_LEVEL
+              - NAV_SEARCH_D2D_EMBEDDING_BOOST_SESSION_LEVEL
+              - HAS_NO_BACKUP_FOP_FOR_ORDER_SESSION_LEVEL
+              - SECOND_PASS_BROAD_INTENT_QUERY_SESSION_LEVEL
+              - SECOND_PASS_REWEIGHTING_TRIGGERED_SESSION_LEVEL
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - SHOULD_SEE_LIVE_OP_CLUSTER_USER_LEVEL
               - CART_ABANDONMENT_USER_LEVEL
@@ -67477,6 +67583,7 @@ components:
               - SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_USER_LEVEL_V2
               - SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_WITH_EXISTING_FOP_USER_LEVEL
               - SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_WITHOUT_EXISTING_FOP_USER_LEVEL
+              - SUBS_PRICE_CHANGE_VERSION_TIME_CHECK_USER_LEVEL
               - WIDE_MEDIA_CLUSTER_INVALID_VIDEO_ASSET_USER_LEVEL
               - WEBSKY_SEARCH_THIRD_PARTY_CONTENT_ELIGIBLE_QUERY_USER_LEVEL
               - EDITORIAL_FCC_AT_USER_LEVEL
@@ -67764,6 +67871,7 @@ components:
             - OBJECTIVE_CRAWL_ASSETS_DONE
             - OBJECTIVE_VITAL_ASSETS_DONE
             - OBJECTIVE_SAM_FEATURES_DONE
+            - OBJECTIVE_SPEECH_RECOGNITION_DONE
           type: string
         outcome:
           description: Whether the objective is reached or not. REQUIRED.
@@ -71454,10 +71562,12 @@ components:
             - MODEL_RACY_WATCHPAGE_2021_05_04_FLAGGED_HOME
             - MODEL_RACY_WATCHPAGE_2021_05_04_FLAGGED_WATCHNEXT
             - MODEL_RACY_WATCHPAGE_V4
+            - MODEL_RACY_WATCHPAGE_RELEASE
             - MODEL_RACY_SHORTS_WATCHPAGE_V1
             - MODEL_RACY_SHORTS_WATCHPAGE_V1_FLAGGED
             - MODEL_RACY_SHORTS_WATCHPAGE_V2
             - MODEL_RACY_SHORTS_WATCHPAGE_V2_FLAGGED
+            - MODEL_RACY_SHORTS_WATCHPAGE_RELEASE
             - MODEL_RACY_THUMB_2019_04_02
             - MODEL_RACY_THUMB_2019_08_12
             - MODEL_RACY_THUMB_2019_08_12A
@@ -71467,6 +71577,7 @@ components:
             - MODEL_RACY_THUMB_2019_08_12E
             - MODEL_RACY_THUMB_2019_08_12_CALIBRATED
             - MODEL_RACY_THUMB_2019_08_12_FLAGGED
+            - MODEL_RACY_THUMB_RELEASE
             - MODEL_QUALITY_2019_09_24
             - MODEL_QUALITY_2019_11_11
             - MODEL_QUALITY_2020_11_12

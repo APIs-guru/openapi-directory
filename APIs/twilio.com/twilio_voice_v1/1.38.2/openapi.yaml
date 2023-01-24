@@ -1441,19 +1441,19 @@ components:
     voice.v1.archived_call:
       properties:
         date:
-          description: date
+          description: The date
           format: date
           nullable: true
           type: string
         sid:
-          description: sid
+          description: The call sid
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^CA[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -1461,53 +1461,53 @@ components:
     voice.v1.byoc_trunk:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the BYOC Trunk resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         cnam_lookup_enabled:
-          description: Whether Caller ID Name (CNAM) lookup is enabled for the trunk
+          description: Whether Caller ID Name (CNAM) lookup is enabled for the trunk. If enabled, all inbound calls to the BYOC Trunk from the United States and Canada automatically perform a CNAM Lookup and display Caller ID data on your phone. See [CNAM Lookups](https://www.twilio.com/docs/sip-trunking#CNAM) for more information.
           nullable: true
           type: boolean
         connection_policy_sid:
-          description: Origination Connection Policy (to your Carrier)
+          description: The SID of the Connection Policy that Twilio will use when routing traffic to your communications infrastructure.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^NY[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT that the resource was created
+          description: The date and time in GMT that the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT that the resource was last updated
+          description: The date and time in GMT that the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         from_domain_sid:
-          description: The SID of the SIP Domain that should be used in the `From` header of originating calls
+          description: The SID of the SIP Domain that should be used in the `From` header of originating calls sent to your SIP infrastructure. If your SIP infrastructure allows users to "call back" an incoming call, configure this with a [SIP Domain](https://www.twilio.com/docs/voice/api/sending-sip) to ensure proper routing. If not configured, the from domain will default to "sip.twilio.com".
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^SD[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that that we created to identify the BYOC Trunk resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^BY[0-9a-fA-F]{32}$
           type: string
         status_callback_method:
-          description: The HTTP method we use to call status_callback_url
+          description: The HTTP method we use to call `status_callback_url`. Either `GET` or `POST`.
           enum:
             - HEAD
             - GET
@@ -1519,17 +1519,17 @@ components:
           nullable: true
           type: string
         status_callback_url:
-          description: The URL that we call with status updates
+          description: The URL that we call to pass status parameters (such as call ended) to your application.
           format: uri
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
         voice_fallback_method:
-          description: The HTTP method used with voice_fallback_url
+          description: "The HTTP method we use to call `voice_fallback_url`. Can be: `GET` or `POST`."
           enum:
             - HEAD
             - GET
@@ -1541,12 +1541,12 @@ components:
           nullable: true
           type: string
         voice_fallback_url:
-          description: The URL we call when an error occurs while executing TwiML
+          description: The URL that we call when an error occurs while retrieving or executing the TwiML requested from `voice_url`.
           format: uri
           nullable: true
           type: string
         voice_method:
-          description: The HTTP method to use with voice_url
+          description: "The HTTP method we use to call `voice_url`. Can be: `GET` or `POST`."
           enum:
             - HEAD
             - GET
@@ -1558,7 +1558,7 @@ components:
           nullable: true
           type: string
         voice_url:
-          description: The URL we call when receiving a call
+          description: The URL we call using the `voice_method` when the BYOC Trunk receives a call.
           format: uri
           nullable: true
           type: string
@@ -1566,40 +1566,40 @@ components:
     voice.v1.connection_policy:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Connection Policy resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         links:
-          description: The URLs of related resources
+          description: The URLs of related resources.
           format: uri-map
           nullable: true
           type: object
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Connection Policy resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^NY[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -1607,60 +1607,60 @@ components:
     voice.v1.connection_policy.connection_policy_target:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the Target resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         connection_policy_sid:
-          description: The SID of the Connection Policy that owns the Target
+          description: The SID of the Connection Policy that owns the Target.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^NY[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The RFC 2822 date and time in GMT when the resource was created
+          description: The date and time in GMT when the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT when the resource was last updated
+          description: The date and time in GMT when the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         enabled:
-          description: Whether the target is enabled
+          description: Whether the target is enabled. The default is `true`.
           nullable: true
           type: boolean
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         priority:
-          description: The relative importance of the target
+          description: The relative importance of the target. Can be an integer from 0 to 65535, inclusive, and the default is 10. The lowest number represents the most important target.
           nullable: true
           type: integer
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the Target resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^NE[0-9a-fA-F]{32}$
           type: string
         target:
-          description: The SIP address you want Twilio to route your calls to
+          description: The SIP address you want Twilio to route your calls to. This must be a `sip:` schema. `sips` is NOT supported.
           format: uri
           nullable: true
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
         weight:
-          description: The value that determines the relative load the Target should receive compared to others with the same priority
+          description: The value that determines the relative share of the load the Target should receive compared to other Targets with the same priority. Can be an integer from 1 to 65535, inclusive, and the default is 10. Targets with higher values receive more load than those with lower ones with the same priority.
           nullable: true
           type: integer
       type: object
@@ -1670,43 +1670,43 @@ components:
     voice.v1.dialing_permissions.dialing_permissions_country:
       properties:
         continent:
-          description: The name of the continent in which the country is located
+          description: The name of the continent in which the country is located.
           nullable: true
           type: string
         country_codes:
-          description: The E.164 assigned country codes(s)
+          description: The E.164 assigned [country codes(s)](https://www.itu.int/itudoc/itu-t/ob-lists/icc/e164_763.html)
           items:
             type: string
           nullable: true
           type: array
         high_risk_special_numbers_enabled:
-          description: Whether dialing to high-risk special services numbers is enabled
+          description: Whether dialing to high-risk special services numbers is enabled. These prefixes include number ranges allocated by the country and include premium numbers, special services, shared cost, and others
           nullable: true
           type: boolean
         high_risk_tollfraud_numbers_enabled:
-          description: Whether dialing to high-risk toll fraud numbers is enabled, else `false`
+          description: Whether dialing to high-risk [toll fraud](https://www.twilio.com/learn/voice-and-video/toll-fraud) numbers is enabled. These prefixes include narrow number ranges that have a high-risk of international revenue sharing fraud (IRSF) attacks, also known as [toll fraud](https://www.twilio.com/learn/voice-and-video/toll-fraud). These prefixes are collected from anti-fraud databases and verified by analyzing calls on our network. These prefixes are not available for download and are updated frequently
           nullable: true
           type: boolean
         iso_code:
-          description: The ISO country code
+          description: The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
           format: iso-country-code
           nullable: true
           type: string
         links:
-          description: A list of URLs related to this resource
+          description: A list of URLs related to this resource.
           format: uri-map
           nullable: true
           type: object
         low_risk_numbers_enabled:
-          description: Whether dialing to low-risk numbers is enabled
+          description: Whether dialing to low-risk numbers is enabled.
           nullable: true
           type: boolean
         name:
-          description: The name of the country
+          description: The name of the country.
           nullable: true
           type: string
         url:
-          description: The absolute URL of this resource
+          description: The absolute URL of this resource.
           format: uri
           nullable: true
           type: string
@@ -1714,43 +1714,43 @@ components:
     voice.v1.dialing_permissions.dialing_permissions_country-instance:
       properties:
         continent:
-          description: The name of the continent in which the country is located
+          description: The name of the continent in which the country is located.
           nullable: true
           type: string
         country_codes:
-          description: The E.164 assigned country codes(s)
+          description: The E.164 assigned [country codes(s)](https://www.itu.int/itudoc/itu-t/ob-lists/icc/e164_763.html)
           items:
             type: string
           nullable: true
           type: array
         high_risk_special_numbers_enabled:
-          description: Whether dialing to high-risk special services numbers is enabled
+          description: Whether dialing to high-risk special services numbers is enabled. These prefixes include number ranges allocated by the country and include premium numbers, special services, shared cost, and others
           nullable: true
           type: boolean
         high_risk_tollfraud_numbers_enabled:
-          description: Whether dialing to high-risk toll fraud numbers is enabled, else `false`
+          description: Whether dialing to high-risk [toll fraud](https://www.twilio.com/learn/voice-and-video/toll-fraud) numbers is enabled. These prefixes include narrow number ranges that have a high-risk of international revenue sharing fraud (IRSF) attacks, also known as [toll fraud](https://www.twilio.com/learn/voice-and-video/toll-fraud). These prefixes are collected from anti-fraud databases and verified by analyzing calls on our network. These prefixes are not available for download and are updated frequently
           nullable: true
           type: boolean
         iso_code:
-          description: The ISO country code
+          description: The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
           format: iso-country-code
           nullable: true
           type: string
         links:
-          description: A list of URLs related to this resource
+          description: A list of URLs related to this resource.
           format: uri-map
           nullable: true
           type: object
         low_risk_numbers_enabled:
-          description: Whether dialing to low-risk numbers is enabled
+          description: Whether dialing to low-risk numbers is enabled.
           nullable: true
           type: boolean
         name:
-          description: The name of the country
+          description: The name of the country.
           nullable: true
           type: string
         url:
-          description: The absolute URL of this resource
+          description: The absolute URL of this resource.
           format: uri
           nullable: true
           type: string
@@ -1758,7 +1758,7 @@ components:
     voice.v1.dialing_permissions.dialing_permissions_country.dialing_permissions_hrs_prefixes:
       properties:
         prefix:
-          description: A prefix that includes the E.164 assigned country code
+          description: A prefix is a contiguous number range for a block of E.164 numbers that includes the E.164 assigned country code. For example, a North American Numbering Plan prefix like `+1510720` written like `+1(510) 720` matches all numbers inclusive from `+1(510) 720-0000` to `+1(510) 720-9999`.
           nullable: true
           type: string
       type: object
@@ -1769,18 +1769,18 @@ components:
           nullable: true
           type: integer
         update_request:
-          description: A URL encoded JSON array of update objects
+          description: 'A bulk update request to change voice dialing country permissions stored as a URL-encoded, JSON array of update objects. For example : `[ { "iso_code": "GB", "low_risk_numbers_enabled": "true", "high_risk_special_numbers_enabled":"true", "high_risk_tollfraud_numbers_enabled": "false" } ]`'
           nullable: true
           type: string
       type: object
     voice.v1.dialing_permissions.dialing_permissions_settings:
       properties:
         dialing_permissions_inheritance:
-          description: "`true` if the sub-account will inherit voice dialing permissions from the Master Project; otherwise `false`"
+          description: "`true` if the sub-account will inherit voice dialing permissions from the Master Project; otherwise `false`."
           nullable: true
           type: boolean
         url:
-          description: The absolute URL of this resource
+          description: The absolute URL of this resource.
           format: uri
           nullable: true
           type: string
@@ -1788,7 +1788,7 @@ components:
     voice.v1.ip_record:
       properties:
         account_sid:
-          description: The SID of the Account that created the resource
+          description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that created the IP Record resource.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1799,17 +1799,17 @@ components:
           nullable: true
           type: integer
         date_created:
-          description: The RFC 2822 date and time in GMT that the resource was created
+          description: The date and time in GMT that the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT that the resource was last updated
+          description: The date and time in GMT that the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         friendly_name:
-          description: The string that you assigned to describe the resource
+          description: The string that you assigned to describe the resource.
           nullable: true
           type: string
         ip_address:
@@ -1817,14 +1817,14 @@ components:
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the IP Record resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IL[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
@@ -1832,38 +1832,38 @@ components:
     voice.v1.source_ip_mapping:
       properties:
         date_created:
-          description: The RFC 2822 date and time in GMT that the resource was created
+          description: The date and time in GMT that the resource was created specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The RFC 2822 date and time in GMT that the resource was last updated
+          description: The date and time in GMT that the resource was last updated specified in [RFC 2822](https://www.ietf.org/rfc/rfc2822.txt) format.
           format: date-time
           nullable: true
           type: string
         ip_record_sid:
-          description: The unique string that identifies an IP Record
+          description: The Twilio-provided string that uniquely identifies the IP Record resource to map from.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IL[0-9a-fA-F]{32}$
           type: string
         sid:
-          description: The unique string that identifies the resource
+          description: The unique string that we created to identify the IP Record resource.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^IB[0-9a-fA-F]{32}$
           type: string
         sip_domain_sid:
-          description: The unique string that identifies a SIP Domain
+          description: The SID of the SIP Domain that the IP Record is mapped to.
           maxLength: 34
           minLength: 34
           nullable: true
           pattern: ^SD[0-9a-fA-F]{32}$
           type: string
         url:
-          description: The absolute URL of the resource
+          description: The absolute URL of the resource.
           format: uri
           nullable: true
           type: string
