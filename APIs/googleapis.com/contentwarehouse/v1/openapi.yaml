@@ -245,48 +245,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:runPipeline":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Run a predefined pipeline.
-      operationId: contentwarehouse.projects.locations.runPipeline
-      parameters:
-        - description: "Required. The resource name which owns the resources of the pipeline. Format: projects/{project_number}/locations/{location}."
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudContentwarehouseV1RunPipelineRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleLongrunningOperation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v1/{parent}/documentLinks":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -781,7 +739,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: 'Sets the access control policy for a resource. Replaces any existing policy. You can set ACL with condition for projects only. Supported operators are: `=`, `!=`, `<`, `<=`, `>`, and `>=` where the left of the operator is `DocumentSchemaId` or property name and the right of the operator is a number or a quoted string. You must escape backslash (\\) and quote (\") characters. Boolean expressions (AND/OR) are supported up to 3 levels of nesting (for example, "((A AND B AND C) OR D) AND E"), a maximum of 10 comparisons are allowed in the expression. The expression must be < 6000 bytes in length. Sample condition: `"DocumentSchemaId = \"some schema id\" " OR SchemaId.floatPropertyName >= 10`'
+      description: Sets the access control policy for a resource. Replaces any existing policy.
       operationId: contentwarehouse.projects.locations.documents.setAcl
       parameters:
         - description: "Required. REQUIRED: The resource for which the policy is being requested. Format for document: projects/{project_number}/locations/{location}/documents/{document_id}. Format for project: projects/{project_number}."
@@ -3845,6 +3803,15 @@ components:
         yomiMiddleName:
           type: string
       type: object
+    AppsPeopleOzExternalMergedpeopleapiNamePronunciationAudioMetadataInfo:
+      description: Pronunciation audio metadata info. See go/name-pronunciation-backend. The metadata itself tracks the state of a user's name pronunciation audio.
+      properties:
+        metadata:
+          $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiPersonFieldMetadata"
+        namePronunciationAudioMetadata:
+          $ref: "#/components/schemas/SocialGraphApiProtoNamePronunciationAudioMetadata"
+          description: Actual metadata proto, shared with FBS backends.
+      type: object
     AppsPeopleOzExternalMergedpeopleapiNickname:
       properties:
         metadata:
@@ -4203,6 +4170,11 @@ components:
           description: See go/people-api-howto:names for details about names in PeopleAPI.
           items:
             $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiName"
+          type: array
+        namePronunciationAudioMetadataInfo:
+          description: Metadata info for a user's name pronunciation audio. See go/name-pronunication-backend.
+          items:
+            $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiNamePronunciationAudioMetadataInfo"
           type: array
         nickname:
           items:
@@ -9472,7 +9444,7 @@ components:
           type: boolean
       type: object
     AssistantApiSuggestionsSupport:
-      description: "Next ID: 17"
+      description: "Next ID: 18"
       properties:
         clickImpersonationSupported:
           description: Whether client supports user impersonation on suggestion chip click. go/suggestion-click-impersonation
@@ -9506,6 +9478,9 @@ components:
           description: Whether the client supports features in |SuggestionFeatureSpecificAction|.
         featureSpecificAppActionsNotificationSupported:
           description: Whether the client supports handling App Actions' notification when the suggestion is clicked. This will allow the server to populate the `app_actions_notification_data` extension field from |SuggestionFeatureSpecificAction| proto message.
+          type: boolean
+        multiStepTrySayingSupported:
+          description: "Whether the multi-step try saying suggestion feature is supported. dd: go/tng-multi-step-simplified"
           type: boolean
         ruleIdInExecutionContextSupported:
           description: "Whether the rule_id field in the execution_context is supported. This is a temporary workaround to be able to identify clicks on Person entity suggestions on Sabrina and is expected to be eventually deprecated. TODO(b/185517153) : Deprecate (but do not delete) once click tracking is correctly sent up from the Katniss client."
@@ -10543,8 +10518,11 @@ components:
           $ref: "#/components/schemas/AssistantGroundingRankerProviderGroundingProviderFeatures"
       type: object
     AssistantGroundingRankerMediaGroundingProviderFeatures:
-      description: "Features to be passed from Media GP to HGR. Next ID: 4"
+      description: "Features to be passed from Media GP to HGR. Next ID: 6"
       properties:
+        isCastVideo:
+          description: Whether the candidate is YouTube CAST_VIDEO candidate. CAST_VIDEO is a deeplink platform. This signal will be used to promote YouTube Music screenful candidates with CAST_VIDEO platform for free users because free users cannot get exact entities in screenless response and can get exact entities with ads in screenful response.
+          type: boolean
         isSeedRadio:
           description: True if the media deeplink has tag SEED_RADIO.
           type: boolean
@@ -10554,6 +10532,10 @@ components:
         mscRate:
           description: "MSC(Media Short Click) rate. MSC rate = total number of MSC events / total number of MSC candidates The event is considered as MSC candidate if the event is a media seeking query(excluding follow-ons) and the media result is successfully fulfilled. The event is MSC event if any of the following is in the following queries within 30 secs: FOLLOWED_BY_DUPLICATE FOLLOWED_BY_ADD_OR_DELETE_MANUAL_REFINEMENT FOLLOWED_BY_SAME_VERTICAL (MEDIA) FOLLOWED_BY_STOP More details: go/media-ranking, go/billboard-navboost, go/magma-music-actions-efrac"
           format: float
+          type: number
+        scubedPSaiMusic:
+          description: Scubed predicted SAI value (pSAI) for music populated by a regression model that incorporates a BERT model signal as well as other Scubed signals.
+          format: double
           type: number
       type: object
     AssistantGroundingRankerProviderGroundingProviderFeatures:
@@ -12575,6 +12557,54 @@ components:
           items:
             type: string
           type: array
+        useCase:
+          enum:
+            - UNKNOWN_USE_CASE
+            - OPENING_HOURS
+            - ON_DEMAND_OPENING_HOURS
+            - GEO_DATA_EXTRACTION
+            - OPERATING_MODE_EXTRACTION
+            - RESTAURANT_RESERVATION
+            - MASSAGE_RESERVATION
+            - HAIRDRESSER_RESERVATION
+            - NAIL_SALON_RESERVATION
+            - RUNNING_LATE
+            - FOOD_ORDERING
+            - LOCAL_INVENTORY_CHECK
+            - ON_DEMAND_LOCAL_INVENTORY
+            - WAITLIST
+            - CHECK_WAIT
+            - CHEFBOT
+            - ADS_CALL_CENTER_AUTHENTICATION
+            - PLAYSTORE
+            - TAKING_RESTAURANT_RESERVATIONS
+            - CALL_CENTER_DEMO
+            - ASSISTED_CALL_DEMO
+            - BUSINESS_OPT_IN
+            - CALLJOY_PILOT
+            - ASSISTANT_REMINDERS_DEMO
+            - HAPPY_BIRTHDAY
+            - ASSISTED_IVR
+            - DUPLEX_FOR_BUSINESS_PILOT
+            - SAY_THE_SAME_THING
+            - COVID_FAQ
+            - VANCOUVER
+            - MEENAPLEX
+            - REMOVED_USE_CASE_6
+            - SEMI_DELEGATED_CALLING
+            - HARDWARE_SETUP
+            - DUMDA_BOT
+            - SMART_REPLY
+            - DUPLEX_ZERO
+            - SPAM_FILTER
+            - TEXT
+            - IVR_CRAWLING
+            - VOICEMAIL
+            - INBOUND_SMB
+            - CCAI_DEMO
+            - DIALOGFLOW_DELEGATION
+            - AD_LEAD_VERIFICATION
+          type: string
       type: object
     BookCitationPerDocData:
       description: Per-doc data for the web page about the cited book Approximate size is on average ~10bytes
@@ -14841,6 +14871,10 @@ components:
           type: string
         quantized:
           $ref: "#/components/schemas/DrishtiQuantizedDenseFeatureData"
+        quantizedByteDense:
+          $ref: "#/components/schemas/DrishtiQuantizedByteDenseFeatureData"
+        quantizedByteIndexed:
+          $ref: "#/components/schemas/DrishtiQuantizedByteIndexedFeatureData"
         sparse:
           $ref: "#/components/schemas/DrishtiSparseFeatureData"
       type: object
@@ -14927,6 +14961,41 @@ components:
         label:
           $ref: "#/components/schemas/DrishtiLabelSetData"
         name:
+          type: string
+      type: object
+    DrishtiQuantizedByteDenseFeatureData:
+      description: Proto message to store quantized dense feature data.
+      properties:
+        extra:
+          description: If extra is present it must be of the same length as value.
+          items:
+            $ref: "#/components/schemas/DrishtiFeatureExtra"
+          type: array
+        generalExtra:
+          $ref: "#/components/schemas/DrishtiFeatureExtra"
+        value:
+          description: Quantized values for the feature.
+          format: byte
+          type: string
+      type: object
+    DrishtiQuantizedByteIndexedFeatureData:
+      description: Proto message to store quantized indexed feature data.
+      properties:
+        extra:
+          description: If extra is present it must be of the same length as value.
+          items:
+            $ref: "#/components/schemas/DrishtiFeatureExtra"
+          type: array
+        generalExtra:
+          $ref: "#/components/schemas/DrishtiFeatureExtra"
+        index:
+          items:
+            format: uint64
+            type: string
+          type: array
+        value:
+          description: Quantized values for the feature.
+          format: byte
           type: string
       type: object
     DrishtiQuantizedDenseFeatureData:
@@ -17457,6 +17526,7 @@ components:
             - PROVIDER_GOOGLE_3D_BASEMAP
             - PROVIDER_GOOGLE_MAPFACTS_PRIVACY
             - PROVIDER_GOOGLE_GT_ALF
+            - PROVIDER_GOOGLE_GT_OPERATOR_PROVENANCE
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -20088,6 +20158,7 @@ components:
             - PROVIDER_GOOGLE_3D_BASEMAP
             - PROVIDER_GOOGLE_MAPFACTS_PRIVACY
             - PROVIDER_GOOGLE_GT_ALF
+            - PROVIDER_GOOGLE_GT_OPERATOR_PROVENANCE
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -21250,6 +21321,7 @@ components:
             - PROVIDER_GOOGLE_3D_BASEMAP
             - PROVIDER_GOOGLE_MAPFACTS_PRIVACY
             - PROVIDER_GOOGLE_GT_ALF
+            - PROVIDER_GOOGLE_GT_OPERATOR_PROVENANCE
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -22601,6 +22673,7 @@ components:
             - PROVIDER_GOOGLE_3D_BASEMAP
             - PROVIDER_GOOGLE_MAPFACTS_PRIVACY
             - PROVIDER_GOOGLE_GT_ALF
+            - PROVIDER_GOOGLE_GT_OPERATOR_PROVENANCE
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -26169,24 +26242,6 @@ components:
             type: string
           type: array
       type: object
-    GoogleCloudContentwarehouseV1ClassifySplitAndExtractPipeline:
-      description: The configuration of the document classify/split and entity/kvp extraction pipeline.
-      properties:
-        classifySplitProcessorInfos:
-          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
-          description: The classify or split processor information.
-        extractProcessorInfos:
-          description: The entity or key-value pair extracting processor information.
-          items:
-            $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
-          type: array
-        inputPath:
-          description: "The input Cloud Storage folder. All files under this folder will be imported to Document Warehouse. Format: gs:///."
-          type: string
-        processorResultsFolderPath:
-          description: "The Cloud Storage folder path used to store the raw results from processors. Format: gs:///."
-          type: string
-      type: object
     GoogleCloudContentwarehouseV1CloudAIDocumentOption:
       description: Request Option for processing Cloud AI Document in CW Document.
       properties:
@@ -26362,6 +26417,7 @@ components:
             - RAW_DOCUMENT_FILE_TYPE_XLSX
             - RAW_DOCUMENT_FILE_TYPE_PPTX
             - RAW_DOCUMENT_FILE_TYPE_TEXT
+            - RAW_DOCUMENT_FILE_TYPE_TIFF
           type: string
         rawDocumentPath:
           description: Raw document file in Cloud Storage path.
@@ -26556,21 +26612,6 @@ components:
           description: String value of the enum field. This must match defined set of enums in document schema using EnumTypeOptions.
           type: string
       type: object
-    GoogleCloudContentwarehouseV1ExportToCdwPipeline:
-      description: The configuration of exporting documents from the Document Warehouse to CDW pipeline.
-      properties:
-        documentIds:
-          description: The list of all the documents to be processed.
-          items:
-            type: string
-          type: array
-        exportFolderPath:
-          description: "The Cloud Storage folder path used to store the exported documents before being sent to CDW. Format: gs:///."
-          type: string
-        processorInfo:
-          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
-          description: The CDW processor information.
-      type: object
     GoogleCloudContentwarehouseV1FetchAclRequest:
       description: Request message for DocumentService.FetchAcl
       properties:
@@ -26616,16 +26657,6 @@ components:
     GoogleCloudContentwarehouseV1FloatTypeOptions:
       description: Configurations for a float property.
       properties: {}
-      type: object
-    GoogleCloudContentwarehouseV1GcsIngestPipeline:
-      description: The configuration of the Cloud Storage ingestion pipeline.
-      properties:
-        inputPath:
-          description: "The input Cloud Storage folder. All files under this folder will be imported to Document Warehouse. Format: gs:///."
-          type: string
-        schemaName:
-          description: "The Document schema resource name. All documents processed by this processor will use this schema. Format: projects/{project_number}/locations/{location}/documentSchemas/{document_schema_id}."
-          type: string
       type: object
     GoogleCloudContentwarehouseV1GetDocumentRequest:
       description: Request message for DocumentService.GetDocument.
@@ -26852,19 +26883,6 @@ components:
         replaceRepeatedFields:
           description: When merging repeated fields, the default behavior is to append entries from the source repeated field to the destination repeated field. If you instead want to keep only the entries from the source repeated field, set this flag to true. If you want to replace a repeated field within a message field on the destination message, you must set both replace_repeated_fields and replace_message_fields to true, otherwise the repeated fields will be appended.
           type: boolean
-      type: object
-    GoogleCloudContentwarehouseV1ProcessorInfo:
-      description: The DocAI processor information.
-      properties:
-        documentType:
-          description: The processor will process the documents with this document type.
-          type: string
-        processorName:
-          description: The processor resource name. Format is `projects/{project}/locations/{location}/processors/{processor}`, or `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
-          type: string
-        schemaName:
-          description: "The Document schema resource name. All documents processed by this processor will use this schema. Format: projects/{project_number}/locations/{location}/documentSchemas/{document_schema_id}."
-          type: string
       type: object
     GoogleCloudContentwarehouseV1Property:
       description: Property of a document.
@@ -27132,19 +27150,6 @@ components:
           description: Source of the rules i.e., customer name.
           type: string
       type: object
-    GoogleCloudContentwarehouseV1RunPipelineRequest:
-      description: Request message for DocumentService.RunPipeline.
-      properties:
-        classifySplitAndExtractPipeline:
-          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ClassifySplitAndExtractPipeline"
-          description: Classify/split and entity/kvp extraction pipeline.
-        exportCdwPipeline:
-          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ExportToCdwPipeline"
-          description: Export docuemnts from Document Warehouseing to CDW for training purpose.
-        gcsIngestPipeline:
-          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1GcsIngestPipeline"
-          description: Cloud Storage ingestion pipeline.
-      type: object
     GoogleCloudContentwarehouseV1SearchDocumentsRequest:
       description: Request message for DocumentService.SearchDocuments.
       properties:
@@ -27230,7 +27235,7 @@ components:
       properties:
         policy:
           $ref: "#/components/schemas/GoogleIamV1Policy"
-          description: "Required. REQUIRED: The complete policy to be applied to the `resource`. The size of the policy is limited to a few 10s of KB. This refers to an Identity and Access (IAM) policy, which specifies access controls for the Document."
+          description: 'Required. REQUIRED: The complete policy to be applied to the `resource`. The size of the policy is limited to a few 10s of KB. This refers to an Identity and Access (IAM) policy, which specifies access controls for the Document. You can set ACL with condition for projects only. Supported operators are: `=`, `!=`, `<`, `<=`, `>`, and `>=` where the left of the operator is `DocumentSchemaId` or property name and the right of the operator is a number or a quoted string. You must escape backslash (\\) and quote (\") characters. Boolean expressions (AND/OR) are supported up to 3 levels of nesting (for example, "((A AND B AND C) OR D) AND E"), a maximum of 10 comparisons are allowed in the expression. The expression must be < 6000 bytes in length. Sample condition: `"DocumentSchemaId = \"some schema id\" OR SchemaId.floatPropertyName >= 10"`'
         projectOwner:
           description: For Set Project ACL only. Authorization check for end user will be ignored when project_owner=true.
           type: boolean
@@ -31625,6 +31630,7 @@ components:
             - GENUS_CONTRIB_SERVICE_SHARED
             - GENUS_CONTRIB_SERVICE_GEO_UGC
             - GENUS_SEARCH_SPORTS
+            - GENUS_BUSINESSMESSAGING
           type: string
         state:
           description: Indicates the state in Venom for this transcode type.
@@ -32157,6 +32163,7 @@ components:
             - GENUS_CONTRIB_SERVICE_SHARED
             - GENUS_CONTRIB_SERVICE_GEO_UGC
             - GENUS_SEARCH_SPORTS
+            - GENUS_BUSINESSMESSAGING
           type: string
         insertionResponseTimestampUsec:
           description: Time that VideoNotification result was received from Venom.
@@ -36675,6 +36682,7 @@ components:
             - SAGE
             - UNSTRUCTURED_INTENTS
             - NSP
+            - AQUA
           type: string
       type: object
     KnowledgeAnswersIntentQueryPersonalEntity:
@@ -37262,6 +37270,9 @@ components:
     KnowledgeAnswersSemanticType:
       description: A SemanticType configures a value determined by another source, in particular another intent or a semantic frame. See go/unifying-intents and go/framery.
       properties:
+        allowAll:
+          description: "If true, is compatible with a schema whose answer_type is any semantic_type including empty (since by default schemas return themselves as semantic_types (b/211438997). This is used primarily for slot composition. Example: for the slot name: Operand type { semantic_type { allow_all: true } entity_type {} } * An entity_type or a schema with answer_type 'entity_type' can fill Operand. * A schema with either (a) no answer_type or (b) answer_type with !semantic_type.names().empty() can fill Operand * A schema with answer_type 'date' CAN NOT fill Operand. Note that when there is an explicit answer_type, the 'self' semantic_type is not considered."
+          type: boolean
         includesContainingIntent:
           description: "Determines whether or not the meaning schema that contains this semantic_type conforms to a function call with the name and arguments taken from the meaning schema. As it refers to the \"containing_intent\", this field should only be set in a semantic_type declared in an intent's type_members field. The behavior of this field is undefined in other cases, for example, declaring the type of an intent slot. On Assistant, we use meaning schemas for argument types to represent both function call values as well as a reusable tool to host other argument values (opaque types, normalized strings, subsets of entities) across intents. Teams need this information to run conformance checks and annotate new data. Example: If the intents below are in the intent catalog, then: - Intent(slot=\"some string\") is conformant, because Type has string_type{} in its type_members. - Intent(slot=Type()) is not conformant, because Type has set semantic_type.includes_containing_intent to false. - Intent(slot=SubType()) is conformant, because type_members is not inherited. { id: \"Intent\" slot: { name: \"slot\" type: { semantic_type { name: \"Type\" }} } } { id: \"Type\" type_members { string_type{} semantic_type { includes_containing_intent: false } } } { id: \"SubType\" parent { id: \"Type\" relationship_type: SUBTYPE } }"
           type: boolean
@@ -47026,6 +47037,8 @@ components:
             - DATABRIDGE_CONSOLE
             - COMMSTAR
             - CDDB
+            - MONOSPACE
+            - MY_ACCOUNT
             - DEPRECATED_QUICKSTART_FLUME
             - DUO_CLIENT
             - ALBERT
@@ -47269,7 +47282,7 @@ components:
           type: string
       type: object
     PerDocData:
-      description: "=========================================================================== # Make sure you read the comments in the bottom before you add any new field. NB: As noted in the comments, this protocol buffer is used in both indexing and serving. In mustang serving implementations we only decode perdocdata during the search phase, and so this protocol should only contain data used during search. See mustang/repos_www/attachments.proto:{MustangBasicInfo,MustangContentInfo} for protocols used during search and/or docinfo. Next available tag deprecated, use this (and look for commented out fields): blaze-bin/net/proto_compiler/protocol-compiler --freetags \\ indexer/perdocdata/perdocdata.proto Next tag: 219"
+      description: "=========================================================================== # Make sure you read the comments in the bottom before you add any new field. NB: As noted in the comments, this protocol buffer is used in both indexing and serving. In mustang serving implementations we only decode perdocdata during the search phase, and so this protocol should only contain data used during search. See mustang/repos_www/attachments.proto:{MustangBasicInfo,MustangContentInfo} for protocols used during search and/or docinfo. Next available tag deprecated, use this (and look for commented out fields): blaze-bin/net/proto_compiler/protocol-compiler --freetags \\ indexer/perdocdata/perdocdata.proto Next tag: 220"
       properties:
         BlogData:
           $ref: "#/components/schemas/BlogPerDocData"
@@ -50750,6 +50763,9 @@ components:
       type: object
     QualityCalypsoAppsUniversalImageData:
       properties:
+        enhancedImage:
+          $ref: "#/components/schemas/QualityCalypsoAppsUniversalImage"
+          description: iOS cover image, which includes the uni image from UAM only.
         featureGraphic:
           $ref: "#/components/schemas/QualityCalypsoAppsUniversalImage"
           description: aka. promotional image / cover image.
@@ -51802,6 +51818,33 @@ components:
           format: int32
           type: integer
       type: object
+    QualityNsrNsrChunksProto:
+      description: The NsrChunksProto corresponds to the NSRChunks class. The data saved by the proto and the class is the same. We provide utilities to go from one to the other.
+      properties:
+        primaryChunk:
+          description: Primary NSR sitechunk. In most of the cases it's same as HOST_LEVEL_V3 sitechunked canonical url of the document. In rare, but important cases it's based on page markup (see quality/nsr/util/sitechunker.h for details).
+          type: string
+        secondaryChunks:
+          description: Secondary NSR sitechunk. When present, it provides more granular chunking than primary sitechunks (see quality/nsr/util/sitechunker.h for details). Note that the NSRChunks class does not store trivial secondary chunks. Be aware of this when constructing NsrChunksProto from scratch.
+          items:
+            type: string
+          type: array
+      type: object
+    QualityNsrNsrChunksWithSourceInfo:
+      properties:
+        nsrChunks:
+          $ref: "#/components/schemas/QualityNsrNsrChunksProto"
+        siteChunkSource:
+          description: These are annotated in the Goldmine NSR annotator.
+          enum:
+            - SITE_CHUNK_SOURCE_UNKNOWN
+            - SITE_CHUNK_SOURCE_WEBUTIL
+            - SITE_CHUNK_SOURCE_BREADCRUMBS
+            - SITE_CHUNK_SOURCE_AUTHOR
+            - SITE_CHUNK_SOURCE_COOKBOOK
+            - SITE_CHUNK_SOURCE_CRAWLED_SELLER_DATA
+          type: string
+      type: object
     QualityNsrNsrData:
       description: "NOTE: When adding a new field to be propagated to Raffia check if NsrPatternSignalSpec needs to be updated. Next ID: 52"
       properties:
@@ -52022,6 +52065,9 @@ components:
           description: Records the last time each system has processed the proto. These are recorded as seconds from the unix epoch. Ideally these fields would be google.protobuf.Timestamp, but the scoring bundle (which depends on this proto) does not understand proto3 syntax. See cl/500942047 for details.
           format: int64
           type: string
+        nsrChunksWithSourceInfo:
+          $ref: "#/components/schemas/QualityNsrNsrChunksWithSourceInfo"
+          description: Stores the NSRChunks (computed by goldmine) which were used to populate the data.
         raffiaLookupKey:
           type: string
         raffiaLookupKeyPerField:
@@ -53944,6 +53990,9 @@ components:
           items:
             $ref: "#/components/schemas/ShoppingWebentityShoppingAnnotationInferredImage"
           type: array
+        isLensBuildable:
+          description: Is the offer Lens buildable. The corresponding field in Shopping Annotation is SurfaceSelection.
+          type: boolean
         matchingType:
           description: information about methods used to match offer with indexed url. See shopping_annotation.proto
           format: int64
@@ -56788,6 +56837,49 @@ components:
             - TARGET_AUDIENCE
             - TARGET_PURPOSE
             - SETTING_BY_LOCATION
+            - DECORATIVE_PATTERN
+            - ELECTRONIC_DEVICE_CONNECTIVITY
+            - DIETARY_RESTRICTION
+            - ACTOR
+            - ADAPTATION_SOURCE
+            - AGE
+            - AUTHOR
+            - AUTHOR_OF_ADAPTATION_SOURCE
+            - AWARD_NOMINATED_FOR
+            - AWARD_WON
+            - BATTERY_LIFE
+            - BATTERY_TYPE
+            - BRAND
+            - COLOR
+            - COUNTRY_OF_ORIGIN
+            - DEGREE_OF_BRIGHTNESS
+            - DEGREE_OF_SEXINESS
+            - DURATION
+            - EXCLUDED_INGREDIENT
+            - FICTIONAL_CHARACTER
+            - FILM_DIRECTOR
+            - GENRE
+            - INTENDED_SPECIAL_OCCASION
+            - LENGTH
+            - MATERIAL
+            - MEDIA_PROVIDER
+            - MUSIC_COMPOSER
+            - ORIGINAL_MEDIA_PROVIDER
+            - PRIMARY_GENRE
+            - PRODUCTION_COMPANY
+            - PUBLICATION_DATE
+            - RECENCY
+            - RELATED_ARTISTIC_WORK
+            - RELEASE_DATE
+            - SECONDARY_GENRE
+            - SETTING_BY_FICTIONAL_LOCATION
+            - SETTING_BY_REAL_LOCATION
+            - SETTING_BY_TIME
+            - SUPPORTED_VIRTUAL_ASSISTANT
+            - TEMPERATURE
+            - THEME
+            - TVM_ATTRIBUTE
+            - WEIGHT
           type: string
         direction:
           description: Direction defines the relation between the measurable aspect and the facet.
@@ -56889,6 +56981,49 @@ components:
             - FACET_AUDIENCE
             - FACET_PURPOSE
             - FACET_SETTING_BY_LOCATION
+            - FACET_DECORATIVE_PATTERN
+            - FACET_ELECTRONIC_DEVICE_CONNECTIVITY
+            - FACET_DIETARY_RESTRICTION
+            - FACET_ACTOR
+            - FACET_ADAPTATION_SOURCE
+            - FACET_AGE
+            - FACET_AUTHOR
+            - FACET_AUTHOR_OF_ADAPTATION_SOURCE
+            - FACET_AWARD_NOMINATED_FOR
+            - FACET_AWARD_WON
+            - FACET_BATTERY_LIFE
+            - FACET_BATTERY_TYPE
+            - FACET_BRAND
+            - FACET_COLOR
+            - FACET_COUNTRY_OF_ORIGIN
+            - FACET_DEGREE_OF_BRIGHTNESS
+            - FACET_DEGREE_OF_SEXINESS
+            - FACET_DURATION
+            - FACET_EXCLUDED_INGREDIENT
+            - FACET_FICTIONAL_CHARACTER
+            - FACET_FILM_DIRECTOR
+            - FACET_GENRE
+            - FACET_INTENDED_SPECIAL_OCCASION
+            - FACET_LENGTH
+            - FACET_MATERIAL
+            - FACET_MEDIA_PROVIDER
+            - FACET_MUSIC_COMPOSER
+            - FACET_ORIGINAL_MEDIA_PROVIDER
+            - FACET_PRIMARY_GENRE
+            - FACET_PRODUCTION_COMPANY
+            - FACET_PUBLICATION_DATE
+            - FACET_RECENCY
+            - FACET_RELATED_ARTISTIC_WORK
+            - FACET_RELEASE_DATE
+            - FACET_SECONDARY_GENRE
+            - FACET_SETTING_BY_FICTIONAL_LOCATION
+            - FACET_SETTING_BY_REAL_LOCATION
+            - FACET_SETTING_BY_TIME
+            - FACET_SUPPORTED_VIRTUAL_ASSISTANT
+            - FACET_TEMPERATURE
+            - FACET_THEME
+            - FACET_TVM_ATTRIBUTE
+            - FACET_WEIGHT
           type: string
       type: object
     RepositoryWebrefLightweightTokensPerMentionLightweightToken:
@@ -59330,6 +59465,9 @@ components:
           type: string
         fixedPointMetadata:
           $ref: "#/components/schemas/ResearchScamGenericFeatureVectorFixedPointMetadata"
+        internalOnlyIsSecondaryPartition:
+          description: copybara:strip_begin INTERNAL USE ONLY! The ScaM Team reserves the right to remove this field and reuse its proto tag without notice. DO NOT USE outside of build_shards_pipeline! This field is used inside build_shards_pipeline to indicate whether this GFV is residing in its secondary (vs. primary) partition. copybara:strip_end
+          type: boolean
         normType:
           description: Describes if data has been normalized and the type.
           enum:
@@ -59340,7 +59478,7 @@ components:
           type: string
         queryMetadata:
           $ref: "#/components/schemas/ResearchScamQueryMetadata"
-          description: copybara:strip_begin A field that contains metadata information when the datapoint is acting as a query. copybara:strip_end
+          description: copybara:strip_begin A field that contains metadata information when the datapoint is acting as a query.
         restrictTokens:
           $ref: "#/components/schemas/ResearchScamGenericFeatureVectorRestrictTokens"
         tokens:
@@ -59474,7 +59612,7 @@ components:
           format: int32
           type: integer
         numSingleShardNeighbors:
-          description: "If populated, this is the maximum number of neighbors that may be returned from a single shard. If not populated, up to num_neighbors neighbors are returned from each shard. Setting his to a smaller value than num_neighbors will increase speed at the expense of accuray by requiring cross-shard merging of fewer neighbors. If this value is set, num_neighbors must also be set and this value must be <= num_neighbors and >= num_neighbors / number of shards. If set, this value must always be > 0. "
+          description: "If populated, this is the maximum number of neighbors that may be returned from a single shard. If not populated, up to num_neighbors neighbors are returned from each shard. Setting this to a smaller value than num_neighbors will increase speed at the expense of accuray by requiring cross-shard merging of fewer neighbors. If this value is set, num_neighbors must also be set and this value must be <= num_neighbors and >= num_neighbors / number of shards. If set, this value must always be > 0. "
           format: int32
           type: integer
         perCrowdingAttributeNumNeighbors:
@@ -59828,7 +59966,7 @@ components:
         locationName:
           description: The original name for the area covered by the dataset.
           type: string
-        locationResource:
+        locationSource:
           enum:
             - UNKNOWN
             - METADATA
@@ -60395,6 +60533,10 @@ components:
       type: object
     ScienceCitation:
       properties:
+        AbstractCitationSource:
+          description: The source of abstract text that is chosen by science docid assigner.
+          format: int32
+          type: integer
         AbstractDisplay:
           enum:
             - UNKNOWN_ABSTRACT_DISPLAY
@@ -61250,6 +61392,8 @@ components:
       type: object
     SdrEmbedding:
       properties:
+        compressedEmbeddings:
+          $ref: "#/components/schemas/QualityRankembedMustangMustangRankEmbedInfo"
         values:
           items:
             format: float
@@ -62737,7 +62881,7 @@ components:
       description: "Next ID: 9"
       properties:
         disableReason:
-          description: Indicates why the limited profile has been disabled. Will be set iff the limited profile is disabled. This field can only be set server-side and must not be used by external clients when mutating LimitedProfiles.
+          description: "Indicates why the limited profile has been disabled. Will be set iff the limited profile is disabled. Note: When mutating limited profiles, in order to disable them, MutateDataRequest.DisableLimitedProfile must be true. Currently, disables are only performed server-side, so this is read-only for clients."
           enum:
             - DISABLE_REASON_UNSPECIFIED
             - INCOMPATIBLE_NAME_ONLY_MUTATION
@@ -62806,6 +62950,23 @@ components:
         weekDayNumber:
           format: int32
           type: integer
+      type: object
+    SocialGraphApiProtoNamePronunciationAudioMetadata:
+      description: Metadata for a user's name pronunciation audio. Proto message is shared between merged_person and FBS.
+      properties:
+        audioSource:
+          description: Stored. Updated on pronunciation creates and updates.
+          enum:
+            - SOURCE_UNSPECIFIED
+            - USER_GENERATED
+          type: string
+        audioState:
+          description: Stored.
+          enum:
+            - STATE_UNSPECIFIED
+            - ENABLED
+            - DISABLED_FOR_NAME_CHANGE
+          type: string
       type: object
     SocialGraphApiProtoNotificationTrigger:
       description: Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService)
@@ -66280,6 +66441,9 @@ components:
               - NORMAL_SELF_UPDATE
               - SECOND_PASS_BROAD_INTENT_QUERY_EVENT_LEVEL
               - SECOND_PASS_REWEIGHTING_TRIGGERED_EVENT_LEVEL
+              - GEARHEAD_TOOLTIP_COOLWALK_RAIL_WIDGET
+              - INLINE_DETAILS_TQUALITY_CHECK_UNKNOWN
+              - INLINE_DETAILS_TQUALITY_CHECK_UNKNOWN_FRONTEND
               - EVENT_LEVEL_TEST_CODE_LIMIT
               - RESERVED_4
               - RESERVED_5
@@ -67223,6 +67387,9 @@ components:
               - HAS_NO_BACKUP_FOP_FOR_ORDER_SESSION_LEVEL
               - SECOND_PASS_BROAD_INTENT_QUERY_SESSION_LEVEL
               - SECOND_PASS_REWEIGHTING_TRIGGERED_SESSION_LEVEL
+              - BOOKS_SEARCH_PAGE_DORA_QUERY_SESSION_LEVEL
+              - INLINE_DETAILS_TQUALITY_CHECK_UNKNOWN_SESSION_LEVEL
+              - INLINE_DETAILS_TQUALITY_CHECK_UNKNOWN_FRONTEND_SESSION_LEVEL
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - SHOULD_SEE_LIVE_OP_CLUSTER_USER_LEVEL
               - CART_ABANDONMENT_USER_LEVEL
@@ -67751,6 +67918,7 @@ components:
             - GAME_THEME_SETTING
             - GAME_CONNECTIVITY
             - GAME_DIMENSIONAL_PLANES
+            - GAME_MONETIZATION
             - ACCESSIBLITY
             - ASSISTANT
             - CHROMEBOOK_COMPATIBILITY
@@ -67936,6 +68104,7 @@ components:
             - NS_CONTRIB_SERVICE_SHARED
             - NS_CONTRIB_SERVICE_GEO_UGC
             - NS_SEARCH_SPORTS
+            - NS_BUSINESSMESSAGING
           type: string
       type: object
     VideoAudioStream:
@@ -76136,7 +76305,7 @@ components:
           type: string
       type: object
     WWWDocInfo:
-      description: "Some per-doc info is returned for all www DocInfo requests. Next id: 92"
+      description: "Some per-doc info is returned for all www DocInfo requests. Next id: 94"
       properties:
         additionalSafesearchStats:
           description: Additional stats output by SafeSearch. See classifier/porn/public/porn-attachments.h.
@@ -76295,6 +76464,9 @@ components:
           description: If not 0, we should not show the image in overlay mode in image snippets.
           format: int32
           type: integer
+        nsrSitechunk:
+          description: Sitechunk used by NSR. For most pages this is equivalent HOST_LEVEL_V3 sitechunk. Main difference is that, for sites like youtube.com and vimeo.com, nsr_sitechunks are channel level (based on schema.org markup, not url alone). See go/nsr-chunks for more details.
+          type: string
         partialBoilerplateMetadescription:
           type: boolean
         pornStats:

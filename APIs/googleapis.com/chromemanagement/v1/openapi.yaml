@@ -432,16 +432,16 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/{name}":
     get:
-      description: Get telemetry device.
-      operationId: chromemanagement.customers.telemetry.devices.get
+      description: Get telemetry user.
+      operationId: chromemanagement.customers.telemetry.users.get
       parameters:
-        - description: Required. Name of the `TelemetryDevice` to return.
+        - description: Required. Name of the `TelemetryUser` to return.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Required. Read mask to specify which fields to return.
+        - description: Read mask to specify which fields to return.
           in: query
           name: readMask
           schema:
@@ -451,7 +451,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleChromeManagementV1TelemetryDevice"
+                $ref: "#/components/schemas/GoogleChromeManagementV1TelemetryUser"
           description: Successful response
       security:
         - Oauth2:
@@ -566,6 +566,63 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleChromeManagementV1ListTelemetryEventsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chrome.management.telemetry.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chrome.management.telemetry.readonly
+      tags:
+        - customers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/telemetry/users":
+    get:
+      description: List all telemetry users.
+      operationId: chromemanagement.customers.telemetry.users.list
+      parameters:
+        - description: Required. Customer id or "my_customer" to use the customer associated to the account making the request.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Only include resources that match the filter. Supported filter fields: * user_id * user_org_unit_id"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Maximum number of results to return. Default value is 100. Maximum value is 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Token to specify next page in the list.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Read mask to specify which fields to return.
+          in: query
+          name: readMask
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleChromeManagementV1ListTelemetryUsersResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -1594,6 +1651,18 @@ components:
             $ref: "#/components/schemas/GoogleChromeManagementV1TelemetryEvent"
           type: array
       type: object
+    GoogleChromeManagementV1ListTelemetryUsersResponse:
+      description: Response message for listing telemetry users for a customer.
+      properties:
+        nextPageToken:
+          description: Token to specify next page in the list.
+          type: string
+        telemetryUsers:
+          description: Telemetry users returned in the response.
+          items:
+            $ref: "#/components/schemas/GoogleChromeManagementV1TelemetryUser"
+          type: array
+      type: object
     GoogleChromeManagementV1MemoryInfo:
       description: "Memory information of a device. * This field has both telemetry and device information: - `totalRamBytes` - Device information - `availableRamBytes` - Telemetry information - `totalMemoryEncryption` - Device information * Data for this field is controlled via policy: [ReportDeviceMemoryInfo](https://chromeenterprise.google/policies/#ReportDeviceMemoryInfo) * Data Collection Frequency: - `totalRamBytes` - Only at upload - `availableRamBytes` - Every 10 minutes - `totalMemoryEncryption` - at device startup * Default Data Reporting Frequency: - `totalRamBytes` - 3 hours - `availableRamBytes` - 3 hours - `totalMemoryEncryption` - at device startup - Policy Controlled: Yes * Cache: If the device is offline, the collected data is stored locally, and will be reported when the device is next online: only for `totalMemoryEncryption` * Reported for affiliated users only: N/A"
       properties:
@@ -1808,6 +1877,20 @@ components:
             - OS_UPDATE_NEED_REBOOT
           readOnly: true
           type: string
+      type: object
+    GoogleChromeManagementV1PeripheralsReport:
+      description: Peripherals report.
+      properties:
+        reportTime:
+          description: Output only. Timestamp of when the report was collected.
+          format: google-datetime
+          readOnly: true
+          type: string
+        usbPeripheralReport:
+          description: Reports of all usb connected devices.
+          items:
+            $ref: "#/components/schemas/GoogleChromeManagementV1UsbPeripheralReport"
+          type: array
       type: object
     GoogleChromeManagementV1StorageInfo:
       description: "Status data for storage. * This field is telemetry information and this will change over time as the device is utilized. * Data for this field is controlled via policy: [ReportDeviceStorageStatus](https://chromeenterprise.google/policies/#ReportDeviceStorageStatus) * Data Collection Frequency: Only at Upload * Default Data Reporting Frequency: 3 hours - Policy Controlled: Yes * Cache: If the device is offline, the collected data is stored locally, and will be reported when the device is next online: No * Reported for affiliated users only: N/A"
@@ -2053,6 +2136,49 @@ components:
           description: List of usb devices that were either added or removed.
           items:
             $ref: "#/components/schemas/GoogleChromeManagementV1UsbPeripheralReport"
+          type: array
+      type: object
+    GoogleChromeManagementV1TelemetryUser:
+      description: Telemetry data collected from a managed user.
+      properties:
+        customer:
+          description: G Suite Customer whose enterprise enrolled the device.
+          type: string
+        name:
+          description: Resource name of the user.
+          type: string
+        orgUnitId:
+          description: Organization unit of the user.
+          type: string
+        userDevice:
+          description: Telemetry data collected from a managed user and device.
+          items:
+            $ref: "#/components/schemas/GoogleChromeManagementV1TelemetryUserDevice"
+          type: array
+        userEmail:
+          description: Email address of the user.
+          type: string
+        userId:
+          description: Directory ID of the user.
+          type: string
+      type: object
+    GoogleChromeManagementV1TelemetryUserDevice:
+      description: Telemetry data collected for a managed user and device.
+      properties:
+        audioStatusReport:
+          description: Output only. Audio reports collected periodically sorted in a decreasing order of report_time.
+          items:
+            $ref: "#/components/schemas/GoogleChromeManagementV1AudioStatusReport"
+          readOnly: true
+          type: array
+        deviceId:
+          description: The unique Directory API ID of the device. This value is the same as the Admin Console's Directory API ID in the ChromeOS Devices tab.
+          type: string
+        peripheralsReport:
+          description: Output only. Peripherals reports collected periodically sorted in a decreasing order of report_time.
+          items:
+            $ref: "#/components/schemas/GoogleChromeManagementV1PeripheralsReport"
+          readOnly: true
           type: array
       type: object
     GoogleChromeManagementV1TelemetryUserInfo:

@@ -3722,7 +3722,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates a user using patch semantics. The update method should be used instead, since it also supports patch semantics and has better performance. This method is unable to clear fields that contain repeated objects (`addresses`, `phones`, etc). Use the update method instead.
+      description: Updates a user using patch semantics. The update method should be used instead, because it also supports patch semantics and has better performance. If you're mapping an external identity to a Google identity, use the [`update`](https://developers.google.com/admin-sdk/directory/v1/reference/users/update) method instead of the `patch` method. This method is unable to clear fields that contain repeated objects (`addresses`, `phones`, etc). Use the update method instead.
       operationId: directory.users.patch
       parameters:
         - description: Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
@@ -6065,7 +6065,7 @@ components:
       description: The result of executing a command.
       properties:
         commandResultPayload:
-          description: 'The payload for the command result. The following commands respond with a payload: - DEVICE_START_CRD_SESSION: Payload is a stringified JSON object in the form: { "url": url }. The URL provides a link to the CRD session.'
+          description: 'The payload for the command result. The following commands respond with a payload: * `DEVICE_START_CRD_SESSION`: Payload is a stringified JSON object in the form: { "url": url }. The URL provides a link to the Chrome Remote Desktop session.'
           type: string
         errorMessage:
           description: The error message with a short explanation as to why the command failed. Only present if the command failed.
@@ -6098,7 +6098,7 @@ components:
             - DEVICE_START_CRD_SESSION
           type: string
         payload:
-          description: 'The payload for the command, provide it only if command supports it. The following commands support adding payload: - SET_VOLUME: Payload is a stringified JSON object in the form: { "volume": 50 }. The volume has to be an integer in the range [0,100]. - DEVICE_START_CRD_SESSION: Payload is optionally a stringified JSON object in the form: { "ackedUserPresence": true }. ackedUserPresence is a boolean. If a device is being used, ackedUserPresence must be set to true to acknowledge that you want to start a CRD session anyways. It is false by default, so a CRD command will fail if used on an active device without this field.'
+          description: 'The payload for the command, provide it only if command supports it. The following commands support adding payload: * `SET_VOLUME`: Payload is a stringified JSON object in the form: { "volume": 50 }. The volume has to be an integer in the range [0,100]. * `DEVICE_START_CRD_SESSION`: Payload is optionally a stringified JSON object in the form: { "ackedUserPresence": true }. `ackedUserPresence` is a boolean. By default, `ackedUserPresence` is set to `false`. To start a Chrome Remote Desktop session for an active device, set `ackedUserPresence` to `true`.'
           type: string
       type: object
     DirectoryChromeosdevicesIssueCommandResponse:

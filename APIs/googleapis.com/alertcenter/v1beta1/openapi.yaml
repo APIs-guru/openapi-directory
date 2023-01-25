@@ -40,7 +40,7 @@ paths:
       description: Lists the alerts.
       operationId: alertcenter.alerts.list
       parameters:
-        - description: Optional. The unique identifier of the Google Workspace organization account of the customer the alerts are associated with. Inferred from the caller identity if not provided.
+        - description: Optional. The unique identifier of the Google Workspace account of the customer the alerts are associated with. The `customer_id` must have the initial "C" stripped (for example, `046psxkn`). Inferred from the caller identity if not provided. [Find your customer ID](https://support.google.com/cloudidentity/answer/10070793).
           in: query
           name: customerId
           schema:
@@ -102,7 +102,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. The unique identifier of the Google Workspace organization account of the customer the alert is associated with. Inferred from the caller identity if not provided.
+        - description: Optional. The unique identifier of the Google Workspace account of the customer the alert is associated with. The `customer_id` must have the initial "C" stripped (for example, `046psxkn`). Inferred from the caller identity if not provided. [Find your customer ID](https://support.google.com/cloudidentity/answer/10070793).
           in: query
           name: customerId
           schema:
@@ -131,7 +131,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. The unique identifier of the Google Workspace organization account of the customer the alert is associated with. Inferred from the caller identity if not provided.
+        - description: Optional. The unique identifier of the Google Workspace account of the customer the alert is associated with. The `customer_id` must have the initial "C" stripped (for example, `046psxkn`). Inferred from the caller identity if not provided. [Find your customer ID](https://support.google.com/cloudidentity/answer/10070793).
           in: query
           name: customerId
           schema:
@@ -173,7 +173,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. The unique identifier of the Google Workspace organization account of the customer the alert feedback are associated with. Inferred from the caller identity if not provided.
+        - description: Optional. The unique identifier of the Google Workspace account of the customer the alert is associated with. The `customer_id` must have the initial "C" stripped (for example, `046psxkn`). Inferred from the caller identity if not provided. [Find your customer ID](https://support.google.com/cloudidentity/answer/10070793).
           in: query
           name: customerId
           schema:
@@ -219,7 +219,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. The unique identifier of the Google Workspace organization account of the customer the alert is associated with. Inferred from the caller identity if not provided.
+        - description: Optional. The unique identifier of the Google Workspace account of the customer the alert is associated with. The `customer_id` must have the initial "C" stripped (for example, `046psxkn`). Inferred from the caller identity if not provided. [Find your customer ID](https://support.google.com/cloudidentity/answer/10070793).
           in: query
           name: customerId
           schema:
@@ -254,7 +254,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. The unique identifier of the Google Workspace organization account of the customer the alert metadata is associated with. Inferred from the caller identity if not provided.
+        - description: Optional. The unique identifier of the Google Workspace account of the customer the alert metadata is associated with. The `customer_id` must have the initial "C" stripped (for example, `046psxkn`). Inferred from the caller identity if not provided. [Find your customer ID](https://support.google.com/cloudidentity/answer/10070793).
           in: query
           name: customerId
           schema:
@@ -402,7 +402,7 @@ paths:
       description: Returns customer-level settings.
       operationId: alertcenter.getSettings
       parameters:
-        - description: Optional. The unique identifier of the Google Workspace organization account of the customer the alert settings are associated with. Inferred from the caller identity if not provided.
+        - description: Optional. The unique identifier of the Google Workspace account of the customer the alert settings are associated with. The `customer_id` must/ have the initial "C" stripped (for example, `046psxkn`). Inferred from the caller identity if not provided. [Find your customer ID](https://support.google.com/cloudidentity/answer/10070793).
           in: query
           name: customerId
           schema:
@@ -437,7 +437,7 @@ paths:
       description: Updates the customer-level settings.
       operationId: alertcenter.updateSettings
       parameters:
-        - description: Optional. The unique identifier of the Google Workspace organization account of the customer the alert settings are associated with. Inferred from the caller identity if not provided.
+        - description: Optional. The unique identifier of the Google Workspace account of the customer the alert settings are associated with. The `customer_id` must have the initial "C" stripped (for example, `046psxkn`). Inferred from the caller identity if not provided. [Find your customer ID](https://support.google.com/cloudidentity/answer/10070793).
           in: query
           name: customerId
           schema:
@@ -673,7 +673,7 @@ components:
           format: google-datetime
           type: string
         customerId:
-          description: Output only. The unique identifier of the Google account of the customer.
+          description: Output only. The unique identifier of the Google Workspace account of the customer.
           type: string
         data:
           additionalProperties:
@@ -722,7 +722,7 @@ components:
           format: google-datetime
           type: string
         customerId:
-          description: Output only. The unique identifier of the Google account of the customer.
+          description: Output only. The unique identifier of the Google Workspace account of the customer.
           type: string
         email:
           description: Output only. The email of the user that provided the feedback.
@@ -749,7 +749,7 @@ components:
           description: The email address of the user assigned to the alert.
           type: string
         customerId:
-          description: Output only. The unique identifier of the Google account of the customer.
+          description: Output only. The unique identifier of the Google Workspace account of the customer.
           type: string
         etag:
           description: "Optional. `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of an alert metadata from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform metadata updates in order to avoid race conditions: An `etag` is returned in the response which contains alert metadata, and systems are expected to put that etag in the request to update alert metadata to ensure that their change will be applied to the same version of the alert metadata. If no `etag` is provided in the call to update alert metadata, then the existing alert metadata is overwritten blindly."
@@ -866,12 +866,12 @@ components:
       description: A request to perform batch delete on alerts.
       properties:
         alertId:
-          description: Required. list of alert IDs.
+          description: Required. The list of alert IDs to delete.
           items:
             type: string
           type: array
         customerId:
-          description: Optional. The unique identifier of the Google Workspace organization account of the customer the alerts are associated with.
+          description: Optional. The unique identifier of the Google Workspace account of the customer the alerts are associated with. The `customer_id` must have the initial "C" stripped (for example, `046psxkn`). Inferred from the caller identity if not provided. [Find your customer ID](https://support.google.com/cloudidentity/answer/10070793).
           type: string
       type: object
     BatchDeleteAlertsResponse:
@@ -880,7 +880,7 @@ components:
         failedAlertStatus:
           additionalProperties:
             $ref: "#/components/schemas/Status"
-          description: The status details for each failed alert_id.
+          description: The status details for each failed `alert_id`.
           type: object
         successAlertIds:
           description: The successful list of alert IDs.
@@ -892,12 +892,12 @@ components:
       description: A request to perform batch undelete on alerts.
       properties:
         alertId:
-          description: Required. list of alert IDs.
+          description: Required. The list of alert IDs to undelete.
           items:
             type: string
           type: array
         customerId:
-          description: Optional. The unique identifier of the Google Workspace organization account of the customer the alerts are associated with.
+          description: Optional. The unique identifier of the Google Workspace account of the customer the alerts are associated with. The `customer_id` must have the initial "C" stripped (for example, `046psxkn`). Inferred from the caller identity if not provided. [Find your customer ID](https://support.google.com/cloudidentity/answer/10070793).
           type: string
       type: object
     BatchUndeleteAlertsResponse:
@@ -906,7 +906,7 @@ components:
         failedAlertStatus:
           additionalProperties:
             $ref: "#/components/schemas/Status"
-          description: The status details for each failed alert_id.
+          description: The status details for each failed `alert_id`.
           type: object
         successAlertIds:
           description: The successful list of alert IDs.
@@ -1330,10 +1330,10 @@ components:
               - ACTION_TYPE_UNSPECIFIED
               - DRIVE_BLOCK_EXTERNAL_SHARING
               - DRIVE_WARN_ON_EXTERNAL_SHARING
+              - DELETE_WEBPROTECT_EVIDENCE
               - ALERT
               - RULE_ACTIVATE
               - RULE_DEACTIVATE
-              - DELETE_WEBPROTECT_EVIDENCE
             type: string
           type: array
         trigger:
@@ -1354,10 +1354,10 @@ components:
               - ACTION_TYPE_UNSPECIFIED
               - DRIVE_BLOCK_EXTERNAL_SHARING
               - DRIVE_WARN_ON_EXTERNAL_SHARING
+              - DELETE_WEBPROTECT_EVIDENCE
               - ALERT
               - RULE_ACTIVATE
               - RULE_DEACTIVATE
-              - DELETE_WEBPROTECT_EVIDENCE
             type: string
           type: array
         triggeringUserEmail:
@@ -1541,7 +1541,7 @@ components:
       description: A request to undelete a specific alert that was marked for deletion.
       properties:
         customerId:
-          description: Optional. The unique identifier of the Google Workspace organization account of the customer the alert is associated with. Inferred from the caller identity if not provided.
+          description: Optional. The unique identifier of the Google Workspace account of the customer the alert is associated with. The `customer_id` must have the initial "C" stripped (for example, `046psxkn`). Inferred from the caller identity if not provided. [Find your customer ID](https://support.google.com/cloudidentity/answer/10070793).
           type: string
       type: object
     User:
