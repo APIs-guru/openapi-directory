@@ -100,7 +100,7 @@ paths:
       description: Returns the Google updated Lodging of a specific location.
       operationId: mybusinesslodging.locations.lodging.getGoogleUpdated
       parameters:
-        - description: "Required. Google identifier for this location in the form: `accounts/{account_id}/locations/{location_id}/lodging`"
+        - description: "Required. Google identifier for this location in the form: `locations/{location_id}/lodging`"
           in: path
           name: name
           required: true

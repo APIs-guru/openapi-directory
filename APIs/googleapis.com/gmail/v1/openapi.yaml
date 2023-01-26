@@ -1278,7 +1278,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Sends the specified message to the recipients in the `To`, `Cc`, and `Bcc` headers.
+      description: Sends the specified message to the recipients in the `To`, `Cc`, and `Bcc` headers. For example usage, see [Sending email](https://developers.google.com/gmail/api/guides/sending).
       operationId: gmail.users.messages.send
       parameters:
         - description: The user's email address. The special value `me` can be used to indicate the authenticated user.

@@ -484,6 +484,11 @@ components:
         name:
           description: 'The human-readable marketing name for this device model. Examples: "Nexus 5", "Galaxy S5".'
           type: string
+        perVersionInfo:
+          description: Version-specific information of an Android model.
+          items:
+            $ref: "#/components/schemas/PerAndroidVersionInfo"
+          type: array
         screenDensity:
           description: Screen density in DPI. This corresponds to ro.sf.lcd_density
           format: int32
@@ -959,6 +964,11 @@ components:
         name:
           description: 'The human-readable name for this device model. Examples: "iPhone 4s", "iPad Mini 2".'
           type: string
+        perVersionInfo:
+          description: Version-specific information of an iOS model.
+          items:
+            $ref: "#/components/schemas/PerIosVersionInfo"
+          type: array
         screenDensity:
           description: Screen density in DPI.
           format: int32
@@ -1162,6 +1172,38 @@ components:
           items:
             type: string
           type: array
+      type: object
+    PerAndroidVersionInfo:
+      description: A version-specific information of an Android model.
+      properties:
+        deviceCapacity:
+          description: The number of online devices for an Android version.
+          enum:
+            - DEVICE_CAPACITY_UNSPECIFIED
+            - DEVICE_CAPACITY_HIGH
+            - DEVICE_CAPACITY_MEDIUM
+            - DEVICE_CAPACITY_LOW
+            - DEVICE_CAPACITY_NONE
+          type: string
+        versionId:
+          description: An Android version.
+          type: string
+      type: object
+    PerIosVersionInfo:
+      description: A version-specific information of an iOS model.
+      properties:
+        deviceCapacity:
+          description: The number of online devices for an iOS version.
+          enum:
+            - DEVICE_CAPACITY_UNSPECIFIED
+            - DEVICE_CAPACITY_HIGH
+            - DEVICE_CAPACITY_MEDIUM
+            - DEVICE_CAPACITY_LOW
+            - DEVICE_CAPACITY_NONE
+          type: string
+        versionId:
+          description: An iOS version.
+          type: string
       type: object
     ProvidedSoftwareCatalog:
       description: The currently provided software environment on the devices under test.

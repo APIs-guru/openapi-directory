@@ -3076,7 +3076,7 @@ components:
           description: Type of the disk attached to each node (e.g. 'pd-standard', 'pd-ssd' or 'pd-balanced') If unspecified, the default disk type is 'pd-standard'
           type: string
         imageType:
-          description: The image type to use for NAP created node. Please see https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for available image types.
+          description: The image type to use for NAP created node.
           type: string
         management:
           $ref: "#/components/schemas/NodeManagement"
@@ -4552,7 +4552,7 @@ components:
           $ref: "#/components/schemas/VirtualNIC"
           description: Enable or disable gvnic on the node pool.
         imageType:
-          description: The image type to use for this node. Note that for a given image type, the latest version of it will be used. Please see https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for available image types.
+          description: The image type to use for this node. Note that for a given image type, the latest version of it will be used.
           type: string
         kubeletConfig:
           $ref: "#/components/schemas/NodeKubeletConfig"
@@ -5730,7 +5730,7 @@ components:
           $ref: "#/components/schemas/VirtualNIC"
           description: Enable or disable gvnic on the node pool.
         imageType:
-          description: Required. The desired image type for the node pool. Please see https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for available image types.
+          description: Required. The desired image type for the node pool.
           type: string
         kubeletConfig:
           $ref: "#/components/schemas/NodeKubeletConfig"
