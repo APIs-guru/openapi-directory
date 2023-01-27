@@ -540,7 +540,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Optional. Only include resources that match the filter. Supported filter fields: * device_id * user_id * device_org_unit_id * user_org_unit_id * timestamp * event_type"
+        - description: 'Optional. Only include resources that match the filter. Supported filter fields: - device_id - user_id - device_org_unit_id - user_org_unit_id - timestamp - event_type The "timestamp" filter accepts either Epoch milliseconds or RFC 3339 formatted time surrounded by simple double quotes.'
           in: query
           name: filter
           schema:
@@ -597,7 +597,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Only include resources that match the filter. Supported filter fields: * user_id * user_org_unit_id"
+        - description: "Only include resources that match the filter. Supported filter fields: - user_id - user_org_unit_id "
           in: query
           name: filter
           schema:
@@ -2089,7 +2089,6 @@ components:
           enum:
             - EVENT_TYPE_UNSPECIFIED
             - AUDIO_SEVERE_UNDERRUN
-            - NETWORK_CONNECTION_STATE_CHANGE
             - USB_ADDED
             - USB_REMOVED
             - NETWORK_HTTPS_LATENCY_CHANGE

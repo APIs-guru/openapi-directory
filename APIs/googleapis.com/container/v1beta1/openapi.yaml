@@ -3076,13 +3076,13 @@ components:
           description: Type of the disk attached to each node (e.g. 'pd-standard', 'pd-ssd' or 'pd-balanced') If unspecified, the default disk type is 'pd-standard'
           type: string
         imageType:
-          description: The image type to use for NAP created node.
+          description: The image type to use for NAP created node. Please see https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for available image types.
           type: string
         management:
           $ref: "#/components/schemas/NodeManagement"
           description: NodeManagement configuration for this NodePool.
         minCpuPlatform:
-          description: 'Deprecated. Minimum CPU platform to be used for NAP created node pools. The instance may be scheduled on the specified or newer CPU platform. Applicable values are the friendly names of CPU platforms, such as minCpuPlatform: Intel Haswell or minCpuPlatform: Intel Sandy Bridge. For more information, read [how to specify min CPU platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform). This field is deprecated, min_cpu_platform should be specified using https://cloud.google.com/requested-min-cpu-platform label selector on the pod. To unset the min cpu platform field pass "automatic" as field value.'
+          description: 'Deprecated. Minimum CPU platform to be used for NAP created node pools. The instance may be scheduled on the specified or newer CPU platform. Applicable values are the friendly names of CPU platforms, such as minCpuPlatform: Intel Haswell or minCpuPlatform: Intel Sandy Bridge. For more information, read [how to specify min CPU platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform). This field is deprecated, min_cpu_platform should be specified using `cloud.google.com/requested-min-cpu-platform` label selector on the pod. To unset the min cpu platform field pass "automatic" as field value.'
           type: string
         oauthScopes:
           description: 'The set of Google API scopes to be made available on all of the node VMs under the "default" service account. The following scopes are recommended, but not required, and by default are not included: * `https://www.googleapis.com/auth/compute` is required for mounting persistent storage on your nodes. * `https://www.googleapis.com/auth/devstorage.read_only` is required for communicating with **gcr.io** (the [Google Container Registry](https://cloud.google.com/container-registry/)). If unspecified, no scopes are added, unless Cloud Logging or Cloud Monitoring are enabled, in which case their required scopes will be added.'
@@ -4552,7 +4552,7 @@ components:
           $ref: "#/components/schemas/VirtualNIC"
           description: Enable or disable gvnic on the node pool.
         imageType:
-          description: The image type to use for this node. Note that for a given image type, the latest version of it will be used.
+          description: The image type to use for this node. Note that for a given image type, the latest version of it will be used. Please see https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for available image types.
           type: string
         kubeletConfig:
           $ref: "#/components/schemas/NodeKubeletConfig"
@@ -4777,7 +4777,7 @@ components:
           $ref: "#/components/schemas/UpgradeSettings"
           description: Upgrade settings control disruption and speed of the upgrade.
         version:
-          description: The version of the Kubernetes of this node.
+          description: The version of Kubernetes running on this NodePool's nodes. If unspecified, it defaults as described [here](https://cloud.google.com/kubernetes-engine/versioning#specifying_node_version).
           type: string
       type: object
     NodePoolAutoConfig:
@@ -5730,7 +5730,7 @@ components:
           $ref: "#/components/schemas/VirtualNIC"
           description: Enable or disable gvnic on the node pool.
         imageType:
-          description: Required. The desired image type for the node pool.
+          description: Required. The desired image type for the node pool. Please see https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for available image types.
           type: string
         kubeletConfig:
           $ref: "#/components/schemas/NodeKubeletConfig"

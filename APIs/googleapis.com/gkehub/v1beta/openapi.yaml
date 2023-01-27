@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://gkehub.googleapis.com/$discovery/rest?version=v1beta
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: gkehub
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster
 tags:
@@ -692,6 +693,13 @@ components:
           description: Output only. The "running state" of the Feature in this Hub.
           readOnly: true
       type: object
+    CommonFleetDefaultMemberConfigSpec:
+      description: CommonFleetDefaultMemberConfigSpec contains default configuration information for memberships of a fleet
+      properties:
+        identityservice:
+          $ref: "#/components/schemas/IdentityServiceMembershipSpec"
+          description: Identity Service-specific spec.
+      type: object
     ConfigManagementBinauthzConfig:
       description: Configuration for Binauthz
       properties:
@@ -1217,6 +1225,9 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        fleetDefaultMemberConfig:
+          $ref: "#/components/schemas/CommonFleetDefaultMemberConfigSpec"
+          description: Optional. Feature configuration applicable to all memberships of the fleet.
         labels:
           additionalProperties:
             type: string
@@ -1775,7 +1786,7 @@ components:
             - INSTALLING
             - ACTIVE
             - UPDATING
-            - DECOMISSIONING
+            - DECOMMISSIONING
             - CLUSTER_ERROR
             - HUB_ERROR
             - SUSPENDED
@@ -1808,7 +1819,7 @@ components:
             - INSTALLING
             - ACTIVE
             - UPDATING
-            - DECOMISSIONING
+            - DECOMMISSIONING
             - CLUSTER_ERROR
             - HUB_ERROR
             - SUSPENDED

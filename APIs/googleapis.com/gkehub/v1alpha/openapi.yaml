@@ -1085,6 +1085,13 @@ components:
           description: Output only. The "running state" of the Feature in this Hub.
           readOnly: true
       type: object
+    CommonFleetDefaultMemberConfigSpec:
+      description: CommonFleetDefaultMemberConfigSpec contains default configuration information for memberships of a fleet
+      properties:
+        identityservice:
+          $ref: "#/components/schemas/IdentityServiceMembershipSpec"
+          description: Identity Service-specific spec.
+      type: object
     ConfigManagementBinauthzConfig:
       description: Configuration for Binauthz
       properties:
@@ -1627,6 +1634,9 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        fleetDefaultMemberConfig:
+          $ref: "#/components/schemas/CommonFleetDefaultMemberConfigSpec"
+          description: Optional. Feature configuration applicable to all memberships of the fleet.
         labels:
           additionalProperties:
             type: string
@@ -2496,7 +2506,7 @@ components:
             - INSTALLING
             - ACTIVE
             - UPDATING
-            - DECOMISSIONING
+            - DECOMMISSIONING
             - CLUSTER_ERROR
             - HUB_ERROR
             - SUSPENDED
@@ -2529,7 +2539,7 @@ components:
             - INSTALLING
             - ACTIVE
             - UPDATING
-            - DECOMISSIONING
+            - DECOMMISSIONING
             - CLUSTER_ERROR
             - HUB_ERROR
             - SUSPENDED

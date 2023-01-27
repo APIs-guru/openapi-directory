@@ -854,6 +854,10 @@ components:
           description: Output only. The "running state" of the Feature in this Hub.
           readOnly: true
       type: object
+    CommonFleetDefaultMemberConfigSpec:
+      description: CommonFleetDefaultMemberConfigSpec contains default configuration information for memberships of a fleet
+      properties: {}
+      type: object
     ConfigManagementConfigSync:
       description: Configuration for Config Sync
       properties:
@@ -1361,6 +1365,9 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        fleetDefaultMemberConfig:
+          $ref: "#/components/schemas/CommonFleetDefaultMemberConfigSpec"
+          description: Optional. Feature configuration applicable to all memberships of the fleet.
         labels:
           additionalProperties:
             type: string
