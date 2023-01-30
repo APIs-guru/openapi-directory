@@ -229,7 +229,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Empty"
+                $ref: "#/components/schemas/GoogleProtobufEmpty"
           description: Successful response
       security:
         - Oauth2:
@@ -995,9 +995,15 @@ components:
           description: If set, overrides the default DIR specified by the image.
           type: string
       type: object
-    Empty:
-      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
-      properties: {}
+    CustomerEncryptionKey:
+      description: A customer-specified encryption key for the Compute Engine resources of this workstation configuration.
+      properties:
+        kmsKey:
+          description: The name of the encryption key that is stored in Google Cloud KMS, for example, `projects/PROJECT_ID/locations/REGION/keyRings/KEY_RING/cryptoKeys/KEY_NAME`.
+          type: string
+        kmsKeyServiceAccount:
+          description: The service account being used for the encryption request for the given KMS key. If absent, the Compute Engine default service account is used. However, it is recommended to use a separate service account and to follow KMS best practices mentioned at https://cloud.google.com/kms/docs/separation-of-duties
+          type: string
       type: object
     Expr:
       description: "Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https://github.com/google/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() < 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != 'private' && document.type != 'internal'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"'New message received at ' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information."
@@ -1104,12 +1110,16 @@ components:
       description: Response message for GenerateAccessToken.
       properties:
         accessToken:
-          description: "The generated bearer access token. To use this token, include it in an Authorization header of an HTTP request sent to the associated workstation's hostname, e.g. \"Authorization: Bearer \"."
+          description: "The generated bearer access token. To use this token, include it in an Authorization header of an HTTP request sent to the associated workstation's hostname, for example, `Authorization: Bearer `."
           type: string
         expireTime:
           description: Time at which the generated token will expire.
           format: google-datetime
           type: string
+      type: object
+    GoogleProtobufEmpty:
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
+      properties: {}
       type: object
     Host:
       description: Runtime host for a workstation.
@@ -1239,27 +1249,27 @@ components:
           type: object
       type: object
     OperationMetadata:
-      description: Represents the metadata of the long-running operation.
+      description: Metadata for long-running operations.
       properties:
         apiVersion:
           description: Output only. API version used to start the operation.
           readOnly: true
           type: string
-        cancelRequested:
-          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
-          readOnly: true
-          type: boolean
         createTime:
-          description: Output only. The time the operation was created.
+          description: Output only. Time that the operation was created.
           format: google-datetime
           readOnly: true
           type: string
         endTime:
-          description: Output only. The time the operation finished running.
+          description: Output only. Time that the operation finished running.
           format: google-datetime
           readOnly: true
           type: string
-        statusDetail:
+        requestedCancellation:
+          description: Output only. Identifies whether the user has requested cancellation of the operation.
+          readOnly: true
+          type: boolean
+        statusMessage:
           description: Output only. Human-readable status of the operation, if any.
           readOnly: true
           type: string
@@ -1315,7 +1325,7 @@ components:
           description: Immutable. Whether Workstations endpoint is private.
           type: boolean
         serviceAttachmentUri:
-          description: Output only. Service attachment URI for the workstation cluster. The service attachemnt is created when private endpoint is enabled. To access workstations in the cluster, configure access to the managed service using (Private Service Connect)[https://cloud.google.com/vpc/docs/configure-private-service-connect-services].
+          description: Output only. Service attachment URI for the workstation cluster. The service attachemnt is created when private endpoint is enabled. To access workstations in the cluster, configure access to the managed service using [Private Service Connect](https://cloud.google.com/vpc/docs/configure-private-service-connect-services).
           readOnly: true
           type: string
       type: object
@@ -1411,7 +1421,7 @@ components:
           description: Checksum computed by the server. May be sent on update and delete requests to ensure that the client has an up-to-date value before proceeding.
           type: string
         host:
-          description: Output only. Host to which clients can send HTTPS traffic that will be received by the workstation. Authorized traffic will be received to the workstation as HTTP on port 80. To send traffic to a different port, clients may prefix the host with the destination port in the format "{port}-{host}".
+          description: Output only. Host to which clients can send HTTPS traffic that will be received by the workstation. Authorized traffic will be received to the workstation as HTTP on port 80. To send traffic to a different port, clients may prefix the host with the destination port in the format `{port}-{host}`.
           readOnly: true
           type: string
         labels:
@@ -1545,6 +1555,9 @@ components:
         displayName:
           description: Human-readable name for this resource.
           type: string
+        encryptionKey:
+          $ref: "#/components/schemas/CustomerEncryptionKey"
+          description: Encrypts resources of this workstation configuration using a customer-specified encryption key. If specified, the boot disk of the Compute Engine instance and the persistent disk will be encrypted using this encryption key. If this field is not set, the disks will be encrypted using a generated key. Customer-specified encryption keys do not protect disk metadata. If the customer-specified encryption key is rotated, when the workstation instance is stopped, the system will attempt to recreate the persistent disk with the new version of the key. Be sure to keep older versions of the key until the persistent disk is recreated. Otherwise, data on the persistent disk will be lost. If the encryption key is revoked, the workstation session will automatically be stopped within 7 hours.
         etag:
           description: Checksum computed by the server. May be sent on update and delete requests to ensure that the client has an up-to-date value before proceeding.
           type: string

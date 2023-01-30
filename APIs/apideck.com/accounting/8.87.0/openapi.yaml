@@ -1433,7 +1433,6 @@ paths:
                     row_version: '1-12345'
                   }
                 ],
-                notes: 'Some notes about this customer',
                 phone_numbers: [
                   {
                     id: '12345',
@@ -1458,11 +1457,6 @@ paths:
                     type: 'primary'
                   }
                 ],
-                tax_rate: {
-                  id: '123456'
-                },
-                tax_number: 'US123945459',
-                currency: 'USD',
                 bank_accounts: [
                   {
                     account_number: '123465',
@@ -1476,6 +1470,17 @@ paths:
                     currency: 'USD'
                   }
                 ],
+                notes: 'Some notes about this customer',
+                tax_rate: {
+                  id: '123456'
+                },
+                tax_number: 'US123945459',
+                currency: 'USD',
+                account: {
+                  id: '123456',
+                  nominal_code: 'N091',
+                  code: '453'
+                },
                 status: 'active',
                 row_version: '1-12345'
               }
@@ -1675,7 +1680,6 @@ paths:
                     row_version: '1-12345'
                   }
                 ],
-                notes: 'Some notes about this customer',
                 phone_numbers: [
                   {
                     id: '12345',
@@ -1700,11 +1704,6 @@ paths:
                     type: 'primary'
                   }
                 ],
-                tax_rate: {
-                  id: '123456'
-                },
-                tax_number: 'US123945459',
-                currency: 'USD',
                 bank_accounts: [
                   {
                     account_number: '123465',
@@ -1718,6 +1717,17 @@ paths:
                     currency: 'USD'
                   }
                 ],
+                notes: 'Some notes about this customer',
+                tax_rate: {
+                  id: '123456'
+                },
+                tax_number: 'US123945459',
+                currency: 'USD',
+                account: {
+                  id: '123456',
+                  nominal_code: 'N091',
+                  code: '453'
+                },
                 status: 'active',
                 row_version: '1-12345'
               }
@@ -3468,13 +3478,15 @@ paths:
 
             const params = {
               supplier: {
-                company_name: 'SpaceX',
+                display_id: 'EMP00101',
                 display_name: 'Windsurf Shop',
+                company_name: 'SpaceX',
                 title: 'CEO',
                 first_name: 'Elon',
                 middle_name: 'D.',
                 last_name: 'Musk',
                 suffix: 'Jr.',
+                individual: true,
                 addresses: [
                   {
                     id: '123',
@@ -3502,7 +3514,6 @@ paths:
                     row_version: '1-12345'
                   }
                 ],
-                notes: 'Some notes about this supplier',
                 phone_numbers: [
                   {
                     id: '12345',
@@ -3540,6 +3551,7 @@ paths:
                     currency: 'USD'
                   }
                 ],
+                notes: 'Some notes about this supplier',
                 tax_rate: {
                   id: '123456'
                 },
@@ -3713,13 +3725,15 @@ paths:
             const params = {
               id: 'id_example',
               supplier: {
-                company_name: 'SpaceX',
+                display_id: 'EMP00101',
                 display_name: 'Windsurf Shop',
+                company_name: 'SpaceX',
                 title: 'CEO',
                 first_name: 'Elon',
                 middle_name: 'D.',
                 last_name: 'Musk',
                 suffix: 'Jr.',
+                individual: true,
                 addresses: [
                   {
                     id: '123',
@@ -3747,7 +3761,6 @@ paths:
                     row_version: '1-12345'
                   }
                 ],
-                notes: 'Some notes about this supplier',
                 phone_numbers: [
                   {
                     id: '12345',
@@ -3785,6 +3798,7 @@ paths:
                     currency: 'USD'
                   }
                 ],
+                notes: 'Some notes about this supplier',
                 tax_rate: {
                   id: '123456'
                 },
@@ -4576,6 +4590,8 @@ components:
   schemas:
     AccountingCustomer:
       properties:
+        account:
+          $ref: "#/components/schemas/LinkedLedgerAccount"
         addresses:
           items:
             $ref: "#/components/schemas/Address"
@@ -4599,11 +4615,13 @@ components:
           title: Display ID
           type: string
         display_name:
-          description: Display Name
+          description: Display name
           example: Windsurf Shop
           nullable: true
           title: Display Name
           type: string
+        downstream_id:
+          $ref: "#/components/schemas/DownstreamId"
         emails:
           items:
             $ref: "#/components/schemas/Email"
@@ -4667,6 +4685,7 @@ components:
       type: object
       x-apideck-schema-id: Customer
       x-apideck-weights:
+        account: medium
         addresses: high
         bank_accounts: high
         company_name: high
@@ -4675,9 +4694,10 @@ components:
         currency: medium
         display_id: edge-case
         display_name: edge-case
+        downstream_id: edge-case
         emails: high
         first_name: high
-        id: high
+        id: critical
         individual: medium
         last_name: high
         middle_name: low
@@ -4688,7 +4708,7 @@ components:
         suffix: low
         tax_number: medium
         tax_rate: medium
-        title: critical
+        title: high
         updated_at: medium
         updated_by: edge-case
         websites: medium
@@ -9998,8 +10018,14 @@ components:
           $ref: "#/components/schemas/CreatedBy"
         currency:
           $ref: "#/components/schemas/Currency"
+        display_id:
+          description: Display ID
+          example: EMP00101
+          nullable: true
+          title: Display ID
+          type: string
         display_name:
-          description: Display name of supplier.
+          description: Display name
           example: Windsurf Shop
           nullable: true
           title: Display Name
@@ -10014,11 +10040,18 @@ components:
           $ref: "#/components/schemas/FirstName"
         id:
           $ref: "#/components/schemas/Id"
+        individual:
+          description: Is this an individual or business supplier
+          example: true
+          nullable: true
+          title: Is individual
+          type: boolean
         last_name:
           $ref: "#/components/schemas/LastName"
         middle_name:
           $ref: "#/components/schemas/MiddleName"
         notes:
+          description: Some notes about this supplier
           example: Some notes about this supplier
           nullable: true
           title: Notes
@@ -10030,7 +10063,7 @@ components:
         row_version:
           $ref: "#/components/schemas/RowVersion"
         status:
-          description: Customer status
+          description: Supplier status
           enum:
             - active
             - inactive
@@ -10041,8 +10074,8 @@ components:
           nullable: true
           title: Status
           type: string
-          x-apideck-enum-id: customers.status
-          x-graphql-type-name: CustomerStatus
+          x-apideck-enum-id: suppliers.status
+          x-graphql-type-name: SupplierStatus
         suffix:
           $ref: "#/components/schemas/Suffix"
         tax_number:
@@ -10062,18 +10095,20 @@ components:
       type: object
       x-apideck-schema-id: Supplier
       x-apideck-weights:
-        account: edge-case
+        account: medium
         addresses: high
         bank_accounts: high
         company_name: high
-        created_at: low
+        created_at: medium
         created_by: edge-case
-        currency: high
+        currency: medium
+        display_id: edge-case
         display_name: edge-case
         downstream_id: edge-case
         emails: high
         first_name: high
         id: critical
+        individual: medium
         last_name: high
         middle_name: low
         notes: low
@@ -10082,7 +10117,7 @@ components:
         status: high
         suffix: low
         tax_number: medium
-        tax_rate: high
+        tax_rate: medium
         title: high
         updated_at: medium
         updated_by: edge-case

@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Memorystore for Memcached API
   version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://memcache.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: memcache
 externalDocs:
@@ -695,6 +693,7 @@ components:
       properties: {}
       type: object
     GoogleCloudSaasacceleratorManagementProvidersV1Instance:
+      description: 'Instance represents the interface for SLM services to actuate the state of control plane resources. Example Instance in JSON, where consumer-project-number=123456, producer-project-id=cloud-sql: ```json Instance: { "name": "projects/123456/locations/us-east1/instances/prod-instance", "create_time": { "seconds": 1526406431, }, "labels": { "env": "prod", "foo": "bar" }, "state": READY, "software_versions": { "software_update": "cloud-sql-09-28-2018", }, "maintenance_policy_names": { "UpdatePolicy": "projects/123456/locations/us-east1/maintenancePolicies/prod-update-policy", } "tenant_project_id": "cloud-sql-test-tenant", "producer_metadata": { "cloud-sql-tier": "basic", "cloud-sql-instance-size": "1G", }, "provisioned_resources": [ { "resource-type": "compute-instance", "resource-url": "https://www.googleapis.com/compute/v1/projects/cloud-sql/zones/us-east1-b/instances/vm-1", } ], "maintenance_schedules": { "csa_rollout": { "start_time": { "seconds": 1526406431, }, "end_time": { "seconds": 1535406431, }, }, "ncsa_rollout": { "start_time": { "seconds": 1526406431, }, "end_time": { "seconds": 1535406431, }, } }, "consumer_defined_name": "my-sql-instance1", } ``` LINT.IfChange'
       properties:
         consumerDefinedName:
           description: consumer_defined_name is the name that is set by the consumer. On the other hand Name field represents system-assigned id of an instance so consumers are not necessarily aware of it. consumer_defined_name is used for notification/UI purposes for consumer to recognize their instances.
@@ -715,7 +714,7 @@ components:
         maintenancePolicyNames:
           additionalProperties:
             type: string
-          description: Optional. Deprecated. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the referenced policy must define the same policy type. For complete details of MaintenancePolicy, please refer to go/cloud-saas-mw-ug.
+          description: Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the referenced policy must define the same policy type. For details, please refer to go/cloud-saas-mw-ug. Should not be set if maintenance_settings.maintenance_policies is set.
           type: object
         maintenanceSchedules:
           additionalProperties:
@@ -813,7 +812,7 @@ components:
         maintenancePolicies:
           additionalProperties:
             $ref: "#/components/schemas/MaintenancePolicy"
-          description: Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the embedded policy must define the same policy type. For complete details of MaintenancePolicy, please refer to go/cloud-saas-mw-ug. If only the name is needed, then only populate MaintenancePolicy.name.
+          description: Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the embedded policy must define the same policy type. For details, please refer to go/cloud-saas-mw-ug. Should not be set if maintenance_policy_names is set. If only the name is needed, then only populate MaintenancePolicy.name.
           type: object
       type: object
     GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata:
@@ -1393,5 +1392,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

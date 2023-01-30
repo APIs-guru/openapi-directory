@@ -1023,6 +1023,9 @@ components:
     InstanceStatus:
       description: VM instance status.
       properties:
+        bootDisk:
+          $ref: "#/components/schemas/Disk"
+          description: The VM boot disk.
         machineType:
           description: The Compute Engine machine type.
           type: string
@@ -1473,6 +1476,11 @@ components:
         email:
           description: Email address of the service account. If not specified, the default Compute Engine service account for the project will be used. If instance template is being used, the service account has to be specified in the instance template and it has to match the email field here.
           type: string
+        scopes:
+          description: List of scopes to be enabled for this service account on the VM, in addition to the cloud-platform API scope that will be added by default.
+          items:
+            type: string
+          type: array
       type: object
     SetIamPolicyRequest:
       description: Request message for `SetIamPolicy` method.
