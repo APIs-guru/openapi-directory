@@ -1431,19 +1431,6 @@ paths:
                   email: 'elon@musk.com',
                   image: 'https://www.spacex.com/static/images/share.jpg'
                 },
-                custom_consumer_settings: {
-                  feature_flag_1: true,
-                  tax_rates: [
-                    {
-                      id: '6',
-                      label: '6%'
-                    },
-                    {
-                      id: '21',
-                      label: '21%'
-                    }
-                  ]
-                },
                 redirect_uri: 'https://mysaas.com/dashboard',
                 settings: {
                   unified_apis: ['crm'],
@@ -1459,11 +1446,24 @@ paths:
                 theme: {
                   favicon: 'https://res.cloudinary.com/apideck/icons/intercom',
                   primary_color: '#286efa',
-                  privacy_url: 'https://compliance.apideck.com/privacy-policy',
                   sidepanel_background_color: '#286efa',
                   sidepanel_text_color: '#FFFFFF',
-                  terms_url: 'https://www.termsfeed.com/terms-conditions/957c85c1b089ae9e3219c83eff65377e',
-                  vault_name: 'Intercom'
+                  vault_name: 'Intercom',
+                  privacy_url: 'https://compliance.apideck.com/privacy-policy',
+                  terms_url: 'https://www.termsfeed.com/terms-conditions/957c85c1b089ae9e3219c83eff65377e'
+                },
+                custom_consumer_settings: {
+                  feature_flag_1: true,
+                  tax_rates: [
+                    {
+                      id: '6',
+                      label: '6%'
+                    },
+                    {
+                      id: '21',
+                      label: '21%'
+                    }
+                  ]
                 }
               }
             }
@@ -2487,18 +2487,27 @@ components:
       example: test_consumer_id
       type: string
     ConsumerMetadata:
+      description: The metadata of the consumer. This is used to display the consumer in the sidebar. This is optional, but recommended.
       properties:
         account_name:
+          description: The name of the account as shown in the sidebar.
           example: SpaceX
+          title: Account name
           type: string
         email:
+          description: The email of the user as shown in the sidebar.
           example: elon@musk.com
+          title: Email
           type: string
         image:
+          description: The avatar of the user in the sidebar. Must be a valid URL
           example: https://www.spacex.com/static/images/share.jpg
+          title: Image
           type: string
         user_name:
+          description: The name of the user as shown in the sidebar.
           example: Elon Musk
+          title: User name
           type: string
       type: object
       x-apideck-schema-id: ConsumerMetadata
@@ -3223,10 +3232,13 @@ components:
           title: Custom consumer settings
           type: object
         redirect_uri:
+          description: The URL to redirect the user to after the session has been configured.
           example: https://mysaas.com/dashboard
+          title: Redirect URI
           type: string
         settings:
           additionalProperties: false
+          description: Settings to change the way the Vault is displayed.
           properties:
             auto_redirect:
               default: false
@@ -3277,27 +3289,42 @@ components:
           type: object
           x-graphql-type-name: SessionSettings
         theme:
+          description: Theming options to change the look and feel of Vault.
           properties:
             favicon:
+              description: The URL to the favicon to use for Vault.
               example: https://res.cloudinary.com/apideck/icons/intercom
+              title: Favicon
               type: string
             primary_color:
+              description: The primary color to use for Vault.
               example: "#286efa"
+              title: Primary color
               type: string
             privacy_url:
+              description: The URL to the privacy policy that will be shown in the sidebar.
               example: https://compliance.apideck.com/privacy-policy
+              title: Privacy URL
               type: string
             sidepanel_background_color:
+              description: The background color to use for the sidebar.
               example: "#286efa"
+              title: Sidebar background color
               type: string
             sidepanel_text_color:
+              description: The text color to use for the sidebar.
               example: "#FFFFFF"
+              title: Sidebar text color
               type: string
             terms_url:
+              description: The URL to the terms and conditions that will be shown in the sidebar.
               example: https://www.termsfeed.com/terms-conditions/957c85c1b089ae9e3219c83eff65377e
+              title: Terms URL
               type: string
             vault_name:
+              description: The name that will be shown in the sidebar.
               example: Intercom
+              title: Vault name
               type: string
           type: object
       type: object

@@ -1658,7 +1658,7 @@ components:
           format: google-datetime
           type: string
         transaction:
-          description: The identifier of the transaction that was started as part of this Lookup request. Set only when ReadOptions.new_transaction was set in LookupRequest.read_options.
+          description: The identifier of the transaction that was started as part of this Lookup request. Set only when ReadOptions.begin_transaction was set in LookupRequest.read_options.
           format: byte
           type: string
       type: object
@@ -1974,7 +1974,7 @@ components:
           $ref: "#/components/schemas/AggregationQuery"
           description: The parsed form of the `GqlQuery` from the request, if it was set.
         transaction:
-          description: The identifier of the transaction that was started as part of this RunAggregationQuery request. Set only when ReadOptions.new_transaction was set in RunAggregationQueryRequest.read_options.
+          description: The identifier of the transaction that was started as part of this RunAggregationQuery request. Set only when ReadOptions.begin_transaction was set in RunAggregationQueryRequest.read_options.
           format: byte
           type: string
       type: object
@@ -2007,7 +2007,7 @@ components:
           $ref: "#/components/schemas/Query"
           description: The parsed form of the `GqlQuery` from the request, if it was set.
         transaction:
-          description: The identifier of the transaction that was started as part of this RunQuery request. Set only when ReadOptions.new_transaction was set in RunQueryRequest.read_options.
+          description: The identifier of the transaction that was started as part of this RunQuery request. Set only when ReadOptions.begin_transaction was set in RunQueryRequest.read_options.
           format: byte
           type: string
       type: object

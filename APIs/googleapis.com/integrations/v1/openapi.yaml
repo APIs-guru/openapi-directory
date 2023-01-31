@@ -270,90 +270,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:archive":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Soft-deletes the integration. Changes the status of the integration to ARCHIVED. If the integration being ARCHIVED is tagged as "HEAD", the tag is removed from this snapshot and set to the previous non-ARCHIVED snapshot. The PUBLISH_REQUESTED, DUE_FOR_DELETION tags are removed too. This RPC throws an exception if the version being archived is DRAFT, and if the `locked_by` user is not the same as the user performing the Archive. Audit fields updated include last_modified_timestamp, last_modified_by. Any existing lock is released when Archiving a integration. Currently, there is no unarchive mechanism.
-      operationId: integrations.projects.locations.products.integrations.versions.archive
-      parameters:
-        - description: "Required. The version to archive. Format: projects/{project}/locations/{location}/integrations/{integration}/versions/{version}"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaArchiveIntegrationVersionRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaArchiveIntegrationVersionResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1/{name}:archiveBundle":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: PROTECT WITH A VISIBILITY LABEL. THIS METHOD WILL BE MOVED TO A SEPARATE SERVICE. Soft-deletes the bundle.
-      operationId: integrations.projects.locations.products.integrations.archiveBundle
-      parameters:
-        - description: "Required. The bundle to archive. Format: projects/{project}/locations/{location}/integrations/{integration}"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaArchiveBundleRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaArchiveBundleResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v1/{name}:cancel":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -388,48 +304,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaCancelExecutionResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1/{name}:deactivate":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Sets the status of the ACTIVE integration to SNAPSHOT with a new tag "PREVIOUSLY_PUBLISHED" after validating it. The "HEAD" and "PUBLISH_REQUESTED" tags do not change. This RPC throws an exception if the version being snapshot is not ACTIVE. Audit fields added include action, action_by, action_timestamp.
-      operationId: integrations.projects.locations.products.integrations.versions.deactivate
-      parameters:
-        - description: "Required. The version to deactivate. Format: projects/{project}/locations/{location}/integrations/{integration}/versions/{version}"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaDeactivateIntegrationVersionRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaDeactivateIntegrationVersionResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -526,43 +400,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:getBundle":
-    get:
-      description: PROTECT WITH A VISIBILITY LABEL. THIS METHOD WILL BE MOVED TO A SEPARATE SERVICE. RPC to get details of the Bundle
-      operationId: integrations.projects.locations.products.integrations.versions.getBundle
-      parameters:
-        - description: Required. The bundle name.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaGetBundleResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}:lift":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -807,90 +644,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleProtobufEmpty"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1/{name}:updateBundle":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    patch:
-      description: THIS METHOD WILL BE MOVED TO A SEPARATE SERVICE. RPC to update the Bundle
-      operationId: integrations.projects.locations.products.integrations.versions.updateBundle
-      parameters:
-        - description: Required. Bundle name
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaUpdateBundleRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaUpdateBundleResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1/{name}:validate":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Validates the given integration. If the id doesn't exist, a NotFoundException is thrown. If validation fails a CanonicalCodeException is thrown. If there was no failure an empty response is returned.
-      operationId: integrations.projects.locations.products.integrations.versions.validate
-      parameters:
-        - description: "Required. The version to validate. Format: projects/{project}/locations/{location}/integrations/{integration}/versions/{version}"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaValidateIntegrationVersionRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaValidateIntegrationVersionResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -1567,63 +1320,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/executionsnapshots":
-    get:
-      description: Lists the snapshots of a given integration executions. This RPC is not being used.
-      operationId: integrations.projects.locations.products.integrations.executionsnapshots.list
-      parameters:
-        - description: Required. The parent resource name of the integration execution.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Currently supports filter by `execution_info_id` or `execution_snapshot_id`.
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: Number of entries to be returned in a page.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: The token used to retrieve the next page results.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-        - description: View mask for the response data. If set, only the field specified will be returned as part of the result. If not set, all fields in event execution snapshot will be filled and returned.
-          in: query
-          name: readMask
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaListExecutionSnapshotsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/integrations":
     get:
       description: Returns the list of all integrations in the specified project.
@@ -2152,85 +1848,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}:createBundle":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: PROTECT WITH A VISIBILITY LABEL. THIS METHOD WILL BE MOVED TO A SEPARATE SERVICE. Create a bundle.
-      operationId: integrations.projects.locations.products.createBundle
-      parameters:
-        - description: Required. The location resource of the request.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaCreateBundleRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaCreateBundleResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1/{parent}:listTaskEntities":
-    get:
-      description: This is a UI only method and will be moved away. Returns a list of common tasks.
-      operationId: integrations.projects.locations.products.listTaskEntities
-      parameters:
-        - description: Required. The location resource of the request. This is not going to be used but preserve the field for future.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaListTaskEntitiesResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:
@@ -2421,7 +2038,7 @@ components:
           type: array
       type: object
     EnterpriseCrmEventbusProtoAttributes:
-      description: "Attributes are additional options that can be associated with each event property. For more information, see go/integration-platform/event_bus/attributes_registry.md. Next available: 8"
+      description: Attributes are additional options that can be associated with each event property. For more information, see
       properties:
         dataType:
           description: Things like URL, Email, Currency, Timestamp (rather than string, int64...)
@@ -2444,7 +2061,7 @@ components:
           type: boolean
         logSettings:
           $ref: "#/components/schemas/EnterpriseCrmEventbusProtoLogSettings"
-          description: See go/integration-platform/analytics/logging_task.md for details.
+          description: See
         searchable:
           enum:
             - UNSPECIFIED
@@ -2471,7 +2088,7 @@ components:
           type: string
       type: object
     EnterpriseCrmEventbusProtoBaseAlertConfigThresholdValue:
-      description: The threshold value of the metric, above or below which the alert should be triggered. See EventAlertConfig or TaskAlertConfig for the different alert metric types in each case. For the *RATE metrics, one or both of these fields may be set. Zero is the default value and can be left at that. For *PERCENTILE_DURATION metrics, one or both of these fields may be set, and also, the duration threshold value should be specified in the threshold_duration_ms member below. For *AVERAGE_DURATION metrics, these fields should not be set at all. A different member, threshold_duration_ms, must be set in the EventAlertConfig or the TaskAlertConfig. See go/eventbus-alert-config-examples
+      description: The threshold value of the metric, above or below which the alert should be triggered. See EventAlertConfig or TaskAlertConfig for the different alert metric types in each case. For the *RATE metrics, one or both of these fields may be set. Zero is the default value and can be left at that. For *PERCENTILE_DURATION metrics, one or both of these fields may be set, and also, the duration threshold value should be specified in the threshold_duration_ms member below. For *AVERAGE_DURATION metrics, these fields should not be set at all. A different member, threshold_duration_ms, must be set in the EventAlertConfig or the TaskAlertConfig.
       properties:
         absolute:
           format: int64
@@ -2761,7 +2378,7 @@ components:
           type: integer
       type: object
     EnterpriseCrmEventbusProtoEventBusProperties:
-      description: LINT.IfChange This message is used for storing key value pair properties for each Event / Task in the EventBus. Please see go/cloud-crm-eng/platform/event_bus.md for more details.
+      description: LINT.IfChange This message is used for storing key value pair properties for each Event / Task in the EventBus.
       properties:
         properties:
           description: An unordered list of property entries.
@@ -2880,7 +2497,7 @@ components:
           type: string
       type: object
     EnterpriseCrmEventbusProtoEventParameters:
-      description: "LINT.IfChange This message is used for processing and persisting (when applicable) key value pair parameters for each event in the event bus. Please see go/integration-platform/event_bus.md for more details. Next id: 4"
+      description: LINT.IfChange This message is used for processing and persisting (when applicable) key value pair parameters for each event in the event bus. Please see
       properties:
         parameters:
           description: Parameters are a part of Event and can be used to communicate between different tasks that are part of the same integration execution.
@@ -2943,7 +2560,7 @@ components:
           type: string
       type: object
     EnterpriseCrmEventbusProtoField:
-      description: "Information about the value and type of the field. Next Id: 8"
+      description: Information about the value and type of the field.
       properties:
         cardinality:
           description: By default, if the cardinality is unspecified the field is considered required while mapping.
@@ -2953,7 +2570,7 @@ components:
           type: string
         defaultValue:
           $ref: "#/components/schemas/EnterpriseCrmEventbusProtoParameterValueType"
-          description: This holds the default values for the fields. This value is supplied by user so may or may not contain PII or SPII data. This field will be scrubbed using DatapolScrubber#maybeScrub() with go/proto-sanitizer#level3
+          description: This holds the default values for the fields. This value is supplied by user so may or may not contain PII or SPII data.
         fieldType:
           description: Specifies the data type of the field.
           enum:
@@ -2984,10 +2601,10 @@ components:
           type: string
         transformExpression:
           $ref: "#/components/schemas/EnterpriseCrmEventbusProtoTransformExpression"
-          description: This is the transform expression to fetch the input field value. for e.g. $param1$.CONCAT('test'). See go/transform-functions-design for more details. Keep points - 1. Only input field can have a transform expression. 2. If a transform expression is provided, reference_key will be ignored. 3. If no value is returned after evaluation of transform expression, default_value can be mapped if provided. 4. The field_type should be the type of the final object returned after the transform expression is evaluated. Scrubs the transform expression before logging as value provided by user so may or may not contain PII or SPII data.
+          description: This is the transform expression to fetch the input field value. for e.g. $param1$.CONCAT('test'). Keep points - 1. Only input field can have a transform expression. 2. If a transform expression is provided, reference_key will be ignored. 3. If no value is returned after evaluation of transform expression, default_value can be mapped if provided. 4. The field_type should be the type of the final object returned after the transform expression is evaluated. Scrubs the transform expression before logging as value provided by user so may or may not contain PII or SPII data.
       type: object
     EnterpriseCrmEventbusProtoFieldMappingConfig:
-      description: "Field Mapping Config to map multiple output fields values from input fields values. Next id: 2"
+      description: Field Mapping Config to map multiple output fields values from input fields values.
       properties:
         mappedFields:
           items:
@@ -3126,7 +2743,7 @@ components:
           type: string
       type: object
     EnterpriseCrmEventbusProtoLogSettings:
-      description: The LogSettings define the logging attributes for an event property. These attributes are used to map the property to the parameter in the log proto. Also used to define scrubbing/truncation behavior and PII information. See go/integration-platform/analytics/logging_task.md for details.
+      description: The LogSettings define the logging attributes for an event property. These attributes are used to map the property to the parameter in the log proto. Also used to define scrubbing/truncation behavior and PII information.
       properties:
         logFieldName:
           description: The name of corresponding logging field of the event property. If omitted, assumes the same name as the event property key.
@@ -3178,7 +2795,7 @@ components:
           type: string
       type: object
     EnterpriseCrmEventbusProtoMappedField:
-      description: "Mapped field is a pair of input field and output field. Next Id: 3"
+      description: Mapped field is a pair of input field and output field.
       properties:
         inputField:
           $ref: "#/components/schemas/EnterpriseCrmEventbusProtoField"
@@ -3707,7 +3324,7 @@ components:
           type: string
       type: object
     EnterpriseCrmEventbusProtoTaskAlertConfig:
-      description: Message to be used to configure alerting in the {@code TaskConfig} protos for tasks in an event. See go/eventbus-alert-config-examples for examples of the different alerts that can be configured.
+      description: Message to be used to configure alerting in the {@code TaskConfig} protos for tasks in an event.
       properties:
         aggregationPeriod:
           description: The period over which the metric value should be aggregated and evaluated. Format is , where integer should be a positive integer and unit should be one of (s,m,h,d,w) meaning (second, minute, hour, day, week).
@@ -3798,7 +3415,7 @@ components:
           type: string
       type: object
     EnterpriseCrmEventbusProtoTaskMetadata:
-      description: "TaskMetadata are attributes that are associated to every common Task we have. Next available: 26"
+      description: TaskMetadata are attributes that are associated to every common Task we have.
       properties:
         activeTaskName:
           description: The new task name to replace the current task if it is deprecated. Otherwise, it is the same as the current task name.
@@ -3866,7 +3483,7 @@ components:
           description: URL to the associated G3 Doc for the task if available
           type: string
         iconLink:
-          description: URL to gstatic image icon for this task. This icon shows up on the task list panel along with the task name in the Workflow Editor screen. Use the 24p, 2x, gray color icon image format. See go/icons.
+          description: URL to gstatic image icon for this task. This icon shows up on the task list panel along with the task name in the Workflow Editor screen. Use the 24p, 2x, gray color icon image format.
           type: string
         isDeprecated:
           description: The deprecation status of the current task. Default value is false;
@@ -3913,7 +3530,7 @@ components:
           type: string
       type: object
     EnterpriseCrmEventbusProtoTaskUiConfig:
-      description: "Task authors would use this type to configure the UI for a particular task by specifying what UI config modules should be included to compose the UI. Learn more about config module framework: go/integration-platform-config-module-framework"
+      description: "Task authors would use this type to configure the UI for a particular task by specifying what UI config modules should be included to compose the UI. Learn more about config module framework:"
       properties:
         taskUiModuleConfigs:
           description: Configurations of included config modules.
@@ -4031,7 +3648,7 @@ components:
           type: string
       type: object
     EnterpriseCrmEventbusProtoWorkflowAlertConfig:
-      description: Message to be used to configure custom alerting in the {@code EventConfig} protos for an event. See go/eventbus-alert-config-examples for examples of the different alerts that can be configured.
+      description: Message to be used to configure custom alerting in the {@code EventConfig} protos for an event.
       properties:
         aggregationPeriod:
           description: For an EXPECTED_MIN threshold, this aggregation_period must be lesser than 24 hours.
@@ -4084,7 +3701,7 @@ components:
           type: string
         thresholdValue:
           $ref: "#/components/schemas/EnterpriseCrmEventbusProtoBaseAlertConfigThresholdValue"
-          description: The metric value, above or below which the alert should be triggered. See go/eventbus-alert-config-examples.
+          description: The metric value, above or below which the alert should be triggered.
         warningEnumList:
           $ref: "#/components/schemas/EnterpriseCrmEventbusProtoBaseAlertConfigErrorEnumList"
       type: object
@@ -4319,7 +3936,7 @@ components:
           type: string
       type: object
     EnterpriseCrmFrontendsEventbusProtoEventParameters:
-      description: "LINT.IfChange This message is used for processing and persisting (when applicable) key value pair parameters for each event in the event bus. Please see go/integration-platform/event_bus.md for more details. Next id: 4"
+      description: LINT.IfChange This message is used for processing and persisting (when applicable) key value pair parameters for each event in the event bus. Please see
       properties:
         parameters:
           description: Parameters are a part of Event and can be used to communicate between different tasks that are part of the same workflow execution.
@@ -4819,7 +4436,7 @@ components:
             - IN_OUT
           type: string
         isTransient:
-          description: Whether this parameter is a transient parameter. go/ip-transient-parameters
+          description: Whether this parameter is a transient parameter.
           type: boolean
         jsonSchema:
           description: This schema will be used to validate runtime JSON-typed values of this parameter.
@@ -5200,22 +4817,6 @@ components:
           description: Only support "bearer" token in v1 as bearer token is the predominant type used with OAuth 2.0.
           type: string
       type: object
-    GoogleCloudIntegrationsV1alphaArchiveBundleRequest:
-      description: Request for ArchiveBundle.
-      properties: {}
-      type: object
-    GoogleCloudIntegrationsV1alphaArchiveBundleResponse:
-      description: Response for ArchiveBundle.
-      properties: {}
-      type: object
-    GoogleCloudIntegrationsV1alphaArchiveIntegrationVersionRequest:
-      description: Request for ArchiveIntegrationVersion.
-      properties: {}
-      type: object
-    GoogleCloudIntegrationsV1alphaArchiveIntegrationVersionResponse:
-      description: Response for ArchiveIntegrationVersion.
-      properties: {}
-      type: object
     GoogleCloudIntegrationsV1alphaAttemptStats:
       description: Status for the execution attempt.
       properties:
@@ -5518,31 +5119,6 @@ components:
           description: The created AppsScriptProject ID.
           type: string
       type: object
-    GoogleCloudIntegrationsV1alphaCreateBundleRequest:
-      description: PROTECT WITH A VISIBILITY LABEL. THIS METHOD WILL BE MOVED TO A SEPARATE SERVICE. Request to create a new Bundle.
-      properties:
-        bundleId:
-          description: Required. name of the bundle that will be created
-          type: string
-        integrations:
-          description: A list of integrations that can be executed by the bundle
-          items:
-            type: string
-          type: array
-        secondaryCustomerOrgId:
-          description: Optional. The prefix for the SA, it should be in the format "o". This is an optional field, and if empty service account will be created per project, where we are creating bundle. This should only be used as the org ID for which we want to run the integrations in the bundle.
-          type: string
-      type: object
-    GoogleCloudIntegrationsV1alphaCreateBundleResponse:
-      description: Response for create bundle.
-      properties:
-        config:
-          $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaIntegrationBundleConfig"
-          description: It contains the bundle data
-        triggerId:
-          description: trigger_id of the bundle task
-          type: string
-      type: object
     GoogleCloudIntegrationsV1alphaCreateCloudFunctionRequest:
       description: Request for Creating Cloud Function rpc call.
       properties:
@@ -5606,14 +5182,6 @@ components:
         usernameAndPassword:
           $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaUsernameAndPassword"
           description: Username and password credential
-      type: object
-    GoogleCloudIntegrationsV1alphaDeactivateIntegrationVersionRequest:
-      description: Request for DeactivateIntegrationVersion.
-      properties: {}
-      type: object
-    GoogleCloudIntegrationsV1alphaDeactivateIntegrationVersionResponse:
-      description: Response for DeactivateIntegrationVersion.
-      properties: {}
       type: object
     GoogleCloudIntegrationsV1alphaDeprovisionClientRequest:
       description: Request for the Deprovision rpc
@@ -5868,13 +5436,6 @@ components:
           description: The message that notifies the user if the request succeeded or not.
           type: string
       type: object
-    GoogleCloudIntegrationsV1alphaGetBundleResponse:
-      description: Response for GetBundle.
-      properties:
-        config:
-          $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaIntegrationBundleConfig"
-          description: It contains the bundle data
-      type: object
     GoogleCloudIntegrationsV1alphaGetClientMetadataResponse:
       description: Response for the GetClientMetadata rpc
       properties:
@@ -5977,19 +5538,6 @@ components:
           description: Percentage threshold.
           format: int32
           type: integer
-      type: object
-    GoogleCloudIntegrationsV1alphaIntegrationBundleConfig:
-      description: This proto holds the core runner data in the bundle task. It is not expected to be directly edited by the user. Instead, a default value will be provided at the task creation time.
-      properties:
-        integrations:
-          description: A bundle of integrations that can be executed by the task at runtime.
-          items:
-            type: string
-          type: array
-        serviceAccount:
-          description: Output only. The service account created and owned by IP and added to the customers GCP project.
-          readOnly: true
-          type: string
       type: object
     GoogleCloudIntegrationsV1alphaIntegrationParameter:
       description: Integration Parameter is defined in the integration config and are used to provide information about data types of the expected parameters and provide any default values if needed. They can also be used to add custom attributes. These are static in nature and should not be used for dynamic event definition.
@@ -6223,18 +5771,6 @@ components:
           description: Next page token.
           type: string
       type: object
-    GoogleCloudIntegrationsV1alphaListExecutionSnapshotsResponse:
-      description: Response for listing the integration execution snapshot.
-      properties:
-        executionSnapshots:
-          description: Required. The detailed information for the execution snapshot.
-          items:
-            $ref: "#/components/schemas/EnterpriseCrmEventbusProtoEventExecutionSnapshot"
-          type: array
-        nextPageToken:
-          description: The token returned in the previous response.
-          type: string
-      type: object
     GoogleCloudIntegrationsV1alphaListExecutionsResponse:
       description: Response for listing the integration execution data.
       properties:
@@ -6337,15 +5873,6 @@ components:
           description: The suspensions for the relevant execution which the caller has permissions to view and resolve.
           items:
             $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaSuspension"
-          type: array
-      type: object
-    GoogleCloudIntegrationsV1alphaListTaskEntitiesResponse:
-      description: This is a UI only method and will be moved away. Response for ListTaskEntities.
-      properties:
-        taskEntities:
-          description: The list of the tasks.
-          items:
-            $ref: "#/components/schemas/EnterpriseCrmFrontendsEventbusProtoTaskEntity"
           type: array
       type: object
     GoogleCloudIntegrationsV1alphaNextTask:
@@ -7061,20 +6588,6 @@ components:
       description: Request for UnpublishIntegrationVersion.
       properties: {}
       type: object
-    GoogleCloudIntegrationsV1alphaUpdateBundleRequest:
-      description: THIS METHOD WILL BE MOVED TO A SEPARATE SERVICE. Request message for Bundle update
-      properties:
-        config:
-          $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaIntegrationBundleConfig"
-          description: It contains the updated bundle data
-      type: object
-    GoogleCloudIntegrationsV1alphaUpdateBundleResponse:
-      description: Response message for Bundle update
-      properties:
-        config:
-          $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaIntegrationBundleConfig"
-          description: Contains updated bundle config
-      type: object
     GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequest:
       description: Request for UploadIntegrationVersion.
       properties:
@@ -7105,14 +6618,6 @@ components:
         username:
           description: Username to be used
           type: string
-      type: object
-    GoogleCloudIntegrationsV1alphaValidateIntegrationVersionRequest:
-      description: Request for ValidateIntegrationVersion.
-      properties: {}
-      type: object
-    GoogleCloudIntegrationsV1alphaValidateIntegrationVersionResponse:
-      description: Response for ValidateIntegrationVersion.
-      properties: {}
       type: object
     GoogleCloudIntegrationsV1alphaValueType:
       description: The type of the parameter.

@@ -4425,6 +4425,7 @@ components:
       additionalProperties: false
       example:
         company_id: "1234"
+        department_id: "1234"
         email: elon@tesla.com
         employee_number: 123456-AB
         employment_status: active
@@ -4435,6 +4436,10 @@ components:
       properties:
         company_id:
           description: Company ID to filter on
+          example: "1234"
+          type: string
+        department_id:
+          description: ID of the department to filter on
           example: "1234"
           type: string
         email:
