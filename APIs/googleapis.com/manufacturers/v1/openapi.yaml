@@ -34,6 +34,148 @@ externalDocs:
 tags:
   - name: accounts
 paths:
+  "/v1/{name}":
+    delete:
+      description: Deletes a product certification by its name. This method can only be called by certification bodies.
+      operationId: manufacturers.accounts.languages.productCertifications.delete
+      parameters:
+        - description: "Required. The name of the product certification to delete. Format: accounts/{account}/languages/{language_code}/productCertifications/{id}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/manufacturercenter
+          Oauth2c:
+            - https://www.googleapis.com/auth/manufacturercenter
+      tags:
+        - accounts
+    get:
+      description: Gets a product certification by its name. This method can only be called by certification bodies.
+      operationId: manufacturers.accounts.languages.productCertifications.get
+      parameters:
+        - description: "Required. The name of the product certification to get. Format: accounts/{account}/languages/{language_code}/productCertifications/{id}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductCertification"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/manufacturercenter
+          Oauth2c:
+            - https://www.googleapis.com/auth/manufacturercenter
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates (or creates if allow_missing = true) a product certification which links certifications with products. This method can only be called by certification bodies.
+      operationId: manufacturers.accounts.languages.productCertifications.patch
+      parameters:
+        - description: "Required. The unique name identifier of a product certification Format: accounts/{account}/languages/{language_code}/productCertifications/{id} Where `id` is a some unique identifier and `language_code` is a 2-letter ISO 639-1 code of a Shopping supported language according to https://support.google.com/merchants/answer/160637."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Optional. The list of fields to update according to aip.dev/134. However, only full update is supported as of right now. Therefore, it can be either ignored or set to "*". Setting any other values will returns UNIMPLEMENTED error.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductCertification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductCertification"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/manufacturercenter
+          Oauth2c:
+            - https://www.googleapis.com/auth/manufacturercenter
+      tags:
+        - accounts
+  "/v1/{parent}/productCertifications":
+    get:
+      description: Lists product certifications from a specified certification body. This method can only be called by certification bodies.
+      operationId: manufacturers.accounts.languages.productCertifications.list
+      parameters:
+        - description: "Required. The parent, which owns this collection of product certifications. Format: accounts/{account}/languages/{language_code}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. The maximum number of product certifications to return. The service may return fewer than this value. If unspecified, at most 50 product certifications will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A page token, received from a previous `ListProductCertifications` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListProductCertifications` must match the call that provided the page token. Required if requesting the second or higher page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListProductCertificationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/manufacturercenter
+          Oauth2c:
+            - https://www.googleapis.com/auth/manufacturercenter
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/products":
     get:
       description: Lists all the products in a Manufacturer Center account.
@@ -447,6 +589,28 @@ components:
           format: int64
           type: string
       type: object
+    Certification:
+      description: Description of a certification.
+      properties:
+        authority:
+          description: Required. Name of the certification body.
+          type: string
+        link:
+          description: Optional. A URL link to the certification.
+          type: string
+        logo:
+          description: Optional. A URL link to the certification logo.
+          type: string
+        name:
+          description: Required. Name of the certification.
+          type: string
+        validUntil:
+          description: Optional. The expiration date (UTC).
+          type: string
+        value:
+          description: Required. A custom value of the certification.
+          type: string
+      type: object
     Count:
       description: The number of products in a single package. For more information, see https://support.google.com/manufacturers/answer/6124116#count.
       properties:
@@ -604,6 +768,18 @@ components:
         type:
           description: The server-generated type of the issue, for example, “INCORRECT_TEXT_FORMATTING”, “IMAGE_NOT_SERVEABLE”, etc.
           type: string
+      type: object
+    ListProductCertificationsResponse:
+      description: Response for ListProductCertifications method.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        productCertifications:
+          description: The product certifications from the specified certification body.
+          items:
+            $ref: "#/components/schemas/ProductCertification"
+          type: array
       type: object
     ListProductsResponse:
       properties:
@@ -806,6 +982,56 @@ components:
           type: string
         targetCountry:
           description: The target country of the product as a CLDR territory code (for example, US).
+          type: string
+      type: object
+    ProductCertification:
+      description: The data matches with the vertical specification for product in http://google3/googlebase/verticals/devel/product_certification
+      properties:
+        brand:
+          description: Required. This is the product's brand name. The brand is used to help identify your product.
+          type: string
+        certification:
+          description: Required. A list of certifications to link to the described product.
+          items:
+            $ref: "#/components/schemas/Certification"
+          type: array
+        countryCode:
+          description: Optional. A 2-letter country code (ISO 3166-1 Alpha 2).
+          items:
+            type: string
+          type: array
+        destinationStatuses:
+          description: Output only. The statuses of the destinations.
+          items:
+            $ref: "#/components/schemas/DestinationStatus"
+          readOnly: true
+          type: array
+        issues:
+          description: Output only. A server-generated list of issues associated with the product.
+          items:
+            $ref: "#/components/schemas/Issue"
+          readOnly: true
+          type: array
+        mpn:
+          description: Optional. These are the Manufacturer Part Numbers (MPN). MPNs are used to uniquely identify a specific product among all products from the same manufacturer
+          items:
+            type: string
+          type: array
+        name:
+          description: "Required. The unique name identifier of a product certification Format: accounts/{account}/languages/{language_code}/productCertifications/{id} Where `id` is a some unique identifier and `language_code` is a 2-letter ISO 639-1 code of a Shopping supported language according to https://support.google.com/merchants/answer/160637."
+          type: string
+        productCode:
+          description: Optional. Another name for GTIN.
+          items:
+            type: string
+          type: array
+        productType:
+          description: Optional. These are your own product categorization system in your product data.
+          items:
+            type: string
+          type: array
+        title:
+          description: Required. This is to clearly identify the product you are certifying.
           type: string
       type: object
     ProductDetail:

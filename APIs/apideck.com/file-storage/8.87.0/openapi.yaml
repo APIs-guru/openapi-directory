@@ -892,7 +892,7 @@ paths:
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/filesFilter"
         - $ref: "#/components/parameters/filesSort"
-        - $ref: "#/components/parameters/passthrough"
+        - $ref: "#/components/parameters/passThrough"
       responses:
         "200":
           $ref: "#/components/responses/GetFilesResponse"
@@ -1007,7 +1007,7 @@ paths:
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/passthrough"
+        - $ref: "#/components/parameters/passThrough"
       requestBody:
         content:
           application/json:
@@ -2191,7 +2191,7 @@ components:
         maximum: 10000
         minimum: 0
         type: number
-    passthrough:
+    passThrough:
       description: Optional unmapped key/values that will be passed through to downstream as query parameters
       explode: true
       in: query
@@ -4405,7 +4405,7 @@ components:
 x-webhooks:
   FileCreated:
     post:
-      description: File created
+      description: Event broadcast when a file has been created.
       operationId: fileCreated
       parameters:
         - description: The type of event that was triggered
@@ -4414,21 +4414,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/FileStorageEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: file
+              entity_url: https://unify.apideck.com/file-storage/files/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: file-storage.file.created
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: dropbox
+              unified_api: file-storage
             schema:
               $ref: "#/components/schemas/WebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: File created
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
+      summary: File Created
       tags:
         - Webhook Events
       x-apideck-event-type: file-storage.file.created
   FileDeleted:
     post:
-      description: File deleted
+      description: Event broadcast when a file has been deleted.
       operationId: fileDeleted
       parameters:
         - description: The type of event that was triggered
@@ -4437,21 +4456,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/FileStorageEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: file
+              entity_url: https://unify.apideck.com/file-storage/files/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: file-storage.file.deleted
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: dropbox
+              unified_api: file-storage
             schema:
               $ref: "#/components/schemas/WebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: File deleted
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
+      summary: File Deleted
       tags:
         - Webhook Events
       x-apideck-event-type: file-storage.file.deleted
   FileUpdated:
     post:
-      description: File updated
+      description: Event broadcast when a file has been updated.
       operationId: fileUpdated
       parameters:
         - description: The type of event that was triggered
@@ -4460,15 +4498,34 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/FileStorageEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: file
+              entity_url: https://unify.apideck.com/file-storage/files/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: file-storage.file.updated
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: dropbox
+              unified_api: file-storage
             schema:
               $ref: "#/components/schemas/WebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: File updated
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
+      summary: File Updated
       tags:
         - Webhook Events
       x-apideck-event-type: file-storage.file.updated

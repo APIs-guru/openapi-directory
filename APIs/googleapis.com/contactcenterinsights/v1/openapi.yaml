@@ -1872,6 +1872,10 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        ingestConversationsStats:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1IngestConversationsMetadataIngestConversationsStats"
+          description: Output only. Statistics for IngestConversations operation.
+          readOnly: true
         partialErrors:
           description: Output only. Partial errors during ingest operation that might cause the operation output to be incomplete.
           items:
@@ -1882,6 +1886,30 @@ components:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1IngestConversationsRequest"
           description: Output only. The original request for ingest.
           readOnly: true
+      type: object
+    GoogleCloudContactcenterinsightsV1IngestConversationsMetadataIngestConversationsStats:
+      description: Statistics for IngestConversations operation.
+      properties:
+        duplicatesSkippedCount:
+          description: Output only. The number of objects skipped because another conversation with the same transcript uri had already been ingested.
+          format: int32
+          readOnly: true
+          type: integer
+        failedIngestCount:
+          description: Output only. The number of objects which were unable to be ingested due to errors. The errors are populated in the partial_errors field.
+          format: int32
+          readOnly: true
+          type: integer
+        processedObjectCount:
+          description: Output only. The number of objects processed during the ingest operation.
+          format: int32
+          readOnly: true
+          type: integer
+        successfulIngestCount:
+          description: Output only. The number of new conversations added during this ingest operation.
+          format: int32
+          readOnly: true
+          type: integer
       type: object
     GoogleCloudContactcenterinsightsV1IngestConversationsRequest:
       description: The request to ingest conversations.
@@ -2719,6 +2747,10 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        ingestConversationsStats:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1IngestConversationsMetadataIngestConversationsStats"
+          description: Output only. Statistics for IngestConversations operation.
+          readOnly: true
         partialErrors:
           description: Output only. Partial errors during ingest operation that might cause the operation output to be incomplete.
           items:
@@ -2729,6 +2761,30 @@ components:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1IngestConversationsRequest"
           description: Output only. The original request for ingest.
           readOnly: true
+      type: object
+    GoogleCloudContactcenterinsightsV1alpha1IngestConversationsMetadataIngestConversationsStats:
+      description: Statistics for IngestConversations operation.
+      properties:
+        duplicatesSkippedCount:
+          description: Output only. The number of objects skipped because another conversation with the same transcript uri had already been ingested.
+          format: int32
+          readOnly: true
+          type: integer
+        failedIngestCount:
+          description: Output only. The number of objects which were unable to be ingested due to errors. The errors are populated in the partial_errors field.
+          format: int32
+          readOnly: true
+          type: integer
+        processedObjectCount:
+          description: Output only. The number of objects processed during the ingest operation.
+          format: int32
+          readOnly: true
+          type: integer
+        successfulIngestCount:
+          description: Output only. The number of new conversations added during this ingest operation.
+          format: int32
+          readOnly: true
+          type: integer
       type: object
     GoogleCloudContactcenterinsightsV1alpha1IngestConversationsRequest:
       description: The request to ingest conversations.

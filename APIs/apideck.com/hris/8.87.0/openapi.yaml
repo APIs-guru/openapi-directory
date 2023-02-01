@@ -6272,7 +6272,7 @@ components:
 x-webhooks:
   CompanyCreated:
     post:
-      description: Company created
+      description: Event broadcast when a company has been created.
       operationId: companyCreated
       parameters:
         - description: The type of event that was triggered
@@ -6281,21 +6281,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/HrisEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: company
+              entity_url: https://unify.apideck.com/hris/companies/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: hris.company.created
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: bamboo
+              unified_api: hris
             schema:
               $ref: "#/components/schemas/WebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Company created
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
+      summary: Company Created
       tags:
         - Webhook Events
       x-apideck-event-type: hris.company.created
   CompanyDeleted:
     post:
-      description: Company deleted
+      description: Event broadcast when a company has been deleted.
       operationId: companyDeleted
       parameters:
         - description: The type of event that was triggered
@@ -6304,21 +6323,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/HrisEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: company
+              entity_url: https://unify.apideck.com/hris/companies/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: hris.company.deleted
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: bamboo
+              unified_api: hris
             schema:
               $ref: "#/components/schemas/WebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Company deleted
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
+      summary: Company Deleted
       tags:
         - Webhook Events
       x-apideck-event-type: hris.company.deleted
   CompanyUpdated:
     post:
-      description: Company updated
+      description: Event broadcast when a company has been updated.
       operationId: companyUpdated
       parameters:
         - description: The type of event that was triggered
@@ -6327,21 +6365,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/HrisEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: company
+              entity_url: https://unify.apideck.com/hris/companies/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: hris.company.updated
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: bamboo
+              unified_api: hris
             schema:
               $ref: "#/components/schemas/WebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Company updated
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
+      summary: Company Updated
       tags:
         - Webhook Events
       x-apideck-event-type: hris.company.updated
   EmployeeCreated:
     post:
-      description: Employee created
+      description: Event broadcast when an employee has been created.
       operationId: employeeCreated
       parameters:
         - description: The type of event that was triggered
@@ -6350,21 +6407,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/HrisEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: employee
+              entity_url: https://unify.apideck.com/hris/employees/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: hris.employee.created
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: bamboo
+              unified_api: hris
             schema:
               $ref: "#/components/schemas/WebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Employee created
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
+      summary: Employee Created
       tags:
         - Webhook Events
       x-apideck-event-type: hris.employee.created
   EmployeeDeleted:
     post:
-      description: Employee deleted
+      description: Event broadcast when an employee has been deleted.
       operationId: employeeDeleted
       parameters:
         - description: The type of event that was triggered
@@ -6373,21 +6449,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/HrisEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: employee
+              entity_url: https://unify.apideck.com/hris/employees/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: hris.employee.deleted
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: bamboo
+              unified_api: hris
             schema:
               $ref: "#/components/schemas/WebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Employee deleted
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
+      summary: Employee Deleted
       tags:
         - Webhook Events
       x-apideck-event-type: hris.employee.deleted
   EmployeeUpdated:
     post:
-      description: Employee updated
+      description: Event broadcast when an employee has been updated.
       operationId: employeeUpdated
       parameters:
         - description: The type of event that was triggered
@@ -6396,15 +6491,34 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/HrisEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: employee
+              entity_url: https://unify.apideck.com/hris/employees/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: hris.employee.updated
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: bamboo
+              unified_api: hris
             schema:
               $ref: "#/components/schemas/WebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Employee updated
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
+      summary: Employee Updated
       tags:
         - Webhook Events
       x-apideck-event-type: hris.employee.updated

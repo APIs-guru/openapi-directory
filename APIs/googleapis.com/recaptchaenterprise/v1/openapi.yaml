@@ -669,16 +669,13 @@ components:
               - SOCIAL_SPAM
             type: string
           type: array
-        transactionEvent:
-          $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1TransactionEvent"
-          description: Optional. If the Assessment is part of a Payment Transaction, provide details on Payment Lifecycle Events that occur in the Transaction.
       type: object
     GoogleCloudRecaptchaenterpriseV1AnnotateAssessmentResponse:
       description: Empty response for AnnotateAssessment.
       properties: {}
       type: object
     GoogleCloudRecaptchaenterpriseV1Assessment:
-      description: A reCAPTCHA Enterprise assessment resource.
+      description: A recaptcha assessment resource.
       properties:
         accountDefenderAssessment:
           $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1AccountDefenderAssessment"
@@ -754,10 +751,10 @@ components:
           format: byte
           type: string
         siteKey:
-          description: Optional. The site key that was used to invoke reCAPTCHA Enterprise on your site and generate the token.
+          description: Optional. The site key that was used to invoke reCAPTCHA on your site and generate the token.
           type: string
         token:
-          description: Optional. The user response token provided by the reCAPTCHA Enterprise client-side integration on your site.
+          description: Optional. The user response token provided by the reCAPTCHA client-side integration on your site.
           type: string
         userAgent:
           description: Optional. The user agent present in the request from the user's device related to this event.
@@ -1042,44 +1039,6 @@ components:
         valid:
           description: Whether the provided user response token is valid. When valid = false, the reason could be specified in invalid_reason or it could also be due to a user failing to solve a challenge or a sitekey mismatch (i.e the sitekey used to generate the token was different than the one specified in the assessment).
           type: boolean
-      type: object
-    GoogleCloudRecaptchaenterpriseV1TransactionEvent:
-      description: Describes an event in the lifecycle of a payment transaction.
-      properties:
-        eventTime:
-          description: Optional. Timestamp when this transaction event occurred; otherwise assumed to be the time of the API call.
-          format: google-datetime
-          type: string
-        eventType:
-          description: Optional. The type of this transaction event.
-          enum:
-            - TRANSACTION_EVENT_TYPE_UNSPECIFIED
-            - MERCHANT_APPROVE
-            - MERCHANT_DENY
-            - MANUAL_REVIEW
-            - AUTHORIZATION
-            - AUTHORIZATION_DECLINE
-            - PAYMENT_CAPTURE
-            - PAYMENT_CAPTURE_DECLINE
-            - CANCEL
-            - CHARGEBACK_INQUIRY
-            - CHARGEBACK_ALERT
-            - FRAUD_NOTIFICATION
-            - CHARGEBACK
-            - CHARGEBACK_REPRESENTMENT
-            - CHARGEBACK_REVERSE
-            - REFUND_REQUEST
-            - REFUND_DECLINE
-            - REFUND
-            - REFUND_REVERSE
-          type: string
-        reason:
-          description: Optional. The reason or standardized code which corresponds with this transaction event, if one exists. E.g. a CHARGEBACK Event with code 4553.
-          type: string
-        value:
-          description: Optional. The value that corresponds with this transaction event, if one exists. E.g. A refund event where $5.00 was refunded. Currency is obtained from the original transaction data.
-          format: double
-          type: number
       type: object
     GoogleCloudRecaptchaenterpriseV1WafSettings:
       description: Settings specific to keys that can be used for WAF (Web Application Firewall).

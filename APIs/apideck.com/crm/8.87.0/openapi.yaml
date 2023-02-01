@@ -8386,7 +8386,7 @@ components:
 x-webhooks:
   ActivityCreated:
     post:
-      description: Activity Created
+      description: Event broadcast when an activity has been created.
       operationId: activityCreated
       parameters:
         - description: The type of event that was triggered
@@ -8395,21 +8395,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/CrmEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: activity
+              entity_url: https://unify.apideck.com/crm/activities/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: crm.activity.created
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: hubspot
+              unified_api: crm
             schema:
               $ref: "#/components/schemas/CrmWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Activity Created
       tags:
         - Webhook Events
       x-apideck-event-type: crm.activity.created
   ActivityDeleted:
     post:
-      description: Activity Deleted
+      description: Event broadcast when an activity has been deleted.
       operationId: activityDeleted
       parameters:
         - description: The type of event that was triggered
@@ -8418,21 +8437,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/CrmEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: activity
+              entity_url: https://unify.apideck.com/crm/activities/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: crm.activity.deleted
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: hubspot
+              unified_api: crm
             schema:
               $ref: "#/components/schemas/CrmWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Activity Deleted
       tags:
         - Webhook Events
       x-apideck-event-type: crm.activity.deleted
   ActivityUpdated:
     post:
-      description: Activity Updated
+      description: Event broadcast when an activity has been updated.
       operationId: activityUpdated
       parameters:
         - description: The type of event that was triggered
@@ -8441,21 +8479,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/CrmEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: activity
+              entity_url: https://unify.apideck.com/crm/activities/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: crm.activity.updated
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: hubspot
+              unified_api: crm
             schema:
               $ref: "#/components/schemas/CrmWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Activity Updated
       tags:
         - Webhook Events
       x-apideck-event-type: crm.activity.updated
   CompanyCreated:
     post:
-      description: Company Created
+      description: Event broadcast when a company has been created.
       operationId: companyCreated
       parameters:
         - description: The type of event that was triggered
@@ -8464,21 +8521,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/CrmEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: company
+              entity_url: https://unify.apideck.com/crm/companies/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: crm.company.created
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: hubspot
+              unified_api: crm
             schema:
               $ref: "#/components/schemas/CrmWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Company Created
       tags:
         - Webhook Events
       x-apideck-event-type: crm.company.created
   CompanyDeleted:
     post:
-      description: Company Deleted
+      description: Event broadcast when a company has been deleted.
       operationId: companyDeleted
       parameters:
         - description: The type of event that was triggered
@@ -8487,21 +8563,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/CrmEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: company
+              entity_url: https://unify.apideck.com/crm/companies/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: crm.company.deleted
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: hubspot
+              unified_api: crm
             schema:
               $ref: "#/components/schemas/CrmWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Company Deleted
       tags:
         - Webhook Events
       x-apideck-event-type: crm.company.deleted
   CompanyUpdated:
     post:
-      description: Company Updated
+      description: Event broadcast when a company has been updated.
       operationId: companyUpdated
       parameters:
         - description: The type of event that was triggered
@@ -8510,21 +8605,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/CrmEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: company
+              entity_url: https://unify.apideck.com/crm/companies/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: crm.company.updated
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: hubspot
+              unified_api: crm
             schema:
               $ref: "#/components/schemas/CrmWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Company Updated
       tags:
         - Webhook Events
       x-apideck-event-type: crm.company.updated
   ContactCreated:
     post:
-      description: Contact Created
+      description: Event broadcast when a contact has been created.
       operationId: contactCreated
       parameters:
         - description: The type of event that was triggered
@@ -8533,21 +8647,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/CrmEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: contact
+              entity_url: https://unify.apideck.com/crm/contacts/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: crm.contact.created
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: hubspot
+              unified_api: crm
             schema:
               $ref: "#/components/schemas/CrmWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Contact Created
       tags:
         - Webhook Events
       x-apideck-event-type: crm.contact.created
   ContactDeleted:
     post:
-      description: Contact Deleted
+      description: Event broadcast when a contact has been deleted.
       operationId: contactDeleted
       parameters:
         - description: The type of event that was triggered
@@ -8556,21 +8689,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/CrmEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: contact
+              entity_url: https://unify.apideck.com/crm/contacts/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: crm.contact.deleted
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: hubspot
+              unified_api: crm
             schema:
               $ref: "#/components/schemas/CrmWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Contact Deleted
       tags:
         - Webhook Events
       x-apideck-event-type: crm.contact.deleted
   ContactUpdated:
     post:
-      description: Contact Updated
+      description: Event broadcast when a contact has been updated.
       operationId: contactUpdated
       parameters:
         - description: The type of event that was triggered
@@ -8579,21 +8731,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/CrmEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: contact
+              entity_url: https://unify.apideck.com/crm/contacts/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: crm.contact.updated
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: hubspot
+              unified_api: crm
             schema:
               $ref: "#/components/schemas/CrmWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Contact Updated
       tags:
         - Webhook Events
       x-apideck-event-type: crm.contact.updated
   LeadCreated:
     post:
-      description: Lead Created
+      description: Event broadcast when a lead has been created.
       operationId: leadCreated
       parameters:
         - description: The type of event that was triggered
@@ -8602,21 +8773,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/CrmEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: lead
+              entity_url: https://unify.apideck.com/crm/leads/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: crm.lead.created
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: hubspot
+              unified_api: crm
             schema:
               $ref: "#/components/schemas/CrmWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Lead Created
       tags:
         - Webhook Events
       x-apideck-event-type: crm.lead.created
   LeadDeleted:
     post:
-      description: Lead Deleted
+      description: Event broadcast when a lead has been deleted.
       operationId: leadDeleted
       parameters:
         - description: The type of event that was triggered
@@ -8625,21 +8815,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/CrmEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: lead
+              entity_url: https://unify.apideck.com/crm/leads/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: crm.lead.deleted
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: hubspot
+              unified_api: crm
             schema:
               $ref: "#/components/schemas/CrmWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Lead Deleted
       tags:
         - Webhook Events
       x-apideck-event-type: crm.lead.deleted
   LeadUpdated:
     post:
-      description: Lead Updated
+      description: Event broadcast when a lead has been updated.
       operationId: leadUpdated
       parameters:
         - description: The type of event that was triggered
@@ -8648,21 +8857,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/CrmEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: lead
+              entity_url: https://unify.apideck.com/crm/leads/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: crm.lead.updated
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: hubspot
+              unified_api: crm
             schema:
               $ref: "#/components/schemas/CrmWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Lead Updated
       tags:
         - Webhook Events
       x-apideck-event-type: crm.lead.updated
   NoteCreated:
     post:
-      description: Note Created
+      description: Event broadcast when a note has been created.
       operationId: noteCreated
       parameters:
         - description: The type of event that was triggered
@@ -8671,21 +8899,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/CrmEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: note
+              entity_url: https://unify.apideck.com/crm/notes/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: crm.note.created
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: hubspot
+              unified_api: crm
             schema:
               $ref: "#/components/schemas/CrmWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Note Created
       tags:
         - Webhook Events
       x-apideck-event-type: crm.note.created
   NoteDeleted:
     post:
-      description: Note Deleted
+      description: Event broadcast when a note has been deleted.
       operationId: noteDeleted
       parameters:
         - description: The type of event that was triggered
@@ -8694,21 +8941,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/CrmEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: note
+              entity_url: https://unify.apideck.com/crm/notes/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: crm.note.deleted
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: hubspot
+              unified_api: crm
             schema:
               $ref: "#/components/schemas/CrmWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Note Deleted
       tags:
         - Webhook Events
       x-apideck-event-type: crm.note.deleted
   NoteUpdated:
     post:
-      description: Note Updated
+      description: Event broadcast when a note has been updated.
       operationId: noteUpdated
       parameters:
         - description: The type of event that was triggered
@@ -8717,21 +8983,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/CrmEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: note
+              entity_url: https://unify.apideck.com/crm/notes/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: crm.note.updated
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: hubspot
+              unified_api: crm
             schema:
               $ref: "#/components/schemas/CrmWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Note Updated
       tags:
         - Webhook Events
       x-apideck-event-type: crm.note.updated
   OpportunityCreated:
     post:
-      description: Opportunity Created
+      description: Event broadcast when an opportunity has been created.
       operationId: opportunityCreated
       parameters:
         - description: The type of event that was triggered
@@ -8740,21 +9025,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/CrmEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: opportunity
+              entity_url: https://unify.apideck.com/crm/opportunities/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: crm.opportunity.created
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: hubspot
+              unified_api: crm
             schema:
               $ref: "#/components/schemas/CrmWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Opportunity Created
       tags:
         - Webhook Events
       x-apideck-event-type: crm.opportunity.created
   OpportunityDeleted:
     post:
-      description: Opportunity Deleted
+      description: Event broadcast when an opportunity has been deleted.
       operationId: opportunityDeleted
       parameters:
         - description: The type of event that was triggered
@@ -8763,21 +9067,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/CrmEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: opportunity
+              entity_url: https://unify.apideck.com/crm/opportunities/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: crm.opportunity.deleted
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: hubspot
+              unified_api: crm
             schema:
               $ref: "#/components/schemas/CrmWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Opportunity Deleted
       tags:
         - Webhook Events
       x-apideck-event-type: crm.opportunity.deleted
   OpportunityUpdated:
     post:
-      description: Opportunity Updated
+      description: Event broadcast when an opportunity has been updated.
       operationId: opportunityUpdated
       parameters:
         - description: The type of event that was triggered
@@ -8786,14 +9109,33 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/CrmEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: opportunity
+              entity_url: https://unify.apideck.com/crm/opportunities/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: crm.opportunity.updated
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: hubspot
+              unified_api: crm
             schema:
               $ref: "#/components/schemas/CrmWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Opportunity Updated
       tags:
         - Webhook Events

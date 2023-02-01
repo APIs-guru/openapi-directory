@@ -2600,7 +2600,7 @@ components:
 x-webhooks:
   LeadCreated:
     post:
-      description: Lead Created
+      description: Event broadcast when a lead has been created.
       operationId: leadCreated
       parameters:
         - description: The type of event that was triggered
@@ -2609,21 +2609,39 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/LeadEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: lead
+              entity_url: https://unify.apideck.com/lead/leads/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: lead.lead.created
+              occurred_at: 2020-01-01T00:00:00.000Z
+              unified_api: lead
             schema:
               $ref: "#/components/schemas/LeadWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Lead Created
       tags:
         - Webhook Events
       x-apideck-event-type: lead.lead.created
   LeadDeleted:
     post:
-      description: Lead Deleted
+      description: Event broadcast when a lead has been deleted.
       operationId: leadDeleted
       parameters:
         - description: The type of event that was triggered
@@ -2632,21 +2650,39 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/LeadEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: lead
+              entity_url: https://unify.apideck.com/lead/leads/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: lead.lead.deleted
+              occurred_at: 2020-01-01T00:00:00.000Z
+              unified_api: lead
             schema:
               $ref: "#/components/schemas/LeadWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Lead Deleted
       tags:
         - Webhook Events
       x-apideck-event-type: lead.lead.deleted
   LeadUpdated:
     post:
-      description: Lead Updated
+      description: Event broadcast when a lead has been updated.
       operationId: leadUpdated
       parameters:
         - description: The type of event that was triggered
@@ -2655,14 +2691,32 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/LeadEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: lead
+              entity_url: https://unify.apideck.com/lead/leads/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: lead.lead.updated
+              occurred_at: 2020-01-01T00:00:00.000Z
+              unified_api: lead
             schema:
               $ref: "#/components/schemas/LeadWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Lead Updated
       tags:
         - Webhook Events

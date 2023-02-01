@@ -4213,7 +4213,12 @@ components:
       in: query
       name: pass_through
       schema:
-        $ref: "#/components/schemas/Passthrough"
+        additionalProperties: true
+        properties:
+          example_downstream_property:
+            description: All passthrough query parameters are passed along to the connector as is (?pass_through[search]=leads becomes ?search=leads)
+            type: string
+        type: object
       style: deepObject
     profitAndLossFilter:
       description: Apply filters
@@ -9411,13 +9416,6 @@ components:
           type: string
       type: object
       x-apideck-schema-id: NotImplemented
-    Passthrough:
-      additionalProperties: true
-      properties:
-        example_downstream_property:
-          description: All passthrough query parameters are passed along to the connector as is (?pass_through[search]=leads becomes ?search=leads)
-          type: string
-      type: object
     Payment:
       properties:
         account:
@@ -10830,30 +10828,51 @@ components:
 x-webhooks:
   CustomerCreated:
     post:
-      description: Customer Created
+      description: Event broadcast when a customer has been created.
       operationId: customerCreated
       parameters:
         - description: The type of event that was triggered
+          example: accounting.customer.created
           in: header
           name: x-apideck-event-type
           required: true
           schema:
             $ref: "#/components/schemas/AccountingEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: customer
+              entity_url: https://unify.apideck.com/accounting/customers/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: accounting.customer.created
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: xero
+              unified_api: accounting
             schema:
               $ref: "#/components/schemas/AccountingWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Customer Created
       tags:
         - Webhook Events
+      x-apideck-event-type: accounting.customer.created
   CustomerDeleted:
     post:
-      description: Activity Deleted
-      operationId: activityDeleted
+      description: Event broadcast when a customer has been deleted.
+      operationId: customerDeleted
       parameters:
         - description: The type of event that was triggered
           in: header
@@ -10861,21 +10880,41 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/AccountingEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: customer
+              entity_url: https://unify.apideck.com/accounting/customers/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: accounting.customer.deleted
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: xero
+              unified_api: accounting
             schema:
               $ref: "#/components/schemas/AccountingWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Activity Deleted
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
+      summary: Customer Deleted
       tags:
         - Webhook Events
+      x-apideck-event-type: accounting.customer.deleted
   CustomerUpdated:
     post:
-      description: Activity Updated
-      operationId: activityUpdated
+      description: Event broadcast when a customer has been updated.
+      operationId: customerUpdated
       parameters:
         - description: The type of event that was triggered
           in: header
@@ -10883,20 +10922,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/AccountingEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: customer
+              entity_url: https://unify.apideck.com/accounting/customers/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: accounting.customer.updated
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: xero
+              unified_api: accounting
             schema:
               $ref: "#/components/schemas/AccountingWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      summary: Activity Updated
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
+      summary: Customer Updated
       tags:
         - Webhook Events
+      x-apideck-event-type: accounting.customer.updated
   InvoiceCreated:
     post:
-      description: Invoice Created
+      description: Event broadcast when an invoice has been created.
       operationId: invoiceCreated
       parameters:
         - description: The type of event that was triggered
@@ -10905,20 +10964,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/AccountingEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: invoice
+              entity_url: https://unify.apideck.com/accounting/invoices/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: accounting.invoice.created
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: xero
+              unified_api: accounting
             schema:
               $ref: "#/components/schemas/AccountingWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Invoice Created
       tags:
         - Webhook Events
+      x-apideck-event-type: accounting.invoice.created
   InvoiceDeleted:
     post:
-      description: Invoice Deleted
+      description: Event broadcast when an invoice has been deleted.
       operationId: invoiceDeleted
       parameters:
         - description: The type of event that was triggered
@@ -10927,20 +11006,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/AccountingEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: invoice
+              entity_url: https://unify.apideck.com/accounting/invoices/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: accounting.invoice.deleted
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: xero
+              unified_api: accounting
             schema:
               $ref: "#/components/schemas/AccountingWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Invoice Deleted
       tags:
         - Webhook Events
+      x-apideck-event-type: accounting.invoice.deleted
   InvoiceItemCreated:
     post:
-      description: Invoice Item Created
+      description: Event broadcast when an invoice has been item created.
       operationId: invoiceItemCreated
       parameters:
         - description: The type of event that was triggered
@@ -10949,20 +11048,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/AccountingEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: invoice_item
+              entity_url: https://unify.apideck.com/accounting/invoice_items/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: accounting.invoice_item.created
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: xero
+              unified_api: accounting
             schema:
               $ref: "#/components/schemas/AccountingWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Invoice Item Created
       tags:
         - Webhook Events
+      x-apideck-event-type: accounting.invoice_item.created
   InvoiceItemDeleted:
     post:
-      description: Invoice Item Deleted
+      description: Event broadcast when an invoice has been item deleted.
       operationId: invoiceItemDeleted
       parameters:
         - description: The type of event that was triggered
@@ -10971,20 +11090,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/AccountingEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: invoice_item
+              entity_url: https://unify.apideck.com/accounting/invoice_items/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: accounting.invoice_item.deleted
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: xero
+              unified_api: accounting
             schema:
               $ref: "#/components/schemas/AccountingWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Invoice Item Deleted
       tags:
         - Webhook Events
+      x-apideck-event-type: accounting.invoice_item.deleted
   InvoiceItemUpdated:
     post:
-      description: Invoice Item Updated
+      description: Event broadcast when an invoice has been item updated.
       operationId: invoiceItemUpdated
       parameters:
         - description: The type of event that was triggered
@@ -10993,20 +11132,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/AccountingEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: invoice_item
+              entity_url: https://unify.apideck.com/accounting/invoice_items/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: accounting.invoice_item.updated
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: xero
+              unified_api: accounting
             schema:
               $ref: "#/components/schemas/AccountingWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Invoice Item Updated
       tags:
         - Webhook Events
+      x-apideck-event-type: accounting.invoice_item.updated
   InvoiceUpdated:
     post:
-      description: Invoice Updated
+      description: Event broadcast when an invoice has been updated.
       operationId: invoiceUpdated
       parameters:
         - description: The type of event that was triggered
@@ -11015,20 +11174,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/AccountingEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: invoice
+              entity_url: https://unify.apideck.com/accounting/invoices/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: accounting.invoice.updated
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: xero
+              unified_api: accounting
             schema:
               $ref: "#/components/schemas/AccountingWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Invoice Updated
       tags:
         - Webhook Events
+      x-apideck-event-type: accounting.invoice.updated
   LedgerAccountCreated:
     post:
-      description: Ledger Account Created
+      description: Event broadcast when a ledger has been account created.
       operationId: ledgerAccountCreated
       parameters:
         - description: The type of event that was triggered
@@ -11037,20 +11216,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/AccountingEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: ledger_account
+              entity_url: https://unify.apideck.com/accounting/ledger_accounts/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: accounting.ledger_account.created
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: xero
+              unified_api: accounting
             schema:
               $ref: "#/components/schemas/AccountingWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Ledger Account Created
       tags:
         - Webhook Events
+      x-apideck-event-type: accounting.ledger_account.created
   LedgerAccountDeleted:
     post:
-      description: Ledger Account Deleted
+      description: Event broadcast when a ledger has been account deleted.
       operationId: ledgerAccountDeleted
       parameters:
         - description: The type of event that was triggered
@@ -11059,20 +11258,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/AccountingEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: ledger_account
+              entity_url: https://unify.apideck.com/accounting/ledger_accounts/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: accounting.ledger_account.deleted
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: xero
+              unified_api: accounting
             schema:
               $ref: "#/components/schemas/AccountingWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Ledger Account Deleted
       tags:
         - Webhook Events
+      x-apideck-event-type: accounting.ledger_account.deleted
   LedgerAccountUpdated:
     post:
-      description: Ledger Account Updated
+      description: Event broadcast when a ledger has been account updated.
       operationId: ledgerAccountUpdated
       parameters:
         - description: The type of event that was triggered
@@ -11081,20 +11300,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/AccountingEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: ledger_account
+              entity_url: https://unify.apideck.com/accounting/ledger_accounts/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: accounting.ledger_account.updated
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: xero
+              unified_api: accounting
             schema:
               $ref: "#/components/schemas/AccountingWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Ledger Account Updated
       tags:
         - Webhook Events
+      x-apideck-event-type: accounting.ledger_account.updated
   TaxRateCreated:
     post:
-      description: Tax Rate Created
+      description: Event broadcast when a tax has been rate created.
       operationId: taxRateCreated
       parameters:
         - description: The type of event that was triggered
@@ -11103,20 +11342,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/AccountingEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: tax_rate
+              entity_url: https://unify.apideck.com/accounting/tax_rates/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: accounting.tax_rate.created
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: xero
+              unified_api: accounting
             schema:
               $ref: "#/components/schemas/AccountingWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Tax Rate Created
       tags:
         - Webhook Events
+      x-apideck-event-type: accounting.tax_rate.created
   TaxRateDeleted:
     post:
-      description: Tax Rate Deleted
+      description: Event broadcast when a tax has been rate deleted.
       operationId: taxRateDeleted
       parameters:
         - description: The type of event that was triggered
@@ -11125,20 +11384,40 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/AccountingEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: tax_rate
+              entity_url: https://unify.apideck.com/accounting/tax_rates/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: accounting.tax_rate.deleted
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: xero
+              unified_api: accounting
             schema:
               $ref: "#/components/schemas/AccountingWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Tax Rate Deleted
       tags:
         - Webhook Events
+      x-apideck-event-type: accounting.tax_rate.deleted
   TaxRateUpdated:
     post:
-      description: Tax Rate Updated
+      description: Event broadcast when a tax has been rate updated.
       operationId: taxRateUpdated
       parameters:
         - description: The type of event that was triggered
@@ -11147,15 +11426,35 @@ x-webhooks:
           required: true
           schema:
             $ref: "#/components/schemas/AccountingEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
       requestBody:
         content:
           application/json:
+            example:
+              consumer_id: test_user_id
+              entity_id: 123456ASDF
+              entity_type: tax_rate
+              entity_url: https://unify.apideck.com/accounting/tax_rates/123456ASDF
+              event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+              event_type: accounting.tax_rate.updated
+              occurred_at: 2020-01-01T00:00:00.000Z
+              service_id: xero
+              unified_api: accounting
             schema:
               $ref: "#/components/schemas/AccountingWebhookEvent"
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
       summary: Tax Rate Updated
       tags:
         - Webhook Events
+      x-apideck-event-type: accounting.tax_rate.updated
   x-sdk-exclude: true
