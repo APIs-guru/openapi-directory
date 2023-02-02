@@ -1058,6 +1058,7 @@ components:
       type: object
       x-apideck-schema-id: CreateWebhookResponse
     CreatedAt:
+      description: The date and time when the object was created.
       example: 2020-09-30T07:43:32.000Z
       format: date-time
       readOnly: true
@@ -1088,6 +1089,7 @@ components:
       pattern: ^(https?)://
       type: string
     Description:
+      description: A description of the object.
       example: A description
       nullable: true
       title: Description
@@ -1547,6 +1549,7 @@ components:
       type: object
       x-apideck-schema-id: UpdateWebhookResponse
     UpdatedAt:
+      description: The date and time when the object was last updated.
       example: 2020-09-30T07:43:32.000Z
       format: date-time
       nullable: true

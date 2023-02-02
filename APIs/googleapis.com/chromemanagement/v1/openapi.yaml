@@ -2040,6 +2040,12 @@ components:
             $ref: "#/components/schemas/GoogleChromeManagementV1OsUpdateStatus"
           readOnly: true
           type: array
+        peripheralsReport:
+          description: Output only. Peripherals reports collected periodically sorted in a decreasing order of report_time.
+          items:
+            $ref: "#/components/schemas/GoogleChromeManagementV1PeripheralsReport"
+          readOnly: true
+          type: array
         serialNumber:
           description: Output only. Device serial number. This value is the same as the Admin Console's Serial Number in the ChromeOS Devices tab.
           readOnly: true

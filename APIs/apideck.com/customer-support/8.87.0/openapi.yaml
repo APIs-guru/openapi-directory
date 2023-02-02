@@ -1104,9 +1104,11 @@ components:
             $ref: "#/components/schemas/BankAccount"
           type: array
         birthday:
+          description: The date of birth of the person.
           example: 2000-08-12
           format: date
           nullable: true
+          title: Birth Date
           type: string
         created_at:
           example: 2020-09-30T07:43:32.000Z
@@ -1224,6 +1226,7 @@ components:
           title: Sales tax number
           type: string
         salutation:
+          description: A formal salutation for the person. For example, 'Mr', 'Mrs'
           example: Mr
           nullable: true
           type: string
@@ -1302,6 +1305,7 @@ components:
         vat_number: high
         websites: medium
     CompanyName:
+      description: The name of the company.
       example: SpaceX
       nullable: true
       title: Company name
@@ -1438,6 +1442,7 @@ components:
             $ref: "#/components/schemas/PhoneNumber"
           type: array
         photo_url:
+          description: The URL of the photo of a person.
           example: https://unavatar.io/elon-musk
           nullable: true
           title: Photo URL
@@ -2171,12 +2176,14 @@ components:
         company_name:
           $ref: "#/components/schemas/CompanyName"
         created_at:
+          description: The date and time when the object was created.
           example: 2020-09-30T07:43:32.000Z
           format: date-time
           readOnly: true
           title: Created at (timestamp)
           type: string
         created_by:
+          description: The user who created the object.
           example: "12345"
           nullable: true
           readOnly: true
@@ -2191,8 +2198,10 @@ components:
         first_name:
           $ref: "#/components/schemas/FirstName"
         id:
+          description: A unique identifier for an object.
           example: "12345"
           readOnly: true
+          title: ID
           type: string
         individual:
           example: true
@@ -2229,6 +2238,7 @@ components:
           title: Tax number
           type: string
         updated_at:
+          description: The date and time when the object was last updated.
           example: 2020-09-30T07:43:32.000Z
           format: date-time
           nullable: true
@@ -2236,9 +2246,11 @@ components:
           title: Updated at (timestamp)
           type: string
         updated_by:
+          description: The user who last updated the object.
           example: "12345"
           nullable: true
           readOnly: true
+          title: Updated by
           type: string
       type: object
       x-apideck-schema-id: CustomerSupportCustomer
@@ -2309,6 +2321,7 @@ components:
         id: edge-case
         type: critical
     FirstName:
+      description: The first name of the person.
       example: Elon
       nullable: true
       title: First name
@@ -2388,6 +2401,7 @@ components:
       x-apideck-schema-id: GetCustomerSupportCustomersResponse
       x-graphql-type-name: CustomerSupportCustomerList
     LastName:
+      description: The last name of the person.
       example: Musk
       nullable: true
       title: Last name
@@ -2944,6 +2958,7 @@ components:
         number: critical
         type: critical
     RowVersion:
+      description: A binary value used to detect updates to a object and prevent data conflicts. It is incremented each time an update is made to the object.
       example: 1-12345
       nullable: true
       title: Row version
@@ -3074,8 +3089,10 @@ components:
     UnifiedId:
       properties:
         id:
+          description: The unique identifier of the resource
           example: "12345"
           readOnly: true
+          title: Id
           type: string
       required:
         - id

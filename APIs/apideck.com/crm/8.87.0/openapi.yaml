@@ -4672,9 +4672,11 @@ components:
             $ref: "#/components/schemas/BankAccount"
           type: array
         birthday:
+          description: The date of birth of the person.
           example: 2000-08-12
           format: date
           nullable: true
+          title: Birth Date
           type: string
         created_at:
           example: 2020-09-30T07:43:32.000Z
@@ -4792,6 +4794,7 @@ components:
           title: Sales tax number
           type: string
         salutation:
+          description: A formal salutation for the person. For example, 'Mr', 'Mrs'
           example: Mr
           nullable: true
           type: string
@@ -5001,6 +5004,7 @@ components:
             $ref: "#/components/schemas/PhoneNumber"
           type: array
         photo_url:
+          description: The URL of the photo of a person.
           example: https://unavatar.io/elon-musk
           nullable: true
           title: Photo URL
@@ -6361,6 +6365,7 @@ components:
         id: edge-case
         type: critical
     FirstName:
+      description: The first name of the person.
       example: Elon
       nullable: true
       title: First name
@@ -6953,6 +6958,7 @@ components:
       x-apideck-schema-id: GetUsersResponse
       x-graphql-type-name: UserList
     LastName:
+      description: The last name of the person.
       example: Musk
       nullable: true
       title: Last name
@@ -7691,6 +7697,7 @@ components:
           example: false
           type: boolean
         created_at:
+          description: The date and time when the object was created.
           example: 2020-09-30T07:43:32.000Z
           format: date-time
           readOnly: true
@@ -7738,6 +7745,7 @@ components:
               win_probability: medium
           type: array
         updated_at:
+          description: The date and time when the object was last updated.
           example: 2020-09-30T07:43:32.000Z
           format: date-time
           nullable: true
@@ -7763,6 +7771,7 @@ components:
         win_probability_enabled: edge-case
       x-pii: []
     RowVersion:
+      description: A binary value used to detect updates to a object and prevent data conflicts. It is incremented each time an update is made to the object.
       example: 1-12345
       nullable: true
       title: Row version
@@ -7903,8 +7912,10 @@ components:
     UnifiedId:
       properties:
         id:
+          description: The unique identifier of the resource
           example: "12345"
           readOnly: true
+          title: Id
           type: string
       required:
         - id
@@ -8210,6 +8221,7 @@ components:
             $ref: "#/components/schemas/Address"
           type: array
         company_name:
+          description: The name of the company.
           example: SpaceX
           nullable: true
           title: Company name
@@ -8219,18 +8231,19 @@ components:
           readOnly: true
           type: string
         department:
-          description: The department the user is currently in.
+          description: The department the person is currently in.
           example: R&D
           nullable: true
           title: Department
           type: string
         description:
+          description: A description of the object.
           example: A description
           nullable: true
           title: Description
           type: string
         division:
-          description: The division the user is currently in.
+          description: The division the person is currently in. Usually a collection of departments or teams or regions.
           example: Europe
           nullable: true
           title: Division
@@ -8279,6 +8292,7 @@ components:
           nullable: true
           type: string
         title:
+          description: The job title of the person.
           example: CEO
           nullable: true
           title: Job title

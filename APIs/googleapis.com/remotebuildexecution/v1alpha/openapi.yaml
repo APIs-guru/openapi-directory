@@ -183,7 +183,7 @@ paths:
       description: Lists instances in a project.
       operationId: remotebuildexecution.projects.instances.list
       parameters:
-        - description: "Resource name of the project. Format: `projects/[PROJECT_ID]`."
+        - description: "Required. Resource name of the project. Format: `projects/[PROJECT_ID]`."
           in: path
           name: parent
           required: true
@@ -219,17 +219,22 @@ paths:
       description: Creates a new instance in the specified region. Returns a long running operation which contains an instance on completion. While the long running operation is in progress, any call to `GetInstance` returns an instance in state `CREATING`.
       operationId: remotebuildexecution.projects.instances.create
       parameters:
-        - description: "Resource name of the project containing the instance. Format: `projects/[PROJECT_ID]`."
+        - description: "Required. Resource name of the project containing the instance. Format: `projects/[PROJECT_ID]`."
           in: path
           name: parent
           required: true
+          schema:
+            type: string
+        - description: "Required. ID of the created instance. A valid `instance_id` must: be 6-50 characters long, contain only lowercase letters, digits, hyphens and underscores, start with a lowercase letter, and end with a lowercase letter or a digit."
+          in: query
+          name: instanceId
           schema:
             type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest"
+              $ref: "#/components/schemas/GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance"
       responses:
         "200":
           content:
@@ -1063,12 +1068,12 @@ components:
       properties:
         instance:
           $ref: "#/components/schemas/GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance"
-          description: Specifies the instance to create. The name in the instance, if specified in the instance, is ignored.
+          description: Required. Specifies the instance to create. The name in the instance, if specified in the instance, is ignored.
         instanceId:
-          description: "ID of the created instance. A valid `instance_id` must: be 6-50 characters long, contain only lowercase letters, digits, hyphens and underscores, start with a lowercase letter, and end with a lowercase letter or a digit."
+          description: "Required. ID of the created instance. A valid `instance_id` must: be 6-50 characters long, contain only lowercase letters, digits, hyphens and underscores, start with a lowercase letter, and end with a lowercase letter or a digit."
           type: string
         parent:
-          description: "Resource name of the project containing the instance. Format: `projects/[PROJECT_ID]`."
+          description: "Required. Resource name of the project containing the instance. Format: `projects/[PROJECT_ID]`."
           type: string
       type: object
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest:
@@ -1088,7 +1093,7 @@ components:
       description: The request used for `DeleteInstance`.
       properties:
         name:
-          description: "Name of the instance to delete. Format: `projects/[PROJECT_ID]/instances/[INSTANCE_ID]`."
+          description: "Required. Name of the instance to delete. Format: `projects/[PROJECT_ID]/instances/[INSTANCE_ID]`."
           type: string
       type: object
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest:
@@ -1202,7 +1207,7 @@ components:
       description: The request used for `GetInstance`.
       properties:
         name:
-          description: "Name of the instance to retrieve. Format: `projects/[PROJECT_ID]/instances/[INSTANCE_ID]`."
+          description: "Required. Name of the instance to retrieve. Format: `projects/[PROJECT_ID]/instances/[INSTANCE_ID]`."
           type: string
       type: object
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest:
@@ -1223,9 +1228,11 @@ components:
           type: string
         loggingEnabled:
           description: Output only. Whether stack driver logging is enabled for the instance.
+          readOnly: true
           type: boolean
         name:
           description: "Output only. Instance resource name formatted as: `projects/[PROJECT_ID]/instances/[INSTANCE_ID]`. Name should not be populated when creating an instance since it is provided in the `instance_id` field."
+          readOnly: true
           type: string
         state:
           description: Output only. State of the instance.
@@ -1234,15 +1241,18 @@ components:
             - CREATING
             - RUNNING
             - INACTIVE
+          readOnly: true
           type: string
       type: object
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest:
+      description: The request used for `ListInstances`.
       properties:
         parent:
-          description: "Resource name of the project. Format: `projects/[PROJECT_ID]`."
+          description: "Required. Resource name of the project. Format: `projects/[PROJECT_ID]`."
           type: string
       type: object
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse:
+      description: The response used for `ListInstances`.
       properties:
         instances:
           description: The list of instances in a given project.

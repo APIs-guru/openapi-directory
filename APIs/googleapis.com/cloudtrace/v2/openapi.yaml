@@ -13,17 +13,20 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Trace API
   version: v2
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://cloudtrace.googleapis.com/$discovery/rest?version=v2
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: cloudtrace
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/trace
 tags:
@@ -314,7 +317,7 @@ components:
           description: "For example: main binary, kernel modules, and dynamic libraries such as libc.so, sharedlib.so (up to 256 bytes)."
       type: object
     Span:
-      description: A span represents a single operation within a trace. Spans can be nested to form a trace tree. Often, a trace contains a root span that describes the end-to-end latency, and one or more subspans for its sub-operations. A trace can also contain multiple root spans, or none at all. Spans do not need to be contiguous. There might be gaps or overlaps between spans in a trace.
+      description: A span represents a single operation within a trace. Spans can be nested to form a trace tree. Often, a trace contains a root span that describes the end-to-end latency, and one or more subspans for its sub-operations. A trace can also contain multiple root spans, or none at all. Spans do not need to be contiguous—there might be gaps or overlaps between spans in a trace.
       properties:
         attributes:
           $ref: "#/components/schemas/Attributes"
@@ -500,3 +503,5 @@ components:
             https://www.googleapis.com/auth/trace.append: Write Trace data for a project or application
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

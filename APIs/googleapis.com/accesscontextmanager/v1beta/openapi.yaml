@@ -6,24 +6,22 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: An API for setting attribute based access control to requests to GCP services.
+  description: An API for setting attribute based access control to requests to Google Cloud services.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
   title: Access Context Manager API
   version: v1beta
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://accesscontextmanager.googleapis.com/$discovery/rest?version=v1beta
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: accesscontextmanager
 externalDocs:
@@ -760,5 +758,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

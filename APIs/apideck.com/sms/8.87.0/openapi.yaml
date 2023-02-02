@@ -1550,12 +1550,14 @@ components:
           title: Message Body
           type: string
         created_at:
+          description: The date and time when the object was created.
           example: 2020-09-30T07:43:32.000Z
           format: date-time
           readOnly: true
           title: Created at (timestamp)
           type: string
         created_by:
+          description: The user who created the object.
           example: "12345"
           nullable: true
           readOnly: true
@@ -1600,8 +1602,10 @@ components:
           title: From
           type: string
         id:
+          description: A unique identifier for an object.
           example: "12345"
           readOnly: true
+          title: ID
           type: string
         messaging_service_id:
           description: The ID of the Messaging Service used with the message. In case of Plivo this links to the Powerpack ID.
@@ -1699,6 +1703,7 @@ components:
           type: string
           x-apideck-enum-id: messages.type
         updated_at:
+          description: The date and time when the object was last updated.
           example: 2020-09-30T07:43:32.000Z
           format: date-time
           nullable: true
@@ -1706,9 +1711,11 @@ components:
           title: Updated at (timestamp)
           type: string
         updated_by:
+          description: The user who last updated the object.
           example: "12345"
           nullable: true
           readOnly: true
+          title: Updated by
           type: string
         webhook_url:
           description: Define a webhook to receive delivery notifications.
@@ -1958,8 +1965,10 @@ components:
     UnifiedId:
       properties:
         id:
+          description: The unique identifier of the resource
           example: "12345"
           readOnly: true
+          title: Id
           type: string
       required:
         - id

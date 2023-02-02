@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://documentai.googleapis.com/$discovery/rest?version=v1beta2
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: documentai
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/document-ai/docs/
 tags:
@@ -848,6 +849,20 @@ components:
       description: Response message for the enable processor method. Intentionally empty proto for adding fields in future.
       properties: {}
       type: object
+    GoogleCloudDocumentaiV1EvaluateProcessorVersionMetadata:
+      description: Metadata of the EvaluateProcessorVersion method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiV1EvaluateProcessorVersionResponse:
+      description: Metadata of the EvaluateProcessorVersion method.
+      properties:
+        evaluation:
+          description: The resource name of the created evaluation.
+          type: string
+      type: object
     GoogleCloudDocumentaiV1HumanReviewStatus:
       description: The status of human review on a processed document.
       properties:
@@ -904,6 +919,48 @@ components:
     GoogleCloudDocumentaiV1SetDefaultProcessorVersionResponse:
       description: Response message for set default processor version method.
       properties: {}
+      type: object
+    GoogleCloudDocumentaiV1TrainProcessorVersionMetadata:
+      description: The metadata that represents a processor version being created.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+        testDatasetValidation:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1TrainProcessorVersionMetadataDatasetValidation"
+          description: The test dataset validation information.
+        trainingDatasetValidation:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1TrainProcessorVersionMetadataDatasetValidation"
+          description: The training dataset validation information.
+      type: object
+    GoogleCloudDocumentaiV1TrainProcessorVersionMetadataDatasetValidation:
+      description: The dataset validation information. This includes any and all errors with documents and the dataset.
+      properties:
+        datasetErrorCount:
+          description: The total number of dataset errors.
+          format: int32
+          type: integer
+        datasetErrors:
+          description: Error information for the dataset as a whole. A maximum of 10 dataset errors will be returned. A single dataset error is terminal for training.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+        documentErrorCount:
+          description: The total number of document errors.
+          format: int32
+          type: integer
+        documentErrors:
+          description: Error information pertaining to specific documents. A maximum of 10 document errors will be returned. Any document with errors will not be used throughout training.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+      type: object
+    GoogleCloudDocumentaiV1TrainProcessorVersionResponse:
+      description: The response for the TrainProcessorVersion method.
+      properties:
+        processorVersion:
+          description: The resource name of the processor version produced by training.
+          type: string
       type: object
     GoogleCloudDocumentaiV1UndeployProcessorVersionMetadata:
       description: The long running operation metadata for the undeploy processor version method.
@@ -1537,6 +1594,7 @@ components:
             - OPERATION_TYPE_UNSPECIFIED
             - ADD
             - REMOVE
+            - UPDATE
             - REPLACE
             - EVAL_REQUESTED
             - EVAL_APPROVED
@@ -2443,6 +2501,7 @@ components:
             - OPERATION_TYPE_UNSPECIFIED
             - ADD
             - REMOVE
+            - UPDATE
             - REPLACE
             - EVAL_REQUESTED
             - EVAL_APPROVED

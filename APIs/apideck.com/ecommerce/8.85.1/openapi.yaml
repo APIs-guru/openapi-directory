@@ -1158,12 +1158,14 @@ components:
       type: object
       x-apideck-schema-id: CreateProductResponse
     CreatedAt:
+      description: The date and time when the object was created.
       example: 2020-09-30T07:43:32.000Z
       format: date-time
       readOnly: true
       title: Created at (timestamp)
       type: string
     CreatedBy:
+      description: The user who created the object.
       example: "12345"
       nullable: true
       readOnly: true
@@ -1908,12 +1910,13 @@ components:
         updated_at: medium
         updated_by: edge-case
     Description:
+      description: A description of the object.
       example: A description
       nullable: true
       title: Description
       type: string
     Division:
-      description: The division the user is currently in.
+      description: The division the person is currently in. Usually a collection of departments or teams or regions.
       example: Europe
       nullable: true
       title: Division
@@ -2630,11 +2633,13 @@ components:
         id: edge-case
         type: critical
     FirstName:
+      description: The first name of the person.
       example: Elon
       nullable: true
       title: First name
       type: string
     Gender:
+      description: The gender represents the gender identity of a person.
       enum:
         - male
         - female
@@ -2643,6 +2648,7 @@ components:
         - not_specified
       example: male
       nullable: true
+      title: Gender
       type: string
       x-apideck-enum-id: genders
     GetEcommerceCustomerResponse:
@@ -2942,8 +2948,10 @@ components:
       x-apideck-schema-id: GetStoresResponse
       x-graphql-type-name: EcommerceStoreList
     Id:
+      description: A unique identifier for an object.
       example: "12345"
       readOnly: true
+      title: ID
       type: string
     Language:
       description: language code according to ISO 639-1. For the United States - EN
@@ -2951,6 +2959,7 @@ components:
       nullable: true
       type: string
     LastName:
+      description: The last name of the person.
       example: Musk
       nullable: true
       title: Last name
@@ -3076,6 +3085,7 @@ components:
       type: object
       x-apideck-schema-id: Meta
     MiddleName:
+      description: Middle name of the person.
       example: D.
       nullable: true
       title: Middle name
@@ -3173,6 +3183,7 @@ components:
       type: object
       x-apideck-schema-id: PaymentRequired
     PaymentUnit:
+      description: Unit of measurement for employee compensation.
       enum:
         - hour
         - week
@@ -3180,6 +3191,7 @@ components:
         - year
         - paycheck
       example: year
+      title: Payment Unit
       type: string
       x-apideck-enum-id: payment_unit
     PhoneNumber:
@@ -3238,16 +3250,19 @@ components:
         number: critical
         type: critical
     PhotoUrl:
+      description: The URL of the photo of a person.
       example: https://unavatar.io/elon-musk
       nullable: true
       title: Photo URL
       type: string
     RowVersion:
+      description: A binary value used to detect updates to a object and prevent data conflicts. It is incremented each time an update is made to the object.
       example: 1-12345
       nullable: true
       title: Row version
       type: string
     Title:
+      description: The job title of the person.
       example: CEO
       nullable: true
       title: Job title
@@ -3348,8 +3363,10 @@ components:
     UnifiedId:
       properties:
         id:
+          description: The unique identifier of the resource
           example: "12345"
           readOnly: true
+          title: Id
           type: string
       required:
         - id
@@ -3484,6 +3501,7 @@ components:
       type: object
       x-apideck-schema-id: UpdateProductResponse
     UpdatedAt:
+      description: The date and time when the object was last updated.
       example: 2020-09-30T07:43:32.000Z
       format: date-time
       nullable: true
@@ -3491,9 +3509,11 @@ components:
       title: Updated at (timestamp)
       type: string
     UpdatedBy:
+      description: The user who last updated the object.
       example: "12345"
       nullable: true
       readOnly: true
+      title: Updated by
       type: string
     Website:
       additionalProperties: false

@@ -1025,9 +1025,11 @@ components:
         archived:
           $ref: "#/components/schemas/Archived"
         birthday:
+          description: The date of birth of the person.
           example: 2000-08-12
           format: date
           nullable: true
+          title: Birth Date
           type: string
         confidential:
           example: false
@@ -1065,6 +1067,7 @@ components:
             $ref: "#/components/schemas/Email"
           type: array
         first_name:
+          description: The first name of the person.
           example: Elon
           nullable: true
           title: First name
@@ -1095,11 +1098,13 @@ components:
         last_interaction_at:
           $ref: "#/components/schemas/LastInteractionAt"
         last_name:
+          description: The last name of the person.
           example: Musk
           nullable: true
           title: Last name
           type: string
         middle_name:
+          description: Middle name of the person.
           example: D.
           nullable: true
           title: Middle name
@@ -1115,6 +1120,7 @@ components:
             $ref: "#/components/schemas/PhoneNumber"
           type: array
         photo_url:
+          description: The URL of the photo of a person.
           example: https://unavatar.io/elon-musk
           nullable: true
           title: Photo URL
@@ -1459,12 +1465,14 @@ components:
       type: object
       x-apideck-schema-id: CreateJobResponse
     CreatedAt:
+      description: The date and time when the object was created.
       example: 2020-09-30T07:43:32.000Z
       format: date-time
       readOnly: true
       title: Created at (timestamp)
       type: string
     CreatedBy:
+      description: The user who created the object.
       example: "12345"
       nullable: true
       readOnly: true
@@ -2103,6 +2111,7 @@ components:
       title: Deleted
       type: boolean
     DeletedAt:
+      description: The time at which the object was deleted.
       example: 2020-09-30T07:43:32.000Z
       format: date-time
       nullable: true
@@ -2110,6 +2119,7 @@ components:
       title: Deleted at (timestamp)
       type: string
     DeletedBy:
+      description: The user who deleted the object.
       example: "12345"
       nullable: true
       readOnly: true
@@ -2161,6 +2171,7 @@ components:
         updated_at: medium
         updated_by: edge-case
     Description:
+      description: A description of the object.
       example: A description
       nullable: true
       title: Description
@@ -2345,10 +2356,13 @@ components:
       x-apideck-schema-id: GetJobsResponse
       x-graphql-type-name: JobList
     Id:
+      description: A unique identifier for an object.
       example: "12345"
       readOnly: true
+      title: ID
       type: string
     Initials:
+      description: The initials of the person, usually derived from their first, middle, and last names.
       example: EM
       nullable: true
       title: Initials
@@ -2436,7 +2450,7 @@ components:
           enum:
             - full-time
             - part-time
-            - intership
+            - internship
             - contractor
             - employee
             - freelance
@@ -2870,6 +2884,7 @@ components:
       title: Record URL
       type: string
     RowVersion:
+      description: A binary value used to detect updates to a object and prevent data conflicts. It is incremented each time an update is made to the object.
       example: 1-12345
       nullable: true
       title: Row version
@@ -2882,6 +2897,7 @@ components:
       type: array
       x-apideck-schema-id: Tags
     Title:
+      description: The job title of the person.
       example: CEO
       nullable: true
       title: Job title
@@ -2982,8 +2998,10 @@ components:
     UnifiedId:
       properties:
         id:
+          description: The unique identifier of the resource
           example: "12345"
           readOnly: true
+          title: Id
           type: string
       required:
         - id
@@ -3052,6 +3070,7 @@ components:
       type: object
       x-apideck-schema-id: UpdateJobResponse
     UpdatedAt:
+      description: The date and time when the object was last updated.
       example: 2020-09-30T07:43:32.000Z
       format: date-time
       nullable: true
@@ -3059,9 +3078,11 @@ components:
       title: Updated at (timestamp)
       type: string
     UpdatedBy:
+      description: The user who last updated the object.
       example: "12345"
       nullable: true
       readOnly: true
+      title: Updated by
       type: string
     Url:
       description: The url pointing to the job.

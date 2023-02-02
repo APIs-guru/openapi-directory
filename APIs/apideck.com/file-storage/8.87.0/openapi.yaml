@@ -2762,12 +2762,14 @@ components:
       type: object
       x-apideck-schema-id: CreateUploadSessionResponse
     CreatedAt:
+      description: The date and time when the object was created.
       example: 2020-09-30T07:43:32.000Z
       format: date-time
       readOnly: true
       title: Created at (timestamp)
       type: string
     CreatedBy:
+      description: The user who created the object.
       example: "12345"
       nullable: true
       readOnly: true
@@ -2972,6 +2974,7 @@ components:
       type: object
       x-apideck-schema-id: DeleteUploadSessionResponse
     Description:
+      description: A description of the object.
       example: A description
       nullable: true
       title: Description
@@ -3614,8 +3617,10 @@ components:
       x-apideck-schema-id: GetUploadSessionResponse
       x-graphql-type-name: UploadSession
     Id:
+      description: A unique identifier for an object.
       example: "12345"
       readOnly: true
+      title: ID
       type: string
     LinkedFolder:
       properties:
@@ -4043,8 +4048,10 @@ components:
     UnifiedId:
       properties:
         id:
+          description: The unique identifier of the resource
           example: "12345"
           readOnly: true
+          title: Id
           type: string
       required:
         - id
@@ -4295,6 +4302,7 @@ components:
       type: object
       x-apideck-schema-id: UpdateUploadSessionResponse
     UpdatedAt:
+      description: The date and time when the object was last updated.
       example: 2020-09-30T07:43:32.000Z
       format: date-time
       nullable: true
@@ -4302,9 +4310,11 @@ components:
       title: Updated at (timestamp)
       type: string
     UpdatedBy:
+      description: The user who last updated the object.
       example: "12345"
       nullable: true
       readOnly: true
+      title: Updated by
       type: string
     UploadSession:
       additionalProperties: false

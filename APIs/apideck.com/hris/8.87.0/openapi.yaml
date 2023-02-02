@@ -2821,11 +2821,13 @@ components:
         employer_contribution: high
         name: critical
     CompanyId:
+      description: The unique identifier of the company.
       example: "23456"
       nullable: true
       title: Company ID
       type: string
     CompanyName:
+      description: The name of the company.
       example: SpaceX
       nullable: true
       title: Company name
@@ -3001,12 +3003,14 @@ components:
         - data
       type: object
     CreatedAt:
+      description: The date and time when the object was created.
       example: 2020-09-30T07:43:32.000Z
       format: date-time
       readOnly: true
       title: Created at (timestamp)
       type: string
     CreatedBy:
+      description: The user who created the object.
       example: "12345"
       nullable: true
       readOnly: true
@@ -3798,12 +3802,13 @@ components:
         updated_at: medium
         updated_by: edge-case
     Description:
+      description: A description of the object.
       example: A description
       nullable: true
       title: Description
       type: string
     Division:
-      description: The division the user is currently in.
+      description: The division the person is currently in. Usually a collection of departments or teams or regions.
       example: Europe
       nullable: true
       title: Division
@@ -3847,9 +3852,11 @@ components:
             $ref: "#/components/schemas/Address"
           type: array
         birthday:
+          description: The date of birth of the person.
           example: 2000-08-12
           format: date
           nullable: true
+          title: Birth Date
           type: string
         company_id:
           $ref: "#/components/schemas/CompanyId"
@@ -3868,9 +3875,10 @@ components:
               currency:
                 $ref: "#/components/schemas/Currency"
               effective_date:
-                description: The effective date for this compensation.
+                description: The date on which a change to an employee's compensation takes effect.
                 example: 2020-08-12
                 readOnly: false
+                title: Effective date
                 type: string
               flsa_status:
                 description: The FLSA status for this compensation.
@@ -3888,6 +3896,7 @@ components:
                 description: The ID of the job to which the compensation belongs.
                 example: "12345"
                 readOnly: true
+                title: Job ID
                 type: string
               payment_unit:
                 $ref: "#/components/schemas/PaymentUnit"
@@ -3895,6 +3904,7 @@ components:
                 description: The amount paid per payment unit.
                 example: 72000
                 readOnly: false
+                title: Rate
                 type: number
             type: object
             x-apideck-weights:
@@ -3907,11 +3917,12 @@ components:
               rate: high
           type: array
         country_of_birth:
-          description: country code according to ISO 3166-1 alpha-2.
+          description: Country code according to ISO 3166-1 alpha-2.
           example: US
           maxLength: 2
           minLength: 2
           nullable: true
+          title: Country Code
           type: string
         created_at:
           $ref: "#/components/schemas/CreatedAt"
@@ -3922,9 +3933,11 @@ components:
             $ref: "#/components/schemas/CustomField"
           type: array
         deceased_on:
+          description: The date the person deceased.
           example: 2000-08-12
           format: date
           nullable: true
+          title: Deceased Date
           type: string
         deleted:
           example: true
@@ -3932,7 +3945,7 @@ components:
           title: Deleted
           type: boolean
         department:
-          description: The department the user is currently in.
+          description: The department the person is currently in.
           example: R&D
           nullable: true
           title: Department
@@ -3952,14 +3965,17 @@ components:
           title: Dietary preference
           type: string
         direct_reports:
+          description: The direct reports refer to the individuals who report directly to a person in the organizational hierarchy.
           example:
             - a0d636c6-43b3-4bde-8c70-85b707d992f4
             - a98lfd96-43b3-4bde-8c70-85b707d992e6
           items:
             type: string
           nullable: true
+          title: Direct reports
           type: array
         display_name:
+          description: The name used to display the employee, often a combination of their first and last names.
           example: Technoking
           nullable: true
           title: Display name
@@ -3987,22 +4003,26 @@ components:
         employment_role:
           properties:
             sub_type:
+              description: The work schedule of the employee.
               enum:
                 - full_time
                 - part_time
                 - hourly
               nullable: true
+              title: Employment sub type
               type: string
               x-apideck-enum-id: employees.employment_role.sub_type
             type:
+              description: The type of employment relationship the employee has with the organization.
               enum:
                 - contractor
                 - employee
                 - freelance
                 - temp
-                - intership
+                - internship
                 - other
               nullable: true
+              title: Employment type
               type: string
               x-apideck-enum-id: employees.employment_role.type
           type: object
@@ -4016,6 +4036,7 @@ components:
           title: Employee start date
           type: string
         employment_status:
+          description: The employment status of the employee, indicating whether they are currently employed, inactive, terminated, or in another status.
           enum:
             - active
             - inactive
@@ -4023,8 +4044,10 @@ components:
             - other
           example: active
           nullable: true
+          title: Employment status
           type: string
           x-apideck-enum-id: employees.employment_status
+          x-graphql-type-name: EmployeeEmploymentStatus
         first_name:
           $ref: "#/components/schemas/FirstName"
         food_allergies:
@@ -4041,6 +4064,7 @@ components:
         id:
           $ref: "#/components/schemas/Id"
         initials:
+          description: The initials of the person, usually derived from their first, middle, and last names.
           example: EM
           nullable: true
           title: Initials
@@ -4049,6 +4073,7 @@ components:
           items:
             properties:
               compensation_rate:
+                description: The rate of pay for the employee in their current job role.
                 example: 72000
                 title: The compensation rate of the job.
                 type: number
@@ -4057,19 +4082,23 @@ components:
               employee_id:
                 $ref: "#/components/schemas/Id"
               end_date:
+                description: The date on which the employee leaves or is expected to leave their current job role.
                 example: 2020-08-12
                 format: date
                 nullable: true
+                title: The end date of the job.
                 type: string
               hired_at:
+                description: The date on which the employee was hired by the organization
                 example: 2020-08-12
                 format: date
                 nullable: true
+                title: Hired date
                 type: string
               id:
                 $ref: "#/components/schemas/Id"
               is_primary:
-                description: Indicates whether this the employee's primary job
+                description: Indicates whether this the employee's primary job.
                 example: true
                 nullable: true
                 title: Primary
@@ -4079,14 +4108,17 @@ components:
               payment_unit:
                 $ref: "#/components/schemas/PaymentUnit"
               role:
+                description: The position and responsibilities of the person within the organization.
                 example: Sales
                 nullable: true
                 title: Job role
                 type: string
               start_date:
+                description: The date on which the employee starts working in their current job role.
                 example: 2020-08-12
                 format: date
                 nullable: true
+                title: The start date of the job.
                 type: string
               title:
                 $ref: "#/components/schemas/Title"
@@ -4112,7 +4144,7 @@ components:
         last_name:
           $ref: "#/components/schemas/LastName"
         leaving_reason:
-          description: The reason because the employment ended
+          description: The reason because the employment ended.
           enum:
             - dismissed
             - resigned
@@ -4125,9 +4157,11 @@ components:
         manager:
           properties:
             email:
+              description: The email address of the manager.
               example: elon@musk.com
               format: email
               nullable: true
+              title: Email address
               type: string
             first_name:
               $ref: "#/components/schemas/FirstName"
@@ -4136,9 +4170,10 @@ components:
             last_name:
               $ref: "#/components/schemas/LastName"
             name:
+              description: The name of the manager, often a combination of their first and last names.
               example: Elon Musk
               nullable: true
-              title: Name
+              title: Manager name
               type: string
           type: object
           x-apideck-weights:
@@ -4148,6 +4183,7 @@ components:
             last_name: medium
             name: medium
         marital_status:
+          description: The marital status of the employee.
           example: married
           nullable: true
           title: Marital status
@@ -4156,7 +4192,7 @@ components:
           $ref: "#/components/schemas/MiddleName"
         nationalities:
           items:
-            description: country code according to ISO 3166-1 alpha-2.
+            description: The nationality of the person, represented as a two-letter country code according to ISO 3166-1 alpha-2.
             example: US
             nullable: true
             title: Nationality
@@ -4190,6 +4226,7 @@ components:
               $ref: "#/components/schemas/LastName"
             middle_name:
               $ref: "#/components/schemas/MiddleName"
+          title: Person
           type: object
           x-apideck-schema-id: Person
           x-apideck-weights:
@@ -4208,11 +4245,13 @@ components:
         preferred_language:
           $ref: "#/components/schemas/Language"
         preferred_name:
+          description: The name the employee prefers to be addressed by, which may be different from their legal name.
           example: Elon Musk
           nullable: true
           title: Preferred name
           type: string
         pronouns:
+          description: The preferred pronouns of the person.
           example: she,her
           nullable: true
           title: Pronouns
@@ -4225,6 +4264,7 @@ components:
         row_version:
           $ref: "#/components/schemas/RowVersion"
         salutation:
+          description: A formal salutation for the person. For example, 'Mr', 'Mrs'
           example: Mr
           nullable: true
           type: string
@@ -4254,6 +4294,7 @@ components:
               url: critical
           type: array
         social_security_number:
+          description: A unique identifier assigned by the government. This field is considered sensitive information and may be subject to special security and privacy restrictions.
           example: "123456789"
           nullable: true
           title: Social Security Number
@@ -4289,20 +4330,23 @@ components:
           type: string
         team:
           additionalProperties: false
-          description: The team the user is currently in.
+          description: The team the person is currently in.
           nullable: true
           properties:
             id:
+              description: The unique identifier of the team.
               example: "1234"
               nullable: true
               type: string
             name:
+              description: The name of the team.
               example: Full Stack Engineers
               nullable: true
               type: string
           type: object
           x-apideck-schema-id: Team
         timezone:
+          description: The time zone related to the resource. The value is a string containing a standard time zone identifier, e.g. Europe/London.
           example: Europe/London
           nullable: true
           title: Timezone
@@ -4314,7 +4358,7 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
         works_remote:
-          description: Indicates whether the employee works remote
+          description: Indicates if the employee works from a remote location.
           example: true
           nullable: true
           title: Remote
@@ -4502,11 +4546,13 @@ components:
       x-apideck-schema-id: EmployeesSort
       x-graphql-type-name: EmployeesSort
     FirstName:
+      description: The first name of the person.
       example: Elon
       nullable: true
       title: First name
       type: string
     Gender:
+      description: The gender represents the gender identity of a person.
       enum:
         - male
         - female
@@ -4515,6 +4561,7 @@ components:
         - not_specified
       example: male
       nullable: true
+      title: Gender
       type: string
       x-apideck-enum-id: genders
     GetDepartmentResponse:
@@ -5157,6 +5204,7 @@ components:
           nullable: true
           type: string
           x-apideck-enum-id: employees.employment_status
+          x-graphql-type-name: JobEmploymentStatus
         end_date:
           example: 2020-08-12
           format: date
@@ -5201,8 +5249,10 @@ components:
       type: object
       x-apideck-schema-id: HrisJobs
     Id:
+      description: A unique identifier for an object.
       example: "12345"
       readOnly: true
+      title: ID
       type: string
     Language:
       description: language code according to ISO 639-1. For the United States - EN
@@ -5210,6 +5260,7 @@ components:
       nullable: true
       type: string
     LastName:
+      description: The last name of the person.
       example: Musk
       nullable: true
       title: Last name
@@ -5262,6 +5313,7 @@ components:
       type: object
       x-apideck-schema-id: Meta
     MiddleName:
+      description: Middle name of the person.
       example: D.
       nullable: true
       title: Middle name
@@ -5359,6 +5411,7 @@ components:
       type: object
       x-apideck-schema-id: PaymentRequired
     PaymentUnit:
+      description: Unit of measurement for employee compensation.
       enum:
         - hour
         - week
@@ -5366,6 +5419,7 @@ components:
         - year
         - paycheck
       example: year
+      title: Payment Unit
       type: string
       x-apideck-enum-id: payment_unit
     Payroll:
@@ -5542,11 +5596,13 @@ components:
         number: critical
         type: critical
     PhotoUrl:
+      description: The URL of the photo of a person.
       example: https://unavatar.io/elon-musk
       nullable: true
       title: Photo URL
       type: string
     RowVersion:
+      description: A binary value used to detect updates to a object and prevent data conflicts. It is incremented each time an update is made to the object.
       example: 1-12345
       nullable: true
       title: Row version
@@ -5900,6 +5956,7 @@ components:
       type: object
       x-graphql-type-name: TimeOffRequestsFilter
     Title:
+      description: The job title of the person.
       example: CEO
       nullable: true
       title: Job title
@@ -6000,8 +6057,10 @@ components:
     UnifiedId:
       properties:
         id:
+          description: The unique identifier of the resource
           example: "12345"
           readOnly: true
+          title: Id
           type: string
       required:
         - id
@@ -6168,6 +6227,7 @@ components:
         - data
       type: object
     UpdatedAt:
+      description: The date and time when the object was last updated.
       example: 2020-09-30T07:43:32.000Z
       format: date-time
       nullable: true
@@ -6175,9 +6235,11 @@ components:
       title: Updated at (timestamp)
       type: string
     UpdatedBy:
+      description: The user who last updated the object.
       example: "12345"
       nullable: true
       readOnly: true
+      title: Updated by
       type: string
     WebhookEvent:
       allOf:

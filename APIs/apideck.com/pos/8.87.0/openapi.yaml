@@ -4988,12 +4988,14 @@ components:
       type: object
       x-apideck-schema-id: CreateTenderResponse
     CreatedAt:
+      description: The date and time when the object was created.
       example: 2020-09-30T07:43:32.000Z
       format: date-time
       readOnly: true
       title: Created at (timestamp)
       type: string
     CreatedBy:
+      description: The user who created the object.
       example: "12345"
       nullable: true
       readOnly: true
@@ -6598,8 +6600,10 @@ components:
       title: Hidden
       type: boolean
     Id:
+      description: A unique identifier for an object.
       example: "12345"
       readOnly: true
+      title: ID
       type: string
     IdempotencyKey:
       description: A value you specify that uniquely identifies this request among requests you have sent.
@@ -8342,11 +8346,12 @@ components:
           maxLength: 100
           type: string
         country:
-          description: country code according to ISO 3166-1 alpha-2.
+          description: Country code according to ISO 3166-1 alpha-2.
           example: US
           maxLength: 2
           minLength: 2
           nullable: true
+          title: Country Code
           type: string
         fingerprint:
           description: |-
@@ -8659,6 +8664,7 @@ components:
       title: Quantity
       type: number
     RowVersion:
+      description: A binary value used to detect updates to a object and prevent data conflicts. It is incremented each time an update is made to the object.
       example: 1-12345
       nullable: true
       title: Row version
@@ -8885,8 +8891,10 @@ components:
     UnifiedId:
       properties:
         id:
+          description: The unique identifier of the resource
           example: "12345"
           readOnly: true
+          title: Id
           type: string
       required:
         - id
@@ -9224,6 +9232,7 @@ components:
       type: object
       x-apideck-schema-id: UpdateTenderResponse
     UpdatedAt:
+      description: The date and time when the object was last updated.
       example: 2020-09-30T07:43:32.000Z
       format: date-time
       nullable: true
@@ -9231,9 +9240,11 @@ components:
       title: Updated at (timestamp)
       type: string
     UpdatedBy:
+      description: The user who last updated the object.
       example: "12345"
       nullable: true
       readOnly: true
+      title: Updated by
       type: string
     Version:
       example: "230320320320"

@@ -2568,7 +2568,7 @@ components:
           $ref: "#/components/schemas/ReadReceiptsSettingsUpdatedMetadata"
         requiredMessageFeaturesMetadata:
           $ref: "#/components/schemas/RequiredMessageFeaturesMetadata"
-          description: Metadata that defines all of the required features that must be rendered in the message. Clients can use this to see whether they support the entire message, or show a fallback chip otherwise. See go/message-quoting-client-to-server for details. LINT.ThenChange( //depot/google3/java/com/google/apps/dynamite/v1/allshared/parser/AnnotationSanitizer.java, //depot/google3/java/com/google/apps/dynamite/v1/backend/action/common/SystemMessageHelper.java, //depot/google3/java/com/google/caribou/eli/mediation/chat/AnnotationTranslator.java )
+          description: Metadata that defines all of the required features that must be rendered in the message. Clients can use this to see whether they support the entire message, or show a fallback chip otherwise. See go/message-quoting-client-to-server for details. LINT.ThenChange( //depot/google3/java/com/google/apps/dynamite/v1/allshared/parser/AnnotationSanitizer.java, //depot/google3/java/com/google/apps/dynamite/v1/backend/action/common/SystemMessageHelper.java, //depot/google3/java/com/google/caribou/eli/mediation/chat/AnnotationConverter.java )
         roomUpdated:
           $ref: "#/components/schemas/RoomUpdatedMetadata"
         serverInvalidated:
@@ -2836,6 +2836,7 @@ components:
             - SCAN_SKIPPED_NO_MESSAGE
             - SCAN_SKIPPED_USER_ACKNOWLEDGED_WARNING
             - SCAN_SKIPPED_MESSAGE_FROM_UNSUPPORTED_ORIGIN
+            - SCAN_SKIPPED_MESSAGE_SENT_DURING_SPACE_MIGRATION
             - SCAN_RULE_EVALUATION_SKIPPED_NO_RULES_FOUND
             - SCAN_RULE_EVALUATION_SKIPPED_NO_APPLICABLE_RULES_FOR_ACTION_PARAMS
             - SCAN_RULE_EVALUATION_SKIPPED_NO_APPLICABLE_RULES_FOR_TRIGGER
@@ -5602,6 +5603,7 @@ components:
             - SCAN_SKIPPED_NO_MESSAGE
             - SCAN_SKIPPED_USER_ACKNOWLEDGED_WARNING
             - SCAN_SKIPPED_MESSAGE_FROM_UNSUPPORTED_ORIGIN
+            - SCAN_SKIPPED_MESSAGE_SENT_DURING_SPACE_MIGRATION
             - SCAN_RULE_EVALUATION_SKIPPED_NO_RULES_FOUND
             - SCAN_RULE_EVALUATION_SKIPPED_NO_APPLICABLE_RULES_FOR_ACTION_PARAMS
             - SCAN_RULE_EVALUATION_SKIPPED_NO_APPLICABLE_RULES_FOR_TRIGGER
@@ -5804,6 +5806,23 @@ components:
     DynamiteMessagesScoringInfo:
       description: This is the proto for holding message level scoring information. This data is used for logging in query-api server and for testing purposes.
       properties:
+        commonContactCount:
+          format: int64
+          type: string
+        commonCountToContactListCountRatio:
+          format: double
+          type: number
+        commonCountToMembershipCountRatio:
+          format: double
+          type: number
+        creatorGaiaId:
+          format: int64
+          type: string
+        creatorInSearcherContactList:
+          type: boolean
+        dasContactCount:
+          format: int64
+          type: string
         finalScore:
           format: double
           type: number
@@ -5819,6 +5838,12 @@ components:
         messageSenderAffinityScore:
           format: double
           type: number
+        spaceId:
+          format: int64
+          type: string
+        spaceMembershipCount:
+          format: int64
+          type: string
         topicalityScore:
           format: double
           type: number
@@ -8915,6 +8940,7 @@ components:
             - SCAN_SKIPPED_NO_MESSAGE
             - SCAN_SKIPPED_USER_ACKNOWLEDGED_WARNING
             - SCAN_SKIPPED_MESSAGE_FROM_UNSUPPORTED_ORIGIN
+            - SCAN_SKIPPED_MESSAGE_SENT_DURING_SPACE_MIGRATION
             - SCAN_RULE_EVALUATION_SKIPPED_NO_RULES_FOUND
             - SCAN_RULE_EVALUATION_SKIPPED_NO_APPLICABLE_RULES_FOR_ACTION_PARAMS
             - SCAN_RULE_EVALUATION_SKIPPED_NO_APPLICABLE_RULES_FOR_TRIGGER

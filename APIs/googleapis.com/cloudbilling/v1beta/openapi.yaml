@@ -553,6 +553,26 @@ components:
           description: 'The type of the guest accelerator cards. For example: "nvidia-tesla-t4".'
           type: string
       type: object
+    InterRegionEgress:
+      description: Egress traffic between two regions.
+      properties:
+        destinationRegion:
+          description: Which [region](https://cloud.google.com/compute/docs/regions-zones) the egress data goes to.
+          type: string
+        egressRate:
+          $ref: "#/components/schemas/Usage"
+          description: VM to VM egress usage. Expected units such as "GiBy/s, By/s, etc."
+        sourceRegion:
+          description: Which [region](https://cloud.google.com/compute/docs/regions-zones) the egress data comes from.
+          type: string
+      type: object
+    IntraRegionEgress:
+      description: Egress traffic within the same region. When source region and destination region are in the same zone, using the internal IP addresses, there isn't any egress charge.
+      properties:
+        egressRate:
+          $ref: "#/components/schemas/Usage"
+          description: VM to VM egress usage. Expected units such as "GiBy/s, By/s, etc."
+      type: object
     MachineType:
       description: Specification of machine series, memory, and number of vCPUs.
       properties:
@@ -836,6 +856,14 @@ components:
           format: int64
           type: string
       type: object
+    VmToVmEgressWorkload:
+      description: Specify VM to VM egress.
+      properties:
+        interRegionEgress:
+          $ref: "#/components/schemas/InterRegionEgress"
+        intraRegionEgress:
+          $ref: "#/components/schemas/IntraRegionEgress"
+      type: object
     Workload:
       description: Specifies usage on a single Google Cloud product over a time frame. Each Google Cloud product has its own message, containing specific product configuration parameters of the product usage amounts along each dimension in which the product is billed.
       properties:
@@ -869,6 +897,9 @@ components:
         standardTierEgressWorkload:
           $ref: "#/components/schemas/StandardTierEgressWorkload"
           description: Usage on Standard Tier Internet Egress.
+        vmToVmEgressWorkload:
+          $ref: "#/components/schemas/VmToVmEgressWorkload"
+          description: Usage on Vm to Vm Egress.
       type: object
     WorkloadCostEstimate:
       description: Estimated cost for a workload.
