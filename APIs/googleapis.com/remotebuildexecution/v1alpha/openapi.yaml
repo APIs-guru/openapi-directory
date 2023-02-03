@@ -225,16 +225,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Required. ID of the created instance. A valid `instance_id` must: be 6-50 characters long, contain only lowercase letters, digits, hyphens and underscores, start with a lowercase letter, and end with a lowercase letter or a digit."
-          in: query
-          name: instanceId
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance"
+              $ref: "#/components/schemas/GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest"
       responses:
         "200":
           content:

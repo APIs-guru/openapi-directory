@@ -845,9 +845,29 @@ components:
       schema:
         type: string
   schemas:
+    AcceleratorConfig:
+      description: A TPU accelerator configuration.
+      properties:
+        topology:
+          description: Required. Topology of TPU in chips.
+          type: string
+        type:
+          description: Required. Type of TPU.
+          enum:
+            - TYPE_UNSPECIFIED
+            - V2
+            - V3
+            - V4
+          type: string
+      type: object
     AcceleratorType:
       description: A accelerator type that a Node can be configured with.
       properties:
+        acceleratorConfigs:
+          description: The accelerator config.
+          items:
+            $ref: "#/components/schemas/AcceleratorConfig"
+          type: array
         name:
           description: The resource name.
           type: string
@@ -1143,6 +1163,9 @@ components:
     Node:
       description: A TPU instance.
       properties:
+        acceleratorConfig:
+          $ref: "#/components/schemas/AcceleratorConfig"
+          description: The AccleratorConfig for the TPU Node.
         acceleratorType:
           description: The type of hardware accelerators associated with this node.
           type: string
