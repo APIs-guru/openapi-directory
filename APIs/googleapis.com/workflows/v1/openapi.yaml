@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://workflows.googleapis.com/$discovery/rest?version=v1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: workflows
 externalDocs:
@@ -62,6 +62,11 @@ paths:
           in: path
           name: name
           required: true
+          schema:
+            type: string
+        - description: Optional. Optional. The revision of the workflow to retrieve. If the revision_id is empty, the latest revision is retrieved. The format is "000001-a4d", where the first 6 characters define the zero-padded decimal revision number. They are followed by a hyphen and 3 hexadecimal characters. (go/wf_adr_clh_1)
+          in: query
+          name: revisionId
           schema:
             type: string
       responses:

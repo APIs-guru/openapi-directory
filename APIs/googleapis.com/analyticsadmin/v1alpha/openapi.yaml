@@ -626,6 +626,262 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
+  "/v1alpha/{parent}/accessBindings":
+    get:
+      description: Lists all access bindings on an account or property.
+      operationId: analyticsadmin.properties.accessBindings.list
+      parameters:
+        - description: "Required. Formats: - accounts/{account} - properties/{property}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of access bindings to return. The service may return fewer than this value. If unspecified, at most 200 access bindings will be returned. The maximum value is 500; values above 500 will be coerced to 500.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListAccessBindings` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListAccessBindings` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaListAccessBindingsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.manage.users
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.manage.users
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.manage.users.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.manage.users.readonly
+      tags:
+        - properties
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates an access binding on an account or property.
+      operationId: analyticsadmin.properties.accessBindings.create
+      parameters:
+        - description: "Required. Formats: - accounts/{account} - properties/{property}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAccessBinding"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAccessBinding"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.manage.users
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.manage.users
+      tags:
+        - properties
+  "/v1alpha/{parent}/accessBindings:batchCreate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates information about multiple access bindings to an account or property. This method is transactional. If any AccessBinding cannot be created, none of the AccessBindings will be created.
+      operationId: analyticsadmin.properties.accessBindings.batchCreate
+      parameters:
+        - description: "Required. The account or property that owns the access bindings. The parent field in the CreateAccessBindingRequest messages must either be empty or match this field. Formats: - accounts/{account} - properties/{property}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaBatchCreateAccessBindingsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaBatchCreateAccessBindingsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.manage.users
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.manage.users
+      tags:
+        - properties
+  "/v1alpha/{parent}/accessBindings:batchDelete":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Deletes information about multiple users' links to an account or property.
+      operationId: analyticsadmin.properties.accessBindings.batchDelete
+      parameters:
+        - description: "Required. The account or property that owns the access bindings. The parent field in the DeleteAccessBindingRequest messages must either be empty or match this field. Formats: - accounts/{account} - properties/{property}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaBatchDeleteAccessBindingsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleProtobufEmpty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.manage.users
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.manage.users
+      tags:
+        - properties
+  "/v1alpha/{parent}/accessBindings:batchGet":
+    get:
+      description: Gets information about multiple access bindings to an account or property.
+      operationId: analyticsadmin.properties.accessBindings.batchGet
+      parameters:
+        - description: "Required. The account or property that owns the access bindings. The parent of all provided values for the 'names' field must match this field. Formats: - accounts/{account} - properties/{property}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Required. The names of the access bindings to retrieve. A maximum of 1000 access bindings can be retrieved in a batch. Formats: - accounts/{account}/accessBindings/{accessBinding} - properties/{property}/accessBindings/{accessBinding}"
+          explode: true
+          in: query
+          name: names
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaBatchGetAccessBindingsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.manage.users
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.manage.users
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.manage.users.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.manage.users.readonly
+      tags:
+        - properties
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1alpha/{parent}/accessBindings:batchUpdate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Updates information about multiple access bindings to an account or property.
+      operationId: analyticsadmin.properties.accessBindings.batchUpdate
+      parameters:
+        - description: "Required. The account or property that owns the access bindings. The parent field in the UpdateAccessBindingRequest messages must either be empty or match this field. Formats: - accounts/{account} - properties/{property}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaBatchUpdateAccessBindingsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaBatchUpdateAccessBindingsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.manage.users
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.manage.users
+      tags:
+        - properties
   "/v1alpha/{parent}/audiences":
     get:
       description: Lists Audiences on a property. Audiences created before 2020 may not be supported. Default audiences will not show filter definitions.
@@ -1992,6 +2248,22 @@ components:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaNumericValue"
           description: Ends with this number.
       type: object
+    GoogleAnalyticsAdminV1alphaAccessBinding:
+      description: A binding of a user to a set of roles.
+      properties:
+        name:
+          description: 'Output only. Resource name of this binding. Format: accounts/{account}/accessBindings/{access_binding} or properties/{property}/accessBindings/{access_binding} Example: "accounts/100/accessBindings/200"'
+          readOnly: true
+          type: string
+        roles:
+          description: "A list of roles for to grant to the parent resource. Valid values: predefinedRoles/viewer predefinedRoles/analyst predefinedRoles/editor predefinedRoles/admin predefinedRoles/no-cost-data predefinedRoles/no-revenue-data For users, if an empty list of roles is set, this AccessBinding will be deleted."
+          items:
+            type: string
+          type: array
+        user:
+          description: 'If set, the email address of the user to set roles for. Format: "someuser@gmail.com"'
+          type: string
+      type: object
     GoogleAnalyticsAdminV1alphaAccessDateRange:
       description: "A contiguous range of days: startDate, startDate + 1, ..., endDate."
       properties:
@@ -2635,6 +2907,24 @@ components:
             $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAuditUserLink"
           type: array
       type: object
+    GoogleAnalyticsAdminV1alphaBatchCreateAccessBindingsRequest:
+      description: Request message for BatchCreateAccessBindings RPC.
+      properties:
+        requests:
+          description: Required. The requests specifying the access bindings to create. A maximum of 1000 access bindings can be created in a batch.
+          items:
+            $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaCreateAccessBindingRequest"
+          type: array
+      type: object
+    GoogleAnalyticsAdminV1alphaBatchCreateAccessBindingsResponse:
+      description: Response message for BatchCreateAccessBindings RPC.
+      properties:
+        accessBindings:
+          description: The access bindings created.
+          items:
+            $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAccessBinding"
+          type: array
+      type: object
     GoogleAnalyticsAdminV1alphaBatchCreateUserLinksRequest:
       description: Request message for BatchCreateUserLinks RPC.
       properties:
@@ -2656,6 +2946,15 @@ components:
             $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaUserLink"
           type: array
       type: object
+    GoogleAnalyticsAdminV1alphaBatchDeleteAccessBindingsRequest:
+      description: Request message for BatchDeleteAccessBindings RPC.
+      properties:
+        requests:
+          description: Required. The requests specifying the access bindings to delete. A maximum of 1000 access bindings can be deleted in a batch.
+          items:
+            $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaDeleteAccessBindingRequest"
+          type: array
+      type: object
     GoogleAnalyticsAdminV1alphaBatchDeleteUserLinksRequest:
       description: Request message for BatchDeleteUserLinks RPC.
       properties:
@@ -2665,6 +2964,15 @@ components:
             $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaDeleteUserLinkRequest"
           type: array
       type: object
+    GoogleAnalyticsAdminV1alphaBatchGetAccessBindingsResponse:
+      description: Response message for BatchGetAccessBindings RPC.
+      properties:
+        accessBindings:
+          description: The requested access bindings.
+          items:
+            $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAccessBinding"
+          type: array
+      type: object
     GoogleAnalyticsAdminV1alphaBatchGetUserLinksResponse:
       description: Response message for BatchGetUserLinks RPC.
       properties:
@@ -2672,6 +2980,24 @@ components:
           description: The requested user links.
           items:
             $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaUserLink"
+          type: array
+      type: object
+    GoogleAnalyticsAdminV1alphaBatchUpdateAccessBindingsRequest:
+      description: Request message for BatchUpdateAccessBindings RPC.
+      properties:
+        requests:
+          description: Required. The requests specifying the access bindings to update. A maximum of 1000 access bindings can be updated in a batch.
+          items:
+            $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaUpdateAccessBindingRequest"
+          type: array
+      type: object
+    GoogleAnalyticsAdminV1alphaBatchUpdateAccessBindingsResponse:
+      description: Response message for BatchUpdateAccessBindings RPC.
+      properties:
+        accessBindings:
+          description: The access bindings updated.
+          items:
+            $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAccessBinding"
           type: array
       type: object
     GoogleAnalyticsAdminV1alphaBatchUpdateUserLinksRequest:
@@ -2859,6 +3185,16 @@ components:
         name:
           description: "Output only. Resource name of this conversion event. Format: properties/{property}/conversionEvents/{conversion_event}"
           readOnly: true
+          type: string
+      type: object
+    GoogleAnalyticsAdminV1alphaCreateAccessBindingRequest:
+      description: Request message for CreateAccessBinding RPC.
+      properties:
+        accessBinding:
+          $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAccessBinding"
+          description: Required. The access binding to create.
+        parent:
+          description: "Required. Formats: - accounts/{account} - properties/{property}"
           type: string
       type: object
     GoogleAnalyticsAdminV1alphaCreateUserLinkRequest:
@@ -3065,6 +3401,13 @@ components:
         measurementId:
           description: 'Output only. Analytics "Measurement ID", without the "G-" prefix. Example: "G-1A2BCD345E" would just be "1A2BCD345E"'
           readOnly: true
+          type: string
+      type: object
+    GoogleAnalyticsAdminV1alphaDeleteAccessBindingRequest:
+      description: Request message for DeleteAccessBinding RPC.
+      properties:
+        name:
+          description: "Required. Formats: - accounts/{account}/accessBindings/{accessBinding} - properties/{property}/accessBindings/{accessBinding}"
           type: string
       type: object
     GoogleAnalyticsAdminV1alphaDeleteUserLinkRequest:
@@ -3347,6 +3690,18 @@ components:
         requestorEmail:
           description: Output only. The email address of the user that proposed this linkage.
           readOnly: true
+          type: string
+      type: object
+    GoogleAnalyticsAdminV1alphaListAccessBindingsResponse:
+      description: Response message for ListAccessBindings RPC.
+      properties:
+        accessBindings:
+          description: List of AccessBindings. These will be ordered stably, but in an arbitrary order.
+          items:
+            $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAccessBinding"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
       type: object
     GoogleAnalyticsAdminV1alphaListAccountSummariesResponse:
@@ -3879,6 +4234,13 @@ components:
     GoogleAnalyticsAdminV1alphaSetAutomatedGa4ConfigurationOptOutResponse:
       description: Response message for setting the opt out status for the automated GA4 setup process.
       properties: {}
+      type: object
+    GoogleAnalyticsAdminV1alphaUpdateAccessBindingRequest:
+      description: Request message for UpdateAccessBinding RPC.
+      properties:
+        accessBinding:
+          $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAccessBinding"
+          description: Required. The access binding to update.
       type: object
     GoogleAnalyticsAdminV1alphaUpdateUserLinkRequest:
       description: Request message for UpdateUserLink RPC.

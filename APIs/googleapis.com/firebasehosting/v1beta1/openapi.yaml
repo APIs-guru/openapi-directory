@@ -63,10 +63,10 @@ paths:
       tags:
         - sites
     get:
-      description: Gets a domain mapping on the specified site.
-      operationId: firebasehosting.sites.domains.get
+      description: Get the specified version that has been created for the specified site. This can include versions that were created for the default `live` channel or for any active preview channels for the specified site.
+      operationId: firebasehosting.sites.versions.get
       parameters:
-        - description: Required. The name of the domain configuration to get.
+        - description: "Required. The fully-qualified resource name for the version, in the format: sites/SITE_ID/versions/VERSION_ID"
           in: path
           name: name
           required: true
@@ -77,7 +77,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Domain"
+                $ref: "#/components/schemas/Version"
           description: Successful response
       security:
         - Oauth2:

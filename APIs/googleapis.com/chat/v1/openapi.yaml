@@ -1569,9 +1569,9 @@ components:
           type: string
         member:
           $ref: "#/components/schemas/User"
-          description: "A Google Chat user or app. Format: `users/{user}` or `users/app` When `users/{user}`, represents a [person](https://developers.google.com/people/api/rest/v1/people) in the People API or a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. When `users/app`, represents a Chat app creating membership for itself."
+          description: The Google Chat user or app the membership corresponds to.
         name:
-          description: "Resource name of the membership. Format: spaces/{space}/members/{member}"
+          description: "Resource name of the membership, assigned by the server. Format: spaces/{space}/members/{member}"
           type: string
         role:
           description: Output only. User's role within a Chat space, which determines their permitted actions in the space.
@@ -1731,7 +1731,7 @@ components:
       description: A space in Google Chat. Spaces are conversations between two or more users or 1:1 messages between a user and a Chat app.
       properties:
         displayName:
-          description: The space's display name. Required when [creating a space](https://developers.google.com/chat/api/reference/rest/v1/spaces/create). For direct messages, this field may be empty.
+          description: The space's display name. Required when [creating a space](https://developers.google.com/chat/api/reference/rest/v1/spaces/create). For direct messages, this field may be empty. Supports up to 128 characters.
           type: string
         name:
           description: "Resource name of the space. Format: spaces/{space}"
@@ -1768,10 +1768,10 @@ components:
       description: Details about the space including description and rules.
       properties:
         description:
-          description: Optional. A description of the space. It could describe the space's discussion topic, functional purpose, or participants.
+          description: Optional. A description of the space. It could describe the space's discussion topic, functional purpose, or participants. Supports up to 150 characters.
           type: string
         guidelines:
-          description: Optional. The space's rules, expectations, and etiquette.
+          description: Optional. The space's rules, expectations, and etiquette. Supports up to 5,000 characters.
           type: string
       type: object
     Status:
@@ -1865,7 +1865,7 @@ components:
           readOnly: true
           type: boolean
         name:
-          description: "Resource name for a Google Chat user. For human users, represents a person in the People API or a user in the Admin SDK Directory API. Format: `users/{user}`"
+          description: "Resource name for a Google Chat user. Format: `users/{user}`. `users/app` can be used as an alias for the calling app bot user. For human users, `{user}` is the same user identifier as: - the `{person_id`} for the [Person](https://developers.google.com/people/api/rest/v1/people) in the People API, where the Person `resource_name` is `people/{person_id}`. For example, `users/123456789` in Chat API represents the same person as `people/123456789` in People API. - the `id` for a [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API."
           type: string
         type:
           description: User type.
