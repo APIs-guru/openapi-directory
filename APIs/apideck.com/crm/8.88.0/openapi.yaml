@@ -276,7 +276,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 8.87.0
+  version: 8.88.0
   x-apideck-api: crm
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -3130,6 +3130,9 @@ paths:
       tags:
         - Users
       x-apideck-api: crm
+      x-apideck-gotchas:
+        - connector: hubspot
+          description: HubSpot owners are mapped to CRM users in Apideck. HubSpot owners and HubSpot users (people who can log into HubSpot) aren’t necessarily the same, as you may have owners created through an integration.
       x-codeSamples:
         - label: Node
           lang: TypeScript

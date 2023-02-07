@@ -245,6 +245,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{name}:runPipeline":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Run a predefined pipeline.
+      operationId: contentwarehouse.projects.locations.runPipeline
+      parameters:
+        - description: "Required. The resource name which owns the resources of the pipeline. Format: projects/{project_number}/locations/{location}."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudContentwarehouseV1RunPipelineRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{parent}/documentLinks":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2445,6 +2487,9 @@ components:
             - SOJI_AFFINITY
             - PLAY_MOVIES_ANDROID_AFFINITY
             - DATA_STUDIO_DOMAIN_ONLY_AFFINITY
+            - MONOSPACE_AFFINITY
+            - MY_ACCOUNT_AFFINITY
+            - NUDGEIT_CAMPAIGN_MANAGER_AFFINITY
           type: string
         containerId:
           description: The ID of the container
@@ -2555,10 +2600,12 @@ components:
       properties:
         ageDisableGracePeriod:
           $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiBirthdayAgeDisableGracePeriod"
+          description: Only supported for PROFILE/DOMAIN_PROFILE/ACCOUNT container.
         birthdayDecoration:
           $ref: "#/components/schemas/SocialGraphApiProtoBirthdayDecoration"
-          description: Whether the user has opted in to display their birthday via photo decorations.
+          description: Whether the user has opted in to display their birthday via photo decorations. Only supported for PROFILE/DOMAIN_PROFILE container.
         birthdayResolution:
+          description: Only supported for PROFILE/DOMAIN_PROFILE/ACCOUNT container.
           enum:
             - FULL
             - MONTH_AND_APPROXIMATED_YEAR
@@ -2579,7 +2626,7 @@ components:
           $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiPersonFieldMetadata"
         prompt:
           $ref: "#/components/schemas/SocialGraphApiProtoPrompt"
-          description: People Prompts settings for contact birthday data.
+          description: People Prompts settings for contact birthday data. Only supported for CONTACT container.
         value:
           description: Actual value entered. Allows unstructured values.
           type: string
@@ -5917,12 +5964,16 @@ components:
               - ADAPTIVE_BRIGHTNESS
               - ADAPTIVE_CHARGING
               - ADAPTIVE_CONNECTIVITY
+              - ADAPTIVE_SOUND
+              - ADD_ACCOUNT
               - ADD_BLUETOOTH_DEVICE
               - ADD_DEVICE
               - ADD_FINGERPRINT
+              - ADS_TRACKING
               - AIRPLANE_MODE
               - ALARM_VOLUME
               - ALARM_SOUND
+              - ALLOW_MULTIPLE_USERS
               - AMBIENT_DISPLAY_ALWAYS_ON
               - AMBIENT_DISPLAY_NEW_NOTIFICATION
               - ANDROID_AUTO
@@ -5958,6 +6009,7 @@ components:
               - CALL_VOLUME
               - CAMERA_DOUBLE_TWIST
               - CAST
+              - CAR_CRASH_DETECTION
               - COLOR_INVERSION
               - COLOR_CORRECTION
               - CONVERSATIONS
@@ -5976,6 +6028,7 @@ components:
               - DEFAULT_NOTIFICATION_SOUND
               - DEFAULT_APPS
               - DEVELOPER_OPTIONS
+              - DEVICE_ASSISTANT_APP
               - DEVICE_NAME
               - DISPLAY_OVER_OTHER_APPS
               - DISPLAY_SIZE
@@ -5986,8 +6039,10 @@ components:
               - DO_NOT_DISTURB_SCHEDULES
               - DOUBLE_TAP_CHECK_PHONE
               - DRIVING_MODE
+              - EARTHQUAKE_ALERTS
               - EMERGENCY
               - EMERGENCY_ALERTS
+              - EMERGENCY_CONTACTS
               - EMERGENCY_INFORMATION
               - ETHERNET_TETHERING
               - EXTRA_DIM
@@ -5998,6 +6053,7 @@ components:
               - FOCUS_MODE
               - FONT_SIZE
               - FREE_UP_SPACE
+              - FINGERPRINT_MANAGER
               - GESTURES
               - HAPTIC_FEEDBACK_VIBRATION
               - HARD_KEYBOARD
@@ -6011,6 +6067,7 @@ components:
               - JUMP_TO_CAMERA
               - KEYBOARD_SHORTCUTS
               - LIFT_CHECK_PHONE
+              - LIVE_TRANSLATE
               - LOCATION
               - LOCATION_HISTORY
               - LOCATION_BLUETOOTH_SCANNING
@@ -6077,6 +6134,8 @@ components:
               - SYSTEM_UPDATE
               - SYSTEM_UPDATES
               - SYSTEM_NAVIGATION
+              - SYSTEM_NAVIGATION_GESTURES
+              - SYSTEM_NAVIGATION_BUTTONS
               - TALKBACK_PASSWORDS
               - TEXT_TO_SPEECH
               - TIME_ZONE
@@ -7139,7 +7198,14 @@ components:
             - CHROMECAST_MANHATTAN
             - CLOUD_DEVICE
             - CROS
+            - FITBIT_OS
+            - FITBIT_OS_WATCH
+            - FITBIT_OS_WATCH_ANDROID
+            - FITBIT_OS_WATCH_IOS
             - GOOGLE_HOME
+            - HEADPHONE
+            - HEADPHONE_ANDROID
+            - HEADPHONE_IOS
             - IOPA
             - IOS
             - IOS_SCREENLESS
@@ -7153,12 +7219,17 @@ components:
             - PIXEL5
             - PIXEL6
             - PIXEL7
+            - PIXEL_BUDS
+            - PIXEL_WATCH
             - SCREENLESS
             - SMART_DISPLAY
             - SPEAKER
             - TABLET
             - TELEPHONE
             - THING
+            - WATCH
+            - WEAR_OS
+            - WEAR_OS_WATCH
           type: string
         surfaceTypeString:
           description: The device's surface type. This is the string version of the assistant.api.core_types.SurfaceType enum. The server should not use this field, rather it should use the SurfaceType value derived from this string.
@@ -10427,6 +10498,50 @@ components:
             - DEEP_NLU
           type: string
       type: object
+    AssistantGroundingRankerAssistantInteractionFeatures:
+      properties:
+        timeDecayed14dHalfLife:
+          format: float
+          type: number
+        timeDecayed1dHalfLife:
+          description: Frequency features.
+          format: float
+          type: number
+        timeDecayed7dHalfLife:
+          format: float
+          type: number
+        timeDecayedAccepted14dHalfLife:
+          format: float
+          type: number
+        timeDecayedAuis14dHalfLife:
+          format: float
+          type: number
+        timeDecayedCanceled14dHalfLife:
+          format: float
+          type: number
+        timeDecayedDeclined14dHalfLife:
+          format: float
+          type: number
+        timeSinceLastButOneCanceledActionSecs:
+          format: float
+          type: number
+        timeSinceLastButOneCompletedActionSecs:
+          format: float
+          type: number
+        timeSinceLastButTwoCanceledActionSecs:
+          format: float
+          type: number
+        timeSinceLastButTwoCompletedActionSecs:
+          format: float
+          type: number
+        timeSinceLastCanceledActionSecs:
+          format: float
+          type: number
+        timeSinceLastCompletedActionSecs:
+          description: Recency features.
+          format: float
+          type: number
+      type: object
     AssistantGroundingRankerContactGroundingProviderFeatures:
       description: "Features to be passed from Contact GP to HGR. Next ID: 13"
       properties:
@@ -10507,6 +10622,19 @@ components:
             - NEURAL_CONTACT_MATCH_DARK_LAUNCH
           type: string
       type: object
+    AssistantGroundingRankerDeviceContactAffinityFeatures:
+      description: Device contact affinity from android call logs.
+      properties:
+        aggregateAffinity:
+          format: float
+          type: number
+        callAffinity:
+          format: float
+          type: number
+        messageAffinity:
+          format: float
+          type: number
+      type: object
     AssistantGroundingRankerGroundingProviderFeatures:
       description: "Next ID: 4"
       properties:
@@ -10516,6 +10644,39 @@ components:
           $ref: "#/components/schemas/AssistantGroundingRankerMediaGroundingProviderFeatures"
         providerGroundingProviderFeatures:
           $ref: "#/components/schemas/AssistantGroundingRankerProviderGroundingProviderFeatures"
+      type: object
+    AssistantGroundingRankerLaaFeatures:
+      properties:
+        bindingSet:
+          $ref: "#/components/schemas/AssistantGroundingRankerLaaFeaturesBindingSet"
+        communicationEndpoint:
+          $ref: "#/components/schemas/AssistantGroundingRankerLaaFeaturesCommunicationEndpoint"
+        contact:
+          $ref: "#/components/schemas/AssistantGroundingRankerLaaFeaturesContact"
+        provider:
+          $ref: "#/components/schemas/AssistantGroundingRankerLaaFeaturesProvider"
+      type: object
+    AssistantGroundingRankerLaaFeaturesBindingSet:
+      properties:
+        assistantInteractionFeatures:
+          $ref: "#/components/schemas/AssistantGroundingRankerAssistantInteractionFeatures"
+      type: object
+    AssistantGroundingRankerLaaFeaturesCommunicationEndpoint:
+      properties:
+        assistantInteractionFeatures:
+          $ref: "#/components/schemas/AssistantGroundingRankerAssistantInteractionFeatures"
+      type: object
+    AssistantGroundingRankerLaaFeaturesContact:
+      properties:
+        assistantInteractionFeatures:
+          $ref: "#/components/schemas/AssistantGroundingRankerAssistantInteractionFeatures"
+        deviceContactAffinityFeatures:
+          $ref: "#/components/schemas/AssistantGroundingRankerDeviceContactAffinityFeatures"
+      type: object
+    AssistantGroundingRankerLaaFeaturesProvider:
+      properties:
+        assistantInteractionFeatures:
+          $ref: "#/components/schemas/AssistantGroundingRankerAssistantInteractionFeatures"
       type: object
     AssistantGroundingRankerMediaGroundingProviderFeatures:
       description: "Features to be passed from Media GP to HGR. Next ID: 6"
@@ -11041,6 +11202,7 @@ components:
             - PHOTO
             - TV_SHOW_EPISODE
             - MUSIC_GENRE
+            - MUSIC_STATION
             - AUDIO_BOOK
             - CHAPTER
             - RADIO_STATION
@@ -11053,6 +11215,7 @@ components:
             - TV_SHOW
             - NEWS
             - NARRATED_WEB
+            - NEWS_CALL_TO_ACTION
             - AUDIO_STORY
             - PODCAST_SERIES
             - PODCAST_EPISODE
@@ -11583,8 +11746,9 @@ components:
           enum:
             - UNKNOWN_REASON
             - LOCAL_FALLBACK
-            - STOP_PLAYBACK_ON_PAUSED_PHONE
+            - MANUAL_DEFINED_REASON
             - SINGLE_NEARBY_DEVICE
+            - PERSONAL_RESPONSE_BIT_OPTOUT_ON_LOCKED_PHONE
           type: string
         resultConfidenceLevel:
           enum:
@@ -11594,7 +11758,7 @@ components:
           type: string
       type: object
     AssistantPrefulfillmentRankerPrefulfillmentSignals:
-      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 36"
+      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 39"
       properties:
         bindingSetAuis:
           description: Assistant User Interaction Score for binding set.
@@ -11608,6 +11772,9 @@ components:
           description: A parsing score that is independently calibrated by each parser/IG.
           format: double
           type: number
+        deepMediaDominant:
+          description: Whether the intent is dominant according to NSP deep-media.
+          type: boolean
         dominant:
           description: Indicates interpretation dominance predicted by KScorer
           type: boolean
@@ -11615,6 +11782,9 @@ components:
           description: 'The total effective length of the spans for the arguments used to construct the parse. May include vertical specific adjustments. Eg: For the query [delete my 7 p.m. alarm called chicken] and intent Delete_alarm(alarm_object=RD(category=AlarmObject( label="chicken", trigger_time_datetime=<< 7 PM >>))), the effective argument span is "7 p.m." + "chicken" (total length of 13).'
           format: float
           type: number
+        fulfillableDominantMedia:
+          description: Whether this is a fulfillable, dominant Media intent.
+          type: boolean
         groundabilityScore:
           description: Grounding Signals. Score indicating how grounded the intent is, populated by the Grounding Box.
           format: double
@@ -11644,6 +11814,9 @@ components:
           description: The rank order of the interpretation as determined by kscorer. The kscorer-determined dominant interpretation, if any, gets a rank of 0. The remaining N interpretations get a rank of 1 through N.
           format: int32
           type: integer
+        laaFeatures:
+          $ref: "#/components/schemas/AssistantGroundingRankerLaaFeatures"
+          description: "Learn and adapt(go/laa) related features. Design doc: go/laa-profile-signal-for-grounding."
         maskCandidateLevelFeatures:
           description: This feature is always false / no-op in serving time. In training time, this feature may be set true on specific examples for weighted training where when this signal is true, only cross-intent level features are used for training and other candidate level features are masked (set as missing).
           type: boolean
@@ -12604,6 +12777,7 @@ components:
             - CCAI_DEMO
             - DIALOGFLOW_DELEGATION
             - AD_LEAD_VERIFICATION
+            - GET_HUMAN
           type: string
       type: object
     BookCitationPerDocData:
@@ -18844,8 +19018,7 @@ components:
             - GEOMETRY_PRECISION_METERS
             - GEOPOLITICAL_GEOMETRY_REST_OF_WORLD_POLYGON
             - GEOPOLITICAL_GEOMETRY_SELF_POLYGON
-            - INFERRED_GEOMETRY_INCLUDES_GEOMETRY_OF
-            - INFERRED_GEOMETRY_EXCLUDES_GEOMETRY_OF
+            - INFERRED_GEOMETRY_GEOMETRY_COMPOSITION
             - INFERRED_GEOMETRY_DEFINES_GEOMETRY_FOR
             - INTERSECTION
             - INTERSECTION_GROUP
@@ -18996,6 +19169,8 @@ components:
             - DEPRECATED_DO_NOT_USE_TRACK_CLASS
             - DEPRECATED_DO_NOT_USE_VIEWCODE_INFO
             - DEPRECATED_DO_NOT_USE_WORKAREA
+            - DEPRECATED_DO_NOT_USE_INFERRED_GEOMETRY_INCLUDES_GEOMETRY_OF
+            - DEPRECATED_DO_NOT_USE_INFERRED_GEOMETRY_EXCLUDES_GEOMETRY_OF
           type: string
         kgPropertyId:
           description: Required when field_type == KNOWLEDGE_GRAPH_PROPERTY.
@@ -19870,6 +20045,20 @@ components:
             - PRIMARY
           type: string
       type: object
+    GeostoreGeometryComposition:
+      description: "Encapsulates all the features which, together, define the geometry of a feature. This happens by: 1. taking the union of all polygons of features referenced in includes_geometry_of 2. subtracting the polygons of all the features referenced in excludes_geometry_of"
+      properties:
+        excludesGeometryOf:
+          description: Features whose geometry to exclude while composing the geometry of this feature.
+          items:
+            $ref: "#/components/schemas/GeostoreFeatureIdProto"
+          type: array
+        includesGeometryOf:
+          description: Features whose geometry to include while composing the geometry of this feature.
+          items:
+            $ref: "#/components/schemas/GeostoreFeatureIdProto"
+          type: array
+      type: object
     GeostoreGeopoliticalGeometryProto:
       description: Geopolitical (unsimplified) polygons for a feature for different geopolitical use cases. See go/unsimplified-poly.
       properties:
@@ -19906,23 +20095,16 @@ components:
           type: string
       type: object
     GeostoreInferredGeometryProto:
-      description: 'The inferred geometry of a feature contains all the features which, together, define the geometry of a feature. This happens by: 1. Taking the union of all polygons of features referenced in "includes_geometry_of". 2. Subtract the geometries of all the features referenced in "excludes_geometry_of". See: go/inferred-geometry for more information.'
+      description: "Inferred geometry defines the geometry of a feature through the geometry of other features. For instance, the geometry of a timezone can be specified as the union of all the countries it applies to. See: go/inferred-geometry and go/geo-schema:composite-geometry-editor for more details."
       properties:
         definesGeometryFor:
           description: Features whose geometry depends on this feature's geometry.
           items:
             $ref: "#/components/schemas/GeostoreFeatureIdProto"
           type: array
-        excludesGeometryOf:
-          description: Features whose geometry to exclude while inferring geometry.
-          items:
-            $ref: "#/components/schemas/GeostoreFeatureIdProto"
-          type: array
-        includesGeometryOf:
-          description: Features whose geometry to include while inferring geometry.
-          items:
-            $ref: "#/components/schemas/GeostoreFeatureIdProto"
-          type: array
+        geometryComposition:
+          $ref: "#/components/schemas/GeostoreGeometryComposition"
+          description: Features whose geometry defines the geometry of this feature.
       type: object
     GeostoreInternalFeatureProto:
       description: Main proto for all internal fields to be stored at the feature level.
@@ -26612,6 +26794,21 @@ components:
           description: String value of the enum field. This must match defined set of enums in document schema using EnumTypeOptions.
           type: string
       type: object
+    GoogleCloudContentwarehouseV1ExportToCdwPipeline:
+      description: The configuration of exporting documents from the Document Warehouse to CDW pipeline.
+      properties:
+        documentIds:
+          description: The list of all the documents to be processed.
+          items:
+            type: string
+          type: array
+        exportFolderPath:
+          description: "The Cloud Storage folder path used to store the exported documents before being sent to CDW. Format: gs:///."
+          type: string
+        processorInfo:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
+          description: The CDW processor information.
+      type: object
     GoogleCloudContentwarehouseV1FetchAclRequest:
       description: Request message for DocumentService.FetchAcl
       properties:
@@ -26657,6 +26854,34 @@ components:
     GoogleCloudContentwarehouseV1FloatTypeOptions:
       description: Configurations for a float property.
       properties: {}
+      type: object
+    GoogleCloudContentwarehouseV1GcsIngestPipeline:
+      description: The configuration of the Cloud Storage ingestion pipeline.
+      properties:
+        inputPath:
+          description: "The input Cloud Storage folder. All files under this folder will be imported to Document Warehouse. Format: gs:///."
+          type: string
+        schemaName:
+          description: "The Document Warehouse schema resource name. All documents processed by this pipeline will use this schema. Format: projects/{project_number}/locations/{location}/documentSchemas/{document_schema_id}."
+          type: string
+      type: object
+    GoogleCloudContentwarehouseV1GcsIngestWithDocAiProcessorsPipeline:
+      description: The configuration of the document classify/split and entity/kvp extraction pipeline.
+      properties:
+        classifySplitProcessorInfos:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
+          description: The classify or split processor information.
+        extractProcessorInfos:
+          description: The entity or key-value pair extracting processor information.
+          items:
+            $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
+          type: array
+        inputPath:
+          description: "The input Cloud Storage folder. All files under this folder will be imported to Document Warehouse. Format: gs:///."
+          type: string
+        processorResultsFolderPath:
+          description: "The Cloud Storage folder path used to store the raw results from processors. Format: gs:///."
+          type: string
       type: object
     GoogleCloudContentwarehouseV1GetDocumentRequest:
       description: Request message for DocumentService.GetDocument.
@@ -26884,6 +27109,19 @@ components:
           description: When merging repeated fields, the default behavior is to append entries from the source repeated field to the destination repeated field. If you instead want to keep only the entries from the source repeated field, set this flag to true. If you want to replace a repeated field within a message field on the destination message, you must set both replace_repeated_fields and replace_message_fields to true, otherwise the repeated fields will be appended.
           type: boolean
       type: object
+    GoogleCloudContentwarehouseV1ProcessorInfo:
+      description: The DocAI processor information.
+      properties:
+        documentType:
+          description: The processor will process the documents with this document type.
+          type: string
+        processorName:
+          description: The processor resource name. Format is `projects/{project}/locations/{location}/processors/{processor}`, or `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
+          type: string
+        schemaName:
+          description: "The Document schema resource name. All documents processed by this processor will use this schema. Format: projects/{project_number}/locations/{location}/documentSchemas/{document_schema_id}."
+          type: string
+      type: object
     GoogleCloudContentwarehouseV1Property:
       description: Property of a document.
       properties:
@@ -26977,12 +27215,27 @@ components:
             - LOW
             - LOWEST
           type: string
+        schemaSources:
+          description: The mapping information between this property to another schema source.
+          items:
+            $ref: "#/components/schemas/GoogleCloudContentwarehouseV1PropertyDefinitionSchemaSource"
+          type: array
         textTypeOptions:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1TextTypeOptions"
           description: Text/string property.
         timestampTypeOptions:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1TimestampTypeOptions"
           description: Timestamp property. It is not supported by CMEK compliant deployment.
+      type: object
+    GoogleCloudContentwarehouseV1PropertyDefinitionSchemaSource:
+      description: The schema source information.
+      properties:
+        name:
+          description: The schema name in the source.
+          type: string
+        processorType:
+          description: The Doc AI processor type name.
+          type: string
       type: object
     GoogleCloudContentwarehouseV1PropertyFilter:
       properties:
@@ -27149,6 +27402,19 @@ components:
         source:
           description: Source of the rules i.e., customer name.
           type: string
+      type: object
+    GoogleCloudContentwarehouseV1RunPipelineRequest:
+      description: Request message for DocumentService.RunPipeline.
+      properties:
+        exportCdwPipeline:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ExportToCdwPipeline"
+          description: Export docuemnts from Document Warehouseing to CDW for training purpose.
+        gcsIngestPipeline:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1GcsIngestPipeline"
+          description: Cloud Storage ingestion pipeline.
+        gcsIngestWithDocAiProcessorsPipeline:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1GcsIngestWithDocAiProcessorsPipeline"
+          description: Use DocAI processors to process documents in Cloud Storage and ingest them to Document Warehouse.
       type: object
     GoogleCloudContentwarehouseV1SearchDocumentsRequest:
       description: Request message for DocumentService.SearchDocuments.
@@ -28082,6 +28348,7 @@ components:
             - OPERATION_TYPE_UNSPECIFIED
             - ADD
             - REMOVE
+            - UPDATE
             - REPLACE
             - EVAL_REQUESTED
             - EVAL_APPROVED
@@ -28111,14 +28378,14 @@ components:
           description: If the change was made by a person specify the name or id of that person.
           type: string
         createTime:
-          description: The time that the revision was created.
+          description: The time that the revision was created, internally generated by doc proto storage at the time of create.
           format: google-datetime
           type: string
         humanReview:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentRevisionHumanReview"
           description: Human Review information of this revision.
         id:
-          description: Id of the revision. Unique within the context of the document.
+          description: Id of the revision, internally generated by doc proto storage. Unique within the context of the document.
           type: string
         parent:
           description: The revisions that this revision is based on. This can include one or more parent (when documents are merged.) This field represents the index into the `revisions` field.
@@ -28299,7 +28566,7 @@ components:
           $ref: "#/components/schemas/GoogleTypeExpr"
           description: The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         members:
-          description: "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. "
+          description: "Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding."
           items:
             type: string
           type: array
@@ -28349,11 +28616,11 @@ components:
       description: The status indicating the user is temporarily busy and there is not a more specific status derived from calendar that applies (e.g., InMeeting or DoNotDisturb).
       properties:
         committedUntil:
-          description: The time when the user will stop being committed, i.e., when their status will be neither of InMeeting, DoNotDisturb, Busy or OutOfOffice < Xh. Note that the goal of this field is to provide information to help users decide how to communicate with a user (see also http://shortn/_wXYXtZScgh).
+          description: The time when the user will either stop being committed or change commitment type (i.e. InMeeting, DoNotDisturb, Busy or OutOfOffice < Xh). Note that the goal of this field is to provide information to help users decide how to communicate with a user (see also http://shortn/_wXYXtZScgh).
           format: google-datetime
           type: string
         committedUntilIsMixed:
-          description: Whether the status of the user from this status's start to committed_until has more than one status type (e.g. DoNotDisturb + InMeeting).
+          description: TODO(b/265939748) To be removed, always false from User Status Service.
           type: boolean
         eventSummary:
           description: The summary of the corresponding event in Calendar.
@@ -28384,11 +28651,11 @@ components:
       description: The status indicating the user should not be disturbed.
       properties:
         committedUntil:
-          description: The time when the user will stop being committed, i.e., when their status will be neither of InMeeting, DoNotDisturb, Busy or OutOfOffice < Xh.
+          description: The time when the user will either stop being committed or change commitment type (i.e. InMeeting, DoNotDisturb, Busy or OutOfOffice < Xh). Note that the goal of this field is to provide information to help users decide how to communicate with a user (see also http://shortn/_wXYXtZScgh).
           format: google-datetime
           type: string
         committedUntilIsMixed:
-          description: Whether the status of the user from this status's start to committed_until has more than one status type (e.g. DoNotDisturb + InMeeting).
+          description: TODO(b/265939748) To be removed, always false from User Status Service.
           type: boolean
         nextAvailable:
           description: The next time when the user will be available, i.e., when their status will be neither InMeeting, CalendarBusy, DoNotDisturb, OutsideWorkingHours, nor OutOfOffice.
@@ -28407,11 +28674,11 @@ components:
       description: The status indicating the user is in a meeting.
       properties:
         committedUntil:
-          description: The time when the user will stop being committed, i.e., when their status will be neither of InMeeting, DoNotDisturb, Busy or OutOfOffice < Xh. Note that the goal of this field is to provide information to help users decide how to communicate with a user (see also http://shortn/_wXYXtZScgh).
+          description: The time when the user will either stop being committed or change commitment type (i.e. InMeeting, DoNotDisturb, Busy or OutOfOffice < Xh). Note that the goal of this field is to provide information to help users decide how to communicate with a user (see also http://shortn/_wXYXtZScgh).
           format: google-datetime
           type: string
         committedUntilIsMixed:
-          description: Whether the status of the user from this status's start to committed_until has more than one status type (e.g. DoNotDisturb + InMeeting).
+          description: TODO(b/265939748) To be removed, always false from User Status Service.
           type: boolean
         eventSummary:
           description: The summary of the corresponding event in Calendar.
@@ -28461,11 +28728,11 @@ components:
           format: google-datetime
           type: string
         committedUntil:
-          description: The time when the user will stop being committed, i.e., when their status will be neither of InMeeting, DoNotDisturb, Busy or OutOfOffice < Xh. Note that if this OOO block is large (>=Xh), committed_until is not set.
+          description: The time when the user will either stop being committed or change commitment type (i.e. InMeeting, DoNotDisturb, Busy or OutOfOffice < Xh). Note that the goal of this field is to provide information to help users decide how to communicate with a user (see also http://shortn/_wXYXtZScgh). Note that if this OOO block is large (>=Xh), committed_until is not set.
           format: google-datetime
           type: string
         committedUntilIsMixed:
-          description: Whether the status of the user from this status's start to committed_until has more than one status type (e.g. DoNotDisturb + InMeeting). Only set if committed_until is set.
+          description: TODO(b/265939748) To be removed, always false from User Status Service.
           type: boolean
         eventSummary:
           description: The summary of the corresponding OOO block in Calendar. This is entered by the user, so we return it "as is" - no i18n.
@@ -30461,7 +30728,7 @@ components:
           type: integer
       type: object
     ImageData:
-      description: "This defines the per-doc data which is extracted from thumbnails and propagated over to indexing. It contains all information that can be used for restricts. Next tag id: 128"
+      description: "This defines the per-doc data which is extracted from thumbnails and propagated over to indexing. It contains all information that can be used for restricts. Next tag id: 129"
       properties:
         adaboostImageFeaturePorn:
           description: "Warning: adaboost_image_feature_porn* and imageFeaturePorn fields are DEPRECATED in favor of brain_porn_scores. Please do not use them. Contact safesearch@ for transition advice."
@@ -30497,6 +30764,10 @@ components:
         clipartDetectorVersion:
           format: int32
           type: integer
+        clusterId:
+          description: Superlabels generated cluster id.
+          format: byte
+          type: string
         codomainStrength:
           description: Like is_visible, this is a property of the (web-doc, img_url) pair not just the image. A high codomain_strength indicates high confidence based on collected stats that the image is hosted on a companion domain. If not enough stats are available for codomain strength, this field may be absent in ImageData, and hence the CompositeDoc. Do not place negative values here. Permitted values range between 0 and image_quality_codomain::kMaxCodomainStrength defined in //image/quality/codomain/codomain-stats-utils.h.
           format: int32
@@ -35423,6 +35694,19 @@ components:
           format: double
           type: number
       type: object
+    IndexingVideosAsrTranscriptRepairAnnotation:
+      description: This proto captures the output of analyses that ran on Automatic Speech Recogntion produced by the recognizer.
+      properties:
+        gibberishResult:
+          enum:
+            - UNDEFINED_GIBBERISH_RESULT
+            - NOT_GIBBERISH
+            - IS_GIBBERISH
+            - GIBBERISH_UNSUPPORTED_LANGUAGE
+            - GIBBERISH_DECLINED
+            - GIBBERISH_DETECTION_FAILED
+          type: string
+      type: object
     KaltixPerDocData:
       properties:
         KaltixRank:
@@ -36520,6 +36804,8 @@ components:
             - CONCEPT
             - RELATION
             - ATTENTIONAL_ENTITY
+            - AUDIO_MESSAGE_METADATA_ID
+            - BROADCAST
           type: string
       type: object
     KnowledgeAnswersIntentQueryImpliedEntity:
@@ -36662,11 +36948,19 @@ components:
           type: string
       type: object
     KnowledgeAnswersIntentQueryParsingSignals:
-      description: "Parsing-related signals. Only horizontal signals should appear directly as fields on this message. Each domain should create their own extension for anything that they need to propagate down stream from AQUA. Note that this proto is not the same as the Superroot proto ParsingSignals (http://google3/knowledge/proto/scoring-signals.proto), which is a Superroot-specific signal used in Scoring. Next ID: 5"
+      description: "Parsing-related signals. Only horizontal signals should appear directly as fields on this message. Each domain should create their own extension for anything that they need to propagate down stream from AQUA. Note that this proto is not the same as the Superroot proto ParsingSignals (http://google3/knowledge/proto/scoring-signals.proto), which is a Superroot-specific signal used in Scoring. Next ID: 7"
       properties:
         calibratedParsingScore:
           description: A parsing score that is independently calibrated by each parser/IG, used by pre-fulfillment ranker, see http://go/prefulfillment-ranker.
           format: double
+          type: number
+        effectiveArgSpanLength:
+          description: 'The total effective length of the spans for the arguments used to construct the parse. May include vertical specific adjustments. Eg: For the query [delete my 7 p.m. alarm called chicken] and intent Delete_alarm(alarm_object=RD(category=AlarmObject( label="chicken", trigger_time_datetime=<< 7 PM >>))), the effective argument span is "7 p.m." + "chicken" (total length of 13).'
+          format: float
+          type: number
+        inQueryMaxEffectiveArgSpanLength:
+          description: This is a cross-intent feature which is calculated by iterating all intent candidates. This feature should be populated in post-IG stage (before GB).
+          format: float
           type: number
         qrewriteCallPathInfo:
           $ref: "#/components/schemas/NlpLoggingQRewriteClientCallPathInfo"
@@ -36683,6 +36977,7 @@ components:
             - UNSTRUCTURED_INTENTS
             - NSP
             - AQUA
+            - PHONE_GENIE
           type: string
       type: object
     KnowledgeAnswersIntentQueryPersonalEntity:
@@ -37583,7 +37878,7 @@ components:
           $ref: "#/components/schemas/KnowledgeAnswersDateType"
         dependencyType:
           $ref: "#/components/schemas/KnowledgeAnswersDependencyType"
-          description: "Work in progress: Used for configuring dynamic types to allow for type transparency. See: go/type-dependencies"
+          description: "Used for configuring dynamic types to allow for type transparency. See: go/type-dependencies"
         durationType:
           $ref: "#/components/schemas/KnowledgeAnswersDurationType"
         entityType:
@@ -37618,9 +37913,6 @@ components:
           $ref: "#/components/schemas/KnowledgeAnswersPolarQuestionType"
         semanticType:
           $ref: "#/components/schemas/KnowledgeAnswersSemanticType"
-        slotName:
-          description: "DEPRECATED: see go/type-dependencies. Please reach out to suwu@, dqwang@ if usage is required."
-          type: string
         stateOfAffairsType:
           $ref: "#/components/schemas/KnowledgeAnswersStateOfAffairsType"
         stringType:
@@ -47039,6 +47331,7 @@ components:
             - CDDB
             - MONOSPACE
             - MY_ACCOUNT
+            - NUDGEIT_CAMPAIGN_MANAGER
             - DEPRECATED_QUICKSTART_FLUME
             - DUO_CLIENT
             - ALBERT
@@ -49970,6 +50263,7 @@ components:
             - REMINDER_DRAGONGLASS_ARIS
             - REMINDER_PROACTIVE_API
             - REMINDER_POST_TASK_MIGRATION
+            - REMINDER_NOTIFICATION_ENABLE_NOTICE
             - CROSS_SURFACE
             - CROSS_SURFACE_MOVIE_SHOWTIMES
             - CROSS_SURFACE_EVENTS
@@ -50337,6 +50631,8 @@ components:
             - MEMORY_TAP_SAVE
             - SHELDON_DISCLOSURE
             - PROACTIVE_API_FASTTRACK
+            - PERSONAL_RESULTS_OPTIN
+            - HEADPHONE_PERSONAL_RESULTS_OPTIN
             - UNIT_TESTING
           type: string
         attachment:
@@ -50717,7 +51013,7 @@ components:
           type: string
       type: object
     QualityCalypsoAppsUniversalAuLiveOpFormat:
-      description: "Contains the format information for a single LiveOp/LiveEvent. Next ID: 10"
+      description: "Contains the format information for a single LiveOp/LiveEvent. Next ID: 11"
       properties:
         deeplink:
           type: string
@@ -50727,6 +51023,8 @@ components:
           description: iOS only, kind of event type
           type: string
         imageUrl:
+          type: string
+        originalImageUrl:
           type: string
         squareImageUrl:
           type: string
@@ -52273,6 +52571,57 @@ components:
               - MUGSHOT
               - CRIME
               - SHOPPING_TOPN
+              - RESERVED_FOR_NEW_ENUM_128
+              - RESERVED_FOR_NEW_ENUM_129
+              - RESERVED_FOR_NEW_ENUM_130
+              - RESERVED_FOR_NEW_ENUM_131
+              - RESERVED_FOR_NEW_ENUM_132
+              - RESERVED_FOR_NEW_ENUM_133
+              - RESERVED_FOR_NEW_ENUM_134
+              - RESERVED_FOR_NEW_ENUM_135
+              - RESERVED_FOR_NEW_ENUM_136
+              - RESERVED_FOR_NEW_ENUM_137
+              - RESERVED_FOR_NEW_ENUM_138
+              - RESERVED_FOR_NEW_ENUM_139
+              - RESERVED_FOR_NEW_ENUM_140
+              - RESERVED_FOR_NEW_ENUM_141
+              - RESERVED_FOR_NEW_ENUM_142
+              - RESERVED_FOR_NEW_ENUM_143
+              - RESERVED_FOR_NEW_ENUM_144
+              - RESERVED_FOR_NEW_ENUM_145
+              - RESERVED_FOR_NEW_ENUM_146
+              - RESERVED_FOR_NEW_ENUM_147
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_97
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_98
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_99
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_100
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_101
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_102
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_103
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_104
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_105
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_106
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_107
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_108
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_109
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_110
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_111
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_112
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_113
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_114
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_115
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_116
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_117
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_118
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_119
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_120
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_121
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_122
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_123
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_124
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_125
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_126
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_127
             type: string
           type: array
         scores:
@@ -52389,6 +52738,57 @@ components:
               - MUGSHOT
               - CRIME
               - SHOPPING_TOPN
+              - RESERVED_FOR_NEW_ENUM_128
+              - RESERVED_FOR_NEW_ENUM_129
+              - RESERVED_FOR_NEW_ENUM_130
+              - RESERVED_FOR_NEW_ENUM_131
+              - RESERVED_FOR_NEW_ENUM_132
+              - RESERVED_FOR_NEW_ENUM_133
+              - RESERVED_FOR_NEW_ENUM_134
+              - RESERVED_FOR_NEW_ENUM_135
+              - RESERVED_FOR_NEW_ENUM_136
+              - RESERVED_FOR_NEW_ENUM_137
+              - RESERVED_FOR_NEW_ENUM_138
+              - RESERVED_FOR_NEW_ENUM_139
+              - RESERVED_FOR_NEW_ENUM_140
+              - RESERVED_FOR_NEW_ENUM_141
+              - RESERVED_FOR_NEW_ENUM_142
+              - RESERVED_FOR_NEW_ENUM_143
+              - RESERVED_FOR_NEW_ENUM_144
+              - RESERVED_FOR_NEW_ENUM_145
+              - RESERVED_FOR_NEW_ENUM_146
+              - RESERVED_FOR_NEW_ENUM_147
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_97
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_98
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_99
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_100
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_101
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_102
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_103
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_104
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_105
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_106
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_107
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_108
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_109
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_110
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_111
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_112
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_113
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_114
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_115
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_116
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_117
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_118
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_119
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_120
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_121
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_122
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_123
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_124
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_125
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_126
+              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_127
             type: string
           type: array
         scores:
@@ -54013,7 +54413,7 @@ components:
         nonDisplayableCurrency:
           type: string
         nonDisplayableOrganicScoreMillis:
-          description: Normalized riskiness score for Organic destinations. It's in range [0,1000] with 0 being the worst score and 1000 being the best.
+          description: Normalized riskiness score for Organic destinations. It's in range [1,1000] with 1 being the worst score and 1000 being the best.
           format: int32
           type: integer
         offerDocid:
@@ -54873,6 +55273,9 @@ components:
         amarnaDocid:
           description: Should precisely match the amarna_docid in ContentBasedVideoMetadata.
           type: string
+        asrRepair:
+          $ref: "#/components/schemas/IndexingVideosAsrTranscriptRepairAnnotation"
+          description: The results of ASR transcript quality analysis.
         lang:
           description: The language of the transcript as recorded in Amarna.
           type: string
@@ -60388,16 +60791,26 @@ components:
     ResearchScienceSearchSourceUrlDocjoinInfoWebrefEntityInfo:
       description: The mid and description of a WebRefEntity.
       properties:
-        description:
-          description: The English description of the mid from the KG.
-          type: string
-        entityType:
+        deprecatedEntityType:
+          description: DEPRECATED. See entity_type instead.
           enum:
             - UNKNOWN
             - FIELD_OF_STUDY
             - GEO
             - ORGANIZATION
           type: string
+        description:
+          description: The English description of the mid from the KG.
+          type: string
+        entityCollectionType:
+          items:
+            enum:
+              - UNKNOWN
+              - FIELD_OF_STUDY
+              - GEO
+              - ORGANIZATION
+            type: string
+          type: array
         kgCollection:
           description: HRID of the KG collections
           items:
@@ -65876,7 +66289,7 @@ components:
           type: number
       type: object
     TrawlerTrawlerPrivateFetchReplyData:
-      description: "This is an optional container of arbitrary data that can be added to a FetchReplyData. This data is meant to be logged, but not sent back in a fetch reply (it should be added *after* the reply is prepared). Use FetchResponsePreparatorImpl::AddTrawlerPrivateDataToFetchReplyData to add. See also the comment in fetch_response_preparator_impl.cc. Next Tag: 43"
+      description: "This is an optional container of arbitrary data that can be added to a FetchReplyData. This data is meant to be logged, but not sent back in a fetch reply (it should be added *after* the reply is prepared). Use FetchResponsePreparatorImpl::AddTrawlerPrivateDataToFetchReplyData to add. See also the comment in fetch_response_preparator_impl.cc. Next Tag: 44"
       properties:
         BotGroupName:
           description: If we fetched using BotFetchAgent, what is the BotGroupName?
@@ -65962,6 +66375,9 @@ components:
             - AUTHORIZATION_POST_BODY
             - AUTHORIZATION_QUERY_PARAMETER
           type: string
+        bypassedHostOverfull:
+          description: Cache hit for this url, bypassed host_overfull error.
+          type: boolean
         cacheAcceptableAfterDate:
           description: Corresponds to AcceptableAfterDate field in FetchParams.
           format: int32
@@ -66433,6 +66849,11 @@ components:
               - MDP_P13N_GAME_QUERY_L7_EVENT_LEVEL
               - MDP_P13N_GAME_QUERY_L8_EVENT_LEVEL
               - MDP_P13N_GAME_QUERY_L9_EVENT_LEVEL
+              - MDP_P13N_RERANKING_UNKNOWN_EVENT_LEVEL
+              - MDP_P13N_RERANKING_CATEGORICAL_EVENT_LEVEL
+              - MDP_P13N_RERANKING_NAVIGATIONAL_EVENT_LEVEL
+              - MDP_P13N_RERANKING_MULTI_NAVIGATIONAL_EVENT_LEVEL
+              - MDP_P13N_RERANKING_NAVIGATIONAL_EXT_EVENT_LEVEL
               - SECOND_PASS_POLARIS_RERANKING_EVENT_LEVEL
               - SECOND_PASS_POLARIS_WITH_RANKING_CHANGE_EVENT_LEVEL
               - EXPLORATORY_BOOSTING_EVENT_LEVEL
@@ -67373,6 +67794,11 @@ components:
               - MDP_P13N_GAME_QUERY_L7_SESSION_LEVEL
               - MDP_P13N_GAME_QUERY_L8_SESSION_LEVEL
               - MDP_P13N_GAME_QUERY_L9_SESSION_LEVEL
+              - MDP_P13N_RERANKING_UNKNOWN_SESSION_LEVEL
+              - MDP_P13N_RERANKING_CATEGORICAL_SESSION_LEVEL
+              - MDP_P13N_RERANKING_NAVIGATIONAL_SESSION_LEVEL
+              - MDP_P13N_RERANKING_MULTI_NAVIGATIONAL_SESSION_LEVEL
+              - MDP_P13N_RERANKING_NAVIGATIONAL_EXT_SESSION_LEVEL
               - VIDEO_CAN_AUTOPLAY
               - VIDEO_CANNOT_AUTOPLAY
               - YOUTUBE_OPT_IN_NOTIFICATION_DRIVEN_PREFETCH_SESSION_LEVEL
@@ -67390,6 +67816,7 @@ components:
               - BOOKS_SEARCH_PAGE_DORA_QUERY_SESSION_LEVEL
               - INLINE_DETAILS_TQUALITY_CHECK_UNKNOWN_SESSION_LEVEL
               - INLINE_DETAILS_TQUALITY_CHECK_UNKNOWN_FRONTEND_SESSION_LEVEL
+              - APPS_LAUNCHER_CLUSTER_AT_SESSION_LEVEL
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - SHOULD_SEE_LIVE_OP_CLUSTER_USER_LEVEL
               - CART_ABANDONMENT_USER_LEVEL
@@ -67668,7 +68095,6 @@ components:
               - P13N_INTERSTITIAL_USER_LEVEL
               - PLAY_EVENT_SERVICE_LOG_HOOK_USER_EXAMPLE
               - FEATURED_SUBSCRIPTIONS_PRESENT_USER_LEVEL
-              - NOTIFICATION_USER_AFFINITY_USER_LEVEL
               - USE_SUBSCRIPTION_NEW_DOCUMENT_FORMAT_USER_LEVEL
               - USE_SUBSCRIPTION_NEW_DOCUMENT_FORMAT_PREVIEW_BATCH_USER_LEVEL
               - USE_SUBSCRIPTION_NEW_DOCUMENT_FORMAT_SKU_DETAILS_USER_LEVEL
@@ -67843,6 +68269,14 @@ components:
               - POST_PURCHASE_OFFER_POST_PURCHASE_CONFIRMATION_DIALOG_SERVER_USER_LEVEL
               - POST_PURCHASE_OFFER_POST_PURCHASE_OFFER_SAVED_DIALOG_SERVER_USER_LEVEL
               - POST_PURCHASE_OFFER_VALUE_PROMOTION_DIALOG_SHOWN_SERVER_USER_LEVEL
+              - MDP_P13N_RERANKING_UNKNOWN_USER_LEVEL
+              - MDP_P13N_RERANKING_CATEGORICAL_USER_LEVEL
+              - MDP_P13N_RERANKING_NAVIGATIONAL_USER_LEVEL
+              - MDP_P13N_RERANKING_MULTI_NAVIGATIONAL_USER_LEVEL
+              - MDP_P13N_RERANKING_NAVIGATIONAL_EXT_USER_LEVEL
+              - PLAY_ONBOARDING_QUEST_PLATFORM_SERVING_USER_LEVEL
+              - APPS_LAUNCHER_CLUSTER_AT_USER_LEVEL
+              - PBUY_V1_SEQUENCE_MODEL_LAUNCH_USER_LEVEL
               - USER_LEVEL_TEST_CODE_LIMIT
             type: string
           type: array
@@ -77235,7 +77669,7 @@ components:
           type: string
       type: object
     YoutubeCommentsClusteringMiniStanza:
-      description: "Intended to be simpler to work with than the ExportedStanza it's derived from See documentation: https://g3doc.corp.google.com/company/teams/youtube/community_intelligence/eng_resources/data_sources.md#ministanza Next available: 76"
+      description: "Intended to be simpler to work with than the ExportedStanza it's derived from See documentation: https://g3doc.corp.google.com/company/teams/youtube/community_intelligence/eng_resources/data_sources.md#ministanza Next available: 77"
       properties:
         ansibleScores:
           additionalProperties:
@@ -77525,6 +77959,9 @@ components:
         sentiment:
           $ref: "#/components/schemas/YoutubeCommentsSentimentSentiment"
           description: Sentiment. This omits entity_sentiment and keeps only the polarity, magnitude, and score. Sentiment as currently implemented is not debiased and has limited language coverage. Please read go/comments-sentiment-access before using.
+        shortReplyVideoId:
+          description: Associated Short Reply video ID if the comment represents a Short Reply. See go/yt-comment-sticker-m2.
+          type: string
         smartReplies:
           additionalProperties:
             $ref: "#/components/schemas/VideoYoutubeCommentsClassificationProtoYouTubeCommentSmartReply"

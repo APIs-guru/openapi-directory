@@ -19,9 +19,9 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://realtimebidding.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: realtimebidding
 externalDocs:
@@ -1857,13 +1857,6 @@ components:
             - GOOGLE_RTB
             - OPENRTB_JSON
             - OPENRTB_PROTOBUF
-            - OPENRTB_2_2
-            - OPENRTB_2_3
-            - OPENRTB_PROTOBUF_2_3
-            - OPENRTB_2_4
-            - OPENRTB_PROTOBUF_2_4
-            - OPENRTB_2_5
-            - OPENRTB_PROTOBUF_2_5
           type: string
         maximumQps:
           description: The maximum number of queries per second allowed to be sent to this server.
