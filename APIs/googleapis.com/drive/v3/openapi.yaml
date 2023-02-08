@@ -3643,7 +3643,7 @@ components:
               type: string
           type: object
         size:
-          description: The size of the file's content in bytes. This is applicable to binary files in Google Drive and Google Docs files.
+          description: The size of the file's content in bytes. This field is populated for files with binary content stored in Google Drive and for Docs Editors files; it is not populated for shortcuts or folders.
           format: int64
           type: string
         spaces:

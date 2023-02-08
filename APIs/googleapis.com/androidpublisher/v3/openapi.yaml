@@ -4667,6 +4667,11 @@ components:
         deviceTierSet:
           $ref: "#/components/schemas/DeviceTierSet"
           description: Definition of the set of device tiers for the app.
+        userCountrySets:
+          description: Definition of user country sets for the app.
+          items:
+            $ref: "#/components/schemas/UserCountrySet"
+          type: array
       type: object
     DeviceTierSet:
       description: A set of device tiers. A tier set determines what variation of app content gets served to a specific device, for device-targeted content. You should assign a priority level to each tier, which determines the ordering by which they are evaluated by Play. See the documentation of DeviceTier.level for more details.
@@ -6178,6 +6183,18 @@ components:
           description: Number of users who have given this review a thumbs up.
           format: int32
           type: integer
+      type: object
+    UserCountrySet:
+      description: A set of user countries. A country set determines what variation of app content gets served to a specific location.
+      properties:
+        countryCodes:
+          description: List of country codes representing countries. A Country code is represented in ISO 3166 alpha-2 format. For Example:- "IT" for Italy, "GE" for Georgia.
+          items:
+            type: string
+          type: array
+        name:
+          description: Country set name.
+          type: string
       type: object
     UserInitiatedCancellation:
       description: Information specific to cancellations initiated by users.
