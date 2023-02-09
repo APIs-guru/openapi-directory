@@ -86,6 +86,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/{customer}/reports:countChromeBrowsersNeedingAttention":
+    get:
+      description: Count of Chrome Browsers that have been recently enrolled, have new policy to be synced, or have no recent activity.
+      operationId: chromemanagement.customers.reports.countChromeBrowsersNeedingAttention
+      parameters:
+        - description: Required. The customer ID or "my_customer" prefixed with "customers/".
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: Optional. The ID of the organizational unit. If omitted, all data will be returned.
+          in: query
+          name: orgUnitId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleChromeManagementV1CountChromeBrowsersNeedingAttentionResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chrome.management.reports.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chrome.management.reports.readonly
+      tags:
+        - customers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{customer}/reports:countChromeDevicesReachingAutoExpirationDate":
     get:
       description: Generate report of the number of devices expiring in each month of the selected time frame. Devices are grouped by auto update expiration date and model. Further information can be found [here](https://support.google.com/chrome/a/answer/10564947).
@@ -1175,6 +1217,22 @@ components:
           description: Total number of matching app requests.
           format: int32
           type: integer
+      type: object
+    GoogleChromeManagementV1CountChromeBrowsersNeedingAttentionResponse:
+      description: Response containing counts for browsers that need attention.
+      properties:
+        noRecentActivityCount:
+          description: Number of browsers that haven’t had any recent activity
+          format: int64
+          type: string
+        pendingBrowserUpdateCount:
+          description: Number of browsers that are pending an OS update
+          format: int64
+          type: string
+        recentlyEnrolledCount:
+          description: Number of browsers that have been recently enrolled
+          format: int64
+          type: string
       type: object
     GoogleChromeManagementV1CountChromeDevicesReachingAutoExpirationDateResponse:
       description: Response containing a list of devices expiring in each month of a selected time frame. Counts are grouped by model and Auto Update Expiration date.

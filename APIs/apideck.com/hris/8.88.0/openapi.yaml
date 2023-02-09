@@ -1140,7 +1140,8 @@ paths:
                   name: 'Elon Musk',
                   first_name: 'Elon',
                   last_name: 'Musk',
-                  email: 'elon@musk.com'
+                  email: 'elon@musk.com',
+                  employment_status: 'active'
                 },
                 direct_reports: [
                   'a0d636c6-43b3-4bde-8c70-85b707d992f4',
@@ -1478,7 +1479,8 @@ paths:
                   name: 'Elon Musk',
                   first_name: 'Elon',
                   last_name: 'Musk',
-                  email: 'elon@musk.com'
+                  email: 'elon@musk.com',
+                  employment_status: 'active'
                 },
                 direct_reports: [
                   'a0d636c6-43b3-4bde-8c70-85b707d992f4',
@@ -4036,18 +4038,7 @@ components:
           title: Employee start date
           type: string
         employment_status:
-          description: The employment status of the employee, indicating whether they are currently employed, inactive, terminated, or in another status.
-          enum:
-            - active
-            - inactive
-            - terminated
-            - other
-          example: active
-          nullable: true
-          title: Employment status
-          type: string
-          x-apideck-enum-id: employees.employment_status
-          x-graphql-type-name: EmployeeEmploymentStatus
+          $ref: "#/components/schemas/EmploymentStatus"
         first_name:
           $ref: "#/components/schemas/FirstName"
         food_allergies:
@@ -4163,6 +4154,8 @@ components:
               nullable: true
               title: Email address
               type: string
+            employment_status:
+              $ref: "#/components/schemas/EmploymentStatus"
             first_name:
               $ref: "#/components/schemas/FirstName"
             id:
@@ -4545,6 +4538,19 @@ components:
       type: object
       x-apideck-schema-id: EmployeesSort
       x-graphql-type-name: EmployeesSort
+    EmploymentStatus:
+      description: The employment status of the employee, indicating whether they are currently employed, inactive, terminated, or in another status.
+      enum:
+        - active
+        - inactive
+        - terminated
+        - other
+      example: active
+      nullable: true
+      title: Employment status
+      type: string
+      x-apideck-enum-id: employees.employment_status
+      x-graphql-type-name: EmployeeEmploymentStatus
     FirstName:
       description: The first name of the person.
       example: Elon
@@ -5195,16 +5201,7 @@ components:
           description: Id of the employee
           type: string
         employment_status:
-          enum:
-            - active
-            - inactive
-            - terminated
-            - other
-          example: active
-          nullable: true
-          type: string
-          x-apideck-enum-id: employees.employment_status
-          x-graphql-type-name: JobEmploymentStatus
+          $ref: "#/components/schemas/EmploymentStatus"
         end_date:
           example: 2020-08-12
           format: date

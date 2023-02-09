@@ -2273,6 +2273,11 @@ components:
         textSentimentModelMetadata:
           $ref: "#/components/schemas/TextSentimentModelMetadata"
           description: Metadata for text sentiment models.
+        trainExampleCount:
+          description: Output only. The number of examples in the training set used for the model creation.
+          format: int32
+          readOnly: true
+          type: integer
         translationModelMetadata:
           $ref: "#/components/schemas/TranslationModelMetadata"
           description: Metadata for translation models.
@@ -2280,6 +2285,11 @@ components:
           description: Output only. Timestamp when this model was last updated.
           format: google-datetime
           type: string
+        validateExampleCount:
+          description: Output only. The number of examples in the validation set used for the model creation.
+          format: int32
+          readOnly: true
+          type: integer
         videoClassificationModelMetadata:
           $ref: "#/components/schemas/VideoClassificationModelMetadata"
           description: Metadata for video classification models.

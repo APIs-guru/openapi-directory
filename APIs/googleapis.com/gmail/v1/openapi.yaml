@@ -957,7 +957,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Mark the email as permanently deleted (not TRASH) and only visible in Google Vault to a Vault administrator. Only used for G Suite accounts.
+        - description: Mark the email as permanently deleted (not TRASH) and only visible in Google Vault to a Vault administrator. Only used for Google Workspace accounts.
           in: query
           name: deleted
           schema:
@@ -1157,7 +1157,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Mark the email as permanently deleted (not TRASH) and only visible in Google Vault to a Vault administrator. Only used for G Suite accounts.
+        - description: Mark the email as permanently deleted (not TRASH) and only visible in Google Vault to a Vault administrator. Only used for Google Workspace accounts.
           in: query
           name: deleted
           schema:
@@ -2427,7 +2427,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Adds a delegate with its verification status set directly to `accepted`, without sending any verification email. The delegate user must be a member of the same G Suite organization as the delegator user. Gmail imposes limitations on the number of delegates and delegators each user in a G Suite organization can have. These limits depend on your organization, but in general each user can have up to 25 delegates and up to 10 delegators. Note that a delegate user must be referred to by their primary email address, and not an email alias. Also note that when a new delegate is created, there may be up to a one minute delay before the new delegate is available for use. This method is only available to service account clients that have been delegated domain-wide authority.
+      description: Adds a delegate with its verification status set directly to `accepted`, without sending any verification email. The delegate user must be a member of the same Google Workspace organization as the delegator user. Gmail imposes limitations on the number of delegates and delegators each user in a Google Workspace organization can have. These limits depend on your organization, but in general each user can have up to 25 delegates and up to 10 delegators. Note that a delegate user must be referred to by their primary email address, and not an email alias. Also note that when a new delegate is created, there may be up to a one minute delay before the new delegate is available for use. This method is only available to service account clients that have been delegated domain-wide authority.
       operationId: gmail.users.settings.delegates.create
       parameters:
         - description: User's email address. The special value "me" can be used to indicate the authenticated user.
@@ -4998,7 +4998,7 @@ components:
           description: Flag that determines whether responses are sent to recipients who are not in the user's list of contacts.
           type: boolean
         restrictToDomain:
-          description: Flag that determines whether responses are sent to recipients who are outside of the user's domain. This feature is only available for G Suite users.
+          description: Flag that determines whether responses are sent to recipients who are outside of the user's domain. This feature is only available for Google Workspace users.
           type: boolean
         startTime:
           description: An optional start time for sending auto-replies (epoch ms). When this is specified, Gmail will automatically reply only to messages that it receives after the start time. If both `startTime` and `endTime` are specified, `startTime` must precede `endTime`.
