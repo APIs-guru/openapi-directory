@@ -2511,6 +2511,10 @@ components:
         path:
           description: Path to access on the HTTP server.
           type: string
+        port:
+          description: Port number to access on the container. Number must be in the range 1 to 65535.
+          format: int32
+          type: integer
         scheme:
           description: Not supported by Cloud Run.
           type: string

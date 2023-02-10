@@ -239,6 +239,97 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - roles
+  "/v1/{location}/workforcePools":
+    get:
+      description: Lists all non-deleted WorkforcePools under the specified parent. If `show_deleted` is set to `true`, then deleted pools are also listed.
+      operationId: iam.locations.workforcePools.list
+      parameters:
+        - description: "The location of the pool. Format: `locations/{location}`."
+          in: path
+          name: location
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of pools to return. If unspecified, at most 50 pools will be returned. The maximum value is 1000; values above 1000 are truncated to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListWorkforcePools` call. Provide this to retrieve the subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: "Required. The parent resource to list pools for. Format: `organizations/{org-id}`."
+          in: query
+          name: parent
+          schema:
+            type: string
+        - description: Whether to return soft-deleted pools.
+          in: query
+          name: showDeleted
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListWorkforcePoolsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - locations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new WorkforcePool. You cannot reuse the name of a deleted pool until 30 days after deletion.
+      operationId: iam.locations.workforcePools.create
+      parameters:
+        - description: "The location of the pool to create. Format: `locations/{location}`."
+          in: path
+          name: location
+          required: true
+          schema:
+            type: string
+        - description: The ID to use for the pool, which becomes the final component of the resource name. The IDs must be a globally unique string of 6 to 63 lowercase letters, digits, or hyphens. It must start with a letter, and cannot have a trailing hyphen. The prefix `gcp-` is reserved for use by Google, and may not be specified.
+          in: query
+          name: workforcePoolId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkforcePool"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - locations
   "/v1/{name}":
     delete:
       description: Deletes a ServiceAccountKey. Deleting a service account key does not revoke short-lived credentials that have been issued based on the service account key.
@@ -1073,6 +1164,11 @@ paths:
           name: options.requestedPolicyVersion
           schema:
             type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetIamPolicyRequest"
       responses:
         "200":
           content:
@@ -1413,6 +1509,38 @@ components:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
       type: object
+    GetIamPolicyRequest:
+      description: Request message for `GetIamPolicy` method.
+      properties:
+        options:
+          $ref: "#/components/schemas/GetPolicyOptions"
+          description: "OPTIONAL: A `GetPolicyOptions` object for specifying options to `GetIamPolicy`."
+      type: object
+    GetPolicyOptions:
+      description: Encapsulates settings provided to GetIamPolicy.
+      properties:
+        requestedPolicyVersion:
+          description: Optional. The maximum policy version that will be used to format the policy. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected. Requests for policies with any conditional role bindings must specify version 3. Policies with no conditional role bindings may specify any valid value or leave the field unset. The policy in the response might use the policy version that you specified, or it might use a lower policy version. For example, if you specify version 3, but the policy has no conditional role bindings, the response uses version 1. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+          format: int32
+          type: integer
+      type: object
+    GoogleIamAdminV1WorkforcePoolProviderOidc:
+      description: Represents an OpenId Connect 1.0 identity provider.
+      properties:
+        clientId:
+          description: Required. The client ID. Must match the audience claim of the JWT issued by the identity provider.
+          type: string
+        issuerUri:
+          description: Required. The OIDC issuer URI. Must be a valid URI using the 'https' scheme.
+          type: string
+      type: object
+    GoogleIamAdminV1WorkforcePoolProviderSaml:
+      description: Represents a SAML identity provider.
+      properties:
+        idpMetadataXml:
+          description: "Required. SAML Identity provider configuration metadata xml doc. The xml document should comply with [SAML 2.0 specification](https://docs.oasis-open.org/security/saml/v2.0/saml-metadata-2.0-os.pdf). The max size of the acceptable xml document will be bounded to 128k characters. The metadata xml document should satisfy the following constraints: 1) Must contain an Identity Provider Entity ID. 2) Must contain at least one non-expired signing key certificate. 3) For each signing key: a) Valid from should be no more than 7 days from now. b) Valid to should be no more than 14 years in the future. 4) Up to 3 IdP signing keys are allowed in the metadata xml. When updating the provider's metadata xml, at least one non-expired signing key must overlap with the existing metadata. This requirement is skipped if there are no non-expired signing keys present in the existing metadata."
+          type: string
+      type: object
     LintPolicyRequest:
       description: The request to lint a Cloud IAM policy object.
       properties:
@@ -1497,6 +1625,30 @@ components:
         nextPageToken:
           description: To retrieve the next page of results, set ListServiceAccountsRequest.page_token to this value.
           type: string
+      type: object
+    ListWorkforcePoolProvidersResponse:
+      description: Response message for ListWorkforcePoolProviders.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        workforcePoolProviders:
+          description: A list of providers.
+          items:
+            $ref: "#/components/schemas/WorkforcePoolProvider"
+          type: array
+      type: object
+    ListWorkforcePoolsResponse:
+      description: Response message for ListWorkforcePools.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        workforcePools:
+          description: A list of pools.
+          items:
+            $ref: "#/components/schemas/WorkforcePool"
+          type: array
       type: object
     ListWorkloadIdentityPoolProvidersResponse:
       description: Response message for ListWorkloadIdentityPoolProviders.
@@ -1954,6 +2106,18 @@ components:
           $ref: "#/components/schemas/ServiceAccount"
           description: Metadata for the restored service account.
       type: object
+    UndeleteWorkforcePoolProviderRequest:
+      description: Request message for UndeleteWorkforcePoolProvider.
+      properties: {}
+      type: object
+    UndeleteWorkforcePoolRequest:
+      description: Request message for UndeleteWorkforcePool.
+      properties: {}
+      type: object
+    UndeleteWorkforcePoolSubjectRequest:
+      description: Request message for UndeleteWorkforcePoolSubject.
+      properties: {}
+      type: object
     UndeleteWorkloadIdentityPoolProviderRequest:
       description: Request message for UndeleteWorkloadIdentityPoolProvider.
       properties: {}
@@ -1968,6 +2132,77 @@ components:
         publicKeyData:
           description: The public key to associate with the service account. Must be an RSA public key that is wrapped in an X.509 v3 certificate. Include the first line, `-----BEGIN CERTIFICATE-----`, and the last line, `-----END CERTIFICATE-----`.
           format: byte
+          type: string
+      type: object
+    WorkforcePool:
+      description: Represents a collection of external workforces. Provides namespaces for federated users that can be referenced in IAM policies.
+      properties:
+        description:
+          description: A user-specified description of the pool. Cannot exceed 256 characters.
+          type: string
+        disabled:
+          description: Whether the pool is disabled. You cannot use a disabled pool to exchange tokens, or use existing tokens to access resources. If the pool is re-enabled, existing tokens grant access again.
+          type: boolean
+        displayName:
+          description: A user-specified display name of the pool in Google Cloud Console. Cannot exceed 32 characters.
+          type: string
+        name:
+          description: "Output only. The resource name of the pool. Format: `locations/{location}/workforcePools/{workforce_pool_id}`"
+          readOnly: true
+          type: string
+        parent:
+          description: "Immutable. The resource name of the parent. Format: `organizations/{org-id}`."
+          type: string
+        sessionDuration:
+          description: Duration that the Google Cloud access tokens, console sign-in sessions, and `gcloud` sign-in sessions from this pool are valid. Must be greater than 15 minutes (900s) and less than 12 hours (43200s). If `session_duration` is not configured, minted credentials have a default duration of one hour (3600s). For SAML providers, the lifetime of the token is the minimum of the `session_duration` and the SessionNotOnOrAfter claim in the SAML assertion.
+          format: google-duration
+          type: string
+        state:
+          description: Output only. The state of the pool.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - DELETED
+          readOnly: true
+          type: string
+      type: object
+    WorkforcePoolProvider:
+      description: A configuration for an external identity provider.
+      properties:
+        attributeCondition:
+          description: "A [Common Expression Language](https://opensource.google/projects/cel) expression, in plain text, to restrict what otherwise valid authentication credentials issued by the provider should not be accepted. The expression must output a boolean representing whether to allow the federation. The following keywords may be referenced in the expressions: * `assertion`: JSON representing the authentication credential issued by the provider. * `google`: The Google attributes mapped from the assertion in the `attribute_mappings`. `google.profile_photo` and `google.display_name` are not supported. * `attribute`: The custom attributes mapped from the assertion in the `attribute_mappings`. The maximum length of the attribute condition expression is 4096 characters. If unspecified, all valid authentication credentials will be accepted. The following example shows how to only allow credentials with a mapped `google.groups` value of `admins`: ``` \"'admins' in google.groups\" ```"
+          type: string
+        attributeMapping:
+          additionalProperties:
+            type: string
+          description: "Required. Maps attributes from the authentication credentials issued by an external identity provider to Google Cloud attributes, such as `subject` and `segment`. Each key must be a string specifying the Google Cloud IAM attribute to map to. The following keys are supported: * `google.subject`: The principal IAM is authenticating. You can reference this value in IAM bindings. This is also the subject that appears in Cloud Logging logs. This is a required field and the mapped subject cannot exceed 127 bytes. * `google.groups`: Groups the authenticating user belongs to. You can grant groups access to resources using an IAM `principalSet` binding; access applies to all members of the group. * `google.display_name`: The name of the authenticated user. This is an optional field and the mapped display name cannot exceed 100 bytes. If not set, `google.subject` will be displayed instead. This attribute cannot be referenced in IAM bindings. * `google.profile_photo`: The URL that specifies the authenticated user's thumbnail photo. This is an optional field. When set, the image will be visible as the user's profile picture. If not set, a generic user icon will be displayed instead. This attribute cannot be referenced in IAM bindings. You can also provide custom attributes by specifying `attribute.{custom_attribute}`, where {custom_attribute} is the name of the custom attribute to be mapped. You can define a maximum of 50 custom attributes. The maximum length of a mapped attribute key is 100 characters, and the key may only contain the characters [a-z0-9_]. You can reference these attributes in IAM policies to define fine-grained access for a workforce pool to Google Cloud resources. For example: * `google.subject`: `principal://iam.googleapis.com/locations/global/workforcePools/{pool}/subject/{value}` * `google.groups`: `principalSet://iam.googleapis.com/locations/global/workforcePools/{pool}/group/{value}` * `attribute.{custom_attribute}`: `principalSet://iam.googleapis.com/locations/global/workforcePools/{pool}/attribute.{custom_attribute}/{value}` Each value must be a [Common Expression Language] (https://opensource.google/projects/cel) function that maps an identity provider credential to the normalized attribute specified by the corresponding map key. You can use the `assertion` keyword in the expression to access a JSON representation of the authentication credential issued by the provider. The maximum length of an attribute mapping expression is 2048 characters. When evaluated, the total size of all mapped attributes must not exceed 4KB. For OIDC providers, you must supply a custom mapping that includes the `google.subject` attribute. For example, the following maps the `sub` claim of the incoming credential to the `subject` attribute on a Google token: ``` {\"google.subject\": \"assertion.sub\"} ```"
+          type: object
+        description:
+          description: A user-specified description of the provider. Cannot exceed 256 characters.
+          type: string
+        disabled:
+          description: Whether the provider is disabled. You cannot use a disabled provider to exchange tokens. However, existing tokens still grant access.
+          type: boolean
+        displayName:
+          description: A user-specified display name for the provider. Cannot exceed 32 characters.
+          type: string
+        name:
+          description: "Output only. The resource name of the provider. Format: `locations/{location}/workforcePools/{workforce_pool_id}/providers/{provider_id}`"
+          readOnly: true
+          type: string
+        oidc:
+          $ref: "#/components/schemas/GoogleIamAdminV1WorkforcePoolProviderOidc"
+          description: An OpenId Connect 1.0 identity provider configuration.
+        saml:
+          $ref: "#/components/schemas/GoogleIamAdminV1WorkforcePoolProviderSaml"
+          description: A SAML identity provider configuration.
+        state:
+          description: Output only. The state of the provider.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - DELETED
+          readOnly: true
           type: string
       type: object
     WorkloadIdentityPool:

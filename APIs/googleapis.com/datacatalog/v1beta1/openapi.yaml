@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Google Cloud Data Catalog API
   version: v1beta1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://datacatalog.googleapis.com/$discovery/rest?version=v1beta1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: datacatalog
 externalDocs:
@@ -1126,12 +1124,12 @@ components:
           type: string
       type: object
     GoogleCloudDatacatalogV1ReconcileTagsMetadata:
-      description: Metadata message for long-running operation returned by the ReconcileTags.
+      description: Long-running operation metadata message returned by the ReconcileTags.
       properties:
         errors:
           additionalProperties:
             $ref: "#/components/schemas/Status"
-          description: Map that maps name of each tagged column (or empty string in case of sole entry) to tagging operation status.
+          description: Maps the name of each tagged column (or empty string for a sole entry) to tagging operation status.
           type: object
         state:
           description: State of the reconciliation operation.
@@ -1143,7 +1141,7 @@ components:
           type: string
       type: object
     GoogleCloudDatacatalogV1ReconcileTagsResponse:
-      description: Request message for long-running operation returned by the ReconcileTags.
+      description: Long-running operation response message returned by ReconcileTags.
       properties:
         createdTagsCount:
           description: Number of tags created in the request.
@@ -1515,7 +1513,7 @@ components:
       description: The criteria that select the subspace used for query matching.
       properties:
         includeGcpPublicDatasets:
-          description: If `true`, include Google Cloud Platform (GCP) public datasets in the search results. Info on GCP public datasets is available at https://cloud.google.com/public-datasets/. By default, GCP public datasets are excluded.
+          description: If `true`, include Google Cloud public datasets in the search results. Info on Google Cloud public datasets is available at https://cloud.google.com/public-datasets/. By default, Google Cloud public datasets are excluded.
           type: boolean
         includeOrgIds:
           description: The list of organization IDs to search within. To find your organization ID, follow instructions in https://cloud.google.com/resource-manager/docs/creating-managing-organization.
@@ -1701,7 +1699,7 @@ components:
           type: string
       type: object
     GoogleCloudDatacatalogV1beta1TagTemplate:
-      description: A tag template defines a tag, which can have one or more typed fields. The template is used to create and attach the tag to GCP resources. [Tag template roles](https://cloud.google.com/iam/docs/understanding-roles#data-catalog-roles) provide permissions to create, edit, and use the template. See, for example, the [TagTemplate User](https://cloud.google.com/data-catalog/docs/how-to/template-user) role, which includes permission to use the tag template to tag resources.
+      description: A tag template defines a tag, which can have one or more typed fields. The template is used to create and attach the tag to Google Cloud resources. [Tag template roles](https://cloud.google.com/iam/docs/understanding-roles#data-catalog-roles) provide permissions to create, edit, and use the template. See, for example, the [TagTemplate User](https://cloud.google.com/data-catalog/docs/how-to/template-user) role, which includes permission to use the tag template to tag resources.
       properties:
         displayName:
           description: The display name for this template. Defaults to an empty string.
@@ -1767,7 +1765,7 @@ components:
           type: integer
         service:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1TaxonomyService"
-          description: Output only. Identity of the service which owns the Taxonomy. This field is only populated when the taxonomy is created by a GCP service. Currently only 'DATAPLEX' is supported.
+          description: Output only. Identity of the service which owns the Taxonomy. This field is only populated when the taxonomy is created by a Google Cloud service. Currently only 'DATAPLEX' is supported.
           readOnly: true
         taxonomyTimestamps:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1SystemTimestamps"
@@ -1781,7 +1779,7 @@ components:
           description: P4SA Identity of the service.
           type: string
         name:
-          description: The GCP service name.
+          description: The Google Cloud service name.
           enum:
             - MANAGING_SYSTEM_UNSPECIFIED
             - MANAGING_SYSTEM_DATAPLEX
@@ -1907,5 +1905,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

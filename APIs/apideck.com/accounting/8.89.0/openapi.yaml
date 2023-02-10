@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 8.88.0
+  version: 8.89.0
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -356,6 +356,11 @@ tags:
     x-apideck-model:
       $ref: "#/components/schemas/ProfitAndLoss"
     x-apideck-resource-id: profit-and-loss
+  - description: ""
+    name: Journal Entries
+    x-apideck-model:
+      $ref: "#/components/schemas/JournalEntry"
+    x-apideck-resource-id: journal-entries
 paths:
   /accounting/balance-sheet:
     get:
@@ -2588,6 +2593,364 @@ paths:
             } catch (error) {
               console.error(error)
             }
+  /accounting/journal-entries:
+    get:
+      description: List Journal Entries
+      operationId: journalEntriesAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetJournalEntriesResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Journal Entries
+      tags:
+        - Journal Entries
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.accounting.journalEntriesAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: journalEntries
+    post:
+      description: Create Journal Entry
+      operationId: journalEntriesAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JournalEntry"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateJournalEntryResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create Journal Entry
+      tags:
+        - Journal Entries
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              journalEntry: {
+                currency_rate: 'USD',
+                currency: 'USD',
+                line_items: [
+                  {
+                    description:
+                      'Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.',
+                    tax_amount: 27500,
+                    total_amount: 27500,
+                    type: 'debit',
+                    tax_rate: {
+                      id: '123456'
+                    },
+                    tracking_category: {
+                      id: '123456',
+                      name: 'New York'
+                    },
+                    ledger_account: {
+                      id: '123456',
+                      nominal_code: 'N091',
+                      code: '453'
+                    }
+                  },
+                  {
+                    description:
+                      'Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.',
+                    tax_amount: 27500,
+                    total_amount: 27500,
+                    type: 'debit',
+                    tax_rate: {
+                      id: '123456'
+                    },
+                    tracking_category: {
+                      id: '123456',
+                      name: 'New York'
+                    },
+                    ledger_account: {
+                      id: '123456',
+                      nominal_code: 'N091',
+                      code: '453'
+                    }
+                  }
+                ],
+                memo: 'Thank you for your business and have a great day!',
+                posted_at: '2020-09-30T07:43:32.000Z'
+              }
+            }
+
+            try {
+              const { data } = await apideck.accounting.journalEntriesAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/accounting/journal-entries/{id}":
+    delete:
+      description: Delete Journal Entry
+      operationId: journalEntriesDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteJournalEntryResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete Journal Entry
+      tags:
+        - Journal Entries
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.accounting.journalEntriesDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get Journal Entry
+      operationId: journalEntriesOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetJournalEntryResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Journal Entry
+      tags:
+        - Journal Entries
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.accounting.journalEntriesOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update Journal Entry
+      operationId: journalEntriesUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JournalEntry"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateJournalEntryResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Update Journal Entry
+      tags:
+        - Journal Entries
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              journalEntry: {
+                currency_rate: 'USD',
+                currency: 'USD',
+                line_items: [
+                  {
+                    description:
+                      'Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.',
+                    tax_amount: 27500,
+                    total_amount: 27500,
+                    type: 'debit',
+                    tax_rate: {
+                      id: '123456'
+                    },
+                    tracking_category: {
+                      id: '123456',
+                      name: 'New York'
+                    },
+                    ledger_account: {
+                      id: '123456',
+                      nominal_code: 'N091',
+                      code: '453'
+                    }
+                  },
+                  {
+                    description:
+                      'Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.',
+                    tax_amount: 27500,
+                    total_amount: 27500,
+                    type: 'debit',
+                    tax_rate: {
+                      id: '123456'
+                    },
+                    tracking_category: {
+                      id: '123456',
+                      name: 'New York'
+                    },
+                    ledger_account: {
+                      id: '123456',
+                      nominal_code: 'N091',
+                      code: '453'
+                    }
+                  }
+                ],
+                memo: 'Thank you for your business and have a great day!',
+                posted_at: '2020-09-30T07:43:32.000Z'
+              }
+            }
+
+            try {
+              const { data } = await apideck.accounting.journalEntriesUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
   /accounting/ledger-accounts:
     get:
       description: List Ledger Accounts
@@ -4292,6 +4655,12 @@ components:
           schema:
             $ref: "#/components/schemas/CreateInvoiceResponse"
       description: Invoice created
+    CreateJournalEntryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateJournalEntryResponse"
+      description: JournalEntries
     CreateLedgerAccountResponse:
       content:
         application/json:
@@ -4346,6 +4715,12 @@ components:
           schema:
             $ref: "#/components/schemas/DeleteInvoiceResponse"
       description: Invoice deleted
+    DeleteJournalEntryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteJournalEntryResponse"
+      description: JournalEntries
     DeleteLedgerAccountResponse:
       content:
         application/json:
@@ -4442,6 +4817,18 @@ components:
           schema:
             $ref: "#/components/schemas/GetInvoicesResponse"
       description: Invoices
+    GetJournalEntriesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetJournalEntriesResponse"
+      description: JournalEntry
+    GetJournalEntryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetJournalEntryResponse"
+      description: JournalEntries
     GetLedgerAccountResponse:
       content:
         application/json:
@@ -4496,6 +4883,12 @@ components:
           schema:
             $ref: "#/components/schemas/GetTaxRatesResponse"
       description: TaxRates
+    JournalEntry:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JournalEntry"
+      description: JournalEntries
     NotFoundResponse:
       content:
         application/json:
@@ -4568,6 +4961,12 @@ components:
           schema:
             $ref: "#/components/schemas/UpdateInvoiceResponse"
       description: Invoice updated
+    UpdateJournalEntryResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateJournalEntryResponse"
+      description: JournalEntries
     UpdateLedgerAccountResponse:
       content:
         application/json:
@@ -6306,6 +6705,38 @@ components:
         - data
       type: object
       x-apideck-schema-id: CreateInvoiceResponse
+    CreateJournalEntryResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: add
+          type: string
+        resource:
+          description: Unified API resource name
+          example: journal-entries
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: quickbooks
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     CreateLedgerAccountResponse:
       properties:
         data:
@@ -7412,6 +7843,38 @@ components:
         - data
       type: object
       x-apideck-schema-id: DeleteInvoiceResponse
+    DeleteJournalEntryResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: delete
+          type: string
+        resource:
+          description: Unified API resource name
+          example: journal-entries
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: quickbooks
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     DeleteLedgerAccountResponse:
       properties:
         data:
@@ -8022,6 +8485,78 @@ components:
       type: object
       x-apideck-schema-id: GetInvoicesResponse
       x-graphql-type-name: InvoiceList
+    GetJournalEntriesResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/JournalEntry"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: all
+          type: string
+        resource:
+          description: Unified API resource name
+          example: journal-entries
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: quickbooks
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: JournalEntryList
+    GetJournalEntryResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/JournalEntry"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: journal-entries
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: quickbooks
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: JournalEntry
     GetLedgerAccountResponse:
       properties:
         data:
@@ -8868,6 +9403,113 @@ components:
       type: object
       x-apideck-schema-id: InvoicesSort
       x-graphql-type-name: InvoicesSort
+    JournalEntry:
+      additionalProperties: false
+      properties:
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        created_by:
+          $ref: "#/components/schemas/CreatedBy"
+        currency:
+          $ref: "#/components/schemas/Currency"
+        currency_rate:
+          $ref: "#/components/schemas/Currency"
+        id:
+          $ref: "#/components/schemas/Id"
+        line_items:
+          description: Requires a minimum of 2 line items that sum to 0
+          items:
+            $ref: "#/components/schemas/JournalEntryLineItem"
+          minItems: 2
+          type: array
+        memo:
+          description: Reference for the journal entry.
+          example: Thank you for your business and have a great day!
+          nullable: true
+          title: Memo
+          type: string
+        posted_at:
+          description: This is the date on which the journal entry was added. This can be different from the creation date and can also be backdated.
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          title: Posted at (timestamp)
+          type: string
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        updated_by:
+          $ref: "#/components/schemas/UpdatedBy"
+      type: object
+      x-apideck-strict-any-of:
+        - required:
+            - ""
+      x-apideck-strict-required:
+        - line_items
+      x-apideck-weights:
+        created_at: medium
+        created_by: edge-case
+        id: high
+        updated_at: medium
+        updated_by: edge-case
+    JournalEntryLineItem:
+      additionalProperties: false
+      properties:
+        description:
+          description: User defined description
+          example: Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.
+          nullable: true
+          title: Description
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        ledger_account:
+          $ref: "#/components/schemas/LinkedLedgerAccount"
+        tax_amount:
+          description: Tax amount
+          example: 27500
+          nullable: true
+          title: Tax amount
+          type: number
+        tax_rate:
+          $ref: "#/components/schemas/LinkedTaxRate"
+        total_amount:
+          description: Debit entries are considered positive, and credit entries are considered negative.
+          example: 27500
+          nullable: true
+          title: Total amount
+          type: number
+        tracking_category:
+          $ref: "#/components/schemas/LinkedTrackingCategory"
+        type:
+          description: Debit entries are considered positive, and credit entries are considered negative.
+          enum:
+            - debit
+            - credit
+          example: debit
+          title: Type
+          type: string
+          x-apideck-enum-id: JournalEntryLineItemType
+          x-graphql-type-name: JournalEntryLineItemType
+      required:
+        - ledger_account
+        - total_amount
+        - type
+      type: object
+      x-apideck-schema-id: JournalEntryLineItem
+      x-apideck-strict-any-of:
+        - required:
+            - ""
+      x-apideck-strict-required:
+        - ledger_account
+        - total_amount
+        - type
+      x-apideck-weights:
+        id: high
+        ledger_account: critical
+        tax_amount: high
+        tax_rate: medium
+        total_amount: critical
+        tracking_category: low
+        type: critical
     Language:
       description: language code according to ISO 639-1. For the United States - EN
       example: EN
@@ -9311,6 +9953,25 @@ components:
         id: medium
         name: medium
       x-graphql-type-name: LinkedTaxRate
+    LinkedTrackingCategory:
+      nullable: true
+      properties:
+        id:
+          description: The unique identifier for the tracking category.
+          example: "123456"
+          title: Tracking Category ID
+          type: string
+        name:
+          description: The name of the tracking category.
+          example: New York
+          nullable: true
+          title: Tracking Category Name
+          type: string
+      type: object
+      x-apideck-schema-id: LinkedTrackingCategory
+      x-apideck-weights:
+        id: critical
+      x-graphql-type-name: LinkedTrackingCategory
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -10645,6 +11306,38 @@ components:
         - data
       type: object
       x-apideck-schema-id: UpdateInvoiceResponse
+    UpdateJournalEntryResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: update
+          type: string
+        resource:
+          description: Unified API resource name
+          example: journal-entries
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: quickbooks
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     UpdateLedgerAccountResponse:
       properties:
         data:

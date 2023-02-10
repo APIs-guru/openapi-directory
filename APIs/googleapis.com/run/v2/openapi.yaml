@@ -1187,6 +1187,10 @@ components:
         path:
           description: Path to access on the HTTP server. Defaults to '/'.
           type: string
+        port:
+          description: Port number to access on the container. Must be in the range 1 to 65535.
+          format: int32
+          type: integer
       type: object
     GoogleCloudRunV2HTTPHeader:
       description: HTTPHeader describes a custom header to be used in HTTP probes

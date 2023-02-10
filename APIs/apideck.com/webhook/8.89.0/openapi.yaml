@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Webhook API
-  version: 8.88.0
+  version: 8.89.0
   x-apideck-api: webhook
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1568,6 +1568,7 @@ components:
         disabled_reason:
           description: Indicates if the webhook has has been disabled as it reached its retry limit or if account is over the usage allocated by it's plan.
           enum:
+            - none
             - retry_limit
             - usage_limit
           example: retry_limit
