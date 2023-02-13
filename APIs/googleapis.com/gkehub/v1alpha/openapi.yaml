@@ -2197,6 +2197,10 @@ components:
         gkeCluster:
           $ref: "#/components/schemas/GkeCluster"
           description: Optional. Specific information for a GKE-on-GCP cluster.
+        googleManaged:
+          description: Output only. Whether the lifecycle of this membership is managed by a google cluster platform service.
+          readOnly: true
+          type: boolean
         kubernetesMetadata:
           $ref: "#/components/schemas/KubernetesMetadata"
           description: Output only. Useful Kubernetes-specific metadata.

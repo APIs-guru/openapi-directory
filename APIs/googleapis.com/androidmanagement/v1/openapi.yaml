@@ -90,7 +90,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates an enterprise. This is the last step in the enterprise signup flow.
+      description: "Creates an enterprise. This is the last step in the enterprise signup flow. See also: SigninDetail"
       operationId: androidmanagement.enterprises.create
       parameters:
         - description: Whether the enterprise admin has seen and agreed to the managed Google Play Agreement (https://www.android.com/enterprise/terms/). Do not set this field for any customer-managed enterprise (https://developers.google.com/android/management/create-enterprise#customer-managed_enterprises). Set this to field to true for all EMM-managed enterprises (https://developers.google.com/android/management/create-enterprise#emm-managed_enterprises).
@@ -1782,7 +1782,7 @@ components:
             type: string
           type: array
         enterpriseDisplayName:
-          description: The name of the enterprise displayed to users.
+          description: The name of the enterprise displayed to users. This field has a maximum length of 100 characters.
           type: string
         logo:
           $ref: "#/components/schemas/ExternalData"

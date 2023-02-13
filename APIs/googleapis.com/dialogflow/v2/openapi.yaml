@@ -8506,6 +8506,9 @@ components:
     GoogleCloudDialogflowV2SuggestConversationSummaryRequest:
       description: The request message for Conversations.SuggestConversationSummary.
       properties:
+        assistQueryParams:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2AssistQueryParameters"
+          description: Parameters for a human assist query.
         contextSize:
           description: Max number of messages prior to and including [latest_message] to use as context when compiling the suggestion. By default 500 and at most 1000.
           format: int32
