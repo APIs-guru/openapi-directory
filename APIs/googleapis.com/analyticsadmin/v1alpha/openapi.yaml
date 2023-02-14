@@ -2134,7 +2134,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Acknowledges the terms of user data collection for the specified property. This acknowledgement must be completed (either in the Google Analytics UI or via this API) before MeasurementProtocolSecret resources may be created.
+      description: Acknowledges the terms of user data collection for the specified property. This acknowledgement must be completed (either in the Google Analytics UI or through this API) before MeasurementProtocolSecret resources may be created.
       operationId: analyticsadmin.properties.acknowledgeUserDataCollection
       parameters:
         - description: Required. The property for which to acknowledge user data collection.
@@ -4041,7 +4041,7 @@ components:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAccount"
           description: The account to create.
         redirectUri:
-          description: Redirect URI where the user will be sent after accepting Terms of Service. Must be configured in Developers Console as a Redirect URI
+          description: Redirect URI where the user will be sent after accepting Terms of Service. Must be configured in Developers Console as a Redirect URI.
           type: string
       type: object
     GoogleAnalyticsAdminV1alphaProvisionAccountTicketResponse:
@@ -4061,7 +4061,7 @@ components:
           type: array
         dimensionFilter:
           $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAccessFilterExpression"
-          description: Dimension filters allow you to restrict report response to specific dimension values which match the filter. For example, filtering on access records of a single user. To learn more, see [Fundamentals of Dimension Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters) for examples. Metrics cannot be used in this filter.
+          description: Dimension filters let you restrict report response to specific dimension values which match the filter. For example, filtering on access records of a single user. To learn more, see [Fundamentals of Dimension Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters) for examples. Metrics cannot be used in this filter.
         dimensions:
           description: The dimensions requested and displayed in the response. Requests are allowed up to 9 dimensions.
           items:

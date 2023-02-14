@@ -37,7 +37,6 @@ tags:
   - name: installer
   - name: nodes
   - name: policies
-  - name: provisioning
 paths:
   /v1alpha1/customers:
     get:
@@ -80,6 +79,41 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1alpha1/customers:provisionDeployment:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new SAS deployment through the GCP workflow. Creates a SAS organization if an organization match is not found.
+      operationId: prod_tt_sasportal.customers.provisionDeployment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SasPortalProvisionDeploymentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SasPortalProvisionDeploymentResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/sasportal
+          Oauth2c:
+            - https://www.googleapis.com/auth/sasportal
+      tags:
+        - customers
   /v1alpha1/installer:generateSecret:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -255,41 +289,6 @@ paths:
             - https://www.googleapis.com/auth/sasportal
       tags:
         - policies
-  /v1alpha1/provisioning:provisionDeployment:
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Creates a new SAS deployment through the GCP workflow. Creates a SAS organization if an organization match is not found.
-      operationId: prod_tt_sasportal.provisioning.provisionDeployment
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SasPortalProvisionDeploymentRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SasPortalProvisionDeploymentResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/sasportal
-          Oauth2c:
-            - https://www.googleapis.com/auth/sasportal
-      tags:
-        - provisioning
   "/v1alpha1/{name}":
     delete:
       description: Deletes a node.

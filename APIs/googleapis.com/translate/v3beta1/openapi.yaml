@@ -13,20 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Translation API
   version: v3beta1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://translation.googleapis.com/$discovery/rest?version=v3beta1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: translate
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/translate/docs/quickstarts
 tags:
@@ -1138,7 +1135,7 @@ components:
           $ref: "#/components/schemas/DocumentOutputConfig"
           description: Optional. Output configurations. Defines if the output file should be stored within Cloud Storage as well as the desired output format. If not provided the translated file will only be returned through a byte-stream and its output mime type will be the same as the input file's mime type.
         enableShadowRemovalNativePdf:
-          description: "Optional. If true, use the text removal server to remove the shadow text on background image for native pdf translation. Shadow removal feature can only be enabled when is_translate_native_pdf_only: false && pdf_native_only: false"
+          description: Optional. If true, use the text removal server to remove the shadow text on background image for native pdf translation.
           type: boolean
         glossaryConfig:
           $ref: "#/components/schemas/TranslateTextGlossaryConfig"
@@ -1273,5 +1270,3 @@ components:
             https://www.googleapis.com/auth/cloud-translation: Translate text from one language to another using Google Translate
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}
