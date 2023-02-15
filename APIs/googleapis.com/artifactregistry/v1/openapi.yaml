@@ -346,7 +346,7 @@ paths:
       description: Lists files.
       operationId: artifactregistry.projects.locations.repositories.files.list
       parameters:
-        - description: 'The name of the repository whose files will be listed. For example: "projects/p1/locations/us-central1/repositories/repo1'
+        - description: 'Required. The name of the repository whose files will be listed. For example: "projects/p1/locations/us-central1/repositories/repo1'
           in: path
           name: parent
           required: true
@@ -1308,8 +1308,9 @@ components:
       description: Files store content that is potentially associated with Packages or Versions.
       properties:
         createTime:
-          description: The time when the File was created.
+          description: Output only. The time when the File was created.
           format: google-datetime
+          readOnly: true
           type: string
         fetchTime:
           description: Output only. The time when the last attempt to refresh the file's data was made. Only set when the repository is remote.
@@ -1332,8 +1333,9 @@ components:
           format: int64
           type: string
         updateTime:
-          description: The time when the File was last updated.
+          description: Output only. The time when the File was last updated.
           format: google-datetime
+          readOnly: true
           type: string
       type: object
     Hash:
@@ -2021,7 +2023,7 @@ components:
           format: int32
           type: integer
         repository:
-          description: 'A reference to the repository resource, for example: "projects/p1/locations/us-central1/repository/repo1".'
+          description: 'A reference to the repository resource, for example: "projects/p1/locations/us-central1/repositories/repo1".'
           type: string
       type: object
     VPCSCConfig:

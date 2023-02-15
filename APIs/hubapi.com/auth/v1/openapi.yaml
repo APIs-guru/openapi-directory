@@ -2,7 +2,7 @@ openapi: 3.0.1
 servers:
   - url: https://api.hubapi.com/
 info:
-  title: OAuthService
+  title: ""
   version: v1
   x-logo:
     url: https://developers.hubspot.com/hubfs/assets/hubspot.com/buzz/HubSpotOpenGraph.png
@@ -52,6 +52,9 @@ paths:
             type: string
           style: simple
       responses:
+        "204":
+          content: {}
+          description: No content
         default:
           $ref: "#/components/responses/Error"
       security: []

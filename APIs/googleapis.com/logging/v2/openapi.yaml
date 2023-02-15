@@ -942,6 +942,57 @@ paths:
             - https://www.googleapis.com/auth/logging.admin
       tags:
         - projects
+  "/v2/{name}:updateAsync":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Updates a log bucket asynchronously.If the bucket has a lifecycle_state of DELETE_REQUESTED, then FAILED_PRECONDITION will be returned.After a bucket has been created, the bucket's location cannot be changed.
+      operationId: logging.projects.locations.buckets.updateAsync
+      parameters:
+        - description: Required. The full resource name of the bucket to update. "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]" "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]" "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]" For example:"projects/my-project/locations/global/buckets/my-bucket"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: "Required. Field mask that specifies the fields in bucket that need an update. A bucket field will be overwritten if, and only if, it is in the update mask. name and output only fields cannot be updated.For a detailed FieldMask definition, see: https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMaskFor example: updateMask=retention_days"
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LogBucket"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/logging.admin
+          Oauth2c:
+            - https://www.googleapis.com/auth/logging.admin
+      tags:
+        - projects
   "/v2/{parent}/buckets":
     get:
       description: Lists log buckets.
@@ -1027,6 +1078,57 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LogBucket"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/logging.admin
+          Oauth2c:
+            - https://www.googleapis.com/auth/logging.admin
+      tags:
+        - projects
+  "/v2/{parent}/buckets:createAsync":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a log bucket asynchronously that can be used to store log entries.After a bucket has been created, the bucket's location cannot be changed.
+      operationId: logging.projects.locations.buckets.createAsync
+      parameters:
+        - description: 'Required. The resource in which to create the log bucket: "projects/[PROJECT_ID]/locations/[LOCATION_ID]" For example:"projects/my-project/locations/global"'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. A client-assigned identifier such as "my-bucket". Identifiers are limited to 100 characters and can include only letters, digits, underscores, hyphens, and periods.
+          in: query
+          name: bucketId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LogBucket"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -1739,6 +1841,35 @@ components:
           readOnly: true
           type: boolean
       type: object
+    BucketMetadata:
+      description: Metadata for LongRunningUpdateBucket Operations.
+      properties:
+        createBucketRequest:
+          $ref: "#/components/schemas/CreateBucketRequest"
+          description: LongRunningCreateBucket RPC request.
+        endTime:
+          description: The end time of an operation.
+          format: google-datetime
+          type: string
+        startTime:
+          description: The create time of an operation.
+          format: google-datetime
+          type: string
+        state:
+          description: State of an operation.
+          enum:
+            - OPERATION_STATE_UNSPECIFIED
+            - OPERATION_STATE_SCHEDULED
+            - OPERATION_STATE_WAITING_FOR_PERMISSIONS
+            - OPERATION_STATE_RUNNING
+            - OPERATION_STATE_SUCCEEDED
+            - OPERATION_STATE_FAILED
+            - OPERATION_STATE_CANCELLED
+          type: string
+        updateBucketRequest:
+          $ref: "#/components/schemas/UpdateBucketRequest"
+          description: LongRunningUpdateBucket RPC request.
+      type: object
     BucketOptions:
       description: "BucketOptions describes the bucket boundaries used to create a histogram for the distribution. The buckets can be in a linear sequence, an exponential sequence, or each bucket can be specified explicitly. BucketOptions does not include the number of values in each bucket.A bucket has an inclusive lower bound and exclusive upper bound for the values that are counted for that bucket. The upper bound of a bucket must be strictly greater than the lower bound. The sequence of N buckets for a distribution consists of an underflow bucket (number 0), zero or more finite buckets (number 1 through N - 2) and an overflow bucket (number N - 1). The buckets are contiguous: the lower bound of bucket i (i > 0) is the same as the upper bound of bucket i - 1. The buckets span the whole range of finite values: lower bound of the underflow bucket is -infinity and the upper bound of the overflow bucket is +infinity. The finite buckets are so-called because both bounds are finite."
       properties:
@@ -1829,6 +1960,19 @@ components:
         logEntriesCopiedCount:
           description: Number of log entries copied.
           format: int64
+          type: string
+      type: object
+    CreateBucketRequest:
+      description: The parameters to CreateBucket.
+      properties:
+        bucket:
+          $ref: "#/components/schemas/LogBucket"
+          description: Required. The new bucket. The region specified in the new bucket must be compliant with any Location Restriction Org Policy. The name field in the bucket is ignored.
+        bucketId:
+          description: Required. A client-assigned identifier such as "my-bucket". Identifiers are limited to 100 characters and can include only letters, digits, underscores, hyphens, and periods.
+          type: string
+        parent:
+          description: 'Required. The resource in which to create the log bucket: "projects/[PROJECT_ID]/locations/[LOCATION_ID]" For example:"projects/my-project/locations/global"'
           type: string
       type: object
     Empty:
@@ -2140,6 +2284,9 @@ components:
     LogBucket:
       description: Describes a repository in which log entries are stored.
       properties:
+        analyticsEnabled:
+          description: Whether log analytics is enabled for this bucket.Once enabled, log analytics features cannot be disabled.
+          type: boolean
         cmekSettings:
           $ref: "#/components/schemas/CmekSettings"
           description: The CMEK settings of the log bucket. If present, new log entries written to this log bucket are encrypted using the CMEK key provided in this configuration. If a log bucket has CMEK settings, the CMEK settings cannot be disabled later by updating the log bucket. Changing the KMS key is allowed.
@@ -2162,6 +2309,9 @@ components:
             - LIFECYCLE_STATE_UNSPECIFIED
             - ACTIVE
             - DELETE_REQUESTED
+            - UPDATING
+            - CREATING
+            - FAILED
           readOnly: true
           type: string
         locked:
@@ -2884,6 +3034,20 @@ components:
     UndeleteBucketRequest:
       description: The parameters to UndeleteBucket.
       properties: {}
+      type: object
+    UpdateBucketRequest:
+      description: The parameters to UpdateBucket.
+      properties:
+        bucket:
+          $ref: "#/components/schemas/LogBucket"
+          description: Required. The updated bucket.
+        name:
+          description: Required. The full resource name of the bucket to update. "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]" "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]" "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]" For example:"projects/my-project/locations/global/buckets/my-bucket"
+          type: string
+        updateMask:
+          description: "Required. Field mask that specifies the fields in bucket that need an update. A bucket field will be overwritten if, and only if, it is in the update mask. name and output only fields cannot be updated.For a detailed FieldMask definition, see: https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMaskFor example: updateMask=retention_days"
+          format: google-fieldmask
+          type: string
       type: object
     WriteLogEntriesRequest:
       description: The parameters to WriteLogEntries.

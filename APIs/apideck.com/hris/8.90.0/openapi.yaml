@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: HRIS API
-  version: 8.89.0
+  version: 8.90.0
   x-apideck-api: hris
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1031,6 +1031,13 @@ paths:
       tags:
         - Employees
       x-apideck-api: hris
+      x-apideck-gotchas:
+        - connector: nmbrs
+          description: We keep track of the "List Employees" response for NMBRS virtual webhooks events, which contains fewer fields compared to the "Get Employee" response.
+        - connector: ceridian-dayforce
+          description: For virtual webhook events on Ceridian Dayforce, we monitor the "List Employees" response, which has a very small set of fields in comparison of the "Get Employee" response. This is the reason why we only support `hris.employee.created` events for this connector.
+        - connector: paylocity
+          description: For virtual webhook events on Paylocity, we monitor the "List Employees" response, which has a very small set of fields in comparison of the "Get Employee" response. This is the reason why we only support `hris.employee.created` events for this connector.
       x-codeSamples:
         - label: Node
           lang: TypeScript

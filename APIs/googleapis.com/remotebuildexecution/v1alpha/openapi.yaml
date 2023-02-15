@@ -1229,6 +1229,9 @@ components:
           description: "Output only. Instance resource name formatted as: `projects/[PROJECT_ID]/instances/[INSTANCE_ID]`. Name should not be populated when creating an instance since it is provided in the `instance_id` field."
           readOnly: true
           type: string
+        schedulerNotificationConfig:
+          $ref: "#/components/schemas/GoogleDevtoolsRemotebuildexecutionAdminV1alphaSchedulerNotificationConfig"
+          description: The instance's configuration for scheduler notifications. Absence implies that this feature is not enabled for this instance.
         state:
           description: Output only. State of the instance.
           enum:
@@ -1276,6 +1279,13 @@ components:
           items:
             $ref: "#/components/schemas/GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool"
           type: array
+      type: object
+    GoogleDevtoolsRemotebuildexecutionAdminV1alphaSchedulerNotificationConfig:
+      description: Defines configurations for an instance's scheduler notifications, where a target Pub/Sub topic will be notified whenever a task (e.g. an action or reservation) completes on this instance.
+      properties:
+        topic:
+          description: "The Pub/Sub topic resource name to issue notifications to. Note that the topic does not need to be owned by the same project as this instance. Format: `projects//topics/`."
+          type: string
       type: object
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaTestNotifyInstanceRequest:
       description: The request used for `TestNotifyInstance`.

@@ -731,7 +731,7 @@ components:
           description: Required. The Document resource ID.
           type: string
         name:
-          description: "Required. The Document resource full name, of the form: projects//locations//dataStores//branches//documents/"
+          description: "Required. The Document resource full name, of the form: projects/{project\\_id}/locations/{location}/dataStores/{data\\_store\\_id}/branches/{branch\\_id}/documents/{document\\_id}"
           type: string
         promotionIds:
           description: The promotion IDs associated with this Document. Currently, this field is restricted to at most one ID.

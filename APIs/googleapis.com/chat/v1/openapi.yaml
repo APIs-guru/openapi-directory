@@ -55,6 +55,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/chat.bot
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.bot
+        - Oauth2:
             - https://www.googleapis.com/auth/chat.messages
           Oauth2c:
             - https://www.googleapis.com/auth/chat.messages
@@ -100,6 +104,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/chat.bot
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.bot
+        - Oauth2:
             - https://www.googleapis.com/auth/chat.spaces
           Oauth2c:
             - https://www.googleapis.com/auth/chat.spaces
@@ -141,6 +149,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/chat.bot
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.bot
+        - Oauth2:
             - https://www.googleapis.com/auth/chat.messages
           Oauth2c:
             - https://www.googleapis.com/auth/chat.messages
@@ -164,6 +176,10 @@ paths:
                 $ref: "#/components/schemas/Attachment"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.bot
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.bot
         - Oauth2:
             - https://www.googleapis.com/auth/chat.messages
           Oauth2c:
@@ -220,6 +236,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/chat.bot
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.bot
+        - Oauth2:
             - https://www.googleapis.com/auth/chat.messages
           Oauth2c:
             - https://www.googleapis.com/auth/chat.messages
@@ -259,6 +279,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/chat.bot
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.bot
+        - Oauth2:
             - https://www.googleapis.com/auth/chat.messages
           Oauth2c:
             - https://www.googleapis.com/auth/chat.messages
@@ -293,6 +317,10 @@ paths:
                 $ref: "#/components/schemas/ListMembershipsResponse"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.bot
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.bot
         - Oauth2:
             - https://www.googleapis.com/auth/chat.memberships
           Oauth2c:
@@ -375,6 +403,10 @@ paths:
                 $ref: "#/components/schemas/Message"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.bot
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.bot
         - Oauth2:
             - https://www.googleapis.com/auth/chat.messages
           Oauth2c:
@@ -1070,11 +1102,11 @@ components:
           type: boolean
       type: object
     GoogleAppsCardV1Divider:
-      description: 'Displays a divider between widgets, a horizontal line. For example, the following JSON creates a divider: ``` "divider": { } ```'
+      description: 'Displays a divider between widgets, a horizontal line. For example, the following JSON creates a divider: ``` "divider": {} ```'
       properties: {}
       type: object
     GoogleAppsCardV1Grid:
-      description: 'Displays a grid with a collection of items. A grid supports any number of columns and items. The number of rows is determined by items divided by columns. A grid with 10 items and 2 columns has 5 rows. A grid with 11 items and 2 columns has 6 rows. Currently supported in [dialogs](https://developers.google.com/chat/how-tos/dialogs). Support for [card messages](https://developers.google.com/chat/api/guides/message-formats/cards) is coming soon. For example, the following JSON creates a 2 column grid with a single item: ``` "grid": { "title": "A fine collection of items", "numColumns": 2, "borderStyle": { "type": "STROKE", "cornerRadius": 4.0 }, "items": [ "image": { "imageUri": "https://www.example.com/image.png", "cropStyle": { "type": "SQUARE" }, "borderStyle": { "type": "STROKE" } }, "title": "An item", "textAlignment": "CENTER" ], "onClick": { "openLink": { "url":"https://www.example.com" } } } ```'
+      description: 'Displays a grid with a collection of items. A grid supports any number of columns and items. The number of rows is determined by items divided by columns. A grid with 10 items and 2 columns has 5 rows. A grid with 11 items and 2 columns has 6 rows. Currently supported in [dialogs](https://developers.google.com/chat/how-tos/dialogs). Support for [card messages](https://developers.google.com/chat/api/guides/message-formats/cards) is coming soon. For example, the following JSON creates a 2 column grid with a single item: ``` "grid": { "title": "A fine collection of items", "columnCount": 2, "borderStyle": { "type": "STROKE", "cornerRadius": 4 }, "items": [ { "image": { "imageUri": "https://www.example.com/image.png", "cropStyle": { "type": "SQUARE" }, "borderStyle": { "type": "STROKE" } }, "title": "An item", "textAlignment": "CENTER" } ], "onClick": { "openLink": { "url": "https://www.example.com" } } } ```'
       properties:
         borderStyle:
           $ref: "#/components/schemas/GoogleAppsCardV1BorderStyle"
@@ -1358,25 +1390,25 @@ components:
       properties:
         buttonList:
           $ref: "#/components/schemas/GoogleAppsCardV1ButtonList"
-          description: 'A list of buttons. For example, the following JSON creates two buttons. The first is a blue text button and the second is an image button that opens a link: ``` "buttonList": { "buttons": [ "button": { "text": "Edit", "color": { "red": 0, "green": 0, "blue": 1, "alpha": 1 } "disabled": true }, "button": { "icon": { "knownIcon": "INVITE" "altText": "check calendar" }, "onClick": { "openLink": { "url": "https://example.com/calendar" } } }, ] } ```'
+          description: 'A list of buttons. For example, the following JSON creates two buttons. The first is a blue text button and the second is an image button that opens a link: ``` "buttonList": { "buttons": [ { "text": "Edit", "color": { "red": 0, "green": 0, "blue": 1, "alpha": 1 }, "disabled": true, }, { "icon": { "knownIcon": "INVITE", "altText": "check calendar" }, "onClick": { "openLink": { "url": "https://example.com/calendar" } } } ] } ```'
         dateTimePicker:
           $ref: "#/components/schemas/GoogleAppsCardV1DateTimePicker"
-          description: 'Displays a selection/input widget for date, time, or date and time. Not supported by Chat apps. Support by Chat apps is coming soon. For example, the following JSON creates a datetime picker to schedule an appointment: ``` "date_time_picker": { "name": "appointment_time", "label": "Book your appointment at:", "type": "DateTimePickerType.DATE_AND_TIME", "valueMsEpoch": "796435200000" } ```'
+          description: 'Displays a selection/input widget for date, time, or date and time. Not supported by Chat apps. Support by Chat apps is coming soon. For example, the following JSON creates a datetime picker to schedule an appointment: ``` "dateTimePicker": { "name": "appointment_time", "label": "Book your appointment at:", "type": "DATE_AND_TIME", "valueMsEpoch": "796435200000" } ```'
         decoratedText:
           $ref: "#/components/schemas/GoogleAppsCardV1DecoratedText"
-          description: 'Displays a decorated text item. For example, the following JSON creates a decorated text widget showing email address: ``` "decoratedText": { "icon": { "knownIcon": "EMAIL" }, "topLabel": "Email Address", "text": "sasha@example.com", "bottomLabel": "This is a new Email address!", "switchWidget": { "name": "has_send_welcome_email_to_sasha", "selected": false, "controlType": "ControlType.CHECKBOX" } } ```'
+          description: 'Displays a decorated text item. For example, the following JSON creates a decorated text widget showing email address: ``` "decoratedText": { "icon": { "knownIcon": "EMAIL" }, "topLabel": "Email Address", "text": "sasha@example.com", "bottomLabel": "This is a new Email address!", "switchControl": { "name": "has_send_welcome_email_to_sasha", "selected": false, "controlType": "CHECKBOX" } } ```'
         divider:
           $ref: "#/components/schemas/GoogleAppsCardV1Divider"
           description: 'Displays a horizontal line divider between widgets. For example, the following JSON creates a divider: ``` "divider": { } ```'
         grid:
           $ref: "#/components/schemas/GoogleAppsCardV1Grid"
-          description: 'Displays a grid with a collection of items. A grid supports any number of columns and items. The number of rows is determined by the upper bounds of the number items divided by the number of columns. A grid with 10 items and 2 columns has 5 rows. A grid with 11 items and 2 columns has 6 rows. Currently supported in [dialogs](https://developers.google.com/chat/how-tos/dialogs). Support for [card messages](https://developers.google.com/chat/api/guides/message-formats/cards) is coming soon. For example, the following JSON creates a 2 column grid with a single item: ``` "grid": { "title": "A fine collection of items", "numColumns": 2, "borderStyle": { "type": "STROKE", "cornerRadius": 4.0 }, "items": [ "image": { "imageUri": "https://www.example.com/image.png", "cropStyle": { "type": "SQUARE" }, "borderStyle": { "type": "STROKE" } }, "title": "An item", "textAlignment": "CENTER" ], "onClick": { "openLink": { "url":"https://www.example.com" } } } ```'
+          description: 'Displays a grid with a collection of items. A grid supports any number of columns and items. The number of rows is determined by the upper bounds of the number items divided by the number of columns. A grid with 10 items and 2 columns has 5 rows. A grid with 11 items and 2 columns has 6 rows. Currently supported in [dialogs](https://developers.google.com/chat/how-tos/dialogs). Support for [card messages](https://developers.google.com/chat/api/guides/message-formats/cards) is coming soon. For example, the following JSON creates a 2 column grid with a single item: ``` "grid": { "title": "A fine collection of items", "columnCount": 2, "borderStyle": { "type": "STROKE", "cornerRadius": 4 }, "items": [ { "image": { "imageUri": "https://www.example.com/image.png", "cropStyle": { "type": "SQUARE" }, "borderStyle": { "type": "STROKE" } }, "title": "An item", "textAlignment": "CENTER" } ], "onClick": { "openLink": { "url": "https://www.example.com" } } } ```'
         image:
           $ref: "#/components/schemas/GoogleAppsCardV1Image"
-          description: 'Displays an image. For example, the following JSON creates an image with alternative text: ``` "image": { "imageUrl": "https://developers.google.com/chat/images/quickstart-app-avatar.png" "altText": "Chat app avatar" } ```'
+          description: 'Displays an image. For example, the following JSON creates an image with alternative text: ``` "image": { "imageUrl": "https://developers.google.com/chat/images/quickstart-app-avatar.png", "altText": "Chat app avatar" } ```'
         selectionInput:
           $ref: "#/components/schemas/GoogleAppsCardV1SelectionInput"
-          description: 'Displays a selection control that lets users select items. Selection controls can be check boxes, radio buttons, switches, or dropdown menus. Currently supported in [dialogs](https://developers.google.com/chat/how-tos/dialogs). Support for [card messages](https://developers.google.com/chat/api/guides/message-formats/cards) is coming soon. For example, the following JSON creates a dropdown menu that lets users choose a size: ``` "selectionInput": { "name": "size", "label": "Size" "type": "SelectionType.DROPDOWN", "items": [ { "text": "S", "value": "small", "selected": false }, { "text": "M", "value": "medium", "selected": true }, { "text": "L", "value": "large", "selected": false }, { "text": "XL", "value": "extra_large", "selected": false } ] } ```'
+          description: 'Displays a selection control that lets users select items. Selection controls can be check boxes, radio buttons, switches, or dropdown menus. Currently supported in [dialogs](https://developers.google.com/chat/how-tos/dialogs). Support for [card messages](https://developers.google.com/chat/api/guides/message-formats/cards) is coming soon. For example, the following JSON creates a dropdown menu that lets users choose a size: ``` "selectionInput": { "name": "size", "label": "Size" "type": "DROPDOWN", "items": [ { "text": "S", "value": "small", "selected": false }, { "text": "M", "value": "medium", "selected": true }, { "text": "L", "value": "large", "selected": false }, { "text": "XL", "value": "extra_large", "selected": false } ] } ```'
         textInput:
           $ref: "#/components/schemas/GoogleAppsCardV1TextInput"
           description: 'Displays a text box that users can type into. Currently supported in [dialogs](https://developers.google.com/chat/how-tos/dialogs). Support for [card messages](https://developers.google.com/chat/api/guides/message-formats/cards) is coming soon. For example, the following JSON creates a text input for an email address: ``` "textInput": { "name": "mailing_address", "label": "Mailing Address" } ``` As another example, the following JSON creates a text input for a programming language with static suggestions: ``` "textInput": { "name": "preferred_programing_language", "label": "Preferred Language", "initialSuggestions": { "items": [ { "text": "C++" }, { "text": "Java" }, { "text": "JavaScript" }, { "text": "Python" } ] } } ```'
@@ -1730,6 +1762,10 @@ components:
     Space:
       description: A space in Google Chat. Spaces are conversations between two or more users or 1:1 messages between a user and a Chat app.
       properties:
+        adminInstalled:
+          description: Output only. Whether the Chat app was installed by a Google Workspace administrator. Administrators can install a Chat app for their domain, organizational unit, or a group of users. Administrators can only install Chat apps for direct messaging between users and the app. To support admin install, your app must feature direct messaging.
+          readOnly: true
+          type: boolean
         displayName:
           description: The space's display name. Required when [creating a space](https://developers.google.com/chat/api/reference/rest/v1/spaces/create). For direct messages, this field may be empty. Supports up to 128 characters.
           type: string
@@ -1914,6 +1950,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
+            https://www.googleapis.com/auth/chat.bot: "Private Service: https://www.googleapis.com/auth/chat.bot"
             https://www.googleapis.com/auth/chat.memberships: View, add, and remove members from conversations in Google Chat
             https://www.googleapis.com/auth/chat.memberships.readonly: View members in Google Chat conversations.
             https://www.googleapis.com/auth/chat.messages: View, compose, send, update, and delete messages, and add, view, and delete reactions to messages.
@@ -1928,6 +1965,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
+            https://www.googleapis.com/auth/chat.bot: "Private Service: https://www.googleapis.com/auth/chat.bot"
             https://www.googleapis.com/auth/chat.memberships: View, add, and remove members from conversations in Google Chat
             https://www.googleapis.com/auth/chat.memberships.readonly: View members in Google Chat conversations.
             https://www.googleapis.com/auth/chat.messages: View, compose, send, update, and delete messages, and add, view, and delete reactions to messages.
