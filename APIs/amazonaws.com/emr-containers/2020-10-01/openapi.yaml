@@ -3,7 +3,7 @@ info:
   version: '2020-10-01'
   x-release: v4
   title: Amazon EMR Containers
-  description: '<p>Amazon EMR on EKS provides a deployment option for Amazon EMR that allows you to run open-source big data frameworks on Amazon Elastic Kubernetes Service (Amazon EKS). With this deployment option, you can focus on running analytics workloads while Amazon EMR on EKS builds, configures, and manages containers for open-source applications. For more information about Amazon EMR on EKS concepts and tasks, see <a href="https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html">What is Amazon EMR on EKS</a>.</p> <p> <i>Amazon EMR containers</i> is the API name for Amazon EMR on EKS. The <code>emr-containers</code> prefix is used in the following scenarios: </p> <ul> <li> <p>It is the prefix in the CLI commands for Amazon EMR on EKS. For example, <code>aws emr-containers start-job-run</code>.</p> </li> <li> <p>It is the prefix before IAM policy actions for Amazon EMR on EKS. For example, <code>"Action": [ "emr-containers:StartJobRun"]</code>. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions">Policy actions for Amazon EMR on EKS</a>.</p> </li> <li> <p>It is the prefix used in Amazon EMR on EKS service endpoints. For example, <code>emr-containers.us-east-2.amazonaws.com</code>. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/service-quotas.html#service-endpoints">Amazon EMR on EKS Service Endpoints</a>.</p> </li> </ul>'
+  description: '<p>Amazon EMR on EKS provides a deployment option for Amazon EMR that allows you to run open-source big data frameworks on Amazon Elastic Kubernetes Service (Amazon EKS). With this deployment option, you can focus on running analytics workloads while Amazon EMR on EKS builds, configures, and manages containers for open-source applications. For more information about Amazon EMR on EKS concepts and tasks, see <a href="https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html">What is shared id="EMR-EKS"/&gt;</a>.</p> <p> <i>Amazon EMR containers</i> is the API name for Amazon EMR on EKS. The <code>emr-containers</code> prefix is used in the following scenarios: </p> <ul> <li> <p>It is the prefix in the CLI commands for Amazon EMR on EKS. For example, <code>aws emr-containers start-job-run</code>.</p> </li> <li> <p>It is the prefix before IAM policy actions for Amazon EMR on EKS. For example, <code>"Action": [ "emr-containers:StartJobRun"]</code>. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions">Policy actions for Amazon EMR on EKS</a>.</p> </li> <li> <p>It is the prefix used in Amazon EMR on EKS service endpoints. For example, <code>emr-containers.us-east-2.amazonaws.com</code>. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/service-quotas.html#service-endpoints">Amazon EMR on EKSService Endpoints</a>.</p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -212,10 +212,162 @@ paths:
             pattern: '[0-9a-z]+'
             minLength: 1
             maxLength: 64
+  /jobtemplates:
+    post:
+      operationId: CreateJobTemplate
+      description: 'Creates a job template. Job template stores values of StartJobRun API request in a template and can be used to start a job run. Job template allows two use cases: avoid repeating recurring StartJobRun API request values, enforcing certain values in StartJobRun API request.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateJobTemplateResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - clientToken
+                - jobTemplateData
+              properties:
+                name:
+                  description: The specified name of the job template.
+                  type: string
+                  pattern: '[\.\-_/#A-Za-z0-9]+'
+                  minLength: 1
+                  maxLength: 64
+                clientToken:
+                  description: The client token of the job template.
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 64
+                jobTemplateData:
+                  description: The values of StartJobRun API requests used in job runs started using the job template.
+                  type: object
+                  properties:
+                    executionRoleArn:
+                      allOf:
+                        - $ref: '#/components/schemas/ParametricIAMRoleArn'
+                        - description: The execution role ARN of the job run.
+                    releaseLabel:
+                      allOf:
+                        - $ref: '#/components/schemas/ParametricReleaseLabel'
+                        - description: ' The release version of Amazon EMR.'
+                    configurationOverrides:
+                      allOf:
+                        - $ref: '#/components/schemas/ParametricConfigurationOverrides'
+                        - description: ' The configuration settings that are used to override defaults configuration.'
+                    jobDriver:
+                      $ref: '#/components/schemas/JobDriver'
+                    parameterConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/TemplateParameterConfigurationMap'
+                        - description: The configuration of parameters existing in the job template.
+                    jobTags:
+                      allOf:
+                        - $ref: '#/components/schemas/TagMap'
+                        - description: The tags assigned to jobs started using the job template.
+                tags:
+                  description: The tags that are associated with the job template.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/StringEmpty256'
+                kmsKeyArn:
+                  description: The KMS key ARN used to encrypt the job template.
+                  type: string
+                  pattern: '^(arn:(aws[a-zA-Z0-9-]*):kms:([a-zA-Z0-9]+-?)+:(\d{12})?:key\/[(0-9a-zA-Z)-?]+|\$\{[a-zA-Z]\w*\})$'
+                  minLength: 3
+                  maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListJobTemplates
+      description: 'Lists job templates based on a set of parameters. Job template stores values of StartJobRun API request in a template and can be used to start a job run. Job template allows two use cases: avoid repeating recurring StartJobRun API request values, enforcing certain values in StartJobRun API request.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListJobTemplatesResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: createdAfter
+          in: query
+          required: false
+          description: The date and time after which the job templates were created.
+          schema:
+            type: string
+            format: date-time
+        - name: createdBefore
+          in: query
+          required: false
+          description: ' The date and time before which the job templates were created.'
+          schema:
+            type: string
+            format: date-time
+        - name: maxResults
+          in: query
+          required: false
+          description: ' The maximum number of job templates that can be listed.'
+          schema:
+            type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: ' The token for the next set of job templates to return.'
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 1024
   '/virtualclusters/{virtualClusterId}/endpoints':
     post:
       operationId: CreateManagedEndpoint
-      description: Creates a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+      description: Creates a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
       responses:
         '200':
           description: Success
@@ -262,7 +414,6 @@ paths:
                 - type
                 - releaseLabel
                 - executionRoleArn
-                - certificateArn
                 - clientToken
               properties:
                 name:
@@ -290,7 +441,7 @@ paths:
                   minLength: 20
                   maxLength: 2048
                 certificateArn:
-                  description: The certificate ARN of the managed endpoint.
+                  description: The certificate ARN provided by users for the managed endpoint. This field is under deprecation and will be removed in future releases.
                   type: string
                   pattern: '^arn:(aws[a-zA-Z0-9-]*):acm:.+:(\d{12}):certificate/.+$'
                   minLength: 44
@@ -330,7 +481,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListManagedEndpoints
-      description: Lists managed endpoints based on a set of parameters. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+      description: Lists managed endpoints based on a set of parameters. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
       responses:
         '200':
           description: Success
@@ -461,7 +612,7 @@ paths:
                     type:
                       allOf:
                         - $ref: '#/components/schemas/ContainerProviderType'
-                        - description: The type of the container provider. EKS is the only supported type as of now.
+                        - description: The type of the container provider. Amazon EKS is the only supported type as of now.
                     id:
                       allOf:
                         - $ref: '#/components/schemas/ClusterId'
@@ -526,7 +677,7 @@ paths:
         - name: containerProviderType
           in: query
           required: false
-          description: The container provider type of the virtual cluster. EKS is the only supported type as of now.
+          description: The container provider type of the virtual cluster. Amazon EKS is the only supported type as of now.
           schema:
             type: string
             enum:
@@ -569,10 +720,89 @@ paths:
             pattern: .*\S.*
             minLength: 1
             maxLength: 1024
+  '/jobtemplates/{templateId}':
+    delete:
+      operationId: DeleteJobTemplate
+      description: 'Deletes a job template. Job template stores values of StartJobRun API request in a template and can be used to start a job run. Job template allows two use cases: avoid repeating recurring StartJobRun API request values, enforcing certain values in StartJobRun API request.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteJobTemplateResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: templateId
+          in: path
+          required: true
+          description: The ID of the job template that will be deleted.
+          schema:
+            type: string
+            pattern: '[0-9a-z]+'
+            minLength: 1
+            maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeJobTemplate
+      description: 'Displays detailed information about a specified job template. Job template stores values of StartJobRun API request in a template and can be used to start a job run. Job template allows two use cases: avoid repeating recurring StartJobRun API request values, enforcing certain values in StartJobRun API request.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeJobTemplateResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: templateId
+          in: path
+          required: true
+          description: The ID of the job template that will be described.
+          schema:
+            type: string
+            pattern: '[0-9a-z]+'
+            minLength: 1
+            maxLength: 64
   '/virtualclusters/{virtualClusterId}/endpoints/{endpointId}':
     delete:
       operationId: DeleteManagedEndpoint
-      description: Deletes a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+      description: Deletes a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
       responses:
         '200':
           description: Success
@@ -621,7 +851,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeManagedEndpoint
-      description: Displays detailed information about a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+      description: Displays detailed information about a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.
       responses:
         '200':
           description: Success
@@ -879,9 +1109,6 @@ paths:
               type: object
               required:
                 - clientToken
-                - executionRoleArn
-                - releaseLabel
-                - jobDriver
               properties:
                 name:
                   description: The name of the job run.
@@ -908,13 +1135,17 @@ paths:
                   minLength: 1
                   maxLength: 64
                 jobDriver:
-                  description: Specify the driver that the job runs on.
+                  description: 'Specify the driver that the job runs on. Exactly one of the two available job drivers is required, either sparkSqlJobDriver or sparkSubmitJobDriver.'
                   type: object
                   properties:
                     sparkSubmitJobDriver:
                       allOf:
                         - $ref: '#/components/schemas/SparkSubmitJobDriver'
                         - description: The job driver parameters specified for spark submit.
+                    sparkSqlJobDriver:
+                      allOf:
+                        - $ref: '#/components/schemas/SparkSqlJobDriver'
+                        - description: The job driver for job type.
                 configurationOverrides:
                   description: A configuration specification to be used to override existing configurations.
                   type: object
@@ -934,6 +1165,26 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/StringEmpty256'
+                jobTemplateId:
+                  description: The job template ID to be used to start the job run.
+                  type: string
+                  pattern: '[0-9a-z]+'
+                  minLength: 1
+                  maxLength: 64
+                jobTemplateParameters:
+                  description: The values of job template parameters to start a job run.
+                  type: object
+                  maxProperties: 20
+                  additionalProperties:
+                    $ref: '#/components/schemas/String1024'
+                retryPolicyConfiguration:
+                  description: The configuration of the retry policy that the job runs on.
+                  type: object
+                  properties:
+                    maxAttempts:
+                      allOf:
+                        - $ref: '#/components/schemas/JavaInteger'
+                        - description: The maximum number of attempts on the job's driver.
   '/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
@@ -983,7 +1234,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: 'Assigns tags to resources. A tag is a label that you assign to an AWS resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your AWS resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you''ve assigned to it. For example, you can define a set of tags for your Amazon EMR on EKS clusters to help you track each cluster''s owner and stack level. We recommend that you devise a consistent set of tag keys for each resource type. You can then search and filter the resources based on the tags that you add.'
+      description: 'Assigns tags to resources. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your Amazon Web Services resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you''ve assigned to it. For example, you can define a set of tags for your Amazon EMR on EKS clusters to help you track each cluster''s owner and stack level. We recommend that you devise a consistent set of tag keys for each resource type. You can then search and filter the resources based on the tags that you add.'
       responses:
         '200':
           description: Success
@@ -1157,6 +1408,76 @@ components:
             - description: The output contains the virtual cluster ID for which the job run is cancelled.
     ValidationException: {}
     InternalServerException: {}
+    CreateJobTemplateResponse:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: This output display the created job template ID.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceNameString'
+            - description: This output displays the name of the created job template.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/JobTemplateArn'
+            - description: This output display the ARN of the created job template.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: This output displays the date and time when the job template was created.
+    ParametricIAMRoleArn:
+      type: string
+      pattern: '(^arn:(aws[a-zA-Z0-9-]*):iam::(\d{12})?:(role((\u002F)|(\u002F[\u0021-\u007F]+\u002F))[\w+=,.@-]+)$)|([\.\-_\#A-Za-z0-9\$\{\}]+)'
+      minLength: 4
+      maxLength: 2048
+    ParametricReleaseLabel:
+      type: string
+      pattern: '([\.\-_/A-Za-z0-9]+|\$\{[a-zA-Z]\w*\})'
+      minLength: 1
+      maxLength: 64
+    ParametricConfigurationOverrides:
+      type: object
+      properties:
+        applicationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationList'
+            - description: ' The configurations for the application running by the job run.'
+        monitoringConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ParametricMonitoringConfiguration'
+            - description: ' The configurations for monitoring. '
+      description: ' A configuration specification to be used to override existing configurations. This data type allows job template parameters to be specified within.'
+    JobDriver:
+      type: object
+      properties:
+        sparkSubmitJobDriver:
+          allOf:
+            - $ref: '#/components/schemas/SparkSubmitJobDriver'
+            - description: The job driver parameters specified for spark submit.
+        sparkSqlJobDriver:
+          allOf:
+            - $ref: '#/components/schemas/SparkSqlJobDriver'
+            - description: The job driver for job type.
+      description: 'Specify the driver that the job runs on. Exactly one of the two available job drivers is required, either sparkSqlJobDriver or sparkSubmitJobDriver.'
+    TemplateParameterConfigurationMap:
+      type: object
+      maxProperties: 20
+      additionalProperties:
+        $ref: '#/components/schemas/TemplateParameterConfiguration'
+    TagMap:
+      type: object
+      minProperties: 0
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/StringEmpty256'
+    StringEmpty256:
+      type: string
+      pattern: .*\S.*
+      minLength: 0
+      maxLength: 256
+    ResourceNotFoundException: {}
     CreateManagedEndpointResponse:
       type: object
       properties:
@@ -1197,12 +1518,6 @@ components:
             - $ref: '#/components/schemas/S3MonitoringConfiguration'
             - description: Amazon S3 configuration for monitoring log publishing.
       description: Configuration setting for monitoring.
-    StringEmpty256:
-      type: string
-      pattern: .*\S.*
-      minLength: 0
-      maxLength: 256
-    ResourceNotFoundException: {}
     CreateVirtualClusterResponse:
       type: object
       properties:
@@ -1233,8 +1548,15 @@ components:
         eksInfo:
           allOf:
             - $ref: '#/components/schemas/EksInfo'
-            - description: The information about the EKS cluster.
+            - description: The information about the Amazon EKS cluster.
       description: The information about the container used for a job run or a managed endpoint.
+    DeleteJobTemplateResponse:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: This output contains the ID of the job template that was deleted.
     DeleteManagedEndpointResponse:
       type: object
       properties:
@@ -1260,6 +1582,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobRun'
             - description: The output displays information about a job run.
+    DescribeJobTemplateResponse:
+      type: object
+      properties:
+        jobTemplate:
+          allOf:
+            - $ref: '#/components/schemas/JobTemplate'
+            - description: This output displays information about the specified job template.
     DescribeManagedEndpointResponse:
       type: object
       properties:
@@ -1295,6 +1624,17 @@ components:
         - CANCELLED
         - CANCEL_PENDING
         - COMPLETED
+    ListJobTemplatesResponse:
+      type: object
+      properties:
+        templates:
+          allOf:
+            - $ref: '#/components/schemas/JobTemplates'
+            - description: This output lists information about the specified job templates.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' This output displays the token for the next set of job templates.'
     ListManagedEndpointsResponse:
       type: object
       properties:
@@ -1381,6 +1721,25 @@ components:
             - $ref: '#/components/schemas/SparkSubmitParameters'
             - description: The Spark submit parameters that are used for job runs.
       description: The information about job driver for Spark submit.
+    SparkSqlJobDriver:
+      type: object
+      properties:
+        entryPoint:
+          allOf:
+            - $ref: '#/components/schemas/EntryPointPath'
+            - description: The SQL file to be executed.
+        sparkSqlParameters:
+          allOf:
+            - $ref: '#/components/schemas/SparkSqlParameters'
+            - description: The Spark parameters to be included in the Spark SQL command.
+      description: The job driver for job type.
+    String1024:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 1024
+    JavaInteger:
+      type: integer
     TagResourceResponse:
       type: object
       properties: {}
@@ -1397,6 +1756,10 @@ components:
       pattern: '^arn:(aws[a-zA-Z0-9-]*):acm:.+:(\d{12}):certificate/.+$'
       minLength: 44
       maxLength: 2048
+    Base64Encoded:
+      type: string
+      pattern: '^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$'
+      maxLength: 5000
     ResourceIdString:
       type: string
       pattern: '[0-9a-z]+'
@@ -1406,6 +1769,18 @@ components:
       type: object
       title: CancelJobRunRequest
       properties: {}
+    Certificate:
+      type: object
+      properties:
+        certificateArn:
+          allOf:
+            - $ref: '#/components/schemas/ACMCertArn'
+            - description: The ARN of the certificate generated for managed endpoint.
+        certificateData:
+          allOf:
+            - $ref: '#/components/schemas/Base64Encoded'
+            - description: The base64 encoded PEM certificate data generated for managed endpoint.
+      description: The entity representing certificate data generated for managed endpoint.
     ClientToken:
       type: string
       pattern: .*\S.*
@@ -1435,11 +1810,6 @@ components:
             - $ref: '#/components/schemas/String256'
             - description: The specified name prefix for log streams.
       description: A configuration for CloudWatch monitoring. You can configure your jobs to send log information to CloudWatch Logs.
-    String1024:
-      type: string
-      pattern: .*\S.*
-      minLength: 1
-      maxLength: 1024
     Configuration:
       type: object
       required:
@@ -1474,8 +1844,8 @@ components:
         namespace:
           allOf:
             - $ref: '#/components/schemas/KubernetesNamespace'
-            - description: The namespaces of the EKS cluster.
-      description: The information about the EKS cluster.
+            - description: The namespaces of the Amazon EKS cluster.
+      description: The information about the Amazon EKS cluster.
     ContainerProvider:
       type: object
       required:
@@ -1485,7 +1855,7 @@ components:
         type:
           allOf:
             - $ref: '#/components/schemas/ContainerProviderType'
-            - description: The type of the container provider. EKS is the only supported type as of now.
+            - description: The type of the container provider. Amazon EKS is the only supported type as of now.
         id:
           allOf:
             - $ref: '#/components/schemas/ClusterId'
@@ -1500,6 +1870,77 @@ components:
       pattern: '[\.\-_/#A-Za-z0-9]+'
       minLength: 1
       maxLength: 64
+    JobTemplateData:
+      type: object
+      required:
+        - executionRoleArn
+        - releaseLabel
+        - jobDriver
+      properties:
+        executionRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/ParametricIAMRoleArn'
+            - description: The execution role ARN of the job run.
+        releaseLabel:
+          allOf:
+            - $ref: '#/components/schemas/ParametricReleaseLabel'
+            - description: ' The release version of Amazon EMR.'
+        configurationOverrides:
+          allOf:
+            - $ref: '#/components/schemas/ParametricConfigurationOverrides'
+            - description: ' The configuration settings that are used to override defaults configuration.'
+        jobDriver:
+          $ref: '#/components/schemas/JobDriver'
+        parameterConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/TemplateParameterConfigurationMap'
+            - description: The configuration of parameters existing in the job template.
+        jobTags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags assigned to jobs started using the job template.
+      description: The values of StartJobRun API requests used in job runs started using the job template.
+    KmsKeyArn:
+      type: string
+      pattern: '^(arn:(aws[a-zA-Z0-9-]*):kms:([a-zA-Z0-9]+-?)+:(\d{12})?:key\/[(0-9a-zA-Z)-?]+|\$\{[a-zA-Z]\w*\})$'
+      minLength: 3
+      maxLength: 2048
+    CreateJobTemplateRequest:
+      type: object
+      required:
+        - name
+        - clientToken
+        - jobTemplateData
+      title: CreateJobTemplateRequest
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceNameString'
+            - description: The specified name of the job template.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: The client token of the job template.
+        jobTemplateData:
+          allOf:
+            - $ref: '#/components/schemas/JobTemplateData'
+            - description: The job template data which holds values of StartJobRun API request.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags that are associated with the job template.
+        kmsKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyArn'
+            - description: The KMS key ARN used to encrypt the job template.
+    JobTemplateArn:
+      type: string
+      pattern: '^arn:(aws[a-zA-Z0-9-]*):emr-containers:.+:(\d{12}):\/jobtemplates\/[0-9a-zA-Z]+$'
+      minLength: 60
+      maxLength: 1024
+    Date:
+      type: string
+      format: date-time
     ReleaseLabel:
       type: string
       pattern: '[\.\-_/A-Za-z0-9]+'
@@ -1510,12 +1951,6 @@ components:
       pattern: '^arn:(aws[a-zA-Z0-9-]*):iam::(\d{12})?:(role((\u002F)|(\u002F[\u0021-\u007F]+\u002F))[\w+=,.@-]+)$'
       minLength: 20
       maxLength: 2048
-    TagMap:
-      type: object
-      minProperties: 0
-      maxProperties: 50
-      additionalProperties:
-        $ref: '#/components/schemas/StringEmpty256'
     CreateManagedEndpointRequest:
       type: object
       required:
@@ -1523,7 +1958,6 @@ components:
         - type
         - releaseLabel
         - executionRoleArn
-        - certificateArn
         - clientToken
       title: CreateManagedEndpointRequest
       properties:
@@ -1546,7 +1980,8 @@ components:
         certificateArn:
           allOf:
             - $ref: '#/components/schemas/ACMCertArn'
-            - description: The certificate ARN of the managed endpoint.
+            - deprecated: true
+              description: The certificate ARN provided by users for the managed endpoint. This field is under deprecation and will be removed in future releases.Customer provided certificate-arn is deprecated and would be removed in future.
         configurationOverrides:
           allOf:
             - $ref: '#/components/schemas/ConfigurationOverrides'
@@ -1593,9 +2028,10 @@ components:
       pattern: '^arn:(aws[a-zA-Z0-9-]*):emr-containers:.+:(\d{12}):\/virtualclusters\/[0-9a-zA-Z]+$'
       minLength: 60
       maxLength: 1024
-    Date:
-      type: string
-      format: date-time
+    DeleteJobTemplateRequest:
+      type: object
+      title: DeleteJobTemplateRequest
+      properties: {}
     DeleteManagedEndpointRequest:
       type: object
       title: DeleteManagedEndpointRequest
@@ -1675,7 +2111,61 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The assigned tags of the job run.
+        retryPolicyConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/RetryPolicyConfiguration'
+            - description: The configuration of the retry policy that the job runs on.
+        retryPolicyExecution:
+          allOf:
+            - $ref: '#/components/schemas/RetryPolicyExecution'
+            - description: The current status of the retry policy executed on the job.
       description: 'This entity describes a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS. '
+    DescribeJobTemplateRequest:
+      type: object
+      title: DescribeJobTemplateRequest
+      properties: {}
+    JobTemplate:
+      type: object
+      required:
+        - jobTemplateData
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceNameString'
+            - description: The name of the job template.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The ID of the job template.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/JobTemplateArn'
+            - description: The ARN of the job template.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: ' The date and time when the job template was created.'
+        createdBy:
+          allOf:
+            - $ref: '#/components/schemas/RequestIdentityUserArn'
+            - description: ' The user who created the job template.'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags assigned to the job template.
+        jobTemplateData:
+          allOf:
+            - $ref: '#/components/schemas/JobTemplateData'
+            - description: The job template data which holds values of StartJobRun API request.
+        kmsKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyArn'
+            - description: ' The KMS key ARN used to encrypt the job template.'
+        decryptionError:
+          allOf:
+            - $ref: '#/components/schemas/String2048'
+            - description: The error message in case the decryption of job template fails.
+      description: 'This entity describes a job template. Job template stores values of StartJobRun API request in a template and can be used to start a job run. Job template allows two use cases: avoid repeating recurring StartJobRun API request values, enforcing certain values in StartJobRun API request.'
     DescribeManagedEndpointRequest:
       type: object
       title: DescribeManagedEndpointRequest
@@ -1718,7 +2208,12 @@ components:
         certificateArn:
           allOf:
             - $ref: '#/components/schemas/ACMCertArn'
-            - description: The certificate ARN of the endpoint.
+            - deprecated: true
+              description: The certificate ARN of the endpoint. This field is under deprecation and will be removed in future.Customer provided certificate-arn is deprecated and would be removed in future.
+        certificateAuthority:
+          allOf:
+            - $ref: '#/components/schemas/Certificate'
+            - description: The certificate generated by emr control plane on customer behalf to secure the managed endpoint.
         configurationOverrides:
           allOf:
             - $ref: '#/components/schemas/ConfigurationOverrides'
@@ -1787,7 +2282,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The assigned tags of the virtual cluster.
-      description: 'This entity describes a virtual cluster. A virtual cluster is a Kubernetes namespace that Amazon EMR is registered with. Amazon EMR uses virtual clusters to run jobs and host endpoints. Multiple virtual clusters can be backed by the same physical cluster. However, each virtual cluster maps to one namespace on an EKS cluster. Virtual clusters do not create any active resources that contribute to your bill or that require lifecycle management outside the service.'
+      description: 'This entity describes a virtual cluster. A virtual cluster is a Kubernetes namespace that Amazon EMR is registered with. Amazon EMR uses virtual clusters to run jobs and host endpoints. Multiple virtual clusters can be backed by the same physical cluster. However, each virtual cluster maps to one namespace on an Amazon EKS cluster. Virtual clusters do not create any active resources that contribute to your bill or that require lifecycle management outside the service.'
     KubernetesNamespace:
       type: string
       pattern: '[a-z0-9]([-a-z0-9]*[a-z0-9])?'
@@ -1825,7 +2320,7 @@ components:
         $ref: '#/components/schemas/Endpoint'
     EntryPointArgument:
       type: string
-      pattern: '(?!\s*$)(^[^'';|\u0026\u003C\u003E*?`$(){}\[\]!#\\]*$)'
+      pattern: .*\S.*
       minLength: 1
       maxLength: 10280
       format: password
@@ -1835,30 +2330,40 @@ components:
         $ref: '#/components/schemas/EntryPointArgument'
     EntryPointPath:
       type: string
-      pattern: '(?!\s*$)(^[^'';|\u0026\u003C\u003E*?`$(){}\[\]!#\\]*$)'
+      pattern: .*\S.*
       minLength: 1
       maxLength: 256
       format: password
-    JavaInteger:
-      type: integer
     JobArn:
       type: string
       pattern: '^arn:(aws[a-zA-Z0-9-]*):emr-containers:.+:(\d{12}):\/virtualclusters\/[0-9a-zA-Z]+\/jobruns\/[0-9a-zA-Z]+$'
       minLength: 60
       maxLength: 1024
-    JobDriver:
-      type: object
-      properties:
-        sparkSubmitJobDriver:
-          allOf:
-            - $ref: '#/components/schemas/SparkSubmitJobDriver'
-            - description: The job driver parameters specified for spark submit.
-      description: Specify the driver that the job runs on.
     RequestIdentityUserArn:
       type: string
       pattern: '^arn:(aws[a-zA-Z0-9-]*):(iam|sts)::(\d{12})?:[\w/+=,.@-]+$'
       minLength: 20
       maxLength: 2048
+    RetryPolicyConfiguration:
+      type: object
+      required:
+        - maxAttempts
+      properties:
+        maxAttempts:
+          allOf:
+            - $ref: '#/components/schemas/JavaInteger'
+            - description: The maximum number of attempts on the job's driver.
+      description: The configuration of the retry policy that the job runs on.
+    RetryPolicyExecution:
+      type: object
+      required:
+        - currentAttemptCount
+      properties:
+        currentAttemptCount:
+          allOf:
+            - $ref: '#/components/schemas/JavaInteger'
+            - description: The current number of attempts made on the driver of the job.
+      description: The current status of the retry policy executed on the job.
     JobRunStates:
       type: array
       items:
@@ -1868,6 +2373,15 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/JobRun'
+    String2048:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 2048
+    JobTemplates:
+      type: array
+      items:
+        $ref: '#/components/schemas/JobTemplate'
     NextToken:
       type: string
       pattern: .*\S.*
@@ -1876,6 +2390,10 @@ components:
     ListJobRunsRequest:
       type: object
       title: ListJobRunsRequest
+      properties: {}
+    ListJobTemplatesRequest:
+      type: object
+      title: ListJobTemplatesRequest
       properties: {}
     ListManagedEndpointsRequest:
       type: object
@@ -1918,24 +2436,73 @@ components:
             - $ref: '#/components/schemas/UriString'
             - description: Amazon S3 destination URI for log publishing.
       description: ' Amazon S3 configuration for monitoring log publishing. You can configure your jobs to send log information to Amazon S3.'
+    TemplateParameter:
+      type: string
+      pattern: '[\.\-_/#A-Za-z0-9\$\{\}]+'
+      minLength: 1
+      maxLength: 512
+    ParametricCloudWatchMonitoringConfiguration:
+      type: object
+      properties:
+        logGroupName:
+          allOf:
+            - $ref: '#/components/schemas/TemplateParameter'
+            - description: ' The name of the log group for log publishing.'
+        logStreamNamePrefix:
+          allOf:
+            - $ref: '#/components/schemas/String256'
+            - description: ' The specified name prefix for log streams.'
+      description: ' A configuration for CloudWatch monitoring. You can configure your jobs to send log information to CloudWatch Logs. This data type allows job template parameters to be specified within.'
+    ParametricMonitoringConfiguration:
+      type: object
+      properties:
+        persistentAppUI:
+          allOf:
+            - $ref: '#/components/schemas/TemplateParameter'
+            - description: ' Monitoring configurations for the persistent application UI.'
+        cloudWatchMonitoringConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ParametricCloudWatchMonitoringConfiguration'
+            - description: ' Monitoring configurations for CloudWatch.'
+        s3MonitoringConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ParametricS3MonitoringConfiguration'
+            - description: ' Amazon S3 configuration for monitoring log publishing.'
+      description: ' Configuration setting for monitoring. This data type allows job template parameters to be specified within.'
+    ParametricS3MonitoringConfiguration:
+      type: object
+      properties:
+        logUri:
+          allOf:
+            - $ref: '#/components/schemas/UriString'
+            - description: Amazon S3 destination URI for log publishing.
+      description: ' Amazon S3 configuration for monitoring log publishing. You can configure your jobs to send log information to Amazon S3. This data type allows job template parameters to be specified within.'
     SensitivePropertiesMap:
       type: object
       maxProperties: 100
       additionalProperties:
         $ref: '#/components/schemas/String1024'
-    SparkSubmitParameters:
+    SparkSqlParameters:
       type: string
-      pattern: '(?!\s*$)(^[^'';|\u0026\u003C\u003E*?`$(){}\[\]!#\\]*$)'
+      pattern: .*\S.*
       minLength: 1
       maxLength: 102400
       format: password
+    SparkSubmitParameters:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 102400
+      format: password
+    TemplateParameterInputMap:
+      type: object
+      maxProperties: 20
+      additionalProperties:
+        $ref: '#/components/schemas/String1024'
     StartJobRunRequest:
       type: object
       required:
         - clientToken
-        - executionRoleArn
-        - releaseLabel
-        - jobDriver
       title: StartJobRunRequest
       properties:
         name:
@@ -1966,6 +2533,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags assigned to job runs.
+        jobTemplateId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The job template ID to be used to start the job run.
+        jobTemplateParameters:
+          allOf:
+            - $ref: '#/components/schemas/TemplateParameterInputMap'
+            - description: The values of job template parameters to start a job run.
+        retryPolicyConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/RetryPolicyConfiguration'
+            - description: The retry policy configuration for the job run.
     TagKeyList:
       type: array
       items:
@@ -1982,6 +2561,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags assigned to resources.
+    TemplateParameterDataType:
+      type: string
+      enum:
+        - NUMBER
+        - STRING
+    TemplateParameterConfiguration:
+      type: object
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/TemplateParameterDataType'
+            - description: 'The type of the job template parameter. Allowed values are: ‘STRING’, ‘NUMBER’.'
+        defaultValue:
+          allOf:
+            - $ref: '#/components/schemas/String1024'
+            - description: The default value for the job template parameter.
+      description: The configuration of a job template parameter.
+    TemplateParameterName:
+      type: string
+      pattern: '[\.\-_\#A-Za-z0-9]+'
+      minLength: 1
+      maxLength: 512
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest

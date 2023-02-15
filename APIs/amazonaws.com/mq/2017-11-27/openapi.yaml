@@ -1924,6 +1924,12 @@ components:
     DescribeBrokerResponse:
       type: object
       properties:
+        ActionsRequired:
+          allOf:
+            - $ref: '#/components/schemas/__listOfActionRequired'
+            - xml:
+                name: actionsRequired
+              description: A list of actions required for a broker.
         AuthenticationStrategy:
           allOf:
             - $ref: '#/components/schemas/AuthenticationStrategy'
@@ -2464,6 +2470,22 @@ components:
     UpdateUserResponse:
       type: object
       properties: {}
+    ActionRequired:
+      type: object
+      properties:
+        ActionRequiredCode:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: actionRequiredCode
+              description: 'The code you can use to resolve your broker issue when the broker is in a CRITICAL_ACTION_REQUIRED state. You can find instructions by choosing the link for your code from the list of action required codes in <a href="https://docs.aws.amazon.com//latest/developer-guide/troubleshooting-action-required-codes.html">Amazon MQ action required codes</a>. Each code references a topic with detailed information, instructions, and recommendations for how to resolve the issue and prevent future occurrences.'
+        ActionRequiredInfo:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: actionRequiredInfo
+              description: Information about the action required to resolve your broker issue when the broker is in a CRITICAL_ACTION_REQUIRED state.
+      description: The action required to resolve a broker issue when the broker is in a CRITICAL_ACTION_REQUIRED state.
     AuthenticationStrategy:
       type: string
       enum:
@@ -2590,6 +2612,7 @@ components:
         - DELETION_IN_PROGRESS
         - RUNNING
         - REBOOT_IN_PROGRESS
+        - CRITICAL_ACTION_REQUIRED
       description: The broker's status.
     __timestampIso8601:
       type: string
@@ -3204,6 +3227,10 @@ components:
       type: object
       title: DescribeBrokerRequest
       properties: {}
+    __listOfActionRequired:
+      type: array
+      items:
+        $ref: '#/components/schemas/ActionRequired'
     __listOfBrokerInstance:
       type: array
       items:

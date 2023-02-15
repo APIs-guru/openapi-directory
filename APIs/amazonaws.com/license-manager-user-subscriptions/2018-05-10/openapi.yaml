@@ -1,0 +1,1775 @@
+openapi: 3.0.0
+info:
+  version: '2018-05-10'
+  x-release: v4
+  title: AWS License Manager User Subscriptions
+  description: 'With License Manager, you can create user-based subscriptions to utilize licensed software with a per user subscription fee on Amazon EC2 instances.'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: license-manager-user-subscriptions
+  x-aws-signingName: license-manager-user-subscriptions
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/license-manager-user-subscriptions-2018-05-10.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/license-manager-user-subscriptions/'
+servers:
+  - url: 'http://license-manager-user-subscriptions.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS License Manager User Subscriptions multi-region endpoint
+  - url: 'https://license-manager-user-subscriptions.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS License Manager User Subscriptions multi-region endpoint
+  - url: 'http://license-manager-user-subscriptions.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS License Manager User Subscriptions endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://license-manager-user-subscriptions.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS License Manager User Subscriptions endpoint for China (Beijing) and China (Ningxia)
+paths:
+  /user/AssociateUser:
+    post:
+      operationId: AssociateUser
+      description: '<p>Associates the user to an EC2 instance to utilize user-based subscriptions.</p> <note> <p>Your estimated bill for charges on the number of users and related costs will take 48 hours to appear for billing periods that haven''t closed (marked as <b>Pending</b> billing status) in Amazon Web Services Billing. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/invoice.html">Viewing your monthly charges</a> in the <i>Amazon Web Services Billing User Guide</i>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateUserResponse'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - IdentityProvider
+                - InstanceId
+                - Username
+              properties:
+                Domain:
+                  description: The domain name of the user.
+                  type: string
+                IdentityProvider:
+                  description: Details about an identity provider.
+                  type: object
+                  properties:
+                    ActiveDirectoryIdentityProvider:
+                      allOf:
+                        - $ref: '#/components/schemas/ActiveDirectoryIdentityProvider'
+                        - description: An object that details an Active Directory identity provider.
+                InstanceId:
+                  description: 'The ID of the EC2 instance, which provides user-based subscriptions.'
+                  type: string
+                Username:
+                  description: The user name from the identity provider for the user.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /identity-provider/DeregisterIdentityProvider:
+    post:
+      operationId: DeregisterIdentityProvider
+      description: Deregisters the identity provider from providing user-based subscriptions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeregisterIdentityProviderResponse'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - IdentityProvider
+                - Product
+              properties:
+                IdentityProvider:
+                  description: Details about an identity provider.
+                  type: object
+                  properties:
+                    ActiveDirectoryIdentityProvider:
+                      allOf:
+                        - $ref: '#/components/schemas/ActiveDirectoryIdentityProvider'
+                        - description: An object that details an Active Directory identity provider.
+                Product:
+                  description: The name of the user-based subscription product.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /user/DisassociateUser:
+    post:
+      operationId: DisassociateUser
+      description: Disassociates the user from an EC2 instance providing user-based subscriptions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateUserResponse'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - IdentityProvider
+                - InstanceId
+                - Username
+              properties:
+                Domain:
+                  description: The domain name of the user.
+                  type: string
+                IdentityProvider:
+                  description: Details about an identity provider.
+                  type: object
+                  properties:
+                    ActiveDirectoryIdentityProvider:
+                      allOf:
+                        - $ref: '#/components/schemas/ActiveDirectoryIdentityProvider'
+                        - description: An object that details an Active Directory identity provider.
+                InstanceId:
+                  description: 'The ID of the EC2 instance, which provides user-based subscriptions.'
+                  type: string
+                Username:
+                  description: The user name from the identity provider for the user.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /identity-provider/ListIdentityProviders:
+    post:
+      operationId: ListIdentityProviders
+      description: Lists the identity providers for user-based subscriptions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListIdentityProvidersResponse'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                MaxResults:
+                  description: Maximum number of results to return in a single call.
+                  type: integer
+                NextToken:
+                  description: Token for the next set of results.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /instance/ListInstances:
+    post:
+      operationId: ListInstances
+      description: Lists the EC2 instances providing user-based subscriptions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListInstancesResponse'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Filters:
+                  description: An array of structures that you can use to filter the results to those that match one or more sets of key-value pairs that you specify.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Filter'
+                MaxResults:
+                  description: Maximum number of results to return in a single call.
+                  type: integer
+                NextToken:
+                  description: Token for the next set of results.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /user/ListProductSubscriptions:
+    post:
+      operationId: ListProductSubscriptions
+      description: Lists the user-based subscription products available from an identity provider.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProductSubscriptionsResponse'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - IdentityProvider
+                - Product
+              properties:
+                Filters:
+                  description: An array of structures that you can use to filter the results to those that match one or more sets of key-value pairs that you specify.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Filter'
+                IdentityProvider:
+                  description: Details about an identity provider.
+                  type: object
+                  properties:
+                    ActiveDirectoryIdentityProvider:
+                      allOf:
+                        - $ref: '#/components/schemas/ActiveDirectoryIdentityProvider'
+                        - description: An object that details an Active Directory identity provider.
+                MaxResults:
+                  description: Maximum number of results to return in a single call.
+                  type: integer
+                NextToken:
+                  description: Token for the next set of results.
+                  type: string
+                Product:
+                  description: The name of the user-based subscription product.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /user/ListUserAssociations:
+    post:
+      operationId: ListUserAssociations
+      description: Lists user associations for an identity provider.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListUserAssociationsResponse'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - IdentityProvider
+                - InstanceId
+              properties:
+                Filters:
+                  description: An array of structures that you can use to filter the results to those that match one or more sets of key-value pairs that you specify.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Filter'
+                IdentityProvider:
+                  description: Details about an identity provider.
+                  type: object
+                  properties:
+                    ActiveDirectoryIdentityProvider:
+                      allOf:
+                        - $ref: '#/components/schemas/ActiveDirectoryIdentityProvider'
+                        - description: An object that details an Active Directory identity provider.
+                InstanceId:
+                  description: 'The ID of the EC2 instance, which provides user-based subscriptions.'
+                  type: string
+                MaxResults:
+                  description: Maximum number of results to return in a single call.
+                  type: integer
+                NextToken:
+                  description: Token for the next set of results.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /identity-provider/RegisterIdentityProvider:
+    post:
+      operationId: RegisterIdentityProvider
+      description: Registers an identity provider for user-based subscriptions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterIdentityProviderResponse'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - IdentityProvider
+                - Product
+              properties:
+                IdentityProvider:
+                  description: Details about an identity provider.
+                  type: object
+                  properties:
+                    ActiveDirectoryIdentityProvider:
+                      allOf:
+                        - $ref: '#/components/schemas/ActiveDirectoryIdentityProvider'
+                        - description: An object that details an Active Directory identity provider.
+                Product:
+                  description: The name of the user-based subscription product.
+                  type: string
+                Settings:
+                  description: 'The registered identity provider’s product related configuration settings such as the subnets to provision VPC endpoints, and the security group ID that is associated with the VPC endpoints. The security group should permit inbound TCP port 1688 communication from resources in the VPC.'
+                  type: object
+                  properties:
+                    SecurityGroupId:
+                      allOf:
+                        - $ref: '#/components/schemas/SecurityGroup'
+                        - description: A security group ID that allows inbound TCP port 1688 communication between resources in your VPC and the VPC endpoint for activation servers.
+                    Subnets:
+                      allOf:
+                        - $ref: '#/components/schemas/SettingsSubnetsList'
+                        - description: The subnets defined for the registered identity provider.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /user/StartProductSubscription:
+    post:
+      operationId: StartProductSubscription
+      description: '<p>Starts a product subscription for a user with the specified identity provider.</p> <note> <p>Your estimated bill for charges on the number of users and related costs will take 48 hours to appear for billing periods that haven''t closed (marked as <b>Pending</b> billing status) in Amazon Web Services Billing. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/invoice.html">Viewing your monthly charges</a> in the <i>Amazon Web Services Billing User Guide</i>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartProductSubscriptionResponse'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - IdentityProvider
+                - Product
+                - Username
+              properties:
+                Domain:
+                  description: The domain name of the user.
+                  type: string
+                IdentityProvider:
+                  description: Details about an identity provider.
+                  type: object
+                  properties:
+                    ActiveDirectoryIdentityProvider:
+                      allOf:
+                        - $ref: '#/components/schemas/ActiveDirectoryIdentityProvider'
+                        - description: An object that details an Active Directory identity provider.
+                Product:
+                  description: The name of the user-based subscription product.
+                  type: string
+                Username:
+                  description: The user name from the identity provider of the user.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /user/StopProductSubscription:
+    post:
+      operationId: StopProductSubscription
+      description: Stops a product subscription for a user with the specified identity provider.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopProductSubscriptionResponse'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - IdentityProvider
+                - Product
+                - Username
+              properties:
+                Domain:
+                  description: The domain name of the user.
+                  type: string
+                IdentityProvider:
+                  description: Details about an identity provider.
+                  type: object
+                  properties:
+                    ActiveDirectoryIdentityProvider:
+                      allOf:
+                        - $ref: '#/components/schemas/ActiveDirectoryIdentityProvider'
+                        - description: An object that details an Active Directory identity provider.
+                Product:
+                  description: The name of the user-based subscription product.
+                  type: string
+                Username:
+                  description: The user name from the identity provider for the user.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /identity-provider/UpdateIdentityProviderSettings:
+    post:
+      operationId: UpdateIdentityProviderSettings
+      description: Updates additional product configuration settings for the registered identity provider.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateIdentityProviderSettingsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - IdentityProvider
+                - Product
+                - UpdateSettings
+              properties:
+                IdentityProvider:
+                  description: Details about an identity provider.
+                  type: object
+                  properties:
+                    ActiveDirectoryIdentityProvider:
+                      allOf:
+                        - $ref: '#/components/schemas/ActiveDirectoryIdentityProvider'
+                        - description: An object that details an Active Directory identity provider.
+                Product:
+                  description: The name of the user-based subscription product.
+                  type: string
+                UpdateSettings:
+                  description: Updates the registered identity provider’s product related configuration settings such as the subnets to provision VPC endpoints.
+                  type: object
+                  properties:
+                    AddSubnets:
+                      allOf:
+                        - $ref: '#/components/schemas/Subnets'
+                        - description: The ID of one or more subnets in which License Manager will create a VPC endpoint for products that require connectivity to activation servers.
+                    RemoveSubnets:
+                      allOf:
+                        - $ref: '#/components/schemas/Subnets'
+                        - description: The ID of one or more subnets to remove.
+                    SecurityGroupId:
+                      allOf:
+                        - $ref: '#/components/schemas/SecurityGroup'
+                        - description: A security group ID that allows inbound TCP port 1688 communication between resources in your VPC and the VPC endpoints for activation servers.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    AssociateUserResponse:
+      type: object
+      required:
+        - InstanceUserSummary
+      properties:
+        InstanceUserSummary:
+          allOf:
+            - $ref: '#/components/schemas/InstanceUserSummary'
+            - description: Metadata that describes the associate user operation.
+    ActiveDirectoryIdentityProvider:
+      type: object
+      properties:
+        DirectoryId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The directory ID for an Active Directory identity provider.
+      description: Details about an Active Directory identity provider.
+    ServiceQuotaExceededException: {}
+    ConflictException: {}
+    ValidationException: {}
+    ThrottlingException: {}
+    InternalServerException: {}
+    ResourceNotFoundException: {}
+    AccessDeniedException: {}
+    DeregisterIdentityProviderResponse:
+      type: object
+      required:
+        - IdentityProviderSummary
+      properties:
+        IdentityProviderSummary:
+          allOf:
+            - $ref: '#/components/schemas/IdentityProviderSummary'
+            - description: Metadata that describes the results of an identity provider operation.
+    DisassociateUserResponse:
+      type: object
+      required:
+        - InstanceUserSummary
+      properties:
+        InstanceUserSummary:
+          allOf:
+            - $ref: '#/components/schemas/InstanceUserSummary'
+            - description: Metadata that describes the associate user operation.
+    ListIdentityProvidersResponse:
+      type: object
+      required:
+        - IdentityProviderSummaries
+      properties:
+        IdentityProviderSummaries:
+          allOf:
+            - $ref: '#/components/schemas/IdentityProviderSummaryList'
+            - description: Metadata that describes the list identity providers operation.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token for the next set of results.
+    ListInstancesResponse:
+      type: object
+      properties:
+        InstanceSummaries:
+          allOf:
+            - $ref: '#/components/schemas/InstanceSummaryList'
+            - description: Metadata that describes the list instances operation.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token for the next set of results.
+    Filter:
+      type: object
+      properties:
+        Attribute:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of an attribute to use as a filter.
+        Operation:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The type of search (For example, eq, geq, leq)'
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Value of the filter.
+      description: 'A filter name and value pair that is used to return more specific results from a describe operation. Filters can be used to match a set of resources by specific criteria, such as tags, attributes, or IDs.'
+    ListProductSubscriptionsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token for the next set of results.
+        ProductUserSummaries:
+          allOf:
+            - $ref: '#/components/schemas/ProductUserSummaryList'
+            - description: Metadata that describes the list product subscriptions operation.
+    ListUserAssociationsResponse:
+      type: object
+      properties:
+        InstanceUserSummaries:
+          allOf:
+            - $ref: '#/components/schemas/InstanceUserSummaryList'
+            - description: Metadata that describes the list user association operation.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token for the next set of results.
+    RegisterIdentityProviderResponse:
+      type: object
+      required:
+        - IdentityProviderSummary
+      properties:
+        IdentityProviderSummary:
+          allOf:
+            - $ref: '#/components/schemas/IdentityProviderSummary'
+            - description: Metadata that describes the results of an identity provider operation.
+    SecurityGroup:
+      type: string
+      pattern: '^sg-(([0-9a-z]{8})|([0-9a-z]{17}))$'
+      minLength: 5
+      maxLength: 200
+    SettingsSubnetsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Subnet'
+      minItems: 1
+    StartProductSubscriptionResponse:
+      type: object
+      required:
+        - ProductUserSummary
+      properties:
+        ProductUserSummary:
+          allOf:
+            - $ref: '#/components/schemas/ProductUserSummary'
+            - description: Metadata that describes the start product subscription operation.
+    StopProductSubscriptionResponse:
+      type: object
+      required:
+        - ProductUserSummary
+      properties:
+        ProductUserSummary:
+          allOf:
+            - $ref: '#/components/schemas/ProductUserSummary'
+            - description: Metadata that describes the start product subscription operation.
+    UpdateIdentityProviderSettingsResponse:
+      type: object
+      required:
+        - IdentityProviderSummary
+      properties:
+        IdentityProviderSummary:
+          $ref: '#/components/schemas/IdentityProviderSummary'
+    Subnets:
+      type: array
+      items:
+        $ref: '#/components/schemas/Subnet'
+    String:
+      type: string
+    IdentityProvider:
+      type: object
+      properties:
+        ActiveDirectoryIdentityProvider:
+          allOf:
+            - $ref: '#/components/schemas/ActiveDirectoryIdentityProvider'
+            - description: An object that details an Active Directory identity provider.
+      description: Details about an identity provider.
+    AssociateUserRequest:
+      type: object
+      required:
+        - IdentityProvider
+        - InstanceId
+        - Username
+      title: AssociateUserRequest
+      properties:
+        Domain:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The domain name of the user.
+        IdentityProvider:
+          allOf:
+            - $ref: '#/components/schemas/IdentityProvider'
+            - description: The identity provider of the user.
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The ID of the EC2 instance, which provides user-based subscriptions.'
+        Username:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The user name from the identity provider for the user.
+    InstanceUserSummary:
+      type: object
+      required:
+        - IdentityProvider
+        - InstanceId
+        - Status
+        - Username
+      properties:
+        AssociationDate:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The date a user was associated with an EC2 instance.
+        DisassociationDate:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The date a user was disassociated from an EC2 instance.
+        Domain:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The domain name of the user.
+        IdentityProvider:
+          allOf:
+            - $ref: '#/components/schemas/IdentityProvider'
+            - description: An object that specifies details for the identity provider.
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The ID of the EC2 instance, which provides user-based subscriptions.'
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status of a user associated with an EC2 instance.
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status message for users of an EC2 instance.
+        Username:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The user name from the identity provider for the user.
+      description: Describes users of an EC2 instance providing user-based subscriptions.
+    BoxInteger:
+      type: integer
+    DeregisterIdentityProviderRequest:
+      type: object
+      required:
+        - IdentityProvider
+        - Product
+      title: DeregisterIdentityProviderRequest
+      properties:
+        IdentityProvider:
+          allOf:
+            - $ref: '#/components/schemas/IdentityProvider'
+            - description: An object that specifies details for the identity provider.
+        Product:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the user-based subscription product.
+    IdentityProviderSummary:
+      type: object
+      required:
+        - IdentityProvider
+        - Product
+        - Settings
+        - Status
+      properties:
+        FailureMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The failure message associated with an identity provider.
+        IdentityProvider:
+          allOf:
+            - $ref: '#/components/schemas/IdentityProvider'
+            - description: An object that specifies details for the identity provider.
+        Product:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the user-based subscription product.
+        Settings:
+          allOf:
+            - $ref: '#/components/schemas/Settings'
+            - description: An object that details the registered identity provider’s product related configuration settings such as the subnets to provision VPC endpoints.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status of an identity provider.
+      description: Describes an identity provider.
+    DisassociateUserRequest:
+      type: object
+      required:
+        - IdentityProvider
+        - InstanceId
+        - Username
+      title: DisassociateUserRequest
+      properties:
+        Domain:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The domain name of the user.
+        IdentityProvider:
+          allOf:
+            - $ref: '#/components/schemas/IdentityProvider'
+            - description: An object that specifies details for the identity provider.
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The ID of the EC2 instance, which provides user-based subscriptions.'
+        Username:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The user name from the identity provider for the user.
+    FilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Filter'
+    Settings:
+      type: object
+      required:
+        - SecurityGroupId
+        - Subnets
+      properties:
+        SecurityGroupId:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroup'
+            - description: A security group ID that allows inbound TCP port 1688 communication between resources in your VPC and the VPC endpoint for activation servers.
+        Subnets:
+          allOf:
+            - $ref: '#/components/schemas/SettingsSubnetsList'
+            - description: The subnets defined for the registered identity provider.
+      description: 'The registered identity provider’s product related configuration settings such as the subnets to provision VPC endpoints, and the security group ID that is associated with the VPC endpoints. The security group should permit inbound TCP port 1688 communication from resources in the VPC.'
+    IdentityProviderSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/IdentityProviderSummary'
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    InstanceSummary:
+      type: object
+      required:
+        - InstanceId
+        - Products
+        - Status
+      properties:
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The ID of the EC2 instance, which provides user-based subscriptions.'
+        LastStatusCheckDate:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The date of the last status check.
+        Products:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: A list of provided user-based subscription products.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status of an EC2 instance resource.
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status message for an EC2 instance.
+      description: Describes an EC2 instance providing user-based subscriptions.
+    InstanceSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceSummary'
+    InstanceUserSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceUserSummary'
+    ListIdentityProvidersRequest:
+      type: object
+      title: ListIdentityProvidersRequest
+      properties:
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/BoxInteger'
+            - description: Maximum number of results to return in a single call.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token for the next set of results.
+    ListInstancesRequest:
+      type: object
+      title: ListInstancesRequest
+      properties:
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: An array of structures that you can use to filter the results to those that match one or more sets of key-value pairs that you specify.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/BoxInteger'
+            - description: Maximum number of results to return in a single call.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token for the next set of results.
+    ListProductSubscriptionsRequest:
+      type: object
+      required:
+        - IdentityProvider
+        - Product
+      title: ListProductSubscriptionsRequest
+      properties:
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: An array of structures that you can use to filter the results to those that match one or more sets of key-value pairs that you specify.
+        IdentityProvider:
+          allOf:
+            - $ref: '#/components/schemas/IdentityProvider'
+            - description: An object that specifies details for the identity provider.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/BoxInteger'
+            - description: Maximum number of results to return in a single call.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token for the next set of results.
+        Product:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the user-based subscription product.
+    ProductUserSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProductUserSummary'
+    ListUserAssociationsRequest:
+      type: object
+      required:
+        - IdentityProvider
+        - InstanceId
+      title: ListUserAssociationsRequest
+      properties:
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: An array of structures that you can use to filter the results to those that match one or more sets of key-value pairs that you specify.
+        IdentityProvider:
+          allOf:
+            - $ref: '#/components/schemas/IdentityProvider'
+            - description: An object that specifies details for the identity provider.
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The ID of the EC2 instance, which provides user-based subscriptions.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/BoxInteger'
+            - description: Maximum number of results to return in a single call.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token for the next set of results.
+    ProductUserSummary:
+      type: object
+      required:
+        - IdentityProvider
+        - Product
+        - Status
+        - Username
+      properties:
+        Domain:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The domain name of the user.
+        IdentityProvider:
+          allOf:
+            - $ref: '#/components/schemas/IdentityProvider'
+            - description: An object that specifies details for the identity provider.
+        Product:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the user-based subscription product.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status of a product for a user.
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status message for a product for a user.
+        SubscriptionEndDate:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The end date of a subscription.
+        SubscriptionStartDate:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The start date of a subscription.
+        Username:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The user name from the identity provider of the user.
+      description: The summary of the user-based subscription products for a user.
+    RegisterIdentityProviderRequest:
+      type: object
+      required:
+        - IdentityProvider
+        - Product
+      title: RegisterIdentityProviderRequest
+      properties:
+        IdentityProvider:
+          allOf:
+            - $ref: '#/components/schemas/IdentityProvider'
+            - description: An object that specifies details for the identity provider.
+        Product:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the user-based subscription product.
+        Settings:
+          allOf:
+            - $ref: '#/components/schemas/Settings'
+            - description: The registered identity provider’s product related configuration settings such as the subnets to provision VPC endpoints.
+    Subnet:
+      type: string
+      pattern: 'subnet-[a-z0-9]{8,17}'
+    StartProductSubscriptionRequest:
+      type: object
+      required:
+        - IdentityProvider
+        - Product
+        - Username
+      title: StartProductSubscriptionRequest
+      properties:
+        Domain:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The domain name of the user.
+        IdentityProvider:
+          allOf:
+            - $ref: '#/components/schemas/IdentityProvider'
+            - description: An object that specifies details for the identity provider.
+        Product:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the user-based subscription product.
+        Username:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The user name from the identity provider of the user.
+    StopProductSubscriptionRequest:
+      type: object
+      required:
+        - IdentityProvider
+        - Product
+        - Username
+      title: StopProductSubscriptionRequest
+      properties:
+        Domain:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The domain name of the user.
+        IdentityProvider:
+          allOf:
+            - $ref: '#/components/schemas/IdentityProvider'
+            - description: An object that specifies details for the identity provider.
+        Product:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the user-based subscription product.
+        Username:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The user name from the identity provider for the user.
+    UpdateSettings:
+      type: object
+      required:
+        - AddSubnets
+        - RemoveSubnets
+      properties:
+        AddSubnets:
+          allOf:
+            - $ref: '#/components/schemas/Subnets'
+            - description: The ID of one or more subnets in which License Manager will create a VPC endpoint for products that require connectivity to activation servers.
+        RemoveSubnets:
+          allOf:
+            - $ref: '#/components/schemas/Subnets'
+            - description: The ID of one or more subnets to remove.
+        SecurityGroupId:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroup'
+            - description: A security group ID that allows inbound TCP port 1688 communication between resources in your VPC and the VPC endpoints for activation servers.
+      description: Updates the registered identity provider’s product related configuration settings such as the subnets to provision VPC endpoints.
+    UpdateIdentityProviderSettingsRequest:
+      type: object
+      required:
+        - IdentityProvider
+        - Product
+        - UpdateSettings
+      title: UpdateIdentityProviderSettingsRequest
+      properties:
+        IdentityProvider:
+          $ref: '#/components/schemas/IdentityProvider'
+        Product:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the user-based subscription product.
+        UpdateSettings:
+          allOf:
+            - $ref: '#/components/schemas/UpdateSettings'
+            - description: '<p>Updates the registered identity provider’s product related configuration settings. You can update any combination of settings in a single operation such as the:</p> <ul> <li> <p>Subnets which you want to add to provision VPC endpoints.</p> </li> <li> <p>Subnets which you want to remove the VPC endpoints from.</p> </li> <li> <p>Security group ID which permits traffic to the VPC endpoints.</p> </li> </ul>'
+security:
+  - hmac: []

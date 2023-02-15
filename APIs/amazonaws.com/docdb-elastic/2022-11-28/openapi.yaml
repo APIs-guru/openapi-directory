@@ -1,0 +1,1620 @@
+openapi: 3.0.0
+info:
+  version: '2022-11-28'
+  x-release: v4
+  title: Amazon DocumentDB Elastic Clusters
+  description: The new Amazon Elastic DocumentDB service endpoint.
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: docdb-elastic
+  x-aws-signingName: docdb-elastic
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/docdb-elastic-2022-11-28.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/docdb-elastic/'
+servers:
+  - url: 'http://docdb-elastic.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The DocDB Elastic multi-region endpoint
+  - url: 'https://docdb-elastic.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The DocDB Elastic multi-region endpoint
+  - url: 'http://docdb-elastic.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The DocDB Elastic endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://docdb-elastic.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The DocDB Elastic endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /cluster:
+    post:
+      operationId: CreateCluster
+      description: Creates a new Elastic DocumentDB cluster and returns its Cluster structure.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateClusterOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - adminUserName
+                - adminUserPassword
+                - authType
+                - clusterName
+                - shardCapacity
+                - shardCount
+              properties:
+                adminUserName:
+                  description: '<p>The name of the Elastic DocumentDB cluster administrator.</p> <p> <i>Constraints</i>:</p> <ul> <li> <p>Must be from 1 to 63 letters or numbers.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot be a reserved word.</p> </li> </ul>'
+                  type: string
+                adminUserPassword:
+                  description: '<p>The password for the Elastic DocumentDB cluster administrator and can contain any printable ASCII characters.</p> <p> <i>Constraints</i>:</p> <ul> <li> <p>Must contain from 8 to 100 characters.</p> </li> <li> <p>Cannot contain a forward slash (/), double quote ("), or the "at" symbol (@).</p> </li> </ul>'
+                  type: string
+                  format: password
+                authType:
+                  description: The authentication type for the Elastic DocumentDB cluster.
+                  type: string
+                  enum:
+                    - PLAIN_TEXT
+                    - SECRET_ARN
+                clientToken:
+                  description: The client token for the Elastic DocumentDB cluster.
+                  type: string
+                clusterName:
+                  description: '<p>The name of the new Elastic DocumentDB cluster. This parameter is stored as a lowercase string.</p> <p> <i>Constraints</i>:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p> <i>Example</i>: <code>my-cluster</code> </p>'
+                  type: string
+                kmsKeyId:
+                  description: '<p>The KMS key identifier to use to encrypt the new Elastic DocumentDB cluster.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a cluster using the same Amazon account that owns this KMS encryption key, you can use the KMS key alias instead of the ARN as the KMS encryption key.</p> <p>If an encryption key is not specified, Elastic DocumentDB uses the default encryption key that KMS creates for your account. Your account has a different default encryption key for each Amazon Region.</p>'
+                  type: string
+                preferredMaintenanceWindow:
+                  description: '<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p> <i>Format</i>: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p> <i>Default</i>: a 30-minute window selected at random from an 8-hour block of time for each Amazon Web Services Region, occurring on a random day of the week.</p> <p> <i>Valid days</i>: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p> <i>Constraints</i>: Minimum 30-minute window.</p>'
+                  type: string
+                shardCapacity:
+                  description: The capacity of each shard in the new Elastic DocumentDB cluster.
+                  type: integer
+                shardCount:
+                  description: The number of shards to create in the new Elastic DocumentDB cluster.
+                  type: integer
+                subnetIds:
+                  description: The Amazon EC2 subnet IDs for the new Elastic DocumentDB cluster.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/String'
+                tags:
+                  description: The tags to be assigned to the new Elastic DocumentDB cluster.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+                vpcSecurityGroupIds:
+                  description: A list of EC2 VPC security groups to associate with the new Elastic DocumentDB cluster.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/String'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /cluster-snapshot:
+    post:
+      operationId: CreateClusterSnapshot
+      description: Creates a snapshot of a cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateClusterSnapshotOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - clusterArn
+                - snapshotName
+              properties:
+                clusterArn:
+                  description: The arn of the Elastic DocumentDB cluster that the snapshot will be taken from.
+                  type: string
+                snapshotName:
+                  description: The name of the Elastic DocumentDB snapshot.
+                  type: string
+                  minLength: 1
+                  maxLength: 63
+                tags:
+                  description: The tags to be assigned to the new Elastic DocumentDB snapshot.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/cluster/{clusterArn}':
+    delete:
+      operationId: DeleteCluster
+      description: Delete a Elastic DocumentDB cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteClusterOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: The arn of the Elastic DocumentDB cluster that is to be deleted.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetCluster
+      description: Returns information about a specific Elastic DocumentDB cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetClusterOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: The arn of the Elastic DocumentDB cluster.
+          schema:
+            type: string
+    put:
+      operationId: UpdateCluster
+      description: 'Modifies a Elastic DocumentDB cluster. This includes updating admin-username/password, upgrading API version setting up a backup window and maintenance window'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateClusterOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: The arn of the Elastic DocumentDB cluster.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                adminUserPassword:
+                  description: '<p>The password for the Elastic DocumentDB cluster administrator. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p> <i>Constraints</i>: Must contain from 8 to 100 characters.</p>'
+                  type: string
+                  format: password
+                authType:
+                  description: The authentication type for the Elastic DocumentDB cluster.
+                  type: string
+                  enum:
+                    - PLAIN_TEXT
+                    - SECRET_ARN
+                clientToken:
+                  description: The client token for the Elastic DocumentDB cluster.
+                  type: string
+                preferredMaintenanceWindow:
+                  description: '<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p> <i>Format</i>: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p> <i>Default</i>: a 30-minute window selected at random from an 8-hour block of time for each Amazon Web Services Region, occurring on a random day of the week.</p> <p> <i>Valid days</i>: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p> <i>Constraints</i>: Minimum 30-minute window.</p>'
+                  type: string
+                shardCapacity:
+                  description: The capacity of each shard in the Elastic DocumentDB cluster.
+                  type: integer
+                shardCount:
+                  description: The number of shards to create in the Elastic DocumentDB cluster.
+                  type: integer
+                subnetIds:
+                  description: The number of shards to create in the Elastic DocumentDB cluster.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/String'
+                vpcSecurityGroupIds:
+                  description: A list of EC2 VPC security groups to associate with the new Elastic DocumentDB cluster.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/String'
+  '/cluster-snapshot/{snapshotArn}':
+    delete:
+      operationId: DeleteClusterSnapshot
+      description: Delete a Elastic DocumentDB snapshot.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteClusterSnapshotOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: snapshotArn
+          in: path
+          required: true
+          description: The arn of the Elastic DocumentDB snapshot that is to be deleted.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetClusterSnapshot
+      description: Returns information about a specific Elastic DocumentDB snapshot
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetClusterSnapshotOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: snapshotArn
+          in: path
+          required: true
+          description: The arn of the Elastic DocumentDB snapshot.
+          schema:
+            type: string
+  /cluster-snapshots:
+    get:
+      operationId: ListClusterSnapshots
+      description: Returns information about Elastic DocumentDB snapshots for a specified cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListClusterSnapshotsOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: clusterArn
+          in: query
+          required: false
+          description: The arn of the Elastic DocumentDB cluster.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of entries to recieve in the response.
+          schema:
+            type: integer
+            minimum: 20
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The nextToken which is used the get the next page of data.
+          schema:
+            type: string
+            description: '<p>Token or cursor used in paginated operations.</p> <p>When this value is provided as operation input, the service returns results from where the previous response left off. When this value is present in operation output, it indicates that there are more results to retrieve.</p> <p>This should be opaque to not expose implementation details and potentially versioned to allow evolution of pagination strategy.</p>'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /clusters:
+    get:
+      operationId: ListClusters
+      description: Returns information about provisioned Elastic DocumentDB clusters.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListClustersOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of entries to recieve in the response.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The nextToken which is used the get the next page of data.
+          schema:
+            type: string
+            description: '<p>Token or cursor used in paginated operations.</p> <p>When this value is provided as operation input, the service returns results from where the previous response left off. When this value is present in operation output, it indicates that there are more results to retrieve.</p> <p>This should be opaque to not expose implementation details and potentially versioned to allow evolution of pagination strategy.</p>'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Lists all tags on a Elastic DocumentDB resource
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The arn of the Elastic DocumentDB resource.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1011
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Adds metadata tags to a Elastic DocumentDB resource
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The arn of the Elastic DocumentDB resource.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1011
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: The tags to be assigned to the Elastic DocumentDB resource.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  '/cluster-snapshot/{snapshotArn}/restore':
+    post:
+      operationId: RestoreClusterFromSnapshot
+      description: Restores a Elastic DocumentDB cluster from a snapshot.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestoreClusterFromSnapshotOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: snapshotArn
+          in: path
+          required: true
+          description: The arn of the Elastic DocumentDB snapshot.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - clusterName
+              properties:
+                clusterName:
+                  description: The name of the Elastic DocumentDB cluster.
+                  type: string
+                kmsKeyId:
+                  description: '<p>The KMS key identifier to use to encrypt the new Elastic DocumentDB cluster.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a cluster using the same Amazon account that owns this KMS encryption key, you can use the KMS key alias instead of the ARN as the KMS encryption key.</p> <p>If an encryption key is not specified here, Elastic DocumentDB uses the default encryption key that KMS creates for your account. Your account has a different default encryption key for each Amazon Region.</p>'
+                  type: string
+                subnetIds:
+                  description: The Amazon EC2 subnet IDs for the Elastic DocumentDB cluster.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/String'
+                tags:
+                  description: 'A list of the tag names to be assigned to the restored DB cluster, in the form of an array of key-value pairs in which the key is the tag name and the value is the key value.'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+                vpcSecurityGroupIds:
+                  description: A list of EC2 VPC security groups to associate with the Elastic DocumentDB cluster.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/String'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes metadata tags to a Elastic DocumentDB resource
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The arn of the Elastic DocumentDB resource.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1011
+        - name: tagKeys
+          in: query
+          required: true
+          description: The tag keys to be removed from the Elastic DocumentDB resource.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 0
+            maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateClusterOutput:
+      type: object
+      required:
+        - cluster
+      properties:
+        cluster:
+          allOf:
+            - $ref: '#/components/schemas/Cluster'
+            - description: The new Elastic DocumentDB cluster that has been created.
+    String:
+      type: string
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    ThrottlingException: {}
+    ValidationException: {}
+    ServiceQuotaExceededException: {}
+    ConflictException: {}
+    InternalServerException: {}
+    AccessDeniedException: {}
+    CreateClusterSnapshotOutput:
+      type: object
+      required:
+        - snapshot
+      properties:
+        snapshot:
+          allOf:
+            - $ref: '#/components/schemas/ClusterSnapshot'
+            - description: Returns information about the new Elastic DocumentDB snapshot.
+    ResourceNotFoundException: {}
+    DeleteClusterOutput:
+      type: object
+      required:
+        - cluster
+      properties:
+        cluster:
+          allOf:
+            - $ref: '#/components/schemas/Cluster'
+            - description: Returns information about the newly deleted Elastic DocumentDB cluster.
+    DeleteClusterSnapshotOutput:
+      type: object
+      required:
+        - snapshot
+      properties:
+        snapshot:
+          allOf:
+            - $ref: '#/components/schemas/ClusterSnapshot'
+            - description: Returns information about the newly deleted Elastic DocumentDB snapshot.
+    GetClusterOutput:
+      type: object
+      required:
+        - cluster
+      properties:
+        cluster:
+          allOf:
+            - $ref: '#/components/schemas/Cluster'
+            - description: Returns information about a specific Elastic DocumentDB cluster.
+    GetClusterSnapshotOutput:
+      type: object
+      required:
+        - snapshot
+      properties:
+        snapshot:
+          allOf:
+            - $ref: '#/components/schemas/ClusterSnapshot'
+            - description: Returns information about a specific Elastic DocumentDB snapshot.
+    ListClusterSnapshotsOutput:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: '<p>The response will provide a nextToken if there is more data beyond the maxResults.</p> <p>If there is no more data in the responce, the nextToken will not be returned.</p>'
+        snapshots:
+          allOf:
+            - $ref: '#/components/schemas/ClusterSnapshotList'
+            - description: A list of Elastic DocumentDB snapshots for a specified cluster.
+    ListClustersOutput:
+      type: object
+      properties:
+        clusters:
+          allOf:
+            - $ref: '#/components/schemas/ClusterList'
+            - description: A list of Elastic DocumentDB cluster.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: '<p>The response will provide a nextToken if there is more data beyond the maxResults.</p> <p>If there is no more data in the responce, the nextToken will not be returned.</p>'
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The list of tags for the specified Elastic DocumentDB resource.
+    RestoreClusterFromSnapshotOutput:
+      type: object
+      required:
+        - cluster
+      properties:
+        cluster:
+          allOf:
+            - $ref: '#/components/schemas/Cluster'
+            - description: Returns information about a the restored Elastic DocumentDB cluster.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
+      minLength: 1
+      maxLength: 128
+    UpdateClusterOutput:
+      type: object
+      required:
+        - cluster
+      properties:
+        cluster:
+          allOf:
+            - $ref: '#/components/schemas/Cluster'
+            - description: Returns information about the updated Elastic DocumentDB cluster.
+    Arn:
+      type: string
+      minLength: 1
+      maxLength: 1011
+    Auth:
+      type: string
+      enum:
+        - PLAIN_TEXT
+        - SECRET_ARN
+    Integer:
+      type: integer
+    Status:
+      type: string
+      enum:
+        - CREATING
+        - ACTIVE
+        - DELETING
+        - UPDATING
+        - VPC_ENDPOINT_LIMIT_EXCEEDED
+        - IP_ADDRESS_LIMIT_EXCEEDED
+        - INVALID_SECURITY_GROUP_ID
+        - INVALID_SUBNET_ID
+        - INACCESSIBLE_ENCRYPTION_CREDS
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    Cluster:
+      type: object
+      required:
+        - adminUserName
+        - authType
+        - clusterArn
+        - clusterEndpoint
+        - clusterName
+        - createTime
+        - kmsKeyId
+        - preferredMaintenanceWindow
+        - shardCapacity
+        - shardCount
+        - status
+        - subnetIds
+        - vpcSecurityGroupIds
+      properties:
+        adminUserName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Elastic DocumentDB cluster administrator.
+        authType:
+          allOf:
+            - $ref: '#/components/schemas/Auth'
+            - description: The authentication type for the Elastic DocumentDB cluster.
+        clusterArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The arn of the Elastic DocumentDB cluster.
+        clusterEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The URL used to connect to the Elastic DocumentDB cluster.
+        clusterName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Elastic DocumentDB cluster.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The time when the Elastic DocumentDB cluster was created in Universal Coordinated Time (UTC).
+        kmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The KMS key identifier to use to encrypt the Elastic DocumentDB cluster.
+        preferredMaintenanceWindow:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p> <i>Format</i>: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p>'
+        shardCapacity:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The capacity of each shard in the Elastic DocumentDB cluster.
+        shardCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of shards in the Elastic DocumentDB cluster.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: The status of the Elastic DocumentDB cluster.
+        subnetIds:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The Amazon EC2 subnet IDs for the Elastic DocumentDB cluster.
+        vpcSecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: A list of EC2 VPC security groups associated with this cluster.
+      description: Returns information about a specific Elastic DocumentDB cluster.
+    ClusterInList:
+      type: object
+      required:
+        - clusterArn
+        - clusterName
+        - status
+      properties:
+        clusterArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The arn of the Elastic DocumentDB cluster.
+        clusterName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Elastic DocumentDB cluster.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: The status of the Elastic DocumentDB cluster.
+      description: A list of Elastic DocumentDB cluster.
+    ClusterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ClusterInList'
+    ClusterSnapshot:
+      type: object
+      required:
+        - adminUserName
+        - clusterArn
+        - clusterCreationTime
+        - kmsKeyId
+        - snapshotArn
+        - snapshotCreationTime
+        - snapshotName
+        - status
+        - subnetIds
+        - vpcSecurityGroupIds
+      properties:
+        adminUserName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Elastic DocumentDB cluster administrator.
+        clusterArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The arn of the Elastic DocumentDB cluster.
+        clusterCreationTime:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The time when the Elastic DocumentDB cluster was created in Universal Coordinated Time (UTC).
+        kmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The KMS key identifier to use to encrypt the Elastic DocumentDB cluster.
+        snapshotArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The arn of the Elastic DocumentDB snapshot
+        snapshotCreationTime:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The time when the Elastic DocumentDB snapshot was created in Universal Coordinated Time (UTC).
+        snapshotName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Elastic DocumentDB snapshot.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: The status of the Elastic DocumentDB snapshot.
+        subnetIds:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: A list of the IDs of subnets associated with the DB cluster snapshot.
+        vpcSecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: A list of the IDs of the VPC security groups associated with the cluster snapshot.
+      description: Returns information about a specific Elastic DocumentDB snapshot.
+    ClusterSnapshotInList:
+      type: object
+      required:
+        - clusterArn
+        - snapshotArn
+        - snapshotCreationTime
+        - snapshotName
+        - status
+      properties:
+        clusterArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The arn of the Elastic DocumentDB cluster.
+        snapshotArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The arn of the Elastic DocumentDB snapshot
+        snapshotCreationTime:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The time when the Elastic DocumentDB snapshot was created in Universal Coordinated Time (UTC).
+        snapshotName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Elastic DocumentDB snapshot.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: The status of the Elastic DocumentDB snapshot.
+      description: A list of Elastic DocumentDB snapshots.
+    ClusterSnapshotList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ClusterSnapshotInList'
+    Password:
+      type: string
+      format: password
+    TagMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    CreateClusterInput:
+      type: object
+      required:
+        - adminUserName
+        - adminUserPassword
+        - authType
+        - clusterName
+        - shardCapacity
+        - shardCount
+      title: CreateClusterInput
+      properties:
+        adminUserName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The name of the Elastic DocumentDB cluster administrator.</p> <p> <i>Constraints</i>:</p> <ul> <li> <p>Must be from 1 to 63 letters or numbers.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot be a reserved word.</p> </li> </ul>'
+        adminUserPassword:
+          allOf:
+            - $ref: '#/components/schemas/Password'
+            - description: '<p>The password for the Elastic DocumentDB cluster administrator and can contain any printable ASCII characters.</p> <p> <i>Constraints</i>:</p> <ul> <li> <p>Must contain from 8 to 100 characters.</p> </li> <li> <p>Cannot contain a forward slash (/), double quote ("), or the "at" symbol (@).</p> </li> </ul>'
+        authType:
+          allOf:
+            - $ref: '#/components/schemas/Auth'
+            - description: The authentication type for the Elastic DocumentDB cluster.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The client token for the Elastic DocumentDB cluster.
+        clusterName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The name of the new Elastic DocumentDB cluster. This parameter is stored as a lowercase string.</p> <p> <i>Constraints</i>:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p> <i>Example</i>: <code>my-cluster</code> </p>'
+        kmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The KMS key identifier to use to encrypt the new Elastic DocumentDB cluster.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a cluster using the same Amazon account that owns this KMS encryption key, you can use the KMS key alias instead of the ARN as the KMS encryption key.</p> <p>If an encryption key is not specified, Elastic DocumentDB uses the default encryption key that KMS creates for your account. Your account has a different default encryption key for each Amazon Region.</p>'
+        preferredMaintenanceWindow:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p> <i>Format</i>: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p> <i>Default</i>: a 30-minute window selected at random from an 8-hour block of time for each Amazon Web Services Region, occurring on a random day of the week.</p> <p> <i>Valid days</i>: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p> <i>Constraints</i>: Minimum 30-minute window.</p>'
+        shardCapacity:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The capacity of each shard in the new Elastic DocumentDB cluster.
+        shardCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of shards to create in the new Elastic DocumentDB cluster.
+        subnetIds:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The Amazon EC2 subnet IDs for the new Elastic DocumentDB cluster.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags to be assigned to the new Elastic DocumentDB cluster.
+        vpcSecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: A list of EC2 VPC security groups to associate with the new Elastic DocumentDB cluster.
+    CreateClusterSnapshotInputSnapshotNameString:
+      type: string
+      minLength: 1
+      maxLength: 63
+    CreateClusterSnapshotInput:
+      type: object
+      required:
+        - clusterArn
+        - snapshotName
+      title: CreateClusterSnapshotInput
+      properties:
+        clusterArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The arn of the Elastic DocumentDB cluster that the snapshot will be taken from.
+        snapshotName:
+          allOf:
+            - $ref: '#/components/schemas/CreateClusterSnapshotInputSnapshotNameString'
+            - description: The name of the Elastic DocumentDB snapshot.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags to be assigned to the new Elastic DocumentDB snapshot.
+    DeleteClusterInput:
+      type: object
+      title: DeleteClusterInput
+      properties: {}
+    DeleteClusterSnapshotInput:
+      type: object
+      title: DeleteClusterSnapshotInput
+      properties: {}
+    GetClusterInput:
+      type: object
+      title: GetClusterInput
+      properties: {}
+    GetClusterSnapshotInput:
+      type: object
+      title: GetClusterSnapshotInput
+      properties: {}
+    ListClusterSnapshotsInputMaxResultsInteger:
+      type: integer
+      minimum: 20
+      maximum: 100
+    PaginationToken:
+      type: string
+      description: '<p>Token or cursor used in paginated operations.</p> <p>When this value is provided as operation input, the service returns results from where the previous response left off. When this value is present in operation output, it indicates that there are more results to retrieve.</p> <p>This should be opaque to not expose implementation details and potentially versioned to allow evolution of pagination strategy.</p>'
+    ListClusterSnapshotsInput:
+      type: object
+      title: ListClusterSnapshotsInput
+      properties: {}
+    ListClustersInputMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListClustersInput:
+      type: object
+      title: ListClustersInput
+      properties: {}
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    RestoreClusterFromSnapshotInput:
+      type: object
+      required:
+        - clusterName
+      title: RestoreClusterFromSnapshotInput
+      properties:
+        clusterName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Elastic DocumentDB cluster.
+        kmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The KMS key identifier to use to encrypt the new Elastic DocumentDB cluster.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a cluster using the same Amazon account that owns this KMS encryption key, you can use the KMS key alias instead of the ARN as the KMS encryption key.</p> <p>If an encryption key is not specified here, Elastic DocumentDB uses the default encryption key that KMS creates for your account. Your account has a different default encryption key for each Amazon Region.</p>'
+        subnetIds:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The Amazon EC2 subnet IDs for the Elastic DocumentDB cluster.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'A list of the tag names to be assigned to the restored DB cluster, in the form of an array of key-value pairs in which the key is the tag name and the value is the key value.'
+        vpcSecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: A list of EC2 VPC security groups to associate with the Elastic DocumentDB cluster.
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 0
+      maxItems: 50
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags to be assigned to the Elastic DocumentDB resource.
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+    UpdateClusterInput:
+      type: object
+      title: UpdateClusterInput
+      properties:
+        adminUserPassword:
+          allOf:
+            - $ref: '#/components/schemas/Password'
+            - description: '<p>The password for the Elastic DocumentDB cluster administrator. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@).</p> <p> <i>Constraints</i>: Must contain from 8 to 100 characters.</p>'
+        authType:
+          allOf:
+            - $ref: '#/components/schemas/Auth'
+            - description: The authentication type for the Elastic DocumentDB cluster.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The client token for the Elastic DocumentDB cluster.
+        preferredMaintenanceWindow:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p> <i>Format</i>: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p> <i>Default</i>: a 30-minute window selected at random from an 8-hour block of time for each Amazon Web Services Region, occurring on a random day of the week.</p> <p> <i>Valid days</i>: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p> <i>Constraints</i>: Minimum 30-minute window.</p>'
+        shardCapacity:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The capacity of each shard in the Elastic DocumentDB cluster.
+        shardCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of shards to create in the Elastic DocumentDB cluster.
+        subnetIds:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The number of shards to create in the Elastic DocumentDB cluster.
+        vpcSecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: A list of EC2 VPC security groups to associate with the new Elastic DocumentDB cluster.
+security:
+  - hmac: []

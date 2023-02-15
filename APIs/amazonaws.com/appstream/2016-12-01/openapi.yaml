@@ -115,6 +115,132 @@ servers:
     description: The Amazon AppStream endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /#X-Amz-Target=PhotonAdminProxyService.AssociateApplicationFleet:
+    post:
+      operationId: AssociateApplicationFleet
+      description: Associates the specified application with the specified fleet. This is only supported for Elastic fleets.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateApplicationFleetResult'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '484':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateApplicationFleetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.AssociateApplicationFleet
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.AssociateApplicationToEntitlement:
+    post:
+      operationId: AssociateApplicationToEntitlement
+      description: Associates an application to entitle.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateApplicationToEntitlementResult'
+        '480':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: EntitlementNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitlementNotFoundException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateApplicationToEntitlementRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.AssociateApplicationToEntitlement
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=PhotonAdminProxyService.AssociateFleet:
     post:
       operationId: AssociateFleet
@@ -343,6 +469,126 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.CreateAppBlock:
+    post:
+      operationId: CreateAppBlock
+      description: <p>Creates an app block.</p> <p>App blocks are an Amazon AppStream 2.0 resource that stores the details about the virtual hard disk in an S3 bucket. It also stores the setup script with details about how to mount the virtual hard disk. The virtual hard disk includes the application binaries and other files necessary to launch your applications. Multiple applications can be assigned to a single app block.</p> <p>This is only supported for Elastic fleets.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAppBlockResult'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '483':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAppBlockRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.CreateAppBlock
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.CreateApplication:
+    post:
+      operationId: CreateApplication
+      description: '<p>Creates an application.</p> <p>Applications are an Amazon AppStream 2.0 resource that stores the details about how to launch applications on Elastic fleet streaming instances. An application consists of the launch details, icon, and display name. Applications are associated with an app block that contains the application binaries and other files. The applications assigned to an Elastic fleet are the applications users can launch. </p> <p>This is only supported for Elastic fleets.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateApplicationResult'
+        '480':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '481':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApplicationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.CreateApplication
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=PhotonAdminProxyService.CreateDirectoryConfig:
     post:
       operationId: CreateDirectoryConfig
@@ -412,10 +658,67 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.CreateEntitlement:
+    post:
+      operationId: CreateEntitlement
+      description: 'Creates a new entitlement. Entitlements control access to specific applications within a stack, based on user attributes. Entitlements apply to SAML 2.0 federated user identities. Amazon AppStream 2.0 user pool and streaming URL users are entitled to all applications in a stack. Entitlements don''t apply to the desktop stream view application, or to applications managed by a dynamic app provider using the Dynamic Application Framework.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEntitlementResult'
+        '480':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: EntitlementAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitlementAlreadyExistsException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEntitlementRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.CreateEntitlement
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=PhotonAdminProxyService.CreateFleet:
     post:
       operationId: CreateFleet
-      description: Creates a fleet. A fleet consists of streaming instances that run a specified image.
+      description: Creates a fleet. A fleet consists of streaming instances that your users access for their applications and desktops.
       responses:
         '200':
           description: Success
@@ -976,6 +1279,114 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.DeleteAppBlock:
+    post:
+      operationId: DeleteAppBlock
+      description: Deletes an app block.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAppBlockResult'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteAppBlockRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.DeleteAppBlock
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.DeleteApplication:
+    post:
+      operationId: DeleteApplication
+      description: Deletes an application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteApplicationResult'
+        '480':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteApplicationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.DeleteApplication
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=PhotonAdminProxyService.DeleteDirectoryConfig:
     post:
       operationId: DeleteDirectoryConfig
@@ -1013,6 +1424,69 @@ paths:
             type: string
             enum:
               - PhotonAdminProxyService.DeleteDirectoryConfig
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.DeleteEntitlement:
+    post:
+      operationId: DeleteEntitlement
+      description: Deletes the specified entitlement.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteEntitlementResult'
+        '480':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: EntitlementNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitlementNotFoundException'
+        '483':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '484':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteEntitlementRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.DeleteEntitlement
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1249,6 +1723,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
         '482':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '483':
           description: ConcurrentModificationException
           content:
             application/json:
@@ -1360,6 +1840,141 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.DescribeAppBlocks:
+    post:
+      operationId: DescribeAppBlocks
+      description: Retrieves a list that describes one or more app blocks.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAppBlocksResult'
+        '480':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeAppBlocksRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.DescribeAppBlocks
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.DescribeApplicationFleetAssociations:
+    post:
+      operationId: DescribeApplicationFleetAssociations
+      description: Retrieves a list that describes one or more application fleet associations. Either ApplicationArn or FleetName must be specified.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeApplicationFleetAssociationsResult'
+        '480':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '481':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeApplicationFleetAssociationsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.DescribeApplicationFleetAssociations
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.DescribeApplications:
+    post:
+      operationId: DescribeApplications
+      description: Retrieves a list that describes one or more applications.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeApplicationsResult'
+        '480':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeApplicationsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.DescribeApplications
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=PhotonAdminProxyService.DescribeDirectoryConfigs:
     post:
       operationId: DescribeDirectoryConfigs
@@ -1391,6 +2006,57 @@ paths:
             type: string
             enum:
               - PhotonAdminProxyService.DescribeDirectoryConfigs
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.DescribeEntitlements:
+    post:
+      operationId: DescribeEntitlements
+      description: Retrieves a list that describes one of more entitlements.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEntitlementsResult'
+        '480':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: EntitlementNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitlementNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEntitlementsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.DescribeEntitlements
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1776,6 +2442,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '482':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
       requestBody:
         required: true
         content:
@@ -1829,6 +2501,114 @@ paths:
             type: string
             enum:
               - PhotonAdminProxyService.DisableUser
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.DisassociateApplicationFleet:
+    post:
+      operationId: DisassociateApplicationFleet
+      description: Disassociates the specified application from the fleet.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateApplicationFleetResult'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '482':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociateApplicationFleetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.DisassociateApplicationFleet
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.DisassociateApplicationFromEntitlement:
+    post:
+      operationId: DisassociateApplicationFromEntitlement
+      description: Deletes the specified application from the specified entitlement.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateApplicationFromEntitlementResult'
+        '480':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: EntitlementNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitlementNotFoundException'
+        '483':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociateApplicationFromEntitlementRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.DisassociateApplicationFromEntitlement
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2030,6 +2810,57 @@ paths:
             type: string
             enum:
               - PhotonAdminProxyService.ListAssociatedStacks
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.ListEntitledApplications:
+    post:
+      operationId: ListEntitledApplications
+      description: Retrieves a list of entitled applications.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEntitledApplicationsResult'
+        '480':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: EntitlementNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitlementNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListEntitledApplicationsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.ListEntitledApplications
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2407,6 +3238,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.UpdateApplication:
+    post:
+      operationId: UpdateApplication
+      description: Updates the specified application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateApplicationResult'
+        '480':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '481':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApplicationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.UpdateApplication
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=PhotonAdminProxyService.UpdateDirectoryConfig:
     post:
       operationId: UpdateDirectoryConfig
@@ -2470,10 +3352,67 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.UpdateEntitlement:
+    post:
+      operationId: UpdateEntitlement
+      description: Updates the specified entitlement.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateEntitlementResult'
+        '480':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: EntitlementNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitlementNotFoundException'
+        '483':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEntitlementRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.UpdateEntitlement
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=PhotonAdminProxyService.UpdateFleet:
     post:
       operationId: UpdateFleet
-      description: '<p>Updates the specified fleet.</p> <p>If the fleet is in the <code>STOPPED</code> state, you can update any attribute except the fleet name. If the fleet is in the <code>RUNNING</code> state, you can update the <code>DisplayName</code>, <code>ComputeCapacity</code>, <code>ImageARN</code>, <code>ImageName</code>, <code>IdleDisconnectTimeoutInSeconds</code>, and <code>DisconnectTimeoutInSeconds</code> attributes. If the fleet is in the <code>STARTING</code> or <code>STOPPING</code> state, you can''t update it.</p>'
+      description: '<p>Updates the specified fleet.</p> <p>If the fleet is in the <code>STOPPED</code> state, you can update any attribute except the fleet name.</p> <p>If the fleet is in the <code>RUNNING</code> state, you can update the following based on the fleet type:</p> <ul> <li> <p>Always-On and On-Demand fleet types</p> <p>You can update the <code>DisplayName</code>, <code>ComputeCapacity</code>, <code>ImageARN</code>, <code>ImageName</code>, <code>IdleDisconnectTimeoutInSeconds</code>, and <code>DisconnectTimeoutInSeconds</code> attributes.</p> </li> <li> <p>Elastic fleet type</p> <p>You can update the <code>DisplayName</code>, <code>IdleDisconnectTimeoutInSeconds</code>, <code>DisconnectTimeoutInSeconds</code>, <code>MaxConcurrentSessions</code>, <code>SessionScriptS3Location</code> and <code>UsbDeviceFilterStrings</code> attributes.</p> </li> </ul> <p>If the fleet is in the <code>STARTING</code> or <code>STOPPED</code> state, you can''t update it.</p>'
       responses:
         '200':
           description: Success
@@ -2759,6 +3698,57 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    AssociateApplicationFleetResult:
+      type: object
+      properties:
+        ApplicationFleetAssociation:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationFleetAssociation'
+            - description: 'If fleet name is specified, this returns the list of applications that are associated to it. If application ARN is specified, this returns the list of fleets to which it is associated.'
+    AssociateApplicationFleetRequest:
+      type: object
+      required:
+        - FleetName
+        - ApplicationArn
+      title: AssociateApplicationFleetRequest
+      properties:
+        FleetName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the fleet.
+        ApplicationArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the application.
+    ConcurrentModificationException: {}
+    LimitExceededException: {}
+    ResourceNotFoundException: {}
+    InvalidParameterCombinationException: {}
+    OperationNotPermittedException: {}
+    AssociateApplicationToEntitlementResult:
+      type: object
+      properties: {}
+    AssociateApplicationToEntitlementRequest:
+      type: object
+      required:
+        - StackName
+        - EntitlementName
+        - ApplicationIdentifier
+      title: AssociateApplicationToEntitlementRequest
+      properties:
+        StackName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the stack.
+        EntitlementName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the entitlement.
+        ApplicationIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the application.
+    EntitlementNotFoundException: {}
     AssociateFleetResult:
       type: object
       properties: {}
@@ -2777,12 +3767,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The name of the stack.
-    LimitExceededException: {}
     InvalidAccountStatusException: {}
-    ResourceNotFoundException: {}
-    ConcurrentModificationException: {}
     IncompatibleImageException: {}
-    OperationNotPermittedException: {}
     BatchAssociateUserStackResult:
       type: object
       properties:
@@ -2800,7 +3786,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/UserStackAssociationList'
             - description: The list of UserStackAssociation objects.
-    InvalidParameterCombinationException: {}
     BatchDisassociateUserStackResult:
       type: object
       properties:
@@ -2851,6 +3836,105 @@ components:
             - description: The description that the image will have when it is copied to the destination.
     ResourceAlreadyExistsException: {}
     ResourceNotAvailableException: {}
+    CreateAppBlockResult:
+      type: object
+      properties:
+        AppBlock:
+          allOf:
+            - $ref: '#/components/schemas/AppBlock'
+            - description: The app block.
+    CreateAppBlockRequest:
+      type: object
+      required:
+        - Name
+        - SourceS3Location
+        - SetupScriptDetails
+      title: CreateAppBlockRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the app block.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the app block.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The display name of the app block. This is not displayed to the user.
+        SourceS3Location:
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: The source S3 location of the app block.
+        SetupScriptDetails:
+          allOf:
+            - $ref: '#/components/schemas/ScriptDetails'
+            - description: The setup script details of the app block.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: The tags assigned to the app block.
+    CreateApplicationResult:
+      type: object
+      properties:
+        Application:
+          $ref: '#/components/schemas/Application'
+    CreateApplicationRequest:
+      type: object
+      required:
+        - Name
+        - IconS3Location
+        - LaunchPath
+        - Platforms
+        - InstanceFamilies
+        - AppBlockArn
+      title: CreateApplicationRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the application. This name is visible to users when display name is not specified.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The display name of the application. This name is visible to users in the application catalog.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the application.
+        IconS3Location:
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: The location in S3 of the application icon.
+        LaunchPath:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The launch path of the application.
+        WorkingDirectory:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The working directory of the application.
+        LaunchParameters:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The launch parameters of the application.
+        Platforms:
+          allOf:
+            - $ref: '#/components/schemas/Platforms'
+            - description: The platforms the application supports. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic fleets.
+        InstanceFamilies:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The instance families the application supports. Valid values are GENERAL_PURPOSE and GRAPHICS_G4.
+        AppBlockArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The app block ARN to which the application should be associated
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: The tags assigned to the application.
     CreateDirectoryConfigResult:
       type: object
       properties:
@@ -2877,7 +3961,48 @@ components:
           allOf:
             - $ref: '#/components/schemas/ServiceAccountCredentials'
             - description: The credentials for the service account used by the fleet or image builder to connect to the directory.
+        CertificateBasedAuthProperties:
+          allOf:
+            - $ref: '#/components/schemas/CertificateBasedAuthProperties'
+            - description: 'The certificate-based authentication properties used to authenticate SAML 2.0 Identity Provider (IdP) user identities to Active Directory domain-joined streaming instances. Fallback is turned on by default when certificate-based authentication is <b>Enabled</b> . Fallback allows users to log in using their AD domain password if certificate-based authentication is unsuccessful, or to unlock a desktop lock screen. <b>Enabled_no_directory_login_fallback</b> enables certificate-based authentication, but does not allow users to log in using their AD domain password. Users will be disconnected to re-authenticate using certificates.'
     InvalidRoleException: {}
+    CreateEntitlementResult:
+      type: object
+      properties:
+        Entitlement:
+          allOf:
+            - $ref: '#/components/schemas/Entitlement'
+            - description: The entitlement.
+    CreateEntitlementRequest:
+      type: object
+      required:
+        - Name
+        - StackName
+        - AppVisibility
+        - Attributes
+      title: CreateEntitlementRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the entitlement.
+        StackName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the stack with which the entitlement is associated.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the entitlement.
+        AppVisibility:
+          allOf:
+            - $ref: '#/components/schemas/AppVisibility'
+            - description: Specifies whether all or selected apps are entitled.
+        Attributes:
+          allOf:
+            - $ref: '#/components/schemas/EntitlementAttributeList'
+            - description: The attributes of the entitlement.
+    EntitlementAlreadyExistsException: {}
     CreateFleetResult:
       type: object
       properties:
@@ -2890,7 +4015,6 @@ components:
       required:
         - Name
         - InstanceType
-        - ComputeCapacity
       title: CreateFleetRequest
       properties:
         Name:
@@ -2908,7 +4032,7 @@ components:
         InstanceType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The instance type to use when launching fleet instances. The following instance types are available:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.memory.z1d.large</p> </li> <li> <p>stream.memory.z1d.xlarge</p> </li> <li> <p>stream.memory.z1d.2xlarge</p> </li> <li> <p>stream.memory.z1d.3xlarge</p> </li> <li> <p>stream.memory.z1d.6xlarge</p> </li> <li> <p>stream.memory.z1d.12xlarge</p> </li> <li> <p>stream.graphics-design.large</p> </li> <li> <p>stream.graphics-design.xlarge</p> </li> <li> <p>stream.graphics-design.2xlarge</p> </li> <li> <p>stream.graphics-design.4xlarge</p> </li> <li> <p>stream.graphics-desktop.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.xlarge</p> </li> <li> <p>stream.graphics.g4dn.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.4xlarge</p> </li> <li> <p>stream.graphics.g4dn.8xlarge</p> </li> <li> <p>stream.graphics.g4dn.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.16xlarge</p> </li> <li> <p>stream.graphics-pro.4xlarge</p> </li> <li> <p>stream.graphics-pro.8xlarge</p> </li> <li> <p>stream.graphics-pro.16xlarge</p> </li> </ul>'
+            - description: '<p>The instance type to use when launching fleet instances. The following instance types are available:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.standard.xlarge</p> </li> <li> <p>stream.standard.2xlarge</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.memory.z1d.large</p> </li> <li> <p>stream.memory.z1d.xlarge</p> </li> <li> <p>stream.memory.z1d.2xlarge</p> </li> <li> <p>stream.memory.z1d.3xlarge</p> </li> <li> <p>stream.memory.z1d.6xlarge</p> </li> <li> <p>stream.memory.z1d.12xlarge</p> </li> <li> <p>stream.graphics-design.large</p> </li> <li> <p>stream.graphics-design.xlarge</p> </li> <li> <p>stream.graphics-design.2xlarge</p> </li> <li> <p>stream.graphics-design.4xlarge</p> </li> <li> <p>stream.graphics-desktop.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.xlarge</p> </li> <li> <p>stream.graphics.g4dn.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.4xlarge</p> </li> <li> <p>stream.graphics.g4dn.8xlarge</p> </li> <li> <p>stream.graphics.g4dn.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.16xlarge</p> </li> <li> <p>stream.graphics-pro.4xlarge</p> </li> <li> <p>stream.graphics-pro.8xlarge</p> </li> <li> <p>stream.graphics-pro.16xlarge</p> </li> </ul> <p>The following instance types are available for Elastic fleets:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.standard.xlarge</p> </li> <li> <p>stream.standard.2xlarge</p> </li> </ul>'
         FleetType:
           allOf:
             - $ref: '#/components/schemas/FleetType'
@@ -2916,11 +4040,11 @@ components:
         ComputeCapacity:
           allOf:
             - $ref: '#/components/schemas/ComputeCapacity'
-            - description: The desired capacity for the fleet.
+            - description: 'The desired capacity for the fleet. This is not allowed for Elastic fleets. For Elastic fleets, specify MaxConcurrentSessions instead.'
         VpcConfig:
           allOf:
             - $ref: '#/components/schemas/VpcConfig'
-            - description: The VPC configuration for the fleet.
+            - description: 'The VPC configuration for the fleet. This is required for Elastic fleets, but not required for other fleet types. Elastic fleets require that you specify at least two subnets in different availability zones.'
         MaxUserDurationInSeconds:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -2944,7 +4068,7 @@ components:
         DomainJoinInfo:
           allOf:
             - $ref: '#/components/schemas/DomainJoinInfo'
-            - description: 'The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. '
+            - description: 'The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. This is not allowed for Elastic fleets. '
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2961,6 +4085,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/StreamView'
             - description: '<p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p> <p>The default value is <code>APP</code>.</p>'
+        Platform:
+          allOf:
+            - $ref: '#/components/schemas/PlatformType'
+            - description: 'The fleet platform. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic fleets. '
+        MaxConcurrentSessions:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The maximum concurrent sessions of the Elastic fleet. This is required for Elastic fleets, and not allowed for other fleet types.'
+        UsbDeviceFilterStrings:
+          allOf:
+            - $ref: '#/components/schemas/UsbDeviceFilterStrings'
+            - description: 'The USB device filter strings that specify which USB devices a user can redirect to the fleet streaming session, when using the Windows native client. This is allowed but not required for Elastic fleets.'
+        SessionScriptS3Location:
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: The S3 location of the session scripts configuration zip file. This only applies to Elastic fleets.
     RequestLimitExceededException: {}
     CreateImageBuilderResult:
       type: object
@@ -3110,6 +4250,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EmbedHostDomains'
             - description: 'The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions. '
+        StreamingExperienceSettings:
+          allOf:
+            - $ref: '#/components/schemas/StreamingExperienceSettings'
+            - description: 'The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.'
     CreateStreamingURLResult:
       type: object
       properties:
@@ -3238,6 +4382,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/AuthenticationType'
             - description: 'The authentication type for the user. You must specify USERPOOL. '
+    DeleteAppBlockResult:
+      type: object
+      properties: {}
+    DeleteAppBlockRequest:
+      type: object
+      required:
+        - Name
+      title: DeleteAppBlockRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the app block.
+    ResourceInUseException: {}
+    DeleteApplicationResult:
+      type: object
+      properties: {}
+    DeleteApplicationRequest:
+      type: object
+      required:
+        - Name
+      title: DeleteApplicationRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the application.
     DeleteDirectoryConfigResult:
       type: object
       properties: {}
@@ -3251,7 +4422,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/DirectoryName'
             - description: The name of the directory configuration.
-    ResourceInUseException: {}
+    DeleteEntitlementResult:
+      type: object
+      properties: {}
+    DeleteEntitlementRequest:
+      type: object
+      required:
+        - Name
+        - StackName
+      title: DeleteEntitlementRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the entitlement.
+        StackName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the stack with which the entitlement is associated.
     DeleteFleetResult:
       type: object
       properties: {}
@@ -3355,6 +4543,91 @@ components:
           allOf:
             - $ref: '#/components/schemas/AuthenticationType'
             - description: The authentication type for the user. You must specify USERPOOL.
+    DescribeAppBlocksResult:
+      type: object
+      properties:
+        AppBlocks:
+          allOf:
+            - $ref: '#/components/schemas/AppBlocks'
+            - description: The app blocks in the list.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token used to retrieve the next page of results for this operation.
+    DescribeAppBlocksRequest:
+      type: object
+      title: DescribeAppBlocksRequest
+      properties:
+        Arns:
+          allOf:
+            - $ref: '#/components/schemas/ArnList'
+            - description: The ARNs of the app blocks.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token used to retrieve the next page of results for this operation.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The maximum size of each page of results.
+    DescribeApplicationFleetAssociationsResult:
+      type: object
+      properties:
+        ApplicationFleetAssociations:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationFleetAssociationList'
+            - description: The application fleet associations in the list.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token used to retrieve the next page of results for this operation.
+    DescribeApplicationFleetAssociationsRequest:
+      type: object
+      title: DescribeApplicationFleetAssociationsRequest
+      properties:
+        FleetName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the fleet.
+        ApplicationArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the application.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The maximum size of each page of results.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token used to retrieve the next page of results for this operation.
+    DescribeApplicationsResult:
+      type: object
+      properties:
+        Applications:
+          allOf:
+            - $ref: '#/components/schemas/Applications'
+            - description: The applications in the list.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token used to retrieve the next page of results for this operation.
+    DescribeApplicationsRequest:
+      type: object
+      title: DescribeApplicationsRequest
+      properties:
+        Arns:
+          allOf:
+            - $ref: '#/components/schemas/ArnList'
+            - description: The ARNs for the applications.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token used to retrieve the next page of results for this operation.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The maximum size of each page of results.
     DescribeDirectoryConfigsResult:
       type: object
       properties:
@@ -3382,6 +4655,39 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+    DescribeEntitlementsResult:
+      type: object
+      properties:
+        Entitlements:
+          allOf:
+            - $ref: '#/components/schemas/EntitlementList'
+            - description: The entitlements.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token used to retrieve the next page of results for this operation.
+    DescribeEntitlementsRequest:
+      type: object
+      required:
+        - StackName
+      title: DescribeEntitlementsRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the entitlement.
+        StackName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the stack with which the entitlement is associated.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token used to retrieve the next page of results for this operation.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The maximum size of each page of results.
     DescribeFleetsResult:
       type: object
       properties:
@@ -3674,6 +4980,47 @@ components:
           allOf:
             - $ref: '#/components/schemas/AuthenticationType'
             - description: The authentication type for the user. You must specify USERPOOL.
+    DisassociateApplicationFleetResult:
+      type: object
+      properties: {}
+    DisassociateApplicationFleetRequest:
+      type: object
+      required:
+        - FleetName
+        - ApplicationArn
+      title: DisassociateApplicationFleetRequest
+      properties:
+        FleetName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the fleet.
+        ApplicationArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the application.
+    DisassociateApplicationFromEntitlementResult:
+      type: object
+      properties: {}
+    DisassociateApplicationFromEntitlementRequest:
+      type: object
+      required:
+        - StackName
+        - EntitlementName
+        - ApplicationIdentifier
+      title: DisassociateApplicationFromEntitlementRequest
+      properties:
+        StackName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the stack with which the entitlement is associated.
+        EntitlementName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the entitlement.
+        ApplicationIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the application to remove from the entitlement.
     DisassociateFleetResult:
       type: object
       properties: {}
@@ -3773,6 +5120,40 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+    ListEntitledApplicationsResult:
+      type: object
+      properties:
+        EntitledApplications:
+          allOf:
+            - $ref: '#/components/schemas/EntitledApplicationList'
+            - description: The entitled applications.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token used to retrieve the next page of results for this operation.
+    ListEntitledApplicationsRequest:
+      type: object
+      required:
+        - StackName
+        - EntitlementName
+      title: ListEntitledApplicationsRequest
+      properties:
+        StackName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the stack with which the entitlement is associated.
+        EntitlementName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the entitlement.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token used to retrieve the next page of results for this operation.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The maximum size of each page of results.
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -3890,6 +5271,53 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
             - description: The tag keys for the tags to disassociate.
+    UpdateApplicationResult:
+      type: object
+      properties:
+        Application:
+          $ref: '#/components/schemas/Application'
+    UpdateApplicationRequest:
+      type: object
+      required:
+        - Name
+      title: UpdateApplicationRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the application. This name is visible to users when display name is not specified.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The display name of the application. This name is visible to users in the application catalog.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the application.
+        IconS3Location:
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: The icon S3 location of the application.
+        LaunchPath:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The launch path of the application.
+        WorkingDirectory:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The working directory of the application.
+        LaunchParameters:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The launch parameters of the application.
+        AppBlockArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the app block.
+        AttributesToDelete:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationAttributes'
+            - description: The attributes to delete for an application.
     UpdateDirectoryConfigResult:
       type: object
       properties:
@@ -3915,6 +5343,44 @@ components:
           allOf:
             - $ref: '#/components/schemas/ServiceAccountCredentials'
             - description: The credentials for the service account used by the fleet or image builder to connect to the directory.
+        CertificateBasedAuthProperties:
+          allOf:
+            - $ref: '#/components/schemas/CertificateBasedAuthProperties'
+            - description: 'The certificate-based authentication properties used to authenticate SAML 2.0 Identity Provider (IdP) user identities to Active Directory domain-joined streaming instances. Fallback is turned on by default when certificate-based authentication is <b>Enabled</b> . Fallback allows users to log in using their AD domain password if certificate-based authentication is unsuccessful, or to unlock a desktop lock screen. <b>Enabled_no_directory_login_fallback</b> enables certificate-based authentication, but does not allow users to log in using their AD domain password. Users will be disconnected to re-authenticate using certificates.'
+    UpdateEntitlementResult:
+      type: object
+      properties:
+        Entitlement:
+          allOf:
+            - $ref: '#/components/schemas/Entitlement'
+            - description: The entitlement.
+    UpdateEntitlementRequest:
+      type: object
+      required:
+        - Name
+        - StackName
+      title: UpdateEntitlementRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the entitlement.
+        StackName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the stack with which the entitlement is associated.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the entitlement.
+        AppVisibility:
+          allOf:
+            - $ref: '#/components/schemas/AppVisibility'
+            - description: Specifies whether all or only selected apps are entitled.
+        Attributes:
+          allOf:
+            - $ref: '#/components/schemas/EntitlementAttributeList'
+            - description: The attributes of the entitlement.
     UpdateFleetResult:
       type: object
       properties:
@@ -3941,15 +5407,15 @@ components:
         InstanceType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The instance type to use when launching fleet instances. The following instance types are available:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.memory.z1d.large</p> </li> <li> <p>stream.memory.z1d.xlarge</p> </li> <li> <p>stream.memory.z1d.2xlarge</p> </li> <li> <p>stream.memory.z1d.3xlarge</p> </li> <li> <p>stream.memory.z1d.6xlarge</p> </li> <li> <p>stream.memory.z1d.12xlarge</p> </li> <li> <p>stream.graphics-design.large</p> </li> <li> <p>stream.graphics-design.xlarge</p> </li> <li> <p>stream.graphics-design.2xlarge</p> </li> <li> <p>stream.graphics-design.4xlarge</p> </li> <li> <p>stream.graphics-desktop.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.xlarge</p> </li> <li> <p>stream.graphics.g4dn.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.4xlarge</p> </li> <li> <p>stream.graphics.g4dn.8xlarge</p> </li> <li> <p>stream.graphics.g4dn.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.16xlarge</p> </li> <li> <p>stream.graphics-pro.4xlarge</p> </li> <li> <p>stream.graphics-pro.8xlarge</p> </li> <li> <p>stream.graphics-pro.16xlarge</p> </li> </ul>'
+            - description: '<p>The instance type to use when launching fleet instances. The following instance types are available:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.standard.xlarge</p> </li> <li> <p>stream.standard.2xlarge</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.memory.z1d.large</p> </li> <li> <p>stream.memory.z1d.xlarge</p> </li> <li> <p>stream.memory.z1d.2xlarge</p> </li> <li> <p>stream.memory.z1d.3xlarge</p> </li> <li> <p>stream.memory.z1d.6xlarge</p> </li> <li> <p>stream.memory.z1d.12xlarge</p> </li> <li> <p>stream.graphics-design.large</p> </li> <li> <p>stream.graphics-design.xlarge</p> </li> <li> <p>stream.graphics-design.2xlarge</p> </li> <li> <p>stream.graphics-design.4xlarge</p> </li> <li> <p>stream.graphics-desktop.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.xlarge</p> </li> <li> <p>stream.graphics.g4dn.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.4xlarge</p> </li> <li> <p>stream.graphics.g4dn.8xlarge</p> </li> <li> <p>stream.graphics.g4dn.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.16xlarge</p> </li> <li> <p>stream.graphics-pro.4xlarge</p> </li> <li> <p>stream.graphics-pro.8xlarge</p> </li> <li> <p>stream.graphics-pro.16xlarge</p> </li> </ul> <p>The following instance types are available for Elastic fleets:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.standard.xlarge</p> </li> <li> <p>stream.standard.2xlarge</p> </li> </ul>'
         ComputeCapacity:
           allOf:
             - $ref: '#/components/schemas/ComputeCapacity'
-            - description: The desired capacity for the fleet.
+            - description: The desired capacity for the fleet. This is not allowed for Elastic fleets.
         VpcConfig:
           allOf:
             - $ref: '#/components/schemas/VpcConfig'
-            - description: The VPC configuration for the fleet.
+            - description: 'The VPC configuration for the fleet. This is required for Elastic fleets, but not required for other fleet types. Elastic fleets require that you specify at least two subnets in different availability zones. '
         MaxUserDurationInSeconds:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -3995,6 +5461,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/StreamView'
             - description: '<p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p> <p>The default value is <code>APP</code>.</p>'
+        Platform:
+          allOf:
+            - $ref: '#/components/schemas/PlatformType'
+            - description: 'The platform of the fleet. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic fleets. '
+        MaxConcurrentSessions:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The maximum number of concurrent sessions for a fleet.
+        UsbDeviceFilterStrings:
+          allOf:
+            - $ref: '#/components/schemas/UsbDeviceFilterStrings'
+            - description: 'The USB device filter strings that specify which USB devices a user can redirect to the fleet streaming session, when using the Windows native client. This is allowed but not required for Elastic fleets.'
+        SessionScriptS3Location:
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: 'The S3 location of the session scripts configuration zip file. This only applies to Elastic fleets. '
     UpdateImagePermissionsResult:
       type: object
       properties: {}
@@ -4080,6 +5562,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EmbedHostDomains'
             - description: 'The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions. '
+        StreamingExperienceSettings:
+          allOf:
+            - $ref: '#/components/schemas/StreamingExperienceSettings'
+            - description: 'The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.'
     AccessEndpointType:
       type: string
       enum:
@@ -4126,11 +5612,110 @@ components:
         - PRINTING_TO_LOCAL_DEVICE
         - DOMAIN_PASSWORD_SIGNIN
         - DOMAIN_SMART_CARD_SIGNIN
+    Arn:
+      type: string
+      pattern: '^arn:aws(?:\-cn|\-iso\-b|\-iso|\-us\-gov)?:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.\\-]{0,1023}$'
+    S3Location:
+      type: object
+      required:
+        - S3Bucket
+        - S3Key
+      properties:
+        S3Bucket:
+          allOf:
+            - $ref: '#/components/schemas/S3Bucket'
+            - description: The S3 bucket of the S3 object.
+        S3Key:
+          allOf:
+            - $ref: '#/components/schemas/S3Key'
+            - description: The S3 key of the S3 object.
+      description: Describes the S3 location.
+    ScriptDetails:
+      type: object
+      required:
+        - ScriptS3Location
+        - ExecutablePath
+        - TimeoutInSeconds
+      properties:
+        ScriptS3Location:
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: The S3 object location for the script.
+        ExecutablePath:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The run path for the script.
+        ExecutableParameters:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The runtime parameters passed to the run path for the script.
+        TimeoutInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The run timeout, in seconds, for the script.'
+      description: Describes the details of the script.
+    Timestamp:
+      type: string
+      format: date-time
+    AppBlock:
+      type: object
+      required:
+        - Name
+        - Arn
+        - SetupScriptDetails
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the app block.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the app block.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the app block.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The display name of the app block.
+        SourceS3Location:
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: The source S3 location of the app block.
+        SetupScriptDetails:
+          allOf:
+            - $ref: '#/components/schemas/ScriptDetails'
+            - description: The setup script details of the app block.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The created time of the app block.
+      description: <p>Describes an app block.</p> <p>App blocks are an Amazon AppStream 2.0 resource that stores the details about the virtual hard disk in an S3 bucket. It also stores the setup script with details about how to mount the virtual hard disk. The virtual hard disk includes the application binaries and other files necessary to launch your applications. Multiple applications can be assigned to a single app block.</p> <p>This is only supported for Elastic fleets.</p>
+    AppBlocks:
+      type: array
+      items:
+        $ref: '#/components/schemas/AppBlock'
+    AppVisibility:
+      type: string
+      enum:
+        - ALL
+        - ASSOCIATED
     Boolean:
       type: boolean
     Metadata:
       type: object
       additionalProperties:
+        $ref: '#/components/schemas/String'
+    Platforms:
+      type: array
+      items:
+        $ref: '#/components/schemas/PlatformType'
+      maxItems: 4
+    StringList:
+      type: array
+      items:
         $ref: '#/components/schemas/String'
     Application:
       type: object
@@ -4163,7 +5748,70 @@ components:
           allOf:
             - $ref: '#/components/schemas/Metadata'
             - description: Additional attributes that describe the application.
+        WorkingDirectory:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The working directory for the application.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the application.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the application.
+        AppBlockArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The app block ARN of the application.
+        IconS3Location:
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: The S3 location of the application icon.
+        Platforms:
+          allOf:
+            - $ref: '#/components/schemas/Platforms'
+            - description: The platforms on which the application can run.
+        InstanceFamilies:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The instance families for the application.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the application was created within the app block.
       description: Describes an application in the application catalog.
+    ApplicationAttribute:
+      type: string
+      enum:
+        - LAUNCH_PARAMETERS
+        - WORKING_DIRECTORY
+    ApplicationAttributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationAttribute'
+      maxItems: 2
+    ApplicationFleetAssociation:
+      type: object
+      required:
+        - FleetName
+        - ApplicationArn
+      properties:
+        FleetName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the fleet associated with the application.
+        ApplicationArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the application associated with the fleet.
+      description: Describes the application fleet association.
+    ApplicationFleetAssociationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationFleetAssociation'
+      minItems: 1
+      maxItems: 25
     SettingsGroup:
       type: string
       maxLength: 100
@@ -4205,19 +5853,20 @@ components:
       type: string
       minLength: 1
       maxLength: 100
-    Arn:
-      type: string
-      pattern: '^arn:aws(?:\-cn|\-iso\-b|\-iso|\-us\-gov)?:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.\\-]{0,1023}$'
     ArnList:
       type: array
       items:
         $ref: '#/components/schemas/Arn'
+    Name:
+      type: string
+      pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,100}$'
     AuthenticationType:
       type: string
       enum:
         - API
         - SAML
         - USERPOOL
+        - AWS_AD
     AwsAccountId:
       type: string
       pattern: ^\d+$
@@ -4239,6 +5888,24 @@ components:
         $ref: '#/components/schemas/UserStackAssociationError'
     BooleanObject:
       type: boolean
+    CertificateBasedAuthStatus:
+      type: string
+      enum:
+        - DISABLED
+        - ENABLED
+        - ENABLED_NO_DIRECTORY_LOGIN_FALLBACK
+    CertificateBasedAuthProperties:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/CertificateBasedAuthStatus'
+            - description: The status of the certificate-based authentication properties.
+        CertificateAuthorityArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the AWS Certificate Manager Private CA resource.
+      description: 'The certificate-based authentication properties used to authenticate SAML 2.0 Identity Provider (IdP) user identities to Active Directory domain-joined streaming instances. Fallback is turned on by default when certificate-based authentication is <b>Enabled</b> . Fallback allows users to log in using their AD domain password if certificate-based authentication is unsuccessful, or to unlock a desktop lock screen. <b>Enabled_no_directory_login_fallback</b> enables certificate-based authentication, but does not allow users to log in using their AD domain password. Users will be disconnected to re-authenticate using certificates.'
     Integer:
       type: integer
     ComputeCapacity:
@@ -4273,9 +5940,6 @@ components:
             - $ref: '#/components/schemas/Integer'
             - description: The number of currently available instances that can be used to stream sessions.
       description: Describes the capacity status for a fleet.
-    Name:
-      type: string
-      pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,100}$'
     RegionName:
       type: string
       minLength: 1
@@ -4283,6 +5947,15 @@ components:
     Description:
       type: string
       maxLength: 256
+    DisplayName:
+      type: string
+      maxLength: 100
+    Tags:
+      type: object
+      minProperties: 1
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
     DirectoryName:
       type: string
     OrganizationalUnitDistinguishedNamesList:
@@ -4325,12 +5998,59 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time the directory configuration was created.
+        CertificateBasedAuthProperties:
+          allOf:
+            - $ref: '#/components/schemas/CertificateBasedAuthProperties'
+            - description: 'The certificate-based authentication properties used to authenticate SAML 2.0 Identity Provider (IdP) user identities to Active Directory domain-joined streaming instances. Fallback is turned on by default when certificate-based authentication is <b>Enabled</b> . Fallback allows users to log in using their AD domain password if certificate-based authentication is unsuccessful, or to unlock a desktop lock screen. <b>Enabled_no_directory_login_fallback</b> enables certificate-based authentication, but does not allow users to log in using their AD domain password. Users will be disconnected to re-authenticate using certificates.'
       description: Describes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
+    EntitlementAttributeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EntitlementAttribute'
+      minItems: 1
+    Entitlement:
+      type: object
+      required:
+        - Name
+        - StackName
+        - AppVisibility
+        - Attributes
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the entitlement.
+        StackName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the stack with which the entitlement is associated.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the entitlement.
+        AppVisibility:
+          allOf:
+            - $ref: '#/components/schemas/AppVisibility'
+            - description: Specifies whether all or selected apps are entitled.
+        Attributes:
+          allOf:
+            - $ref: '#/components/schemas/EntitlementAttributeList'
+            - description: The attributes of the entitlement.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the entitlement was created.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the entitlement was last modified.
+      description: 'Specifies an entitlement. Entitlements control access to specific applications within a stack, based on user attributes. Entitlements apply to SAML 2.0 federated user identities. Amazon AppStream 2.0 user pool and streaming URL users are entitled to all applications in a stack. Entitlements don''t apply to the desktop stream view application, or to applications managed by a dynamic app provider using the Dynamic Application Framework.'
     FleetType:
       type: string
       enum:
         - ALWAYS_ON
         - ON_DEMAND
+        - ELASTIC
     VpcConfig:
       type: object
       properties:
@@ -4343,9 +6063,6 @@ components:
             - $ref: '#/components/schemas/SecurityGroupIdList'
             - description: The identifiers of the security groups for the fleet or image builder.
       description: Describes VPC configuration information for fleets and image builders.
-    DisplayName:
-      type: string
-      maxLength: 100
     DomainJoinInfo:
       type: object
       properties:
@@ -4358,17 +6075,22 @@ components:
             - $ref: '#/components/schemas/OrganizationalUnitDistinguishedName'
             - description: The distinguished name of the organizational unit for computer accounts.
       description: Describes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
-    Tags:
-      type: object
-      minProperties: 1
-      maxProperties: 50
-      additionalProperties:
-        $ref: '#/components/schemas/TagValue'
     StreamView:
       type: string
       enum:
         - APP
         - DESKTOP
+    PlatformType:
+      type: string
+      enum:
+        - WINDOWS
+        - WINDOWS_SERVER_2016
+        - WINDOWS_SERVER_2019
+        - AMAZON_LINUX2
+    UsbDeviceFilterStrings:
+      type: array
+      items:
+        $ref: '#/components/schemas/UsbDeviceFilterString'
     Fleet:
       type: object
       required:
@@ -4458,6 +6180,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/StreamView'
             - description: '<p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p> <p>The default value is <code>APP</code>.</p>'
+        Platform:
+          allOf:
+            - $ref: '#/components/schemas/PlatformType'
+            - description: The platform of the fleet.
+        MaxConcurrentSessions:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The maximum number of concurrent sessions for the fleet.
+        UsbDeviceFilterStrings:
+          allOf:
+            - $ref: '#/components/schemas/UsbDeviceFilterStrings'
+            - description: The USB device filter strings associated with the fleet.
+        SessionScriptS3Location:
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: The S3 location of the session scripts configuration zip file. This only applies to Elastic fleets.
       description: Describes a fleet.
     ImageBuilder:
       type: object
@@ -4537,9 +6275,6 @@ components:
       description: 'Describes a virtual machine that is used to create an image. '
     Long:
       type: integer
-    Timestamp:
-      type: string
-      format: date-time
     StorageConnectorList:
       type: array
       description: The storage connectors.
@@ -4562,6 +6297,14 @@ components:
         $ref: '#/components/schemas/EmbedHostDomain'
       minItems: 1
       maxItems: 20
+    StreamingExperienceSettings:
+      type: object
+      properties:
+        PreferredProtocol:
+          allOf:
+            - $ref: '#/components/schemas/PreferredProtocol'
+            - description: The preferred protocol that you want to use while streaming your application.
+      description: 'The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.'
     Stack:
       type: object
       required:
@@ -4619,6 +6362,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EmbedHostDomains'
             - description: The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.
+        StreamingExperienceSettings:
+          allOf:
+            - $ref: '#/components/schemas/StreamingExperienceSettings'
+            - description: 'The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.'
       description: Describes a stack.
     StreamingUrlUserId:
       type: string
@@ -4727,10 +6474,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DirectoryConfig'
-    StringList:
+    EntitlementList:
       type: array
       items:
-        $ref: '#/components/schemas/String'
+        $ref: '#/components/schemas/Entitlement'
     FleetList:
       type: array
       description: The fleets.
@@ -4802,6 +6549,35 @@ components:
       pattern: '(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]'
       description: 'Specifies a valid domain that can embed AppStream. Valid examples include: ["testorigin.tt--com", "testingorigin.com.us", "test.com.us"] Invalid examples include: ["test,com", ".com", "h*llo.com". ""]'
       maxLength: 128
+    EntitledApplication:
+      type: object
+      required:
+        - ApplicationIdentifier
+      properties:
+        ApplicationIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the application.
+      description: The application associated to an entitlement. Access is controlled based on user attributes.
+    EntitledApplicationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EntitledApplication'
+    EntitlementAttribute:
+      type: object
+      required:
+        - Name
+        - Value
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>A supported AWS IAM SAML <code>PrincipalTag</code> attribute that is matched to the associated value when a user identity federates into an Amazon AppStream 2.0 SAML application.</p> <p>The following are valid values:</p> <ul> <li> <p>roles</p> </li> <li> <p>department </p> </li> <li> <p>organization </p> </li> <li> <p>groups </p> </li> <li> <p>title </p> </li> <li> <p>costCenter </p> </li> <li> <p>userType</p> </li> </ul> <p> </p>'
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A value that is matched to a supported SAML attribute name when a user identity federates into an Amazon AppStream 2.0 SAML application. '
+      description: An attribute associated with an entitlement. Application entitlements work by matching a supported SAML 2.0 attribute name to a value when a user identity federates to an Amazon AppStream 2.0 SAML application.
     FleetState:
       type: string
       enum:
@@ -4820,6 +6596,8 @@ components:
         - VPC_CONFIGURATION_SECURITY_GROUP_IDS
         - DOMAIN_JOIN_INFO
         - IAM_ROLE_ARN
+        - USB_DEVICE_FILTER_STRINGS
+        - SESSION_SCRIPT_S3_LOCATION
       description: The fleet attribute.
     FleetAttributes:
       type: array
@@ -4881,12 +6659,6 @@ components:
         - DELETING
         - CREATING
         - IMPORTING
-    PlatformType:
-      type: string
-      enum:
-        - WINDOWS
-        - WINDOWS_SERVER_2016
-        - WINDOWS_SERVER_2019
     ImageStateChangeReason:
       type: object
       properties:
@@ -4991,6 +6763,11 @@ components:
       enum:
         - ENABLED
         - DISABLED
+    PreferredProtocol:
+      type: string
+      enum:
+        - TCP
+        - UDP
     ResourceError:
       type: object
       properties:
@@ -5012,6 +6789,15 @@ components:
       description: The ARN of the resource.
       minLength: 1
       maxLength: 2048
+    S3Bucket:
+      type: string
+      pattern: '^[0-9a-z\.\-]*(?<!\.)$'
+      minLength: 3
+      maxLength: 63
+    S3Key:
+      type: string
+      minLength: 1
+      maxLength: 1024
     SecurityGroupIdList:
       type: array
       description: The security group identifiers.
@@ -5114,6 +6900,7 @@ components:
         - EMBED_HOST_DOMAINS
         - IAM_ROLE_ARN
         - ACCESS_ENDPOINTS
+        - STREAMING_EXPERIENCE_SETTINGS
     StackAttributes:
       type: array
       items:
@@ -5201,6 +6988,11 @@ components:
             - $ref: '#/components/schemas/LastReportGenerationExecutionErrors'
             - description: The errors that were returned if usage reports couldn't be generated.
       description: Describes information about the usage report subscription.
+    UsbDeviceFilterString:
+      type: string
+      pattern: '^((\w*)\s*(\w*)\s*\,\s*(\w*)\s*\,\s*\*?(\w*)\s*\,\s*\*?(\w*)\s*\,\s*\*?\d*\s*\,\s*\*?\d*\s*\,\s*[0-1]\s*\,\s*[0-1]\s*)$'
+      minLength: 0
+      maxLength: 100
     User:
       type: object
       required:

@@ -1,0 +1,3658 @@
+openapi: 3.0.0
+info:
+  version: '2020-05-27'
+  x-release: v4
+  title: Amazon SageMaker geospatial capabilities
+  description: Provides APIs for creating and managing SageMaker geospatial resources.
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: sagemaker-geospatial
+  x-aws-signingName: sagemaker-geospatial
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/sagemaker-geospatial-2020-05-27.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/sagemaker-geospatial/'
+servers:
+  - url: 'http://sagemaker-geospatial.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon SageMaker geospatial capabilities multi-region endpoint
+  - url: 'https://sagemaker-geospatial.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon SageMaker geospatial capabilities multi-region endpoint
+  - url: 'http://sagemaker-geospatial.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon SageMaker geospatial capabilities endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://sagemaker-geospatial.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon SageMaker geospatial capabilities endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  '/earth-observation-jobs/{Arn}':
+    delete:
+      operationId: DeleteEarthObservationJob
+      description: Use this operation to delete an Earth Observation job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteEarthObservationJobOutput'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: Arn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the Earth Observation job being deleted.
+          schema:
+            type: string
+            pattern: '^arn:aws[a-z-]{0,12}:sagemaker-geospatial:[a-z0-9-]{1,25}:[0-9]{12}:earth-observation-job/[a-z0-9]{12,}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetEarthObservationJob
+      description: Get the details for a previously initiated Earth Observation job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEarthObservationJobOutput'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: Arn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the Earth Observation job.
+          schema:
+            type: string
+            pattern: '^arn:aws[a-z-]{0,12}:sagemaker-geospatial:[a-z0-9-]{1,25}:[0-9]{12}:earth-observation-job/[a-z0-9]{12,}$'
+  '/vector-enrichment-jobs/{Arn}':
+    delete:
+      operationId: DeleteVectorEnrichmentJob
+      description: Use this operation to delete a Vector Enrichment job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteVectorEnrichmentJobOutput'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: Arn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the Vector Enrichment job being deleted.
+          schema:
+            type: string
+            pattern: '^arn:aws[a-z-]{0,12}:sagemaker-geospatial:[a-z0-9-]{1,25}:[0-9]{12}:vector-enrichment-job/[a-z0-9]{12,}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetVectorEnrichmentJob
+      description: Retrieves details of a Vector Enrichment Job for a given job Amazon Resource Name (ARN).
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVectorEnrichmentJobOutput'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: Arn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the Vector Enrichment job.
+          schema:
+            type: string
+            pattern: '^arn:aws[a-z-]{0,12}:sagemaker-geospatial:[a-z0-9-]{1,25}:[0-9]{12}:vector-enrichment-job/[a-z0-9]{12,}$'
+  /export-earth-observation-job:
+    post:
+      operationId: ExportEarthObservationJob
+      description: Use this operation to export results of an Earth Observation job and optionally source images used as input to the EOJ to an S3 location.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportEarthObservationJobOutput'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Arn
+                - ExecutionRoleArn
+                - OutputConfig
+              properties:
+                Arn:
+                  description: The input Amazon Resource Name (ARN) of the Earth Observation job being exported.
+                  type: string
+                  pattern: '^arn:aws[a-z-]{0,12}:sagemaker-geospatial:[a-z0-9-]{1,25}:[0-9]{12}:earth-observation-job/[a-z0-9]{12,}$'
+                ExecutionRoleArn:
+                  description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
+                  type: string
+                ExportSourceImages:
+                  description: The source images provided to the Earth Observation job being exported.
+                  type: boolean
+                OutputConfig:
+                  description: The response structure for an OutputConfig returned by an ExportEarthObservationJob.
+                  type: object
+                  properties:
+                    S3Data:
+                      allOf:
+                        - $ref: '#/components/schemas/ExportS3DataInput'
+                        - description: Path to Amazon S3 storage location for the output configuration file.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /export-vector-enrichment-jobs:
+    post:
+      operationId: ExportVectorEnrichmentJob
+      description: Use this operation to copy results of a Vector Enrichment job to an S3 location.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportVectorEnrichmentJobOutput'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Arn
+                - ExecutionRoleArn
+                - OutputConfig
+              properties:
+                Arn:
+                  description: The Amazon Resource Name (ARN) of the Vector Enrichment job.
+                  type: string
+                  pattern: '^arn:aws[a-z-]{0,12}:sagemaker-geospatial:[a-z0-9-]{1,25}:[0-9]{12}:vector-enrichment-job/[a-z0-9]{12,}$'
+                ExecutionRoleArn:
+                  description: The Amazon Resource Name (ARN) of the IAM rolewith permission to upload to the location in OutputConfig.
+                  type: string
+                OutputConfig:
+                  description: An object containing information about the output file.
+                  type: object
+                  properties:
+                    S3Data:
+                      allOf:
+                        - $ref: '#/components/schemas/VectorEnrichmentJobS3Data'
+                        - description: <p/>
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/raster-data-collection/{Arn}':
+    get:
+      operationId: GetRasterDataCollection
+      description: Use this operation to get details of a specific raster data collection.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRasterDataCollectionOutput'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: Arn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the raster data collection.
+          schema:
+            type: string
+            pattern: '^arn:aws[a-z-]{0,12}:sagemaker-geospatial:[a-z0-9-]{1,25}:[0-9]{12}:raster-data-collection/(public|premium|user)/[a-z0-9]{12,}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tile/{z}/{x}/{y}#Arn&ImageAssets&Target':
+    get:
+      operationId: GetTile
+      description: Gets a web mercator tile for the given Earth Observation job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTileOutput'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: Arn
+          in: query
+          required: true
+          description: The Amazon Resource Name (ARN) of the tile operation.
+          schema:
+            type: string
+            pattern: '^arn:aws[a-z-]{0,12}:sagemaker-geospatial:[a-z0-9-]{1,25}:[0-9]{12}:earth-observation-job/[a-z0-9]{12,}$'
+        - name: ImageAssets
+          in: query
+          required: true
+          description: The particular assets or bands to tile.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+            minItems: 1
+        - name: ImageMask
+          in: query
+          required: false
+          description: Determines whether or not to return a valid data mask.
+          schema:
+            type: boolean
+        - name: OutputDataType
+          in: query
+          required: false
+          description: The output data type of the tile operation.
+          schema:
+            type: string
+            enum:
+              - INT32
+              - FLOAT32
+              - INT16
+              - FLOAT64
+              - UINT16
+        - name: OutputFormat
+          in: query
+          required: false
+          description: 'The data format of the output tile. The formats include .npy, .png and .jpg.'
+          schema:
+            type: string
+        - name: PropertyFilters
+          in: query
+          required: false
+          description: Property filters for the imagery to tile.
+          schema:
+            type: string
+        - name: Target
+          in: query
+          required: true
+          description: Determines what part of the Earth Observation job to tile. 'INPUT' or 'OUTPUT' are the valid options.
+          schema:
+            type: string
+            enum:
+              - INPUT
+              - OUTPUT
+        - name: TimeRangeFilter
+          in: query
+          required: false
+          description: Time range filter applied to imagery to find the images to tile.
+          schema:
+            type: string
+        - name: x
+          in: path
+          required: true
+          description: The x coordinate of the tile input.
+          schema:
+            type: integer
+        - name: 'y'
+          in: path
+          required: true
+          description: The y coordinate of the tile input.
+          schema:
+            type: integer
+        - name: z
+          in: path
+          required: true
+          description: The z coordinate of the tile input.
+          schema:
+            type: integer
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /list-earth-observation-jobs:
+    post:
+      operationId: ListEarthObservationJobs
+      description: Use this operation to get a list of the Earth Observation jobs associated with the calling Amazon Web Services account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEarthObservationJobOutput'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                MaxResults:
+                  description: The total number of items to return.
+                  type: integer
+                  minimum: 1
+                  maximum: 20
+                NextToken:
+                  description: 'If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.'
+                  type: string
+                  minLength: 0
+                  maxLength: 8192
+                  format: password
+                SortBy:
+                  description: The parameter by which to sort the results.
+                  type: string
+                SortOrder:
+                  description: An optional value that specifies whether you want the results sorted in <code>Ascending</code> or <code>Descending</code> order.
+                  type: string
+                  enum:
+                    - ASCENDING
+                    - DESCENDING
+                StatusEquals:
+                  description: A filter that retrieves only jobs with a specific status.
+                  type: string
+                  enum:
+                    - INITIALIZING
+                    - IN_PROGRESS
+                    - STOPPING
+                    - COMPLETED
+                    - STOPPED
+                    - FAILED
+                    - DELETING
+                    - DELETED
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /raster-data-collections:
+    get:
+      operationId: ListRasterDataCollections
+      description: Use this operation to get raster data collections.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRasterDataCollectionsOutput'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: MaxResults
+          in: query
+          required: false
+          description: The total number of items to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 20
+        - name: NextToken
+          in: query
+          required: false
+          description: 'If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.'
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 8192
+            format: password
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{ResourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags attached to the resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource you want to tag.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: TagResource
+      description: The resource you want to tag.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource you want to tag.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 2048
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Tags
+              properties:
+                Tags:
+                  description: Each tag consists of a key and a value.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/String'
+  /list-vector-enrichment-jobs:
+    post:
+      operationId: ListVectorEnrichmentJobs
+      description: Retrieves a list of vector enrichment jobs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListVectorEnrichmentJobOutput'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                MaxResults:
+                  description: The maximum number of items to return.
+                  type: integer
+                  minimum: 1
+                  maximum: 20
+                NextToken:
+                  description: 'If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.'
+                  type: string
+                  minLength: 0
+                  maxLength: 8192
+                  format: password
+                SortBy:
+                  description: The parameter by which to sort the results.
+                  type: string
+                SortOrder:
+                  description: An optional value that specifies whether you want the results sorted in <code>Ascending</code> or <code>Descending</code> order.
+                  type: string
+                  enum:
+                    - ASCENDING
+                    - DESCENDING
+                StatusEquals:
+                  description: A filter that retrieves only jobs with a specific status.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /search-raster-data-collection:
+    post:
+      operationId: SearchRasterDataCollection
+      description: Allows you run image query on a specific raster data collection to get a list of the satellite imagery matching the selected filters.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchRasterDataCollectionOutput'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Arn
+                - RasterDataCollectionQuery
+              properties:
+                Arn:
+                  description: The Amazon Resource Name (ARN) of the raster data collection.
+                  type: string
+                  pattern: '^arn:aws[a-z-]{0,12}:sagemaker-geospatial:[a-z0-9-]{1,25}:[0-9]{12}:raster-data-collection/(public|premium|user)/[a-z0-9]{12,}$'
+                NextToken:
+                  description: 'If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.'
+                  type: string
+                  minLength: 0
+                  maxLength: 8192
+                  format: password
+                RasterDataCollectionQuery:
+                  description: 'This is a RasterDataCollectionQueryInput containing AreaOfInterest, Time Range filter and Property filters.'
+                  type: object
+                  properties:
+                    AreaOfInterest:
+                      allOf:
+                        - $ref: '#/components/schemas/AreaOfInterest'
+                        - description: <p/>
+                    BandFilter:
+                      allOf:
+                        - $ref: '#/components/schemas/StringListInput'
+                        - description: <p/>
+                    PropertyFilters:
+                      allOf:
+                        - $ref: '#/components/schemas/PropertyFilters'
+                        - description: <p/>
+                    TimeRangeFilter:
+                      allOf:
+                        - $ref: '#/components/schemas/TimeRangeFilterInput'
+                        - description: <p/>
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /earth-observation-jobs:
+    post:
+      operationId: StartEarthObservationJob
+      description: Use this operation to create an Earth observation job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartEarthObservationJobOutput'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - InputConfig
+                - JobConfig
+                - Name
+              properties:
+                ClientToken:
+                  description: A unique token that guarantees that the call to this API is idempotent.
+                  type: string
+                ExecutionRoleArn:
+                  description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
+                  type: string
+                InputConfig:
+                  description: Input configuration information.
+                  type: object
+                  properties:
+                    DataSourceConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/EojDataSourceConfigInput'
+                        - description: The location of the input data.&gt;
+                    PreviousEarthObservationJobArn:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: The Amazon Resource Name (ARN) of the previous Earth Observation job.
+                    RasterDataCollectionQuery:
+                      allOf:
+                        - $ref: '#/components/schemas/RasterDataCollectionQueryInput'
+                        - description: <p/>
+                JobConfig:
+                  description: The input structure for the JobConfig in an EarthObservationJob.
+                  type: object
+                  properties:
+                    BandMathConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/BandMathConfigInput'
+                        - description: <p/>
+                    CloudMaskingConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/CloudMaskingConfigInput'
+                        - description: An object containing information about the job configuration for cloud masking.
+                    CloudRemovalConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/CloudRemovalConfigInput'
+                        - description: An object containing information about the job configuration for cloud removal.
+                    GeoMosaicConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/GeoMosaicConfigInput'
+                        - description: An object containing information about the job configuration for geomosaic.
+                    LandCoverSegmentationConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/LandCoverSegmentationConfigInput'
+                        - description: An object containing information about the job configuration for land cover segmentation.
+                    ResamplingConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/ResamplingConfigInput'
+                        - description: An object containing information about the job configuration for resampling.
+                    StackConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/StackConfigInput'
+                        - description: <p/>
+                    TemporalStatisticsConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/TemporalStatisticsConfigInput'
+                        - description: An object containing information about the job configuration for temporal statistics.
+                    ZonalStatisticsConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/ZonalStatisticsConfigInput'
+                        - description: An object containing information about the job configuration for zonal statistics.
+                KmsKeyId:
+                  description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+                  type: string
+                Name:
+                  description: The name of the Earth Observation job.
+                  type: string
+                Tags:
+                  description: Each tag consists of a key and a value.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/String'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /vector-enrichment-jobs:
+    post:
+      operationId: StartVectorEnrichmentJob
+      description: 'Creates a Vector Enrichment job for the supplied job type. Currently, there are two supported job types: reverse geocoding and map matching.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartVectorEnrichmentJobOutput'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ExecutionRoleArn
+                - InputConfig
+                - JobConfig
+                - Name
+              properties:
+                ClientToken:
+                  description: A unique token that guarantees that the call to this API is idempotent.
+                  type: string
+                ExecutionRoleArn:
+                  description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
+                  type: string
+                InputConfig:
+                  description: The input structure for the InputConfig in a VectorEnrichmentJob.
+                  type: object
+                  properties:
+                    DataSourceConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/VectorEnrichmentJobDataSourceConfigInput'
+                        - description: <p/>
+                    DocumentType:
+                      allOf:
+                        - $ref: '#/components/schemas/VectorEnrichmentJobDocumentType'
+                        - description: <p/>
+                JobConfig:
+                  description: It contains configs such as ReverseGeocodingConfig and MapMatchingConfig.
+                  type: object
+                  properties:
+                    MapMatchingConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/MapMatchingConfig'
+                        - description: <p/>
+                    ReverseGeocodingConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/ReverseGeocodingConfig'
+                        - description: <p/>
+                KmsKeyId:
+                  description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+                  type: string
+                Name:
+                  description: The name of the Vector Enrichment job.
+                  type: string
+                Tags:
+                  description: Each tag consists of a key and a value.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/String'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /earth-observation-jobs/stop:
+    post:
+      operationId: StopEarthObservationJob
+      description: Use this operation to stop an existing earth observation job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopEarthObservationJobOutput'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Arn
+              properties:
+                Arn:
+                  description: The Amazon Resource Name (ARN) of the Earth Observation job being stopped.
+                  type: string
+                  pattern: '^arn:aws[a-z-]{0,12}:sagemaker-geospatial:[a-z0-9-]{1,25}:[0-9]{12}:earth-observation-job/[a-z0-9]{12,}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /vector-enrichment-jobs/stop:
+    post:
+      operationId: StopVectorEnrichmentJob
+      description: Stops the Vector Enrichment job for a given job ARN.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopVectorEnrichmentJobOutput'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Arn
+              properties:
+                Arn:
+                  description: The Amazon Resource Name (ARN) of the Vector Enrichment job.
+                  type: string
+                  pattern: '^arn:aws[a-z-]{0,12}:sagemaker-geospatial:[a-z0-9-]{1,25}:[0-9]{12}:vector-enrichment-job/[a-z0-9]{12,}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{ResourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: The resource you want to untag.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource you want to untag.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 2048
+        - name: tagKeys
+          in: query
+          required: true
+          description: Keys of the tags you want to remove.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+            minItems: 1
+            maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    DeleteEarthObservationJobOutput:
+      type: object
+      properties: {}
+    AccessDeniedException: {}
+    ValidationException: {}
+    ThrottlingException: {}
+    InternalServerException: {}
+    ResourceNotFoundException: {}
+    ConflictException: {}
+    DeleteVectorEnrichmentJobOutput:
+      type: object
+      properties: {}
+    ExportEarthObservationJobOutput:
+      type: object
+      required:
+        - Arn
+        - CreationTime
+        - ExecutionRoleArn
+        - ExportStatus
+        - OutputConfig
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/EarthObservationJobArn'
+            - description: The output Amazon Resource Name (ARN) of the Earth Observation job being exported.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation time.
+        ExecutionRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
+        ExportSourceImages:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: The source images provided to the Earth Observation job being exported.
+        ExportStatus:
+          allOf:
+            - $ref: '#/components/schemas/EarthObservationJobExportStatus'
+            - description: The status of the results of the Earth Observation job being exported.
+        OutputConfig:
+          allOf:
+            - $ref: '#/components/schemas/OutputConfigInput'
+            - description: An object containing information about the output file.
+    ExportS3DataInput:
+      type: object
+      required:
+        - S3Uri
+      properties:
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The URL to the Amazon S3 data input.
+      description: <p/>
+    ServiceQuotaExceededException: {}
+    ExportVectorEnrichmentJobOutput:
+      type: object
+      required:
+        - Arn
+        - CreationTime
+        - ExecutionRoleArn
+        - ExportStatus
+        - OutputConfig
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobArn'
+            - description: The Amazon Resource Name (ARN) of the Vector Enrichment job being exported.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation time.
+        ExecutionRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the IAM role with permission to upload to the location in OutputConfig.
+        ExportStatus:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobExportStatus'
+            - description: The status of the results the Vector Enrichment job being exported.
+        OutputConfig:
+          allOf:
+            - $ref: '#/components/schemas/ExportVectorEnrichmentJobOutputConfig'
+            - description: 'Output location information for exporting Vector Enrichment Job results. '
+    VectorEnrichmentJobS3Data:
+      type: object
+      required:
+        - S3Uri
+      properties:
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The URL to the Amazon S3 data for the Vector Enrichment job.
+      description: The Amazon S3 data for the Vector Enrichment job.
+    GetEarthObservationJobOutput:
+      type: object
+      required:
+        - Arn
+        - CreationTime
+        - DurationInSeconds
+        - InputConfig
+        - JobConfig
+        - Name
+        - Status
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the Earth Observation job.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation time of the initiated Earth Observation job.
+        DurationInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The duration of Earth Observation job, in seconds.'
+        ErrorDetails:
+          allOf:
+            - $ref: '#/components/schemas/EarthObservationJobErrorDetails'
+            - description: Details about the errors generated during the Earth Observation job.
+        ExecutionRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
+        ExportErrorDetails:
+          allOf:
+            - $ref: '#/components/schemas/ExportErrorDetails'
+            - description: Details about the errors generated during ExportEarthObservationJob.
+        ExportStatus:
+          allOf:
+            - $ref: '#/components/schemas/EarthObservationJobExportStatus'
+            - description: The status of the Earth Observation job.
+        InputConfig:
+          allOf:
+            - $ref: '#/components/schemas/InputConfigOutput'
+            - description: Input data for the Earth Observation job.
+        JobConfig:
+          allOf:
+            - $ref: '#/components/schemas/JobConfigInput'
+            - description: An object containing information about the job configuration.
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Earth Observation job.
+        OutputBands:
+          allOf:
+            - $ref: '#/components/schemas/EarthObservationJobOutputBands'
+            - description: <p/>
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/EarthObservationJobStatus'
+            - description: The status of a previously initiated Earth Observation job.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Each tag consists of a key and a value.
+    GetRasterDataCollectionOutput:
+      type: object
+      required:
+        - Arn
+        - Description
+        - DescriptionPageUrl
+        - ImageSourceBands
+        - Name
+        - SupportedFilters
+        - Type
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/DataCollectionArn'
+            - description: The Amazon Resource Name (ARN) of the raster data collection.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description of the raster data collection.
+        DescriptionPageUrl:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The URL of the description page.
+        ImageSourceBands:
+          allOf:
+            - $ref: '#/components/schemas/ImageSourceBandList'
+            - description: <p/>
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the raster data collection.
+        SupportedFilters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: The filters supported by the raster data collection.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Each tag consists of a key and a value.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/DataCollectionType'
+            - description: The raster data collection type.
+    GetTileOutput:
+      type: object
+      properties:
+        BinaryFile:
+          allOf:
+            - $ref: '#/components/schemas/BinaryFile'
+            - description: The output binary file.
+    String:
+      type: string
+    GetVectorEnrichmentJobOutput:
+      type: object
+      required:
+        - Arn
+        - CreationTime
+        - DurationInSeconds
+        - ExecutionRoleArn
+        - InputConfig
+        - JobConfig
+        - Name
+        - Status
+        - Type
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the Vector Enrichment job.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation time.
+        DurationInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The duration of the Vector Enrichment job, in seconds.'
+        ErrorDetails:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobErrorDetails'
+            - description: Details about the errors generated during the Vector Enrichment job.
+        ExecutionRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
+        ExportErrorDetails:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobExportErrorDetails'
+            - description: Details about the errors generated during the ExportVectorEnrichmentJob.
+        ExportStatus:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobExportStatus'
+            - description: The export status of the Vector Enrichment job being initiated.
+        InputConfig:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobInputConfig'
+            - description: Input configuration information for the Vector Enrichment job.
+        JobConfig:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobConfig'
+            - description: An object containing information about the job configuration.
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Vector Enrichment job.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobStatus'
+            - description: The status of the initiated Vector Enrichment job.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Each tag consists of a key and a value.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobType'
+            - description: The type of the Vector Enrichment job being initiated.
+    ListEarthObservationJobOutput:
+      type: object
+      required:
+        - EarthObservationJobSummaries
+      properties:
+        EarthObservationJobSummaries:
+          allOf:
+            - $ref: '#/components/schemas/EarthObservationJobList'
+            - description: Contains summary information about the Earth Observation jobs.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.'
+    ListRasterDataCollectionsOutput:
+      type: object
+      required:
+        - RasterDataCollectionSummaries
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.'
+        RasterDataCollectionSummaries:
+          allOf:
+            - $ref: '#/components/schemas/DataCollectionsList'
+            - description: Contains summary information about the raster data collection.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Each tag consists of a key and a value.
+    ListVectorEnrichmentJobOutput:
+      type: object
+      required:
+        - VectorEnrichmentJobSummaries
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.'
+        VectorEnrichmentJobSummaries:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobList'
+            - description: Contains summary information about the Vector Enrichment jobs.
+    SearchRasterDataCollectionOutput:
+      type: object
+      required:
+        - ApproximateResultCount
+      properties:
+        ApproximateResultCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: <p/>
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/ItemSourceList'
+            - description: <p/>
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.'
+    AreaOfInterest:
+      type: object
+      properties:
+        AreaOfInterestGeometry:
+          allOf:
+            - $ref: '#/components/schemas/AreaOfInterestGeometry'
+            - description: <p/>
+      description: <p/>
+    StringListInput:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+      minItems: 1
+    PropertyFilters:
+      type: object
+      properties:
+        LogicalOperator:
+          allOf:
+            - $ref: '#/components/schemas/LogicalOperator'
+            - description: <p/>
+        Properties:
+          allOf:
+            - $ref: '#/components/schemas/PropertyFiltersList'
+            - description: <p/>
+      description: <p/>
+    TimeRangeFilterInput:
+      type: object
+      required:
+        - EndTime
+        - StartTime
+      properties:
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The end time for the time-range filter.
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The start time for the time-range filter.
+      description: The input for the time-range filter.
+    StartEarthObservationJobOutput:
+      type: object
+      required:
+        - Arn
+        - CreationTime
+        - DurationInSeconds
+        - JobConfig
+        - Name
+        - Status
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the Earth Observation job.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation time.
+        DurationInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The duration of the session, in seconds.'
+        ExecutionRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
+        InputConfig:
+          allOf:
+            - $ref: '#/components/schemas/InputConfigOutput'
+            - description: Input configuration information for the Earth Observation job.
+        JobConfig:
+          allOf:
+            - $ref: '#/components/schemas/JobConfigInput'
+            - description: An object containing information about the job configuration.
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Earth Observation job.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/EarthObservationJobStatus'
+            - description: The status of the Earth Observation job.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Each tag consists of a key and a value.
+    EojDataSourceConfigInput:
+      type: object
+      properties:
+        S3Data:
+          allOf:
+            - $ref: '#/components/schemas/S3DataInput'
+            - description: <p/>
+      description: <p/>
+    RasterDataCollectionQueryInput:
+      type: object
+      required:
+        - RasterDataCollectionArn
+        - TimeRangeFilter
+      properties:
+        AreaOfInterest:
+          allOf:
+            - $ref: '#/components/schemas/AreaOfInterest'
+            - description: The area of interest being queried for the raster data collection.
+        PropertyFilters:
+          allOf:
+            - $ref: '#/components/schemas/PropertyFilters'
+            - description: <p/>
+        RasterDataCollectionArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the raster data collection.
+        TimeRangeFilter:
+          allOf:
+            - $ref: '#/components/schemas/TimeRangeFilterInput'
+            - description: <p/>
+      description: <p/>
+    BandMathConfigInput:
+      type: object
+      properties:
+        CustomIndices:
+          allOf:
+            - $ref: '#/components/schemas/CustomIndicesInput'
+            - description: <p/>
+        PredefinedIndices:
+          allOf:
+            - $ref: '#/components/schemas/StringListInput'
+            - description: <p/>
+      description: <p/>
+    CloudMaskingConfigInput:
+      type: object
+      properties: {}
+      description: <p/>
+    CloudRemovalConfigInput:
+      type: object
+      properties:
+        AlgorithmName:
+          allOf:
+            - $ref: '#/components/schemas/AlgorithmNameCloudRemoval'
+            - description: The name of the algorithm used for cloud removal.
+        InterpolationValue:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The interpolation value you provide for cloud removal.
+        TargetBands:
+          allOf:
+            - $ref: '#/components/schemas/StringListInput'
+            - description: <p/>
+      description: <p/>
+    GeoMosaicConfigInput:
+      type: object
+      properties:
+        AlgorithmName:
+          allOf:
+            - $ref: '#/components/schemas/AlgorithmNameGeoMosaic'
+            - description: The name of the algorithm being used for geomosaic.
+        TargetBands:
+          allOf:
+            - $ref: '#/components/schemas/StringListInput'
+            - description: The target bands for geomosaic.
+      description: Input configuration information for the geomosaic.
+    LandCoverSegmentationConfigInput:
+      type: object
+      properties: {}
+      description: <p/>
+    ResamplingConfigInput:
+      type: object
+      required:
+        - OutputResolution
+      properties:
+        AlgorithmName:
+          allOf:
+            - $ref: '#/components/schemas/AlgorithmNameResampling'
+            - description: The name of the algorithm used for resampling.
+        OutputResolution:
+          allOf:
+            - $ref: '#/components/schemas/OutputResolutionResamplingInput'
+            - description: <p/>
+        TargetBands:
+          allOf:
+            - $ref: '#/components/schemas/StringListInput'
+            - description: <p/>
+      description: <p/>
+    StackConfigInput:
+      type: object
+      properties:
+        OutputResolution:
+          allOf:
+            - $ref: '#/components/schemas/OutputResolutionStackInput'
+            - description: <p/>
+        TargetBands:
+          allOf:
+            - $ref: '#/components/schemas/StringListInput'
+            - description: <p/>
+      description: <p/>
+    TemporalStatisticsConfigInput:
+      type: object
+      required:
+        - Statistics
+      properties:
+        GroupBy:
+          allOf:
+            - $ref: '#/components/schemas/GroupBy'
+            - description: <p/>
+        Statistics:
+          allOf:
+            - $ref: '#/components/schemas/TemporalStatisticsListInput'
+            - description: <p/>
+        TargetBands:
+          allOf:
+            - $ref: '#/components/schemas/StringListInput'
+            - description: <p/>
+      description: <p/>
+    ZonalStatisticsConfigInput:
+      type: object
+      required:
+        - Statistics
+        - ZoneS3Path
+      properties:
+        Statistics:
+          allOf:
+            - $ref: '#/components/schemas/ZonalStatisticsListInput'
+            - description: <p/>
+        TargetBands:
+          allOf:
+            - $ref: '#/components/schemas/StringListInput'
+            - description: <p/>
+        ZoneS3Path:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
+      description: <p/>
+    StartVectorEnrichmentJobOutput:
+      type: object
+      required:
+        - Arn
+        - CreationTime
+        - DurationInSeconds
+        - ExecutionRoleArn
+        - InputConfig
+        - JobConfig
+        - Name
+        - Status
+        - Type
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobArn'
+            - description: The Amazon Resource Name (ARN) of the Vector Enrichment job.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation time.
+        DurationInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The duration of the Vector Enrichment job, in seconds.'
+        ExecutionRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
+        InputConfig:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobInputConfig'
+            - description: Input configuration information for starting the Vector Enrichment job.
+        JobConfig:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobConfig'
+            - description: An object containing information about the job configuration.
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Vector Enrichment job.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobStatus'
+            - description: The status of the Vector Enrichment job being started.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Each tag consists of a key and a value.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobType'
+            - description: The type of the Vector Enrichment job.
+    VectorEnrichmentJobDataSourceConfigInput:
+      type: object
+      properties:
+        S3Data:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobS3Data'
+            - description: <p/>
+      description: <p/>
+    VectorEnrichmentJobDocumentType:
+      type: string
+      enum:
+        - CSV
+    MapMatchingConfig:
+      type: object
+      required:
+        - IdAttributeName
+        - TimestampAttributeName
+        - XAttributeName
+        - YAttributeName
+      properties:
+        IdAttributeName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
+        TimestampAttributeName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the timestamp attribute.
+        XAttributeName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the X-attribute
+        YAttributeName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Y-attribute
+      description: <p/>
+    ReverseGeocodingConfig:
+      type: object
+      required:
+        - XAttributeName
+        - YAttributeName
+      properties:
+        XAttributeName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
+        YAttributeName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
+      description: <p/>
+    StopEarthObservationJobOutput:
+      type: object
+      properties: {}
+    StopVectorEnrichmentJobOutput:
+      type: object
+      properties: {}
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    AlgorithmNameCloudRemoval:
+      type: string
+      enum:
+        - INTERPOLATION
+    AlgorithmNameGeoMosaic:
+      type: string
+      enum:
+        - NEAR
+        - BILINEAR
+        - CUBIC
+        - CUBICSPLINE
+        - LANCZOS
+        - AVERAGE
+        - RMS
+        - MODE
+        - MAX
+        - MIN
+        - MED
+        - Q1
+        - Q3
+        - SUM
+    AlgorithmNameResampling:
+      type: string
+      enum:
+        - NEAR
+        - BILINEAR
+        - CUBIC
+        - CUBICSPLINE
+        - LANCZOS
+        - AVERAGE
+        - RMS
+        - MODE
+        - MAX
+        - MIN
+        - MED
+        - Q1
+        - Q3
+        - SUM
+    AreaOfInterestGeometry:
+      type: object
+      properties:
+        MultiPolygonGeometry:
+          allOf:
+            - $ref: '#/components/schemas/MultiPolygonGeometryInput'
+            - description: <p/>
+        PolygonGeometry:
+          allOf:
+            - $ref: '#/components/schemas/PolygonGeometryInput'
+            - description: <p/>
+      description: <p/>
+    MultiPolygonGeometryInput:
+      type: object
+      required:
+        - Coordinates
+      properties:
+        Coordinates:
+          allOf:
+            - $ref: '#/components/schemas/LinearRingsList'
+            - description: The coordinates of the multipolygon geometry.
+      description: <p/>
+    PolygonGeometryInput:
+      type: object
+      required:
+        - Coordinates
+      properties:
+        Coordinates:
+          allOf:
+            - $ref: '#/components/schemas/LinearRings'
+            - description: <p/>
+      description: <p/>
+    Arn:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    AssetValue:
+      type: object
+      properties:
+        Href:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
+      description: <p/>
+    AssetsMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/AssetValue'
+    CustomIndicesInput:
+      type: object
+      properties:
+        Operations:
+          allOf:
+            - $ref: '#/components/schemas/OperationsListInput'
+            - description: <p/>
+      description: <p/>
+    BinaryFile:
+      type: string
+    Boolean:
+      type: boolean
+    ComparisonOperator:
+      type: string
+      enum:
+        - EQUALS
+        - NOT_EQUALS
+        - STARTS_WITH
+    OperationsListInput:
+      type: array
+      items:
+        $ref: '#/components/schemas/Operation'
+      minItems: 1
+    DataCollectionArn:
+      type: string
+      pattern: '^arn:aws[a-z-]{0,12}:sagemaker-geospatial:[a-z0-9-]{1,25}:[0-9]{12}:raster-data-collection/(public|premium|user)/[a-z0-9]{12,}$'
+    DataCollectionType:
+      type: string
+      enum:
+        - PUBLIC
+        - PREMIUM
+        - USER
+    RasterDataCollectionMetadata:
+      type: object
+      required:
+        - Arn
+        - Description
+        - Name
+        - SupportedFilters
+        - Type
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/DataCollectionArn'
+            - description: The Amazon Resource Name (ARN) of the raster data collection.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description of the raster data collection.
+        DescriptionPageUrl:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description URL of the raster data collection.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the raster data collection.
+        SupportedFilters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: <p/>
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Each tag consists of a key and a value.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/DataCollectionType'
+            - description: The type of raster data collection.
+      description: Response object containing details for a specific RasterDataCollection.
+    DataCollectionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RasterDataCollectionMetadata'
+    EarthObservationJobArn:
+      type: string
+      pattern: '^arn:aws[a-z-]{0,12}:sagemaker-geospatial:[a-z0-9-]{1,25}:[0-9]{12}:earth-observation-job/[a-z0-9]{12,}$'
+    DeleteEarthObservationJobInput:
+      type: object
+      title: DeleteEarthObservationJobInput
+      properties: {}
+    VectorEnrichmentJobArn:
+      type: string
+      pattern: '^arn:aws[a-z-]{0,12}:sagemaker-geospatial:[a-z0-9-]{1,25}:[0-9]{12}:vector-enrichment-job/[a-z0-9]{12,}$'
+    DeleteVectorEnrichmentJobInput:
+      type: object
+      title: DeleteVectorEnrichmentJobInput
+      properties: {}
+    Double:
+      type: number
+      format: double
+    EarthObservationJobErrorType:
+      type: string
+      enum:
+        - CLIENT_ERROR
+        - SERVER_ERROR
+    EarthObservationJobErrorDetails:
+      type: object
+      properties:
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/EarthObservationJobErrorType'
+            - description: <p/>
+      description: The structure representing the errors in an EarthObservationJob.
+    EarthObservationJobExportStatus:
+      type: string
+      enum:
+        - IN_PROGRESS
+        - SUCCEEDED
+        - FAILED
+    ListEarthObservationJobOutputConfig:
+      type: object
+      required:
+        - Arn
+        - CreationTime
+        - DurationInSeconds
+        - Name
+        - OperationType
+        - Status
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the list of the Earth Observation jobs.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation time.
+        DurationInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The duration of the session, in seconds.'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The names of the Earth Observation jobs in the list.
+        OperationType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/EarthObservationJobStatus'
+            - description: The status of the list of the Earth Observation jobs.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Each tag consists of a key and a value.
+      description: An object containing information about the output file.
+    EarthObservationJobList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListEarthObservationJobOutputConfig'
+    OutputBand:
+      type: object
+      required:
+        - BandName
+        - OutputDataType
+      properties:
+        BandName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the band.
+        OutputDataType:
+          allOf:
+            - $ref: '#/components/schemas/OutputType'
+            - description: The datatype of the output band.
+      description: A single EarthObservationJob output band.
+    EarthObservationJobOutputBands:
+      type: array
+      items:
+        $ref: '#/components/schemas/OutputBand'
+    EarthObservationJobStatus:
+      type: string
+      enum:
+        - INITIALIZING
+        - IN_PROGRESS
+        - STOPPING
+        - COMPLETED
+        - STOPPED
+        - FAILED
+        - DELETING
+        - DELETED
+    Float:
+      type: number
+      format: float
+    EoCloudCoverInput:
+      type: object
+      required:
+        - LowerBound
+        - UpperBound
+      properties:
+        LowerBound:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: <p/>
+        UpperBound:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: <p/>
+      description: <p/>
+    S3DataInput:
+      type: object
+      required:
+        - MetadataProvider
+        - S3Uri
+      properties:
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+        MetadataProvider:
+          allOf:
+            - $ref: '#/components/schemas/MetadataProvider'
+            - description: <p/>
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The URL to the Amazon S3 input.
+      description: Path to Amazon S3 storage location for input data.
+    OutputConfigInput:
+      type: object
+      required:
+        - S3Data
+      properties:
+        S3Data:
+          allOf:
+            - $ref: '#/components/schemas/ExportS3DataInput'
+            - description: Path to Amazon S3 storage location for the output configuration file.
+      description: The response structure for an OutputConfig returned by an ExportEarthObservationJob.
+    ExportEarthObservationJobInput:
+      type: object
+      required:
+        - Arn
+        - ExecutionRoleArn
+        - OutputConfig
+      title: ExportEarthObservationJobInput
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/EarthObservationJobArn'
+            - description: The input Amazon Resource Name (ARN) of the Earth Observation job being exported.
+        ExecutionRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
+        ExportSourceImages:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: The source images provided to the Earth Observation job being exported.
+        OutputConfig:
+          allOf:
+            - $ref: '#/components/schemas/OutputConfigInput'
+            - description: An object containing information about the output file.
+    Timestamp:
+      type: string
+      format: date-time
+    ExportErrorDetailsOutput:
+      type: object
+      properties:
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ExportErrorType'
+            - description: <p/>
+      description: <p/>
+    ExportErrorDetails:
+      type: object
+      properties:
+        ExportResults:
+          allOf:
+            - $ref: '#/components/schemas/ExportErrorDetailsOutput'
+            - description: <p/>
+        ExportSourceImages:
+          allOf:
+            - $ref: '#/components/schemas/ExportErrorDetailsOutput'
+            - description: <p/>
+      description: The structure for returning the export error details in a GetEarthObservationJob.
+    ExportErrorType:
+      type: string
+      enum:
+        - CLIENT_ERROR
+        - SERVER_ERROR
+    ExportVectorEnrichmentJobOutputConfig:
+      type: object
+      required:
+        - S3Data
+      properties:
+        S3Data:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobS3Data'
+            - description: <p/>
+      description: An object containing information about the output file.
+    ExportVectorEnrichmentJobInput:
+      type: object
+      required:
+        - Arn
+        - ExecutionRoleArn
+        - OutputConfig
+      title: ExportVectorEnrichmentJobInput
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobArn'
+            - description: The Amazon Resource Name (ARN) of the Vector Enrichment job.
+        ExecutionRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the IAM rolewith permission to upload to the location in OutputConfig.
+        OutputConfig:
+          allOf:
+            - $ref: '#/components/schemas/ExportVectorEnrichmentJobOutputConfig'
+            - description: 'Output location information for exporting Vector Enrichment Job results. '
+    VectorEnrichmentJobExportStatus:
+      type: string
+      enum:
+        - IN_PROGRESS
+        - SUCCEEDED
+        - FAILED
+    Filter:
+      type: object
+      required:
+        - Name
+        - Type
+      properties:
+        Maximum:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: The maximum value of the filter.
+        Minimum:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: The minimum value of the filter.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the filter.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The type of the filter being used.
+      description: The structure representing the filters supported by a RasterDataCollection.
+    FilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Filter'
+    LinearRings:
+      type: array
+      items:
+        $ref: '#/components/schemas/LinearRing'
+      minItems: 1
+    Geometry:
+      type: object
+      required:
+        - Coordinates
+        - Type
+      properties:
+        Coordinates:
+          allOf:
+            - $ref: '#/components/schemas/LinearRings'
+            - description: <p/>
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
+      description: <p/>
+    GetEarthObservationJobInput:
+      type: object
+      title: GetEarthObservationJobInput
+      properties: {}
+    Integer:
+      type: integer
+    InputConfigOutput:
+      type: object
+      properties:
+        DataSourceConfig:
+          allOf:
+            - $ref: '#/components/schemas/EojDataSourceConfigInput'
+            - description: The location of the input data.
+        PreviousEarthObservationJobArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the previous Earth Observation job.
+        RasterDataCollectionQuery:
+          allOf:
+            - $ref: '#/components/schemas/RasterDataCollectionQueryOutput'
+            - description: <p/>
+      description: The InputConfig for an EarthObservationJob response.
+    JobConfigInput:
+      type: object
+      properties:
+        BandMathConfig:
+          allOf:
+            - $ref: '#/components/schemas/BandMathConfigInput'
+            - description: <p/>
+        CloudMaskingConfig:
+          allOf:
+            - $ref: '#/components/schemas/CloudMaskingConfigInput'
+            - description: An object containing information about the job configuration for cloud masking.
+        CloudRemovalConfig:
+          allOf:
+            - $ref: '#/components/schemas/CloudRemovalConfigInput'
+            - description: An object containing information about the job configuration for cloud removal.
+        GeoMosaicConfig:
+          allOf:
+            - $ref: '#/components/schemas/GeoMosaicConfigInput'
+            - description: An object containing information about the job configuration for geomosaic.
+        LandCoverSegmentationConfig:
+          allOf:
+            - $ref: '#/components/schemas/LandCoverSegmentationConfigInput'
+            - description: An object containing information about the job configuration for land cover segmentation.
+        ResamplingConfig:
+          allOf:
+            - $ref: '#/components/schemas/ResamplingConfigInput'
+            - description: An object containing information about the job configuration for resampling.
+        StackConfig:
+          allOf:
+            - $ref: '#/components/schemas/StackConfigInput'
+            - description: <p/>
+        TemporalStatisticsConfig:
+          allOf:
+            - $ref: '#/components/schemas/TemporalStatisticsConfigInput'
+            - description: An object containing information about the job configuration for temporal statistics.
+        ZonalStatisticsConfig:
+          allOf:
+            - $ref: '#/components/schemas/ZonalStatisticsConfigInput'
+            - description: An object containing information about the job configuration for zonal statistics.
+      description: The input structure for the JobConfig in an EarthObservationJob.
+    Tags:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/String'
+    GetRasterDataCollectionInput:
+      type: object
+      title: GetRasterDataCollectionInput
+      properties: {}
+    ImageSourceBandList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    OutputType:
+      type: string
+      enum:
+        - INT32
+        - FLOAT32
+        - INT16
+        - FLOAT64
+        - UINT16
+    TargetOptions:
+      type: string
+      enum:
+        - INPUT
+        - OUTPUT
+    GetTileInput:
+      type: object
+      title: GetTileInput
+      properties: {}
+    GetVectorEnrichmentJobInput:
+      type: object
+      title: GetVectorEnrichmentJobInput
+      properties: {}
+    VectorEnrichmentJobErrorDetails:
+      type: object
+      properties:
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A message that you define and then is processed and rendered by the Vector Enrichment job when the error occurs.
+        ErrorType:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobErrorType'
+            - description: The type of error generated during the Vector Enrichment job.
+      description: VectorEnrichmentJob error details in response from GetVectorEnrichmentJob.
+    VectorEnrichmentJobExportErrorDetails:
+      type: object
+      properties:
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The message providing details about the errors generated during the Vector Enrichment job.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobExportErrorType'
+            - description: <p/>
+      description: VectorEnrichmentJob export error details in response from GetVectorEnrichmentJob.
+    VectorEnrichmentJobInputConfig:
+      type: object
+      required:
+        - DataSourceConfig
+        - DocumentType
+      properties:
+        DataSourceConfig:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobDataSourceConfigInput'
+            - description: <p/>
+        DocumentType:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobDocumentType'
+            - description: <p/>
+      description: The input structure for the InputConfig in a VectorEnrichmentJob.
+    VectorEnrichmentJobConfig:
+      type: object
+      properties:
+        MapMatchingConfig:
+          allOf:
+            - $ref: '#/components/schemas/MapMatchingConfig'
+            - description: <p/>
+        ReverseGeocodingConfig:
+          allOf:
+            - $ref: '#/components/schemas/ReverseGeocodingConfig'
+            - description: <p/>
+      description: It contains configs such as ReverseGeocodingConfig and MapMatchingConfig.
+    VectorEnrichmentJobStatus:
+      type: string
+      enum:
+        - INITIALIZING
+        - IN_PROGRESS
+        - STOPPING
+        - STOPPED
+        - COMPLETED
+        - FAILED
+        - DELETING
+        - DELETED
+    VectorEnrichmentJobType:
+      type: string
+      enum:
+        - REVERSE_GEOCODING
+        - MAP_MATCHING
+    GroupBy:
+      type: string
+      enum:
+        - ALL
+        - YEARLY
+    InputConfigInput:
+      type: object
+      properties:
+        DataSourceConfig:
+          allOf:
+            - $ref: '#/components/schemas/EojDataSourceConfigInput'
+            - description: The location of the input data.&gt;
+        PreviousEarthObservationJobArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the previous Earth Observation job.
+        RasterDataCollectionQuery:
+          allOf:
+            - $ref: '#/components/schemas/RasterDataCollectionQueryInput'
+            - description: <p/>
+      description: Input configuration information.
+    RasterDataCollectionQueryOutput:
+      type: object
+      required:
+        - RasterDataCollectionArn
+        - RasterDataCollectionName
+        - TimeRangeFilter
+      properties:
+        AreaOfInterest:
+          allOf:
+            - $ref: '#/components/schemas/AreaOfInterest'
+            - description: <p/>
+        PropertyFilters:
+          allOf:
+            - $ref: '#/components/schemas/PropertyFilters'
+            - description: <p/>
+        RasterDataCollectionArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
+        RasterDataCollectionName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the raster data collection.
+        TimeRangeFilter:
+          allOf:
+            - $ref: '#/components/schemas/TimeRangeFilterInput'
+            - description: <p/>
+      description: <p/>
+    Properties:
+      type: object
+      properties:
+        EoCloudCover:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: <p/>
+        LandsatCloudCoverLand:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: <p/>
+        Platform:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
+        ViewOffNadir:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: <p/>
+        ViewSunAzimuth:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: <p/>
+        ViewSunElevation:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: <p/>
+      description: <p/>
+    ItemSource:
+      type: object
+      required:
+        - DateTime
+        - Geometry
+        - Id
+      properties:
+        Assets:
+          allOf:
+            - $ref: '#/components/schemas/AssetsMap'
+            - description: <p/>
+        DateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: <p/>
+        Geometry:
+          allOf:
+            - $ref: '#/components/schemas/Geometry'
+            - description: <p/>
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A unique Id for the source item.
+        Properties:
+          allOf:
+            - $ref: '#/components/schemas/Properties'
+            - description: <p/>
+      description: Structure representing the items in the response for SearchRasterDataCollection.
+    ItemSourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ItemSource'
+    LandsatCloudCoverLandInput:
+      type: object
+      required:
+        - LowerBound
+        - UpperBound
+      properties:
+        LowerBound:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: <p/>
+        UpperBound:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: <p/>
+      description: <p/>
+    Position:
+      type: array
+      items:
+        $ref: '#/components/schemas/Double'
+      minItems: 2
+      maxItems: 2
+    LinearRing:
+      type: array
+      items:
+        $ref: '#/components/schemas/Position'
+      minItems: 4
+    LinearRingsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LinearRings'
+    ListEarthObservationJobInputMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 20
+    NextToken:
+      type: string
+      minLength: 0
+      maxLength: 8192
+      format: password
+    SortOrder:
+      type: string
+      enum:
+        - ASCENDING
+        - DESCENDING
+    ListEarthObservationJobInput:
+      type: object
+      title: ListEarthObservationJobInput
+      properties:
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListEarthObservationJobInputMaxResultsInteger'
+            - description: The total number of items to return.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.'
+        SortBy:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The parameter by which to sort the results.
+        SortOrder:
+          allOf:
+            - $ref: '#/components/schemas/SortOrder'
+            - description: An optional value that specifies whether you want the results sorted in <code>Ascending</code> or <code>Descending</code> order.
+        StatusEquals:
+          allOf:
+            - $ref: '#/components/schemas/EarthObservationJobStatus'
+            - description: A filter that retrieves only jobs with a specific status.
+    ListRasterDataCollectionsInputMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 20
+    ListRasterDataCollectionsInput:
+      type: object
+      title: ListRasterDataCollectionsInput
+      properties: {}
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    ListVectorEnrichmentJobInputMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 20
+    ListVectorEnrichmentJobInput:
+      type: object
+      title: ListVectorEnrichmentJobInput
+      properties:
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListVectorEnrichmentJobInputMaxResultsInteger'
+            - description: The maximum number of items to return.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.'
+        SortBy:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The parameter by which to sort the results.
+        SortOrder:
+          allOf:
+            - $ref: '#/components/schemas/SortOrder'
+            - description: An optional value that specifies whether you want the results sorted in <code>Ascending</code> or <code>Descending</code> order.
+        StatusEquals:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A filter that retrieves only jobs with a specific status.
+    VectorEnrichmentJobList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListVectorEnrichmentJobOutputConfig'
+    ListVectorEnrichmentJobOutputConfig:
+      type: object
+      required:
+        - Arn
+        - CreationTime
+        - DurationInSeconds
+        - Name
+        - Status
+        - Type
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobArn'
+            - description: The Amazon Resource Name (ARN) of the list of the Vector Enrichment jobs.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation time.
+        DurationInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The duration of the session, in seconds.'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The names of the Vector Enrichment jobs in the list.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobStatus'
+            - description: 'The status of the Vector Enrichment jobs list. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Each tag consists of a key and a value.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobType'
+            - description: The type of the list of Vector Enrichment jobs.
+      description: An object containing information about the output file.
+    LogicalOperator:
+      type: string
+      enum:
+        - AND
+    MetadataProvider:
+      type: string
+      enum:
+        - PLANET_ORDER
+    Operation:
+      type: object
+      required:
+        - Equation
+        - Name
+      properties:
+        Equation:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the operation.
+        OutputType:
+          allOf:
+            - $ref: '#/components/schemas/OutputType'
+            - description: The type of the operation.
+      description: <p/>
+    UserDefined:
+      type: object
+      required:
+        - Unit
+        - Value
+      properties:
+        Unit:
+          allOf:
+            - $ref: '#/components/schemas/Unit'
+            - description: <p/>
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: <p/>
+      description: <p/>
+    OutputResolutionResamplingInput:
+      type: object
+      required:
+        - UserDefined
+      properties:
+        UserDefined:
+          allOf:
+            - $ref: '#/components/schemas/UserDefined'
+            - description: <p/>
+      description: <p/>
+    PredefinedResolution:
+      type: string
+      enum:
+        - HIGHEST
+        - LOWEST
+        - AVERAGE
+    OutputResolutionStackInput:
+      type: object
+      properties:
+        Predefined:
+          allOf:
+            - $ref: '#/components/schemas/PredefinedResolution'
+            - description: <p/>
+        UserDefined:
+          allOf:
+            - $ref: '#/components/schemas/UserDefined'
+            - description: <p/>
+      description: <p/>
+    PlatformInput:
+      type: object
+      required:
+        - Value
+      properties:
+        ComparisonOperator:
+          allOf:
+            - $ref: '#/components/schemas/ComparisonOperator'
+            - description: <p/>
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The value of the platform.
+      description: <p/>
+    ViewOffNadirInput:
+      type: object
+      required:
+        - LowerBound
+        - UpperBound
+      properties:
+        LowerBound:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: <p/>
+        UpperBound:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: <p/>
+      description: <p/>
+    ViewSunAzimuthInput:
+      type: object
+      required:
+        - LowerBound
+        - UpperBound
+      properties:
+        LowerBound:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: <p/>
+        UpperBound:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: <p/>
+      description: <p/>
+    ViewSunElevationInput:
+      type: object
+      required:
+        - LowerBound
+        - UpperBound
+      properties:
+        LowerBound:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: The lower bound to view the sun elevation.
+        UpperBound:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: The upper bound to view the sun elevation.
+      description: <p/>
+    Property:
+      type: object
+      properties:
+        EoCloudCover:
+          allOf:
+            - $ref: '#/components/schemas/EoCloudCoverInput'
+            - description: <p/>
+        LandsatCloudCoverLand:
+          allOf:
+            - $ref: '#/components/schemas/LandsatCloudCoverLandInput'
+            - description: <p/>
+        Platform:
+          allOf:
+            - $ref: '#/components/schemas/PlatformInput'
+            - description: <p/>
+        ViewOffNadir:
+          allOf:
+            - $ref: '#/components/schemas/ViewOffNadirInput'
+            - description: <p/>
+        ViewSunAzimuth:
+          allOf:
+            - $ref: '#/components/schemas/ViewSunAzimuthInput'
+            - description: <p/>
+        ViewSunElevation:
+          allOf:
+            - $ref: '#/components/schemas/ViewSunElevationInput'
+            - description: <p/>
+      description: <p/>
+    PropertyFilter:
+      type: object
+      required:
+        - Property
+      properties:
+        Property:
+          allOf:
+            - $ref: '#/components/schemas/Property'
+            - description: <p/>
+      description: <p/>
+    PropertyFiltersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PropertyFilter'
+    RasterDataCollectionQueryWithBandFilterInput:
+      type: object
+      required:
+        - TimeRangeFilter
+      properties:
+        AreaOfInterest:
+          allOf:
+            - $ref: '#/components/schemas/AreaOfInterest'
+            - description: <p/>
+        BandFilter:
+          allOf:
+            - $ref: '#/components/schemas/StringListInput'
+            - description: <p/>
+        PropertyFilters:
+          allOf:
+            - $ref: '#/components/schemas/PropertyFilters'
+            - description: <p/>
+        TimeRangeFilter:
+          allOf:
+            - $ref: '#/components/schemas/TimeRangeFilterInput'
+            - description: <p/>
+      description: 'This is a RasterDataCollectionQueryInput containing AreaOfInterest, Time Range filter and Property filters.'
+    SearchRasterDataCollectionInput:
+      type: object
+      required:
+        - Arn
+        - RasterDataCollectionQuery
+      title: SearchRasterDataCollectionInput
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/DataCollectionArn'
+            - description: The Amazon Resource Name (ARN) of the raster data collection.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.'
+        RasterDataCollectionQuery:
+          allOf:
+            - $ref: '#/components/schemas/RasterDataCollectionQueryWithBandFilterInput'
+            - description: <p/>
+    StartEarthObservationJobInput:
+      type: object
+      required:
+        - InputConfig
+        - JobConfig
+        - Name
+      title: StartEarthObservationJobInput
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A unique token that guarantees that the call to this API is idempotent.
+        ExecutionRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
+        InputConfig:
+          allOf:
+            - $ref: '#/components/schemas/InputConfigInput'
+            - description: Input configuration information for the Earth Observation job.
+        JobConfig:
+          allOf:
+            - $ref: '#/components/schemas/JobConfigInput'
+            - description: An object containing information about the job configuration.
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Earth Observation job.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Each tag consists of a key and a value.
+    StartVectorEnrichmentJobInput:
+      type: object
+      required:
+        - ExecutionRoleArn
+        - InputConfig
+        - JobConfig
+        - Name
+      title: StartVectorEnrichmentJobInput
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A unique token that guarantees that the call to this API is idempotent.
+        ExecutionRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
+        InputConfig:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobInputConfig'
+            - description: Input configuration information for the Vector Enrichment job.
+        JobConfig:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobConfig'
+            - description: An object containing information about the job configuration.
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Key Management Service (KMS) key ID for server-side encryption.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Vector Enrichment job.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Each tag consists of a key and a value.
+    StopEarthObservationJobInput:
+      type: object
+      required:
+        - Arn
+      title: StopEarthObservationJobInput
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/EarthObservationJobArn'
+            - description: The Amazon Resource Name (ARN) of the Earth Observation job being stopped.
+    StopVectorEnrichmentJobInput:
+      type: object
+      required:
+        - Arn
+      title: StopVectorEnrichmentJobInput
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/VectorEnrichmentJobArn'
+            - description: The Amazon Resource Name (ARN) of the Vector Enrichment job.
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+      minItems: 1
+      maxItems: 50
+    TagResourceRequest:
+      type: object
+      required:
+        - Tags
+      title: TagResourceRequest
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Each tag consists of a key and a value.
+    TemporalStatistics:
+      type: string
+      enum:
+        - MEAN
+        - MEDIAN
+        - STANDARD_DEVIATION
+    TemporalStatisticsListInput:
+      type: array
+      items:
+        $ref: '#/components/schemas/TemporalStatistics'
+      minItems: 1
+    Unit:
+      type: string
+      enum:
+        - METERS
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+    VectorEnrichmentJobErrorType:
+      type: string
+      enum:
+        - CLIENT_ERROR
+        - SERVER_ERROR
+    VectorEnrichmentJobExportErrorType:
+      type: string
+      enum:
+        - CLIENT_ERROR
+        - SERVER_ERROR
+    ZonalStatistics:
+      type: string
+      enum:
+        - MEAN
+        - MEDIAN
+        - STANDARD_DEVIATION
+        - MAX
+        - MIN
+        - SUM
+    ZonalStatisticsListInput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ZonalStatistics'
+      minItems: 1
+security:
+  - hmac: []

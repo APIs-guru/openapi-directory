@@ -129,30 +129,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidRequestException'
         '481':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '482':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '482':
+        '483':
           description: InternalFailureException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalFailureException'
-        '483':
+        '484':
           description: LimitExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
-        '484':
+        '485':
           description: ThrottlingException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
-        '485':
+        '486':
           description: ConflictingOperationException
           content:
             application/json:
@@ -190,6 +196,91 @@ paths:
                   pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
                   minLength: 36
                   maxLength: 36
+                clientToken:
+                  description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+                  type: string
+                  pattern: '\S{36,64}'
+                  minLength: 36
+                  maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /timeseries/associate/#alias&assetId&propertyId:
+    post:
+      operationId: AssociateTimeSeriesToAssetProperty
+      description: Associates a time series (data stream) with an asset property.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ConflictingOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictingOperationException'
+      parameters:
+        - name: alias
+          in: query
+          required: true
+          description: The alias that identifies the time series.
+          schema:
+            type: string
+            pattern: '[^\u0000-\u001F\u007F]+'
+            minLength: 1
+        - name: assetId
+          in: query
+          required: true
+          description: The ID of the asset in which the asset property was created.
+          schema:
+            type: string
+            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+            minLength: 36
+            maxLength: 36
+        - name: propertyId
+          in: query
+          required: true
+          description: The ID of the asset property.
+          schema:
+            type: string
+            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+            minLength: 36
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
                 clientToken:
                   description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
                   type: string
@@ -360,6 +451,236 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /properties/batch/aggregates:
+    post:
+      operationId: BatchGetAssetPropertyAggregates
+      description: 'Gets aggregated values (for example, average, minimum, and maximum) for one or more asset properties. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates">Querying aggregates</a> in the <i>IoT SiteWise User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetAssetPropertyAggregatesResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - entries
+              properties:
+                entries:
+                  description: The list of asset property aggregate entries for the batch get request. You can specify up to 16 entries per request.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/BatchGetAssetPropertyAggregatesEntry'
+                nextToken:
+                  description: The token to be used for the next set of paginated results.
+                  type: string
+                  pattern: '[A-Za-z0-9+/=]+'
+                  minLength: 1
+                  maxLength: 4096
+                maxResults:
+                  description: '<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.</p> <ul> <li> <p>The size of the result set is less than 1 MB.</p> </li> <li> <p>The number of data points in the result set is less than the value of <code>maxResults</code>. The maximum value of <code>maxResults</code> is 4000.</p> </li> </ul>'
+                  type: integer
+                  minimum: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /properties/batch/latest:
+    post:
+      operationId: BatchGetAssetPropertyValue
+      description: 'Gets the current value for one or more asset properties. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#current-values">Querying current values</a> in the <i>IoT SiteWise User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetAssetPropertyValueResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - entries
+              properties:
+                entries:
+                  description: The list of asset property value entries for the batch get request. You can specify up to 16 entries per request.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/BatchGetAssetPropertyValueEntry'
+                nextToken:
+                  description: The token to be used for the next set of paginated results.
+                  type: string
+                  pattern: '[A-Za-z0-9+/=]+'
+                  minLength: 1
+                  maxLength: 4096
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /properties/batch/history:
+    post:
+      operationId: BatchGetAssetPropertyValueHistory
+      description: 'Gets the historical values for one or more asset properties. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#historical-values">Querying historical values</a> in the <i>IoT SiteWise User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetAssetPropertyValueHistoryResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - entries
+              properties:
+                entries:
+                  description: The list of asset property historical value entries for the batch get request. You can specify up to 16 entries per request.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/BatchGetAssetPropertyValueHistoryEntry'
+                nextToken:
+                  description: The token to be used for the next set of paginated results.
+                  type: string
+                  pattern: '[A-Za-z0-9+/=]+'
+                  minLength: 1
+                  maxLength: 4096
+                maxResults:
+                  description: '<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.</p> <ul> <li> <p>The size of the result set is less than 1 MB.</p> </li> <li> <p>The number of data points in the result set is less than the value of <code>maxResults</code>. The maximum value of <code>maxResults</code> is 4000.</p> </li> </ul>'
+                  type: integer
+                  minimum: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /properties:
     post:
       operationId: BatchPutAssetPropertyValue
@@ -439,7 +760,7 @@ paths:
   /access-policies:
     post:
       operationId: CreateAccessPolicy
-      description: 'Creates an access policy that grants the specified identity (Amazon Web Services SSO user, Amazon Web Services SSO group, or IAM user) access to the specified IoT SiteWise Monitor portal or project resource.'
+      description: 'Creates an access policy that grants the specified identity (IAM Identity Center user, IAM Identity Center group, or IAM user) access to the specified IoT SiteWise Monitor portal or project resource.'
       responses:
         '201':
           description: Success
@@ -490,17 +811,17 @@ paths:
                 - accessPolicyPermission
               properties:
                 accessPolicyIdentity:
-                  description: '<p>Contains an identity that can access an IoT SiteWise Monitor resource.</p> <note> <p>Currently, you can''t use Amazon Web Services APIs to retrieve Amazon Web Services SSO identity IDs. You can find the Amazon Web Services SSO identity IDs in the URL of user and group pages in the <a href="https://console.aws.amazon.com/singlesignon">Amazon Web Services SSO console</a>.</p> </note>'
+                  description: '<p>Contains an identity that can access an IoT SiteWise Monitor resource.</p> <note> <p>Currently, you can''t use Amazon Web Services APIs to retrieve IAM Identity Center identity IDs. You can find the IAM Identity Center identity IDs in the URL of user and group pages in the <a href="https://console.aws.amazon.com/singlesignon">IAM Identity Center console</a>.</p> </note>'
                   type: object
                   properties:
                     user:
                       allOf:
                         - $ref: '#/components/schemas/UserIdentity'
-                        - description: An Amazon Web Services SSO user identity.
+                        - description: An IAM Identity Center user identity.
                     group:
                       allOf:
                         - $ref: '#/components/schemas/GroupIdentity'
-                        - description: An Amazon Web Services SSO group identity.
+                        - description: An IAM Identity Center group identity.
                     iamUser:
                       allOf:
                         - $ref: '#/components/schemas/IAMUserIdentity'
@@ -550,7 +871,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListAccessPolicies
-      description: 'Retrieves a paginated list of access policies for an identity (an Amazon Web Services SSO user, an Amazon Web Services SSO group, or an IAM user) or an IoT SiteWise Monitor resource (a portal or project).'
+      description: 'Retrieves a paginated list of access policies for an identity (an IAM Identity Center user, an IAM Identity Center group, or an IAM user) or an IoT SiteWise Monitor resource (a portal or project).'
       responses:
         '200':
           description: Success
@@ -580,7 +901,7 @@ paths:
         - name: identityType
           in: query
           required: false
-          description: 'The type of identity (Amazon Web Services SSO user, Amazon Web Services SSO group, or IAM user). This parameter is required if you specify <code>identityId</code>.'
+          description: 'The type of identity (IAM Identity Center user, IAM Identity Center group, or IAM user). This parameter is required if you specify <code>identityId</code>.'
           schema:
             type: string
             enum:
@@ -705,7 +1026,7 @@ paths:
                 - assetModelId
               properties:
                 assetName:
-                  description: 'A unique, friendly name for the asset.'
+                  description: A friendly name for the asset.
                   type: string
                   pattern: '[^\u0000-\u001F\u007F]+'
                   minLength: 1
@@ -729,6 +1050,12 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+                assetDescription:
+                  description: A description for the asset.
+                  type: string
+                  pattern: '[^\u0000-\u001F\u007F]+'
+                  minLength: 1
+                  maxLength: 2048
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -964,6 +1291,184 @@ paths:
             type: integer
             minimum: 1
             maximum: 250
+  /jobs:
+    post:
+      operationId: CreateBulkImportJob
+      description: '<p>Defines a job to ingest data to IoT SiteWise from Amazon S3. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/CreateBulkImportJob.html">Create a bulk import job (CLI)</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <important> <p>You must enable IoT SiteWise to export data to Amazon S3 before you create a bulk import job. For more information about how to configure storage settings, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_PutStorageConfiguration.html">PutStorageConfiguration</a>.</p> </important>'
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBulkImportJobResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '486':
+          description: ConflictingOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictingOperationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - jobName
+                - jobRoleArn
+                - files
+                - errorReportLocation
+                - jobConfiguration
+              properties:
+                jobName:
+                  description: The unique name that helps identify the job request.
+                  type: string
+                  pattern: '[^\u0000-\u001F\u007F]+'
+                  minLength: 1
+                  maxLength: 256
+                jobRoleArn:
+                  description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the IAM role that allows IoT SiteWise to read Amazon S3 data.'
+                  type: string
+                  pattern: .*
+                  minLength: 1
+                  maxLength: 1600
+                files:
+                  description: The files in the specified Amazon S3 bucket that contain your data.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/File'
+                errorReportLocation:
+                  description: The Amazon S3 destination where errors associated with the job creation request are saved.
+                  type: object
+                  properties:
+                    bucket:
+                      allOf:
+                        - $ref: '#/components/schemas/Bucket'
+                        - description: The name of the Amazon S3 bucket to which errors associated with the bulk import job are sent.
+                    prefix:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: 'Amazon S3 uses the prefix as a folder name to organize data in the bucket. Each Amazon S3 object has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/). For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html">Organizing objects using prefixes</a> in the <i>Amazon Simple Storage Service User Guide</i>.'
+                jobConfiguration:
+                  description: 'Contains the configuration information of a job, such as the file format used to save data in Amazon S3.'
+                  type: object
+                  properties:
+                    fileFormat:
+                      allOf:
+                        - $ref: '#/components/schemas/FileFormat'
+                        - description: The file format of the data in Amazon S3.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListBulkImportJobs
+      description: 'Retrieves a paginated list of bulk import job requests. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ListBulkImportJobs.html">List bulk import jobs (CLI)</a> in the <i>IoT SiteWise User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListBulkImportJobsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: The token to be used for the next set of paginated results.
+          schema:
+            type: string
+            pattern: '[A-Za-z0-9+/=]+'
+            minLength: 1
+            maxLength: 4096
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return for each paginated request.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 250
+        - name: filter
+          in: query
+          required: false
+          description: You can use a filter to select the bulk import jobs that you want to retrieve.
+          schema:
+            type: string
+            enum:
+              - ALL
+              - PENDING
+              - RUNNING
+              - CANCELLED
+              - FAILED
+              - COMPLETED_WITH_FAILURES
+              - COMPLETED
   /dashboards:
     post:
       operationId: CreateDashboard
@@ -1196,7 +1701,7 @@ paths:
   /portals:
     post:
       operationId: CreatePortal
-      description: '<p>Creates a portal, which can contain projects and dashboards. IoT SiteWise Monitor uses Amazon Web Services SSO or IAM to authenticate portal users and manage user permissions.</p> <note> <p>Before you can sign in to a new portal, you must add at least one identity to that portal. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/administer-portals.html#portal-change-admins">Adding or removing portal administrators</a> in the <i>IoT SiteWise User Guide</i>.</p> </note>'
+      description: '<p>Creates a portal, which can contain projects and dashboards. IoT SiteWise Monitor uses IAM Identity Center or IAM to authenticate portal users and manage user permissions.</p> <note> <p>Before you can sign in to a new portal, you must add at least one identity to that portal. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/administer-portals.html#portal-change-admins">Adding or removing portal administrators</a> in the <i>IoT SiteWise User Guide</i>.</p> </note>'
       responses:
         '202':
           description: Success
@@ -1296,7 +1801,7 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 portalAuthMode:
-                  description: '<p>The service to use to authenticate users to the portal. Choose from the following options:</p> <ul> <li> <p> <code>SSO</code> – The portal uses Amazon Web Services Single Sign On to authenticate users and manage user permissions. Before you can create a portal that uses Amazon Web Services SSO, you must enable Amazon Web Services SSO. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso">Enabling Amazon Web Services SSO</a> in the <i>IoT SiteWise User Guide</i>. This option is only available in Amazon Web Services Regions other than the China Regions.</p> </li> <li> <p> <code>IAM</code> – The portal uses Identity and Access Management to authenticate users and manage user permissions. This option is only available in the China Regions.</p> </li> </ul> <p>You can''t change this value after you create a portal.</p> <p>Default: <code>SSO</code> </p>'
+                  description: '<p>The service to use to authenticate users to the portal. Choose from the following options:</p> <ul> <li> <p> <code>SSO</code> – The portal uses IAM Identity Center (successor to Single Sign-On) to authenticate users and manage user permissions. Before you can create a portal that uses IAM Identity Center, you must enable IAM Identity Center. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso">Enabling IAM Identity Center</a> in the <i>IoT SiteWise User Guide</i>. This option is only available in Amazon Web Services Regions other than the China Regions.</p> </li> <li> <p> <code>IAM</code> – The portal uses Identity and Access Management to authenticate users and manage user permissions.</p> </li> </ul> <p>You can''t change this value after you create a portal.</p> <p>Default: <code>SSO</code> </p>'
                   type: string
                   enum:
                     - IAM
@@ -1376,7 +1881,7 @@ paths:
   /projects:
     post:
       operationId: CreateProject
-      description: Creates a project in the specified portal.
+      description: <p>Creates a project in the specified portal.</p> <note> <p>Make sure that the project name and description don't contain confidential information.</p> </note>
       responses:
         '201':
           description: Success
@@ -1626,17 +2131,17 @@ paths:
                 - accessPolicyPermission
               properties:
                 accessPolicyIdentity:
-                  description: '<p>Contains an identity that can access an IoT SiteWise Monitor resource.</p> <note> <p>Currently, you can''t use Amazon Web Services APIs to retrieve Amazon Web Services SSO identity IDs. You can find the Amazon Web Services SSO identity IDs in the URL of user and group pages in the <a href="https://console.aws.amazon.com/singlesignon">Amazon Web Services SSO console</a>.</p> </note>'
+                  description: '<p>Contains an identity that can access an IoT SiteWise Monitor resource.</p> <note> <p>Currently, you can''t use Amazon Web Services APIs to retrieve IAM Identity Center identity IDs. You can find the IAM Identity Center identity IDs in the URL of user and group pages in the <a href="https://console.aws.amazon.com/singlesignon">IAM Identity Center console</a>.</p> </note>'
                   type: object
                   properties:
                     user:
                       allOf:
                         - $ref: '#/components/schemas/UserIdentity'
-                        - description: An Amazon Web Services SSO user identity.
+                        - description: An IAM Identity Center user identity.
                     group:
                       allOf:
                         - $ref: '#/components/schemas/GroupIdentity'
-                        - description: An Amazon Web Services SSO group identity.
+                        - description: An IAM Identity Center group identity.
                     iamUser:
                       allOf:
                         - $ref: '#/components/schemas/IAMUserIdentity'
@@ -1781,6 +2286,12 @@ paths:
             pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
             minLength: 36
             maxLength: 36
+        - name: excludeProperties
+          in: query
+          required: false
+          description: ' Whether or not to exclude asset properties from the response. '
+          schema:
+            type: boolean
     put:
       operationId: UpdateAsset
       description: 'Updates an asset''s name. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html">Updating assets and models</a> in the <i>IoT SiteWise User Guide</i>.'
@@ -1847,7 +2358,7 @@ paths:
                 - assetName
               properties:
                 assetName:
-                  description: 'A unique, friendly name for the asset.'
+                  description: A friendly name for the asset.
                   type: string
                   pattern: '[^\u0000-\u001F\u007F]+'
                   minLength: 1
@@ -1858,6 +2369,12 @@ paths:
                   pattern: '\S{36,64}'
                   minLength: 36
                   maxLength: 64
+                assetDescription:
+                  description: A description for the asset.
+                  type: string
+                  pattern: '[^\u0000-\u001F\u007F]+'
+                  minLength: 1
+                  maxLength: 2048
   '/asset-models/{assetModelId}':
     delete:
       operationId: DeleteAssetModel
@@ -1970,6 +2487,12 @@ paths:
             pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
             minLength: 36
             maxLength: 36
+        - name: excludeProperties
+          in: query
+          required: false
+          description: ' Whether or not to exclude asset model properties from the response. '
+          schema:
+            type: boolean
     put:
       operationId: UpdateAssetModel
       description: '<p>Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model''s property and hierarchy definitions. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html">Updating assets and models</a> in the <i>IoT SiteWise User Guide</i>.</p> <important> <p>This operation overwrites the existing model with the provided model. To avoid deleting your asset model''s properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html">DescribeAssetModel</a>.</p> <p>If you remove a property from an asset model, IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, IoT SiteWise disassociates every asset associated with that hierarchy. You can''t change the type or data type of an existing property.</p> </important>'
@@ -2820,6 +3343,91 @@ paths:
                   pattern: '\S{36,64}'
                   minLength: 36
                   maxLength: 64
+  /timeseries/delete/:
+    post:
+      operationId: DeleteTimeSeries
+      description: '<p>Deletes a time series (data stream). If you delete a time series that''s associated with an asset property, the asset property still exists, but the time series will no longer be associated with this asset property.</p> <p>To identify a time series, do one of the following:</p> <ul> <li> <p>If the time series isn''t associated with an asset property, specify the <code>alias</code> of the time series.</p> </li> <li> <p>If the time series is associated with an asset property, specify one of the following: </p> <ul> <li> <p>The <code>alias</code> of the time series.</p> </li> <li> <p>The <code>assetId</code> and <code>propertyId</code> that identifies the asset property.</p> </li> </ul> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ConflictingOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictingOperationException'
+      parameters:
+        - name: alias
+          in: query
+          required: false
+          description: The alias that identifies the time series.
+          schema:
+            type: string
+            pattern: '[^\u0000-\u001F\u007F]+'
+            minLength: 1
+        - name: assetId
+          in: query
+          required: false
+          description: The ID of the asset in which the asset property was created.
+          schema:
+            type: string
+            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+            minLength: 36
+            maxLength: 36
+        - name: propertyId
+          in: query
+          required: false
+          description: The ID of the asset property.
+          schema:
+            type: string
+            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+            minLength: 36
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clientToken:
+                  description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+                  type: string
+                  pattern: '\S{36,64}'
+                  minLength: 36
+                  maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/assets/{assetId}/properties/{propertyId}':
     get:
       operationId: DescribeAssetProperty
@@ -2961,6 +3569,65 @@ paths:
                   pattern: '\S{36,64}'
                   minLength: 36
                   maxLength: 64
+                propertyUnit:
+                  description: 'The unit of measure (such as Newtons or RPM) of the asset property. If you don''t specify a value for this parameter, the service uses the value of the <code>assetModelProperty</code> in the asset model.'
+                  type: string
+                  pattern: '[^\u0000-\u001F\u007F]+'
+                  minLength: 1
+                  maxLength: 256
+  '/jobs/{jobId}':
+    get:
+      operationId: DescribeBulkImportJob
+      description: 'Retrieves information about a bulk import job request. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/DescribeBulkImportJob.html">Describe a bulk import job (CLI)</a> in the <i>Amazon Simple Storage Service User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeBulkImportJobResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the job.
+          schema:
+            type: string
+            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+            minLength: 36
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /configuration/account/encryption:
     get:
       operationId: DescribeDefaultEncryptionConfiguration
@@ -3056,7 +3723,7 @@ paths:
                     - SITEWISE_DEFAULT_ENCRYPTION
                     - KMS_BASED_ENCRYPTION
                 kmsKeyId:
-                  description: The Key ID of the customer managed customer master key (CMK) used for KMS encryption. This is required if you use <code>KMS_BASED_ENCRYPTION</code>.
+                  description: The Key ID of the customer managed key used for KMS encryption. This is required if you use <code>KMS_BASED_ENCRYPTION</code>.
                   type: string
                   minLength: 1
                   maxLength: 2048
@@ -3343,7 +4010,7 @@ paths:
                 - storageType
               properties:
                 storageType:
-                  description: '<p>The type of storage that you specified for your data. The storage type can be one of the following values:</p> <ul> <li> <p> <code>SITEWISE_DEFAULT_STORAGE</code> – IoT SiteWise replicates your data into a service managed database.</p> </li> <li> <p> <code>MULTI_LAYER_STORAGE</code> – IoT SiteWise replicates your data into a service managed database and saves a copy of your raw data and metadata in an Amazon S3 object that you specified.</p> </li> </ul>'
+                  description: '<p>The storage tier that you specified for your data. The <code>storageType</code> parameter can be one of the following values:</p> <ul> <li> <p> <code>SITEWISE_DEFAULT_STORAGE</code> – IoT SiteWise saves your data into the hot tier. The hot tier is a service-managed database.</p> </li> <li> <p> <code>MULTI_LAYER_STORAGE</code> – IoT SiteWise saves your data in both the cold tier and the hot tier. The cold tier is a customer-managed Amazon S3 bucket.</p> </li> </ul>'
                   type: string
                   enum:
                     - SITEWISE_DEFAULT_STORAGE
@@ -3356,6 +4023,94 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/CustomerManagedS3Storage'
                         - description: Contains information about a customer managed Amazon S3 bucket.
+                disassociatedDataStorage:
+                  description: '<p>Contains the storage configuration for time series (data streams) that aren''t associated with asset properties. The <code>disassociatedDataStorage</code> can be one of the following values:</p> <ul> <li> <p> <code>ENABLED</code> – IoT SiteWise accepts time series that aren''t associated with asset properties.</p> <important> <p>After the <code>disassociatedDataStorage</code> is enabled, you can''t disable it.</p> </important> </li> <li> <p> <code>DISABLED</code> – IoT SiteWise doesn''t accept time series (data streams) that aren''t associated with asset properties.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html">Data streams</a> in the <i>IoT SiteWise User Guide</i>.</p>'
+                  type: string
+                  enum:
+                    - ENABLED
+                    - DISABLED
+                retentionPeriod:
+                  description: 'How many days your data is kept in the hot tier. By default, your data is kept indefinitely in the hot tier.'
+                  type: object
+                  properties:
+                    numberOfDays:
+                      allOf:
+                        - $ref: '#/components/schemas/NumberOfDays'
+                        - description: '<p>The number of days that your data is kept.</p> <note> <p>If you specified a value for this parameter, the <code>unlimited</code> parameter must be <code>false</code>.</p> </note>'
+                    unlimited:
+                      allOf:
+                        - $ref: '#/components/schemas/Unlimited'
+                        - description: '<p>If true, your data is kept indefinitely.</p> <note> <p>If configured to <code>true</code>, you must not specify a value for the <code>numberOfDays</code> parameter.</p> </note>'
+  /timeseries/describe/:
+    get:
+      operationId: DescribeTimeSeries
+      description: '<p>Retrieves information about a time series (data stream).</p> <p>To identify a time series, do one of the following:</p> <ul> <li> <p>If the time series isn''t associated with an asset property, specify the <code>alias</code> of the time series.</p> </li> <li> <p>If the time series is associated with an asset property, specify one of the following: </p> <ul> <li> <p>The <code>alias</code> of the time series.</p> </li> <li> <p>The <code>assetId</code> and <code>propertyId</code> that identifies the asset property.</p> </li> </ul> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTimeSeriesResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: alias
+          in: query
+          required: false
+          description: The alias that identifies the time series.
+          schema:
+            type: string
+            pattern: '[^\u0000-\u001F\u007F]+'
+            minLength: 1
+        - name: assetId
+          in: query
+          required: false
+          description: The ID of the asset in which the asset property was created.
+          schema:
+            type: string
+            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+            minLength: 36
+            maxLength: 36
+        - name: propertyId
+          in: query
+          required: false
+          description: The ID of the asset property.
+          schema:
+            type: string
+            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+            minLength: 36
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/assets/{assetId}/disassociate':
     post:
       operationId: DisassociateAssets
@@ -3425,6 +4180,91 @@ paths:
                   pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
                   minLength: 36
                   maxLength: 36
+                clientToken:
+                  description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+                  type: string
+                  pattern: '\S{36,64}'
+                  minLength: 36
+                  maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /timeseries/disassociate/#alias&assetId&propertyId:
+    post:
+      operationId: DisassociateTimeSeriesFromAssetProperty
+      description: Disassociates a time series (data stream) from an asset property.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ConflictingOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictingOperationException'
+      parameters:
+        - name: alias
+          in: query
+          required: true
+          description: The alias that identifies the time series.
+          schema:
+            type: string
+            pattern: '[^\u0000-\u001F\u007F]+'
+            minLength: 1
+        - name: assetId
+          in: query
+          required: true
+          description: The ID of the asset in which the asset property was created.
+          schema:
+            type: string
+            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+            minLength: 36
+            maxLength: 36
+        - name: propertyId
+          in: query
+          required: true
+          description: The ID of the asset property.
+          schema:
+            type: string
+            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+            minLength: 36
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
                 clientToken:
                   description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
                   type: string
@@ -3864,7 +4704,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-            maximum: 31556889864403200
+            maximum: 9223372036854774
         - name: startTimeOffsetInNanos
           in: query
           required: false
@@ -3880,7 +4720,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-            maximum: 31556889864403200
+            maximum: 9223372036854774
         - name: endTimeOffsetInNanos
           in: query
           required: false
@@ -3926,7 +4766,7 @@ paths:
         - name: type
           in: query
           required: true
-          description: '<p>The interpolation type.</p> <p>Valid values: <code>LINEAR_INTERPOLATION | LOCF_INTERPOLATION</code> </p> <ul> <li> <p> <code>LINEAR_INTERPOLATION</code> – Estimates missing data using <a href="https://en.wikipedia.org/wiki/Linear_interpolation">linear interpolation</a>.</p> <p>For example, you can use this operation to return the interpolated temperature values for a wind turbine every 24 hours over a duration of 7 days. If the interpolation starts on July 1, 2021, at 9 AM, IoT SiteWise returns the first interpolated value on July 2, 2021, at 9 AM, the second interpolated value on July 3, 2021, at 9 AM, and so on.</p> </li> <li> <p> <code>LOCF_INTERPOLATION</code> – Estimates missing data using last observation carried forward interpolation</p> <p>If no data point is found for an interval, IoT SiteWise returns the last observed data point for the previous interval and carries forward this interpolated value until a new data point is found.</p> <p>For example, you can get the state of an on-off valve every 24 hours over a duration of 7 days. If the interpolation starts on July 1, 2021, at 9 AM, IoT SiteWise returns the last observed data point between July 1, 2021, at 9 AM and July 2, 2021, at 9 AM as the first interpolated value. If no data point is found after 9 AM on July 2, 2021, IoT SiteWise uses the same interpolated value for the rest of the days.</p> </li> </ul>'
+          description: '<p>The interpolation type.</p> <p>Valid values: <code>LINEAR_INTERPOLATION | LOCF_INTERPOLATION</code> </p> <ul> <li> <p> <code>LINEAR_INTERPOLATION</code> – Estimates missing data using <a href="https://en.wikipedia.org/wiki/Linear_interpolation">linear interpolation</a>.</p> <p>For example, you can use this operation to return the interpolated temperature values for a wind turbine every 24 hours over a duration of 7 days. If the interpolation starts July 1, 2021, at 9 AM, IoT SiteWise returns the first interpolated value on July 2, 2021, at 9 AM, the second interpolated value on July 3, 2021, at 9 AM, and so on.</p> </li> <li> <p> <code>LOCF_INTERPOLATION</code> – Estimates missing data using last observation carried forward interpolation</p> <p>If no data point is found for an interval, IoT SiteWise returns the last observed data point for the previous interval and carries forward this interpolated value until a new data point is found.</p> <p>For example, you can get the state of an on-off valve every 24 hours over a duration of 7 days. If the interpolation starts July 1, 2021, at 9 AM, IoT SiteWise returns the last observed data point between July 1, 2021, at 9 AM and July 2, 2021, at 9 AM as the first interpolated value. If a data point isn''t found after 9 AM on July 2, 2021, IoT SiteWise uses the same interpolated value for the rest of the days.</p> </li> </ul>'
           schema:
             type: string
             minLength: 1
@@ -3934,11 +4774,169 @@ paths:
         - name: intervalWindowInSeconds
           in: query
           required: false
-          description: '<p>The query interval for the window in seconds. IoT SiteWise computes each interpolated value by using data points from the timestamp of each interval minus the window to the timestamp of each interval plus the window. If not specified, the window is between the start time minus the interval and the end time plus the interval. </p> <note> <ul> <li> <p>If you specify a value for the <code>intervalWindowInSeconds</code> parameter, the <code>type</code> parameter must be <code>LINEAR_INTERPOLATION</code>.</p> </li> <li> <p>If no data point is found during the specified query window, IoT SiteWise won''t return an interpolated value for the interval. This indicates that there''s a gap in the ingested data points.</p> </li> </ul> </note> <p>For example, you can get the interpolated temperature values for a wind turbine every 24 hours over a duration of 7 days. If the interpolation starts on July 1, 2021, at 9 AM with a window of 2 hours, IoT SiteWise uses the data points from 7 AM (9 AM - 2 hours) to 11 AM (9 AM + 2 hours) on July 2, 2021 to compute the first interpolated value, uses the data points from 7 AM (9 AM - 2 hours) to 11 AM (9 AM + 2 hours) on July 3, 2021 to compute the second interpolated value, and so on. </p>'
+          description: '<p>The query interval for the window, in seconds. IoT SiteWise computes each interpolated value by using data points from the timestamp of each interval, minus the window to the timestamp of each interval plus the window. If not specified, the window ranges between the start time minus the interval and the end time plus the interval.</p> <note> <ul> <li> <p>If you specify a value for the <code>intervalWindowInSeconds</code> parameter, the value for the <code>type</code> parameter must be <code>LINEAR_INTERPOLATION</code>.</p> </li> <li> <p>If a data point isn''t found during the specified query window, IoT SiteWise won''t return an interpolated value for the interval. This indicates that there''s a gap in the ingested data points.</p> </li> </ul> </note> <p>For example, you can get the interpolated temperature values for a wind turbine every 24 hours over a duration of 7 days. If the interpolation starts on July 1, 2021, at 9 AM with a window of 2 hours, IoT SiteWise uses the data points from 7 AM (9 AM minus 2 hours) to 11 AM (9 AM plus 2 hours) on July 2, 2021 to compute the first interpolated value. Next, IoT SiteWise uses the data points from 7 AM (9 AM minus 2 hours) to 11 AM (9 AM plus 2 hours) on July 3, 2021 to compute the second interpolated value, and so on. </p>'
           schema:
             type: integer
             minimum: 1
             maximum: 320000000
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/asset-models/{assetModelId}/properties':
+    get:
+      operationId: ListAssetModelProperties
+      description: 'Retrieves a paginated list of properties associated with an asset model. If you update properties associated with the model before you finish listing all the properties, you need to start all over again.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAssetModelPropertiesResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: assetModelId
+          in: path
+          required: true
+          description: The ID of the asset model.
+          schema:
+            type: string
+            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+            minLength: 36
+            maxLength: 36
+        - name: nextToken
+          in: query
+          required: false
+          description: The token to be used for the next set of paginated results.
+          schema:
+            type: string
+            pattern: '[A-Za-z0-9+/=]+'
+            minLength: 1
+            maxLength: 4096
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return for each paginated request. If not specified, the default value is 50.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 250
+        - name: filter
+          in: query
+          required: false
+          description: '<p> Filters the requested list of asset model properties. You can choose one of the following options:</p> <ul> <li> <p> <code>ALL</code> – The list includes all asset model properties for a given asset model ID. </p> </li> <li> <p> <code>BASE</code> – The list includes only base asset model properties for a given asset model ID. </p> </li> </ul> <p>Default: <code>BASE</code> </p>'
+          schema:
+            type: string
+            enum:
+              - ALL
+              - BASE
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/assets/{assetId}/properties':
+    get:
+      operationId: ListAssetProperties
+      description: 'Retrieves a paginated list of properties associated with an asset. If you update properties associated with the model before you finish listing all the properties, you need to start all over again.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAssetPropertiesResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: assetId
+          in: path
+          required: true
+          description: The ID of the asset.
+          schema:
+            type: string
+            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+            minLength: 36
+            maxLength: 36
+        - name: nextToken
+          in: query
+          required: false
+          description: The token to be used for the next set of paginated results.
+          schema:
+            type: string
+            pattern: '[A-Za-z0-9+/=]+'
+            minLength: 1
+            maxLength: 4096
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return for each paginated request. If not specified, the default value is 50.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 250
+        - name: filter
+          in: query
+          required: false
+          description: '<p> Filters the requested list of asset properties. You can choose one of the following options:</p> <ul> <li> <p> <code>ALL</code> – The list includes all asset properties for a given asset model ID. </p> </li> <li> <p> <code>BASE</code> – The list includes only base asset properties for a given asset model ID. </p> </li> </ul> <p>Default: <code>BASE</code> </p>'
+          schema:
+            type: string
+            enum:
+              - ALL
+              - BASE
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4458,6 +5456,93 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+  /timeseries/:
+    get:
+      operationId: ListTimeSeries
+      description: Retrieves a paginated list of time series (data streams).
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTimeSeriesResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: The token to be used for the next set of paginated results.
+          schema:
+            type: string
+            pattern: '[A-Za-z0-9+/=]+'
+            minLength: 1
+            maxLength: 4096
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return for each paginated request.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 250
+        - name: assetId
+          in: query
+          required: false
+          description: The ID of the asset in which the asset property was created.
+          schema:
+            type: string
+            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+            minLength: 36
+            maxLength: 36
+        - name: aliasPrefix
+          in: query
+          required: false
+          description: The alias prefix of the time series.
+          schema:
+            type: string
+            pattern: '[^\u0000-\u001F\u007F]+'
+            minLength: 1
+        - name: timeSeriesType
+          in: query
+          required: false
+          description: '<p>The type of the time series. The time series type can be one of the following values:</p> <ul> <li> <p> <code>ASSOCIATED</code> – The time series is associated with an asset property.</p> </li> <li> <p> <code>DISASSOCIATED</code> – The time series isn''t associated with any asset property.</p> </li> </ul>'
+          schema:
+            type: string
+            enum:
+              - ASSOCIATED
+              - DISASSOCIATED
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /tags#resourceArn&tagKeys:
     delete:
       operationId: UntagResource
@@ -4677,6 +5762,7 @@ components:
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
     InvalidRequestException: {}
+    ResourceAlreadyExistsException: {}
     ResourceNotFoundException: {}
     InternalFailureException: {}
     LimitExceededException: {}
@@ -4701,6 +5787,186 @@ components:
           allOf:
             - $ref: '#/components/schemas/BatchDisassociateProjectAssetsErrors'
             - description: 'A list of associated error information, if any.'
+    BatchGetAssetPropertyAggregatesResponse:
+      type: object
+      required:
+        - errorEntries
+        - successEntries
+        - skippedEntries
+      properties:
+        errorEntries:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyAggregatesErrorEntries'
+            - description: A list of the errors (if any) associated with the batch request. Each error entry contains the <code>entryId</code> of the entry that failed.
+        successEntries:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyAggregatesSuccessEntries'
+            - description: A list of entries that were processed successfully by this batch request. Each success entry contains the <code>entryId</code> of the entry that succeeded and the latest query result.
+        skippedEntries:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyAggregatesSkippedEntries'
+            - description: A list of entries that were not processed by this batch request. because these entries had been completely processed by previous paginated requests. Each skipped entry contains the <code>entryId</code> of the entry that skipped.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token for the next set of results, or null if there are no additional results.'
+    BatchGetAssetPropertyAggregatesEntry:
+      type: object
+      required:
+        - entryId
+        - aggregateTypes
+        - resolution
+        - startDate
+        - endDate
+      properties:
+        entryId:
+          allOf:
+            - $ref: '#/components/schemas/EntryId'
+            - description: The ID of the entry.
+        assetId:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: The ID of the asset in which the asset property was created.
+        propertyId:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: The ID of the asset property.
+        propertyAlias:
+          allOf:
+            - $ref: '#/components/schemas/AssetPropertyAlias'
+            - description: 'The alias that identifies the property, such as an OPC-UA server data stream path (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html">Mapping industrial data streams to asset properties</a> in the <i>IoT SiteWise User Guide</i>.'
+        aggregateTypes:
+          allOf:
+            - $ref: '#/components/schemas/AggregateTypes'
+            - description: The data aggregating function.
+        resolution:
+          allOf:
+            - $ref: '#/components/schemas/Resolution'
+            - description: The time interval over which to aggregate data.
+        startDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The exclusive start of the range from which to query historical data, expressed in seconds in Unix epoch time.'
+        endDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The inclusive end of the range from which to query historical data, expressed in seconds in Unix epoch time.'
+        qualities:
+          allOf:
+            - $ref: '#/components/schemas/Qualities'
+            - description: The quality by which to filter asset data.
+        timeOrdering:
+          allOf:
+            - $ref: '#/components/schemas/TimeOrdering'
+            - description: '<p>The chronological sorting order of the requested information.</p> <p>Default: <code>ASCENDING</code> </p>'
+      description: '<p>Contains information for an asset property aggregate entry that is associated with the <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html">BatchGetAssetPropertyAggregates</a> API.</p> <p>To identify an asset property, you must specify one of the following:</p> <ul> <li> <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p> </li> <li> <p>A <code>propertyAlias</code>, which is a data stream alias (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property''s alias, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html">UpdateAssetProperty</a>.</p> </li> </ul>'
+    ServiceUnavailableException: {}
+    BatchGetAssetPropertyValueResponse:
+      type: object
+      required:
+        - errorEntries
+        - successEntries
+        - skippedEntries
+      properties:
+        errorEntries:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyValueErrorEntries'
+            - description: A list of the errors (if any) associated with the batch request. Each error entry contains the <code>entryId</code> of the entry that failed.
+        successEntries:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyValueSuccessEntries'
+            - description: A list of entries that were processed successfully by this batch request. Each success entry contains the <code>entryId</code> of the entry that succeeded and the latest query result.
+        skippedEntries:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyValueSkippedEntries'
+            - description: A list of entries that were not processed by this batch request. because these entries had been completely processed by previous paginated requests. Each skipped entry contains the <code>entryId</code> of the entry that skipped.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token for the next set of results, or null if there are no additional results.'
+    BatchGetAssetPropertyValueEntry:
+      type: object
+      required:
+        - entryId
+      properties:
+        entryId:
+          allOf:
+            - $ref: '#/components/schemas/EntryId'
+            - description: The ID of the entry.
+        assetId:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: The ID of the asset in which the asset property was created.
+        propertyId:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: The ID of the asset property.
+        propertyAlias:
+          allOf:
+            - $ref: '#/components/schemas/AssetPropertyAlias'
+            - description: 'The alias that identifies the property, such as an OPC-UA server data stream path (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html">Mapping industrial data streams to asset properties</a> in the <i>IoT SiteWise User Guide</i>.'
+      description: '<p>Contains information for an asset property value entry that is associated with the <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html">BatchGetAssetPropertyValue</a> API.</p> <p>To identify an asset property, you must specify one of the following:</p> <ul> <li> <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p> </li> <li> <p>A <code>propertyAlias</code>, which is a data stream alias (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property''s alias, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html">UpdateAssetProperty</a>.</p> </li> </ul>'
+    BatchGetAssetPropertyValueHistoryResponse:
+      type: object
+      required:
+        - errorEntries
+        - successEntries
+        - skippedEntries
+      properties:
+        errorEntries:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyValueHistoryErrorEntries'
+            - description: A list of the errors (if any) associated with the batch request. Each error entry contains the <code>entryId</code> of the entry that failed.
+        successEntries:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyValueHistorySuccessEntries'
+            - description: A list of entries that were processed successfully by this batch request. Each success entry contains the <code>entryId</code> of the entry that succeeded and the latest query result.
+        skippedEntries:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyValueHistorySkippedEntries'
+            - description: A list of entries that were not processed by this batch request. because these entries had been completely processed by previous paginated requests. Each skipped entry contains the <code>entryId</code> of the entry that skipped.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token for the next set of results, or null if there are no additional results.'
+    BatchGetAssetPropertyValueHistoryEntry:
+      type: object
+      required:
+        - entryId
+      properties:
+        entryId:
+          allOf:
+            - $ref: '#/components/schemas/EntryId'
+            - description: The ID of the entry.
+        assetId:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: The ID of the asset in which the asset property was created.
+        propertyId:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: The ID of the asset property.
+        propertyAlias:
+          allOf:
+            - $ref: '#/components/schemas/AssetPropertyAlias'
+            - description: 'The alias that identifies the property, such as an OPC-UA server data stream path (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html">Mapping industrial data streams to asset properties</a> in the <i>IoT SiteWise User Guide</i>.'
+        startDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The exclusive start of the range from which to query historical data, expressed in seconds in Unix epoch time.'
+        endDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The inclusive end of the range from which to query historical data, expressed in seconds in Unix epoch time.'
+        qualities:
+          allOf:
+            - $ref: '#/components/schemas/Qualities'
+            - description: The quality by which to filter asset data.
+        timeOrdering:
+          allOf:
+            - $ref: '#/components/schemas/TimeOrdering'
+            - description: '<p>The chronological sorting order of the requested information.</p> <p>Default: <code>ASCENDING</code> </p>'
+      description: '<p>Contains information for an asset property historical value entry that is associated with the <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html">BatchGetAssetPropertyValueHistory</a> API.</p> <p>To identify an asset property, you must specify one of the following:</p> <ul> <li> <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p> </li> <li> <p>A <code>propertyAlias</code>, which is a data stream alias (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property''s alias, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html">UpdateAssetProperty</a>.</p> </li> </ul>'
     BatchPutAssetPropertyValueResponse:
       type: object
       required:
@@ -4737,7 +6003,6 @@ components:
             - $ref: '#/components/schemas/AssetPropertyValues'
             - description: 'The list of property values to upload. You can specify up to 10 <code>propertyValues</code> array elements. '
       description: 'Contains a list of value updates for an asset property in the list of asset entries consumed by the <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchPutAssetPropertyValue.html">BatchPutAssetPropertyValue</a> API operation.'
-    ServiceUnavailableException: {}
     CreateAccessPolicyResponse:
       type: object
       required:
@@ -4760,7 +6025,7 @@ components:
         id:
           allOf:
             - $ref: '#/components/schemas/IdentityId'
-            - description: The Amazon Web Services SSO ID of the user.
+            - description: The IAM Identity Center ID of the user.
       description: Contains information for a user identity in an access policy.
     GroupIdentity:
       type: object
@@ -4770,7 +6035,7 @@ components:
         id:
           allOf:
             - $ref: '#/components/schemas/IdentityId'
-            - description: The Amazon Web Services SSO ID of the group.
+            - description: The IAM Identity Center ID of the group.
       description: Contains information for a group identity in an access policy.
     IAMUserIdentity:
       type: object
@@ -4835,7 +6100,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/AssetStatus'
             - description: 'The status of the asset, which contains a state (<code>CREATING</code> after successfully calling this operation) and any error message.'
-    ResourceAlreadyExistsException: {}
     CreateAssetModelResponse:
       type: object
       required:
@@ -4919,6 +6183,58 @@ components:
         properties:
           description: The asset property definitions for this composite model.
       description: Contains a composite model definition in an asset model. This composite model definition is applied to all assets created from the asset model.
+    CreateBulkImportJobResponse:
+      type: object
+      required:
+        - jobId
+        - jobName
+        - jobStatus
+      properties:
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: The ID of the job.
+        jobName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The unique name that helps identify the job request.
+        jobStatus:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: <p>The status of the bulk import job can be one of following values.</p> <ul> <li> <p> <code>PENDING</code> – IoT SiteWise is waiting for the current bulk import job to finish.</p> </li> <li> <p> <code>CANCELLED</code> – The bulk import job has been canceled.</p> </li> <li> <p> <code>RUNNING</code> – IoT SiteWise is processing your request to import your data from Amazon S3.</p> </li> <li> <p> <code>COMPLETED</code> – IoT SiteWise successfully completed your request to import data from Amazon S3.</p> </li> <li> <p> <code>FAILED</code> – IoT SiteWise couldn't process your request to import data from Amazon S3. You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.</p> </li> <li> <p> <code>COMPLETED_WITH_FAILURES</code> – IoT SiteWise completed your request to import data from Amazon S3 with errors. You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.</p> </li> </ul>
+    File:
+      type: object
+      required:
+        - bucket
+        - key
+      properties:
+        bucket:
+          allOf:
+            - $ref: '#/components/schemas/Bucket'
+            - description: The name of the Amazon S3 bucket from which data is imported.
+        key:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The key of the Amazon S3 object that contains your data. Each object has a key that is a unique identifier. Each object has exactly one key.
+        versionId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The version ID to identify a specific version of the Amazon S3 object that contains your data.
+      description: 'The file in Amazon S3 where your data is saved. '
+    Bucket:
+      type: string
+      minLength: 3
+      maxLength: 63
+    String:
+      type: string
+    FileFormat:
+      type: object
+      properties:
+        csv:
+          allOf:
+            - $ref: '#/components/schemas/Csv'
+            - description: The .csv file format.
+      description: The file format of the data.
     CreateDashboardResponse:
       type: object
       required:
@@ -4987,7 +6303,7 @@ components:
         portalStartUrl:
           allOf:
             - $ref: '#/components/schemas/Url'
-            - description: 'The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that use Amazon Web Services SSO for authentication. For portals that use IAM for authentication, you must use the IoT SiteWise console to get a URL that you can use to access the portal.'
+            - description: 'The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that use IAM Identity Center for authentication. For portals that use IAM for authentication, you must use the IoT SiteWise console to get a URL that you can use to access the portal.'
         portalStatus:
           allOf:
             - $ref: '#/components/schemas/PortalStatus'
@@ -4995,7 +6311,7 @@ components:
         ssoApplicationId:
           allOf:
             - $ref: '#/components/schemas/SSOApplicationId'
-            - description: 'The associated Amazon Web Services SSO application ID, if the portal uses Amazon Web Services SSO.'
+            - description: 'The associated IAM Identity Center application ID, if the portal uses IAM Identity Center.'
     ImageFileData:
       type: string
       minLength: 1
@@ -5081,7 +6397,7 @@ components:
         accessPolicyIdentity:
           allOf:
             - $ref: '#/components/schemas/Identity'
-            - description: 'The identity (Amazon Web Services SSO user, Amazon Web Services SSO group, or IAM user) to which this access policy applies.'
+            - description: 'The identity (IAM Identity Center user, IAM Identity Center group, or IAM user) to which this access policy applies.'
         accessPolicyResource:
           allOf:
             - $ref: '#/components/schemas/Resource'
@@ -5151,6 +6467,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AssetStatus'
             - description: 'The current status of the asset, which contains a state and any error message.'
+        assetDescription:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description for the asset.
     DescribeAssetModelResponse:
       type: object
       required:
@@ -5231,6 +6551,55 @@ components:
           allOf:
             - $ref: '#/components/schemas/CompositeModelProperty'
             - description: 'The composite asset model that declares this asset property, if this asset property exists in a composite model.'
+    DescribeBulkImportJobResponse:
+      type: object
+      required:
+        - jobId
+        - jobName
+        - jobStatus
+        - jobRoleArn
+        - files
+        - errorReportLocation
+        - jobConfiguration
+        - jobCreationDate
+        - jobLastUpdateDate
+      properties:
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: The ID of the job.
+        jobName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The unique name that helps identify the job request.
+        jobStatus:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: <p>The status of the bulk import job can be one of following values.</p> <ul> <li> <p> <code>PENDING</code> – IoT SiteWise is waiting for the current bulk import job to finish.</p> </li> <li> <p> <code>CANCELLED</code> – The bulk import job has been canceled.</p> </li> <li> <p> <code>RUNNING</code> – IoT SiteWise is processing your request to import your data from Amazon S3.</p> </li> <li> <p> <code>COMPLETED</code> – IoT SiteWise successfully completed your request to import data from Amazon S3.</p> </li> <li> <p> <code>FAILED</code> – IoT SiteWise couldn't process your request to import data from Amazon S3. You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.</p> </li> <li> <p> <code>COMPLETED_WITH_FAILURES</code> – IoT SiteWise completed your request to import data from Amazon S3 with errors. You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.</p> </li> </ul>
+        jobRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the IAM role that allows IoT SiteWise to read Amazon S3 data.'
+        files:
+          allOf:
+            - $ref: '#/components/schemas/Files'
+            - description: The files in the specified Amazon S3 bucket that contain your data.
+        errorReportLocation:
+          allOf:
+            - $ref: '#/components/schemas/ErrorReportLocation'
+            - description: The Amazon S3 destination where errors associated with the job creation request are saved.
+        jobConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/JobConfiguration'
+            - description: 'Contains the configuration information of a job, such as the file format used to save data in Amazon S3.'
+        jobCreationDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date the job was created, in Unix epoch TIME.'
+        jobLastUpdateDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date the job was last updated, in Unix epoch time.'
     DescribeDashboardResponse:
       type: object
       required:
@@ -5287,7 +6656,7 @@ components:
         kmsKeyArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
-            - description: The key ARN of the customer managed customer master key (CMK) used for KMS encryption if you use <code>KMS_BASED_ENCRYPTION</code>.
+            - description: The key ARN of the customer managed key used for KMS encryption if you use <code>KMS_BASED_ENCRYPTION</code>.
         configurationStatus:
           allOf:
             - $ref: '#/components/schemas/ConfigurationStatus'
@@ -5395,11 +6764,11 @@ components:
         portalClientId:
           allOf:
             - $ref: '#/components/schemas/PortalClientId'
-            - description: The Amazon Web Services SSO application generated client ID (used with Amazon Web Services SSO APIs). IoT SiteWise includes <code>portalClientId</code> for only portals that use Amazon Web Services SSO to authenticate users.
+            - description: The IAM Identity Center application generated client ID (used with IAM Identity Center APIs). IoT SiteWise includes <code>portalClientId</code> for only portals that use IAM Identity Center to authenticate users.
         portalStartUrl:
           allOf:
             - $ref: '#/components/schemas/Url'
-            - description: 'The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that use Amazon Web Services SSO for authentication. For portals that use IAM for authentication, you must use the IoT SiteWise console to get a URL that you can use to access the portal.'
+            - description: 'The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that use IAM Identity Center for authentication. For portals that use IAM for authentication, you must use the IoT SiteWise console to get a URL that you can use to access the portal.'
         portalContactEmail:
           allOf:
             - $ref: '#/components/schemas/Email'
@@ -5483,17 +6852,65 @@ components:
         storageType:
           allOf:
             - $ref: '#/components/schemas/StorageType'
-            - description: '<p>The type of storage that you specified for your data. The storage type can be one of the following values:</p> <ul> <li> <p> <code>SITEWISE_DEFAULT_STORAGE</code> – IoT SiteWise replicates your data into a service managed database.</p> </li> <li> <p> <code>MULTI_LAYER_STORAGE</code> – IoT SiteWise replicates your data into a service managed database and saves a copy of your raw data and metadata in an Amazon S3 object that you specified.</p> </li> </ul>'
+            - description: '<p>The storage tier that you specified for your data. The <code>storageType</code> parameter can be one of the following values:</p> <ul> <li> <p> <code>SITEWISE_DEFAULT_STORAGE</code> – IoT SiteWise saves your data into the hot tier. The hot tier is a service-managed database.</p> </li> <li> <p> <code>MULTI_LAYER_STORAGE</code> – IoT SiteWise saves your data in both the cold tier and the hot tier. The cold tier is a customer-managed Amazon S3 bucket.</p> </li> </ul>'
         multiLayerStorage:
           allOf:
             - $ref: '#/components/schemas/MultiLayerStorage'
             - description: Contains information about the storage destination.
+        disassociatedDataStorage:
+          allOf:
+            - $ref: '#/components/schemas/DisassociatedDataStorageState'
+            - description: '<p>Contains the storage configuration for time series (data streams) that aren''t associated with asset properties. The <code>disassociatedDataStorage</code> can be one of the following values:</p> <ul> <li> <p> <code>ENABLED</code> – IoT SiteWise accepts time series that aren''t associated with asset properties.</p> <important> <p>After the <code>disassociatedDataStorage</code> is enabled, you can''t disable it.</p> </important> </li> <li> <p> <code>DISABLED</code> – IoT SiteWise doesn''t accept time series (data streams) that aren''t associated with asset properties.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html">Data streams</a> in the <i>IoT SiteWise User Guide</i>.</p>'
+        retentionPeriod:
+          allOf:
+            - $ref: '#/components/schemas/RetentionPeriod'
+            - description: 'How many days your data is kept in the hot tier. By default, your data is kept indefinitely in the hot tier.'
         configurationStatus:
           $ref: '#/components/schemas/ConfigurationStatus'
         lastUpdateDate:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: 'The date the storage configuration was last updated, in Unix epoch time.'
+    DescribeTimeSeriesResponse:
+      type: object
+      required:
+        - timeSeriesId
+        - dataType
+        - timeSeriesCreationDate
+        - timeSeriesLastUpdateDate
+      properties:
+        assetId:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: The ID of the asset in which the asset property was created.
+        propertyId:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: The ID of the asset property.
+        alias:
+          allOf:
+            - $ref: '#/components/schemas/PropertyAlias'
+            - description: The alias that identifies the time series.
+        timeSeriesId:
+          allOf:
+            - $ref: '#/components/schemas/TimeSeriesId'
+            - description: The ID of the time series.
+        dataType:
+          allOf:
+            - $ref: '#/components/schemas/PropertyDataType'
+            - description: '<p>The data type of the time series.</p> <p>If you specify <code>STRUCT</code>, you must also specify <code>dataTypeSpec</code> to identify the type of the structure for this time series.</p>'
+        dataTypeSpec:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: <p>The data type of the structure for this time series. This parameter is required for time series that have the <code>STRUCT</code> data type.</p> <p>The options for this parameter depend on the type of the composite model in which you created the asset property that is associated with your time series. Use <code>AWS/ALARM_STATE</code> for alarm state in alarm composite models.</p>
+        timeSeriesCreationDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date that the time series was created, in Unix epoch time.'
+        timeSeriesLastUpdateDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date that the time series was last updated, in Unix epoch time.'
     GetAssetPropertyAggregatesResponse:
       type: object
       required:
@@ -5568,6 +6985,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: 'The token for the next set of results, or null if there are no additional results.'
+    ListAssetModelPropertiesResponse:
+      type: object
+      required:
+        - assetModelPropertySummaries
+      properties:
+        assetModelPropertySummaries:
+          allOf:
+            - $ref: '#/components/schemas/AssetModelPropertySummaries'
+            - description: A list that summarizes the properties associated with the specified asset model.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token for the next set of results, or null if there are no additional results.'
     ListAssetModelsResponse:
       type: object
       required:
@@ -5577,6 +7007,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/AssetModelSummaries'
             - description: A list that summarizes each asset model.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token for the next set of results, or null if there are no additional results.'
+    ListAssetPropertiesResponse:
+      type: object
+      required:
+        - assetPropertySummaries
+      properties:
+        assetPropertySummaries:
+          allOf:
+            - $ref: '#/components/schemas/AssetPropertySummaries'
+            - description: A list that summarizes the properties associated with the specified asset.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -5616,6 +7059,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/AssociatedAssetsSummaries'
             - description: A list that summarizes the associated assets.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token for the next set of results, or null if there are no additional results.'
+    ListBulkImportJobsResponse:
+      type: object
+      required:
+        - jobSummaries
+      properties:
+        jobSummaries:
+          allOf:
+            - $ref: '#/components/schemas/JobSummaries'
+            - description: One or more job summaries to list.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -5691,6 +7147,19 @@ components:
             - $ref: '#/components/schemas/TagMap'
             - description: 'The list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html">Tagging your IoT SiteWise resources</a> in the <i>IoT SiteWise User Guide</i>.'
     UnauthorizedException: {}
+    ListTimeSeriesResponse:
+      type: object
+      required:
+        - TimeSeriesSummaries
+      properties:
+        TimeSeriesSummaries:
+          allOf:
+            - $ref: '#/components/schemas/TimeSeriesSummaries'
+            - description: One or more time series summaries to list.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token for the next set of results, or null if there are no additional results.'
     PutDefaultEncryptionConfigurationResponse:
       type: object
       required:
@@ -5704,7 +7173,7 @@ components:
         kmsKeyArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
-            - description: The Key ARN of the KMS CMK used for KMS encryption if you use <code>KMS_BASED_ENCRYPTION</code>.
+            - description: The Key ARN of the KMS key used for KMS encryption if you use <code>KMS_BASED_ENCRYPTION</code>.
         configurationStatus:
           allOf:
             - $ref: '#/components/schemas/ConfigurationStatus'
@@ -5727,11 +7196,17 @@ components:
         storageType:
           allOf:
             - $ref: '#/components/schemas/StorageType'
-            - description: '<p>The type of storage that you specified for your data. The storage type can be one of the following values:</p> <ul> <li> <p> <code>SITEWISE_DEFAULT_STORAGE</code> – IoT SiteWise replicates your data into a service managed database.</p> </li> <li> <p> <code>MULTI_LAYER_STORAGE</code> – IoT SiteWise replicates your data into a service managed database and saves a copy of your raw data and metadata in an Amazon S3 object that you specified.</p> </li> </ul>'
+            - description: '<p>The storage tier that you specified for your data. The <code>storageType</code> parameter can be one of the following values:</p> <ul> <li> <p> <code>SITEWISE_DEFAULT_STORAGE</code> – IoT SiteWise saves your data into the hot tier. The hot tier is a service-managed database.</p> </li> <li> <p> <code>MULTI_LAYER_STORAGE</code> – IoT SiteWise saves your data in both the cold tier and the hot tier. The cold tier is a customer-managed Amazon S3 bucket.</p> </li> </ul>'
         multiLayerStorage:
           allOf:
             - $ref: '#/components/schemas/MultiLayerStorage'
             - description: Contains information about the storage destination.
+        disassociatedDataStorage:
+          allOf:
+            - $ref: '#/components/schemas/DisassociatedDataStorageState'
+            - description: '<p>Contains the storage configuration for time series (data streams) that aren''t associated with asset properties. The <code>disassociatedDataStorage</code> can be one of the following values:</p> <ul> <li> <p> <code>ENABLED</code> – IoT SiteWise accepts time series that aren''t associated with asset properties.</p> <important> <p>After the <code>disassociatedDataStorage</code> is enabled, you can''t disable it.</p> </important> </li> <li> <p> <code>DISABLED</code> – IoT SiteWise doesn''t accept time series (data streams) that aren''t associated with asset properties.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html">Data streams</a> in the <i>IoT SiteWise User Guide</i>.</p>'
+        retentionPeriod:
+          $ref: '#/components/schemas/RetentionPeriod'
         configurationStatus:
           $ref: '#/components/schemas/ConfigurationStatus'
     CustomerManagedS3Storage:
@@ -5749,6 +7224,11 @@ components:
             - $ref: '#/components/schemas/ARN'
             - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the Identity and Access Management role that allows IoT SiteWise to send data to Amazon S3.'
       description: Contains information about a customer managed Amazon S3 bucket.
+    NumberOfDays:
+      type: integer
+      minimum: 30
+    Unlimited:
+      type: boolean
     TagResourceResponse:
       type: object
       properties: {}
@@ -5852,6 +7332,10 @@ components:
             - description: 'The type of the composite model. For alarm composite models, this type is <code>AWS/ALARM</code>.'
         properties:
           description: The asset property definitions for this composite model.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: ' The ID of the asset model composite model. '
       description: Contains information about a composite model in an asset model. This object contains the asset property definitions that you define in the composite model.
     UpdateDashboardResponse:
       type: object
@@ -5912,7 +7396,7 @@ components:
         identity:
           allOf:
             - $ref: '#/components/schemas/Identity'
-            - description: 'The identity (an Amazon Web Services SSO user, an Amazon Web Services SSO group, or an IAM user).'
+            - description: 'The identity (an IAM Identity Center user, an IAM Identity Center group, or an IAM user).'
         resource:
           allOf:
             - $ref: '#/components/schemas/Resource'
@@ -5940,11 +7424,11 @@ components:
         user:
           allOf:
             - $ref: '#/components/schemas/UserIdentity'
-            - description: An Amazon Web Services SSO user identity.
+            - description: An IAM Identity Center user identity.
         group:
           allOf:
             - $ref: '#/components/schemas/GroupIdentity'
-            - description: An Amazon Web Services SSO group identity.
+            - description: An IAM Identity Center group identity.
         iamUser:
           allOf:
             - $ref: '#/components/schemas/IAMUserIdentity'
@@ -5953,7 +7437,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/IAMRoleIdentity'
             - description: An IAM role identity.
-      description: '<p>Contains an identity that can access an IoT SiteWise Monitor resource.</p> <note> <p>Currently, you can''t use Amazon Web Services APIs to retrieve Amazon Web Services SSO identity IDs. You can find the Amazon Web Services SSO identity IDs in the URL of user and group pages in the <a href="https://console.aws.amazon.com/singlesignon">Amazon Web Services SSO console</a>.</p> </note>'
+      description: '<p>Contains an identity that can access an IoT SiteWise Monitor resource.</p> <note> <p>Currently, you can''t use Amazon Web Services APIs to retrieve IAM Identity Center identity IDs. You can find the IAM Identity Center identity IDs in the URL of user and group pages in the <a href="https://console.aws.amazon.com/singlesignon">IAM Identity Center console</a>.</p> </note>'
     Resource:
       type: object
       properties:
@@ -6082,6 +7566,10 @@ components:
             - description: 'The type of the composite model. For alarm composite models, this type is <code>AWS/ALARM</code>.'
         properties:
           description: The asset properties that this composite model defines.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: ' The ID of the asset composite model. '
       description: Contains information about a composite model in an asset. This object contains the asset's properties that you define in the composite model.
     AssetCompositeModels:
       type: array
@@ -6204,6 +7692,44 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AssetModelPropertyDefinition'
+    AssetModelPropertySummary:
+      type: object
+      required:
+        - name
+        - dataType
+        - type
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: The ID of the property.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the property.
+        dataType:
+          allOf:
+            - $ref: '#/components/schemas/PropertyDataType'
+            - description: The data type of the property.
+        dataTypeSpec:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The data type of the structure for this property. This parameter exists on properties that have the <code>STRUCT</code> data type.
+        unit:
+          allOf:
+            - $ref: '#/components/schemas/PropertyUnit'
+            - description: The unit (such as <code>Newtons</code> or <code>RPM</code>) of the property.
+        type:
+          $ref: '#/components/schemas/PropertyType'
+        assetModelCompositeModelId:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: ' The ID of the composite model that contains the asset model property. '
+      description: Contains a summary of a property associated with a model.
+    AssetModelPropertySummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetModelPropertySummary'
     AssetModelState:
       type: string
       enum:
@@ -6354,6 +7880,32 @@ components:
       pattern: '[^\u0000-\u001F\u007F]+'
       minLength: 1
       maxLength: 2048
+    AssetPropertySummary:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: The ID of the property.
+        alias:
+          allOf:
+            - $ref: '#/components/schemas/PropertyAlias'
+            - description: 'The alias that identifies the property, such as an OPC-UA server data stream path (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html">Mapping industrial data streams to asset properties</a> in the <i>IoT SiteWise User Guide</i>.'
+        unit:
+          allOf:
+            - $ref: '#/components/schemas/PropertyUnit'
+            - description: ' The unit of measure (such as Newtons or RPM) of the asset property. '
+        notification:
+          $ref: '#/components/schemas/PropertyNotification'
+        assetCompositeModelId:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: ' The ID of the composite model that contains the asset property. '
+      description: Contains a summary of a property associated with an asset.
+    AssetPropertySummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetPropertySummary'
     Variant:
       type: object
       properties:
@@ -6503,6 +8055,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AssetHierarchies'
             - description: A list of asset hierarchies that each contain a <code>hierarchyId</code>. A hierarchy specifies allowed parent/child asset relationships.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description for the asset.
       description: Contains a summary of an asset.
     AssetSummaries:
       type: array
@@ -6528,6 +8084,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/ID'
             - description: The ID of the child asset to be associated.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+    AssociateTimeSeriesToAssetPropertyRequest:
+      type: object
+      title: AssociateTimeSeriesToAssetPropertyRequest
+      properties:
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
@@ -6576,6 +8140,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AssetHierarchies'
             - description: A list of asset hierarchies that each contain a <code>hierarchyId</code>. A hierarchy specifies allowed parent/child asset relationships.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description for the asset.
       description: Contains a summary of an associated asset.
     AssociatedAssetsSummaries:
       type: array
@@ -6641,6 +8209,365 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
             - description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+    BatchEntryCompletionStatus:
+      type: string
+      enum:
+        - SUCCESS
+        - ERROR
+    BatchGetAssetPropertyAggregatesEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchGetAssetPropertyAggregatesEntry'
+    EntryId:
+      type: string
+      pattern: '^[a-zA-Z0-9_-]+$'
+      minLength: 1
+      maxLength: 64
+    Resolution:
+      type: string
+      pattern: 1m|1h|1d
+      minLength: 2
+      maxLength: 2
+    Qualities:
+      type: array
+      items:
+        $ref: '#/components/schemas/Quality'
+      minItems: 1
+      maxItems: 1
+    TimeOrdering:
+      type: string
+      enum:
+        - ASCENDING
+        - DESCENDING
+    BatchGetAssetPropertyAggregatesErrorCode:
+      type: string
+      enum:
+        - ResourceNotFoundException
+        - InvalidRequestException
+        - AccessDeniedException
+    BatchGetAssetPropertyAggregatesErrorEntry:
+      type: object
+      required:
+        - errorCode
+        - errorMessage
+        - entryId
+      properties:
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyAggregatesErrorCode'
+            - description: The error code.
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: The associated error message.
+        entryId:
+          allOf:
+            - $ref: '#/components/schemas/EntryId'
+            - description: The ID of the entry.
+      description: 'Contains error information for an asset property aggregate entry that is associated with the <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html">BatchGetAssetPropertyAggregates</a> API.'
+    BatchGetAssetPropertyAggregatesErrorEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchGetAssetPropertyAggregatesErrorEntry'
+    ErrorMessage:
+      type: string
+    BatchGetAssetPropertyAggregatesErrorInfo:
+      type: object
+      required:
+        - errorCode
+        - errorTimestamp
+      properties:
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyAggregatesErrorCode'
+            - description: The error code.
+        errorTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date the error occurred, in Unix epoch time.'
+      description: 'Contains the error code and the timestamp for an asset property aggregate entry that is associated with the <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html">BatchGetAssetPropertyAggregates</a> API.'
+    BatchGetAssetPropertyAggregatesMaxResults:
+      type: integer
+      minimum: 1
+    NextToken:
+      type: string
+      pattern: '[A-Za-z0-9+/=]+'
+      minLength: 1
+      maxLength: 4096
+    BatchGetAssetPropertyAggregatesRequest:
+      type: object
+      required:
+        - entries
+      title: BatchGetAssetPropertyAggregatesRequest
+      properties:
+        entries:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyAggregatesEntries'
+            - description: The list of asset property aggregate entries for the batch get request. You can specify up to 16 entries per request.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to be used for the next set of paginated results.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyAggregatesMaxResults'
+            - description: '<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.</p> <ul> <li> <p>The size of the result set is less than 1 MB.</p> </li> <li> <p>The number of data points in the result set is less than the value of <code>maxResults</code>. The maximum value of <code>maxResults</code> is 4000.</p> </li> </ul>'
+    BatchGetAssetPropertyAggregatesSuccessEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchGetAssetPropertyAggregatesSuccessEntry'
+    BatchGetAssetPropertyAggregatesSkippedEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchGetAssetPropertyAggregatesSkippedEntry'
+    BatchGetAssetPropertyAggregatesSkippedEntry:
+      type: object
+      required:
+        - entryId
+        - completionStatus
+      properties:
+        entryId:
+          allOf:
+            - $ref: '#/components/schemas/EntryId'
+            - description: The ID of the entry.
+        completionStatus:
+          allOf:
+            - $ref: '#/components/schemas/BatchEntryCompletionStatus'
+            - description: 'The completion status of each entry that is associated with the <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html">BatchGetAssetPropertyAggregates</a> API.'
+        errorInfo:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyAggregatesErrorInfo'
+            - description: 'The error information, such as the error code and the timestamp.'
+      description: 'Contains information for an entry that has been processed by the previous <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html">BatchGetAssetPropertyAggregates</a> request.'
+    BatchGetAssetPropertyAggregatesSuccessEntry:
+      type: object
+      required:
+        - entryId
+        - aggregatedValues
+      properties:
+        entryId:
+          allOf:
+            - $ref: '#/components/schemas/EntryId'
+            - description: The ID of the entry.
+        aggregatedValues:
+          allOf:
+            - $ref: '#/components/schemas/AggregatedValues'
+            - description: 'The requested aggregated asset property values (for example, average, minimum, and maximum).'
+      description: 'Contains success information for an entry that is associated with the <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html">BatchGetAssetPropertyAggregates</a> API.'
+    BatchGetAssetPropertyValueEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchGetAssetPropertyValueEntry'
+    BatchGetAssetPropertyValueErrorCode:
+      type: string
+      enum:
+        - ResourceNotFoundException
+        - InvalidRequestException
+        - AccessDeniedException
+    BatchGetAssetPropertyValueErrorEntry:
+      type: object
+      required:
+        - errorCode
+        - errorMessage
+        - entryId
+      properties:
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyValueErrorCode'
+            - description: The error code.
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: The associated error message.
+        entryId:
+          allOf:
+            - $ref: '#/components/schemas/EntryId'
+            - description: The ID of the entry.
+      description: 'Contains error information for an asset property value entry that is associated with the <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html">BatchGetAssetPropertyValue</a> API.'
+    BatchGetAssetPropertyValueErrorEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchGetAssetPropertyValueErrorEntry'
+    BatchGetAssetPropertyValueErrorInfo:
+      type: object
+      required:
+        - errorCode
+        - errorTimestamp
+      properties:
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyValueErrorCode'
+            - description: The error code.
+        errorTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date the error occurred, in Unix epoch time.'
+      description: 'The error information, such as the error code and the timestamp.'
+    BatchGetAssetPropertyValueHistoryEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchGetAssetPropertyValueHistoryEntry'
+    BatchGetAssetPropertyValueHistoryErrorCode:
+      type: string
+      enum:
+        - ResourceNotFoundException
+        - InvalidRequestException
+        - AccessDeniedException
+    BatchGetAssetPropertyValueHistoryErrorEntry:
+      type: object
+      required:
+        - errorCode
+        - errorMessage
+        - entryId
+      properties:
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyValueHistoryErrorCode'
+            - description: The error code.
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: The associated error message.
+        entryId:
+          allOf:
+            - $ref: '#/components/schemas/EntryId'
+            - description: The ID of the entry.
+      description: A list of the errors (if any) associated with the batch request. Each error entry contains the <code>entryId</code> of the entry that failed.
+    BatchGetAssetPropertyValueHistoryErrorEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchGetAssetPropertyValueHistoryErrorEntry'
+    BatchGetAssetPropertyValueHistoryErrorInfo:
+      type: object
+      required:
+        - errorCode
+        - errorTimestamp
+      properties:
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyValueHistoryErrorCode'
+            - description: The error code.
+        errorTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date the error occurred, in Unix epoch time.'
+      description: 'The error information, such as the error code and the timestamp.'
+    BatchGetAssetPropertyValueHistoryMaxResults:
+      type: integer
+      minimum: 1
+    BatchGetAssetPropertyValueHistoryRequest:
+      type: object
+      required:
+        - entries
+      title: BatchGetAssetPropertyValueHistoryRequest
+      properties:
+        entries:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyValueHistoryEntries'
+            - description: The list of asset property historical value entries for the batch get request. You can specify up to 16 entries per request.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to be used for the next set of paginated results.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyValueHistoryMaxResults'
+            - description: '<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.</p> <ul> <li> <p>The size of the result set is less than 1 MB.</p> </li> <li> <p>The number of data points in the result set is less than the value of <code>maxResults</code>. The maximum value of <code>maxResults</code> is 4000.</p> </li> </ul>'
+    BatchGetAssetPropertyValueHistorySuccessEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchGetAssetPropertyValueHistorySuccessEntry'
+    BatchGetAssetPropertyValueHistorySkippedEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchGetAssetPropertyValueHistorySkippedEntry'
+    BatchGetAssetPropertyValueHistorySkippedEntry:
+      type: object
+      required:
+        - entryId
+        - completionStatus
+      properties:
+        entryId:
+          allOf:
+            - $ref: '#/components/schemas/EntryId'
+            - description: The ID of the entry.
+        completionStatus:
+          allOf:
+            - $ref: '#/components/schemas/BatchEntryCompletionStatus'
+            - description: 'The completion status of each entry that is associated with the <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValueHistory.html">BatchGetAssetPropertyValueHistory</a> API.'
+        errorInfo:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyValueHistoryErrorInfo'
+            - description: 'The error information, such as the error code and the timestamp.'
+      description: 'Contains information for an entry that has been processed by the previous <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html">BatchGetAssetPropertyValueHistory</a> request.'
+    BatchGetAssetPropertyValueHistorySuccessEntry:
+      type: object
+      required:
+        - entryId
+        - assetPropertyValueHistory
+      properties:
+        entryId:
+          allOf:
+            - $ref: '#/components/schemas/EntryId'
+            - description: The ID of the entry.
+        assetPropertyValueHistory:
+          allOf:
+            - $ref: '#/components/schemas/AssetPropertyValueHistory'
+            - description: The requested historical values for the specified asset property.
+      description: 'Contains success information for an entry that is associated with the <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html">BatchGetAssetPropertyValueHistory</a> API.'
+    BatchGetAssetPropertyValueRequest:
+      type: object
+      required:
+        - entries
+      title: BatchGetAssetPropertyValueRequest
+      properties:
+        entries:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyValueEntries'
+            - description: The list of asset property value entries for the batch get request. You can specify up to 16 entries per request.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to be used for the next set of paginated results.
+    BatchGetAssetPropertyValueSuccessEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchGetAssetPropertyValueSuccessEntry'
+    BatchGetAssetPropertyValueSkippedEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchGetAssetPropertyValueSkippedEntry'
+    BatchGetAssetPropertyValueSkippedEntry:
+      type: object
+      required:
+        - entryId
+        - completionStatus
+      properties:
+        entryId:
+          allOf:
+            - $ref: '#/components/schemas/EntryId'
+            - description: The ID of the entry.
+        completionStatus:
+          allOf:
+            - $ref: '#/components/schemas/BatchEntryCompletionStatus'
+            - description: 'The completion status of each entry that is associated with the <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html">BatchGetAssetPropertyValue</a> request.'
+        errorInfo:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetAssetPropertyValueErrorInfo'
+            - description: 'The error information, such as the error code and the timestamp.'
+      description: 'Contains information for an entry that has been processed by the previous <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html">BatchGetAssetPropertyValue</a> request.'
+    BatchGetAssetPropertyValueSuccessEntry:
+      type: object
+      required:
+        - entryId
+      properties:
+        entryId:
+          allOf:
+            - $ref: '#/components/schemas/EntryId'
+            - description: The ID of the entry.
+        assetPropertyValue:
+          $ref: '#/components/schemas/AssetPropertyValue'
+      description: 'Contains success information for an entry that is associated with the <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html">BatchGetAssetPropertyValue</a> API.'
     BatchPutAssetPropertyValueErrorCode:
       type: string
       enum:
@@ -6653,8 +8580,6 @@ components:
         - ConflictingOperationException
         - TimestampOutOfRangeException
         - AccessDeniedException
-    ErrorMessage:
-      type: string
     Timestamps:
       type: array
       items:
@@ -6698,11 +8623,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/BatchPutAssetPropertyErrorEntry'
-    EntryId:
-      type: string
-      pattern: '^[a-zA-Z0-9_-]+$'
-      minLength: 1
-      maxLength: 64
     BatchPutAssetPropertyErrors:
       type: array
       items:
@@ -6737,6 +8657,21 @@ components:
         - OUT_OF_SYNC
         - SYNC_FAILED
         - UNKNOWN
+    ColumnName:
+      type: string
+      enum:
+        - ALIAS
+        - ASSET_ID
+        - PROPERTY_ID
+        - DATA_TYPE
+        - TIMESTAMP_SECONDS
+        - TIMESTAMP_NANO_OFFSET
+        - QUALITY
+        - VALUE
+    ColumnNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/ColumnName'
     Property:
       type: object
       required:
@@ -6790,6 +8725,10 @@ components:
             - description: The type of the composite model that defines this property.
         assetProperty:
           $ref: '#/components/schemas/Property'
+        id:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: ' The ID of the composite model that contains the property. '
       description: Contains information about a composite model property on an asset.
     ComputeLocation:
       type: string
@@ -6857,7 +8796,7 @@ components:
         accessPolicyIdentity:
           allOf:
             - $ref: '#/components/schemas/Identity'
-            - description: 'The identity for this access policy. Choose an Amazon Web Services SSO user, an Amazon Web Services SSO group, or an IAM user.'
+            - description: 'The identity for this access policy. Choose an IAM Identity Center user, an IAM Identity Center group, or an IAM user.'
         accessPolicyResource:
           allOf:
             - $ref: '#/components/schemas/Resource'
@@ -6918,7 +8857,7 @@ components:
         assetName:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: 'A unique, friendly name for the asset.'
+            - description: A friendly name for the asset.
         assetModelId:
           allOf:
             - $ref: '#/components/schemas/ID'
@@ -6931,6 +8870,78 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'A list of key-value pairs that contain metadata for the asset. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html">Tagging your IoT SiteWise resources</a> in the <i>IoT SiteWise User Guide</i>.'
+        assetDescription:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description for the asset.
+    Files:
+      type: array
+      items:
+        $ref: '#/components/schemas/File'
+    ErrorReportLocation:
+      type: object
+      required:
+        - bucket
+        - prefix
+      properties:
+        bucket:
+          allOf:
+            - $ref: '#/components/schemas/Bucket'
+            - description: The name of the Amazon S3 bucket to which errors associated with the bulk import job are sent.
+        prefix:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Amazon S3 uses the prefix as a folder name to organize data in the bucket. Each Amazon S3 object has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/). For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html">Organizing objects using prefixes</a> in the <i>Amazon Simple Storage Service User Guide</i>.'
+      description: The Amazon S3 destination where errors associated with the job creation request are saved.
+    JobConfiguration:
+      type: object
+      required:
+        - fileFormat
+      properties:
+        fileFormat:
+          allOf:
+            - $ref: '#/components/schemas/FileFormat'
+            - description: The file format of the data in Amazon S3.
+      description: 'Contains the configuration information of a job, such as the file format used to save data in Amazon S3.'
+    CreateBulkImportJobRequest:
+      type: object
+      required:
+        - jobName
+        - jobRoleArn
+        - files
+        - errorReportLocation
+        - jobConfiguration
+      title: CreateBulkImportJobRequest
+      properties:
+        jobName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The unique name that helps identify the job request.
+        jobRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the IAM role that allows IoT SiteWise to read Amazon S3 data.'
+        files:
+          allOf:
+            - $ref: '#/components/schemas/Files'
+            - description: The files in the specified Amazon S3 bucket that contain your data.
+        errorReportLocation:
+          allOf:
+            - $ref: '#/components/schemas/ErrorReportLocation'
+            - description: The Amazon S3 destination where errors associated with the job creation request are saved.
+        jobConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/JobConfiguration'
+            - description: 'Contains the configuration information of a job, such as the file format used to save data in Amazon S3.'
+    JobStatus:
+      type: string
+      enum:
+        - PENDING
+        - CANCELLED
+        - RUNNING
+        - COMPLETED
+        - FAILED
+        - COMPLETED_WITH_FAILURES
     DashboardDefinition:
       type: string
       pattern: .+
@@ -7043,7 +9054,7 @@ components:
         portalAuthMode:
           allOf:
             - $ref: '#/components/schemas/AuthMode'
-            - description: '<p>The service to use to authenticate users to the portal. Choose from the following options:</p> <ul> <li> <p> <code>SSO</code> – The portal uses Amazon Web Services Single Sign On to authenticate users and manage user permissions. Before you can create a portal that uses Amazon Web Services SSO, you must enable Amazon Web Services SSO. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso">Enabling Amazon Web Services SSO</a> in the <i>IoT SiteWise User Guide</i>. This option is only available in Amazon Web Services Regions other than the China Regions.</p> </li> <li> <p> <code>IAM</code> – The portal uses Identity and Access Management to authenticate users and manage user permissions. This option is only available in the China Regions.</p> </li> </ul> <p>You can''t change this value after you create a portal.</p> <p>Default: <code>SSO</code> </p>'
+            - description: '<p>The service to use to authenticate users to the portal. Choose from the following options:</p> <ul> <li> <p> <code>SSO</code> – The portal uses IAM Identity Center (successor to Single Sign-On) to authenticate users and manage user permissions. Before you can create a portal that uses IAM Identity Center, you must enable IAM Identity Center. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso">Enabling IAM Identity Center</a> in the <i>IoT SiteWise User Guide</i>. This option is only available in Amazon Web Services Regions other than the China Regions.</p> </li> <li> <p> <code>IAM</code> – The portal uses Identity and Access Management to authenticate users and manage user permissions.</p> </li> </ul> <p>You can''t change this value after you create a portal.</p> <p>Default: <code>SSO</code> </p>'
         notificationSenderEmail:
           allOf:
             - $ref: '#/components/schemas/Email'
@@ -7103,6 +9114,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'A list of key-value pairs that contain metadata for the project. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html">Tagging your IoT SiteWise resources</a> in the <i>IoT SiteWise User Guide</i>.'
+    Csv:
+      type: object
+      properties:
+        columnNames:
+          allOf:
+            - $ref: '#/components/schemas/ColumnNames'
+            - description: The column names specified in the .csv file.
+      description: A .csv file.
     DashboardSummary:
       type: object
       required:
@@ -7162,10 +9181,20 @@ components:
       type: object
       title: DeleteProjectRequest
       properties: {}
+    DeleteTimeSeriesRequest:
+      type: object
+      title: DeleteTimeSeriesRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
     DescribeAccessPolicyRequest:
       type: object
       title: DescribeAccessPolicyRequest
       properties: {}
+    ExcludeProperties:
+      type: boolean
     DescribeAssetModelRequest:
       type: object
       title: DescribeAssetModelRequest
@@ -7177,6 +9206,10 @@ components:
     DescribeAssetRequest:
       type: object
       title: DescribeAssetRequest
+      properties: {}
+    DescribeBulkImportJobRequest:
+      type: object
+      title: DescribeBulkImportJobRequest
       properties: {}
     DescribeDashboardRequest:
       type: object
@@ -7264,6 +9297,31 @@ components:
             - $ref: '#/components/schemas/CustomerManagedS3Storage'
             - description: Contains information about a customer managed Amazon S3 bucket.
       description: Contains information about the storage destination.
+    DisassociatedDataStorageState:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    RetentionPeriod:
+      type: object
+      properties:
+        numberOfDays:
+          allOf:
+            - $ref: '#/components/schemas/NumberOfDays'
+            - description: '<p>The number of days that your data is kept.</p> <note> <p>If you specified a value for this parameter, the <code>unlimited</code> parameter must be <code>false</code>.</p> </note>'
+        unlimited:
+          allOf:
+            - $ref: '#/components/schemas/Unlimited'
+            - description: '<p>If true, your data is kept indefinitely.</p> <note> <p>If configured to <code>true</code>, you must not specify a value for the <code>numberOfDays</code> parameter.</p> </note>'
+      description: 'How many days your data is kept in the hot tier. By default, your data is kept indefinitely in the hot tier.'
+    DescribeTimeSeriesRequest:
+      type: object
+      title: DescribeTimeSeriesRequest
+      properties: {}
+    TimeSeriesId:
+      type: string
+      minLength: 36
+      maxLength: 73
     DetailedErrorCode:
       type: string
       enum:
@@ -7305,6 +9363,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/ID'
             - description: The ID of the child asset to disassociate.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+    DisassociateTimeSeriesFromAssetPropertyRequest:
+      type: object
+      title: DisassociateTimeSeriesFromAssetPropertyRequest
+      properties:
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
@@ -7416,27 +9482,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/GatewaySummary'
-    Resolution:
-      type: string
-      pattern: 1m|1h|1d
-      minLength: 2
-      maxLength: 2
-    Qualities:
-      type: array
-      items:
-        $ref: '#/components/schemas/Quality'
-      minItems: 1
-      maxItems: 1
-    TimeOrdering:
-      type: string
-      enum:
-        - ASCENDING
-        - DESCENDING
-    NextToken:
-      type: string
-      pattern: '[A-Za-z0-9+/=]+'
-      minLength: 1
-      maxLength: 4096
     MaxResults:
       type: integer
       minimum: 1
@@ -7456,7 +9501,7 @@ components:
     TimeInSeconds:
       type: integer
       minimum: 1
-      maximum: 31556889864403200
+      maximum: 9223372036854774
     OffsetInNanos:
       type: integer
       minimum: 0
@@ -7520,6 +9565,30 @@ components:
       type: string
       minLength: 2
       maxLength: 23
+    JobSummary:
+      type: object
+      required:
+        - id
+        - name
+        - status
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: The ID of the job.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The unique name that helps identify the job request.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: <p>The status of the bulk import job can be one of following values.</p> <ul> <li> <p> <code>PENDING</code> – IoT SiteWise is waiting for the current bulk import job to finish.</p> </li> <li> <p> <code>CANCELLED</code> – The bulk import job has been canceled.</p> </li> <li> <p> <code>RUNNING</code> – IoT SiteWise is processing your request to import your data from Amazon S3.</p> </li> <li> <p> <code>COMPLETED</code> – IoT SiteWise successfully completed your request to import data from Amazon S3.</p> </li> <li> <p> <code>FAILED</code> – IoT SiteWise couldn't process your request to import data from Amazon S3. You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.</p> </li> <li> <p> <code>COMPLETED_WITH_FAILURES</code> – IoT SiteWise completed your request to import data from Amazon S3 with errors. You can use logs saved in the specified error report location in Amazon S3 to troubleshoot issues.</p> </li> </ul>
+      description: Contains a job summary information.
+    JobSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/JobSummary'
     KmsKeyId:
       type: string
       minLength: 1
@@ -7533,9 +9602,27 @@ components:
       type: object
       title: ListAccessPoliciesRequest
       properties: {}
+    ListAssetModelPropertiesFilter:
+      type: string
+      enum:
+        - ALL
+        - BASE
+    ListAssetModelPropertiesRequest:
+      type: object
+      title: ListAssetModelPropertiesRequest
+      properties: {}
     ListAssetModelsRequest:
       type: object
       title: ListAssetModelsRequest
+      properties: {}
+    ListAssetPropertiesFilter:
+      type: string
+      enum:
+        - ALL
+        - BASE
+    ListAssetPropertiesRequest:
+      type: object
+      title: ListAssetPropertiesRequest
       properties: {}
     TraversalType:
       type: string
@@ -7562,6 +9649,20 @@ components:
     ListAssociatedAssetsRequest:
       type: object
       title: ListAssociatedAssetsRequest
+      properties: {}
+    ListBulkImportJobsFilter:
+      type: string
+      enum:
+        - ALL
+        - PENDING
+        - RUNNING
+        - CANCELLED
+        - FAILED
+        - COMPLETED_WITH_FAILURES
+        - COMPLETED
+    ListBulkImportJobsRequest:
+      type: object
+      title: ListBulkImportJobsRequest
       properties: {}
     ListDashboardsRequest:
       type: object
@@ -7595,6 +9696,19 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    ListTimeSeriesType:
+      type: string
+      enum:
+        - ASSOCIATED
+        - DISASSOCIATED
+    ListTimeSeriesRequest:
+      type: object
+      title: ListTimeSeriesRequest
+      properties: {}
+    TimeSeriesSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/TimeSeriesSummary'
     Macro:
       type: string
       pattern: '[^\u0000-\u001F\u007F]+'
@@ -7672,8 +9786,8 @@ components:
         offset:
           allOf:
             - $ref: '#/components/schemas/Offset'
-            - description: '<p>The offset for the tumbling window. The <code>offset</code> parameter accepts the following:</p> <ul> <li> <p>The offset time.</p> <p>For example, if you specify <code>18h</code> for <code>offset</code> and <code>1d</code> for <code>interval</code>, IoT SiteWise aggregates data in one of the following ways:</p> <ul> <li> <p>If you create the metric before or at 6:00 PM (UTC), you get the first aggregation result at 6 PM (UTC) on the day when you create the metric.</p> </li> <li> <p>If you create the metric after 6:00 PM (UTC), you get the first aggregation result at 6 PM (UTC) the next day.</p> </li> </ul> </li> <li> <p>The ISO 8601 format.</p> <p>For example, if you specify <code>PT18H</code> for <code>offset</code> and <code>1d</code> for <code>interval</code>, IoT SiteWise aggregates data in one of the following ways:</p> <ul> <li> <p>If you create the metric before or at 6:00 PM (UTC), you get the first aggregation result at 6 PM (UTC) on the day when you create the metric.</p> </li> <li> <p>If you create the metric after 6:00 PM (UTC), you get the first aggregation result at 6 PM (UTC) the next day.</p> </li> </ul> </li> <li> <p>The 24-hour clock.</p> <p>For example, if you specify <code>00:03:00</code> for <code>offset</code> and <code>5m</code> for <code>interval</code>, and you create the metric at 2 PM (UTC), you get the first aggregation result at 2:03 PM (UTC). You get the second aggregation result at 2:08 PM (UTC). </p> </li> <li> <p>The offset time zone.</p> <p>For example, if you specify <code>2021-07-23T18:00-08</code> for <code>offset</code> and <code>1d</code> for <code>interval</code>, IoT SiteWise aggregates data in one of the following ways:</p> <ul> <li> <p>If you create the metric before or at 6:00 PM (PST), you get the first aggregation result at 6 PM (PST) on the day when you create the metric.</p> </li> <li> <p>If you create the metric after 6:00 PM (PST), you get the first aggregation result at 6 PM (PST) the next day.</p> </li> </ul> </li> </ul>'
-      description: '<p>Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time window. You use this window in metrics to aggregate data from properties and other assets.</p> <p>You can use <code>m</code>, <code>h</code>, <code>d</code>, and <code>w</code> when you specify an interval or offset. Note that <code>m</code> represents minutes, and <code>w</code> represents weeks. You can also use <code>s</code> to represent seconds in <code>offset</code>.</p> <p>The <code>interval</code> and <code>offset</code> parameters support the <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601 format</a>. For example, <code>PT5S</code> represents five seconds, <code>PT5M</code> represents five minutes, and <code>PT5H</code> represents five hours.</p>'
+            - description: '<p>The offset for the tumbling window. The <code>offset</code> parameter accepts the following:</p> <ul> <li> <p>The offset time.</p> <p>For example, if you specify <code>18h</code> for <code>offset</code> and <code>1d</code> for <code>interval</code>, IoT SiteWise aggregates data in one of the following ways:</p> <ul> <li> <p>If you create the metric before or at 6 PM (UTC), you get the first aggregation result at 6 PM (UTC) on the day when you create the metric.</p> </li> <li> <p>If you create the metric after 6 PM (UTC), you get the first aggregation result at 6 PM (UTC) the next day.</p> </li> </ul> </li> <li> <p>The ISO 8601 format.</p> <p>For example, if you specify <code>PT18H</code> for <code>offset</code> and <code>1d</code> for <code>interval</code>, IoT SiteWise aggregates data in one of the following ways:</p> <ul> <li> <p>If you create the metric before or at 6 PM (UTC), you get the first aggregation result at 6 PM (UTC) on the day when you create the metric.</p> </li> <li> <p>If you create the metric after 6 PM (UTC), you get the first aggregation result at 6 PM (UTC) the next day.</p> </li> </ul> </li> <li> <p>The 24-hour clock.</p> <p>For example, if you specify <code>00:03:00</code> for <code>offset</code>, <code>5m</code> for <code>interval</code>, and you create the metric at 2 PM (UTC), you get the first aggregation result at 2:03 PM (UTC). You get the second aggregation result at 2:08 PM (UTC). </p> </li> <li> <p>The offset time zone.</p> <p>For example, if you specify <code>2021-07-23T18:00-08</code> for <code>offset</code> and <code>1d</code> for <code>interval</code>, IoT SiteWise aggregates data in one of the following ways:</p> <ul> <li> <p>If you create the metric before or at 6 PM (PST), you get the first aggregation result at 6 PM (PST) on the day when you create the metric.</p> </li> <li> <p>If you create the metric after 6 PM (PST), you get the first aggregation result at 6 PM (PST) the next day.</p> </li> </ul> </li> </ul>'
+      description: '<p>Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time window. You can use this window in metrics to aggregate data from properties and other assets.</p> <p>You can use <code>m</code>, <code>h</code>, <code>d</code>, and <code>w</code> when you specify an interval or offset. Note that <code>m</code> represents minutes, <code>h</code> represents hours, <code>d</code> represents days, and <code>w</code> represents weeks. You can also use <code>s</code> to represent seconds in <code>offset</code>.</p> <p>The <code>interval</code> and <code>offset</code> parameters support the <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601 format</a>. For example, <code>PT5S</code> represents 5 seconds, <code>PT5M</code> represents 5 minutes, and <code>PT5H</code> represents 5 hours.</p>'
     MonitorErrorCode:
       type: string
       enum:
@@ -7729,7 +9843,7 @@ components:
         startUrl:
           allOf:
             - $ref: '#/components/schemas/Url'
-            - description: 'The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that use Amazon Web Services SSO for authentication. For portals that use IAM for authentication, you must use the IoT SiteWise console to get a URL that you can use to access the portal.'
+            - description: 'The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that use IAM Identity Center for authentication. For portals that use IAM for authentication, you must use the IoT SiteWise console to get a URL that you can use to access the portal.'
         creationDate:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -7807,7 +9921,6 @@ components:
       type: integer
     PropertyValueStringValue:
       type: string
-      pattern: '[^\u0000-\u001F\u007F]+'
     PutDefaultEncryptionConfigurationRequest:
       type: object
       required:
@@ -7821,7 +9934,7 @@ components:
         kmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
-            - description: The Key ID of the customer managed customer master key (CMK) used for KMS encryption. This is required if you use <code>KMS_BASED_ENCRYPTION</code>.
+            - description: The Key ID of the customer managed key used for KMS encryption. This is required if you use <code>KMS_BASED_ENCRYPTION</code>.
     PutLoggingOptionsRequest:
       type: object
       required:
@@ -7841,11 +9954,17 @@ components:
         storageType:
           allOf:
             - $ref: '#/components/schemas/StorageType'
-            - description: '<p>The type of storage that you specified for your data. The storage type can be one of the following values:</p> <ul> <li> <p> <code>SITEWISE_DEFAULT_STORAGE</code> – IoT SiteWise replicates your data into a service managed database.</p> </li> <li> <p> <code>MULTI_LAYER_STORAGE</code> – IoT SiteWise replicates your data into a service managed database and saves a copy of your raw data and metadata in an Amazon S3 object that you specified.</p> </li> </ul>'
+            - description: '<p>The storage tier that you specified for your data. The <code>storageType</code> parameter can be one of the following values:</p> <ul> <li> <p> <code>SITEWISE_DEFAULT_STORAGE</code> – IoT SiteWise saves your data into the hot tier. The hot tier is a service-managed database.</p> </li> <li> <p> <code>MULTI_LAYER_STORAGE</code> – IoT SiteWise saves your data in both the cold tier and the hot tier. The cold tier is a customer-managed Amazon S3 bucket.</p> </li> </ul>'
         multiLayerStorage:
           allOf:
             - $ref: '#/components/schemas/MultiLayerStorage'
             - description: 'Identifies a storage destination. If you specified <code>MULTI_LAYER_STORAGE</code> for the storage type, you must specify a <code>MultiLayerStorage</code> object.'
+        disassociatedDataStorage:
+          allOf:
+            - $ref: '#/components/schemas/DisassociatedDataStorageState'
+            - description: '<p>Contains the storage configuration for time series (data streams) that aren''t associated with asset properties. The <code>disassociatedDataStorage</code> can be one of the following values:</p> <ul> <li> <p> <code>ENABLED</code> – IoT SiteWise accepts time series that aren''t associated with asset properties.</p> <important> <p>After the <code>disassociatedDataStorage</code> is enabled, you can''t disable it.</p> </important> </li> <li> <p> <code>DISABLED</code> – IoT SiteWise doesn''t accept time series (data streams) that aren''t associated with asset properties.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html">Data streams</a> in the <i>IoT SiteWise User Guide</i>.</p>'
+        retentionPeriod:
+          $ref: '#/components/schemas/RetentionPeriod'
     TagKeyList:
       type: array
       items:
@@ -7862,6 +9981,47 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html">Tagging your IoT SiteWise resources</a> in the <i>IoT SiteWise User Guide</i>.'
+    TimeSeriesSummary:
+      type: object
+      required:
+        - timeSeriesId
+        - dataType
+        - timeSeriesCreationDate
+        - timeSeriesLastUpdateDate
+      properties:
+        assetId:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: The ID of the asset in which the asset property was created.
+        propertyId:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: The ID of the asset property.
+        alias:
+          allOf:
+            - $ref: '#/components/schemas/PropertyAlias'
+            - description: The alias that identifies the time series.
+        timeSeriesId:
+          allOf:
+            - $ref: '#/components/schemas/TimeSeriesId'
+            - description: The ID of the time series.
+        dataType:
+          allOf:
+            - $ref: '#/components/schemas/PropertyDataType'
+            - description: '<p>The data type of the time series.</p> <p>If you specify <code>STRUCT</code>, you must also specify <code>dataTypeSpec</code> to identify the type of the structure for this time series.</p>'
+        dataTypeSpec:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: <p>The data type of the structure for this time series. This parameter is required for time series that have the <code>STRUCT</code> data type.</p> <p>The options for this parameter depend on the type of the composite model in which you created the asset property that is associated with your time series. Use <code>AWS/ALARM_STATE</code> for alarm state in alarm composite models.</p>
+        timeSeriesCreationDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date that the time series was created, in Unix epoch time.'
+        timeSeriesLastUpdateDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date that the time series was last updated, in Unix epoch time.'
+      description: Contains a summary of a time series (data stream).
     TransformProcessingConfig:
       type: object
       required:
@@ -7889,7 +10049,7 @@ components:
         accessPolicyIdentity:
           allOf:
             - $ref: '#/components/schemas/Identity'
-            - description: 'The identity for this access policy. Choose an Amazon Web Services SSO user, an Amazon Web Services SSO group, or an IAM user.'
+            - description: 'The identity for this access policy. Choose an IAM Identity Center user, an IAM Identity Center group, or an IAM user.'
         accessPolicyResource:
           allOf:
             - $ref: '#/components/schemas/Resource'
@@ -7948,6 +10108,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
             - description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+        propertyUnit:
+          allOf:
+            - $ref: '#/components/schemas/PropertyUnit'
+            - description: 'The unit of measure (such as Newtons or RPM) of the asset property. If you don''t specify a value for this parameter, the service uses the value of the <code>assetModelProperty</code> in the asset model.'
     UpdateAssetRequest:
       type: object
       required:
@@ -7957,11 +10121,15 @@ components:
         assetName:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: 'A unique, friendly name for the asset.'
+            - description: A friendly name for the asset.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
             - description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+        assetDescription:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description for the asset.
     UpdateDashboardRequest:
       type: object
       required:

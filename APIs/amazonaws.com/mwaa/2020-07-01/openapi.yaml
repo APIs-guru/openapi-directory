@@ -3,7 +3,7 @@ info:
   version: '2020-07-01'
   x-release: v4
   title: AmazonMWAA
-  description: '<p><fullname>Amazon Managed Workflows for Apache Airflow</fullname> <p>This section contains the Amazon Managed Workflows for Apache Airflow (MWAA) API reference documentation. For more information, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html">What Is Amazon MWAA?</a>.</p></p>'
+  description: '<p><fullname>Amazon Managed Workflows for Apache Airflow</fullname> <p>This section contains the Amazon Managed Workflows for Apache Airflow (MWAA) API reference documentation. For more information, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html">What Is Amazon MWAA?</a>.</p> <p> <b>Endpoints</b> </p> <ul> <li> <p> <code>api.airflow.{region}.amazonaws.com</code> - This endpoint is used for environment management.</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_CreateEnvironment.html">CreateEnvironment</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_DeleteEnvironment.html">DeleteEnvironment</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_GetEnvironment.html">GetEnvironment</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_ListEnvironments.html">ListEnvironments</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_ListTagsForResource.html">ListTagsForResource</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_TagResource.html">TagResource</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_UntagResource.html">UntagResource</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_UpdateEnvironment.html">UpdateEnvironment</a> </p> </li> </ul> </li> <li> <p> <code>env.airflow.{region}.amazonaws.com</code> - This endpoint is used to operate the Airflow environment.</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_CreateCliToken.html ">CreateCliToken</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_CreateWebLoginToken.html">CreateWebLoginToken</a> </p> </li> </ul> </li> <li> <p> <code>ops.airflow.{region}.amazonaws.com</code> - This endpoint is used to push environment metrics that track environment health.</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/mwaa/latest/API/API_PublishMetrics.html ">PublishMetrics</a> </p> </li> </ul> </li> </ul> <p> <b>Regions</b> </p> <p>For a list of regions that Amazon MWAA supports, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html#regions-mwaa">Region availability</a> in the <i>Amazon MWAA User Guide</i>.</p></p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -118,7 +118,7 @@ paths:
   '/clitoken/{Name}':
     post:
       operationId: CreateCliToken
-      description: Create a CLI token to use Airflow CLI.
+      description: 'Creates a CLI token for the Airflow CLI. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/call-mwaa-apis-cli.html">Creating an Apache Airflow CLI token</a>.'
       responses:
         '200':
           description: Success
@@ -136,7 +136,7 @@ paths:
         - name: Name
           in: path
           required: true
-          description: Create a CLI token request for a MWAA environment.
+          description: 'The name of the Amazon MWAA environment. For example, <code>MyMWAAEnvironment</code>.'
           schema:
             type: string
             pattern: '^[a-zA-Z][0-9a-zA-Z-_]*$'
@@ -201,7 +201,7 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/ConfigValue'
                 AirflowVersion:
-                  description: 'The Apache Airflow version for your environment. For example, <code>v1.10.12</code>. If no value is specified, defaults to the latest version. Valid values: <code>v1.10.12</code>.'
+                  description: 'The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version. Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, and <code>2.4.3</code>. For more information, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html">Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA)</a>.'
                   type: string
                   pattern: '^[0-9a-z.]+$'
                   minLength: 1
@@ -218,31 +218,41 @@ paths:
                   minLength: 1
                   maxLength: 1024
                 ExecutionRoleArn:
-                  description: 'The Amazon Resource Name (ARN) of the execution role for your environment. An execution role is an AWS Identity and Access Management (IAM) role that grants MWAA permission to access AWS services and resources used by your environment. For example, <code>arn:aws:iam::123456789:role/my-execution-role</code>. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html">Amazon MWAA Execution role</a>.'
+                  description: 'The Amazon Resource Name (ARN) of the execution role for your environment. An execution role is an Amazon Web Services Identity and Access Management (IAM) role that grants MWAA permission to access Amazon Web Services services and resources used by your environment. For example, <code>arn:aws:iam::123456789:role/my-execution-role</code>. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html">Amazon MWAA Execution role</a>.'
                   type: string
                   pattern: '^arn:aws(-[a-z]+)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+$'
                   minLength: 1
                   maxLength: 1224
                 KmsKey:
-                  description: 'The AWS Key Management Service (KMS) key to encrypt the data in your environment. You can use an AWS owned CMK, or a Customer managed CMK (advanced). To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/get-started.html">Get started with Amazon Managed Workflows for Apache Airflow</a>.'
+                  description: 'The Amazon Web Services Key Management Service (KMS) key to encrypt the data in your environment. You can use an Amazon Web Services owned CMK, or a Customer managed CMK (advanced). To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/create-environment.html">Create an Amazon MWAA environment</a>.'
                   type: string
                   pattern: '^(((arn:aws(-[a-z]+)?:kms:[a-z]{2}-[a-z]+-\d:\d+:)?key\/)?[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}|(arn:aws(-[a-z]+)?:kms:[a-z]{2}-[a-z]+-\d:\d+:)?alias/.+)$'
                   minLength: 1
                   maxLength: 1224
                 LoggingConfiguration:
-                  description: 'Defines the Apache Airflow logs to send to CloudWatch Logs: <code>DagProcessingLogs</code>, <code>SchedulerLogs</code>, <code>TaskLogs</code>, <code>WebserverLogs</code>, <code>WorkerLogs</code>.'
+                  description: Defines the Apache Airflow log types to send to CloudWatch Logs.
                   type: object
                   properties:
                     DagProcessingLogs:
-                      $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+                      allOf:
+                        - $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+                        - description: Publishes Airflow DAG processing logs to CloudWatch Logs.
                     SchedulerLogs:
-                      $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+                      allOf:
+                        - $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+                        - description: Publishes Airflow scheduler logs to CloudWatch Logs.
                     TaskLogs:
-                      $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+                      allOf:
+                        - $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+                        - description: Publishes Airflow task logs to CloudWatch Logs.
                     WebserverLogs:
-                      $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+                      allOf:
+                        - $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+                        - description: Publishes Airflow web server logs to CloudWatch Logs.
                     WorkerLogs:
-                      $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+                      allOf:
+                        - $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+                        - description: Publishes Airflow worker logs to CloudWatch Logs.
                 MaxWorkers:
                   description: 'The maximum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers up to the number you specify in the <code>MaxWorkers</code> field. For example, <code>20</code>. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra workers leaving the one worker that is included with your environment, or the number you specify in <code>MinWorkers</code>.'
                   type: integer
@@ -252,17 +262,17 @@ paths:
                   type: integer
                   minimum: 1
                 NetworkConfiguration:
-                  description: 'The VPC networking components used to secure and enable network traffic between the AWS resources for your environment. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.'
+                  description: 'Describes the VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.'
                   type: object
                   properties:
                     SecurityGroupIds:
                       allOf:
                         - $ref: '#/components/schemas/SecurityGroupList'
-                        - description: 'A list of 1 or more security group IDs. Accepts up to 5 security group IDs. A security group must be attached to the same VPC as the subnets. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html">Security in your VPC on Amazon MWAA</a>.'
+                        - description: 'A list of security group IDs. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html">Security in your VPC on Amazon MWAA</a>.'
                     SubnetIds:
                       allOf:
                         - $ref: '#/components/schemas/SubnetList'
-                        - description: A list of 2 subnet IDs. <b>Required</b> to create an environment. Must be private subnets in two different availability zones. A subnet must be attached to the same VPC as the security group.
+                        - description: 'A list of subnet IDs. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.'
                 PluginsS3ObjectVersion:
                   description: 'The version of the plugins.zip file on your Amazon S3 bucket. A version must be specified each time a plugins.zip file is updated. To learn more, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html">How S3 Versioning works</a>.'
                   type: string
@@ -286,7 +296,7 @@ paths:
                   minLength: 1
                   maxLength: 1024
                 Schedulers:
-                  description: The number of Apache Airflow schedulers to run in your environment.
+                  description: '<p>The number of Apache Airflow schedulers to run in your environment. Valid values:</p> <ul> <li> <p>v2 - Accepts between 2 to 5. Defaults to 2.</p> </li> <li> <p>v1 - Accepts 1.</p> </li> </ul>'
                   type: integer
                   maximum: 5
                 SourceBucketArn:
@@ -296,7 +306,7 @@ paths:
                   minLength: 1
                   maxLength: 1224
                 Tags:
-                  description: 'The key-value tag pairs you want to associate to your environment. For example, <code>"Environment": "Staging"</code>. To learn more, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS resources</a>.'
+                  description: 'The key-value tag pairs you want to associate to your environment. For example, <code>"Environment": "Staging"</code>. To learn more, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.'
                   type: object
                   minProperties: 1
                   maxProperties: 50
@@ -309,7 +319,7 @@ paths:
                     - PRIVATE_ONLY
                     - PUBLIC_ONLY
                 WeeklyMaintenanceWindowStart:
-                  description: '<p>The day and time of the week to start weekly maintenance updates of your environment in the following format: <code>DAY:HH:MM</code>. For example: <code>TUE:03:30</code>. You can specify a start time in 30 minute increments only. Supported input includes the following:</p> <ul> <li> <p>MON|TUE|WED|THU|FRI|SAT|SUN:([01]\\d|2[0-3]):(00|30)</p> </li> </ul>'
+                  description: 'The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time to start weekly maintenance updates of your environment in the following format: <code>DAY:HH:MM</code>. For example: <code>TUE:03:30</code>. You can specify a start time in 30 minute increments only.'
                   type: string
                   pattern: '(MON|TUE|WED|THU|FRI|SAT|SUN):([01]\d|2[0-3]):(00|30)'
                   minLength: 1
@@ -362,7 +372,7 @@ paths:
             maxLength: 80
     get:
       operationId: GetEnvironment
-      description: Retrieves the details of an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
+      description: Describes an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
       responses:
         '200':
           description: Success
@@ -449,7 +459,7 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/ConfigValue'
                 AirflowVersion:
-                  description: 'The Apache Airflow version for your environment. For example, <code>v1.10.12</code>. If no value is specified, defaults to the latest version. Valid values: <code>v1.10.12</code>.'
+                  description: 'The Apache Airflow version for your environment. If no value is specified, defaults to the latest version. Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, and <code>2.4.3</code>.'
                   type: string
                   pattern: '^[0-9a-z.]+$'
                   minLength: 1
@@ -466,25 +476,35 @@ paths:
                   minLength: 1
                   maxLength: 1024
                 ExecutionRoleArn:
-                  description: 'The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to access AWS resources in your environment. For example, <code>arn:aws:iam::123456789:role/my-execution-role</code>. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html">Amazon MWAA Execution role</a>.'
+                  description: 'The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to access Amazon Web Services resources in your environment. For example, <code>arn:aws:iam::123456789:role/my-execution-role</code>. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html">Amazon MWAA Execution role</a>.'
                   type: string
                   pattern: '^arn:aws(-[a-z]+)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+$'
                   minLength: 1
                   maxLength: 1224
                 LoggingConfiguration:
-                  description: 'Defines the Apache Airflow logs to send to CloudWatch Logs: <code>DagProcessingLogs</code>, <code>SchedulerLogs</code>, <code>TaskLogs</code>, <code>WebserverLogs</code>, <code>WorkerLogs</code>.'
+                  description: Defines the Apache Airflow log types to send to CloudWatch Logs.
                   type: object
                   properties:
                     DagProcessingLogs:
-                      $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+                      allOf:
+                        - $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+                        - description: Publishes Airflow DAG processing logs to CloudWatch Logs.
                     SchedulerLogs:
-                      $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+                      allOf:
+                        - $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+                        - description: Publishes Airflow scheduler logs to CloudWatch Logs.
                     TaskLogs:
-                      $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+                      allOf:
+                        - $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+                        - description: Publishes Airflow task logs to CloudWatch Logs.
                     WebserverLogs:
-                      $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+                      allOf:
+                        - $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+                        - description: Publishes Airflow web server logs to CloudWatch Logs.
                     WorkerLogs:
-                      $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+                      allOf:
+                        - $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+                        - description: Publishes Airflow worker logs to CloudWatch Logs.
                 MaxWorkers:
                   description: 'The maximum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers up to the number you specify in the <code>MaxWorkers</code> field. For example, <code>20</code>. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra workers leaving the one worker that is included with your environment, or the number you specify in <code>MinWorkers</code>.'
                   type: integer
@@ -494,13 +514,13 @@ paths:
                   type: integer
                   minimum: 1
                 NetworkConfiguration:
-                  description: 'The VPC networking components used to secure and enable network traffic between the AWS resources for your environment. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.'
+                  description: 'Defines the VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.'
                   type: object
                   properties:
                     SecurityGroupIds:
                       allOf:
                         - $ref: '#/components/schemas/SecurityGroupList'
-                        - description: 'A list of 1 or more security group IDs. Accepts up to 5 security group IDs. A security group must be attached to the same VPC as the subnets. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html">Security in your VPC on Amazon MWAA</a>.'
+                        - description: 'A list of security group IDs. A security group must be attached to the same VPC as the subnets. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html">Security in your VPC on Amazon MWAA</a>.'
                 PluginsS3ObjectVersion:
                   description: 'The version of the plugins.zip file on your Amazon S3 bucket. A version must be specified each time a plugins.zip file is updated. To learn more, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html">How S3 Versioning works</a>.'
                   type: string
@@ -540,7 +560,7 @@ paths:
                     - PRIVATE_ONLY
                     - PUBLIC_ONLY
                 WeeklyMaintenanceWindowStart:
-                  description: '<p>The day and time of the week to start weekly maintenance updates of your environment in the following format: <code>DAY:HH:MM</code>. For example: <code>TUE:03:30</code>. You can specify a start time in 30 minute increments only. Supported input includes the following:</p> <ul> <li> <p>MON|TUE|WED|THU|FRI|SAT|SUN:([01]\\d|2[0-3]):(00|30)</p> </li> </ul>'
+                  description: 'The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time to start weekly maintenance updates of your environment in the following format: <code>DAY:HH:MM</code>. For example: <code>TUE:03:30</code>. You can specify a start time in 30 minute increments only.'
                   type: string
                   pattern: '(MON|TUE|WED|THU|FRI|SAT|SUN):([01]\d|2[0-3]):(00|30)'
                   minLength: 1
@@ -548,7 +568,7 @@ paths:
   '/webtoken/{Name}':
     post:
       operationId: CreateWebLoginToken
-      description: Create a JWT token to be used to login to Airflow Web UI with claims based Authentication.
+      description: 'Creates a web login token for the Airflow Web UI. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/call-mwaa-apis-web.html">Creating an Apache Airflow web login token</a>.'
       responses:
         '200':
           description: Success
@@ -584,7 +604,7 @@ paths:
         - name: Name
           in: path
           required: true
-          description: Create an Airflow Web UI login token request for a MWAA environment.
+          description: 'The name of the Amazon MWAA environment. For example, <code>MyMWAAEnvironment</code>.'
           schema:
             type: string
             pattern: '^[a-zA-Z][0-9a-zA-Z-_]*$'
@@ -741,7 +761,7 @@ paths:
                 - Tags
               properties:
                 Tags:
-                  description: 'The key-value tag pairs you want to associate to your environment. For example, <code>"Environment": "Staging"</code>. To learn more, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS resources</a>.'
+                  description: 'The key-value tag pairs you want to associate to your environment. For example, <code>"Environment": "Staging"</code>. To learn more, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.'
                   type: object
                   minProperties: 1
                   maxProperties: 50
@@ -750,7 +770,7 @@ paths:
   '/metrics/environments/{EnvironmentName}':
     post:
       operationId: PublishMetrics
-      description: An operation for publishing metrics from the customers to the Ops plane.
+      description: ' <b>Internal only</b>. Publishes environment health metrics to Amazon CloudWatch.'
       responses:
         '200':
           description: Success
@@ -774,7 +794,7 @@ paths:
         - name: EnvironmentName
           in: path
           required: true
-          description: Publishes environment metric data to Amazon CloudWatch.
+          description: ' <b>Internal only</b>. The name of the environment.'
           schema:
             type: string
             pattern: '^[a-zA-Z][0-9a-zA-Z-_]*$'
@@ -790,7 +810,7 @@ paths:
                 - MetricData
               properties:
                 MetricData:
-                  description: Publishes metric data points to Amazon CloudWatch. CloudWatch associates the data points with the specified metrica.
+                  description: ' <b>Internal only</b>. Publishes metrics to Amazon CloudWatch. To learn more about the metrics published to Amazon CloudWatch, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html">Amazon MWAA performance metrics in Amazon CloudWatch</a>.'
                   type: array
                   items:
                     $ref: '#/components/schemas/MetricDatum'
@@ -916,12 +936,12 @@ components:
       properties:
         CliToken:
           allOf:
-            - $ref: '#/components/schemas/SyntheticCreateCliTokenResponseToken'
-            - description: Create an Airflow CLI login token response for the provided JWT token.
+            - $ref: '#/components/schemas/Token'
+            - description: An Airflow CLI login token.
         WebServerHostname:
           allOf:
             - $ref: '#/components/schemas/Hostname'
-            - description: Create an Airflow CLI login token response for the provided webserver hostname.
+            - description: The Airflow web server hostname for the environment.
     ResourceNotFoundException: {}
     CreateEnvironmentOutput:
       type: object
@@ -932,9 +952,10 @@ components:
             - description: The Amazon Resource Name (ARN) returned in the response for the environment.
     ConfigValue:
       type: string
-      pattern: .*
+      pattern: '^[ -~]+$'
       minLength: 1
-      maxLength: 256
+      maxLength: 65536
+      format: password
     ModuleLoggingConfigurationInput:
       type: object
       required:
@@ -944,12 +965,12 @@ components:
         Enabled:
           allOf:
             - $ref: '#/components/schemas/LoggingEnabled'
-            - description: Indicates whether to enable the Apache Airflow log type (e.g. <code>DagProcessingLogs</code>) in CloudWatch Logs.
+            - description: Indicates whether to enable the Apache Airflow log type (e.g. <code>DagProcessingLogs</code>).
         LogLevel:
           allOf:
             - $ref: '#/components/schemas/LoggingLevel'
-            - description: 'Defines the Apache Airflow logs to send for the log type (e.g. <code>DagProcessingLogs</code>) to CloudWatch Logs. Valid values: <code>CRITICAL</code>, <code>ERROR</code>, <code>WARNING</code>, <code>INFO</code>.'
-      description: 'Defines the type of logs to send for the Apache Airflow log type (e.g. <code>DagProcessingLogs</code>). Valid values: <code>CloudWatchLogGroupArn</code>, <code>Enabled</code>, <code>LogLevel</code>.'
+            - description: Defines the Apache Airflow log level (e.g. <code>INFO</code>) to send to CloudWatch Logs.
+      description: Enables the Apache Airflow log type (e.g. <code>DagProcessingLogs</code>) and defines the log level to send to CloudWatch Logs (e.g. <code>INFO</code>).
     SecurityGroupList:
       type: array
       items:
@@ -975,11 +996,11 @@ components:
         WebServerHostname:
           allOf:
             - $ref: '#/components/schemas/Hostname'
-            - description: Create an Airflow Web UI login token response for the provided webserver hostname.
+            - description: The Airflow web server hostname for the environment.
         WebToken:
           allOf:
-            - $ref: '#/components/schemas/SyntheticCreateWebLoginTokenResponseToken'
-            - description: Create an Airflow Web UI login token response for the provided JWT token.
+            - $ref: '#/components/schemas/Token'
+            - description: An Airflow web server login token.
     AccessDeniedException: {}
     DeleteEnvironmentOutput:
       type: object
@@ -999,7 +1020,7 @@ components:
         Environments:
           allOf:
             - $ref: '#/components/schemas/EnvironmentList'
-            - description: Returns the list of Amazon MWAA environments.
+            - description: Returns a list of Amazon MWAA environments.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -1010,7 +1031,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: 'The key-value tag pairs associated to your environment. To learn more, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS resources</a>.'
+            - description: 'The key-value tag pairs associated to your environment. To learn more, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.'
     PublishMetricsOutput:
       type: object
       properties: {}
@@ -1023,26 +1044,28 @@ components:
         Dimensions:
           allOf:
             - $ref: '#/components/schemas/Dimensions'
-            - description: Internal only API.
+            - description: ' <b>Internal only</b>. The dimensions associated with the metric.'
         MetricName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Internal only API.
+            - description: ' <b>Internal only</b>. The name of the metric.'
         StatisticValues:
           allOf:
             - $ref: '#/components/schemas/StatisticSet'
-            - description: Internal only API.
+            - description: ' <b>Internal only</b>. The statistical values for the metric.'
         Timestamp:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Internal only API.
+            - description: ' <b>Internal only</b>. The time the metric data was received.'
         Unit:
-          $ref: '#/components/schemas/Unit'
+          allOf:
+            - $ref: '#/components/schemas/Unit'
+            - description: ' <b>Internal only</b>. The unit used to store the metric.'
         Value:
           allOf:
             - $ref: '#/components/schemas/Double'
-            - description: Internal only API.
-      description: Internal only API.
+            - description: ' <b>Internal only</b>. The value for the metric.'
+      description: ' <b>Internal only</b>. Collects Apache Airflow metrics. To learn more about the metrics published to Amazon CloudWatch, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html">Amazon MWAA performance metrics in Amazon CloudWatch</a>.'
     TagResourceOutput:
       type: object
       properties: {}
@@ -1077,7 +1100,7 @@ components:
       maxLength: 1224
     ConfigKey:
       type: string
-      pattern: '^[a-z]+([a-z._]*[a-z]+)?$'
+      pattern: '^[a-z]+([a-z0-9._]*[a-z0-9_]+)?$'
       minLength: 1
       maxLength: 64
     EnvironmentName:
@@ -1089,7 +1112,7 @@ components:
       type: object
       title: CreateCliTokenRequest
       properties: {}
-    SyntheticCreateCliTokenResponseToken:
+    Token:
       type: string
       format: password
     Hostname:
@@ -1097,10 +1120,6 @@ components:
       pattern: '^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$'
       minLength: 1
       maxLength: 255
-    SyntheticCreateEnvironmentInputAirflowConfigurationOptions:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/ConfigValue'
     RelativePath:
       type: string
       pattern: .*
@@ -1124,16 +1143,26 @@ components:
       type: object
       properties:
         DagProcessingLogs:
-          $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+          allOf:
+            - $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+            - description: Publishes Airflow DAG processing logs to CloudWatch Logs.
         SchedulerLogs:
-          $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+          allOf:
+            - $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+            - description: Publishes Airflow scheduler logs to CloudWatch Logs.
         TaskLogs:
-          $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+          allOf:
+            - $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+            - description: Publishes Airflow task logs to CloudWatch Logs.
         WebserverLogs:
-          $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+          allOf:
+            - $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+            - description: Publishes Airflow web server logs to CloudWatch Logs.
         WorkerLogs:
-          $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
-      description: 'Defines the Apache Airflow logs to send to CloudWatch Logs: <code>DagProcessingLogs</code>, <code>SchedulerLogs</code>, <code>TaskLogs</code>, <code>WebserverLogs</code>, <code>WorkerLogs</code>.'
+          allOf:
+            - $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
+            - description: Publishes Airflow worker logs to CloudWatch Logs.
+      description: Defines the Apache Airflow log types to send to CloudWatch Logs.
     MaxWorkers:
       type: integer
       minimum: 1
@@ -1146,12 +1175,12 @@ components:
         SecurityGroupIds:
           allOf:
             - $ref: '#/components/schemas/SecurityGroupList'
-            - description: 'A list of 1 or more security group IDs. Accepts up to 5 security group IDs. A security group must be attached to the same VPC as the subnets. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html">Security in your VPC on Amazon MWAA</a>.'
+            - description: 'A list of security group IDs. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html">Security in your VPC on Amazon MWAA</a>.'
         SubnetIds:
           allOf:
             - $ref: '#/components/schemas/SubnetList'
-            - description: A list of 2 subnet IDs. <b>Required</b> to create an environment. Must be private subnets in two different availability zones. A subnet must be attached to the same VPC as the security group.
-      description: 'The VPC networking components used to secure and enable network traffic between the AWS resources for your environment. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.'
+            - description: 'A list of subnet IDs. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.'
+      description: 'Describes the VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.'
     S3ObjectVersion:
       type: string
       minLength: 1
@@ -1191,12 +1220,12 @@ components:
       properties:
         AirflowConfigurationOptions:
           allOf:
-            - $ref: '#/components/schemas/SyntheticCreateEnvironmentInputAirflowConfigurationOptions'
+            - $ref: '#/components/schemas/AirflowConfigurationOptions'
             - description: 'A list of key-value pairs containing the Apache Airflow configuration options you want to attach to your environment. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html">Apache Airflow configuration options</a>.'
         AirflowVersion:
           allOf:
             - $ref: '#/components/schemas/AirflowVersion'
-            - description: 'The Apache Airflow version for your environment. For example, <code>v1.10.12</code>. If no value is specified, defaults to the latest version. Valid values: <code>v1.10.12</code>.'
+            - description: 'The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version. Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, and <code>2.4.3</code>. For more information, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html">Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA)</a>.'
         DagS3Path:
           allOf:
             - $ref: '#/components/schemas/RelativePath'
@@ -1208,15 +1237,15 @@ components:
         ExecutionRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: 'The Amazon Resource Name (ARN) of the execution role for your environment. An execution role is an AWS Identity and Access Management (IAM) role that grants MWAA permission to access AWS services and resources used by your environment. For example, <code>arn:aws:iam::123456789:role/my-execution-role</code>. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html">Amazon MWAA Execution role</a>.'
+            - description: 'The Amazon Resource Name (ARN) of the execution role for your environment. An execution role is an Amazon Web Services Identity and Access Management (IAM) role that grants MWAA permission to access Amazon Web Services services and resources used by your environment. For example, <code>arn:aws:iam::123456789:role/my-execution-role</code>. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html">Amazon MWAA Execution role</a>.'
         KmsKey:
           allOf:
             - $ref: '#/components/schemas/KmsKey'
-            - description: 'The AWS Key Management Service (KMS) key to encrypt the data in your environment. You can use an AWS owned CMK, or a Customer managed CMK (advanced). To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/get-started.html">Get started with Amazon Managed Workflows for Apache Airflow</a>.'
+            - description: 'The Amazon Web Services Key Management Service (KMS) key to encrypt the data in your environment. You can use an Amazon Web Services owned CMK, or a Customer managed CMK (advanced). To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/create-environment.html">Create an Amazon MWAA environment</a>.'
         LoggingConfiguration:
           allOf:
             - $ref: '#/components/schemas/LoggingConfigurationInput'
-            - description: 'Defines the Apache Airflow logs to send to CloudWatch Logs: <code>DagProcessingLogs</code>, <code>SchedulerLogs</code>, <code>TaskLogs</code>, <code>WebserverLogs</code>, <code>WorkerLogs</code>.'
+            - description: Defines the Apache Airflow logs to send to CloudWatch Logs.
         MaxWorkers:
           allOf:
             - $ref: '#/components/schemas/MaxWorkers'
@@ -1228,7 +1257,7 @@ components:
         NetworkConfiguration:
           allOf:
             - $ref: '#/components/schemas/NetworkConfiguration'
-            - description: 'The VPC networking components used to secure and enable network traffic between the AWS resources for your environment. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.'
+            - description: 'The VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.'
         PluginsS3ObjectVersion:
           allOf:
             - $ref: '#/components/schemas/S3ObjectVersion'
@@ -1248,7 +1277,7 @@ components:
         Schedulers:
           allOf:
             - $ref: '#/components/schemas/Schedulers'
-            - description: The number of Apache Airflow schedulers to run in your environment.
+            - description: '<p>The number of Apache Airflow schedulers to run in your environment. Valid values:</p> <ul> <li> <p>v2 - Accepts between 2 to 5. Defaults to 2.</p> </li> <li> <p>v1 - Accepts 1.</p> </li> </ul>'
         SourceBucketArn:
           allOf:
             - $ref: '#/components/schemas/S3BucketArn'
@@ -1256,7 +1285,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: 'The key-value tag pairs you want to associate to your environment. For example, <code>"Environment": "Staging"</code>. To learn more, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS resources</a>.'
+            - description: 'The key-value tag pairs you want to associate to your environment. For example, <code>"Environment": "Staging"</code>. To learn more, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.'
         WebserverAccessMode:
           allOf:
             - $ref: '#/components/schemas/WebserverAccessMode'
@@ -1264,7 +1293,7 @@ components:
         WeeklyMaintenanceWindowStart:
           allOf:
             - $ref: '#/components/schemas/WeeklyMaintenanceWindowStart'
-            - description: '<p>The day and time of the week to start weekly maintenance updates of your environment in the following format: <code>DAY:HH:MM</code>. For example: <code>TUE:03:30</code>. You can specify a start time in 30 minute increments only. Supported input includes the following:</p> <ul> <li> <p>MON|TUE|WED|THU|FRI|SAT|SUN:([01]\\d|2[0-3]):(00|30)</p> </li> </ul>'
+            - description: 'The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time to start weekly maintenance updates of your environment in the following format: <code>DAY:HH:MM</code>. For example: <code>TUE:03:30</code>. You can specify a start time in 30 minute increments only.'
       description: 'This section contains the Amazon Managed Workflows for Apache Airflow (MWAA) API reference documentation to create an environment. For more information, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/get-started.html">Get started with Amazon Managed Workflows for Apache Airflow</a>.'
     EnvironmentArn:
       type: string
@@ -1275,9 +1304,6 @@ components:
       type: object
       title: CreateWebLoginTokenRequest
       properties: {}
-    SyntheticCreateWebLoginTokenResponseToken:
-      type: string
-      format: password
     CreatedAt:
       type: string
       format: date-time
@@ -1296,12 +1322,12 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Internal only API.
+            - description: ' <b>Internal only</b>. The name of the dimension.'
         Value:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Internal only API.
-      description: Internal only API.
+            - description: ' <b>Internal only</b>. The value of the dimension.'
+      description: ' <b>Internal only</b>. Represents the dimensions of a metric. To learn more about the metrics published to Amazon CloudWatch, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html">Amazon MWAA performance metrics in Amazon CloudWatch</a>.'
     Dimensions:
       type: array
       items:
@@ -1320,25 +1346,39 @@ components:
           allOf:
             - $ref: '#/components/schemas/UpdateError'
             - description: The error that was encountered during the last update of the environment.
+        Source:
+          allOf:
+            - $ref: '#/components/schemas/UpdateSource'
+            - description: 'The source of the last update to the environment. Includes internal processes by Amazon MWAA, such as an environment maintenance update.'
         Status:
           allOf:
             - $ref: '#/components/schemas/UpdateStatus'
-            - description: 'The status of the last update on the environment. Valid values: <code>SUCCESS</code>, <code>PENDING</code>, <code>FAILED</code>.'
-      description: 'The status of the last update on the environment, and any errors that were encountered.'
+            - description: The status of the last update on the environment.
+      description: 'Describes the status of the last update on the environment, and any errors that were encountered.'
     LoggingConfiguration:
       type: object
       properties:
         DagProcessingLogs:
-          $ref: '#/components/schemas/ModuleLoggingConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/ModuleLoggingConfiguration'
+            - description: The Airflow DAG processing logs published to CloudWatch Logs and the log level.
         SchedulerLogs:
-          $ref: '#/components/schemas/ModuleLoggingConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/ModuleLoggingConfiguration'
+            - description: The Airflow scheduler logs published to CloudWatch Logs and the log level.
         TaskLogs:
-          $ref: '#/components/schemas/ModuleLoggingConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/ModuleLoggingConfiguration'
+            - description: The Airflow task logs published to CloudWatch Logs and the log level.
         WebserverLogs:
-          $ref: '#/components/schemas/ModuleLoggingConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/ModuleLoggingConfiguration'
+            - description: The Airflow web server logs published to CloudWatch Logs and the log level.
         WorkerLogs:
-          $ref: '#/components/schemas/ModuleLoggingConfiguration'
-      description: 'Defines the Apache Airflow logs to send to CloudWatch Logs: <code>DagProcessingLogs</code>, <code>SchedulerLogs</code>, <code>TaskLogs</code>, <code>WebserverLogs</code>, <code>WorkerLogs</code>.'
+          allOf:
+            - $ref: '#/components/schemas/ModuleLoggingConfiguration'
+            - description: The Airflow worker logs published to CloudWatch Logs and the log level.
+      description: Describes the Apache Airflow log types that are published to CloudWatch Logs.
     EnvironmentStatus:
       type: string
       enum:
@@ -1365,7 +1405,7 @@ components:
         AirflowVersion:
           allOf:
             - $ref: '#/components/schemas/AirflowVersion'
-            - description: 'The Apache Airflow version on your environment. For example, <code>v1.10.12</code>.'
+            - description: 'The Apache Airflow version on your environment. Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, and <code>2.4.3</code>.'
         Arn:
           allOf:
             - $ref: '#/components/schemas/EnvironmentArn'
@@ -1385,17 +1425,19 @@ components:
         ExecutionRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: 'The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to access AWS resources in your environment. For example, <code>arn:aws:iam::123456789:role/my-execution-role</code>. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html">Amazon MWAA Execution role</a>.'
+            - description: 'The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to access Amazon Web Services resources in your environment. For example, <code>arn:aws:iam::123456789:role/my-execution-role</code>. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html">Amazon MWAA Execution role</a>.'
         KmsKey:
           allOf:
             - $ref: '#/components/schemas/KmsKey'
-            - description: The Key Management Service (KMS) encryption key used to encrypt the data in your environment.
+            - description: The Amazon Web Services Key Management Service (KMS) encryption key used to encrypt the data in your environment.
         LastUpdate:
-          $ref: '#/components/schemas/LastUpdate'
+          allOf:
+            - $ref: '#/components/schemas/LastUpdate'
+            - description: The status of the last update on the environment.
         LoggingConfiguration:
           allOf:
             - $ref: '#/components/schemas/LoggingConfiguration'
-            - description: 'The Apache Airflow logs being sent to CloudWatch Logs: <code>DagProcessingLogs</code>, <code>SchedulerLogs</code>, <code>TaskLogs</code>, <code>WebserverLogs</code>, <code>WorkerLogs</code>.'
+            - description: The Apache Airflow logs published to CloudWatch Logs.
         MaxWorkers:
           allOf:
             - $ref: '#/components/schemas/MaxWorkers'
@@ -1409,7 +1451,9 @@ components:
             - $ref: '#/components/schemas/EnvironmentName'
             - description: 'The name of the Amazon MWAA environment. For example, <code>MyMWAAEnvironment</code>.'
         NetworkConfiguration:
-          $ref: '#/components/schemas/NetworkConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/NetworkConfiguration'
+            - description: 'Describes the VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.'
         PluginsS3ObjectVersion:
           allOf:
             - $ref: '#/components/schemas/S3ObjectVersion'
@@ -1445,7 +1489,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: 'The key-value tag pairs associated to your environment. For example, <code>"Environment": "Staging"</code>. To learn more, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS resources</a>.'
+            - description: 'The key-value tag pairs associated to your environment. For example, <code>"Environment": "Staging"</code>. To learn more, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.'
         WebserverAccessMode:
           allOf:
             - $ref: '#/components/schemas/WebserverAccessMode'
@@ -1457,8 +1501,8 @@ components:
         WeeklyMaintenanceWindowStart:
           allOf:
             - $ref: '#/components/schemas/WeeklyMaintenanceWindowStart'
-            - description: 'The day and time of the week that weekly maintenance updates are scheduled. For example: <code>TUE:03:30</code>.'
-      description: The Amazon Managed Workflows for Apache Airflow (MWAA) environment.
+            - description: 'The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time that weekly maintenance updates are scheduled. For example: <code>TUE:03:30</code>.'
+      description: Describes an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
     EnvironmentList:
       type: array
       items:
@@ -1490,7 +1534,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/ErrorMessage'
             - description: The error message that corresponds to the error code.
-      description: 'An object containing the error encountered with the last update: <code>ErrorCode</code>, <code>ErrorMessage</code>.'
+      description: Describes the error(s) encountered with the last update of the environment.
+    UpdateSource:
+      type: string
+      pattern: ^.+$
+      minLength: 1
+      maxLength: 256
     UpdateStatus:
       type: string
       enum:
@@ -1523,12 +1572,12 @@ components:
         Enabled:
           allOf:
             - $ref: '#/components/schemas/LoggingEnabled'
-            - description: Indicates whether to enable the Apache Airflow log type (e.g. <code>DagProcessingLogs</code>) in CloudWatch Logs.
+            - description: Indicates whether the Apache Airflow log type (e.g. <code>DagProcessingLogs</code>) is enabled.
         LogLevel:
           allOf:
             - $ref: '#/components/schemas/LoggingLevel'
-            - description: 'Defines the Apache Airflow logs to send for the log type (e.g. <code>DagProcessingLogs</code>) to CloudWatch Logs. Valid values: <code>CRITICAL</code>, <code>ERROR</code>, <code>WARNING</code>, <code>INFO</code>.'
-      description: 'Defines the type of logs to send for the Apache Airflow log type (e.g. <code>DagProcessingLogs</code>). Valid values: <code>CloudWatchLogGroupArn</code>, <code>Enabled</code>, <code>LogLevel</code>.'
+            - description: 'The Apache Airflow log level for the log type (e.g. <code>DagProcessingLogs</code>). '
+      description: Describes the Apache Airflow log details for the log type (e.g. <code>DagProcessingLogs</code>).
     LoggingEnabled:
       type: boolean
     LoggingLevel:
@@ -1549,20 +1598,20 @@ components:
         Maximum:
           allOf:
             - $ref: '#/components/schemas/Double'
-            - description: Internal only API.
+            - description: ' <b>Internal only</b>. The maximum value of the sample set.'
         Minimum:
           allOf:
             - $ref: '#/components/schemas/Double'
-            - description: Internal only API.
+            - description: ' <b>Internal only</b>. The minimum value of the sample set.'
         SampleCount:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: Internal only API.
+            - description: ' <b>Internal only</b>. The number of samples used for the statistic set.'
         Sum:
           allOf:
             - $ref: '#/components/schemas/Double'
-            - description: Internal only API.
-      description: Internal only API.
+            - description: ' <b>Internal only</b>. The sum of values for the sample set.'
+      description: ' <b>Internal only</b>. Represents a set of statistics that describe a specific metric. To learn more about the metrics published to Amazon CloudWatch, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html">Amazon MWAA performance metrics in Amazon CloudWatch</a>.'
     Timestamp:
       type: string
       format: date-time
@@ -1596,7 +1645,6 @@ components:
         - Terabits/Second
         - Count/Second
         - None
-      description: Unit
     PublishMetricsInput:
       type: object
       required:
@@ -1606,7 +1654,7 @@ components:
         MetricData:
           allOf:
             - $ref: '#/components/schemas/MetricData'
-            - description: Publishes metric data points to Amazon CloudWatch. CloudWatch associates the data points with the specified metrica.
+            - description: ' <b>Internal only</b>. Publishes metrics to Amazon CloudWatch. To learn more about the metrics published to Amazon CloudWatch, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html">Amazon MWAA performance metrics in Amazon CloudWatch</a>.'
     SecurityGroupId:
       type: string
       pattern: '^sg-[a-zA-Z0-9\-._]+$'
@@ -1617,10 +1665,6 @@ components:
       pattern: '^subnet-[a-zA-Z0-9\-._]+$'
       minLength: 1
       maxLength: 1024
-    SyntheticUpdateEnvironmentInputAirflowConfigurationOptions:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/ConfigValue'
     TagKeyList:
       type: array
       items:
@@ -1636,7 +1680,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: 'The key-value tag pairs you want to associate to your environment. For example, <code>"Environment": "Staging"</code>. To learn more, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS resources</a>.'
+            - description: 'The key-value tag pairs you want to associate to your environment. For example, <code>"Environment": "Staging"</code>. To learn more, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.'
     UntagResourceInput:
       type: object
       title: UntagResourceInput
@@ -1649,20 +1693,20 @@ components:
         SecurityGroupIds:
           allOf:
             - $ref: '#/components/schemas/SecurityGroupList'
-            - description: 'A list of 1 or more security group IDs. Accepts up to 5 security group IDs. A security group must be attached to the same VPC as the subnets. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html">Security in your VPC on Amazon MWAA</a>.'
-      description: 'The VPC networking components used to secure and enable network traffic between the AWS resources for your environment. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.'
+            - description: 'A list of security group IDs. A security group must be attached to the same VPC as the subnets. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html">Security in your VPC on Amazon MWAA</a>.'
+      description: 'Defines the VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.'
     UpdateEnvironmentInput:
       type: object
       title: UpdateEnvironmentInput
       properties:
         AirflowConfigurationOptions:
           allOf:
-            - $ref: '#/components/schemas/SyntheticUpdateEnvironmentInputAirflowConfigurationOptions'
+            - $ref: '#/components/schemas/AirflowConfigurationOptions'
             - description: 'A list of key-value pairs containing the Apache Airflow configuration options you want to attach to your environment. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html">Apache Airflow configuration options</a>.'
         AirflowVersion:
           allOf:
             - $ref: '#/components/schemas/AirflowVersion'
-            - description: 'The Apache Airflow version for your environment. For example, <code>v1.10.12</code>. If no value is specified, defaults to the latest version. Valid values: <code>v1.10.12</code>.'
+            - description: 'The Apache Airflow version for your environment. If no value is specified, defaults to the latest version. Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, and <code>2.4.3</code>.'
         DagS3Path:
           allOf:
             - $ref: '#/components/schemas/RelativePath'
@@ -1674,11 +1718,11 @@ components:
         ExecutionRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: 'The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to access AWS resources in your environment. For example, <code>arn:aws:iam::123456789:role/my-execution-role</code>. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html">Amazon MWAA Execution role</a>.'
+            - description: 'The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to access Amazon Web Services resources in your environment. For example, <code>arn:aws:iam::123456789:role/my-execution-role</code>. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html">Amazon MWAA Execution role</a>.'
         LoggingConfiguration:
           allOf:
             - $ref: '#/components/schemas/LoggingConfigurationInput'
-            - description: 'Defines the Apache Airflow logs to send to CloudWatch Logs: <code>DagProcessingLogs</code>, <code>SchedulerLogs</code>, <code>TaskLogs</code>, <code>WebserverLogs</code>, <code>WorkerLogs</code>.'
+            - description: The Apache Airflow log types to send to CloudWatch Logs.
         MaxWorkers:
           allOf:
             - $ref: '#/components/schemas/MaxWorkers'
@@ -1690,7 +1734,7 @@ components:
         NetworkConfiguration:
           allOf:
             - $ref: '#/components/schemas/UpdateNetworkConfigurationInput'
-            - description: 'The VPC networking components used to secure and enable network traffic between the AWS resources for your environment. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.'
+            - description: 'The VPC networking components used to secure and enable network traffic between the Amazon Web Services resources for your environment. To learn more, see <a href="https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html">About networking on Amazon MWAA</a>.'
         PluginsS3ObjectVersion:
           allOf:
             - $ref: '#/components/schemas/S3ObjectVersion'
@@ -1722,6 +1766,6 @@ components:
         WeeklyMaintenanceWindowStart:
           allOf:
             - $ref: '#/components/schemas/WeeklyMaintenanceWindowStart'
-            - description: '<p>The day and time of the week to start weekly maintenance updates of your environment in the following format: <code>DAY:HH:MM</code>. For example: <code>TUE:03:30</code>. You can specify a start time in 30 minute increments only. Supported input includes the following:</p> <ul> <li> <p>MON|TUE|WED|THU|FRI|SAT|SUN:([01]\\d|2[0-3]):(00|30)</p> </li> </ul>'
+            - description: 'The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time to start weekly maintenance updates of your environment in the following format: <code>DAY:HH:MM</code>. For example: <code>TUE:03:30</code>. You can specify a start time in 30 minute increments only.'
 security:
   - hmac: []

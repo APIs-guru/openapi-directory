@@ -1,0 +1,4005 @@
+openapi: 3.0.0
+info:
+  version: '2021-08-28'
+  x-release: v4
+  title: AWS Migration Hub Orchestrator
+  description: 'This API reference provides descriptions, syntax, and other details about each of the actions and data types for AWS Migration Hub Orchestrator. he topic for each action shows the API request parameters and the response. Alternatively, you can use one of the AWS SDKs to access an API that is tailored to the programming language or platform that you''re using.'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: migrationhuborchestrator
+  x-aws-signingName: migrationhub-orchestrator
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/migrationhuborchestrator-2021-08-28.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/migrationhub-orchestrator/'
+servers:
+  - url: 'http://migrationhub-orchestrator.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Migration Hub Orchestrator multi-region endpoint
+  - url: 'https://migrationhub-orchestrator.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Migration Hub Orchestrator multi-region endpoint
+  - url: 'http://migrationhub-orchestrator.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Migration Hub Orchestrator endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://migrationhub-orchestrator.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Migration Hub Orchestrator endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /migrationworkflow/:
+    post:
+      operationId: CreateWorkflow
+      description: Create a workflow to orchestrate your migrations.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMigrationWorkflowResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - templateId
+                - applicationConfigurationId
+                - inputParameters
+              properties:
+                name:
+                  description: The name of the migration workflow.
+                  type: string
+                  pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+                  minLength: 1
+                  maxLength: 100
+                description:
+                  description: The description of the migration workflow.
+                  type: string
+                  pattern: '[-a-zA-Z0-9_.+, ]*'
+                  minLength: 0
+                  maxLength: 500
+                templateId:
+                  description: The ID of the template.
+                  type: string
+                  pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+                  minLength: 1
+                  maxLength: 100
+                applicationConfigurationId:
+                  description: The configuration ID of the application configured in Application Discovery Service.
+                  type: string
+                  pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+                  minLength: 1
+                  maxLength: 100
+                inputParameters:
+                  description: The input parameters required to create a migration workflow.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/StepInput'
+                stepTargets:
+                  description: The servers on which a step will be run.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/StringListMember'
+                tags:
+                  description: The tags to add on a migration workflow.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/StringMapValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /workflowstep:
+    post:
+      operationId: CreateWorkflowStep
+      description: Create a step in the migration workflow.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorkflowStepResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - stepGroupId
+                - workflowId
+                - stepActionType
+              properties:
+                name:
+                  description: The name of the step.
+                  type: string
+                  pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+                  minLength: 1
+                  maxLength: 100
+                stepGroupId:
+                  description: The ID of the step group.
+                  type: string
+                  pattern: '[a-zA-Z0-9-]+'
+                  minLength: 1
+                  maxLength: 100
+                workflowId:
+                  description: The ID of the migration workflow.
+                  type: string
+                  pattern: '[a-zA-Z0-9-]+'
+                  minLength: 1
+                  maxLength: 100
+                stepActionType:
+                  description: The action type of the step. You must run and update the status of a manual step for the workflow to continue after the completion of the step.
+                  type: string
+                  enum:
+                    - MANUAL
+                    - AUTOMATED
+                description:
+                  description: The description of the step.
+                  type: string
+                  pattern: '[-a-zA-Z0-9_.+, ]*'
+                  minLength: 0
+                  maxLength: 500
+                workflowStepAutomationConfiguration:
+                  description: The custom script to run tests on source or target environments.
+                  type: object
+                  properties:
+                    scriptLocationS3Bucket:
+                      allOf:
+                        - $ref: '#/components/schemas/S3Bucket'
+                        - description: The Amazon S3 bucket where the script is located.
+                    scriptLocationS3Key:
+                      allOf:
+                        - $ref: '#/components/schemas/PlatformScriptKey'
+                        - description: The Amazon S3 key for the script location.
+                    command:
+                      allOf:
+                        - $ref: '#/components/schemas/PlatformCommand'
+                        - description: The command required to run the script.
+                    runEnvironment:
+                      allOf:
+                        - $ref: '#/components/schemas/RunEnvironment'
+                        - description: The source or target environment.
+                    targetType:
+                      allOf:
+                        - $ref: '#/components/schemas/TargetType'
+                        - description: The servers on which to run the script.
+                stepTarget:
+                  description: The servers on which a step will be run.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/StringListMember'
+                outputs:
+                  description: The key value pairs added for the expected output.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/WorkflowStepOutput'
+                previous:
+                  description: The previous step.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/StringListMember'
+                next:
+                  description: The next step.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/StringListMember'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /workflowstepgroups:
+    post:
+      operationId: CreateWorkflowStepGroup
+      description: Create a step group in a migration workflow.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorkflowStepGroupResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - workflowId
+                - name
+              properties:
+                workflowId:
+                  description: The ID of the migration workflow that will contain the step group.
+                  type: string
+                  pattern: '[a-zA-Z0-9-]+'
+                  minLength: 1
+                  maxLength: 100
+                name:
+                  description: The name of the step group.
+                  type: string
+                  pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+                  minLength: 1
+                  maxLength: 100
+                description:
+                  description: The description of the step group.
+                  type: string
+                  pattern: '[-a-zA-Z0-9_.+, ]*'
+                  minLength: 0
+                  maxLength: 500
+                next:
+                  description: The next step group.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/StringListMember'
+                previous:
+                  description: The previous step group.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/StringListMember'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/migrationworkflow/{id}':
+    delete:
+      operationId: DeleteWorkflow
+      description: Delete a migration workflow. You must pause a running workflow in Migration Hub Orchestrator console to delete it.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteMigrationWorkflowResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the migration workflow you want to delete.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetWorkflow
+      description: Get migration workflow.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMigrationWorkflowResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the migration workflow.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+    post:
+      operationId: UpdateWorkflow
+      description: Update a migration workflow.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateMigrationWorkflowResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the migration workflow.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: The name of the migration workflow.
+                  type: string
+                  pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+                  minLength: 1
+                  maxLength: 100
+                description:
+                  description: The description of the migration workflow.
+                  type: string
+                  pattern: '[-a-zA-Z0-9_.+, ]*'
+                  minLength: 0
+                  maxLength: 500
+                inputParameters:
+                  description: The input parameters required to update a migration workflow.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/StepInput'
+                stepTargets:
+                  description: The servers on which a step will be run.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/StringListMember'
+  '/workflowstep/{id}#stepGroupId&workflowId':
+    delete:
+      operationId: DeleteWorkflowStep
+      description: Delete a step in a migration workflow. Pause the workflow to delete a running step.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteWorkflowStepResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the step you want to delete.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+        - name: stepGroupId
+          in: query
+          required: true
+          description: The ID of the step group that contains the step you want to delete.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+        - name: workflowId
+          in: query
+          required: true
+          description: The ID of the migration workflow.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/workflowstepgroup/{id}#workflowId':
+    delete:
+      operationId: DeleteWorkflowStepGroup
+      description: Delete a step group in a migration workflow.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteWorkflowStepGroupResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: workflowId
+          in: query
+          required: true
+          description: The ID of the migration workflow.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+        - name: id
+          in: path
+          required: true
+          description: The ID of the step group you want to delete.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetWorkflowStepGroup
+      description: Get the step group of a migration workflow.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkflowStepGroupResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the step group.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+        - name: workflowId
+          in: query
+          required: true
+          description: The ID of the migration workflow.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+    post:
+      operationId: UpdateWorkflowStepGroup
+      description: Update the step group in a migration workflow.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateWorkflowStepGroupResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: workflowId
+          in: query
+          required: true
+          description: The ID of the migration workflow.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+        - name: id
+          in: path
+          required: true
+          description: The ID of the step group.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: The name of the step group.
+                  type: string
+                  pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+                  minLength: 1
+                  maxLength: 100
+                description:
+                  description: The description of the step group.
+                  type: string
+                  pattern: '[-a-zA-Z0-9_.+, ]*'
+                  minLength: 0
+                  maxLength: 500
+                next:
+                  description: The next step group.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/StringListMember'
+                previous:
+                  description: The previous step group.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/StringListMember'
+  '/migrationworkflowtemplate/{id}':
+    get:
+      operationId: GetTemplate
+      description: Get the template you want to use for creating a migration workflow.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMigrationWorkflowTemplateResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the template.
+          schema:
+            type: string
+            pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+            minLength: 1
+            maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/templatestep/{id}#templateId&stepGroupId':
+    get:
+      operationId: GetTemplateStep
+      description: Get a specific step in a template.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTemplateStepResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the step.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+        - name: templateId
+          in: query
+          required: true
+          description: The ID of the template.
+          schema:
+            type: string
+            pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+            minLength: 1
+            maxLength: 100
+        - name: stepGroupId
+          in: query
+          required: true
+          description: The ID of the step group.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/templates/{templateId}/stepgroups/{id}':
+    get:
+      operationId: GetTemplateStepGroup
+      description: Get a step group in a template.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTemplateStepGroupResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: templateId
+          in: path
+          required: true
+          description: The ID of the template.
+          schema:
+            type: string
+            pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+            minLength: 1
+            maxLength: 100
+        - name: id
+          in: path
+          required: true
+          description: The ID of the step group.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/workflowstep/{id}#workflowId&stepGroupId':
+    get:
+      operationId: GetWorkflowStep
+      description: Get a step in the migration workflow.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkflowStepResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: workflowId
+          in: query
+          required: true
+          description: The ID of the migration workflow.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+        - name: stepGroupId
+          in: query
+          required: true
+          description: desThe ID of the step group.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+        - name: id
+          in: path
+          required: true
+          description: The ID of the step.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /plugins:
+    get:
+      operationId: ListPlugins
+      description: List AWS Migration Hub Orchestrator plugins.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPluginsResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of plugins that can be returned.
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 0
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: List the tags added to a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          schema:
+            type: string
+            pattern: 'arn:aws:migrationhub-orchestrator:[a-z0-9-]+:[0-9]+:workflow/[.]*'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Tag a resource by specifying its Amazon Resource Name (ARN).
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource to which you want to add tags.
+          schema:
+            type: string
+            pattern: 'arn:aws:migrationhub-orchestrator:[a-z0-9-]+:[0-9]+:workflow/[.]*'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  '/templatestepgroups/{templateId}':
+    get:
+      operationId: ListTemplateStepGroups
+      description: List the step groups in a template.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTemplateStepGroupsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results that can be returned.
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 0
+            maxLength: 2048
+        - name: templateId
+          in: path
+          required: true
+          description: The ID of the template.
+          schema:
+            type: string
+            pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+            minLength: 1
+            maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /templatesteps#templateId&stepGroupId:
+    get:
+      operationId: ListTemplateSteps
+      description: List the steps in a template.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTemplateStepsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results that can be returned.
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 0
+            maxLength: 2048
+        - name: templateId
+          in: query
+          required: true
+          description: The ID of the template.
+          schema:
+            type: string
+            pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+            minLength: 1
+            maxLength: 100
+        - name: stepGroupId
+          in: query
+          required: true
+          description: The ID of the step group.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /migrationworkflowtemplates:
+    get:
+      operationId: ListTemplates
+      description: List the templates available in Migration Hub Orchestrator to create a migration workflow.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMigrationWorkflowTemplatesResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results that can be returned.
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 0
+            maxLength: 2048
+        - name: name
+          in: query
+          required: false
+          description: The name of the template.
+          schema:
+            type: string
+            pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+            minLength: 1
+            maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /workflowstepgroups#workflowId:
+    get:
+      operationId: ListWorkflowStepGroups
+      description: List the step groups in a migration workflow.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWorkflowStepGroupsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 0
+            maxLength: 2048
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results that can be returned.
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100
+        - name: workflowId
+          in: query
+          required: true
+          description: The ID of the migration workflow.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/workflow/{workflowId}/workflowstepgroups/{stepGroupId}/workflowsteps':
+    get:
+      operationId: ListWorkflowSteps
+      description: List the steps in a workflow.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWorkflowStepsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 0
+            maxLength: 2048
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results that can be returned.
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100
+        - name: workflowId
+          in: path
+          required: true
+          description: The ID of the migration workflow.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+        - name: stepGroupId
+          in: path
+          required: true
+          description: The ID of the step group.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /migrationworkflows:
+    get:
+      operationId: ListWorkflows
+      description: List the migration workflows.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMigrationWorkflowsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results that can be returned.
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token.
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 0
+            maxLength: 2048
+        - name: templateId
+          in: query
+          required: false
+          description: The ID of the template.
+          schema:
+            type: string
+            pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+            minLength: 1
+            maxLength: 100
+        - name: adsApplicationConfigurationName
+          in: query
+          required: false
+          description: The name of the application configured in Application Discovery Service.
+          schema:
+            type: string
+            pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+            minLength: 1
+            maxLength: 100
+        - name: status
+          in: query
+          required: false
+          description: The status of the migration workflow.
+          schema:
+            type: string
+            enum:
+              - CREATING
+              - NOT_STARTED
+              - CREATION_FAILED
+              - STARTING
+              - IN_PROGRESS
+              - WORKFLOW_FAILED
+              - PAUSED
+              - PAUSING
+              - PAUSING_FAILED
+              - USER_ATTENTION_REQUIRED
+              - DELETING
+              - DELETION_FAILED
+              - DELETED
+              - COMPLETED
+        - name: name
+          in: query
+          required: false
+          description: The name of the migration workflow.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/retryworkflowstep/{id}#workflowId&stepGroupId':
+    post:
+      operationId: RetryWorkflowStep
+      description: Retry a failed step in a migration workflow.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetryWorkflowStepResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: workflowId
+          in: query
+          required: true
+          description: The ID of the migration workflow.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+        - name: stepGroupId
+          in: query
+          required: true
+          description: The ID of the step group.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+        - name: id
+          in: path
+          required: true
+          description: The ID of the step.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/migrationworkflow/{id}/start':
+    post:
+      operationId: StartWorkflow
+      description: Start a migration workflow.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartMigrationWorkflowResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the migration workflow.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/migrationworkflow/{id}/stop':
+    post:
+      operationId: StopWorkflow
+      description: Stop an ongoing migration workflow.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopMigrationWorkflowResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the migration workflow.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Deletes the tags for a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource from which you want to remove tags.
+          schema:
+            type: string
+            pattern: 'arn:aws:migrationhub-orchestrator:[a-z0-9-]+:[0-9]+:workflow/[.]*'
+        - name: tagKeys
+          in: query
+          required: true
+          description: 'One or more tag keys. Specify only the tag keys, not the tag values.'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 0
+            maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/workflowstep/{id}':
+    post:
+      operationId: UpdateWorkflowStep
+      description: Update a step in a migration workflow.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateWorkflowStepResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the step.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - stepGroupId
+                - workflowId
+              properties:
+                stepGroupId:
+                  description: The ID of the step group.
+                  type: string
+                  pattern: '[a-zA-Z0-9-]+'
+                  minLength: 1
+                  maxLength: 100
+                workflowId:
+                  description: The ID of the migration workflow.
+                  type: string
+                  pattern: '[a-zA-Z0-9-]+'
+                  minLength: 1
+                  maxLength: 100
+                name:
+                  description: The name of the step.
+                  type: string
+                  pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+                  minLength: 1
+                  maxLength: 100
+                description:
+                  description: The description of the step.
+                  type: string
+                  pattern: '[-a-zA-Z0-9_.+, ]*'
+                  minLength: 0
+                  maxLength: 500
+                stepActionType:
+                  description: The action type of the step. You must run and update the status of a manual step for the workflow to continue after the completion of the step.
+                  type: string
+                  enum:
+                    - MANUAL
+                    - AUTOMATED
+                workflowStepAutomationConfiguration:
+                  description: The custom script to run tests on source or target environments.
+                  type: object
+                  properties:
+                    scriptLocationS3Bucket:
+                      allOf:
+                        - $ref: '#/components/schemas/S3Bucket'
+                        - description: The Amazon S3 bucket where the script is located.
+                    scriptLocationS3Key:
+                      allOf:
+                        - $ref: '#/components/schemas/PlatformScriptKey'
+                        - description: The Amazon S3 key for the script location.
+                    command:
+                      allOf:
+                        - $ref: '#/components/schemas/PlatformCommand'
+                        - description: The command required to run the script.
+                    runEnvironment:
+                      allOf:
+                        - $ref: '#/components/schemas/RunEnvironment'
+                        - description: The source or target environment.
+                    targetType:
+                      allOf:
+                        - $ref: '#/components/schemas/TargetType'
+                        - description: The servers on which to run the script.
+                stepTarget:
+                  description: The servers on which a step will be run.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/StringListMember'
+                outputs:
+                  description: The outputs of a step.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/WorkflowStepOutput'
+                previous:
+                  description: The previous step.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/StringListMember'
+                next:
+                  description: The next step.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/StringListMember'
+                status:
+                  description: The status of the step.
+                  type: string
+                  enum:
+                    - AWAITING_DEPENDENCIES
+                    - READY
+                    - IN_PROGRESS
+                    - COMPLETED
+                    - FAILED
+                    - PAUSED
+                    - USER_ATTENTION_REQUIRED
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateMigrationWorkflowResponse:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/MigrationWorkflowId'
+            - description: The ID of the migration workflow.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the migration workflow.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the migration workflow.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the migration workflow.
+        templateId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the template.
+        adsApplicationConfigurationId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The configuration ID of the application configured in Application Discovery Service.
+        workflowInputs:
+          allOf:
+            - $ref: '#/components/schemas/StepInputParameters'
+            - description: The inputs for creating a migration workflow.
+        stepTargets:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The servers on which a step will be run.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/MigrationWorkflowStatusEnum'
+            - description: The status of the migration workflow.
+        creationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the migration workflow was created.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/StringMap'
+            - description: The tags to add on a migration workflow.
+    StepInput:
+      type: object
+      properties:
+        integerValue:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The value of the integer.
+        stringValue:
+          allOf:
+            - $ref: '#/components/schemas/StringValue'
+            - description: String value.
+        listOfStringsValue:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: List of string values.
+        mapOfStringValue:
+          allOf:
+            - $ref: '#/components/schemas/StringMap'
+            - description: Map of string values.
+      description: A map of key value pairs that is generated when you create a migration workflow. The key value pairs will differ based on your selection of the template.
+    StringListMember:
+      type: string
+      minLength: 0
+      maxLength: 100
+    StringMapValue:
+      type: string
+      minLength: 0
+      maxLength: 100
+    ThrottlingException: {}
+    AccessDeniedException: {}
+    InternalServerException: {}
+    ValidationException: {}
+    CreateWorkflowStepResponse:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the step.
+        stepGroupId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the step group.
+        workflowId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the migration workflow.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the step.
+    S3Bucket:
+      type: string
+      pattern: '[0-9a-z]+[0-9a-z\.\-]*[0-9a-z]+'
+      minLength: 0
+      maxLength: 63
+    PlatformScriptKey:
+      type: object
+      properties:
+        linux:
+          allOf:
+            - $ref: '#/components/schemas/S3Key'
+            - description: The script location for Linux.
+        windows:
+          allOf:
+            - $ref: '#/components/schemas/S3Key'
+            - description: The script location for Windows.
+      description: The script location for a particular operating system.
+    PlatformCommand:
+      type: object
+      properties:
+        linux:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Command for Linux.
+        windows:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Command for Windows.
+      description: Command to be run on a particular operating system.
+    RunEnvironment:
+      type: string
+      enum:
+        - AWS
+        - ONPREMISE
+    TargetType:
+      type: string
+      enum:
+        - SINGLE
+        - ALL
+        - NONE
+    WorkflowStepOutput:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepOutputName'
+            - description: The name of the step.
+        dataType:
+          allOf:
+            - $ref: '#/components/schemas/DataType'
+            - description: The data type of the output.
+        required:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Determine if an output is required from a step.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepOutputUnion'
+            - description: The value of the output.
+      description: The output of a step.
+    CreateWorkflowStepGroupResponse:
+      type: object
+      properties:
+        workflowId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the migration workflow that contains the step group.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the step group.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the step group.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the step group.
+        tools:
+          allOf:
+            - $ref: '#/components/schemas/ToolsList'
+            - description: List of AWS services utilized in a migration workflow.
+        next:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The next step group.
+        previous:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The previous step group.
+        creationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the step group is created.
+    DeleteMigrationWorkflowResponse:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/MigrationWorkflowId'
+            - description: The ID of the migration workflow.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the migration workflow.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/MigrationWorkflowStatusEnum'
+            - description: The status of the migration workflow.
+    ResourceNotFoundException: {}
+    DeleteWorkflowStepResponse:
+      type: object
+      properties: {}
+    DeleteWorkflowStepGroupResponse:
+      type: object
+      properties: {}
+    GetMigrationWorkflowTemplateResponse:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the template.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the template.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The time at which the template was last created.
+        inputs:
+          allOf:
+            - $ref: '#/components/schemas/TemplateInputList'
+            - description: The inputs provided for the creation of the migration workflow.
+        tools:
+          allOf:
+            - $ref: '#/components/schemas/ToolsList'
+            - description: List of AWS services utilized in a migration workflow.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/TemplateStatus'
+            - description: The status of the template.
+        creationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the template was last created.
+    GetTemplateStepResponse:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/StepId'
+            - description: The ID of the step.
+        stepGroupId:
+          allOf:
+            - $ref: '#/components/schemas/StepGroupId'
+            - description: The ID of the step group.
+        templateId:
+          allOf:
+            - $ref: '#/components/schemas/TemplateId'
+            - description: The ID of the template.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the step.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the step.
+        stepActionType:
+          allOf:
+            - $ref: '#/components/schemas/StepActionType'
+            - description: The action type of the step. You must run and update the status of a manual step for the workflow to continue after the completion of the step.
+        creationTime:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The time at which the step was created.
+        previous:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The previous step.
+        next:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The next step.
+        outputs:
+          allOf:
+            - $ref: '#/components/schemas/StepOutputList'
+            - description: The outputs of the step.
+        stepAutomationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/StepAutomationConfiguration'
+            - description: The custom script to run tests on source or target environments.
+    GetTemplateStepGroupResponse:
+      type: object
+      properties:
+        templateId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the template.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the step group.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the step group.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the step group.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/StepGroupStatus'
+            - description: The status of the step group.
+        creationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the step group was created.
+        lastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the step group was last modified.
+        tools:
+          allOf:
+            - $ref: '#/components/schemas/ToolsList'
+            - description: List of AWS services utilized in a migration workflow.
+        previous:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The previous step group.
+        next:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The next step group.
+    GetMigrationWorkflowResponse:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/MigrationWorkflowId'
+            - description: The ID of the migration workflow.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the migration workflow.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the migration workflow.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the migration workflow.
+        templateId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the template.
+        adsApplicationConfigurationId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The configuration ID of the application configured in Application Discovery Service.
+        adsApplicationName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the application configured in Application Discovery Service.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/MigrationWorkflowStatusEnum'
+            - description: The status of the migration workflow.
+        statusMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status message of the migration workflow.
+        creationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the migration workflow was created.
+        lastStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the migration workflow was last started.
+        lastStopTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the migration workflow was last stopped.
+        lastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the migration workflow was last modified.
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the migration workflow ended.
+        tools:
+          allOf:
+            - $ref: '#/components/schemas/ToolsList'
+            - description: List of AWS services utilized in a migration workflow.
+        totalSteps:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The total number of steps in the migration workflow.
+        completedSteps:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: Get a list of completed steps in the migration workflow.
+        workflowInputs:
+          allOf:
+            - $ref: '#/components/schemas/StepInputParameters'
+            - description: The inputs required for creating the migration workflow.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/StringMap'
+            - description: The tags added to the migration workflow.
+        workflowBucket:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon S3 bucket where the migration logs are stored.
+    GetWorkflowStepResponse:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the step.
+        stepGroupId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the step group.
+        workflowId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the migration workflow.
+        stepId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the step.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the step.
+        stepActionType:
+          allOf:
+            - $ref: '#/components/schemas/StepActionType'
+            - description: The action type of the step. You must run and update the status of a manual step for the workflow to continue after the completion of the step.
+        owner:
+          allOf:
+            - $ref: '#/components/schemas/Owner'
+            - description: The owner of the step.
+        workflowStepAutomationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepAutomationConfiguration'
+            - description: The custom script to run tests on source or target environments.
+        stepTarget:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The servers on which a step will be run.
+        outputs:
+          allOf:
+            - $ref: '#/components/schemas/GetWorkflowStepResponseOutputsList'
+            - description: The outputs of the step.
+        previous:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The previous step.
+        next:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The next step.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/StepStatus'
+            - description: The status of the step.
+        statusMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status message of the migration workflow.
+        scriptOutputLocation:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The output location of the script.
+        creationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the step was created.
+        lastStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the workflow was last started.
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the step ended.
+        noOfSrvCompleted:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of servers that have been migrated.
+        noOfSrvFailed:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of servers that have failed to migrate.
+        totalNoOfSrv:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The total number of servers that have been migrated.
+    GetWorkflowStepGroupResponse:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/StepGroupId'
+            - description: The ID of the step group.
+        workflowId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the migration workflow.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the step group.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the step group.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/StepGroupStatus'
+            - description: The status of the step group.
+        owner:
+          allOf:
+            - $ref: '#/components/schemas/Owner'
+            - description: The owner of the step group.
+        creationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the step group was created.
+        lastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the step group was last modified.
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the step group ended.
+        tools:
+          allOf:
+            - $ref: '#/components/schemas/ToolsList'
+            - description: List of AWS services utilized in a migration workflow.
+        previous:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The previous step group.
+        next:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The next step group.
+    ListPluginsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token.
+        plugins:
+          allOf:
+            - $ref: '#/components/schemas/PluginSummaries'
+            - description: Migration Hub Orchestrator plugins.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags added to a resource.
+    ListTemplateStepGroupsResponse:
+      type: object
+      required:
+        - templateStepGroupSummary
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token.
+        templateStepGroupSummary:
+          allOf:
+            - $ref: '#/components/schemas/TemplateStepGroupSummaryList'
+            - description: The summary of the step group in the template.
+    ListTemplateStepsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token.
+        templateStepSummaryList:
+          allOf:
+            - $ref: '#/components/schemas/TemplateStepSummaryList'
+            - description: The list of summaries of steps in a template.
+    ListMigrationWorkflowTemplatesResponse:
+      type: object
+      required:
+        - templateSummary
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token.
+        templateSummary:
+          allOf:
+            - $ref: '#/components/schemas/TemplateSummaryList'
+            - description: The summary of the template.
+    ListWorkflowStepGroupsResponse:
+      type: object
+      required:
+        - workflowStepGroupsSummary
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token.
+        workflowStepGroupsSummary:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepGroupsSummaryList'
+            - description: The summary of step groups in a migration workflow.
+    ListWorkflowStepsResponse:
+      type: object
+      required:
+        - workflowStepsSummary
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token.
+        workflowStepsSummary:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepsSummaryList'
+            - description: The summary of steps in a migration workflow.
+    ListMigrationWorkflowsResponse:
+      type: object
+      required:
+        - migrationWorkflowSummary
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token.
+        migrationWorkflowSummary:
+          allOf:
+            - $ref: '#/components/schemas/MigrationWorkflowSummaryList'
+            - description: The summary of the migration workflow.
+    RetryWorkflowStepResponse:
+      type: object
+      properties:
+        stepGroupId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the step group.
+        workflowId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the migration workflow.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the step.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/StepStatus'
+            - description: The status of the step.
+    StartMigrationWorkflowResponse:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/MigrationWorkflowId'
+            - description: The ID of the migration workflow.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the migration workflow.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/MigrationWorkflowStatusEnum'
+            - description: The status of the migration workflow.
+        statusMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status message of the migration workflow.
+        lastStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the migration workflow was last started.
+    StopMigrationWorkflowResponse:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/MigrationWorkflowId'
+            - description: The ID of the migration workflow.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the migration workflow.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/MigrationWorkflowStatusEnum'
+            - description: The status of the migration workflow.
+        statusMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status message of the migration workflow.
+        lastStopTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the migration workflow was stopped.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      pattern: '(?!aws:)[a-zA-Z+-=._:/]+'
+      minLength: 1
+      maxLength: 128
+    UpdateMigrationWorkflowResponse:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/MigrationWorkflowId'
+            - description: The ID of the migration workflow.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the migration workflow.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the migration workflow.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the migration workflow.
+        templateId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the template.
+        adsApplicationConfigurationId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the application configured in Application Discovery Service.
+        workflowInputs:
+          allOf:
+            - $ref: '#/components/schemas/StepInputParameters'
+            - description: The inputs required to update a migration workflow.
+        stepTargets:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The servers on which a step will be run.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/MigrationWorkflowStatusEnum'
+            - description: The status of the migration workflow.
+        creationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the migration workflow was created.
+        lastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the migration workflow was last modified.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/StringMap'
+            - description: The tags added to the migration workflow.
+    UpdateWorkflowStepResponse:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/StepId'
+            - description: The ID of the step.
+        stepGroupId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the step group.
+        workflowId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the migration workflow.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the step.
+    UpdateWorkflowStepGroupResponse:
+      type: object
+      properties:
+        workflowId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the migration workflow.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the step group.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the step group.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the step group.
+        tools:
+          allOf:
+            - $ref: '#/components/schemas/ToolsList'
+            - description: List of AWS services utilized in a migration workflow.
+        next:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The next step group.
+        previous:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The previous step group.
+        lastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the step group was last modified.
+    ApplicationConfigurationName:
+      type: string
+      pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+      minLength: 1
+      maxLength: 100
+    Boolean:
+      type: boolean
+    CreateMigrationWorkflowRequestNameString:
+      type: string
+      pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+      minLength: 1
+      maxLength: 100
+    CreateMigrationWorkflowRequestDescriptionString:
+      type: string
+      pattern: '[-a-zA-Z0-9_.+, ]*'
+      minLength: 0
+      maxLength: 500
+    CreateMigrationWorkflowRequestTemplateIdString:
+      type: string
+      pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+      minLength: 1
+      maxLength: 100
+    CreateMigrationWorkflowRequestApplicationConfigurationIdString:
+      type: string
+      pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+      minLength: 1
+      maxLength: 100
+    StepInputParameters:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/StepInput'
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StringListMember'
+    StringMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/StringMapValue'
+    CreateMigrationWorkflowRequest:
+      type: object
+      required:
+        - name
+        - templateId
+        - applicationConfigurationId
+        - inputParameters
+      title: CreateMigrationWorkflowRequest
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/CreateMigrationWorkflowRequestNameString'
+            - description: The name of the migration workflow.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/CreateMigrationWorkflowRequestDescriptionString'
+            - description: The description of the migration workflow.
+        templateId:
+          allOf:
+            - $ref: '#/components/schemas/CreateMigrationWorkflowRequestTemplateIdString'
+            - description: The ID of the template.
+        applicationConfigurationId:
+          allOf:
+            - $ref: '#/components/schemas/CreateMigrationWorkflowRequestApplicationConfigurationIdString'
+            - description: The configuration ID of the application configured in Application Discovery Service.
+        inputParameters:
+          allOf:
+            - $ref: '#/components/schemas/StepInputParameters'
+            - description: The input parameters required to create a migration workflow.
+        stepTargets:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The servers on which a step will be run.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/StringMap'
+            - description: The tags to add on a migration workflow.
+    MigrationWorkflowId:
+      type: string
+      pattern: '[a-zA-Z0-9-]+'
+      minLength: 1
+      maxLength: 100
+    String:
+      type: string
+    MigrationWorkflowStatusEnum:
+      type: string
+      enum:
+        - CREATING
+        - NOT_STARTED
+        - CREATION_FAILED
+        - STARTING
+        - IN_PROGRESS
+        - WORKFLOW_FAILED
+        - PAUSED
+        - PAUSING
+        - PAUSING_FAILED
+        - USER_ATTENTION_REQUIRED
+        - DELETING
+        - DELETION_FAILED
+        - DELETED
+        - COMPLETED
+    Timestamp:
+      type: string
+      format: date-time
+    StepGroupName:
+      type: string
+      pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+      minLength: 1
+      maxLength: 100
+    StepGroupDescription:
+      type: string
+      pattern: '[-a-zA-Z0-9_.+, ]*'
+      minLength: 0
+      maxLength: 500
+    CreateWorkflowStepGroupRequest:
+      type: object
+      required:
+        - workflowId
+        - name
+      title: CreateWorkflowStepGroupRequest
+      properties:
+        workflowId:
+          allOf:
+            - $ref: '#/components/schemas/MigrationWorkflowId'
+            - description: The ID of the migration workflow that will contain the step group.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/StepGroupName'
+            - description: The name of the step group.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/StepGroupDescription'
+            - description: The description of the step group.
+        next:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The next step group.
+        previous:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The previous step group.
+    ToolsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tool'
+    MigrationWorkflowName:
+      type: string
+      pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+      minLength: 1
+      maxLength: 100
+    StepGroupId:
+      type: string
+      pattern: '[a-zA-Z0-9-]+'
+      minLength: 1
+      maxLength: 100
+    StepActionType:
+      type: string
+      enum:
+        - MANUAL
+        - AUTOMATED
+    MigrationWorkflowDescription:
+      type: string
+      pattern: '[-a-zA-Z0-9_.+, ]*'
+      minLength: 0
+      maxLength: 500
+    WorkflowStepAutomationConfiguration:
+      type: object
+      properties:
+        scriptLocationS3Bucket:
+          allOf:
+            - $ref: '#/components/schemas/S3Bucket'
+            - description: The Amazon S3 bucket where the script is located.
+        scriptLocationS3Key:
+          allOf:
+            - $ref: '#/components/schemas/PlatformScriptKey'
+            - description: The Amazon S3 key for the script location.
+        command:
+          allOf:
+            - $ref: '#/components/schemas/PlatformCommand'
+            - description: The command required to run the script.
+        runEnvironment:
+          allOf:
+            - $ref: '#/components/schemas/RunEnvironment'
+            - description: The source or target environment.
+        targetType:
+          allOf:
+            - $ref: '#/components/schemas/TargetType'
+            - description: The servers on which to run the script.
+      description: The custom script to run tests on source or target environments.
+    WorkflowStepOutputList:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorkflowStepOutput'
+    CreateWorkflowStepRequest:
+      type: object
+      required:
+        - name
+        - stepGroupId
+        - workflowId
+        - stepActionType
+      title: CreateWorkflowStepRequest
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/MigrationWorkflowName'
+            - description: The name of the step.
+        stepGroupId:
+          allOf:
+            - $ref: '#/components/schemas/StepGroupId'
+            - description: The ID of the step group.
+        workflowId:
+          allOf:
+            - $ref: '#/components/schemas/MigrationWorkflowId'
+            - description: The ID of the migration workflow.
+        stepActionType:
+          allOf:
+            - $ref: '#/components/schemas/StepActionType'
+            - description: The action type of the step. You must run and update the status of a manual step for the workflow to continue after the completion of the step.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/MigrationWorkflowDescription'
+            - description: The description of the step.
+        workflowStepAutomationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepAutomationConfiguration'
+            - description: The custom script to run tests on source or target environments.
+        stepTarget:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The servers on which a step will be run.
+        outputs:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepOutputList'
+            - description: The key value pairs added for the expected output.
+        previous:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The previous step.
+        next:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The next step.
+    DataType:
+      type: string
+      enum:
+        - STRING
+        - INTEGER
+        - STRINGLIST
+        - STRINGMAP
+    DeleteMigrationWorkflowRequest:
+      type: object
+      title: DeleteMigrationWorkflowRequest
+      properties: {}
+    DeleteWorkflowStepGroupRequest:
+      type: object
+      title: DeleteWorkflowStepGroupRequest
+      properties: {}
+    StepId:
+      type: string
+      pattern: '[a-zA-Z0-9-]+'
+      minLength: 1
+      maxLength: 100
+    DeleteWorkflowStepRequest:
+      type: object
+      title: DeleteWorkflowStepRequest
+      properties: {}
+    GetMigrationWorkflowRequest:
+      type: object
+      title: GetMigrationWorkflowRequest
+      properties: {}
+    Integer:
+      type: integer
+    TemplateId:
+      type: string
+      pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+      minLength: 1
+      maxLength: 100
+    GetMigrationWorkflowTemplateRequest:
+      type: object
+      title: GetMigrationWorkflowTemplateRequest
+      properties: {}
+    TemplateInputList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TemplateInput'
+    TemplateStatus:
+      type: string
+      enum:
+        - CREATED
+    GetTemplateStepGroupRequest:
+      type: object
+      title: GetTemplateStepGroupRequest
+      properties: {}
+    StepGroupStatus:
+      type: string
+      enum:
+        - AWAITING_DEPENDENCIES
+        - READY
+        - IN_PROGRESS
+        - COMPLETED
+        - FAILED
+        - PAUSED
+        - PAUSING
+        - USER_ATTENTION_REQUIRED
+    GetTemplateStepRequest:
+      type: object
+      title: GetTemplateStepRequest
+      properties: {}
+    StepOutputList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StepOutput'
+    StepAutomationConfiguration:
+      type: object
+      properties:
+        scriptLocationS3Bucket:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon S3 bucket where the script is located.
+        scriptLocationS3Key:
+          allOf:
+            - $ref: '#/components/schemas/PlatformScriptKey'
+            - description: The Amazon S3 key for the script location.
+        command:
+          allOf:
+            - $ref: '#/components/schemas/PlatformCommand'
+            - description: The command to run the script.
+        runEnvironment:
+          allOf:
+            - $ref: '#/components/schemas/RunEnvironment'
+            - description: The source or target environment.
+        targetType:
+          allOf:
+            - $ref: '#/components/schemas/TargetType'
+            - description: The servers on which to run the script.
+      description: The custom script to run tests on source or target environments.
+    GetWorkflowStepGroupRequest:
+      type: object
+      title: GetWorkflowStepGroupRequest
+      properties: {}
+    Owner:
+      type: string
+      enum:
+        - AWS_MANAGED
+        - CUSTOM
+    GetWorkflowStepRequest:
+      type: object
+      title: GetWorkflowStepRequest
+      properties: {}
+    GetWorkflowStepResponseOutputsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorkflowStepOutput'
+      minItems: 0
+      maxItems: 5
+    StepStatus:
+      type: string
+      enum:
+        - AWAITING_DEPENDENCIES
+        - READY
+        - IN_PROGRESS
+        - COMPLETED
+        - FAILED
+        - PAUSED
+        - USER_ATTENTION_REQUIRED
+    IPAddress:
+      type: string
+      pattern: '(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])'
+      minLength: 0
+      maxLength: 15
+    MaxResults:
+      type: integer
+      minimum: 0
+      maximum: 100
+    NextToken:
+      type: string
+      pattern: .*\S.*
+      minLength: 0
+      maxLength: 2048
+    TemplateName:
+      type: string
+      pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+      minLength: 1
+      maxLength: 100
+    ListMigrationWorkflowTemplatesRequest:
+      type: object
+      title: ListMigrationWorkflowTemplatesRequest
+      properties: {}
+    TemplateSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TemplateSummary'
+    ListMigrationWorkflowsRequest:
+      type: object
+      title: ListMigrationWorkflowsRequest
+      properties: {}
+    MigrationWorkflowSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MigrationWorkflowSummary'
+    ListPluginsRequest:
+      type: object
+      title: ListPluginsRequest
+      properties: {}
+    PluginSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/PluginSummary'
+    ResourceArn:
+      type: string
+      pattern: 'arn:aws:migrationhub-orchestrator:[a-z0-9-]+:[0-9]+:workflow/[.]*'
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    TagMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    ListTemplateStepGroupsRequest:
+      type: object
+      title: ListTemplateStepGroupsRequest
+      properties: {}
+    TemplateStepGroupSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TemplateStepGroupSummary'
+    ListTemplateStepsRequest:
+      type: object
+      title: ListTemplateStepsRequest
+      properties: {}
+    TemplateStepSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TemplateStepSummary'
+    ListWorkflowStepGroupsRequest:
+      type: object
+      title: ListWorkflowStepGroupsRequest
+      properties: {}
+    WorkflowStepGroupsSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorkflowStepGroupSummary'
+    ListWorkflowStepsRequest:
+      type: object
+      title: ListWorkflowStepsRequest
+      properties: {}
+    WorkflowStepsSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorkflowStepSummary'
+    MigrationWorkflowSummary:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/MigrationWorkflowId'
+            - description: The ID of the migration workflow.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the migration workflow.
+        templateId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the template.
+        adsApplicationConfigurationName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the application configured in Application Discovery Service.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/MigrationWorkflowStatusEnum'
+            - description: The status of the migration workflow.
+        creationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the migration workflow was created.
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the migration workflow ended.
+        statusMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status message of the migration workflow.
+        completedSteps:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The steps completed in the migration workflow.
+        totalSteps:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: All the steps in a migration workflow.
+      description: The summary of a migration workflow.
+    S3Key:
+      type: string
+      minLength: 0
+      maxLength: 1024
+    PluginHealth:
+      type: string
+      enum:
+        - HEALTHY
+        - UNHEALTHY
+    PluginId:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 60
+    PluginSummary:
+      type: object
+      properties:
+        pluginId:
+          allOf:
+            - $ref: '#/components/schemas/PluginId'
+            - description: The ID of the plugin.
+        hostname:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the host.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/PluginHealth'
+            - description: The status of the plugin.
+        ipAddress:
+          allOf:
+            - $ref: '#/components/schemas/IPAddress'
+            - description: The IP address at which the plugin is located.
+        version:
+          allOf:
+            - $ref: '#/components/schemas/PluginVersion'
+            - description: The version of the plugin.
+        registeredTime:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The time at which the plugin was registered.
+      description: The summary of the Migration Hub Orchestrator plugin.
+    PluginVersion:
+      type: string
+      pattern: .*
+      minLength: 0
+      maxLength: 1024
+    RetryWorkflowStepRequest:
+      type: object
+      title: RetryWorkflowStepRequest
+      properties: {}
+    StartMigrationWorkflowRequest:
+      type: object
+      title: StartMigrationWorkflowRequest
+      properties: {}
+    StepDescription:
+      type: string
+      pattern: '[-a-zA-Z0-9_.+, ]*'
+      minLength: 0
+      maxLength: 500
+    StringValue:
+      type: string
+      minLength: 0
+      maxLength: 100
+    StepInputParametersKey:
+      type: string
+      pattern: '[a-zA-Z0-9-_ ()]+'
+      minLength: 1
+      maxLength: 100
+    StepName:
+      type: string
+      pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+      minLength: 1
+      maxLength: 100
+    StepOutput:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the step.
+        dataType:
+          allOf:
+            - $ref: '#/components/schemas/DataType'
+            - description: The data type of the step output.
+        required:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Determine if an output is required from a step.
+      description: The output of the step.
+    StopMigrationWorkflowRequest:
+      type: object
+      title: StopMigrationWorkflowRequest
+      properties: {}
+    StringMapKey:
+      type: string
+      pattern: '[a-zA-Z0-9-_ ()]+'
+      minLength: 1
+      maxLength: 100
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 0
+      maxItems: 50
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'A collection of labels, in the form of key:value pairs, that apply to this resource.'
+    TemplateInputName:
+      type: string
+      pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+      minLength: 1
+      maxLength: 100
+    TemplateInput:
+      type: object
+      properties:
+        inputName:
+          allOf:
+            - $ref: '#/components/schemas/TemplateInputName'
+            - description: The name of the template.
+        dataType:
+          allOf:
+            - $ref: '#/components/schemas/DataType'
+            - description: The data type of the template input.
+        required:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Determine if an input is required from the template.
+      description: The input parameters of a template.
+    TemplateStepGroupSummary:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the step group.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the step group.
+        previous:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The previous step group.
+        next:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The next step group.
+      description: The summary of the step group in the template.
+    TemplateStepSummary:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the step.
+        stepGroupId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the step group.
+        templateId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the template.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the step.
+        stepActionType:
+          allOf:
+            - $ref: '#/components/schemas/StepActionType'
+            - description: The action type of the step. You must run and update the status of a manual step for the workflow to continue after the completion of the step.
+        targetType:
+          allOf:
+            - $ref: '#/components/schemas/TargetType'
+            - description: The servers on which to run the script.
+        owner:
+          allOf:
+            - $ref: '#/components/schemas/Owner'
+            - description: The owner of the step.
+        previous:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The previous step.
+        next:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The next step.
+      description: The summary of the step.
+    TemplateSummary:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the template.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the template.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the template.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the template.
+      description: The summary of the template.
+    Tool:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name of an AWS service. '
+        url:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The URL of an AWS service.
+      description: List of AWS services utilized in a migration workflow.
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+    UpdateMigrationWorkflowRequestNameString:
+      type: string
+      pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+      minLength: 1
+      maxLength: 100
+    UpdateMigrationWorkflowRequestDescriptionString:
+      type: string
+      pattern: '[-a-zA-Z0-9_.+, ]*'
+      minLength: 0
+      maxLength: 500
+    UpdateMigrationWorkflowRequest:
+      type: object
+      title: UpdateMigrationWorkflowRequest
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/UpdateMigrationWorkflowRequestNameString'
+            - description: The name of the migration workflow.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/UpdateMigrationWorkflowRequestDescriptionString'
+            - description: The description of the migration workflow.
+        inputParameters:
+          allOf:
+            - $ref: '#/components/schemas/StepInputParameters'
+            - description: The input parameters required to update a migration workflow.
+        stepTargets:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The servers on which a step will be run.
+    UpdateWorkflowStepGroupRequest:
+      type: object
+      title: UpdateWorkflowStepGroupRequest
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/StepGroupName'
+            - description: The name of the step group.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/StepGroupDescription'
+            - description: The description of the step group.
+        next:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The next step group.
+        previous:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The previous step group.
+    UpdateWorkflowStepRequest:
+      type: object
+      required:
+        - stepGroupId
+        - workflowId
+      title: UpdateWorkflowStepRequest
+      properties:
+        stepGroupId:
+          allOf:
+            - $ref: '#/components/schemas/StepGroupId'
+            - description: The ID of the step group.
+        workflowId:
+          allOf:
+            - $ref: '#/components/schemas/MigrationWorkflowId'
+            - description: The ID of the migration workflow.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/StepName'
+            - description: The name of the step.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/StepDescription'
+            - description: The description of the step.
+        stepActionType:
+          allOf:
+            - $ref: '#/components/schemas/StepActionType'
+            - description: The action type of the step. You must run and update the status of a manual step for the workflow to continue after the completion of the step.
+        workflowStepAutomationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepAutomationConfiguration'
+            - description: The custom script to run tests on the source and target environments.
+        stepTarget:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The servers on which a step will be run.
+        outputs:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepOutputList'
+            - description: The outputs of a step.
+        previous:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The previous step.
+        next:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The next step.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/StepStatus'
+            - description: The status of the step.
+    WorkflowStepGroupSummary:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the step group.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the step group.
+        owner:
+          allOf:
+            - $ref: '#/components/schemas/Owner'
+            - description: The owner of the step group.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/StepGroupStatus'
+            - description: The status of the step group.
+        previous:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The previous step group.
+        next:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The next step group.
+      description: The summary of a step group in a workflow.
+    WorkflowStepOutputName:
+      type: string
+      pattern: '[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*'
+      minLength: 1
+      maxLength: 100
+    WorkflowStepOutputUnion:
+      type: object
+      properties:
+        integerValue:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The integer value. '
+        stringValue:
+          allOf:
+            - $ref: '#/components/schemas/StringValue'
+            - description: The string value.
+        listOfStringValue:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The list of string value.
+      description: A structure to hold multiple values of an output.
+    WorkflowStepSummary:
+      type: object
+      properties:
+        stepId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the step.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the step.
+        stepActionType:
+          allOf:
+            - $ref: '#/components/schemas/StepActionType'
+            - description: The action type of the step. You must run and update the status of a manual step for the workflow to continue after the completion of the step.
+        owner:
+          allOf:
+            - $ref: '#/components/schemas/Owner'
+            - description: The owner of the step.
+        previous:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The previous step.
+        next:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The next step.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/StepStatus'
+            - description: The status of the step.
+        statusMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status message of the migration workflow.
+        noOfSrvCompleted:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of servers that have been migrated.
+        noOfSrvFailed:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of servers that have failed to migrate.
+        totalNoOfSrv:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The total number of servers that have been migrated.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the step.
+        scriptLocation:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The location of the script.
+      description: The summary of the step in a migration workflow.
+security:
+  - hmac: []

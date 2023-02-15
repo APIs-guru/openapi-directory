@@ -471,6 +471,12 @@ paths:
                             name: includeEncoderConfigurationInSegments
                           description: |
                             When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.
+                    IncludeIframeOnlyStream:
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - xml:
+                            name: includeIframeOnlyStream
+                          description: 'When enabled, an I-Frame only stream will be included in the output.'
                     PeriodTriggers:
                       allOf:
                         - $ref: '#/components/schemas/__listOf__PeriodTriggersElement'
@@ -510,6 +516,12 @@ paths:
                         - xml:
                             name: hlsManifests
                           description: A list of HLS manifest configurations.
+                    IncludeDvbSubtitles:
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - xml:
+                            name: includeDvbSubtitles
+                          description: 'When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.'
                     SegmentDurationSeconds:
                       allOf:
                         - $ref: '#/components/schemas/__integer'
@@ -1757,6 +1769,12 @@ components:
     DescribePackagingGroupResponse:
       type: object
       properties:
+        ApproximateAssetCount:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: approximateAssetCount
+              description: The approximate asset count of the PackagingGroup.
         Arn:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -1847,6 +1865,12 @@ components:
     UpdatePackagingGroupResponse:
       type: object
       properties:
+        ApproximateAssetCount:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: approximateAssetCount
+              description: The approximate asset count of the PackagingGroup.
         Arn:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -1968,6 +1992,11 @@ components:
         - RoleArn
       type: object
       properties:
+        EncryptionContractConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionContractConfiguration'
+            - xml:
+                name: encryptionContractConfiguration
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2113,6 +2142,12 @@ components:
                 name: includeEncoderConfigurationInSegments
               description: |
                 When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.
+        IncludeIframeOnlyStream:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: includeIframeOnlyStream
+              description: 'When enabled, an I-Frame only stream will be included in the output.'
         PeriodTriggers:
           allOf:
             - $ref: '#/components/schemas/__listOf__PeriodTriggersElement'
@@ -2154,6 +2189,12 @@ components:
             - xml:
                 name: hlsManifests
               description: A list of HLS manifest configurations.
+        IncludeDvbSubtitles:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: includeDvbSubtitles
+              description: 'When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.'
         SegmentDurationSeconds:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -2275,6 +2316,11 @@ components:
         - NONE
         - HBBTV_1_5
       type: string
+    ScteMarkersSource:
+      enum:
+        - SEGMENTS
+        - MANIFEST
+      type: string
     StreamSelection:
       type: object
       properties:
@@ -2324,6 +2370,12 @@ components:
             - xml:
                 name: profile
               description: 'The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.'
+        ScteMarkersSource:
+          allOf:
+            - $ref: '#/components/schemas/ScteMarkersSource'
+            - xml:
+                name: scteMarkersSource
+              description: 'The source of scte markers used. When set to SEGMENTS, the scte markers are sourced from the segments of the ingested content. When set to MANIFEST, the scte markers are sourced from the manifest of the ingested content. The MANIFEST value is compatible with source HLS playlists using the SCTE-35 Enhanced syntax (#EXT-OATCLS-SCTE35 tags). SCTE-35 Elemental and SCTE-35 Daterange syntaxes are not supported with this option.'
         StreamSelection:
           allOf:
             - $ref: '#/components/schemas/StreamSelection'
@@ -2363,6 +2415,12 @@ components:
             - xml:
                 name: packagingConfigurationId
               description: The ID of the PackagingConfiguration being applied to the Asset.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: status
+              description: 'The current processing status of the asset used for the packaging configuration. The status can be either QUEUED, PROCESSING, PLAYABLE, or FAILED. Status information won''t be available for most assets ingested before 2021-09-30.'
         Url:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2370,6 +2428,52 @@ components:
                 name: url
               description: The URL of the parent manifest for the repackaged Asset.
       description: The endpoint URL used to access an Asset using one PackagingConfiguration.
+    PresetSpeke20Audio:
+      enum:
+        - PRESET-AUDIO-1
+        - PRESET-AUDIO-2
+        - PRESET-AUDIO-3
+        - SHARED
+        - UNENCRYPTED
+      type: string
+    PresetSpeke20Video:
+      enum:
+        - PRESET-VIDEO-1
+        - PRESET-VIDEO-2
+        - PRESET-VIDEO-3
+        - PRESET-VIDEO-4
+        - PRESET-VIDEO-5
+        - PRESET-VIDEO-6
+        - PRESET-VIDEO-7
+        - PRESET-VIDEO-8
+        - SHARED
+        - UNENCRYPTED
+      type: string
+    EncryptionContractConfiguration:
+      required:
+        - PresetSpeke20Audio
+        - PresetSpeke20Video
+      type: object
+      properties:
+        PresetSpeke20Audio:
+          allOf:
+            - $ref: '#/components/schemas/PresetSpeke20Audio'
+            - xml:
+                name: presetSpeke20Audio
+              description: A collection of audio encryption presets.
+        PresetSpeke20Video:
+          allOf:
+            - $ref: '#/components/schemas/PresetSpeke20Video'
+            - xml:
+                name: presetSpeke20Video
+              description: A collection of video encryption presets.
+      description: |
+        Use encryptionContractConfiguration to configure one or more content encryption keys for your endpoints that use SPEKE 2.0. 
+        The encryption contract defines which content keys are used to encrypt the audio and video tracks in your stream. 
+        To configure the encryption contract, specify which audio and video encryption presets to use.
+        Note the following considerations when using encryptionContractConfiguration:
+        encryptionContractConfiguration can be used for DASH endpoints that use SPEKE 2.0. SPEKE 2.0 relies on the CPIX 2.3 specification.
+        You must disable key rotation for this endpoint by setting keyRotationIntervalSeconds to 0.
     EncryptionMethod:
       enum:
         - AES_128
@@ -2530,6 +2634,12 @@ components:
     PackagingGroup:
       type: object
       properties:
+        ApproximateAssetCount:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: approximateAssetCount
+              description: The approximate asset count of the PackagingGroup.
         Arn:
           allOf:
             - $ref: '#/components/schemas/__string'

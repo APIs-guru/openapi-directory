@@ -117,6 +117,7 @@ x-hasEquivalentPaths: true
 paths:
   /associateDomain:
     post:
+      deprecated: true
       operationId: AssociateDomain
       description: Specifies a domain to be associated to Amazon WorkLink.
       responses:
@@ -203,6 +204,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /associateWebsiteAuthorizationProvider:
     post:
+      deprecated: true
       operationId: AssociateWebsiteAuthorizationProvider
       description: Associates a website authorization provider with a specified fleet. This is used to authorize users against associated websites in the company network.
       responses:
@@ -285,6 +287,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /associateWebsiteCertificateAuthority:
     post:
+      deprecated: true
       operationId: AssociateWebsiteCertificateAuthority
       description: Imports the root certificate of a certificate authority (CA) used to obtain TLS certificates used by associated websites within the company network.
       responses:
@@ -366,6 +369,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /createFleet:
     post:
+      deprecated: true
       operationId: CreateFleet
       description: Creates a fleet. A fleet consists of resources and the configuration that delivers associated websites to authorized users who download and set up the Amazon WorkLink app.
       responses:
@@ -451,6 +455,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /deleteFleet:
     post:
+      deprecated: true
       operationId: DeleteFleet
       description: 'Deletes a fleet. Prevents users from accessing previously associated websites. '
       responses:
@@ -515,6 +520,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /describeAuditStreamConfiguration:
     post:
+      deprecated: true
       operationId: DescribeAuditStreamConfiguration
       description: Describes the configuration for delivering audit streams to the customer account.
       responses:
@@ -579,6 +585,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /describeCompanyNetworkConfiguration:
     post:
+      deprecated: true
       operationId: DescribeCompanyNetworkConfiguration
       description: Describes the networking configuration to access the internal websites associated with the specified fleet.
       responses:
@@ -643,6 +650,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /describeDevice:
     post:
+      deprecated: true
       operationId: DescribeDevice
       description: Provides information about a user's device.
       responses:
@@ -713,6 +721,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /describeDevicePolicyConfiguration:
     post:
+      deprecated: true
       operationId: DescribeDevicePolicyConfiguration
       description: Describes the device policy configuration for the specified fleet.
       responses:
@@ -777,6 +786,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /describeDomain:
     post:
+      deprecated: true
       operationId: DescribeDomain
       description: Provides information about the domain.
       responses:
@@ -848,6 +858,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /describeFleetMetadata:
     post:
+      deprecated: true
       operationId: DescribeFleetMetadata
       description: 'Provides basic information for the specified fleet, excluding identity provider, networking, and device configuration details.'
       responses:
@@ -912,6 +923,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /describeIdentityProviderConfiguration:
     post:
+      deprecated: true
       operationId: DescribeIdentityProviderConfiguration
       description: Describes the identity provider configuration of the specified fleet.
       responses:
@@ -976,6 +988,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /describeWebsiteCertificateAuthority:
     post:
+      deprecated: true
       operationId: DescribeWebsiteCertificateAuthority
       description: Provides information about the certificate authority.
       responses:
@@ -1046,6 +1059,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /disassociateDomain:
     post:
+      deprecated: true
       operationId: DisassociateDomain
       description: 'Disassociates a domain from Amazon WorkLink. End users lose the ability to access the domain with Amazon WorkLink. '
       responses:
@@ -1117,6 +1131,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /disassociateWebsiteAuthorizationProvider:
     post:
+      deprecated: true
       operationId: DisassociateWebsiteAuthorizationProvider
       description: 'Disassociates a website authorization provider from a specified fleet. After the disassociation, users can''t load any associated websites that require this authorization provider.'
       responses:
@@ -1193,6 +1208,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /disassociateWebsiteCertificateAuthority:
     post:
+      deprecated: true
       operationId: DisassociateWebsiteCertificateAuthority
       description: Removes a certificate authority (CA).
       responses:
@@ -1263,6 +1279,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /listDevices:
     post:
+      deprecated: true
       operationId: ListDevices
       description: Retrieves a list of devices registered with the specified fleet.
       responses:
@@ -1349,6 +1366,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /listDomains:
     post:
+      deprecated: true
       operationId: ListDomains
       description: Retrieves a list of domains associated to a specified fleet.
       responses:
@@ -1435,6 +1453,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /listFleets:
     post:
+      deprecated: true
       operationId: ListFleets
       description: Retrieves a list of fleets for the current account and Region.
       responses:
@@ -1508,6 +1527,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/tags/{ResourceArn}':
     get:
+      deprecated: true
       operationId: ListTagsForResource
       description: Retrieves a list of tags for the specified resource.
       responses:
@@ -1541,6 +1561,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
+      deprecated: true
       operationId: TagResource
       description: 'Adds or overwrites one or more tags for the specified resource, such as a fleet. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value.'
       responses:
@@ -1583,6 +1604,7 @@ paths:
                     $ref: '#/components/schemas/TagValue'
   /listWebsiteAuthorizationProviders:
     post:
+      deprecated: true
       operationId: ListWebsiteAuthorizationProviders
       description: Retrieves a list of website authorization providers associated with a specified fleet.
       responses:
@@ -1669,6 +1691,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /listWebsiteCertificateAuthorities:
     post:
+      deprecated: true
       operationId: ListWebsiteCertificateAuthorities
       description: Retrieves a list of certificate authorities added for the current account and Region.
       responses:
@@ -1749,6 +1772,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /restoreDomainAccess:
     post:
+      deprecated: true
       operationId: RestoreDomainAccess
       description: Moves a domain to ACTIVE status if it was in the INACTIVE status.
       responses:
@@ -1820,6 +1844,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /revokeDomainAccess:
     post:
+      deprecated: true
       operationId: RevokeDomainAccess
       description: Moves a domain to INACTIVE status if it was in the ACTIVE status.
       responses:
@@ -1891,6 +1916,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /signOutUser:
     post:
+      deprecated: true
       operationId: SignOutUser
       description: Signs the user out from all of their devices. The user can sign in again if they have valid credentials.
       responses:
@@ -1961,6 +1987,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/tags/{ResourceArn}#tagKeys':
     delete:
+      deprecated: true
       operationId: UntagResource
       description: Removes one or more tags from the specified resource.
       responses:
@@ -2005,6 +2032,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /updateAuditStreamConfiguration:
     post:
+      deprecated: true
       operationId: UpdateAuditStreamConfiguration
       description: Updates the audit stream configuration for the fleet.
       responses:
@@ -2073,6 +2101,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /updateCompanyNetworkConfiguration:
     post:
+      deprecated: true
       operationId: UpdateCompanyNetworkConfiguration
       description: Updates the company network configuration for the fleet.
       responses:
@@ -2155,6 +2184,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /updateDevicePolicyConfiguration:
     post:
+      deprecated: true
       operationId: UpdateDevicePolicyConfiguration
       description: Updates the device policy configuration for the fleet.
       responses:
@@ -2225,6 +2255,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /updateDomainMetadata:
     post:
+      deprecated: true
       operationId: UpdateDomainMetadata
       description: 'Updates domain metadata, such as DisplayName.'
       responses:
@@ -2300,6 +2331,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /UpdateFleetMetadata:
     post:
+      deprecated: true
       operationId: UpdateFleetMetadata
       description: 'Updates fleet metadata, such as DisplayName.'
       responses:
@@ -2371,6 +2403,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /updateIdentityProviderConfiguration:
     post:
+      deprecated: true
       operationId: UpdateIdentityProviderConfiguration
       description: Updates the identity provider configuration for the fleet.
       responses:

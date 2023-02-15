@@ -1,0 +1,3695 @@
+openapi: 3.0.0
+info:
+  version: '2021-08-17'
+  x-release: v4
+  title: GameSparks
+  description: <p/>
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: gamesparks
+  x-aws-signingName: gamesparks
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/gamesparks-2021-08-17.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/gamesparks/'
+servers:
+  - url: 'http://gamesparks.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The GameSparks multi-region endpoint
+  - url: 'https://gamesparks.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The GameSparks multi-region endpoint
+  - url: 'http://gamesparks.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The GameSparks endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://gamesparks.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The GameSparks endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /game:
+    post:
+      operationId: CreateGame
+      description: ' Creates a new game with an empty configuration. After creating your game, you can update the configuration using <code>UpdateGameConfiguration</code> or <code>ImportGameConfiguration</code>. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateGameResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - GameName
+              properties:
+                ClientToken:
+                  description: ' A client-defined token. With an active client token in the request, this action is idempotent. '
+                  type: string
+                  minLength: 33
+                  maxLength: 126
+                Description:
+                  description: The description of the game.
+                  type: string
+                  pattern: ^\S(.*\S)?$|^$
+                  minLength: 0
+                  maxLength: 250
+                GameName:
+                  description: The name of the game.
+                  type: string
+                  pattern: '^[a-zA-Z0-9_-]+$'
+                  minLength: 1
+                  maxLength: 36
+                Tags:
+                  description: The list of tags to apply to the game.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListGames
+      description: Gets a paginated list of games.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListGamesResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: MaxResults
+          in: query
+          required: false
+          description: <p>The maximum number of results to return.</p> <p> Use this parameter with NextToken to get results as a set of sequential pages. </p>
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: NextToken
+          in: query
+          required: false
+          description: '<p>The token that indicates the start of the next sequential page of results.</p> <p> Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value. </p>'
+          schema:
+            type: string
+            pattern: ^\S(.*\S)?$
+            minLength: 1
+            maxLength: 1024
+  '/game/{GameName}/snapshot':
+    post:
+      operationId: CreateSnapshot
+      description: Creates a snapshot of the game configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSnapshotResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Description:
+                  description: The description of the snapshot.
+                  type: string
+                  pattern: ^\S(.*\S)?$|^$
+                  minLength: 0
+                  maxLength: 250
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListSnapshots
+      description: Gets a paginated list of snapshot summaries from the game.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSnapshotsResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: MaxResults
+          in: query
+          required: false
+          description: <p>The maximum number of results to return.</p> <p> Use this parameter with NextToken to get results as a set of sequential pages. </p>
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: NextToken
+          in: query
+          required: false
+          description: '<p>The token that indicates the start of the next sequential page of results.</p> <p> Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value. </p>'
+          schema:
+            type: string
+            pattern: ^\S(.*\S)?$
+            minLength: 1
+            maxLength: 1024
+  '/game/{GameName}/stage':
+    post:
+      operationId: CreateStage
+      description: Creates a new stage for stage-by-stage game development and deployment.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateStageResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Role
+                - StageName
+              properties:
+                ClientToken:
+                  description: ' A client-defined token. With an active client token in the request, this action is idempotent. '
+                  type: string
+                  minLength: 33
+                  maxLength: 126
+                Description:
+                  description: The description of the stage.
+                  type: string
+                  pattern: ^\S(.*\S)?$|^$
+                  minLength: 0
+                  maxLength: 250
+                Role:
+                  description: ' The Amazon Resource Name (ARN) of the role to run the game with. This role can be a game-defined role or the default role that GameSparks created. '
+                  type: string
+                  pattern: '^arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/.+$'
+                  minLength: 20
+                  maxLength: 2048
+                StageName:
+                  description: The name of the stage.
+                  type: string
+                  pattern: '^[a-zA-Z0-9_-]+$'
+                  minLength: 1
+                  maxLength: 36
+                Tags:
+                  description: The list of tags to apply to the stage.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListStages
+      description: Gets a paginated list of stage summaries from the game.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListStagesResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: MaxResults
+          in: query
+          required: false
+          description: <p>The maximum number of results to return.</p> <p> Use this parameter with NextToken to get results as a set of sequential pages. </p>
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: NextToken
+          in: query
+          required: false
+          description: '<p>The token that indicates the start of the next sequential page of results.</p> <p> Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value. </p>'
+          schema:
+            type: string
+            pattern: ^\S(.*\S)?$
+            minLength: 1
+            maxLength: 1024
+  '/game/{GameName}':
+    delete:
+      operationId: DeleteGame
+      description: Deletes a game.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteGameResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game to delete.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetGame
+      description: Gets details about a game.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetGameResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+    patch:
+      operationId: UpdateGame
+      description: Updates details of the game.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateGameResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Description:
+                  description: The description of the game.
+                  type: string
+                  pattern: ^\S(.*\S)?$|^$
+                  minLength: 0
+                  maxLength: 250
+  '/game/{GameName}/stage/{StageName}':
+    delete:
+      operationId: DeleteStage
+      description: 'Deletes a stage from a game, along with the associated game runtime.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteStageResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: StageName
+          in: path
+          required: true
+          description: The name of the stage to delete.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetStage
+      description: Gets information about a stage.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetStageResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: StageName
+          in: path
+          required: true
+          description: The name of the stage.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+    patch:
+      operationId: UpdateStage
+      description: Updates the metadata of a stage.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateStageResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: StageName
+          in: path
+          required: true
+          description: The name of the stage.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Description:
+                  description: The description of the stage.
+                  type: string
+                  pattern: ^\S(.*\S)?$|^$
+                  minLength: 0
+                  maxLength: 250
+                Role:
+                  description: The Amazon Resource Name (ARN) of the role to use for the game snapshots deployed to this stage.
+                  type: string
+                  pattern: '^arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/.+$'
+                  minLength: 20
+                  maxLength: 2048
+  '/runtime/game/{GameName}/stage/{StageName}/player/{PlayerId}/disconnect':
+    post:
+      operationId: DisconnectPlayer
+      description: '<p>Disconnects a player from the game runtime.</p> <p> If a player has multiple connections, this operation attempts to close all of them. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisconnectPlayerResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: PlayerId
+          in: path
+          required: true
+          description: The unique identifier representing a player.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 44
+        - name: StageName
+          in: path
+          required: true
+          description: The name of the stage.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/game/{GameName}/snapshot/{SnapshotId}/export':
+    get:
+      operationId: ExportSnapshot
+      description: Exports a game configuration snapshot.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportSnapshotResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: SnapshotId
+          in: path
+          required: true
+          description: The identifier of the snapshot to export.
+          schema:
+            type: string
+            pattern: '^Snapshot_\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3,6}Z$'
+            minLength: 33
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/extension/{Namespace}/{Name}':
+    get:
+      operationId: GetExtension
+      description: Gets details about a specified extension.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetExtensionResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: Name
+          in: path
+          required: true
+          description: The name of the extension.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: Namespace
+          in: path
+          required: true
+          description: The namespace (qualifier) of the extension.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/extension/{Namespace}/{Name}/version/{ExtensionVersion}':
+    get:
+      operationId: GetExtensionVersion
+      description: Gets details about a specified extension version.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetExtensionVersionResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: ExtensionVersion
+          in: path
+          required: true
+          description: The version of the extension.
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 20
+        - name: Name
+          in: path
+          required: true
+          description: The name of the extension.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: Namespace
+          in: path
+          required: true
+          description: The namespace (qualifier) of the extension.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/game/{GameName}/configuration':
+    get:
+      operationId: GetGameConfiguration
+      description: Gets the configuration of the game.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetGameConfigurationResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: Sections
+          in: query
+          required: false
+          description: The list of sections to return.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/SectionName'
+            minItems: 1
+            maxItems: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: ImportGameConfiguration
+      description: '<p>Imports a game configuration.</p> <p> This operation replaces the current configuration of the game with the provided input. This is not a reversible operation. If you want to preserve the previous configuration, use <code>CreateSnapshot</code> to make a new snapshot before importing. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportGameConfigurationResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ImportSource
+              properties:
+                ImportSource:
+                  description: The source used to import configuration sections.
+                  type: object
+                  properties:
+                    File:
+                      allOf:
+                        - $ref: '#/components/schemas/RawGameConfigurationData'
+                        - description: The JSON string containing the configuration sections.
+    patch:
+      operationId: UpdateGameConfiguration
+      description: Updates one or more sections of the game configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateGameConfigurationResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Modifications
+              properties:
+                Modifications:
+                  description: The list of modifications to make.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SectionModification'
+                  minItems: 1
+                  maxItems: 100
+  '/game/{GameName}/snapshot/{SnapshotId}/generated-sdk-code-job/{JobId}':
+    get:
+      operationId: GetGeneratedCodeJob
+      description: Gets details about a job that is generating code for a snapshot.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetGeneratedCodeJobResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: JobId
+          in: path
+          required: true
+          description: The identifier of the code generation job.
+          schema:
+            type: string
+            pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+        - name: SnapshotId
+          in: path
+          required: true
+          description: The identifier of the snapshot for the code generation job.
+          schema:
+            type: string
+            pattern: '^Snapshot_\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3,6}Z$'
+            minLength: 33
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/runtime/game/{GameName}/stage/{StageName}/player/{PlayerId}/connection':
+    get:
+      operationId: GetPlayerConnectionStatus
+      description: '<p>Gets the status of a player''s connection to the game runtime.</p> <p> It''s possible for a single player to have multiple connections to the game runtime. If a player is not connected, this operation returns an empty list. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPlayerConnectionStatusResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: PlayerId
+          in: path
+          required: true
+          description: The unique identifier representing a player.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 44
+        - name: StageName
+          in: path
+          required: true
+          description: The name of the stage.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/game/{GameName}/snapshot/{SnapshotId}':
+    get:
+      operationId: GetSnapshot
+      description: Gets a copy of the game configuration in a snapshot.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSnapshotResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: Sections
+          in: query
+          required: false
+          description: The list of game configuration sections to be described.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/SectionName'
+            minItems: 1
+            maxItems: 100
+        - name: SnapshotId
+          in: path
+          required: true
+          description: The identifier of the snapshot.
+          schema:
+            type: string
+            pattern: '^Snapshot_\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3,6}Z$'
+            minLength: 33
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    patch:
+      operationId: UpdateSnapshot
+      description: Updates the metadata of a GameSparks snapshot.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSnapshotResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: SnapshotId
+          in: path
+          required: true
+          description: The identifier of the snapshot.
+          schema:
+            type: string
+            pattern: '^Snapshot_\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3,6}Z$'
+            minLength: 33
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Description:
+                  description: The description of the snapshot.
+                  type: string
+                  pattern: ^\S(.*\S)?$|^$
+                  minLength: 0
+                  maxLength: 250
+  '/game/{GameName}/stage/{StageName}/deployment':
+    get:
+      operationId: GetStageDeployment
+      description: Gets information about a stage deployment.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetStageDeploymentResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: DeploymentId
+          in: query
+          required: false
+          description: ' The identifier of the stage deployment. <code>StartStageDeployment</code> returns the identifier that you use here. '
+          schema:
+            type: string
+            pattern: ^\S(.*\S)?$
+            minLength: 1
+            maxLength: 128
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: StageName
+          in: path
+          required: true
+          description: The name of the stage.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartStageDeployment
+      description: '<p>Deploys a snapshot to the stage and creates a new game runtime.</p> <p> After you call this operation, you can check the deployment status by using <code>GetStageDeployment</code>. </p> <p> If there are any players connected to the previous game runtime, then both runtimes persist. Existing connections to the previous runtime are maintained. When players disconnect and reconnect, they connect to the new runtime. After there are no connections to the previous game runtime, it is deleted. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartStageDeploymentResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: StageName
+          in: path
+          required: true
+          description: The name of the stage to deploy the snapshot onto.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - SnapshotId
+              properties:
+                ClientToken:
+                  description: ' A client-defined token. With an active client token in the request, this action is idempotent. '
+                  type: string
+                  minLength: 33
+                  maxLength: 126
+                SnapshotId:
+                  description: The identifier of the snapshot to deploy.
+                  type: string
+                  pattern: '^Snapshot_\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3,6}Z$'
+                  minLength: 33
+                  maxLength: 36
+  '/extension/{Namespace}/{Name}/version':
+    get:
+      operationId: ListExtensionVersions
+      description: '<p>Gets a paginated list of available versions for the extension.</p> <p> Each time an API change is made to an extension, the version is incremented. The list retrieved by this operation shows the versions that are currently available. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListExtensionVersionsResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: MaxResults
+          in: query
+          required: false
+          description: <p>The maximum number of results to return.</p> <p> Use this parameter with NextToken to get results as a set of sequential pages. </p>
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: Name
+          in: path
+          required: true
+          description: The name of the extension.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: Namespace
+          in: path
+          required: true
+          description: The namespace (qualifier) of the extension.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: NextToken
+          in: query
+          required: false
+          description: '<p>The token that indicates the start of the next sequential page of results.</p> <p> Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value. </p>'
+          schema:
+            type: string
+            pattern: ^\S(.*\S)?$
+            minLength: 1
+            maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /extension:
+    get:
+      operationId: ListExtensions
+      description: <p>Gets a paginated list of available extensions.</p> <p> Extensions provide features that games can use from scripts. </p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListExtensionsResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: MaxResults
+          in: query
+          required: false
+          description: <p>The maximum number of results to return.</p> <p> Use this parameter with NextToken to get results as a set of sequential pages. </p>
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: NextToken
+          in: query
+          required: false
+          description: '<p>The token that indicates the start of the next sequential page of results.</p> <p> Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value. </p>'
+          schema:
+            type: string
+            pattern: ^\S(.*\S)?$
+            minLength: 1
+            maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/game/{GameName}/snapshot/{SnapshotId}/generated-sdk-code-jobs':
+    get:
+      operationId: ListGeneratedCodeJobs
+      description: Gets a paginated list of code generation jobs for a snapshot.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListGeneratedCodeJobsResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: MaxResults
+          in: query
+          required: false
+          description: <p>The maximum number of results to return.</p> <p> Use this parameter with NextToken to get results as a set of sequential pages. </p>
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: NextToken
+          in: query
+          required: false
+          description: '<p>The token that indicates the start of the next sequential page of results.</p> <p> Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value. </p>'
+          schema:
+            type: string
+            pattern: ^\S(.*\S)?$
+            minLength: 1
+            maxLength: 1024
+        - name: SnapshotId
+          in: path
+          required: true
+          description: The identifier of the snapshot.
+          schema:
+            type: string
+            pattern: '^Snapshot_\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3,6}Z$'
+            minLength: 33
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/game/{GameName}/stage/{StageName}/deployments':
+    get:
+      operationId: ListStageDeployments
+      description: Gets a paginated list of stage deployment summaries from the game.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListStageDeploymentsResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: MaxResults
+          in: query
+          required: false
+          description: <p>The maximum number of results to return.</p> <p> Use this parameter with NextToken to get results as a set of sequential pages. </p>
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: NextToken
+          in: query
+          required: false
+          description: '<p>The token that indicates the start of the next sequential page of results.</p> <p> Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value. </p>'
+          schema:
+            type: string
+            pattern: ^\S(.*\S)?$
+            minLength: 1
+            maxLength: 1024
+        - name: StageName
+          in: path
+          required: true
+          description: The name of the stage.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{ResourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags associated with a GameSparks resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the GameSparks resource.
+          schema:
+            type: string
+            pattern: '^arn:aws:gamesparks:'
+            minLength: 20
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Adds tags to a GameSparks resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource to add the tags to.
+          schema:
+            type: string
+            pattern: '^arn:aws:gamesparks:'
+            minLength: 20
+            maxLength: 2048
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: The tags to add to the resource.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  '/game/{GameName}/snapshot/{SnapshotId}/generated-sdk-code-job':
+    post:
+      operationId: StartGeneratedCodeJob
+      description: ' Starts an asynchronous process that generates client code for system-defined and custom messages. The resulting code is collected as a .zip file and uploaded to a pre-signed Amazon S3 URL. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartGeneratedCodeJobResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: GameName
+          in: path
+          required: true
+          description: The name of the game.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 36
+        - name: SnapshotId
+          in: path
+          required: true
+          description: The identifier of the snapshot for which to generate code.
+          schema:
+            type: string
+            pattern: '^Snapshot_\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3,6}Z$'
+            minLength: 33
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Generator
+              properties:
+                Generator:
+                  description: Properties that specify the code generator for a generated code job.
+                  type: object
+                  properties:
+                    GameSdkVersion:
+                      allOf:
+                        - $ref: '#/components/schemas/GameSdkVersion'
+                        - description: The target version of the GameSparks Game SDK.
+                    Language:
+                      allOf:
+                        - $ref: '#/components/schemas/Language'
+                        - description: '<p>The programming language for the generated code.</p> <p> Not all languages are supported for each platform. For cases where multiple languages are supported, this parameter specifies the language to be used. If this value is omitted, the default language for the target platform will be used. </p>'
+                    TargetPlatform:
+                      allOf:
+                        - $ref: '#/components/schemas/TargetPlatform'
+                        - description: The platform that will be used to run the generated code.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{ResourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes tags from a GameSparks resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource to remove the tags from.
+          schema:
+            type: string
+            pattern: '^arn:aws:gamesparks:'
+            minLength: 20
+            maxLength: 2048
+        - name: tagKeys
+          in: query
+          required: true
+          description: The keys of the tags to remove.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 1
+            maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateGameResult:
+      type: object
+      properties:
+        Game:
+          allOf:
+            - $ref: '#/components/schemas/GameDetails'
+            - description: Details about the game that was created.
+    TagValue:
+      type: string
+      pattern: '^[\s\w+-=\.:/@]*$'
+      minLength: 0
+      maxLength: 256
+    ValidationException: {}
+    AccessDeniedException: {}
+    ThrottlingException: {}
+    ConflictException: {}
+    InternalServerException: {}
+    ServiceQuotaExceededException: {}
+    CreateSnapshotResult:
+      type: object
+      properties:
+        Snapshot:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotDetails'
+            - description: Properties that provide details of the created snapshot.
+    ResourceNotFoundException: {}
+    CreateStageResult:
+      type: object
+      properties:
+        Stage:
+          allOf:
+            - $ref: '#/components/schemas/StageDetails'
+            - description: Properties that describe the stage.
+    DeleteGameResult:
+      type: object
+      properties: {}
+    DeleteStageResult:
+      type: object
+      properties: {}
+    DisconnectPlayerResult:
+      type: object
+      properties:
+        DisconnectFailures:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionIdList'
+            - description: The list of the connection ids that could not be disconnected.
+        DisconnectSuccesses:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionIdList'
+            - description: The list of the connection ids that were disconnected.
+    ExportSnapshotResult:
+      type: object
+      properties:
+        S3Url:
+          allOf:
+            - $ref: '#/components/schemas/S3PresignedUrl'
+            - description: '<p>The presigned URL for the snapshot data.</p> <p> This URL will be available for 10 minutes, and can be used to download the snapshot content. If the URL expires, a new one can be requested using the same operation. </p>'
+    GetExtensionResult:
+      type: object
+      properties:
+        Extension:
+          allOf:
+            - $ref: '#/components/schemas/ExtensionDetails'
+            - description: Details about the extension.
+    GetExtensionVersionResult:
+      type: object
+      properties:
+        ExtensionVersion:
+          allOf:
+            - $ref: '#/components/schemas/ExtensionVersionDetails'
+            - description: The version of the extension.
+    GetGameResult:
+      type: object
+      properties:
+        Game:
+          allOf:
+            - $ref: '#/components/schemas/GameDetails'
+            - description: The details of the game.
+    GetGameConfigurationResult:
+      type: object
+      properties:
+        GameConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/GameConfigurationDetails'
+            - description: Details about the game configuration.
+    SectionName:
+      type: string
+      pattern: '^[a-zA-Z0-9.]+$'
+      minLength: 1
+      maxLength: 36
+    GetGeneratedCodeJobResult:
+      type: object
+      properties:
+        GeneratedCodeJob:
+          allOf:
+            - $ref: '#/components/schemas/GeneratedCodeJobDetails'
+            - description: Details about the generated code job.
+    GetPlayerConnectionStatusResult:
+      type: object
+      properties:
+        Connections:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionList'
+            - description: 'The list of connection ids, one for each connection in use by the player.'
+    GetSnapshotResult:
+      type: object
+      properties:
+        Snapshot:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotDetails'
+            - description: Properties that provide details of the snapshot.
+    GetStageResult:
+      type: object
+      properties:
+        Stage:
+          allOf:
+            - $ref: '#/components/schemas/StageDetails'
+            - description: Properties that provide details of the stage.
+    GetStageDeploymentResult:
+      type: object
+      properties:
+        StageDeployment:
+          allOf:
+            - $ref: '#/components/schemas/StageDeploymentDetails'
+            - description: Properties that provide details of the stage deployment.
+    ImportGameConfigurationResult:
+      type: object
+      properties:
+        GameConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/GameConfigurationDetails'
+            - description: Details about the game configuration.
+    RawGameConfigurationData:
+      type: string
+      minLength: 10
+      maxLength: 1024000
+    ListExtensionVersionsResult:
+      type: object
+      properties:
+        ExtensionVersions:
+          allOf:
+            - $ref: '#/components/schemas/ExtensionVersionDetailsList'
+            - description: The list of extension versions.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: <p>The token that indicates the start of the next sequential page of results.</p> <p> Use this value when making the next call to this operation to continue where the last one finished. </p>
+    ListExtensionsResult:
+      type: object
+      properties:
+        Extensions:
+          allOf:
+            - $ref: '#/components/schemas/ExtensionDetailsList'
+            - description: The list of extensions.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: <p>The token that indicates the start of the next sequential page of results.</p> <p> Use this value when making the next call to this operation to continue where the last one finished. </p>
+    ListGamesResult:
+      type: object
+      properties:
+        Games:
+          allOf:
+            - $ref: '#/components/schemas/GameSummaryList'
+            - description: The list of games.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: <p>The token that indicates the start of the next sequential page of results.</p> <p> Use this value when making the next call to this operation to continue where the last one finished. </p>
+    ListGeneratedCodeJobsResult:
+      type: object
+      properties:
+        GeneratedCodeJobs:
+          allOf:
+            - $ref: '#/components/schemas/GeneratedCodeJobDetailsList'
+            - description: The list of generated code jobs.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: <p>The token that indicates the start of the next sequential page of results.</p> <p> Use this value when making the next call to this operation to continue where the last one finished. </p>
+    ListSnapshotsResult:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: <p>The token that indicates the start of the next sequential page of results.</p> <p> Use this value when making the next call to this operation to continue where the last one finished. </p>
+        Snapshots:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotSummaryList'
+            - description: ' A list of snapshot summaries. You can use the returned snapshot IDs in the <code>UpdateSnapshot</code> and <code>GetSnapshot</code> operations. '
+    ListStageDeploymentsResult:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: <p>The token that indicates the start of the next sequential page of results.</p> <p> Use this value when making the next call to this operation to continue where the last one finished. </p>
+        StageDeployments:
+          allOf:
+            - $ref: '#/components/schemas/StageDeploymentList'
+            - description: ' A list of stage deployment summaries. You can use the deployment IDs in the <code>UpdateStageDeployment</code> and <code>GetStageDeployment</code> actions. '
+    ListStagesResult:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: <p>The token that indicates the start of the next sequential page of results.</p> <p> Use this value when making the next call to this operation to continue where the last one finished. </p>
+        Stages:
+          allOf:
+            - $ref: '#/components/schemas/StageSummaryList'
+            - description: ' A list of stage summaries. You can use the stage names in the <code>UpdateStage</code> and <code>GetStage</code> actions. '
+    ListTagsForResourceResult:
+      type: object
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags associated with the resource.
+    StartGeneratedCodeJobResult:
+      type: object
+      properties:
+        GeneratedCodeJobId:
+          allOf:
+            - $ref: '#/components/schemas/GeneratedCodeJobId'
+            - description: ' The identifier of the code generation job. You can use this identifier in the <code>GetGeneratedCodeJob</code> operation. '
+    GameSdkVersion:
+      type: string
+      pattern: '^((\d|[1-9]\d*)\.(\d|[0-9]\d*)\.(\d|[0-9]\d*)|LATEST)$'
+      minLength: 5
+      maxLength: 10
+    Language:
+      type: string
+      pattern: '^[a-zA-Z_]+$'
+      minLength: 1
+      maxLength: 16
+    TargetPlatform:
+      type: string
+      pattern: '^[a-zA-Z]+$'
+      minLength: 1
+      maxLength: 16
+    StartStageDeploymentResult:
+      type: object
+      properties:
+        StageDeployment:
+          allOf:
+            - $ref: '#/components/schemas/StageDeploymentDetails'
+            - description: Properties that describe the stage deployment.
+    TagResourceResult:
+      type: object
+      properties: {}
+    UntagResourceResult:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
+      minLength: 1
+      maxLength: 128
+    UpdateGameResult:
+      type: object
+      properties:
+        Game:
+          allOf:
+            - $ref: '#/components/schemas/GameDetails'
+            - description: The details of the game.
+    UpdateGameConfigurationResult:
+      type: object
+      properties:
+        GameConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/GameConfigurationDetails'
+            - description: Details about the game configuration.
+    SectionModification:
+      type: object
+      required:
+        - Operation
+        - Path
+        - Section
+      properties:
+        Operation:
+          allOf:
+            - $ref: '#/components/schemas/Operation'
+            - description: '<p>The operation to be performed on a configuration section.</p> <p> Content can be added, deleted, or replaced within a section. </p>'
+        Path:
+          allOf:
+            - $ref: '#/components/schemas/Path'
+            - description: The path within the section content to be modified.
+        Section:
+          allOf:
+            - $ref: '#/components/schemas/SectionName'
+            - description: The name of the section to be modified.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/Document'
+            - description: '<p>For add and replace operations, this is the value that will be used.</p> <p> This field should be omitted for delete operations. </p>'
+      description: A single modification to the configuration section.
+    UpdateSnapshotResult:
+      type: object
+      properties:
+        Snapshot:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotDetails'
+            - description: Properties that provide details of the updated snapshot.
+    UpdateStageResult:
+      type: object
+      properties:
+        Stage:
+          allOf:
+            - $ref: '#/components/schemas/StageDetails'
+            - description: Properties that provide details of the updated stage.
+    ARN:
+      type: string
+      pattern: '^[A-Za-z0-9:_/-]+$'
+      minLength: 20
+      maxLength: 2048
+    ByteSize:
+      type: integer
+      minimum: 0
+    ClientToken:
+      type: string
+      minLength: 33
+      maxLength: 126
+    DateTime:
+      type: string
+      format: date-time
+    ConnectionId:
+      type: string
+      minLength: 1
+      maxLength: 36
+    Connection:
+      type: object
+      properties:
+        Created:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time when the connection was created.
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionId'
+            - description: The identifier used to indicate a specific WebSocket connection.
+      description: Details about a WebSocket connection.
+    ConnectionIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConnectionId'
+    ConnectionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Connection'
+    GameDescription:
+      type: string
+      pattern: ^\S(.*\S)?$|^$
+      minLength: 0
+      maxLength: 250
+    GameName:
+      type: string
+      pattern: '^[a-zA-Z0-9_-]+$'
+      minLength: 1
+      maxLength: 36
+    TagMap:
+      type: object
+      minProperties: 1
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    CreateGameRequest:
+      type: object
+      required:
+        - GameName
+      title: CreateGameRequest
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: ' A client-defined token. With an active client token in the request, this action is idempotent. '
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/GameDescription'
+            - description: The description of the game.
+        GameName:
+          allOf:
+            - $ref: '#/components/schemas/GameName'
+            - description: The name of the game.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The list of tags to apply to the game.
+    GameDetails:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of this game.
+        Created:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date when the game was created.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/GameDescription'
+            - description: The description of the game.
+        EnableTerminationProtection:
+          allOf:
+            - $ref: '#/components/schemas/GameTerminationProtection'
+            - description: Determines if the game can be deleted.
+        LastUpdated:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date when the game was last modified.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/GameName'
+            - description: The name of the game.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/GameState'
+            - description: The state of the game.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags associated with the game.
+      description: Details about a game.
+    SnapshotDescription:
+      type: string
+      pattern: ^\S(.*\S)?$|^$
+      minLength: 0
+      maxLength: 250
+    CreateSnapshotRequest:
+      type: object
+      title: CreateSnapshotRequest
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotDescription'
+            - description: The description of the snapshot.
+    SnapshotDetails:
+      type: object
+      properties:
+        Created:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The timestamp of when the snapshot was created.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotDescription'
+            - description: The description of the snapshot.
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotId'
+            - description: The identifier of the snapshot.
+        LastUpdated:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The timestamp of when the snapshot was last updated.
+        Sections:
+          allOf:
+            - $ref: '#/components/schemas/Sections'
+            - description: The sections in the snapshot.
+      description: Properties that provide details of a snapshot.
+    StageDescription:
+      type: string
+      pattern: ^\S(.*\S)?$|^$
+      minLength: 0
+      maxLength: 250
+    RoleARN:
+      type: string
+      pattern: '^arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/.+$'
+      minLength: 20
+      maxLength: 2048
+    StageName:
+      type: string
+      pattern: '^[a-zA-Z0-9_-]+$'
+      minLength: 1
+      maxLength: 36
+    CreateStageRequest:
+      type: object
+      required:
+        - Role
+        - StageName
+      title: CreateStageRequest
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: ' A client-defined token. With an active client token in the request, this action is idempotent. '
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/StageDescription'
+            - description: The description of the stage.
+        Role:
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: ' The Amazon Resource Name (ARN) of the role to run the game with. This role can be a game-defined role or the default role that GameSparks created. '
+        StageName:
+          allOf:
+            - $ref: '#/components/schemas/StageName'
+            - description: The name of the stage.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The list of tags to apply to the stage.
+    StageDetails:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the stage.
+        Created:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The timestamp of when the stage was created.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/StageDescription'
+            - description: The description of the stage.
+        GameKey:
+          allOf:
+            - $ref: '#/components/schemas/GameKey'
+            - description: <p>The game key associated with the stage.</p> <p> The game key is a unique identifier that the game client uses to connect to the GameSparks backend. </p>
+        LastUpdated:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The timestamp of when the stage was last updated.
+        LogGroup:
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The Amazon CloudWatch log group for game runtimes deployed to the stage.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/StageName'
+            - description: The name of the stage.
+        Role:
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: The Amazon Resource Name (ARN) of the role used to run the game runtimes deployed to the stage.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/StageState'
+            - description: The state of the stage.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags associated with the stage.
+      description: Properties that provide details of a stage.
+    DeleteGameRequest:
+      type: object
+      title: DeleteGameRequest
+      properties: {}
+    DeleteStageRequest:
+      type: object
+      title: DeleteStageRequest
+      properties: {}
+    DeploymentAction:
+      type: string
+      enum:
+        - DEPLOY
+        - UNDEPLOY
+    DeploymentId:
+      type: string
+      pattern: ^\S(.*\S)?$
+      minLength: 1
+      maxLength: 128
+    Message:
+      type: string
+    ResultCode:
+      type: string
+      enum:
+        - SUCCESS
+        - INVALID_ROLE_FAILURE
+        - UNSPECIFIED_FAILURE
+    DeploymentResult:
+      type: object
+      properties:
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/Message'
+            - description: Details about the deployment result.
+        ResultCode:
+          allOf:
+            - $ref: '#/components/schemas/ResultCode'
+            - description: The type of deployment result.
+      description: The result of the deployment.
+    DeploymentState:
+      type: string
+      enum:
+        - PENDING
+        - IN_PROGRESS
+        - COMPLETED
+        - FAILED
+    PlayerId:
+      type: string
+      pattern: '^[a-zA-Z0-9_-]+$'
+      minLength: 1
+      maxLength: 44
+    DisconnectPlayerRequest:
+      type: object
+      title: DisconnectPlayerRequest
+      properties: {}
+    Document:
+      type: object
+      properties: {}
+      description: <p/>
+    SnapshotId:
+      type: string
+      pattern: '^Snapshot_\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3,6}Z$'
+      minLength: 33
+      maxLength: 36
+    ExportSnapshotRequest:
+      type: object
+      title: ExportSnapshotRequest
+      properties: {}
+    S3PresignedUrl:
+      type: string
+      pattern: '^https:\/\/(.*)\.s3(.*)\.amazonaws\.com\/(.*)$'
+      minLength: 10
+      maxLength: 2048
+    ExtensionDescription:
+      type: string
+      pattern: ^\S(.*\S)?$|^$
+      minLength: 0
+      maxLength: 250
+    ExtensionName:
+      type: string
+      pattern: '^[a-zA-Z0-9_-]+$'
+      minLength: 1
+      maxLength: 36
+    ExtensionNamespace:
+      type: string
+      pattern: '^[a-zA-Z0-9_-]+$'
+      minLength: 1
+      maxLength: 36
+    ExtensionDetails:
+      type: object
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ExtensionDescription'
+            - description: The description of the extension.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ExtensionName'
+            - description: The name of the extension.
+        Namespace:
+          allOf:
+            - $ref: '#/components/schemas/ExtensionNamespace'
+            - description: The namespace (qualifier) of the extension.
+      description: Details about the extension.
+    ExtensionDetailsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExtensionDetails'
+    ExtensionVersion:
+      type: string
+      minLength: 0
+      maxLength: 20
+    ExtensionVersionSchema:
+      type: string
+      minLength: 0
+      maxLength: 2048
+    ExtensionVersionDetails:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ExtensionName'
+            - description: The name of the extension.
+        Namespace:
+          allOf:
+            - $ref: '#/components/schemas/ExtensionNamespace'
+            - description: The namespace (qualifier) of the extension.
+        Schema:
+          allOf:
+            - $ref: '#/components/schemas/ExtensionVersionSchema'
+            - description: The model that defines the interface for this extension version.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/ExtensionVersion'
+            - description: The version of the extension.
+      description: Details about the extension version.
+    ExtensionVersionDetailsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExtensionVersionDetails'
+    Sections:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Section'
+    GameConfigurationDetails:
+      type: object
+      properties:
+        Created:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date when the game was created.
+        LastUpdated:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date when the game was last modified.
+        Sections:
+          allOf:
+            - $ref: '#/components/schemas/Sections'
+            - description: 'Configuration data, organized by section name.'
+      description: '<p>Details about the game configuration.</p> <p> The game configuration is organized into named sections, where the schema of each section is defined by an extension. The schema for these sections can be retrieved using the <code>GetExtensionVersion</code> operation. </p>'
+    GameTerminationProtection:
+      type: boolean
+    GameState:
+      type: string
+      enum:
+        - ACTIVE
+        - DELETING
+    GameKey:
+      type: string
+      minLength: 1
+      maxLength: 44
+    GameSummary:
+      type: object
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/GameDescription'
+            - description: The description of the game.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/GameName'
+            - description: The name of the game.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/GameState'
+            - description: The state of the game.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags associated with the game.
+      description: The summary of the properties of a game.
+    GameSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GameSummary'
+    GeneratedCodeJobDescription:
+      type: string
+      pattern: ^\S(.*\S)?$|^$
+      minLength: 0
+      maxLength: 250
+    GeneratedCodeJobId:
+      type: string
+      pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+    GeneratedCodeJobState:
+      type: string
+      enum:
+        - IN_PROGRESS
+        - COMPLETED
+        - FAILED
+        - PENDING
+    GeneratedCodeJobDetails:
+      type: object
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/GeneratedCodeJobDescription'
+            - description: The description of the generated code job.
+        ExpirationTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: <p>The expiration date and time for the download URL.</p> <p> The download URL us guaranteed to be available until at least this time. </p>
+        GeneratedCodeJobId:
+          allOf:
+            - $ref: '#/components/schemas/GeneratedCodeJobId'
+            - description: The identifier for the generated code job.
+        S3Url:
+          allOf:
+            - $ref: '#/components/schemas/S3PresignedUrl'
+            - description: A presigned URL that can be used to download the generated code.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/GeneratedCodeJobState'
+            - description: The status of the generated code job
+      description: Details about a generated code job.
+    GeneratedCodeJobDetailsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GeneratedCodeJobDetails'
+    Generator:
+      type: object
+      properties:
+        GameSdkVersion:
+          allOf:
+            - $ref: '#/components/schemas/GameSdkVersion'
+            - description: The target version of the GameSparks Game SDK.
+        Language:
+          allOf:
+            - $ref: '#/components/schemas/Language'
+            - description: '<p>The programming language for the generated code.</p> <p> Not all languages are supported for each platform. For cases where multiple languages are supported, this parameter specifies the language to be used. If this value is omitted, the default language for the target platform will be used. </p>'
+        TargetPlatform:
+          allOf:
+            - $ref: '#/components/schemas/TargetPlatform'
+            - description: The platform that will be used to run the generated code.
+      description: Properties that specify the code generator for a generated code job.
+    GetExtensionRequest:
+      type: object
+      title: GetExtensionRequest
+      properties: {}
+    GetExtensionVersionRequest:
+      type: object
+      title: GetExtensionVersionRequest
+      properties: {}
+    SectionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SectionName'
+      minItems: 1
+      maxItems: 100
+    GetGameConfigurationRequest:
+      type: object
+      title: GetGameConfigurationRequest
+      properties: {}
+    GetGameRequest:
+      type: object
+      title: GetGameRequest
+      properties: {}
+    GetGeneratedCodeJobRequest:
+      type: object
+      title: GetGeneratedCodeJobRequest
+      properties: {}
+    GetPlayerConnectionStatusRequest:
+      type: object
+      title: GetPlayerConnectionStatusRequest
+      properties: {}
+    GetSnapshotRequest:
+      type: object
+      title: GetSnapshotRequest
+      properties: {}
+    GetStageDeploymentRequest:
+      type: object
+      title: GetStageDeploymentRequest
+      properties: {}
+    StageDeploymentDetails:
+      type: object
+      properties:
+        Created:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The timestamp of when the stage deployment was created.
+        DeploymentAction:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentAction'
+            - description: The type of action of the stage deployment.
+        DeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The identifier of the deployment.
+        DeploymentResult:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentResult'
+            - description: The result of the deployment.
+        DeploymentState:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentState'
+            - description: The state of the deployment.
+        LastUpdated:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The timestamp of when the deployment was last updated.
+        SnapshotId:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotId'
+            - description: The identifier of the snapshot associated with the stage deployment.
+      description: Properties that provide details of a stage deployment.
+    GetStageRequest:
+      type: object
+      title: GetStageRequest
+      properties: {}
+    ImportGameConfigurationSource:
+      type: object
+      required:
+        - File
+      properties:
+        File:
+          allOf:
+            - $ref: '#/components/schemas/RawGameConfigurationData'
+            - description: The JSON string containing the configuration sections.
+      description: The source used to import configuration sections.
+    ImportGameConfigurationRequest:
+      type: object
+      required:
+        - ImportSource
+      title: ImportGameConfigurationRequest
+      properties:
+        ImportSource:
+          allOf:
+            - $ref: '#/components/schemas/ImportGameConfigurationSource'
+            - description: The source used to import configuration sections.
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    NextToken:
+      type: string
+      pattern: ^\S(.*\S)?$
+      minLength: 1
+      maxLength: 1024
+    ListExtensionVersionsRequest:
+      type: object
+      title: ListExtensionVersionsRequest
+      properties: {}
+    ListExtensionsRequest:
+      type: object
+      title: ListExtensionsRequest
+      properties: {}
+    ListGamesRequest:
+      type: object
+      title: ListGamesRequest
+      properties: {}
+    ListGeneratedCodeJobsRequest:
+      type: object
+      title: ListGeneratedCodeJobsRequest
+      properties: {}
+    ListSnapshotsRequest:
+      type: object
+      title: ListSnapshotsRequest
+      properties: {}
+    SnapshotSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SnapshotSummary'
+    ListStageDeploymentsRequest:
+      type: object
+      title: ListStageDeploymentsRequest
+      properties: {}
+    StageDeploymentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StageDeploymentSummary'
+    ListStagesRequest:
+      type: object
+      title: ListStagesRequest
+      properties: {}
+    StageSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StageSummary'
+    ResourceArn:
+      type: string
+      pattern: '^arn:aws:gamesparks:'
+      minLength: 20
+      maxLength: 2048
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    LogGroupName:
+      type: string
+      minLength: 1
+      maxLength: 512
+    Operation:
+      type: string
+      enum:
+        - ADD
+        - REMOVE
+        - REPLACE
+    Path:
+      type: string
+      pattern: '^\/.*[^\/]$'
+      minLength: 1
+      maxLength: 500
+    Section:
+      type: object
+      properties:
+        Attributes:
+          allOf:
+            - $ref: '#/components/schemas/Document'
+            - description: The content of a configuration section.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/SectionName'
+            - description: The name of the section.
+        Size:
+          allOf:
+            - $ref: '#/components/schemas/ByteSize'
+            - description: 'The size, in bytes, of the section contents.'
+      description: The configuration section.
+    SectionModificationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SectionModification'
+      minItems: 1
+      maxItems: 100
+    SnapshotSummary:
+      type: object
+      properties:
+        Created:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The timestamp of when the snapshot was created.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotDescription'
+            - description: The description of the snapshot.
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotId'
+            - description: The identifier of the snapshot.
+        LastUpdated:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: Then timestamp of when the snapshot was last updated.
+      description: The summary of the properties of a snapshot.
+    StageDeploymentSummary:
+      type: object
+      properties:
+        DeploymentAction:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentAction'
+            - description: The type of action of the deployment.
+        DeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The identifier of the deployment.
+        DeploymentResult:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentResult'
+            - description: The result of the deployment.
+        DeploymentState:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentState'
+            - description: The state of the deployment.
+        LastUpdated:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The timestamp of when the deployment was last updated.
+        SnapshotId:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotId'
+            - description: The identifier of the snapshot associated with the stage deployment.
+      description: The summary of the properties of a stage deployment.
+    StageState:
+      type: string
+      enum:
+        - ACTIVE
+        - DELETING
+    StageSummary:
+      type: object
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/StageDescription'
+            - description: The description of the stage.
+        GameKey:
+          allOf:
+            - $ref: '#/components/schemas/GameKey'
+            - description: <p>The game key associated with the stage.</p> <p> The game key is a unique identifier that the game client uses to connect to the GameSparks backend. </p>
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/StageName'
+            - description: The name of the stage.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/StageState'
+            - description: The state of the stage.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags associated with the stage.
+      description: The summary of the properties of a stage.
+    StartGeneratedCodeJobRequest:
+      type: object
+      required:
+        - Generator
+      title: StartGeneratedCodeJobRequest
+      properties:
+        Generator:
+          allOf:
+            - $ref: '#/components/schemas/Generator'
+            - description: Properties of the generator to use for the job.
+    StartStageDeploymentRequest:
+      type: object
+      required:
+        - SnapshotId
+      title: StartStageDeploymentRequest
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: ' A client-defined token. With an active client token in the request, this action is idempotent. '
+        SnapshotId:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotId'
+            - description: The identifier of the snapshot to deploy.
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 1
+      maxItems: 50
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags to add to the resource.
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+    UpdateGameConfigurationRequest:
+      type: object
+      required:
+        - Modifications
+      title: UpdateGameConfigurationRequest
+      properties:
+        Modifications:
+          allOf:
+            - $ref: '#/components/schemas/SectionModificationList'
+            - description: The list of modifications to make.
+    UpdateGameRequest:
+      type: object
+      title: UpdateGameRequest
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/GameDescription'
+            - description: The description of the game.
+    UpdateSnapshotRequest:
+      type: object
+      title: UpdateSnapshotRequest
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotDescription'
+            - description: The description of the snapshot.
+    UpdateStageRequest:
+      type: object
+      title: UpdateStageRequest
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/StageDescription'
+            - description: The description of the stage.
+        Role:
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: The Amazon Resource Name (ARN) of the role to use for the game snapshots deployed to this stage.
+security:
+  - hmac: []

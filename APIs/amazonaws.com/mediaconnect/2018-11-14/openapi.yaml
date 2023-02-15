@@ -542,7 +542,7 @@ paths:
                         - $ref: '#/components/schemas/__integer'
                         - xml:
                             name: maxLatency
-                          description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+                          description: 'The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.'
                     MaxSyncBuffer:
                       allOf:
                         - $ref: '#/components/schemas/__integer'
@@ -573,6 +573,30 @@ paths:
                         - xml:
                             name: protocol
                           description: The protocol that is used by the source.
+                    SenderControlPort:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: senderControlPort
+                          description: The port that the flow uses to send outbound requests to initiate connection with the sender.
+                    SenderIpAddress:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: senderIpAddress
+                          description: The IP address that the flow communicates with to initiate connection with the sender.
+                    SourceListenerAddress:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: sourceListenerAddress
+                          description: Source IP or domain name for SRT-caller protocol.
+                    SourceListenerPort:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: sourceListenerPort
+                          description: Source port for SRT-caller protocol.
                     StreamId:
                       allOf:
                         - $ref: '#/components/schemas/__string'
@@ -592,7 +616,7 @@ paths:
                             name: whitelistCidr
                           description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
                 sourceFailoverConfig:
-                  description: The settings for source failover
+                  description: The settings for source failover.
                   type: object
                   properties:
                     FailoverMode:
@@ -628,6 +652,22 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/VpcInterfaceRequest'
+                maintenance:
+                  description: Create maintenance setting for a flow
+                  type: object
+                  properties:
+                    MaintenanceDay:
+                      allOf:
+                        - $ref: '#/components/schemas/MaintenanceDay'
+                        - xml:
+                            name: maintenanceDay
+                          description: A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+                    MaintenanceStartHour:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: maintenanceStartHour
+                          description: 'UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -873,7 +913,7 @@ paths:
               type: object
               properties:
                 sourceFailoverConfig:
-                  description: The settings for source failover
+                  description: The settings for source failover.
                   type: object
                   properties:
                     FailoverMode:
@@ -899,6 +939,28 @@ paths:
                         - $ref: '#/components/schemas/State'
                         - xml:
                             name: state
+                maintenance:
+                  description: Update maintenance setting for a flow
+                  type: object
+                  properties:
+                    MaintenanceDay:
+                      allOf:
+                        - $ref: '#/components/schemas/MaintenanceDay'
+                        - xml:
+                            name: maintenanceDay
+                          description: A day of a week when the maintenance will happen. use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+                    MaintenanceScheduledDate:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: maintenanceScheduledDate
+                          description: 'A scheduled date in ISO UTC format when the maintenance will happen. Use YYYY-MM-DD format. Example: 2021-01-30.'
+                    MaintenanceStartHour:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: maintenanceStartHour
+                          description: 'UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.'
   '/v1/offerings/{offeringArn}':
     get:
       operationId: DescribeOffering
@@ -1831,7 +1893,7 @@ paths:
                             name: url
                           description: The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
                 maxLatency:
-                  description: The maximum latency in milliseconds for Zixi-based streams.
+                  description: 'The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.'
                   type: integer
                 mediaStreamOutputConfigurations:
                   description: 'The media streams that are associated with the output, and the parameters for those associations.'
@@ -1856,8 +1918,16 @@ paths:
                     - st2110-jpegxs
                     - cdi
                     - srt-listener
+                    - srt-caller
+                    - fujitsu-qos
                 remoteId:
                   description: The remote ID for the Zixi-pull stream.
+                  type: string
+                senderControlPort:
+                  description: The port that the flow uses to send outbound requests to initiate connection with the sender.
+                  type: integer
+                senderIpAddress:
+                  description: The IP address that the flow communicates with to initiate connection with the sender.
                   type: string
                 smoothingLatency:
                   description: 'The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.'
@@ -2080,7 +2150,7 @@ paths:
                   description: 'The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.'
                   type: integer
                 maxLatency:
-                  description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+                  description: 'The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.'
                   type: integer
                 maxSyncBuffer:
                   description: The size of the buffer (in milliseconds) to use to sync incoming source data.
@@ -2105,6 +2175,20 @@ paths:
                     - st2110-jpegxs
                     - cdi
                     - srt-listener
+                    - srt-caller
+                    - fujitsu-qos
+                senderControlPort:
+                  description: The port that the flow uses to send outbound requests to initiate connection with the sender.
+                  type: integer
+                senderIpAddress:
+                  description: The IP address that the flow communicates with to initiate connection with the sender.
+                  type: string
+                sourceListenerAddress:
+                  description: Source IP or domain name for SRT-caller protocol.
+                  type: string
+                sourceListenerPort:
+                  description: Source port for SRT-caller protocol.
+                  type: integer
                 streamId:
                   description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
                   type: string
@@ -2732,7 +2816,7 @@ components:
             - $ref: '#/components/schemas/__integer'
             - xml:
                 name: maxLatency
-              description: The maximum latency in milliseconds for Zixi-based streams.
+              description: 'The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.'
         MediaStreamOutputConfigurations:
           allOf:
             - $ref: '#/components/schemas/__listOfMediaStreamOutputConfigurationRequest'
@@ -2769,6 +2853,12 @@ components:
             - xml:
                 name: remoteId
               description: The remote ID for the Zixi-pull output stream.
+        SenderControlPort:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: senderControlPort
+              description: The port that the flow uses to send outbound requests to initiate connection with the sender.
         SmoothingLatency:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -2842,7 +2932,7 @@ components:
             - $ref: '#/components/schemas/__integer'
             - xml:
                 name: maxLatency
-              description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+              description: 'The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.'
         MaxSyncBuffer:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -2873,6 +2963,30 @@ components:
             - xml:
                 name: protocol
               description: The protocol that is used by the source.
+        SenderControlPort:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: senderControlPort
+              description: The port that the flow uses to send outbound requests to initiate connection with the sender.
+        SenderIpAddress:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: senderIpAddress
+              description: The IP address that the flow communicates with to initiate connection with the sender.
+        SourceListenerAddress:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: sourceListenerAddress
+              description: Source IP or domain name for SRT-caller protocol.
+        SourceListenerPort:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: sourceListenerPort
+              description: Source port for SRT-caller protocol.
         StreamId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -3075,6 +3189,8 @@ components:
         - st2110-jpegxs
         - cdi
         - srt-listener
+        - srt-caller
+        - fujitsu-qos
     FailoverMode:
       type: string
       enum:
@@ -3095,6 +3211,16 @@ components:
       enum:
         - ENABLED
         - DISABLED
+    MaintenanceDay:
+      type: string
+      enum:
+        - Monday
+        - Tuesday
+        - Wednesday
+        - Thursday
+        - Friday
+        - Saturday
+        - Sunday
     CreateFlow420Exception: {}
     DeleteFlowResponse:
       type: object
@@ -3610,6 +3736,25 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/VpcInterface'
+    AddMaintenance:
+      type: object
+      required:
+        - MaintenanceDay
+        - MaintenanceStartHour
+      properties:
+        MaintenanceDay:
+          allOf:
+            - $ref: '#/components/schemas/MaintenanceDay'
+            - xml:
+                name: maintenanceDay
+              description: A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+        MaintenanceStartHour:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: maintenanceStartHour
+              description: 'UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.'
+      description: Create maintenance setting for a flow
     MediaStreamAttributesRequest:
       type: object
       properties:
@@ -3690,7 +3835,7 @@ components:
             - $ref: '#/components/schemas/State'
             - xml:
                 name: state
-      description: The settings for source failover
+      description: The settings for source failover.
     CreateFlowRequest:
       type: object
       required:
@@ -3748,6 +3893,11 @@ components:
             - xml:
                 name: vpcInterfaces
               description: The VPC interfaces you want on the flow.
+        Maintenance:
+          allOf:
+            - $ref: '#/components/schemas/AddMaintenance'
+            - xml:
+                name: maintenance
       description: Creates a new flow. The request must include one source. The request optionally can include outputs (up to 50) and entitlements (up to 50).
     Flow:
       type: object
@@ -3835,6 +3985,11 @@ components:
             - xml:
                 name: vpcInterfaces
               description: The VPC Interfaces for this flow.
+        Maintenance:
+          allOf:
+            - $ref: '#/components/schemas/Maintenance'
+            - xml:
+                name: maintenance
       description: 'The settings for a flow, including its source, outputs, and entitlements.'
     DeleteFlowRequest:
       type: object
@@ -4284,6 +4439,18 @@ components:
             - xml:
                 name: name
               description: The name of the source.
+        SenderControlPort:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: senderControlPort
+              description: The port that the flow uses to send outbound requests to initiate connection with the sender.
+        SenderIpAddress:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: senderIpAddress
+              description: The IP address that the flow communicates with to initiate connection with the sender.
         SourceArn:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -4309,6 +4476,34 @@ components:
                 name: whitelistCidr
               description: 'The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.'
       description: The settings for the source of the flow.
+    Maintenance:
+      type: object
+      properties:
+        MaintenanceDay:
+          allOf:
+            - $ref: '#/components/schemas/MaintenanceDay'
+            - xml:
+                name: maintenanceDay
+              description: A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+        MaintenanceDeadline:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: maintenanceDeadline
+              description: 'The Maintenance has to be performed before this deadline in ISO UTC format. Example: 2021-01-30T08:30:00Z.'
+        MaintenanceScheduledDate:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: maintenanceScheduledDate
+              description: 'A scheduled date in ISO UTC format when the maintenance will happen. Use YYYY-MM-DD format. Example: 2021-01-30.'
+        MaintenanceStartHour:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: maintenanceStartHour
+              description: 'UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.'
+      description: The maintenance setting of a flow
     Range:
       type: string
       enum:
@@ -4557,6 +4752,11 @@ components:
             - xml:
                 name: status
               description: The current status of the flow.
+        Maintenance:
+          allOf:
+            - $ref: '#/components/schemas/Maintenance'
+            - xml:
+                name: maintenance
       description: 'Provides a summary of a flow, including its ARN, Availability Zone, and source type.'
     MediaStreamAttributes:
       type: object
@@ -4758,7 +4958,7 @@ components:
             - $ref: '#/components/schemas/__integer'
             - xml:
                 name: maxLatency
-              description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+              description: 'The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.'
         MaxSyncBuffer:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -4783,12 +4983,36 @@ components:
             - xml:
                 name: remoteId
               description: The remote ID for the Zixi-pull stream.
+        SenderControlPort:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: senderControlPort
+              description: The port that the flow uses to send outbound requests to initiate connection with the sender.
+        SenderIpAddress:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: senderIpAddress
+              description: The IP address that the flow communicates with to initiate connection with the sender.
         SmoothingLatency:
           allOf:
             - $ref: '#/components/schemas/__integer'
             - xml:
                 name: smoothingLatency
               description: 'The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.'
+        SourceListenerAddress:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: sourceListenerAddress
+              description: Source IP or domain name for SRT-caller protocol.
+        SourceListenerPort:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: sourceListenerPort
+              description: Source port for SRT-caller protocol.
         StreamId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -5045,7 +5269,7 @@ components:
             - $ref: '#/components/schemas/State'
             - xml:
                 name: state
-      description: The settings for source failover
+      description: The settings for source failover.
     UpdateFlowEntitlementRequest:
       type: object
       title: UpdateFlowEntitlementRequest
@@ -5143,7 +5367,7 @@ components:
             - $ref: '#/components/schemas/__integer'
             - xml:
                 name: maxLatency
-              description: The maximum latency in milliseconds for Zixi-based streams.
+              description: 'The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.'
         MediaStreamOutputConfigurations:
           allOf:
             - $ref: '#/components/schemas/__listOfMediaStreamOutputConfigurationRequest'
@@ -5174,6 +5398,18 @@ components:
             - xml:
                 name: remoteId
               description: The remote ID for the Zixi-pull stream.
+        SenderControlPort:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: senderControlPort
+              description: The port that the flow uses to send outbound requests to initiate connection with the sender.
+        SenderIpAddress:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: senderIpAddress
+              description: The IP address that the flow communicates with to initiate connection with the sender.
         SmoothingLatency:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -5193,6 +5429,28 @@ components:
                 name: vpcInterfaceAttachment
               description: The name of the VPC interface attachment to use for this output.
       description: The fields that you want to update in the output.
+    UpdateMaintenance:
+      type: object
+      properties:
+        MaintenanceDay:
+          allOf:
+            - $ref: '#/components/schemas/MaintenanceDay'
+            - xml:
+                name: maintenanceDay
+              description: A day of a week when the maintenance will happen. use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+        MaintenanceScheduledDate:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: maintenanceScheduledDate
+              description: 'A scheduled date in ISO UTC format when the maintenance will happen. Use YYYY-MM-DD format. Example: 2021-01-30.'
+        MaintenanceStartHour:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: maintenanceStartHour
+              description: 'UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.'
+      description: Update maintenance setting for a flow
     UpdateFlowRequest:
       type: object
       title: UpdateFlowRequest
@@ -5202,6 +5460,11 @@ components:
             - $ref: '#/components/schemas/UpdateFailoverConfig'
             - xml:
                 name: sourceFailoverConfig
+        Maintenance:
+          allOf:
+            - $ref: '#/components/schemas/UpdateMaintenance'
+            - xml:
+                name: maintenance
       description: A request to update flow.
     UpdateFlowSourceRequest:
       type: object
@@ -5242,7 +5505,7 @@ components:
             - $ref: '#/components/schemas/__integer'
             - xml:
                 name: maxLatency
-              description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+              description: 'The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.'
         MaxSyncBuffer:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -5267,6 +5530,30 @@ components:
             - xml:
                 name: protocol
               description: The protocol that is used by the source.
+        SenderControlPort:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: senderControlPort
+              description: The port that the flow uses to send outbound requests to initiate connection with the sender.
+        SenderIpAddress:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: senderIpAddress
+              description: The IP address that the flow communicates with to initiate connection with the sender.
+        SourceListenerAddress:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: sourceListenerAddress
+              description: Source IP or domain name for SRT-caller protocol.
+        SourceListenerPort:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: sourceListenerPort
+              description: Source port for SRT-caller protocol.
         StreamId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -5301,7 +5588,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: name
-              description: Immutable and has to be a unique against other VpcInterfaces in this Flow
+              description: Immutable and has to be a unique against other VpcInterfaces in this Flow.
         NetworkInterfaceIds:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'

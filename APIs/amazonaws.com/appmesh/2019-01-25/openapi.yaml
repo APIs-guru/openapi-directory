@@ -185,7 +185,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -317,7 +317,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -421,6 +421,8 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/EgressFilter'
                         - description: The egress filter rules for the service mesh.
+                    serviceDiscovery:
+                      $ref: '#/components/schemas/MeshServiceDiscovery'
                 tags:
                   description: 'Optional metadata that you can apply to the service mesh to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
                   type: array
@@ -568,7 +570,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -704,7 +706,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -794,7 +796,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -912,7 +914,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -926,7 +928,7 @@ paths:
   '/v20190125/meshes/{meshName}/virtualNodes':
     put:
       operationId: CreateVirtualNode
-      description: '<p>Creates a virtual node within a service mesh.</p> <p> A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can specify the service discovery information for your task group, and whether the proxy running in a task group will communicate with other proxies using Transport Layer Security (TLS).</p> <p>You define a <code>listener</code> for any inbound traffic that your virtual node expects. Any virtual service that your virtual node expects to communicate to is specified as a <code>backend</code>.</p> <p>The response metadata for your new virtual node contains the <code>arn</code> that is associated with the virtual node. Set this value to the full ARN; for example, <code>arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp</code>) as the <code>APPMESH_RESOURCE_ARN</code> environment variable for your task group''s Envoy proxy container in your task definition or pod spec. This is then mapped to the <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p> <note> <p>By default, App Mesh uses the name of the resource you specified in <code>APPMESH_RESOURCE_ARN</code> when Envoy is referring to itself in metrics and traces. You can override this behavior by setting the <code>APPMESH_RESOURCE_CLUSTER</code> environment variable with your own name.</p> </note> <p>For more information about virtual nodes, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html">Virtual nodes</a>. You must be using <code>1.15.0</code> or later of the Envoy image when setting these variables. For more information aboutApp Mesh Envoy variables, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html">Envoy image</a> in the AWS App Mesh User Guide.</p>'
+      description: '<p>Creates a virtual node within a service mesh.</p> <p> A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can specify the service discovery information for your task group, and whether the proxy running in a task group will communicate with other proxies using Transport Layer Security (TLS).</p> <p>You define a <code>listener</code> for any inbound traffic that your virtual node expects. Any virtual service that your virtual node expects to communicate to is specified as a <code>backend</code>.</p> <p>The response metadata for your new virtual node contains the <code>arn</code> that is associated with the virtual node. Set this value to the full ARN; for example, <code>arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp</code>) as the <code>APPMESH_RESOURCE_ARN</code> environment variable for your task group''s Envoy proxy container in your task definition or pod spec. This is then mapped to the <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p> <note> <p>By default, App Mesh uses the name of the resource you specified in <code>APPMESH_RESOURCE_ARN</code> when Envoy is referring to itself in metrics and traces. You can override this behavior by setting the <code>APPMESH_RESOURCE_CLUSTER</code> environment variable with your own name.</p> </note> <p>For more information about virtual nodes, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html">Virtual nodes</a>. You must be using <code>1.15.0</code> or later of the Envoy image when setting these variables. For more information aboutApp Mesh Envoy variables, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html">Envoy image</a> in the App Mesh User Guide.</p>'
       responses:
         '200':
           description: Success
@@ -994,7 +996,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -1122,7 +1124,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -1204,7 +1206,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -1316,7 +1318,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -1398,7 +1400,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then the account that you specify must share the mesh with your account before you can create the resource in the service mesh. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -1508,7 +1510,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -1592,7 +1594,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -1679,7 +1681,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -1770,7 +1772,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -1943,7 +1945,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -2027,6 +2029,8 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/EgressFilter'
                         - description: The egress filter rules for the service mesh.
+                    serviceDiscovery:
+                      $ref: '#/components/schemas/MeshServiceDiscovery'
   '/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}':
     delete:
       operationId: DeleteRoute
@@ -2092,7 +2096,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -2179,7 +2183,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -2270,7 +2274,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -2392,7 +2396,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -2471,7 +2475,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -2554,7 +2558,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -2658,7 +2662,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -2737,7 +2741,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -2820,7 +2824,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -2934,7 +2938,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -3013,7 +3017,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -3096,7 +3100,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -3194,7 +3198,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -3271,7 +3275,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -3352,7 +3356,7 @@ paths:
         - name: meshOwner
           in: query
           required: false
-          description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+          description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
           schema:
             type: string
             minLength: 12
@@ -3759,6 +3763,14 @@ components:
             - $ref: '#/components/schemas/EgressFilterType'
             - description: 'The egress filter type. By default, the type is <code>DROP_ALL</code>, which allows egress only from virtual nodes to other defined resources in the service mesh (and any traffic to <code>*.amazonaws.com</code> for Amazon Web Services API calls). You can set the egress filter type to <code>ALLOW_ALL</code> to allow egress to any endpoint inside or outside of the service mesh.'
       description: An object that represents the egress filter rules for a service mesh.
+    MeshServiceDiscovery:
+      type: object
+      properties:
+        ipPreference:
+          allOf:
+            - $ref: '#/components/schemas/IpPreference'
+            - description: The IP version to use to control traffic within the mesh.
+      description: An object that represents the service discovery information for a service mesh.
     CreateRouteOutput:
       type: object
       required:
@@ -3828,6 +3840,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TcpRouteAction'
             - description: The action to take if a match is determined.
+        match:
+          allOf:
+            - $ref: '#/components/schemas/TcpRouteMatch'
+            - description: An object that represents the criteria for determining a request match.
         timeout:
           allOf:
             - $ref: '#/components/schemas/TcpTimeout'
@@ -3854,8 +3870,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/VirtualGatewayListener'
-      minItems: 0
-      maxItems: 1
     VirtualGatewayLogging:
       type: object
       properties:
@@ -3890,8 +3904,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Listener'
-      minItems: 0
-      maxItems: 1
     Logging:
       type: object
       properties:
@@ -3926,8 +3938,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/VirtualRouterListener'
-      minItems: 1
-      maxItems: 1
     CreateVirtualServiceOutput:
       type: object
       required:
@@ -4281,10 +4291,14 @@ components:
       required:
         - path
       properties:
+        format:
+          allOf:
+            - $ref: '#/components/schemas/LoggingFormat'
+            - description: The specified format for the logs. The format is either <code>json_format</code> or <code>text_format</code>.
         path:
           allOf:
             - $ref: '#/components/schemas/FilePath'
-            - description: '<p>The file path to write access logs to. You can use <code>/dev/stdout</code> to send access logs to standard out and configure your Envoy container to use a log driver, such as <code>awslogs</code>, to export the access logs to a log storage service such as Amazon CloudWatch Logs. You can also specify a path in the Envoy container''s file system to write the files to disk.</p> <note> <p>The Envoy process must have write permissions to the path that you specify here. Otherwise, Envoy fails to bootstrap properly.</p> </note>'
+            - description: '<p>The file path to write access logs to. You can use <code>/dev/stdout</code> to send access logs to standard out and configure your Envoy container to use a log driver, such as <code>awslogs</code>, to export the access logs to a log storage service such as Amazon CloudWatch Logs. You can also specify a path in the Envoy container''s file system to write the files to disk.</p> <pre><code> &lt;note&gt; &lt;p&gt;The Envoy process must have write permissions to the path that you specify here. Otherwise, Envoy fails to bootstrap properly.&lt;/p&gt; &lt;/note&gt; </code></pre>'
       description: An object that represents an access log file.
     AccessLog:
       type: object
@@ -4324,7 +4338,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsCloudMapInstanceAttributeValue'
             - description: The value of an Cloud Map service instance attribute key. Any Cloud Map service instance that contains the specified key and value is returned.
-      description: <p>An object that represents the Cloud Map attribute information for your virtual node.</p> <note> <p>AWS Cloud Map is not available in the eu-south-1 Region.</p> </note>
+      description: <p>An object that represents the Cloud Map attribute information for your virtual node.</p> <note> <p>Cloud Map is not available in the eu-south-1 Region.</p> </note>
     AwsCloudMapInstanceAttributes:
       type: array
       items:
@@ -4333,6 +4347,13 @@ components:
       type: string
       minLength: 1
       maxLength: 1024
+    IpPreference:
+      type: string
+      enum:
+        - IPv6_PREFERRED
+        - IPv4_PREFERRED
+        - IPv4_ONLY
+        - IPv6_ONLY
     AwsCloudMapServiceDiscovery:
       type: object
       required:
@@ -4343,6 +4364,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsCloudMapInstanceAttributes'
             - description: A string map that contains attributes with values that you can use to filter instances by any custom attribute that you specified when you registered the instance. Only instances that match all of the specified key/value pairs will be returned.
+        ipPreference:
+          allOf:
+            - $ref: '#/components/schemas/IpPreference'
+            - description: The preferred IP version that this virtual node uses. Setting the IP preference on the virtual node only overrides the IP preference set for the mesh on this specific node.
         namespaceName:
           allOf:
             - $ref: '#/components/schemas/AwsCloudMapName'
@@ -4436,7 +4461,7 @@ components:
         subjectAlternativeNames:
           allOf:
             - $ref: '#/components/schemas/SubjectAlternativeNames'
-            - description: A reference to an object that represents the SANs for a Transport Layer Security (TLS) validation context.
+            - description: 'A reference to an object that represents the SANs for a Transport Layer Security (TLS) validation context. If you don''t specify SANs on the <i>terminating</i> mesh endpoint, the Envoy proxy for that node doesn''t verify the SAN on a peer client certificate. If you don''t specify SANs on the <i>originating</i> mesh endpoint, the SAN on the certificate provided by the terminating endpoint must match the mesh endpoint service discovery configuration. Since SPIRE vended certificates have a SPIFFE ID as a name, you must set the SAN since the name doesn''t match the service discovery name.'
         trust:
           allOf:
             - $ref: '#/components/schemas/TlsValidationContextTrust'
@@ -4562,6 +4587,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/EgressFilter'
             - description: The egress filter rules for the service mesh.
+        serviceDiscovery:
+          $ref: '#/components/schemas/MeshServiceDiscovery'
       description: An object that represents the specification of a service mesh.
     CreateMeshInput:
       type: object
@@ -5050,6 +5077,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Hostname'
             - description: 'Specifies the DNS service discovery hostname for the virtual node. '
+        ipPreference:
+          allOf:
+            - $ref: '#/components/schemas/IpPreference'
+            - description: The preferred IP version that this virtual node uses. Setting the IP preference on the virtual node only overrides the IP preference set for the mesh on this specific node.
         responseType:
           allOf:
             - $ref: '#/components/schemas/DnsResponseType'
@@ -5084,6 +5115,18 @@ components:
       type: string
       minLength: 1
       maxLength: 253
+    LoggingFormat:
+      type: object
+      properties:
+        json:
+          allOf:
+            - $ref: '#/components/schemas/JsonFormat'
+            - description: <p/>
+        text:
+          allOf:
+            - $ref: '#/components/schemas/TextFormat'
+            - description: <p/>
+      description: An object that represents the format for the logs.
     FilePath:
       type: string
       minLength: 1
@@ -5114,11 +5157,11 @@ components:
         meshOwner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+            - description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
         resourceOwner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: 'The AWS IAM account ID of the resource owner. If the account ID is not your own, then it''s the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+            - description: 'The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it''s the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
         uid:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -5198,11 +5241,11 @@ components:
         meshOwner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+            - description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
         resourceOwner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: 'The AWS IAM account ID of the resource owner. If the account ID is not your own, then it''s the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+            - description: 'The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it''s the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
         version:
           allOf:
             - $ref: '#/components/schemas/Long'
@@ -5227,6 +5270,10 @@ components:
         - ACTIVE
         - INACTIVE
         - DELETED
+    ListenerPort:
+      type: integer
+      minimum: 1
+      maximum: 65535
     GatewayRouteVirtualService:
       type: object
       required:
@@ -5242,6 +5289,10 @@ components:
       required:
         - virtualService
       properties:
+        port:
+          allOf:
+            - $ref: '#/components/schemas/ListenerPort'
+            - description: The port number of the gateway route target.
         virtualService:
           allOf:
             - $ref: '#/components/schemas/GatewayRouteVirtualService'
@@ -5272,6 +5323,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/GrpcGatewayRouteMetadataList'
             - description: The gateway route metadata to be matched on.
+        port:
+          allOf:
+            - $ref: '#/components/schemas/ListenerPort'
+            - description: The port number to match from the request.
         serviceName:
           allOf:
             - $ref: '#/components/schemas/ServiceName'
@@ -5431,6 +5486,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MethodName'
             - description: 'The method name to match from the request. If you specify a name, you must also specify a <code>serviceName</code>.'
+        port:
+          allOf:
+            - $ref: '#/components/schemas/ListenerPort'
+            - description: The port number to match on.
         serviceName:
           allOf:
             - $ref: '#/components/schemas/ServiceName'
@@ -5624,6 +5683,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/HttpPathMatch'
             - description: The path to match on.
+        port:
+          allOf:
+            - $ref: '#/components/schemas/ListenerPort'
+            - description: The port number to match on.
         prefix:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -5659,7 +5722,9 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.
         match:
-          $ref: '#/components/schemas/HeaderMatchMethod'
+          allOf:
+            - $ref: '#/components/schemas/HeaderMatchMethod'
+            - description: An object that represents the method and value to match with the header value sent in a request. Specify one match method.
         name:
           allOf:
             - $ref: '#/components/schemas/HeaderName'
@@ -5809,6 +5874,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/HttpPathMatch'
             - description: The client request path to match on.
+        port:
+          allOf:
+            - $ref: '#/components/schemas/ListenerPort'
+            - description: The port number to match on.
         prefix:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -5863,6 +5932,33 @@ components:
       enum:
         - http
         - https
+    JsonFormatRef:
+      type: object
+      required:
+        - key
+        - value
+      properties:
+        key:
+          allOf:
+            - $ref: '#/components/schemas/JsonKey'
+            - description: The specified key for the JSON.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/JsonValue'
+            - description: The specified value for the JSON.
+      description: An object that represents the key value pairs for the JSON.
+    JsonFormat:
+      type: array
+      items:
+        $ref: '#/components/schemas/JsonFormatRef'
+    JsonKey:
+      type: string
+      minLength: 1
+      maxLength: 100
+    JsonValue:
+      type: string
+      minLength: 1
+      maxLength: 100
     ListGatewayRoutesLimit:
       type: integer
       minimum: 1
@@ -6100,7 +6196,7 @@ components:
         acm:
           allOf:
             - $ref: '#/components/schemas/ListenerTlsAcmCertificate'
-            - description: A reference to an object that represents an AWS Certicate Manager (ACM) certificate.
+            - description: A reference to an object that represents an Certificate Manager certificate.
         file:
           allOf:
             - $ref: '#/components/schemas/ListenerTlsFileCertificate'
@@ -6139,7 +6235,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: 'The Amazon Resource Name (ARN) for the certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites">Transport Layer Security (TLS)</a>.'
-      description: An object that represents an AWS Certicate Manager (ACM) certificate.
+      description: An object that represents an Certificate Manager certificate.
     SdsSecretName:
       type: string
     SubjectAlternativeNames:
@@ -6184,6 +6280,10 @@ components:
             - $ref: '#/components/schemas/SdsSecretName'
             - description: A reference to an object that represents the name of the secret for a Transport Layer Security (TLS) Secret Discovery Service validation context trust.
       description: 'An object that represents a Transport Layer Security (TLS) Secret Discovery Service validation context trust. The proxy must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html">TLS documentation</a> for more info.'
+    TextFormat:
+      type: string
+      minLength: 1
+      maxLength: 1000
     MaxConnections:
       type: integer
       minimum: 1
@@ -6231,11 +6331,11 @@ components:
         meshOwner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+            - description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
         resourceOwner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: 'The AWS IAM account ID of the resource owner. If the account ID is not your own, then it''s the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+            - description: 'The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it''s the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
         version:
           allOf:
             - $ref: '#/components/schemas/Long'
@@ -6300,11 +6400,11 @@ components:
         meshOwner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+            - description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
         resourceOwner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: 'The AWS IAM account ID of the resource owner. If the account ID is not your own, then it''s the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+            - description: 'The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it''s the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
         routeName:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
@@ -6377,6 +6477,14 @@ components:
             - $ref: '#/components/schemas/WeightedTargets'
             - description: An object that represents the targets that traffic is routed to when a request matches the route.
       description: An object that represents the action to take if a match is determined.
+    TcpRouteMatch:
+      type: object
+      properties:
+        port:
+          allOf:
+            - $ref: '#/components/schemas/ListenerPort'
+            - description: The port number to match on.
+      description: An object representing the TCP route to match.
     TlsValidationContextTrust:
       type: object
       properties:
@@ -6520,6 +6628,10 @@ components:
       required:
         - path
       properties:
+        format:
+          allOf:
+            - $ref: '#/components/schemas/LoggingFormat'
+            - description: The specified format for the virtual gateway access logs. It can be either <code>json_format</code> or <code>text_format</code>.
         path:
           allOf:
             - $ref: '#/components/schemas/FilePath'
@@ -6767,11 +6879,11 @@ components:
         meshOwner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+            - description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
         resourceOwner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: 'The AWS IAM account ID of the resource owner. If the account ID is not your own, then it''s the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+            - description: 'The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it''s the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
         version:
           allOf:
             - $ref: '#/components/schemas/Long'
@@ -7034,11 +7146,11 @@ components:
         meshOwner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+            - description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
         resourceOwner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: 'The AWS IAM account ID of the resource owner. If the account ID is not your own, then it''s the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+            - description: 'The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it''s the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
         version:
           allOf:
             - $ref: '#/components/schemas/Long'
@@ -7105,11 +7217,11 @@ components:
         meshOwner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+            - description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
         resourceOwner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: 'The AWS IAM account ID of the resource owner. If the account ID is not your own, then it''s the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+            - description: 'The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it''s the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
         version:
           allOf:
             - $ref: '#/components/schemas/Long'
@@ -7184,11 +7296,11 @@ components:
         meshOwner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: 'The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+            - description: 'The Amazon Web Services IAM account ID of the service mesh owner. If the account ID is not your own, then it''s the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
         resourceOwner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: 'The AWS IAM account ID of the resource owner. If the account ID is not your own, then it''s the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
+            - description: 'The Amazon Web Services IAM account ID of the resource owner. If the account ID is not your own, then it''s the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html">Working with shared meshes</a>.'
         version:
           allOf:
             - $ref: '#/components/schemas/Long'
@@ -7210,6 +7322,10 @@ components:
         - virtualNode
         - weight
       properties:
+        port:
+          allOf:
+            - $ref: '#/components/schemas/ListenerPort'
+            - description: The targeted port of the weighted object.
         virtualNode:
           allOf:
             - $ref: '#/components/schemas/ResourceName'

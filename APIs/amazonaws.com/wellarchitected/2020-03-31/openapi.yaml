@@ -3,7 +3,7 @@ info:
   version: '2020-03-31'
   x-release: v4
   title: AWS Well-Architected Tool
-  description: '<fullname>AWS Well-Architected Tool</fullname> <p>This is the <i>AWS Well-Architected Tool API Reference</i>. The AWS Well-Architected Tool API provides programmatic access to the <a href="http://aws.amazon.com/well-architected-tool">AWS Well-Architected Tool</a> in the <a href="https://console.aws.amazon.com/wellarchitected">AWS Management Console</a>. For information about the AWS Well-Architected Tool, see the <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html">AWS Well-Architected Tool User Guide</a>.</p>'
+  description: '<fullname>Well-Architected Tool</fullname> <p>This is the <i>Well-Architected Tool API Reference</i>. The WA Tool API provides programmatic access to the <a href="http://aws.amazon.com/well-architected-tool">Well-Architected Tool</a> in the <a href="https://console.aws.amazon.com/wellarchitected">Amazon Web Services Management Console</a>. For information about the Well-Architected Tool, see the <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html">Well-Architected Tool User Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -118,7 +118,7 @@ paths:
   '/workloads/{WorkloadId}/associateLenses':
     patch:
       operationId: AssociateLenses
-      description: Associate a lens to a workload.
+      description: '<p>Associate a lens to a workload.</p> <p>Up to 10 lenses can be associated with a workload in a single API operation. A maximum of 20 lenses can be associated with a workload.</p> <note> <p> <b>Disclaimer</b> </p> <p>By accessing and/or applying custom lenses created by another Amazon Web Services user or account, you acknowledge that custom lenses created by other users and shared with you are Third Party Content as defined in the Amazon Web Services Customer Agreement. </p> </note>'
       responses:
         '200':
           description: Success
@@ -166,7 +166,7 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
       requestBody:
         required: true
         content:
@@ -177,11 +177,280 @@ paths:
                 - LensAliases
               properties:
                 LensAliases:
-                  description: <p>List of lens aliases to associate or disassociate with a workload.</p> <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>
+                  description: <p>List of lens aliases to associate or disassociate with a workload. Up to 10 lenses can be specified.</p> <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>
                   type: array
                   items:
                     $ref: '#/components/schemas/LensAlias'
                   minItems: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/lenses/{LensAlias}/shares':
+    post:
+      operationId: CreateLensShare
+      description: '<p>Create a lens share.</p> <p>The owner of a lens can share it with other Amazon Web Services accounts, IAM users, an organization, and organizational units (OUs) in the same Amazon Web Services Region. Shared access to a lens is not removed until the lens invitation is deleted.</p> <note> <p> <b>Disclaimer</b> </p> <p>By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateLensShareOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: LensAlias
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - SharedWith
+                - ClientRequestToken
+              properties:
+                SharedWith:
+                  description: 'The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the workload is shared.'
+                  type: string
+                  minLength: 12
+                  maxLength: 2048
+                ClientRequestToken:
+                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListLensShares
+      description: List the lens shares associated with the lens.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListLensSharesOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: LensAlias
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            minLength: 1
+            maxLength: 128
+        - name: SharedWithPrefix
+          in: query
+          required: false
+          description: 'The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the lens is shared.'
+          schema:
+            type: string
+            maxLength: 100
+        - name: NextToken
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+            description: The token to use to retrieve the next set of results.
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to return for this request.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: Status
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+            enum:
+              - ACCEPTED
+              - REJECTED
+              - PENDING
+              - REVOKED
+              - EXPIRED
+              - ASSOCIATING
+              - ASSOCIATED
+              - FAILED
+            description: The status of a workload share.
+  '/lenses/{LensAlias}/versions':
+    post:
+      operationId: CreateLensVersion
+      description: '<p>Create a new lens version.</p> <p>A lens can have up to 100 versions.</p> <p>After a lens has been imported, create a new lens version to publish it. The owner of a lens can share the lens with other Amazon Web Services accounts and IAM users in the same Amazon Web Services Region. Only the owner of a lens can delete it. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateLensVersionOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: LensAlias
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - LensVersion
+                - ClientRequestToken
+              properties:
+                LensVersion:
+                  description: The version of the lens being created.
+                  type: string
+                  minLength: 1
+                  maxLength: 32
+                IsMajorVersion:
+                  description: Set to true if this new major lens version.
+                  type: boolean
+                ClientRequestToken:
+                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+                  type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -251,7 +520,7 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
       requestBody:
         required: true
         content:
@@ -268,7 +537,7 @@ paths:
                   minLength: 3
                   maxLength: 100
                 ClientRequestToken:
-                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the AWS SDKs automatically generate one for you. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the request will fail.</p> </important>'
+                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -281,7 +550,7 @@ paths:
   /workloads:
     post:
       operationId: CreateWorkload
-      description: '<p>Create a new workload.</p> <p>The owner of a workload can share the workload with other AWS accounts and IAM users in the same AWS Region. Only the owner of a workload can delete it.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html">Defining a Workload</a> in the <i>AWS Well-Architected Tool User Guide</i>.</p>'
+      description: '<p>Create a new workload.</p> <p>The owner of a workload can share the workload with other Amazon Web Services accounts, IAM users, an organization, and organizational units (OUs) in the same Amazon Web Services Region. Only the owner of a workload can delete it.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html">Defining a Workload</a> in the <i>Well-Architected Tool User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -336,12 +605,11 @@ paths:
                 - WorkloadName
                 - Description
                 - Environment
-                - ReviewOwner
                 - Lenses
                 - ClientRequestToken
               properties:
                 WorkloadName:
-                  description: <p>The name of the workload.</p> <p>The name must be unique within an account within a Region. Spaces and capitalization are ignored when checking for uniqueness.</p>
+                  description: <p>The name of the workload.</p> <p>The name must be unique within an account within an Amazon Web Services Region. Spaces and capitalization are ignored when checking for uniqueness.</p>
                   type: string
                   minLength: 3
                   maxLength: 100
@@ -357,19 +625,19 @@ paths:
                     - PRODUCTION
                     - PREPRODUCTION
                 AccountIds:
-                  description: The list of AWS account IDs associated with the workload.
+                  description: The list of Amazon Web Services account IDs associated with the workload.
                   type: array
                   items:
                     $ref: '#/components/schemas/AwsAccountId'
                   maxItems: 100
                 AwsRegions:
-                  description: 'The list of AWS Regions associated with the workload, for example, <code>us-east-2</code>, or <code>ca-central-1</code>.'
+                  description: 'The list of Amazon Web Services Regions associated with the workload, for example, <code>us-east-2</code>, or <code>ca-central-1</code>.'
                   type: array
                   items:
                     $ref: '#/components/schemas/AwsRegion'
                   maxItems: 50
                 NonAwsRegions:
-                  description: ' The list of non-AWS Regions associated with the workload.'
+                  description: ' The list of non-Amazon Web Services Regions associated with the workload.'
                   type: array
                   items:
                     $ref: '#/components/schemas/WorkloadNonAwsRegion'
@@ -382,6 +650,7 @@ paths:
                 ArchitecturalDesign:
                   description: The URL of the architectural design for the workload.
                   type: string
+                  pattern: '^(|(https?|ftp):\/\/[^\s/$.?#].[^\s]*)$'
                   maxLength: 2048
                 ReviewOwner:
                   description: 'The review owner of the workload. The name, email address, or identifier for the primary group or individual that owns the workload review process.'
@@ -406,7 +675,7 @@ paths:
                   type: string
                   maxLength: 2084
                 ClientRequestToken:
-                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the AWS SDKs automatically generate one for you. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the request will fail.</p> </important>'
+                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
                   type: string
                 Tags:
                   description: The tags to be associated with the workload.
@@ -415,6 +684,20 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+                DiscoveryConfig:
+                  description: Discovery configuration associated to the workload.
+                  type: object
+                  properties:
+                    TrustedAdvisorIntegrationStatus:
+                      allOf:
+                        - $ref: '#/components/schemas/TrustedAdvisorIntegrationStatus'
+                        - description: Discovery integration status in respect to Trusted Advisor for the workload.
+                Applications:
+                  description: List of AppRegistry application ARNs associated to the workload.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ApplicationArn'
+                  maxItems: 1
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -426,7 +709,7 @@ paths:
   '/workloads/{WorkloadId}/shares':
     post:
       operationId: CreateWorkloadShare
-      description: '<p>Create a workload share.</p> <p>The owner of a workload can share it with other AWS accounts and IAM users in the same AWS Region. Shared access to a workload is not removed until the workload invitation is deleted.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html">Sharing a Workload</a> in the <i>AWS Well-Architected Tool User Guide</i>.</p>'
+      description: '<p>Create a workload share.</p> <p>The owner of a workload can share it with other Amazon Web Services accounts and IAM users in the same Amazon Web Services Region. Shared access to a workload is not removed until the workload invitation is deleted.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html">Sharing a Workload</a> in the <i>Well-Architected Tool User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -484,7 +767,7 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
       requestBody:
         required: true
         content:
@@ -497,7 +780,7 @@ paths:
                 - ClientRequestToken
               properties:
                 SharedWith:
-                  description: The AWS account ID or IAM role with which the workload is shared.
+                  description: 'The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the workload is shared.'
                   type: string
                   minLength: 12
                   maxLength: 2048
@@ -508,7 +791,7 @@ paths:
                     - READONLY
                     - CONTRIBUTOR
                 ClientRequestToken:
-                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the AWS SDKs automatically generate one for you. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the request will fail.</p> </important>'
+                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -566,11 +849,11 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
         - name: SharedWithPrefix
           in: query
           required: false
-          description: The AWS account ID or IAM role with which the workload is shared.
+          description: 'The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the workload is shared.'
           schema:
             type: string
             maxLength: 100
@@ -589,6 +872,176 @@ paths:
             type: integer
             minimum: 1
             maximum: 50
+        - name: Status
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+            enum:
+              - ACCEPTED
+              - REJECTED
+              - PENDING
+              - REVOKED
+              - EXPIRED
+              - ASSOCIATING
+              - ASSOCIATED
+              - FAILED
+            description: The status of a workload share.
+  '/lenses/{LensAlias}#ClientRequestToken&LensStatus':
+    delete:
+      operationId: DeleteLens
+      description: '<p>Delete an existing lens.</p> <p>Only the owner of a lens can delete it. After the lens is deleted, Amazon Web Services accounts and IAM users that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads. </p> <note> <p> <b>Disclaimer</b> </p> <p>By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account.</p> </note>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: LensAlias
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            minLength: 1
+            maxLength: 128
+        - name: ClientRequestToken
+          in: query
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+        - name: LensStatus
+          in: query
+          required: true
+          description: The status of the lens to be deleted.
+          schema:
+            type: string
+            enum:
+              - ALL
+              - DRAFT
+              - PUBLISHED
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/lenses/{LensAlias}/shares/{ShareId}#ClientRequestToken':
+    delete:
+      operationId: DeleteLensShare
+      description: '<p>Delete a lens share.</p> <p>After the lens share is deleted, Amazon Web Services accounts, IAM users, organizations, and organizational units (OUs) that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads.</p> <note> <p> <b>Disclaimer</b> </p> <p>By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account.</p> </note>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: ShareId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: '[0-9a-f]{32}'
+            description: The ID associated with the workload share.
+        - name: LensAlias
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            minLength: 1
+            maxLength: 128
+        - name: ClientRequestToken
+          in: query
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/workloads/{WorkloadId}#ClientRequestToken':
     delete:
       operationId: DeleteWorkload
@@ -640,14 +1093,14 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
         - name: ClientRequestToken
           in: query
           required: true
           description: ''
           schema:
             type: string
-            description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the AWS SDKs automatically generate one for you. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the request will fail.</p> </important>'
+            description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -715,14 +1168,14 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
         - name: ClientRequestToken
           in: query
           required: true
           description: ''
           schema:
             type: string
-            description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the AWS SDKs automatically generate one for you. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the request will fail.</p> </important>'
+            description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -734,7 +1187,7 @@ paths:
   '/workloads/{WorkloadId}/disassociateLenses':
     patch:
       operationId: DisassociateLenses
-      description: <p>Disassociate a lens from a workload.</p> <note> <p>The AWS Well-Architected Framework lens (<code>wellarchitected</code>) cannot be removed from a workload.</p> </note>
+      description: <p>Disassociate a lens from a workload.</p> <p>Up to 10 lenses can be disassociated from a workload in a single API operation.</p> <note> <p>The Amazon Web Services Well-Architected Framework lens (<code>wellarchitected</code>) cannot be removed from a workload.</p> </note>
       responses:
         '200':
           description: Success
@@ -782,7 +1235,7 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
       requestBody:
         required: true
         content:
@@ -793,11 +1246,78 @@ paths:
                 - LensAliases
               properties:
                 LensAliases:
-                  description: <p>List of lens aliases to associate or disassociate with a workload.</p> <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>
+                  description: <p>List of lens aliases to associate or disassociate with a workload. Up to 10 lenses can be specified.</p> <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>
                   type: array
                   items:
                     $ref: '#/components/schemas/LensAlias'
                   minItems: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/lenses/{LensAlias}/export':
+    get:
+      operationId: ExportLens
+      description: '<p>Export an existing lens.</p> <p>Lenses are defined in JSON. For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html">JSON format specification</a> in the <i>Well-Architected Tool User Guide</i>. Only the owner of a lens can export it. </p> <note> <p> <b>Disclaimer</b> </p> <p>Do not include or gather personal identifiable information (PII) of end users or other identifiable individuals in or via your custom lenses. If your custom lens or those shared with you and used in your account do include or collect PII you are responsible for: ensuring that the included PII is processed in accordance with applicable law, providing adequate privacy notices, and obtaining necessary consents for processing such data.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportLensOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: LensAlias
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            minLength: 1
+            maxLength: 128
+        - name: LensVersion
+          in: query
+          required: false
+          description: The lens version to be exported.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 32
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -855,16 +1375,16 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
         - name: LensAlias
           in: path
           required: true
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens, for example, <code>serverless</code>.</p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
-            maxLength: 64
+            maxLength: 128
         - name: QuestionId
           in: path
           required: true
@@ -945,16 +1465,16 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
         - name: LensAlias
           in: path
           required: true
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens, for example, <code>serverless</code>.</p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
-            maxLength: 64
+            maxLength: 128
         - name: QuestionId
           in: path
           required: true
@@ -997,6 +1517,73 @@ paths:
                     - ARCHITECTURE_CONSTRAINTS
                     - OTHER
                     - NONE
+  '/lenses/{LensAlias}':
+    get:
+      operationId: GetLens
+      description: Get an existing lens.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLensOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: LensAlias
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            minLength: 1
+            maxLength: 128
+        - name: LensVersion
+          in: query
+          required: false
+          description: The lens version to be retrieved.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 32
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/workloads/{WorkloadId}/lensReviews/{LensAlias}':
     get:
       operationId: GetLensReview
@@ -1046,16 +1633,16 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
         - name: LensAlias
           in: path
           required: true
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens, for example, <code>serverless</code>.</p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
-            maxLength: 64
+            maxLength: 128
         - name: MilestoneNumber
           in: query
           required: false
@@ -1127,16 +1714,16 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
         - name: LensAlias
           in: path
           required: true
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens, for example, <code>serverless</code>.</p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
-            maxLength: 64
+            maxLength: 128
       requestBody:
         required: true
         content:
@@ -1202,16 +1789,16 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
         - name: LensAlias
           in: path
           required: true
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens, for example, <code>serverless</code>.</p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
-            maxLength: 64
+            maxLength: 128
         - name: MilestoneNumber
           in: query
           required: false
@@ -1229,7 +1816,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/lenses/{LensAlias}/versionDifference#BaseLensVersion':
+  '/lenses/{LensAlias}/versionDifference':
     get:
       operationId: GetLensVersionDifference
       description: Get lens version differences.
@@ -1277,17 +1864,25 @@ paths:
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens, for example, <code>serverless</code>.</p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
-            maxLength: 64
+            maxLength: 128
         - name: BaseLensVersion
           in: query
-          required: true
+          required: false
           description: The base version of the lens.
           schema:
             type: string
             minLength: 1
-            maxLength: 128
+            maxLength: 32
+        - name: TargetLensVersion
+          in: query
+          required: false
+          description: The lens version to target a difference for.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 32
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1345,7 +1940,7 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
         - name: MilestoneNumber
           in: path
           required: true
@@ -1412,7 +2007,7 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1475,7 +2070,7 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
       requestBody:
         required: true
         content:
@@ -1484,7 +2079,7 @@ paths:
               type: object
               properties:
                 WorkloadName:
-                  description: <p>The name of the workload.</p> <p>The name must be unique within an account within a Region. Spaces and capitalization are ignored when checking for uniqueness.</p>
+                  description: <p>The name of the workload.</p> <p>The name must be unique within an account within an Amazon Web Services Region. Spaces and capitalization are ignored when checking for uniqueness.</p>
                   type: string
                   minLength: 3
                   maxLength: 100
@@ -1500,19 +2095,19 @@ paths:
                     - PRODUCTION
                     - PREPRODUCTION
                 AccountIds:
-                  description: The list of AWS account IDs associated with the workload.
+                  description: The list of Amazon Web Services account IDs associated with the workload.
                   type: array
                   items:
                     $ref: '#/components/schemas/AwsAccountId'
                   maxItems: 100
                 AwsRegions:
-                  description: 'The list of AWS Regions associated with the workload, for example, <code>us-east-2</code>, or <code>ca-central-1</code>.'
+                  description: 'The list of Amazon Web Services Regions associated with the workload, for example, <code>us-east-2</code>, or <code>ca-central-1</code>.'
                   type: array
                   items:
                     $ref: '#/components/schemas/AwsRegion'
                   maxItems: 50
                 NonAwsRegions:
-                  description: ' The list of non-AWS Regions associated with the workload.'
+                  description: ' The list of non-Amazon Web Services Regions associated with the workload.'
                   type: array
                   items:
                     $ref: '#/components/schemas/WorkloadNonAwsRegion'
@@ -1525,6 +2120,7 @@ paths:
                 ArchitecturalDesign:
                   description: The URL of the architectural design for the workload.
                   type: string
+                  pattern: '^(|(https?|ftp):\/\/[^\s/$.?#].[^\s]*)$'
                   maxLength: 2048
                 ReviewOwner:
                   description: 'The review owner of the workload. The name, email address, or identifier for the primary group or individual that owns the workload review process.'
@@ -1555,6 +2151,112 @@ paths:
                     - IN_PROGRESS
                     - COMPLETE
                     - RISK_ACKNOWLEDGED
+                DiscoveryConfig:
+                  description: Discovery configuration associated to the workload.
+                  type: object
+                  properties:
+                    TrustedAdvisorIntegrationStatus:
+                      allOf:
+                        - $ref: '#/components/schemas/TrustedAdvisorIntegrationStatus'
+                        - description: Discovery integration status in respect to Trusted Advisor for the workload.
+                Applications:
+                  description: List of AppRegistry application ARNs to associate to the workload.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ApplicationArn'
+                  maxItems: 1
+  /importLens:
+    put:
+      operationId: ImportLens
+      description: '<p>Import a new lens.</p> <p>The lens cannot be applied to workloads or shared with other Amazon Web Services accounts until it''s published with <a>CreateLensVersion</a> </p> <p>Lenses are defined in JSON. For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html">JSON format specification</a> in the <i>Well-Architected Tool User Guide</i>.</p> <p>A custom lens cannot exceed 500 KB in size.</p> <note> <p> <b>Disclaimer</b> </p> <p>Do not include or gather personal identifiable information (PII) of end users or other identifiable individuals in or via your custom lenses. If your custom lens or those shared with you and used in your account do include or collect PII you are responsible for: ensuring that the included PII is processed in accordance with applicable law, providing adequate privacy notices, and obtaining necessary consents for processing such data.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportLensOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - JSONString
+                - ClientRequestToken
+              properties:
+                LensAlias:
+                  description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                JSONString:
+                  description: The JSON representation of a lens.
+                  type: string
+                  minLength: 2
+                  maxLength: 500000
+                ClientRequestToken:
+                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+                  type: string
+                Tags:
+                  description: Tags to associate to a lens.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/workloads/{WorkloadId}/lensReviews/{LensAlias}/answers':
     get:
       operationId: ListAnswers
@@ -1604,16 +2306,16 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
         - name: LensAlias
           in: path
           required: true
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens, for example, <code>serverless</code>.</p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
-            maxLength: 64
+            maxLength: 128
         - name: PillarId
           in: query
           required: false
@@ -1647,6 +2349,222 @@ paths:
             type: integer
             minimum: 1
             maximum: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/workloads/{WorkloadId}/checks':
+    post:
+      operationId: ListCheckDetails
+      description: List of Trusted Advisor check details by account related to the workload.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCheckDetailsOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: WorkloadId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: '[0-9a-f]{32}'
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - LensArn
+                - PillarId
+                - QuestionId
+                - ChoiceId
+              properties:
+                NextToken:
+                  description: The token to use to retrieve the next set of results.
+                  type: string
+                MaxResults:
+                  description: The maximum number of results to return for this request.
+                  type: integer
+                  minimum: 1
+                  maximum: 50
+                LensArn:
+                  description: Well-Architected Lens ARN.
+                  type: string
+                PillarId:
+                  description: '<p>The ID used to identify a pillar, for example, <code>security</code>.</p> <p>A pillar is identified by its <a>PillarReviewSummary$PillarId</a>.</p>'
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                QuestionId:
+                  description: The ID of the question.
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                ChoiceId:
+                  description: The ID of a choice.
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/workloads/{WorkloadId}/checkSummaries':
+    post:
+      operationId: ListCheckSummaries
+      description: List of Trusted Advisor checks summarized for all accounts related to the workload.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCheckSummariesOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: WorkloadId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: '[0-9a-f]{32}'
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - LensArn
+                - PillarId
+                - QuestionId
+                - ChoiceId
+              properties:
+                NextToken:
+                  description: The token to use to retrieve the next set of results.
+                  type: string
+                MaxResults:
+                  description: The maximum number of results to return for this request.
+                  type: integer
+                  minimum: 1
+                  maximum: 50
+                LensArn:
+                  description: Well-Architected Lens ARN.
+                  type: string
+                PillarId:
+                  description: '<p>The ID used to identify a pillar, for example, <code>security</code>.</p> <p>A pillar is identified by its <a>PillarReviewSummary$PillarId</a>.</p>'
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                QuestionId:
+                  description: The ID of the question.
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                ChoiceId:
+                  description: The ID of a choice.
+                  type: string
+                  minLength: 1
+                  maxLength: 64
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1704,16 +2622,16 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
         - name: LensAlias
           in: path
           required: true
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens, for example, <code>serverless</code>.</p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
-            maxLength: 64
+            maxLength: 128
         - name: PillarId
           in: query
           required: false
@@ -1804,7 +2722,7 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
         - name: MilestoneNumber
           in: query
           required: false
@@ -1890,6 +2808,35 @@ paths:
             description: The maximum number of results to return for this request.
             minimum: 1
             maximum: 50
+        - name: LensType
+          in: query
+          required: false
+          description: The type of lenses to be returned.
+          schema:
+            type: string
+            enum:
+              - AWS_OFFICIAL
+              - CUSTOM_SHARED
+              - CUSTOM_SELF
+        - name: LensStatus
+          in: query
+          required: false
+          description: The status of lenses to be returned.
+          schema:
+            type: string
+            enum:
+              - ALL
+              - DRAFT
+              - PUBLISHED
+        - name: LensName
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+            description: The full name of the lens.
+            minLength: 1
+            maxLength: 128
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1947,7 +2894,7 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
         - name: MaxResults
           in: query
           schema:
@@ -2039,7 +2986,7 @@ paths:
               type: object
               properties:
                 WorkloadId:
-                  description: The ID assigned to the workload. This ID is unique within an AWS Region.
+                  description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
                   type: string
                   pattern: '[0-9a-f]{32}'
                 NextToken:
@@ -2102,6 +3049,22 @@ paths:
             type: string
             description: An optional string added to the beginning of each workload name returned in the results.
             maxLength: 100
+        - name: LensNamePrefix
+          in: query
+          required: false
+          description: An optional string added to the beginning of each lens name returned in the results.
+          schema:
+            type: string
+            maxLength: 100
+        - name: ShareResourceType
+          in: query
+          required: false
+          description: The type of share invitations to be returned.
+          schema:
+            type: string
+            enum:
+              - WORKLOAD
+              - LENS
         - name: NextToken
           in: query
           required: false
@@ -2128,7 +3091,7 @@ paths:
   '/tags/{WorkloadArn}':
     get:
       operationId: ListTagsForResource
-      description: List the tags for a resource.
+      description: <p>List the tags for a resource.</p> <note> <p>The WorkloadArn parameter can be either a workload ARN or a custom lens ARN.</p> </note>
       responses:
         '200':
           description: Success
@@ -2166,7 +3129,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: Adds one or more tags to the specified resource.
+      description: <p>Adds one or more tags to the specified resource.</p> <note> <p>The WorkloadArn parameter can be either a workload ARN or a custom lens ARN.</p> </note>
       responses:
         '200':
           description: Success
@@ -2288,7 +3251,7 @@ paths:
   '/tags/{WorkloadArn}#tagKeys':
     delete:
       operationId: UntagResource
-      description: '<p>Deletes specified tags from a resource.</p> <p>To specify multiple tags, use separate <b>tagKeys</b> parameters, for example:</p> <p> <code>DELETE /tags/WorkloadArn?tagKeys=key1&amp;tagKeys=key2</code> </p>'
+      description: '<p>Deletes specified tags from a resource.</p> <note> <p>The WorkloadArn parameter can be either a workload ARN or a custom lens ARN.</p> </note> <p>To specify multiple tags, use separate <b>tagKeys</b> parameters, for example:</p> <p> <code>DELETE /tags/WorkloadArn?tagKeys=key1&amp;tagKeys=key2</code> </p>'
       responses:
         '200':
           description: Success
@@ -2334,10 +3297,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /global-settings:
+    patch:
+      operationId: UpdateGlobalSettings
+      description: Updates whether the Amazon Web Services account is opted into organization sharing features.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                OrganizationSharingStatus:
+                  description: The status of organization sharing settings.
+                  type: string
+                  enum:
+                    - ENABLED
+                    - DISABLED
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/shareInvitations/{ShareInvitationId}':
     patch:
       operationId: UpdateShareInvitation
-      description: Update a workload invitation.
+      description: <p>Update a workload or custom lens share invitation.</p> <note> <p>This API operation can be called independently of any resource. Previous documentation implied that a workload ARN must be specified.</p> </note>
       responses:
         '200':
           description: Success
@@ -2475,7 +3497,7 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
       requestBody:
         required: true
         content:
@@ -2550,16 +3572,16 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID assigned to the workload. This ID is unique within an AWS Region.
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
         - name: LensAlias
           in: path
           required: true
           description: ''
           schema:
             type: string
-            description: '<p>The alias of the lens, for example, <code>serverless</code>.</p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+            description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
             minLength: 1
-            maxLength: 64
+            maxLength: 128
       requestBody:
         required: true
         content:
@@ -2575,7 +3597,7 @@ paths:
                   minLength: 3
                   maxLength: 100
                 ClientRequestToken:
-                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the AWS SDKs automatically generate one for you. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the request will fail.</p> </important>'
+                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2639,15 +3661,32 @@ components:
   schemas:
     LensAlias:
       type: string
-      description: '<p>The alias of the lens, for example, <code>serverless</code>.</p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
+      description: '<p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2::lens/serverless</code>.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1:123456789012:lens/my-lens</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>'
       minLength: 1
-      maxLength: 64
+      maxLength: 128
     ValidationException: {}
     ResourceNotFoundException: {}
     ConflictException: {}
     InternalServerException: {}
     AccessDeniedException: {}
     ThrottlingException: {}
+    CreateLensShareOutput:
+      type: object
+      properties:
+        ShareId:
+          $ref: '#/components/schemas/ShareId'
+    ServiceQuotaExceededException: {}
+    CreateLensVersionOutput:
+      type: object
+      properties:
+        LensArn:
+          allOf:
+            - $ref: '#/components/schemas/LensArn'
+            - description: The ARN for the lens.
+        LensVersion:
+          allOf:
+            - $ref: '#/components/schemas/LensVersion'
+            - description: The version of the lens.
     CreateMilestoneOutput:
       type: object
       properties:
@@ -2656,7 +3695,6 @@ components:
         MilestoneNumber:
           $ref: '#/components/schemas/MilestoneNumber'
       description: Output of a create milestone call.
-    ServiceQuotaExceededException: {}
     CreateWorkloadOutput:
       type: object
       properties:
@@ -2668,10 +3706,10 @@ components:
     AwsAccountId:
       type: string
       pattern: '[0-9]{12}'
-      description: An AWS account ID.
+      description: An Amazon Web Services account ID.
     AwsRegion:
       type: string
-      description: 'An AWS Region, for example, <code>us-west-2</code> or <code>ap-northeast-1</code>.'
+      description: 'An Amazon Web Services Region, for example, <code>us-west-2</code> or <code>ap-northeast-1</code>.'
       maxLength: 100
     WorkloadNonAwsRegion:
       type: string
@@ -2686,6 +3724,15 @@ components:
       type: string
       minLength: 0
       maxLength: 256
+    TrustedAdvisorIntegrationStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    ApplicationArn:
+      type: string
+      pattern: 'arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/applications/[a-z0-9]+'
+      maxLength: 2084
     CreateWorkloadShareOutput:
       type: object
       properties:
@@ -2694,6 +3741,13 @@ components:
         ShareId:
           $ref: '#/components/schemas/ShareId'
       description: Input for Create Workload Share
+    ExportLensOutput:
+      type: object
+      properties:
+        LensJSON:
+          allOf:
+            - $ref: '#/components/schemas/LensJSON'
+            - description: The JSON for the lens.
     GetAnswerOutput:
       type: object
       properties:
@@ -2703,9 +3757,20 @@ components:
           $ref: '#/components/schemas/MilestoneNumber'
         LensAlias:
           $ref: '#/components/schemas/LensAlias'
+        LensArn:
+          allOf:
+            - $ref: '#/components/schemas/LensArn'
+            - description: The ARN for the lens.
         Answer:
           $ref: '#/components/schemas/Answer'
       description: Output of a get answer call.
+    GetLensOutput:
+      type: object
+      properties:
+        Lens:
+          allOf:
+            - $ref: '#/components/schemas/Lens'
+            - description: A lens return object.
     GetLensReviewOutput:
       type: object
       properties:
@@ -2731,10 +3796,18 @@ components:
       properties:
         LensAlias:
           $ref: '#/components/schemas/LensAlias'
+        LensArn:
+          allOf:
+            - $ref: '#/components/schemas/LensArn'
+            - description: The ARN for the lens.
         BaseLensVersion:
           allOf:
             - $ref: '#/components/schemas/LensVersion'
             - description: The base version of the lens.
+        TargetLensVersion:
+          allOf:
+            - $ref: '#/components/schemas/LensVersion'
+            - description: The target lens version for the lens.
         LatestLensVersion:
           allOf:
             - $ref: '#/components/schemas/LensVersion'
@@ -2755,6 +3828,17 @@ components:
         Workload:
           $ref: '#/components/schemas/Workload'
       description: Output of a get workload call.
+    ImportLensOutput:
+      type: object
+      properties:
+        LensArn:
+          allOf:
+            - $ref: '#/components/schemas/LensArn'
+            - description: The ARN for the lens.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ImportLensStatus'
+            - description: The status of the imported lens.
     ListAnswersOutput:
       type: object
       properties:
@@ -2764,11 +3848,33 @@ components:
           $ref: '#/components/schemas/MilestoneNumber'
         LensAlias:
           $ref: '#/components/schemas/LensAlias'
+        LensArn:
+          allOf:
+            - $ref: '#/components/schemas/LensArn'
+            - description: The ARN for the lens.
         AnswerSummaries:
           $ref: '#/components/schemas/AnswerSummaries'
         NextToken:
           $ref: '#/components/schemas/NextToken'
       description: Output of a list answers call.
+    ListCheckDetailsOutput:
+      type: object
+      properties:
+        CheckDetails:
+          allOf:
+            - $ref: '#/components/schemas/CheckDetails'
+            - description: The details about the Trusted Advisor checks related to the Well-Architected best practice.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    ListCheckSummariesOutput:
+      type: object
+      properties:
+        CheckSummaries:
+          allOf:
+            - $ref: '#/components/schemas/CheckSummaries'
+            - description: List of Trusted Advisor summaries related to the Well-Architected best practice.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
     ListLensReviewImprovementsOutput:
       type: object
       properties:
@@ -2778,6 +3884,10 @@ components:
           $ref: '#/components/schemas/MilestoneNumber'
         LensAlias:
           $ref: '#/components/schemas/LensAlias'
+        LensArn:
+          allOf:
+            - $ref: '#/components/schemas/LensArn'
+            - description: The ARN for the lens.
         ImprovementSummaries:
           $ref: '#/components/schemas/ImprovementSummaries'
         NextToken:
@@ -2795,6 +3905,15 @@ components:
         NextToken:
           $ref: '#/components/schemas/NextToken'
       description: Output of a list lens reviews call.
+    ListLensSharesOutput:
+      type: object
+      properties:
+        LensShareSummaries:
+          allOf:
+            - $ref: '#/components/schemas/LensShareSummaries'
+            - description: A list of lens share summaries.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
     ListLensesOutput:
       type: object
       properties:
@@ -2874,6 +3993,10 @@ components:
           $ref: '#/components/schemas/WorkloadId'
         LensAlias:
           $ref: '#/components/schemas/LensAlias'
+        LensArn:
+          allOf:
+            - $ref: '#/components/schemas/LensArn'
+            - description: The ARN for the lens.
         Answer:
           $ref: '#/components/schemas/Answer'
       description: Output of a update answer call.
@@ -2918,7 +4041,7 @@ components:
         ShareInvitation:
           allOf:
             - $ref: '#/components/schemas/ShareInvitation'
-            - description: The updated workload share invitation.
+            - description: The updated workload or custom lens share invitation.
     UpdateWorkloadOutput:
       type: object
       properties:
@@ -2933,6 +4056,40 @@ components:
         WorkloadShare:
           $ref: '#/components/schemas/WorkloadShare'
       description: Input for Update Workload Share
+    CheckStatusCount:
+      type: integer
+      minimum: 1
+      maximum: 101
+    AccountSummary:
+      type: object
+      description: Account summary for a Well-Architected best practice in relation to Trusted Advisor checks.
+      additionalProperties:
+        $ref: '#/components/schemas/CheckStatusCount'
+    AdditionalResourceType:
+      type: string
+      enum:
+        - HELPFUL_RESOURCE
+        - IMPROVEMENT_PLAN
+    Urls:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChoiceContent'
+    AdditionalResources:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/AdditionalResourceType'
+            - description: Type of additional resource.
+        Content:
+          allOf:
+            - $ref: '#/components/schemas/Urls'
+            - description: 'The URLs for additional resources, either helpful resources or improvement plans. Up to five additional URLs can be specified.'
+      description: The choice level additional resources.
+    AdditionalResourcesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AdditionalResources'
     QuestionId:
       type: string
       description: The ID of the question.
@@ -2958,6 +4115,10 @@ components:
       description: The helpful resource URL for a question.
       minLength: 1
       maxLength: 2048
+    DisplayText:
+      type: string
+      minLength: 1
+      maxLength: 64
     Choices:
       type: array
       description: List of choices available for a question.
@@ -3007,6 +4168,10 @@ components:
           $ref: '#/components/schemas/ImprovementPlanUrl'
         HelpfulResourceUrl:
           $ref: '#/components/schemas/HelpfulResourceUrl'
+        HelpfulResourceDisplayText:
+          allOf:
+            - $ref: '#/components/schemas/DisplayText'
+            - description: The helpful resource text to be displayed.
         Choices:
           $ref: '#/components/schemas/Choices'
         SelectedChoices:
@@ -3064,10 +4229,10 @@ components:
     WorkloadId:
       type: string
       pattern: '[0-9a-f]{32}'
-      description: The ID assigned to the workload. This ID is unique within an AWS Region.
+      description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
     LensAliases:
       type: array
-      description: <p>List of lens aliases to associate or disassociate with a workload.</p> <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>
+      description: <p>List of lens aliases to associate or disassociate with a workload. Up to 10 lenses can be specified.</p> <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>
       items:
         $ref: '#/components/schemas/LensAlias'
       minItems: 1
@@ -3083,6 +4248,135 @@ components:
     Base64String:
       type: string
       description: <p>The Base64-encoded string representation of a lens review report.</p> <p>This data can be used to create a PDF file.</p>
+    CheckDescription:
+      type: string
+    CheckId:
+      type: string
+    CheckName:
+      type: string
+    CheckProvider:
+      type: string
+      enum:
+        - TRUSTED_ADVISOR
+    LensArn:
+      type: string
+    CheckStatus:
+      type: string
+      enum:
+        - OKAY
+        - WARNING
+        - ERROR
+        - NOT_AVAILABLE
+        - FETCH_FAILED
+    FlaggedResources:
+      type: integer
+      minimum: 1
+      maximum: 9999
+    CheckFailureReason:
+      type: string
+      enum:
+        - ASSUME_ROLE_ERROR
+        - ACCESS_DENIED
+        - UNKNOWN_ERROR
+        - PREMIUM_SUPPORT_REQUIRED
+    Timestamp:
+      type: string
+      description: The date and time recorded.
+      format: date-time
+    CheckDetail:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/CheckId'
+            - description: Trusted Advisor check ID.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/CheckName'
+            - description: Trusted Advisor check name.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/CheckDescription'
+            - description: Trusted Advisor check description.
+        Provider:
+          allOf:
+            - $ref: '#/components/schemas/CheckProvider'
+            - description: Provider of the check related to the best practice.
+        LensArn:
+          allOf:
+            - $ref: '#/components/schemas/LensArn'
+            - description: Well-Architected Lens ARN associated to the check.
+        PillarId:
+          $ref: '#/components/schemas/PillarId'
+        QuestionId:
+          $ref: '#/components/schemas/QuestionId'
+        ChoiceId:
+          $ref: '#/components/schemas/ChoiceId'
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/CheckStatus'
+            - description: Status associated to the check.
+        AccountId:
+          $ref: '#/components/schemas/AwsAccountId'
+        FlaggedResources:
+          allOf:
+            - $ref: '#/components/schemas/FlaggedResources'
+            - description: Count of flagged resources associated to the check.
+        Reason:
+          allOf:
+            - $ref: '#/components/schemas/CheckFailureReason'
+            - description: Reason associated to the check.
+        UpdatedAt:
+          $ref: '#/components/schemas/Timestamp'
+      description: Account details for a Well-Architected best practice in relation to Trusted Advisor checks.
+    CheckDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/CheckDetail'
+    CheckSummary:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/CheckId'
+            - description: Trusted Advisor check ID.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/CheckName'
+            - description: Trusted Advisor check name.
+        Provider:
+          allOf:
+            - $ref: '#/components/schemas/CheckProvider'
+            - description: Provider of the check related to the best practice.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/CheckDescription'
+            - description: Trusted Advisor check description.
+        UpdatedAt:
+          $ref: '#/components/schemas/Timestamp'
+        LensArn:
+          allOf:
+            - $ref: '#/components/schemas/LensArn'
+            - description: Well-Architected Lens ARN associated to the check.
+        PillarId:
+          $ref: '#/components/schemas/PillarId'
+        QuestionId:
+          $ref: '#/components/schemas/QuestionId'
+        ChoiceId:
+          $ref: '#/components/schemas/ChoiceId'
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/CheckStatus'
+            - description: Status associated to the check.
+        AccountSummary:
+          allOf:
+            - $ref: '#/components/schemas/AccountSummary'
+            - description: Account summary associated to the check.
+      description: Trusted Advisor check summary.
+    CheckSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/CheckSummary'
     ChoiceTitle:
       type: string
       description: The title of a choice.
@@ -3093,6 +4387,18 @@ components:
       description: The description of a choice.
       minLength: 1
       maxLength: 1024
+    ChoiceContent:
+      type: object
+      properties:
+        DisplayText:
+          allOf:
+            - $ref: '#/components/schemas/ChoiceContentDisplayText'
+            - description: The display text for the choice content.
+        Url:
+          allOf:
+            - $ref: '#/components/schemas/ChoiceContentUrl'
+            - description: The URL for the choice content.
+      description: The choice content.
     Choice:
       type: object
       properties:
@@ -3102,6 +4408,18 @@ components:
           $ref: '#/components/schemas/ChoiceTitle'
         Description:
           $ref: '#/components/schemas/ChoiceDescription'
+        HelpfulResource:
+          allOf:
+            - $ref: '#/components/schemas/ChoiceContent'
+            - description: The choice level helpful resource.
+        ImprovementPlan:
+          allOf:
+            - $ref: '#/components/schemas/ChoiceContent'
+            - description: The choice level improvement plan.
+        AdditionalResources:
+          allOf:
+            - $ref: '#/components/schemas/AdditionalResourcesList'
+            - description: 'The additional resources for a choice. A choice can have up to two additional resources: one of type <code>HELPFUL_RESOURCE</code>, one of type <code>IMPROVEMENT_PLAN</code>, or both.'
       description: A choice available to answer question.
     ChoiceStatus:
       type: string
@@ -3152,17 +4470,84 @@ components:
             - $ref: '#/components/schemas/ChoiceReason'
             - description: The reason why a choice is non-applicable to a question in your workload.
       description: A choice summary that has been answered on a question in your workload.
+    ChoiceContentDisplayText:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    ChoiceContentUrl:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    ChoiceImprovementPlan:
+      type: object
+      properties:
+        ChoiceId:
+          $ref: '#/components/schemas/ChoiceId'
+        DisplayText:
+          allOf:
+            - $ref: '#/components/schemas/DisplayText'
+            - description: The display text for the improvement plan.
+        ImprovementPlanUrl:
+          $ref: '#/components/schemas/ImprovementPlanUrl'
+      description: The choice level improvement plan.
+    ChoiceImprovementPlans:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChoiceImprovementPlan'
     ChoiceUpdates:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/ChoiceUpdate'
     ClientRequestToken:
       type: string
-      description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the AWS SDKs automatically generate one for you. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the request will fail.</p> </important>'
+      description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
     Count:
       type: integer
       description: A non-negative integer that denotes how many.
       minimum: 0
+    SharedWith:
+      type: string
+      description: 'The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the workload is shared.'
+      minLength: 12
+      maxLength: 2048
+    CreateLensShareInput:
+      type: object
+      required:
+        - SharedWith
+        - ClientRequestToken
+      title: CreateLensShareInput
+      properties:
+        SharedWith:
+          $ref: '#/components/schemas/SharedWith'
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+    ShareId:
+      type: string
+      pattern: '[0-9a-f]{32}'
+      description: The ID associated with the workload share.
+    LensVersion:
+      type: string
+      minLength: 1
+      maxLength: 32
+    IsMajorVersion:
+      type: boolean
+    CreateLensVersionInput:
+      type: object
+      required:
+        - LensVersion
+        - ClientRequestToken
+      title: CreateLensVersionInput
+      properties:
+        LensVersion:
+          allOf:
+            - $ref: '#/components/schemas/LensVersion'
+            - description: The version of the lens being created.
+        IsMajorVersion:
+          allOf:
+            - $ref: '#/components/schemas/IsMajorVersion'
+            - description: Set to true if this new major lens version.
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
     MilestoneName:
       type: string
       description: <p>The name of the milestone in a workload.</p> <p>Milestone names must be unique within a workload.</p>
@@ -3187,7 +4572,7 @@ components:
       maximum: 100
     WorkloadName:
       type: string
-      description: <p>The name of the workload.</p> <p>The name must be unique within an account within a Region. Spaces and capitalization are ignored when checking for uniqueness.</p>
+      description: <p>The name of the workload.</p> <p>The name must be unique within an account within an Amazon Web Services Region. Spaces and capitalization are ignored when checking for uniqueness.</p>
       minLength: 3
       maxLength: 100
     WorkloadDescription:
@@ -3203,19 +4588,19 @@ components:
       description: The environment for the workload.
     WorkloadAccountIds:
       type: array
-      description: The list of AWS account IDs associated with the workload.
+      description: The list of Amazon Web Services account IDs associated with the workload.
       items:
         $ref: '#/components/schemas/AwsAccountId'
       maxItems: 100
     WorkloadAwsRegions:
       type: array
-      description: 'The list of AWS Regions associated with the workload, for example, <code>us-east-2</code>, or <code>ca-central-1</code>.'
+      description: 'The list of Amazon Web Services Regions associated with the workload, for example, <code>us-east-2</code>, or <code>ca-central-1</code>.'
       items:
         $ref: '#/components/schemas/AwsRegion'
       maxItems: 50
     WorkloadNonAwsRegions:
       type: array
-      description: ' The list of non-AWS Regions associated with the workload.'
+      description: ' The list of non-Amazon Web Services Regions associated with the workload.'
       items:
         $ref: '#/components/schemas/WorkloadNonAwsRegion'
       maxItems: 5
@@ -3226,6 +4611,7 @@ components:
         $ref: '#/components/schemas/PillarId'
     WorkloadArchitecturalDesign:
       type: string
+      pattern: '^(|(https?|ftp):\/\/[^\s/$.?#].[^\s]*)$'
       description: The URL of the architectural design for the workload.
       maxLength: 2048
     WorkloadReviewOwner:
@@ -3252,13 +4638,25 @@ components:
       maxProperties: 50
       additionalProperties:
         $ref: '#/components/schemas/TagValue'
+    WorkloadDiscoveryConfig:
+      type: object
+      properties:
+        TrustedAdvisorIntegrationStatus:
+          allOf:
+            - $ref: '#/components/schemas/TrustedAdvisorIntegrationStatus'
+            - description: Discovery integration status in respect to Trusted Advisor for the workload.
+      description: Discovery configuration associated to the workload.
+    WorkloadApplications:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationArn'
+      maxItems: 1
     CreateWorkloadInput:
       type: object
       required:
         - WorkloadName
         - Description
         - Environment
-        - ReviewOwner
         - Lenses
         - ClientRequestToken
       title: CreateWorkloadInput
@@ -3295,15 +4693,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags to be associated with the workload.
+        DiscoveryConfig:
+          allOf:
+            - $ref: '#/components/schemas/WorkloadDiscoveryConfig'
+            - description: Well-Architected discovery configuration settings associated to the workload.
+        Applications:
+          allOf:
+            - $ref: '#/components/schemas/WorkloadApplications'
+            - description: List of AppRegistry application ARNs associated to the workload.
       description: Input for workload creation.
     WorkloadArn:
       type: string
       description: The ARN for the workload.
-    SharedWith:
-      type: string
-      description: The AWS account ID or IAM role with which the workload is shared.
-      minLength: 12
-      maxLength: 2048
     PermissionType:
       type: string
       enum:
@@ -3325,10 +4726,20 @@ components:
         ClientRequestToken:
           $ref: '#/components/schemas/ClientRequestToken'
       description: Input for Create Workload Share
-    ShareId:
+    LensStatusType:
       type: string
-      pattern: '[0-9a-f]{32}'
-      description: The ID associated with the workload share.
+      enum:
+        - ALL
+        - DRAFT
+        - PUBLISHED
+    DeleteLensInput:
+      type: object
+      title: DeleteLensInput
+      properties: {}
+    DeleteLensShareInput:
+      type: object
+      title: DeleteLensShareInput
+      properties: {}
     DeleteWorkloadInput:
       type: object
       title: DeleteWorkloadInput
@@ -3354,11 +4765,51 @@ components:
         LensAliases:
           $ref: '#/components/schemas/LensAliases'
       description: Input to disassociate lens reviews.
+    ExportLensInput:
+      type: object
+      title: ExportLensInput
+      properties: {}
+    LensJSON:
+      type: string
+      minLength: 2
+      maxLength: 500000
     GetAnswerInput:
       type: object
       title: GetAnswerInput
       properties: {}
       description: Input to get answer.
+    GetLensInput:
+      type: object
+      title: GetLensInput
+      properties: {}
+    Lens:
+      type: object
+      properties:
+        LensArn:
+          allOf:
+            - $ref: '#/components/schemas/LensArn'
+            - description: The ARN of a lens.
+        LensVersion:
+          allOf:
+            - $ref: '#/components/schemas/LensVersion'
+            - description: The version of a lens.
+        Name:
+          $ref: '#/components/schemas/LensName'
+        Description:
+          $ref: '#/components/schemas/LensDescription'
+        Owner:
+          allOf:
+            - $ref: '#/components/schemas/LensOwner'
+            - description: The Amazon Web Services account ID that owns the lens.
+        ShareInvitationId:
+          allOf:
+            - $ref: '#/components/schemas/ShareInvitationId'
+            - description: The ID assigned to the share invitation.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags assigned to the lens.
+      description: A lens return object.
     GetLensReviewInput:
       type: object
       title: GetLensReviewInput
@@ -3369,6 +4820,10 @@ components:
       properties:
         LensAlias:
           $ref: '#/components/schemas/LensAlias'
+        LensArn:
+          allOf:
+            - $ref: '#/components/schemas/LensArn'
+            - description: The ARN for the lens.
         LensVersion:
           allOf:
             - $ref: '#/components/schemas/LensVersion'
@@ -3400,13 +4855,13 @@ components:
       properties:
         LensAlias:
           $ref: '#/components/schemas/LensAlias'
+        LensArn:
+          allOf:
+            - $ref: '#/components/schemas/LensArn'
+            - description: The ARN for the lens.
         Base64String:
           $ref: '#/components/schemas/Base64String'
       description: A report of a lens review.
-    LensVersion:
-      type: string
-      minLength: 1
-      maxLength: 128
     GetLensVersionDifferenceInput:
       type: object
       title: GetLensVersionDifferenceInput
@@ -3496,7 +4951,40 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags associated with the workload.
+        DiscoveryConfig:
+          allOf:
+            - $ref: '#/components/schemas/WorkloadDiscoveryConfig'
+            - description: Discovery configuration associated to the workload.
+        Applications:
+          allOf:
+            - $ref: '#/components/schemas/WorkloadApplications'
+            - description: List of AppRegistry application ARNs associated to the workload.
       description: A workload return object.
+    ImportLensInput:
+      type: object
+      required:
+        - JSONString
+        - ClientRequestToken
+      title: ImportLensInput
+      properties:
+        LensAlias:
+          $ref: '#/components/schemas/LensAlias'
+        JSONString:
+          allOf:
+            - $ref: '#/components/schemas/LensJSON'
+            - description: The JSON representation of a lens.
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Tags to associate to a lens.
+    ImportLensStatus:
+      type: string
+      enum:
+        - IN_PROGRESS
+        - COMPLETE
+        - ERROR
     ImprovementSummary:
       type: object
       properties:
@@ -3510,6 +4998,10 @@ components:
           $ref: '#/components/schemas/Risk'
         ImprovementPlanUrl:
           $ref: '#/components/schemas/ImprovementPlanUrl'
+        ImprovementPlans:
+          allOf:
+            - $ref: '#/components/schemas/ChoiceImprovementPlans'
+            - description: The improvement plan details.
       description: An improvement summary of a lens review in a workload.
     ImprovementSummaries:
       type: array
@@ -3518,31 +5010,37 @@ components:
         $ref: '#/components/schemas/ImprovementSummary'
     IsReviewOwnerUpdateAcknowledged:
       type: boolean
-    LensDescription:
-      type: string
-      description: The description of the lens.
-      minLength: 1
-      maxLength: 1024
     LensName:
       type: string
       description: The full name of the lens.
       minLength: 1
       maxLength: 128
+    LensDescription:
+      type: string
+      description: The description of the lens.
+      minLength: 1
+      maxLength: 1024
+    LensOwner:
+      type: string
+    ShareInvitationId:
+      type: string
+      pattern: '[0-9a-f]{32}'
+    LensNamePrefix:
+      type: string
+      maxLength: 100
     LensStatus:
       type: string
       enum:
         - CURRENT
         - NOT_CURRENT
         - DEPRECATED
+        - DELETED
+        - UNSHARED
     PillarReviewSummaries:
       type: array
       description: List of pillar review summaries of lens review in a workload.
       items:
         $ref: '#/components/schemas/PillarReviewSummary'
-    Timestamp:
-      type: string
-      description: The date and time recorded.
-      format: date-time
     RiskCounts:
       type: object
       description: A map from risk names to the count of how questions have that rating.
@@ -3556,6 +5054,10 @@ components:
       properties:
         LensAlias:
           $ref: '#/components/schemas/LensAlias'
+        LensArn:
+          allOf:
+            - $ref: '#/components/schemas/LensArn'
+            - description: The ARN for the lens.
         LensVersion:
           allOf:
             - $ref: '#/components/schemas/LensVersion'
@@ -3576,25 +5078,83 @@ components:
       description: List of lens summaries of lens reviews of a workload.
       items:
         $ref: '#/components/schemas/LensReviewSummary'
+    LensShareSummary:
+      type: object
+      properties:
+        ShareId:
+          $ref: '#/components/schemas/ShareId'
+        SharedWith:
+          $ref: '#/components/schemas/SharedWith'
+        Status:
+          $ref: '#/components/schemas/ShareStatus'
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusMessage'
+            - description: Optional message to compliment the Status field.
+      description: A lens share summary return object.
+    LensShareSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/LensShareSummary'
+    ShareStatus:
+      type: string
+      enum:
+        - ACCEPTED
+        - REJECTED
+        - PENDING
+        - REVOKED
+        - EXPIRED
+        - ASSOCIATING
+        - ASSOCIATED
+        - FAILED
+      description: The status of a workload share.
+    StatusMessage:
+      type: string
+      minLength: 1
+      maxLength: 512
     LensSummary:
       type: object
       properties:
+        LensArn:
+          allOf:
+            - $ref: '#/components/schemas/LensArn'
+            - description: The ARN of the lens.
         LensAlias:
           $ref: '#/components/schemas/LensAlias'
+        LensName:
+          $ref: '#/components/schemas/LensName'
+        LensType:
+          allOf:
+            - $ref: '#/components/schemas/LensType'
+            - description: The type of the lens.
+        Description:
+          $ref: '#/components/schemas/LensDescription'
+        CreatedAt:
+          $ref: '#/components/schemas/Timestamp'
+        UpdatedAt:
+          $ref: '#/components/schemas/Timestamp'
         LensVersion:
           allOf:
             - $ref: '#/components/schemas/LensVersion'
             - description: The version of the lens.
-        LensName:
-          $ref: '#/components/schemas/LensName'
-        Description:
-          $ref: '#/components/schemas/LensDescription'
+        Owner:
+          $ref: '#/components/schemas/AwsAccountId'
+        LensStatus:
+          allOf:
+            - $ref: '#/components/schemas/LensStatus'
+            - description: The status of the lens.
       description: A lens summary of a lens.
     LensSummaries:
       type: array
       description: List of lens summaries of available lenses.
       items:
         $ref: '#/components/schemas/LensSummary'
+    LensType:
+      type: string
+      enum:
+        - AWS_OFFICIAL
+        - CUSTOM_SHARED
+        - CUSTOM_SELF
     LensUpgradeSummary:
       type: object
       properties:
@@ -3604,6 +5164,10 @@ components:
           $ref: '#/components/schemas/WorkloadName'
         LensAlias:
           $ref: '#/components/schemas/LensAlias'
+        LensArn:
+          allOf:
+            - $ref: '#/components/schemas/LensArn'
+            - description: The ARN for the lens.
         CurrentLensVersion:
           allOf:
             - $ref: '#/components/schemas/LensVersion'
@@ -3622,6 +5186,57 @@ components:
       title: ListAnswersInput
       properties: {}
       description: Input to list answers.
+    MaxResults:
+      type: integer
+      description: The maximum number of results to return for this request.
+      minimum: 1
+      maximum: 50
+    ListCheckDetailsInput:
+      type: object
+      required:
+        - LensArn
+        - PillarId
+        - QuestionId
+        - ChoiceId
+      title: ListCheckDetailsInput
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+        LensArn:
+          allOf:
+            - $ref: '#/components/schemas/LensArn'
+            - description: Well-Architected Lens ARN.
+        PillarId:
+          $ref: '#/components/schemas/PillarId'
+        QuestionId:
+          $ref: '#/components/schemas/QuestionId'
+        ChoiceId:
+          $ref: '#/components/schemas/ChoiceId'
+    ListCheckSummariesInput:
+      type: object
+      required:
+        - LensArn
+        - PillarId
+        - QuestionId
+        - ChoiceId
+      title: ListCheckSummariesInput
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+        LensArn:
+          allOf:
+            - $ref: '#/components/schemas/LensArn'
+            - description: Well-Architected Lens ARN.
+        PillarId:
+          $ref: '#/components/schemas/PillarId'
+        QuestionId:
+          $ref: '#/components/schemas/QuestionId'
+        ChoiceId:
+          $ref: '#/components/schemas/ChoiceId'
     ListLensReviewImprovementsMaxResults:
       type: integer
       minimum: 1
@@ -3631,16 +5246,22 @@ components:
       title: ListLensReviewImprovementsInput
       properties: {}
       description: Input to list lens review improvements.
-    MaxResults:
-      type: integer
-      description: The maximum number of results to return for this request.
-      minimum: 1
-      maximum: 50
     ListLensReviewsInput:
       type: object
       title: ListLensReviewsInput
       properties: {}
       description: Input to list lens reviews.
+    SharedWithPrefix:
+      type: string
+      maxLength: 100
+    ListWorkloadSharesMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 50
+    ListLensSharesInput:
+      type: object
+      title: ListLensSharesInput
+      properties: {}
     ListLensesInput:
       type: object
       title: ListLensesInput
@@ -3684,6 +5305,11 @@ components:
       type: string
       description: An optional string added to the beginning of each workload name returned in the results.
       maxLength: 100
+    ShareResourceType:
+      type: string
+      enum:
+        - WORKLOAD
+        - LENS
     ListShareInvitationsMaxResults:
       type: integer
       minimum: 1
@@ -3701,13 +5327,6 @@ components:
       type: object
       title: ListTagsForResourceInput
       properties: {}
-    SharedWithPrefix:
-      type: string
-      maxLength: 100
-    ListWorkloadSharesMaxResults:
-      type: integer
-      minimum: 1
-      maximum: 50
     ListWorkloadSharesInput:
       type: object
       title: ListWorkloadSharesInput
@@ -3789,6 +5408,16 @@ components:
       enum:
         - LENS_VERSION_UPGRADED
         - LENS_VERSION_DEPRECATED
+    OrganizationSharingStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    PillarName:
+      type: string
+      description: The name of the pillar.
+      minLength: 1
+      maxLength: 128
     QuestionDifferences:
       type: array
       items:
@@ -3798,6 +5427,8 @@ components:
       properties:
         PillarId:
           $ref: '#/components/schemas/PillarId'
+        PillarName:
+          $ref: '#/components/schemas/PillarName'
         DifferenceStatus:
           allOf:
             - $ref: '#/components/schemas/DifferenceStatus'
@@ -3811,11 +5442,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/PillarDifference'
-    PillarName:
-      type: string
-      description: The name of the pillar.
-      minLength: 1
-      maxLength: 128
     PillarNotes:
       type: object
       description: List of pillar notes of a lens review in a workload.
@@ -3845,9 +5471,6 @@ components:
             - $ref: '#/components/schemas/DifferenceStatus'
             - description: Indicates the type of change to the question.
       description: A question difference return object.
-    ShareInvitationId:
-      type: string
-      pattern: '[0-9a-f]{32}'
     ShareInvitation:
       type: object
       properties:
@@ -3855,8 +5478,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/ShareInvitationId'
             - description: The ID assigned to the share invitation.
+        ShareResourceType:
+          allOf:
+            - $ref: '#/components/schemas/ShareResourceType'
+            - description: The resource type of the share invitation.
         WorkloadId:
           $ref: '#/components/schemas/WorkloadId'
+        LensAlias:
+          $ref: '#/components/schemas/LensAlias'
+        LensArn:
+          allOf:
+            - $ref: '#/components/schemas/LensArn'
+            - description: The ARN for the lens.
       description: The share invitation.
     ShareInvitationAction:
       type: string
@@ -3877,20 +5510,21 @@ components:
           $ref: '#/components/schemas/SharedWith'
         PermissionType:
           $ref: '#/components/schemas/PermissionType'
+        ShareResourceType:
+          allOf:
+            - $ref: '#/components/schemas/ShareResourceType'
+            - description: The resource type of the share invitation.
         WorkloadName:
           $ref: '#/components/schemas/WorkloadName'
         WorkloadId:
           $ref: '#/components/schemas/WorkloadId'
+        LensName:
+          $ref: '#/components/schemas/LensName'
+        LensArn:
+          allOf:
+            - $ref: '#/components/schemas/LensArn'
+            - description: The ARN for the lens.
       description: A share invitation summary return object.
-    ShareStatus:
-      type: string
-      enum:
-        - ACCEPTED
-        - REJECTED
-        - PENDING
-        - REVOKED
-        - EXPIRED
-      description: The status of a workload share.
     TagKeyList:
       type: array
       items:
@@ -3930,6 +5564,14 @@ components:
             - $ref: '#/components/schemas/AnswerReason'
             - description: The reason why a question is not applicable to your workload.
       description: Input to update answer.
+    UpdateGlobalSettingsInput:
+      type: object
+      title: UpdateGlobalSettingsInput
+      properties:
+        OrganizationSharingStatus:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationSharingStatus'
+            - description: The status of organization sharing settings.
     UpdateLensReviewInput:
       type: object
       title: UpdateLensReviewInput
@@ -3991,6 +5633,14 @@ components:
           $ref: '#/components/schemas/Notes'
         ImprovementStatus:
           $ref: '#/components/schemas/WorkloadImprovementStatus'
+        DiscoveryConfig:
+          allOf:
+            - $ref: '#/components/schemas/WorkloadDiscoveryConfig'
+            - description: Well-Architected discovery configuration settings to associate to the workload.
+        Applications:
+          allOf:
+            - $ref: '#/components/schemas/WorkloadApplications'
+            - description: List of AppRegistry application ARNs to associate to the workload.
       description: Input to update a workload.
     UpdateWorkloadShareInput:
       type: object
@@ -4040,6 +5690,10 @@ components:
           $ref: '#/components/schemas/PermissionType'
         Status:
           $ref: '#/components/schemas/ShareStatus'
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusMessage'
+            - description: Optional message to compliment the Status field.
       description: A workload share summary return object.
 security:
   - hmac: []

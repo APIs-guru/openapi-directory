@@ -1,0 +1,2742 @@
+openapi: 3.0.0
+info:
+  version: '2021-01-01'
+  x-release: v4
+  title: AWS Backup Gateway
+  description: '<p><fullname>Backup gateway</fullname> <p>Backup gateway connects Backup to your hypervisor, so you can create, store, and restore backups of your virtual machines (VMs) anywhere, whether on-premises or in the VMware Cloud (VMC) on Amazon Web Services.</p> <p>Add on-premises resources by connecting to a hypervisor through a gateway. Backup will automatically discover the resources in your hypervisor.</p> <p>Use Backup to assign virtual or on-premises resources to a backup plan, or run on-demand backups. Once you have backed up your resources, you can view them and restore them like any resource supported by Backup.</p> <p>To download the Amazon Web Services software to get started, navigate to the Backup console, choose <b>Gateways</b>, then choose <b>Create gateway</b>.</p></p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: backup-gateway
+  x-aws-signingName: backup-gateway
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/backup-gateway-2021-01-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/backup-gateway/'
+servers:
+  - url: 'http://backup-gateway.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Backup Gateway multi-region endpoint
+  - url: 'https://backup-gateway.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Backup Gateway multi-region endpoint
+  - url: 'http://backup-gateway.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Backup Gateway endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://backup-gateway.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Backup Gateway endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /#X-Amz-Target=BackupOnPremises_v20210101.AssociateGatewayToServer:
+    post:
+      operationId: AssociateGatewayToServer
+      description: 'Associates a backup gateway with your server. After you complete the association process, you can back up and restore your VMs through the gateway.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateGatewayToServerOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateGatewayToServerInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.AssociateGatewayToServer
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.CreateGateway:
+    post:
+      operationId: CreateGateway
+      description: 'Creates a backup gateway. After you create a gateway, you can associate it with a server using the <code>AssociateGatewayToServer</code> operation.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateGatewayOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGatewayInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.CreateGateway
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.DeleteGateway:
+    post:
+      operationId: DeleteGateway
+      description: Deletes a backup gateway.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteGatewayOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteGatewayInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.DeleteGateway
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.DeleteHypervisor:
+    post:
+      operationId: DeleteHypervisor
+      description: Deletes a hypervisor.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteHypervisorOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteHypervisorInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.DeleteHypervisor
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.DisassociateGatewayFromServer:
+    post:
+      operationId: DisassociateGatewayFromServer
+      description: 'Disassociates a backup gateway from the specified server. After the disassociation process finishes, the gateway can no longer access the virtual machines on the server.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateGatewayFromServerOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociateGatewayFromServerInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.DisassociateGatewayFromServer
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.GetBandwidthRateLimitSchedule:
+    post:
+      operationId: GetBandwidthRateLimitSchedule
+      description: 'Retrieves the bandwidth rate limit schedule for a specified gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. Use this to get a gateway''s bandwidth rate limit schedule.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBandwidthRateLimitScheduleOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBandwidthRateLimitScheduleInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.GetBandwidthRateLimitSchedule
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.GetGateway:
+    post:
+      operationId: GetGateway
+      description: 'By providing the ARN (Amazon Resource Name), this API returns the gateway.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetGatewayOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetGatewayInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.GetGateway
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.GetHypervisor:
+    post:
+      operationId: GetHypervisor
+      description: 'This action requests information about the specified hypervisor to which the gateway will connect. A hypervisor is hardware, software, or firmware that creates and manages virtual machines, and allocates resources to them.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetHypervisorOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetHypervisorInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.GetHypervisor
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.GetHypervisorPropertyMappings:
+    post:
+      operationId: GetHypervisorPropertyMappings
+      description: This action retrieves the property mappings for the specified hypervisor. A hypervisor property mapping displays the relationship of entity properties available from the on-premises hypervisor to the properties available in Amazon Web Services.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetHypervisorPropertyMappingsOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetHypervisorPropertyMappingsInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.GetHypervisorPropertyMappings
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.GetVirtualMachine:
+    post:
+      operationId: GetVirtualMachine
+      description: 'By providing the ARN (Amazon Resource Name), this API returns the virtual machine.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetVirtualMachineOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetVirtualMachineInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.GetVirtualMachine
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.ImportHypervisorConfiguration:
+    post:
+      operationId: ImportHypervisorConfiguration
+      description: Connect to a hypervisor by importing its configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportHypervisorConfigurationOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportHypervisorConfigurationInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.ImportHypervisorConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.ListGateways:
+    post:
+      operationId: ListGateways
+      description: Lists backup gateways owned by an Amazon Web Services account in an Amazon Web Services Region. The returned list is ordered by gateway Amazon Resource Name (ARN).
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListGatewaysOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListGatewaysInput'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.ListGateways
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.ListHypervisors:
+    post:
+      operationId: ListHypervisors
+      description: Lists your hypervisors.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListHypervisorsOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListHypervisorsInput'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.ListHypervisors
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.ListTagsForResource:
+    post:
+      operationId: ListTagsForResource
+      description: Lists the tags applied to the resource identified by its Amazon Resource Name (ARN).
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsForResourceInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.ListTagsForResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.ListVirtualMachines:
+    post:
+      operationId: ListVirtualMachines
+      description: Lists your virtual machines.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListVirtualMachinesOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListVirtualMachinesInput'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.ListVirtualMachines
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.PutBandwidthRateLimitSchedule:
+    post:
+      operationId: PutBandwidthRateLimitSchedule
+      description: 'This action sets the bandwidth rate limit schedule for a specified gateway. By default, gateways do not have a bandwidth rate limit schedule, which means no bandwidth rate limiting is in effect. Use this to initiate a gateway''s bandwidth rate limit schedule.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutBandwidthRateLimitScheduleOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutBandwidthRateLimitScheduleInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.PutBandwidthRateLimitSchedule
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.PutHypervisorPropertyMappings:
+    post:
+      operationId: PutHypervisorPropertyMappings
+      description: This action sets the property mappings for the specified hypervisor. A hypervisor property mapping displays the relationship of entity properties available from the on-premises hypervisor to the properties available in Amazon Web Services.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutHypervisorPropertyMappingsOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutHypervisorPropertyMappingsInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.PutHypervisorPropertyMappings
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.PutMaintenanceStartTime:
+    post:
+      operationId: PutMaintenanceStartTime
+      description: Set the maintenance start time for a gateway.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutMaintenanceStartTimeOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutMaintenanceStartTimeInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.PutMaintenanceStartTime
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.StartVirtualMachinesMetadataSync:
+    post:
+      operationId: StartVirtualMachinesMetadataSync
+      description: This action sends a request to sync metadata across the specified virtual machines.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartVirtualMachinesMetadataSyncOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartVirtualMachinesMetadataSyncInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.StartVirtualMachinesMetadataSync
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.TagResource:
+    post:
+      operationId: TagResource
+      description: Tag the resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagResourceInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.TagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.TestHypervisorConfiguration:
+    post:
+      operationId: TestHypervisorConfiguration
+      description: Tests your hypervisor configuration to validate that backup gateway can connect with the hypervisor and its resources.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestHypervisorConfigurationOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestHypervisorConfigurationInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.TestHypervisorConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.UntagResource:
+    post:
+      operationId: UntagResource
+      description: Removes tags from the resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UntagResourceInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.UntagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.UpdateGatewayInformation:
+    post:
+      operationId: UpdateGatewayInformation
+      description: Updates a gateway's name. Specify which gateway to update using the Amazon Resource Name (ARN) of the gateway in your request.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateGatewayInformationOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGatewayInformationInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.UpdateGatewayInformation
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.UpdateGatewaySoftwareNow:
+    post:
+      operationId: UpdateGatewaySoftwareNow
+      description: '<p>Updates the gateway virtual machine (VM) software. The request immediately triggers the software update.</p> <note> <p>When you make this request, you get a <code>200 OK</code> success response immediately. However, it might take some time for the update to complete.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateGatewaySoftwareNowOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGatewaySoftwareNowInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.UpdateGatewaySoftwareNow
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BackupOnPremises_v20210101.UpdateHypervisor:
+    post:
+      operationId: UpdateHypervisor
+      description: 'Updates a hypervisor metadata, including its host, username, and password. Specify which hypervisor to update using the Amazon Resource Name (ARN) of the hypervisor in your request.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateHypervisorOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateHypervisorInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BackupOnPremises_v20210101.UpdateHypervisor
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    AssociateGatewayToServerOutput:
+      type: object
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: The Amazon Resource Name (ARN) of a gateway.
+    AssociateGatewayToServerInput:
+      type: object
+      required:
+        - GatewayArn
+        - ServerArn
+      title: AssociateGatewayToServerInput
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation to return a list of gateways for your account and Amazon Web Services Region.
+        ServerArn:
+          allOf:
+            - $ref: '#/components/schemas/ServerArn'
+            - description: The Amazon Resource Name (ARN) of the server that hosts your virtual machines.
+    ValidationException: {}
+    ConflictException: {}
+    InternalServerException: {}
+    ThrottlingException: {}
+    CreateGatewayOutput:
+      type: object
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: The Amazon Resource Name (ARN) of the gateway you create.
+    CreateGatewayInput:
+      type: object
+      required:
+        - ActivationKey
+        - GatewayDisplayName
+        - GatewayType
+      title: CreateGatewayInput
+      properties:
+        ActivationKey:
+          allOf:
+            - $ref: '#/components/schemas/ActivationKey'
+            - description: The activation key of the created gateway.
+        GatewayDisplayName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The display name of the created gateway.
+        GatewayType:
+          allOf:
+            - $ref: '#/components/schemas/GatewayType'
+            - description: The type of created gateway.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: A list of up to 50 tags to assign to the gateway. Each tag is a key-value pair.
+    DeleteGatewayOutput:
+      type: object
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: The Amazon Resource Name (ARN) of the gateway you deleted.
+    DeleteGatewayInput:
+      type: object
+      required:
+        - GatewayArn
+      title: DeleteGatewayInput
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: The Amazon Resource Name (ARN) of the gateway to delete.
+    ResourceNotFoundException: {}
+    DeleteHypervisorOutput:
+      type: object
+      properties:
+        HypervisorArn:
+          allOf:
+            - $ref: '#/components/schemas/ServerArn'
+            - description: The Amazon Resource Name (ARN) of the hypervisor you deleted.
+    DeleteHypervisorInput:
+      type: object
+      required:
+        - HypervisorArn
+      title: DeleteHypervisorInput
+      properties:
+        HypervisorArn:
+          allOf:
+            - $ref: '#/components/schemas/ServerArn'
+            - description: The Amazon Resource Name (ARN) of the hypervisor to delete.
+    AccessDeniedException: {}
+    DisassociateGatewayFromServerOutput:
+      type: object
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: The Amazon Resource Name (ARN) of the gateway you disassociated.
+    DisassociateGatewayFromServerInput:
+      type: object
+      required:
+        - GatewayArn
+      title: DisassociateGatewayFromServerInput
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: The Amazon Resource Name (ARN) of the gateway to disassociate.
+    GetBandwidthRateLimitScheduleOutput:
+      type: object
+      properties:
+        BandwidthRateLimitIntervals:
+          allOf:
+            - $ref: '#/components/schemas/BandwidthRateLimitIntervals'
+            - description: 'An array containing bandwidth rate limit schedule intervals for a gateway. When no bandwidth rate limit intervals have been scheduled, the array is empty.'
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: 'The Amazon Resource Name (ARN) of the gateway. Use the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html"> <code>ListGateways</code> </a> operation to return a list of gateways for your account and Amazon Web Services Region.'
+    GetBandwidthRateLimitScheduleInput:
+      type: object
+      required:
+        - GatewayArn
+      title: GetBandwidthRateLimitScheduleInput
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: 'The Amazon Resource Name (ARN) of the gateway. Use the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html"> <code>ListGateways</code> </a> operation to return a list of gateways for your account and Amazon Web Services Region.'
+    GetGatewayOutput:
+      type: object
+      properties:
+        Gateway:
+          allOf:
+            - $ref: '#/components/schemas/GatewayDetails'
+            - description: 'By providing the ARN (Amazon Resource Name), this API returns the gateway.'
+    GetGatewayInput:
+      type: object
+      required:
+        - GatewayArn
+      title: GetGatewayInput
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: The Amazon Resource Name (ARN) of the gateway.
+    GetHypervisorOutput:
+      type: object
+      properties:
+        Hypervisor:
+          allOf:
+            - $ref: '#/components/schemas/HypervisorDetails'
+            - description: Details about the requested hypervisor.
+    GetHypervisorInput:
+      type: object
+      required:
+        - HypervisorArn
+      title: GetHypervisorInput
+      properties:
+        HypervisorArn:
+          allOf:
+            - $ref: '#/components/schemas/ServerArn'
+            - description: The Amazon Resource Name (ARN) of the hypervisor.
+    GetHypervisorPropertyMappingsOutput:
+      type: object
+      properties:
+        HypervisorArn:
+          allOf:
+            - $ref: '#/components/schemas/ServerArn'
+            - description: The Amazon Resource Name (ARN) of the hypervisor.
+        IamRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The Amazon Resource Name (ARN) of the IAM role.
+        VmwareToAwsTagMappings:
+          allOf:
+            - $ref: '#/components/schemas/VmwareToAwsTagMappings'
+            - description: This is a display of the mappings of on-premises VMware tags to the Amazon Web Services tags.
+    GetHypervisorPropertyMappingsInput:
+      type: object
+      required:
+        - HypervisorArn
+      title: GetHypervisorPropertyMappingsInput
+      properties:
+        HypervisorArn:
+          allOf:
+            - $ref: '#/components/schemas/ServerArn'
+            - description: The Amazon Resource Name (ARN) of the hypervisor.
+    GetVirtualMachineOutput:
+      type: object
+      properties:
+        VirtualMachine:
+          allOf:
+            - $ref: '#/components/schemas/VirtualMachineDetails'
+            - description: 'This object contains the basic attributes of <code>VirtualMachine</code> contained by the output of <code>GetVirtualMachine</code> '
+    GetVirtualMachineInput:
+      type: object
+      required:
+        - ResourceArn
+      title: GetVirtualMachineInput
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the virtual machine.
+    ImportHypervisorConfigurationOutput:
+      type: object
+      properties:
+        HypervisorArn:
+          allOf:
+            - $ref: '#/components/schemas/ServerArn'
+            - description: The Amazon Resource Name (ARN) of the hypervisor you disassociated.
+    ImportHypervisorConfigurationInput:
+      type: object
+      required:
+        - Host
+        - Name
+      title: ImportHypervisorConfigurationInput
+      properties:
+        Host:
+          allOf:
+            - $ref: '#/components/schemas/Host'
+            - description: The server host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).
+        KmsKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyArn'
+            - description: The Key Management Service for the hypervisor.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the hypervisor.
+        Password:
+          allOf:
+            - $ref: '#/components/schemas/Password'
+            - description: The password for the hypervisor.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: The tags of the hypervisor configuration to import.
+        Username:
+          allOf:
+            - $ref: '#/components/schemas/Username'
+            - description: The username for the hypervisor.
+    ListGatewaysOutput:
+      type: object
+      properties:
+        Gateways:
+          allOf:
+            - $ref: '#/components/schemas/Gateways'
+            - description: A list of your gateways.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The next item following a partial list of returned resources. For example, if a request is made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+    ListGatewaysInput:
+      type: object
+      title: ListGatewaysInput
+      properties:
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of gateways to list.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The next item following a partial list of returned resources. For example, if a request is made to return <code>MaxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+    ListHypervisorsOutput:
+      type: object
+      properties:
+        Hypervisors:
+          allOf:
+            - $ref: '#/components/schemas/Hypervisors'
+            - description: 'A list of your <code>Hypervisor</code> objects, ordered by their Amazon Resource Names (ARNs).'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The next item following a partial list of returned resources. For example, if a request is made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+    ListHypervisorsInput:
+      type: object
+      title: ListHypervisorsInput
+      properties:
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of hypervisors to list.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The next item following a partial list of returned resources. For example, if a request is made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+    ListTagsForResourceOutput:
+      type: object
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the resource's tags that you listed.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: A list of the resource's tags.
+    ListTagsForResourceInput:
+      type: object
+      required:
+        - ResourceArn
+      title: ListTagsForResourceInput
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the resource's tags to list.
+    ListVirtualMachinesOutput:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The next item following a partial list of returned resources. For example, if a request is made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+        VirtualMachines:
+          allOf:
+            - $ref: '#/components/schemas/VirtualMachines'
+            - description: 'A list of your <code>VirtualMachine</code> objects, ordered by their Amazon Resource Names (ARNs).'
+    ListVirtualMachinesInput:
+      type: object
+      title: ListVirtualMachinesInput
+      properties:
+        HypervisorArn:
+          allOf:
+            - $ref: '#/components/schemas/ServerArn'
+            - description: The Amazon Resource Name (ARN) of the hypervisor connected to your virtual machine.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of virtual machines to list.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The next item following a partial list of returned resources. For example, if a request is made to return <code>maxResults</code> number of resources, <code>NextToken</code> allows you to return more items in your list starting at the location pointed to by the next token.'
+    PutBandwidthRateLimitScheduleOutput:
+      type: object
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: 'The Amazon Resource Name (ARN) of the gateway. Use the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html"> <code>ListGateways</code> </a> operation to return a list of gateways for your account and Amazon Web Services Region.'
+    PutBandwidthRateLimitScheduleInput:
+      type: object
+      required:
+        - BandwidthRateLimitIntervals
+        - GatewayArn
+      title: PutBandwidthRateLimitScheduleInput
+      properties:
+        BandwidthRateLimitIntervals:
+          allOf:
+            - $ref: '#/components/schemas/BandwidthRateLimitIntervals'
+            - description: 'An array containing bandwidth rate limit schedule intervals for a gateway. When no bandwidth rate limit intervals have been scheduled, the array is empty.'
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: 'The Amazon Resource Name (ARN) of the gateway. Use the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html"> <code>ListGateways</code> </a> operation to return a list of gateways for your account and Amazon Web Services Region.'
+    PutHypervisorPropertyMappingsOutput:
+      type: object
+      properties:
+        HypervisorArn:
+          allOf:
+            - $ref: '#/components/schemas/ServerArn'
+            - description: The Amazon Resource Name (ARN) of the hypervisor.
+    PutHypervisorPropertyMappingsInput:
+      type: object
+      required:
+        - HypervisorArn
+        - IamRoleArn
+        - VmwareToAwsTagMappings
+      title: PutHypervisorPropertyMappingsInput
+      properties:
+        HypervisorArn:
+          allOf:
+            - $ref: '#/components/schemas/ServerArn'
+            - description: The Amazon Resource Name (ARN) of the hypervisor.
+        IamRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The Amazon Resource Name (ARN) of the IAM role.
+        VmwareToAwsTagMappings:
+          allOf:
+            - $ref: '#/components/schemas/VmwareToAwsTagMappings'
+            - description: This action requests the mappings of on-premises VMware tags to the Amazon Web Services tags.
+    PutMaintenanceStartTimeOutput:
+      type: object
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: The Amazon Resource Name (ARN) of a gateway for which you set the maintenance start time.
+    PutMaintenanceStartTimeInput:
+      type: object
+      required:
+        - GatewayArn
+        - HourOfDay
+        - MinuteOfHour
+      title: PutMaintenanceStartTimeInput
+      properties:
+        DayOfMonth:
+          allOf:
+            - $ref: '#/components/schemas/DayOfMonth'
+            - description: <p>The day of the month start maintenance on a gateway.</p> <p>Valid values range from <code>Sunday</code> to <code>Saturday</code>.</p>
+        DayOfWeek:
+          allOf:
+            - $ref: '#/components/schemas/DayOfWeek'
+            - description: The day of the week to start maintenance on a gateway.
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: 'The Amazon Resource Name (ARN) for the gateway, used to specify its maintenance start time.'
+        HourOfDay:
+          allOf:
+            - $ref: '#/components/schemas/HourOfDay'
+            - description: The hour of the day to start maintenance on a gateway.
+        MinuteOfHour:
+          allOf:
+            - $ref: '#/components/schemas/MinuteOfHour'
+            - description: The minute of the hour to start maintenance on a gateway.
+    StartVirtualMachinesMetadataSyncOutput:
+      type: object
+      properties:
+        HypervisorArn:
+          allOf:
+            - $ref: '#/components/schemas/ServerArn'
+            - description: The Amazon Resource Name (ARN) of the hypervisor.
+    StartVirtualMachinesMetadataSyncInput:
+      type: object
+      required:
+        - HypervisorArn
+      title: StartVirtualMachinesMetadataSyncInput
+      properties:
+        HypervisorArn:
+          allOf:
+            - $ref: '#/components/schemas/ServerArn'
+            - description: The Amazon Resource Name (ARN) of the hypervisor.
+    TagResourceOutput:
+      type: object
+      properties:
+        ResourceARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the resource you tagged.
+    TagResourceInput:
+      type: object
+      required:
+        - ResourceARN
+        - Tags
+      title: TagResourceInput
+      properties:
+        ResourceARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the resource to tag.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: A list of tags to assign to the resource.
+    TestHypervisorConfigurationOutput:
+      type: object
+      properties: {}
+    TestHypervisorConfigurationInput:
+      type: object
+      required:
+        - GatewayArn
+        - Host
+      title: TestHypervisorConfigurationInput
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: The Amazon Resource Name (ARN) of the gateway to the hypervisor to test.
+        Host:
+          allOf:
+            - $ref: '#/components/schemas/Host'
+            - description: The server host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).
+        Password:
+          allOf:
+            - $ref: '#/components/schemas/Password'
+            - description: The password for the hypervisor.
+        Username:
+          allOf:
+            - $ref: '#/components/schemas/Username'
+            - description: The username for the hypervisor.
+    UntagResourceOutput:
+      type: object
+      properties:
+        ResourceARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the resource from which you removed tags.
+    UntagResourceInput:
+      type: object
+      required:
+        - ResourceARN
+        - TagKeys
+      title: UntagResourceInput
+      properties:
+        ResourceARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the resource from which to remove tags.
+        TagKeys:
+          allOf:
+            - $ref: '#/components/schemas/TagKeys'
+            - description: The list of tag keys specifying which tags to remove.
+    UpdateGatewayInformationOutput:
+      type: object
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: The Amazon Resource Name (ARN) of the gateway you updated.
+    UpdateGatewayInformationInput:
+      type: object
+      required:
+        - GatewayArn
+      title: UpdateGatewayInformationInput
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: The Amazon Resource Name (ARN) of the gateway to update.
+        GatewayDisplayName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The updated display name of the gateway.
+    UpdateGatewaySoftwareNowOutput:
+      type: object
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: The Amazon Resource Name (ARN) of the gateway you updated.
+    UpdateGatewaySoftwareNowInput:
+      type: object
+      required:
+        - GatewayArn
+      title: UpdateGatewaySoftwareNowInput
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: The Amazon Resource Name (ARN) of the gateway to be updated.
+    UpdateHypervisorOutput:
+      type: object
+      properties:
+        HypervisorArn:
+          allOf:
+            - $ref: '#/components/schemas/ServerArn'
+            - description: The Amazon Resource Name (ARN) of the hypervisor you updated.
+    UpdateHypervisorInput:
+      type: object
+      required:
+        - HypervisorArn
+      title: UpdateHypervisorInput
+      properties:
+        Host:
+          allOf:
+            - $ref: '#/components/schemas/Host'
+            - description: The updated host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).
+        HypervisorArn:
+          allOf:
+            - $ref: '#/components/schemas/ServerArn'
+            - description: The Amazon Resource Name (ARN) of the hypervisor to update.
+        LogGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/LogGroupArn'
+            - description: The Amazon Resource Name (ARN) of the group of gateways within the requested log.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The updated name for the hypervisor
+        Password:
+          allOf:
+            - $ref: '#/components/schemas/Password'
+            - description: The updated password for the hypervisor.
+        Username:
+          allOf:
+            - $ref: '#/components/schemas/Username'
+            - description: The updated username for the hypervisor.
+    ActivationKey:
+      type: string
+      pattern: '^[0-9a-zA-Z\-]+$'
+      minLength: 1
+      maxLength: 50
+    GatewayArn:
+      type: string
+      pattern: '^arn:(aws|aws-cn|aws-us-gov):backup-gateway(:[a-zA-Z-0-9]+){3}\/[a-zA-Z-0-9]+$'
+      minLength: 50
+      maxLength: 500
+    ServerArn:
+      type: string
+      pattern: '^arn:(aws|aws-cn|aws-us-gov):backup-gateway(:[a-zA-Z-0-9]+){3}\/[a-zA-Z-0-9]+$'
+      minLength: 50
+      maxLength: 500
+    AverageUploadRateLimit:
+      type: integer
+      minimum: 51200
+      maximum: 8000000000000
+    DaysOfWeek:
+      type: array
+      items:
+        $ref: '#/components/schemas/DayOfWeek'
+      minItems: 1
+      maxItems: 7
+    HourOfDay:
+      type: integer
+      minimum: 0
+      maximum: 23
+    MinuteOfHour:
+      type: integer
+      minimum: 0
+      maximum: 59
+    BandwidthRateLimitInterval:
+      type: object
+      required:
+        - DaysOfWeek
+        - EndHourOfDay
+        - EndMinuteOfHour
+        - StartHourOfDay
+        - StartMinuteOfHour
+      properties:
+        AverageUploadRateLimitInBitsPerSec:
+          allOf:
+            - $ref: '#/components/schemas/AverageUploadRateLimit'
+            - description: '<p>The average upload rate limit component of the bandwidth rate limit interval, in bits per second. This field does not appear in the response if the upload rate limit is not set.</p> <note> <p>For Backup Gateway, the minimum value is <code>(Value)</code>.</p> </note>'
+        DaysOfWeek:
+          allOf:
+            - $ref: '#/components/schemas/DaysOfWeek'
+            - description: 'The days of the week component of the bandwidth rate limit interval, represented as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 represents Saturday.'
+        EndHourOfDay:
+          allOf:
+            - $ref: '#/components/schemas/HourOfDay'
+            - description: The hour of the day to end the bandwidth rate limit interval.
+        EndMinuteOfHour:
+          allOf:
+            - $ref: '#/components/schemas/MinuteOfHour'
+            - description: '<p>The minute of the hour to end the bandwidth rate limit interval.</p> <important> <p>The bandwidth rate limit interval ends at the end of the minute. To end an interval at the end of an hour, use the value <code>59</code>.</p> </important>'
+        StartHourOfDay:
+          allOf:
+            - $ref: '#/components/schemas/HourOfDay'
+            - description: The hour of the day to start the bandwidth rate limit interval.
+        StartMinuteOfHour:
+          allOf:
+            - $ref: '#/components/schemas/MinuteOfHour'
+            - description: 'The minute of the hour to start the bandwidth rate limit interval. The interval begins at the start of that minute. To begin an interval exactly at the start of the hour, use the value <code>0</code>.'
+      description: 'Describes a bandwidth rate limit interval for a gateway. A bandwidth rate limit schedule consists of one or more bandwidth rate limit intervals. A bandwidth rate limit interval defines a period of time on one or more days of the week, during which bandwidth rate limits are specified for uploading, downloading, or both.'
+    BandwidthRateLimitIntervals:
+      type: array
+      items:
+        $ref: '#/components/schemas/BandwidthRateLimitInterval'
+      minItems: 0
+      maxItems: 20
+    Name:
+      type: string
+      pattern: '^[a-zA-Z0-9-]*$'
+      minLength: 1
+      maxLength: 100
+    GatewayType:
+      type: string
+      enum:
+        - BACKUP_VM
+    Tags:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    DayOfMonth:
+      type: integer
+      minimum: 1
+      maximum: 31
+    DayOfWeek:
+      type: integer
+      minimum: 0
+      maximum: 6
+    HypervisorId:
+      type: string
+      minLength: 1
+      maxLength: 100
+    Time:
+      type: string
+      format: date-time
+    Gateway:
+      type: object
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation to return a list of gateways for your account and Amazon Web Services Region.
+        GatewayDisplayName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The display name of the gateway.
+        GatewayType:
+          allOf:
+            - $ref: '#/components/schemas/GatewayType'
+            - description: The type of the gateway.
+        HypervisorId:
+          allOf:
+            - $ref: '#/components/schemas/HypervisorId'
+            - description: The hypervisor ID of the gateway.
+        LastSeenTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: 'The last time Backup gateway communicated with the gateway, in Unix format and UTC time.'
+      description: A gateway is an Backup Gateway appliance that runs on the customer's network to provide seamless connectivity to backup storage in the Amazon Web Services Cloud.
+    MaintenanceStartTime:
+      type: object
+      required:
+        - HourOfDay
+        - MinuteOfHour
+      properties:
+        DayOfMonth:
+          allOf:
+            - $ref: '#/components/schemas/DayOfMonth'
+            - description: 'The day of the month component of the maintenance start time represented as an ordinal number from 1 to 28, where 1 represents the first day of the month and 28 represents the last day of the month.'
+        DayOfWeek:
+          allOf:
+            - $ref: '#/components/schemas/DayOfWeek'
+            - description: 'An ordinal number between 0 and 6 that represents the day of the week, where 0 represents Sunday and 6 represents Saturday. The day of week is in the time zone of the gateway.'
+        HourOfDay:
+          allOf:
+            - $ref: '#/components/schemas/HourOfDay'
+            - description: 'The hour component of the maintenance start time represented as <i>hh</i>, where <i>hh</i> is the hour (0 to 23). The hour of the day is in the time zone of the gateway.'
+        MinuteOfHour:
+          allOf:
+            - $ref: '#/components/schemas/MinuteOfHour'
+            - description: 'The minute component of the maintenance start time represented as <i>mm</i>, where <i>mm</i> is the minute (0 to 59). The minute of the hour is in the time zone of the gateway.'
+      description: This is your gateway's weekly maintenance start time including the day and time of the week. Note that values are in terms of the gateway's time zone. Can be weekly or monthly.
+    VpcEndpoint:
+      type: string
+      minLength: 1
+      maxLength: 255
+    GatewayDetails:
+      type: object
+      properties:
+        GatewayArn:
+          allOf:
+            - $ref: '#/components/schemas/GatewayArn'
+            - description: The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation to return a list of gateways for your account and Amazon Web Services Region.
+        GatewayDisplayName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The display name of the gateway.
+        GatewayType:
+          allOf:
+            - $ref: '#/components/schemas/GatewayType'
+            - description: The type of the gateway type.
+        HypervisorId:
+          allOf:
+            - $ref: '#/components/schemas/HypervisorId'
+            - description: The hypervisor ID of the gateway.
+        LastSeenTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: 'Details showing the last time Backup gateway communicated with the cloud, in Unix format and UTC time.'
+        MaintenanceStartTime:
+          allOf:
+            - $ref: '#/components/schemas/MaintenanceStartTime'
+            - description: Returns your gateway's weekly maintenance start time including the day and time of the week. Note that values are in terms of the gateway's time zone. Can be weekly or monthly.
+        NextUpdateAvailabilityTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: Details showing the next update availability time of the gateway.
+        VpcEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpoint'
+            - description: The DNS name for the virtual private cloud (VPC) endpoint the gateway uses to connect to the cloud for backup gateway.
+      description: The details of gateway.
+    Gateways:
+      type: array
+      items:
+        $ref: '#/components/schemas/Gateway'
+    HypervisorDetails:
+      type: object
+      properties:
+        Host:
+          allOf:
+            - $ref: '#/components/schemas/Host'
+            - description: The server host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).
+        HypervisorArn:
+          allOf:
+            - $ref: '#/components/schemas/ServerArn'
+            - description: The Amazon Resource Name (ARN) of the hypervisor.
+        KmsKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyArn'
+            - description: The Amazon Resource Name (ARN) of the KMS used to encrypt the hypervisor.
+        LastSuccessfulMetadataSyncTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: This is the time when the most recent successful sync of metadata occurred.
+        LatestMetadataSyncStatus:
+          allOf:
+            - $ref: '#/components/schemas/SyncMetadataStatus'
+            - description: This is the most recent status for the indicated metadata sync.
+        LatestMetadataSyncStatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: This is the most recent status for the indicated metadata sync.
+        LogGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/LogGroupArn'
+            - description: The Amazon Resource Name (ARN) of the group of gateways within the requested log.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: This is the name of the specified hypervisor.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/HypervisorState'
+            - description: '<p>This is the current state of the specified hypervisor.</p> <p>The possible states are <code>PENDING</code>, <code>ONLINE</code>, <code>OFFLINE</code>, or <code>ERROR</code>.</p>'
+      description: 'These are the details of the specified hypervisor. A hypervisor is hardware, software, or firmware that creates and manages virtual machines, and allocates resources to them.'
+    IamRoleArn:
+      type: string
+      pattern: '^arn:(aws|aws-cn|aws-us-gov):iam::([0-9]+):role/(\S+)$'
+      minLength: 20
+      maxLength: 2048
+    VmwareToAwsTagMappings:
+      type: array
+      items:
+        $ref: '#/components/schemas/VmwareToAwsTagMapping'
+    ResourceArn:
+      type: string
+      pattern: '^arn:(aws|aws-cn|aws-us-gov):backup-gateway(:[a-zA-Z-0-9]+){3}\/[a-zA-Z-0-9]+$'
+      minLength: 50
+      maxLength: 500
+    VirtualMachineDetails:
+      type: object
+      properties:
+        HostName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The host name of the virtual machine.
+        HypervisorId:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The ID of the virtual machine's hypervisor.
+        LastBackupDate:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: 'The most recent date a virtual machine was backed up, in Unix format and UTC time.'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the virtual machine.
+        Path:
+          allOf:
+            - $ref: '#/components/schemas/Path'
+            - description: The path of the virtual machine.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: 'The Amazon Resource Name (ARN) of the virtual machine. For example, <code>arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL</code>.'
+        VmwareTags:
+          allOf:
+            - $ref: '#/components/schemas/VmwareTags'
+            - description: These are the details of the VMware tags associated with the specified virtual machine.
+      description: 'Your <code>VirtualMachine</code> objects, ordered by their Amazon Resource Names (ARNs).'
+    Host:
+      type: string
+      pattern: ^.+$
+      minLength: 3
+      maxLength: 128
+    KmsKeyArn:
+      type: string
+      pattern: '^(^arn:(aws|aws-cn|aws-us-gov):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\S+)$)|(^alias/(\S+)$)$'
+      minLength: 50
+      maxLength: 500
+    HypervisorState:
+      type: string
+      enum:
+        - PENDING
+        - ONLINE
+        - OFFLINE
+        - ERROR
+    Hypervisor:
+      type: object
+      properties:
+        Host:
+          allOf:
+            - $ref: '#/components/schemas/Host'
+            - description: The server host of the hypervisor. This can be either an IP address or a fully-qualified domain name (FQDN).
+        HypervisorArn:
+          allOf:
+            - $ref: '#/components/schemas/ServerArn'
+            - description: The Amazon Resource Name (ARN) of the hypervisor.
+        KmsKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyArn'
+            - description: The Amazon Resource Name (ARN) of the Key Management Service used to encrypt the hypervisor.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the hypervisor.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/HypervisorState'
+            - description: The state of the hypervisor.
+      description: '<p>Represents the hypervisor''s permissions to which the gateway will connect.</p> <p>A hypervisor is hardware, software, or firmware that creates and manages virtual machines, and allocates resources to them.</p>'
+    SyncMetadataStatus:
+      type: string
+      enum:
+        - CREATED
+        - RUNNING
+        - FAILED
+        - PARTIALLY_FAILED
+        - SUCCEEDED
+    string:
+      type: string
+    LogGroupArn:
+      type: string
+      pattern: '^$|^arn:(aws|aws-cn|aws-us-gov):logs:([a-zA-Z0-9-]+):([0-9]+):log-group:[a-zA-Z0-9_\-\/\.]+:\*$'
+      minLength: 0
+      maxLength: 2048
+    Hypervisors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Hypervisor'
+    Password:
+      type: string
+      pattern: '^[ -~]+$'
+      minLength: 1
+      maxLength: 100
+      format: password
+    Username:
+      type: string
+      pattern: '^[ -\.0-\[\]-~]*[!-\.0-\[\]-~][ -\.0-\[\]-~]*$'
+      minLength: 1
+      maxLength: 100
+      format: password
+    MaxResults:
+      type: integer
+      minimum: 1
+    NextToken:
+      type: string
+      pattern: ^.+$
+      minLength: 1
+      maxLength: 1000
+    VirtualMachines:
+      type: array
+      items:
+        $ref: '#/components/schemas/VirtualMachine'
+    Path:
+      type: string
+      pattern: '^[^\x00]+$'
+      minLength: 1
+      maxLength: 4096
+    TagKey:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 1
+      maxLength: 128
+    TagValue:
+      type: string
+      pattern: '^[^\x00]*$'
+      minLength: 0
+      maxLength: 256
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: 'The key part of a tag''s key-value pair. The key can''t start with <code>aws:</code>.'
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The value part of a tag's key-value pair.
+      description: 'A key-value pair you can use to manage, filter, and search for your resources. Allowed characters include UTF-8 letters, numbers, spaces, and the following characters: + - = . _ : /.'
+    TagKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+    VirtualMachine:
+      type: object
+      properties:
+        HostName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The host name of the virtual machine.
+        HypervisorId:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The ID of the virtual machine's hypervisor.
+        LastBackupDate:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: 'The most recent date a virtual machine was backed up, in Unix format and UTC time.'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the virtual machine.
+        Path:
+          allOf:
+            - $ref: '#/components/schemas/Path'
+            - description: The path of the virtual machine.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: 'The Amazon Resource Name (ARN) of the virtual machine. For example, <code>arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL</code>.'
+      description: A virtual machine that is on a hypervisor.
+    VmwareTags:
+      type: array
+      items:
+        $ref: '#/components/schemas/VmwareTag'
+    VmwareCategory:
+      type: string
+      minLength: 1
+      maxLength: 80
+    VmwareTagName:
+      type: string
+      minLength: 1
+      maxLength: 80
+    VmwareTag:
+      type: object
+      properties:
+        VmwareCategory:
+          allOf:
+            - $ref: '#/components/schemas/VmwareCategory'
+            - description: The is the category of VMware.
+        VmwareTagDescription:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: This is a user-defined description of a VMware tag.
+        VmwareTagName:
+          allOf:
+            - $ref: '#/components/schemas/VmwareTagName'
+            - description: This is the user-defined name of a VMware tag.
+      description: '<p>A VMware tag is a tag attached to a specific virtual machine. A <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_Tag.html">tag</a> is a key-value pair you can use to manage, filter, and search for your resources.</p> <p>The content of VMware tags can be matched to Amazon Web Services tags.</p>'
+    VmwareToAwsTagMapping:
+      type: object
+      required:
+        - AwsTagKey
+        - AwsTagValue
+        - VmwareCategory
+        - VmwareTagName
+      properties:
+        AwsTagKey:
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The key part of the Amazon Web Services tag's key-value pair.
+        AwsTagValue:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The value part of the Amazon Web Services tag's key-value pair.
+        VmwareCategory:
+          allOf:
+            - $ref: '#/components/schemas/VmwareCategory'
+            - description: The is the category of VMware.
+        VmwareTagName:
+          allOf:
+            - $ref: '#/components/schemas/VmwareTagName'
+            - description: This is the user-defined name of a VMware tag.
+      description: This displays the mapping of on-premises VMware tags to the corresponding Amazon Web Services tags.
+security:
+  - hmac: []

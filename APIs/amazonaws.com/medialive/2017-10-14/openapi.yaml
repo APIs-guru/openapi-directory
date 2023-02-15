@@ -792,6 +792,84 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /prod/claimDevice:
+    post:
+      operationId: ClaimDevice
+      description: 'Send a request to claim an AWS Elemental device that you have purchased from a third-party vendor. After the request succeeds, you will own the device.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClaimDeviceResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: BadGatewayException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGatewayException'
+        '485':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '486':
+          description: GatewayTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutException'
+        '487':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  description: Placeholder documentation for __string
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /prod/channels:
     post:
       operationId: CreateChannel
@@ -989,6 +1067,22 @@ paths:
                     - INFO
                     - DEBUG
                     - DISABLED
+                maintenance:
+                  description: Placeholder documentation for MaintenanceCreateSettings
+                  type: object
+                  properties:
+                    MaintenanceDay:
+                      allOf:
+                        - $ref: '#/components/schemas/MaintenanceDay'
+                        - xml:
+                            name: maintenanceDay
+                          description: Choose one day of the week for maintenance. The chosen day is used for all future maintenance windows.
+                    MaintenanceStartTime:
+                      allOf:
+                        - $ref: '#/components/schemas/__stringPattern010920300'
+                        - xml:
+                            name: maintenanceStartTime
+                          description: Choose the hour that maintenance will start. The chosen time is used for all future maintenance windows.
                 name:
                   description: Placeholder documentation for __string
                   type: string
@@ -1214,7 +1308,7 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/__string'
                 type:
-                  description: Placeholder documentation for InputType
+                  description: The different types of inputs that AWS Elemental MediaLive supports.
                   type: string
                   enum:
                     - UDP_PUSH
@@ -1226,6 +1320,7 @@ paths:
                     - MEDIACONNECT
                     - INPUT_DEVICE
                     - AWS_CDI
+                    - TS_FILE
                 vpc:
                   description: |
                     Settings for a private VPC Input.
@@ -2393,6 +2488,28 @@ paths:
                     - INFO
                     - DEBUG
                     - DISABLED
+                maintenance:
+                  description: Placeholder documentation for MaintenanceUpdateSettings
+                  type: object
+                  properties:
+                    MaintenanceDay:
+                      allOf:
+                        - $ref: '#/components/schemas/MaintenanceDay'
+                        - xml:
+                            name: maintenanceDay
+                          description: Choose one day of the week for maintenance. The chosen day is used for all future maintenance windows.
+                    MaintenanceScheduledDate:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: maintenanceScheduledDate
+                          description: Choose a specific date for maintenance to occur. The chosen date is used for the next maintenance window only.
+                    MaintenanceStartTime:
+                      allOf:
+                        - $ref: '#/components/schemas/__stringPattern010920300'
+                        - xml:
+                            name: maintenanceStartTime
+                          description: Choose the hour that maintenance will start. The chosen time is used for all future maintenance windows.
                 name:
                   description: Placeholder documentation for __string
                   type: string
@@ -3545,6 +3662,22 @@ paths:
                 name:
                   description: Placeholder documentation for __string
                   type: string
+                renewalSettings:
+                  description: The Renewal settings for Reservations
+                  type: object
+                  properties:
+                    AutomaticRenewal:
+                      allOf:
+                        - $ref: '#/components/schemas/ReservationAutomaticRenewal'
+                        - xml:
+                            name: automaticRenewal
+                          description: Automatic renewal status for the reservation
+                    RenewalCount:
+                      allOf:
+                        - $ref: '#/components/schemas/__integerMin1'
+                        - xml:
+                            name: renewalCount
+                          description: Count for the reservation renewal
   '/prod/tags/{resource-arn}#tagKeys':
     delete:
       operationId: DeleteTags
@@ -3759,6 +3892,12 @@ paths:
                         - xml:
                             name: maxBitrate
                           description: The maximum bitrate in bits per second. Set a value here to throttle the bitrate of the source video.
+                    LatencyMs:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: latencyMs
+                          description: The Link device's buffer size (latency) in milliseconds (ms).
                 name:
                   description: Placeholder documentation for __string
                   type: string
@@ -3778,6 +3917,12 @@ paths:
                         - xml:
                             name: maxBitrate
                           description: The maximum bitrate in bits per second. Set a value here to throttle the bitrate of the source video.
+                    LatencyMs:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: latencyMs
+                          description: The Link device's buffer size (latency) in milliseconds (ms).
   '/prod/inputDevices/{inputDeviceId}/thumbnailData#accept':
     get:
       operationId: DescribeInputDeviceThumbnail
@@ -4492,6 +4637,22 @@ paths:
                 name:
                   description: Placeholder documentation for __string
                   type: string
+                renewalSettings:
+                  description: The Renewal settings for Reservations
+                  type: object
+                  properties:
+                    AutomaticRenewal:
+                      allOf:
+                        - $ref: '#/components/schemas/ReservationAutomaticRenewal'
+                        - xml:
+                            name: automaticRenewal
+                          description: Automatic renewal status for the reservation
+                    RenewalCount:
+                      allOf:
+                        - $ref: '#/components/schemas/__integerMin1'
+                        - xml:
+                            name: renewalCount
+                          description: Count for the reservation renewal
                 requestId:
                   description: Placeholder documentation for __string
                   type: string
@@ -4503,6 +4664,94 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/__string'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/prod/inputDevices/{inputDeviceId}/reboot':
+    post:
+      operationId: RebootInputDevice
+      description: 'Send a reboot command to the specified input device. The device will begin rebooting within a few seconds of sending the command. When the reboot is complete, the device’s connection status will change to connected.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RebootInputDeviceResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: BadGatewayException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGatewayException'
+        '485':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '486':
+          description: GatewayTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutException'
+        '487':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: inputDeviceId
+          in: path
+          required: true
+          description: 'The unique ID of the input device to reboot. For example, hd-123456789abcdef.'
+          schema:
+            type: string
+            description: Placeholder documentation for __string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                force:
+                  description: Whether or not to force reboot the input device.
+                  type: string
+                  enum:
+                    - 'NO'
+                    - 'YES'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4656,6 +4905,81 @@ paths:
           in: path
           required: true
           description: A request to start a channel
+          schema:
+            type: string
+            description: Placeholder documentation for __string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/prod/inputDevices/{inputDeviceId}/startInputDeviceMaintenanceWindow':
+    post:
+      operationId: StartInputDeviceMaintenanceWindow
+      description: 'Start a maintenance window for the specified input device. Starting a maintenance window will give the device up to two hours to install software. If the device was streaming prior to the maintenance, it will resume streaming when the software is fully installed. Devices automatically install updates while they are powered on and their MediaLive channels are stopped. A maintenance window allows you to update a device without having to stop MediaLive channels that use the device. The device must remain powered on and connected to the internet for the duration of the maintenance.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartInputDeviceMaintenanceWindowResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: BadGatewayException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGatewayException'
+        '485':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '486':
+          description: GatewayTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutException'
+        '487':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: inputDeviceId
+          in: path
+          required: true
+          description: 'The unique ID of the input device to start a maintenance window for. For example, hd-123456789abcdef.'
           schema:
             type: string
             description: Placeholder documentation for __string
@@ -5236,6 +5560,10 @@ components:
       type: object
       properties: {}
       description: Placeholder documentation for CancelInputDeviceTransferResponse
+    ClaimDeviceResponse:
+      type: object
+      properties: {}
+      description: Placeholder documentation for ClaimDeviceResponse
     CreateChannelResponse:
       type: object
       properties:
@@ -5523,6 +5851,21 @@ components:
         - UHD
       description: |
         Input resolution based on lines of vertical resolution in the input; SD is less than 720 lines, HD is 720 to 1080 lines, UHD is greater than 1080 lines
+    MaintenanceDay:
+      type: string
+      enum:
+        - MONDAY
+        - TUESDAY
+        - WEDNESDAY
+        - THURSDAY
+        - FRIDAY
+        - SATURDAY
+        - SUNDAY
+      description: The currently selected maintenance day.
+    __stringPattern010920300:
+      type: string
+      pattern: '^([0,1]?[0-9]|2[0-3]):00$'
+      description: Placeholder documentation for __stringPattern010920300
     CreateInputResponse:
       type: object
       properties:
@@ -5772,6 +6115,12 @@ components:
             - xml:
                 name: logLevel
               description: The log level being written to CloudWatch Logs.
+        Maintenance:
+          allOf:
+            - $ref: '#/components/schemas/MaintenanceStatus'
+            - xml:
+                name: maintenance
+              description: Maintenance settings for this channel.
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -5995,6 +6344,12 @@ components:
             - xml:
                 name: region
               description: 'AWS region, e.g. ''us-west-2'''
+        RenewalSettings:
+          allOf:
+            - $ref: '#/components/schemas/RenewalSettings'
+            - xml:
+                name: renewalSettings
+              description: Renewal settings for the reservation
         ReservationId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -6101,6 +6456,12 @@ components:
             - xml:
                 name: logLevel
               description: The log level being written to CloudWatch Logs.
+        Maintenance:
+          allOf:
+            - $ref: '#/components/schemas/MaintenanceStatus'
+            - xml:
+                name: maintenance
+              description: Maintenance settings for this channel.
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -6197,7 +6558,7 @@ components:
                 name: inputSourceType
               description: |
                 Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
-                during input switch actions. Presently, this functionality only works with MP4_FILE inputs.
+                during input switch actions. Presently, this functionality only works with MP4_FILE and TS_FILE inputs.
         MediaConnectFlows:
           allOf:
             - $ref: '#/components/schemas/__listOfMediaConnectFlow'
@@ -6614,6 +6975,12 @@ components:
             - xml:
                 name: region
               description: 'AWS region, e.g. ''us-west-2'''
+        RenewalSettings:
+          allOf:
+            - $ref: '#/components/schemas/RenewalSettings'
+            - xml:
+                name: renewalSettings
+              description: Renewal settings for the reservation
         ReservationId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -6824,6 +7191,21 @@ components:
             - xml:
                 name: reservation
       description: Placeholder documentation for PurchaseOfferingResponse
+    ReservationAutomaticRenewal:
+      type: string
+      enum:
+        - DISABLED
+        - ENABLED
+        - UNAVAILABLE
+      description: Automatic Renewal Status for Reservation
+    __integerMin1:
+      type: integer
+      description: Placeholder documentation for __integerMin1
+      minimum: 1
+    RebootInputDeviceResponse:
+      type: object
+      properties: {}
+      description: Placeholder documentation for RebootInputDeviceResponse
     RejectInputDeviceTransferResponse:
       type: object
       properties: {}
@@ -6893,6 +7275,12 @@ components:
             - xml:
                 name: logLevel
               description: The log level being written to CloudWatch Logs.
+        Maintenance:
+          allOf:
+            - $ref: '#/components/schemas/MaintenanceStatus'
+            - xml:
+                name: maintenance
+              description: Maintenance settings for this channel.
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -6935,6 +7323,10 @@ components:
                 name: vpc
               description: Settings for VPC output
       description: Placeholder documentation for StartChannelResponse
+    StartInputDeviceMaintenanceWindowResponse:
+      type: object
+      properties: {}
+      description: Placeholder documentation for StartInputDeviceMaintenanceWindowResponse
     StartMultiplexResponse:
       type: object
       properties:
@@ -7064,6 +7456,12 @@ components:
             - xml:
                 name: logLevel
               description: The log level being written to CloudWatch Logs.
+        Maintenance:
+          allOf:
+            - $ref: '#/components/schemas/MaintenanceStatus'
+            - xml:
+                name: maintenance
+              description: Maintenance settings for this channel.
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -7542,6 +7940,12 @@ components:
       title: AcceptInputDeviceTransferRequest
       properties: {}
       description: Placeholder documentation for AcceptInputDeviceTransferRequest
+    AccessibilityType:
+      type: string
+      enum:
+        - DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES
+        - IMPLEMENTS_ACCESSIBILITY_FEATURES
+      description: Accessibility Type
     AfdSignaling:
       type: string
       enum:
@@ -7873,6 +8277,12 @@ components:
             - xml:
                 name: videoPid
               description: Packet Identifier (PID) of the elementary video stream in the transport stream. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
+        Scte35PrerollPullupMilliseconds:
+          allOf:
+            - $ref: '#/components/schemas/__doubleMin0Max5000'
+            - xml:
+                name: scte35PrerollPullupMilliseconds
+              description: 'Defines the amount SCTE-35 preroll will be increased (in milliseconds) on the output. Preroll is the amount of time between the presence of a SCTE-35 indication in a transport stream and the PTS of the video frame it references. Zero means don''t add pullup (it doesn''t mean set the preroll to zero). Negative pullup is not supported, which means that you can''t make the preroll shorter. Be aware that latency in the output will increase by the pullup amount.'
       description: M2ts Settings
     RawSettings:
       type: object
@@ -7901,10 +8311,6 @@ components:
             - xml:
                 name: destinationRefId
       description: Reference to an OutputDestination ID defined in the channel
-    __integerMin1:
-      type: integer
-      description: Placeholder documentation for __integerMin1
-      minimum: 1
     ArchiveGroupSettings:
       type: object
       required:
@@ -7998,6 +8404,54 @@ components:
                 name: outputChannel
               description: The index of the output channel being produced.
       description: Audio Channel Mapping
+    Eac3AtmosSettings:
+      type: object
+      properties:
+        Bitrate:
+          allOf:
+            - $ref: '#/components/schemas/__double'
+            - xml:
+                name: bitrate
+              description: |-
+                Average bitrate in bits/second. Valid bitrates depend on the coding mode.
+                //  * @affectsRightSizing true
+        CodingMode:
+          allOf:
+            - $ref: '#/components/schemas/Eac3AtmosCodingMode'
+            - xml:
+                name: codingMode
+              description: Dolby Digital Plus with Dolby Atmos coding mode. Determines number of channels.
+        Dialnorm:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin1Max31'
+            - xml:
+                name: dialnorm
+              description: Sets the dialnorm for the output. Default 23.
+        DrcLine:
+          allOf:
+            - $ref: '#/components/schemas/Eac3AtmosDrcLine'
+            - xml:
+                name: drcLine
+              description: Sets the Dolby dynamic range compression profile.
+        DrcRf:
+          allOf:
+            - $ref: '#/components/schemas/Eac3AtmosDrcRf'
+            - xml:
+                name: drcRf
+              description: 'Sets the profile for heavy Dolby dynamic range compression, ensures that the instantaneous signal peaks do not exceed specified levels.'
+        HeightTrim:
+          allOf:
+            - $ref: '#/components/schemas/__double'
+            - xml:
+                name: heightTrim
+              description: Height dimensional trim. Sets the maximum amount to attenuate the height channels when the downstream player isn??t configured to handle Dolby Digital Plus with Dolby Atmos and must remix the channels.
+        SurroundTrim:
+          allOf:
+            - $ref: '#/components/schemas/__double'
+            - xml:
+                name: surroundTrim
+              description: Surround dimensional trim. Sets the maximum amount to attenuate the surround channels when the downstream player isn't configured to handle Dolby Digital Plus with Dolby Atmos and must remix the channels.
+      description: Eac3 Atmos Settings
     Eac3Settings:
       type: object
       properties:
@@ -8183,6 +8637,11 @@ components:
             - $ref: '#/components/schemas/Ac3Settings'
             - xml:
                 name: ac3Settings
+        Eac3AtmosSettings:
+          allOf:
+            - $ref: '#/components/schemas/Eac3AtmosSettings'
+            - xml:
+                name: eac3AtmosSettings
         Eac3Settings:
           allOf:
             - $ref: '#/components/schemas/Eac3Settings'
@@ -8240,6 +8699,16 @@ components:
         - FOLLOW_INPUT
         - USE_CONFIGURED
       description: Audio Description Audio Type Control
+    AudioWatermarkSettings:
+      type: object
+      properties:
+        NielsenWatermarksSettings:
+          allOf:
+            - $ref: '#/components/schemas/NielsenWatermarksSettings'
+            - xml:
+                name: nielsenWatermarksSettings
+              description: Settings to configure Nielsen Watermarks in the audio encode
+      description: Audio Watermark Settings
     __stringMin1Max35:
       type: string
       description: Placeholder documentation for __stringMin1Max35
@@ -8251,6 +8720,10 @@ components:
         - FOLLOW_INPUT
         - USE_CONFIGURED
       description: Audio Description Language Code Control
+    __stringMax255:
+      type: string
+      description: Placeholder documentation for __stringMax255
+      maxLength: 255
     RemixSettings:
       type: object
       required:
@@ -8311,6 +8784,12 @@ components:
                   followInput: If the input contains an ISO 639 audioType, then that value is passed through to the output. If the input contains no ISO 639 audioType, the value in Audio Type is included in the output.
                   useConfigured: The value in Audio Type is included in the output.
                 Note that this field and audioType are both ignored if inputType is broadcasterMixedAd.
+        AudioWatermarkingSettings:
+          allOf:
+            - $ref: '#/components/schemas/AudioWatermarkSettings'
+            - xml:
+                name: audioWatermarkingSettings
+              description: Settings to configure one or more solutions that insert audio watermarks in the audio encode
         CodecSettings:
           allOf:
             - $ref: '#/components/schemas/AudioCodecSettings'
@@ -8331,7 +8810,7 @@ components:
               description: 'Choosing followInput will cause the ISO 639 language code of the output to follow the ISO 639 language code of the input. The languageCode will be used when useConfigured is set, or when followInput is selected but there is no ISO 639 language code specified by the input.'
         Name:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/__stringMax255'
             - xml:
                 name: name
               description: The name of this AudioDescription. Outputs will use this name to uniquely identify this AudioDescription.  Description names should be unique within this Live Event.
@@ -8348,6 +8827,31 @@ components:
                 name: streamName
               description: 'Used for MS Smooth and Apple HLS outputs. Indicates the name displayed by the player (eg. English, or Director Commentary).'
       description: Audio Description
+    DolbyEProgramSelection:
+      type: string
+      enum:
+        - ALL_CHANNELS
+        - PROGRAM_1
+        - PROGRAM_2
+        - PROGRAM_3
+        - PROGRAM_4
+        - PROGRAM_5
+        - PROGRAM_6
+        - PROGRAM_7
+        - PROGRAM_8
+      description: Dolby EProgram Selection
+    AudioDolbyEDecode:
+      type: object
+      required:
+        - ProgramSelection
+      properties:
+        ProgramSelection:
+          allOf:
+            - $ref: '#/components/schemas/DolbyEProgramSelection'
+            - xml:
+                name: programSelection
+              description: 'Applies only to Dolby E. Enter the program ID (according to the metadata in the audio) of the Dolby E program to extract from the specified track. One program extracted per audio selector. To select multiple programs, create multiple selectors with the same Track and different Program numbers. “All channels” means to ignore the program IDs and include all the channels in this selector; useful if metadata is known to be incorrect.'
+      description: Audio Dolby EDecode
     __stringMin1:
       type: string
       description: Placeholder documentation for __stringMin1
@@ -8429,7 +8933,7 @@ components:
               description: key used to extract the password from EC2 Parameter store
         Uri:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/__stringMax2048'
             - xml:
                 name: uri
               description: 'Uniform Resource Identifier - This should be a path to a file accessible to the Live system (eg. a http:// URI) depending on the output type. For example, a RTMP destination should have a uri simliar to: "rtmp://fmsserver/live".'
@@ -8562,6 +9066,12 @@ components:
             - xml:
                 name: tracks
               description: Selects one or more unique audio tracks from within a source.
+        DolbyEDecode:
+          allOf:
+            - $ref: '#/components/schemas/AudioDolbyEDecode'
+            - xml:
+                name: dolbyEDecode
+              description: Configure decoding options for Dolby E streams - these should be Dolby E frames carried in PCM streams tagged with SMPTE-337
       description: Audio Track Selection
     __integerMin1000:
       type: integer
@@ -8602,6 +9112,31 @@ components:
       description: Placeholder documentation for __listOfAudioTrack
       items:
         $ref: '#/components/schemas/AudioTrack'
+    NielsenWatermarksSettings:
+      type: object
+      properties:
+        NielsenCbetSettings:
+          allOf:
+            - $ref: '#/components/schemas/NielsenCBET'
+            - xml:
+                name: nielsenCbetSettings
+              description: Complete these fields only if you want to insert watermarks of type Nielsen CBET
+        NielsenDistributionType:
+          allOf:
+            - $ref: '#/components/schemas/NielsenWatermarksDistributionTypes'
+            - xml:
+                name: nielsenDistributionType
+              description: |-
+                Choose the distribution types that you want to assign to the watermarks:
+                - PROGRAM_CONTENT
+                - FINAL_DISTRIBUTOR
+        NielsenNaesIiNwSettings:
+          allOf:
+            - $ref: '#/components/schemas/NielsenNaesIiNw'
+            - xml:
+                name: nielsenNaesIiNwSettings
+              description: Complete these fields only if you want to insert watermarks of type Nielsen NAES II (N2) and Nielsen NAES VI (NW).
+      description: Nielsen Watermarks Settings
     AuthenticationScheme:
       type: string
       enum:
@@ -8661,6 +9196,11 @@ components:
     AvailSettings:
       type: object
       properties:
+        Esam:
+          allOf:
+            - $ref: '#/components/schemas/Esam'
+            - xml:
+                name: esam
         Scte35SpliceInsert:
           allOf:
             - $ref: '#/components/schemas/Scte35SpliceInsert'
@@ -8672,6 +9212,49 @@ components:
             - xml:
                 name: scte35TimeSignalApos
       description: Avail Settings
+    Esam:
+      type: object
+      required:
+        - AcquisitionPointId
+        - PoisEndpoint
+      properties:
+        AcquisitionPointId:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax256'
+            - xml:
+                name: acquisitionPointId
+              description: Sent as acquisitionPointIdentity to identify the MediaLive channel to the POIS.
+        AdAvailOffset:
+          allOf:
+            - $ref: '#/components/schemas/__integerMinNegative1000Max1000'
+            - xml:
+                name: adAvailOffset
+              description: 'When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time. This only applies to embedded SCTE 104/35 messages and does not apply to OOB messages.'
+        PasswordParam:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: passwordParam
+              description: Documentation update needed
+        PoisEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax2048'
+            - xml:
+                name: poisEndpoint
+              description: The URL of the signal conditioner endpoint on the Placement Opportunity Information System (POIS). MediaLive sends SignalProcessingEvents here when SCTE-35 messages are read.
+        Username:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: username
+              description: Documentation update needed
+        ZoneIdentity:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax256'
+            - xml:
+                name: zoneIdentity
+              description: Optional data sent as zoneIdentity to identify the MediaLive channel to the POIS.
+      description: Esam
     Scte35SpliceInsert:
       type: object
       properties:
@@ -9173,6 +9756,12 @@ components:
         - CaptionSelectorName
         - Name
       properties:
+        Accessibility:
+          allOf:
+            - $ref: '#/components/schemas/AccessibilityType'
+            - xml:
+                name: accessibility
+              description: 'Indicates whether the caption track implements accessibility features such as written descriptions of spoken dialog, music, and sounds.'
         CaptionSelectorName:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -9318,7 +9907,7 @@ components:
             - $ref: '#/components/schemas/__stringMax1000'
             - xml:
                 name: copyrightHolder
-              description: Applies only if you plan to convert these source captions to EBU-TT-D or TTML in an output. Complete this field if you want to include the name of the copyright holder in the copyright metadata tag in the TTML
+              description: Complete this field if you want to include the name of the copyright holder in the copyright tag in the captions metadata.
         FillLineGap:
           allOf:
             - $ref: '#/components/schemas/EbuTtDFillLineGapControl'
@@ -9388,7 +9977,7 @@ components:
             - $ref: '#/components/schemas/TtmlDestinationStyleControl'
             - xml:
                 name: styleControl
-              description: 'When set to passthrough, passes through style and position information from a TTML-like input source (TTML, SMPTE-TT, CFF-TT) to the CFF-TT output or TTML output.'
+              description: This field is not currently supported and will not affect the output styling. Leave the default value.
       description: Ttml Destination Settings
     WebvttDestinationSettings:
       type: object
@@ -9785,6 +10374,34 @@ components:
         - DEBUG
         - DISABLED
       description: The log level the user wants for their channel.
+    MaintenanceStatus:
+      type: object
+      properties:
+        MaintenanceDay:
+          allOf:
+            - $ref: '#/components/schemas/MaintenanceDay'
+            - xml:
+                name: maintenanceDay
+              description: The currently selected maintenance day.
+        MaintenanceDeadline:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: maintenanceDeadline
+              description: Maintenance is required by the displayed date and time. Date and time is in ISO.
+        MaintenanceScheduledDate:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: maintenanceScheduledDate
+              description: The currently scheduled maintenance date and time. Date and time is in ISO.
+        MaintenanceStartTime:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: maintenanceStartTime
+              description: The currently selected maintenance start time. Time is in UTC.
+      description: Placeholder documentation for MaintenanceStatus
     __listOfPipelineDetail:
       type: array
       description: Placeholder documentation for __listOfPipelineDetail
@@ -9911,6 +10528,12 @@ components:
             - xml:
                 name: logLevel
               description: The log level being written to CloudWatch Logs.
+        Maintenance:
+          allOf:
+            - $ref: '#/components/schemas/MaintenanceStatus'
+            - xml:
+                name: maintenance
+              description: Maintenance settings for this channel.
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -10023,6 +10646,12 @@ components:
             - xml:
                 name: logLevel
               description: The log level being written to CloudWatch Logs.
+        Maintenance:
+          allOf:
+            - $ref: '#/components/schemas/MaintenanceStatus'
+            - xml:
+                name: maintenance
+              description: Maintenance settings for this channel.
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -10057,12 +10686,39 @@ components:
             - $ref: '#/components/schemas/VpcOutputSettingsDescription'
             - xml:
                 name: vpc
-              description: Settings for VPC output
+              description: Settings for any VPC outputs.
       description: Placeholder documentation for ChannelSummary
+    ClaimDeviceRequest:
+      type: object
+      title: ClaimDeviceRequest
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: The id of the device you want to claim.
+      description: A request to claim an AWS Elemental device that you have purchased from a third-party vendor.
     ColorSpacePassthroughSettings:
       type: object
       properties: {}
       description: Passthrough applies no color space conversion to the output
+    MaintenanceCreateSettings:
+      type: object
+      properties:
+        MaintenanceDay:
+          allOf:
+            - $ref: '#/components/schemas/MaintenanceDay'
+            - xml:
+                name: maintenanceDay
+              description: Choose one day of the week for maintenance. The chosen day is used for all future maintenance windows.
+        MaintenanceStartTime:
+          allOf:
+            - $ref: '#/components/schemas/__stringPattern010920300'
+            - xml:
+                name: maintenanceStartTime
+              description: Choose the hour that maintenance will start. The chosen time is used for all future maintenance windows.
+      description: Placeholder documentation for MaintenanceCreateSettings
     VpcOutputSettings:
       type: object
       required:
@@ -10139,6 +10795,12 @@ components:
             - xml:
                 name: logLevel
               description: The log level to write to CloudWatch Logs.
+        Maintenance:
+          allOf:
+            - $ref: '#/components/schemas/MaintenanceCreateSettings'
+            - xml:
+                name: maintenance
+              description: Maintenance settings for this channel.
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -10177,7 +10839,7 @@ components:
             - $ref: '#/components/schemas/VpcOutputSettings'
             - xml:
                 name: vpc
-              description: Settings for VPC output
+              description: Settings for the VPC outputs
       description: A request to create a channel
     __listOfInputDestinationRequest:
       type: array
@@ -10211,7 +10873,8 @@ components:
         - MEDIACONNECT
         - INPUT_DEVICE
         - AWS_CDI
-      description: Placeholder documentation for InputType
+        - TS_FILE
+      description: The different types of inputs that AWS Elemental MediaLive supports.
     InputVpcRequest:
       type: object
       required:
@@ -10369,7 +11032,7 @@ components:
                 name: inputSourceType
               description: |
                 Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
-                during input switch actions. Presently, this functionality only works with MP4_FILE inputs.
+                during input switch actions. Presently, this functionality only works with MP4_FILE and TS_FILE inputs.
         MediaConnectFlows:
           allOf:
             - $ref: '#/components/schemas/__listOfMediaConnectFlow'
@@ -10870,6 +11533,22 @@ components:
       enum:
         - NO_UPFRONT
       description: 'Offering type, e.g. ''NO_UPFRONT'''
+    RenewalSettings:
+      type: object
+      properties:
+        AutomaticRenewal:
+          allOf:
+            - $ref: '#/components/schemas/ReservationAutomaticRenewal'
+            - xml:
+                name: automaticRenewal
+              description: Automatic renewal status for the reservation
+        RenewalCount:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin1'
+            - xml:
+                name: renewalCount
+              description: Count for the reservation renewal
+      description: The Renewal settings for Reservations
     ReservationResourceSpecification:
       type: object
       properties:
@@ -10967,6 +11646,7 @@ components:
       enum:
         - UP_TO_DATE
         - NOT_UP_TO_DATE
+        - UPDATING
       description: The status of software on the input device.
     InputDeviceHdSettings:
       type: object
@@ -11019,6 +11699,12 @@ components:
             - xml:
                 name: width
               description: 'The width of the video source, in pixels.'
+        LatencyMs:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: latencyMs
+              description: The Link device's buffer size (latency) in milliseconds (ms). You can specify this value.
       description: 'Settings that describe the active source from the input device, and the video characteristics of that source.'
     InputDeviceNetworkSettings:
       type: object
@@ -11058,6 +11744,7 @@ components:
       type: string
       enum:
         - HD
+        - UHD
       description: 'The type of the input device. For an AWS Elemental Link device that outputs resolutions up to 1080, choose "HD".'
     InputDeviceUhdSettings:
       type: object
@@ -11110,6 +11797,12 @@ components:
             - xml:
                 name: width
               description: 'The width of the video source, in pixels.'
+        LatencyMs:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: latencyMs
+              description: The Link device's buffer size (latency) in milliseconds (ms). You can specify this value.
       description: 'Settings that describe the active source from the input device, and the video characteristics of that source.'
     AcceptHeader:
       type: string
@@ -11159,8 +11852,8 @@ components:
         - DYNAMIC
       description: |
         There are two types of input sources, static and dynamic. If an input source is dynamic you can
-        change the source url of the input dynamically using an input switch action. However, the only input type
-        to support a dynamic url at this time is MP4_FILE. By default all input sources are static.
+        change the source url of the input dynamically using an input switch action. Currently, two input types
+        support a dynamic url at this time, MP4_FILE and TS_FILE. By default all input sources are static.
     __listOfMediaConnectFlow:
       type: array
       description: Placeholder documentation for __listOfMediaConnectFlow
@@ -11228,6 +11921,10 @@ components:
       title: DescribeScheduleRequest
       properties: {}
       description: Placeholder documentation for DescribeScheduleRequest
+    DolbyVision81Settings:
+      type: object
+      properties: {}
+      description: Dolby Vision81 Settings
     __integerMin0Max65536:
       type: integer
       description: Placeholder documentation for __integerMin0Max65536
@@ -11381,6 +12078,33 @@ components:
                 name: repInterval
               description: The number of milliseconds between instances of this table in the output transport stream.
       description: DVB Time and Date Table (SDT)
+    Eac3AtmosCodingMode:
+      type: string
+      enum:
+        - CODING_MODE_5_1_4
+        - CODING_MODE_7_1_4
+        - CODING_MODE_9_1_6
+      description: Eac3 Atmos Coding Mode
+    Eac3AtmosDrcLine:
+      type: string
+      enum:
+        - FILM_LIGHT
+        - FILM_STANDARD
+        - MUSIC_LIGHT
+        - MUSIC_STANDARD
+        - NONE
+        - SPEECH
+      description: Eac3 Atmos Drc Line
+    Eac3AtmosDrcRf:
+      type: string
+      enum:
+        - FILM_LIGHT
+        - FILM_STANDARD
+        - MUSIC_LIGHT
+        - MUSIC_STANDARD
+        - NONE
+        - SPEECH
+      description: Eac3 Atmos Drc Rf
     Eac3AttenuationControl:
       type: string
       enum:
@@ -11514,6 +12238,19 @@ components:
       description: Placeholder documentation for __integerMin1Max5
       minimum: 1
       maximum: 5
+    __stringMax256:
+      type: string
+      description: Placeholder documentation for __stringMax256
+      maxLength: 256
+    __integerMinNegative1000Max1000:
+      type: integer
+      description: Placeholder documentation for __integerMinNegative1000Max1000
+      minimum: -1000
+      maximum: 1000
+    __stringMax2048:
+      type: string
+      description: Placeholder documentation for __stringMax2048
+      maxLength: 2048
     FailoverConditionSettings:
       type: object
       properties:
@@ -11764,6 +12501,31 @@ components:
       description: Placeholder documentation for __integerMin1Max3600000
       minimum: 1
       maximum: 3600000
+    TimecodeBurninSettings:
+      type: object
+      required:
+        - Position
+        - FontSize
+      properties:
+        FontSize:
+          allOf:
+            - $ref: '#/components/schemas/TimecodeBurninFontSize'
+            - xml:
+                name: fontSize
+              description: Choose a timecode burn-in font size
+        Position:
+          allOf:
+            - $ref: '#/components/schemas/TimecodeBurninPosition'
+            - xml:
+                name: position
+              description: Choose a timecode burn-in output position
+        Prefix:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax255'
+            - xml:
+                name: prefix
+              description: Create a timecode burn-in prefix (optional)
+      description: Timecode Burnin Settings
     FrameCaptureSettings:
       type: object
       properties:
@@ -11779,6 +12541,12 @@ components:
             - xml:
                 name: captureIntervalUnits
               description: Unit for the frame capture interval.
+        TimecodeBurninSettings:
+          allOf:
+            - $ref: '#/components/schemas/TimecodeBurninSettings'
+            - xml:
+                name: timecodeBurninSettings
+              description: Timecode burn-in settings
       description: Frame Capture Settings
     __integerMinNegative60Max60:
       type: integer
@@ -12370,6 +13138,12 @@ components:
                 Determines how timecodes should be inserted into the video elementary stream.
                 - 'disabled': Do not include timecodes
                 - 'picTimingSei': Pass through picture timing SEI messages from the source specified in Timecode Config
+        TimecodeBurninSettings:
+          allOf:
+            - $ref: '#/components/schemas/TimecodeBurninSettings'
+            - xml:
+                name: timecodeBurninSettings
+              description: Timecode burn-in settings
       description: H264 Settings
     H265AdaptiveQuantization:
       type: string
@@ -12424,6 +13198,11 @@ components:
             - $ref: '#/components/schemas/ColorSpacePassthroughSettings'
             - xml:
                 name: colorSpacePassthroughSettings
+        DolbyVision81Settings:
+          allOf:
+            - $ref: '#/components/schemas/DolbyVision81Settings'
+            - xml:
+                name: dolbyVision81Settings
         Hdr10Settings:
           allOf:
             - $ref: '#/components/schemas/Hdr10Settings'
@@ -12746,6 +13525,12 @@ components:
                 Determines how timecodes should be inserted into the video elementary stream.
                 - 'disabled': Do not include timecodes
                 - 'picTimingSei': Pass through picture timing SEI messages from the source specified in Timecode Config
+        TimecodeBurninSettings:
+          allOf:
+            - $ref: '#/components/schemas/TimecodeBurninSettings'
+            - xml:
+                name: timecodeBurninSettings
+              description: Timecode burn-in settings
       description: H265 Settings
     __integerMin0Max32768:
       type: integer
@@ -13088,6 +13873,12 @@ components:
         - EXCLUDE
         - INCLUDE
       description: Hls Program Date Time
+    HlsProgramDateTimeClock:
+      type: string
+      enum:
+        - INITIALIZE_FROM_OUTPUT_TIMECODE
+        - SYSTEM_CLOCK
+      description: Hls Program Date Time Clock
     __integerMin0Max3600:
       type: integer
       description: Placeholder documentation for __integerMin0Max3600
@@ -13329,7 +14120,7 @@ components:
             - $ref: '#/components/schemas/__integerMin0'
             - xml:
                 name: minSegmentLength
-              description: 'When set, minimumSegmentLength is enforced by looking ahead and back within the specified range for a nearby avail and extending the segment size if needed.'
+              description: 'Minimum length of MPEG-2 Transport Stream segments in seconds. When set, minimum segment length is enforced by looking ahead and back within the specified range for a nearby avail and extending the segment size if needed.'
         Mode:
           allOf:
             - $ref: '#/components/schemas/HlsMode'
@@ -13355,7 +14146,18 @@ components:
             - $ref: '#/components/schemas/HlsProgramDateTime'
             - xml:
                 name: programDateTime
-              description: 'Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files. The value is calculated as follows: either the program date and time are initialized using the input timecode source, or the time is initialized using the input timecode source and the date is initialized using the timestampOffset.'
+              description: Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files. The value is calculated using the program date time clock.
+        ProgramDateTimeClock:
+          allOf:
+            - $ref: '#/components/schemas/HlsProgramDateTimeClock'
+            - xml:
+                name: programDateTimeClock
+              description: |-
+                Specifies the algorithm used to drive the HLS EXT-X-PROGRAM-DATE-TIME clock. Options include:
+
+                INITIALIZE_FROM_OUTPUT_TIMECODE: The PDT clock is initialized as a function of the first output timecode, then incremented by the EXTINF duration of each encoded segment.
+
+                SYSTEM_CLOCK: The PDT clock is initialized as a function of the UTC wall clock, then incremented by the EXTINF duration of each encoded segment. If the PDT clock diverges from the wall clock by more than 500ms, it is resynchronized to the wall clock.
         ProgramDateTimePeriod:
           allOf:
             - $ref: '#/components/schemas/__integerMin0Max3600'
@@ -13378,7 +14180,7 @@ components:
             - $ref: '#/components/schemas/__integerMin1'
             - xml:
                 name: segmentLength
-              description: 'Length of MPEG-2 Transport Stream segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer.'
+              description: 'Length of MPEG-2 Transport Stream segments to create in seconds. Note that segments will end on the next keyframe after this duration, so actual segment length may be longer.'
         SegmentationMode:
           allOf:
             - $ref: '#/components/schemas/HlsSegmentationMode'
@@ -13636,6 +14438,12 @@ components:
             - xml:
                 name: networkInputSettings
               description: Input settings.
+        Scte35Pid:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin32Max8191'
+            - xml:
+                name: scte35Pid
+              description: 'PID from which to read SCTE-35 messages. If left undefined, EML will select the first SCTE-35 PID found in the input.'
         Smpte2038DataPreference:
           allOf:
             - $ref: '#/components/schemas/Smpte2038DataPreference'
@@ -13820,6 +14628,12 @@ components:
             - xml:
                 name: maxBitrate
               description: The maximum bitrate in bits per second. Set a value here to throttle the bitrate of the source video.
+        LatencyMs:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: latencyMs
+              description: The Link device's buffer size (latency) in milliseconds (ms).
       description: Configurable settings for the input device.
     InputDeviceState:
       type: string
@@ -14015,6 +14829,11 @@ components:
                 name: serverValidation
               description: 'Check HTTPS server certificates. When set to checkCryptographyOnly, cryptography in the certificate will be checked, but not the server''s name. Certain subdomains (notably S3 buckets that use dots in the bucket name) do not strictly match the corresponding certificate''s wildcard pattern and would otherwise cause the event to error. This setting is ignored for protocols that do not use https.'
       description: Network source to transcode. Must be accessible to the Elemental Live node that is running the live event through a network connection.
+    __integerMin32Max8191:
+      type: integer
+      description: Placeholder documentation for __integerMin32Max8191
+      minimum: 32
+      maximum: 8191
     Smpte2038DataPreference:
       type: string
       enum:
@@ -14373,6 +15192,10 @@ components:
         - NO_PASSTHROUGH
         - PASSTHROUGH
       description: M2ts Timed Metadata Behavior
+    __doubleMin0Max5000:
+      type: number
+      description: Placeholder documentation for __doubleMin0Max5000
+      format: double
     M3u8NielsenId3Behavior:
       type: string
       enum:
@@ -14503,6 +15326,28 @@ components:
                 name: videoPid
               description: Packet Identifier (PID) of the elementary video stream in the transport stream. Can be entered as a decimal or hexadecimal value.
       description: Settings information for the .m3u8 container
+    MaintenanceUpdateSettings:
+      type: object
+      properties:
+        MaintenanceDay:
+          allOf:
+            - $ref: '#/components/schemas/MaintenanceDay'
+            - xml:
+                name: maintenanceDay
+              description: Choose one day of the week for maintenance. The chosen day is used for all future maintenance windows.
+        MaintenanceScheduledDate:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: maintenanceScheduledDate
+              description: Choose a specific date for maintenance to occur. The chosen date is used for the next maintenance window only.
+        MaintenanceStartTime:
+          allOf:
+            - $ref: '#/components/schemas/__stringPattern010920300'
+            - xml:
+                name: maintenanceStartTime
+              description: Choose the hour that maintenance will start. The chosen time is used for all future maintenance windows.
+      description: Placeholder documentation for MaintenanceUpdateSettings
     MediaConnectFlow:
       type: object
       properties:
@@ -14778,6 +15623,12 @@ components:
                 Determines how MediaLive inserts timecodes in the output video. For detailed information about setting up the input and the output for a timecode, see the section on \"MediaLive Features - Timecode configuration\" in the MediaLive User Guide.
                 DISABLED: do not include timecodes.
                 GOP_TIMECODE: Include timecode metadata in the GOP header.
+        TimecodeBurninSettings:
+          allOf:
+            - $ref: '#/components/schemas/TimecodeBurninSettings'
+            - xml:
+                name: timecodeBurninSettings
+              description: Timecode burn-in settings
       description: Mpeg2 Settings
     SmoothGroupAudioOnlyTimecodeControl:
       type: string
@@ -15064,10 +15915,6 @@ components:
                 name: pipelineId
               description: Identifies a specific pipeline in the multiplex.
       description: The current source for one of the pipelines in the multiplex.
-    __stringMax256:
-      type: string
-      description: Placeholder documentation for __stringMax256
-      maxLength: 256
     MultiplexProgramSummary:
       type: object
       properties:
@@ -15190,12 +16037,83 @@ components:
         - CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME
         - CHECK_CRYPTOGRAPHY_ONLY
       description: Network Input Server Validation
+    __stringMin2Max2:
+      type: string
+      description: Placeholder documentation for __stringMin2Max2
+      minLength: 2
+      maxLength: 2
+    NielsenWatermarksCbetStepaside:
+      type: string
+      enum:
+        - DISABLED
+        - ENABLED
+      description: Nielsen Watermarks Cbet Stepaside
+    __stringMin1Max7:
+      type: string
+      description: Placeholder documentation for __stringMin1Max7
+      minLength: 1
+      maxLength: 7
+    NielsenCBET:
+      type: object
+      required:
+        - CbetCheckDigitString
+        - CbetStepaside
+        - Csid
+      properties:
+        CbetCheckDigitString:
+          allOf:
+            - $ref: '#/components/schemas/__stringMin2Max2'
+            - xml:
+                name: cbetCheckDigitString
+              description: Enter the CBET check digits to use in the watermark.
+        CbetStepaside:
+          allOf:
+            - $ref: '#/components/schemas/NielsenWatermarksCbetStepaside'
+            - xml:
+                name: cbetStepaside
+              description: Determines the method of CBET insertion mode when prior encoding is detected on the same layer.
+        Csid:
+          allOf:
+            - $ref: '#/components/schemas/__stringMin1Max7'
+            - xml:
+                name: csid
+              description: Enter the CBET Source ID (CSID) to use in the watermark
+      description: Nielsen CBET
     NielsenPcmToId3TaggingState:
       type: string
       enum:
         - DISABLED
         - ENABLED
       description: State of Nielsen PCM to ID3 tagging
+    __doubleMin1Max65535:
+      type: number
+      description: Placeholder documentation for __doubleMin1Max65535
+      format: double
+    NielsenNaesIiNw:
+      type: object
+      required:
+        - CheckDigitString
+        - Sid
+      properties:
+        CheckDigitString:
+          allOf:
+            - $ref: '#/components/schemas/__stringMin2Max2'
+            - xml:
+                name: checkDigitString
+              description: Enter the check digit string for the watermark
+        Sid:
+          allOf:
+            - $ref: '#/components/schemas/__doubleMin1Max65535'
+            - xml:
+                name: sid
+              description: Enter the Nielsen Source ID (SID) to include in the watermark
+      description: Nielsen Naes Ii Nw
+    NielsenWatermarksDistributionTypes:
+      type: string
+      enum:
+        - FINAL_DISTRIBUTOR
+        - PROGRAM_CONTENT
+      description: Nielsen Watermarks Distribution Types
     Offering:
       type: object
       properties:
@@ -15453,7 +16371,7 @@ components:
             - $ref: '#/components/schemas/__stringMax32'
             - xml:
                 name: name
-              description: 'Custom output group name optionally defined by the user.  Only letters, numbers, and the underscore character allowed; only 32 characters allowed.'
+              description: Custom output group name optionally defined by the user.
         OutputGroupSettings:
           allOf:
             - $ref: '#/components/schemas/OutputGroupSettings'
@@ -15682,6 +16600,12 @@ components:
             - xml:
                 name: name
               description: Name for the new reservation
+        RenewalSettings:
+          allOf:
+            - $ref: '#/components/schemas/RenewalSettings'
+            - xml:
+                name: renewalSettings
+              description: Renewal settings for the reservation
         RequestId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -15776,6 +16700,12 @@ components:
             - xml:
                 name: region
               description: 'AWS region, e.g. ''us-west-2'''
+        RenewalSettings:
+          allOf:
+            - $ref: '#/components/schemas/RenewalSettings'
+            - xml:
+                name: renewalSettings
+              description: Renewal settings for the reservation
         ReservationId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -15813,6 +16743,23 @@ components:
                 name: usagePrice
               description: 'Recurring usage charge for each reserved resource, e.g. ''157.0'''
       description: Reserved resources available to use
+    RebootInputDeviceForce:
+      type: string
+      enum:
+        - 'NO'
+        - 'YES'
+      description: Whether or not to force reboot the input device.
+    RebootInputDeviceRequest:
+      type: object
+      title: RebootInputDeviceRequest
+      properties:
+        Force:
+          allOf:
+            - $ref: '#/components/schemas/RebootInputDeviceForce'
+            - xml:
+                name: force
+              description: 'Force a reboot of an input device. If the device is streaming, it will stop streaming and begin rebooting within a few seconds of sending the command. If the device was streaming prior to the reboot, the device will resume streaming when the reboot completes.'
+      description: A request to reboot an AWS Elemental device.
     RejectInputDeviceTransferRequest:
       type: object
       title: RejectInputDeviceTransferRequest
@@ -15960,6 +16907,12 @@ components:
             - xml:
                 name: pauseStateSettings
               description: Action to pause or unpause one or both channel pipelines
+        Scte35InputSettings:
+          allOf:
+            - $ref: '#/components/schemas/Scte35InputScheduleActionSettings'
+            - xml:
+                name: scte35InputSettings
+              description: Action to specify scte35 input
         Scte35ReturnToNetworkSettings:
           allOf:
             - $ref: '#/components/schemas/Scte35ReturnToNetworkScheduleActionSettings'
@@ -16039,6 +16992,24 @@ components:
                 name: scheduleActionStartSettings
               description: The time for the action to start in the channel.
       description: Contains information on a single schedule action.
+    Scte35InputScheduleActionSettings:
+      type: object
+      required:
+        - Mode
+      properties:
+        InputAttachmentNameReference:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: inputAttachmentNameReference
+              description: 'In fixed mode, enter the name of the input attachment that you want to use as a SCTE-35 input. (Don''t enter the ID of the input.)"'
+        Mode:
+          allOf:
+            - $ref: '#/components/schemas/Scte35InputMode'
+            - xml:
+                name: mode
+              description: Whether the SCTE-35 input should be the active input or a fixed input.
+      description: Scte35Input Schedule Action Settings
     Scte35ReturnToNetworkScheduleActionSettings:
       type: object
       required:
@@ -16347,6 +17318,12 @@ components:
                 name: subSegmentsExpected
               description: Corresponds to SCTE-35 sub_segments_expected. A value that is valid for the specified segmentation_type_id.
       description: Corresponds to SCTE-35 segmentation_descriptor.
+    Scte35InputMode:
+      type: string
+      enum:
+        - FIXED
+        - FOLLOW_ACTIVE
+      description: Whether the SCTE-35 input should be the active input or a fixed input.
     __longMin0Max4294967295:
       type: integer
       description: Placeholder documentation for __longMin0Max4294967295
@@ -16363,11 +17340,6 @@ components:
       description: Placeholder documentation for __longMin0Max1099511627775
       minimum: 0
       maximum: 1099511627775
-    __integerMinNegative1000Max1000:
-      type: integer
-      description: Placeholder documentation for __integerMinNegative1000Max1000
-      minimum: -1000
-      maximum: 1000
     Scte35SpliceInsertNoRegionalBlackoutBehavior:
       type: string
       enum:
@@ -16395,6 +17367,11 @@ components:
       title: StartChannelRequest
       properties: {}
       description: Placeholder documentation for StartChannelRequest
+    StartInputDeviceMaintenanceWindowRequest:
+      type: object
+      title: StartInputDeviceMaintenanceWindowRequest
+      properties: {}
+      description: Placeholder documentation for StartInputDeviceMaintenanceWindowRequest
     StartMultiplexRequest:
       type: object
       title: StartMultiplexRequest
@@ -16438,6 +17415,27 @@ components:
         - STRENGTH_15
         - STRENGTH_16
       description: Temporal Filter Strength
+    TimecodeBurninFontSize:
+      type: string
+      enum:
+        - EXTRA_SMALL_10
+        - LARGE_48
+        - MEDIUM_32
+        - SMALL_16
+      description: Timecode Burnin Font Size
+    TimecodeBurninPosition:
+      type: string
+      enum:
+        - BOTTOM_CENTER
+        - BOTTOM_LEFT
+        - BOTTOM_RIGHT
+        - MIDDLE_CENTER
+        - MIDDLE_LEFT
+        - MIDDLE_RIGHT
+        - TOP_CENTER
+        - TOP_LEFT
+        - TOP_RIGHT
+      description: Timecode Burnin Position
     TimecodeConfigSource:
       type: string
       enum:
@@ -16581,6 +17579,12 @@ components:
             - xml:
                 name: logLevel
               description: The log level to write to CloudWatch Logs.
+        Maintenance:
+          allOf:
+            - $ref: '#/components/schemas/MaintenanceUpdateSettings'
+            - xml:
+                name: maintenance
+              description: Maintenance settings for this channel.
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -16730,6 +17734,12 @@ components:
             - xml:
                 name: name
               description: Name of the reservation
+        RenewalSettings:
+          allOf:
+            - $ref: '#/components/schemas/RenewalSettings'
+            - xml:
+                name: renewalSettings
+              description: Renewal settings for the reservation
       description: Request to update a reservation
     __doubleMin0Max1:
       type: number

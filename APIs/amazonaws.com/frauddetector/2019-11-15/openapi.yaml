@@ -3,7 +3,7 @@ info:
   version: '2019-11-15'
   x-release: v4
   title: Amazon Fraud Detector
-  description: 'This is the Amazon Fraud Detector API Reference. This guide is for developers who need detailed information about Amazon Fraud Detector API actions, data types, and errors. For more information about Amazon Fraud Detector features, see the <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/">Amazon Fraud Detector User Guide</a>.'
+  description: '<p>This is the Amazon Fraud Detector API Reference. This guide is for developers who need detailed information about Amazon Fraud Detector API actions, data types, and errors. For more information about Amazon Fraud Detector features, see the <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/">Amazon Fraud Detector User Guide</a>.</p> <p>We provide the Query API as well as AWS software development kits (SDK) for Amazon Fraud Detector in Java and Python programming languages.</p> <p>The Amazon Fraud Detector Query API provides HTTPS requests that use the HTTP verb GET or POST and a Query parameter <code>Action</code>. AWS SDK provides libraries, sample code, tutorials, and other resources for software developers who prefer to build applications using language-specific APIs instead of submitting a request over HTTP or HTTPS. These libraries provide basic functions that automatically take care of tasks such as cryptographically signing your requests, retrying requests, and handling error responses, so that it is easier for you to get started. For more information about the AWS SDKs, see <a href="https://docs.aws.amazon.com/https:/aws.amazon.com/tools/">Tools to build on AWS</a>. </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -228,6 +228,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.CancelBatchImportJob:
+    post:
+      operationId: CancelBatchImportJob
+      description: ' Cancels an in-progress batch import job.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelBatchImportJobResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelBatchImportJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.CancelBatchImportJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSHawksNestServiceFacade.CancelBatchPredictionJob:
     post:
       operationId: CancelBatchPredictionJob
@@ -283,6 +346,69 @@ paths:
             type: string
             enum:
               - AWSHawksNestServiceFacade.CancelBatchPredictionJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.CreateBatchImportJob:
+    post:
+      operationId: CreateBatchImportJob
+      description: 'Creates a batch import job. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBatchImportJobResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBatchImportJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.CreateBatchImportJob
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -651,6 +777,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteBatchImportJob:
+    post:
+      operationId: DeleteBatchImportJob
+      description: 'Deletes the specified batch import job ID record. This action does not delete the data that was batch imported. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteBatchImportJobResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteBatchImportJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.DeleteBatchImportJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteBatchPredictionJob:
     post:
       operationId: DeleteBatchPredictionJob
@@ -669,24 +852,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ValidationException'
         '481':
-          description: ResourceNotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
-        '482':
           description: InternalServerException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
-        '483':
+        '482':
           description: ThrottlingException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
-        '484':
+        '483':
           description: AccessDeniedException
           content:
             application/json:
@@ -969,7 +1146,7 @@ paths:
   /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteEventType:
     post:
       operationId: DeleteEventType
-      description: '<p>Deletes an event type.</p> <p>You cannot delete an event type that is used in a detector or a model.</p> <p>When you delete an entity type, Amazon Fraud Detector permanently deletes that entity type and the data is no longer stored in Amazon Fraud Detector.</p>'
+      description: '<p>Deletes an event type.</p> <p>You cannot delete an event type that is used in a detector or a model.</p> <p>When you delete an event type, Amazon Fraud Detector permanently deletes that event type and the data is no longer stored in Amazon Fraud Detector.</p>'
       responses:
         '200':
           description: Success
@@ -1021,6 +1198,75 @@ paths:
             type: string
             enum:
               - AWSHawksNestServiceFacade.DeleteEventType
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteEventsByEventType:
+    post:
+      operationId: DeleteEventsByEventType
+      description: Deletes all events of a particular event type.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteEventsByEventTypeResult'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteEventsByEventTypeRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.DeleteEventsByEventType
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1602,6 +1848,81 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.GetBatchImportJobs:
+    post:
+      operationId: GetBatchImportJobs
+      description: 'Gets all batch import jobs or a specific job of the specified ID. This is a paginated API. If you provide a null <code>maxResults</code>, this action retrieves a maximum of 50 records per page. If you provide a <code>maxResults</code>, the value must be between 1 and 50. To get the next page results, provide the pagination token from the <code>GetBatchImportJobsResponse</code> as part of your request. A null pagination token fetches the records from the beginning.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBatchImportJobsResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBatchImportJobsRequest'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.GetBatchImportJobs
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSHawksNestServiceFacade.GetBatchPredictionJobs:
     post:
       operationId: GetBatchPredictionJobs
@@ -1669,6 +1990,69 @@ paths:
             type: string
             enum:
               - AWSHawksNestServiceFacade.GetBatchPredictionJobs
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.GetDeleteEventsByEventTypeStatus:
+    post:
+      operationId: GetDeleteEventsByEventTypeStatus
+      description: Retrieves the status of a <code>DeleteEventsByEventType</code> action.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDeleteEventsByEventTypeStatusResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDeleteEventsByEventTypeStatusRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.GetDeleteEventsByEventTypeStatus
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1890,6 +2274,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.GetEvent:
+    post:
+      operationId: GetEvent
+      description: Retrieves details of events stored with Amazon Fraud Detector. This action does not retrieve prediction results.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEventResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetEventRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.GetEvent
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSHawksNestServiceFacade.GetEventPrediction:
     post:
       operationId: GetEventPrediction
@@ -1957,6 +2404,69 @@ paths:
             type: string
             enum:
               - AWSHawksNestServiceFacade.GetEventPrediction
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.GetEventPredictionMetadata:
+    post:
+      operationId: GetEventPredictionMetadata
+      description: ' Gets details of the past fraud predictions for the specified event ID, event type, detector ID, and detector version ID that was generated in the specified time period. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEventPredictionMetadataResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetEventPredictionMetadataRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.GetEventPredictionMetadata
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2118,7 +2628,7 @@ paths:
   /#X-Amz-Target=AWSHawksNestServiceFacade.GetKMSEncryptionKey:
     post:
       operationId: GetKMSEncryptionKey
-      description: Gets the encryption key if a Key Management Service (KMS) customer master key (CMK) has been specified to be used to encrypt content in Amazon Fraud Detector.
+      description: Gets the encryption key if a KMS key has been specified to be used to encrypt content in Amazon Fraud Detector.
       responses:
         '200':
           description: Success
@@ -2604,6 +3114,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.ListEventPredictions:
+    post:
+      operationId: ListEventPredictions
+      description: '<p>Gets a list of past predictions. The list can be filtered by detector ID, detector version ID, event ID, event type, or by specifying a time period. If filter is not specified, the most recent prediction is returned.</p> <p>For example, the following filter lists all past predictions for <code>xyz</code> event type - <code>{ "eventType":{ "value": "xyz" }” } </code> </p> <p>This is a paginated API. If you provide a null <code>maxResults</code>, this action will retrieve a maximum of 10 records per page. If you provide a <code>maxResults</code>, the value must be between 50 and 100. To get the next page results, provide the <code>nextToken</code> from the response as part of your request. A null <code>nextToken</code> fetches the records from the beginning. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEventPredictionsResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListEventPredictionsRequest'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.ListEventPredictions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSHawksNestServiceFacade.ListTagsForResource:
     post:
       operationId: ListTagsForResource
@@ -2928,7 +3507,7 @@ paths:
   /#X-Amz-Target=AWSHawksNestServiceFacade.PutKMSEncryptionKey:
     post:
       operationId: PutKMSEncryptionKey
-      description: Specifies the Key Management Service (KMS) customer master key (CMK) to be used to encrypt content in Amazon Fraud Detector.
+      description: Specifies the KMS key to be used to encrypt content in Amazon Fraud Detector.
       responses:
         '200':
           description: Success
@@ -3112,6 +3691,75 @@ paths:
             type: string
             enum:
               - AWSHawksNestServiceFacade.PutOutcome
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.SendEvent:
+    post:
+      operationId: SendEvent
+      description: 'Stores events in Amazon Fraud Detector without generating fraud predictions for those events. For example, you can use <code>SendEvent</code> to upload a historical dataset, which you can then later use to train a model.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendEventResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendEventRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.SendEvent
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3435,10 +4083,79 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.UpdateEventLabel:
+    post:
+      operationId: UpdateEventLabel
+      description: Updates the specified event with a new label.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateEventLabelResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEventLabelRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.UpdateEventLabel
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSHawksNestServiceFacade.UpdateModel:
     post:
       operationId: UpdateModel
-      description: Updates a model. You can update the description attribute using this action.
+      description: Updates model description.
       responses:
         '200':
           description: Success
@@ -3576,7 +4293,7 @@ paths:
   /#X-Amz-Target=AWSHawksNestServiceFacade.UpdateModelVersionStatus:
     post:
       operationId: UpdateModelVersionStatus
-      description: '<p>Updates the status of a model version.</p> <p>You can perform the following status updates:</p> <ol> <li> <p>Change the <code>TRAINING_COMPLETE</code> status to <code>ACTIVE</code>.</p> </li> <li> <p>Change <code>ACTIVE</code>to <code>INACTIVE</code>.</p> </li> </ol>'
+      description: '<p>Updates the status of a model version.</p> <p>You can perform the following status updates:</p> <ol> <li> <p>Change the <code>TRAINING_IN_PROGRESS</code> status to <code>TRAINING_CANCELLED</code>.</p> </li> <li> <p>Change the <code>TRAINING_COMPLETE</code> status to <code>ACTIVE</code>.</p> </li> <li> <p>Change <code>ACTIVE</code> to <code>INACTIVE</code>.</p> </li> </ol>'
       responses:
         '200':
           description: Success
@@ -3947,6 +4664,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/NameList'
             - description: The list of variable names to get.
+    CancelBatchImportJobResult:
+      type: object
+      properties: {}
+    CancelBatchImportJobRequest:
+      type: object
+      required:
+        - jobId
+      title: CancelBatchImportJobRequest
+      properties:
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: '<p> The ID of an in-progress batch import job to cancel. </p> <p>Amazon Fraud Detector will throw an error if the batch import job is in <code>FAILED</code>, <code>CANCELED</code>, or <code>COMPLETED</code> state.</p>'
+    ResourceNotFoundException: {}
     CancelBatchPredictionJobResult:
       type: object
       properties: {}
@@ -3960,7 +4691,43 @@ components:
           allOf:
             - $ref: '#/components/schemas/identifier'
             - description: The ID of the batch prediction job to cancel.
-    ResourceNotFoundException: {}
+    CreateBatchImportJobResult:
+      type: object
+      properties: {}
+    CreateBatchImportJobRequest:
+      type: object
+      required:
+        - jobId
+        - inputPath
+        - outputPath
+        - eventTypeName
+        - iamRoleArn
+      title: CreateBatchImportJobRequest
+      properties:
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: 'The ID of the batch import job. The ID cannot be of a past job, unless the job exists in <code>CREATE_FAILED</code> state.'
+        inputPath:
+          allOf:
+            - $ref: '#/components/schemas/s3BucketLocation'
+            - description: The URI that points to the Amazon S3 location of your data file.
+        outputPath:
+          allOf:
+            - $ref: '#/components/schemas/s3BucketLocation'
+            - description: 'The URI that points to the Amazon S3 location for storing your results. '
+        eventTypeName:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The name of the event type.
+        iamRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/iamRoleArn'
+            - description: '<p>The ARN of the IAM role created for Amazon S3 bucket that holds your data file.</p> <p>The IAM role must have read permissions to your input S3 bucket and write permissions to your output S3 bucket. For more information about bucket permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-policies-s3.html">User policy examples</a> in the <i>Amazon S3 User Guide</i>.</p>'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/tagList'
+            - description: 'A collection of key-value pairs associated with this request. '
     CreateBatchPredictionJobResult:
       type: object
       properties: {}
@@ -4002,7 +4769,7 @@ components:
         iamRoleArn:
           allOf:
             - $ref: '#/components/schemas/iamRoleArn'
-            - description: The ARN of the IAM role to use for this job request.
+            - description: '<p>The ARN of the IAM role to use for this job request.</p> <p>The IAM Role must have read permissions to your input S3 bucket and write permissions to your output S3 bucket. For more information about bucket permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-policies-s3.html">User policy examples</a> in the <i>Amazon S3 User Guide</i>.</p>'
         tags:
           allOf:
             - $ref: '#/components/schemas/tagList'
@@ -4016,7 +4783,7 @@ components:
             - description: The ID for the created version's parent detector.
         detectorVersionId:
           allOf:
-            - $ref: '#/components/schemas/nonEmptyString'
+            - $ref: '#/components/schemas/wholeNumberVersionString'
             - description: 'The ID for the created detector. '
         status:
           allOf:
@@ -4101,7 +4868,7 @@ components:
             - description: The model type.
         modelVersionNumber:
           allOf:
-            - $ref: '#/components/schemas/nonEmptyString'
+            - $ref: '#/components/schemas/floatVersionString'
             - description: The model version number of the model version created.
         status:
           allOf:
@@ -4135,7 +4902,11 @@ components:
         externalEventsDetail:
           allOf:
             - $ref: '#/components/schemas/ExternalEventsDetail'
-            - description: Details for the external events data used for model version training. Required if <code>trainingDataSource</code> is <code>EXTERNAL_EVENTS</code>.
+            - description: Details of the external events data used for model version training. Required if <code>trainingDataSource</code> is <code>EXTERNAL_EVENTS</code>.
+        ingestedEventsDetail:
+          allOf:
+            - $ref: '#/components/schemas/IngestedEventsDetail'
+            - description: Details of the ingested events data used for model version training. Required if <code>trainingDataSource</code> is <code>INGESTED_EVENTS</code>.
         tags:
           allOf:
             - $ref: '#/components/schemas/tagList'
@@ -4225,6 +4996,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/tagList'
             - description: A collection of key and value pairs.
+    DeleteBatchImportJobResult:
+      type: object
+      properties: {}
+    DeleteBatchImportJobRequest:
+      type: object
+      required:
+        - jobId
+      title: DeleteBatchImportJobRequest
+      properties:
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: 'The ID of the batch import job to delete. '
     DeleteBatchPredictionJobResult:
       type: object
       properties: {}
@@ -4301,6 +5085,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/identifier'
             - description: The name of the event type.
+        deleteAuditHistory:
+          allOf:
+            - $ref: '#/components/schemas/DeleteAuditHistory'
+            - description: Specifies whether or not to delete any predictions associated with the event.
     DeleteEventTypeResult:
       type: object
       properties: {}
@@ -4314,6 +5102,27 @@ components:
           allOf:
             - $ref: '#/components/schemas/identifier'
             - description: The name of the event type to delete.
+    DeleteEventsByEventTypeResult:
+      type: object
+      properties:
+        eventTypeName:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: Name of event type for which to delete the events.
+        eventsDeletionStatus:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The status of the delete request.
+    DeleteEventsByEventTypeRequest:
+      type: object
+      required:
+        - eventTypeName
+      title: DeleteEventsByEventTypeRequest
+      properties:
+        eventTypeName:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The name of the event type.
     DeleteExternalModelResult:
       type: object
       properties: {}
@@ -4490,6 +5299,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/modelsMaxPageSize'
             - description: The maximum number of results to return.
+    GetBatchImportJobsResult:
+      type: object
+      properties:
+        batchImports:
+          allOf:
+            - $ref: '#/components/schemas/BatchImportList'
+            - description: An array containing the details of each batch import job.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The next token for the subsequent resquest.
+    GetBatchImportJobsRequest:
+      type: object
+      title: GetBatchImportJobsRequest
+      properties:
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The ID of the batch import job to get.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/batchImportsMaxPageSize'
+            - description: The maximum number of objects to return for request.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The next token from the previous request.
     GetBatchPredictionJobsResult:
       type: object
       properties:
@@ -4517,6 +5353,27 @@ components:
           allOf:
             - $ref: '#/components/schemas/string'
             - description: The next token from the previous request.
+    GetDeleteEventsByEventTypeStatusResult:
+      type: object
+      properties:
+        eventTypeName:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The event type name.
+        eventsDeletionStatus:
+          allOf:
+            - $ref: '#/components/schemas/AsyncJobStatus'
+            - description: The deletion status.
+    GetDeleteEventsByEventTypeStatusRequest:
+      type: object
+      required:
+        - eventTypeName
+      title: GetDeleteEventsByEventTypeStatusRequest
+      properties:
+        eventTypeName:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: Name of event type for which to get the deletion status.
     GetDetectorVersionResult:
       type: object
       properties:
@@ -4633,6 +5490,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/entityTypesMaxResults'
             - description: The maximum number of objects to return for the request.
+    GetEventResult:
+      type: object
+      properties:
+        event:
+          allOf:
+            - $ref: '#/components/schemas/Event'
+            - description: The details of the event.
+    GetEventRequest:
+      type: object
+      required:
+        - eventId
+        - eventTypeName
+      title: GetEventRequest
+      properties:
+        eventId:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The ID of the event to retrieve.
+        eventTypeName:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The event type of the event to retrieve.
     GetEventPredictionResult:
       type: object
       properties:
@@ -4682,16 +5561,109 @@ components:
         eventTimestamp:
           allOf:
             - $ref: '#/components/schemas/utcTimestampISO8601'
-            - description: Timestamp that defines when the event under evaluation occurred.
+            - description: Timestamp that defines when the event under evaluation occurred. The timestamp must be specified using ISO 8601 standard in UTC.
         eventVariables:
           allOf:
             - $ref: '#/components/schemas/EventVariableMap'
-            - description: '<p>Names of the event type''s variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.</p> <important> <ul> <li> <p>You must provide at least one eventVariable</p> </li> <li> <p>If detectorVersion is associated with a modelVersion, you must provide at least one associated eventVariable</p> </li> </ul> </important> <p>To ensure highest possible fraud prediction and to simplify your data preparation, Amazon Fraud Detector will replace all missing variables or values as follows:</p> <p> <b>For Amazon Fraud Detector trained models:</b> </p> <p>If a null value is provided explicitly for a variable or if a variable is missing, model will replace the null value or the missing variable (no variable name in the eventVariables map) with calculated default mean/medians for numeric variables and with special values for categorical variables.</p> <p> <b>For External models ( for example, imported SageMaker):</b> </p> <p>If a null value is provided explicitly for a variable, the model and rules will use “null” as the value. If a variable is not provided (no variable name in the eventVariables map), model and rules will use the default value that is provided for the variable. </p>'
+            - description: '<p>Names of the event type''s variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.</p> <important> <p>You must provide at least one eventVariable</p> </important> <p>To ensure most accurate fraud prediction and to simplify your data preparation, Amazon Fraud Detector will replace all missing variables or values as follows:</p> <p> <b>For Amazon Fraud Detector trained models:</b> </p> <p>If a null value is provided explicitly for a variable or if a variable is missing, model will replace the null value or the missing variable (no variable name in the eventVariables map) with calculated default mean/medians for numeric variables and with special values for categorical variables.</p> <p> <b>For imported SageMaker models:</b> </p> <p>If a null value is provided explicitly for a variable, the model and rules will use “null” as the value. If a variable is not provided (no variable name in the eventVariables map), model and rules will use the default value that is provided for the variable. </p>'
         externalModelEndpointDataBlobs:
           allOf:
             - $ref: '#/components/schemas/ExternalModelEndpointDataBlobMap'
             - description: The Amazon SageMaker model endpoint input data blobs.
     ResourceUnavailableException: {}
+    GetEventPredictionMetadataResult:
+      type: object
+      properties:
+        eventId:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: ' The event ID. '
+        eventTypeName:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: ' The event type associated with the detector specified for this prediction. '
+        entityId:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: ' The entity ID. '
+        entityType:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: ' The entity type. '
+        eventTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/time'
+            - description: ' The timestamp for when the prediction was generated for the associated event ID. '
+        detectorId:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: ' The detector ID. '
+        detectorVersionId:
+          allOf:
+            - $ref: '#/components/schemas/wholeNumberVersionString'
+            - description: ' The detector version ID. '
+        detectorVersionStatus:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: ' The status of the detector version. '
+        eventVariables:
+          allOf:
+            - $ref: '#/components/schemas/ListOfEventVariableSummaries'
+            - description: ' A list of event variables that influenced the prediction scores. '
+        rules:
+          allOf:
+            - $ref: '#/components/schemas/EvaluatedRuleList'
+            - description: ' List of rules associated with the detector version that were used for evaluating variable values. '
+        ruleExecutionMode:
+          allOf:
+            - $ref: '#/components/schemas/RuleExecutionMode'
+            - description: ' The execution mode of the rule used for evaluating variable values. '
+        outcomes:
+          allOf:
+            - $ref: '#/components/schemas/ListOfStrings'
+            - description: ' The outcomes of the matched rule, based on the rule execution mode. '
+        evaluatedModelVersions:
+          allOf:
+            - $ref: '#/components/schemas/ListOfEvaluatedModelVersions'
+            - description: ' Model versions that were evaluated for generating predictions. '
+        evaluatedExternalModels:
+          allOf:
+            - $ref: '#/components/schemas/ListOfEvaluatedExternalModels'
+            - description: ' External (Amazon SageMaker) models that were evaluated for generating predictions. '
+        predictionTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/time'
+            - description: 'The timestamp that defines when the prediction was generated. '
+    GetEventPredictionMetadataRequest:
+      type: object
+      required:
+        - eventId
+        - eventTypeName
+        - detectorId
+        - detectorVersionId
+        - predictionTimestamp
+      title: GetEventPredictionMetadataRequest
+      properties:
+        eventId:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: ' The event ID. '
+        eventTypeName:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: ' The event type associated with the detector specified for the prediction. '
+        detectorId:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: ' The detector ID. '
+        detectorVersionId:
+          allOf:
+            - $ref: '#/components/schemas/wholeNumberVersionString'
+            - description: ' The detector version ID. '
+        predictionTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/time'
+            - description: '<p> The timestamp that defines when the prediction was generated. The timestamp must be specified using ISO 8601 standard in UTC.</p> <p>We recommend calling <a href="https://docs.aws.amazon.com/frauddetector/latest/api/API_ListEventPredictions.html">ListEventPredictions</a> first, and using the <code>predictionTimestamp</code> value in the response to provide an accurate prediction timestamp value.</p>'
     GetEventTypesResult:
       type: object
       properties:
@@ -4806,7 +5778,11 @@ components:
         externalEventsDetail:
           allOf:
             - $ref: '#/components/schemas/ExternalEventsDetail'
-            - description: The event details.
+            - description: 'The details of the external events data used for training the model version. This will be populated if the <code>trainingDataSource</code> is <code>EXTERNAL_EVENTS</code> '
+        ingestedEventsDetail:
+          allOf:
+            - $ref: '#/components/schemas/IngestedEventsDetail'
+            - description: The details of the ingested events data used for training the model version. This will be populated if the <code>trainingDataSource</code> is <code>INGESTED_EVENTS</code>.
         status:
           allOf:
             - $ref: '#/components/schemas/string'
@@ -4957,6 +5933,49 @@ components:
           allOf:
             - $ref: '#/components/schemas/VariablesMaxResults'
             - description: 'The max size per page determined for the get variable request. '
+    ListEventPredictionsResult:
+      type: object
+      properties:
+        eventPredictionSummaries:
+          allOf:
+            - $ref: '#/components/schemas/ListOfEventPredictionSummaries'
+            - description: ' The summary of the past predictions. '
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: ' Identifies the next page of results to return. Use the token to make the call again to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. '
+    ListEventPredictionsRequest:
+      type: object
+      title: ListEventPredictionsRequest
+      properties:
+        eventId:
+          allOf:
+            - $ref: '#/components/schemas/FilterCondition'
+            - description: ' The event ID. '
+        eventType:
+          allOf:
+            - $ref: '#/components/schemas/FilterCondition'
+            - description: ' The event type associated with the detector. '
+        detectorId:
+          allOf:
+            - $ref: '#/components/schemas/FilterCondition'
+            - description: ' The detector ID. '
+        detectorVersionId:
+          allOf:
+            - $ref: '#/components/schemas/FilterCondition'
+            - description: ' The detector version ID. '
+        predictionTimeRange:
+          allOf:
+            - $ref: '#/components/schemas/PredictionTimeRange'
+            - description: ' The time period for when the predictions were generated. '
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: ' Identifies the next page of results to return. Use the token to make the call again to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. '
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/EventPredictionsMaxResults'
+            - description: ' The maximum number of predictions to return for the request. '
     ListTagsForResourceResult:
       type: object
       properties:
@@ -5064,6 +6083,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyListOfStrings'
             - description: 'The entity type for the event type. Example entity types: customer, merchant, account.'
+        eventIngestion:
+          allOf:
+            - $ref: '#/components/schemas/EventIngestion'
+            - description: Specifies if ingenstion is enabled or disabled.
         tags:
           allOf:
             - $ref: '#/components/schemas/tagList'
@@ -5122,7 +6145,7 @@ components:
         kmsEncryptionKeyArn:
           allOf:
             - $ref: '#/components/schemas/KmsEncryptionKeyArn'
-            - description: The KMS encryption key ARN.
+            - description: <p>The KMS encryption key ARN.</p> <p>The KMS key must be single-Region key. Amazon Fraud Detector does not support multi-Region KMS key.</p>
     PutLabelResult:
       type: object
       properties: {}
@@ -5165,6 +6188,47 @@ components:
           allOf:
             - $ref: '#/components/schemas/tagList'
             - description: A collection of key and value pairs.
+    SendEventResult:
+      type: object
+      properties: {}
+    SendEventRequest:
+      type: object
+      required:
+        - eventId
+        - eventTypeName
+        - eventTimestamp
+        - eventVariables
+        - entities
+      title: SendEventRequest
+      properties:
+        eventId:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The event ID to upload.
+        eventTypeName:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The event type name of the event.
+        eventTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/utcTimestampISO8601'
+            - description: The timestamp that defines when the event under evaluation occurred. The timestamp must be specified using ISO 8601 standard in UTC.
+        eventVariables:
+          allOf:
+            - $ref: '#/components/schemas/EventVariableMap'
+            - description: Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.
+        assignedLabel:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The label to associate with the event. Required if specifying <code>labelTimestamp</code>.
+        labelTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/utcTimestampISO8601'
+            - description: The timestamp associated with the label. Required if specifying <code>assignedLabel</code>.
+        entities:
+          allOf:
+            - $ref: '#/components/schemas/listOfEntities'
+            - description: An array of entities.
     TagResourceResult:
       type: object
       properties: {}
@@ -5286,7 +6350,35 @@ components:
         status:
           allOf:
             - $ref: '#/components/schemas/DetectorVersionStatus'
-            - description: The new status.
+            - description: <p>The new status.</p> <p>The only supported values are <code>ACTIVE</code> and <code>INACTIVE</code> </p>
+    UpdateEventLabelResult:
+      type: object
+      properties: {}
+    UpdateEventLabelRequest:
+      type: object
+      required:
+        - eventId
+        - eventTypeName
+        - assignedLabel
+        - labelTimestamp
+      title: UpdateEventLabelRequest
+      properties:
+        eventId:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The ID of the event associated with the label to update.
+        eventTypeName:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The event type of the event associated with the label to update.
+        assignedLabel:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The new label to assign to the event.
+        labelTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/utcTimestampISO8601'
+            - description: 'The timestamp associated with the label. The timestamp must be specified using ISO 8601 standard in UTC. '
     UpdateModelResult:
       type: object
       properties: {}
@@ -5351,7 +6443,11 @@ components:
         externalEventsDetail:
           allOf:
             - $ref: '#/components/schemas/ExternalEventsDetail'
-            - description: The event details.
+            - description: The details of the external events data used for training the model version. Required if <code>trainingDataSource</code> is <code>EXTERNAL_EVENTS</code>.
+        ingestedEventsDetail:
+          allOf:
+            - $ref: '#/components/schemas/IngestedEventsDetail'
+            - description: The details of the ingested event used for training the model version. Required if your <code>trainingDataSource</code> is <code>INGESTED_EVENTS</code>.
         tags:
           allOf:
             - $ref: '#/components/schemas/tagList'
@@ -5467,6 +6563,102 @@ components:
           allOf:
             - $ref: '#/components/schemas/string'
             - description: 'The variable type. For more information see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>.'
+    float:
+      type: number
+      format: float
+    ATIMetricDataPoint:
+      type: object
+      properties:
+        cr:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: ' The challenge rate. This indicates the percentage of login events that the model recommends to challenge such as one-time password, multi-factor authentication, and investigations. '
+        adr:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: ' The anomaly discovery rate. This metric quantifies the percentage of anomalies that can be detected by the model at the selected score threshold. A lower score threshold increases the percentage of anomalies captured by the model, but would also require challenging a larger percentage of login events, leading to a higher customer friction. '
+        threshold:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: ' The model''s threshold that specifies an acceptable fraud capture rate. For example, a threshold of 500 means any model score 500 or above is labeled as fraud. '
+        atodr:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: ' The account takeover discovery rate. This metric quantifies the percentage of account compromise events that can be detected by the model at the selected score threshold. This metric is only available if 50 or more entities with at-least one labeled account takeover event is present in the ingested dataset. '
+      description: ' The Account Takeover Insights (ATI) model performance metrics data points. '
+    ATIMetricDataPointsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ATIMetricDataPoint'
+    ATIModelPerformance:
+      type: object
+      properties:
+        asi:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: ' The anomaly separation index (ASI) score. This metric summarizes the overall ability of the model to separate anomalous activities from the normal behavior. Depending on the business, a large fraction of these anomalous activities can be malicious and correspond to the account takeover attacks. A model with no separability power will have the lowest possible ASI score of 0.5, whereas the a model with a high separability power will have the highest possible ASI score of 1.0 '
+      description: ' The Account Takeover Insights (ATI) model performance score. '
+    ATITrainingMetricsValue:
+      type: object
+      properties:
+        metricDataPoints:
+          allOf:
+            - $ref: '#/components/schemas/ATIMetricDataPointsList'
+            - description: ' The model''s performance metrics data points. '
+        modelPerformance:
+          allOf:
+            - $ref: '#/components/schemas/ATIModelPerformance'
+            - description: ' The model''s overall performance scores. '
+      description: ' The Account Takeover Insights (ATI) model training metric details. '
+    ListOfStrings:
+      type: array
+      items:
+        $ref: '#/components/schemas/string'
+    AggregatedLogOddsMetric:
+      type: object
+      required:
+        - variableNames
+        - aggregatedVariablesImportance
+      properties:
+        variableNames:
+          allOf:
+            - $ref: '#/components/schemas/ListOfStrings'
+            - description: ' The names of all the variables. '
+        aggregatedVariablesImportance:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: ' The relative importance of the variables in the list to the other event variable. '
+      description: '<p>The log odds metric details.</p> <p>Account Takeover Insights (ATI) model uses event variables from the login data you provide to continuously calculate a set of variables (aggregated variables) based on historical events. For example, your ATI model might calculate the number of times an user has logged in using the same IP address. In this case, event variables used to derive the aggregated variables are <code>IP address</code> and <code>user</code>.</p>'
+    string:
+      type: string
+    AggregatedVariablesImpactExplanation:
+      type: object
+      properties:
+        eventVariableNames:
+          allOf:
+            - $ref: '#/components/schemas/ListOfStrings'
+            - description: ' The names of all the event variables that were used to derive the aggregated variables. '
+        relativeImpact:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: ' The relative impact of the aggregated variables in terms of magnitude on the prediction scores. '
+        logOddsImpact:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: '<p> The raw, uninterpreted value represented as log-odds of the fraud. These values are usually between -10 to +10, but range from -infinity to +infinity.</p> <ul> <li> <p>A positive value indicates that the variables drove the risk score up.</p> </li> <li> <p>A negative value indicates that the variables drove the risk score down.</p> </li> </ul>'
+      description: '<p> The details of the impact of aggregated variables on the prediction score. </p> <p>Account Takeover Insights (ATI) model uses the login data you provide to continuously calculate a set of variables (aggregated variables) based on historical events. For example, the model might calculate the number of times an user has logged in using the same IP address. In this case, event variables used to derive the aggregated variables are <code>IP address</code> and <code>user</code>.</p>'
+    ListOfAggregatedLogOddsMetrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/AggregatedLogOddsMetric'
+    AggregatedVariablesImportanceMetrics:
+      type: object
+      properties:
+        logOddsMetrics:
+          allOf:
+            - $ref: '#/components/schemas/ListOfAggregatedLogOddsMetrics'
+            - description: ' List of variables'' metrics. '
+      description: '<p>The details of the relative importance of the aggregated variables.</p> <p>Account Takeover Insights (ATI) model uses event variables from the login data you provide to continuously calculate a set of variables (aggregated variables) based on historical events. For example, your ATI model might calculate the number of times an user has logged in using the same IP address. In this case, event variables used to derive the aggregated variables are <code>IP address</code> and <code>user</code>.</p>'
     AsyncJobStatus:
       type: string
       enum:
@@ -5476,8 +6668,6 @@ components:
         - CANCELED
         - COMPLETE
         - FAILED
-    string:
-      type: string
     integer:
       type: integer
     BatchCreateVariableError:
@@ -5556,11 +6746,6 @@ components:
       pattern: '^s3:\/\/(.+)$'
       minLength: 1
       maxLength: 512
-    floatVersionString:
-      type: string
-      pattern: '^[1-9][0-9]{0,3}\.[0-9]{1,2}$'
-      minLength: 3
-      maxLength: 7
     iamRoleArn:
       type: string
       pattern: '^arn\:aws[a-z-]{0,15}\:iam\:\:[0-9]{12}\:role\/[^\s]{2,64}$'
@@ -5573,6 +6758,71 @@ components:
       maxLength: 256
     Integer:
       type: integer
+    BatchImport:
+      type: object
+      properties:
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: 'The ID of the batch import job. '
+        status:
+          allOf:
+            - $ref: '#/components/schemas/AsyncJobStatus'
+            - description: The status of the batch import job.
+        failureReason:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The reason batch import job failed.
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/time'
+            - description: Timestamp of when the batch import job started.
+        completionTime:
+          allOf:
+            - $ref: '#/components/schemas/time'
+            - description: Timestamp of when batch import job completed.
+        inputPath:
+          allOf:
+            - $ref: '#/components/schemas/s3BucketLocation'
+            - description: The Amazon S3 location of your data file for batch import.
+        outputPath:
+          allOf:
+            - $ref: '#/components/schemas/s3BucketLocation'
+            - description: The Amazon S3 location of your output file.
+        eventTypeName:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The name of the event type.
+        iamRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/iamRoleArn'
+            - description: The ARN of the IAM role to use for this job request.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/fraudDetectorArn'
+            - description: The ARN of the batch import job.
+        processedRecordsCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of records processed by batch import job.
+        failedRecordsCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The number of records that failed to import. '
+        totalRecordsCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The total number of records in the batch import job.
+      description: The batch import job details.
+    BatchImportList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchImport'
+    floatVersionString:
+      type: string
+      pattern: '^[1-9][0-9]{0,3}\.[0-9]{1,2}$'
+      minLength: 3
+      maxLength: 7
     BatchPrediction:
       type: object
       properties:
@@ -5595,7 +6845,7 @@ components:
         completionTime:
           allOf:
             - $ref: '#/components/schemas/time'
-            - description: Timestamp of when the batch prediction job comleted.
+            - description: Timestamp of when the batch prediction job completed.
         lastHeartbeatTime:
           allOf:
             - $ref: '#/components/schemas/time'
@@ -5641,6 +6891,8 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/BatchPrediction'
+    Boolean:
+      type: boolean
     wholeNumberVersionString:
       type: string
       pattern: '^([1-9][0-9]*)$'
@@ -5650,10 +6902,6 @@ components:
       type: string
       minLength: 1
       maxLength: 128
-    ListOfStrings:
-      type: array
-      items:
-        $ref: '#/components/schemas/string'
     RuleList:
       type: array
       items:
@@ -5667,9 +6915,6 @@ components:
       enum:
         - ALL_MATCHED
         - FIRST_MATCHED
-    nonEmptyString:
-      type: string
-      minLength: 1
     DetectorVersionStatus:
       type: string
       enum:
@@ -5685,15 +6930,17 @@ components:
       type: string
       enum:
         - ONLINE_FRAUD_INSIGHTS
+        - TRANSACTION_FRAUD_INSIGHTS
+        - ACCOUNT_TAKEOVER_INSIGHTS
     TrainingDataSourceEnum:
       type: string
       enum:
         - EXTERNAL_EVENTS
+        - INGESTED_EVENTS
     TrainingDataSchema:
       type: object
       required:
         - modelVariables
-        - labelSchema
       properties:
         modelVariables:
           allOf:
@@ -5717,6 +6964,16 @@ components:
             - $ref: '#/components/schemas/iamRoleArn'
             - description: The ARN of the role that provides Amazon Fraud Detector access to the data location.
       description: Details for the external events data used for model version training.
+    IngestedEventsDetail:
+      type: object
+      required:
+        - ingestedEventsTimeWindow
+      properties:
+        ingestedEventsTimeWindow:
+          allOf:
+            - $ref: '#/components/schemas/IngestedEventsTimeWindow'
+            - description: The start and stop time of the ingested events.
+      description: The details of the ingested event.
     ruleExpression:
       type: string
       minLength: 1
@@ -5782,12 +7039,14 @@ components:
         fileLevelMessages:
           allOf:
             - $ref: '#/components/schemas/fileValidationMessageList'
-            - description: The file-specific model training validation messages.
+            - description: The file-specific model training data validation messages.
         fieldLevelMessages:
           allOf:
             - $ref: '#/components/schemas/fieldValidationMessageList'
             - description: The field-specific model training validation messages.
-      description: The model training validation messages.
+      description: The model training data validation metrics.
+    DeleteAuditHistory:
+      type: boolean
     sageMakerEndpointIdentifier:
       type: string
       pattern: '^[0-9A-Za-z_-]+$'
@@ -5846,7 +7105,7 @@ components:
       properties:
         detectorVersionId:
           allOf:
-            - $ref: '#/components/schemas/nonEmptyString'
+            - $ref: '#/components/schemas/wholeNumberVersionString'
             - description: 'The detector version ID. '
         status:
           allOf:
@@ -5865,6 +7124,11 @@ components:
       type: integer
       minimum: 5
       maximum: 10
+    entityRestrictedString:
+      type: string
+      pattern: '^[0-9A-Za-z_.@+-]+$'
+      minLength: 1
+      maxLength: 256
     Entity:
       type: object
       required:
@@ -5877,7 +7141,7 @@ components:
             - description: The entity type.
         entityId:
           allOf:
-            - $ref: '#/components/schemas/identifier'
+            - $ref: '#/components/schemas/entityRestrictedString'
             - description: 'The entity ID. If you do not know the <code>entityId</code>, you can pass <code>unknown</code>, which is areserved string literal.'
       description: 'The entity details. '
     EntityType:
@@ -5904,6 +7168,199 @@ components:
             - $ref: '#/components/schemas/fraudDetectorArn'
             - description: The entity type ARN.
       description: The entity type details.
+    MapOfStrings:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/string'
+    EvaluatedExternalModel:
+      type: object
+      properties:
+        modelEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: ' The endpoint of the external (Amazon Sagemaker) model. '
+        useEventVariables:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Indicates whether event variables were used to generate predictions. '
+        inputVariables:
+          allOf:
+            - $ref: '#/components/schemas/MapOfStrings'
+            - description: ' Input variables use for generating predictions. '
+        outputVariables:
+          allOf:
+            - $ref: '#/components/schemas/MapOfStrings'
+            - description: ' Output variables. '
+      description: ' The details of the external (Amazon Sagemaker) model evaluated for generating predictions. '
+    ListOfModelVersionEvaluations:
+      type: array
+      items:
+        $ref: '#/components/schemas/ModelVersionEvaluation'
+    EvaluatedModelVersion:
+      type: object
+      properties:
+        modelId:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: ' The model ID. '
+        modelVersion:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: ' The model version. '
+        modelType:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: '<p>The model type. </p> <p>Valid values: <code>ONLINE_FRAUD_INSIGHTS</code> | <code>TRANSACTION_FRAUD_INSIGHTS</code> </p>'
+        evaluations:
+          allOf:
+            - $ref: '#/components/schemas/ListOfModelVersionEvaluations'
+            - description: ' Evaluations generated for the model version. '
+      description: ' The model version evaluated for generating prediction. '
+    sensitiveString:
+      type: string
+      format: password
+    EvaluatedRule:
+      type: object
+      properties:
+        ruleId:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: ' The rule ID. '
+        ruleVersion:
+          allOf:
+            - $ref: '#/components/schemas/wholeNumberVersionString'
+            - description: ' The rule version. '
+        expression:
+          allOf:
+            - $ref: '#/components/schemas/sensitiveString'
+            - description: ' The rule expression. '
+        expressionWithValues:
+          allOf:
+            - $ref: '#/components/schemas/sensitiveString'
+            - description: ' The rule expression value. '
+        outcomes:
+          allOf:
+            - $ref: '#/components/schemas/ListOfStrings'
+            - description: ' The rule outcome. '
+        evaluated:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Indicates whether the rule was evaluated. '
+        matched:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Indicates whether the rule matched. '
+      description: ' The details of the rule used for evaluating variable values. '
+    EvaluatedRuleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EvaluatedRule'
+    EventAttributeMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/attributeValue'
+    listOfEntities:
+      type: array
+      items:
+        $ref: '#/components/schemas/Entity'
+    Event:
+      type: object
+      properties:
+        eventId:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The event ID.
+        eventTypeName:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The event type.
+        eventTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The timestamp that defines when the event under evaluation occurred. The timestamp must be specified using ISO 8601 standard in UTC.
+        eventVariables:
+          allOf:
+            - $ref: '#/components/schemas/EventAttributeMap'
+            - description: Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.
+        currentLabel:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The label associated with the event.
+        labelTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The timestamp associated with the label to update. The timestamp must be specified using ISO 8601 standard in UTC.
+        entities:
+          allOf:
+            - $ref: '#/components/schemas/listOfEntities'
+            - description: The event entities.
+      description: The event details.
+    attributeValue:
+      type: string
+      minLength: 1
+      maxLength: 256
+      format: password
+    EventIngestion:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    EventPredictionSummary:
+      type: object
+      properties:
+        eventId:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: ' The event ID. '
+        eventTypeName:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: ' The event type. '
+        eventTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/time'
+            - description: ' The timestamp of the event. '
+        predictionTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/time'
+            - description: ' The timestamp when the prediction was generated. '
+        detectorId:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: ' The detector ID. '
+        detectorVersionId:
+          allOf:
+            - $ref: '#/components/schemas/wholeNumberVersionString'
+            - description: ' The detector version ID. '
+      description: ' Information about the summary of an event prediction. '
+    EventPredictionsMaxResults:
+      type: integer
+      minimum: 50
+      maximum: 100
+    IngestedEventStatistics:
+      type: object
+      properties:
+        numberOfEvents:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of stored events.
+        eventDataSizeInBytes:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The total size of the stored events.
+        leastRecentEvent:
+          allOf:
+            - $ref: '#/components/schemas/time'
+            - description: The oldest stored event.
+        mostRecentEvent:
+          allOf:
+            - $ref: '#/components/schemas/time'
+            - description: The newest stored event.
+        lastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/time'
+            - description: 'Timestamp of when the stored event was last updated. '
+      description: Data about the stored events.
     EventType:
       type: object
       properties:
@@ -5927,6 +7384,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyListOfStrings'
             - description: The event type entity types.
+        eventIngestion:
+          allOf:
+            - $ref: '#/components/schemas/EventIngestion'
+            - description: 'If <code>Enabled</code>, Amazon Fraud Detector stores event data when you generate a prediction and uses that data to update calculated variables in near real-time. Amazon Fraud Detector uses this data, known as <code>INGESTED_EVENTS</code>, to train your model and improve fraud predictions.'
+        ingestedEventStatistics:
+          allOf:
+            - $ref: '#/components/schemas/IngestedEventStatistics'
+            - description: Data about the stored events.
         lastUpdatedTime:
           allOf:
             - $ref: '#/components/schemas/time'
@@ -5943,13 +7408,29 @@ components:
     variableValue:
       type: string
       minLength: 1
-      maxLength: 1024
+      maxLength: 8192
       format: password
     EventVariableMap:
       type: object
       minProperties: 1
       additionalProperties:
         $ref: '#/components/schemas/variableValue'
+    EventVariableSummary:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/sensitiveString'
+            - description: ' The event variable name. '
+        value:
+          allOf:
+            - $ref: '#/components/schemas/sensitiveString'
+            - description: ' The value of the event variable. '
+        source:
+          allOf:
+            - $ref: '#/components/schemas/sensitiveString'
+            - description: ' The event variable source. '
+      description: ' Information about the summary of an event variable that was evaluated for generating prediction. '
     ModelSource:
       type: string
       enum:
@@ -5973,11 +7454,11 @@ components:
             - description: The event variables.
         jsonInputTemplate:
           allOf:
-            - $ref: '#/components/schemas/string'
+            - $ref: '#/components/schemas/modelInputTemplate'
             - description: ' Template for constructing the JSON input-data sent to SageMaker. At event-evaluation, the placeholders for variable names in the template will be replaced with the variable values before being sent to SageMaker. '
         csvInputTemplate:
           allOf:
-            - $ref: '#/components/schemas/string'
+            - $ref: '#/components/schemas/modelInputTemplate'
             - description: ' Template for constructing the CSV input-data sent to SageMaker. At event-evaluation, the placeholders for variable-names in the template will be replaced with the variable values before being sent to SageMaker. '
       description: The Amazon SageMaker model input configuration.
     ModelOutputConfiguration:
@@ -6135,6 +7616,23 @@ components:
             - $ref: '#/components/schemas/string'
             - description: The message type.
       description: The message details.
+    filterString:
+      type: string
+      pattern: '^[0-9A-Za-z_-]+$'
+      minLength: 1
+      maxLength: 256
+    FilterCondition:
+      type: object
+      properties:
+        value:
+          allOf:
+            - $ref: '#/components/schemas/filterString'
+            - description: ' A statement containing a resource property and a value to specify filter condition. '
+      description: ' A conditional statement for filtering a list of past predictions. '
+    batchImportsMaxPageSize:
+      type: integer
+      minimum: 1
+      maximum: 50
     batchPredictionsMaxPageSize:
       type: integer
       minimum: 1
@@ -6147,10 +7645,18 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/EntityType'
-    listOfEntities:
+    ListOfEventVariableSummaries:
       type: array
       items:
-        $ref: '#/components/schemas/Entity'
+        $ref: '#/components/schemas/EventVariableSummary'
+    ListOfEvaluatedModelVersions:
+      type: array
+      items:
+        $ref: '#/components/schemas/EvaluatedModelVersion'
+    ListOfEvaluatedExternalModels:
+      type: array
+      items:
+        $ref: '#/components/schemas/EvaluatedExternalModel'
     utcTimestampISO8601:
       type: string
       minLength: 10
@@ -6215,6 +7721,23 @@ components:
       type: integer
       minimum: 50
       maximum: 100
+    Long:
+      type: integer
+    IngestedEventsTimeWindow:
+      type: object
+      required:
+        - startTime
+        - endTime
+      properties:
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/time'
+            - description: Timestamp of the first ingensted event.
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/time'
+            - description: Timestamp of the final ingested event.
+      description: The start and stop time of the ingested events.
     JsonKeyToVariableMap:
       type: object
       additionalProperties:
@@ -6251,17 +7774,49 @@ components:
     labelMapper:
       type: object
       additionalProperties:
-        $ref: '#/components/schemas/NonEmptyListOfStrings'
+        $ref: '#/components/schemas/ListOfStrings'
+    UnlabeledEventsTreatment:
+      type: string
+      enum:
+        - IGNORE
+        - FRAUD
+        - LEGIT
+        - AUTO
     LabelSchema:
       type: object
-      required:
-        - labelMapper
       properties:
         labelMapper:
           allOf:
             - $ref: '#/components/schemas/labelMapper'
             - description: 'The label mapper maps the Amazon Fraud Detector supported model classification labels (<code>FRAUD</code>, <code>LEGIT</code>) to the appropriate event type labels. For example, if "<code>FRAUD</code>" and "<code>LEGIT</code>" are Amazon Fraud Detector supported labels, this mapper could be: <code>{"FRAUD" =&gt; ["0"]</code>, <code>"LEGIT" =&gt; ["1"]}</code> or <code>{"FRAUD" =&gt; ["false"]</code>, <code>"LEGIT" =&gt; ["true"]}</code> or <code>{"FRAUD" =&gt; ["fraud", "abuse"]</code>, <code>"LEGIT" =&gt; ["legit", "safe"]}</code>. The value part of the mapper is a list, because you may have multiple label variants from your event type for a single Amazon Fraud Detector label. '
+        unlabeledEventsTreatment:
+          allOf:
+            - $ref: '#/components/schemas/UnlabeledEventsTreatment'
+            - description: '<p>The action to take for unlabeled events.</p> <ul> <li> <p>Use <code>IGNORE</code> if you want the unlabeled events to be ignored. This is recommended when the majority of the events in the dataset are labeled.</p> </li> <li> <p>Use <code>FRAUD</code> if you want to categorize all unlabeled events as “Fraud”. This is recommended when most of the events in your dataset are fraudulent.</p> </li> <li> <p>Use <code>LEGIT</code> f you want to categorize all unlabeled events as “Legit”. This is recommended when most of the events in your dataset are legitimate.</p> </li> <li> <p>Use <code>AUTO</code> if you want Amazon Fraud Detector to decide how to use the unlabeled data. This is recommended when there is significant unlabeled events in the dataset.</p> </li> </ul> <p>By default, Amazon Fraud Detector ignores the unlabeled data.</p>'
       description: The label schema.
+    PredictionTimeRange:
+      type: object
+      required:
+        - startTime
+        - endTime
+      properties:
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/time'
+            - description: ' The start time of the time period for when the predictions were generated. '
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/time'
+            - description: ' The end time of the time period for when the predictions were generated. '
+      description: ' The time period for when the predictions were generated. '
+    ListOfEventPredictionSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventPredictionSummary'
+    ListOfAggregatedVariablesImpactExplanations:
+      type: array
+      items:
+        $ref: '#/components/schemas/AggregatedVariablesImpactExplanation'
     LogOddsMetric:
       type: object
       required:
@@ -6298,6 +7853,22 @@ components:
             - $ref: '#/components/schemas/ModelPredictionMap'
             - description: The model's fraud prediction scores.
       description: The fraud prediction scores.
+    ModelVersionEvaluation:
+      type: object
+      properties:
+        outputVariableName:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: ' The output variable name. '
+        evaluationScore:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: ' The evaluation score generated for the model version. '
+        predictionExplanations:
+          allOf:
+            - $ref: '#/components/schemas/PredictionExplanations'
+            - description: ' The prediction explanations generated for the model version. '
+      description: ' The model version evalutions. '
     ModelVersion:
       type: object
       required:
@@ -6315,7 +7886,7 @@ components:
             - description: The model type.
         modelVersionNumber:
           allOf:
-            - $ref: '#/components/schemas/nonEmptyString'
+            - $ref: '#/components/schemas/floatVersionString'
             - description: The model version number.
         arn:
           allOf:
@@ -6338,9 +7909,6 @@ components:
       type: integer
       minimum: 50
       maximum: 50
-    float:
-      type: number
-      format: float
     MetricDataPoint:
       type: object
       properties:
@@ -6406,6 +7974,10 @@ components:
         - APPLICATION_JSON
     UseEventVariables:
       type: boolean
+    modelInputTemplate:
+      type: string
+      minLength: 1
+      maxLength: 2000
     ModelOutputDataFormat:
       type: string
       enum:
@@ -6431,6 +8003,22 @@ components:
             - $ref: '#/components/schemas/VariableImportanceMetrics'
             - description: The variable importance metrics.
       description: The training result details.
+    TrainingResultV2:
+      type: object
+      properties:
+        dataValidationMetrics:
+          $ref: '#/components/schemas/DataValidationMetrics'
+        trainingMetricsV2:
+          allOf:
+            - $ref: '#/components/schemas/TrainingMetricsV2'
+            - description: ' The training metric details. '
+        variableImportanceMetrics:
+          $ref: '#/components/schemas/VariableImportanceMetrics'
+        aggregatedVariablesImportanceMetrics:
+          allOf:
+            - $ref: '#/components/schemas/AggregatedVariablesImportanceMetrics'
+            - description: '<p> The variable importance metrics of the aggregated variables. </p> <p>Account Takeover Insights (ATI) model uses event variables from the login data you provide to continuously calculate a set of variables (aggregated variables) based on historical events. For example, your ATI model might calculate the number of times an user has logged in using the same IP address. In this case, event variables used to derive the aggregated variables are <code>IP address</code> and <code>user</code>.</p>'
+      description: ' The training result details. '
     ModelVersionDetail:
       type: object
       properties:
@@ -6461,7 +8049,11 @@ components:
         externalEventsDetail:
           allOf:
             - $ref: '#/components/schemas/ExternalEventsDetail'
-            - description: The event details.
+            - description: The external events data details. This will be populated if the <code>trainingDataSource</code> for the model version is specified as <code>EXTERNAL_EVENTS</code>.
+        ingestedEventsDetail:
+          allOf:
+            - $ref: '#/components/schemas/IngestedEventsDetail'
+            - description: The ingested events data details. This will be populated if the <code>trainingDataSource</code> for the model version is specified as <code>INGESTED_EVENTS</code>.
         trainingResult:
           allOf:
             - $ref: '#/components/schemas/TrainingResult'
@@ -6478,13 +8070,92 @@ components:
           allOf:
             - $ref: '#/components/schemas/fraudDetectorArn'
             - description: The model version ARN.
+        trainingResultV2:
+          allOf:
+            - $ref: '#/components/schemas/TrainingResultV2'
+            - description: ' The training result details. The details include the relative importance of the variables. '
       description: The details of the model version.
+    PredictionExplanations:
+      type: object
+      properties:
+        variableImpactExplanations:
+          allOf:
+            - $ref: '#/components/schemas/listOfVariableImpactExplanations'
+            - description: ' The details of the event variable''s impact on the prediction score. '
+        aggregatedVariablesImpactExplanations:
+          allOf:
+            - $ref: '#/components/schemas/ListOfAggregatedVariablesImpactExplanations'
+            - description: '<p> The details of the aggregated variables impact on the prediction score. </p> <p>Account Takeover Insights (ATI) model uses event variables from the login data you provide to continuously calculate a set of variables (aggregated variables) based on historical events. For example, your ATI model might calculate the number of times an user has logged in using the same IP address. In this case, event variables used to derive the aggregated variables are <code>IP address</code> and <code>user</code>.</p>'
+      description: ' The prediction explanations that provide insight into how each event variable impacted the model version''s fraud prediction score. '
     ModelVersionStatus:
       type: string
       enum:
         - ACTIVE
         - INACTIVE
         - TRAINING_CANCELLED
+    OFIMetricDataPoint:
+      type: object
+      properties:
+        fpr:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: ' The false positive rate. This is the percentage of total legitimate events that are incorrectly predicted as fraud. '
+        precision:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: ' The percentage of fraud events correctly predicted as fraudulent as compared to all events predicted as fraudulent. '
+        tpr:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: ' The true positive rate. This is the percentage of total fraud the model detects. Also known as capture rate. '
+        threshold:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: ' The model threshold that specifies an acceptable fraud capture rate. For example, a threshold of 500 means any model score 500 or above is labeled as fraud. '
+      description: ' The Online Fraud Insights (OFI) model performance metrics data points. '
+    OFIMetricDataPointsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OFIMetricDataPoint'
+    UncertaintyRange:
+      type: object
+      required:
+        - lowerBoundValue
+        - upperBoundValue
+      properties:
+        lowerBoundValue:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: ' The lower bound value of the area under curve (auc). '
+        upperBoundValue:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: ' The lower bound value of the area under curve (auc). '
+      description: ' Range of area under curve (auc) expected from the model. A range greater than 0.1 indicates higher model uncertainity. A range is the difference between upper and lower bound of auc. '
+    OFIModelPerformance:
+      type: object
+      properties:
+        auc:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: ' The area under the curve (auc). This summarizes the total positive rate (tpr) and false positive rate (FPR) across all possible model score thresholds. '
+        uncertaintyRange:
+          allOf:
+            - $ref: '#/components/schemas/UncertaintyRange'
+            - description: ' Indicates the range of area under curve (auc) expected from the OFI model. A range greater than 0.1 indicates higher model uncertainity. '
+      description: ' The Online Fraud Insights (OFI) model performance score. '
+    OFITrainingMetricsValue:
+      type: object
+      properties:
+        metricDataPoints:
+          allOf:
+            - $ref: '#/components/schemas/OFIMetricDataPointsList'
+            - description: ' The model''s performance metrics data points. '
+        modelPerformance:
+          allOf:
+            - $ref: '#/components/schemas/OFIModelPerformance'
+            - description: ' The model''s overall performance score. '
+      description: ' The Online Fraud Insights (OFI) model training metric details. '
     Outcome:
       type: object
       properties:
@@ -6509,6 +8180,10 @@ components:
             - $ref: '#/components/schemas/fraudDetectorArn'
             - description: The outcome ARN.
       description: The outcome.
+    listOfVariableImpactExplanations:
+      type: array
+      items:
+        $ref: '#/components/schemas/VariableImpactExplanation'
     RuleDetail:
       type: object
       properties:
@@ -6553,6 +8228,54 @@ components:
             - $ref: '#/components/schemas/fraudDetectorArn'
             - description: The rule ARN.
       description: The details of the rule.
+    TFIMetricDataPoint:
+      type: object
+      properties:
+        fpr:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: ' The false positive rate. This is the percentage of total legitimate events that are incorrectly predicted as fraud. '
+        precision:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: ' The percentage of fraud events correctly predicted as fraudulent as compared to all events predicted as fraudulent. '
+        tpr:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: ' The true positive rate. This is the percentage of total fraud the model detects. Also known as capture rate. '
+        threshold:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: ' The model threshold that specifies an acceptable fraud capture rate. For example, a threshold of 500 means any model score 500 or above is labeled as fraud. '
+      description: ' The performance metrics data points for Transaction Fraud Insights (TFI) model. '
+    TFIMetricDataPointsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TFIMetricDataPoint'
+    TFIModelPerformance:
+      type: object
+      properties:
+        auc:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: ' The area under the curve (auc). This summarizes the total positive rate (tpr) and false positive rate (FPR) across all possible model score thresholds. '
+        uncertaintyRange:
+          allOf:
+            - $ref: '#/components/schemas/UncertaintyRange'
+            - description: ' Indicates the range of area under curve (auc) expected from the TFI model. A range greater than 0.1 indicates higher model uncertainity. '
+      description: ' The Transaction Fraud Insights (TFI) model performance score. '
+    TFITrainingMetricsValue:
+      type: object
+      properties:
+        metricDataPoints:
+          allOf:
+            - $ref: '#/components/schemas/TFIMetricDataPointsList'
+            - description: ' The model''s performance metrics data points. '
+        modelPerformance:
+          allOf:
+            - $ref: '#/components/schemas/TFIModelPerformance'
+            - description: ' The model performance score. '
+      description: ' The Transaction Fraud Insights (TFI) model training metric details. '
     tagKey:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
@@ -6593,6 +8316,22 @@ components:
             - $ref: '#/components/schemas/metricDataPointsList'
             - description: The data points details.
       description: The training metric details.
+    TrainingMetricsV2:
+      type: object
+      properties:
+        ofi:
+          allOf:
+            - $ref: '#/components/schemas/OFITrainingMetricsValue'
+            - description: ' The Online Fraud Insights (OFI) model training metric details. '
+        tfi:
+          allOf:
+            - $ref: '#/components/schemas/TFITrainingMetricsValue'
+            - description: ' The Transaction Fraud Insights (TFI) model training metric details. '
+        ati:
+          allOf:
+            - $ref: '#/components/schemas/ATITrainingMetricsValue'
+            - description: ' The Account Takeover Insights (ATI) model training metric details. '
+      description: ' The training metrics details. '
     VariableImportanceMetrics:
       type: object
       properties:
@@ -6675,6 +8414,26 @@ components:
             - $ref: '#/components/schemas/string'
             - description: '<p>The type of the variable. For more information see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>.</p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT </code> </p>'
       description: A variable in the list of variables for the batch create variable request.
+    VariableImpactExplanation:
+      type: object
+      properties:
+        eventVariableName:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: ' The event variable name. '
+        relativeImpact:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: ' The event variable''s relative impact in terms of magnitude on the prediction scores. The relative impact values consist of a numerical rating (0-5, 5 being the highest) and direction (increased/decreased) impact of the fraud risk. '
+        logOddsImpact:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: '<p> The raw, uninterpreted value represented as log-odds of the fraud. These values are usually between -10 to +10, but range from - infinity to + infinity.</p> <ul> <li> <p>A positive value indicates that the variable drove the risk score up.</p> </li> <li> <p>A negative value indicates that the variable drove the risk score down.</p> </li> </ul>'
+      description: ' The details of the event variable''s impact on the prediction score. '
+    attributeKey:
+      type: string
+      minLength: 1
+      maxLength: 64
     variableName:
       type: string
       minLength: 1

@@ -3,7 +3,7 @@ info:
   version: '2020-09-18'
   x-release: v4
   title: AWS IoT Core Device Advisor
-  description: 'AWS IoT Core Device Advisor is a cloud-based, fully managed test capability for validating IoT devices during device software development. Device Advisor provides pre-built tests that you can use to validate IoT devices for reliable and secure connectivity with AWS IoT Core before deploying devices to production. By using Device Advisor, you can confirm that your devices can connect to AWS IoT Core, follow security best practices and, if applicable, receive software updates from IoT Device Management. You can also download signed qualification reports to submit to the AWS Partner Network to get your device qualified for the AWS Partner Device Catalog without the need to send your device in and wait for it to be tested.'
+  description: 'Amazon Web Services IoT Core Device Advisor is a cloud-based, fully managed test capability for validating IoT devices during device software development. Device Advisor provides pre-built tests that you can use to validate IoT devices for reliable and secure connectivity with Amazon Web Services IoT Core before deploying devices to production. By using Device Advisor, you can confirm that your devices can connect to Amazon Web Services IoT Core, follow security best practices and, if applicable, receive software updates from IoT Device Management. You can also download signed qualification reports to submit to the Amazon Web Services Partner Network to get your device qualified for the Amazon Web Services Partner Device Catalog without the need to send your device in and wait for it to be tested.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -118,7 +118,7 @@ paths:
   /suiteDefinitions:
     post:
       operationId: CreateSuiteDefinition
-      description: Creates a Device Advisor test suite.
+      description: '<p>Creates a Device Advisor test suite.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">CreateSuiteDefinition</a> action.</p>'
       responses:
         '200':
           description: Success
@@ -145,15 +145,17 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - suiteDefinitionConfiguration
               properties:
                 suiteDefinitionConfiguration:
-                  description: Gets Suite Definition Configuration.
+                  description: Gets the suite definition configuration.
                   type: object
                   properties:
                     suiteDefinitionName:
                       allOf:
                         - $ref: '#/components/schemas/SuiteDefinitionName'
-                        - description: Gets Suite Definition Configuration name.
+                        - description: Gets the suite definition name. This is a required parameter.
                     devices:
                       allOf:
                         - $ref: '#/components/schemas/DeviceUnderTestList'
@@ -162,14 +164,22 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/IntendedForQualificationBoolean'
                         - description: Gets the tests intended for qualification in a suite.
+                    isLongDurationTest:
+                      allOf:
+                        - $ref: '#/components/schemas/IsLongDurationTestBoolean'
+                        - description: Verifies if the test suite is a long duration test.
                     rootGroup:
                       allOf:
                         - $ref: '#/components/schemas/RootGroup'
-                        - description: Gets test suite root group.
+                        - description: Gets the test suite root group. This is a required parameter.
                     devicePermissionRoleArn:
                       allOf:
                         - $ref: '#/components/schemas/AmazonResourceName'
-                        - description: Gets device permission arn.
+                        - description: Gets the device permission ARN. This is a required parameter.
+                    protocol:
+                      allOf:
+                        - $ref: '#/components/schemas/Protocol'
+                        - description: Sets the MQTT protocol that is configured in the suite definition.
                 tags:
                   description: The tags to be attached to the suite definition.
                   type: object
@@ -187,7 +197,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListSuiteDefinitions
-      description: Lists the Device Advisor test suites you have created.
+      description: '<p>Lists the Device Advisor test suites you have created.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListSuiteDefinitions</a> action.</p>'
       responses:
         '200':
           description: Success
@@ -226,7 +236,7 @@ paths:
   '/suiteDefinitions/{suiteDefinitionId}':
     delete:
       operationId: DeleteSuiteDefinition
-      description: Deletes a Device Advisor test suite.
+      description: '<p>Deletes a Device Advisor test suite.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">DeleteSuiteDefinition</a> action.</p>'
       responses:
         '200':
           description: Success
@@ -250,7 +260,7 @@ paths:
         - name: suiteDefinitionId
           in: path
           required: true
-          description: Suite definition Id of the test suite to be deleted.
+          description: Suite definition ID of the test suite to be deleted.
           schema:
             type: string
             minLength: 12
@@ -265,7 +275,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetSuiteDefinition
-      description: Gets information about a Device Advisor test suite.
+      description: '<p>Gets information about a Device Advisor test suite.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">GetSuiteDefinition</a> action.</p>'
       responses:
         '200':
           description: Success
@@ -295,7 +305,7 @@ paths:
         - name: suiteDefinitionId
           in: path
           required: true
-          description: Suite definition Id of the test suite to get.
+          description: Suite definition ID of the test suite to get.
           schema:
             type: string
             minLength: 12
@@ -310,7 +320,7 @@ paths:
             maxLength: 255
     patch:
       operationId: UpdateSuiteDefinition
-      description: Updates a Device Advisor test suite.
+      description: '<p>Updates a Device Advisor test suite.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">UpdateSuiteDefinition</a> action.</p>'
       responses:
         '200':
           description: Success
@@ -334,7 +344,7 @@ paths:
         - name: suiteDefinitionId
           in: path
           required: true
-          description: Suite definition Id of the test suite to be updated.
+          description: Suite definition ID of the test suite to be updated.
           schema:
             type: string
             minLength: 12
@@ -345,15 +355,17 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - suiteDefinitionConfiguration
               properties:
                 suiteDefinitionConfiguration:
-                  description: Gets Suite Definition Configuration.
+                  description: Gets the suite definition configuration.
                   type: object
                   properties:
                     suiteDefinitionName:
                       allOf:
                         - $ref: '#/components/schemas/SuiteDefinitionName'
-                        - description: Gets Suite Definition Configuration name.
+                        - description: Gets the suite definition name. This is a required parameter.
                     devices:
                       allOf:
                         - $ref: '#/components/schemas/DeviceUnderTestList'
@@ -362,18 +374,80 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/IntendedForQualificationBoolean'
                         - description: Gets the tests intended for qualification in a suite.
+                    isLongDurationTest:
+                      allOf:
+                        - $ref: '#/components/schemas/IsLongDurationTestBoolean'
+                        - description: Verifies if the test suite is a long duration test.
                     rootGroup:
                       allOf:
                         - $ref: '#/components/schemas/RootGroup'
-                        - description: Gets test suite root group.
+                        - description: Gets the test suite root group. This is a required parameter.
                     devicePermissionRoleArn:
                       allOf:
                         - $ref: '#/components/schemas/AmazonResourceName'
-                        - description: Gets device permission arn.
+                        - description: Gets the device permission ARN. This is a required parameter.
+                    protocol:
+                      allOf:
+                        - $ref: '#/components/schemas/Protocol'
+                        - description: Sets the MQTT protocol that is configured in the suite definition.
+  /endpoint:
+    get:
+      operationId: GetEndpoint
+      description: Gets information about an Device Advisor endpoint.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEndpointResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: thingArn
+          in: query
+          required: false
+          description: The thing ARN of the device. This is an optional parameter.
+          schema:
+            type: string
+            minLength: 20
+            maxLength: 2048
+        - name: certificateArn
+          in: query
+          required: false
+          description: The certificate ARN of the device. This is an optional parameter.
+          schema:
+            type: string
+            minLength: 20
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/suiteDefinitions/{suiteDefinitionId}/suiteRuns/{suiteRunId}':
     get:
       operationId: GetSuiteRun
-      description: Gets information about a Device Advisor test suite run.
+      description: '<p>Gets information about a Device Advisor test suite run.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">GetSuiteRun</a> action.</p>'
       responses:
         '200':
           description: Success
@@ -403,7 +477,7 @@ paths:
         - name: suiteDefinitionId
           in: path
           required: true
-          description: Suite definition Id for the test suite run.
+          description: Suite definition ID for the test suite run.
           schema:
             type: string
             minLength: 12
@@ -411,7 +485,7 @@ paths:
         - name: suiteRunId
           in: path
           required: true
-          description: Suite run Id for the test suite run.
+          description: Suite run ID for the test suite run.
           schema:
             type: string
             minLength: 12
@@ -427,7 +501,7 @@ paths:
   '/suiteDefinitions/{suiteDefinitionId}/suiteRuns/{suiteRunId}/report':
     get:
       operationId: GetSuiteRunReport
-      description: Gets a report download link for a successful Device Advisor qualifying test suite run.
+      description: '<p>Gets a report download link for a successful Device Advisor qualifying test suite run.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">GetSuiteRunReport</a> action.</p>'
       responses:
         '200':
           description: Success
@@ -457,7 +531,7 @@ paths:
         - name: suiteDefinitionId
           in: path
           required: true
-          description: Suite definition Id of the test suite.
+          description: Suite definition ID of the test suite.
           schema:
             type: string
             minLength: 12
@@ -465,7 +539,7 @@ paths:
         - name: suiteRunId
           in: path
           required: true
-          description: Suite run Id of the test suite run.
+          description: Suite run ID of the test suite run.
           schema:
             type: string
             minLength: 12
@@ -481,7 +555,7 @@ paths:
   /suiteRuns:
     get:
       operationId: ListSuiteRuns
-      description: 'Lists the runs of the specified Device Advisor test suite. You can list all runs of the test suite, or the runs of a specific version of the test suite.'
+      description: '<p>Lists runs of the specified Device Advisor test suite. You can list all runs of the test suite, or the runs of a specific version of the test suite.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListSuiteRuns</a> action.</p>'
       responses:
         '200':
           description: Success
@@ -505,7 +579,7 @@ paths:
         - name: suiteDefinitionId
           in: query
           required: false
-          description: Lists the test suite runs of the specified test suite based on suite definition Id.
+          description: Lists the test suite runs of the specified test suite based on suite definition ID.
           schema:
             type: string
             minLength: 12
@@ -513,7 +587,7 @@ paths:
         - name: suiteDefinitionVersion
           in: query
           required: false
-          description: Must be passed along with suiteDefinitionId. Lists the test suite runs of the specified test suite based on suite definition version.
+          description: Must be passed along with <code>suiteDefinitionId</code>. Lists the test suite runs of the specified test suite based on suite definition version.
           schema:
             type: string
             minLength: 2
@@ -544,7 +618,7 @@ paths:
   '/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
-      description: Lists the tags attached to an IoT Device Advisor resource.
+      description: '<p>Lists the tags attached to an IoT Device Advisor resource.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListTagsForResource</a> action.</p>'
       responses:
         '200':
           description: Success
@@ -574,7 +648,7 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: The ARN of the IoT Device Advisor resource.
+          description: The resource ARN of the IoT Device Advisor resource. This can be SuiteDefinition ARN or SuiteRun ARN.
           schema:
             type: string
             minLength: 20
@@ -589,7 +663,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: Adds to and modifies existing tags of an IoT Device Advisor resource.
+      description: '<p>Adds to and modifies existing tags of an IoT Device Advisor resource.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">TagResource</a> action.</p>'
       responses:
         '200':
           description: Success
@@ -619,7 +693,7 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: The resource ARN of an IoT Device Advisor resource.
+          description: The resource ARN of an IoT Device Advisor resource. This can be SuiteDefinition ARN or SuiteRun ARN.
           schema:
             type: string
             minLength: 20
@@ -643,7 +717,7 @@ paths:
   '/suiteDefinitions/{suiteDefinitionId}/suiteRuns':
     post:
       operationId: StartSuiteRun
-      description: Starts a Device Advisor test suite run.
+      description: '<p>Starts a Device Advisor test suite run.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">StartSuiteRun</a> action.</p>'
       responses:
         '200':
           description: Success
@@ -673,7 +747,7 @@ paths:
         - name: suiteDefinitionId
           in: path
           required: true
-          description: Suite definition Id of the test suite.
+          description: Suite definition ID of the test suite.
           schema:
             type: string
             minLength: 12
@@ -684,6 +758,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - suiteRunConfiguration
               properties:
                 suiteDefinitionVersion:
                   description: Suite definition version of the test suite.
@@ -697,11 +773,15 @@ paths:
                     primaryDevice:
                       allOf:
                         - $ref: '#/components/schemas/DeviceUnderTest'
-                        - description: Gets the primary device for suite run.
+                        - description: Sets the primary device for the test suite run. This requires a thing ARN or a certificate ARN.
                     selectedTestList:
                       allOf:
                         - $ref: '#/components/schemas/SelectedTestList'
-                        - description: Gets test case list.
+                        - description: Sets test case list.
+                    parallelRun:
+                      allOf:
+                        - $ref: '#/components/schemas/ParallelRun'
+                        - description: TRUE if multiple test suites run in parallel.
                 tags:
                   description: The tags to be attached to the suite run.
                   type: object
@@ -720,7 +800,7 @@ paths:
   '/suiteDefinitions/{suiteDefinitionId}/suiteRuns/{suiteRunId}/stop':
     post:
       operationId: StopSuiteRun
-      description: Stops a Device Advisor test suite run that is currently running.
+      description: '<p>Stops a Device Advisor test suite run that is currently running.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">StopSuiteRun</a> action.</p>'
       responses:
         '200':
           description: Success
@@ -750,7 +830,7 @@ paths:
         - name: suiteDefinitionId
           in: path
           required: true
-          description: Suite definition Id of the test suite run to be stopped.
+          description: Suite definition ID of the test suite run to be stopped.
           schema:
             type: string
             minLength: 12
@@ -758,7 +838,7 @@ paths:
         - name: suiteRunId
           in: path
           required: true
-          description: Suite run Id of the test suite run to be stopped.
+          description: Suite run ID of the test suite run to be stopped.
           schema:
             type: string
             minLength: 12
@@ -774,7 +854,7 @@ paths:
   '/tags/{resourceArn}#tagKeys':
     delete:
       operationId: UntagResource
-      description: Removes tags from an IoT Device Advisor resource.
+      description: '<p>Removes tags from an IoT Device Advisor resource.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">UntagResource</a> action.</p>'
       responses:
         '200':
           description: Success
@@ -804,7 +884,7 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: The resource ARN of an IoT Device Advisor resource.
+          description: The resource ARN of an IoT Device Advisor resource. This can be SuiteDefinition ARN or SuiteRun ARN.
           schema:
             type: string
             minLength: 20
@@ -885,19 +965,19 @@ components:
         suiteDefinitionId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Creates a Device Advisor test suite with suite UUID.
+            - description: The UUID of the test suite created.
         suiteDefinitionArn:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
-            - description: Creates a Device Advisor test suite with Amazon Resource name.
+            - description: The Amazon Resource Name (ARN) of the test suite.
         suiteDefinitionName:
           allOf:
             - $ref: '#/components/schemas/SuiteDefinitionName'
-            - description: Creates a Device Advisor test suite with suite definition name.
+            - description: The suite definition name of the test suite. This is a required parameter.
         createdAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Creates a Device Advisor test suite with TimeStamp of when it was created.
+            - description: The timestamp of when the test suite was created.
     SuiteDefinitionName:
       type: string
       minLength: 1
@@ -910,6 +990,8 @@ components:
       maxItems: 2
     IntendedForQualificationBoolean:
       type: boolean
+    IsLongDurationTestBoolean:
+      type: boolean
     RootGroup:
       type: string
       minLength: 1
@@ -918,6 +1000,11 @@ components:
       type: string
       minLength: 20
       maxLength: 2048
+    Protocol:
+      type: string
+      enum:
+        - MqttV3_1_1
+        - MqttV5
     String256:
       type: string
       minLength: 1
@@ -927,13 +1014,21 @@ components:
     DeleteSuiteDefinitionResponse:
       type: object
       properties: {}
+    GetEndpointResponse:
+      type: object
+      properties:
+        endpoint:
+          allOf:
+            - $ref: '#/components/schemas/Endpoint'
+            - description: The response of an Device Advisor endpoint.
+    ResourceNotFoundException: {}
     GetSuiteDefinitionResponse:
       type: object
       properties:
         suiteDefinitionId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Suite definition Id of the suite definition.
+            - description: Suite definition ID of the suite definition.
         suiteDefinitionArn:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
@@ -962,14 +1057,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: Tags attached to the suite definition.
-    ResourceNotFoundException: {}
     GetSuiteRunResponse:
       type: object
       properties:
         suiteDefinitionId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Suite definition Id for the test suite run.
+            - description: Suite definition ID for the test suite run.
         suiteDefinitionVersion:
           allOf:
             - $ref: '#/components/schemas/SuiteDefinitionVersion'
@@ -977,7 +1071,7 @@ components:
         suiteRunId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Suite run Id for the test suite run.
+            - description: Suite run ID for the test suite run.
         suiteRunArn:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
@@ -993,7 +1087,7 @@ components:
         startTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Date (in Unix epoch time) when the test suite run was started.
+            - description: Date (in Unix epoch time) when the test suite run started.
         endTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -1052,33 +1146,39 @@ components:
         suiteRunId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Suite Run Id of the started suite run.
+            - description: Suite Run ID of the started suite run.
         suiteRunArn:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
-            - description: Amazon resource name of the started suite run.
+            - description: Amazon Resource Name (ARN) of the started suite run.
         createdAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Date (in Unix epoch time) when the suite run was created.
+            - description: Starts a Device Advisor test suite run based on suite create time.
+        endpoint:
+          allOf:
+            - $ref: '#/components/schemas/Endpoint'
+            - description: The response of an Device Advisor test endpoint.
     DeviceUnderTest:
       type: object
       properties:
         thingArn:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
-            - description: Lists devices thing arn
+            - description: Lists devices thing ARN.
         certificateArn:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
-            - description: Lists devices certificate arn
-      description: Lists all the devices under test
+            - description: Lists devices certificate ARN.
+      description: Information of a test device. A thing ARN or a certificate ARN is required.
     SelectedTestList:
       type: array
       items:
         $ref: '#/components/schemas/UUID'
       minItems: 0
       maxItems: 100
+    ParallelRun:
+      type: boolean
     ConflictException: {}
     StopSuiteRunResponse:
       type: object
@@ -1099,15 +1199,15 @@ components:
         suiteDefinitionId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Suite definition Id of the updated test suite.
+            - description: Suite definition ID of the updated test suite.
         suiteDefinitionArn:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
-            - description: Amazon Resource name of the updated test suite.
+            - description: Amazon Resource Name (ARN) of the updated test suite.
         suiteDefinitionName:
           allOf:
             - $ref: '#/components/schemas/SuiteDefinitionName'
-            - description: Suite definition name of the updated test suite.
+            - description: Updates the suite definition name. This is a required parameter.
         suiteDefinitionVersion:
           allOf:
             - $ref: '#/components/schemas/SuiteDefinitionVersion'
@@ -1122,11 +1222,15 @@ components:
             - description: Timestamp of when the test suite was updated.
     SuiteDefinitionConfiguration:
       type: object
+      required:
+        - suiteDefinitionName
+        - rootGroup
+        - devicePermissionRoleArn
       properties:
         suiteDefinitionName:
           allOf:
             - $ref: '#/components/schemas/SuiteDefinitionName'
-            - description: Gets Suite Definition Configuration name.
+            - description: Gets the suite definition name. This is a required parameter.
         devices:
           allOf:
             - $ref: '#/components/schemas/DeviceUnderTestList'
@@ -1135,15 +1239,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/IntendedForQualificationBoolean'
             - description: Gets the tests intended for qualification in a suite.
+        isLongDurationTest:
+          allOf:
+            - $ref: '#/components/schemas/IsLongDurationTestBoolean'
+            - description: Verifies if the test suite is a long duration test.
         rootGroup:
           allOf:
             - $ref: '#/components/schemas/RootGroup'
-            - description: Gets test suite root group.
+            - description: Gets the test suite root group. This is a required parameter.
         devicePermissionRoleArn:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
-            - description: Gets device permission arn.
-      description: Gets Suite Definition Configuration.
+            - description: Gets the device permission ARN. This is a required parameter.
+        protocol:
+          allOf:
+            - $ref: '#/components/schemas/Protocol'
+            - description: Sets the MQTT protocol that is configured in the suite definition.
+      description: Gets the suite definition configuration.
     TagMap:
       type: object
       minProperties: 0
@@ -1152,6 +1264,8 @@ components:
         $ref: '#/components/schemas/String256'
     CreateSuiteDefinitionRequest:
       type: object
+      required:
+        - suiteDefinitionConfiguration
       title: CreateSuiteDefinitionRequest
       properties:
         suiteDefinitionConfiguration:
@@ -1173,10 +1287,18 @@ components:
       type: object
       title: DeleteSuiteDefinitionRequest
       properties: {}
+    Endpoint:
+      type: string
+      minLength: 45
+      maxLength: 75
     ErrorReason:
       type: string
     Failure:
       type: string
+    GetEndpointRequest:
+      type: object
+      title: GetEndpointRequest
+      properties: {}
     SuiteDefinitionVersion:
       type: string
       minLength: 2
@@ -1197,15 +1319,21 @@ components:
       properties: {}
     SuiteRunConfiguration:
       type: object
+      required:
+        - primaryDevice
       properties:
         primaryDevice:
           allOf:
             - $ref: '#/components/schemas/DeviceUnderTest'
-            - description: Gets the primary device for suite run.
+            - description: Sets the primary device for the test suite run. This requires a thing ARN or a certificate ARN.
         selectedTestList:
           allOf:
             - $ref: '#/components/schemas/SelectedTestList'
-            - description: Gets test case list.
+            - description: Sets test case list.
+        parallelRun:
+          allOf:
+            - $ref: '#/components/schemas/ParallelRun'
+            - description: TRUE if multiple test suites run in parallel.
       description: Gets suite run configuration.
     TestResult:
       type: object
@@ -1240,7 +1368,7 @@ components:
         groupId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Group result Id.
+            - description: Group result ID.
         groupName:
           allOf:
             - $ref: '#/components/schemas/GroupName'
@@ -1286,6 +1414,8 @@ components:
       type: string
     StartSuiteRunRequest:
       type: object
+      required:
+        - suiteRunConfiguration
       title: StartSuiteRunRequest
       properties:
         suiteDefinitionVersion:
@@ -1322,7 +1452,7 @@ components:
         suiteDefinitionId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Suite definition Id of the test suite.
+            - description: Suite definition ID of the test suite.
         suiteDefinitionName:
           allOf:
             - $ref: '#/components/schemas/SuiteDefinitionName'
@@ -1330,11 +1460,19 @@ components:
         defaultDevices:
           allOf:
             - $ref: '#/components/schemas/DeviceUnderTestList'
-            - description: Specifies the devices under test for the test suite.
+            - description: Specifies the devices that are under test for the test suite.
         intendedForQualification:
           allOf:
             - $ref: '#/components/schemas/IntendedForQualificationBoolean'
             - description: Specifies if the test suite is intended for qualification.
+        isLongDurationTest:
+          allOf:
+            - $ref: '#/components/schemas/IsLongDurationTestBoolean'
+            - description: Verifies if the test suite is a long duration test.
+        protocol:
+          allOf:
+            - $ref: '#/components/schemas/Protocol'
+            - description: Gets the MQTT protocol that is configured in the suite definition.
         createdAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -1350,7 +1488,7 @@ components:
         suiteDefinitionId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Suite definition Id of the suite run.
+            - description: Suite definition ID of the suite run.
         suiteDefinitionVersion:
           allOf:
             - $ref: '#/components/schemas/SuiteDefinitionVersion'
@@ -1362,7 +1500,7 @@ components:
         suiteRunId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Suite run Id of the suite run.
+            - description: Suite run ID of the suite run.
         createdAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -1387,7 +1525,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/SuiteRunResultCount'
             - description: Number of test cases that failed in the suite run.
-      description: Information about the suite run.
+      description: '<p>Information about the suite run.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">SuiteRunInformation</a> action.</p>'
+    SystemMessage:
+      type: string
     TagKeyList:
       type: array
       items:
@@ -1408,25 +1548,29 @@ components:
       type: string
     Warnings:
       type: string
+    TestCaseScenariosList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TestCaseScenario'
     TestCaseRun:
       type: object
       properties:
         testCaseRunId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Provides test case run Id.
+            - description: Provides the test case run ID.
         testCaseDefinitionId:
           allOf:
             - $ref: '#/components/schemas/UUID'
-            - description: Provides test case run definition Id.
+            - description: Provides the test case run definition ID.
         testCaseDefinitionName:
           allOf:
             - $ref: '#/components/schemas/TestCaseDefinitionName'
-            - description: Provides test case run definition Name.
+            - description: Provides the test case run definition name.
         status:
           allOf:
             - $ref: '#/components/schemas/Status'
-            - description: Provides test case run status.
+            - description: '<p>Provides the test case run status. Status is one of the following:</p> <ul> <li> <p> <code>PASS</code>: Test passed.</p> </li> <li> <p> <code>FAIL</code>: Test failed.</p> </li> <li> <p> <code>PENDING</code>: Test has not started running but is scheduled.</p> </li> <li> <p> <code>RUNNING</code>: Test is running.</p> </li> <li> <p> <code>STOPPING</code>: Test is performing cleanup steps. You will see this status only if you stop a suite run.</p> </li> <li> <p> <code>STOPPED</code> Test is stopped. You will see this status only if you stop a suite run.</p> </li> <li> <p> <code>PASS_WITH_WARNINGS</code>: Test passed with warnings.</p> </li> <li> <p> <code>ERORR</code>: Test faced an error when running due to an internal issue.</p> </li> </ul>'
         startTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -1438,7 +1582,7 @@ components:
         logUrl:
           allOf:
             - $ref: '#/components/schemas/LogUrl'
-            - description: Provides test case run log Url.
+            - description: Provides test case run log URL.
         warnings:
           allOf:
             - $ref: '#/components/schemas/Warnings'
@@ -1447,13 +1591,62 @@ components:
           allOf:
             - $ref: '#/components/schemas/Failure'
             - description: Provides test case run failure result.
-      description: Provides test case run.
+        testScenarios:
+          allOf:
+            - $ref: '#/components/schemas/TestCaseScenariosList'
+            - description: ' Provides the test scenarios for the test case run. '
+      description: Provides the test case run.
+    TestCaseScenarioId:
+      type: string
+    TestCaseScenarioType:
+      type: string
+      enum:
+        - Advanced
+        - Basic
+    TestCaseScenarioStatus:
+      type: string
+      enum:
+        - PASS
+        - FAIL
+        - CANCELED
+        - PENDING
+        - RUNNING
+        - STOPPING
+        - STOPPED
+        - PASS_WITH_WARNINGS
+        - ERROR
+    TestCaseScenario:
+      type: object
+      properties:
+        testCaseScenarioId:
+          allOf:
+            - $ref: '#/components/schemas/TestCaseScenarioId'
+            - description: Provides test case scenario ID.
+        testCaseScenarioType:
+          allOf:
+            - $ref: '#/components/schemas/TestCaseScenarioType'
+            - description: '<p>Provides test case scenario type. Type is one of the following:</p> <ul> <li> <p>Advanced</p> </li> <li> <p>Basic</p> </li> </ul>'
+        status:
+          allOf:
+            - $ref: '#/components/schemas/TestCaseScenarioStatus'
+            - description: '<p>Provides the test case scenario status. Status is one of the following:</p> <ul> <li> <p> <code>PASS</code>: Test passed.</p> </li> <li> <p> <code>FAIL</code>: Test failed.</p> </li> <li> <p> <code>PENDING</code>: Test has not started running but is scheduled.</p> </li> <li> <p> <code>RUNNING</code>: Test is running.</p> </li> <li> <p> <code>STOPPING</code>: Test is performing cleanup steps. You will see this status only if you stop a suite run.</p> </li> <li> <p> <code>STOPPED</code> Test is stopped. You will see this status only if you stop a suite run.</p> </li> <li> <p> <code>PASS_WITH_WARNINGS</code>: Test passed with warnings.</p> </li> <li> <p> <code>ERORR</code>: Test faced an error when running due to an internal issue.</p> </li> </ul>'
+        failure:
+          allOf:
+            - $ref: '#/components/schemas/Failure'
+            - description: Provides test case scenario failure result.
+        systemMessage:
+          allOf:
+            - $ref: '#/components/schemas/SystemMessage'
+            - description: ' '
+      description: Provides test case scenario.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
       properties: {}
     UpdateSuiteDefinitionRequest:
       type: object
+      required:
+        - suiteDefinitionConfiguration
       title: UpdateSuiteDefinitionRequest
       properties:
         suiteDefinitionConfiguration:

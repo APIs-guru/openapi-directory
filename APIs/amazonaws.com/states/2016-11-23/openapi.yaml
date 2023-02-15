@@ -3,7 +3,7 @@ info:
   version: '2016-11-23'
   x-release: v4
   title: AWS Step Functions
-  description: '<fullname>AWS Step Functions</fullname> <p>AWS Step Functions is a service that lets you coordinate the components of distributed applications and microservices using visual workflows.</p> <p>You can use Step Functions to build applications from individual components, each of which performs a discrete function, or <i>task</i>, allowing you to scale and change applications quickly. Step Functions provides a console that helps visualize the components of your application as a series of steps. Step Functions automatically triggers and tracks each step, and retries steps when there are errors, so your application executes predictably and in the right order every time. Step Functions logs the state of each step, so you can quickly diagnose and debug any issues.</p> <p>Step Functions manages operations and underlying infrastructure to ensure your application is available at any scale. You can run tasks on AWS, your own servers, or any system that has access to AWS. You can access and use Step Functions using the console, the AWS SDKs, or an HTTP API. For more information about Step Functions, see the <i> <a href="https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html">AWS Step Functions Developer Guide</a> </i>.</p>'
+  description: '<fullname>Step Functions</fullname> <p>Step Functions is a service that lets you coordinate the components of distributed applications and microservices using visual workflows.</p> <p>You can use Step Functions to build applications from individual components, each of which performs a discrete function, or <i>task</i>, allowing you to scale and change applications quickly. Step Functions provides a console that helps visualize the components of your application as a series of steps. Step Functions automatically triggers and tracks each step, and retries steps when there are errors, so your application executes predictably and in the right order every time. Step Functions logs the state of each step, so you can quickly diagnose and debug any issues.</p> <p>Step Functions manages operations and underlying infrastructure to ensure your application is available at any scale. You can run tasks on Amazon Web Services, your own servers, or any system that has access to Amazon Web Services. You can access and use Step Functions using the console, the Amazon Web Services SDKs, or an HTTP API. For more information about Step Functions, see the <i> <a href="https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html">Step Functions Developer Guide</a> </i>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -117,7 +117,7 @@ paths:
   /#X-Amz-Target=AWSStepFunctions.CreateActivity:
     post:
       operationId: CreateActivity
-      description: '<p>Creates an activity. An activity is a task that you write in any programming language and host on any machine that has access to AWS Step Functions. Activities must poll Step Functions using the <code>GetActivityTask</code> API action and respond using <code>SendTask*</code> API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note> <note> <p> <code>CreateActivity</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. <code>CreateActivity</code>''s idempotency check is based on the activity <code>name</code>. If a following request has different <code>tags</code> values, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>tags</code> will not be updated, even if they are different.</p> </note>'
+      description: '<p>Creates an activity. An activity is a task that you write in any programming language and host on any machine that has access to Step Functions. Activities must poll Step Functions using the <code>GetActivityTask</code> API action and respond using <code>SendTask*</code> API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note> <note> <p> <code>CreateActivity</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. <code>CreateActivity</code>''s idempotency check is based on the activity <code>name</code>. If a following request has different <code>tags</code> values, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>tags</code> will not be updated, even if they are different.</p> </note>'
       responses:
         '200':
           description: Success
@@ -168,7 +168,7 @@ paths:
   /#X-Amz-Target=AWSStepFunctions.CreateStateMachine:
     post:
       operationId: CreateStateMachine
-      description: '<p>Creates a state machine. A state machine consists of a collection of states that can do work (<code>Task</code> states), determine to which states to transition next (<code>Choice</code> states), stop an execution with an error (<code>Fail</code> states), and so on. State machines are specified using a JSON-based, structured language. For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a> in the AWS Step Functions User Guide.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note> <note> <p> <code>CreateStateMachine</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. <code>CreateStateMachine</code>''s idempotency check is based on the state machine <code>name</code>, <code>definition</code>, <code>type</code>, <code>LoggingConfiguration</code> and <code>TracingConfiguration</code>. If a following request has a different <code>roleArn</code> or <code>tags</code>, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>roleArn</code> and <code>tags</code> will not be updated, even if they are different.</p> </note>'
+      description: '<p>Creates a state machine. A state machine consists of a collection of states that can do work (<code>Task</code> states), determine to which states to transition next (<code>Choice</code> states), stop an execution with an error (<code>Fail</code> states), and so on. State machines are specified using a JSON-based, structured language. For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a> in the Step Functions User Guide.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note> <note> <p> <code>CreateStateMachine</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. <code>CreateStateMachine</code>''s idempotency check is based on the state machine <code>name</code>, <code>definition</code>, <code>type</code>, <code>LoggingConfiguration</code> and <code>TracingConfiguration</code>. If a following request has a different <code>roleArn</code> or <code>tags</code>, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>roleArn</code> and <code>tags</code> will not be updated, even if they are different.</p> </note>'
       responses:
         '200':
           description: Success
@@ -300,7 +300,7 @@ paths:
   /#X-Amz-Target=AWSStepFunctions.DeleteStateMachine:
     post:
       operationId: DeleteStateMachine
-      description: '<p>Deletes a state machine. This is an asynchronous operation: It sets the state machine''s status to <code>DELETING</code> and begins the deletion process. </p> <note> <p>For <code>EXPRESS</code>state machines, the deletion will happen eventually (usually less than a minute). Running executions may emit logs after <code>DeleteStateMachine</code> API is called.</p> </note>'
+      description: '<p>Deletes a state machine. This is an asynchronous operation: It sets the state machine''s status to <code>DELETING</code> and begins the deletion process. </p> <p>If the given state machine Amazon Resource Name (ARN) is a qualified state machine ARN, it will fail with ValidationException.</p> <p>A qualified state machine ARN refers to a <i>Distributed Map state</i> defined within a state machine. For example, the qualified state machine ARN <code>arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel</code> refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in the state machine named <code>stateMachineName</code>.</p> <note> <p>For <code>EXPRESS</code> state machines, the deletion will happen eventually (usually less than a minute). Running executions may emit logs after <code>DeleteStateMachine</code> API is called.</p> </note>'
       responses:
         '200':
           description: Success
@@ -314,6 +314,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidArn'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       requestBody:
         required: true
         content:
@@ -384,7 +390,7 @@ paths:
   /#X-Amz-Target=AWSStepFunctions.DescribeExecution:
     post:
       operationId: DescribeExecution
-      description: <p>Describes an execution.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note> <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>
+      description: '<p>Provides all information about a state machine execution, such as the state machine associated with the execution, the execution input and output, and relevant execution metadata. Use this API action to return the Map Run ARN if the execution was dispatched by a Map Run.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note> <p>This API action is not supported by <code>EXPRESS</code> state machine executions unless they were dispatched by a Map Run.</p>'
       responses:
         '200':
           description: Success
@@ -426,10 +432,55 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSStepFunctions.DescribeMapRun:
+    post:
+      operationId: DescribeMapRun
+      description: 'Provides information about a Map Run''s configuration, progress, and results. For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html">Examining Map Run</a> in the <i>Step Functions Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeMapRunOutput'
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+        '481':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeMapRunInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSStepFunctions.DescribeMapRun
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSStepFunctions.DescribeStateMachine:
     post:
       operationId: DescribeStateMachine
-      description: <p>Describes a state machine.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>
+      description: '<p>Provides information about a state machine''s definition, its IAM role Amazon Resource Name (ARN), and configuration. If the state machine ARN is a qualified state machine ARN, the response returned includes the <code>Map</code> state''s label.</p> <p>A qualified state machine ARN refers to a <i>Distributed Map state</i> defined within a state machine. For example, the qualified state machine ARN <code>arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel</code> refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in the state machine named <code>stateMachineName</code>.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note>'
       responses:
         '200':
           description: Success
@@ -474,7 +525,7 @@ paths:
   /#X-Amz-Target=AWSStepFunctions.DescribeStateMachineForExecution:
     post:
       operationId: DescribeStateMachineForExecution
-      description: <p>Describes the state machine associated with a specific execution.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note> <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>
+      description: '<p>Provides information about a state machine''s definition, its execution role ARN, and configuration. If an execution was dispatched by a Map Run, the Map Run is returned in the response. Additionally, the state machine returned will be the state machine associated with the Map Run.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note> <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>'
       responses:
         '200':
           description: Success
@@ -519,7 +570,7 @@ paths:
   /#X-Amz-Target=AWSStepFunctions.GetActivityTask:
     post:
       operationId: GetActivityTask
-      description: '<p>Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll returns a <code>taskToken</code> with a null string.</p> <important> <p>Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request).</p> <p>Polling with <code>GetActivityTask</code> can cause latency in some implementations. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html">Avoid Latency When Polling for Activity Tasks</a> in the Step Functions Developer Guide.</p> </important>'
+      description: '<p>Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll returns a <code>taskToken</code> with a null string.</p> <note> <p>This API action isn''t logged in CloudTrail.</p> </note> <important> <p>Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request).</p> <p>Polling with <code>GetActivityTask</code> can cause latency in some implementations. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html">Avoid Latency When Polling for Activity Tasks</a> in the Step Functions Developer Guide.</p> </important>'
       responses:
         '200':
           description: Success
@@ -684,7 +735,7 @@ paths:
   /#X-Amz-Target=AWSStepFunctions.ListExecutions:
     post:
       operationId: ListExecutions
-      description: '<p>Lists the executions of a state machine that meet the filtering criteria. Results are sorted by time, with the most recent execution first.</p> <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note> <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>'
+      description: '<p>Lists all executions of a state machine or a Map Run. You can list all executions related to a state machine by specifying a state machine Amazon Resource Name (ARN), or those related to a Map Run by specifying a Map Run ARN.</p> <p>Results are sorted by time, with the most recent execution first.</p> <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note> <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>'
       responses:
         '200':
           description: Success
@@ -716,6 +767,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/StateMachineTypeNotSupported'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
       requestBody:
         required: true
         content:
@@ -742,6 +805,69 @@ paths:
             type: string
             enum:
               - AWSStepFunctions.ListExecutions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSStepFunctions.ListMapRuns:
+    post:
+      operationId: ListMapRuns
+      description: 'Lists all Map Runs that were started by a given state machine execution. Use this API action to obtain Map Run ARNs, and then call <code>DescribeMapRun</code> to obtain more information, if needed.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMapRunsOutput'
+        '480':
+          description: ExecutionDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutionDoesNotExist'
+        '481':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+        '482':
+          description: InvalidToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListMapRunsInput'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSStepFunctions.ListMapRuns
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1008,7 +1134,7 @@ paths:
   /#X-Amz-Target=AWSStepFunctions.StartExecution:
     post:
       operationId: StartExecution
-      description: '<p>Starts a state machine execution.</p> <note> <p> <code>StartExecution</code> is idempotent. If <code>StartExecution</code> is called with the same name and input as a running execution, the call will succeed and return the same response as the original request. If the execution is closed or if the input is different, it will return a 400 <code>ExecutionAlreadyExists</code> error. Names can be reused after 90 days. </p> </note>'
+      description: '<p>Starts a state machine execution. If the given state machine Amazon Resource Name (ARN) is a qualified state machine ARN, it will fail with ValidationException.</p> <p>A qualified state machine ARN refers to a <i>Distributed Map state</i> defined within a state machine. For example, the qualified state machine ARN <code>arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel</code> refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in the state machine named <code>stateMachineName</code>.</p> <note> <p> <code>StartExecution</code> is idempotent for <code>STANDARD</code> workflows. For a <code>STANDARD</code> workflow, if <code>StartExecution</code> is called with the same name and input as a running execution, the call will succeed and return the same response as the original request. If the execution is closed or if the input is different, it will return a <code>400 ExecutionAlreadyExists</code> error. Names can be reused after 90 days. </p> <p> <code>StartExecution</code> is not idempotent for <code>EXPRESS</code> workflows. </p> </note>'
       responses:
         '200':
           description: Success
@@ -1058,6 +1184,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/StateMachineDeleting'
+        '487':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       requestBody:
         required: true
         content:
@@ -1083,7 +1215,7 @@ paths:
   /#X-Amz-Target=AWSStepFunctions.StartSyncExecution:
     post:
       operationId: StartSyncExecution
-      description: Starts a Synchronous Express state machine execution.
+      description: '<p>Starts a Synchronous Express state machine execution. <code>StartSyncExecution</code> is not available for <code>STANDARD</code> workflows.</p> <note> <p> <code>StartSyncExecution</code> will return a <code>200 OK</code> response, even if your execution fails, because the status code in the API response doesn''t reflect function errors. Error codes are reserved for errors that prevent your execution from running, such as permissions errors, limit errors, or issues with your state machine code and configuration. </p> </note> <note> <p>This API action isn''t logged in CloudTrail.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1172,6 +1304,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidArn'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       requestBody:
         required: true
         content:
@@ -1197,7 +1335,7 @@ paths:
   /#X-Amz-Target=AWSStepFunctions.TagResource:
     post:
       operationId: TagResource
-      description: '<p>Add a tag to a Step Functions resource.</p> <p>An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
+      description: '<p>Add a tag to a Step Functions resource.</p> <p>An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User Guide</i>, and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
       responses:
         '200':
           description: Success
@@ -1290,10 +1428,61 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSStepFunctions.UpdateMapRun:
+    post:
+      operationId: UpdateMapRun
+      description: Updates an in-progress Map Run's configuration to include changes to the settings that control maximum concurrency and Map Run failure.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateMapRunOutput'
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+        '481':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMapRunInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSStepFunctions.UpdateMapRun
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSStepFunctions.UpdateStateMachine:
     post:
       operationId: UpdateStateMachine
-      description: '<p>Updates an existing state machine by modifying its <code>definition</code>, <code>roleArn</code>, or <code>loggingConfiguration</code>. Running executions will continue to use the previous <code>definition</code> and <code>roleArn</code>. You must include at least one of <code>definition</code> or <code>roleArn</code> or you will receive a <code>MissingRequiredParameter</code> error.</p> <note> <p>All <code>StartExecution</code> calls within a few seconds will use the updated <code>definition</code> and <code>roleArn</code>. Executions started immediately after calling <code>UpdateStateMachine</code> may use the previous state machine <code>definition</code> and <code>roleArn</code>. </p> </note>'
+      description: '<p>Updates an existing state machine by modifying its <code>definition</code>, <code>roleArn</code>, or <code>loggingConfiguration</code>. Running executions will continue to use the previous <code>definition</code> and <code>roleArn</code>. You must include at least one of <code>definition</code> or <code>roleArn</code> or you will receive a <code>MissingRequiredParameter</code> error.</p> <p>If the given state machine Amazon Resource Name (ARN) is a qualified state machine ARN, it will fail with ValidationException.</p> <p>A qualified state machine ARN refers to a <i>Distributed Map state</i> defined within a state machine. For example, the qualified state machine ARN <code>arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel</code> refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in the state machine named <code>stateMachineName</code>.</p> <note> <p>All <code>StartExecution</code> calls within a few seconds will use the updated <code>definition</code> and <code>roleArn</code>. Executions started immediately after calling <code>UpdateStateMachine</code> may use the previous state machine <code>definition</code> and <code>roleArn</code>. </p> </note>'
       responses:
         '200':
           description: Success
@@ -1343,6 +1532,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/StateMachineDoesNotExist'
+        '487':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       requestBody:
         required: true
         content:
@@ -1440,11 +1635,11 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: '<p>The name of the activity to create. This name must be unique for your AWS account and region for 90 days. For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
+            - description: '<p>The name of the activity to create. This name must be unique for your Amazon Web Services account and region for 90 days. For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions"> Limits Related to State Machine Executions</a> in the <i>Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: '<p>The list of tags to add to a resource.</p> <p>An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
+            - description: '<p>The list of tags to add to a resource.</p> <p>An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User Guide</i>, and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
     ActivityLimitExceeded: {}
     InvalidName: {}
     TooManyTags: {}
@@ -1489,15 +1684,15 @@ components:
         loggingConfiguration:
           allOf:
             - $ref: '#/components/schemas/LoggingConfiguration'
-            - description: '<p>Defines what execution history events are logged and where they are logged.</p> <note> <p>By default, the <code>level</code> is set to <code>OFF</code>. For more information see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html">Log Levels</a> in the AWS Step Functions User Guide.</p> </note>'
+            - description: '<p>Defines what execution history events are logged and where they are logged.</p> <note> <p>By default, the <code>level</code> is set to <code>OFF</code>. For more information see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html">Log Levels</a> in the Step Functions User Guide.</p> </note>'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: '<p>Tags to be added when creating a state machine.</p> <p>An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
+            - description: '<p>Tags to be added when creating a state machine.</p> <p>An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User Guide</i>, and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
         tracingConfiguration:
           allOf:
             - $ref: '#/components/schemas/TracingConfiguration'
-            - description: Selects whether AWS X-Ray tracing is enabled.
+            - description: Selects whether X-Ray tracing is enabled.
     InvalidArn: {}
     InvalidDefinition: {}
     InvalidLoggingConfiguration: {}
@@ -1532,6 +1727,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the state machine to delete.
+    ValidationException: {}
     DescribeActivityOutput:
       type: object
       required:
@@ -1609,7 +1805,19 @@ components:
         traceHeader:
           allOf:
             - $ref: '#/components/schemas/TraceHeader'
-            - description: The AWS X-Ray trace header that was passed to the execution.
+            - description: The X-Ray trace header that was passed to the execution.
+        mapRunArn:
+          allOf:
+            - $ref: '#/components/schemas/LongArn'
+            - description: 'The Amazon Resource Name (ARN) that identifies a Map Run, which dispatched this execution.'
+        error:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveError'
+            - description: The error string if the state machine execution failed.
+        cause:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveCause'
+            - description: The cause string if the state machine execution failed.
     DescribeExecutionInput:
       type: object
       required:
@@ -1621,6 +1829,70 @@ components:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the execution to describe.
     ExecutionDoesNotExist: {}
+    DescribeMapRunOutput:
+      type: object
+      required:
+        - mapRunArn
+        - executionArn
+        - status
+        - startDate
+        - maxConcurrency
+        - toleratedFailurePercentage
+        - toleratedFailureCount
+        - itemCounts
+        - executionCounts
+      properties:
+        mapRunArn:
+          allOf:
+            - $ref: '#/components/schemas/LongArn'
+            - description: The Amazon Resource Name (ARN) that identifies a Map Run.
+        executionArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) that identifies the execution in which the Map Run was started.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/MapRunStatus'
+            - description: The current status of the Map Run.
+        startDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date when the Map Run was started.
+        stopDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date when the Map Run was stopped.
+        maxConcurrency:
+          allOf:
+            - $ref: '#/components/schemas/MaxConcurrency'
+            - description: The maximum number of child workflow executions configured to run in parallel for the Map Run at the same time.
+        toleratedFailurePercentage:
+          allOf:
+            - $ref: '#/components/schemas/ToleratedFailurePercentage'
+            - description: The maximum percentage of failed child workflow executions before the Map Run fails.
+        toleratedFailureCount:
+          allOf:
+            - $ref: '#/components/schemas/ToleratedFailureCount'
+            - description: The maximum number of failed child workflow executions before the Map Run fails.
+        itemCounts:
+          allOf:
+            - $ref: '#/components/schemas/MapRunItemCounts'
+            - description: 'A JSON object that contains information about the total number of items, and the item count for each processing status, such as <code>pending</code> and <code>failed</code>.'
+        executionCounts:
+          allOf:
+            - $ref: '#/components/schemas/MapRunExecutionCounts'
+            - description: 'A JSON object that contains information about the total number of child workflow executions for the Map Run, and the count of child workflow executions for each status, such as <code>failed</code> and <code>succeeded</code>.'
+    DescribeMapRunInput:
+      type: object
+      required:
+        - mapRunArn
+      title: DescribeMapRunInput
+      properties:
+        mapRunArn:
+          allOf:
+            - $ref: '#/components/schemas/LongArn'
+            - description: The Amazon Resource Name (ARN) that identifies a Map Run.
+    ResourceNotFound: {}
     DescribeStateMachineOutput:
       type: object
       required:
@@ -1650,7 +1922,7 @@ components:
         roleArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the IAM role used when creating this state machine. (The IAM role maintains security by granting Step Functions access to AWS resources.)
+            - description: The Amazon Resource Name (ARN) of the IAM role used when creating this state machine. (The IAM role maintains security by granting Step Functions access to Amazon Web Services resources.)
         type:
           allOf:
             - $ref: '#/components/schemas/StateMachineType'
@@ -1664,7 +1936,11 @@ components:
         tracingConfiguration:
           allOf:
             - $ref: '#/components/schemas/TracingConfiguration'
-            - description: Selects whether AWS X-Ray tracing is enabled.
+            - description: Selects whether X-Ray tracing is enabled.
+        label:
+          allOf:
+            - $ref: '#/components/schemas/MapRunLabel'
+            - description: A user-defined or an auto-generated string that identifies a <code>Map</code> state. This parameter is present only if the <code>stateMachineArn</code> specified in input is a qualified state machine ARN.
     DescribeStateMachineInput:
       type: object
       required:
@@ -1710,7 +1986,15 @@ components:
         tracingConfiguration:
           allOf:
             - $ref: '#/components/schemas/TracingConfiguration'
-            - description: Selects whether AWS X-Ray tracing is enabled.
+            - description: Selects whether X-Ray tracing is enabled.
+        mapRunArn:
+          allOf:
+            - $ref: '#/components/schemas/LongArn'
+            - description: The Amazon Resource Name (ARN) of the Map Run that started the child workflow execution. This field is returned only if the <code>executionArn</code> is a child workflow execution that was started by a Distributed Map state.
+        label:
+          allOf:
+            - $ref: '#/components/schemas/MapRunLabel'
+            - description: A user-defined or an auto-generated string that identifies a <code>Map</code> state. This ﬁeld is returned only if the <code>executionArn</code> is a child workflow execution that was started by a Distributed Map state.
     DescribeStateMachineForExecutionInput:
       type: object
       required:
@@ -1827,14 +2111,12 @@ components:
             - description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
     ListExecutionsInput:
       type: object
-      required:
-        - stateMachineArn
       title: ListExecutionsInput
       properties:
         stateMachineArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the state machine whose executions is listed.
+            - description: '<p>The Amazon Resource Name (ARN) of the state machine whose executions is listed.</p> <p>You can specify either a <code>mapRunArn</code> or a <code>stateMachineArn</code>, but not both.</p>'
         statusFilter:
           allOf:
             - $ref: '#/components/schemas/ExecutionStatus'
@@ -1846,6 +2128,41 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/ListExecutionsPageToken'
+            - description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
+        mapRunArn:
+          allOf:
+            - $ref: '#/components/schemas/LongArn'
+            - description: '<p>The Amazon Resource Name (ARN) of the Map Run that started the child workflow executions. If the <code>mapRunArn</code> field is specified, a list of all of the child workflow executions started by a Map Run is returned. For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html">Examining Map Run</a> in the <i>Step Functions Developer Guide</i>.</p> <p>You can specify either a <code>mapRunArn</code> or a <code>stateMachineArn</code>, but not both.</p>'
+    ListMapRunsOutput:
+      type: object
+      required:
+        - mapRuns
+      properties:
+        mapRuns:
+          allOf:
+            - $ref: '#/components/schemas/MapRunList'
+            - description: 'An array that lists information related to a Map Run, such as the Amazon Resource Name (ARN) of the Map Run and the ARN of the state machine that started the Map Run.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PageToken'
+            - description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
+    ListMapRunsInput:
+      type: object
+      required:
+        - executionArn
+      title: ListMapRunsInput
+      properties:
+        executionArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the execution for which the Map Runs must be listed.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/PageSize'
+            - description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PageToken'
             - description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
     ListStateMachinesOutput:
       type: object
@@ -1887,7 +2204,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
-    ResourceNotFound: {}
     SendTaskFailureOutput:
       type: object
       properties: {}
@@ -1970,7 +2286,7 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: '<p>The name of the execution. This name must be unique for your AWS account, region, and state machine for 90 days. For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
+            - description: '<p>The name of the execution. This name must be unique for your Amazon Web Services account, region, and state machine for 90 days. For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions"> Limits Related to State Machine Executions</a> in the <i>Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
         input:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
@@ -1978,7 +2294,7 @@ components:
         traceHeader:
           allOf:
             - $ref: '#/components/schemas/TraceHeader'
-            - description: Passes the AWS X-Ray trace header. The trace header can also be passed in the request payload.
+            - description: Passes the X-Ray trace header. The trace header can also be passed in the request payload.
     ExecutionLimitExceeded: {}
     ExecutionAlreadyExists: {}
     InvalidExecutionInput: {}
@@ -2037,7 +2353,7 @@ components:
         traceHeader:
           allOf:
             - $ref: '#/components/schemas/TraceHeader'
-            - description: The AWS X-Ray trace header that was passed to the execution.
+            - description: The X-Ray trace header that was passed to the execution.
         billingDetails:
           allOf:
             - $ref: '#/components/schemas/BillingDetails'
@@ -2063,7 +2379,7 @@ components:
         traceHeader:
           allOf:
             - $ref: '#/components/schemas/TraceHeader'
-            - description: Passes the AWS X-Ray trace header. The trace header can also be passed in the request payload.
+            - description: Passes the X-Ray trace header. The trace header can also be passed in the request payload.
     StopExecutionOutput:
       type: object
       required:
@@ -2127,6 +2443,31 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
             - description: The list of tags to remove from the resource.
+    UpdateMapRunOutput:
+      type: object
+      properties: {}
+    UpdateMapRunInput:
+      type: object
+      required:
+        - mapRunArn
+      title: UpdateMapRunInput
+      properties:
+        mapRunArn:
+          allOf:
+            - $ref: '#/components/schemas/LongArn'
+            - description: The Amazon Resource Name (ARN) of a Map Run.
+        maxConcurrency:
+          allOf:
+            - $ref: '#/components/schemas/MaxConcurrency'
+            - description: The maximum number of child workflow executions that can be specified to run in parallel for the Map Run at the same time.
+        toleratedFailurePercentage:
+          allOf:
+            - $ref: '#/components/schemas/ToleratedFailurePercentage'
+            - description: The maximum percentage of failed items before the Map Run fails.
+        toleratedFailureCount:
+          allOf:
+            - $ref: '#/components/schemas/ToleratedFailureCount'
+            - description: The maximum number of failed items before the Map Run fails.
     UpdateStateMachineOutput:
       type: object
       required:
@@ -2161,7 +2502,7 @@ components:
         tracingConfiguration:
           allOf:
             - $ref: '#/components/schemas/TracingConfiguration'
-            - description: Selects whether AWS X-Ray tracing is enabled.
+            - description: Selects whether X-Ray tracing is enabled.
     MissingRequiredParameter: {}
     SensitiveError:
       type: string
@@ -2384,8 +2725,8 @@ components:
         enabled:
           allOf:
             - $ref: '#/components/schemas/Enabled'
-            - description: 'When set to <code>true</code>, AWS X-Ray tracing is enabled.'
-      description: 'Selects whether or not the state machine''s AWS X-Ray tracing is enabled. Default is <code>false</code> '
+            - description: 'When set to <code>true</code>, X-Ray tracing is enabled.'
+      description: 'Selects whether or not the state machine''s X-Ray tracing is enabled. Default is <code>false</code> '
     ExecutionStatus:
       type: string
       enum:
@@ -2399,6 +2740,120 @@ components:
       pattern: '\p{ASCII}*'
       minLength: 0
       maxLength: 256
+    LongArn:
+      type: string
+      minLength: 1
+      maxLength: 2000
+    MapRunStatus:
+      type: string
+      enum:
+        - RUNNING
+        - SUCCEEDED
+        - FAILED
+        - ABORTED
+    MaxConcurrency:
+      type: integer
+      minimum: 0
+    ToleratedFailurePercentage:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 100
+    ToleratedFailureCount:
+      type: integer
+      minimum: 0
+    MapRunItemCounts:
+      type: object
+      required:
+        - pending
+        - running
+        - succeeded
+        - failed
+        - timedOut
+        - aborted
+        - total
+        - resultsWritten
+      properties:
+        pending:
+          allOf:
+            - $ref: '#/components/schemas/UnsignedLong'
+            - description: The total number of items to process in child workflow executions that haven't started running yet.
+        running:
+          allOf:
+            - $ref: '#/components/schemas/UnsignedLong'
+            - description: The total number of items being processed in child workflow executions that are currently in-progress.
+        succeeded:
+          allOf:
+            - $ref: '#/components/schemas/UnsignedLong'
+            - description: The total number of items processed in child workflow executions that have completed successfully.
+        failed:
+          allOf:
+            - $ref: '#/components/schemas/UnsignedLong'
+            - description: The total number of items processed in child workflow executions that have failed.
+        timedOut:
+          allOf:
+            - $ref: '#/components/schemas/UnsignedLong'
+            - description: The total number of items processed in child workflow executions that have timed out.
+        aborted:
+          allOf:
+            - $ref: '#/components/schemas/UnsignedLong'
+            - description: 'The total number of items processed in child workflow executions that were either stopped by the user or by Step Functions, because the Map Run failed.'
+        total:
+          allOf:
+            - $ref: '#/components/schemas/UnsignedLong'
+            - description: The total number of items processed in all the child workflow executions started by a Map Run.
+        resultsWritten:
+          allOf:
+            - $ref: '#/components/schemas/UnsignedLong'
+            - description: 'Returns the count of items whose results were written by <code>ResultWriter</code>. For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html">ResultWriter</a> in the <i>Step Functions Developer Guide</i>.'
+      description: Contains details about items that were processed in all of the child workflow executions that were started by a Map Run.
+    MapRunExecutionCounts:
+      type: object
+      required:
+        - pending
+        - running
+        - succeeded
+        - failed
+        - timedOut
+        - aborted
+        - total
+        - resultsWritten
+      properties:
+        pending:
+          allOf:
+            - $ref: '#/components/schemas/UnsignedLong'
+            - description: 'The total number of child workflow executions that were started by a Map Run, but haven''t started executing yet. '
+        running:
+          allOf:
+            - $ref: '#/components/schemas/UnsignedLong'
+            - description: The total number of child workflow executions that were started by a Map Run and are currently in-progress.
+        succeeded:
+          allOf:
+            - $ref: '#/components/schemas/UnsignedLong'
+            - description: The total number of child workflow executions that were started by a Map Run and have completed successfully.
+        failed:
+          allOf:
+            - $ref: '#/components/schemas/UnsignedLong'
+            - description: 'The total number of child workflow executions that were started by a Map Run, but have failed.'
+        timedOut:
+          allOf:
+            - $ref: '#/components/schemas/UnsignedLong'
+            - description: The total number of child workflow executions that were started by a Map Run and have timed out.
+        aborted:
+          allOf:
+            - $ref: '#/components/schemas/UnsignedLong'
+            - description: 'The total number of child workflow executions that were started by a Map Run and were running, but were either stopped by the user or by Step Functions because the Map Run failed. '
+        total:
+          allOf:
+            - $ref: '#/components/schemas/UnsignedLong'
+            - description: The total number of child workflow executions that were started by a Map Run.
+        resultsWritten:
+          allOf:
+            - $ref: '#/components/schemas/UnsignedLong'
+            - description: 'Returns the count of child workflow executions whose results were written by <code>ResultWriter</code>. For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html">ResultWriter</a> in the <i>Step Functions Developer Guide</i>.'
+      description: Contains details about all of the child workflow executions started by a Map Run.
+    MapRunLabel:
+      type: string
     StateMachineStatus:
       type: string
       enum:
@@ -2465,11 +2920,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: 'If the execution already ended, the date the execution stopped.'
+        mapRunArn:
+          allOf:
+            - $ref: '#/components/schemas/LongArn'
+            - description: 'The Amazon Resource Name (ARN) of a Map Run. This field is returned only if <code>mapRunArn</code> was specified in the <code>ListExecutions</code> API action. If <code>stateMachineArn</code> was specified in <code>ListExecutions</code>, the <code>mapRunArn</code> isn''t returned.'
+        itemCount:
+          allOf:
+            - $ref: '#/components/schemas/UnsignedInteger'
+            - description: 'The total number of items processed in a child workflow execution. This field is returned only if <code>mapRunArn</code> was specified in the <code>ListExecutions</code> API action. If <code>stateMachineArn</code> was specified in <code>ListExecutions</code>, the <code>itemCount</code> field isn''t returned.'
       description: Contains details about an execution.
     ExecutionList:
       type: array
       items:
         $ref: '#/components/schemas/ExecutionListItem'
+    UnsignedInteger:
+      type: integer
+      minimum: 0
     ExecutionStartedEventDetails:
       type: object
       properties:
@@ -2484,7 +2950,7 @@ components:
         roleArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the IAM role used for executing AWS Lambda tasks.
+            - description: The Amazon Resource Name (ARN) of the IAM role used for executing Lambda tasks.
       description: Contains details about the start of the execution.
     ExecutionSucceededEventDetails:
       type: object
@@ -2593,6 +3059,10 @@ components:
         - WaitStateAborted
         - WaitStateEntered
         - WaitStateExited
+        - MapRunAborted
+        - MapRunFailed
+        - MapRunStarted
+        - MapRunSucceeded
     TaskFailedEventDetails:
       type: object
       required:
@@ -2602,11 +3072,11 @@ components:
         resourceType:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The action of the resource called by a task state.
+            - description: The service name of the resource in a task state.
         resource:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The service name of the resource in a task state.
+            - description: The action of the resource called by a task state.
         error:
           allOf:
             - $ref: '#/components/schemas/SensitiveError'
@@ -2627,11 +3097,11 @@ components:
         resourceType:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The action of the resource called by a task state.
+            - description: The service name of the resource in a task state.
         resource:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The service name of the resource in a task state.
+            - description: The action of the resource called by a task state.
         region:
           allOf:
             - $ref: '#/components/schemas/Name'
@@ -2648,6 +3118,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TimeoutInSeconds'
             - description: The maximum allowed duration between two heartbeats for the task.
+        taskCredentials:
+          allOf:
+            - $ref: '#/components/schemas/TaskCredentials'
+            - description: The credentials that Step Functions uses for the task.
       description: Contains details about a task scheduled during an execution.
     TaskStartFailedEventDetails:
       type: object
@@ -2658,11 +3132,11 @@ components:
         resourceType:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The action of the resource called by a task state.
+            - description: The service name of the resource in a task state.
         resource:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The service name of the resource in a task state.
+            - description: The action of the resource called by a task state.
         error:
           allOf:
             - $ref: '#/components/schemas/SensitiveError'
@@ -2681,11 +3155,11 @@ components:
         resourceType:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The action of the resource called by a task state.
+            - description: The service name of the resource in a task state.
         resource:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The service name of the resource in a task state.
+            - description: The action of the resource called by a task state.
       description: Contains details about the start of a task during an execution.
     TaskSubmitFailedEventDetails:
       type: object
@@ -2696,11 +3170,11 @@ components:
         resourceType:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The action of the resource called by a task state.
+            - description: The service name of the resource in a task state.
         resource:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The service name of the resource in a task state.
+            - description: The action of the resource called by a task state.
         error:
           allOf:
             - $ref: '#/components/schemas/SensitiveError'
@@ -2719,11 +3193,11 @@ components:
         resourceType:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The action of the resource called by a task state.
+            - description: The service name of the resource in a task state.
         resource:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The service name of the resource in a task state.
+            - description: The action of the resource called by a task state.
         output:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
@@ -2742,11 +3216,11 @@ components:
         resourceType:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The action of the resource called by a task state.
+            - description: The service name of the resource in a task state.
         resource:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The service name of the resource in a task state.
+            - description: The action of the resource called by a task state.
         output:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
@@ -2765,11 +3239,11 @@ components:
         resourceType:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The action of the resource called by a task state.
+            - description: The service name of the resource in a task state.
         resource:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The service name of the resource in a task state.
+            - description: The action of the resource called by a task state.
         error:
           allOf:
             - $ref: '#/components/schemas/SensitiveError'
@@ -2810,7 +3284,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/SensitiveCause'
             - description: A more detailed explanation of the cause of the failure.
-      description: Contains details about a lambda function that failed during an execution.
+      description: Contains details about a Lambda function that failed during an execution.
     LambdaFunctionScheduleFailedEventDetails:
       type: object
       properties:
@@ -2822,7 +3296,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/SensitiveCause'
             - description: A more detailed explanation of the cause of the failure.
-      description: Contains details about a failed lambda function schedule event that occurred during an execution.
+      description: Contains details about a failed Lambda function schedule event that occurred during an execution.
     LambdaFunctionScheduledEventDetails:
       type: object
       required:
@@ -2831,11 +3305,11 @@ components:
         resource:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the scheduled lambda function.
+            - description: The Amazon Resource Name (ARN) of the scheduled Lambda function.
         input:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
-            - description: 'The JSON data input to the lambda function. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.'
+            - description: 'The JSON data input to the Lambda function. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.'
         inputDetails:
           allOf:
             - $ref: '#/components/schemas/HistoryEventExecutionDataDetails'
@@ -2843,8 +3317,12 @@ components:
         timeoutInSeconds:
           allOf:
             - $ref: '#/components/schemas/TimeoutInSeconds'
-            - description: The maximum allowed duration of the lambda function.
-      description: Contains details about a lambda function scheduled during an execution.
+            - description: The maximum allowed duration of the Lambda function.
+        taskCredentials:
+          allOf:
+            - $ref: '#/components/schemas/TaskCredentials'
+            - description: The credentials that Step Functions uses for the task.
+      description: Contains details about a Lambda function scheduled during an execution.
     LambdaFunctionStartFailedEventDetails:
       type: object
       properties:
@@ -2863,12 +3341,12 @@ components:
         output:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
-            - description: 'The JSON data output by the lambda function. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.'
+            - description: 'The JSON data output by the Lambda function. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.'
         outputDetails:
           allOf:
             - $ref: '#/components/schemas/HistoryEventExecutionDataDetails'
             - description: Contains details about the output of an execution history event.
-      description: Contains details about a lambda function that successfully terminated during an execution.
+      description: Contains details about a Lambda function that successfully terminated during an execution.
     LambdaFunctionTimedOutEventDetails:
       type: object
       properties:
@@ -2880,7 +3358,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/SensitiveCause'
             - description: A more detailed explanation of the cause of the timeout.
-      description: Contains details about a lambda function timeout that occurred during an execution.
+      description: Contains details about a Lambda function timeout that occurred during an execution.
     StateEnteredEventDetails:
       type: object
       required:
@@ -2917,6 +3395,26 @@ components:
             - $ref: '#/components/schemas/HistoryEventExecutionDataDetails'
             - description: Contains details about the output of an execution history event.
       description: Contains details about an exit from a state during an execution.
+    MapRunStartedEventDetails:
+      type: object
+      properties:
+        mapRunArn:
+          allOf:
+            - $ref: '#/components/schemas/LongArn'
+            - description: The Amazon Resource Name (ARN) of a Map Run that was started.
+      description: Contains details about a Map Run that was started during a state machine execution.
+    MapRunFailedEventDetails:
+      type: object
+      properties:
+        error:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveError'
+            - description: The error code of the Map Run failure.
+        cause:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveCause'
+            - description: A more detailed explanation of the cause of the failure.
+      description: Contains details about a Map Run failure event that occurred during a state machine execution.
     HistoryEvent:
       type: object
       required:
@@ -3029,22 +3527,42 @@ components:
         lambdaFunctionSucceededEventDetails:
           allOf:
             - $ref: '#/components/schemas/LambdaFunctionSucceededEventDetails'
-            - description: Contains details about a lambda function that terminated successfully during an execution.
+            - description: Contains details about a Lambda function that terminated successfully during an execution.
         lambdaFunctionTimedOutEventDetails:
           $ref: '#/components/schemas/LambdaFunctionTimedOutEventDetails'
         stateEnteredEventDetails:
           $ref: '#/components/schemas/StateEnteredEventDetails'
         stateExitedEventDetails:
           $ref: '#/components/schemas/StateExitedEventDetails'
+        mapRunStartedEventDetails:
+          allOf:
+            - $ref: '#/components/schemas/MapRunStartedEventDetails'
+            - description: 'Contains details, such as <code>mapRunArn</code>, and the start date and time of a Map Run. <code>mapRunArn</code> is the Amazon Resource Name (ARN) of the Map Run that was started.'
+        mapRunFailedEventDetails:
+          allOf:
+            - $ref: '#/components/schemas/MapRunFailedEventDetails'
+            - description: Contains error and cause details about a Map Run that failed.
       description: Contains details about the events of an execution.
     truncated:
       type: boolean
     IncludeExecutionData:
       type: boolean
+    TaskCredentials:
+      type: object
+      properties:
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/LongArn'
+            - description: The ARN of an IAM role that Step Functions assumes for the task. The role can allow cross-account access to resources.
+      description: Contains details about the credentials that Step Functions uses for a task.
     ListExecutionsPageToken:
       type: string
       minLength: 1
       maxLength: 3096
+    MapRunList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MapRunListItem'
     StateMachineList:
       type: array
       items:
@@ -3055,7 +3573,7 @@ components:
         cloudWatchLogsLogGroup:
           allOf:
             - $ref: '#/components/schemas/CloudWatchLogsLogGroup'
-            - description: 'An object describing a CloudWatch log group. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html">AWS::Logs::LogGroup</a> in the AWS CloudFormation User Guide.'
+            - description: 'An object describing a CloudWatch log group. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html">AWS::Logs::LogGroup</a> in the CloudFormation User Guide.'
       description: <p/>
     LogDestinationList:
       type: array
@@ -3068,9 +3586,38 @@ components:
         - ERROR
         - FATAL
         - 'OFF'
-    UnsignedInteger:
+    UnsignedLong:
       type: integer
       minimum: 0
+    MapRunListItem:
+      type: object
+      required:
+        - executionArn
+        - mapRunArn
+        - stateMachineArn
+        - startDate
+      properties:
+        executionArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The <code>executionArn</code> of the execution from which the Map Run was started.
+        mapRunArn:
+          allOf:
+            - $ref: '#/components/schemas/LongArn'
+            - description: The Amazon Resource Name (ARN) of the Map Run.
+        stateMachineArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the executed state machine.
+        startDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date on which the Map Run started.
+        stopDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date on which the Map Run stopped.
+      description: Contains details about a specific Map Run.
     SyncExecutionStatus:
       type: string
       enum:
@@ -3121,7 +3668,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagValue'
             - description: The value of a tag.
-      description: '<p>Tags are key-value pairs that can be associated with Step Functions state machines and activities.</p> <p>An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
+      description: '<p>Tags are key-value pairs that can be associated with Step Functions state machines and activities.</p> <p>An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User Guide</i>, and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
     TagKeyList:
       type: array
       items:

@@ -1,0 +1,1240 @@
+openapi: 3.0.0
+info:
+  version: '2022-10-19'
+  x-release: v4
+  title: Amazon Kendra Intelligent Ranking
+  description: Amazon Kendra Intelligent Ranking uses Amazon Kendra semantic search capabilities to intelligently re-rank a search service's results.
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: kendra-ranking
+  x-aws-signingName: kendra-ranking
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/kendra-ranking-2022-10-19.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/kendra-ranking/'
+servers:
+  - url: 'http://kendra-ranking.{region}.api.aws'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Kendra Ranking multi-region endpoint
+  - url: 'https://kendra-ranking.{region}.api.aws'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Kendra Ranking multi-region endpoint
+  - url: 'http://kendra-ranking.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Kendra Ranking endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://kendra-ranking.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Kendra Ranking endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /#X-Amz-Target=AWSKendraRerankingFrontendService.CreateRescoreExecutionPlan:
+    post:
+      operationId: CreateRescoreExecutionPlan
+      description: '<p>Creates a rescore execution plan. A rescore execution plan is an Amazon Kendra Intelligent Ranking resource used for provisioning the <code>Rescore</code> API. You set the number of capacity units that you require for Amazon Kendra Intelligent Ranking to rescore or re-rank a search service''s results.</p> <p>For an example of using the <code>CreateRescoreExecutionPlan</code> API, including using the Python and Java SDKs, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/search-service-rerank.html">Semantically ranking a search service''s results</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRescoreExecutionPlanResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRescoreExecutionPlanRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraRerankingFrontendService.CreateRescoreExecutionPlan
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraRerankingFrontendService.DeleteRescoreExecutionPlan:
+    post:
+      operationId: DeleteRescoreExecutionPlan
+      description: Deletes a rescore execution plan. A rescore execution plan is an Amazon Kendra Intelligent Ranking resource used for provisioning the <code>Rescore</code> API.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRescoreExecutionPlanRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraRerankingFrontendService.DeleteRescoreExecutionPlan
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraRerankingFrontendService.DescribeRescoreExecutionPlan:
+    post:
+      operationId: DescribeRescoreExecutionPlan
+      description: Gets information about a rescore execution plan. A rescore execution plan is an Amazon Kendra Intelligent Ranking resource used for provisioning the <code>Rescore</code> API.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeRescoreExecutionPlanResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeRescoreExecutionPlanRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraRerankingFrontendService.DescribeRescoreExecutionPlan
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraRerankingFrontendService.ListRescoreExecutionPlans:
+    post:
+      operationId: ListRescoreExecutionPlans
+      description: Lists your rescore execution plans. A rescore execution plan is an Amazon Kendra Intelligent Ranking resource used for provisioning the <code>Rescore</code> API.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRescoreExecutionPlansResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListRescoreExecutionPlansRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraRerankingFrontendService.ListRescoreExecutionPlans
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraRerankingFrontendService.ListTagsForResource:
+    post:
+      operationId: ListTagsForResource
+      description: Gets a list of tags associated with a specified resource. A rescore execution plan is an example of a resource that can have tags associated with it.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsForResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraRerankingFrontendService.ListTagsForResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraRerankingFrontendService.Rescore:
+    post:
+      operationId: Rescore
+      description: Rescores or re-ranks search results from a search service such as OpenSearch (self managed). You use the semantic search capabilities of Amazon Kendra Intelligent Ranking to improve the search service's results.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RescoreResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RescoreRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraRerankingFrontendService.Rescore
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraRerankingFrontendService.TagResource:
+    post:
+      operationId: TagResource
+      description: 'Adds a specified tag to a specified rescore execution plan. A rescore execution plan is an Amazon Kendra Intelligent Ranking resource used for provisioning the <code>Rescore</code> API. If the tag already exists, the existing value is replaced with the new value.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraRerankingFrontendService.TagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraRerankingFrontendService.UntagResource:
+    post:
+      operationId: UntagResource
+      description: Removes a tag from a rescore execution plan. A rescore execution plan is an Amazon Kendra Intelligent Ranking resource used for provisioning the <code>Rescore</code> operation.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UntagResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraRerankingFrontendService.UntagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraRerankingFrontendService.UpdateRescoreExecutionPlan:
+    post:
+      operationId: UpdateRescoreExecutionPlan
+      description: Updates a rescore execution plan. A rescore execution plan is an Amazon Kendra Intelligent Ranking resource used for provisioning the <code>Rescore</code> API. You can update the number of capacity units you require for Amazon Kendra Intelligent Ranking to rescore or re-rank a search service's results.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRescoreExecutionPlanRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraRerankingFrontendService.UpdateRescoreExecutionPlan
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateRescoreExecutionPlanResponse:
+      type: object
+      required:
+        - Id
+        - Arn
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/RescoreExecutionPlanId'
+            - description: The identifier of the rescore execution plan.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/RescoreExecutionPlanArn'
+            - description: The Amazon Resource Name (ARN) of the rescore execution plan.
+    CreateRescoreExecutionPlanRequest:
+      type: object
+      required:
+        - Name
+      title: CreateRescoreExecutionPlanRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RescoreExecutionPlanName'
+            - description: A name for the rescore execution plan.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description for the rescore execution plan.
+        CapacityUnits:
+          allOf:
+            - $ref: '#/components/schemas/CapacityUnitsConfiguration'
+            - description: 'You can set additional capacity units to meet the needs of your rescore execution plan. You are given a single capacity unit by default. If you want to use the default capacity, you don''t set additional capacity units. For more information on the default capacity and additional capacity units, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html">Adjusting capacity</a>.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of key-value pairs that identify or categorize your rescore execution plan. You can also use tags to help control access to the rescore execution plan. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.'
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientTokenName'
+            - description: A token that you provide to identify the request to create a rescore execution plan. Multiple calls to the <code>CreateRescoreExecutionPlanRequest</code> API with the same client token will create only one rescore execution plan.
+    AccessDeniedException: {}
+    ConflictException: {}
+    ServiceQuotaExceededException: {}
+    ThrottlingException: {}
+    ValidationException: {}
+    InternalServerException: {}
+    DeleteRescoreExecutionPlanRequest:
+      type: object
+      required:
+        - Id
+      title: DeleteRescoreExecutionPlanRequest
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/RescoreExecutionPlanId'
+            - description: The identifier of the rescore execution plan that you want to delete.
+    ResourceNotFoundException: {}
+    DescribeRescoreExecutionPlanResponse:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/RescoreExecutionPlanId'
+            - description: The identifier of the rescore execution plan.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/RescoreExecutionPlanArn'
+            - description: The Amazon Resource Name (ARN) of the rescore execution plan.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RescoreExecutionPlanName'
+            - description: The name for the rescore execution plan.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description for the rescore execution plan.
+        CapacityUnits:
+          allOf:
+            - $ref: '#/components/schemas/CapacityUnitsConfiguration'
+            - description: 'The capacity units set for the rescore execution plan. A capacity of zero indicates that the rescore execution plan is using the default capacity. For more information on the default capacity and additional capacity units, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html">Adjusting capacity</a>.'
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The Unix timestamp of when the rescore execution plan was created.
+        UpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The Unix timestamp of when the rescore execution plan was last updated.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/RescoreExecutionPlanStatus'
+            - description: 'The current status of the rescore execution plan. When the value is <code>ACTIVE</code>, the rescore execution plan is ready for use. If the <code>Status</code> field value is <code>FAILED</code>, the <code>ErrorMessage</code> field contains a message that explains why.'
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: 'When the <code>Status</code> field value is <code>FAILED</code>, the <code>ErrorMessage</code> field contains a message that explains why.'
+    DescribeRescoreExecutionPlanRequest:
+      type: object
+      required:
+        - Id
+      title: DescribeRescoreExecutionPlanRequest
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/RescoreExecutionPlanId'
+            - description: The identifier of the rescore execution plan that you want to get information on.
+    ListRescoreExecutionPlansResponse:
+      type: object
+      properties:
+        SummaryItems:
+          allOf:
+            - $ref: '#/components/schemas/RescoreExecutionPlanSummaryList'
+            - description: An array of summary information for one or more rescore execution plans.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the response is truncated, Amazon Kendra Intelligent Ranking returns a pagination token in the response.'
+    ListRescoreExecutionPlansRequest:
+      type: object
+      title: ListRescoreExecutionPlansRequest
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the response is truncated, Amazon Kendra Intelligent Ranking returns a pagination token in the response. You can use this pagination token to retrieve the next set of rescore execution plans.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsIntegerForListRescoreExecutionPlansRequest'
+            - description: The maximum number of rescore execution plans to return.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A list of tags associated with the rescore execution plan.
+      description: 'If the action is successful, the service sends back an HTTP 200 response.'
+    ListTagsForResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+      title: ListTagsForResourceRequest
+      properties:
+        ResourceARN:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The Amazon Resource Name (ARN) of the rescore execution plan to get a list of tags for.
+      description: The request information for listing tags associated with a rescore execution plan. A rescore execution plan is an Amazon Kendra Intelligent Ranking resource used for provisioning the <code>Rescore</code> API.
+    ResourceUnavailableException: {}
+    RescoreResult:
+      type: object
+      properties:
+        RescoreId:
+          allOf:
+            - $ref: '#/components/schemas/RescoreId'
+            - description: The identifier associated with the scores that Amazon Kendra Intelligent Ranking gives to the results. Amazon Kendra Intelligent Ranking rescores or re-ranks the results for the search service.
+        ResultItems:
+          allOf:
+            - $ref: '#/components/schemas/RescoreResultItemList'
+            - description: A list of result items for documents with new relevancy scores. The results are in descending order.
+    RescoreRequest:
+      type: object
+      required:
+        - RescoreExecutionPlanId
+        - SearchQuery
+        - Documents
+      title: RescoreRequest
+      properties:
+        RescoreExecutionPlanId:
+          allOf:
+            - $ref: '#/components/schemas/RescoreExecutionPlanId'
+            - description: The identifier of the rescore execution plan. A rescore execution plan is an Amazon Kendra Intelligent Ranking resource used for provisioning the <code>Rescore</code> API.
+        SearchQuery:
+          allOf:
+            - $ref: '#/components/schemas/SearchQuery'
+            - description: The input query from the search service.
+        Documents:
+          allOf:
+            - $ref: '#/components/schemas/DocumentList'
+            - description: The list of documents for Amazon Kendra Intelligent Ranking to rescore or rank on.
+    TagResourceResponse:
+      type: object
+      properties: {}
+      description: 'If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.'
+    TagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - Tags
+      title: TagResourceRequest
+      properties:
+        ResourceARN:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The Amazon Resource Name (ARN) of the rescore execution plan to tag.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tag keys to add to a rescore execution plan. If a tag already exists, the existing value is replaced with the new value.'
+      description: The request information for tagging a rescore execution plan. A rescore execution plan is an Amazon Kendra Intelligent Ranking resource used for provisioning the <code>Rescore</code> API.
+    UntagResourceResponse:
+      type: object
+      properties: {}
+      description: 'If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.'
+    UntagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - TagKeys
+      title: UntagResourceRequest
+      properties:
+        ResourceARN:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The Amazon Resource Name (ARN) of the rescore execution plan to remove the tag.
+        TagKeys:
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: 'A list of tag keys to remove from the rescore execution plan. If a tag key does not exist on the resource, it is ignored.'
+      description: The request information to remove a tag from a rescore execution plan. A rescore execution plan is an Amazon Kendra Intelligent Ranking resource used for provisioning the <code>Rescore</code> API.
+    UpdateRescoreExecutionPlanRequest:
+      type: object
+      required:
+        - Id
+      title: UpdateRescoreExecutionPlanRequest
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/RescoreExecutionPlanId'
+            - description: The identifier of the rescore execution plan that you want to update.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RescoreExecutionPlanName'
+            - description: A new name for the rescore execution plan.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A new description for the rescore execution plan.
+        CapacityUnits:
+          allOf:
+            - $ref: '#/components/schemas/CapacityUnitsConfiguration'
+            - description: 'You can set additional capacity units to meet the needs of your rescore execution plan. You are given a single capacity unit by default. If you want to use the default capacity, you don''t set additional capacity units. For more information on the default capacity and additional capacity units, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html">Adjusting capacity</a>.'
+    AmazonResourceName:
+      type: string
+      minLength: 1
+      maxLength: 1011
+    Tokens:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    BodyTokensList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tokens'
+      minItems: 1
+    RescoreCapacityUnit:
+      type: integer
+      minimum: 0
+    CapacityUnitsConfiguration:
+      type: object
+      required:
+        - RescoreCapacityUnits
+      properties:
+        RescoreCapacityUnits:
+          allOf:
+            - $ref: '#/components/schemas/RescoreCapacityUnit'
+            - description: <p>The amount of extra capacity for your rescore execution plan.</p> <p>A single extra capacity unit for a rescore execution plan provides 0.01 rescore requests per second. You can add up to 1000 extra capacity units.</p>
+      description: Sets additional capacity units configured for your rescore execution plan. A rescore execution plan is an Amazon Kendra Intelligent Ranking resource used for provisioning the <code>Rescore</code> API. You can add and remove capacity units to fit your usage requirements.
+    ClientTokenName:
+      type: string
+      pattern: '^$|[\x00-\x7F]+'
+      minLength: 1
+      maxLength: 64
+    RescoreExecutionPlanName:
+      type: string
+      pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
+      minLength: 1
+      maxLength: 1000
+    Description:
+      type: string
+      pattern: '^\P{C}*$'
+      minLength: 0
+      maxLength: 1000
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 0
+      maxItems: 200
+    RescoreExecutionPlanId:
+      type: string
+      pattern: '[a-zA-Z0-9][a-zA-Z0-9-]*'
+      minLength: 36
+      maxLength: 36
+    RescoreExecutionPlanArn:
+      type: string
+      pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+      minLength: 0
+      maxLength: 1284
+    Timestamp:
+      type: string
+      format: date-time
+    RescoreExecutionPlanStatus:
+      type: string
+      enum:
+        - CREATING
+        - UPDATING
+        - ACTIVE
+        - DELETING
+        - FAILED
+    ErrorMessage:
+      type: string
+      pattern: '^\P{C}*$'
+      minLength: 1
+      maxLength: 2048
+    DocumentId:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    GroupId:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    DocumentTitle:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    DocumentBody:
+      type: string
+      pattern: '^\P{C}*$'
+      minLength: 1
+      maxLength: 2048
+    TitleTokensList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tokens'
+      minItems: 1
+    Float:
+      type: number
+      format: float
+      minimum: -100000
+      maximum: 100000
+    Document:
+      type: object
+      required:
+        - Id
+        - OriginalScore
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/DocumentId'
+            - description: The identifier of the document from the search service.
+        GroupId:
+          allOf:
+            - $ref: '#/components/schemas/GroupId'
+            - description: The optional group identifier of the document from the search service. Documents with the same group identifier are grouped together and processed as one document within the service.
+        Title:
+          allOf:
+            - $ref: '#/components/schemas/DocumentTitle'
+            - description: The title of the search service's document.
+        Body:
+          allOf:
+            - $ref: '#/components/schemas/DocumentBody'
+            - description: The body text of the search service's document.
+        TokenizedTitle:
+          allOf:
+            - $ref: '#/components/schemas/TitleTokensList'
+            - description: The title of the search service's document represented as a list of tokens or words. You must choose to provide <code>Title</code> or <code>TokenizedTitle</code>. You cannot provide both.
+        TokenizedBody:
+          allOf:
+            - $ref: '#/components/schemas/BodyTokensList'
+            - description: The body text of the search service's document represented as a list of tokens or words. You must choose to provide <code>Body</code> or <code>TokenizedBody</code>. You cannot provide both.
+        OriginalScore:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: The original document score or rank from the search service. Amazon Kendra Intelligent Ranking gives the document a new score or rank based on its intelligent search algorithms.
+      description: Information about a document from a search service such as OpenSearch (self managed). Amazon Kendra Intelligent Ranking uses this information to rank and score on.
+    DocumentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Document'
+      minItems: 1
+    NextToken:
+      type: string
+      pattern: '^\P{C}*$'
+      minLength: 1
+      maxLength: 800
+    MaxResultsIntegerForListRescoreExecutionPlansRequest:
+      type: integer
+      minimum: 1
+      maximum: 50
+    RescoreExecutionPlanSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RescoreExecutionPlanSummary'
+    RescoreExecutionPlanSummary:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RescoreExecutionPlanName'
+            - description: The name of the rescore execution plan.
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/RescoreExecutionPlanId'
+            - description: The identifier of the rescore execution plan.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The Unix timestamp when the rescore execution plan was created.
+        UpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The Unix timestamp when the rescore execution plan was last updated.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/RescoreExecutionPlanStatus'
+            - description: 'The current status of the rescore execution plan. When the value is <code>ACTIVE</code>, the rescore execution plan is ready for use.'
+      description: Summary information for a rescore execution plan. A rescore execution plan is an Amazon Kendra Intelligent Ranking resource used for provisioning the <code>Rescore</code> API.
+    RescoreId:
+      type: string
+      pattern: '[a-zA-Z0-9][a-zA-Z0-9-]'
+      minLength: 1
+      maxLength: 36
+    SearchQuery:
+      type: string
+      minLength: 1
+      maxLength: 1000
+    RescoreResultItemList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RescoreResultItem'
+      minItems: 1
+    RescoreResultItem:
+      type: object
+      properties:
+        DocumentId:
+          allOf:
+            - $ref: '#/components/schemas/DocumentId'
+            - description: The identifier of the document from the search service.
+        Score:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: The relevancy score or rank that Amazon Kendra Intelligent Ranking gives to the result.
+      description: A result item for a document with a new relevancy score.
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The key for the tag. Keys are not case sensitive and must be unique.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The value associated with the tag. The value can be an empty string but it can't be null.
+      description: 'A key-value pair that identifies or categorizes a rescore execution plan. A rescore execution plan is an Amazon Kendra Intelligent Ranking resource used for provisioning the <code>Rescore</code> API. You can also use a tag to help control access to a rescore execution plan. A tag key and value can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.'
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 0
+      maxItems: 200
+security:
+  - hmac: []

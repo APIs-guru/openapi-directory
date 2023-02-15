@@ -1,0 +1,1344 @@
+openapi: 3.0.0
+info:
+  version: '2018-04-10'
+  x-release: v4
+  title: AWS Backup Storage
+  description: The frontend service for Cryo Storage.
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: backupstorage
+  x-aws-signingName: backup-storage
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/backupstorage-2018-04-10.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/backupstorage/'
+servers:
+  - url: 'http://backupstorage.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Backup Storage multi-region endpoint
+  - url: 'https://backupstorage.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Backup Storage multi-region endpoint
+  - url: 'http://backupstorage.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Backup Storage endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://backupstorage.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Backup Storage endpoint for China (Beijing) and China (Ningxia)
+paths:
+  '/backup-jobs/{jobId}/object/{objectName}':
+    delete:
+      operationId: DeleteObject
+      description: Delete Object from the incremental base Backup.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: ServiceInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceInternalException'
+        '482':
+          description: RetryableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetryableException'
+        '483':
+          description: IllegalArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IllegalArgumentException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: Backup job Id for the in-progress backup.
+          schema:
+            type: string
+        - name: objectName
+          in: path
+          required: true
+          description: The name of the Object.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: StartObject
+      description: Start upload containing one or many chunks.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartObjectOutput'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: ServiceInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceInternalException'
+        '482':
+          description: RetryableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetryableException'
+        '483':
+          description: IllegalArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IllegalArgumentException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: DataAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataAlreadyExistsException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '487':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: Backup job Id for the in-progress backup
+          schema:
+            type: string
+        - name: objectName
+          in: path
+          required: true
+          description: Name for the object.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ThrowOnDuplicate:
+                  description: Throw an exception if Object name is already exist.
+                  type: boolean
+  '/restore-jobs/{jobId}/chunk/{chunkToken}':
+    get:
+      operationId: GetChunk
+      description: Gets the specified object's chunk.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetChunkOutput'
+        '480':
+          description: IllegalArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IllegalArgumentException'
+        '481':
+          description: RetryableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetryableException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ServiceInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceInternalException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: KMSInvalidKeyUsageException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidKeyUsageException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: Storage job id
+          schema:
+            type: string
+        - name: chunkToken
+          in: path
+          required: true
+          description: Chunk token
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/restore-jobs/{jobId}/object/{objectToken}/metadata':
+    get:
+      operationId: GetObjectMetadata
+      description: Get metadata associated with an Object.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetObjectMetadataOutput'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: ServiceInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceInternalException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: RetryableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetryableException'
+        '484':
+          description: IllegalArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IllegalArgumentException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: KMSInvalidKeyUsageException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidKeyUsageException'
+        '487':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: Backup job id for the in-progress backup.
+          schema:
+            type: string
+        - name: objectToken
+          in: path
+          required: true
+          description: Object token.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/restore-jobs/{jobId}/chunks/{objectToken}/list':
+    get:
+      operationId: ListChunks
+      description: List chunks in a given Object
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListChunksOutput'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ServiceInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceInternalException'
+        '483':
+          description: RetryableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetryableException'
+        '484':
+          description: IllegalArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IllegalArgumentException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: Storage job id
+          schema:
+            type: string
+        - name: objectToken
+          in: path
+          required: true
+          description: Object token
+          schema:
+            type: string
+        - name: max-results
+          in: query
+          required: false
+          description: Maximum number of chunks
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: next-token
+          in: query
+          required: false
+          description: Pagination token
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/restore-jobs/{jobId}/objects/list':
+    get:
+      operationId: ListObjects
+      description: List all Objects in a given Backup.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListObjectsOutput'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: ServiceInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceInternalException'
+        '482':
+          description: RetryableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetryableException'
+        '483':
+          description: IllegalArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IllegalArgumentException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: KMSInvalidKeyUsageException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidKeyUsageException'
+        '487':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: Storage job id
+          schema:
+            type: string
+        - name: starting-object-name
+          in: query
+          required: false
+          description: 'Optional, specifies the starting Object name to list from. Ignored if NextToken is not NULL'
+          schema:
+            type: string
+        - name: starting-object-prefix
+          in: query
+          required: false
+          description: 'Optional, specifies the starting Object prefix to list from. Ignored if NextToken is not NULL'
+          schema:
+            type: string
+        - name: max-results
+          in: query
+          required: false
+          description: Maximum objects count
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: next-token
+          in: query
+          required: false
+          description: Pagination token
+          schema:
+            type: string
+        - name: created-before
+          in: query
+          required: false
+          description: (Optional) Created before filter
+          schema:
+            type: string
+            format: date-time
+        - name: created-after
+          in: query
+          required: false
+          description: (Optional) Created after filter
+          schema:
+            type: string
+            format: date-time
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/backup-jobs/{jobId}/object/{uploadId}/complete#checksum&checksum-algorithm':
+    put:
+      operationId: NotifyObjectComplete
+      description: Complete upload
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotifyObjectCompleteOutput'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: ServiceInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceInternalException'
+        '482':
+          description: NotReadableInputStreamException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotReadableInputStreamException'
+        '483':
+          description: RetryableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetryableException'
+        '484':
+          description: IllegalArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IllegalArgumentException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: KMSInvalidKeyUsageException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidKeyUsageException'
+        '487':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: Backup job Id for the in-progress backup
+          schema:
+            type: string
+        - name: uploadId
+          in: path
+          required: true
+          description: Upload Id for the in-progress upload
+          schema:
+            type: string
+        - name: checksum
+          in: query
+          required: true
+          description: Object checksum
+          schema:
+            type: string
+        - name: checksum-algorithm
+          in: query
+          required: true
+          description: Checksum algorithm
+          schema:
+            type: string
+            enum:
+              - SUMMARY
+        - name: metadata-string
+          in: query
+          required: false
+          description: Optional metadata associated with an Object. Maximum string length is 256 bytes.
+          schema:
+            type: string
+            pattern: '^.{1,256}$'
+        - name: metadata-blob-length
+          in: query
+          required: false
+          description: The size of MetadataBlob.
+          schema:
+            type: integer
+        - name: metadata-checksum
+          in: query
+          required: false
+          description: Checksum of MetadataBlob.
+          schema:
+            type: string
+        - name: metadata-checksum-algorithm
+          in: query
+          required: false
+          description: Checksum algorithm.
+          schema:
+            type: string
+            enum:
+              - SHA256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                MetadataBlob:
+                  description: Optional metadata associated with an Object. Maximum length is 4MB.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/backup-jobs/{jobId}/chunk/{uploadId}/{chunkIndex}#length&checksum&checksum-algorithm':
+    put:
+      operationId: PutChunk
+      description: Upload chunk.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutChunkOutput'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: ServiceInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceInternalException'
+        '482':
+          description: NotReadableInputStreamException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotReadableInputStreamException'
+        '483':
+          description: RetryableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetryableException'
+        '484':
+          description: IllegalArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IllegalArgumentException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: KMSInvalidKeyUsageException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidKeyUsageException'
+        '487':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: Backup job Id for the in-progress backup.
+          schema:
+            type: string
+        - name: uploadId
+          in: path
+          required: true
+          description: Upload Id for the in-progress upload.
+          schema:
+            type: string
+        - name: chunkIndex
+          in: path
+          required: true
+          description: Describes this chunk's position relative to the other chunks
+          schema:
+            type: integer
+        - name: length
+          in: query
+          required: true
+          description: Data length
+          schema:
+            type: integer
+        - name: checksum
+          in: query
+          required: true
+          description: Data checksum
+          schema:
+            type: string
+        - name: checksum-algorithm
+          in: query
+          required: true
+          description: Checksum algorithm
+          schema:
+            type: string
+            enum:
+              - SHA256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Data
+              properties:
+                Data:
+                  description: Data to be uploaded
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/backup-jobs/{jobId}/object/{objectName}/put-object':
+    put:
+      operationId: PutObject
+      description: Upload object that can store object metadata String and data blob in single API call using inline chunk field.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutObjectOutput'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: ServiceInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceInternalException'
+        '482':
+          description: NotReadableInputStreamException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotReadableInputStreamException'
+        '483':
+          description: RetryableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetryableException'
+        '484':
+          description: IllegalArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IllegalArgumentException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: KMSInvalidKeyUsageException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidKeyUsageException'
+        '487':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: Backup job Id for the in-progress backup.
+          schema:
+            type: string
+        - name: objectName
+          in: path
+          required: true
+          description: The name of the Object to be uploaded.
+          schema:
+            type: string
+        - name: metadata-string
+          in: query
+          required: false
+          description: 'Store user defined metadata like backup checksum, disk ids, restore metadata etc.'
+          schema:
+            type: string
+        - name: length
+          in: query
+          required: false
+          description: Length of the inline chunk data.
+          schema:
+            type: integer
+        - name: checksum
+          in: query
+          required: false
+          description: Inline chunk checksum
+          schema:
+            type: string
+        - name: checksum-algorithm
+          in: query
+          required: false
+          description: Inline chunk checksum algorithm
+          schema:
+            type: string
+        - name: object-checksum
+          in: query
+          required: false
+          description: object checksum
+          schema:
+            type: string
+        - name: object-checksum-algorithm
+          in: query
+          required: false
+          description: object checksum algorithm
+          schema:
+            type: string
+            enum:
+              - SUMMARY
+        - name: throwOnDuplicate
+          in: query
+          required: false
+          description: Throw an exception if Object name is already exist.
+          schema:
+            type: boolean
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                InlineChunk:
+                  description: Inline chunk data to be uploaded.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    ServiceUnavailableException: {}
+    ServiceInternalException: {}
+    RetryableException: {}
+    IllegalArgumentException: {}
+    ResourceNotFoundException: {}
+    ThrottlingException: {}
+    AccessDeniedException: {}
+    GetChunkOutput:
+      type: object
+      required:
+        - Data
+      properties:
+        Data:
+          allOf:
+            - $ref: '#/components/schemas/PayloadBlob'
+            - description: Chunk data
+    KMSInvalidKeyUsageException: {}
+    GetObjectMetadataOutput:
+      type: object
+      properties:
+        MetadataBlob:
+          allOf:
+            - $ref: '#/components/schemas/PayloadBlob'
+            - description: Metadata blob.
+    ListChunksOutput:
+      type: object
+      required:
+        - ChunkList
+      properties:
+        ChunkList:
+          allOf:
+            - $ref: '#/components/schemas/ChunkList'
+            - description: List of chunks
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: Pagination token
+    ListObjectsOutput:
+      type: object
+      required:
+        - ObjectList
+      properties:
+        ObjectList:
+          allOf:
+            - $ref: '#/components/schemas/ObjectList'
+            - description: Object list
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: Pagination token
+    NotifyObjectCompleteOutput:
+      type: object
+      required:
+        - ObjectChecksum
+        - ObjectChecksumAlgorithm
+      properties:
+        ObjectChecksum:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: Object checksum
+        ObjectChecksumAlgorithm:
+          allOf:
+            - $ref: '#/components/schemas/SummaryChecksumAlgorithm'
+            - description: Checksum algorithm
+    NotReadableInputStreamException: {}
+    PutChunkOutput:
+      type: object
+      required:
+        - ChunkChecksum
+        - ChunkChecksumAlgorithm
+      properties:
+        ChunkChecksum:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: Chunk checksum
+        ChunkChecksumAlgorithm:
+          allOf:
+            - $ref: '#/components/schemas/DataChecksumAlgorithm'
+            - description: Checksum algorithm
+    PutObjectOutput:
+      type: object
+      required:
+        - InlineChunkChecksum
+        - InlineChunkChecksumAlgorithm
+        - ObjectChecksum
+        - ObjectChecksumAlgorithm
+      properties:
+        InlineChunkChecksum:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: Inline chunk checksum
+        InlineChunkChecksumAlgorithm:
+          allOf:
+            - $ref: '#/components/schemas/DataChecksumAlgorithm'
+            - description: Inline chunk checksum algorithm
+        ObjectChecksum:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: object checksum
+        ObjectChecksumAlgorithm:
+          allOf:
+            - $ref: '#/components/schemas/SummaryChecksumAlgorithm'
+            - description: object checksum algorithm
+    StartObjectOutput:
+      type: object
+      required:
+        - UploadId
+      properties:
+        UploadId:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: Upload Id for a given upload.
+    DataAlreadyExistsException: {}
+    string:
+      type: string
+    OptionalLong:
+      type: integer
+    SummaryChecksumAlgorithm:
+      type: string
+      enum:
+        - SUMMARY
+    BackupObject:
+      type: object
+      required:
+        - Name
+        - ObjectChecksum
+        - ObjectChecksumAlgorithm
+        - ObjectToken
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: Object name
+        ChunksCount:
+          allOf:
+            - $ref: '#/components/schemas/OptionalLong'
+            - description: Number of chunks in object
+        MetadataString:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: Metadata string associated with the Object
+        ObjectChecksum:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: Object checksum
+        ObjectChecksumAlgorithm:
+          allOf:
+            - $ref: '#/components/schemas/SummaryChecksumAlgorithm'
+            - description: Checksum algorithm
+        ObjectToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: Object token
+      description: Object
+    long:
+      type: integer
+    DataChecksumAlgorithm:
+      type: string
+      enum:
+        - SHA256
+    Chunk:
+      type: object
+      required:
+        - Index
+        - Length
+        - Checksum
+        - ChecksumAlgorithm
+        - ChunkToken
+      properties:
+        Index:
+          allOf:
+            - $ref: '#/components/schemas/long'
+            - description: Chunk index
+        Length:
+          allOf:
+            - $ref: '#/components/schemas/long'
+            - description: Chunk length
+        Checksum:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: Chunk checksum
+        ChecksumAlgorithm:
+          allOf:
+            - $ref: '#/components/schemas/DataChecksumAlgorithm'
+            - description: Checksum algorithm
+        ChunkToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: Chunk token
+      description: Chunk
+    ChunkList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Chunk'
+    DeleteObjectInput:
+      type: object
+      title: DeleteObjectInput
+      properties: {}
+    GetChunkInput:
+      type: object
+      title: GetChunkInput
+      properties: {}
+    PayloadBlob:
+      type: string
+    GetObjectMetadataInput:
+      type: object
+      title: GetObjectMetadataInput
+      properties: {}
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListChunksInput:
+      type: object
+      title: ListChunksInput
+      properties: {}
+    timestamp:
+      type: string
+      format: date-time
+    ListObjectsInput:
+      type: object
+      title: ListObjectsInput
+      properties: {}
+    ObjectList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BackupObject'
+    MetadataString:
+      type: string
+      pattern: '^.{1,256}$'
+    NotifyObjectCompleteInput:
+      type: object
+      title: NotifyObjectCompleteInput
+      properties:
+        MetadataBlob:
+          allOf:
+            - $ref: '#/components/schemas/PayloadBlob'
+            - description: Optional metadata associated with an Object. Maximum length is 4MB.
+    PutChunkInput:
+      type: object
+      required:
+        - Data
+      title: PutChunkInput
+      properties:
+        Data:
+          allOf:
+            - $ref: '#/components/schemas/PayloadBlob'
+            - description: Data to be uploaded
+    boolean:
+      type: boolean
+    PutObjectInput:
+      type: object
+      title: PutObjectInput
+      properties:
+        InlineChunk:
+          allOf:
+            - $ref: '#/components/schemas/PayloadBlob'
+            - description: Inline chunk data to be uploaded.
+    StartObjectInput:
+      type: object
+      title: StartObjectInput
+      properties:
+        ThrowOnDuplicate:
+          allOf:
+            - $ref: '#/components/schemas/boolean'
+            - description: Throw an exception if Object name is already exist.
+security:
+  - hmac: []

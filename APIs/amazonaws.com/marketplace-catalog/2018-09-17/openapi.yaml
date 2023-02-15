@@ -545,10 +545,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListTagsForResource:
+    post:
+      operationId: ListTagsForResource
+      description: 'Lists all tags that have been added to a resource (either an <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities">entity</a> or <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets">change set</a>).'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceArn
+              properties:
+                ResourceArn:
+                  description: Required. The Amazon Resource Name (ARN) associated with the resource you want to list tags on.
+                  type: string
+                  pattern: '^arn:[\w+=/,.@-]+:aws-marketplace:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=,.@-]+)*$'
+                  minLength: 1
+                  maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /StartChangeSet:
     post:
       operationId: StartChangeSet
-      description: '<p>This operation allows you to request changes for your entities. Within a single ChangeSet, you cannot start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If you try to start a ChangeSet containing a change against an entity that is already locked, you will receive a <code>ResourceInUseException</code>.</p> <p>For example, you cannot start the ChangeSet described in the <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples">example</a> later in this topic, because it contains two changes to execute the same change type (<code>AddRevisions</code>) against the same entity (<code>entity-id@1)</code>.</p> <p>For more information about working with change sets, see <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets"> Working with change sets</a>.</p>'
+      description: '<p>Allows you to request changes for your entities. Within a single <code>ChangeSet</code>, you can''t start the same change type against the same entity multiple times. Additionally, when a <code>ChangeSet</code> is running, all the entities targeted by the different changes are locked until the change set has completed (either succeeded, cancelled, or failed). If you try to start a change set containing a change against an entity that is already locked, you will receive a <code>ResourceInUseException</code> error.</p> <p>For example, you can''t start the <code>ChangeSet</code> described in the <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples">example</a> later in this topic because it contains two changes to run the same change type (<code>AddRevisions</code>) against the same entity (<code>entity-id@1</code>).</p> <p>For more information about working with change sets, see <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets"> Working with change sets</a>.</p>'
       responses:
         '200':
           description: Success
@@ -631,9 +696,162 @@ paths:
                 ClientRequestToken:
                   description: A unique token to identify the request to ensure idempotency.
                   type: string
-                  pattern: '^[\w\-]+$'
+                  pattern: '^[!-~]+$'
                   minLength: 1
-                  maxLength: 36
+                  maxLength: 64
+                ChangeSetTags:
+                  description: A list of objects specifying each key name and value for the <code>ChangeSetTags</code> property.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /TagResource:
+    post:
+      operationId: TagResource
+      description: 'Tags a resource (either an <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities">entity</a> or <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets">change set</a>).'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceArn
+                - Tags
+              properties:
+                ResourceArn:
+                  description: Required. The Amazon Resource Name (ARN) associated with the resource you want to tag.
+                  type: string
+                  pattern: '^arn:[\w+=/,.@-]+:aws-marketplace:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=,.@-]+)*$'
+                  minLength: 1
+                  maxLength: 255
+                Tags:
+                  description: 'Required. A list of objects specifying each key name and value. Number of objects allowed: 1-50.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /UntagResource:
+    post:
+      operationId: UntagResource
+      description: 'Removes a tag or list of tags from a resource (either an <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities">entity</a> or <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets">change set</a>).'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceArn
+                - TagKeys
+              properties:
+                ResourceArn:
+                  description: Required. The Amazon Resource Name (ARN) associated with the resource you want to remove the tag from.
+                  type: string
+                  pattern: '^arn:[\w+=/,.@-]+:aws-marketplace:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=,.@-]+)*$'
+                  minLength: 1
+                  maxLength: 255
+                TagKeys:
+                  description: 'Required. A list of key names of tags to be removed. Number of strings allowed: 0-256.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/TagKey'
+                  minItems: 1
+                  maxItems: 50
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -764,7 +982,7 @@ components:
         EntityArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
-            - description: The ARN associated to the unique identifier for the change set referenced in this request.
+            - description: The ARN associated to the unique identifier for the entity referenced in this request.
         LastModifiedDate:
           allOf:
             - $ref: '#/components/schemas/DateTimeISO8601'
@@ -818,6 +1036,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: The value of the next token if it exists. Null if there is no more result.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: Required. The ARN associated with the resource you want to list tags on.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'Required. A list of objects specifying each key name and value. Number of objects allowed: 1-50.'
     StartChangeSetResponse:
       type: object
       properties:
@@ -844,6 +1073,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Entity'
             - description: The entity to be changed.
+        EntityTags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags associated with the change.
         Details:
           allOf:
             - $ref: '#/components/schemas/Json'
@@ -853,7 +1086,33 @@ components:
             - $ref: '#/components/schemas/ChangeName'
             - description: Optional name for the change.
       description: 'An object that contains the <code>ChangeType</code>, <code>Details</code>, and <code>Entity</code>.'
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The key associated with the tag.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The value associated with the tag.
+      description: A list of objects specifying each key name and value.
     ServiceQuotaExceededException: {}
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 1
+      maxLength: 128
     ARN:
       type: string
       pattern: '^[a-zA-Z0-9:*/-]+$'
@@ -892,6 +1151,12 @@ components:
             - $ref: '#/components/schemas/Identifier'
             - description: The identifier for the entity.
       description: 'An entity contains data that describes your product, its supported features, and how it can be used or launched by your customer. '
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 1
+      maxItems: 50
     Json:
       type: string
       pattern: '^[\s]*\{[\s\S]*\}[\s]*$'
@@ -1003,9 +1268,9 @@ components:
         $ref: '#/components/schemas/ErrorDetail'
     ClientRequestToken:
       type: string
-      pattern: '^[\w\-]+$'
+      pattern: '^[!-~]+$'
       minLength: 1
-      maxLength: 36
+      maxLength: 64
     DescribeChangeSetRequest:
       type: object
       title: DescribeChangeSetRequest
@@ -1188,6 +1453,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResultInteger'
             - description: 'Specifies the upper limit of the elements on a single page. If a value isn''t provided, the default value is 20.'
+    ResourceARN:
+      type: string
+      pattern: '^arn:[\w+=/,.@-]+:aws-marketplace:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=,.@-]+)*$'
+      minLength: 1
+      maxLength: 255
+    ListTagsForResourceRequest:
+      type: object
+      required:
+        - ResourceArn
+      title: ListTagsForResourceRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: Required. The Amazon Resource Name (ARN) associated with the resource you want to list tags on.
     RequestedChangeList:
       type: array
       items:
@@ -1217,5 +1497,50 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
             - description: A unique token to identify the request to ensure idempotency.
+        ChangeSetTags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A list of objects specifying each key name and value for the <code>ChangeSetTags</code> property.
+    TagValue:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 0
+      maxLength: 256
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 1
+      maxItems: 50
+    TagResourceRequest:
+      type: object
+      required:
+        - ResourceArn
+        - Tags
+      title: TagResourceRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: Required. The Amazon Resource Name (ARN) associated with the resource you want to tag.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'Required. A list of objects specifying each key name and value. Number of objects allowed: 1-50.'
+    UntagResourceRequest:
+      type: object
+      required:
+        - ResourceArn
+        - TagKeys
+      title: UntagResourceRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: Required. The Amazon Resource Name (ARN) associated with the resource you want to remove the tag from.
+        TagKeys:
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: 'Required. A list of key names of tags to be removed. Number of strings allowed: 0-256.'
 security:
   - hmac: []

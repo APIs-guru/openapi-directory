@@ -3,7 +3,7 @@ info:
   version: '2018-09-22'
   x-release: v4
   title: CodeArtifact
-  description: '<p> AWS CodeArtifact is a fully managed artifact repository compatible with language-native package managers and build tools such as npm, Apache Maven, and pip. You can use CodeArtifact to share packages with development teams and pull packages. Packages can be pulled from both public and CodeArtifact repositories. You can also create an upstream relationship between a CodeArtifact repository and another repository, which effectively merges their contents from the point of view of a package manager client. </p> <p> <b>AWS CodeArtifact Components</b> </p> <p>Use the information in this guide to help you work with the following CodeArtifact components:</p> <ul> <li> <p> <b>Repository</b>: A CodeArtifact repository contains a set of <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html#welcome-concepts-package-version">package versions</a>, each of which maps to a set of assets, or files. Repositories are polyglot, so a single repository can contain packages of any supported type. Each repository exposes endpoints for fetching and publishing packages using tools like the <b> <code>npm</code> </b> CLI, the Maven CLI (<b> <code>mvn</code> </b>), and <b> <code>pip</code> </b>.</p> </li> <li> <p> <b>Domain</b>: Repositories are aggregated into a higher-level entity known as a <i>domain</i>. All package assets and metadata are stored in the domain, but are consumed through repositories. A given package asset, such as a Maven JAR file, is stored once per domain, no matter how many repositories it''s present in. All of the assets and metadata in a domain are encrypted with the same customer master key (CMK) stored in AWS Key Management Service (AWS KMS).</p> <p>Each repository is a member of a single domain and can''t be moved to a different domain.</p> <p>The domain allows organizational policy to be applied across multiple repositories, such as which accounts can access repositories in the domain, and which public repositories can be used as sources of packages.</p> <p>Although an organization can have multiple domains, we recommend a single production domain that contains all published artifacts so that teams can find and share packages across their organization.</p> </li> <li> <p> <b>Package</b>: A <i>package</i> is a bundle of software and the metadata required to resolve dependencies and install the software. CodeArtifact supports <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/using-npm.html">npm</a>, <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/using-python.html">PyPI</a>, and <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/using-maven">Maven</a> package formats.</p> <p>In CodeArtifact, a package consists of:</p> <ul> <li> <p>A <i>name</i> (for example, <code>webpack</code> is the name of a popular npm package)</p> </li> <li> <p>An optional namespace (for example, <code>@types</code> in <code>@types/node</code>)</p> </li> <li> <p>A set of versions (for example, <code>1.0.0</code>, <code>1.0.1</code>, <code>1.0.2</code>, etc.)</p> </li> <li> <p> Package-level metadata (for example, npm tags)</p> </li> </ul> </li> <li> <p> <b>Package version</b>: A version of a package, such as <code>@types/node 12.6.9</code>. The version number format and semantics vary for different package formats. For example, npm package versions must conform to the <a href="https://semver.org/">Semantic Versioning specification</a>. In CodeArtifact, a package version consists of the version identifier, metadata at the package version level, and a set of assets.</p> </li> <li> <p> <b>Upstream repository</b>: One repository is <i>upstream</i> of another when the package versions in it can be accessed from the repository endpoint of the downstream repository, effectively merging the contents of the two repositories from the point of view of a client. CodeArtifact allows creating an upstream relationship between two repositories.</p> </li> <li> <p> <b>Asset</b>: An individual file stored in CodeArtifact associated with a package version, such as an npm <code>.tgz</code> file or Maven POM and JAR files.</p> </li> </ul> <p>CodeArtifact supports these operations:</p> <ul> <li> <p> <code>AssociateExternalConnection</code>: Adds an existing external connection to a repository. </p> </li> <li> <p> <code>CopyPackageVersions</code>: Copies package versions from one repository to another repository in the same domain.</p> </li> <li> <p> <code>CreateDomain</code>: Creates a domain</p> </li> <li> <p> <code>CreateRepository</code>: Creates a CodeArtifact repository in a domain. </p> </li> <li> <p> <code>DeleteDomain</code>: Deletes a domain. You cannot delete a domain that contains repositories. </p> </li> <li> <p> <code>DeleteDomainPermissionsPolicy</code>: Deletes the resource policy that is set on a domain.</p> </li> <li> <p> <code>DeletePackageVersions</code>: Deletes versions of a package. After a package has been deleted, it can be republished, but its assets and metadata cannot be restored because they have been permanently removed from storage.</p> </li> <li> <p> <code>DeleteRepository</code>: Deletes a repository. </p> </li> <li> <p> <code>DeleteRepositoryPermissionsPolicy</code>: Deletes the resource policy that is set on a repository.</p> </li> <li> <p> <code>DescribeDomain</code>: Returns a <code>DomainDescription</code> object that contains information about the requested domain.</p> </li> <li> <p> <code>DescribePackageVersion</code>: Returns a <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html">PackageVersionDescription</a> object that contains details about a package version. </p> </li> <li> <p> <code>DescribeRepository</code>: Returns a <code>RepositoryDescription</code> object that contains detailed information about the requested repository. </p> </li> <li> <p> <code>DisposePackageVersions</code>: Disposes versions of a package. A package version with the status <code>Disposed</code> cannot be restored because they have been permanently removed from storage.</p> </li> <li> <p> <code>DisassociateExternalConnection</code>: Removes an existing external connection from a repository. </p> </li> <li> <p> <code>GetAuthorizationToken</code>: Generates a temporary authorization token for accessing repositories in the domain. The token expires the authorization period has passed. The default authorization period is 12 hours and can be customized to any length with a maximum of 12 hours.</p> </li> <li> <p> <code>GetDomainPermissionsPolicy</code>: Returns the policy of a resource that is attached to the specified domain. </p> </li> <li> <p> <code>GetPackageVersionAsset</code>: Returns the contents of an asset that is in a package version. </p> </li> <li> <p> <code>GetPackageVersionReadme</code>: Gets the readme file or descriptive text for a package version.</p> </li> <li> <p> <code>GetRepositoryEndpoint</code>: Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each package format: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul> </li> <li> <p> <code>GetRepositoryPermissionsPolicy</code>: Returns the resource policy that is set on a repository. </p> </li> <li> <p> <code>ListDomains</code>: Returns a list of <code>DomainSummary</code> objects. Each returned <code>DomainSummary</code> object contains information about a domain.</p> </li> <li> <p> <code>ListPackages</code>: Lists the packages in a repository.</p> </li> <li> <p> <code>ListPackageVersionAssets</code>: Lists the assets for a given package version.</p> </li> <li> <p> <code>ListPackageVersionDependencies</code>: Returns a list of the direct dependencies for a package version. </p> </li> <li> <p> <code>ListPackageVersions</code>: Returns a list of package versions for a specified package in a repository.</p> </li> <li> <p> <code>ListRepositories</code>: Returns a list of repositories owned by the AWS account that called this method.</p> </li> <li> <p> <code>ListRepositoriesInDomain</code>: Returns a list of the repositories in a domain.</p> </li> <li> <p> <code>PutDomainPermissionsPolicy</code>: Attaches a resource policy to a domain.</p> </li> <li> <p> <code>PutRepositoryPermissionsPolicy</code>: Sets the resource policy on a repository that specifies permissions to access it. </p> </li> <li> <p> <code>UpdatePackageVersionsStatus</code>: Updates the status of one or more versions of a package.</p> </li> <li> <p> <code>UpdateRepository</code>: Updates the properties of a repository.</p> </li> </ul>'
+  description: '<p> CodeArtifact is a fully managed artifact repository compatible with language-native package managers and build tools such as npm, Apache Maven, pip, and dotnet. You can use CodeArtifact to share packages with development teams and pull packages. Packages can be pulled from both public and CodeArtifact repositories. You can also create an upstream relationship between a CodeArtifact repository and another repository, which effectively merges their contents from the point of view of a package manager client. </p> <p> <b>CodeArtifact Components</b> </p> <p>Use the information in this guide to help you work with the following CodeArtifact components:</p> <ul> <li> <p> <b>Repository</b>: A CodeArtifact repository contains a set of <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html#welcome-concepts-package-version">package versions</a>, each of which maps to a set of assets, or files. Repositories are polyglot, so a single repository can contain packages of any supported type. Each repository exposes endpoints for fetching and publishing packages using tools like the <b> <code>npm</code> </b> CLI, the Maven CLI (<b> <code>mvn</code> </b>), Python CLIs (<b> <code>pip</code> </b> and <code>twine</code>), and NuGet CLIs (<code>nuget</code> and <code>dotnet</code>).</p> </li> <li> <p> <b>Domain</b>: Repositories are aggregated into a higher-level entity known as a <i>domain</i>. All package assets and metadata are stored in the domain, but are consumed through repositories. A given package asset, such as a Maven JAR file, is stored once per domain, no matter how many repositories it''s present in. All of the assets and metadata in a domain are encrypted with the same customer master key (CMK) stored in Key Management Service (KMS).</p> <p>Each repository is a member of a single domain and can''t be moved to a different domain.</p> <p>The domain allows organizational policy to be applied across multiple repositories, such as which accounts can access repositories in the domain, and which public repositories can be used as sources of packages.</p> <p>Although an organization can have multiple domains, we recommend a single production domain that contains all published artifacts so that teams can find and share packages across their organization.</p> </li> <li> <p> <b>Package</b>: A <i>package</i> is a bundle of software and the metadata required to resolve dependencies and install the software. CodeArtifact supports <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/using-npm.html">npm</a>, <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/using-python.html">PyPI</a>, <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/using-maven">Maven</a>, and <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/using-nuget">NuGet</a> package formats.</p> <p>In CodeArtifact, a package consists of:</p> <ul> <li> <p>A <i>name</i> (for example, <code>webpack</code> is the name of a popular npm package)</p> </li> <li> <p>An optional namespace (for example, <code>@types</code> in <code>@types/node</code>)</p> </li> <li> <p>A set of versions (for example, <code>1.0.0</code>, <code>1.0.1</code>, <code>1.0.2</code>, etc.)</p> </li> <li> <p> Package-level metadata (for example, npm tags)</p> </li> </ul> </li> <li> <p> <b>Package version</b>: A version of a package, such as <code>@types/node 12.6.9</code>. The version number format and semantics vary for different package formats. For example, npm package versions must conform to the <a href="https://semver.org/">Semantic Versioning specification</a>. In CodeArtifact, a package version consists of the version identifier, metadata at the package version level, and a set of assets.</p> </li> <li> <p> <b>Upstream repository</b>: One repository is <i>upstream</i> of another when the package versions in it can be accessed from the repository endpoint of the downstream repository, effectively merging the contents of the two repositories from the point of view of a client. CodeArtifact allows creating an upstream relationship between two repositories.</p> </li> <li> <p> <b>Asset</b>: An individual file stored in CodeArtifact associated with a package version, such as an npm <code>.tgz</code> file or Maven POM and JAR files.</p> </li> </ul> <p>CodeArtifact supports these operations:</p> <ul> <li> <p> <code>AssociateExternalConnection</code>: Adds an existing external connection to a repository. </p> </li> <li> <p> <code>CopyPackageVersions</code>: Copies package versions from one repository to another repository in the same domain.</p> </li> <li> <p> <code>CreateDomain</code>: Creates a domain</p> </li> <li> <p> <code>CreateRepository</code>: Creates a CodeArtifact repository in a domain. </p> </li> <li> <p> <code>DeleteDomain</code>: Deletes a domain. You cannot delete a domain that contains repositories. </p> </li> <li> <p> <code>DeleteDomainPermissionsPolicy</code>: Deletes the resource policy that is set on a domain.</p> </li> <li> <p> <code>DeletePackageVersions</code>: Deletes versions of a package. After a package has been deleted, it can be republished, but its assets and metadata cannot be restored because they have been permanently removed from storage.</p> </li> <li> <p> <code>DeleteRepository</code>: Deletes a repository. </p> </li> <li> <p> <code>DeleteRepositoryPermissionsPolicy</code>: Deletes the resource policy that is set on a repository.</p> </li> <li> <p> <code>DescribeDomain</code>: Returns a <code>DomainDescription</code> object that contains information about the requested domain.</p> </li> <li> <p> <code>DescribePackage</code>: Returns a <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html">PackageDescription</a> object that contains details about a package. </p> </li> <li> <p> <code>DescribePackageVersion</code>: Returns a <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html">PackageVersionDescription</a> object that contains details about a package version. </p> </li> <li> <p> <code>DescribeRepository</code>: Returns a <code>RepositoryDescription</code> object that contains detailed information about the requested repository. </p> </li> <li> <p> <code>DisposePackageVersions</code>: Disposes versions of a package. A package version with the status <code>Disposed</code> cannot be restored because they have been permanently removed from storage.</p> </li> <li> <p> <code>DisassociateExternalConnection</code>: Removes an existing external connection from a repository. </p> </li> <li> <p> <code>GetAuthorizationToken</code>: Generates a temporary authorization token for accessing repositories in the domain. The token expires the authorization period has passed. The default authorization period is 12 hours and can be customized to any length with a maximum of 12 hours.</p> </li> <li> <p> <code>GetDomainPermissionsPolicy</code>: Returns the policy of a resource that is attached to the specified domain. </p> </li> <li> <p> <code>GetPackageVersionAsset</code>: Returns the contents of an asset that is in a package version. </p> </li> <li> <p> <code>GetPackageVersionReadme</code>: Gets the readme file or descriptive text for a package version.</p> </li> <li> <p> <code>GetRepositoryEndpoint</code>: Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each package format: </p> <ul> <li> <p> <code>maven</code> </p> </li> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>nuget</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> </ul> </li> <li> <p> <code>GetRepositoryPermissionsPolicy</code>: Returns the resource policy that is set on a repository. </p> </li> <li> <p> <code>ListDomains</code>: Returns a list of <code>DomainSummary</code> objects. Each returned <code>DomainSummary</code> object contains information about a domain.</p> </li> <li> <p> <code>ListPackages</code>: Lists the packages in a repository.</p> </li> <li> <p> <code>ListPackageVersionAssets</code>: Lists the assets for a given package version.</p> </li> <li> <p> <code>ListPackageVersionDependencies</code>: Returns a list of the direct dependencies for a package version. </p> </li> <li> <p> <code>ListPackageVersions</code>: Returns a list of package versions for a specified package in a repository.</p> </li> <li> <p> <code>ListRepositories</code>: Returns a list of repositories owned by the Amazon Web Services account that called this method.</p> </li> <li> <p> <code>ListRepositoriesInDomain</code>: Returns a list of the repositories in a domain.</p> </li> <li> <p> <code>PutDomainPermissionsPolicy</code>: Attaches a resource policy to a domain.</p> </li> <li> <p> <code>PutPackageOriginConfiguration</code>: Sets the package origin configuration for a package, which determine how new versions of the package can be added to a specific repository.</p> </li> <li> <p> <code>PutRepositoryPermissionsPolicy</code>: Sets the resource policy on a repository that specifies permissions to access it. </p> </li> <li> <p> <code>UpdatePackageVersionsStatus</code>: Updates the status of one or more versions of a package.</p> </li> <li> <p> <code>UpdateRepository</code>: Updates the properties of a repository.</p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -181,7 +181,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -199,10 +199,12 @@ paths:
         - name: external-connection
           in: query
           required: true
-          description: '<p> The name of the external connection to add to the repository. The following values are supported: </p> <ul> <li> <p> <code>public:npmjs</code> - for the npm public repository. </p> </li> <li> <p> <code>public:pypi</code> - for the Python Package Index. </p> </li> <li> <p> <code>public:maven-central</code> - for Maven Central. </p> </li> <li> <p> <code>public:maven-googleandroid</code> - for the Google Android repository. </p> </li> <li> <p> <code>public:maven-gradleplugins</code> - for the Gradle plugins repository. </p> </li> <li> <p> <code>public:maven-commonsware</code> - for the CommonsWare Android repository. </p> </li> </ul>'
+          description: '<p> The name of the external connection to add to the repository. The following values are supported: </p> <ul> <li> <p> <code>public:npmjs</code> - for the npm public repository. </p> </li> <li> <p> <code>public:nuget-org</code> - for the NuGet Gallery. </p> </li> <li> <p> <code>public:pypi</code> - for the Python Package Index. </p> </li> <li> <p> <code>public:maven-central</code> - for Maven Central. </p> </li> <li> <p> <code>public:maven-googleandroid</code> - for the Google Android repository. </p> </li> <li> <p> <code>public:maven-gradleplugins</code> - for the Gradle plugins repository. </p> </li> <li> <p> <code>public:maven-commonsware</code> - for the CommonsWare Android repository. </p> </li> </ul>'
           schema:
             type: string
             pattern: '[A-Za-z0-9][A-Za-z0-9._\-:]{1,99}'
+            minLength: 2
+            maxLength: 100
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -276,7 +278,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -298,6 +300,8 @@ paths:
           schema:
             type: string
             pattern: '[A-Za-z0-9][A-Za-z0-9._\-:]{1,99}'
+            minLength: 2
+            maxLength: 100
   /v1/package/versions/copy#domain&source-repository&destination-repository&format&package:
     post:
       operationId: CopyPackageVersions
@@ -364,7 +368,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -373,7 +377,7 @@ paths:
         - name: source-repository
           in: query
           required: true
-          description: ' The name of the repository that contains the package versions to copy. '
+          description: ' The name of the repository that contains the package versions to be copied. '
           schema:
             type: string
             pattern: '[A-Za-z0-9][A-Za-z0-9._\-]{1,99}'
@@ -391,7 +395,7 @@ paths:
         - name: format
           in: query
           required: true
-          description: '<p> The format of the package that is copied. The valid package types are: </p> <ul> <li> <p> <code>npm</code>: A Node Package Manager (npm) package. </p> </li> <li> <p> <code>pypi</code>: A Python Package Index (PyPI) package. </p> </li> <li> <p> <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file. </p> </li> </ul>'
+          description: ' The format of the package versions to be copied. '
           schema:
             type: string
             enum:
@@ -402,19 +406,19 @@ paths:
         - name: namespace
           in: query
           required: false
-          description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+          description: '<p>The namespace of the package versions to be copied. The package version component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package version is its <code>groupId</code>. The namespace is required when copying Maven package versions. </p> </li> <li> <p> The namespace of an npm package version is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace. </p> </li> </ul>'
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: package
           in: query
           required: true
-          description: ' The name of the package that is copied. '
+          description: ' The name of the package that contains the versions to be copied. '
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
       requestBody:
@@ -425,7 +429,7 @@ paths:
               type: object
               properties:
                 versions:
-                  description: <p> The versions of the package to copy. </p> <note> <p> You must specify <code>versions</code> or <code>versionRevisions</code>. You cannot specify both. </p> </note>
+                  description: <p> The versions of the package to be copied. </p> <note> <p> You must specify <code>versions</code> or <code>versionRevisions</code>. You cannot specify both. </p> </note>
                   type: array
                   items:
                     $ref: '#/components/schemas/PackageVersion'
@@ -452,7 +456,7 @@ paths:
   /v1/domain#domain:
     post:
       operationId: CreateDomain
-      description: '<p> Creates a domain. CodeArtifact <i>domains</i> make it easier to manage multiple repositories across an organization. You can use a domain to apply permissions across many repositories owned by different AWS accounts. An asset is stored only once in a domain, even if it''s in multiple repositories. </p> <p>Although you can have multiple domains, we recommend a single production domain that contains all published artifacts so that your development teams can find and share packages. You can use a second pre-production domain to test changes to the production domain configuration. </p>'
+      description: '<p> Creates a domain. CodeArtifact <i>domains</i> make it easier to manage multiple repositories across an organization. You can use a domain to apply permissions across many repositories owned by different Amazon Web Services accounts. An asset is stored only once in a domain, even if it''s in multiple repositories. </p> <p>Although you can have multiple domains, we recommend a single production domain that contains all published artifacts so that your development teams can find and share packages. You can use a second pre-production domain to test changes to the production domain configuration. </p>'
       responses:
         '200':
           description: Success
@@ -506,7 +510,7 @@ paths:
         - name: domain
           in: query
           required: true
-          description: ' The name of the domain to create. All domain names in an AWS Region that are in the same AWS account must be unique. The domain name is used as the prefix in DNS hostnames. Do not use sensitive information in a domain name because it is publicly discoverable. '
+          description: ' The name of the domain to create. All domain names in an Amazon Web Services Region that are in the same Amazon Web Services account must be unique. The domain name is used as the prefix in DNS hostnames. Do not use sensitive information in a domain name because it is publicly discoverable. '
           schema:
             type: string
             pattern: '[a-z][a-z0-9\-]{0,48}[a-z0-9]'
@@ -520,7 +524,7 @@ paths:
               type: object
               properties:
                 encryptionKey:
-                  description: '<p> The encryption key for the domain. This is used to encrypt content stored in a domain. An encryption key can be a key ID, a key Amazon Resource Name (ARN), a key alias, or a key alias ARN. To specify an <code>encryptionKey</code>, your IAM role must have <code>kms:DescribeKey</code> and <code>kms:CreateGrant</code> permissions on the encryption key that is used. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestSyntax">DescribeKey</a> in the <i>AWS Key Management Service API Reference</i> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html">AWS KMS API Permissions Reference</a> in the <i>AWS Key Management Service Developer Guide</i>. </p> <important> <p> CodeArtifact supports only symmetric CMKs. Do not associate an asymmetric CMK with your domain. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">Using symmetric and asymmetric keys</a> in the <i>AWS Key Management Service Developer Guide</i>. </p> </important>'
+                  description: '<p> The encryption key for the domain. This is used to encrypt content stored in a domain. An encryption key can be a key ID, a key Amazon Resource Name (ARN), a key alias, or a key alias ARN. To specify an <code>encryptionKey</code>, your IAM role must have <code>kms:DescribeKey</code> and <code>kms:CreateGrant</code> permissions on the encryption key that is used. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestSyntax">DescribeKey</a> in the <i>Key Management Service API Reference</i> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html">Key Management Service API Permissions Reference</a> in the <i>Key Management Service Developer Guide</i>. </p> <important> <p> CodeArtifact supports only symmetric CMKs. Do not associate an asymmetric CMK with your domain. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">Using symmetric and asymmetric keys</a> in the <i>Key Management Service Developer Guide</i>. </p> </important>'
                   type: string
                   pattern: \S+
                   minLength: 1
@@ -593,7 +597,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -652,7 +656,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -724,7 +728,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -749,10 +753,10 @@ paths:
                 description:
                   description: ' A description of the created repository. '
                   type: string
-                  pattern: '\P{C}+'
+                  pattern: '\P{C}*'
                   maxLength: 1000
                 upstreams:
-                  description: ' A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when AWS CodeArtifact looks for a requested package version. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html">Working with upstream repositories</a>. '
+                  description: ' A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when CodeArtifact looks for a requested package version. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html">Working with upstream repositories</a>. '
                   type: array
                   items:
                     $ref: '#/components/schemas/UpstreamRepository'
@@ -830,7 +834,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -898,7 +902,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -978,7 +982,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -1003,10 +1007,10 @@ paths:
                 description:
                   description: ' An updated repository description. '
                   type: string
-                  pattern: '\P{C}+'
+                  pattern: '\P{C}*'
                   maxLength: 1000
                 upstreams:
-                  description: ' A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when AWS CodeArtifact looks for a requested package version. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html">Working with upstream repositories</a>. '
+                  description: ' A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when CodeArtifact looks for a requested package version. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html">Working with upstream repositories</a>. '
                   type: array
                   items:
                     $ref: '#/components/schemas/UpstreamRepository'
@@ -1070,7 +1074,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -1095,7 +1099,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetDomainPermissionsPolicy
-      description: '<p> Returns the resource policy attached to the specified domain. </p> <note> <p> The policy is a resource-based policy, not an identity-based policy. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html">Identity-based policies and resource-based policies </a> in the <i>AWS Identity and Access Management User Guide</i>. </p> </note>'
+      description: '<p> Returns the resource policy attached to the specified domain. </p> <note> <p> The policy is a resource-based policy, not an identity-based policy. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html">Identity-based policies and resource-based policies </a> in the <i>IAM User Guide</i>. </p> </note>'
       responses:
         '200':
           description: Success
@@ -1146,12 +1150,339 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
             minLength: 12
             maxLength: 12
+  /v1/package#domain&repository&format&package:
+    delete:
+      operationId: DeletePackage
+      description: 'Deletes a package and all associated package versions. A deleted package cannot be restored. To delete one or more package versions, use the <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DeletePackageVersions.html">DeletePackageVersions</a> API.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletePackageResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: domain
+          in: query
+          required: true
+          description: The name of the domain that contains the package to delete.
+          schema:
+            type: string
+            pattern: '[a-z][a-z0-9\-]{0,48}[a-z0-9]'
+            minLength: 2
+            maxLength: 50
+        - name: domain-owner
+          in: query
+          required: false
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
+          schema:
+            type: string
+            pattern: '[0-9]{12}'
+            minLength: 12
+            maxLength: 12
+        - name: repository
+          in: query
+          required: true
+          description: The name of the repository that contains the package to delete.
+          schema:
+            type: string
+            pattern: '[A-Za-z0-9][A-Za-z0-9._\-]{1,99}'
+            minLength: 2
+            maxLength: 100
+        - name: format
+          in: query
+          required: true
+          description: The format of the requested package to delete.
+          schema:
+            type: string
+            enum:
+              - npm
+              - pypi
+              - maven
+              - nuget
+        - name: namespace
+          in: query
+          required: false
+          description: '<p>The namespace of the package to delete. The package component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. The namespace is required when deleting Maven package versions. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet packages do not contain corresponding components, packages of those formats do not have a namespace. </p> </li> </ul>'
+          schema:
+            type: string
+            pattern: '[^#/\s]+'
+            minLength: 1
+            maxLength: 255
+        - name: package
+          in: query
+          required: true
+          description: The name of the package to delete.
+          schema:
+            type: string
+            pattern: '[^#/\s]+'
+            minLength: 1
+            maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribePackage
+      description: ' Returns a <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html">PackageDescription</a> object that contains information about the requested package.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribePackageResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: domain
+          in: query
+          required: true
+          description: The name of the domain that contains the repository that contains the package.
+          schema:
+            type: string
+            pattern: '[a-z][a-z0-9\-]{0,48}[a-z0-9]'
+            minLength: 2
+            maxLength: 50
+        - name: domain-owner
+          in: query
+          required: false
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
+          schema:
+            type: string
+            pattern: '[0-9]{12}'
+            minLength: 12
+            maxLength: 12
+        - name: repository
+          in: query
+          required: true
+          description: 'The name of the repository that contains the requested package. '
+          schema:
+            type: string
+            pattern: '[A-Za-z0-9][A-Za-z0-9._\-]{1,99}'
+            minLength: 2
+            maxLength: 100
+        - name: format
+          in: query
+          required: true
+          description: A format that specifies the type of the requested package.
+          schema:
+            type: string
+            enum:
+              - npm
+              - pypi
+              - maven
+              - nuget
+        - name: namespace
+          in: query
+          required: false
+          description: '<p>The namespace of the requested package. The package component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. The namespace is required when requesting Maven packages. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace. </p> </li> </ul>'
+          schema:
+            type: string
+            pattern: '[^#/\s]+'
+            minLength: 1
+            maxLength: 255
+        - name: package
+          in: query
+          required: true
+          description: The name of the requested package.
+          schema:
+            type: string
+            pattern: '[^#/\s]+'
+            minLength: 1
+            maxLength: 255
+    post:
+      operationId: PutPackageOriginConfiguration
+      description: '<p>Sets the package origin configuration for a package.</p> <p>The package origin configuration determines how new versions of a package can be added to a repository. You can allow or block direct publishing of new package versions, or ingestion and retaining of new package versions from an external connection or upstream source. For more information about package origin controls and configuration, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/package-origin-controls.html">Editing package origin controls</a> in the <i>CodeArtifact User Guide</i>.</p> <p> <code>PutPackageOriginConfiguration</code> can be called on a package that doesn''t yet exist in the repository. When called on a package that does not exist, a package is created in the repository with no versions and the requested restrictions are set on the package. This can be used to preemptively block ingesting or retaining any versions from external connections or upstream repositories, or to block publishing any versions of the package into the repository before connecting any package managers or publishers to the repository.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutPackageOriginConfigurationResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: domain
+          in: query
+          required: true
+          description: The name of the domain that contains the repository that contains the package.
+          schema:
+            type: string
+            pattern: '[a-z][a-z0-9\-]{0,48}[a-z0-9]'
+            minLength: 2
+            maxLength: 50
+        - name: domain-owner
+          in: query
+          required: false
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
+          schema:
+            type: string
+            pattern: '[0-9]{12}'
+            minLength: 12
+            maxLength: 12
+        - name: repository
+          in: query
+          required: true
+          description: The name of the repository that contains the package.
+          schema:
+            type: string
+            pattern: '[A-Za-z0-9][A-Za-z0-9._\-]{1,99}'
+            minLength: 2
+            maxLength: 100
+        - name: format
+          in: query
+          required: true
+          description: A format that specifies the type of the package to be updated.
+          schema:
+            type: string
+            enum:
+              - npm
+              - pypi
+              - maven
+              - nuget
+        - name: namespace
+          in: query
+          required: false
+          description: '<p>The namespace of the package to be updated. The package component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace. </p> </li> </ul>'
+          schema:
+            type: string
+            pattern: '[^#/\s]+'
+            minLength: 1
+            maxLength: 255
+        - name: package
+          in: query
+          required: true
+          description: The name of the package to be updated.
+          schema:
+            type: string
+            pattern: '[^#/\s]+'
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - restrictions
+              properties:
+                restrictions:
+                  description: Details about the origin restrictions set on the package. The package origin restrictions determine how new versions of a package can be added to a specific repository.
+                  type: object
+                  properties:
+                    publish:
+                      allOf:
+                        - $ref: '#/components/schemas/AllowPublish'
+                        - description: The package origin configuration that determines if new versions of the package can be published directly to the repository.
+                    upstream:
+                      allOf:
+                        - $ref: '#/components/schemas/AllowUpstream'
+                        - description: The package origin configuration that determines if new versions of the package can be added to the repository from an external connection or upstream source.
   /v1/package/versions/delete#domain&repository&format&package:
     post:
       operationId: DeletePackageVersions
@@ -1212,7 +1543,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -1230,7 +1561,7 @@ paths:
         - name: format
           in: query
           required: true
-          description: '<p> The format of the package versions to delete. The valid values are: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
+          description: ' The format of the package versions to delete. '
           schema:
             type: string
             enum:
@@ -1241,10 +1572,10 @@ paths:
         - name: namespace
           in: query
           required: false
-          description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+          description: '<p>The namespace of the package versions to be deleted. The package version component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package version is its <code>groupId</code>. The namespace is required when deleting Maven package versions. </p> </li> <li> <p> The namespace of an npm package version is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace. </p> </li> </ul>'
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: package
@@ -1253,7 +1584,7 @@ paths:
           description: ' The name of the package with the versions to delete. '
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
       requestBody:
@@ -1272,7 +1603,7 @@ paths:
                     $ref: '#/components/schemas/PackageVersion'
                   maxItems: 100
                 expectedStatus:
-                  description: '<p> The expected status of the package version to delete. Valid values are: </p> <ul> <li> <p> <code>Published</code> </p> </li> <li> <p> <code>Unfinished</code> </p> </li> <li> <p> <code>Unlisted</code> </p> </li> <li> <p> <code>Archived</code> </p> </li> <li> <p> <code>Disposed</code> </p> </li> </ul>'
+                  description: ' The expected status of the package version to delete. '
                   type: string
                   enum:
                     - Published
@@ -1292,7 +1623,7 @@ paths:
   /v1/repository/permissions/policies#domain&repository:
     delete:
       operationId: DeleteRepositoryPermissionsPolicy
-      description: '<p> Deletes the resource policy that is set on a repository. After a resource policy is deleted, the permissions allowed and denied by the deleted policy are removed. The effect of deleting a resource policy might not be immediate. </p> <important> <p> Use <code>DeleteRepositoryPermissionsPolicy</code> with caution. After a policy is deleted, AWS users, roles, and accounts lose permissions to perform the repository actions granted by the deleted policy. </p> </important>'
+      description: '<p> Deletes the resource policy that is set on a repository. After a resource policy is deleted, the permissions allowed and denied by the deleted policy are removed. The effect of deleting a resource policy might not be immediate. </p> <important> <p> Use <code>DeleteRepositoryPermissionsPolicy</code> with caution. After a policy is deleted, Amazon Web Services users, roles, and accounts lose permissions to perform the repository actions granted by the deleted policy. </p> </important>'
       responses:
         '200':
           description: Success
@@ -1349,7 +1680,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -1441,7 +1772,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -1459,7 +1790,7 @@ paths:
         - name: format
           in: query
           required: true
-          description: '<p> A format that specifies the type of the requested package version. The valid values are: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
+          description: ' A format that specifies the type of the requested package version. '
           schema:
             type: string
             enum:
@@ -1470,10 +1801,10 @@ paths:
         - name: namespace
           in: query
           required: false
-          description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+          description: '<p>The namespace of the requested package version. The package version component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package version is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package version is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace. </p> </li> </ul>'
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: package
@@ -1482,7 +1813,7 @@ paths:
           description: ' The name of the requested package version. '
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: version
@@ -1491,7 +1822,7 @@ paths:
           description: ' A string that contains the package version (for example, <code>3.5.2</code>). '
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
     parameters:
@@ -1562,7 +1893,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -1580,7 +1911,7 @@ paths:
         - name: format
           in: query
           required: true
-          description: '<p> A format that specifies the type of package versions you want to dispose. The valid values are: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
+          description: ' A format that specifies the type of package versions you want to dispose. '
           schema:
             type: string
             enum:
@@ -1591,10 +1922,10 @@ paths:
         - name: namespace
           in: query
           required: false
-          description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+          description: '<p>The namespace of the package versions to be disposed. The package version component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package version is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package version is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace. </p> </li> </ul>'
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: package
@@ -1603,7 +1934,7 @@ paths:
           description: ' The name of the package with the versions you want to dispose. '
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
       requestBody:
@@ -1627,7 +1958,7 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/PackageVersionRevision'
                 expectedStatus:
-                  description: '<p> The expected status of the package version to dispose. Valid values are: </p> <ul> <li> <p> <code>Published</code> </p> </li> <li> <p> <code>Unfinished</code> </p> </li> <li> <p> <code>Unlisted</code> </p> </li> <li> <p> <code>Archived</code> </p> </li> <li> <p> <code>Disposed</code> </p> </li> </ul>'
+                  description: ' The expected status of the package version to dispose. '
                   type: string
                   enum:
                     - Published
@@ -1647,7 +1978,7 @@ paths:
   /v1/authorization-token#domain:
     post:
       operationId: GetAuthorizationToken
-      description: '<p> Generates a temporary authorization token for accessing repositories in the domain. This API requires the <code>codeartifact:GetAuthorizationToken</code> and <code>sts:GetServiceBearerToken</code> permissions. For more information about authorization tokens, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/tokens-authentication.html">AWS CodeArtifact authentication and tokens</a>. </p> <note> <p>CodeArtifact authorization tokens are valid for a period of 12 hours when created with the <code>login</code> command. You can call <code>login</code> periodically to refresh the token. When you create an authorization token with the <code>GetAuthorizationToken</code> API, you can set a custom authorization period, up to a maximum of 12 hours, with the <code>durationSeconds</code> parameter.</p> <p>The authorization period begins after <code>login</code> or <code>GetAuthorizationToken</code> is called. If <code>login</code> or <code>GetAuthorizationToken</code> is called while assuming a role, the token lifetime is independent of the maximum session duration of the role. For example, if you call <code>sts assume-role</code> and specify a session duration of 15 minutes, then generate a CodeArtifact authorization token, the token will be valid for the full authorization period even though this is longer than the 15-minute session duration.</p> <p>See <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html">Using IAM Roles</a> for more information on controlling session duration. </p> </note>'
+      description: '<p> Generates a temporary authorization token for accessing repositories in the domain. This API requires the <code>codeartifact:GetAuthorizationToken</code> and <code>sts:GetServiceBearerToken</code> permissions. For more information about authorization tokens, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/tokens-authentication.html">CodeArtifact authentication and tokens</a>. </p> <note> <p>CodeArtifact authorization tokens are valid for a period of 12 hours when created with the <code>login</code> command. You can call <code>login</code> periodically to refresh the token. When you create an authorization token with the <code>GetAuthorizationToken</code> API, you can set a custom authorization period, up to a maximum of 12 hours, with the <code>durationSeconds</code> parameter.</p> <p>The authorization period begins after <code>login</code> or <code>GetAuthorizationToken</code> is called. If <code>login</code> or <code>GetAuthorizationToken</code> is called while assuming a role, the token lifetime is independent of the maximum session duration of the role. For example, if you call <code>sts assume-role</code> and specify a session duration of 15 minutes, then generate a CodeArtifact authorization token, the token will be valid for the full authorization period even though this is longer than the 15-minute session duration.</p> <p>See <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html">Using IAM Roles</a> for more information on controlling session duration. </p> </note>'
       responses:
         '200':
           description: Success
@@ -1698,7 +2029,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -1780,7 +2111,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -1798,7 +2129,7 @@ paths:
         - name: format
           in: query
           required: true
-          description: '<p> A format that specifies the type of the package version with the requested asset file. The valid values are: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
+          description: ' A format that specifies the type of the package version with the requested asset file. '
           schema:
             type: string
             enum:
@@ -1809,10 +2140,10 @@ paths:
         - name: namespace
           in: query
           required: false
-          description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+          description: '<p>The namespace of the package version with the requested asset file. The package version component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package version is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package version is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace. </p> </li> </ul>'
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: package
@@ -1821,7 +2152,7 @@ paths:
           description: ' The name of the package that contains the requested asset. '
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: version
@@ -1830,7 +2161,7 @@ paths:
           description: ' A string that contains the package version (for example, <code>3.5.2</code>). '
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: asset
@@ -1862,7 +2193,7 @@ paths:
   /v1/package/version/readme#domain&repository&format&package&version:
     get:
       operationId: GetPackageVersionReadme
-      description: '<p> Gets the readme file or descriptive text for a package version. For packages that do not contain a readme file, CodeArtifact extracts a description from a metadata file. For example, from the <code>&lt;description&gt;</code> element in the <code>pom.xml</code> file of a Maven package. </p> <p> The returned text might contain formatting. For example, it might contain formatting for Markdown or reStructuredText. </p>'
+      description: '<p> Gets the readme file or descriptive text for a package version. </p> <p> The returned text might contain formatting. For example, it might contain formatting for Markdown or reStructuredText. </p>'
       responses:
         '200':
           description: Success
@@ -1913,7 +2244,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -1931,7 +2262,7 @@ paths:
         - name: format
           in: query
           required: true
-          description: '<p> A format that specifies the type of the package version with the requested readme file. The valid values are: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
+          description: '<p> A format that specifies the type of the package version with the requested readme file. </p> <note> <p>Although <code>maven</code> is listed as a valid value, CodeArtifact does not support displaying readme files for Maven packages.</p> </note>'
           schema:
             type: string
             enum:
@@ -1942,10 +2273,10 @@ paths:
         - name: namespace
           in: query
           required: false
-          description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+          description: '<p>The namespace of the package version with the requested readme file. The package version component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package version is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package version is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace. </p> </li> </ul>'
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: package
@@ -1954,7 +2285,7 @@ paths:
           description: ' The name of the package version that contains the requested readme file. '
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: version
@@ -1963,7 +2294,7 @@ paths:
           description: ' A string that contains the package version (for example, <code>3.5.2</code>). '
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
     parameters:
@@ -1977,7 +2308,7 @@ paths:
   /v1/repository/endpoint#domain&repository&format:
     get:
       operationId: GetRepositoryEndpoint
-      description: '<p> Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each package format: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
+      description: '<p> Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each package format: </p> <ul> <li> <p> <code>maven</code> </p> </li> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>nuget</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -2028,7 +2359,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain that contains the repository. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain that contains the repository. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -2046,7 +2377,7 @@ paths:
         - name: format
           in: query
           required: true
-          description: '<p> Returns which endpoint of a repository to return. A repository has one endpoint for each package format: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
+          description: ' Returns which endpoint of a repository to return. A repository has one endpoint for each package format. '
           schema:
             type: string
             enum:
@@ -2116,7 +2447,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -2204,7 +2535,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -2237,12 +2568,13 @@ paths:
                 policyDocument:
                   description: ' A valid displayable JSON Aspen policy string to be set as the access control resource policy on the provided repository. '
                   type: string
+                  pattern: '[\P{C}\s]+'
                   minLength: 1
-                  maxLength: 5120
+                  maxLength: 7168
   /v1/domains:
     post:
       operationId: ListDomains
-      description: ' Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html">DomainSummary</a> objects for all domains owned by the AWS account that makes this call. Each returned <code>DomainSummary</code> object contains information about a domain. '
+      description: ' Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html">DomainSummary</a> objects for all domains owned by the Amazon Web Services account that makes this call. Each returned <code>DomainSummary</code> object contains information about a domain. '
       responses:
         '200':
           description: Success
@@ -2367,7 +2699,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -2376,7 +2708,7 @@ paths:
         - name: repository
           in: query
           required: true
-          description: ' The name of the repository that contains the package that contains the returned package version assets. '
+          description: ' The name of the repository that contains the package that contains the requested package version assets. '
           schema:
             type: string
             pattern: '[A-Za-z0-9][A-Za-z0-9._\-]{1,99}'
@@ -2385,7 +2717,7 @@ paths:
         - name: format
           in: query
           required: true
-          description: '<p> The format of the package that contains the returned package version assets. The valid package types are: </p> <ul> <li> <p> <code>npm</code>: A Node Package Manager (npm) package. </p> </li> <li> <p> <code>pypi</code>: A Python Package Index (PyPI) package. </p> </li> <li> <p> <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file. </p> </li> </ul>'
+          description: ' The format of the package that contains the requested package version assets. '
           schema:
             type: string
             enum:
@@ -2396,19 +2728,19 @@ paths:
         - name: namespace
           in: query
           required: false
-          description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+          description: '<p>The namespace of the package version that contains the requested package version assets. The package version component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package version is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package version is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace. </p> </li> </ul>'
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: package
           in: query
           required: true
-          description: ' The name of the package that contains the returned package version assets. '
+          description: ' The name of the package that contains the requested package version assets. '
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: version
@@ -2417,7 +2749,7 @@ paths:
           description: ' A string that contains the package version (for example, <code>3.5.2</code>). '
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: max-results
@@ -2511,7 +2843,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -2529,7 +2861,7 @@ paths:
         - name: format
           in: query
           required: true
-          description: '<p> The format of the package with the requested dependencies. The valid package types are: </p> <ul> <li> <p> <code>npm</code>: A Node Package Manager (npm) package. </p> </li> <li> <p> <code>pypi</code>: A Python Package Index (PyPI) package. </p> </li> <li> <p> <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file. </p> </li> </ul>'
+          description: ' The format of the package with the requested dependencies. '
           schema:
             type: string
             enum:
@@ -2540,10 +2872,10 @@ paths:
         - name: namespace
           in: query
           required: false
-          description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+          description: '<p>The namespace of the package version with the requested dependencies. The package version component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package version is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package version is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace. </p> </li> </ul>'
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: package
@@ -2552,7 +2884,7 @@ paths:
           description: ' The name of the package versions'' package. '
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: version
@@ -2561,7 +2893,7 @@ paths:
           description: ' A string that contains the package version (for example, <code>3.5.2</code>). '
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: next-token
@@ -2584,7 +2916,7 @@ paths:
   /v1/package/versions#domain&repository&format&package:
     post:
       operationId: ListPackageVersions
-      description: ' Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html">PackageVersionSummary</a> objects for package versions in a repository that match the request parameters. '
+      description: ' Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html">PackageVersionSummary</a> objects for package versions in a repository that match the request parameters. Package versions of all statuses will be returned by default when calling <code>list-package-versions</code> with no <code>--status</code> parameter. '
       responses:
         '200':
           description: Success
@@ -2626,7 +2958,7 @@ paths:
         - name: domain
           in: query
           required: true
-          description: ' The name of the domain that contains the repository that contains the returned package versions. '
+          description: ' The name of the domain that contains the repository that contains the requested package versions. '
           schema:
             type: string
             pattern: '[a-z][a-z0-9\-]{0,48}[a-z0-9]'
@@ -2635,7 +2967,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -2644,7 +2976,7 @@ paths:
         - name: repository
           in: query
           required: true
-          description: ' The name of the repository that contains the package. '
+          description: ' The name of the repository that contains the requested package versions. '
           schema:
             type: string
             pattern: '[A-Za-z0-9][A-Za-z0-9._\-]{1,99}'
@@ -2653,7 +2985,7 @@ paths:
         - name: format
           in: query
           required: true
-          description: '<p> The format of the returned packages. The valid package types are: </p> <ul> <li> <p> <code>npm</code>: A Node Package Manager (npm) package. </p> </li> <li> <p> <code>pypi</code>: A Python Package Index (PyPI) package. </p> </li> <li> <p> <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file. </p> </li> </ul>'
+          description: ' The format of the returned package versions. '
           schema:
             type: string
             enum:
@@ -2664,25 +2996,25 @@ paths:
         - name: namespace
           in: query
           required: false
-          description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+          description: '<p>The namespace of the package that contains the requested package versions. The package component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace. </p> </li> </ul>'
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: package
           in: query
           required: true
-          description: ' The name of the package for which you want to return a list of package versions. '
+          description: ' The name of the package for which you want to request package versions. '
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: status
           in: query
           required: false
-          description: '<p> A string that specifies the status of the package versions to include in the returned list. It can be one of the following: </p> <ul> <li> <p> <code>Published</code> </p> </li> <li> <p> <code>Unfinished</code> </p> </li> <li> <p> <code>Unlisted</code> </p> </li> <li> <p> <code>Archived</code> </p> </li> <li> <p> <code>Disposed</code> </p> </li> </ul>'
+          description: ' A string that filters the requested package versions by status. '
           schema:
             type: string
             enum:
@@ -2695,7 +3027,7 @@ paths:
         - name: sortBy
           in: query
           required: false
-          description: ' How to sort the returned list of package versions. '
+          description: ' How to sort the requested list of package versions. '
           schema:
             type: string
             enum:
@@ -2717,6 +3049,16 @@ paths:
             pattern: \S+
             minLength: 1
             maxLength: 2000
+        - name: originType
+          in: query
+          required: false
+          description: The <code>originType</code> used to filter package versions. Only package versions with the provided <code>originType</code> will be returned.
+          schema:
+            type: string
+            enum:
+              - INTERNAL
+              - EXTERNAL
+              - UNKNOWN
         - name: maxResults
           in: query
           schema:
@@ -2782,7 +3124,7 @@ paths:
         - name: domain
           in: query
           required: true
-          description: ' The name of the domain that contains the repository that contains the requested list of packages. '
+          description: ' The name of the domain that contains the repository that contains the requested packages. '
           schema:
             type: string
             pattern: '[a-z][a-z0-9\-]{0,48}[a-z0-9]'
@@ -2791,7 +3133,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -2800,7 +3142,7 @@ paths:
         - name: repository
           in: query
           required: true
-          description: ' The name of the repository from which packages are to be listed. '
+          description: ' The name of the repository that contains the requested packages. '
           schema:
             type: string
             pattern: '[A-Za-z0-9][A-Za-z0-9._\-]{1,99}'
@@ -2809,7 +3151,7 @@ paths:
         - name: format
           in: query
           required: false
-          description: '<p> The format of the packages. The valid package types are: </p> <ul> <li> <p> <code>npm</code>: A Node Package Manager (npm) package. </p> </li> <li> <p> <code>pypi</code>: A Python Package Index (PyPI) package. </p> </li> <li> <p> <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file. </p> </li> </ul>'
+          description: The format used to filter requested packages. Only packages from the provided format will be returned.
           schema:
             type: string
             enum:
@@ -2820,19 +3162,19 @@ paths:
         - name: namespace
           in: query
           required: false
-          description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+          description: '<p>The namespace used to filter requested packages. Only packages with the provided namespace will be returned. The package component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace. </p> </li> </ul>'
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: package-prefix
           in: query
           required: false
-          description: ' A prefix used to filter returned packages. Only packages with names that start with <code>packagePrefix</code> are returned. '
+          description: ' A prefix used to filter requested packages. Only packages with names that start with <code>packagePrefix</code> are returned. '
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: max-results
@@ -2852,6 +3194,24 @@ paths:
             pattern: \S+
             minLength: 1
             maxLength: 2000
+        - name: publish
+          in: query
+          required: false
+          description: 'The value of the <code>Publish</code> package origin control restriction used to filter requested packages. Only packages with the provided restriction are returned. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html">PackageOriginRestrictions</a>.'
+          schema:
+            type: string
+            enum:
+              - ALLOW
+              - BLOCK
+        - name: upstream
+          in: query
+          required: false
+          description: 'The value of the <code>Upstream</code> package origin control restriction used to filter requested packages. Only packages with the provided restriction are returned. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html">PackageOriginRestrictions</a>.'
+          schema:
+            type: string
+            enum:
+              - ALLOW
+              - BLOCK
         - name: maxResults
           in: query
           schema:
@@ -2875,7 +3235,7 @@ paths:
   /v1/repositories:
     post:
       operationId: ListRepositories
-      description: ' Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html">RepositorySummary</a> objects. Each <code>RepositorySummary</code> contains information about a repository in the specified AWS account and that matches the input parameters. '
+      description: ' Returns a list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html">RepositorySummary</a> objects. Each <code>RepositorySummary</code> contains information about a repository in the specified Amazon Web Services account and that matches the input parameters. '
       responses:
         '200':
           description: Success
@@ -3008,7 +3368,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -3017,7 +3377,7 @@ paths:
         - name: administrator-account
           in: query
           required: false
-          description: ' Filter the list of repositories to only include those that are managed by the AWS account ID. '
+          description: ' Filter the list of repositories to only include those that are managed by the Amazon Web Services account ID. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -3072,7 +3432,7 @@ paths:
   /v1/tags#resourceArn:
     post:
       operationId: ListTagsForResource
-      description: Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeArtifact.
+      description: Gets information about Amazon Web Services tags for a specified Amazon Resource Name (ARN) in CodeArtifact.
       responses:
         '200':
           description: Success
@@ -3193,7 +3553,7 @@ paths:
                   minLength: 2
                   maxLength: 50
                 domainOwner:
-                  description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+                  description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
                   type: string
                   pattern: '[0-9]{12}'
                   minLength: 12
@@ -3207,8 +3567,9 @@ paths:
                 policyDocument:
                   description: ' A valid displayable JSON Aspen policy string to be set as the access control resource policy on the provided domain. '
                   type: string
+                  pattern: '[\P{C}\s]+'
                   minLength: 1
-                  maxLength: 5120
+                  maxLength: 7168
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3220,7 +3581,7 @@ paths:
   /v1/tag#resourceArn:
     post:
       operationId: TagResource
-      description: Adds or updates tags for a resource in AWS CodeArtifact.
+      description: Adds or updates tags for a resource in CodeArtifact.
       responses:
         '200':
           description: Success
@@ -3295,7 +3656,7 @@ paths:
   /v1/untag#resourceArn:
     post:
       operationId: UntagResource
-      description: Removes tags from a resource in AWS CodeArtifact.
+      description: Removes tags from a resource in CodeArtifact.
       responses:
         '200':
           description: Success
@@ -3364,7 +3725,7 @@ paths:
   /v1/package/versions/update_status#domain&repository&format&package:
     post:
       operationId: UpdatePackageVersionsStatus
-      description: ' Updates the status of one or more versions of a package. '
+      description: ' Updates the status of one or more versions of a package. Using <code>UpdatePackageVersionsStatus</code>, you can update the status of package versions to <code>Archived</code>, <code>Published</code>, or <code>Unlisted</code>. To set the status of a package version to <code>Disposed</code>, use <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DisposePackageVersions.html">DisposePackageVersions</a>. '
       responses:
         '200':
           description: Success
@@ -3421,7 +3782,7 @@ paths:
         - name: domain-owner
           in: query
           required: false
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
           schema:
             type: string
             pattern: '[0-9]{12}'
@@ -3439,7 +3800,7 @@ paths:
         - name: format
           in: query
           required: true
-          description: '<p> A format that specifies the type of the package with the statuses to update. The valid values are: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
+          description: ' A format that specifies the type of the package with the statuses to update. '
           schema:
             type: string
             enum:
@@ -3450,10 +3811,10 @@ paths:
         - name: namespace
           in: query
           required: false
-          description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+          description: '<p>The namespace of the package version to be updated. The package version component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package version is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package version is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace. </p> </li> </ul>'
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
         - name: package
@@ -3462,7 +3823,7 @@ paths:
           description: ' The name of the package with the version statuses to update. '
           schema:
             type: string
-            pattern: '[^!#/\s]+'
+            pattern: '[^#/\s]+'
             minLength: 1
             maxLength: 255
       requestBody:
@@ -3593,7 +3954,7 @@ components:
             - description: '<p> A map of package versions that failed to copy and their error codes. The possible error codes are in the <code>PackageVersionError</code> data type. They are: </p> <ul> <li> <p> <code>ALREADY_EXISTS</code> </p> </li> <li> <p> <code>MISMATCHED_REVISION</code> </p> </li> <li> <p> <code>MISMATCHED_STATUS</code> </p> </li> <li> <p> <code>NOT_ALLOWED</code> </p> </li> <li> <p> <code>NOT_FOUND</code> </p> </li> <li> <p> <code>SKIPPED</code> </p> </li> </ul>'
     PackageVersion:
       type: string
-      pattern: '[^!#/\s]+'
+      pattern: '[^#/\s]+'
       minLength: 1
       maxLength: 255
     PackageVersionRevision:
@@ -3622,7 +3983,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagValue'
             - description: The tag value.
-      description: 'A tag is a key-value pair that can be used to manage, search for, or filter resources in AWS CodeArtifact.'
+      description: 'A tag is a key-value pair that can be used to manage, search for, or filter resources in CodeArtifact.'
     CreateRepositoryResult:
       type: object
       properties:
@@ -3654,13 +4015,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourcePolicy'
             - description: ' Information about the deleted resource policy after processing the request. '
+    DeletePackageResult:
+      type: object
+      properties:
+        deletedPackage:
+          $ref: '#/components/schemas/PackageSummary'
     DeletePackageVersionsResult:
       type: object
       properties:
         successfulVersions:
           allOf:
             - $ref: '#/components/schemas/SuccessfulPackageVersionInfoMap'
-            - description: ' A list of the package versions that were successfully deleted. '
+            - description: ' A list of the package versions that were successfully deleted. The status of every successful version will be <code>Deleted</code>. '
         failedVersions:
           allOf:
             - $ref: '#/components/schemas/PackageVersionErrorMap'
@@ -3684,6 +4050,15 @@ components:
       properties:
         domain:
           $ref: '#/components/schemas/DomainDescription'
+    DescribePackageResult:
+      type: object
+      required:
+        - package
+      properties:
+        package:
+          allOf:
+            - $ref: '#/components/schemas/PackageDescription'
+            - description: 'A <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html">PackageDescription</a> object that contains information about the requested package.'
     DescribePackageVersionResult:
       type: object
       required:
@@ -3749,11 +4124,11 @@ components:
         format:
           allOf:
             - $ref: '#/components/schemas/PackageFormat'
-            - description: '<p> The format of the package with the requested readme file. Valid format types are: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
+            - description: ' The format of the package with the requested readme file. '
         namespace:
           allOf:
             - $ref: '#/components/schemas/PackageNamespace'
-            - description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+            - description: '<p>The namespace of the package version with the requested readme file. The package version component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package version is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package version is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace. </p> </li> </ul>'
         package:
           allOf:
             - $ref: '#/components/schemas/PackageName'
@@ -3801,19 +4176,19 @@ components:
         format:
           allOf:
             - $ref: '#/components/schemas/PackageFormat'
-            - description: ' The format of the package that contains the returned package version assets. '
+            - description: ' The format of the package that contains the requested package version assets. '
         namespace:
           allOf:
             - $ref: '#/components/schemas/PackageNamespace'
-            - description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+            - description: '<p>The namespace of the package version that contains the requested package version assets. The package version component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package version is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package version is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace. </p> </li> </ul>'
         package:
           allOf:
             - $ref: '#/components/schemas/PackageName'
-            - description: ' The name of the package that contains the returned package version assets. '
+            - description: ' The name of the package that contains the requested package version assets. '
         version:
           allOf:
             - $ref: '#/components/schemas/PackageVersion'
-            - description: ' The version of the package associated with the returned assets. '
+            - description: ' The version of the package associated with the requested assets. '
         versionRevision:
           allOf:
             - $ref: '#/components/schemas/PackageVersionRevision'
@@ -3832,11 +4207,11 @@ components:
         format:
           allOf:
             - $ref: '#/components/schemas/PackageFormat'
-            - description: '<p> A format that specifies the type of the package that contains the returned dependencies. The valid values are: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
+            - description: ' A format that specifies the type of the package that contains the returned dependencies. '
         namespace:
           allOf:
             - $ref: '#/components/schemas/PackageNamespace'
-            - description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+            - description: '<p>The namespace of the package version that contains the returned dependencies. The package version component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package version is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package version is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace. </p> </li> </ul>'
         package:
           allOf:
             - $ref: '#/components/schemas/PackageName'
@@ -3867,11 +4242,11 @@ components:
         format:
           allOf:
             - $ref: '#/components/schemas/PackageFormat'
-            - description: '<p> A format of the package. Valid package format values are: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
+            - description: ' A format of the package. '
         namespace:
           allOf:
             - $ref: '#/components/schemas/PackageNamespace'
-            - description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+            - description: '<p>The namespace of the package that contains the requested package versions. The package component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace. </p> </li> </ul>'
         package:
           allOf:
             - $ref: '#/components/schemas/PackageName'
@@ -3931,6 +4306,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourcePolicy'
             - description: ' The resource policy that was set after processing the request. '
+    PutPackageOriginConfigurationResult:
+      type: object
+      properties:
+        originConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/PackageOriginConfiguration'
+            - description: 'A <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginConfiguration.html">PackageOriginConfiguration</a> object that describes the origin configuration set for the package. It contains a <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html">PackageOriginRestrictions</a> object that describes how new versions of the package can be introduced to the repository.'
+    AllowPublish:
+      type: string
+      enum:
+        - ALLOW
+        - BLOCK
+    AllowUpstream:
+      type: string
+      enum:
+        - ALLOW
+        - BLOCK
     PutRepositoryPermissionsPolicyResult:
       type: object
       properties:
@@ -3946,6 +4338,7 @@ components:
       properties: {}
     TagKey:
       type: string
+      pattern: '\P{C}+'
       minLength: 1
       maxLength: 128
     UpdatePackageVersionsStatusResult:
@@ -4029,6 +4422,8 @@ components:
     ExternalConnectionName:
       type: string
       pattern: '[A-Za-z0-9][A-Za-z0-9._\-:]{1,99}'
+      minLength: 2
+      maxLength: 100
     AssociateExternalConnectionRequest:
       type: object
       title: AssociateExternalConnectionRequest
@@ -4043,7 +4438,7 @@ components:
         administratorAccount:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: ' The 12-digit account number of the AWS account that manages the repository. '
+            - description: ' The 12-digit account number of the Amazon Web Services account that manages the repository. '
         domainName:
           allOf:
             - $ref: '#/components/schemas/DomainName'
@@ -4051,7 +4446,7 @@ components:
         domainOwner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: ' The 12-digit account number of the AWS account that owns the domain that contains the repository. It does not include dashes or spaces. '
+            - description: ' The 12-digit account number of the Amazon Web Services account that owns the domain that contains the repository. It does not include dashes or spaces. '
         arn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -4063,12 +4458,12 @@ components:
         upstreams:
           allOf:
             - $ref: '#/components/schemas/UpstreamRepositoryInfoList'
-            - description: ' A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when AWS CodeArtifact looks for a requested package version. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html">Working with upstream repositories</a>. '
+            - description: ' A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when CodeArtifact looks for a requested package version. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html">Working with upstream repositories</a>. '
         externalConnections:
           allOf:
             - $ref: '#/components/schemas/RepositoryExternalConnectionInfoList'
             - description: ' An array of external connections associated with the repository. '
-      description: ' The details of a repository stored in AWS CodeArtifact. A CodeArtifact repository contains a set of package versions, each of which maps to a set of assets. Repositories are polyglot—a single repository can contain packages of any supported type. Each repository exposes endpoints for fetching and publishing packages using tools like the <code>npm</code> CLI, the Maven CLI (<code>mvn</code>), and <code>pip</code>. You can create up to 100 repositories per AWS account. '
+      description: ' The details of a repository stored in CodeArtifact. A CodeArtifact repository contains a set of package versions, each of which maps to a set of assets. Repositories are polyglot—a single repository can contain packages of any supported type. Each repository exposes endpoints for fetching and publishing packages using tools like the <code>npm</code> CLI, the Maven CLI (<code>mvn</code>), and <code>pip</code>. You can create up to 100 repositories per Amazon Web Services account. '
     AuthorizationTokenDurationSeconds:
       type: integer
       minimum: 0
@@ -4084,12 +4479,12 @@ components:
         - nuget
     PackageNamespace:
       type: string
-      pattern: '[^!#/\s]+'
+      pattern: '[^#/\s]+'
       minLength: 1
       maxLength: 255
     PackageName:
       type: string
-      pattern: '[^!#/\s]+'
+      pattern: '[^#/\s]+'
       minLength: 1
       maxLength: 255
     PackageVersionList:
@@ -4108,7 +4503,7 @@ components:
         versions:
           allOf:
             - $ref: '#/components/schemas/PackageVersionList'
-            - description: <p> The versions of the package to copy. </p> <note> <p> You must specify <code>versions</code> or <code>versionRevisions</code>. You cannot specify both. </p> </note>
+            - description: <p> The versions of the package to be copied. </p> <note> <p> You must specify <code>versions</code> or <code>versionRevisions</code>. You cannot specify both. </p> </note>
         versionRevisions:
           allOf:
             - $ref: '#/components/schemas/PackageVersionRevisionMap'
@@ -4142,7 +4537,7 @@ components:
         encryptionKey:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: '<p> The encryption key for the domain. This is used to encrypt content stored in a domain. An encryption key can be a key ID, a key Amazon Resource Name (ARN), a key alias, or a key alias ARN. To specify an <code>encryptionKey</code>, your IAM role must have <code>kms:DescribeKey</code> and <code>kms:CreateGrant</code> permissions on the encryption key that is used. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestSyntax">DescribeKey</a> in the <i>AWS Key Management Service API Reference</i> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html">AWS KMS API Permissions Reference</a> in the <i>AWS Key Management Service Developer Guide</i>. </p> <important> <p> CodeArtifact supports only symmetric CMKs. Do not associate an asymmetric CMK with your domain. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">Using symmetric and asymmetric keys</a> in the <i>AWS Key Management Service Developer Guide</i>. </p> </important>'
+            - description: '<p> The encryption key for the domain. This is used to encrypt content stored in a domain. An encryption key can be a key ID, a key Amazon Resource Name (ARN), a key alias, or a key alias ARN. To specify an <code>encryptionKey</code>, your IAM role must have <code>kms:DescribeKey</code> and <code>kms:CreateGrant</code> permissions on the encryption key that is used. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestSyntax">DescribeKey</a> in the <i>Key Management Service API Reference</i> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html">Key Management Service API Permissions Reference</a> in the <i>Key Management Service Developer Guide</i>. </p> <important> <p> CodeArtifact supports only symmetric CMKs. Do not associate an asymmetric CMK with your domain. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">Using symmetric and asymmetric keys</a> in the <i>Key Management Service Developer Guide</i>. </p> </important>'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -4157,7 +4552,7 @@ components:
         owner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: ' The AWS account ID that owns the domain. '
+            - description: ' The Amazon Web Services account ID that owns the domain. '
         arn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -4165,7 +4560,7 @@ components:
         status:
           allOf:
             - $ref: '#/components/schemas/DomainStatus'
-            - description: <p> The current status of a domain. The valid values are </p> <ul> <li> <p> <code>Active</code> </p> </li> <li> <p> <code>Deleted</code> </p> </li> </ul>
+            - description: ' The current status of a domain. '
         createdTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -4173,7 +4568,7 @@ components:
         encryptionKey:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: ' The ARN of an AWS Key Management Service (AWS KMS) key associated with a domain. '
+            - description: ' The ARN of an Key Management Service (KMS) key associated with a domain. '
         repositoryCount:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -4189,7 +4584,7 @@ components:
       description: ' Information about a domain. A domain is a container for repositories. When you create a domain, it is empty until you add one or more repositories. '
     Description:
       type: string
-      pattern: '\P{C}+'
+      pattern: '\P{C}*'
       maxLength: 1000
     UpstreamRepositoryList:
       type: array
@@ -4206,7 +4601,7 @@ components:
         upstreams:
           allOf:
             - $ref: '#/components/schemas/UpstreamRepositoryList'
-            - description: ' A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when AWS CodeArtifact looks for a requested package version. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html">Working with upstream repositories</a>. '
+            - description: ' A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when CodeArtifact looks for a requested package version. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html">Working with upstream repositories</a>. '
         tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -4235,11 +4630,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/PolicyDocument'
             - description: ' The resource policy formatted in JSON. '
-      description: ' An AWS CodeArtifact resource policy that contains a resource ARN, document details, and a revision. '
+      description: ' An CodeArtifact resource policy that contains a resource ARN, document details, and a revision. '
     DeleteDomainRequest:
       type: object
       title: DeleteDomainRequest
       properties: {}
+    DeletePackageRequest:
+      type: object
+      title: DeletePackageRequest
+      properties: {}
+    PackageSummary:
+      type: object
+      properties:
+        format:
+          allOf:
+            - $ref: '#/components/schemas/PackageFormat'
+            - description: ' The format of the package. '
+        namespace:
+          allOf:
+            - $ref: '#/components/schemas/PackageNamespace'
+            - description: '<p>The namespace of the package. The package component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace. </p> </li> </ul>'
+        package:
+          allOf:
+            - $ref: '#/components/schemas/PackageName'
+            - description: ' The name of the package. '
+        originConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/PackageOriginConfiguration'
+            - description: 'A <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginConfiguration.html">PackageOriginConfiguration</a> object that contains a <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html">PackageOriginRestrictions</a> object that contains information about the upstream and publish package origin restrictions.'
+      description: ' Details about a package, including its format, namespace, and name. '
     PackageVersionStatus:
       type: string
       enum:
@@ -4262,7 +4681,7 @@ components:
         expectedStatus:
           allOf:
             - $ref: '#/components/schemas/PackageVersionStatus'
-            - description: '<p> The expected status of the package version to delete. Valid values are: </p> <ul> <li> <p> <code>Published</code> </p> </li> <li> <p> <code>Unfinished</code> </p> </li> <li> <p> <code>Unlisted</code> </p> </li> <li> <p> <code>Archived</code> </p> </li> <li> <p> <code>Disposed</code> </p> </li> </ul>'
+            - description: ' The expected status of the package version to delete. '
     DeleteRepositoryPermissionsPolicyRequest:
       type: object
       title: DeleteRepositoryPermissionsPolicyRequest
@@ -4275,6 +4694,30 @@ components:
       type: object
       title: DescribeDomainRequest
       properties: {}
+    DescribePackageRequest:
+      type: object
+      title: DescribePackageRequest
+      properties: {}
+    PackageDescription:
+      type: object
+      properties:
+        format:
+          allOf:
+            - $ref: '#/components/schemas/PackageFormat'
+            - description: A format that specifies the type of the package.
+        namespace:
+          allOf:
+            - $ref: '#/components/schemas/PackageNamespace'
+            - description: '<p>The namespace of the package. The package component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace. </p> </li> </ul>'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/PackageName'
+            - description: The name of the package.
+        originConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/PackageOriginConfiguration'
+            - description: The package origin configuration for the package.
+      description: Details about a package.
     DescribePackageVersionRequest:
       type: object
       title: DescribePackageVersionRequest
@@ -4285,11 +4728,11 @@ components:
         format:
           allOf:
             - $ref: '#/components/schemas/PackageFormat'
-            - description: '<p> The format of the package version. The valid package formats are: </p> <ul> <li> <p> <code>npm</code>: A Node Package Manager (npm) package. </p> </li> <li> <p> <code>pypi</code>: A Python Package Index (PyPI) package. </p> </li> <li> <p> <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file. </p> </li> </ul>'
+            - description: ' The format of the package version. '
         namespace:
           allOf:
             - $ref: '#/components/schemas/PackageNamespace'
-            - description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+            - description: '<p>The namespace of the package version. The package version component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package version is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package version is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace. </p> </li> </ul>'
         packageName:
           allOf:
             - $ref: '#/components/schemas/PackageName'
@@ -4329,7 +4772,11 @@ components:
         status:
           allOf:
             - $ref: '#/components/schemas/PackageVersionStatus'
-            - description: '<p> A string that contains the status of the package version. It can be one of the following: </p> <ul> <li> <p> <code>Published</code> </p> </li> <li> <p> <code>Unfinished</code> </p> </li> <li> <p> <code>Unlisted</code> </p> </li> <li> <p> <code>Archived</code> </p> </li> <li> <p> <code>Disposed</code> </p> </li> </ul>'
+            - description: ' A string that contains the status of the package version. '
+        origin:
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionOrigin'
+            - description: 'A <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionOrigin.html">PackageVersionOrigin</a> object that contains information about how the package version was added to the repository.'
       description: ' Details about a package version. '
     DescribeRepositoryRequest:
       type: object
@@ -4356,7 +4803,7 @@ components:
         expectedStatus:
           allOf:
             - $ref: '#/components/schemas/PackageVersionStatus'
-            - description: '<p> The expected status of the package version to dispose. Valid values are: </p> <ul> <li> <p> <code>Published</code> </p> </li> <li> <p> <code>Unfinished</code> </p> </li> <li> <p> <code>Unlisted</code> </p> </li> <li> <p> <code>Archived</code> </p> </li> <li> <p> <code>Disposed</code> </p> </li> </ul>'
+            - description: ' The expected status of the package version to dispose. '
     DomainStatus:
       type: string
       enum:
@@ -4369,6 +4816,18 @@ components:
       type: integer
     Long:
       type: integer
+    DomainEntryPoint:
+      type: object
+      properties:
+        repositoryName:
+          allOf:
+            - $ref: '#/components/schemas/RepositoryName'
+            - description: The name of the repository that a package was originally published to.
+        externalConnectionName:
+          allOf:
+            - $ref: '#/components/schemas/ExternalConnectionName'
+            - description: The name of the external connection that a package was ingested from.
+      description: 'Information about how a package originally entered the CodeArtifact domain. For packages published directly to CodeArtifact, the entry point is the repository it was published to. For packages ingested from an external repository, the entry point is the external connection that it was ingested from. An external connection is a CodeArtifact repository that is connected to an external repository such as the npm registry or NuGet gallery.'
     DomainSummary:
       type: object
       properties:
@@ -4379,7 +4838,7 @@ components:
         owner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+            - description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
         arn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -4387,7 +4846,7 @@ components:
         status:
           allOf:
             - $ref: '#/components/schemas/DomainStatus'
-            - description: '<p> A string that contains the status of the domain. The valid values are: </p> <ul> <li> <p> <code>Active</code> </p> </li> <li> <p> <code>Deleted</code> </p> </li> </ul>'
+            - description: ' A string that contains the status of the domain. '
         createdTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -4501,6 +4960,12 @@ components:
       type: string
       enum:
         - PUBLISHED_TIME
+    PackageVersionOriginType:
+      type: string
+      enum:
+        - INTERNAL
+        - EXTERNAL
+        - UNKNOWN
     ListPackageVersionsRequest:
       type: object
       title: ListPackageVersionsRequest
@@ -4551,7 +5016,7 @@ components:
         namespace:
           allOf:
             - $ref: '#/components/schemas/PackageNamespace'
-            - description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+            - description: '<p>The namespace of the package that this package depends on. The package component that specifies its namespace depends on its type. For example:</p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace. </p> </li> </ul>'
         package:
           allOf:
             - $ref: '#/components/schemas/PackageName'
@@ -4565,26 +5030,45 @@ components:
             - $ref: '#/components/schemas/String'
             - description: ' The required version, or version range, of the package that this package depends on. The version format is specific to the package type. For example, the following are possible valid required versions: <code>1.2.3</code>, <code>^2.3.4</code>, or <code>4.x</code>. '
       description: ' Details about a package dependency. '
-    PackageSummary:
+    PackageOriginConfiguration:
       type: object
       properties:
-        format:
+        restrictions:
           allOf:
-            - $ref: '#/components/schemas/PackageFormat'
-            - description: '<p> The format of the package. Valid values are: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
-        namespace:
+            - $ref: '#/components/schemas/PackageOriginRestrictions'
+            - description: A <code>PackageOriginRestrictions</code> object that contains information about the upstream and publish package origin configuration for the package.
+      description: Details about the package origin configuration of a package.
+    PackageOriginRestrictions:
+      type: object
+      required:
+        - publish
+        - upstream
+      properties:
+        publish:
           allOf:
-            - $ref: '#/components/schemas/PackageNamespace'
-            - description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
-        package:
+            - $ref: '#/components/schemas/AllowPublish'
+            - description: The package origin configuration that determines if new versions of the package can be published directly to the repository.
+        upstream:
           allOf:
-            - $ref: '#/components/schemas/PackageName'
-            - description: ' The name of the package. '
-      description: ' Details about a package, including its format, namespace, and name. The <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackages.html">ListPackages</a> operation returns a list of <code>PackageSummary</code> objects. '
+            - $ref: '#/components/schemas/AllowUpstream'
+            - description: The package origin configuration that determines if new versions of the package can be added to the repository from an external connection or upstream source.
+      description: Details about the origin restrictions set on the package. The package origin restrictions determine how new versions of a package can be added to a specific repository.
     String255:
       type: string
       minLength: 1
       maxLength: 255
+    PackageVersionOrigin:
+      type: object
+      properties:
+        domainEntryPoint:
+          allOf:
+            - $ref: '#/components/schemas/DomainEntryPoint'
+            - description: 'A <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainEntryPoint.html">DomainEntryPoint</a> object that contains information about from which repository or external connection the package version was added to the domain.'
+        originType:
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionOriginType'
+            - description: Describes how the package version was originally added to the domain. An <code>INTERNAL</code> origin type means the package version was published directly to a repository in the domain. An <code>EXTERNAL</code> origin type means the package version was ingested from an external connection.
+      description: Information about how a package version was added to a repository.
     PackageVersionErrorCode:
       type: string
       enum:
@@ -4605,7 +5089,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ErrorMessage'
             - description: ' The error message associated with the error. '
-      description: ' An error associated with package. '
+      description: 'l An error associated with package. '
     PackageVersionSummary:
       type: object
       required:
@@ -4623,12 +5107,17 @@ components:
         status:
           allOf:
             - $ref: '#/components/schemas/PackageVersionStatus'
-            - description: '<p> A string that contains the status of the package version. It can be one of the following: </p> <ul> <li> <p> <code>Published</code> </p> </li> <li> <p> <code>Unfinished</code> </p> </li> <li> <p> <code>Unlisted</code> </p> </li> <li> <p> <code>Archived</code> </p> </li> <li> <p> <code>Disposed</code> </p> </li> </ul>'
+            - description: ' A string that contains the status of the package version. It can be one of the following: '
+        origin:
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionOrigin'
+            - description: 'A <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionOrigin.html">PackageVersionOrigin</a> object that contains information about how the package version was added to the repository.'
       description: ' Details about a package version, including its status, version, and revision. The <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html">ListPackageVersions</a> operation returns a list of <code>PackageVersionSummary</code> objects. '
     PolicyDocument:
       type: string
+      pattern: '[\P{C}\s]+'
       minLength: 1
-      maxLength: 5120
+      maxLength: 7168
     PutDomainPermissionsPolicyRequest:
       type: object
       required:
@@ -4643,7 +5132,7 @@ components:
         domainOwner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+            - description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
         policyRevision:
           allOf:
             - $ref: '#/components/schemas/PolicyRevision'
@@ -4652,6 +5141,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/PolicyDocument'
             - description: ' A valid displayable JSON Aspen policy string to be set as the access control resource policy on the provided domain. '
+    PutPackageOriginConfigurationRequest:
+      type: object
+      required:
+        - restrictions
+      title: PutPackageOriginConfigurationRequest
+      properties:
+        restrictions:
+          allOf:
+            - $ref: '#/components/schemas/PackageOriginRestrictions'
+            - description: '<p>A <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html">PackageOriginRestrictions</a> object that contains information about the <code>upstream</code> and <code>publish</code> package origin restrictions. The <code>upstream</code> restriction determines if new package versions can be ingested or retained from external connections or upstream repositories. The <code>publish</code> restriction determines if new package versions can be published directly to the repository.</p> <p>You must include both the desired <code>upstream</code> and <code>publish</code> restrictions.</p>'
     PutRepositoryPermissionsPolicyRequest:
       type: object
       required:
@@ -4684,7 +5183,7 @@ components:
         packageFormat:
           allOf:
             - $ref: '#/components/schemas/PackageFormat'
-            - description: '<p> The package format associated with a repository''s external connection. The valid package formats are: </p> <ul> <li> <p> <code>npm</code>: A Node Package Manager (npm) package. </p> </li> <li> <p> <code>pypi</code>: A Python Package Index (PyPI) package. </p> </li> <li> <p> <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file. </p> </li> </ul>'
+            - description: '<p> The package format associated with a repository''s external connection. The valid package formats are: </p> <ul> <li> <p> <code>npm</code>: A Node Package Manager (npm) package. </p> </li> <li> <p> <code>pypi</code>: A Python Package Index (PyPI) package. </p> </li> <li> <p> <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file. </p> </li> <li> <p> <code>nuget</code>: A NuGet package. </p> </li> </ul>'
         status:
           allOf:
             - $ref: '#/components/schemas/ExternalConnectionStatus'
@@ -4700,7 +5199,7 @@ components:
         administratorAccount:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: ' The AWS account ID that manages the repository. '
+            - description: ' The Amazon Web Services account ID that manages the repository. '
         domainName:
           allOf:
             - $ref: '#/components/schemas/DomainName'
@@ -4708,7 +5207,7 @@ components:
         domainOwner:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+            - description: ' The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include dashes or spaces. '
         arn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -4728,10 +5227,11 @@ components:
         status:
           allOf:
             - $ref: '#/components/schemas/PackageVersionStatus'
-            - description: '<p> The status of a package version. Valid statuses are: </p> <ul> <li> <p> <code>Published</code> </p> </li> <li> <p> <code>Unfinished</code> </p> </li> <li> <p> <code>Unlisted</code> </p> </li> <li> <p> <code>Archived</code> </p> </li> <li> <p> <code>Disposed</code> </p> </li> </ul>'
+            - description: ' The status of a package version. '
       description: ' Contains the revision and status of a package version. '
     TagValue:
       type: string
+      pattern: '\P{C}*'
       minLength: 0
       maxLength: 256
     TagKeyList:
@@ -4794,7 +5294,7 @@ components:
         upstreams:
           allOf:
             - $ref: '#/components/schemas/UpstreamRepositoryList'
-            - description: ' A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when AWS CodeArtifact looks for a requested package version. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html">Working with upstream repositories</a>. '
+            - description: ' A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when CodeArtifact looks for a requested package version. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html">Working with upstream repositories</a>. '
     UpstreamRepositoryInfo:
       type: object
       properties:

@@ -268,6 +268,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.BatchGetRepositoryScanningConfiguration:
+    post:
+      operationId: BatchGetRepositoryScanningConfiguration
+      description: Gets the scanning configuration for one or more repositories.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetRepositoryScanningConfigurationResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGetRepositoryScanningConfigurationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonEC2ContainerRegistry_V20150921.BatchGetRepositoryScanningConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.CompleteLayerUpload:
     post:
       operationId: CompleteLayerUpload
@@ -347,6 +404,75 @@ paths:
             type: string
             enum:
               - AmazonEC2ContainerRegistry_V20150921.CompleteLayerUpload
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.CreatePullThroughCacheRule:
+    post:
+      operationId: CreatePullThroughCacheRule
+      description: Creates a pull through cache rule. A pull through cache rule provides a way to cache images from an external public registry in your Amazon ECR private registry.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePullThroughCacheRuleResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: PullThroughCacheRuleAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PullThroughCacheRuleAlreadyExistsException'
+        '484':
+          description: UnsupportedUpstreamRegistryException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUpstreamRegistryException'
+        '485':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePullThroughCacheRuleRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonEC2ContainerRegistry_V20150921.CreatePullThroughCacheRule
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -487,6 +613,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DeletePullThroughCacheRule:
+    post:
+      operationId: DeletePullThroughCacheRule
+      description: Deletes a pull through cache rule.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletePullThroughCacheRuleResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: PullThroughCacheRuleNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PullThroughCacheRuleNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletePullThroughCacheRuleRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonEC2ContainerRegistry_V20150921.DeletePullThroughCacheRule
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DeleteRegistryPolicy:
     post:
       operationId: DeleteRegistryPolicy
@@ -516,6 +699,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RegistryPolicyNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       requestBody:
         required: true
         content:
@@ -658,6 +847,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DescribeImageReplicationStatus:
+    post:
+      operationId: DescribeImageReplicationStatus
+      description: Returns the replication status for a specified image.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeImageReplicationStatusResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ImageNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageNotFoundException'
+        '483':
+          description: RepositoryNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotFoundException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeImageReplicationStatusRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonEC2ContainerRegistry_V20150921.DescribeImageReplicationStatus
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DescribeImageScanFindings:
     post:
       operationId: DescribeImageScanFindings
@@ -699,6 +951,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ScanNotFoundException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       requestBody:
         required: true
         content:
@@ -794,6 +1052,75 @@ paths:
             type: string
             enum:
               - AmazonEC2ContainerRegistry_V20150921.DescribeImages
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DescribePullThroughCacheRules:
+    post:
+      operationId: DescribePullThroughCacheRules
+      description: Returns the pull through cache rules for a registry.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribePullThroughCacheRulesResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: PullThroughCacheRuleNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PullThroughCacheRuleNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribePullThroughCacheRulesRequest'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonEC2ContainerRegistry_V20150921.DescribePullThroughCacheRules
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1179,6 +1506,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RegistryPolicyNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       requestBody:
         required: true
         content:
@@ -1193,6 +1526,57 @@ paths:
             type: string
             enum:
               - AmazonEC2ContainerRegistry_V20150921.GetRegistryPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.GetRegistryScanningConfiguration:
+    post:
+      operationId: GetRegistryScanningConfiguration
+      description: Retrieves the scanning configuration for a registry.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRegistryScanningConfigurationResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRegistryScanningConfigurationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonEC2ContainerRegistry_V20150921.GetRegistryScanningConfiguration
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1525,7 +1909,7 @@ paths:
   /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.PutImageScanningConfiguration:
     post:
       operationId: PutImageScanningConfiguration
-      description: Updates the image scanning configuration for the specified repository.
+      description: '<important> <p>The <code>PutImageScanningConfiguration</code> API is being deprecated, in favor of specifying the image scanning configuration at the registry level. For more information, see <a>PutRegistryScanningConfiguration</a>.</p> </important> <p>Updates the image scanning configuration for the specified repository.</p>'
       responses:
         '200':
           description: Success
@@ -1551,6 +1935,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RepositoryNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       requestBody:
         required: true
         content:
@@ -1698,6 +2088,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       requestBody:
         required: true
         content:
@@ -1712,6 +2108,57 @@ paths:
             type: string
             enum:
               - AmazonEC2ContainerRegistry_V20150921.PutRegistryPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.PutRegistryScanningConfiguration:
+    post:
+      operationId: PutRegistryScanningConfiguration
+      description: Creates or updates the scanning configuration for your private registry.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutRegistryScanningConfigurationResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutRegistryScanningConfigurationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonEC2ContainerRegistry_V20150921.PutRegistryScanningConfiguration
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1869,6 +2316,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ImageNotFoundException'
+        '486':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       requestBody:
         required: true
         content:
@@ -2324,6 +2777,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/MediaTypeList'
             - description: '<p>The accepted media types for the request.</p> <p>Valid values: <code>application/vnd.docker.distribution.manifest.v1+json</code> | <code>application/vnd.docker.distribution.manifest.v2+json</code> | <code>application/vnd.oci.image.manifest.v1+json</code> </p>'
+    BatchGetRepositoryScanningConfigurationResponse:
+      type: object
+      properties:
+        scanningConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/RepositoryScanningConfigurationList'
+            - description: The scanning configuration for the requested repositories.
+        failures:
+          allOf:
+            - $ref: '#/components/schemas/RepositoryScanningConfigurationFailureList'
+            - description: Any failures associated with the call.
+    BatchGetRepositoryScanningConfigurationRequest:
+      type: object
+      required:
+        - repositoryNames
+      title: BatchGetRepositoryScanningConfigurationRequest
+      properties:
+        repositoryNames:
+          allOf:
+            - $ref: '#/components/schemas/ScanningConfigurationRepositoryNameList'
+            - description: One or more repository names to get the scanning configuration for.
+    ValidationException: {}
     CompleteLayerUploadResponse:
       type: object
       properties:
@@ -2373,6 +2848,47 @@ components:
     LayerAlreadyExistsException: {}
     EmptyUploadException: {}
     KmsException: {}
+    CreatePullThroughCacheRuleResponse:
+      type: object
+      properties:
+        ecrRepositoryPrefix:
+          allOf:
+            - $ref: '#/components/schemas/PullThroughCacheRuleRepositoryPrefix'
+            - description: The Amazon ECR repository prefix associated with the pull through cache rule.
+        upstreamRegistryUrl:
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: The upstream registry URL associated with the pull through cache rule.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/CreationTimestamp'
+            - description: 'The date and time, in JavaScript date format, when the pull through cache rule was created.'
+        registryId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: The registry ID associated with the request.
+    CreatePullThroughCacheRuleRequest:
+      type: object
+      required:
+        - ecrRepositoryPrefix
+        - upstreamRegistryUrl
+      title: CreatePullThroughCacheRuleRequest
+      properties:
+        ecrRepositoryPrefix:
+          allOf:
+            - $ref: '#/components/schemas/PullThroughCacheRuleRepositoryPrefix'
+            - description: The repository name prefix to use when caching images from the source registry.
+        upstreamRegistryUrl:
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: The registry URL of the upstream public registry to use as the source for the pull through cache rule.
+        registryId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: 'The Amazon Web Services account ID associated with the registry to create the pull through cache rule for. If you do not specify a registry, the default registry is assumed.'
+    PullThroughCacheRuleAlreadyExistsException: {}
+    UnsupportedUpstreamRegistryException: {}
+    LimitExceededException: {}
     CreateRepositoryResponse:
       type: object
       example:
@@ -2391,6 +2907,10 @@ components:
         - repositoryName
       title: CreateRepositoryRequest
       properties:
+        registryId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: 'The Amazon Web Services account ID associated with the registry to create the repository. If you do not specify a registry, the default registry is assumed.'
         repositoryName:
           allOf:
             - $ref: '#/components/schemas/RepositoryName'
@@ -2414,7 +2934,6 @@ components:
     InvalidTagParameterException: {}
     TooManyTagsException: {}
     RepositoryAlreadyExistsException: {}
-    LimitExceededException: {}
     DeleteLifecyclePolicyResponse:
       type: object
       properties:
@@ -2449,6 +2968,40 @@ components:
             - $ref: '#/components/schemas/RepositoryName'
             - description: The name of the repository.
     LifecyclePolicyNotFoundException: {}
+    DeletePullThroughCacheRuleResponse:
+      type: object
+      properties:
+        ecrRepositoryPrefix:
+          allOf:
+            - $ref: '#/components/schemas/PullThroughCacheRuleRepositoryPrefix'
+            - description: The Amazon ECR repository prefix associated with the request.
+        upstreamRegistryUrl:
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: The upstream registry URL associated with the pull through cache rule.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/CreationTimestamp'
+            - description: The timestamp associated with the pull through cache rule.
+        registryId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: The registry ID associated with the request.
+    DeletePullThroughCacheRuleRequest:
+      type: object
+      required:
+        - ecrRepositoryPrefix
+      title: DeletePullThroughCacheRuleRequest
+      properties:
+        ecrRepositoryPrefix:
+          allOf:
+            - $ref: '#/components/schemas/PullThroughCacheRuleRepositoryPrefix'
+            - description: The Amazon ECR repository prefix associated with the pull through cache rule to delete.
+        registryId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: 'The Amazon Web Services account ID associated with the registry that contains the pull through cache rule. If you do not specify a registry, the default registry is assumed.'
+    PullThroughCacheRuleNotFoundException: {}
     DeleteRegistryPolicyResponse:
       type: object
       properties:
@@ -2530,6 +3083,37 @@ components:
             - $ref: '#/components/schemas/RepositoryName'
             - description: The name of the repository that is associated with the repository policy to delete.
     RepositoryPolicyNotFoundException: {}
+    DescribeImageReplicationStatusResponse:
+      type: object
+      properties:
+        repositoryName:
+          allOf:
+            - $ref: '#/components/schemas/RepositoryName'
+            - description: The repository name associated with the request.
+        imageId:
+          $ref: '#/components/schemas/ImageIdentifier'
+        replicationStatuses:
+          allOf:
+            - $ref: '#/components/schemas/ImageReplicationStatusList'
+            - description: The replication status details for the images in the specified repository.
+    DescribeImageReplicationStatusRequest:
+      type: object
+      required:
+        - repositoryName
+        - imageId
+      title: DescribeImageReplicationStatusRequest
+      properties:
+        repositoryName:
+          allOf:
+            - $ref: '#/components/schemas/RepositoryName'
+            - description: The name of the repository that the image is in.
+        imageId:
+          $ref: '#/components/schemas/ImageIdentifier'
+        registryId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: 'The Amazon Web Services account ID associated with the registry. If you do not specify a registry, the default registry is assumed.'
+    ImageNotFoundException: {}
     DescribeImageScanFindingsResponse:
       type: object
       properties:
@@ -2580,7 +3164,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: 'The maximum number of image scan results returned by <code>DescribeImageScanFindings</code> in paginated output. When this parameter is used, <code>DescribeImageScanFindings</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeImageScanFindings</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>DescribeImageScanFindings</code> returns up to 100 results and a <code>nextToken</code> value, if applicable.'
-    ImageNotFoundException: {}
     ScanNotFoundException: {}
     DescribeImagesResponse:
       type: object
@@ -2623,6 +3206,37 @@ components:
           allOf:
             - $ref: '#/components/schemas/DescribeImagesFilter'
             - description: The filter key and value with which to filter your <code>DescribeImages</code> results.
+    DescribePullThroughCacheRulesResponse:
+      type: object
+      properties:
+        pullThroughCacheRules:
+          allOf:
+            - $ref: '#/components/schemas/PullThroughCacheRuleList'
+            - description: The details of the pull through cache rules.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The <code>nextToken</code> value to include in a future <code>DescribePullThroughCacheRulesRequest</code> request. When the results of a <code>DescribePullThroughCacheRulesRequest</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.'
+    DescribePullThroughCacheRulesRequest:
+      type: object
+      title: DescribePullThroughCacheRulesRequest
+      properties:
+        registryId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: 'The Amazon Web Services account ID associated with the registry to return the pull through cache rules for. If you do not specify a registry, the default registry is assumed.'
+        ecrRepositoryPrefixes:
+          allOf:
+            - $ref: '#/components/schemas/PullThroughCacheRuleRepositoryPrefixList'
+            - description: 'The Amazon ECR repository prefixes associated with the pull through cache rules to return. If no repository prefix value is specified, all pull through cache rules are returned.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The <code>nextToken</code> value returned from a previous paginated <code>DescribePullThroughCacheRulesRequest</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is null when there are no more results to return.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of pull through cache rules returned by <code>DescribePullThroughCacheRulesRequest</code> in paginated output. When this parameter is used, <code>DescribePullThroughCacheRulesRequest</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribePullThroughCacheRulesRequest</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>DescribePullThroughCacheRulesRequest</code> returns up to 100 results and a <code>nextToken</code> value, if applicable.'
     DescribeRegistryResponse:
       type: object
       properties:
@@ -2638,7 +3252,6 @@ components:
       type: object
       title: DescribeRegistryRequest
       properties: {}
-    ValidationException: {}
     DescribeRepositoriesResponse:
       type: object
       example:
@@ -2840,6 +3453,21 @@ components:
     GetRegistryPolicyRequest:
       type: object
       title: GetRegistryPolicyRequest
+      properties: {}
+    GetRegistryScanningConfigurationResponse:
+      type: object
+      properties:
+        registryId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: The ID of the registry.
+        scanningConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/RegistryScanningConfiguration'
+            - description: The scanning configuration for the registry.
+    GetRegistryScanningConfigurationRequest:
+      type: object
+      title: GetRegistryScanningConfigurationRequest
       properties: {}
     GetRepositoryPolicyResponse:
       type: object
@@ -3133,6 +3761,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/RegistryPolicyText'
             - description: 'The JSON policy text to apply to your registry. The policy text follows the same format as IAM policy text. For more information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html">Registry permissions</a> in the <i>Amazon Elastic Container Registry User Guide</i>.'
+    PutRegistryScanningConfigurationResponse:
+      type: object
+      properties:
+        registryScanningConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/RegistryScanningConfiguration'
+            - description: The scanning configuration for your registry.
+    PutRegistryScanningConfigurationRequest:
+      type: object
+      title: PutRegistryScanningConfigurationRequest
+      properties:
+        scanType:
+          allOf:
+            - $ref: '#/components/schemas/ScanType'
+            - description: '<p>The scanning type to set for the registry.</p> <p>When a registry scanning configuration is not defined, by default the <code>BASIC</code> scan type is used. When basic scanning is used, you may specify filters to determine which individual repositories, or all repositories, are scanned when new images are pushed to those repositories. Alternatively, you can do manual scans of images with basic scanning.</p> <p>When the <code>ENHANCED</code> scan type is set, Amazon Inspector provides automated vulnerability scanning. You may choose between continuous scanning or scan on push and you may specify filters to determine which individual repositories, or all repositories, are scanned.</p>'
+        rules:
+          allOf:
+            - $ref: '#/components/schemas/RegistryScanningRuleList'
+            - description: The scanning rules to use for the registry. A scanning rule is used to determine which repository filters are used and at what frequency scanning will occur.
     PutReplicationConfigurationResponse:
       type: object
       properties:
@@ -3351,6 +3998,8 @@ components:
             - $ref: '#/components/schemas/LayerPartBlob'
             - description: The base64-encoded layer part payload.
     InvalidLayerPartException: {}
+    Arch:
+      type: string
     Arn:
       type: string
     AttributeKey:
@@ -3381,6 +4030,8 @@ components:
         $ref: '#/components/schemas/Attribute'
       minItems: 0
       maxItems: 50
+    Author:
+      type: string
     Base64:
       type: string
       pattern: ^\S+$
@@ -3409,6 +4060,17 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AuthorizationData'
+    ImageDigest:
+      type: string
+    ImageTagsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImageTag'
+    Platform:
+      type: string
+    Date:
+      type: string
+      format: date-time
     RegistryId:
       type: string
       pattern: '[0-9]{12}'
@@ -3417,6 +4079,45 @@ components:
       pattern: '(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*'
       minLength: 2
       maxLength: 256
+    AwsEcrContainerImageDetails:
+      type: object
+      properties:
+        architecture:
+          allOf:
+            - $ref: '#/components/schemas/Arch'
+            - description: The architecture of the Amazon ECR container image.
+        author:
+          allOf:
+            - $ref: '#/components/schemas/Author'
+            - description: The image author of the Amazon ECR container image.
+        imageHash:
+          allOf:
+            - $ref: '#/components/schemas/ImageDigest'
+            - description: The image hash of the Amazon ECR container image.
+        imageTags:
+          allOf:
+            - $ref: '#/components/schemas/ImageTagsList'
+            - description: The image tags attached to the Amazon ECR container image.
+        platform:
+          allOf:
+            - $ref: '#/components/schemas/Platform'
+            - description: The platform of the Amazon ECR container image.
+        pushedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time the Amazon ECR container image was pushed.
+        registry:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: The registry the Amazon ECR container image belongs to.
+        repositoryName:
+          allOf:
+            - $ref: '#/components/schemas/RepositoryName'
+            - description: The name of the repository the Amazon ECR container image resides in.
+      description: The image details of the Amazon ECR container image.
+    BaseScore:
+      type: number
+      format: double
     BatchedOperationLayerDigestList:
       type: array
       items:
@@ -3451,6 +4152,20 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Image'
+    ScanningConfigurationRepositoryNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RepositoryName'
+      minItems: 1
+      maxItems: 25
+    RepositoryScanningConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RepositoryScanningConfiguration'
+    RepositoryScanningConfigurationFailureList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RepositoryScanningConfigurationFailure'
     BatchedOperationLayerDigest:
       type: string
       minLength: 0
@@ -3467,6 +4182,16 @@ components:
     LayerDigest:
       type: string
       pattern: '[a-zA-Z0-9-_+.]+:[a-fA-F0-9]+'
+    PullThroughCacheRuleRepositoryPrefix:
+      type: string
+      pattern: '[a-z0-9]+(?:[._-][a-z0-9]+)*'
+      minLength: 2
+      maxLength: 20
+    Url:
+      type: string
+    CreationTimestamp:
+      type: string
+      format: date-time
     TagList:
       type: array
       items:
@@ -3492,7 +4217,7 @@ components:
         encryptionType:
           allOf:
             - $ref: '#/components/schemas/EncryptionType'
-            - description: '<p>The encryption type to use.</p> <p>If you use the <code>KMS</code> encryption type, the contents of the repository will be encrypted using server-side encryption with Key Management Service key stored in KMS. When you use KMS to encrypt your data, you can either use the default Amazon Web Services managed KMS key for Amazon ECR, or specify your own KMS key, which you already created. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html">Protecting data using server-side encryption with an KMS key stored in Key Management Service (SSE-KMS)</a> in the <i>Amazon Simple Storage Service Console Developer Guide.</i>.</p> <p>If you use the <code>AES256</code> encryption type, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts the images in the repository using an AES-256 encryption algorithm. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html">Protecting data using server-side encryption with Amazon S3-managed encryption keys (SSE-S3)</a> in the <i>Amazon Simple Storage Service Console Developer Guide.</i>.</p>'
+            - description: '<p>The encryption type to use.</p> <p>If you use the <code>KMS</code> encryption type, the contents of the repository will be encrypted using server-side encryption with Key Management Service key stored in KMS. When you use KMS to encrypt your data, you can either use the default Amazon Web Services managed KMS key for Amazon ECR, or specify your own KMS key, which you already created. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html">Protecting data using server-side encryption with an KMS key stored in Key Management Service (SSE-KMS)</a> in the <i>Amazon Simple Storage Service Console Developer Guide</i>.</p> <p>If you use the <code>AES256</code> encryption type, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts the images in the repository using an AES-256 encryption algorithm. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html">Protecting data using server-side encryption with Amazon S3-managed encryption keys (SSE-S3)</a> in the <i>Amazon Simple Storage Service Console Developer Guide</i>.</p>'
         kmsKey:
           allOf:
             - $ref: '#/components/schemas/KmsKey'
@@ -3532,9 +4257,83 @@ components:
             - $ref: '#/components/schemas/EncryptionConfiguration'
             - description: The encryption configuration for the repository. This determines how the contents of your repository are encrypted at rest.
       description: An object representing a repository.
-    CreationTimestamp:
+    ScoringVector:
       type: string
-      format: date-time
+    Source:
+      type: string
+    Version:
+      type: string
+    CvssScore:
+      type: object
+      properties:
+        baseScore:
+          allOf:
+            - $ref: '#/components/schemas/BaseScore'
+            - description: The base CVSS score used for the finding.
+        scoringVector:
+          allOf:
+            - $ref: '#/components/schemas/ScoringVector'
+            - description: The vector string of the CVSS score.
+        source:
+          allOf:
+            - $ref: '#/components/schemas/Source'
+            - description: The source of the CVSS score.
+        version:
+          allOf:
+            - $ref: '#/components/schemas/Version'
+            - description: The version of CVSS used for the score.
+      description: The CVSS score for a finding.
+    Metric:
+      type: string
+    Reason:
+      type: string
+    CvssScoreAdjustment:
+      type: object
+      properties:
+        metric:
+          allOf:
+            - $ref: '#/components/schemas/Metric'
+            - description: The metric used to adjust the CVSS score.
+        reason:
+          allOf:
+            - $ref: '#/components/schemas/Reason'
+            - description: The reason the CVSS score has been adjustment.
+      description: Details on adjustments Amazon Inspector made to the CVSS score for a finding.
+    CvssScoreAdjustmentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CvssScoreAdjustment'
+    Score:
+      type: number
+      format: double
+    CvssScoreDetails:
+      type: object
+      properties:
+        adjustments:
+          allOf:
+            - $ref: '#/components/schemas/CvssScoreAdjustmentList'
+            - description: An object that contains details about adjustment Amazon Inspector made to the CVSS score.
+        score:
+          allOf:
+            - $ref: '#/components/schemas/Score'
+            - description: The CVSS score.
+        scoreSource:
+          allOf:
+            - $ref: '#/components/schemas/Source'
+            - description: The source for the CVSS score.
+        scoringVector:
+          allOf:
+            - $ref: '#/components/schemas/ScoringVector'
+            - description: The vector for the CVSS score.
+        version:
+          allOf:
+            - $ref: '#/components/schemas/Version'
+            - description: The CVSS version used in scoring.
+      description: Information about the CVSS score.
+    CvssScoreList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CvssScore'
     LifecyclePolicyText:
       type: string
       minLength: 100
@@ -3563,7 +4362,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/ImageTag'
             - description: The tag used for the image.
-      description: An object with identifying information for an Amazon ECR image.
+      description: An object with identifying information for an image in an Amazon ECR repository.
+    ImageReplicationStatusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImageReplicationStatus'
     NextToken:
       type: string
     MaxResults:
@@ -3593,14 +4396,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/VulnerabilitySourceUpdateTimestamp'
             - description: The time when the vulnerability data was last scanned.
-        findings:
-          allOf:
-            - $ref: '#/components/schemas/ImageScanFindingList'
-            - description: The findings from the image scan.
         findingSeverityCounts:
           allOf:
             - $ref: '#/components/schemas/FindingSeverityCounts'
             - description: 'The image vulnerability counts, sorted by severity.'
+        findings:
+          allOf:
+            - $ref: '#/components/schemas/ImageScanFindingList'
+            - description: The findings from the image scan.
+        enhancedFindings:
+          allOf:
+            - $ref: '#/components/schemas/EnhancedImageScanFindingList'
+            - description: Details about the enhanced scan findings from Amazon Inspector.
       description: The details of an image scan.
     TagStatus:
       type: string
@@ -3620,6 +4427,16 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ImageDetail'
+    PullThroughCacheRuleRepositoryPrefixList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PullThroughCacheRuleRepositoryPrefix'
+      minItems: 1
+      maxItems: 100
+    PullThroughCacheRuleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PullThroughCacheRule'
     ReplicationConfiguration:
       type: object
       required:
@@ -3628,7 +4445,7 @@ components:
         rules:
           allOf:
             - $ref: '#/components/schemas/ReplicationRuleList'
-            - description: An array of objects representing the replication rules for a replication configuration. A replication configuration may contain only one replication rule but the rule may contain one or more replication destinations.
+            - description: An array of objects representing the replication destinations and repository filters for a replication configuration.
       description: The replication configuration for a registry.
     RepositoryNameList:
       type: array
@@ -3650,6 +4467,152 @@ components:
       minLength: 1
       maxLength: 2048
     FindingDescription:
+      type: string
+    FindingArn:
+      type: string
+    PackageVulnerabilityDetails:
+      type: object
+      properties:
+        cvss:
+          allOf:
+            - $ref: '#/components/schemas/CvssScoreList'
+            - description: An object that contains details about the CVSS score of a finding.
+        referenceUrls:
+          allOf:
+            - $ref: '#/components/schemas/ReferenceUrlsList'
+            - description: One or more URLs that contain details about this vulnerability type.
+        relatedVulnerabilities:
+          allOf:
+            - $ref: '#/components/schemas/RelatedVulnerabilitiesList'
+            - description: One or more vulnerabilities related to the one identified in this finding.
+        source:
+          allOf:
+            - $ref: '#/components/schemas/Source'
+            - description: The source of the vulnerability information.
+        sourceUrl:
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: A URL to the source of the vulnerability information.
+        vendorCreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that this vulnerability was first added to the vendor's database.
+        vendorSeverity:
+          allOf:
+            - $ref: '#/components/schemas/Severity'
+            - description: The severity the vendor has given to this vulnerability type.
+        vendorUpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time the vendor last updated this vulnerability in their database.
+        vulnerabilityId:
+          allOf:
+            - $ref: '#/components/schemas/VulnerabilityId'
+            - description: The ID given to this vulnerability.
+        vulnerablePackages:
+          allOf:
+            - $ref: '#/components/schemas/VulnerablePackagesList'
+            - description: The packages impacted by this vulnerability.
+      description: Information about a package vulnerability finding.
+    Remediation:
+      type: object
+      properties:
+        recommendation:
+          allOf:
+            - $ref: '#/components/schemas/Recommendation'
+            - description: An object that contains information about the recommended course of action to remediate the finding.
+      description: Information on how to remediate a finding.
+    ResourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Resource'
+    ScoreDetails:
+      type: object
+      properties:
+        cvss:
+          allOf:
+            - $ref: '#/components/schemas/CvssScoreDetails'
+            - description: An object that contains details about the CVSS score given to a finding.
+      description: Information about the Amazon Inspector score given to a finding.
+    Severity:
+      type: string
+    Status:
+      type: string
+    Title:
+      type: string
+    Type:
+      type: string
+    EnhancedImageScanFinding:
+      type: object
+      properties:
+        awsAccountId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: The Amazon Web Services account ID associated with the image.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/FindingDescription'
+            - description: The description of the finding.
+        findingArn:
+          allOf:
+            - $ref: '#/components/schemas/FindingArn'
+            - description: The Amazon Resource Number (ARN) of the finding.
+        firstObservedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that the finding was first observed.
+        lastObservedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that the finding was last observed.
+        packageVulnerabilityDetails:
+          allOf:
+            - $ref: '#/components/schemas/PackageVulnerabilityDetails'
+            - description: An object that contains the details of a package vulnerability finding.
+        remediation:
+          allOf:
+            - $ref: '#/components/schemas/Remediation'
+            - description: An object that contains the details about how to remediate a finding.
+        resources:
+          allOf:
+            - $ref: '#/components/schemas/ResourceList'
+            - description: Contains information on the resources involved in a finding.
+        score:
+          allOf:
+            - $ref: '#/components/schemas/Score'
+            - description: The Amazon Inspector score given to the finding.
+        scoreDetails:
+          allOf:
+            - $ref: '#/components/schemas/ScoreDetails'
+            - description: An object that contains details of the Amazon Inspector score.
+        severity:
+          allOf:
+            - $ref: '#/components/schemas/Severity'
+            - description: The severity of the finding.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: The status of the finding.
+        title:
+          allOf:
+            - $ref: '#/components/schemas/Title'
+            - description: The title of the finding.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/Type'
+            - description: The type of the finding.
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time the finding was last updated at.
+      description: The details of an enhanced image scan. This is returned when enhanced scanning is enabled for your private registry.
+    EnhancedImageScanFindingList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EnhancedImageScanFinding'
+    Epoch:
+      type: integer
+    FilePath:
       type: string
     FindingName:
       type: string
@@ -3675,8 +4638,6 @@ components:
         $ref: '#/components/schemas/RegistryId'
       minItems: 1
       maxItems: 10
-    Url:
-      type: string
     LifecyclePreviewMaxResults:
       type: integer
       minimum: 1
@@ -3708,6 +4669,18 @@ components:
             - $ref: '#/components/schemas/ImageCount'
             - description: The number of expiring images.
       description: The summary of the lifecycle policy preview request.
+    RegistryScanningConfiguration:
+      type: object
+      properties:
+        scanType:
+          allOf:
+            - $ref: '#/components/schemas/ScanType'
+            - description: The type of scanning configured for the registry.
+        rules:
+          allOf:
+            - $ref: '#/components/schemas/RegistryScanningRuleList'
+            - description: The scanning rules associated with the registry.
+      description: The scanning configuration for a private registry.
     ImageManifest:
       type: string
       minLength: 1
@@ -3745,8 +4718,6 @@ components:
     ImageCount:
       type: integer
       minimum: 0
-    ImageDigest:
-      type: string
     ImageTagList:
       type: array
       items:
@@ -3772,6 +4743,9 @@ components:
             - $ref: '#/components/schemas/FindingSeverityCounts'
             - description: 'The image vulnerability counts, sorted by severity.'
       description: A summary of the last completed image scan.
+    RecordedPullTimestamp:
+      type: string
+      format: date-time
     ImageDetail:
       type: object
       properties:
@@ -3815,6 +4789,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MediaType'
             - description: The artifact media type of the image.
+        lastRecordedPullTime:
+          allOf:
+            - $ref: '#/components/schemas/RecordedPullTimestamp'
+            - description: '<p>The date and time, expressed in standard JavaScript date format, when Amazon ECR recorded the last image pull.</p> <note> <p>Amazon ECR refreshes the last image pull timestamp at least once every 24 hours. For example, if you pull an image once a day then the <code>lastRecordedPullTime</code> timestamp will indicate the exact time that the image was last pulled. However, if you pull an image once an hour, because Amazon ECR refreshes the <code>lastRecordedPullTime</code> timestamp at least once every 24 hours, the result may not be the exact time that the image was last pulled.</p> </note>'
       description: An object that describes an image returned by a <a>DescribeImages</a> operation.
     ImageFailureCode:
       type: string
@@ -3848,6 +4826,39 @@ components:
       type: string
       minLength: 1
       maxLength: 300
+    Region:
+      type: string
+      pattern: '[0-9a-z-]{2,25}'
+      minLength: 2
+      maxLength: 25
+    ReplicationStatus:
+      type: string
+      enum:
+        - IN_PROGRESS
+        - COMPLETE
+        - FAILED
+    ReplicationError:
+      type: string
+    ImageReplicationStatus:
+      type: object
+      properties:
+        region:
+          allOf:
+            - $ref: '#/components/schemas/Region'
+            - description: The destination Region for the image replication.
+        registryId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: The Amazon Web Services account ID associated with the registry to which the image belongs.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationStatus'
+            - description: The image replication status.
+        failureCode:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationError'
+            - description: The failure code for a replication that has failed.
+      description: The status of the replication process for an image.
     ImageScanFinding:
       type: object
       properties:
@@ -3888,6 +4899,11 @@ components:
         - IN_PROGRESS
         - COMPLETE
         - FAILED
+        - UNSUPPORTED_IMAGE
+        - ACTIVE
+        - PENDING
+        - SCAN_ELIGIBILITY_EXPIRED
+        - FINDINGS_UNAVAILABLE
     ScanStatusDescription:
       type: string
     ScanOnPushFlag:
@@ -3992,17 +5008,104 @@ components:
             - $ref: '#/components/schemas/TagStatus'
             - description: The tag status with which to filter your <a>ListImages</a> results. You can filter results based on whether they are <code>TAGGED</code> or <code>UNTAGGED</code>.
       description: An object representing a filter on a <a>ListImages</a> operation.
-    Region:
+    PackageManager:
       type: string
-      pattern: '[0-9a-z-]{2,25}'
-      minLength: 2
-      maxLength: 25
+    ReferenceUrlsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Url'
+    RelatedVulnerabilitiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RelatedVulnerability'
+    VulnerabilityId:
+      type: string
+    VulnerablePackagesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/VulnerablePackage'
+    PullThroughCacheRule:
+      type: object
+      properties:
+        ecrRepositoryPrefix:
+          allOf:
+            - $ref: '#/components/schemas/PullThroughCacheRuleRepositoryPrefix'
+            - description: The Amazon ECR repository prefix associated with the pull through cache rule.
+        upstreamRegistryUrl:
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: The upstream registry URL associated with the pull through cache rule.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/CreationTimestamp'
+            - description: The date and time the pull through cache was created.
+        registryId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: The Amazon Web Services account ID associated with the registry the pull through cache rule is associated with.
+      description: The details of a pull through cache rule.
+    ScanType:
+      type: string
+      enum:
+        - BASIC
+        - ENHANCED
+    RegistryScanningRuleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RegistryScanningRule'
+      minItems: 0
+      maxItems: 2
+    RecommendationText:
+      type: string
+    Recommendation:
+      type: object
+      properties:
+        url:
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: The URL address to the CVE remediation recommendations.
+        text:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationText'
+            - description: The recommended course of action to remediate the finding.
+      description: Details about the recommended course of action to remediate the finding.
+    ScanFrequency:
+      type: string
+      enum:
+        - SCAN_ON_PUSH
+        - CONTINUOUS_SCAN
+        - MANUAL
+    ScanningRepositoryFilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ScanningRepositoryFilter'
+      minItems: 0
+      maxItems: 100
+    RegistryScanningRule:
+      type: object
+      required:
+        - scanFrequency
+        - repositoryFilters
+      properties:
+        scanFrequency:
+          allOf:
+            - $ref: '#/components/schemas/ScanFrequency'
+            - description: 'The frequency that scans are performed at for a private registry. When the <code>ENHANCED</code> scan type is specified, the supported scan frequencies are <code>CONTINUOUS_SCAN</code> and <code>SCAN_ON_PUSH</code>. When the <code>BASIC</code> scan type is specified, the <code>SCAN_ON_PUSH</code> and <code>MANUAL</code> scan frequencies are supported.'
+        repositoryFilters:
+          allOf:
+            - $ref: '#/components/schemas/ScanningRepositoryFilterList'
+            - description: The repository filters associated with the scanning configuration for a private registry.
+      description: The details of a scanning rule for a private registry.
+    RelatedVulnerability:
+      type: string
+    Release:
+      type: string
     ReplicationRuleList:
       type: array
       items:
         $ref: '#/components/schemas/ReplicationRule'
       minItems: 0
-      maxItems: 1
+      maxItems: 10
     ReplicationDestination:
       type: object
       required:
@@ -4012,18 +5115,24 @@ components:
         region:
           allOf:
             - $ref: '#/components/schemas/Region'
-            - description: A Region to replicate to.
+            - description: The Region to replicate to.
         registryId:
           allOf:
             - $ref: '#/components/schemas/RegistryId'
-            - description: The account ID of the destination registry to replicate to.
-      description: An array of objects representing the details of a replication destination.
+            - description: 'The Amazon Web Services account ID of the Amazon ECR private registry to replicate to. When configuring cross-Region replication within your own registry, specify your own account ID.'
+      description: An array of objects representing the destination for a replication rule.
     ReplicationDestinationList:
       type: array
       items:
         $ref: '#/components/schemas/ReplicationDestination'
       minItems: 0
       maxItems: 25
+    RepositoryFilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RepositoryFilter'
+      minItems: 1
+      maxItems: 100
     ReplicationRule:
       type: object
       required:
@@ -4032,8 +5141,142 @@ components:
         destinations:
           allOf:
             - $ref: '#/components/schemas/ReplicationDestinationList'
-            - description: An array of objects representing the details of a replication destination.
-      description: An array of objects representing the replication destinations for a replication configuration. A replication configuration may contain only one replication rule but the rule may contain one or more replication destinations.
+            - description: An array of objects representing the destination for a replication rule.
+        repositoryFilters:
+          allOf:
+            - $ref: '#/components/schemas/RepositoryFilterList'
+            - description: An array of objects representing the filters for a replication rule. Specifying a repository filter for a replication rule provides a method for controlling which repositories in a private registry are replicated.
+      description: An array of objects representing the replication destinations and repository filters for a replication configuration.
+    RepositoryFilterValue:
+      type: string
+      pattern: '^(?:[a-z0-9]+(?:[._-][a-z0-9]*)*/)*[a-z0-9]*(?:[._-][a-z0-9]*)*$'
+      minLength: 2
+      maxLength: 256
+    RepositoryFilterType:
+      type: string
+      enum:
+        - PREFIX_MATCH
+    RepositoryFilter:
+      type: object
+      required:
+        - filter
+        - filterType
+      properties:
+        filter:
+          allOf:
+            - $ref: '#/components/schemas/RepositoryFilterValue'
+            - description: 'The repository filter details. When the <code>PREFIX_MATCH</code> filter type is specified, this value is required and should be the repository name prefix to configure replication for.'
+        filterType:
+          allOf:
+            - $ref: '#/components/schemas/RepositoryFilterType'
+            - description: 'The repository filter type. The only supported value is <code>PREFIX_MATCH</code>, which is a repository name prefix specified with the <code>filter</code> parameter.'
+      description: 'The filter settings used with image replication. Specifying a repository filter to a replication rule provides a method for controlling which repositories in a private registry are replicated. If no repository filter is specified, all images in the repository are replicated.'
+    RepositoryScanningConfiguration:
+      type: object
+      properties:
+        repositoryArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the repository.
+        repositoryName:
+          allOf:
+            - $ref: '#/components/schemas/RepositoryName'
+            - description: The name of the repository.
+        scanOnPush:
+          allOf:
+            - $ref: '#/components/schemas/ScanOnPushFlag'
+            - description: Whether or not scan on push is configured for the repository.
+        scanFrequency:
+          allOf:
+            - $ref: '#/components/schemas/ScanFrequency'
+            - description: The scan frequency for the repository.
+        appliedScanFilters:
+          allOf:
+            - $ref: '#/components/schemas/ScanningRepositoryFilterList'
+            - description: The scan filters applied to the repository.
+      description: The details of the scanning configuration for a repository.
+    ScanningConfigurationFailureCode:
+      type: string
+      enum:
+        - REPOSITORY_NOT_FOUND
+    ScanningConfigurationFailureReason:
+      type: string
+    RepositoryScanningConfigurationFailure:
+      type: object
+      properties:
+        repositoryName:
+          allOf:
+            - $ref: '#/components/schemas/RepositoryName'
+            - description: The name of the repository.
+        failureCode:
+          allOf:
+            - $ref: '#/components/schemas/ScanningConfigurationFailureCode'
+            - description: The failure code.
+        failureReason:
+          allOf:
+            - $ref: '#/components/schemas/ScanningConfigurationFailureReason'
+            - description: The reason for the failure.
+      description: The details about any failures associated with the scanning configuration of a repository.
+    ResourceDetails:
+      type: object
+      properties:
+        awsEcrContainerImage:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcrContainerImageDetails'
+            - description: An object that contains details about the Amazon ECR container image involved in the finding.
+      description: Contains details about the resource involved in the finding.
+    ResourceId:
+      type: string
+    Tags:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    Resource:
+      type: object
+      properties:
+        details:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDetails'
+            - description: An object that contains details about the resource involved in a finding.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The ID of the resource.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: The tags attached to the resource.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/Type'
+            - description: The type of resource.
+      description: Details about the resource involved in a finding.
+    ScanningRepositoryFilterValue:
+      type: string
+      pattern: '^[a-z0-9*](?:[._\-/a-z0-9*]?[a-z0-9*]+)*$'
+      minLength: 1
+      maxLength: 255
+    ScanningRepositoryFilterType:
+      type: string
+      enum:
+        - WILDCARD
+    ScanningRepositoryFilter:
+      type: object
+      required:
+        - filter
+        - filterType
+      properties:
+        filter:
+          allOf:
+            - $ref: '#/components/schemas/ScanningRepositoryFilterValue'
+            - description: The filter to use when scanning.
+        filterType:
+          allOf:
+            - $ref: '#/components/schemas/ScanningRepositoryFilterType'
+            - description: The type associated with the filter.
+      description: 'The details of a scanning repository filter. For more information on how to use filters, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html#image-scanning-filters">Using filters</a> in the <i>Amazon Elastic Container Registry User Guide</i>.'
+    SourceLayerHash:
+      type: string
     TagKey:
       type: string
     TagValue:
@@ -4048,11 +5291,49 @@ components:
         Value:
           allOf:
             - $ref: '#/components/schemas/TagValue'
-            - description: The optional part of a key-value pair that make up a tag. A <code>value</code> acts as a descriptor within a tag category (key).
-      description: 'The metadata that you apply to a resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+            - description: A <code>value</code> acts as a descriptor within a tag category (key).
+      description: 'The metadata to apply to a resource to help you categorize and organize them. Each tag consists of a key and a value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
     TagKeyList:
       type: array
       items:
         $ref: '#/components/schemas/TagKey'
+    VulnerablePackageName:
+      type: string
+    VulnerablePackage:
+      type: object
+      properties:
+        arch:
+          allOf:
+            - $ref: '#/components/schemas/Arch'
+            - description: The architecture of the vulnerable package.
+        epoch:
+          allOf:
+            - $ref: '#/components/schemas/Epoch'
+            - description: The epoch of the vulnerable package.
+        filePath:
+          allOf:
+            - $ref: '#/components/schemas/FilePath'
+            - description: The file path of the vulnerable package.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/VulnerablePackageName'
+            - description: The name of the vulnerable package.
+        packageManager:
+          allOf:
+            - $ref: '#/components/schemas/PackageManager'
+            - description: The package manager of the vulnerable package.
+        release:
+          allOf:
+            - $ref: '#/components/schemas/Release'
+            - description: The release of the vulnerable package.
+        sourceLayerHash:
+          allOf:
+            - $ref: '#/components/schemas/SourceLayerHash'
+            - description: The source layer hash of the vulnerable package.
+        version:
+          allOf:
+            - $ref: '#/components/schemas/Version'
+            - description: The version of the vulnerable package.
+      description: Information on the vulnerable package identified by a finding.
 security:
   - hmac: []

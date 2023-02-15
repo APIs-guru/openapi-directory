@@ -1,0 +1,4675 @@
+openapi: 3.0.0
+info:
+  version: '2022-02-17'
+  x-release: v4
+  title: AWS Clean Rooms Service
+  description: '<note> <p>AWS Clean Rooms is in preview release and is subject to change.</p> </note> <p>Welcome to the <i>AWS Clean Rooms API Reference</i>.</p> <p>AWS Clean Rooms is an AWS service that helps multiple parties to join their data together in a secure collaboration workspace. In the collaboration, members who can query and receive results can get insights into the combined data without either party getting access to the other party''s raw data.</p> <p>To learn more about AWS Clean Rooms concepts, procedures, and best practices, see the <a href="https://docs.aws.amazon.com/clean-rooms/latest/userguide/what-is.html">AWS Clean Rooms User Guide</a>.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: cleanrooms
+  x-aws-signingName: cleanrooms
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cleanrooms-2022-02-17.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/cleanrooms/'
+servers:
+  - url: 'http://cleanrooms.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Clean Rooms Service multi-region endpoint
+  - url: 'https://cleanrooms.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Clean Rooms Service multi-region endpoint
+  - url: 'http://cleanrooms.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Clean Rooms Service endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://cleanrooms.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Clean Rooms Service endpoint for China (Beijing) and China (Ningxia)
+paths:
+  '/collaborations/{collaborationIdentifier}/batch-schema':
+    post:
+      operationId: BatchGetSchema
+      description: Retrieves multiple schemas by their identifiers.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetSchemaOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: collaborationIdentifier
+          in: path
+          required: true
+          description: A unique identifier for the collaboration that the schemas belong to. Currently accepts collaboration ID.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - names
+              properties:
+                names:
+                  description: The names for the schema objects to retrieve.&gt;
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/TableAlias'
+                  minItems: 1
+                  maxItems: 25
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /collaborations:
+    post:
+      operationId: CreateCollaboration
+      description: Creates a new collaboration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCollaborationOutput'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - members
+                - name
+                - description
+                - creatorMemberAbilities
+                - creatorDisplayName
+                - queryLogStatus
+              properties:
+                members:
+                  description: 'A list of initial members, not including the creator. This list is immutable.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MemberSpecification'
+                  minItems: 0
+                  maxItems: 9
+                name:
+                  description: The display name for a collaboration.
+                  type: string
+                  pattern: '(?!\s*$)[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\t]*'
+                  minLength: 1
+                  maxLength: 100
+                description:
+                  description: A description of the collaboration provided by the collaboration owner.
+                  type: string
+                  pattern: '(?!\s*$)[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\t\r\n]*'
+                  minLength: 1
+                  maxLength: 255
+                creatorMemberAbilities:
+                  description: The abilities granted to the collaboration creator.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MemberAbility'
+                creatorDisplayName:
+                  description: The display name of the collaboration creator.
+                  type: string
+                  pattern: '(?!\s*$)[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\t]*'
+                  minLength: 1
+                  maxLength: 100
+                dataEncryptionMetadata:
+                  description: The settings for client-side encryption for cryptographic computing.
+                  type: object
+                  properties:
+                    allowCleartext:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Indicates whether encrypted tables can contain cleartext data (true) or are to cryptographically process every column (false).
+                    allowDuplicates:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Indicates whether Fingerprint columns can contain duplicate entries (true) or are to contain only non-repeated values (false).
+                    allowJoinsOnColumnsWithDifferentNames:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Indicates whether Fingerprint columns can be joined on any other Fingerprint column with a different name (true) or can only be joined on Fingerprint columns of the same name (false).
+                    preserveNulls:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Indicates whether NULL values are to be copied as NULL to encrypted tables (true) or cryptographically processed (false).
+                queryLogStatus:
+                  description: An indicator as to whether query logging has been enabled or disabled for the collaboration.
+                  type: string
+                  enum:
+                    - ENABLED
+                    - DISABLED
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListCollaborations
+      description: 'Lists collaborations the caller owns, is active in, or has been invited to.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCollaborationsOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: The token value retrieved from a previous call to access the next page of results.
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 10240
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service may return a nextToken even if the maximum results has not been met.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: memberStatus
+          in: query
+          required: false
+          description: The caller's status in a collaboration.
+          schema:
+            type: string
+            enum:
+              - INVITED
+              - ACTIVE
+  /configuredTables:
+    post:
+      operationId: CreateConfiguredTable
+      description: Creates a new configured table resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateConfiguredTableOutput'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - tableReference
+                - allowedColumns
+                - analysisMethod
+              properties:
+                name:
+                  description: The name of the configured table.
+                  type: string
+                  pattern: '(?!\s*$)[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\t]*'
+                  minLength: 1
+                  maxLength: 100
+                description:
+                  description: A description for the configured table.
+                  type: string
+                  pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\t\r\n]*'
+                  minLength: 0
+                  maxLength: 255
+                tableReference:
+                  description: 'A pointer to the data set that underlies this table. Currently, this can only be an AWS Glue table.'
+                  type: object
+                  properties:
+                    glue:
+                      allOf:
+                        - $ref: '#/components/schemas/GlueTableReference'
+                        - description: 'If present, a reference to the AWS Glue table referred to by this table reference.'
+                allowedColumns:
+                  description: The columns of the underlying table that can be used by collaborations or analysis rules.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ColumnName'
+                  minItems: 1
+                  maxItems: 250
+                analysisMethod:
+                  description: The analysis method for the configured tables. The only valid value is currently `DIRECT_QUERY`.
+                  type: string
+                  enum:
+                    - DIRECT_QUERY
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListConfiguredTables
+      description: Lists configured tables.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListConfiguredTablesOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: The token value retrieved from a previous call to access the next page of results.
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 10240
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum size of the results that is returned per call.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+  '/configuredTables/{configuredTableIdentifier}/analysisRule':
+    post:
+      operationId: CreateConfiguredTableAnalysisRule
+      description: 'Creates a new analysis rule for a configured table. Currently, only one analysis rule can be created for a given configured table.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateConfiguredTableAnalysisRuleOutput'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: configuredTableIdentifier
+          in: path
+          required: true
+          description: 'The identifier for the configured table to create the analysis rule for. Currently accepts the configured table ID. '
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - analysisRuleType
+                - analysisRulePolicy
+              properties:
+                analysisRuleType:
+                  description: The type of analysis rule. Valid values are AGGREGATION and LIST.
+                  type: string
+                  enum:
+                    - AGGREGATION
+                    - LIST
+                analysisRulePolicy:
+                  description: Controls on the query specifications that can be run on a configured table.
+                  type: object
+                  properties:
+                    v1:
+                      allOf:
+                        - $ref: '#/components/schemas/ConfiguredTableAnalysisRulePolicyV1'
+                        - description: Controls on the query specifications that can be run on a configured table.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/memberships/{membershipIdentifier}/configuredTableAssociations':
+    post:
+      operationId: CreateConfiguredTableAssociation
+      description: Creates a configured table association. A configured table association links a configured table with a collaboration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateConfiguredTableAssociationOutput'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: membershipIdentifier
+          in: path
+          required: true
+          description: A unique identifier for one of your memberships for a collaboration. The configured table is associated to the collaboration that this membership belongs to. Currently accepts a membership ID.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - configuredTableIdentifier
+                - roleArn
+              properties:
+                name:
+                  description: The name of the configured table association. This name is used to query the underlying configured table.
+                  type: string
+                  pattern: '[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?'
+                  minLength: 0
+                  maxLength: 128
+                description:
+                  description: A description for the configured table association.
+                  type: string
+                  pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\t\r\n]*'
+                  minLength: 0
+                  maxLength: 255
+                configuredTableIdentifier:
+                  description: A unique identifier for the configured table to be associated to. Currently accepts a configured table ID.
+                  type: string
+                  pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+                  minLength: 36
+                  maxLength: 36
+                roleArn:
+                  description: The service will assume this role to access catalog metadata and query the table.
+                  type: string
+                  pattern: 'arn:aws:iam::[\w]+:role/[\w+=,./@-]+'
+                  minLength: 32
+                  maxLength: 512
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListConfiguredTableAssociations
+      description: Lists configured table associations for a membership.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListConfiguredTableAssociationsOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: membershipIdentifier
+          in: path
+          required: true
+          description: A unique identifier for the membership to list configured table associations for. Currently accepts the membership ID.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: nextToken
+          in: query
+          required: false
+          description: The token value retrieved from a previous call to access the next page of results.
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 10240
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum size of the results that is returned per call.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+  /memberships:
+    post:
+      operationId: CreateMembership
+      description: Creates a membership for a specific collaboration identifier and joins the collaboration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMembershipOutput'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - collaborationIdentifier
+                - queryLogStatus
+              properties:
+                collaborationIdentifier:
+                  description: The unique ID for the associated collaboration.
+                  type: string
+                  pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+                  minLength: 36
+                  maxLength: 36
+                queryLogStatus:
+                  description: An indicator as to whether query logging has been enabled or disabled for the collaboration.
+                  type: string
+                  enum:
+                    - ENABLED
+                    - DISABLED
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListMemberships
+      description: Lists all memberships resources within the caller's account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMembershipsOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: The token value retrieved from a previous call to access the next page of results.
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 10240
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum size of the results that is returned per call.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: status
+          in: query
+          required: false
+          description: A filter which will return only memberships in the specified status.
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - REMOVED
+              - COLLABORATION_DELETED
+  '/collaborations/{collaborationIdentifier}':
+    delete:
+      operationId: DeleteCollaboration
+      description: Deletes a collaboration. It can only be called by the collaboration owner.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCollaborationOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: collaborationIdentifier
+          in: path
+          required: true
+          description: The identifier for the collaboration.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetCollaboration
+      description: Returns metadata about a collaboration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCollaborationOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: collaborationIdentifier
+          in: path
+          required: true
+          description: The identifier for the collaboration.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+    patch:
+      operationId: UpdateCollaboration
+      description: Updates collaboration metadata and can only be called by the collaboration owner.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateCollaborationOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: collaborationIdentifier
+          in: path
+          required: true
+          description: The identifier for the collaboration.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: A human-readable identifier provided by the collaboration owner. Display names are not unique.
+                  type: string
+                  pattern: '(?!\s*$)[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\t]*'
+                  minLength: 1
+                  maxLength: 100
+                description:
+                  description: A description of the collaboration.
+                  type: string
+                  pattern: '(?!\s*$)[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\t\r\n]*'
+                  minLength: 1
+                  maxLength: 255
+  '/configuredTables/{configuredTableIdentifier}':
+    delete:
+      operationId: DeleteConfiguredTable
+      description: Deletes a configured table.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteConfiguredTableOutput'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: configuredTableIdentifier
+          in: path
+          required: true
+          description: The unique ID for the configured table to delete.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetConfiguredTable
+      description: Retrieves a configured table.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetConfiguredTableOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: configuredTableIdentifier
+          in: path
+          required: true
+          description: The unique ID for the configured table to retrieve.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+    patch:
+      operationId: UpdateConfiguredTable
+      description: Updates a configured table.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateConfiguredTableOutput'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: configuredTableIdentifier
+          in: path
+          required: true
+          description: The identifier for the configured table to update. Currently accepts the configured table ID.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: A new name for the configured table.
+                  type: string
+                  pattern: '(?!\s*$)[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\t]*'
+                  minLength: 1
+                  maxLength: 100
+                description:
+                  description: A new description for the configured table.
+                  type: string
+                  pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\t\r\n]*'
+                  minLength: 0
+                  maxLength: 255
+  '/configuredTables/{configuredTableIdentifier}/analysisRule/{analysisRuleType}':
+    delete:
+      operationId: DeleteConfiguredTableAnalysisRule
+      description: Deletes a configured table analysis rule.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteConfiguredTableAnalysisRuleOutput'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: configuredTableIdentifier
+          in: path
+          required: true
+          description: The unique identifier for the configured table that the analysis rule applies to. Currently accepts the configured table ID.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: analysisRuleType
+          in: path
+          required: true
+          description: The analysis rule type to be deleted. Configured table analysis rules are uniquely identified by their configured table identifier and analysis rule type.
+          schema:
+            type: string
+            enum:
+              - AGGREGATION
+              - LIST
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetConfiguredTableAnalysisRule
+      description: Retrieves a configured table analysis rule.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetConfiguredTableAnalysisRuleOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: configuredTableIdentifier
+          in: path
+          required: true
+          description: The unique identifier for the configured table to retrieve. Currently accepts the configured table ID.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: analysisRuleType
+          in: path
+          required: true
+          description: The analysis rule to be retrieved. Configured table analysis rules are uniquely identified by their configured table identifier and analysis rule type.
+          schema:
+            type: string
+            enum:
+              - AGGREGATION
+              - LIST
+    patch:
+      operationId: UpdateConfiguredTableAnalysisRule
+      description: Updates a configured table analysis rule.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateConfiguredTableAnalysisRuleOutput'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: configuredTableIdentifier
+          in: path
+          required: true
+          description: The unique identifier for the configured table that the analysis rule applies to. Currently accepts the configured table ID.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: analysisRuleType
+          in: path
+          required: true
+          description: The analysis rule type to be updated. Configured table analysis rules are uniquely identified by their configured table identifier and analysis rule type.
+          schema:
+            type: string
+            enum:
+              - AGGREGATION
+              - LIST
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - analysisRulePolicy
+              properties:
+                analysisRulePolicy:
+                  description: Controls on the query specifications that can be run on a configured table.
+                  type: object
+                  properties:
+                    v1:
+                      allOf:
+                        - $ref: '#/components/schemas/ConfiguredTableAnalysisRulePolicyV1'
+                        - description: Controls on the query specifications that can be run on a configured table.
+  '/memberships/{membershipIdentifier}/configuredTableAssociations/{configuredTableAssociationIdentifier}':
+    delete:
+      operationId: DeleteConfiguredTableAssociation
+      description: Deletes a configured table association.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteConfiguredTableAssociationOutput'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: configuredTableAssociationIdentifier
+          in: path
+          required: true
+          description: The unique ID for the configured table association to be deleted. Currently accepts the configured table ID.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: membershipIdentifier
+          in: path
+          required: true
+          description: A unique identifier for the membership that the configured table association belongs to. Currently accepts the membership ID.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetConfiguredTableAssociation
+      description: Retrieves a configured table association.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetConfiguredTableAssociationOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: configuredTableAssociationIdentifier
+          in: path
+          required: true
+          description: The unique ID for the configured table association to retrieve. Currently accepts the configured table ID.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: membershipIdentifier
+          in: path
+          required: true
+          description: A unique identifier for the membership that the configured table association belongs to. Currently accepts the membership ID.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+    patch:
+      operationId: UpdateConfiguredTableAssociation
+      description: Updates a configured table association.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateConfiguredTableAssociationOutput'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: configuredTableAssociationIdentifier
+          in: path
+          required: true
+          description: The unique identifier for the configured table association to update. Currently accepts the configured table association ID.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: membershipIdentifier
+          in: path
+          required: true
+          description: The unique ID for the membership that the configured table association belongs to.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  description: A new description for the configured table association.
+                  type: string
+                  pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\t\r\n]*'
+                  minLength: 0
+                  maxLength: 255
+                roleArn:
+                  description: The service will assume this role to access catalog metadata and query the table.
+                  type: string
+                  pattern: 'arn:aws:iam::[\w]+:role/[\w+=,./@-]+'
+                  minLength: 32
+                  maxLength: 512
+  '/collaborations/{collaborationIdentifier}/member/{accountId}':
+    delete:
+      operationId: DeleteMember
+      description: Removes the specified member from a collaboration. The removed member is placed in the Removed status and can't interact with the collaboration. The removed member's data is inaccessible to active members of the collaboration.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteMemberOutput'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: collaborationIdentifier
+          in: path
+          required: true
+          description: The unique identifier for the associated collaboration.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: accountId
+          in: path
+          required: true
+          description: The account ID of the member to remove.
+          schema:
+            type: string
+            pattern: \d+
+            minLength: 12
+            maxLength: 12
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/memberships/{membershipIdentifier}':
+    delete:
+      operationId: DeleteMembership
+      description: Deletes a specified membership. All resources under a membership must be deleted.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteMembershipOutput'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: membershipIdentifier
+          in: path
+          required: true
+          description: The identifier for a membership resource.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetMembership
+      description: Retrieves a specified membership for an identifier.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMembershipOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: membershipIdentifier
+          in: path
+          required: true
+          description: The identifier for a membership resource.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+    patch:
+      operationId: UpdateMembership
+      description: Updates a membership.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateMembershipOutput'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: membershipIdentifier
+          in: path
+          required: true
+          description: The unique identifier of the membership.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                queryLogStatus:
+                  description: An indicator as to whether query logging has been enabled or disabled for the collaboration.
+                  type: string
+                  enum:
+                    - ENABLED
+                    - DISABLED
+  '/memberships/{membershipIdentifier}/protectedQueries/{protectedQueryIdentifier}':
+    get:
+      operationId: GetProtectedQuery
+      description: Returns query processing metadata.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProtectedQueryOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: membershipIdentifier
+          in: path
+          required: true
+          description: The identifier for a membership in a protected query instance.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: protectedQueryIdentifier
+          in: path
+          required: true
+          description: The identifier for a protected query instance.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 1
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    patch:
+      operationId: UpdateProtectedQuery
+      description: Updates the processing of a currently running query.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateProtectedQueryOutput'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: membershipIdentifier
+          in: path
+          required: true
+          description: The identifier for a member of a protected query instance.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: protectedQueryIdentifier
+          in: path
+          required: true
+          description: The identifier for a protected query instance.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 1
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - targetStatus
+              properties:
+                targetStatus:
+                  description: The target status of a query. Used to update the execution status of a currently running query.
+                  type: string
+                  enum:
+                    - CANCELLED
+  '/collaborations/{collaborationIdentifier}/schemas/{name}':
+    get:
+      operationId: GetSchema
+      description: Retrieves the schema for a relation within a collaboration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSchemaOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: collaborationIdentifier
+          in: path
+          required: true
+          description: A unique identifier for the collaboration that the schema belongs to. Currently accepts a collaboration ID.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: name
+          in: path
+          required: true
+          description: The name of the relation to retrieve the schema for.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?'
+            minLength: 0
+            maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/collaborations/{collaborationIdentifier}/schemas/{name}/analysisRule/{type}':
+    get:
+      operationId: GetSchemaAnalysisRule
+      description: Retrieves a schema analysis rule.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSchemaAnalysisRuleOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: collaborationIdentifier
+          in: path
+          required: true
+          description: A unique identifier for the collaboration that the schema belongs to. Currently accepts a collaboration ID.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: name
+          in: path
+          required: true
+          description: The name of the schema to retrieve the analysis rule for.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?'
+            minLength: 0
+            maxLength: 128
+        - name: type
+          in: path
+          required: true
+          description: 'The type of the schema analysis rule to retrieve. Schema analysis rules are uniquely identified by a combination of the collaboration, the schema name, and their type.'
+          schema:
+            type: string
+            enum:
+              - AGGREGATION
+              - LIST
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/collaborations/{collaborationIdentifier}/members':
+    get:
+      operationId: ListMembers
+      description: Lists all members within a collaboration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMembersOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: collaborationIdentifier
+          in: path
+          required: true
+          description: The identifier of the collaboration in which the members are listed.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: nextToken
+          in: query
+          required: false
+          description: The token value retrieved from a previous call to access the next page of results.
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 10240
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum size of the results that is returned per call.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/memberships/{membershipIdentifier}/protectedQueries':
+    get:
+      operationId: ListProtectedQueries
+      description: 'Lists protected queries, sorted by the most recent query.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProtectedQueriesOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: membershipIdentifier
+          in: path
+          required: true
+          description: The identifier for the membership in the collaboration.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: status
+          in: query
+          required: false
+          description: A filter on the status of the protected query.
+          schema:
+            type: string
+            enum:
+              - SUBMITTED
+              - STARTED
+              - CANCELLED
+              - CANCELLING
+              - FAILED
+              - SUCCESS
+              - TIMED_OUT
+        - name: nextToken
+          in: query
+          required: false
+          description: The token value retrieved from a previous call to access the next page of results.
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 10240
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service can return a nextToken even if the maximum results has not been met. '
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartProtectedQuery
+      description: Creates a protected query that is started by AWS Clean Rooms.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartProtectedQueryOutput'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: membershipIdentifier
+          in: path
+          required: true
+          description: A unique identifier for the membership to run this query against. Currently accepts a membership ID.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - type
+                - sqlParameters
+                - resultConfiguration
+              properties:
+                type:
+                  description: The type of the protected query to be started.
+                  type: string
+                  enum:
+                    - SQL
+                sqlParameters:
+                  description: The parameters for the SQL type Protected Query.
+                  type: object
+                  properties:
+                    queryString:
+                      allOf:
+                        - $ref: '#/components/schemas/ProtectedQuerySQLParametersQueryStringString'
+                        - description: The query string to be submitted.
+                resultConfiguration:
+                  description: Contains configurations for protected query results.
+                  type: object
+                  properties:
+                    outputConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/ProtectedQueryOutputConfiguration'
+                        - description: Configuration for protected query results.
+  '/collaborations/{collaborationIdentifier}/schemas':
+    get:
+      operationId: ListSchemas
+      description: Lists the schemas for relations within a collaboration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSchemasOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: collaborationIdentifier
+          in: path
+          required: true
+          description: A unique identifier for the collaboration that the schema belongs to. Currently accepts a collaboration ID.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: schemaType
+          in: query
+          required: false
+          description: 'If present, filter schemas by schema type. The only valid schema type is currently `TABLE`.'
+          schema:
+            type: string
+            enum:
+              - TABLE
+        - name: nextToken
+          in: query
+          required: false
+          description: The token value retrieved from a previous call to access the next page of results.
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 10240
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum size of the results that is returned per call.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    BatchGetSchemaOutput:
+      type: object
+      required:
+        - schemas
+        - errors
+      properties:
+        schemas:
+          allOf:
+            - $ref: '#/components/schemas/SchemaList'
+            - description: The retrieved list of schemas.
+        errors:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetSchemaErrorList'
+            - description: Error reasons for schemas that could not be retrieved. One error is returned for every schema that could not be retrieved.
+    TableAlias:
+      type: string
+      pattern: '[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?'
+      minLength: 0
+      maxLength: 128
+    ResourceNotFoundException: {}
+    InternalServerException: {}
+    ValidationException: {}
+    ThrottlingException: {}
+    AccessDeniedException: {}
+    CreateCollaborationOutput:
+      type: object
+      required:
+        - collaboration
+      properties:
+        collaboration:
+          allOf:
+            - $ref: '#/components/schemas/Collaboration'
+            - description: The entire created collaboration object.
+    MemberSpecification:
+      type: object
+      required:
+        - accountId
+        - memberAbilities
+        - displayName
+      properties:
+        accountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The identifier used to reference members of the collaboration. Currently only supports AWS Account ID.
+        memberAbilities:
+          allOf:
+            - $ref: '#/components/schemas/MemberAbilities'
+            - description: The abilities granted to the collaboration member.
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The member's display name.
+      description: Basic metadata used to construct a new member.
+    MemberAbility:
+      type: string
+      enum:
+        - CAN_QUERY
+        - CAN_RECEIVE_RESULTS
+    Boolean:
+      type: boolean
+    ServiceQuotaExceededException: {}
+    CreateConfiguredTableOutput:
+      type: object
+      required:
+        - configuredTable
+      properties:
+        configuredTable:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTable'
+            - description: The created configured table.
+    GlueTableReference:
+      type: object
+      required:
+        - tableName
+        - databaseName
+      properties:
+        tableName:
+          allOf:
+            - $ref: '#/components/schemas/GlueResourceName'
+            - description: The name of the AWS Glue table.
+        databaseName:
+          allOf:
+            - $ref: '#/components/schemas/GlueResourceName'
+            - description: The name of the database the AWS Glue table belongs to.
+      description: A reference to a table within an AWS Glue data catalog.
+    ColumnName:
+      type: string
+      pattern: '[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?'
+      minLength: 0
+      maxLength: 128
+    ConflictException: {}
+    CreateConfiguredTableAnalysisRuleOutput:
+      type: object
+      required:
+        - analysisRule
+      properties:
+        analysisRule:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableAnalysisRule'
+            - description: The entire created analysis rule.
+    ConfiguredTableAnalysisRulePolicyV1:
+      type: object
+      properties:
+        list:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRuleList'
+            - description: Analysis rule type that enables only list queries on a configured table.
+        aggregation:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRuleAggregation'
+            - description: Analysis rule type that enables only aggregation queries on a configured table.
+      description: Controls on the query specifications that can be run on a configured table.
+    CreateConfiguredTableAssociationOutput:
+      type: object
+      required:
+        - configuredTableAssociation
+      properties:
+        configuredTableAssociation:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableAssociation'
+            - description: The entire configured table association object.
+    CreateMembershipOutput:
+      type: object
+      required:
+        - membership
+      properties:
+        membership:
+          allOf:
+            - $ref: '#/components/schemas/Membership'
+            - description: The membership that was created.
+    DeleteCollaborationOutput:
+      type: object
+      properties: {}
+    DeleteConfiguredTableOutput:
+      type: object
+      properties: {}
+      description: The empty output for a successful deletion.
+    DeleteConfiguredTableAnalysisRuleOutput:
+      type: object
+      properties: {}
+      description: An empty response that indicates a successful delete.
+    DeleteConfiguredTableAssociationOutput:
+      type: object
+      properties: {}
+    DeleteMemberOutput:
+      type: object
+      properties: {}
+    DeleteMembershipOutput:
+      type: object
+      properties: {}
+    GetCollaborationOutput:
+      type: object
+      required:
+        - collaboration
+      properties:
+        collaboration:
+          allOf:
+            - $ref: '#/components/schemas/Collaboration'
+            - description: The entire collaboration for this identifier.
+    GetConfiguredTableOutput:
+      type: object
+      required:
+        - configuredTable
+      properties:
+        configuredTable:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTable'
+            - description: The retrieved configured table.
+    GetConfiguredTableAnalysisRuleOutput:
+      type: object
+      required:
+        - analysisRule
+      properties:
+        analysisRule:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableAnalysisRule'
+            - description: The entire analysis rule output.
+    GetConfiguredTableAssociationOutput:
+      type: object
+      required:
+        - configuredTableAssociation
+      properties:
+        configuredTableAssociation:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableAssociation'
+            - description: The entire configured table association object.
+    GetMembershipOutput:
+      type: object
+      required:
+        - membership
+      properties:
+        membership:
+          allOf:
+            - $ref: '#/components/schemas/Membership'
+            - description: The membership retrieved for the provided identifier.
+    GetProtectedQueryOutput:
+      type: object
+      required:
+        - protectedQuery
+      properties:
+        protectedQuery:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedQuery'
+            - description: The query processing metadata.
+    GetSchemaOutput:
+      type: object
+      required:
+        - schema
+      properties:
+        schema:
+          allOf:
+            - $ref: '#/components/schemas/Schema'
+            - description: The entire schema object.
+    GetSchemaAnalysisRuleOutput:
+      type: object
+      required:
+        - analysisRule
+      properties:
+        analysisRule:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRule'
+            - description: A specification about how data from the configured table can be used.
+    ListCollaborationsOutput:
+      type: object
+      required:
+        - collaborationList
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token value retrieved from a previous call to access the next page of results.
+        collaborationList:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationSummaryList'
+            - description: The list of collaborations.
+    ListConfiguredTableAssociationsOutput:
+      type: object
+      required:
+        - configuredTableAssociationSummaries
+      properties:
+        configuredTableAssociationSummaries:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableAssociationSummaryList'
+            - description: The retrieved list of configured table associations.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token value retrieved from a previous call to access the next page of results.
+    ListConfiguredTablesOutput:
+      type: object
+      required:
+        - configuredTableSummaries
+      properties:
+        configuredTableSummaries:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableSummaryList'
+            - description: The configured tables listed by the request.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token value retrieved from a previous call to access the next page of results.
+    ListMembersOutput:
+      type: object
+      required:
+        - memberSummaries
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token value retrieved from a previous call to access the next page of results.
+        memberSummaries:
+          allOf:
+            - $ref: '#/components/schemas/MemberSummaryList'
+            - description: The list of members returned by the ListMembers operation.
+    ListMembershipsOutput:
+      type: object
+      required:
+        - membershipSummaries
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token value retrieved from a previous call to access the next page of results.
+        membershipSummaries:
+          allOf:
+            - $ref: '#/components/schemas/MembershipSummaryList'
+            - description: The list of memberships returned from the ListMemberships operation.
+    ListProtectedQueriesOutput:
+      type: object
+      required:
+        - protectedQueries
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token value retrieved from a previous call to access the next page of results.
+        protectedQueries:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedQuerySummaryList'
+            - description: A list of protected queries.
+    ListSchemasOutput:
+      type: object
+      required:
+        - schemaSummaries
+      properties:
+        schemaSummaries:
+          allOf:
+            - $ref: '#/components/schemas/SchemaSummaryList'
+            - description: The retrieved list of schemas.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token value retrieved from a previous call to access the next page of results.
+    StartProtectedQueryOutput:
+      type: object
+      required:
+        - protectedQuery
+      properties:
+        protectedQuery:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedQuery'
+            - description: The protected query.
+    ProtectedQuerySQLParametersQueryStringString:
+      type: string
+      minLength: 0
+      maxLength: 15000
+    ProtectedQueryOutputConfiguration:
+      type: object
+      properties:
+        s3:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedQueryS3OutputConfiguration'
+            - description: Required configuration for a protected query with an `S3` output type.
+      description: Contains configuration details for protected query output.
+    UpdateCollaborationOutput:
+      type: object
+      required:
+        - collaboration
+      properties:
+        collaboration:
+          allOf:
+            - $ref: '#/components/schemas/Collaboration'
+            - description: The entire collaboration that has been updated.
+    UpdateConfiguredTableOutput:
+      type: object
+      required:
+        - configuredTable
+      properties:
+        configuredTable:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTable'
+            - description: The updated configured table.
+    UpdateConfiguredTableAnalysisRuleOutput:
+      type: object
+      required:
+        - analysisRule
+      properties:
+        analysisRule:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableAnalysisRule'
+            - description: The entire updated analysis rule.
+    UpdateConfiguredTableAssociationOutput:
+      type: object
+      required:
+        - configuredTableAssociation
+      properties:
+        configuredTableAssociation:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableAssociation'
+            - description: The entire updated configured table association.
+    UpdateMembershipOutput:
+      type: object
+      required:
+        - membership
+      properties:
+        membership:
+          $ref: '#/components/schemas/Membership'
+    UpdateProtectedQueryOutput:
+      type: object
+      required:
+        - protectedQuery
+      properties:
+        protectedQuery:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedQuery'
+            - description: The protected query output.
+    AccountId:
+      type: string
+      pattern: \d+
+      minLength: 12
+      maxLength: 12
+    AggregateColumnColumnNamesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalysisRuleColumnName'
+      minItems: 1
+    AggregateFunctionName:
+      type: string
+      enum:
+        - SUM
+        - SUM_DISTINCT
+        - COUNT
+        - COUNT_DISTINCT
+        - AVG
+    AggregateColumn:
+      type: object
+      required:
+        - columnNames
+        - function
+      properties:
+        columnNames:
+          allOf:
+            - $ref: '#/components/schemas/AggregateColumnColumnNamesList'
+            - description: Column names in configured table of aggregate columns.
+        function:
+          allOf:
+            - $ref: '#/components/schemas/AggregateFunctionName'
+            - description: Aggregation function that can be applied to aggregate column in query.
+      description: Column in configured table that can be used in aggregate function in query.
+    AnalysisRuleColumnName:
+      type: string
+      pattern: '[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?'
+      minLength: 1
+      maxLength: 127
+    AggregationConstraintMinimumInteger:
+      type: integer
+      minimum: 2
+    AggregationType:
+      type: string
+      enum:
+        - COUNT_DISTINCT
+    AggregationConstraint:
+      type: object
+      required:
+        - columnName
+        - minimum
+        - type
+      properties:
+        columnName:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRuleColumnName'
+            - description: Column in aggregation constraint for which there must be a minimum number of distinct values in an output row for it to be in the query output.
+        minimum:
+          allOf:
+            - $ref: '#/components/schemas/AggregationConstraintMinimumInteger'
+            - description: The minimum number of distinct values that an output row must be an aggregation of. Minimum threshold of distinct values for a specified column that must exist in an output row for it to be in the query output.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/AggregationType'
+            - description: The type of aggregation the constraint allows. The only valid value is currently `COUNT_DISTINCT`.
+      description: Constraint on query output removing output rows that do not meet a minimum number of distinct values of a specified column.
+    AggregationConstraints:
+      type: array
+      items:
+        $ref: '#/components/schemas/AggregationConstraint'
+      minItems: 1
+    AllowedColumnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ColumnName'
+      minItems: 1
+      maxItems: 250
+    AnalysisMethod:
+      type: string
+      enum:
+        - DIRECT_QUERY
+    CollaborationIdentifier:
+      type: string
+      pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+      minLength: 36
+      maxLength: 36
+    AnalysisRuleType:
+      type: string
+      enum:
+        - AGGREGATION
+        - LIST
+    Timestamp:
+      type: string
+      format: date-time
+    AnalysisRulePolicy:
+      type: object
+      properties:
+        v1:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRulePolicyV1'
+            - description: Controls on the query specifications that can be run on configured table..
+      description: Controls on the query specifications that can be run on configured table..
+    AnalysisRule:
+      type: object
+      required:
+        - collaborationId
+        - type
+        - name
+        - createTime
+        - updateTime
+        - policy
+      properties:
+        collaborationId:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationIdentifier'
+            - description: The unique ID for the associated collaboration.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRuleType'
+            - description: The type of analysis rule. Valid values are `AGGREGATION` and `LIST`.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/TableAlias'
+            - description: The name for the analysis rule.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the analysis rule was created.
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the analysis rule was last updated.
+        policy:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRulePolicy'
+            - description: A policy that describes the associated data usage limitations.
+      description: A specification about how data from the configured table can be used in a query.
+    AnalysisRuleAggregationAggregateColumnsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AggregateColumn'
+      minItems: 1
+    AnalysisRuleColumnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalysisRuleColumnName'
+    JoinRequiredOption:
+      type: string
+      enum:
+        - QUERY_RUNNER
+    ScalarFunctionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ScalarFunctions'
+    AnalysisRuleAggregation:
+      type: object
+      required:
+        - aggregateColumns
+        - joinColumns
+        - dimensionColumns
+        - scalarFunctions
+        - outputConstraints
+      properties:
+        aggregateColumns:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRuleAggregationAggregateColumnsList'
+            - description: The columns that query runners are allowed to use in aggregation queries.
+        joinColumns:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRuleColumnList'
+            - description: Columns in configured table that can be used in join statements and/or as aggregate columns. They can never be outputted directly.
+        joinRequired:
+          allOf:
+            - $ref: '#/components/schemas/JoinRequiredOption'
+            - description: Control that requires member who runs query to do a join with their configured table and/or other configured table in query
+        dimensionColumns:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRuleColumnList'
+            - description: 'The columns that query runners are allowed to select, group by, or filter by.'
+        scalarFunctions:
+          allOf:
+            - $ref: '#/components/schemas/ScalarFunctionsList'
+            - description: Set of scalar functions that are allowed to be used on dimension columns and the output of aggregation of metrics.
+        outputConstraints:
+          allOf:
+            - $ref: '#/components/schemas/AggregationConstraints'
+            - description: Columns that must meet a specific threshold value (after an aggregation function is applied to it) for each output row to be returned.
+      description: Enables query structure and specified queries that product aggregate statistics.
+    AnalysisRuleListJoinColumnsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalysisRuleColumnName'
+      minItems: 1
+    AnalysisRuleList:
+      type: object
+      required:
+        - joinColumns
+        - listColumns
+      properties:
+        joinColumns:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRuleListJoinColumnsList'
+            - description: Columns that can be used to join a configured table with the table of the member who can query and another members' configured tables.
+        listColumns:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRuleColumnList'
+            - description: Columns that can be listed in the output.
+      description: A type of analysis rule that enables row-level analysis.
+    AnalysisRulePolicyV1:
+      type: object
+      properties:
+        list:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRuleList'
+            - description: Analysis rule type that enables only list queries on a configured table.
+        aggregation:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRuleAggregation'
+            - description: Analysis rule type that enables only aggregation queries on a configured table.
+      description: Controls on the query specifications that can be run on configured table..
+    AnalysisRuleTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalysisRuleType'
+    String:
+      type: string
+    BatchGetSchemaError:
+      type: object
+      required:
+        - name
+        - code
+        - message
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/TableAlias'
+            - description: An error name for the error.
+        code:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An error code for the error. '
+        message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: An error message for the error.
+      description: An error describing why a schema could not be fetched.
+    BatchGetSchemaErrorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchGetSchemaError'
+      minItems: 0
+      maxItems: 25
+    TableAliasList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TableAlias'
+      minItems: 1
+      maxItems: 25
+    BatchGetSchemaInput:
+      type: object
+      required:
+        - names
+      title: BatchGetSchemaInput
+      properties:
+        names:
+          allOf:
+            - $ref: '#/components/schemas/TableAliasList'
+            - description: The names for the schema objects to retrieve.&gt;
+    SchemaList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Schema'
+      minItems: 0
+      maxItems: 25
+    UUID:
+      type: string
+      pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+      minLength: 36
+      maxLength: 36
+    CollaborationArn:
+      type: string
+      pattern: 'arn:aws:[\w]+:[\w]{2}-[\w]{4,9}-[\d]:[\d]{12}:collaboration/[\d\w-]+'
+      minLength: 0
+      maxLength: 100
+    CollaborationName:
+      type: string
+      pattern: '(?!\s*$)[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\t]*'
+      minLength: 1
+      maxLength: 100
+    CollaborationDescription:
+      type: string
+      pattern: '(?!\s*$)[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\t\r\n]*'
+      minLength: 1
+      maxLength: 255
+    DisplayName:
+      type: string
+      pattern: '(?!\s*$)[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\t]*'
+      minLength: 1
+      maxLength: 100
+    MemberStatus:
+      type: string
+      enum:
+        - INVITED
+        - ACTIVE
+        - LEFT
+        - REMOVED
+    MembershipArn:
+      type: string
+      pattern: 'arn:aws:[\w]+:[\w]{2}-[\w]{4,9}-[\d]:[\d]{12}:membership/[\d\w-]+'
+      minLength: 0
+      maxLength: 100
+    DataEncryptionMetadata:
+      type: object
+      required:
+        - allowCleartext
+        - allowDuplicates
+        - allowJoinsOnColumnsWithDifferentNames
+        - preserveNulls
+      properties:
+        allowCleartext:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether encrypted tables can contain cleartext data (true) or are to cryptographically process every column (false).
+        allowDuplicates:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether Fingerprint columns can contain duplicate entries (true) or are to contain only non-repeated values (false).
+        allowJoinsOnColumnsWithDifferentNames:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether Fingerprint columns can be joined on any other Fingerprint column with a different name (true) or can only be joined on Fingerprint columns of the same name (false).
+        preserveNulls:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether NULL values are to be copied as NULL to encrypted tables (true) or cryptographically processed (false).
+      description: The settings for client-side encryption for cryptographic computing.
+    CollaborationQueryLogStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    Collaboration:
+      type: object
+      required:
+        - id
+        - arn
+        - name
+        - creatorAccountId
+        - creatorDisplayName
+        - createTime
+        - updateTime
+        - memberStatus
+        - queryLogStatus
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The unique ID for the collaboration.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationArn'
+            - description: The unique ARN for the collaboration.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationName'
+            - description: A human-readable identifier provided by the collaboration owner. Display names are not unique.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationDescription'
+            - description: A description of the collaboration provided by the collaboration owner.
+        creatorAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The identifier used to reference members of the collaboration. Currently only supports AWS account ID.
+        creatorDisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: A display name of the collaboration creator.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the collaboration was created.
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the collaboration metadata was last updated.
+        memberStatus:
+          allOf:
+            - $ref: '#/components/schemas/MemberStatus'
+            - description: The status of a member in a collaboration.
+        membershipId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The unique ID for your membership within the collaboration.
+        membershipArn:
+          allOf:
+            - $ref: '#/components/schemas/MembershipArn'
+            - description: The unique ARN for your membership within the collaboration.
+        dataEncryptionMetadata:
+          allOf:
+            - $ref: '#/components/schemas/DataEncryptionMetadata'
+            - description: The settings for client-side encryption for cryptographic computing.
+        queryLogStatus:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationQueryLogStatus'
+            - description: An indicator as to whether query logging has been enabled or disabled for the collaboration.
+      description: The multi-party data share environment. The collaboration contains metadata about its purpose and participants.
+    CollaborationSummary:
+      type: object
+      required:
+        - id
+        - arn
+        - name
+        - creatorAccountId
+        - creatorDisplayName
+        - createTime
+        - updateTime
+        - memberStatus
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The identifier for the collaboration.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationArn'
+            - description: The ARN of the collaboration.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationName'
+            - description: A human-readable identifier provided by the collaboration owner. Display names are not unique.
+        creatorAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The identifier used to reference members of the collaboration. Currently only supports AWS Account ID.
+        creatorDisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The display name of the collaboration creator.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the collaboration was created.
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the collaboration metadata was last updated.
+        memberStatus:
+          allOf:
+            - $ref: '#/components/schemas/MemberStatus'
+            - description: The status of a member in a collaboration.
+        membershipId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The identifier of a member in a collaboration.
+        membershipArn:
+          allOf:
+            - $ref: '#/components/schemas/MembershipArn'
+            - description: The ARN of a member in a collaboration.
+      description: The metadata of the collaboration.
+    CollaborationSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CollaborationSummary'
+    ColumnTypeString:
+      type: string
+      pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\t]*'
+      minLength: 0
+      maxLength: 255
+    Column:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ColumnName'
+            - description: The name of the column.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ColumnTypeString'
+            - description: The type of the column.
+      description: 'A column within a schema relation, derived from the underlying AWS Glue table.'
+    ColumnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Column'
+    ConfiguredTableArn:
+      type: string
+      pattern: 'arn:aws:[\w]+:[\w]{2}-[\w]{4,9}-[\d]:[\d]{12}:configuredTable/[\d\w-]+'
+      minLength: 0
+      maxLength: 100
+    TableDescription:
+      type: string
+      pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\t\r\n]*'
+      minLength: 0
+      maxLength: 255
+    TableReference:
+      type: object
+      properties:
+        glue:
+          allOf:
+            - $ref: '#/components/schemas/GlueTableReference'
+            - description: 'If present, a reference to the AWS Glue table referred to by this table reference.'
+      description: 'A pointer to the data set that underlies this table. Currently, this can only be an AWS Glue table.'
+    ConfiguredTableAnalysisRuleTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConfiguredTableAnalysisRuleType'
+    ConfiguredTable:
+      type: object
+      required:
+        - id
+        - arn
+        - name
+        - tableReference
+        - createTime
+        - updateTime
+        - analysisRuleTypes
+        - analysisMethod
+        - allowedColumns
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The unique ID for the configured table.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableArn'
+            - description: The unique ARN for the configured table.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: A name for the configured table.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/TableDescription'
+            - description: A description for the configured table.
+        tableReference:
+          allOf:
+            - $ref: '#/components/schemas/TableReference'
+            - description: The AWS Glue table that this configured table represents.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the configured table was created.
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the configured table was last updated
+        analysisRuleTypes:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableAnalysisRuleTypeList'
+            - description: 'The types of analysis rules associated with this configured table. Valid values are `AGGREGATION` and `LIST`. Currently, only one analysis rule may be associated with a configured table.'
+        analysisMethod:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisMethod'
+            - description: The analysis method for the configured table. The only valid value is currently `DIRECT_QUERY`.
+        allowedColumns:
+          allOf:
+            - $ref: '#/components/schemas/AllowedColumnList'
+            - description: The columns within the underlying AWS Glue table that can be utilized within collaborations.
+      description: A table that has been configured for use in a collaboration.
+    ConfiguredTableAnalysisRulePolicy:
+      type: object
+      properties:
+        v1:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableAnalysisRulePolicyV1'
+            - description: Controls on the query specifications that can be run on a configured table.
+      description: Controls on the query specifications that can be run on a configured table.
+    ConfiguredTableAnalysisRuleType:
+      type: string
+      enum:
+        - AGGREGATION
+        - LIST
+    ConfiguredTableAnalysisRule:
+      type: object
+      required:
+        - configuredTableId
+        - configuredTableArn
+        - policy
+        - type
+        - createTime
+        - updateTime
+      properties:
+        configuredTableId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The unique ID for the configured table.
+        configuredTableArn:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableArn'
+            - description: The unique ARN for the configured table.
+        policy:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableAnalysisRulePolicy'
+            - description: The policy that controls SQL query rules.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableAnalysisRuleType'
+            - description: The type of configured table analysis rule. Valid values are `AGGREGATION` and `LIST`.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the configured table analysis rule was created.
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the configured table analysis rule was last updated.
+      description: 'A configured table analysis rule, which limits how data for this table can be used.'
+    ConfiguredTableAssociationArn:
+      type: string
+      pattern: 'arn:aws:[\w]+:[\w]{2}-[\w]{4,9}-[\d]:[\d]{12}:configuredTableAssociation/[\d\w-]+/[\d\w-]+'
+      minLength: 0
+      maxLength: 100
+    RoleArn:
+      type: string
+      pattern: 'arn:aws:iam::[\w]+:role/[\w+=,./@-]+'
+      minLength: 32
+      maxLength: 512
+    ConfiguredTableAssociation:
+      type: object
+      required:
+        - arn
+        - id
+        - configuredTableId
+        - configuredTableArn
+        - membershipId
+        - membershipArn
+        - roleArn
+        - name
+        - createTime
+        - updateTime
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableAssociationArn'
+            - description: The unique ARN for the configured table association.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The unique ID for the configured table association.
+        configuredTableId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The unique ID for the configured table that the association refers to.
+        configuredTableArn:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableArn'
+            - description: The unique ARN for the configured table that the association refers to.
+        membershipId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The unique ID for the membership this configured table association belongs to.
+        membershipArn:
+          allOf:
+            - $ref: '#/components/schemas/MembershipArn'
+            - description: The unique ARN for the membership this configured table association belongs to.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The service will assume this role to access catalog metadata and query the table.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/TableAlias'
+            - description: 'The name of the configured table association, in lowercase. The table is identified by this name when running protected queries against the underlying data.'
+        description:
+          allOf:
+            - $ref: '#/components/schemas/TableDescription'
+            - description: A description of the configured table association.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the configured table association was created.
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the configured table association was last updated.
+      description: A configured table association links a configured table to a collaboration.
+    ConfiguredTableAssociationIdentifier:
+      type: string
+      pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+      minLength: 36
+      maxLength: 36
+    MembershipIdentifier:
+      type: string
+      pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+      minLength: 36
+      maxLength: 36
+    ConfiguredTableAssociationSummary:
+      type: object
+      required:
+        - configuredTableId
+        - membershipId
+        - membershipArn
+        - name
+        - createTime
+        - updateTime
+        - id
+        - arn
+      properties:
+        configuredTableId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The unique configured table ID that this configured table association refers to.
+        membershipId:
+          allOf:
+            - $ref: '#/components/schemas/MembershipIdentifier'
+            - description: The unique ID for the membership that the configured table association belongs to.
+        membershipArn:
+          allOf:
+            - $ref: '#/components/schemas/MembershipArn'
+            - description: The unique ARN for the membership that the configured table association belongs to.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/TableAlias'
+            - description: The name of the configured table association. The table is identified by this name when running Protected Queries against the underlying data.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the configured table association was created.
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the configured table association was last updated.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The unique ID for the configured table association.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableAssociationArn'
+            - description: The unique ARN for the configured table association.
+      description: The configured table association summary for the objects listed by the request.
+    ConfiguredTableAssociationSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConfiguredTableAssociationSummary'
+    ConfiguredTableIdentifier:
+      type: string
+      pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+      minLength: 36
+      maxLength: 36
+    ConfiguredTableSummary:
+      type: object
+      required:
+        - id
+        - arn
+        - name
+        - createTime
+        - updateTime
+        - analysisRuleTypes
+        - analysisMethod
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableIdentifier'
+            - description: The unique ID of the configured table.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableArn'
+            - description: The unique ARN of the configured table.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The name of the configured table.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the configured table was created.
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the configured table was last updated.
+        analysisRuleTypes:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableAnalysisRuleTypeList'
+            - description: The types of analysis rules associated with this configured table.
+        analysisMethod:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisMethod'
+            - description: The analysis method for the configured tables. The only valid value is currently `DIRECT_QUERY`.
+      description: The configured table summary for the objects listed by the request.
+    ConfiguredTableSummaryList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/ConfiguredTableSummary'
+          - description: The member of the configured table summary list.
+    MemberList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MemberSpecification'
+      minItems: 0
+      maxItems: 9
+    MemberAbilities:
+      type: array
+      items:
+        $ref: '#/components/schemas/MemberAbility'
+    CreateCollaborationInput:
+      type: object
+      required:
+        - members
+        - name
+        - description
+        - creatorMemberAbilities
+        - creatorDisplayName
+        - queryLogStatus
+      title: CreateCollaborationInput
+      properties:
+        members:
+          allOf:
+            - $ref: '#/components/schemas/MemberList'
+            - description: 'A list of initial members, not including the creator. This list is immutable.'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationName'
+            - description: The display name for a collaboration.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationDescription'
+            - description: A description of the collaboration provided by the collaboration owner.
+        creatorMemberAbilities:
+          allOf:
+            - $ref: '#/components/schemas/MemberAbilities'
+            - description: The abilities granted to the collaboration creator.
+        creatorDisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The display name of the collaboration creator.
+        dataEncryptionMetadata:
+          allOf:
+            - $ref: '#/components/schemas/DataEncryptionMetadata'
+            - description: The settings for client-side encryption with Cryptographic Computing for Clean Rooms.
+        queryLogStatus:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationQueryLogStatus'
+            - description: An indicator as to whether query logging has been enabled or disabled for the collaboration.
+    CreateConfiguredTableAnalysisRuleInput:
+      type: object
+      required:
+        - analysisRuleType
+        - analysisRulePolicy
+      title: CreateConfiguredTableAnalysisRuleInput
+      properties:
+        analysisRuleType:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableAnalysisRuleType'
+            - description: The type of analysis rule. Valid values are AGGREGATION and LIST.
+        analysisRulePolicy:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableAnalysisRulePolicy'
+            - description: The entire created configured table analysis rule object.
+    CreateConfiguredTableAssociationInput:
+      type: object
+      required:
+        - name
+        - configuredTableIdentifier
+        - roleArn
+      title: CreateConfiguredTableAssociationInput
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/TableAlias'
+            - description: The name of the configured table association. This name is used to query the underlying configured table.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/TableDescription'
+            - description: A description for the configured table association.
+        configuredTableIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableIdentifier'
+            - description: A unique identifier for the configured table to be associated to. Currently accepts a configured table ID.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The service will assume this role to access catalog metadata and query the table.
+    CreateConfiguredTableInput:
+      type: object
+      required:
+        - name
+        - tableReference
+        - allowedColumns
+        - analysisMethod
+      title: CreateConfiguredTableInput
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The name of the configured table.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/TableDescription'
+            - description: A description for the configured table.
+        tableReference:
+          allOf:
+            - $ref: '#/components/schemas/TableReference'
+            - description: A reference to the AWS Glue table being configured.
+        allowedColumns:
+          allOf:
+            - $ref: '#/components/schemas/AllowedColumnList'
+            - description: The columns of the underlying table that can be used by collaborations or analysis rules.
+        analysisMethod:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisMethod'
+            - description: The analysis method for the configured tables. The only valid value is currently `DIRECT_QUERY`.
+    MembershipQueryLogStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    CreateMembershipInput:
+      type: object
+      required:
+        - collaborationIdentifier
+        - queryLogStatus
+      title: CreateMembershipInput
+      properties:
+        collaborationIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationIdentifier'
+            - description: The unique ID for the associated collaboration.
+        queryLogStatus:
+          allOf:
+            - $ref: '#/components/schemas/MembershipQueryLogStatus'
+            - description: An indicator as to whether query logging has been enabled or disabled for the collaboration.
+    Membership:
+      type: object
+      required:
+        - id
+        - arn
+        - collaborationArn
+        - collaborationId
+        - collaborationCreatorAccountId
+        - collaborationCreatorDisplayName
+        - collaborationName
+        - createTime
+        - updateTime
+        - status
+        - memberAbilities
+        - queryLogStatus
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The unique ID of the membership.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/MembershipArn'
+            - description: The unique ARN for the membership.
+        collaborationArn:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationArn'
+            - description: The unique ARN for the membership's associated collaboration.
+        collaborationId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The unique ID for the membership's collaboration.
+        collaborationCreatorAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The identifier used to reference members of the collaboration. Currently only supports AWS account ID.
+        collaborationCreatorDisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The display name of the collaboration creator.
+        collaborationName:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationName'
+            - description: The name of the membership's collaboration.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the membership was created.
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the membership metadata was last updated.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/MembershipStatus'
+            - description: 'The status of the membership. Valid values are `ACTIVE`, `REMOVED`, and `COLLABORATION_DELETED`.'
+        memberAbilities:
+          allOf:
+            - $ref: '#/components/schemas/MemberAbilities'
+            - description: The abilities granted to the collaboration member.
+        queryLogStatus:
+          allOf:
+            - $ref: '#/components/schemas/MembershipQueryLogStatus'
+            - description: An indicator as to whether query logging has been enabled or disabled for the collaboration.
+      description: The membership object.
+    DeleteCollaborationInput:
+      type: object
+      title: DeleteCollaborationInput
+      properties: {}
+    DeleteConfiguredTableAnalysisRuleInput:
+      type: object
+      title: DeleteConfiguredTableAnalysisRuleInput
+      properties: {}
+    DeleteConfiguredTableAssociationInput:
+      type: object
+      title: DeleteConfiguredTableAssociationInput
+      properties: {}
+    DeleteConfiguredTableInput:
+      type: object
+      title: DeleteConfiguredTableInput
+      properties: {}
+    DeleteMemberInput:
+      type: object
+      title: DeleteMemberInput
+      properties: {}
+    DeleteMembershipInput:
+      type: object
+      title: DeleteMembershipInput
+      properties: {}
+    FilterableMemberStatus:
+      type: string
+      enum:
+        - INVITED
+        - ACTIVE
+    GetCollaborationInput:
+      type: object
+      title: GetCollaborationInput
+      properties: {}
+    GetConfiguredTableAnalysisRuleInput:
+      type: object
+      title: GetConfiguredTableAnalysisRuleInput
+      properties: {}
+    GetConfiguredTableAssociationInput:
+      type: object
+      title: GetConfiguredTableAssociationInput
+      properties: {}
+    GetConfiguredTableInput:
+      type: object
+      title: GetConfiguredTableInput
+      properties: {}
+    GetMembershipInput:
+      type: object
+      title: GetMembershipInput
+      properties: {}
+    ProtectedQueryIdentifier:
+      type: string
+      pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+      minLength: 1
+      maxLength: 36
+    GetProtectedQueryInput:
+      type: object
+      title: GetProtectedQueryInput
+      properties: {}
+    ProtectedQuery:
+      type: object
+      required:
+        - id
+        - membershipId
+        - membershipArn
+        - createTime
+        - sqlParameters
+        - status
+        - resultConfiguration
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The identifier for a protected query instance.
+        membershipId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The identifier for the membership.
+        membershipArn:
+          allOf:
+            - $ref: '#/components/schemas/MembershipArn'
+            - description: The ARN of the membership.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the protected query was created.
+        sqlParameters:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedQuerySQLParameters'
+            - description: The protected query SQL parameters.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedQueryStatus'
+            - description: The status of the query.
+        resultConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedQueryResultConfiguration'
+            - description: Contains any details needed to write the query results.
+        statistics:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedQueryStatistics'
+            - description: Statistics about protected query execution.
+        result:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedQueryResult'
+            - description: The result of the protected query.
+        error:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedQueryError'
+            - description: An error thrown by the protected query.
+      description: The parameters for an AWS Clean Rooms protected query.
+    GetSchemaAnalysisRuleInput:
+      type: object
+      title: GetSchemaAnalysisRuleInput
+      properties: {}
+    GetSchemaInput:
+      type: object
+      title: GetSchemaInput
+      properties: {}
+    Schema:
+      type: object
+      required:
+        - columns
+        - partitionKeys
+        - analysisRuleTypes
+        - creatorAccountId
+        - name
+        - collaborationId
+        - collaborationArn
+        - description
+        - createTime
+        - updateTime
+        - type
+      properties:
+        columns:
+          allOf:
+            - $ref: '#/components/schemas/ColumnList'
+            - description: The columns for the relation this schema represents.
+        partitionKeys:
+          allOf:
+            - $ref: '#/components/schemas/ColumnList'
+            - description: The partition keys for the data set underlying this schema.
+        analysisRuleTypes:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRuleTypeList'
+            - description: 'The analysis rule types associated with the schema. Valued values are LIST and AGGREGATION. Currently, only one entry is present.'
+        analysisMethod:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisMethod'
+            - description: The analysis method for the schema. The only valid value is currently DIRECT_QUERY.
+        creatorAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The unique account ID for the AWS account that owns the schema.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/TableAlias'
+            - description: A name for the schema. The schema relation is referred to by this name when queried by a protected query.
+        collaborationId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The unique ID for the collaboration that the schema belongs to.
+        collaborationArn:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationArn'
+            - description: The unique ARN for the collaboration that the schema belongs to.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/TableDescription'
+            - description: A description for the schema.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the schema was created.
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the schema was last updated.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/SchemaType'
+            - description: The type of schema. The only valid value is currently `TABLE`.
+      description: A schema is a relation within a collaboration.
+    GlueResourceName:
+      type: string
+      pattern: '[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?'
+      minLength: 0
+      maxLength: 128
+    KeyPrefix:
+      type: string
+      pattern: '[\w!.*/-]*'
+    PaginationToken:
+      type: string
+      minLength: 0
+      maxLength: 10240
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListCollaborationsInput:
+      type: object
+      title: ListCollaborationsInput
+      properties: {}
+    ListConfiguredTableAssociationsInput:
+      type: object
+      title: ListConfiguredTableAssociationsInput
+      properties: {}
+    ListConfiguredTablesInput:
+      type: object
+      title: ListConfiguredTablesInput
+      properties: {}
+    ListMembersInput:
+      type: object
+      title: ListMembersInput
+      properties: {}
+    MemberSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MemberSummary'
+    MembershipStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - REMOVED
+        - COLLABORATION_DELETED
+    ListMembershipsInput:
+      type: object
+      title: ListMembershipsInput
+      properties: {}
+    MembershipSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MembershipSummary'
+    ProtectedQueryStatus:
+      type: string
+      enum:
+        - SUBMITTED
+        - STARTED
+        - CANCELLED
+        - CANCELLING
+        - FAILED
+        - SUCCESS
+        - TIMED_OUT
+    ListProtectedQueriesInput:
+      type: object
+      title: ListProtectedQueriesInput
+      properties: {}
+    ProtectedQuerySummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProtectedQuerySummary'
+    SchemaType:
+      type: string
+      enum:
+        - TABLE
+    ListSchemasInput:
+      type: object
+      title: ListSchemasInput
+      properties: {}
+    SchemaSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SchemaSummary'
+    Long:
+      type: integer
+    MemberSummary:
+      type: object
+      required:
+        - accountId
+        - status
+        - displayName
+        - abilities
+        - createTime
+        - updateTime
+      properties:
+        accountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The identifier used to reference members of the collaboration. Currently only supports AWS Account ID.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/MemberStatus'
+            - description: 'The status of the member. Valid values are `INVITED`, `ACTIVE`, `LEFT`, and `REMOVED`.'
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The member's display name.
+        abilities:
+          allOf:
+            - $ref: '#/components/schemas/MemberAbilities'
+            - description: The abilities granted to the collaboration member.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the member was created.
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the member metadata was last updated.
+        membershipId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: 'The unique ID for the member''s associated membership, if present.'
+        membershipArn:
+          allOf:
+            - $ref: '#/components/schemas/MembershipArn'
+            - description: 'The unique ARN for the member''s associated membership, if present.'
+      description: The member object listed by the request.
+    MembershipSummary:
+      type: object
+      required:
+        - id
+        - arn
+        - collaborationArn
+        - collaborationId
+        - collaborationCreatorAccountId
+        - collaborationCreatorDisplayName
+        - collaborationName
+        - createTime
+        - updateTime
+        - status
+        - memberAbilities
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The unique ID for the membership's collaboration.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/MembershipArn'
+            - description: The unique ARN for the membership.
+        collaborationArn:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationArn'
+            - description: The unique ARN for the membership's associated collaboration.
+        collaborationId:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationIdentifier'
+            - description: The unique ID for the membership's collaboration.
+        collaborationCreatorAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The identifier of the AWS principal that created the collaboration. Currently only supports AWS account ID.
+        collaborationCreatorDisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The display name of the collaboration creator.
+        collaborationName:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationName'
+            - description: The name for the membership's collaboration.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the membership was created.
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the membership metadata was last updated.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/MembershipStatus'
+            - description: 'The status of the membership. Valid values are `ACTIVE`, `REMOVED`, and `COLLABORATION_DELETED`.'
+        memberAbilities:
+          allOf:
+            - $ref: '#/components/schemas/MemberAbilities'
+            - description: The abilities granted to the collaboration member.
+      description: The membership object listed by the request.
+    ProtectedQuerySQLParameters:
+      type: object
+      required:
+        - queryString
+      properties:
+        queryString:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedQuerySQLParametersQueryStringString'
+            - description: The query string to be submitted.
+      description: The parameters for the SQL type Protected Query.
+    ProtectedQueryResultConfiguration:
+      type: object
+      required:
+        - outputConfiguration
+      properties:
+        outputConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedQueryOutputConfiguration'
+            - description: Configuration for protected query results.
+      description: Contains configurations for protected query results.
+    ProtectedQueryStatistics:
+      type: object
+      properties:
+        totalDurationInMillis:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'The duration of the Protected Query, from creation until query completion.'
+      description: Contains statistics about the execution of the protected query.
+    ProtectedQueryResult:
+      type: object
+      required:
+        - output
+      properties:
+        output:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedQueryOutput'
+            - description: The output of the protected query.
+      description: Details about the query results.
+    ProtectedQueryError:
+      type: object
+      required:
+        - message
+        - code
+      properties:
+        message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description of why the query failed.
+        code:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: An error code for the error.
+      description: Details of errors thrown by the protected query.
+    ProtectedQueryS3Output:
+      type: object
+      required:
+        - location
+      properties:
+        location:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The S3 location of the result.
+      description: Contains output information for protected queries with an S3 output type.
+    ProtectedQueryOutput:
+      type: object
+      properties:
+        s3:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedQueryS3Output'
+            - description: 'If present, the output for a protected query with an `S3` output type.'
+      description: Contains details about the protected query output.
+    ProtectedQueryS3OutputConfiguration:
+      type: object
+      required:
+        - resultFormat
+        - bucket
+      properties:
+        resultFormat:
+          allOf:
+            - $ref: '#/components/schemas/ResultFormat'
+            - description: Intended file format of the result.
+        bucket:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedQueryS3OutputConfigurationBucketString'
+            - description: The S3 bucket to unload the protected query results.
+        keyPrefix:
+          allOf:
+            - $ref: '#/components/schemas/KeyPrefix'
+            - description: The S3 prefix to unload the protected query results.
+      description: Contains the configuration to write the query results to S3.
+    ResultFormat:
+      type: string
+      enum:
+        - CSV
+        - PARQUET
+    ProtectedQueryS3OutputConfigurationBucketString:
+      type: string
+      pattern: '.*(?!^(\d+\.)+\d+$)(^(([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])\.)*([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])$).*'
+      minLength: 3
+      maxLength: 63
+    ProtectedQuerySummary:
+      type: object
+      required:
+        - id
+        - membershipId
+        - membershipArn
+        - createTime
+        - status
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The unique ID of the protected query.
+        membershipId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The unique ID for the membership that initiated the protected query.
+        membershipArn:
+          allOf:
+            - $ref: '#/components/schemas/MembershipArn'
+            - description: The unique ARN for the membership that initiated the protected query.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the protected query was created.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedQueryStatus'
+            - description: 'The status of the protected query. Value values are `SUBMITTED`, `STARTED`, `CANCELLED`, `CANCELLING`, `FAILED`, `SUCCESS`, `TIMED_OUT`.'
+      description: The protected query summary for the objects listed by the request.
+    ProtectedQueryType:
+      type: string
+      enum:
+        - SQL
+    ScalarFunctions:
+      type: string
+      enum:
+        - TRUNC
+        - ABS
+        - CEILING
+        - FLOOR
+        - LN
+        - LOG
+        - ROUND
+        - SQRT
+        - CAST
+        - LOWER
+        - RTRIM
+        - UPPER
+        - COALESCE
+    SchemaSummary:
+      type: object
+      required:
+        - name
+        - type
+        - creatorAccountId
+        - createTime
+        - updateTime
+        - collaborationId
+        - collaborationArn
+        - analysisRuleTypes
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/TableAlias'
+            - description: The name for the schema object.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/SchemaType'
+            - description: The type of schema object. The only valid schema type is currently `TABLE`.
+        creatorAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The unique account ID for the AWS account that owns the schema.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the schema object was created.
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the schema object was last updated.
+        collaborationId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The unique ID for the collaboration that the schema belongs to.
+        collaborationArn:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationArn'
+            - description: The unique ARN for the collaboration that the schema belongs to.
+        analysisRuleTypes:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRuleTypeList'
+            - description: The types of analysis rules that are associated with this schema object.
+        analysisMethod:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisMethod'
+            - description: The analysis method for the associated schema. The only valid value is currently `DIRECT_QUERY`.
+      description: The schema summary for the objects listed by the request.
+    StartProtectedQueryInput:
+      type: object
+      required:
+        - type
+        - sqlParameters
+        - resultConfiguration
+      title: StartProtectedQueryInput
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedQueryType'
+            - description: The type of the protected query to be started.
+        sqlParameters:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedQuerySQLParameters'
+            - description: The protected SQL query parameters.
+        resultConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedQueryResultConfiguration'
+            - description: The details needed to write the query results.
+    TargetProtectedQueryStatus:
+      type: string
+      enum:
+        - CANCELLED
+    UpdateCollaborationInput:
+      type: object
+      title: UpdateCollaborationInput
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationName'
+            - description: A human-readable identifier provided by the collaboration owner. Display names are not unique.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationDescription'
+            - description: A description of the collaboration.
+    UpdateConfiguredTableAnalysisRuleInput:
+      type: object
+      required:
+        - analysisRulePolicy
+      title: UpdateConfiguredTableAnalysisRuleInput
+      properties:
+        analysisRulePolicy:
+          allOf:
+            - $ref: '#/components/schemas/ConfiguredTableAnalysisRulePolicy'
+            - description: The new analysis rule policy for the configured table analysis rule.
+    UpdateConfiguredTableAssociationInput:
+      type: object
+      title: UpdateConfiguredTableAssociationInput
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/TableDescription'
+            - description: A new description for the configured table association.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The service will assume this role to access catalog metadata and query the table.
+    UpdateConfiguredTableInput:
+      type: object
+      title: UpdateConfiguredTableInput
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: A new name for the configured table.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/TableDescription'
+            - description: A new description for the configured table.
+    UpdateMembershipInput:
+      type: object
+      title: UpdateMembershipInput
+      properties:
+        queryLogStatus:
+          allOf:
+            - $ref: '#/components/schemas/MembershipQueryLogStatus'
+            - description: An indicator as to whether query logging has been enabled or disabled for the collaboration.
+    UpdateProtectedQueryInput:
+      type: object
+      required:
+        - targetStatus
+      title: UpdateProtectedQueryInput
+      properties:
+        targetStatus:
+          allOf:
+            - $ref: '#/components/schemas/TargetProtectedQueryStatus'
+            - description: The target status of a query. Used to update the execution status of a currently running query.
+security:
+  - hmac: []

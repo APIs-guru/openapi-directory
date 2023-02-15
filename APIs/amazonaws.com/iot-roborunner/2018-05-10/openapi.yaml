@@ -1,0 +1,2638 @@
+openapi: 3.0.0
+info:
+  version: '2018-05-10'
+  x-release: v4
+  title: AWS IoT RoboRunner
+  description: 'An example service, deployed with the Octane Service creator, which will echo the string'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: iot-roborunner
+  x-aws-signingName: iotroborunner
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/iot-roborunner-2018-05-10.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/iotroborunner/'
+servers:
+  - url: 'http://iotroborunner.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS IoT RoboRunner multi-region endpoint
+  - url: 'https://iotroborunner.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS IoT RoboRunner multi-region endpoint
+  - url: 'http://iotroborunner.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS IoT RoboRunner endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://iotroborunner.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS IoT RoboRunner endpoint for China (Beijing) and China (Ningxia)
+paths:
+  /createDestination:
+    post:
+      operationId: CreateDestination
+      description: Grants permission to create a destination
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDestinationResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '486':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - site
+              properties:
+                clientToken:
+                  description: Token used for detecting replayed requests. Replayed requests will not be performed multiple times.
+                  type: string
+                  pattern: '[!-~]*'
+                  minLength: 1
+                  maxLength: 64
+                name:
+                  description: Human friendly name of the resource.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                site:
+                  description: Site ARN.
+                  type: string
+                  pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+                  minLength: 1
+                  maxLength: 1011
+                state:
+                  description: State of the destination.
+                  type: string
+                  enum:
+                    - ENABLED
+                    - DISABLED
+                    - DECOMMISSIONED
+                additionalFixedProperties:
+                  description: JSON document containing additional fixed properties regarding the destination
+                  type: string
+                  minLength: 1
+                  maxLength: 131072
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /createSite:
+    post:
+      operationId: CreateSite
+      description: Grants permission to create a site
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSiteResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - countryCode
+              properties:
+                clientToken:
+                  description: Token used for detecting replayed requests. Replayed requests will not be performed multiple times.
+                  type: string
+                  pattern: '[!-~]*'
+                  minLength: 1
+                  maxLength: 64
+                name:
+                  description: Human friendly name of the resource.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                countryCode:
+                  description: 'A valid ISO 3166-1 alpha-2 code for the country in which the site resides. e.g., US.'
+                  type: string
+                  pattern: '[a-zA-Z]{2}'
+                  minLength: 2
+                  maxLength: 2
+                description:
+                  description: A high-level description of the site.
+                  type: string
+                  minLength: 0
+                  maxLength: 140
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /createWorker:
+    post:
+      operationId: CreateWorker
+      description: Grants permission to create a worker
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorkerResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '486':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - fleet
+              properties:
+                clientToken:
+                  description: Token used for detecting replayed requests. Replayed requests will not be performed multiple times.
+                  type: string
+                  pattern: '[!-~]*'
+                  minLength: 1
+                  maxLength: 64
+                name:
+                  description: Human friendly name of the resource.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                fleet:
+                  description: Full ARN of the worker fleet.
+                  type: string
+                  pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/worker-fleet/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+                  minLength: 1
+                  maxLength: 1011
+                additionalTransientProperties:
+                  description: JSON blob containing unstructured worker properties that are transient and may change during regular operation.
+                  type: string
+                  minLength: 1
+                  maxLength: 131072
+                additionalFixedProperties:
+                  description: JSON blob containing unstructured worker properties that are fixed and won't change during regular operation.
+                  type: string
+                  minLength: 1
+                  maxLength: 131072
+                vendorProperties:
+                  description: Properties of the worker that are provided by the vendor FMS.
+                  type: object
+                  properties:
+                    vendorWorkerId:
+                      $ref: '#/components/schemas/VendorWorkerId'
+                    vendorWorkerIpAddress:
+                      $ref: '#/components/schemas/VendorWorkerIpAddress'
+                    vendorAdditionalTransientProperties:
+                      $ref: '#/components/schemas/VendorAdditionalTransientPropertiesJson'
+                    vendorAdditionalFixedProperties:
+                      $ref: '#/components/schemas/VendorAdditionalFixedPropertiesJson'
+                position:
+                  description: Supported coordinates for worker position.
+                  type: object
+                  properties:
+                    cartesianCoordinates:
+                      allOf:
+                        - $ref: '#/components/schemas/CartesianCoordinates'
+                        - description: Cartesian coordinates.
+                orientation:
+                  description: Worker orientation measured in units clockwise from north.
+                  type: object
+                  properties:
+                    degrees:
+                      allOf:
+                        - $ref: '#/components/schemas/OrientationDegreesDouble'
+                        - description: 'Degrees, limited on [0, 360)'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /createWorkerFleet:
+    post:
+      operationId: CreateWorkerFleet
+      description: Grants permission to create a worker fleet
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorkerFleetResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '486':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - site
+              properties:
+                clientToken:
+                  description: Token used for detecting replayed requests. Replayed requests will not be performed multiple times.
+                  type: string
+                  pattern: '[!-~]*'
+                  minLength: 1
+                  maxLength: 64
+                name:
+                  description: Human friendly name of the resource.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                site:
+                  description: Site ARN.
+                  type: string
+                  pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+                  minLength: 1
+                  maxLength: 1011
+                additionalFixedProperties:
+                  description: JSON blob containing additional fixed properties regarding the worker fleet
+                  type: string
+                  minLength: 1
+                  maxLength: 131072
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /deleteDestination:
+    post:
+      operationId: DeleteDestination
+      description: Grants permission to delete a destination
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDestinationResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  description: Destination ARN.
+                  type: string
+                  pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:destination/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$|^arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/destination/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+                  minLength: 1
+                  maxLength: 1011
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /deleteSite:
+    post:
+      operationId: DeleteSite
+      description: Grants permission to delete a site
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSiteResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  description: Site ARN.
+                  type: string
+                  pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+                  minLength: 1
+                  maxLength: 1011
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /deleteWorker:
+    post:
+      operationId: DeleteWorker
+      description: Grants permission to delete a worker
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteWorkerResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  description: Full ARN of the worker.
+                  type: string
+                  pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/worker-fleet/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/worker/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+                  minLength: 1
+                  maxLength: 1011
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /deleteWorkerFleet:
+    post:
+      operationId: DeleteWorkerFleet
+      description: Grants permission to delete a worker fleet
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteWorkerFleetResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  description: Full ARN of the worker fleet.
+                  type: string
+                  pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/worker-fleet/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+                  minLength: 1
+                  maxLength: 1011
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /getDestination#id:
+    get:
+      operationId: GetDestination
+      description: Grants permission to get a destination
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDestinationResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:destination/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$|^arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/destination/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+            description: Destination ARN.
+            minLength: 1
+            maxLength: 1011
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /getSite#id:
+    get:
+      operationId: GetSite
+      description: Grants permission to get a site
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSiteResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+            description: Site ARN.
+            minLength: 1
+            maxLength: 1011
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /getWorker#id:
+    get:
+      operationId: GetWorker
+      description: Grants permission to get a worker
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkerResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/worker-fleet/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/worker/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+            description: Full ARN of the worker.
+            minLength: 1
+            maxLength: 1011
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /getWorkerFleet#id:
+    get:
+      operationId: GetWorkerFleet
+      description: Grants permission to get a worker fleet
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkerFleetResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/worker-fleet/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+            description: Full ARN of the worker fleet.
+            minLength: 1
+            maxLength: 1011
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /listDestinations#site:
+    get:
+      operationId: ListDestinations
+      description: Grants permission to list destinations
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDestinationsResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: site
+          in: query
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+            description: Site ARN.
+            minLength: 1
+            maxLength: 1011
+        - name: maxResults
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: integer
+            description: Maximum number of results to retrieve in a single call.
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+            pattern: '.*[a-zA-Z0-9_.-/+=]*.*'
+            description: Pagination token returned when another page of data exists. Provide it in your next call to the API to receive the next page.
+            minLength: 1
+            maxLength: 2048
+        - name: state
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+            enum:
+              - ENABLED
+              - DISABLED
+              - DECOMMISSIONED
+            description: State of the destination.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /listSites:
+    get:
+      operationId: ListSites
+      description: Grants permission to list sites
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSitesResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: integer
+            description: Maximum number of results to retrieve in a single ListSites call.
+            minimum: 1
+            maximum: 25
+        - name: nextToken
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+            pattern: '.*[a-zA-Z0-9_.-/+=]*.*'
+            description: Pagination token returned when another page of data exists. Provide it in your next call to the API to receive the next page.
+            minLength: 1
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /listWorkerFleets#site:
+    get:
+      operationId: ListWorkerFleets
+      description: Grants permission to list worker fleets
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWorkerFleetsResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: site
+          in: query
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+            description: Site ARN.
+            minLength: 1
+            maxLength: 1011
+        - name: maxResults
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: integer
+            description: Maximum number of results to retrieve in a single ListWorkerFleets call.
+            minimum: 1
+            maximum: 25
+        - name: nextToken
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+            pattern: '.*[a-zA-Z0-9_.-/+=]*.*'
+            description: Pagination token returned when another page of data exists. Provide it in your next call to the API to receive the next page.
+            minLength: 1
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /listWorkers#site:
+    get:
+      operationId: ListWorkers
+      description: Grants permission to list workers
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWorkersResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: site
+          in: query
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+            description: Site ARN.
+            minLength: 1
+            maxLength: 1011
+        - name: maxResults
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: integer
+            description: Maximum number of results to retrieve in a single ListWorkers call.
+            minimum: 1
+            maximum: 25
+        - name: nextToken
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+            pattern: '.*[a-zA-Z0-9_.-/+=]*.*'
+            description: Pagination token returned when another page of data exists. Provide it in your next call to the API to receive the next page.
+            minLength: 1
+            maxLength: 2048
+        - name: fleet
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+            pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/worker-fleet/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+            description: Full ARN of the worker fleet.
+            minLength: 1
+            maxLength: 1011
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /updateDestination:
+    post:
+      operationId: UpdateDestination
+      description: Grants permission to update a destination
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDestinationResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  description: Destination ARN.
+                  type: string
+                  pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:destination/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$|^arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/destination/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+                  minLength: 1
+                  maxLength: 1011
+                name:
+                  description: Human friendly name of the resource.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                state:
+                  description: State of the destination.
+                  type: string
+                  enum:
+                    - ENABLED
+                    - DISABLED
+                    - DECOMMISSIONED
+                additionalFixedProperties:
+                  description: JSON document containing additional fixed properties regarding the destination
+                  type: string
+                  minLength: 1
+                  maxLength: 131072
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /updateSite:
+    post:
+      operationId: UpdateSite
+      description: Grants permission to update a site
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSiteResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  description: Site ARN.
+                  type: string
+                  pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+                  minLength: 1
+                  maxLength: 1011
+                name:
+                  description: Human friendly name of the resource.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                countryCode:
+                  description: 'A valid ISO 3166-1 alpha-2 code for the country in which the site resides. e.g., US.'
+                  type: string
+                  pattern: '[a-zA-Z]{2}'
+                  minLength: 2
+                  maxLength: 2
+                description:
+                  description: A high-level description of the site.
+                  type: string
+                  minLength: 0
+                  maxLength: 140
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /updateWorker:
+    post:
+      operationId: UpdateWorker
+      description: Grants permission to update a worker
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateWorkerResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  description: Full ARN of the worker.
+                  type: string
+                  pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/worker-fleet/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/worker/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+                  minLength: 1
+                  maxLength: 1011
+                name:
+                  description: Human friendly name of the resource.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                additionalTransientProperties:
+                  description: JSON blob containing unstructured worker properties that are transient and may change during regular operation.
+                  type: string
+                  minLength: 1
+                  maxLength: 131072
+                additionalFixedProperties:
+                  description: JSON blob containing unstructured worker properties that are fixed and won't change during regular operation.
+                  type: string
+                  minLength: 1
+                  maxLength: 131072
+                vendorProperties:
+                  description: Properties of the worker that are provided by the vendor FMS.
+                  type: object
+                  properties:
+                    vendorWorkerId:
+                      $ref: '#/components/schemas/VendorWorkerId'
+                    vendorWorkerIpAddress:
+                      $ref: '#/components/schemas/VendorWorkerIpAddress'
+                    vendorAdditionalTransientProperties:
+                      $ref: '#/components/schemas/VendorAdditionalTransientPropertiesJson'
+                    vendorAdditionalFixedProperties:
+                      $ref: '#/components/schemas/VendorAdditionalFixedPropertiesJson'
+                position:
+                  description: Supported coordinates for worker position.
+                  type: object
+                  properties:
+                    cartesianCoordinates:
+                      allOf:
+                        - $ref: '#/components/schemas/CartesianCoordinates'
+                        - description: Cartesian coordinates.
+                orientation:
+                  description: Worker orientation measured in units clockwise from north.
+                  type: object
+                  properties:
+                    degrees:
+                      allOf:
+                        - $ref: '#/components/schemas/OrientationDegreesDouble'
+                        - description: 'Degrees, limited on [0, 360)'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /updateWorkerFleet:
+    post:
+      operationId: UpdateWorkerFleet
+      description: Grants permission to update a worker fleet
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateWorkerFleetResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  description: Full ARN of the worker fleet.
+                  type: string
+                  pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/worker-fleet/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+                  minLength: 1
+                  maxLength: 1011
+                name:
+                  description: Human friendly name of the resource.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                additionalFixedProperties:
+                  description: JSON blob containing additional fixed properties regarding the worker fleet
+                  type: string
+                  minLength: 1
+                  maxLength: 131072
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateDestinationResponse:
+      type: object
+      required:
+        - arn
+        - id
+        - createdAt
+        - updatedAt
+        - state
+      properties:
+        arn:
+          $ref: '#/components/schemas/DestinationArn'
+        id:
+          $ref: '#/components/schemas/DestinationId'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAtTimestamp'
+        updatedAt:
+          $ref: '#/components/schemas/UpdatedAtTimestamp'
+        state:
+          $ref: '#/components/schemas/DestinationState'
+    ConflictException: {}
+    AccessDeniedException: {}
+    ValidationException: {}
+    ResourceNotFoundException: {}
+    ThrottlingException: {}
+    InternalServerException: {}
+    ServiceQuotaExceededException: {}
+    CreateSiteResponse:
+      type: object
+      required:
+        - arn
+        - id
+        - createdAt
+        - updatedAt
+      properties:
+        arn:
+          $ref: '#/components/schemas/SiteArn'
+        id:
+          $ref: '#/components/schemas/SiteId'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAtTimestamp'
+        updatedAt:
+          $ref: '#/components/schemas/UpdatedAtTimestamp'
+    CreateWorkerResponse:
+      type: object
+      required:
+        - arn
+        - id
+        - createdAt
+        - updatedAt
+        - site
+      properties:
+        arn:
+          $ref: '#/components/schemas/WorkerArn'
+        id:
+          $ref: '#/components/schemas/WorkerId'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAtTimestamp'
+        updatedAt:
+          $ref: '#/components/schemas/UpdatedAtTimestamp'
+        site:
+          $ref: '#/components/schemas/SiteArn'
+    VendorWorkerId:
+      type: string
+      description: The worker ID defined by the vendor FMS.
+      minLength: 1
+      maxLength: 255
+    VendorWorkerIpAddress:
+      type: string
+      description: The worker IP address defined by the vendor FMS.
+      minLength: 1
+      maxLength: 45
+    VendorAdditionalTransientPropertiesJson:
+      type: string
+      description: JSON blob containing unstructured vendor properties that are transient and may change during regular operation.
+      minLength: 1
+      maxLength: 131072
+    VendorAdditionalFixedPropertiesJson:
+      type: string
+      description: JSON blob containing unstructured vendor properties that are fixed and won't change during regular operation.
+      minLength: 1
+      maxLength: 131072
+    CartesianCoordinates:
+      type: object
+      required:
+        - x
+        - 'y'
+      properties:
+        x:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: X coordinate.
+        'y':
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: Y coordinate.
+        z:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: Z coordinate.
+      description: Cartesian coordinates in 3D space relative to the RoboRunner origin.
+    OrientationDegreesDouble:
+      type: number
+      format: double
+      minimum: 0
+      maximum: 360
+    CreateWorkerFleetResponse:
+      type: object
+      required:
+        - arn
+        - id
+        - createdAt
+        - updatedAt
+      properties:
+        arn:
+          $ref: '#/components/schemas/WorkerFleetArn'
+        id:
+          $ref: '#/components/schemas/WorkerFleetId'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAtTimestamp'
+        updatedAt:
+          $ref: '#/components/schemas/UpdatedAtTimestamp'
+    DeleteDestinationResponse:
+      type: object
+      properties: {}
+    DeleteSiteResponse:
+      type: object
+      properties: {}
+    DeleteWorkerResponse:
+      type: object
+      properties: {}
+    DeleteWorkerFleetResponse:
+      type: object
+      properties: {}
+    GetDestinationResponse:
+      type: object
+      required:
+        - arn
+        - id
+        - name
+        - site
+        - createdAt
+        - updatedAt
+        - state
+      properties:
+        arn:
+          $ref: '#/components/schemas/DestinationArn'
+        id:
+          $ref: '#/components/schemas/DestinationId'
+        name:
+          $ref: '#/components/schemas/Name'
+        site:
+          $ref: '#/components/schemas/SiteArn'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAtTimestamp'
+        updatedAt:
+          $ref: '#/components/schemas/UpdatedAtTimestamp'
+        state:
+          $ref: '#/components/schemas/DestinationState'
+        additionalFixedProperties:
+          $ref: '#/components/schemas/DestinationAdditionalFixedProperties'
+    GetSiteResponse:
+      type: object
+      required:
+        - arn
+        - id
+        - name
+        - countryCode
+        - createdAt
+        - updatedAt
+      properties:
+        arn:
+          $ref: '#/components/schemas/SiteArn'
+        id:
+          $ref: '#/components/schemas/SiteId'
+        name:
+          $ref: '#/components/schemas/Name'
+        countryCode:
+          $ref: '#/components/schemas/SiteCountryCode'
+        description:
+          $ref: '#/components/schemas/SiteDescription'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAtTimestamp'
+        updatedAt:
+          $ref: '#/components/schemas/UpdatedAtTimestamp'
+    GetWorkerResponse:
+      type: object
+      required:
+        - arn
+        - id
+        - fleet
+        - site
+        - createdAt
+        - updatedAt
+        - name
+      properties:
+        arn:
+          $ref: '#/components/schemas/WorkerArn'
+        id:
+          $ref: '#/components/schemas/WorkerId'
+        fleet:
+          $ref: '#/components/schemas/WorkerFleetArn'
+        site:
+          $ref: '#/components/schemas/SiteArn'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAtTimestamp'
+        updatedAt:
+          $ref: '#/components/schemas/UpdatedAtTimestamp'
+        name:
+          $ref: '#/components/schemas/Name'
+        additionalTransientProperties:
+          $ref: '#/components/schemas/WorkerAdditionalTransientPropertiesJson'
+        additionalFixedProperties:
+          $ref: '#/components/schemas/WorkerAdditionalFixedPropertiesJson'
+        vendorProperties:
+          $ref: '#/components/schemas/VendorProperties'
+        position:
+          $ref: '#/components/schemas/PositionCoordinates'
+        orientation:
+          $ref: '#/components/schemas/Orientation'
+    GetWorkerFleetResponse:
+      type: object
+      required:
+        - id
+        - arn
+        - name
+        - site
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          $ref: '#/components/schemas/WorkerFleetId'
+        arn:
+          $ref: '#/components/schemas/WorkerFleetArn'
+        name:
+          $ref: '#/components/schemas/Name'
+        site:
+          $ref: '#/components/schemas/SiteArn'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAtTimestamp'
+        updatedAt:
+          $ref: '#/components/schemas/UpdatedAtTimestamp'
+        additionalFixedProperties:
+          $ref: '#/components/schemas/WorkerFleetAdditionalFixedProperties'
+    ListDestinationsResponse:
+      type: object
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+        destinations:
+          $ref: '#/components/schemas/Destinations'
+    ListSitesResponse:
+      type: object
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+        sites:
+          $ref: '#/components/schemas/Sites'
+    ListWorkerFleetsResponse:
+      type: object
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+        workerFleets:
+          $ref: '#/components/schemas/WorkerFleets'
+    ListWorkersResponse:
+      type: object
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+        workers:
+          $ref: '#/components/schemas/Workers'
+    UpdateDestinationResponse:
+      type: object
+      required:
+        - arn
+        - id
+        - name
+        - updatedAt
+        - state
+      properties:
+        arn:
+          $ref: '#/components/schemas/DestinationArn'
+        id:
+          $ref: '#/components/schemas/DestinationId'
+        name:
+          $ref: '#/components/schemas/Name'
+        updatedAt:
+          $ref: '#/components/schemas/UpdatedAtTimestamp'
+        state:
+          $ref: '#/components/schemas/DestinationState'
+        additionalFixedProperties:
+          $ref: '#/components/schemas/DestinationAdditionalFixedProperties'
+    UpdateSiteResponse:
+      type: object
+      required:
+        - arn
+        - id
+        - name
+        - updatedAt
+      properties:
+        arn:
+          $ref: '#/components/schemas/SiteArn'
+        id:
+          $ref: '#/components/schemas/SiteId'
+        name:
+          $ref: '#/components/schemas/Name'
+        countryCode:
+          $ref: '#/components/schemas/SiteCountryCode'
+        description:
+          $ref: '#/components/schemas/SiteDescription'
+        updatedAt:
+          $ref: '#/components/schemas/UpdatedAtTimestamp'
+    UpdateWorkerResponse:
+      type: object
+      required:
+        - arn
+        - id
+        - fleet
+        - updatedAt
+        - name
+      properties:
+        arn:
+          $ref: '#/components/schemas/WorkerArn'
+        id:
+          $ref: '#/components/schemas/WorkerId'
+        fleet:
+          $ref: '#/components/schemas/WorkerFleetArn'
+        updatedAt:
+          $ref: '#/components/schemas/UpdatedAtTimestamp'
+        name:
+          $ref: '#/components/schemas/Name'
+        additionalTransientProperties:
+          $ref: '#/components/schemas/WorkerAdditionalTransientPropertiesJson'
+        additionalFixedProperties:
+          $ref: '#/components/schemas/WorkerAdditionalFixedPropertiesJson'
+        orientation:
+          $ref: '#/components/schemas/Orientation'
+        vendorProperties:
+          $ref: '#/components/schemas/VendorProperties'
+        position:
+          $ref: '#/components/schemas/PositionCoordinates'
+    UpdateWorkerFleetResponse:
+      type: object
+      required:
+        - arn
+        - id
+        - name
+        - updatedAt
+      properties:
+        arn:
+          $ref: '#/components/schemas/WorkerFleetArn'
+        id:
+          $ref: '#/components/schemas/WorkerFleetId'
+        name:
+          $ref: '#/components/schemas/Name'
+        updatedAt:
+          $ref: '#/components/schemas/UpdatedAtTimestamp'
+        additionalFixedProperties:
+          $ref: '#/components/schemas/WorkerFleetAdditionalFixedProperties'
+    Double:
+      type: number
+      format: double
+    IdempotencyToken:
+      type: string
+      pattern: '[!-~]*'
+      description: Token used for detecting replayed requests. Replayed requests will not be performed multiple times.
+      minLength: 1
+      maxLength: 64
+    Name:
+      type: string
+      description: Human friendly name of the resource.
+      minLength: 1
+      maxLength: 255
+    SiteGenericIdentifier:
+      type: string
+      pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+      description: Site ARN.
+      minLength: 1
+      maxLength: 1011
+    DestinationState:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+        - DECOMMISSIONED
+      description: State of the destination.
+    DestinationAdditionalFixedProperties:
+      type: string
+      description: JSON document containing additional fixed properties regarding the destination
+      minLength: 1
+      maxLength: 131072
+    CreateDestinationRequest:
+      type: object
+      required:
+        - name
+        - site
+      title: CreateDestinationRequest
+      properties:
+        clientToken:
+          $ref: '#/components/schemas/IdempotencyToken'
+        name:
+          $ref: '#/components/schemas/Name'
+        site:
+          $ref: '#/components/schemas/SiteGenericIdentifier'
+        state:
+          allOf:
+            - $ref: '#/components/schemas/DestinationState'
+            - description: The state of the destination. Default used if not specified.
+        additionalFixedProperties:
+          $ref: '#/components/schemas/DestinationAdditionalFixedProperties'
+    DestinationArn:
+      type: string
+      pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:destination/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$|^arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/destination/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+      description: Destination ARN.
+      minLength: 1
+      maxLength: 1011
+    DestinationId:
+      type: string
+      description: Filters access by the destination's identifier
+      minLength: 1
+      maxLength: 255
+    CreatedAtTimestamp:
+      type: string
+      description: Timestamp at which the resource was created.
+      format: date-time
+    UpdatedAtTimestamp:
+      type: string
+      description: Timestamp at which the resource was last updated.
+      format: date-time
+    SiteCountryCode:
+      type: string
+      pattern: '[a-zA-Z]{2}'
+      description: 'A valid ISO 3166-1 alpha-2 code for the country in which the site resides. e.g., US.'
+      minLength: 2
+      maxLength: 2
+    SiteDescription:
+      type: string
+      description: A high-level description of the site.
+      minLength: 0
+      maxLength: 140
+    CreateSiteRequest:
+      type: object
+      required:
+        - name
+        - countryCode
+      title: CreateSiteRequest
+      properties:
+        clientToken:
+          $ref: '#/components/schemas/IdempotencyToken'
+        name:
+          $ref: '#/components/schemas/Name'
+        countryCode:
+          $ref: '#/components/schemas/SiteCountryCode'
+        description:
+          $ref: '#/components/schemas/SiteDescription'
+    SiteArn:
+      type: string
+      pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+      description: Site ARN.
+      minLength: 1
+      maxLength: 1011
+    SiteId:
+      type: string
+      description: Filters access by the site's identifier
+      minLength: 1
+      maxLength: 255
+    WorkerFleetAdditionalFixedProperties:
+      type: string
+      description: JSON blob containing additional fixed properties regarding the worker fleet
+      minLength: 1
+      maxLength: 131072
+    CreateWorkerFleetRequest:
+      type: object
+      required:
+        - name
+        - site
+      title: CreateWorkerFleetRequest
+      properties:
+        clientToken:
+          $ref: '#/components/schemas/IdempotencyToken'
+        name:
+          $ref: '#/components/schemas/Name'
+        site:
+          $ref: '#/components/schemas/SiteGenericIdentifier'
+        additionalFixedProperties:
+          $ref: '#/components/schemas/WorkerFleetAdditionalFixedProperties'
+    WorkerFleetArn:
+      type: string
+      pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/worker-fleet/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+      description: Full ARN of the worker fleet.
+      minLength: 1
+      maxLength: 1011
+    WorkerFleetId:
+      type: string
+      description: Filters access by the worker fleet's identifier
+      minLength: 1
+      maxLength: 255
+    WorkerFleetGenericIdentifier:
+      type: string
+      pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/worker-fleet/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+      description: Full ARN of the worker fleet.
+      minLength: 1
+      maxLength: 1011
+    WorkerAdditionalTransientPropertiesJson:
+      type: string
+      description: JSON blob containing unstructured worker properties that are transient and may change during regular operation.
+      minLength: 1
+      maxLength: 131072
+    WorkerAdditionalFixedPropertiesJson:
+      type: string
+      description: JSON blob containing unstructured worker properties that are fixed and won't change during regular operation.
+      minLength: 1
+      maxLength: 131072
+    VendorProperties:
+      type: object
+      required:
+        - vendorWorkerId
+      properties:
+        vendorWorkerId:
+          $ref: '#/components/schemas/VendorWorkerId'
+        vendorWorkerIpAddress:
+          $ref: '#/components/schemas/VendorWorkerIpAddress'
+        vendorAdditionalTransientProperties:
+          $ref: '#/components/schemas/VendorAdditionalTransientPropertiesJson'
+        vendorAdditionalFixedProperties:
+          $ref: '#/components/schemas/VendorAdditionalFixedPropertiesJson'
+      description: Properties of the worker that are provided by the vendor FMS.
+    PositionCoordinates:
+      type: object
+      properties:
+        cartesianCoordinates:
+          allOf:
+            - $ref: '#/components/schemas/CartesianCoordinates'
+            - description: Cartesian coordinates.
+      description: Supported coordinates for worker position.
+    Orientation:
+      type: object
+      properties:
+        degrees:
+          allOf:
+            - $ref: '#/components/schemas/OrientationDegreesDouble'
+            - description: 'Degrees, limited on [0, 360)'
+      description: Worker orientation measured in units clockwise from north.
+    CreateWorkerRequest:
+      type: object
+      required:
+        - name
+        - fleet
+      title: CreateWorkerRequest
+      properties:
+        clientToken:
+          $ref: '#/components/schemas/IdempotencyToken'
+        name:
+          $ref: '#/components/schemas/Name'
+        fleet:
+          $ref: '#/components/schemas/WorkerFleetGenericIdentifier'
+        additionalTransientProperties:
+          $ref: '#/components/schemas/WorkerAdditionalTransientPropertiesJson'
+        additionalFixedProperties:
+          $ref: '#/components/schemas/WorkerAdditionalFixedPropertiesJson'
+        vendorProperties:
+          $ref: '#/components/schemas/VendorProperties'
+        position:
+          $ref: '#/components/schemas/PositionCoordinates'
+        orientation:
+          $ref: '#/components/schemas/Orientation'
+    WorkerArn:
+      type: string
+      pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/worker-fleet/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/worker/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+      description: Full ARN of the worker.
+      minLength: 1
+      maxLength: 1011
+    WorkerId:
+      type: string
+      description: Filters access by the workers identifier
+      minLength: 1
+      maxLength: 255
+    DestinationGenericIdentifier:
+      type: string
+      pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:destination/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$|^arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/destination/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+      description: Destination ARN.
+      minLength: 1
+      maxLength: 1011
+    DeleteDestinationRequest:
+      type: object
+      required:
+        - id
+      title: DeleteDestinationRequest
+      properties:
+        id:
+          $ref: '#/components/schemas/DestinationGenericIdentifier'
+    DeleteSiteRequest:
+      type: object
+      required:
+        - id
+      title: DeleteSiteRequest
+      properties:
+        id:
+          $ref: '#/components/schemas/SiteGenericIdentifier'
+    DeleteWorkerFleetRequest:
+      type: object
+      required:
+        - id
+      title: DeleteWorkerFleetRequest
+      properties:
+        id:
+          $ref: '#/components/schemas/WorkerFleetGenericIdentifier'
+    WorkerGenericIdentifier:
+      type: string
+      pattern: 'arn:aws:iotroborunner:[\w-]+:\w+:site/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/worker-fleet/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/worker/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+      description: Full ARN of the worker.
+      minLength: 1
+      maxLength: 1011
+    DeleteWorkerRequest:
+      type: object
+      required:
+        - id
+      title: DeleteWorkerRequest
+      properties:
+        id:
+          $ref: '#/components/schemas/WorkerGenericIdentifier'
+    Destination:
+      type: object
+      required:
+        - arn
+        - id
+        - name
+        - site
+        - createdAt
+        - updatedAt
+        - state
+      properties:
+        arn:
+          $ref: '#/components/schemas/DestinationArn'
+        id:
+          $ref: '#/components/schemas/DestinationId'
+        name:
+          $ref: '#/components/schemas/Name'
+        site:
+          $ref: '#/components/schemas/SiteArn'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAtTimestamp'
+        updatedAt:
+          $ref: '#/components/schemas/UpdatedAtTimestamp'
+        state:
+          $ref: '#/components/schemas/DestinationState'
+        additionalFixedProperties:
+          $ref: '#/components/schemas/DestinationAdditionalFixedProperties'
+      description: Area within a facility where work can be performed.
+    Destinations:
+      type: array
+      description: List of destinations.
+      items:
+        $ref: '#/components/schemas/Destination'
+    GetDestinationRequest:
+      type: object
+      title: GetDestinationRequest
+      properties: {}
+    GetSiteRequest:
+      type: object
+      title: GetSiteRequest
+      properties: {}
+    GetWorkerFleetRequest:
+      type: object
+      title: GetWorkerFleetRequest
+      properties: {}
+    GetWorkerRequest:
+      type: object
+      title: GetWorkerRequest
+      properties: {}
+    PageSize:
+      type: integer
+      description: Maximum number of results to retrieve in a single call.
+      minimum: 1
+      maximum: 1000
+    PaginationToken:
+      type: string
+      pattern: '.*[a-zA-Z0-9_.-/+=]*.*'
+      description: Pagination token returned when another page of data exists. Provide it in your next call to the API to receive the next page.
+      minLength: 1
+      maxLength: 2048
+    ListDestinationsRequest:
+      type: object
+      title: ListDestinationsRequest
+      properties: {}
+    ListSitesPageSize:
+      type: integer
+      description: Maximum number of results to retrieve in a single ListSites call.
+      minimum: 1
+      maximum: 25
+    ListSitesRequest:
+      type: object
+      title: ListSitesRequest
+      properties: {}
+    Sites:
+      type: array
+      description: List of facilities.
+      items:
+        $ref: '#/components/schemas/Site'
+    ListWorkerFleetsPageSize:
+      type: integer
+      description: Maximum number of results to retrieve in a single ListWorkerFleets call.
+      minimum: 1
+      maximum: 25
+    ListWorkerFleetsRequest:
+      type: object
+      title: ListWorkerFleetsRequest
+      properties: {}
+    WorkerFleets:
+      type: array
+      description: List of worker fleets.
+      items:
+        $ref: '#/components/schemas/WorkerFleet'
+    ListWorkersPageSize:
+      type: integer
+      description: Maximum number of results to retrieve in a single ListWorkers call.
+      minimum: 1
+      maximum: 25
+    ListWorkersRequest:
+      type: object
+      title: ListWorkersRequest
+      properties: {}
+    Workers:
+      type: array
+      description: List of workers.
+      items:
+        $ref: '#/components/schemas/Worker'
+    Site:
+      type: object
+      required:
+        - arn
+        - name
+        - countryCode
+        - createdAt
+      properties:
+        arn:
+          $ref: '#/components/schemas/SiteArn'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the site. Mutable after creation and unique within a given account.
+        countryCode:
+          $ref: '#/components/schemas/SiteCountryCode'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAtTimestamp'
+      description: 'Facility containing destinations, workers, activities, and tasks.'
+    UpdateDestinationRequest:
+      type: object
+      required:
+        - id
+      title: UpdateDestinationRequest
+      properties:
+        id:
+          $ref: '#/components/schemas/DestinationGenericIdentifier'
+        name:
+          $ref: '#/components/schemas/Name'
+        state:
+          $ref: '#/components/schemas/DestinationState'
+        additionalFixedProperties:
+          $ref: '#/components/schemas/DestinationAdditionalFixedProperties'
+    UpdateSiteRequest:
+      type: object
+      required:
+        - id
+      title: UpdateSiteRequest
+      properties:
+        id:
+          $ref: '#/components/schemas/SiteGenericIdentifier'
+        name:
+          $ref: '#/components/schemas/Name'
+        countryCode:
+          $ref: '#/components/schemas/SiteCountryCode'
+        description:
+          $ref: '#/components/schemas/SiteDescription'
+    UpdateWorkerFleetRequest:
+      type: object
+      required:
+        - id
+      title: UpdateWorkerFleetRequest
+      properties:
+        id:
+          $ref: '#/components/schemas/WorkerFleetGenericIdentifier'
+        name:
+          $ref: '#/components/schemas/Name'
+        additionalFixedProperties:
+          $ref: '#/components/schemas/WorkerFleetAdditionalFixedProperties'
+    UpdateWorkerRequest:
+      type: object
+      required:
+        - id
+      title: UpdateWorkerRequest
+      properties:
+        id:
+          $ref: '#/components/schemas/WorkerGenericIdentifier'
+        name:
+          $ref: '#/components/schemas/Name'
+        additionalTransientProperties:
+          $ref: '#/components/schemas/WorkerAdditionalTransientPropertiesJson'
+        additionalFixedProperties:
+          $ref: '#/components/schemas/WorkerAdditionalFixedPropertiesJson'
+        vendorProperties:
+          $ref: '#/components/schemas/VendorProperties'
+        position:
+          $ref: '#/components/schemas/PositionCoordinates'
+        orientation:
+          $ref: '#/components/schemas/Orientation'
+    Worker:
+      type: object
+      required:
+        - arn
+        - id
+        - fleet
+        - createdAt
+        - updatedAt
+        - name
+        - site
+      properties:
+        arn:
+          $ref: '#/components/schemas/WorkerArn'
+        id:
+          $ref: '#/components/schemas/WorkerId'
+        fleet:
+          $ref: '#/components/schemas/WorkerFleetArn'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAtTimestamp'
+        updatedAt:
+          $ref: '#/components/schemas/UpdatedAtTimestamp'
+        name:
+          $ref: '#/components/schemas/Name'
+        site:
+          $ref: '#/components/schemas/SiteArn'
+        additionalTransientProperties:
+          $ref: '#/components/schemas/WorkerAdditionalTransientPropertiesJson'
+        additionalFixedProperties:
+          $ref: '#/components/schemas/WorkerAdditionalFixedPropertiesJson'
+        vendorProperties:
+          $ref: '#/components/schemas/VendorProperties'
+        position:
+          $ref: '#/components/schemas/PositionCoordinates'
+        orientation:
+          $ref: '#/components/schemas/Orientation'
+      description: A unit capable of performing tasks.
+    WorkerFleet:
+      type: object
+      required:
+        - arn
+        - id
+        - name
+        - site
+        - createdAt
+        - updatedAt
+      properties:
+        arn:
+          $ref: '#/components/schemas/WorkerFleetArn'
+        id:
+          $ref: '#/components/schemas/WorkerFleetId'
+        name:
+          $ref: '#/components/schemas/Name'
+        site:
+          $ref: '#/components/schemas/SiteArn'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAtTimestamp'
+        updatedAt:
+          $ref: '#/components/schemas/UpdatedAtTimestamp'
+        additionalFixedProperties:
+          $ref: '#/components/schemas/WorkerFleetAdditionalFixedProperties'
+      description: A collection of workers organized within a facility.
+security:
+  - hmac: []

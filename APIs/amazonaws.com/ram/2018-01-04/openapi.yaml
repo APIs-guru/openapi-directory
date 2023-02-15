@@ -3,7 +3,7 @@ info:
   version: '2018-01-04'
   x-release: v4
   title: AWS Resource Access Manager
-  description: '<p>This is the <i>Resource Access Manager API Reference</i>. This documentation provides descriptions and syntax for each of the actions and data types in RAM. RAM is a service that helps you securely share your Amazon Web Services resources across Amazon Web Services accounts and within your organization or organizational units (OUs) in Organizations. For supported resource types, you can also share resources with IAM roles and IAM users. If you have multiple Amazon Web Services accounts, you can use RAM to share those resources with other accounts.</p> <p>To learn more about RAM, see the following resources:</p> <ul> <li> <p> <a href="http://aws.amazon.com/ram">Resource Access Manager product page</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/ram/latest/userguide/">Resource Access Manager User Guide</a> </p> </li> </ul>'
+  description: '<p>This is the <i>Resource Access Manager API Reference</i>. This documentation provides descriptions and syntax for each of the actions and data types in RAM. RAM is a service that helps you securely share your Amazon Web Services resources across Amazon Web Services accounts. If you have multiple Amazon Web Services accounts, you can use RAM to share those resources with other accounts. If you use Organizations to manage your accounts, then you share your resources with your organization or organizational units (OUs). For supported resource types, you can also share resources with individual Identity and Access Management (IAM) roles an users. </p> <p>To learn more about RAM, see the following resources:</p> <ul> <li> <p> <a href="http://aws.amazon.com/ram">Resource Access Manager product page</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/ram/latest/userguide/">Resource Access Manager User Guide</a> </p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -116,7 +116,7 @@ paths:
   /acceptresourceshareinvitation:
     post:
       operationId: AcceptResourceShareInvitation
-      description: Accepts an invitation to a resource share from another Amazon Web Services account.
+      description: 'Accepts an invitation to a resource share from another Amazon Web Services account. After you accept the invitation, the resources included in the resource share are available to interact with in the relevant Amazon Web Services Management Consoles and tools.'
       responses:
         '200':
           description: Success
@@ -195,10 +195,10 @@ paths:
                 - resourceShareInvitationArn
               properties:
                 resourceShareInvitationArn:
-                  description: The Amazon Resource Name (ARN) of the invitation.
+                  description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the invitation that you want to accept.'
                   type: string
                 clientToken:
-                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p>'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -211,7 +211,7 @@ paths:
   /associateresourceshare:
     post:
       operationId: AssociateResourceShare
-      description: Associates the specified resource share with the specified principals and resources.
+      description: 'Adds the specified list of principals and list of resources to a resource share. Principals that already have access to this resource share immediately receive access to the added resources. Newly added principals immediately receive access to the resources shared in this resource share. '
       responses:
         '200':
           description: Success
@@ -291,6 +291,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnknownResourceException'
+        '492':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
       parameters: []
       requestBody:
         required: true
@@ -302,20 +308,20 @@ paths:
                 - resourceShareArn
               properties:
                 resourceShareArn:
-                  description: The Amazon Resource Name (ARN) of the resource share.
+                  description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share that you want to add principals or resources to.'
                   type: string
                 resourceArns:
-                  description: The Amazon Resource Names (ARNs) of the resources.
+                  description: 'Specifies a list of <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> of the resources that you want to share. This can be <code>null</code> if you want to add only principals.'
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
                 principals:
-                  description: '<p>The principals to associate with the resource share. The possible values are:</p> <ul> <li> <p>An Amazon Web Services account ID</p> </li> <li> <p>An Amazon Resource Name (ARN) of an organization in Organizations</p> </li> <li> <p>An ARN of an organizational unit (OU) in Organizations</p> </li> <li> <p>An ARN of an IAM role</p> </li> <li> <p>An ARN of an IAM user</p> </li> </ul> <note> <p>Not all resource types can be shared with IAM roles and IAM users. For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and IAM users</a> in the <i>Resource Access Manager User Guide</i>.</p> </note>'
+                  description: '<p>Specifies a list of principals to whom you want to the resource share. This can be <code>null</code> if you want to add only resources.</p> <p>What the principals can do with the resources in the share is determined by the RAM permissions that you associate with the resource share. See <a>AssociateResourceSharePermission</a>.</p> <p>You can include the following values:</p> <ul> <li> <p>An Amazon Web Services account ID, for example: <code>123456789012</code> </p> </li> <li> <p>An <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of an organization in Organizations, for example: <code>organizations::123456789012:organization/o-exampleorgid</code> </p> </li> <li> <p>An ARN of an organizational unit (OU) in Organizations, for example: <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code> </p> </li> <li> <p>An ARN of an IAM role, for example: <code>iam::123456789012:role/rolename</code> </p> </li> <li> <p>An ARN of an IAM user, for example: <code>iam::123456789012user/username</code> </p> </li> </ul> <note> <p>Not all resource types can be shared with IAM roles and users. For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User Guide</i>.</p> </note>'
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
                 clientToken:
-                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p>'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -328,7 +334,7 @@ paths:
   /associateresourcesharepermission:
     post:
       operationId: AssociateResourceSharePermission
-      description: Associates a permission with a resource share.
+      description: Adds or replaces the RAM permission for a resource type included in a resource share. You can have exactly one permission associated with each resource type in the resource share. You can add a new RAM permission only if there are currently no resources of that resource type currently in the resource share.
       responses:
         '200':
           description: Success
@@ -390,19 +396,19 @@ paths:
                 - permissionArn
               properties:
                 resourceShareArn:
-                  description: The Amazon Resource Name (ARN) of the resource share.
+                  description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share to which you want to add or replace permissions.'
                   type: string
                 permissionArn:
-                  description: The Amazon Resource Name (ARN) of the RAM permission to associate with the resource share.
+                  description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the RAM permission to associate with the resource share. To find the ARN for a permission, use either the <a>ListPermissions</a> operation or go to the <a href="https://console.aws.amazon.com/ram/home#Permissions:">Permissions library</a> page in the RAM console and then choose the name of the permission. The ARN is displayed on the detail page.'
                   type: string
                 replace:
-                  description: Indicates whether the permission should replace the permissions that are currently associated with the resource share. Use <code>true</code> to replace the current permissions. Use <code>false</code> to add the permission to the current permission.
+                  description: <p>Specifies whether the specified permission should replace or add to the existing permission associated with the resource share. Use <code>true</code> to replace the current permissions. Use <code>false</code> to add the permission to the current permission. The default value is <code>false</code>.</p> <note> <p>A resource share can have only one permission per resource type. If a resource share already has a permission for the specified resource type and you don't set <code>replace</code> to <code>true</code> then the operation returns an error. This helps prevent accidental overwriting of a permission.</p> </note>
                   type: boolean
                 clientToken:
-                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p>'
                   type: string
                 permissionVersion:
-                  description: The version of the RAM permissions to associate with the resource share.
+                  description: 'Specifies the version of the RAM permission to associate with the resource share. If you don''t specify this parameter, the operation uses the version designated as the default. You can use the <a>ListPermissionVersions</a> operation to discover the available versions of a permission.'
                   type: integer
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -415,7 +421,7 @@ paths:
   /createresourceshare:
     post:
       operationId: CreateResourceShare
-      description: '<p>Creates a resource share. You must provide a list of the Amazon Resource Names (ARNs) for the resources you want to share. You must also specify who you want to share the resources with, and the permissions that you grant them.</p> <note> <p>Sharing a resource makes it available for use by principals outside of the Amazon Web Services account that created the resource. Sharing doesn''t change any permissions or quotas that apply to the resource in the account that created it.</p> </note>'
+      description: '<p>Creates a resource share. You can provide a list of the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> for the resources that you want to share, a list of principals you want to share the resources with, and the permissions to grant those principals.</p> <note> <p>Sharing a resource makes it available for use by principals outside of the Amazon Web Services account that created the resource. Sharing doesn''t change any permissions or quotas that apply to the resource in the account that created it.</p> </note>'
       responses:
         '200':
           description: Success
@@ -500,31 +506,31 @@ paths:
                 - name
               properties:
                 name:
-                  description: The name of the resource share.
+                  description: Specifies the name of the resource share.
                   type: string
                 resourceArns:
-                  description: The ARNs of the resources to associate with the resource share.
+                  description: Specifies a list of one or more ARNs of the resources to associate with the resource share.
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
                 principals:
-                  description: '<p>The principals to associate with the resource share. The possible values are:</p> <ul> <li> <p>An Amazon Web Services account ID</p> </li> <li> <p>An Amazon Resource Name (ARN) of an organization in Organizations</p> </li> <li> <p>An ARN of an organizational unit (OU) in Organizations</p> </li> <li> <p>An ARN of an IAM role</p> </li> <li> <p>An ARN of an IAM user</p> </li> </ul> <note> <p>Not all resource types can be shared with IAM roles and IAM users. For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and IAM users</a> in the <i>Resource Access Manager User Guide</i>.</p> </note>'
+                  description: '<p>Specifies a list of one or more principals to associate with the resource share.</p> <p>You can include the following values:</p> <ul> <li> <p>An Amazon Web Services account ID, for example: <code>123456789012</code> </p> </li> <li> <p>An <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of an organization in Organizations, for example: <code>organizations::123456789012:organization/o-exampleorgid</code> </p> </li> <li> <p>An ARN of an organizational unit (OU) in Organizations, for example: <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code> </p> </li> <li> <p>An ARN of an IAM role, for example: <code>iam::123456789012:role/rolename</code> </p> </li> <li> <p>An ARN of an IAM user, for example: <code>iam::123456789012user/username</code> </p> </li> </ul> <note> <p>Not all resource types can be shared with IAM roles and users. For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User Guide</i>.</p> </note>'
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
                 tags:
-                  description: One or more tags.
+                  description: Specifies one or more tags to attach to the resource share itself. It doesn't attach the tags to the resources associated with the resource share.
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
                 allowExternalPrincipals:
-                  description: Indicates whether principals outside your organization in Organizations can be associated with a resource share.
+                  description: Specifies whether principals outside your organization in Organizations can be associated with a resource share. A value of <code>true</code> lets you share with individual Amazon Web Services accounts that are <i>not</i> in your organization. A value of <code>false</code> only has meaning if your account is a member of an Amazon Web Services Organization. The default value is <code>true</code>.
                   type: boolean
                 clientToken:
-                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p>'
                   type: string
                 permissionArns:
-                  description: 'The Amazon Resource Names (ARNs) of the permissions to associate with the resource share. If you do not specify an ARN for the permission, RAM automatically attaches the default version of the permission for each resource type. Only one permission can be associated with each resource type in a resource share.'
+                  description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> of the RAM permission to associate with the resource share. If you do not specify an ARN for the permission, RAM automatically attaches the default version of the permission for each resource type. You can associate only one permission with each resource type included in the resource share.'
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
@@ -539,7 +545,7 @@ paths:
   /deleteresourceshare#resourceShareArn:
     delete:
       operationId: DeleteResourceShare
-      description: Deletes the specified resource share.
+      description: Deletes the specified resource share. This doesn't delete any of the resources that were associated with the resource share; it only stops the sharing of those resources outside of the Amazon Web Services account that created them.
       responses:
         '200':
           description: Success
@@ -605,13 +611,13 @@ paths:
         - name: resourceShareArn
           in: query
           required: true
-          description: The Amazon Resource Name (ARN) of the resource share.
+          description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share to delete.'
           schema:
             type: string
         - name: clientToken
           in: query
           required: false
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p>'
           schema:
             type: string
     parameters:
@@ -704,20 +710,20 @@ paths:
                 - resourceShareArn
               properties:
                 resourceShareArn:
-                  description: The Amazon Resource Name (ARN) of the resource share.
+                  description: 'Specifies <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share that you want to remove resources from.'
                   type: string
                 resourceArns:
-                  description: The Amazon Resource Names (ARNs) of the resources.
+                  description: 'Specifies a list of <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> for one or more resources that you want to remove from the resource share. After the operation runs, these resources are no longer shared with principals outside of the Amazon Web Services account that created the resources.'
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
                 principals:
-                  description: The principals.
+                  description: '<p>Specifies a list of one or more principals that no longer are to have access to the resources in this resource share.</p> <p>You can include the following values:</p> <ul> <li> <p>An Amazon Web Services account ID, for example: <code>123456789012</code> </p> </li> <li> <p>An <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of an organization in Organizations, for example: <code>organizations::123456789012:organization/o-exampleorgid</code> </p> </li> <li> <p>An ARN of an organizational unit (OU) in Organizations, for example: <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code> </p> </li> <li> <p>An ARN of an IAM role, for example: <code>iam::123456789012:role/rolename</code> </p> </li> <li> <p>An ARN of an IAM user, for example: <code>iam::123456789012user/username</code> </p> </li> </ul> <note> <p>Not all resource types can be shared with IAM roles and users. For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User Guide</i>.</p> </note>'
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
                 clientToken:
-                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p>'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -730,7 +736,7 @@ paths:
   /disassociateresourcesharepermission:
     post:
       operationId: DisassociateResourceSharePermission
-      description: Disassociates an RAM permission from a resource share.
+      description: Disassociates an RAM permission from a resource share. Permission changes take effect immediately. You can remove a RAM permission from a resource share only if there are currently no resources of the relevant resource type currently attached to the resource share.
       responses:
         '200':
           description: Success
@@ -798,13 +804,13 @@ paths:
                 - permissionArn
               properties:
                 resourceShareArn:
-                  description: The Amazon Resource Name (ARN) of the resource share.
+                  description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share from which you want to disassociate a permission.'
                   type: string
                 permissionArn:
-                  description: The Amazon Resource Name (ARN) of the permission to disassociate from the resource share.
+                  description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the permission to disassociate from the resource share. Changes to permissions take effect immediately.'
                   type: string
                 clientToken:
-                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p>'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -817,7 +823,7 @@ paths:
   /enablesharingwithawsorganization:
     post:
       operationId: EnableSharingWithAwsOrganization
-      description: <p>Enables resource sharing within your organization in Organizations.</p> <p>The caller must be the master account for the organization.</p>
+      description: '<p>Enables resource sharing within your organization in Organizations. Calling this operation enables RAM to retrieve information about the organization and its structure. This lets you share resources with all of the accounts in an organization by specifying the organization''s ID, or all of the accounts in an organizational unit (OU) by specifying the OU''s ID. Until you enable sharing within the organization, you can specify only individual Amazon Web Services accounts, or for supported resource types, IAM users and roles.</p> <p>You must call this operation from an IAM user or role in the organization''s management account.</p>'
       responses:
         '200':
           description: Success
@@ -910,10 +916,10 @@ paths:
                 - permissionArn
               properties:
                 permissionArn:
-                  description: The Amazon Resource Name (ARN) of the permission.
+                  description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the permission whose contents you want to retrieve. To find the ARN for a permission, use either the <a>ListPermissions</a> operation or go to the <a href="https://console.aws.amazon.com/ram/home#Permissions:">Permissions library</a> page in the RAM console and then choose the name of the permission. The ARN is displayed on the detail page.'
                   type: string
                 permissionVersion:
-                  description: The identifier for the version of the permission.
+                  description: 'Specifies identifier for the version of the RAM permission to retrieve. If you don''t specify this parameter, the operation retrieves the default version.'
                   type: integer
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -926,7 +932,7 @@ paths:
   /getresourcepolicies:
     post:
       operationId: GetResourcePolicies
-      description: Gets the policies for the specified resources that you own and have shared.
+      description: Retrieves the resource policies for the specified resources that you own and have shared.
       responses:
         '200':
           description: Success
@@ -993,18 +999,18 @@ paths:
                 - resourceArns
               properties:
                 resourceArns:
-                  description: The Amazon Resource Names (ARNs) of the resources.
+                  description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> of the resources whose policies you want to retrieve.'
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
                 principal:
-                  description: The principal.
+                  description: Specifies the principal.
                   type: string
                 nextToken:
-                  description: The token for the next page of results.
+                  description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
                   type: string
                 maxResults:
-                  description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+                  description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
                   type: integer
                   minimum: 1
                   maximum: 500
@@ -1019,7 +1025,7 @@ paths:
   /getresourceshareassociations:
     post:
       operationId: GetResourceShareAssociations
-      description: Gets the resources or principals for the resource shares that you own.
+      description: Retrieves the resource and principal associations for resource shares that you own.
       responses:
         '200':
           description: Success
@@ -1092,24 +1098,24 @@ paths:
                 - associationType
               properties:
                 associationType:
-                  description: The association type. Specify <code>PRINCIPAL</code> to list the principals that are associated with the specified resource share. Specify <code>RESOURCE</code> to list the resources that are associated with the specified resource share.
+                  description: <p>Specifies whether you want to retrieve the associations that involve a specified resource or principal.</p> <ul> <li> <p> <code>PRINCIPAL</code> – list the principals that are associated with the specified resource share.</p> </li> <li> <p> <code>RESOURCE</code> – list the resources that are associated with the specified resource share.</p> </li> </ul>
                   type: string
                   enum:
                     - PRINCIPAL
                     - RESOURCE
                 resourceShareArns:
-                  description: The Amazon Resource Names (ARN) of the resource shares.
+                  description: 'Specifies a list of <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> of the resource share whose associations you want to retrieve.'
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
                 resourceArn:
-                  description: The Amazon Resource Name (ARN) of the resource. You cannot specify this parameter if the association type is <code>PRINCIPAL</code>.
+                  description: '<p>Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource whose resource shares you want to retrieve.</p> <p>You cannot specify this parameter if the association type is <code>PRINCIPAL</code>.</p>'
                   type: string
                 principal:
-                  description: The principal. You cannot specify this parameter if the association type is <code>RESOURCE</code>.
+                  description: '<p>Specifies the ID of the principal whose resource shares you want to retrieve. This can be an Amazon Web Services account ID, an organization ID, an organizational unit ID, or the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of an individual IAM user or role.</p> <p>You cannot specify this parameter if the association type is <code>RESOURCE</code>.</p>'
                   type: string
                 associationStatus:
-                  description: The association status.
+                  description: Specifies that you want to retrieve only associations with this status.
                   type: string
                   enum:
                     - ASSOCIATING
@@ -1118,10 +1124,10 @@ paths:
                     - DISASSOCIATING
                     - DISASSOCIATED
                 nextToken:
-                  description: The token for the next page of results.
+                  description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
                   type: string
                 maxResults:
-                  description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+                  description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
                   type: integer
                   minimum: 1
                   maximum: 500
@@ -1136,7 +1142,7 @@ paths:
   /getresourceshareinvitations:
     post:
       operationId: GetResourceShareInvitations
-      description: Gets the invitations that you have received for resource shares.
+      description: Retrieves details about invitations that you have received for resource shares.
       responses:
         '200':
           description: Success
@@ -1213,20 +1219,20 @@ paths:
               type: object
               properties:
                 resourceShareInvitationArns:
-                  description: The Amazon Resource Names (ARN) of the invitations.
+                  description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> of the resource share invitations you want information about.'
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
                 resourceShareArns:
-                  description: The Amazon Resource Names (ARN) of the resource shares.
+                  description: 'Specifies that you want details about invitations only for the resource shares described by this list of <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> '
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
                 nextToken:
-                  description: The token for the next page of results.
+                  description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
                   type: string
                 maxResults:
-                  description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+                  description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
                   type: integer
                   minimum: 1
                   maximum: 500
@@ -1241,7 +1247,7 @@ paths:
   /getresourceshares:
     post:
       operationId: GetResourceShares
-      description: Gets the resource shares that you own or the resource shares that are shared with you.
+      description: Retrieves details about the resource shares that you own or that are shared with you.
       responses:
         '200':
           description: Success
@@ -1308,12 +1314,12 @@ paths:
                 - resourceOwner
               properties:
                 resourceShareArns:
-                  description: The Amazon Resource Names (ARNs) of the resource shares.
+                  description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> of individual resource shares that you want information about.'
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
                 resourceShareStatus:
-                  description: The status of the resource share.
+                  description: Specifies that you want to retrieve details of only those resource shares that have this status.
                   type: string
                   enum:
                     - PENDING
@@ -1322,29 +1328,29 @@ paths:
                     - DELETING
                     - DELETED
                 resourceOwner:
-                  description: The type of owner.
+                  description: '<p>Specifies that you want to retrieve details of only those resource shares that match the following:</p> <ul> <li> <p> <b> <code>SELF</code> </b> – resource shares that your account shares with other accounts</p> </li> <li> <p> <b> <code>OTHER-ACCOUNTS</code> </b> – resource shares that other accounts share with your account</p> </li> </ul>'
                   type: string
                   enum:
                     - SELF
                     - OTHER-ACCOUNTS
                 name:
-                  description: The name of the resource share.
+                  description: Specifies the name of an individual resource share that you want to retrieve details about.
                   type: string
                 tagFilters:
-                  description: One or more tag filters.
+                  description: Specifies that you want to retrieve details of only those resource shares that match the specified tag keys and values.
                   type: array
                   items:
                     $ref: '#/components/schemas/TagFilter'
                 nextToken:
-                  description: The token for the next page of results.
+                  description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
                   type: string
                 maxResults:
-                  description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+                  description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
                   type: integer
                   minimum: 1
                   maximum: 500
                 permissionArn:
-                  description: The Amazon Resource Name (ARN) of the RAM permission that is associated with the resource share.
+                  description: 'Specifies that you want to retrieve details of only those resource shares that use the RAM permission with this <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a>.'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1357,7 +1363,7 @@ paths:
   /listpendinginvitationresources:
     post:
       operationId: ListPendingInvitationResources
-      description: Lists the resources in a resource share that is shared with you but that the invitation is still pending for.
+      description: Lists the resources in a resource share that is shared with you but for which the invitation is still <code>PENDING</code>. That means that you haven't accepted or rejected the invitation and the invitation hasn't expired.
       responses:
         '200':
           description: Success
@@ -1442,13 +1448,114 @@ paths:
                 - resourceShareInvitationArn
               properties:
                 resourceShareInvitationArn:
-                  description: The Amazon Resource Name (ARN) of the invitation.
+                  description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the invitation. You can use <a>GetResourceShareInvitations</a> to find the ARN of the invitation.'
                   type: string
                 nextToken:
-                  description: The token for the next page of results.
+                  description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
                   type: string
                 maxResults:
-                  description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+                  description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+                  type: integer
+                  minimum: 1
+                  maximum: 500
+                resourceRegionScope:
+                  description: <p>Specifies that you want the results to include only resources that have the specified scope.</p> <ul> <li> <p> <code>ALL</code> – the results include both global and regional resources or resource types.</p> </li> <li> <p> <code>GLOBAL</code> – the results include only global resources or resource types.</p> </li> <li> <p> <code>REGIONAL</code> – the results include only regional resources or resource types.</p> </li> </ul> <p>The default value is <code>ALL</code>.</p>
+                  type: string
+                  enum:
+                    - ALL
+                    - REGIONAL
+                    - GLOBAL
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /listpermissionversions:
+    post:
+      operationId: ListPermissionVersions
+      description: Lists the available versions of the specified RAM permission.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPermissionVersionsResponse'
+        '480':
+          description: MalformedArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MalformedArnException'
+        '481':
+          description: UnknownResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnknownResourceException'
+        '482':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '483':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '486':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - permissionArn
+              properties:
+                permissionArn:
+                  description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the RAM permission whose versions you want to list. You can use the <code>permissionVersion</code> parameter on the <a>AssociateResourceSharePermission</a> operation to specify a non-default version to attach.'
+                  type: string
+                nextToken:
+                  description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
+                  type: string
+                maxResults:
+                  description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
                   type: integer
                   minimum: 1
                   maximum: 500
@@ -1463,7 +1570,7 @@ paths:
   /listpermissions:
     post:
       operationId: ListPermissions
-      description: Lists the RAM permissions.
+      description: 'Retrieves a list of available RAM permissions that you can use for the supported resource types. '
       responses:
         '200':
           description: Success
@@ -1522,13 +1629,13 @@ paths:
               type: object
               properties:
                 resourceType:
-                  description: 'Specifies the resource type for which to list permissions. For example, to list only permissions that apply to EC2 subnets, specify <code>ec2:Subnet</code>.'
+                  description: 'Specifies that you want to list permissions for only the specified resource type. For example, to list only permissions that apply to EC2 subnets, specify <code>ec2:Subnet</code>. You can use the <a>ListResourceTypes</a> operation to get the specific string required.'
                   type: string
                 nextToken:
-                  description: The token for the next page of results.
+                  description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
                   type: string
                 maxResults:
-                  description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+                  description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
                   type: integer
                   minimum: 1
                   maximum: 500
@@ -1543,7 +1650,7 @@ paths:
   /listprincipals:
     post:
       operationId: ListPrincipals
-      description: Lists the principals that you have shared resources with or that have shared resources with you.
+      description: Lists the principals that you are sharing resources with or that are sharing resources with you.
       responses:
         '200':
           description: Success
@@ -1610,32 +1717,32 @@ paths:
                 - resourceOwner
               properties:
                 resourceOwner:
-                  description: The type of owner.
+                  description: '<p>Specifies that you want to list information for only resource shares that match the following:</p> <ul> <li> <p> <b> <code>SELF</code> </b> – principals that your account is sharing resources with</p> </li> <li> <p> <b> <code>OTHER-ACCOUNTS</code> </b> – principals that are sharing resources with your account</p> </li> </ul>'
                   type: string
                   enum:
                     - SELF
                     - OTHER-ACCOUNTS
                 resourceArn:
-                  description: The Amazon Resource Name (ARN) of the resource.
+                  description: 'Specifies that you want to list principal information for the resource share with the specified <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a>.'
                   type: string
                 principals:
-                  description: The principals.
+                  description: '<p>Specifies that you want to list information for only the listed principals.</p> <p>You can include the following values:</p> <ul> <li> <p>An Amazon Web Services account ID, for example: <code>123456789012</code> </p> </li> <li> <p>An <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of an organization in Organizations, for example: <code>organizations::123456789012:organization/o-exampleorgid</code> </p> </li> <li> <p>An ARN of an organizational unit (OU) in Organizations, for example: <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code> </p> </li> <li> <p>An ARN of an IAM role, for example: <code>iam::123456789012:role/rolename</code> </p> </li> <li> <p>An ARN of an IAM user, for example: <code>iam::123456789012user/username</code> </p> </li> </ul> <note> <p>Not all resource types can be shared with IAM roles and users. For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User Guide</i>.</p> </note>'
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
                 resourceType:
-                  description: '<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:FirewallRuleGroup</code> |<code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> | <code>s3-outposts:Outpost</code> | <code>ssm-contacts:Contact</code> | <code>ssm-incidents:ResponsePlan</code> </p>'
+                  description: '<p>Specifies that you want to list information for only principals associated with resource shares that include the specified resource type.</p> <p>For a list of valid values, query the <a>ListResourceTypes</a> operation.</p>'
                   type: string
                 resourceShareArns:
-                  description: The Amazon Resource Names (ARN) of the resource shares.
+                  description: 'Specifies that you want to list information for only principals associated with the resource shares specified by a list the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.'
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
                 nextToken:
-                  description: The token for the next page of results.
+                  description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
                   type: string
                 maxResults:
-                  description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+                  description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
                   type: integer
                   minimum: 1
                   maximum: 500
@@ -1723,13 +1830,13 @@ paths:
                 - resourceShareArn
               properties:
                 resourceShareArn:
-                  description: The Amazon Resource Name (ARN) of the resource share.
+                  description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share for which you want to retrieve the associated permissions.'
                   type: string
                 nextToken:
-                  description: The token for the next page of results.
+                  description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
                   type: string
                 maxResults:
-                  description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+                  description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
                   type: integer
                   minimum: 1
                   maximum: 500
@@ -1744,7 +1851,7 @@ paths:
   /listresourcetypes:
     post:
       operationId: ListResourceTypes
-      description: Lists the shareable resource types supported by RAM.
+      description: Lists the resource types that can be shared by RAM.
       responses:
         '200':
           description: Success
@@ -1797,13 +1904,20 @@ paths:
               type: object
               properties:
                 nextToken:
-                  description: The token for the next page of results.
+                  description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
                   type: string
                 maxResults:
-                  description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+                  description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
                   type: integer
                   minimum: 1
                   maximum: 500
+                resourceRegionScope:
+                  description: <p>Specifies that you want the results to include only resources that have the specified scope.</p> <ul> <li> <p> <code>ALL</code> – the results include both global and regional resources or resource types.</p> </li> <li> <p> <code>GLOBAL</code> – the results include only global resources or resource types.</p> </li> <li> <p> <code>REGIONAL</code> – the results include only regional resources or resource types.</p> </li> </ul> <p>The default value is <code>ALL</code>.</p>
+                  type: string
+                  enum:
+                    - ALL
+                    - REGIONAL
+                    - GLOBAL
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1815,7 +1929,7 @@ paths:
   /listresources:
     post:
       operationId: ListResources
-      description: Lists the resources that you added to a resource shares or the resources that are shared with you.
+      description: Lists the resources that you added to a resource share or the resources that are shared with you.
       responses:
         '200':
           description: Success
@@ -1888,35 +2002,42 @@ paths:
                 - resourceOwner
               properties:
                 resourceOwner:
-                  description: The type of owner.
+                  description: '<p>Specifies that you want to list only the resource shares that match the following:</p> <ul> <li> <p> <b> <code>SELF</code> </b> – resources that your account shares with other accounts</p> </li> <li> <p> <b> <code>OTHER-ACCOUNTS</code> </b> – resources that other accounts share with your account</p> </li> </ul>'
                   type: string
                   enum:
                     - SELF
                     - OTHER-ACCOUNTS
                 principal:
-                  description: The principal.
+                  description: Specifies that you want to list only the resource shares that are associated with the specified principal.
                   type: string
                 resourceType:
-                  description: '<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:FirewallRuleGroup</code> |<code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> | <code>s3-outposts:Outpost</code> | <code>ssm-contacts:Contact</code> | <code>ssm-incidents:ResponsePlan</code> </p>'
+                  description: '<p>Specifies that you want to list only the resource shares that include resources of the specified resource type.</p> <p>For valid values, query the <a>ListResourceTypes</a> operation.</p>'
                   type: string
                 resourceArns:
-                  description: The Amazon Resource Names (ARNs) of the resources.
+                  description: 'Specifies that you want to list only the resource shares that include resources with the specified <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.'
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
                 resourceShareArns:
-                  description: The Amazon Resource Names (ARN) of the resource shares.
+                  description: 'Specifies that you want to list only resources in the resource shares identified by the specified <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.'
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
                 nextToken:
-                  description: The token for the next page of results.
+                  description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
                   type: string
                 maxResults:
-                  description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+                  description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
                   type: integer
                   minimum: 1
                   maximum: 500
+                resourceRegionScope:
+                  description: <p>Specifies that you want the results to include only resources that have the specified scope.</p> <ul> <li> <p> <code>ALL</code> – the results include both global and regional resources or resource types.</p> </li> <li> <p> <code>GLOBAL</code> – the results include only global resources or resource types.</p> </li> <li> <p> <code>REGIONAL</code> – the results include only regional resources or resource types.</p> </li> </ul> <p>The default value is <code>ALL</code>.</p>
+                  type: string
+                  enum:
+                    - ALL
+                    - REGIONAL
+                    - GLOBAL
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1928,7 +2049,7 @@ paths:
   /promoteresourcesharecreatedfrompolicy#resourceShareArn:
     post:
       operationId: PromoteResourceShareCreatedFromPolicy
-      description: '<p>Resource shares that were created by attaching a policy to a resource are visible only to the resource share owner, and the resource share cannot be modified in RAM.</p> <p>Use this API action to promote the resource share. When you promote the resource share, it becomes:</p> <ul> <li> <p>Visible to all principals that it is shared with.</p> </li> <li> <p>Modifiable in RAM.</p> </li> </ul>'
+      description: '<p>When you attach a resource-based permission policy to a resource, it automatically creates a resource share. However, resource shares created this way are visible only to the resource share owner, and the resource share can''t be modified in RAM.</p> <p>You can use this operation to promote the resource share to a full RAM resource share. When you promote a resource share, you can then manage the resource share in RAM and it becomes visible to all of the principals you shared it with.</p>'
       responses:
         '200':
           description: Success
@@ -1988,7 +2109,7 @@ paths:
         - name: resourceShareArn
           in: query
           required: true
-          description: The Amazon Resource Name (ARN) of the resource share to promote.
+          description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share to promote.'
           schema:
             type: string
     parameters:
@@ -2081,10 +2202,10 @@ paths:
                 - resourceShareInvitationArn
               properties:
                 resourceShareInvitationArn:
-                  description: The Amazon Resource Name (ARN) of the invitation.
+                  description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the invitation that you want to reject.'
                   type: string
                 clientToken:
-                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p>'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2097,7 +2218,7 @@ paths:
   /tagresource:
     post:
       operationId: TagResource
-      description: Adds the specified tags to the specified resource share that you own.
+      description: 'Adds the specified tag keys and values to the specified resource share. The tags are attached only to the resource share, not to the resources that are in the resource share.'
       responses:
         '200':
           description: Success
@@ -2165,10 +2286,10 @@ paths:
                 - tags
               properties:
                 resourceShareArn:
-                  description: The Amazon Resource Name (ARN) of the resource share.
+                  description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share that you want to add tags to.'
                   type: string
                 tags:
-                  description: One or more tags.
+                  description: A list of one or more tag key and value pairs. The tag key must be present and not be an empty string. The tag value must be present but can be an empty string.
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
@@ -2183,7 +2304,7 @@ paths:
   /untagresource:
     post:
       operationId: UntagResource
-      description: Removes the specified tags from the specified resource share that you own.
+      description: Removes the specified tag key and value pairs from the specified resource share.
       responses:
         '200':
           description: Success
@@ -2221,10 +2342,10 @@ paths:
                 - tagKeys
               properties:
                 resourceShareArn:
-                  description: The Amazon Resource Name (ARN) of the resource share.
+                  description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share that you want to remove tags from. The tags are removed from the resource share, not the resources in the resource share.'
                   type: string
                 tagKeys:
-                  description: The tag keys of the tags to remove.
+                  description: Specifies a list of one or more tag keys that you want to remove.
                   type: array
                   items:
                     $ref: '#/components/schemas/TagKey'
@@ -2239,7 +2360,7 @@ paths:
   /updateresourceshare:
     post:
       operationId: UpdateResourceShare
-      description: Updates the specified resource share that you own.
+      description: Modifies some of the properties of the specified resource share.
       responses:
         '200':
           description: Success
@@ -2312,16 +2433,16 @@ paths:
                 - resourceShareArn
               properties:
                 resourceShareArn:
-                  description: The Amazon Resource Name (ARN) of the resource share.
+                  description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share that you want to modify.'
                   type: string
                 name:
-                  description: The name of the resource share.
+                  description: 'If specified, the new name that you want to attach to the resource share.'
                   type: string
                 allowExternalPrincipals:
-                  description: Indicates whether principals outside your organization in Organizations can be associated with a resource share.
+                  description: Specifies whether principals outside your organization in Organizations can be associated with a resource share.
                   type: boolean
                 clientToken:
-                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p>'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2389,11 +2510,11 @@ components:
         resourceShareInvitation:
           allOf:
             - $ref: '#/components/schemas/ResourceShareInvitation'
-            - description: Information about the invitation.
+            - description: An object that contains information about the specified invitation.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+            - description: The idempotency identifier associated with this request. If you want to repeat the same operation in an idempotent manner then you must include this value in the <code>clientToken</code> request parameter of that later call. All other parameters must also have the same values that you used in the first call.
     MalformedArnException: {}
     OperationNotPermittedException: {}
     ResourceShareInvitationArnNotFoundException: {}
@@ -2410,51 +2531,52 @@ components:
         resourceShareAssociations:
           allOf:
             - $ref: '#/components/schemas/ResourceShareAssociationList'
-            - description: Information about the associations.
+            - description: An array of objects that contain information about the associations.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+            - description: The idempotency identifier associated with this request. If you want to repeat the same operation in an idempotent manner then you must include this value in the <code>clientToken</code> request parameter of that later call. All other parameters must also have the same values that you used in the first call.
     String:
       type: string
     UnknownResourceException: {}
     InvalidStateTransitionException: {}
     ResourceShareLimitExceededException: {}
     InvalidParameterException: {}
+    ThrottlingException: {}
     AssociateResourceSharePermissionResponse:
       type: object
       properties:
         returnValue:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether the request succeeded.
+            - description: A return value of <code>true</code> indicates that the request succeeded. A value of <code>false</code> indicates that the request failed.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+            - description: The idempotency identifier associated with this request. If you want to repeat the same operation in an idempotent manner then you must include this value in the <code>clientToken</code> request parameter of that later call. All other parameters must also have the same values that you used in the first call.
     CreateResourceShareResponse:
       type: object
       properties:
         resourceShare:
           allOf:
             - $ref: '#/components/schemas/ResourceShare'
-            - description: Information about the resource share.
+            - description: An object with information about the new resource share.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+            - description: The idempotency identifier associated with this request. If you want to repeat the same operation in an idempotent manner then you must include this value in the <code>clientToken</code> request parameter of that later call. All other parameters must also have the same values that you used in the first call.
     Tag:
       type: object
       properties:
         key:
           allOf:
             - $ref: '#/components/schemas/TagKey'
-            - description: The key of the tag.
+            - description: 'The key, or name, attached to the tag. Every tag must have a key. Key names are case sensitive.'
         value:
           allOf:
             - $ref: '#/components/schemas/TagValue'
-            - description: The value of the tag.
-      description: Information about a tag.
+            - description: The string value attached to the tag. The value can be an empty string. Key values are case sensitive.
+      description: '<p>A structure containing a tag. A tag is metadata that you can attach to your resources to help organize and categorize them. You can also use them to help you secure your resources. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html">Controlling access to Amazon Web Services resources using tags</a>.</p> <p>For more information about tags, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>'
     TagPolicyViolationException: {}
     DeleteResourceShareResponse:
       type: object
@@ -2462,58 +2584,58 @@ components:
         returnValue:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether the request succeeded.
+            - description: A return value of <code>true</code> indicates that the request succeeded. A value of <code>false</code> indicates that the request failed.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+            - description: The idempotency identifier associated with this request. If you want to repeat the same operation in an idempotent manner then you must include this value in the <code>clientToken</code> request parameter of that later call. All other parameters must also have the same values that you used in the first call.
     DisassociateResourceShareResponse:
       type: object
       properties:
         resourceShareAssociations:
           allOf:
             - $ref: '#/components/schemas/ResourceShareAssociationList'
-            - description: Information about the associations.
+            - description: An array of objects that contain information about the updated associations for this resource share.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+            - description: The idempotency identifier associated with this request. If you want to repeat the same operation in an idempotent manner then you must include this value in the <code>clientToken</code> request parameter of that later call. All other parameters must also have the same values that you used in the first call.
     DisassociateResourceSharePermissionResponse:
       type: object
       properties:
         returnValue:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether the request succeeded.
+            - description: A return value of <code>true</code> indicates that the request succeeded. A value of <code>false</code> indicates that the request failed.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+            - description: The idempotency identifier associated with this request. If you want to repeat the same operation in an idempotent manner then you must include this value in the <code>clientToken</code> request parameter of that later call. All other parameters must also have the same values that you used in the first call.
     EnableSharingWithAwsOrganizationResponse:
       type: object
       properties:
         returnValue:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether the request succeeded.
+            - description: A return value of <code>true</code> indicates that the request succeeded. A value of <code>false</code> indicates that the request failed.
     GetPermissionResponse:
       type: object
       properties:
         permission:
           allOf:
             - $ref: '#/components/schemas/ResourceSharePermissionDetail'
-            - description: Information about the permission.
+            - description: An object that contains information about the permission.
     GetResourcePoliciesResponse:
       type: object
       properties:
         policies:
           allOf:
             - $ref: '#/components/schemas/PolicyList'
-            - description: 'A key policy document, in JSON format.'
+            - description: An array of resource policy documents in JSON format.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+            - description: 'If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.'
     InvalidNextTokenException: {}
     ResourceArnNotFoundException: {}
     GetResourceShareAssociationsResponse:
@@ -2522,22 +2644,22 @@ components:
         resourceShareAssociations:
           allOf:
             - $ref: '#/components/schemas/ResourceShareAssociationList'
-            - description: Information about the associations.
+            - description: An array of objects that contain the details about the associations.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+            - description: 'If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.'
     GetResourceShareInvitationsResponse:
       type: object
       properties:
         resourceShareInvitations:
           allOf:
             - $ref: '#/components/schemas/ResourceShareInvitationList'
-            - description: Information about the invitations.
+            - description: An array of objects that contain the details about the invitations.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+            - description: 'If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.'
     InvalidMaxResultsException: {}
     GetResourceSharesResponse:
       type: object
@@ -2545,90 +2667,101 @@ components:
         resourceShares:
           allOf:
             - $ref: '#/components/schemas/ResourceShareList'
-            - description: Information about the resource shares.
+            - description: An array of objects that contain the information about the resource shares.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+            - description: 'If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.'
     TagFilter:
       type: object
       properties:
         tagKey:
           allOf:
             - $ref: '#/components/schemas/TagKey'
-            - description: The tag key.
+            - description: The tag key. This must have a valid string value and can't be empty.
         tagValues:
           allOf:
             - $ref: '#/components/schemas/TagValueList'
-            - description: The tag values.
-      description: Used to filter information based on tags.
+            - description: 'A list of zero or more tag values. If no values are provided, then the filter matches any tag with the specified key, regardless of its value.'
+      description: A tag key and optional list of possible values that you can use to filter results for tagged resources.
     ListPendingInvitationResourcesResponse:
       type: object
       properties:
         resources:
           allOf:
             - $ref: '#/components/schemas/ResourceList'
-            - description: Information about the resources included the resource share.
+            - description: An array of objects that contain the information about the resources included the specified resource share.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+            - description: 'If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.'
     MissingRequiredParameterException: {}
+    ListPermissionVersionsResponse:
+      type: object
+      properties:
+        permissions:
+          allOf:
+            - $ref: '#/components/schemas/ResourceSharePermissionList'
+            - description: An array of objects that contain details for each of the available versions.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.'
     ListPermissionsResponse:
       type: object
       properties:
         permissions:
           allOf:
             - $ref: '#/components/schemas/ResourceSharePermissionList'
-            - description: Information about the permissions.
+            - description: An array of objects with information about the permissions.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+            - description: 'If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.'
     ListPrincipalsResponse:
       type: object
       properties:
         principals:
           allOf:
             - $ref: '#/components/schemas/PrincipalList'
-            - description: The principals.
+            - description: An array of objects that contain the details about the principals.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+            - description: 'If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.'
     ListResourceSharePermissionsResponse:
       type: object
       properties:
         permissions:
           allOf:
             - $ref: '#/components/schemas/ResourceSharePermissionList'
-            - description: The permissions associated with the resource share.
+            - description: An array of objects that describe the permissions associated with the resource share.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+            - description: 'If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.'
     ListResourceTypesResponse:
       type: object
       properties:
         resourceTypes:
           allOf:
             - $ref: '#/components/schemas/ServiceNameAndResourceTypeList'
-            - description: The shareable resource types supported by RAM.
+            - description: An array of objects that contain information about the resource types that can be shared using RAM.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+            - description: 'If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.'
     ListResourcesResponse:
       type: object
       properties:
         resources:
           allOf:
             - $ref: '#/components/schemas/ResourceList'
-            - description: Information about the resources.
+            - description: An array of objects that contain information about the resources.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+            - description: 'If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.'
     InvalidResourceTypeException: {}
     PromoteResourceShareCreatedFromPolicyResponse:
       type: object
@@ -2636,18 +2769,18 @@ components:
         returnValue:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether the request succeeded.
+            - description: A return value of <code>true</code> indicates that the request succeeded. A value of <code>false</code> indicates that the request failed.
     RejectResourceShareInvitationResponse:
       type: object
       properties:
         resourceShareInvitation:
           allOf:
             - $ref: '#/components/schemas/ResourceShareInvitation'
-            - description: Information about the invitation.
+            - description: An object that contains the details about the rejected invitation.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+            - description: The idempotency identifier associated with this request. If you want to repeat the same operation in an idempotent manner then you must include this value in the <code>clientToken</code> request parameter of that later call. All other parameters must also have the same values that you used in the first call.
     TagResourceResponse:
       type: object
       properties: {}
@@ -2667,7 +2800,7 @@ components:
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+            - description: The idempotency identifier associated with this request. If you want to repeat the same operation in an idempotent manner then you must include this value in the <code>clientToken</code> request parameter of that later call. All other parameters must also have the same values that you used in the first call.
     AcceptResourceShareInvitationRequest:
       type: object
       required:
@@ -2677,18 +2810,18 @@ components:
         resourceShareInvitationArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the invitation.
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the invitation that you want to accept.'
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+            - description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p>'
     ResourceShareInvitation:
       type: object
       properties:
         resourceShareInvitationArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the invitation.
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the invitation.'
         resourceShareName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2696,7 +2829,7 @@ components:
         resourceShareArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the resource share.
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share'
         senderAccountId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2712,17 +2845,17 @@ components:
         status:
           allOf:
             - $ref: '#/components/schemas/ResourceShareInvitationStatus'
-            - description: The status of the invitation.
+            - description: The current status of the invitation.
         resourceShareAssociations:
           allOf:
             - $ref: '#/components/schemas/ResourceShareAssociationList'
             - deprecated: true
-              description: 'To view the resources associated with a pending resource share invitation, use <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_ListPendingInvitationResources.html"> ListPendingInvitationResources</a>.This member has been deprecated. Use ListPendingInvitationResources.'
+              description: 'To view the resources associated with a pending resource share invitation, use <a>ListPendingInvitationResources</a>.This member has been deprecated. Use ListPendingInvitationResources.'
         receiverArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the IAM user or IAM role that received the invitation.
-      description: Describes an invitation to join a resource share.
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the IAM user or role that received the invitation.'
+      description: Describes an invitation for an Amazon Web Services account to join a resource share.
     Boolean:
       type: boolean
     Integer:
@@ -2737,23 +2870,23 @@ components:
         resourceShareArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the resource share.
+            - description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share to which you want to add or replace permissions.'
         permissionArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the RAM permission to associate with the resource share.
+            - description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the RAM permission to associate with the resource share. To find the ARN for a permission, use either the <a>ListPermissions</a> operation or go to the <a href="https://console.aws.amazon.com/ram/home#Permissions:">Permissions library</a> page in the RAM console and then choose the name of the permission. The ARN is displayed on the detail page.'
         replace:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether the permission should replace the permissions that are currently associated with the resource share. Use <code>true</code> to replace the current permissions. Use <code>false</code> to add the permission to the current permission.
+            - description: <p>Specifies whether the specified permission should replace or add to the existing permission associated with the resource share. Use <code>true</code> to replace the current permissions. Use <code>false</code> to add the permission to the current permission. The default value is <code>false</code>.</p> <note> <p>A resource share can have only one permission per resource type. If a resource share already has a permission for the specified resource type and you don't set <code>replace</code> to <code>true</code> then the operation returns an error. This helps prevent accidental overwriting of a permission.</p> </note>
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+            - description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p>'
         permissionVersion:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The version of the RAM permissions to associate with the resource share.
+            - description: 'Specifies the version of the RAM permission to associate with the resource share. If you don''t specify this parameter, the operation uses the version designated as the default. You can use the <a>ListPermissionVersions</a> operation to discover the available versions of a permission.'
     ResourceArnList:
       type: array
       items:
@@ -2771,19 +2904,19 @@ components:
         resourceShareArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the resource share.
+            - description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share that you want to add principals or resources to.'
         resourceArns:
           allOf:
             - $ref: '#/components/schemas/ResourceArnList'
-            - description: The Amazon Resource Names (ARNs) of the resources.
+            - description: 'Specifies a list of <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> of the resources that you want to share. This can be <code>null</code> if you want to add only principals.'
         principals:
           allOf:
             - $ref: '#/components/schemas/PrincipalArnOrIdList'
-            - description: '<p>The principals to associate with the resource share. The possible values are:</p> <ul> <li> <p>An Amazon Web Services account ID</p> </li> <li> <p>An Amazon Resource Name (ARN) of an organization in Organizations</p> </li> <li> <p>An ARN of an organizational unit (OU) in Organizations</p> </li> <li> <p>An ARN of an IAM role</p> </li> <li> <p>An ARN of an IAM user</p> </li> </ul> <note> <p>Not all resource types can be shared with IAM roles and IAM users. For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and IAM users</a> in the <i>Resource Access Manager User Guide</i>.</p> </note>'
+            - description: '<p>Specifies a list of principals to whom you want to the resource share. This can be <code>null</code> if you want to add only resources.</p> <p>What the principals can do with the resources in the share is determined by the RAM permissions that you associate with the resource share. See <a>AssociateResourceSharePermission</a>.</p> <p>You can include the following values:</p> <ul> <li> <p>An Amazon Web Services account ID, for example: <code>123456789012</code> </p> </li> <li> <p>An <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of an organization in Organizations, for example: <code>organizations::123456789012:organization/o-exampleorgid</code> </p> </li> <li> <p>An ARN of an organizational unit (OU) in Organizations, for example: <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code> </p> </li> <li> <p>An ARN of an IAM role, for example: <code>iam::123456789012:role/rolename</code> </p> </li> <li> <p>An ARN of an IAM user, for example: <code>iam::123456789012user/username</code> </p> </li> </ul> <note> <p>Not all resource types can be shared with IAM roles and users. For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User Guide</i>.</p> </note>'
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+            - description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p>'
     ResourceShareAssociationList:
       type: array
       items:
@@ -2805,38 +2938,38 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the resource share.
+            - description: Specifies the name of the resource share.
         resourceArns:
           allOf:
             - $ref: '#/components/schemas/ResourceArnList'
-            - description: The ARNs of the resources to associate with the resource share.
+            - description: Specifies a list of one or more ARNs of the resources to associate with the resource share.
         principals:
           allOf:
             - $ref: '#/components/schemas/PrincipalArnOrIdList'
-            - description: '<p>The principals to associate with the resource share. The possible values are:</p> <ul> <li> <p>An Amazon Web Services account ID</p> </li> <li> <p>An Amazon Resource Name (ARN) of an organization in Organizations</p> </li> <li> <p>An ARN of an organizational unit (OU) in Organizations</p> </li> <li> <p>An ARN of an IAM role</p> </li> <li> <p>An ARN of an IAM user</p> </li> </ul> <note> <p>Not all resource types can be shared with IAM roles and IAM users. For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and IAM users</a> in the <i>Resource Access Manager User Guide</i>.</p> </note>'
+            - description: '<p>Specifies a list of one or more principals to associate with the resource share.</p> <p>You can include the following values:</p> <ul> <li> <p>An Amazon Web Services account ID, for example: <code>123456789012</code> </p> </li> <li> <p>An <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of an organization in Organizations, for example: <code>organizations::123456789012:organization/o-exampleorgid</code> </p> </li> <li> <p>An ARN of an organizational unit (OU) in Organizations, for example: <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code> </p> </li> <li> <p>An ARN of an IAM role, for example: <code>iam::123456789012:role/rolename</code> </p> </li> <li> <p>An ARN of an IAM user, for example: <code>iam::123456789012user/username</code> </p> </li> </ul> <note> <p>Not all resource types can be shared with IAM roles and users. For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User Guide</i>.</p> </note>'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: One or more tags.
+            - description: Specifies one or more tags to attach to the resource share itself. It doesn't attach the tags to the resources associated with the resource share.
         allowExternalPrincipals:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether principals outside your organization in Organizations can be associated with a resource share.
+            - description: Specifies whether principals outside your organization in Organizations can be associated with a resource share. A value of <code>true</code> lets you share with individual Amazon Web Services accounts that are <i>not</i> in your organization. A value of <code>false</code> only has meaning if your account is a member of an Amazon Web Services Organization. The default value is <code>true</code>.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+            - description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p>'
         permissionArns:
           allOf:
             - $ref: '#/components/schemas/PermissionArnList'
-            - description: 'The Amazon Resource Names (ARNs) of the permissions to associate with the resource share. If you do not specify an ARN for the permission, RAM automatically attaches the default version of the permission for each resource type. Only one permission can be associated with each resource type in a resource share.'
+            - description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> of the RAM permission to associate with the resource share. If you do not specify an ARN for the permission, RAM automatically attaches the default version of the permission for each resource type. You can associate only one permission with each resource type included in the resource share.'
     ResourceShare:
       type: object
       properties:
         resourceShareArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the resource share.
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share'
         name:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2852,7 +2985,7 @@ components:
         status:
           allOf:
             - $ref: '#/components/schemas/ResourceShareStatus'
-            - description: The status of the resource share.
+            - description: The current status of the resource share.
         statusMessage:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2860,20 +2993,20 @@ components:
         tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: The tags for the resource share.
+            - description: The tag key and value pairs attached to the resource share.
         creationTime:
           allOf:
             - $ref: '#/components/schemas/DateTime'
-            - description: The time when the resource share was created.
+            - description: The date and time when the resource share was created.
         lastUpdatedTime:
           allOf:
             - $ref: '#/components/schemas/DateTime'
-            - description: The time when the resource share was last updated.
+            - description: The date and time when the resource share was last updated.
         featureSet:
           allOf:
             - $ref: '#/components/schemas/ResourceShareFeatureSet'
-            - description: '<p>Indicates how the resource share was created. Possible values include:</p> <ul> <li> <p> <code>CREATED_FROM_POLICY</code> - Indicates that the resource share was created from an Amazon Web Services Identity and Access Management (Amazon Web Services IAM) policy attached to a resource. These resource shares are visible only to the Amazon Web Services account that created it. They cannot be modified in RAM.</p> </li> <li> <p> <code>PROMOTING_TO_STANDARD</code> - The resource share is in the process of being promoted. For more information, see <a>PromoteResourceShareCreatedFromPolicy</a>.</p> </li> <li> <p> <code>STANDARD</code> - Indicates that the resource share was created in RAM using the console or APIs. These resource shares are visible to all principals. They can be modified in RAM.</p> </li> </ul>'
-      description: Describes a resource share.
+            - description: '<p>Indicates how the resource share was created. Possible values include:</p> <ul> <li> <p> <code>CREATED_FROM_POLICY</code> - Indicates that the resource share was created from an Identity and Access Management (IAM) resource-based permission policy attached to the resource. This type of resource share is visible only to the Amazon Web Services account that created it. You can''t modify it in RAM unless you promote it. For more information, see <a>PromoteResourceShareCreatedFromPolicy</a>.</p> </li> <li> <p> <code>PROMOTING_TO_STANDARD</code> - The resource share is in the process of being promoted. For more information, see <a>PromoteResourceShareCreatedFromPolicy</a>.</p> </li> <li> <p> <code>STANDARD</code> - Indicates that the resource share was created in RAM using the console or APIs. These resource shares are visible to all principals you share the resource share with. You can modify these resource shares in RAM using the console or APIs.</p> </li> </ul>'
+      description: Describes a resource share in RAM.
     DateTime:
       type: string
       format: date-time
@@ -2891,15 +3024,15 @@ components:
         resourceShareArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the resource share.
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share from which you want to disassociate a permission.'
         permissionArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the permission to disassociate from the resource share.
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the permission to disassociate from the resource share. Changes to permissions take effect immediately.'
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+            - description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p>'
     DisassociateResourceShareRequest:
       type: object
       required:
@@ -2909,19 +3042,19 @@ components:
         resourceShareArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the resource share.
+            - description: 'Specifies <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share that you want to remove resources from.'
         resourceArns:
           allOf:
             - $ref: '#/components/schemas/ResourceArnList'
-            - description: The Amazon Resource Names (ARNs) of the resources.
+            - description: 'Specifies a list of <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> for one or more resources that you want to remove from the resource share. After the operation runs, these resources are no longer shared with principals outside of the Amazon Web Services account that created the resources.'
         principals:
           allOf:
             - $ref: '#/components/schemas/PrincipalArnOrIdList'
-            - description: The principals.
+            - description: '<p>Specifies a list of one or more principals that no longer are to have access to the resources in this resource share.</p> <p>You can include the following values:</p> <ul> <li> <p>An Amazon Web Services account ID, for example: <code>123456789012</code> </p> </li> <li> <p>An <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of an organization in Organizations, for example: <code>organizations::123456789012:organization/o-exampleorgid</code> </p> </li> <li> <p>An ARN of an organizational unit (OU) in Organizations, for example: <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code> </p> </li> <li> <p>An ARN of an IAM role, for example: <code>iam::123456789012:role/rolename</code> </p> </li> <li> <p>An ARN of an IAM user, for example: <code>iam::123456789012user/username</code> </p> </li> </ul> <note> <p>Not all resource types can be shared with IAM roles and users. For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User Guide</i>.</p> </note>'
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+            - description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p>'
     EnableSharingWithAwsOrganizationRequest:
       type: object
       title: EnableSharingWithAwsOrganizationRequest
@@ -2935,38 +3068,38 @@ components:
         permissionArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the permission.
+            - description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the permission whose contents you want to retrieve. To find the ARN for a permission, use either the <a>ListPermissions</a> operation or go to the <a href="https://console.aws.amazon.com/ram/home#Permissions:">Permissions library</a> page in the RAM console and then choose the name of the permission. The ARN is displayed on the detail page.'
         permissionVersion:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The identifier for the version of the permission.
+            - description: 'Specifies identifier for the version of the RAM permission to retrieve. If you don''t specify this parameter, the operation retrieves the default version.'
     ResourceSharePermissionDetail:
       type: object
       properties:
         arn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the permission.
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of this RAM permission.'
         version:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The identifier for the version of the permission.
+            - description: The version of the permission represented in this structure.
         defaultVersion:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Specifies whether the version of the permission is set to the default version for this permission.
+            - description: Specifies whether the version of the permission represented in this structure is the default version for this permission.
         name:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the permission.
+            - description: The name of this permission.
         resourceType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The resource type to which the permission applies.
+            - description: The resource type to which this permission applies.
         permission:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The permission's effect and actions in JSON format. The <code>effect</code> indicates whether the actions are allowed or denied. The <code>actions</code> list the API actions to which the principal is granted or denied access.
+            - description: The permission's effect and actions in JSON format. The <code>effect</code> indicates whether the specified actions are allowed or denied. The <code>actions</code> list the operations to which the principal is granted or denied access.
         creationTime:
           allOf:
             - $ref: '#/components/schemas/DateTime'
@@ -2978,7 +3111,7 @@ components:
         isResourceTypeDefault:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Specifies whether the version of the permission is set to the default version for this resource type.
+            - description: Specifies whether the version of the permission represented in this structure is the default version for all resources of this resource type.
       description: Information about an RAM permission.
     MaxResults:
       type: integer
@@ -2993,19 +3126,19 @@ components:
         resourceArns:
           allOf:
             - $ref: '#/components/schemas/ResourceArnList'
-            - description: The Amazon Resource Names (ARNs) of the resources.
+            - description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> of the resources whose policies you want to retrieve.'
         principal:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The principal.
+            - description: Specifies the principal.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token for the next page of results.
+            - description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
         maxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+            - description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
     PolicyList:
       type: array
       items:
@@ -3036,31 +3169,31 @@ components:
         associationType:
           allOf:
             - $ref: '#/components/schemas/ResourceShareAssociationType'
-            - description: The association type. Specify <code>PRINCIPAL</code> to list the principals that are associated with the specified resource share. Specify <code>RESOURCE</code> to list the resources that are associated with the specified resource share.
+            - description: <p>Specifies whether you want to retrieve the associations that involve a specified resource or principal.</p> <ul> <li> <p> <code>PRINCIPAL</code> – list the principals that are associated with the specified resource share.</p> </li> <li> <p> <code>RESOURCE</code> – list the resources that are associated with the specified resource share.</p> </li> </ul>
         resourceShareArns:
           allOf:
             - $ref: '#/components/schemas/ResourceShareArnList'
-            - description: The Amazon Resource Names (ARN) of the resource shares.
+            - description: 'Specifies a list of <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> of the resource share whose associations you want to retrieve.'
         resourceArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the resource. You cannot specify this parameter if the association type is <code>PRINCIPAL</code>.
+            - description: '<p>Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource whose resource shares you want to retrieve.</p> <p>You cannot specify this parameter if the association type is <code>PRINCIPAL</code>.</p>'
         principal:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The principal. You cannot specify this parameter if the association type is <code>RESOURCE</code>.
+            - description: '<p>Specifies the ID of the principal whose resource shares you want to retrieve. This can be an Amazon Web Services account ID, an organization ID, an organizational unit ID, or the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of an individual IAM user or role.</p> <p>You cannot specify this parameter if the association type is <code>RESOURCE</code>.</p>'
         associationStatus:
           allOf:
             - $ref: '#/components/schemas/ResourceShareAssociationStatus'
-            - description: The association status.
+            - description: Specifies that you want to retrieve only associations with this status.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token for the next page of results.
+            - description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
         maxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+            - description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
     ResourceShareInvitationArnList:
       type: array
       items:
@@ -3072,19 +3205,19 @@ components:
         resourceShareInvitationArns:
           allOf:
             - $ref: '#/components/schemas/ResourceShareInvitationArnList'
-            - description: The Amazon Resource Names (ARN) of the invitations.
+            - description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> of the resource share invitations you want information about.'
         resourceShareArns:
           allOf:
             - $ref: '#/components/schemas/ResourceShareArnList'
-            - description: The Amazon Resource Names (ARN) of the resource shares.
+            - description: 'Specifies that you want details about invitations only for the resource shares described by this list of <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> '
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token for the next page of results.
+            - description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
         maxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+            - description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
     ResourceShareInvitationList:
       type: array
       items:
@@ -3115,39 +3248,45 @@ components:
         resourceShareArns:
           allOf:
             - $ref: '#/components/schemas/ResourceShareArnList'
-            - description: The Amazon Resource Names (ARNs) of the resource shares.
+            - description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> of individual resource shares that you want information about.'
         resourceShareStatus:
           allOf:
             - $ref: '#/components/schemas/ResourceShareStatus'
-            - description: The status of the resource share.
+            - description: Specifies that you want to retrieve details of only those resource shares that have this status.
         resourceOwner:
           allOf:
             - $ref: '#/components/schemas/ResourceOwner'
-            - description: The type of owner.
+            - description: '<p>Specifies that you want to retrieve details of only those resource shares that match the following:</p> <ul> <li> <p> <b> <code>SELF</code> </b> – resource shares that your account shares with other accounts</p> </li> <li> <p> <b> <code>OTHER-ACCOUNTS</code> </b> – resource shares that other accounts share with your account</p> </li> </ul>'
         name:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the resource share.
+            - description: Specifies the name of an individual resource share that you want to retrieve details about.
         tagFilters:
           allOf:
             - $ref: '#/components/schemas/TagFilters'
-            - description: One or more tag filters.
+            - description: Specifies that you want to retrieve details of only those resource shares that match the specified tag keys and values.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token for the next page of results.
+            - description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
         maxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+            - description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
         permissionArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the RAM permission that is associated with the resource share.
+            - description: 'Specifies that you want to retrieve details of only those resource shares that use the RAM permission with this <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a>.'
     ResourceShareList:
       type: array
       items:
         $ref: '#/components/schemas/ResourceShare'
+    ResourceRegionScopeFilter:
+      type: string
+      enum:
+        - ALL
+        - REGIONAL
+        - GLOBAL
     ListPendingInvitationResourcesRequest:
       type: object
       required:
@@ -3157,19 +3296,45 @@ components:
         resourceShareInvitationArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the invitation.
+            - description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the invitation. You can use <a>GetResourceShareInvitations</a> to find the ARN of the invitation.'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token for the next page of results.
+            - description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
         maxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+            - description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+        resourceRegionScope:
+          allOf:
+            - $ref: '#/components/schemas/ResourceRegionScopeFilter'
+            - description: <p>Specifies that you want the results to include only resources that have the specified scope.</p> <ul> <li> <p> <code>ALL</code> – the results include both global and regional resources or resource types.</p> </li> <li> <p> <code>GLOBAL</code> – the results include only global resources or resource types.</p> </li> <li> <p> <code>REGIONAL</code> – the results include only regional resources or resource types.</p> </li> </ul> <p>The default value is <code>ALL</code>.</p>
     ResourceList:
       type: array
       items:
         $ref: '#/components/schemas/Resource'
+    ListPermissionVersionsRequest:
+      type: object
+      required:
+        - permissionArn
+      title: ListPermissionVersionsRequest
+      properties:
+        permissionArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the RAM permission whose versions you want to list. You can use the <code>permissionVersion</code> parameter on the <a>AssociateResourceSharePermission</a> operation to specify a non-default version to attach.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+    ResourceSharePermissionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceSharePermissionSummary'
     ListPermissionsRequest:
       type: object
       title: ListPermissionsRequest
@@ -3177,19 +3342,15 @@ components:
         resourceType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'Specifies the resource type for which to list permissions. For example, to list only permissions that apply to EC2 subnets, specify <code>ec2:Subnet</code>.'
+            - description: 'Specifies that you want to list permissions for only the specified resource type. For example, to list only permissions that apply to EC2 subnets, specify <code>ec2:Subnet</code>. You can use the <a>ListResourceTypes</a> operation to get the specific string required.'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token for the next page of results.
+            - description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
         maxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
-    ResourceSharePermissionList:
-      type: array
-      items:
-        $ref: '#/components/schemas/ResourceSharePermissionSummary'
+            - description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
     ListPrincipalsRequest:
       type: object
       required:
@@ -3199,31 +3360,31 @@ components:
         resourceOwner:
           allOf:
             - $ref: '#/components/schemas/ResourceOwner'
-            - description: The type of owner.
+            - description: '<p>Specifies that you want to list information for only resource shares that match the following:</p> <ul> <li> <p> <b> <code>SELF</code> </b> – principals that your account is sharing resources with</p> </li> <li> <p> <b> <code>OTHER-ACCOUNTS</code> </b> – principals that are sharing resources with your account</p> </li> </ul>'
         resourceArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the resource.
+            - description: 'Specifies that you want to list principal information for the resource share with the specified <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a>.'
         principals:
           allOf:
             - $ref: '#/components/schemas/PrincipalArnOrIdList'
-            - description: The principals.
+            - description: '<p>Specifies that you want to list information for only the listed principals.</p> <p>You can include the following values:</p> <ul> <li> <p>An Amazon Web Services account ID, for example: <code>123456789012</code> </p> </li> <li> <p>An <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of an organization in Organizations, for example: <code>organizations::123456789012:organization/o-exampleorgid</code> </p> </li> <li> <p>An ARN of an organizational unit (OU) in Organizations, for example: <code>organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123</code> </p> </li> <li> <p>An ARN of an IAM role, for example: <code>iam::123456789012:role/rolename</code> </p> </li> <li> <p>An ARN of an IAM user, for example: <code>iam::123456789012user/username</code> </p> </li> </ul> <note> <p>Not all resource types can be shared with IAM roles and users. For more information, see <a href="https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types">Sharing with IAM roles and users</a> in the <i>Resource Access Manager User Guide</i>.</p> </note>'
         resourceType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:FirewallRuleGroup</code> |<code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> | <code>s3-outposts:Outpost</code> | <code>ssm-contacts:Contact</code> | <code>ssm-incidents:ResponsePlan</code> </p>'
+            - description: '<p>Specifies that you want to list information for only principals associated with resource shares that include the specified resource type.</p> <p>For a list of valid values, query the <a>ListResourceTypes</a> operation.</p>'
         resourceShareArns:
           allOf:
             - $ref: '#/components/schemas/ResourceShareArnList'
-            - description: The Amazon Resource Names (ARN) of the resource shares.
+            - description: 'Specifies that you want to list information for only principals associated with the resource shares specified by a list the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token for the next page of results.
+            - description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
         maxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+            - description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
     PrincipalList:
       type: array
       items:
@@ -3237,15 +3398,15 @@ components:
         resourceShareArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the resource share.
+            - description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share for which you want to retrieve the associated permissions.'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token for the next page of results.
+            - description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
         maxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+            - description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
     ListResourceTypesRequest:
       type: object
       title: ListResourceTypesRequest
@@ -3253,11 +3414,15 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token for the next page of results.
+            - description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
         maxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+            - description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+        resourceRegionScope:
+          allOf:
+            - $ref: '#/components/schemas/ResourceRegionScopeFilter'
+            - description: <p>Specifies that you want the results to include only resources that have the specified scope.</p> <ul> <li> <p> <code>ALL</code> – the results include both global and regional resources or resource types.</p> </li> <li> <p> <code>GLOBAL</code> – the results include only global resources or resource types.</p> </li> <li> <p> <code>REGIONAL</code> – the results include only regional resources or resource types.</p> </li> </ul> <p>The default value is <code>ALL</code>.</p>
     ServiceNameAndResourceTypeList:
       type: array
       items:
@@ -3271,31 +3436,35 @@ components:
         resourceOwner:
           allOf:
             - $ref: '#/components/schemas/ResourceOwner'
-            - description: The type of owner.
+            - description: '<p>Specifies that you want to list only the resource shares that match the following:</p> <ul> <li> <p> <b> <code>SELF</code> </b> – resources that your account shares with other accounts</p> </li> <li> <p> <b> <code>OTHER-ACCOUNTS</code> </b> – resources that other accounts share with your account</p> </li> </ul>'
         principal:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The principal.
+            - description: Specifies that you want to list only the resource shares that are associated with the specified principal.
         resourceType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:FirewallRuleGroup</code> |<code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> | <code>s3-outposts:Outpost</code> | <code>ssm-contacts:Contact</code> | <code>ssm-incidents:ResponsePlan</code> </p>'
+            - description: '<p>Specifies that you want to list only the resource shares that include resources of the specified resource type.</p> <p>For valid values, query the <a>ListResourceTypes</a> operation.</p>'
         resourceArns:
           allOf:
             - $ref: '#/components/schemas/ResourceArnList'
-            - description: The Amazon Resource Names (ARNs) of the resources.
+            - description: 'Specifies that you want to list only the resource shares that include resources with the specified <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.'
         resourceShareArns:
           allOf:
             - $ref: '#/components/schemas/ResourceShareArnList'
-            - description: The Amazon Resource Names (ARN) of the resource shares.
+            - description: 'Specifies that you want to list only resources in the resource shares identified by the specified <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token for the next page of results.
+            - description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
         maxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+            - description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+        resourceRegionScope:
+          allOf:
+            - $ref: '#/components/schemas/ResourceRegionScopeFilter'
+            - description: <p>Specifies that you want the results to include only resources that have the specified scope.</p> <ul> <li> <p> <code>ALL</code> – the results include both global and regional resources or resource types.</p> </li> <li> <p> <code>GLOBAL</code> – the results include only global resources or resource types.</p> </li> <li> <p> <code>REGIONAL</code> – the results include only regional resources or resource types.</p> </li> </ul> <p>The default value is <code>ALL</code>.</p>
     Policy:
       type: string
     Principal:
@@ -3308,15 +3477,15 @@ components:
         resourceShareArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the resource share.
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of a resource share the principal is associated with.'
         creationTime:
           allOf:
             - $ref: '#/components/schemas/DateTime'
-            - description: The time when the principal was associated with the resource share.
+            - description: The date and time when the principal was associated with the resource share.
         lastUpdatedTime:
           allOf:
             - $ref: '#/components/schemas/DateTime'
-            - description: The time when the association was last updated.
+            - description: The date and time when the association was last updated.
         external:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -3335,11 +3504,11 @@ components:
         resourceShareInvitationArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the invitation.
+            - description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the invitation that you want to reject.'
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+            - description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p>'
     ResourceStatus:
       type: string
       enum:
@@ -3348,29 +3517,34 @@ components:
         - LIMIT_EXCEEDED
         - UNAVAILABLE
         - PENDING
+    ResourceRegionScope:
+      type: string
+      enum:
+        - REGIONAL
+        - GLOBAL
     Resource:
       type: object
       properties:
         arn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the resource.
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource.'
         type:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The resource type.
+            - description: 'The resource type. This takes the form of: <code>service-code</code>:<code>resource-code</code> '
         resourceShareArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the resource share.
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share this resource is associated with.'
         resourceGroupArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the resource group. This value is returned only if the resource is a resource group.
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource group. This value is available only if the resource is part of a resource group.'
         status:
           allOf:
             - $ref: '#/components/schemas/ResourceStatus'
-            - description: The status of the resource.
+            - description: The current status of the resource.
         statusMessage:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3378,12 +3552,16 @@ components:
         creationTime:
           allOf:
             - $ref: '#/components/schemas/DateTime'
-            - description: The time when the resource was associated with the resource share.
+            - description: The date and time when the resource was associated with the resource share.
         lastUpdatedTime:
           allOf:
             - $ref: '#/components/schemas/DateTime'
-            - description: The time when the association was last updated.
-      description: Describes a resource associated with a resource share.
+            - description: The date an time when the association was last updated.
+        resourceRegionScope:
+          allOf:
+            - $ref: '#/components/schemas/ResourceRegionScope'
+            - description: '<p>Specifies the scope of visibility of this resource:</p> <ul> <li> <p> <b>REGIONAL</b> – The resource can be accessed only by using requests that target the Amazon Web Services Region in which the resource exists.</p> </li> <li> <p> <b>GLOBAL</b> – The resource can be accessed from any Amazon Web Services Region.</p> </li> </ul>'
+      description: Describes a resource associated with a resource share in RAM.
     ResourceShareFeatureSet:
       type: string
       enum:
@@ -3396,7 +3574,7 @@ components:
         resourceShareArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the resource share.
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share.'
         resourceShareName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3404,15 +3582,15 @@ components:
         associatedEntity:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The associated entity. For resource associations, this is the Amazon Resource Name (ARN) of the resource. For principal associations, this is one of the following:</p> <ul> <li> <p>An Amazon Web Services account ID</p> </li> <li> <p>An ARN of an organization in Organizations</p> </li> <li> <p>An ARN of an organizational unit (OU) in Organizations</p> </li> <li> <p>An ARN of an IAM role</p> </li> <li> <p>An ARN of an IAM user</p> </li> </ul>'
+            - description: '<p>The associated entity. This can be either of the following:</p> <ul> <li> <p>For a resource association, this is the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource.</p> </li> <li> <p>For principal associations, this is one of the following:</p> <ul> <li> <p>The ID of an Amazon Web Services account</p> </li> <li> <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of an organization in Organizations</p> </li> <li> <p>The ARN of an organizational unit (OU) in Organizations</p> </li> <li> <p>The ARN of an IAM role</p> </li> <li> <p>The ARN of an IAM user</p> </li> </ul> </li> </ul>'
         associationType:
           allOf:
             - $ref: '#/components/schemas/ResourceShareAssociationType'
-            - description: The association type.
+            - description: The type of entity included in this association.
         status:
           allOf:
             - $ref: '#/components/schemas/ResourceShareAssociationStatus'
-            - description: The status of the association.
+            - description: The current status of the association.
         statusMessage:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3420,16 +3598,16 @@ components:
         creationTime:
           allOf:
             - $ref: '#/components/schemas/DateTime'
-            - description: The time when the association was created.
+            - description: The date and time when the association was created.
         lastUpdatedTime:
           allOf:
             - $ref: '#/components/schemas/DateTime'
-            - description: The time when the association was last updated.
+            - description: The date and time when the association was last updated.
         external:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Indicates whether the principal belongs to the same organization in Organizations as the Amazon Web Services account that owns the resource share.
-      description: Describes an association with a resource share.
+      description: Describes an association with a resource share and either a principal or a resource.
     ResourceShareInvitationStatus:
       type: string
       enum:
@@ -3443,23 +3621,23 @@ components:
         arn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the permission.
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the permission you want information about.'
         version:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The identifier for the version of the permission.
+            - description: The version of the permission represented in this structure.
         defaultVersion:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Specifies whether the version of the permission is set to the default version for this permission.
+            - description: Specifies whether the version of the permission represented in this structure is the default version for this permission.
         name:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the permission.
+            - description: The name of this permission.
         resourceType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The type of resource to which the permission applies.
+            - description: The type of resource to which this permission applies.
         status:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3475,20 +3653,24 @@ components:
         isResourceTypeDefault:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Specifies whether the version of the permission is set to the default version for this resource type.
-      description: Information about a permission that is associated with a resource share.
+            - description: Specifies whether the version of the permission represented in this structure is the default version for all resources of this resource type.
+      description: Information about an RAM permission that is associated with a resource share and any of its resources of a specified type.
     ServiceNameAndResourceType:
       type: object
       properties:
         resourceType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The shareable resource types.
+            - description: The type of the resource.
         serviceName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the Amazon Web Services services to which the resources belong.
-      description: Information about the shareable resource types and the Amazon Web Services services to which they belong.
+            - description: The name of the Amazon Web Services service to which resources of this type belong.
+        resourceRegionScope:
+          allOf:
+            - $ref: '#/components/schemas/ResourceRegionScope'
+            - description: '<p>Specifies the scope of visibility of resources of this type:</p> <ul> <li> <p> <b>REGIONAL</b> – The resource can be accessed only by using requests that target the Amazon Web Services Region in which the resource exists.</p> </li> <li> <p> <b>GLOBAL</b> – The resource can be accessed from any Amazon Web Services Region.</p> </li> </ul>'
+      description: Information about a shareable resource type and the Amazon Web Services service to which resources of that type belong.
     TagValue:
       type: string
     TagValueList:
@@ -3509,11 +3691,11 @@ components:
         resourceShareArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the resource share.
+            - description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share that you want to add tags to.'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: One or more tags.
+            - description: A list of one or more tag key and value pairs. The tag key must be present and not be an empty string. The tag value must be present but can be an empty string.
     UntagResourceRequest:
       type: object
       required:
@@ -3524,11 +3706,11 @@ components:
         resourceShareArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the resource share.
+            - description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share that you want to remove tags from. The tags are removed from the resource share, not the resources in the resource share.'
         tagKeys:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
-            - description: The tag keys of the tags to remove.
+            - description: Specifies a list of one or more tag keys that you want to remove.
     UpdateResourceShareRequest:
       type: object
       required:
@@ -3538,18 +3720,18 @@ components:
         resourceShareArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the resource share.
+            - description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resoure Name (ARN)</a> of the resource share that you want to modify.'
         name:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the resource share.
+            - description: 'If specified, the new name that you want to attach to the resource share.'
         allowExternalPrincipals:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether principals outside your organization in Organizations can be associated with a resource share.
+            - description: Specifies whether principals outside your organization in Organizations can be associated with a resource share.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+            - description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p>'
 security:
   - hmac: []

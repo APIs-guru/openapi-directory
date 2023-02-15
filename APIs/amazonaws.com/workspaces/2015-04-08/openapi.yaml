@@ -3,7 +3,7 @@ info:
   version: '2015-04-08'
   x-release: v4
   title: Amazon WorkSpaces
-  description: '<fullname>Amazon WorkSpaces Service</fullname> <p>Amazon WorkSpaces enables you to provision virtual, cloud-based Microsoft Windows and Amazon Linux desktops for your users.</p>'
+  description: '<fullname>Amazon WorkSpaces Service</fullname> <p>Amazon WorkSpaces enables you to provision virtual, cloud-based Microsoft Windows or Amazon Linux desktops for your users, known as <i>WorkSpaces</i>. WorkSpaces eliminates the need to procure and deploy hardware or install complex software. You can quickly add or remove users as your needs change. Users can access their virtual desktops from multiple devices or web browsers.</p> <p>This API Reference provides detailed information about the actions, data types, parameters, and errors of the WorkSpaces service. For more information about the supported Amazon Web Services Regions, endpoints, and service quotas of the Amazon WorkSpaces service, see <a href="https://docs.aws.amazon.com/general/latest/gr/wsp.html">WorkSpaces endpoints and quotas</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>You can also manage your WorkSpaces resources using the WorkSpaces console, Command Line Interface (CLI), and SDKs. For more information about administering WorkSpaces, see the <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/">Amazon WorkSpaces Administration Guide</a>. For more information about using the Amazon WorkSpaces client application or web browser to access provisioned WorkSpaces, see the <a href="https://docs.aws.amazon.com/workspaces/latest/userguide/">Amazon WorkSpaces User Guide</a>. For more information about using the CLI to manage your WorkSpaces resources, see the <a href="https://docs.aws.amazon.com/cli/latest/reference/workspaces/index.html">WorkSpaces section of the CLI Reference</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -318,7 +318,7 @@ paths:
   /#X-Amz-Target=WorkspacesService.CopyWorkspaceImage:
     post:
       operationId: CopyWorkspaceImage
-      description: '<p>Copies the specified image from the specified Region to the current Region. For more information about copying images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/copy-custom-image.html"> Copy a Custom WorkSpaces Image</a>.</p> <note> <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p> <p>In the AWS GovCloud (US-West) Region, to copy images to and from other AWS Regions, contact AWS Support.</p> </note> <important> <p>Before copying a shared image, be sure to verify that it has been shared from the correct AWS account. To determine if an image has been shared and to see the AWS account ID that owns an image, use the <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html">DescribeWorkSpaceImages</a> and <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImagePermissions.html">DescribeWorkspaceImagePermissions</a> API operations. </p> </important>'
+      description: '<p>Copies the specified image from the specified Region to the current Region. For more information about copying images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/copy-custom-image.html"> Copy a Custom WorkSpaces Image</a>.</p> <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p> <p>In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web Services Support.</p> <important> <p>Before copying a shared image, be sure to verify that it has been shared from the correct Amazon Web Services account. To determine if an image has been shared and to see the ID of the Amazon Web Services account that owns an image, use the <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html">DescribeWorkSpaceImages</a> and <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImagePermissions.html">DescribeWorkspaceImagePermissions</a> API operations. </p> </important>'
       responses:
         '200':
           description: Success
@@ -382,6 +382,69 @@ paths:
             type: string
             enum:
               - WorkspacesService.CopyWorkspaceImage
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.CreateConnectClientAddIn:
+    post:
+      operationId: CreateConnectClientAddIn
+      description: <p>Creates a client-add-in for Amazon Connect within a directory. You can create only one Amazon Connect client add-in within a directory.</p> <p>This client add-in allows WorkSpaces users to seamlessly connect to Amazon Connect.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateConnectClientAddInResult'
+        '480':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ResourceCreationFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceCreationFailedException'
+        '483':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConnectClientAddInRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.CreateConnectClientAddIn
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -522,6 +585,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.CreateStandbyWorkspaces:
+    post:
+      operationId: CreateStandbyWorkspaces
+      description: Creates a standby WorkSpace in a secondary Region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateStandbyWorkspacesResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '482':
+          description: OperationNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotSupportedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStandbyWorkspacesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.CreateStandbyWorkspaces
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkspacesService.CreateTags:
     post:
       operationId: CreateTags
@@ -565,6 +691,81 @@ paths:
             type: string
             enum:
               - WorkspacesService.CreateTags
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.CreateUpdatedWorkspaceImage:
+    post:
+      operationId: CreateUpdatedWorkspaceImage
+      description: '<p>Creates a new updated WorkSpace image based on the specified source image. The new updated WorkSpace image has the latest drivers and other updates required by the Amazon WorkSpaces components.</p> <p>To determine which WorkSpace images need to be updated with the latest Amazon WorkSpaces requirements, use <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html"> DescribeWorkspaceImages</a>.</p> <note> <ul> <li> <p>Only Windows 10, Windows Server 2016, and Windows Server 2019 WorkSpace images can be programmatically updated at this time.</p> </li> <li> <p>Microsoft Windows updates and other application updates are not included in the update process.</p> </li> <li> <p>The source WorkSpace image is not deleted. You can delete the source image after you''ve verified your new updated image and created a new bundle. </p> </li> </ul> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUpdatedWorkspaceImageResult'
+        '480':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '481':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: OperationNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotSupportedException'
+        '484':
+          description: InvalidResourceStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUpdatedWorkspaceImageRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.CreateUpdatedWorkspaceImage
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -642,10 +843,85 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.CreateWorkspaceImage:
+    post:
+      operationId: CreateWorkspaceImage
+      description: Creates a new WorkSpace image from an existing WorkSpace.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorkspaceImageResult'
+        '480':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '481':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: OperationNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotSupportedException'
+        '484':
+          description: InvalidResourceStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkspaceImageRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.CreateWorkspaceImage
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkspacesService.CreateWorkspaces:
     post:
       operationId: CreateWorkspaces
-      description: <p>Creates one or more WorkSpaces.</p> <p>This operation is asynchronous and returns before the WorkSpaces are created.</p>
+      description: '<p>Creates one or more WorkSpaces.</p> <p>This operation is asynchronous and returns before the WorkSpaces are created.</p> <note> <p>The <code>MANUAL</code> running mode value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see <a href="http://aws.amazon.com/workspaces/core/">Amazon WorkSpaces Core</a>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -679,6 +955,108 @@ paths:
             type: string
             enum:
               - WorkspacesService.CreateWorkspaces
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.DeleteClientBranding:
+    post:
+      operationId: DeleteClientBranding
+      description: '<p>Deletes customized client branding. Client branding allows you to customize your WorkSpace''s client login portal. You can tailor your login portal company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in.</p> <p>After you delete your customized client branding, your login portal reverts to the default client branding.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteClientBrandingResult'
+        '480':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteClientBrandingRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.DeleteClientBranding
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.DeleteConnectClientAddIn:
+    post:
+      operationId: DeleteConnectClientAddIn
+      description: Deletes a client-add-in for Amazon Connect that is configured within a directory.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteConnectClientAddInResult'
+        '480':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteConnectClientAddInRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.DeleteConnectClientAddIn
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -969,7 +1347,7 @@ paths:
   /#X-Amz-Target=WorkspacesService.DeregisterWorkspaceDirectory:
     post:
       operationId: DeregisterWorkspaceDirectory
-      description: '<p>Deregisters the specified directory. This operation is asynchronous and returns before the WorkSpace directory is deregistered. If any WorkSpaces are registered to this directory, you must remove them before you can deregister the directory.</p> <note> <p>Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the <a href="http://aws.amazon.com/directoryservice/pricing/">AWS Directory Services pricing terms</a>.</p> <p>To delete empty directories, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html"> Delete the Directory for Your WorkSpaces</a>. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again.</p> </note>'
+      description: '<p>Deregisters the specified directory. This operation is asynchronous and returns before the WorkSpace directory is deregistered. If any WorkSpaces are registered to this directory, you must remove them before you can deregister the directory.</p> <note> <p>Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the <a href="http://aws.amazon.com/directoryservice/pricing/">Directory Service pricing terms</a>.</p> <p>To delete empty directories, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html"> Delete the Directory for Your WorkSpaces</a>. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1107,6 +1485,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.DescribeClientBranding:
+    post:
+      operationId: DescribeClientBranding
+      description: '<p>Describes the specified client branding. Client branding allows you to customize the log in page of various device types for your users. You can add your company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in.</p> <note> <p>Only device types that have branding information configured will be shown in the response.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeClientBrandingResult'
+        '480':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeClientBrandingRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.DescribeClientBranding
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkspacesService.DescribeClientProperties:
     post:
       operationId: DescribeClientProperties
@@ -1158,10 +1587,61 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.DescribeConnectClientAddIns:
+    post:
+      operationId: DescribeConnectClientAddIns
+      description: Retrieves a list of Amazon Connect client add-ins that have been created.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeConnectClientAddInsResult'
+        '480':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeConnectClientAddInsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.DescribeConnectClientAddIns
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkspacesService.DescribeConnectionAliasPermissions:
     post:
       operationId: DescribeConnectionAliasPermissions
-      description: 'Describes the permissions that the owner of a connection alias has granted to another AWS account for the specified connection alias. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.'
+      description: 'Describes the permissions that the owner of a connection alias has granted to another Amazon Web Services account for the specified connection alias. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.'
       responses:
         '200':
           description: Success
@@ -1443,7 +1923,7 @@ paths:
   /#X-Amz-Target=WorkspacesService.DescribeWorkspaceImagePermissions:
     post:
       operationId: DescribeWorkspaceImagePermissions
-      description: Describes the permissions that the owner of an image has granted to other AWS accounts for an image.
+      description: Describes the permissions that the owner of an image has granted to other Amazon Web Services accounts for an image.
       responses:
         '200':
           description: Success
@@ -1680,7 +2160,7 @@ paths:
   /#X-Amz-Target=WorkspacesService.DisassociateConnectionAlias:
     post:
       operationId: DisassociateConnectionAlias
-      description: '<p>Disassociates a connection alias from a directory. Disassociating a connection alias disables cross-Region redirection between two directories in different AWS Regions. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.</p> <note> <p>Before performing this operation, call <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html"> DescribeConnectionAliases</a> to make sure that the current state of the connection alias is <code>CREATED</code>.</p> </note>'
+      description: '<p>Disassociates a connection alias from a directory. Disassociating a connection alias disables cross-Region redirection between two directories in different Regions. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.</p> <note> <p>Before performing this operation, call <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html"> DescribeConnectionAliases</a> to make sure that the current state of the connection alias is <code>CREATED</code>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1797,10 +2277,67 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.ImportClientBranding:
+    post:
+      operationId: ImportClientBranding
+      description: '<p>Imports client branding. Client branding allows you to customize your WorkSpace''s client login portal. You can tailor your login portal company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in.</p> <p>After you import client branding, the default branding experience for the specified platform type is replaced with the imported experience</p> <note> <ul> <li> <p>You must specify at least one platform type when importing client branding.</p> </li> <li> <p>You can import up to 6 MB of data with each request. If your request exceeds this limit, you can import client branding for different platform types using separate requests.</p> </li> <li> <p>In each platform type, the <code>SupportEmail</code> and <code>SupportLink</code> parameters are mutually exclusive. You can specify only one parameter for each platform type, but not both.</p> </li> <li> <p>Imported data can take up to a minute to appear in the WorkSpaces client.</p> </li> </ul> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportClientBrandingResult'
+        '480':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '481':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportClientBrandingRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.ImportClientBranding
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkspacesService.ImportWorkspaceImage:
     post:
       operationId: ImportWorkspaceImage
-      description: 'Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your AWS account, and you must own the image. For more information about creating BYOL images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html"> Bring Your Own Windows Desktop Licenses</a>.'
+      description: 'Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your Amazon Web Services account, and you must own the image. For more information about creating BYOL images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html"> Bring Your Own Windows Desktop Licenses</a>.'
       responses:
         '200':
           description: Success
@@ -1869,7 +2406,7 @@ paths:
   /#X-Amz-Target=WorkspacesService.ListAvailableManagementCidrRanges:
     post:
       operationId: ListAvailableManagementCidrRanges
-      description: '<p>Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable Bring Your Own License (BYOL). </p> <p>This operation can be run only by AWS accounts that are enabled for BYOL. If your account isn''t enabled for BYOL, you''ll receive an <code>AccessDeniedException</code> error.</p> <p>The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>'
+      description: '<p>Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable Bring Your Own License (BYOL). </p> <p>This operation can be run only by Amazon Web Services accounts that are enabled for BYOL. If your account isn''t enabled for BYOL, you''ll receive an <code>AccessDeniedException</code> error.</p> <p>The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>'
       responses:
         '200':
           description: Success
@@ -2043,6 +2580,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.ModifyCertificateBasedAuthProperties:
+    post:
+      operationId: ModifyCertificateBasedAuthProperties
+      description: Modifies the properties of the certificate-based authentication you want to use with your WorkSpaces.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyCertificateBasedAuthPropertiesResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '482':
+          description: OperationNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotSupportedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyCertificateBasedAuthPropertiesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.ModifyCertificateBasedAuthProperties
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkspacesService.ModifyClientProperties:
     post:
       operationId: ModifyClientProperties
@@ -2086,6 +2680,63 @@ paths:
             type: string
             enum:
               - WorkspacesService.ModifyClientProperties
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.ModifySamlProperties:
+    post:
+      operationId: ModifySamlProperties
+      description: 'Modifies multiple properties related to SAML 2.0 authentication, including the enablement status, user access URL, and relay state parameter name that are used for configuring federation with an SAML 2.0 identity provider.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifySamlPropertiesResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '482':
+          description: OperationNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotSupportedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifySamlPropertiesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.ModifySamlProperties
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2250,7 +2901,7 @@ paths:
   /#X-Amz-Target=WorkspacesService.ModifyWorkspaceProperties:
     post:
       operationId: ModifyWorkspaceProperties
-      description: 'Modifies the specified WorkSpace properties. For important information about how to modify the size of the root and user volumes, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html"> Modify a WorkSpace</a>. '
+      description: '<p>Modifies the specified WorkSpace properties. For important information about how to modify the size of the root and user volumes, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html"> Modify a WorkSpace</a>. </p> <note> <p>The <code>MANUAL</code> running mode value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see <a href="http://aws.amazon.com/workspaces/core/">Amazon WorkSpaces Core</a>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2351,6 +3002,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: OperationNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotSupportedException'
       requestBody:
         required: true
         content:
@@ -2384,6 +3041,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RebootWorkspacesResult'
+        '480':
+          description: OperationNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotSupportedException'
       requestBody:
         required: true
         content:
@@ -2417,6 +3080,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RebuildWorkspacesResult'
+        '480':
+          description: OperationNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotSupportedException'
       requestBody:
         required: true
         content:
@@ -2549,6 +3218,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: OperationNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotSupportedException'
       requestBody:
         required: true
         content:
@@ -2697,7 +3372,7 @@ paths:
   /#X-Amz-Target=WorkspacesService.TerminateWorkspaces:
     post:
       operationId: TerminateWorkspaces
-      description: '<p>Terminates the specified WorkSpaces.</p> <important> <p>Terminating a WorkSpace is a permanent action and cannot be undone. The user''s data is destroyed. If you need to archive any user data, contact AWS Support before terminating the WorkSpace.</p> </important> <p>You can terminate a WorkSpace that is in any state except <code>SUSPENDED</code>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely terminated. After a WorkSpace is terminated, the <code>TERMINATED</code> state is returned only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html"> DescribeWorkSpaces</a>. If the WorkSpace ID isn''t returned, then the WorkSpace has been successfully terminated.</p> <note> <p>Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the <a href="http://aws.amazon.com/directoryservice/pricing/">AWS Directory Services pricing terms</a>.</p> <p>To delete empty directories, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html"> Delete the Directory for Your WorkSpaces</a>. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again.</p> </note>'
+      description: '<p>Terminates the specified WorkSpaces.</p> <important> <p>Terminating a WorkSpace is a permanent action and cannot be undone. The user''s data is destroyed. If you need to archive any user data, contact Amazon Web Services Support before terminating the WorkSpace.</p> </important> <p>You can terminate a WorkSpace that is in any state except <code>SUSPENDED</code>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely terminated. After a WorkSpace is terminated, the <code>TERMINATED</code> state is returned only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html"> DescribeWorkSpaces</a>. If the WorkSpace ID isn''t returned, then the WorkSpace has been successfully terminated.</p> <note> <p>Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the <a href="http://aws.amazon.com/directoryservice/pricing/">Directory Service pricing terms</a>.</p> <p>To delete empty directories, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html"> Delete the Directory for Your WorkSpaces</a>. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2719,6 +3394,57 @@ paths:
             type: string
             enum:
               - WorkspacesService.TerminateWorkspaces
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.UpdateConnectClientAddIn:
+    post:
+      operationId: UpdateConnectClientAddIn
+      description: Updates a Amazon Connect client add-in. Use this action to update the name and endpoint URL of a Amazon Connect client add-in.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateConnectClientAddInResult'
+        '480':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConnectClientAddInRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.UpdateConnectClientAddIn
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2900,6 +3626,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceUnavailableException'
+        '484':
+          description: OperationNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotSupportedException'
       requestBody:
         required: true
         content:
@@ -2925,7 +3657,7 @@ paths:
   /#X-Amz-Target=WorkspacesService.UpdateWorkspaceImagePermission:
     post:
       operationId: UpdateWorkspaceImagePermission
-      description: '<p>Shares or unshares an image with one account in the same AWS Region by specifying whether that account has permission to copy the image. If the copy image permission is granted, the image is shared with that account. If the copy image permission is revoked, the image is unshared with the account.</p> <p>After an image has been shared, the recipient account can copy the image to other AWS Regions as needed.</p> <note> <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p> <p>In the AWS GovCloud (US-West) Region, to copy images to and from other AWS Regions, contact AWS Support.</p> </note> <p>For more information about sharing images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html"> Share or Unshare a Custom WorkSpaces Image</a>.</p> <note> <ul> <li> <p>To delete an image that has been shared, you must unshare the image before you delete it.</p> </li> <li> <p>Sharing Bring Your Own License (BYOL) images across AWS accounts isn''t supported at this time in the AWS GovCloud (US-West) Region. To share BYOL images across accounts in the AWS GovCloud (US-West) Region, contact AWS Support.</p> </li> </ul> </note>'
+      description: '<p>Shares or unshares an image with one account in the same Amazon Web Services Region by specifying whether that account has permission to copy the image. If the copy image permission is granted, the image is shared with that account. If the copy image permission is revoked, the image is unshared with the account.</p> <p>After an image has been shared, the recipient account can copy the image to other Regions as needed.</p> <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p> <p>In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web Services Support.</p> <p>For more information about sharing images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html"> Share or Unshare a Custom WorkSpaces Image</a>.</p> <note> <ul> <li> <p>To delete an image that has been shared, you must unshare the image before you delete it.</p> </li> <li> <p>Sharing Bring Your Own License (BYOL) images across Amazon Web Services accounts isn''t supported at this time in Amazon Web Services GovCloud (US). To share BYOL images across accounts in Amazon Web Services GovCloud (US), contact Amazon Web Services Support.</p> </li> </ul> </note>'
       responses:
         '200':
           description: Success
@@ -3139,6 +3871,34 @@ components:
             - description: The tags for the image.
     ResourceAlreadyExistsException: {}
     ResourceUnavailableException: {}
+    CreateConnectClientAddInResult:
+      type: object
+      properties:
+        AddInId:
+          allOf:
+            - $ref: '#/components/schemas/AmazonUuid'
+            - description: The client add-in identifier.
+    CreateConnectClientAddInRequest:
+      type: object
+      required:
+        - ResourceId
+        - Name
+        - URL
+      title: CreateConnectClientAddInRequest
+      properties:
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The directory identifier for which to configure the client add-in.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/AddInName'
+            - description: The name of the client add-in.
+        URL:
+          allOf:
+            - $ref: '#/components/schemas/AddInUrl'
+            - description: The endpoint URL of the Amazon Connect client add-in.
+    ResourceCreationFailedException: {}
     CreateConnectionAliasResult:
       type: object
       properties:
@@ -3155,7 +3915,7 @@ components:
         ConnectionString:
           allOf:
             - $ref: '#/components/schemas/ConnectionString'
-            - description: '<p>A connection string in the form of a fully qualified domain name (FQDN), such as <code>www.example.com</code>.</p> <important> <p>After you create a connection string, it is always associated to your AWS account. You cannot recreate the same connection string with a different account, even if you delete all instances of it from the original account. The connection string is globally reserved for your account.</p> </important>'
+            - description: '<p>A connection string in the form of a fully qualified domain name (FQDN), such as <code>www.example.com</code>.</p> <important> <p>After you create a connection string, it is always associated to your Amazon Web Services account. You cannot recreate the same connection string with a different account, even if you delete all instances of it from the original account. The connection string is globally reserved for your account.</p> </important>'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -3189,7 +3949,32 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: The tags. Each WorkSpaces resource can have a maximum of 50 tags.
-    ResourceCreationFailedException: {}
+    CreateStandbyWorkspacesResult:
+      type: object
+      properties:
+        FailedStandbyRequests:
+          allOf:
+            - $ref: '#/components/schemas/FailedCreateStandbyWorkspacesRequestList'
+            - description: 'Information about the standby WorkSpace that could not be created. '
+        PendingStandbyRequests:
+          allOf:
+            - $ref: '#/components/schemas/PendingCreateStandbyWorkspacesRequestList'
+            - description: Information about the standby WorkSpace that was created.
+    CreateStandbyWorkspacesRequest:
+      type: object
+      required:
+        - PrimaryRegion
+        - StandbyWorkspaces
+      title: CreateStandbyWorkspacesRequest
+      properties:
+        PrimaryRegion:
+          allOf:
+            - $ref: '#/components/schemas/Region'
+            - description: The Region of the primary WorkSpace.
+        StandbyWorkspaces:
+          allOf:
+            - $ref: '#/components/schemas/StandbyWorkspacesList'
+            - description: Information about the standby WorkSpace to be created.
     CreateTagsResult:
       type: object
       properties: {}
@@ -3208,6 +3993,37 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+    CreateUpdatedWorkspaceImageResult:
+      type: object
+      properties:
+        ImageId:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageId'
+            - description: The identifier of the new updated WorkSpace image.
+    CreateUpdatedWorkspaceImageRequest:
+      type: object
+      required:
+        - Name
+        - Description
+        - SourceImageId
+      title: CreateUpdatedWorkspaceImageRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageName'
+            - description: The name of the new updated WorkSpace image.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageDescription'
+            - description: A description of whether updates for the WorkSpace image are available.
+        SourceImageId:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageId'
+            - description: The identifier of the source WorkSpace image.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: '<p>The tags that you want to add to the new updated WorkSpace image.</p> <note> <p>To add tags at the same time when you''re creating the updated image, you must create an IAM policy that grants your IAM user permissions to use <code>workspaces:CreateTags</code>. </p> </note>'
     CreateWorkspaceBundleResult:
       type: object
       properties:
@@ -3245,6 +4061,65 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: '<p>The tags associated with the bundle.</p> <note> <p>To add tags at the same time when you''re creating the bundle, you must create an IAM policy that grants your IAM user permissions to use <code>workspaces:CreateTags</code>. </p> </note>'
+    CreateWorkspaceImageResult:
+      type: object
+      properties:
+        ImageId:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageId'
+            - description: The identifier of the new WorkSpace image.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageName'
+            - description: The name of the image.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageDescription'
+            - description: The description of the image.
+        OperatingSystem:
+          allOf:
+            - $ref: '#/components/schemas/OperatingSystem'
+            - description: The operating system that the image is running.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageState'
+            - description: The availability status of the image.
+        RequiredTenancy:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageRequiredTenancy'
+            - description: 'Specifies whether the image is running on dedicated hardware. When Bring Your Own License (BYOL) is enabled, this value is set to DEDICATED. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.htm"> Bring Your Own Windows Desktop Images.</a>.'
+        Created:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date when the image was created.
+        OwnerAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AwsAccount'
+            - description: The identifier of the Amazon Web Services account that owns the image.
+    CreateWorkspaceImageRequest:
+      type: object
+      required:
+        - Name
+        - Description
+        - WorkspaceId
+      title: CreateWorkspaceImageRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageName'
+            - description: The name of the new WorkSpace image.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageDescription'
+            - description: The description of the new WorkSpace image.
+        WorkspaceId:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The identifier of the source WorkSpace
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'The tags that you want to add to the new WorkSpace image. To add tags when you''re creating the image, you must create an IAM policy that grants your IAM user permission to use <code>workspaces:CreateTags</code>.'
     CreateWorkspacesResult:
       type: object
       properties:
@@ -3266,6 +4141,42 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkspaceRequestList'
             - description: The WorkSpaces to create. You can specify up to 25 WorkSpaces.
+    DeleteClientBrandingResult:
+      type: object
+      properties: {}
+    DeleteClientBrandingRequest:
+      type: object
+      required:
+        - ResourceId
+        - Platforms
+      title: DeleteClientBrandingRequest
+      properties:
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The directory identifier of the WorkSpace for which you want to delete client branding.
+        Platforms:
+          allOf:
+            - $ref: '#/components/schemas/ClientDeviceTypeList'
+            - description: The device type for which you want to delete client branding.
+    DeleteConnectClientAddInResult:
+      type: object
+      properties: {}
+    DeleteConnectClientAddInRequest:
+      type: object
+      required:
+        - AddInId
+        - ResourceId
+      title: DeleteConnectClientAddInRequest
+      properties:
+        AddInId:
+          allOf:
+            - $ref: '#/components/schemas/AmazonUuid'
+            - description: The identifier of the client add-in to delete.
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The directory identifier for which the client add-in is configured.
     DeleteConnectionAliasResult:
       type: object
       properties: {}
@@ -3381,6 +4292,43 @@ components:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
+    DescribeClientBrandingResult:
+      type: object
+      properties:
+        DeviceTypeWindows:
+          allOf:
+            - $ref: '#/components/schemas/DefaultClientBrandingAttributes'
+            - description: The branding information for Windows devices.
+        DeviceTypeOsx:
+          allOf:
+            - $ref: '#/components/schemas/DefaultClientBrandingAttributes'
+            - description: The branding information for macOS devices.
+        DeviceTypeAndroid:
+          allOf:
+            - $ref: '#/components/schemas/DefaultClientBrandingAttributes'
+            - description: The branding information for Android devices.
+        DeviceTypeIos:
+          allOf:
+            - $ref: '#/components/schemas/IosClientBrandingAttributes'
+            - description: The branding information for iOS devices.
+        DeviceTypeLinux:
+          allOf:
+            - $ref: '#/components/schemas/DefaultClientBrandingAttributes'
+            - description: The branding information for Linux devices.
+        DeviceTypeWeb:
+          allOf:
+            - $ref: '#/components/schemas/DefaultClientBrandingAttributes'
+            - description: The branding information for Web access.
+    DescribeClientBrandingRequest:
+      type: object
+      required:
+        - ResourceId
+      title: DescribeClientBrandingRequest
+      properties:
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The directory identifier of the WorkSpace for which you want to view client branding information.
     DescribeClientPropertiesResult:
       type: object
       properties:
@@ -3398,6 +4346,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceIdList'
             - description: 'The resource identifier, in the form of directory IDs.'
+    DescribeConnectClientAddInsResult:
+      type: object
+      properties:
+        AddIns:
+          allOf:
+            - $ref: '#/components/schemas/ConnectClientAddInList'
+            - description: Information about client add-ins.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'The token to use to retrieve the next page of results. This value is null when there are no more results to return. '
+    DescribeConnectClientAddInsRequest:
+      type: object
+      required:
+        - ResourceId
+      title: DescribeConnectClientAddInsRequest
+      properties:
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The directory identifier for which the client add-in is configured.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/Limit'
+            - description: The maximum number of items to return.
     DescribeConnectionAliasPermissionsResult:
       type: object
       properties:
@@ -3528,7 +4505,7 @@ components:
         Owner:
           allOf:
             - $ref: '#/components/schemas/BundleOwner'
-            - description: '<p>The owner of the bundles. You cannot combine this parameter with any other filter.</p> <p>To describe the bundles provided by AWS, specify <code>AMAZON</code>. To describe the bundles that belong to your account, don''t specify a value.</p>'
+            - description: '<p>The owner of the bundles. You cannot combine this parameter with any other filter.</p> <p>To describe the bundles provided by Amazon Web Services, specify <code>AMAZON</code>. To describe the bundles that belong to your account, don''t specify a value.</p>'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
@@ -3570,7 +4547,7 @@ components:
         ImagePermissions:
           allOf:
             - $ref: '#/components/schemas/ImagePermissions'
-            - description: The identifiers of the AWS accounts that the image has been shared with.
+            - description: The identifiers of the Amazon Web Services accounts that the image has been shared with.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
@@ -3738,6 +4715,67 @@ components:
           allOf:
             - $ref: '#/components/schemas/IpGroupIdList'
             - description: The identifiers of one or more IP access control groups.
+    ImportClientBrandingResult:
+      type: object
+      properties:
+        DeviceTypeWindows:
+          allOf:
+            - $ref: '#/components/schemas/DefaultClientBrandingAttributes'
+            - description: The branding information configured for Windows devices.
+        DeviceTypeOsx:
+          allOf:
+            - $ref: '#/components/schemas/DefaultClientBrandingAttributes'
+            - description: The branding information configured for macOS devices.
+        DeviceTypeAndroid:
+          allOf:
+            - $ref: '#/components/schemas/DefaultClientBrandingAttributes'
+            - description: The branding information configured for Android devices.
+        DeviceTypeIos:
+          allOf:
+            - $ref: '#/components/schemas/IosClientBrandingAttributes'
+            - description: The branding information configured for iOS devices.
+        DeviceTypeLinux:
+          allOf:
+            - $ref: '#/components/schemas/DefaultClientBrandingAttributes'
+            - description: The branding information configured for Linux devices.
+        DeviceTypeWeb:
+          allOf:
+            - $ref: '#/components/schemas/DefaultClientBrandingAttributes'
+            - description: The branding information configured for web access.
+    ImportClientBrandingRequest:
+      type: object
+      required:
+        - ResourceId
+      title: ImportClientBrandingRequest
+      properties:
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The directory identifier of the WorkSpace for which you want to import client branding.
+        DeviceTypeWindows:
+          allOf:
+            - $ref: '#/components/schemas/DefaultImportClientBrandingAttributes'
+            - description: The branding information to import for Windows devices.
+        DeviceTypeOsx:
+          allOf:
+            - $ref: '#/components/schemas/DefaultImportClientBrandingAttributes'
+            - description: The branding information to import for macOS devices.
+        DeviceTypeAndroid:
+          allOf:
+            - $ref: '#/components/schemas/DefaultImportClientBrandingAttributes'
+            - description: The branding information to import for Android devices.
+        DeviceTypeIos:
+          allOf:
+            - $ref: '#/components/schemas/IosImportClientBrandingAttributes'
+            - description: The branding information to import for iOS devices.
+        DeviceTypeLinux:
+          allOf:
+            - $ref: '#/components/schemas/DefaultImportClientBrandingAttributes'
+            - description: The branding information to import for Linux devices.
+        DeviceTypeWeb:
+          allOf:
+            - $ref: '#/components/schemas/DefaultImportClientBrandingAttributes'
+            - description: The branding information to import for web access.
     ImportWorkspaceImageResult:
       type: object
       properties:
@@ -3761,7 +4799,7 @@ components:
         IngestionProcess:
           allOf:
             - $ref: '#/components/schemas/WorkspaceImageIngestionProcess'
-            - description: '<p>The ingestion process to be used when importing the image, depending on which protocol you want to use for your BYOL Workspace image, either PCoIP or WorkSpaces Streaming Protocol (WSP). To use WSP, specify a value that ends in <code>_WSP</code>. To use PCoIP, specify a value that does not end in <code>_WSP</code>. </p> <p>For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify <code>BYOL_REGULAR</code> or <code>BYOL_REGULAR_WSP</code>, depending on the protocol.</p>'
+            - description: '<p>The ingestion process to be used when importing the image, depending on which protocol you want to use for your BYOL Workspace image, either PCoIP, WorkSpaces Streaming Protocol (WSP), or bring your own protocol (BYOP). To use WSP, specify a value that ends in <code>_WSP</code>. To use PCoIP, specify a value that does not end in <code>_WSP</code>. To use BYOP, specify a value that ends in <code>_BYOP</code>.</p> <p>For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify <code>BYOL_REGULAR</code>, <code>BYOL_REGULAR_WSP</code>, or <code>BYOL_REGULAR_BYOP</code>, depending on the protocol.</p> <note> <p>The <code>BYOL_REGULAR_BYOP</code> and <code>BYOL_GRAPHICS_G4DN_BYOP</code> values are only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use these values. For more information, see <a href="http://aws.amazon.com/workspaces/core/">Amazon WorkSpaces Core</a>.</p> </note>'
         ImageName:
           allOf:
             - $ref: '#/components/schemas/WorkspaceImageName'
@@ -3849,6 +4887,27 @@ components:
           allOf:
             - $ref: '#/components/schemas/DedicatedTenancyManagementCidrRange'
             - description: 'The IP address range, specified as an IPv4 CIDR block, for the management network interface. Specify an IP address range that is compatible with your network and in CIDR notation (that is, specify the range as an IPv4 CIDR block). The CIDR block size must be /16 (for example, 203.0.113.25/16). It must also be specified as available by the <code>ListAvailableManagementCidrRanges</code> operation.'
+    ModifyCertificateBasedAuthPropertiesResult:
+      type: object
+      properties: {}
+    ModifyCertificateBasedAuthPropertiesRequest:
+      type: object
+      required:
+        - ResourceId
+      title: ModifyCertificateBasedAuthPropertiesRequest
+      properties:
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: 'The resource identifiers, in the form of directory IDs.'
+        CertificateBasedAuthProperties:
+          allOf:
+            - $ref: '#/components/schemas/CertificateBasedAuthProperties'
+            - description: The properties of the certificate-based authentication.
+        PropertiesToDelete:
+          allOf:
+            - $ref: '#/components/schemas/DeletableCertificateBasedAuthPropertiesList'
+            - description: The properties of the certificate-based authentication you want to delete.
     ModifyClientPropertiesResult:
       type: object
       properties: {}
@@ -3867,6 +4926,27 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientProperties'
             - description: Information about the Amazon WorkSpaces client.
+    ModifySamlPropertiesResult:
+      type: object
+      properties: {}
+    ModifySamlPropertiesRequest:
+      type: object
+      required:
+        - ResourceId
+      title: ModifySamlPropertiesRequest
+      properties:
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The directory identifier for which you want to configure SAML properties.
+        SamlProperties:
+          allOf:
+            - $ref: '#/components/schemas/SamlProperties'
+            - description: The properties for configuring SAML 2.0 authentication.
+        PropertiesToDelete:
+          allOf:
+            - $ref: '#/components/schemas/DeletableSamlPropertiesList'
+            - description: '<p>The SAML properties to delete as part of your request.</p> <p>Specify one of the following options:</p> <ul> <li> <p> <code>SAML_PROPERTIES_USER_ACCESS_URL</code> to delete the user access URL.</p> </li> <li> <p> <code>SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME</code> to delete the relay state parameter name.</p> </li> </ul>'
     ModifySelfservicePermissionsResult:
       type: object
       properties: {}
@@ -4021,7 +5101,7 @@ components:
         Tenancy:
           allOf:
             - $ref: '#/components/schemas/Tenancy'
-            - description: 'Indicates whether your WorkSpace directory is dedicated or shared. To use Bring Your Own License (BYOL) images, this value must be set to <code>DEDICATED</code> and your AWS account must be enabled for BYOL. If your account has not been enabled for BYOL, you will receive an InvalidParameterValuesException error. For more information about BYOL images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html">Bring Your Own Windows Desktop Images</a>.'
+            - description: 'Indicates whether your WorkSpace directory is dedicated or shared. To use Bring Your Own License (BYOL) images, this value must be set to <code>DEDICATED</code> and your Amazon Web Services account must be enabled for BYOL. If your account has not been enabled for BYOL, you will receive an InvalidParameterValuesException error. For more information about BYOL images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html">Bring Your Own Windows Desktop Images</a>.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -4110,6 +5190,32 @@ components:
           allOf:
             - $ref: '#/components/schemas/TerminateWorkspaceRequests'
             - description: The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
+    UpdateConnectClientAddInResult:
+      type: object
+      properties: {}
+    UpdateConnectClientAddInRequest:
+      type: object
+      required:
+        - AddInId
+        - ResourceId
+      title: UpdateConnectClientAddInRequest
+      properties:
+        AddInId:
+          allOf:
+            - $ref: '#/components/schemas/AmazonUuid'
+            - description: The identifier of the client add-in to update.
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The directory identifier for which the client add-in is configured.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/AddInName'
+            - description: The name of the client add-in.
+        URL:
+          allOf:
+            - $ref: '#/components/schemas/AddInUrl'
+            - description: The endpoint URL of the Amazon Connect client add-in.
     UpdateConnectionAliasPermissionResult:
       type: object
       properties: {}
@@ -4127,7 +5233,7 @@ components:
         ConnectionAliasPermission:
           allOf:
             - $ref: '#/components/schemas/ConnectionAliasPermission'
-            - description: Indicates whether to share or unshare the connection alias with the specified AWS account.
+            - description: Indicates whether to share or unshare the connection alias with the specified Amazon Web Services account.
     UpdateRulesOfIpGroupResult:
       type: object
       properties: {}
@@ -4183,7 +5289,7 @@ components:
         SharedAccountId:
           allOf:
             - $ref: '#/components/schemas/AwsAccount'
-            - description: '<p>The identifier of the AWS account to share or unshare the image with.</p> <important> <p>Before sharing the image, confirm that you are sharing to the correct AWS account ID.</p> </important>'
+            - description: '<p>The identifier of the Amazon Web Services account to share or unshare the image with.</p> <important> <p>Before sharing the image, confirm that you are sharing to the correct Amazon Web Services account ID.</p> </important>'
     ARN:
       type: string
       pattern: '^arn:aws:[A-Za-z0-9][A-za-z0-9_/.-]{0,62}:[A-za-z0-9_/.-]{0,63}:[A-za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.-]{0,127}$'
@@ -4245,8 +5351,23 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AccountModification'
+    AddInName:
+      type: string
+      pattern: ^.*$
+      minLength: 1
+      maxLength: 64
+    AddInUrl:
+      type: string
+      pattern: '^(http|https)\://\S+'
+      minLength: 1
+      maxLength: 1024
     Alias:
       type: string
+    AmazonUuid:
+      type: string
+      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+      minLength: 36
+      maxLength: 36
     Application:
       type: string
       enum:
@@ -4323,7 +5444,7 @@ components:
         Owner:
           allOf:
             - $ref: '#/components/schemas/BundleOwner'
-            - description: 'The owner of the bundle. This is the account identifier of the owner, or <code>AMAZON</code> if the bundle is provided by AWS.'
+            - description: 'The owner of the bundle. This is the account identifier of the owner, or <code>AMAZON</code> if the bundle is provided by Amazon Web Services.'
         Description:
           allOf:
             - $ref: '#/components/schemas/Description'
@@ -4352,6 +5473,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time when the bundle was created.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceBundleState'
+            - description: The state of the WorkSpace bundle.
+        BundleType:
+          allOf:
+            - $ref: '#/components/schemas/BundleType'
+            - description: The type of WorkSpace bundle.
       description: Describes a WorkSpace bundle.
     BundleList:
       type: array
@@ -4359,7 +5488,69 @@ components:
         $ref: '#/components/schemas/WorkspaceBundle'
     BundleOwner:
       type: string
+    BundleType:
+      type: string
+      enum:
+        - REGULAR
+        - STANDBY
+    CertificateAuthorityArn:
+      type: string
+      pattern: 'arn:[\w+=/,.@-]+:[\w+=/,.@-]+:[\w+=/,.@-]*:[0-9]*:[\w+=,.@-]+(/[\w+=,.@-]+)*'
+      minLength: 5
+      maxLength: 200
+    CertificateBasedAuthStatusEnum:
+      type: string
+      enum:
+        - DISABLED
+        - ENABLED
+    CertificateBasedAuthProperties:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/CertificateBasedAuthStatusEnum'
+            - description: The status of the certificate-based authentication properties.
+        CertificateAuthorityArn:
+          allOf:
+            - $ref: '#/components/schemas/CertificateAuthorityArn'
+            - description: The Amazon Resource Name (ARN) of the Amazon Web Services Certificate Manager Private CA resource.
+      description: Describes the properties of the certificate-based authentication you want to use with your WorkSpaces.
+    ClientDeviceType:
+      type: string
+      enum:
+        - DeviceTypeWindows
+        - DeviceTypeOsx
+        - DeviceTypeAndroid
+        - DeviceTypeIos
+        - DeviceTypeLinux
+        - DeviceTypeWeb
+    ClientDeviceTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ClientDeviceType'
+      minItems: 1
+      maxItems: 6
+    ClientEmail:
+      type: string
+      pattern: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'
+      minLength: 6
+      maxLength: 64
+    ClientLocale:
+      type: string
+      pattern: '^[a-z]{2}_[A-Z]{2}$'
+      minLength: 5
+      maxLength: 5
+    ClientLoginMessage:
+      type: string
+      pattern: ^.*$
+      minLength: 0
+      maxLength: 2000
     ReconnectEnum:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    LogUploadEnum:
       type: string
       enum:
         - ENABLED
@@ -4371,6 +5562,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ReconnectEnum'
             - description: 'Specifies whether users can cache their credentials on the Amazon WorkSpaces client. When enabled, users can choose to reconnect to their WorkSpaces without re-entering their credentials. '
+        LogUploadEnabled:
+          allOf:
+            - $ref: '#/components/schemas/LogUploadEnum'
+            - description: 'Specifies whether users can upload diagnostic log files of Amazon WorkSpaces client directly to WorkSpaces to troubleshoot issues when using the WorkSpaces client. When enabled, the log files will be sent to WorkSpaces automatically and will be applied to all users in the specified directory.'
       description: Describes an Amazon WorkSpaces client.
     ClientPropertiesResult:
       type: object
@@ -4388,6 +5583,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ClientPropertiesResult'
+    ClientUrl:
+      type: string
+      pattern: '^(http|https)\://\S+'
+      minLength: 1
+      maxLength: 200
     Compute:
       type: string
       enum:
@@ -4398,6 +5598,8 @@ components:
         - GRAPHICS
         - POWERPRO
         - GRAPHICSPRO
+        - GRAPHICS_G4DN
+        - GRAPHICSPRO_G4DN
     ComputeType:
       type: object
       properties:
@@ -4408,6 +5610,30 @@ components:
       description: Describes the compute type of the bundle.
     ComputerName:
       type: string
+    ConnectClientAddIn:
+      type: object
+      properties:
+        AddInId:
+          allOf:
+            - $ref: '#/components/schemas/AmazonUuid'
+            - description: The client add-in identifier.
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The directory identifier for which the client add-in is configured.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/AddInName'
+            - description: The name of the client add in.
+        URL:
+          allOf:
+            - $ref: '#/components/schemas/AddInUrl'
+            - description: The endpoint URL of the client add-in.
+      description: Describes an Amazon Connect client add-in.
+    ConnectClientAddInList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConnectClientAddIn'
     ConnectionString:
       type: string
       pattern: '^[.0-9a-zA-Z\-]{1,255}$'
@@ -4443,7 +5669,7 @@ components:
         OwnerAccountId:
           allOf:
             - $ref: '#/components/schemas/AwsAccount'
-            - description: The identifier of the AWS account that owns the connection alias.
+            - description: The identifier of the Amazon Web Services account that owns the connection alias.
         Associations:
           allOf:
             - $ref: '#/components/schemas/ConnectionAliasAssociationList'
@@ -4459,7 +5685,7 @@ components:
         AssociatedAccountId:
           allOf:
             - $ref: '#/components/schemas/AwsAccount'
-            - description: The identifier of the AWS account that associated the connection alias with a directory.
+            - description: The identifier of the Amazon Web Services account that associated the connection alias with a directory.
         ResourceId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -4490,11 +5716,11 @@ components:
         SharedAccountId:
           allOf:
             - $ref: '#/components/schemas/AwsAccount'
-            - description: The identifier of the AWS account that the connection alias is shared with.
+            - description: The identifier of the Amazon Web Services account that the connection alias is shared with.
         AllowAssociation:
           allOf:
             - $ref: '#/components/schemas/BooleanObject'
-            - description: Indicates whether the specified AWS account is allowed to associate the connection alias with a directory.
+            - description: Indicates whether the specified Amazon Web Services account is allowed to associate the connection alias with a directory.
       description: 'Describes the permissions for a connection alias. Connection aliases are used for cross-Region redirection. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.'
     ConnectionAliasPermissions:
       type: array
@@ -4534,6 +5760,18 @@ components:
       type: string
     IpGroupDesc:
       type: string
+    StandbyWorkspacesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StandbyWorkspace'
+    FailedCreateStandbyWorkspacesRequestList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FailedCreateStandbyWorkspacesRequest'
+    PendingCreateStandbyWorkspacesRequestList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PendingCreateStandbyWorkspacesRequest'
     WorkspaceBundleName:
       type: string
       pattern: '^[a-zA-Z0-9_./()\\-]+$'
@@ -4560,6 +5798,28 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The size of the root volume.
       description: Describes the root volume for a WorkSpace bundle.
+    WorkspaceId:
+      type: string
+      pattern: '^ws-[0-9a-z]{8,63}$'
+    OperatingSystem:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/OperatingSystemType'
+            - description: The operating system.
+      description: The operating system that the image is running.
+    WorkspaceImageState:
+      type: string
+      enum:
+        - AVAILABLE
+        - PENDING
+        - ERROR
+    WorkspaceImageRequiredTenancy:
+      type: string
+      enum:
+        - DEFAULT
+        - DEDICATED
     WorkspaceRequestList:
       type: array
       items:
@@ -4582,6 +5842,62 @@ components:
       type: string
       enum:
         - ENABLED
+    LoginMessage:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/ClientLoginMessage'
+    DefaultClientBrandingAttributes:
+      type: object
+      properties:
+        LogoUrl:
+          allOf:
+            - $ref: '#/components/schemas/ClientUrl'
+            - description: The logo. The only image format accepted is a binary data object that is converted from a <code>.png</code> file.
+        SupportEmail:
+          allOf:
+            - $ref: '#/components/schemas/ClientEmail'
+            - description: '<p>The support email. The company''s customer support email address.</p> <note> <ul> <li> <p>In each platform type, the <code>SupportEmail</code> and <code>SupportLink</code> parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.</p> </li> <li> <p>The default email is <code>workspaces-feedback@amazon.com</code>.</p> </li> </ul> </note>'
+        SupportLink:
+          allOf:
+            - $ref: '#/components/schemas/ClientUrl'
+            - description: '<p>The support link. The link for the company''s customer support page for their WorkSpace.</p> <note> <ul> <li> <p>In each platform type, the <code>SupportEmail</code> and <code>SupportLink</code> parameters are mutually exclusive.You can specify one parameter for each platform type, but not both.</p> </li> <li> <p>The default support link is <code>workspaces-feedback@amazon.com</code>.</p> </li> </ul> </note>'
+        ForgotPasswordLink:
+          allOf:
+            - $ref: '#/components/schemas/ClientUrl'
+            - description: The forgotten password link. This is the web address that users can go to if they forget the password for their WorkSpace.
+        LoginMessage:
+          allOf:
+            - $ref: '#/components/schemas/LoginMessage'
+            - description: 'The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is <code>en_US</code>. The HTML tags supported include the following: <code>a, b, blockquote, br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul</code>.'
+      description: <p>Returns default client branding attributes that were imported. These attributes display on the client login screen.</p> <important> <p>Client branding attributes are public facing. Ensure that you don't include sensitive information.</p> </important>
+    DefaultLogo:
+      type: string
+      minLength: 1
+      maxLength: 1500000
+    DefaultImportClientBrandingAttributes:
+      type: object
+      properties:
+        Logo:
+          allOf:
+            - $ref: '#/components/schemas/DefaultLogo'
+            - description: The logo. The only image format accepted is a binary data object that is converted from a <code>.png</code> file.
+        SupportEmail:
+          allOf:
+            - $ref: '#/components/schemas/ClientEmail'
+            - description: '<p>The support email. The company''s customer support email address.</p> <note> <ul> <li> <p>In each platform type, the <code>SupportEmail</code> and <code>SupportLink</code> parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.</p> </li> <li> <p>The default email is <code>workspaces-feedback@amazon.com</code>.</p> </li> </ul> </note>'
+        SupportLink:
+          allOf:
+            - $ref: '#/components/schemas/ClientUrl'
+            - description: '<p>The support link. The link for the company''s customer support page for their WorkSpace.</p> <note> <ul> <li> <p>In each platform type, the <code>SupportEmail</code> and <code>SupportLink</code> parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.</p> </li> <li> <p>The default support link is <code>workspaces-feedback@amazon.com</code>.</p> </li> </ul> </note>'
+        ForgotPasswordLink:
+          allOf:
+            - $ref: '#/components/schemas/ClientUrl'
+            - description: The forgotten password link. This is the web address that users can go to if they forget the password for their WorkSpace.
+        LoginMessage:
+          allOf:
+            - $ref: '#/components/schemas/LoginMessage'
+            - description: 'The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is <code>en_US</code>. The HTML tags supported include the following: <code>a, b, blockquote, br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul</code>.'
+      description: <p>The default client branding attributes to be imported. These attributes display on the client login screen.</p> <important> <p>Client branding attributes are public facing. Ensure that you do not include sensitive information.</p> </important>
     DefaultOu:
       type: string
     SecurityGroupId:
@@ -4617,6 +5933,23 @@ components:
             - $ref: '#/components/schemas/BooleanObject'
             - description: 'Specifies whether maintenance mode is enabled for WorkSpaces. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html">WorkSpace Maintenance</a>.'
       description: 'Describes the default values that are used to create WorkSpaces. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html">Update Directory Details for Your WorkSpaces</a>.'
+    DeletableCertificateBasedAuthProperty:
+      type: string
+      enum:
+        - CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN
+    DeletableCertificateBasedAuthPropertiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeletableCertificateBasedAuthProperty'
+    DeletableSamlProperty:
+      type: string
+      enum:
+        - SAML_PROPERTIES_USER_ACCESS_URL
+        - SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME
+    DeletableSamlPropertiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeletableSamlProperty'
     TagKeyList:
       type: array
       items:
@@ -4625,6 +5958,38 @@ components:
       type: string
       minLength: 1
       maxLength: 2048
+    IosClientBrandingAttributes:
+      type: object
+      properties:
+        LogoUrl:
+          allOf:
+            - $ref: '#/components/schemas/ClientUrl'
+            - description: 'The logo. This is the standard-resolution display that has a 1:1 pixel density (or @1x), where one pixel is equal to one point. The only image format accepted is a binary data object that is converted from a <code>.png</code> file.'
+        Logo2xUrl:
+          allOf:
+            - $ref: '#/components/schemas/ClientUrl'
+            - description: '<p>The @2x version of the logo. This is the higher resolution display that offers a scale factor of 2.0 (or @2x). The only image format accepted is a binary data object that is converted from a <code>.png</code> file.</p> <note> <p> For more information about iOS image size and resolution, see <a href="https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/">Image Size and Resolution </a> in the <i>Apple Human Interface Guidelines</i>.</p> </note>'
+        Logo3xUrl:
+          allOf:
+            - $ref: '#/components/schemas/ClientUrl'
+            - description: '<p>The @3x version of the logo. This is the higher resolution display that offers a scale factor of 3.0 (or @3x).The only image format accepted is a binary data object that is converted from a <code>.png</code> file.</p> <note> <p> For more information about iOS image size and resolution, see <a href="https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/">Image Size and Resolution </a> in the <i>Apple Human Interface Guidelines</i>.</p> </note>'
+        SupportEmail:
+          allOf:
+            - $ref: '#/components/schemas/ClientEmail'
+            - description: '<p>The support email. The company''s customer support email address.</p> <note> <ul> <li> <p>In each platform type, the <code>SupportEmail</code> and <code>SupportLink</code> parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.</p> </li> <li> <p>The default email is <code>workspaces-feedback@amazon.com</code>.</p> </li> </ul> </note>'
+        SupportLink:
+          allOf:
+            - $ref: '#/components/schemas/ClientUrl'
+            - description: '<p>The support link. The link for the company''s customer support page for their WorkSpace.</p> <note> <ul> <li> <p>In each platform type, the <code>SupportEmail</code> and <code>SupportLink</code> parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.</p> </li> <li> <p>The default support link is <code>workspaces-feedback@amazon.com</code>.</p> </li> </ul> </note>'
+        ForgotPasswordLink:
+          allOf:
+            - $ref: '#/components/schemas/ClientUrl'
+            - description: The forgotten password link. This is the web address that users can go to if they forget the password for their WorkSpace.
+        LoginMessage:
+          allOf:
+            - $ref: '#/components/schemas/LoginMessage'
+            - description: 'The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is <code>en_US</code>. The HTML tags supported include the following: <code>a, b, blockquote, br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul</code>.'
+      description: <p>The client branding attributes for iOS device types. These attributes are displayed on the iOS client login screen only.</p> <important> <p>Client branding attributes are public facing. Ensure you do not include sensitive information.</p> </important>
     ResourceIdList:
       type: array
       items:
@@ -4668,9 +6033,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/WorkspaceImage'
-    WorkspaceId:
-      type: string
-      pattern: '^ws-[0-9a-z]{8,63}$'
     SnapshotList:
       type: array
       items:
@@ -4756,6 +6118,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/SelfservicePermissions'
             - description: The default self-service permissions for WorkSpaces in the directory.
+        SamlProperties:
+          allOf:
+            - $ref: '#/components/schemas/SamlProperties'
+            - description: 'Describes the enablement status, user access URL, and relay state parameter name that are used for configuring federation with an SAML 2.0 identity provider.'
+        CertificateBasedAuthProperties:
+          allOf:
+            - $ref: '#/components/schemas/CertificateBasedAuthProperties'
+            - description: The certificate-based authentication properties used to authenticate SAML 2.0 Identity Provider (IdP) user identities to Active Directory for WorkSpaces login.
       description: Describes a directory that is used with Amazon WorkSpaces.
     DirectoryName:
       type: string
@@ -4770,6 +6140,45 @@ components:
       pattern: '^ami\-([a-f0-9]{8}|[a-f0-9]{17})$'
     ErrorType:
       type: string
+    StandbyWorkspace:
+      type: object
+      required:
+        - PrimaryWorkspaceId
+        - DirectoryId
+      properties:
+        PrimaryWorkspaceId:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The identifier of the standby WorkSpace.
+        VolumeEncryptionKey:
+          allOf:
+            - $ref: '#/components/schemas/VolumeEncryptionKey'
+            - description: The volume encryption key of the standby WorkSpace.
+        DirectoryId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The identifier of the directory for the standby WorkSpace.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags associated with the standby WorkSpace.
+      description: Describes a standby WorkSpace.
+    FailedCreateStandbyWorkspacesRequest:
+      type: object
+      properties:
+        StandbyWorkspaceRequest:
+          allOf:
+            - $ref: '#/components/schemas/StandbyWorkspace'
+            - description: Information about the standby WorkSpace that could not be created.
+        ErrorCode:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceErrorCode'
+            - description: The error code that is returned if the standby WorkSpace could not be created.
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The text of the error message that is returned if the standby WorkSpace could not be created.
+      description: Describes the standby WorkSpace that could not be created.
     WorkspaceRequest:
       type: object
       required:
@@ -4780,11 +6189,11 @@ components:
         DirectoryId:
           allOf:
             - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the AWS Directory Service directory for the WorkSpace. You can use <a>DescribeWorkspaceDirectories</a> to list the available directories.
+            - description: The identifier of the Directory Service directory for the WorkSpace. You can use <a>DescribeWorkspaceDirectories</a> to list the available directories.
         UserName:
           allOf:
             - $ref: '#/components/schemas/UserName'
-            - description: The user name of the user for the WorkSpace. This user name must exist in the AWS Directory Service directory for the WorkSpace.
+            - description: The user name of the user for the WorkSpace. This user name must exist in the Directory Service directory for the WorkSpace.
         BundleId:
           allOf:
             - $ref: '#/components/schemas/BundleId'
@@ -4792,7 +6201,7 @@ components:
         VolumeEncryptionKey:
           allOf:
             - $ref: '#/components/schemas/VolumeEncryptionKey'
-            - description: The symmetric AWS KMS customer master key (CMK) used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric CMKs.
+            - description: The symmetric KMS key used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric KMS keys.
         UserVolumeEncryptionEnabled:
           allOf:
             - $ref: '#/components/schemas/BooleanObject'
@@ -4868,15 +6277,62 @@ components:
         SharedAccountId:
           allOf:
             - $ref: '#/components/schemas/AwsAccount'
-            - description: The identifier of the AWS account that an image has been shared with.
-      description: 'Describes the AWS accounts that have been granted permission to use a shared image. For more information about sharing images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html"> Share or Unshare a Custom WorkSpaces Image</a>.'
+            - description: The identifier of the Amazon Web Services account that an image has been shared with.
+      description: 'Describes the Amazon Web Services accounts that have been granted permission to use a shared image. For more information about sharing images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html"> Share or Unshare a Custom WorkSpaces Image</a>.'
+    IosImportClientBrandingAttributes:
+      type: object
+      properties:
+        Logo:
+          allOf:
+            - $ref: '#/components/schemas/IosLogo'
+            - description: 'The logo. This is the standard-resolution display that has a 1:1 pixel density (or @1x), where one pixel is equal to one point. The only image format accepted is a binary data object that is converted from a <code>.png</code> file.'
+        Logo2x:
+          allOf:
+            - $ref: '#/components/schemas/Ios2XLogo'
+            - description: '<p>The @2x version of the logo. This is the higher resolution display that offers a scale factor of 2.0 (or @2x). The only image format accepted is a binary data object that is converted from a <code>.png</code> file.</p> <note> <p> For more information about iOS image size and resolution, see <a href="https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/">Image Size and Resolution </a> in the <i>Apple Human Interface Guidelines</i>.</p> </note>'
+        Logo3x:
+          allOf:
+            - $ref: '#/components/schemas/Ios3XLogo'
+            - description: '<p>The @3x version of the logo. This is the higher resolution display that offers a scale factor of 3.0 (or @3x). The only image format accepted is a binary data object that is converted from a <code>.png</code> file.</p> <note> <p> For more information about iOS image size and resolution, see <a href="https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/">Image Size and Resolution </a> in the <i>Apple Human Interface Guidelines</i>.</p> </note>'
+        SupportEmail:
+          allOf:
+            - $ref: '#/components/schemas/ClientEmail'
+            - description: '<p>The support email. The company''s customer support email address.</p> <note> <ul> <li> <p>In each platform type, the <code>SupportEmail</code> and <code>SupportLink</code> parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.</p> </li> <li> <p>The default email is <code>workspaces-feedback@amazon.com</code>.</p> </li> </ul> </note>'
+        SupportLink:
+          allOf:
+            - $ref: '#/components/schemas/ClientUrl'
+            - description: '<p>The support link. The link for the company''s customer support page for their WorkSpace.</p> <note> <ul> <li> <p>In each platform type, the <code>SupportEmail</code> and <code>SupportLink</code> parameters are mutually exclusive. You can specify one parameter for each platform type, but not both.</p> </li> <li> <p>The default support link is <code>workspaces-feedback@amazon.com</code>.</p> </li> </ul> </note>'
+        ForgotPasswordLink:
+          allOf:
+            - $ref: '#/components/schemas/ClientUrl'
+            - description: The forgotten password link. This is the web address that users can go to if they forget the password for their WorkSpace.
+        LoginMessage:
+          allOf:
+            - $ref: '#/components/schemas/LoginMessage'
+            - description: 'The login message. Specified as a key value pair, in which the key is a locale and the value is the localized message for that locale. The only key supported is <code>en_US</code>. The HTML tags supported include the following: <code>a, b, blockquote, br, cite, code, dd, dl, dt, div, em, i, li, ol, p, pre, q, small, span, strike, strong, sub, sup, u, ul</code>.'
+      description: <p>The client branding attributes to import for iOS device types. These attributes are displayed on the iOS client login screen.</p> <important> <p>Client branding attributes are public facing. Ensure you do not include sensitive information.</p> </important>
     WorkspaceImageIngestionProcess:
       type: string
       enum:
         - BYOL_REGULAR
         - BYOL_GRAPHICS
         - BYOL_GRAPHICSPRO
+        - BYOL_GRAPHICS_G4DN
         - BYOL_REGULAR_WSP
+        - BYOL_REGULAR_BYOP
+        - BYOL_GRAPHICS_G4DN_BYOP
+    Ios2XLogo:
+      type: string
+      minLength: 1
+      maxLength: 1770000
+    Ios3XLogo:
+      type: string
+      minLength: 1
+      maxLength: 1770000
+    IosLogo:
+      type: string
+      minLength: 1
+      maxLength: 447000
     IpRule:
       type: string
     IpRevokedRuleList:
@@ -4931,6 +6387,22 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ModificationState'
+    SamlProperties:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/SamlStatusEnum'
+            - description: '<p>Indicates the status of SAML 2.0 authentication. These statuses include the following.</p> <ul> <li> <p>If the setting is <code>DISABLED</code>, end users will be directed to login with their directory credentials.</p> </li> <li> <p>If the setting is <code>ENABLED</code>, end users will be directed to login via the user access URL. Users attempting to connect to WorkSpaces from a client application that does not support SAML 2.0 authentication will not be able to connect.</p> </li> <li> <p>If the setting is <code>ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK</code>, end users will be directed to login via the user access URL on supported client applications, but will not prevent clients that do not support SAML 2.0 authentication from connecting as if SAML 2.0 authentication was disabled.</p> </li> </ul>'
+        UserAccessUrl:
+          allOf:
+            - $ref: '#/components/schemas/SamlUserAccessUrl'
+            - description: 'The SAML 2.0 identity provider (IdP) user access URL is the URL a user would navigate to in their web browser in order to federate from the IdP and directly access the application, without any SAML 2.0 service provider (SP) bindings.'
+        RelayStateParameterName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The relay state parameter name supported by the SAML 2.0 identity provider (IdP). When the end user is redirected to the user access URL from the WorkSpaces client application, this relay state parameter name is appended as a query parameter to the URL along with the relay state endpoint to return the user to the client application session.</p> <p>To use SAML 2.0 authentication with WorkSpaces, the IdP must support IdP-initiated deep linking for the relay state URL. Consult your IdP documentation for more information.</p>'
+      description: 'Describes the enablement status, user access URL, and relay state parameter name that are used for configuring federation with an SAML 2.0 identity provider.'
     SelfservicePermissions:
       type: object
       properties:
@@ -4961,11 +6433,11 @@ components:
         DeviceTypeWindows:
           allOf:
             - $ref: '#/components/schemas/AccessPropertyValue'
-            - description: 'Indicates whether users can use Windows clients to access their WorkSpaces. To restrict WorkSpaces access to trusted devices (also known as managed devices) with valid certificates, specify a value of <code>TRUST</code>. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html">Restrict WorkSpaces Access to Trusted Devices</a>. '
+            - description: Indicates whether users can use Windows clients to access their WorkSpaces.
         DeviceTypeOsx:
           allOf:
             - $ref: '#/components/schemas/AccessPropertyValue'
-            - description: 'Indicates whether users can use macOS clients to access their WorkSpaces. To restrict WorkSpaces access to trusted devices (also known as managed devices) with valid certificates, specify a value of <code>TRUST</code>. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html">Restrict WorkSpaces Access to Trusted Devices</a>. '
+            - description: Indicates whether users can use macOS clients to access their WorkSpaces.
         DeviceTypeWeb:
           allOf:
             - $ref: '#/components/schemas/AccessPropertyValue'
@@ -4977,7 +6449,7 @@ components:
         DeviceTypeAndroid:
           allOf:
             - $ref: '#/components/schemas/AccessPropertyValue'
-            - description: Indicates whether users can use Android devices to access their WorkSpaces.
+            - description: Indicates whether users can use Android and Android-compatible Chrome OS devices to access their WorkSpaces.
         DeviceTypeChromeOs:
           allOf:
             - $ref: '#/components/schemas/AccessPropertyValue'
@@ -5025,7 +6497,7 @@ components:
         RunningMode:
           allOf:
             - $ref: '#/components/schemas/RunningMode'
-            - description: 'The running mode. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html">Manage the WorkSpace Running Mode</a>.'
+            - description: '<p>The running mode. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html">Manage the WorkSpace Running Mode</a>.</p> <note> <p>The <code>MANUAL</code> value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see <a href="http://aws.amazon.com/workspaces/core/">Amazon WorkSpaces Core</a>.</p> </note>'
         RunningModeAutoStopTimeoutInMinutes:
           allOf:
             - $ref: '#/components/schemas/RunningModeAutoStopTimeoutInMinutes'
@@ -5042,6 +6514,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Compute'
             - description: 'The compute type. For more information, see <a href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon WorkSpaces Bundles</a>.'
+        Protocols:
+          allOf:
+            - $ref: '#/components/schemas/ProtocolList'
+            - description: '<p>The protocol. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-protocols.html"> Protocols for Amazon WorkSpaces</a>.</p> <note> <ul> <li> <p>Only available for WorkSpaces created with PCoIP bundles.</p> </li> <li> <p>The <code>Protocols</code> property is case sensitive. Ensure you use <code>PCOIP</code> or <code>WSP</code>.</p> </li> <li> <p>Unavailable for Windows 7 WorkSpaces and WorkSpaces using GPU-based bundles (Graphics, GraphicsPro, Graphics.g4dn, and GraphicsPro.g4dn).</p> </li> </ul> </note>'
       description: Describes a WorkSpace.
     TargetWorkspaceState:
       type: string
@@ -5053,14 +6529,55 @@ components:
       enum:
         - WINDOWS
         - LINUX
-    OperatingSystem:
+    WorkspaceState:
+      type: string
+      enum:
+        - PENDING
+        - AVAILABLE
+        - IMPAIRED
+        - UNHEALTHY
+        - REBOOTING
+        - STARTING
+        - REBUILDING
+        - RESTORING
+        - MAINTENANCE
+        - ADMIN_MAINTENANCE
+        - TERMINATING
+        - TERMINATED
+        - SUSPENDED
+        - UPDATING
+        - STOPPING
+        - STOPPED
+        - ERROR
+    PendingCreateStandbyWorkspacesRequest:
       type: object
       properties:
-        Type:
+        UserName:
           allOf:
-            - $ref: '#/components/schemas/OperatingSystemType'
-            - description: The operating system.
-      description: The operating system that the image is running.
+            - $ref: '#/components/schemas/UserName'
+            - description: '<p>Describes the standby WorkSpace that was created.</p> <p>Because this operation is asynchronous, the identifier returned is not immediately available for use with other operations. For example, if you call <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html"> DescribeWorkspaces</a> before the WorkSpace is created, the information returned can be incomplete. </p>'
+        DirectoryId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The identifier of the directory for the standby WorkSpace.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceState'
+            - description: The operational state of the standby WorkSpace.
+        WorkspaceId:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The identifier of the standby WorkSpace.
+      description: Information about the standby WorkSpace.
+    Protocol:
+      type: string
+      enum:
+        - PCOIP
+        - WSP
+    ProtocolList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Protocol'
     RebootRequest:
       type: object
       required:
@@ -5107,6 +6624,35 @@ components:
       type: string
       minLength: 1
       maxLength: 20
+    StandbyWorkspaceRelationshipType:
+      type: string
+      enum:
+        - PRIMARY
+        - STANDBY
+    RelatedWorkspaceProperties:
+      type: object
+      properties:
+        WorkspaceId:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The identifier of the related WorkSpace.
+        Region:
+          allOf:
+            - $ref: '#/components/schemas/Region'
+            - description: The Region of the related WorkSpace.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceState'
+            - description: Indicates the state of the WorkSpace.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/StandbyWorkspaceRelationshipType'
+            - description: Indicates the type of WorkSpace.
+      description: Describes the related WorkSpace. The related WorkSpace could be a standby WorkSpace or primary WorkSpace related to the specified WorkSpace.
+    RelatedWorkspaces:
+      type: array
+      items:
+        $ref: '#/components/schemas/RelatedWorkspaceProperties'
     RootVolumeSizeGib:
       type: integer
     RunningMode:
@@ -5114,8 +6660,20 @@ components:
       enum:
         - AUTO_STOP
         - ALWAYS_ON
+        - MANUAL
     RunningModeAutoStopTimeoutInMinutes:
       type: integer
+    SamlStatusEnum:
+      type: string
+      enum:
+        - DISABLED
+        - ENABLED
+        - ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK
+    SamlUserAccessUrl:
+      type: string
+      pattern: '^(http|https)\://\S+$'
+      minLength: 8
+      maxLength: 200
     Snapshot:
       type: object
       properties:
@@ -5124,6 +6682,8 @@ components:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time when the snapshot was created.
       description: Describes a snapshot.
+    VolumeEncryptionKey:
+      type: string
     StartRequest:
       type: object
       properties:
@@ -5194,30 +6754,25 @@ components:
         $ref: '#/components/schemas/TerminateRequest'
       minItems: 1
       maxItems: 25
+    UpdateDescription:
+      type: string
+      pattern: '^[a-zA-Z0-9_./() -]+$'
+      minLength: 1
+      maxLength: 255
+    UpdateResult:
+      type: object
+      properties:
+        UpdateAvailable:
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: Indicates whether updated drivers or other components are available for the specified WorkSpace image.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/UpdateDescription'
+            - description: A description of whether updates for the WorkSpace image are pending or available.
+      description: <p>Describes whether a WorkSpace image needs to be updated with the latest drivers and other components required by Amazon WorkSpaces.</p> <note> <p>Only Windows 10 WorkSpace images can be programmatically updated at this time.</p> </note>
     UserVolumeSizeGib:
       type: integer
-    VolumeEncryptionKey:
-      type: string
-    WorkspaceState:
-      type: string
-      enum:
-        - PENDING
-        - AVAILABLE
-        - IMPAIRED
-        - UNHEALTHY
-        - REBOOTING
-        - STARTING
-        - REBUILDING
-        - RESTORING
-        - MAINTENANCE
-        - ADMIN_MAINTENANCE
-        - TERMINATING
-        - TERMINATED
-        - SUSPENDED
-        - UPDATING
-        - STOPPING
-        - STOPPED
-        - ERROR
     Workspace:
       type: object
       properties:
@@ -5228,7 +6783,7 @@ components:
         DirectoryId:
           allOf:
             - $ref: '#/components/schemas/DirectoryId'
-            - description: The identifier of the AWS Directory Service directory for the WorkSpace.
+            - description: The identifier of the Directory Service directory for the WorkSpace.
         UserName:
           allOf:
             - $ref: '#/components/schemas/UserName'
@@ -5264,7 +6819,7 @@ components:
         VolumeEncryptionKey:
           allOf:
             - $ref: '#/components/schemas/VolumeEncryptionKey'
-            - description: The symmetric AWS KMS customer master key (CMK) used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric CMKs.
+            - description: The symmetric KMS key used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric KMS keys.
         UserVolumeEncryptionEnabled:
           allOf:
             - $ref: '#/components/schemas/BooleanObject'
@@ -5281,7 +6836,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/ModificationStateList'
             - description: The modification states of the WorkSpace.
+        RelatedWorkspaces:
+          allOf:
+            - $ref: '#/components/schemas/RelatedWorkspaces'
+            - description: The standby WorkSpace or primary WorkSpace related to the specified WorkSpace.
       description: Describes a WorkSpace.
+    WorkspaceBundleState:
+      type: string
+      enum:
+        - AVAILABLE
+        - PENDING
+        - ERROR
     WorkspaceConnectionStatus:
       type: object
       properties:
@@ -5315,17 +6880,6 @@ components:
         - DEREGISTERING
         - DEREGISTERED
         - ERROR
-    WorkspaceImageState:
-      type: string
-      enum:
-        - AVAILABLE
-        - PENDING
-        - ERROR
-    WorkspaceImageRequiredTenancy:
-      type: string
-      enum:
-        - DEFAULT
-        - DEDICATED
     WorkspaceImageErrorCode:
       type: string
     WorkspaceImage:
@@ -5366,11 +6920,15 @@ components:
         Created:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date when the image was created. If the image has been shared, the AWS account that the image has been shared with sees the original creation date of the image.'
+            - description: 'The date when the image was created. If the image has been shared, the Amazon Web Services account that the image has been shared with sees the original creation date of the image.'
         OwnerAccountId:
           allOf:
             - $ref: '#/components/schemas/AwsAccount'
-            - description: The identifier of the AWS account that owns the image.
+            - description: The identifier of the Amazon Web Services account that owns the image.
+        Updates:
+          allOf:
+            - $ref: '#/components/schemas/UpdateResult'
+            - description: The updates (if any) that are available for the specified image.
       description: Describes a WorkSpace image.
     WorkspacesIpGroup:
       type: object

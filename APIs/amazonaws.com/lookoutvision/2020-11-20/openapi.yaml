@@ -181,7 +181,7 @@ paths:
         - name: X-Amzn-Client-Token
           in: header
           required: false
-          description: 'ClientToken is an idempotency token that ensures a call to <code>CreateDataset</code> completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from <code>CreateDataset</code>. In this case, safely retry your call to <code>CreateDataset</code> by using the same <code>ClientToken</code> parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for <code>ClientToken</code> is considered a new call to <code>CreateDataset</code>. An idempotency token is active for 8 hours. '
+          description: '<p>ClientToken is an idempotency token that ensures a call to <code>CreateDataset</code> completes only once. You choose the value to pass. For example, An issue might prevent you from getting a response from <code>CreateDataset</code>. In this case, safely retry your call to <code>CreateDataset</code> by using the same <code>ClientToken</code> parameter value.</p> <p>If you don''t supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from making multiple dataset creation requests. You''ll need to provide your own value for other use cases. </p> <p>An error occurs if the other input parameters are not the same as in the first request. Using a different value for <code>ClientToken</code> is considered a new call to <code>CreateDataset</code>. An idempotency token is active for 8 hours. </p>'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9-]+$'
@@ -284,7 +284,7 @@ paths:
         - name: X-Amzn-Client-Token
           in: header
           required: false
-          description: 'ClientToken is an idempotency token that ensures a call to <code>CreateModel</code> completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from <code>CreateModel</code>. In this case, safely retry your call to <code>CreateModel</code> by using the same <code>ClientToken</code> parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for <code>ClientToken</code> is considered a new call to <code>CreateModel</code>. An idempotency token is active for 8 hours.'
+          description: '<p>ClientToken is an idempotency token that ensures a call to <code>CreateModel</code> completes only once. You choose the value to pass. For example, An issue might prevent you from getting a response from <code>CreateModel</code>. In this case, safely retry your call to <code>CreateModel</code> by using the same <code>ClientToken</code> parameter value. </p> <p>If you don''t supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from starting multiple training jobs. You''ll need to provide your own value for other use cases. </p> <p>An error occurs if the other input parameters are not the same as in the first request. Using a different value for <code>ClientToken</code> is considered a new call to <code>CreateModel</code>. An idempotency token is active for 8 hours.</p>'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9-]+$'
@@ -314,7 +314,7 @@ paths:
                         - $ref: '#/components/schemas/S3Location'
                         - description: The S3 location for the output.
                 KmsKeyId:
-                  description: 'The identifier for your AWS Key Management Service (AWS KMS) customer master key (CMK). The key is used to encrypt training and test images copied into the service for model training. Your source images are unaffected. If this parameter is not specified, the copied images are encrypted by a key that AWS owns and manages.'
+                  description: 'The identifier for your AWS KMS key. The key is used to encrypt training and test images copied into the service for model training. Your source images are unaffected. If this parameter is not specified, the copied images are encrypted by a key that AWS owns and manages.'
                   type: string
                   pattern: '^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,2048}$'
                   minLength: 1
@@ -336,7 +336,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListModels
-      description: '<p>Lists the versions of a model in an Amazon Lookout for Vision project.</p> <p>This operation requires permissions to perform the <code>lookoutvision:ListModels</code> operation.</p>'
+      description: '<p>Lists the versions of a model in an Amazon Lookout for Vision project.</p> <p>The <code>ListModels</code> operation is eventually consistent. Recent calls to <code>CreateModel</code> might take a while to appear in the response from <code>ListProjects</code>.</p> <p>This operation requires permissions to perform the <code>lookoutvision:ListModels</code> operation.</p>'
       responses:
         '200':
           description: Success
@@ -475,7 +475,7 @@ paths:
         - name: X-Amzn-Client-Token
           in: header
           required: false
-          description: 'ClientToken is an idempotency token that ensures a call to <code>CreateProject</code> completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from <code>CreateProject</code>. In this case, safely retry your call to <code>CreateProject</code> by using the same <code>ClientToken</code> parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for <code>ClientToken</code> is considered a new call to <code>CreateProject</code>. An idempotency token is active for 8 hours.'
+          description: '<p>ClientToken is an idempotency token that ensures a call to <code>CreateProject</code> completes only once. You choose the value to pass. For example, An issue might prevent you from getting a response from <code>CreateProject</code>. In this case, safely retry your call to <code>CreateProject</code> by using the same <code>ClientToken</code> parameter value. </p> <p>If you don''t supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from making multiple project creation requests. You''ll need to provide your own value for other use cases. </p> <p>An error occurs if the other input parameters are not the same as in the first request. Using a different value for <code>ClientToken</code> is considered a new call to <code>CreateProject</code>. An idempotency token is active for 8 hours.</p>'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9-]+$'
@@ -506,7 +506,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListProjects
-      description: '<p>Lists the Amazon Lookout for Vision projects in your AWS account.</p> <p>This operation requires permissions to perform the <code>lookoutvision:ListProjects</code> operation.</p>'
+      description: '<p>Lists the Amazon Lookout for Vision projects in your AWS account that are in the AWS Region in which you call <code>ListProjects</code>.</p> <p>The <code>ListProjects</code> operation is eventually consistent. Recent calls to <code>CreateProject</code> and <code>DeleteProject</code> might take a while to appear in the response from <code>ListProjects</code>.</p> <p>This operation requires permissions to perform the <code>lookoutvision:ListProjects</code> operation.</p>'
       responses:
         '200':
           description: Success
@@ -648,7 +648,7 @@ paths:
         - name: X-Amzn-Client-Token
           in: header
           required: false
-          description: 'ClientToken is an idempotency token that ensures a call to <code>DeleteDataset</code> completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from <code>DeleteDataset</code>. In this case, safely retry your call to <code>DeleteDataset</code> by using the same <code>ClientToken</code> parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for <code>ClientToken</code> is considered a new call to <code>DeleteDataset</code>. An idempotency token is active for 8 hours.'
+          description: '<p>ClientToken is an idempotency token that ensures a call to <code>DeleteDataset</code> completes only once. You choose the value to pass. For example, An issue might prevent you from getting a response from <code>DeleteDataset</code>. In this case, safely retry your call to <code>DeleteDataset</code> by using the same <code>ClientToken</code> parameter value. </p> <p>If you don''t supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from making multiple deletetion requests. You''ll need to provide your own value for other use cases. </p> <p>An error occurs if the other input parameters are not the same as in the first request. Using a different value for <code>ClientToken</code> is considered a new call to <code>DeleteDataset</code>. An idempotency token is active for 8 hours.</p>'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9-]+$'
@@ -730,7 +730,7 @@ paths:
   '/2020-11-20/projects/{projectName}/models/{modelVersion}':
     delete:
       operationId: DeleteModel
-      description: '<p>Deletes an Amazon Lookout for Vision model. You can''t delete a running model. To stop a running model, use the <a>StopModel</a> operation.</p> <p>It might take a few seconds to delete a model. To determine if a model has been deleted, call <a>ListProjects</a> and check if the version of the model (<code>ModelVersion</code>) is in the <code>Models</code> array. </p> <p>This operation requires permissions to perform the <code>lookoutvision:DeleteModel</code> operation.</p>'
+      description: '<p>Deletes an Amazon Lookout for Vision model. You can''t delete a running model. To stop a running model, use the <a>StopModel</a> operation.</p> <p>It might take a few seconds to delete a model. To determine if a model has been deleted, call <a>ListModels</a> and check if the version of the model (<code>ModelVersion</code>) is in the <code>Models</code> array. </p> <p/> <p>This operation requires permissions to perform the <code>lookoutvision:DeleteModel</code> operation.</p>'
       responses:
         '202':
           description: Success
@@ -790,13 +790,13 @@ paths:
           description: The version of the model that you want to delete.
           schema:
             type: string
-            pattern: '([1-9][0-9]*|latest)'
+            pattern: '([1-9][0-9]*)'
             minLength: 1
             maxLength: 10
         - name: X-Amzn-Client-Token
           in: header
           required: false
-          description: 'ClientToken is an idempotency token that ensures a call to <code>DeleteModel</code> completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from <code>DeleteModel</code>. In this case, safely retry your call to <code>DeleteModel</code> by using the same <code>ClientToken</code> parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for <code>ClientToken</code> is considered a new call to <code>DeleteModel</code>. An idempotency token is active for 8 hours.'
+          description: '<p>ClientToken is an idempotency token that ensures a call to <code>DeleteModel</code> completes only once. You choose the value to pass. For example, an issue might prevent you from getting a response from <code>DeleteModel</code>. In this case, safely retry your call to <code>DeleteModel</code> by using the same <code>ClientToken</code> parameter value.</p> <p>If you don''t supply a value for ClientToken, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from making multiple model deletion requests. You''ll need to provide your own value for other use cases. </p> <p>An error occurs if the other input parameters are not the same as in the first request. Using a different value for <code>ClientToken</code> is considered a new call to <code>DeleteModel</code>. An idempotency token is active for 8 hours.</p>'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9-]+$'
@@ -935,7 +935,7 @@ paths:
         - name: X-Amzn-Client-Token
           in: header
           required: false
-          description: 'ClientToken is an idempotency token that ensures a call to <code>DeleteProject</code> completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from <code>DeleteProject</code>. In this case, safely retry your call to <code>DeleteProject</code> by using the same <code>ClientToken</code> parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for <code>ClientToken</code> is considered a new call to <code>DeleteProject</code>. An idempotency token is active for 8 hours.'
+          description: '<p>ClientToken is an idempotency token that ensures a call to <code>DeleteProject</code> completes only once. You choose the value to pass. For example, An issue might prevent you from getting a response from <code>DeleteProject</code>. In this case, safely retry your call to <code>DeleteProject</code> by using the same <code>ClientToken</code> parameter value. </p> <p>If you don''t supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from making multiple project deletion requests. You''ll need to provide your own value for other use cases. </p> <p>An error occurs if the other input parameters are not the same as in the first request. Using a different value for <code>ClientToken</code> is considered a new call to <code>DeleteProject</code>. An idempotency token is active for 8 hours.</p>'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9-]+$'
@@ -1005,10 +1005,78 @@ paths:
             pattern: '[a-zA-Z0-9][a-zA-Z0-9_\-]*'
             minLength: 1
             maxLength: 255
+  '/2020-11-20/projects/{projectName}/modelpackagingjobs/{jobName}':
+    get:
+      operationId: DescribeModelPackagingJob
+      description: '<p>Describes an Amazon Lookout for Vision model packaging job. </p> <p>This operation requires permissions to perform the <code>lookoutvision:DescribeModelPackagingJob</code> operation.</p> <p>For more information, see <i>Using your Amazon Lookout for Vision model on an edge device</i> in the Amazon Lookout for Vision Developer Guide. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeModelPackagingJobResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: projectName
+          in: path
+          required: true
+          description: 'The name of the project that contains the model packaging job that you want to describe. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9][a-zA-Z0-9_\-]*'
+            minLength: 1
+            maxLength: 255
+        - name: jobName
+          in: path
+          required: true
+          description: 'The job name for the model packaging job. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-]+'
+            minLength: 1
+            maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/2020-11-20/projects/{projectName}/models/{modelVersion}/detect#Content-Type':
     post:
       operationId: DetectAnomalies
-      description: '<p>Detects anomalies in an image that you supply. </p> <p>The response from <code>DetectAnomalies</code> includes a boolean prediction that the image contains one or more anomalies and a confidence value for the prediction.</p> <note> <p>Before calling <code>DetectAnomalies</code>, you must first start your model with the <a>StartModel</a> operation. You are charged for the amount of time, in minutes, that a model runs and for the number of anomaly detection units that your model uses. If you are not using a model, use the <a>StopModel</a> operation to stop your model. </p> </note> <p>This operation requires permissions to perform the <code>lookoutvision:DetectAnomalies</code> operation.</p>'
+      description: '<p>Detects anomalies in an image that you supply. </p> <p>The response from <code>DetectAnomalies</code> includes a boolean prediction that the image contains one or more anomalies and a confidence value for the prediction. If the model is an image segmentation model, the response also includes segmentation information for each type of anomaly found in the image.</p> <note> <p>Before calling <code>DetectAnomalies</code>, you must first start your model with the <a>StartModel</a> operation. You are charged for the amount of time, in minutes, that a model runs and for the number of anomaly detection units that your model uses. If you are not using a model, use the <a>StopModel</a> operation to stop your model. </p> </note> <p>For more information, see <i>Detecting anomalies in an image</i> in the Amazon Lookout for Vision developer guide.</p> <p>This operation requires permissions to perform the <code>lookoutvision:DetectAnomalies</code> operation.</p>'
       responses:
         '200':
           description: Success
@@ -1242,7 +1310,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     patch:
       operationId: UpdateDatasetEntries
-      description: '<p>Adds one or more JSON Line entries to a dataset. A JSON Line includes information about an image used for training or testing an Amazon Lookout for Vision model. The following is an example JSON Line.</p> <p>Updating a dataset might take a while to complete. To check the current status, call <a>DescribeDataset</a> and check the <code>Status</code> field in the response.</p> <p>This operation requires permissions to perform the <code>lookoutvision:UpdateDatasetEntries</code> operation.</p>'
+      description: '<p>Adds or updates one or more JSON Line entries in a dataset. A JSON Line includes information about an image used for training or testing an Amazon Lookout for Vision model.</p> <p>To update an existing JSON Line, use the <code>source-ref</code> field to identify the JSON Line. The JSON line that you supply replaces the existing JSON line. Any existing annotations that are not in the new JSON line are removed from the dataset. </p> <p>For more information, see <i>Defining JSON lines for anomaly classification</i> in the Amazon Lookout for Vision Developer Guide. </p> <note> <p>The images you reference in the <code>source-ref</code> field of a JSON line, must be in the same S3 bucket as the existing images in the dataset. </p> </note> <p>Updating a dataset might take a while to complete. To check the current status, call <a>DescribeDataset</a> and check the <code>Status</code> field in the response.</p> <p>This operation requires permissions to perform the <code>lookoutvision:UpdateDatasetEntries</code> operation.</p>'
       responses:
         '202':
           description: Success
@@ -1308,7 +1376,7 @@ paths:
         - name: X-Amzn-Client-Token
           in: header
           required: false
-          description: 'ClientToken is an idempotency token that ensures a call to <code>UpdateDatasetEntries</code> completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from <code>UpdateDatasetEntries</code>. In this case, safely retry your call to <code>UpdateDatasetEntries</code> by using the same <code>ClientToken</code> parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for <code>ClientToken</code> is considered a new call to <code>UpdateDatasetEntries</code>. An idempotency token is active for 8 hours. '
+          description: '<p>ClientToken is an idempotency token that ensures a call to <code>UpdateDatasetEntries</code> completes only once. You choose the value to pass. For example, An issue might prevent you from getting a response from <code>UpdateDatasetEntries</code>. In this case, safely retry your call to <code>UpdateDatasetEntries</code> by using the same <code>ClientToken</code> parameter value.</p> <p>If you don''t supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from making multiple updates with the same dataset entries. You''ll need to provide your own value for other use cases. </p> <p>An error occurs if the other input parameters are not the same as in the first request. Using a different value for <code>ClientToken</code> is considered a new call to <code>UpdateDatasetEntries</code>. An idempotency token is active for 8 hours. </p>'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9-]+$'
@@ -1328,6 +1396,200 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 10485760
+  '/2020-11-20/projects/{projectName}/modelpackagingjobs':
+    get:
+      operationId: ListModelPackagingJobs
+      description: '<p> Lists the model packaging jobs created for an Amazon Lookout for Vision project. </p> <p>This operation requires permissions to perform the <code>lookoutvision:ListModelPackagingJobs</code> operation. </p> <p>For more information, see <i>Using your Amazon Lookout for Vision model on an edge device</i> in the Amazon Lookout for Vision Developer Guide. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListModelPackagingJobsResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: projectName
+          in: path
+          required: true
+          description: ' The name of the project for which you want to list the model packaging jobs. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9][a-zA-Z0-9_\-]*'
+            minLength: 1
+            maxLength: 255
+        - name: nextToken
+          in: query
+          required: false
+          description: 'If the previous response was incomplete (because there is more results to retrieve), Amazon Lookout for Vision returns a pagination token in the response. You can use this pagination token to retrieve the next set of results. '
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9\/\+\=]{0,2048}$'
+            maxLength: 2048
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return per paginated call. The largest value you can specify is 100. If you specify a value greater than 100, a ValidationException error occurs. The default value is 100. '
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartModelPackagingJob
+      description: '<p>Starts an Amazon Lookout for Vision model packaging job. A model packaging job creates an AWS IoT Greengrass component for a Lookout for Vision model. You can use the component to deploy your model to an edge device managed by Greengrass. </p> <p>Use the <a>DescribeModelPackagingJob</a> API to determine the current status of the job. The model packaging job is complete if the value of <code>Status</code> is <code>SUCCEEDED</code>.</p> <p>To deploy the component to the target device, use the component name and component version with the AWS IoT Greengrass <a href="https://docs.aws.amazon.com/greengrass/v2/APIReference/API_CreateDeployment.html">CreateDeployment</a> API.</p> <p>This operation requires the following permissions:</p> <ul> <li> <p> <code>lookoutvision:StartModelPackagingJob</code> </p> </li> <li> <p> <code>s3:PutObject</code> </p> </li> <li> <p> <code>s3:GetBucketLocation</code> </p> </li> <li> <p> <code>kms:GenerateDataKey</code> </p> </li> <li> <p> <code>greengrass:CreateComponentVersion</code> </p> </li> <li> <p> <code>greengrass:DescribeComponent</code> </p> </li> <li> <p>(Optional) <code>greengrass:TagResource</code>. Only required if you want to tag the component.</p> </li> </ul> <p>For more information, see <i>Using your Amazon Lookout for Vision model on an edge device</i> in the Amazon Lookout for Vision Developer Guide. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartModelPackagingJobResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: projectName
+          in: path
+          required: true
+          description: ' The name of the project which contains the version of the model that you want to package. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9][a-zA-Z0-9_\-]*'
+            minLength: 1
+            maxLength: 255
+        - name: X-Amzn-Client-Token
+          in: header
+          required: false
+          description: '<p>ClientToken is an idempotency token that ensures a call to <code>StartModelPackagingJob</code> completes only once. You choose the value to pass. For example, An issue might prevent you from getting a response from <code>StartModelPackagingJob</code>. In this case, safely retry your call to <code>StartModelPackagingJob</code> by using the same <code>ClientToken</code> parameter value.</p> <p>If you don''t supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from making multiple dataset creation requests. You''ll need to provide your own value for other use cases. </p> <p>An error occurs if the other input parameters are not the same as in the first request. Using a different value for <code>ClientToken</code> is considered a new call to <code>StartModelPackagingJob</code>. An idempotency token is active for 8 hours. </p>'
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9-]+$'
+            minLength: 1
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ModelVersion
+                - Configuration
+              properties:
+                ModelVersion:
+                  description: ' The version of the model within the project that you want to package. '
+                  type: string
+                  pattern: '([1-9][0-9]*|latest)'
+                  minLength: 1
+                  maxLength: 10
+                JobName:
+                  description: 'A name for the model packaging job. If you don''t supply a value, the service creates a job name for you. '
+                  type: string
+                  pattern: '[a-zA-Z0-9-]+'
+                  minLength: 1
+                  maxLength: 64
+                Configuration:
+                  description: ' Configuration information for a Amazon Lookout for Vision model packaging job. For more information, see <a>StartModelPackagingJob</a>. '
+                  type: object
+                  properties:
+                    Greengrass:
+                      allOf:
+                        - $ref: '#/components/schemas/GreengrassConfiguration'
+                        - description: ' Configuration information for the AWS IoT Greengrass component in a model packaging job. '
+                Description:
+                  description: 'A description for the model packaging job. '
+                  type: string
+                  pattern: '[a-zA-Z0-9-_. ()'':,;?]+'
+                  minLength: 1
+                  maxLength: 256
   '/2020-11-20/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
@@ -1544,7 +1806,7 @@ paths:
         - name: X-Amzn-Client-Token
           in: header
           required: false
-          description: 'ClientToken is an idempotency token that ensures a call to <code>StartModel</code> completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from <code>StartModel</code>. In this case, safely retry your call to <code>StartModel</code> by using the same <code>ClientToken</code> parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for <code>ClientToken</code> is considered a new call to <code>StartModel</code>. An idempotency token is active for 8 hours. '
+          description: '<p>ClientToken is an idempotency token that ensures a call to <code>StartModel</code> completes only once. You choose the value to pass. For example, An issue might prevent you from getting a response from <code>StartModel</code>. In this case, safely retry your call to <code>StartModel</code> by using the same <code>ClientToken</code> parameter value. </p> <p>If you don''t supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from making multiple start requests. You''ll need to provide your own value for other use cases. </p> <p>An error occurs if the other input parameters are not the same as in the first request. Using a different value for <code>ClientToken</code> is considered a new call to <code>StartModel</code>. An idempotency token is active for 8 hours. </p>'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9-]+$'
@@ -1560,7 +1822,11 @@ paths:
                 - MinInferenceUnits
               properties:
                 MinInferenceUnits:
-                  description: 'The minimum number of inference units to use. A single inference unit represents 1 hour of processing and can support up to 5 Transaction Pers Second (TPS). Use a higher number to increase the TPS throughput of your model. You are charged for the number of inference units that you use. '
+                  description: 'The minimum number of inference units to use. A single inference unit represents 1 hour of processing. Use a higher number to increase the TPS throughput of your model. You are charged for the number of inference units that you use. '
+                  type: integer
+                  minimum: 1
+                MaxInferenceUnits:
+                  description: 'The maximum number of inference units to use for auto-scaling the model. If you don''t specify a value, Amazon Lookout for Vision doesn''t auto-scale the model.'
                   type: integer
                   minimum: 1
     parameters:
@@ -1640,7 +1906,7 @@ paths:
         - name: X-Amzn-Client-Token
           in: header
           required: false
-          description: 'ClientToken is an idempotency token that ensures a call to <code>StopModel</code> completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from <code>StopModel</code>. In this case, safely retry your call to <code>StopModel</code> by using the same <code>ClientToken</code> parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for <code>ClientToken</code> is considered a new call to <code>StopModel</code>. An idempotency token is active for 8 hours. '
+          description: '<p>ClientToken is an idempotency token that ensures a call to <code>StopModel</code> completes only once. You choose the value to pass. For example, An issue might prevent you from getting a response from <code>StopModel</code>. In this case, safely retry your call to <code>StopModel</code> by using the same <code>ClientToken</code> parameter value.</p> <p>If you don''t supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. This prevents retries after a network error from making multiple stop requests. You''ll need to provide your own value for other use cases. </p> <p>An error occurs if the other input parameters are not the same as in the first request. Using a different value for <code>ClientToken</code> is considered a new call to <code>StopModel</code>. An idempotency token is active for 8 hours. </p>'
           schema:
             type: string
             pattern: '^[a-zA-Z0-9-]+$'
@@ -1817,12 +2083,12 @@ components:
         Bucket:
           allOf:
             - $ref: '#/components/schemas/S3BucketName'
-            - description: The S3 bucket that contains the training output.
+            - description: 'The S3 bucket that contains the training or model packaging job output. If you are training a model, the bucket must in your AWS account. If you use an S3 bucket for a model packaging job, the S3 bucket must be in the same AWS Region and AWS account in which you use AWS IoT Greengrass.'
         Prefix:
           allOf:
             - $ref: '#/components/schemas/S3KeyPrefix'
-            - description: 'The path of the folder, within the S3 bucket, that contains the training output.'
-      description: Information about the location training output.
+            - description: 'The path of the folder, within the S3 bucket, that contains the output.'
+      description: Information about the location of training output or the output of a model packaging job.
     Tag:
       type: object
       required:
@@ -1876,6 +2142,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/ModelDescription'
             - description: Contains the description of the model.
+    DescribeModelPackagingJobResponse:
+      type: object
+      properties:
+        ModelPackagingDescription:
+          allOf:
+            - $ref: '#/components/schemas/ModelPackagingDescription'
+            - description: 'The description of the model packaging job. '
     DescribeProjectResponse:
       type: object
       properties:
@@ -1901,6 +2174,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: 'If the response is truncated, Amazon Lookout for Vision returns this token that you can use in the subsequent request to retrieve the next set ofdataset entries.'
+    ListModelPackagingJobsResponse:
+      type: object
+      properties:
+        ModelPackagingJobs:
+          allOf:
+            - $ref: '#/components/schemas/ModelPackagingJobsList'
+            - description: ' A list of the model packaging jobs created for the specified Amazon Lookout for Vision project. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If the previous response was incomplete (because there is more results to retrieve), Amazon Lookout for Vision returns a pagination token in the response. You can use this pagination token to retrieve the next set of results. '
     ListModelsResponse:
       type: object
       properties:
@@ -1937,6 +2221,52 @@ components:
           allOf:
             - $ref: '#/components/schemas/ModelHostingStatus'
             - description: The current running status of the model.
+    StartModelPackagingJobResponse:
+      type: object
+      properties:
+        JobName:
+          allOf:
+            - $ref: '#/components/schemas/ModelPackagingJobName'
+            - description: 'The job name for the model packaging job. If you don''t supply a job name in the <code>JobName</code> input parameter, the service creates a job name for you. '
+    GreengrassConfiguration:
+      type: object
+      required:
+        - S3OutputLocation
+        - ComponentName
+      properties:
+        CompilerOptions:
+          allOf:
+            - $ref: '#/components/schemas/CompilerOptions'
+            - description: '<p>Additional compiler options for the Greengrass component. Currently, only NVIDIA Graphics Processing Units (GPU) and CPU accelerators are supported. If you specify <code>TargetDevice</code>, don''t specify <code>CompilerOptions</code>.</p> <p>For more information, see <i>Compiler options</i> in the Amazon Lookout for Vision Developer Guide. </p>'
+        TargetDevice:
+          allOf:
+            - $ref: '#/components/schemas/TargetDevice'
+            - description: 'The target device for the model. Currently the only supported value is <code>jetson_xavier</code>. If you specify <code>TargetDevice</code>, you can''t specify <code>TargetPlatform</code>. '
+        TargetPlatform:
+          allOf:
+            - $ref: '#/components/schemas/TargetPlatform'
+            - description: 'The target platform for the model. If you specify <code>TargetPlatform</code>, you can''t specify <code>TargetDevice</code>. '
+        S3OutputLocation:
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: ' An S3 location in which Lookout for Vision stores the component artifacts. '
+        ComponentName:
+          allOf:
+            - $ref: '#/components/schemas/ComponentName'
+            - description: ' A name for the AWS IoT Greengrass component. '
+        ComponentVersion:
+          allOf:
+            - $ref: '#/components/schemas/ComponentVersion'
+            - description: 'A Version for the AWS IoT Greengrass component. If you don''t provide a value, a default value of <code> <i>Model Version</i>.0.0</code> is used. '
+        ComponentDescription:
+          allOf:
+            - $ref: '#/components/schemas/ComponentDescription'
+            - description: ' A description for the AWS IoT Greengrass component. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: ' A set of tags (key-value pairs) that you want to attach to the AWS IoT Greengrass component. '
+      description: '<p>Configuration information for the AWS IoT Greengrass component created in a model packaging job. For more information, see <a>StartModelPackagingJob</a>. </p> <note> <p>You can''t specify a component with the same <code>ComponentName</code> and <code>Componentversion</code> as an existing component with the same component name and component version.</p> </note>'
     StopModelResponse:
       type: object
       properties:
@@ -1962,11 +2292,48 @@ components:
           allOf:
             - $ref: '#/components/schemas/DatasetStatus'
             - description: The status of the dataset update.
+    AnomalyName:
+      type: string
+      pattern: '[a-zA-Z0-9]*'
+      minLength: 1
+      maxLength: 256
+    PixelAnomaly:
+      type: object
+      properties:
+        TotalPercentageArea:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: The percentage area of the image that the anomaly type covers.
+        Color:
+          allOf:
+            - $ref: '#/components/schemas/Color'
+            - description: 'A hex color value for the mask that covers an anomaly type. Each anomaly type has a different mask color. The color maps to the color of the anomaly type used in the training dataset. '
+      description: 'Information about the pixels in an anomaly mask. For more information, see <a>Anomaly</a>. <code>PixelAnomaly</code> is only returned by image segmentation models.'
+    Anomaly:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyName'
+            - description: 'The name of an anomaly type found in an image. <code>Name</code> maps to an anomaly type in the training dataset, apart from the anomaly type <code>background</code>. The service automatically inserts the <code>background</code> anomaly type into the response from <code>DetectAnomalies</code>. '
+        PixelAnomaly:
+          allOf:
+            - $ref: '#/components/schemas/PixelAnomaly'
+            - description: Information about the pixel mask that covers an anomaly type.
+      description: 'Information about an anomaly type found on an image by an image segmentation model. For more information, see <a>DetectAnomalies</a>.'
     AnomalyClassFilter:
       type: string
       pattern: (normal|anomaly)
       minLength: 1
       maxLength: 10
+    AnomalyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Anomaly'
+    AnomalyMask:
+      type: string
+      minLength: 1
+      maxLength: 5242880
     Boolean:
       type: boolean
     ClientToken:
@@ -1974,6 +2341,34 @@ components:
       pattern: '^[a-zA-Z0-9-]+$'
       minLength: 1
       maxLength: 64
+    Color:
+      type: string
+      pattern: '\#[a-zA-Z0-9]{6}'
+      minLength: 7
+      maxLength: 7
+    CompilerOptions:
+      type: string
+      pattern: .*
+      minLength: 3
+      maxLength: 1024
+    ComponentDescription:
+      type: string
+      pattern: '[a-zA-Z0-9-_. ()'':,;?]+'
+      minLength: 1
+      maxLength: 256
+    ComponentName:
+      type: string
+      pattern: '[a-zA-Z0-9-_.]+'
+      minLength: 1
+      maxLength: 128
+    ComponentVersion:
+      type: string
+      pattern: '^([0-9]{1,6})\.([0-9]{1,6})\.([0-9]{1,6})$'
+      minLength: 1
+      maxLength: 64
+    ComponentVersionArn:
+      type: string
+      pattern: 'arn:[^:]*:greengrass:[^:]*:aws:components:[^:]+'
     ContentType:
       type: string
       pattern: .*
@@ -2030,7 +2425,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/DatasetStatusMessage'
             - description: The status message for the dataset.
-      description: Sumary information for an Amazon Lookout for Vision dataset.
+      description: 'Summary information for an Amazon Lookout for Vision dataset. For more information, see <a>DescribeDataset</a> and <a>ProjectDescription</a>.'
     ModelDescriptionMessage:
       type: string
       pattern: '[0-9A-Za-z\.\-_]*'
@@ -2074,7 +2469,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
-            - description: 'The identifier for your AWS Key Management Service (AWS KMS) customer master key (CMK). The key is used to encrypt training and test images copied into the service for model training. Your source images are unaffected. If this parameter is not specified, the copied images are encrypted by a key that AWS owns and manages.'
+            - description: 'The identifier for your AWS KMS key. The key is used to encrypt training and test images copied into the service for model training. Your source images are unaffected. If this parameter is not specified, the copied images are encrypted by a key that AWS owns and manages.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -2209,7 +2604,7 @@ components:
         ImageStats:
           allOf:
             - $ref: '#/components/schemas/DatasetImageStats'
-            - description: <p/>
+            - description: Statistics about the images in a dataset.
       description: 'The description for a dataset. For more information, see <a>DescribeDataset</a>.'
     DatasetEntry:
       type: string
@@ -2249,9 +2644,9 @@ components:
       type: object
       title: DeleteDatasetRequest
       properties: {}
-    ModelVersion:
+    ModelVersionNoLatest:
       type: string
-      pattern: '([1-9][0-9]*|latest)'
+      pattern: '([1-9][0-9]*)'
       minLength: 1
       maxLength: 10
     DeleteModelRequest:
@@ -2270,6 +2665,68 @@ components:
       type: object
       title: DescribeDatasetRequest
       properties: {}
+    ModelPackagingJobName:
+      type: string
+      pattern: '[a-zA-Z0-9-]+'
+      minLength: 1
+      maxLength: 64
+    DescribeModelPackagingJobRequest:
+      type: object
+      title: DescribeModelPackagingJobRequest
+      properties: {}
+    ModelPackagingDescription:
+      type: object
+      properties:
+        JobName:
+          allOf:
+            - $ref: '#/components/schemas/ModelPackagingJobName'
+            - description: ' The name of the model packaging job. '
+        ProjectName:
+          allOf:
+            - $ref: '#/components/schemas/ProjectName'
+            - description: 'The name of the project that''s associated with a model that''s in the model package. '
+        ModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersion'
+            - description: 'The version of the model used in the model packaging job. '
+        ModelPackagingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ModelPackagingConfiguration'
+            - description: ' The configuration information used in the model packaging job. '
+        ModelPackagingJobDescription:
+          allOf:
+            - $ref: '#/components/schemas/ModelPackagingJobDescription'
+            - description: 'The description for the model packaging job. '
+        ModelPackagingMethod:
+          allOf:
+            - $ref: '#/components/schemas/ModelPackagingMethod'
+            - description: 'The AWS service used to package the job. Currently Lookout for Vision can package jobs with AWS IoT Greengrass. '
+        ModelPackagingOutputDetails:
+          allOf:
+            - $ref: '#/components/schemas/ModelPackagingOutputDetails'
+            - description: 'Information about the output of the model packaging job. For more information, see <a>DescribeModelPackagingJob</a>. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ModelPackagingJobStatus'
+            - description: ' The status of the model packaging job. '
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/ModelPackagingStatusMessage'
+            - description: ' The status message for the model packaging job. '
+        CreationTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: ' The Unix timestamp for the time and date that the model packaging job was created. '
+        LastUpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: ' The Unix timestamp for the time and date that the model packaging job was last updated. '
+      description: ' Information about a model packaging job. For more information, see <a>DescribeModelPackagingJob</a>. '
+    ModelVersion:
+      type: string
+      pattern: '([1-9][0-9]*|latest)'
+      minLength: 1
+      maxLength: 10
     DescribeModelRequest:
       type: object
       title: DescribeModelRequest
@@ -2325,6 +2782,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
             - description: The identifer for the AWS Key Management Service (AWS KMS) key that was used to encrypt the model during training.
+        MinInferenceUnits:
+          allOf:
+            - $ref: '#/components/schemas/InferenceUnits'
+            - description: 'The minimum number of inference units used by the model. For more information, see <a>StartModel</a> '
+        MaxInferenceUnits:
+          allOf:
+            - $ref: '#/components/schemas/InferenceUnits'
+            - description: 'The maximum number of inference units Amazon Lookout for Vision uses to auto-scale the model. For more information, see <a>StartModel</a>.'
       description: Describes an Amazon Lookout for Vision model.
     DescribeProjectRequest:
       type: object
@@ -2372,12 +2837,20 @@ components:
         IsAnomalous:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'True if the image contains an anomaly, otherwise false.'
+            - description: 'True if Amazon Lookout for Vision classifies the image as containing an anomaly, otherwise false.'
         Confidence:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: The confidence that Amazon Lookout for Vision has in the accuracy of the prediction.
-      description: The prediction results from a call to <a>DetectAnomalies</a>.
+            - description: The confidence that Lookout for Vision has in the accuracy of the classification in <code>IsAnomalous</code>.
+        Anomalies:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyList'
+            - description: '<p>If the model is an image segmentation model, <code>Anomalies</code> contains a list of anomaly types found in the image. There is one entry for each type of anomaly found (even if multiple instances of an anomaly type exist on the image). The first element in the list is always an anomaly type representing the image background (''background'') and shouldn''t be considered an anomaly. Amazon Lookout for Vision automatically add the background anomaly type to the response, and you don''t need to declare a background anomaly type in your dataset.</p> <p>If the list has one entry (''background''), no anomalies were found on the image.</p> <p/> <p>An image classification model doesn''t return an <code>Anomalies</code> list. </p>'
+        AnomalyMask:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyMask'
+            - description: '<p>If the model is an image segmentation model, <code>AnomalyMask</code> contains pixel masks that covers all anomaly types found on the image. Each anomaly type has a different mask color. To map a color to an anomaly type, see the <code>color</code> field of the <a>PixelAnomaly</a> object.</p> <p>An image classification model doesn''t return an <code>Anomalies</code> list. </p>'
+      description: 'The prediction results from a call to <a>DetectAnomalies</a>. <code>DetectAnomalyResult</code> includes classification information for the prediction (<code>IsAnomalous</code> and <code>Confidence</code>). If the model you use is an image segementation model, <code>DetectAnomalyResult</code> also includes segmentation information (<code>Anomalies</code> and <code>AnomalyMask</code>). Classification information is calculated separately from segmentation information and you shouldn''t assume a relationship between them.'
     ImageSource:
       type: object
       properties:
@@ -2389,6 +2862,45 @@ components:
     Float:
       type: number
       format: float
+    TargetDevice:
+      type: string
+      enum:
+        - jetson_xavier
+    TargetPlatform:
+      type: object
+      required:
+        - Os
+        - Arch
+      properties:
+        Os:
+          allOf:
+            - $ref: '#/components/schemas/TargetPlatformOs'
+            - description: 'The target operating system for the model. Linux is the only operating system that is currently supported. '
+        Arch:
+          allOf:
+            - $ref: '#/components/schemas/TargetPlatformArch'
+            - description: 'The target architecture for the model. The currently supported architectures are X86_64 (64-bit version of the x86 instruction set) and ARM_64 (ARMv8 64-bit CPU). '
+        Accelerator:
+          allOf:
+            - $ref: '#/components/schemas/TargetPlatformAccelerator'
+            - description: '<p>The target accelerator for the model. Currently, Amazon Lookout for Vision only supports NVIDIA (Nvidia graphics processing unit) and CPU accelerators. If you specify NVIDIA as an accelerator, you must also specify the <code>gpu-code</code>, <code>trt-ver</code>, and <code>cuda-ver</code> compiler options. If you don''t specify an accelerator, Lookout for Vision uses the CPU for compilation and we highly recommend that you use the <a>GreengrassConfiguration$CompilerOptions</a> field. For example, you can use the following compiler options for CPU: </p> <ul> <li> <p> <code>mcpu</code>: CPU micro-architecture. For example, <code>{''mcpu'': ''skylake-avx512''}</code> </p> </li> <li> <p> <code>mattr</code>: CPU flags. For example, <code>{''mattr'': [''+neon'', ''+vfpv4'']}</code> </p> </li> </ul>'
+      description: The platform on which a model runs on an AWS IoT Greengrass core device.
+    GreengrassOutputDetails:
+      type: object
+      properties:
+        ComponentVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ComponentVersionArn'
+            - description: ' The Amazon Resource Name (ARN) of the component. '
+        ComponentName:
+          allOf:
+            - $ref: '#/components/schemas/ComponentName'
+            - description: ' The name of the component. '
+        ComponentVersion:
+          allOf:
+            - $ref: '#/components/schemas/ComponentVersion'
+            - description: ' The version of the component. '
+      description: 'Information about the AWS IoT Greengrass component created by a model packaging job. '
     ImageSourceType:
       type: string
       pattern: direct
@@ -2429,6 +2941,14 @@ components:
       type: object
       title: ListDatasetEntriesRequest
       properties: {}
+    ListModelPackagingJobsRequest:
+      type: object
+      title: ListModelPackagingJobsRequest
+      properties: {}
+    ModelPackagingJobsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ModelPackagingJobMetadata'
     ListModelsRequest:
       type: object
       title: ListModelsRequest
@@ -2506,10 +3026,110 @@ components:
         - HOSTING_FAILED
         - STOPPING_HOSTING
         - SYSTEM_UPDATING
+    ModelPackagingConfiguration:
+      type: object
+      required:
+        - Greengrass
+      properties:
+        Greengrass:
+          allOf:
+            - $ref: '#/components/schemas/GreengrassConfiguration'
+            - description: ' Configuration information for the AWS IoT Greengrass component in a model packaging job. '
+      description: ' Configuration information for a Amazon Lookout for Vision model packaging job. For more information, see <a>StartModelPackagingJob</a>. '
+    ModelPackagingJobDescription:
+      type: string
+      pattern: '[a-zA-Z0-9-_. ()'':,;?]+'
+      minLength: 1
+      maxLength: 256
+    ModelPackagingMethod:
+      type: string
+      pattern: '^[a-zA-Z0-9]+'
+      minLength: 1
+      maxLength: 32
+    ModelPackagingOutputDetails:
+      type: object
+      properties:
+        Greengrass:
+          allOf:
+            - $ref: '#/components/schemas/GreengrassOutputDetails'
+            - description: ' Information about the AWS IoT Greengrass component in a model packaging job. '
+      description: ' Information about the output from a model packaging job. '
+    ModelPackagingJobStatus:
+      type: string
+      enum:
+        - CREATED
+        - RUNNING
+        - SUCCEEDED
+        - FAILED
+    ModelPackagingStatusMessage:
+      type: string
+    ModelPackagingJobMetadata:
+      type: object
+      properties:
+        JobName:
+          allOf:
+            - $ref: '#/components/schemas/ModelPackagingJobName'
+            - description: ' The name of the model packaging job. '
+        ProjectName:
+          allOf:
+            - $ref: '#/components/schemas/ProjectName'
+            - description: ' The project that contains the model that is in the model package. '
+        ModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersion'
+            - description: ' The version of the model that is in the model package. '
+        ModelPackagingJobDescription:
+          allOf:
+            - $ref: '#/components/schemas/ModelPackagingJobDescription'
+            - description: ' The description for the model packaging job. '
+        ModelPackagingMethod:
+          allOf:
+            - $ref: '#/components/schemas/ModelPackagingMethod'
+            - description: ' The AWS service used to package the job. Currently Lookout for Vision can package jobs with AWS IoT Greengrass. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ModelPackagingJobStatus'
+            - description: 'The status of the model packaging job. '
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/ModelPackagingStatusMessage'
+            - description: 'The status message for the model packaging job. '
+        CreationTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The Unix timestamp for the time and date that the model packaging job was created.
+        LastUpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The Unix timestamp for the time and date that the model packaging job was last updated.
+      description: ' Metadata for a model packaging job. For more information, see <a>ListModelPackagingJobs</a>. '
     S3KeyPrefix:
       type: string
       pattern: '^([a-zA-Z0-9!_.*''()-][/a-zA-Z0-9!_.*''()-]*)?$'
       maxLength: 1024
+    StartModelPackagingJobRequest:
+      type: object
+      required:
+        - ModelVersion
+        - Configuration
+      title: StartModelPackagingJobRequest
+      properties:
+        ModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersion'
+            - description: ' The version of the model within the project that you want to package. '
+        JobName:
+          allOf:
+            - $ref: '#/components/schemas/ModelPackagingJobName'
+            - description: 'A name for the model packaging job. If you don''t supply a value, the service creates a job name for you. '
+        Configuration:
+          allOf:
+            - $ref: '#/components/schemas/ModelPackagingConfiguration'
+            - description: 'The configuration for the model packaging job. '
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ModelPackagingJobDescription'
+            - description: 'A description for the model packaging job. '
     StartModelRequest:
       type: object
       required:
@@ -2519,7 +3139,11 @@ components:
         MinInferenceUnits:
           allOf:
             - $ref: '#/components/schemas/InferenceUnits'
-            - description: 'The minimum number of inference units to use. A single inference unit represents 1 hour of processing and can support up to 5 Transaction Pers Second (TPS). Use a higher number to increase the TPS throughput of your model. You are charged for the number of inference units that you use. '
+            - description: 'The minimum number of inference units to use. A single inference unit represents 1 hour of processing. Use a higher number to increase the TPS throughput of your model. You are charged for the number of inference units that you use. '
+        MaxInferenceUnits:
+          allOf:
+            - $ref: '#/components/schemas/InferenceUnits'
+            - description: 'The maximum number of inference units to use for auto-scaling the model. If you don''t specify a value, Amazon Lookout for Vision doesn''t auto-scale the model.'
     StopModelRequest:
       type: object
       title: StopModelRequest
@@ -2545,6 +3169,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: The key-value tags to assign to the model.
+    TargetPlatformOs:
+      type: string
+      enum:
+        - LINUX
+    TargetPlatformArch:
+      type: string
+      enum:
+        - ARM64
+        - X86_64
+    TargetPlatformAccelerator:
+      type: string
+      enum:
+        - NVIDIA
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest

@@ -3,7 +3,7 @@ info:
   version: '2020-07-20'
   x-release: v4
   title: AWS Single Sign-On Admin
-  description: '<p>Amazon Web Services Single Sign On (SSO) is a cloud SSO service that makes it easy to centrally manage SSO access to multiple Amazon Web Services accounts and business applications. This guide provides information on SSO operations which could be used for access management of Amazon Web Services accounts. For information about Amazon Web Services SSO features, see the <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html">Amazon Web Services Single Sign-On User Guide</a>.</p> <p>Many operations in the SSO APIs rely on identifiers for users and groups, known as principals. For more information about how to work with principals and principal IDs in Amazon Web Services SSO, see the <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html">Amazon Web Services SSO Identity Store API Reference</a>.</p>'
+  description: '<p>AWS IAM Identity Center (successor to AWS Single Sign-On) helps you securely create, or connect, your workforce identities and manage their access centrally across AWS accounts and applications. IAM Identity Center is the recommended approach for workforce authentication and authorization in AWS, for organizations of any size and type.</p> <note> <p>Although AWS Single Sign-On was renamed, the <code>sso</code> and <code>identitystore</code> API namespaces will continue to retain their original name for backward compatibility purposes. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html#renamed">IAM Identity Center rename</a>.</p> </note> <p>This reference guide provides information on single sign-on operations which could be used for access management of AWS accounts. For information about IAM Identity Center features, see the <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html">IAM Identity Center User Guide</a>.</p> <p>Many operations in the IAM Identity Center APIs rely on identifiers for users and groups, known as principals. For more information about how to work with principals and principal IDs in IAM Identity Center, see the <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html">Identity Store API Reference</a>.</p> <note> <p>AWS provides SDKs that consist of libraries and sample code for various programming languages and platforms (Java, Ruby, .Net, iOS, Android, and more). The SDKs provide a convenient way to create programmatic access to IAM Identity Center and other AWS services. For more information about the AWS SDKs, including how to download and install them, see <a href="http://aws.amazon.com/tools/">Tools for Amazon Web Services</a>.</p> </note>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -115,10 +115,85 @@ servers:
     description: The SSO Admin endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /#X-Amz-Target=SWBExternalService.AttachCustomerManagedPolicyReferenceToPermissionSet:
+    post:
+      operationId: AttachCustomerManagedPolicyReferenceToPermissionSet
+      description: Attaches the specified customer managed policy to the specified <a>PermissionSet</a>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttachCustomerManagedPolicyReferenceToPermissionSetResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttachCustomerManagedPolicyReferenceToPermissionSetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SWBExternalService.AttachCustomerManagedPolicyReferenceToPermissionSet
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SWBExternalService.AttachManagedPolicyToPermissionSet:
     post:
       operationId: AttachManagedPolicyToPermissionSet
-      description: '<p>Attaches an IAM managed policy ARN to a permission set.</p> <note> <p>If the permission set is already referenced by one or more account assignments, you will need to call <code> <a>ProvisionPermissionSet</a> </code> after this operation. Calling <code>ProvisionPermissionSet</code> applies the corresponding IAM policy updates to all assigned accounts.</p> </note>'
+      description: '<p>Attaches an AWS managed policy ARN to a permission set.</p> <note> <p>If the permission set is already referenced by one or more account assignments, you will need to call <code> <a>ProvisionPermissionSet</a> </code> after this operation. Calling <code>ProvisionPermissionSet</code> applies the corresponding IAM policy updates to all assigned accounts.</p> </note>'
       responses:
         '200':
           description: Success
@@ -193,7 +268,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.CreateAccountAssignment:
     post:
       operationId: CreateAccountAssignment
-      description: '<p>Assigns access to a principal for a specified Amazon Web Services account using a specified permission set.</p> <note> <p>The term <i>principal</i> here refers to a user or group that is defined in Amazon Web Services SSO.</p> </note> <note> <p>As part of a successful <code>CreateAccountAssignment</code> call, the specified permission set will automatically be provisioned to the account in the form of an IAM policy. That policy is attached to the SSO-created IAM role. If the permission set is subsequently updated, the corresponding IAM policies attached to roles in your accounts will not be updated automatically. In this case, you must call <code> <a>ProvisionPermissionSet</a> </code> to make these updates.</p> </note>'
+      description: '<p>Assigns access to a principal for a specified AWS account using a specified permission set.</p> <note> <p>The term <i>principal</i> here refers to a user or group that is defined in IAM Identity Center.</p> </note> <note> <p>As part of a successful <code>CreateAccountAssignment</code> call, the specified permission set will automatically be provisioned to the account in the form of an IAM policy. That policy is attached to the IAM role created in IAM Identity Center. If the permission set is subsequently updated, the corresponding IAM policies attached to roles in your accounts will not be updated automatically. In this case, you must call <code> <a>ProvisionPermissionSet</a> </code> to make these updates.</p> </note> <note> <p> After a successful response, call <code>DescribeAccountAssignmentCreationStatus</code> to describe the status of an assignment creation request. </p> </note>'
       responses:
         '200':
           description: Success
@@ -268,7 +343,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.CreateInstanceAccessControlAttributeConfiguration:
     post:
       operationId: CreateInstanceAccessControlAttributeConfiguration
-      description: 'Enables the attributes-based access control (ABAC) feature for the specified Amazon Web Services SSO instance. You can also specify new attributes to add to your ABAC configuration during the enabling process. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.'
+      description: '<p>Enables the attributes-based access control (ABAC) feature for the specified IAM Identity Center instance. You can also specify new attributes to add to your ABAC configuration during the enabling process. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>IAM Identity Center User Guide</i>.</p> <note> <p>After a successful response, call <code>DescribeInstanceAccessControlAttributeConfiguration</code> to validate that <code>InstanceAccessControlAttributeConfiguration</code> was created.</p> </note>'
       responses:
         '200':
           description: Success
@@ -337,7 +412,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.CreatePermissionSet:
     post:
       operationId: CreatePermissionSet
-      description: '<p>Creates a permission set within a specified SSO instance.</p> <note> <p>To grant users and groups access to Amazon Web Services account resources, use <code> <a>CreateAccountAssignment</a> </code>.</p> </note>'
+      description: '<p>Creates a permission set within a specified IAM Identity Center instance.</p> <note> <p>To grant users and groups access to AWS account resources, use <code> <a>CreateAccountAssignment</a> </code>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -412,7 +487,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.DeleteAccountAssignment:
     post:
       operationId: DeleteAccountAssignment
-      description: Deletes a principal's access from a specified Amazon Web Services account using a specified permission set.
+      description: '<p>Deletes a principal''s access from a specified AWS account using a specified permission set.</p> <note> <p>After a successful response, call <code>DescribeAccountAssignmentCreationStatus</code> to describe the status of an assignment deletion request.</p> </note>'
       responses:
         '200':
           description: Success
@@ -550,7 +625,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.DeleteInstanceAccessControlAttributeConfiguration:
     post:
       operationId: DeleteInstanceAccessControlAttributeConfiguration
-      description: 'Disables the attributes-based access control (ABAC) feature for the specified Amazon Web Services SSO instance and deletes all of the attribute mappings that have been configured. Once deleted, any attributes that are received from an identity source and any custom attributes you have previously configured will not be passed. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.'
+      description: 'Disables the attributes-based access control (ABAC) feature for the specified IAM Identity Center instance and deletes all of the attribute mappings that have been configured. Once deleted, any attributes that are received from an identity source and any custom attributes you have previously configured will not be passed. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>IAM Identity Center User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -677,6 +752,69 @@ paths:
             type: string
             enum:
               - SWBExternalService.DeletePermissionSet
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SWBExternalService.DeletePermissionsBoundaryFromPermissionSet:
+    post:
+      operationId: DeletePermissionsBoundaryFromPermissionSet
+      description: Deletes the permissions boundary from a specified <a>PermissionSet</a>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletePermissionsBoundaryFromPermissionSetResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletePermissionsBoundaryFromPermissionSetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SWBExternalService.DeletePermissionsBoundaryFromPermissionSet
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -814,7 +952,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.DescribeInstanceAccessControlAttributeConfiguration:
     post:
       operationId: DescribeInstanceAccessControlAttributeConfiguration
-      description: 'Returns the list of Amazon Web Services SSO identity store attributes that have been configured to work with attributes-based access control (ABAC) for the specified Amazon Web Services SSO instance. This will not return attributes configured and sent by an external identity provider. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.'
+      description: 'Returns the list of IAM Identity Center identity store attributes that have been configured to work with attributes-based access control (ABAC) for the specified IAM Identity Center instance. This will not return attributes configured and sent by an external identity provider. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>IAM Identity Center User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -1000,10 +1138,79 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SWBExternalService.DetachCustomerManagedPolicyReferenceFromPermissionSet:
+    post:
+      operationId: DetachCustomerManagedPolicyReferenceFromPermissionSet
+      description: Detaches the specified customer managed policy from the specified <a>PermissionSet</a>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetachCustomerManagedPolicyReferenceFromPermissionSetResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetachCustomerManagedPolicyReferenceFromPermissionSetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SWBExternalService.DetachCustomerManagedPolicyReferenceFromPermissionSet
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SWBExternalService.DetachManagedPolicyFromPermissionSet:
     post:
       operationId: DetachManagedPolicyFromPermissionSet
-      description: Detaches the attached IAM managed policy ARN from the specified permission set.
+      description: Detaches the attached AWS managed policy ARN from the specified permission set.
       responses:
         '200':
           description: Success
@@ -1132,10 +1339,73 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SWBExternalService.GetPermissionsBoundaryForPermissionSet:
+    post:
+      operationId: GetPermissionsBoundaryForPermissionSet
+      description: Obtains the permissions boundary for a specified <a>PermissionSet</a>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPermissionsBoundaryForPermissionSetResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetPermissionsBoundaryForPermissionSetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SWBExternalService.GetPermissionsBoundaryForPermissionSet
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SWBExternalService.ListAccountAssignmentCreationStatus:
     post:
       operationId: ListAccountAssignmentCreationStatus
-      description: Lists the status of the Amazon Web Services account assignment creation requests for a specified SSO instance.
+      description: Lists the status of the AWS account assignment creation requests for a specified IAM Identity Center instance.
       responses:
         '200':
           description: Success
@@ -1210,7 +1480,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.ListAccountAssignmentDeletionStatus:
     post:
       operationId: ListAccountAssignmentDeletionStatus
-      description: Lists the status of the Amazon Web Services account assignment deletion requests for a specified SSO instance.
+      description: Lists the status of the AWS account assignment deletion requests for a specified IAM Identity Center instance.
       responses:
         '200':
           description: Success
@@ -1285,7 +1555,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.ListAccountAssignments:
     post:
       operationId: ListAccountAssignments
-      description: Lists the assignee of the specified Amazon Web Services account with the specified permission set.
+      description: Lists the assignee of the specified AWS account with the specified permission set.
       responses:
         '200':
           description: Success
@@ -1360,7 +1630,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.ListAccountsForProvisionedPermissionSet:
     post:
       operationId: ListAccountsForProvisionedPermissionSet
-      description: Lists all the Amazon Web Services accounts where the specified permission set is provisioned.
+      description: Lists all the AWS accounts where the specified permission set is provisioned.
       responses:
         '200':
           description: Success
@@ -1432,10 +1702,85 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SWBExternalService.ListCustomerManagedPolicyReferencesInPermissionSet:
+    post:
+      operationId: ListCustomerManagedPolicyReferencesInPermissionSet
+      description: Lists all customer managed policies attached to a specified <a>PermissionSet</a>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCustomerManagedPolicyReferencesInPermissionSetResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListCustomerManagedPolicyReferencesInPermissionSetRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SWBExternalService.ListCustomerManagedPolicyReferencesInPermissionSet
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SWBExternalService.ListInstances:
     post:
       operationId: ListInstances
-      description: Lists the SSO instances that the caller has access to.
+      description: Lists the IAM Identity Center instances that the caller has access to.
       responses:
         '200':
           description: Success
@@ -1504,7 +1849,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.ListManagedPoliciesInPermissionSet:
     post:
       operationId: ListManagedPoliciesInPermissionSet
-      description: Lists the IAM managed policy that is attached to a specified permission set.
+      description: Lists the AWS managed policy that is attached to a specified permission set.
       responses:
         '200':
           description: Success
@@ -1579,7 +1924,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.ListPermissionSetProvisioningStatus:
     post:
       operationId: ListPermissionSetProvisioningStatus
-      description: Lists the status of the permission set provisioning requests for a specified SSO instance.
+      description: Lists the status of the permission set provisioning requests for a specified IAM Identity Center instance.
       responses:
         '200':
           description: Success
@@ -1654,7 +1999,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.ListPermissionSets:
     post:
       operationId: ListPermissionSets
-      description: Lists the <a>PermissionSet</a>s in an SSO instance.
+      description: Lists the <a>PermissionSet</a>s in an IAM Identity Center instance.
       responses:
         '200':
           description: Success
@@ -1729,7 +2074,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.ListPermissionSetsProvisionedToAccount:
     post:
       operationId: ListPermissionSetsProvisionedToAccount
-      description: Lists all the permission sets that are provisioned to a specified Amazon Web Services account.
+      description: Lists all the permission sets that are provisioned to a specified AWS account.
       responses:
         '200':
           description: Success
@@ -1942,7 +2287,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.PutInlinePolicyToPermissionSet:
     post:
       operationId: PutInlinePolicyToPermissionSet
-      description: '<p>Attaches an IAM inline policy to a permission set.</p> <note> <p>If the permission set is already referenced by one or more account assignments, you will need to call <code> <a>ProvisionPermissionSet</a> </code> after this action to apply the corresponding IAM policy updates to all assigned accounts.</p> </note>'
+      description: '<p>Attaches an inline policy to a permission set.</p> <note> <p>If the permission set is already referenced by one or more account assignments, you will need to call <code> <a>ProvisionPermissionSet</a> </code> after this action to apply the corresponding IAM policy updates to all assigned accounts.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2006,6 +2351,75 @@ paths:
             type: string
             enum:
               - SWBExternalService.PutInlinePolicyToPermissionSet
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SWBExternalService.PutPermissionsBoundaryToPermissionSet:
+    post:
+      operationId: PutPermissionsBoundaryToPermissionSet
+      description: Attaches an AWS managed or customer managed policy to the specified <a>PermissionSet</a> as a permissions boundary.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutPermissionsBoundaryToPermissionSetResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutPermissionsBoundaryToPermissionSetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SWBExternalService.PutPermissionsBoundaryToPermissionSet
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2161,7 +2575,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.UpdateInstanceAccessControlAttributeConfiguration:
     post:
       operationId: UpdateInstanceAccessControlAttributeConfiguration
-      description: 'Updates the Amazon Web Services SSO identity store attributes that you can use with the Amazon Web Services SSO instance for attributes-based access control (ABAC). When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the Amazon Web Services SSO identity store. If a SAML assertion passes any of these attributes, Amazon Web Services SSO replaces the attribute value with the value from the Amazon Web Services SSO identity store. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.'
+      description: 'Updates the IAM Identity Center identity store attributes that you can use with the IAM Identity Center instance for attributes-based access control (ABAC). When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the IAM Identity Center identity store. If a SAML assertion passes any of these attributes, IAM Identity Center replaces the attribute value with the value from the IAM Identity Center identity store. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>IAM Identity Center User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -2348,6 +2762,36 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    AttachCustomerManagedPolicyReferenceToPermissionSetResponse:
+      type: object
+      properties: {}
+    AttachCustomerManagedPolicyReferenceToPermissionSetRequest:
+      type: object
+      required:
+        - InstanceArn
+        - PermissionSetArn
+        - CustomerManagedPolicyReference
+      title: AttachCustomerManagedPolicyReferenceToPermissionSetRequest
+      properties:
+        InstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/InstanceArn'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. '
+        PermissionSetArn:
+          allOf:
+            - $ref: '#/components/schemas/PermissionSetArn'
+            - description: The ARN of the <code>PermissionSet</code>.
+        CustomerManagedPolicyReference:
+          allOf:
+            - $ref: '#/components/schemas/CustomerManagedPolicyReference'
+            - description: Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each AWS account where you want to deploy your permission set.
+    ResourceNotFoundException: {}
+    InternalServerException: {}
+    ServiceQuotaExceededException: {}
+    ThrottlingException: {}
+    ValidationException: {}
+    AccessDeniedException: {}
+    ConflictException: {}
     AttachManagedPolicyToPermissionSetResponse:
       type: object
       properties: {}
@@ -2362,7 +2806,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
@@ -2370,14 +2814,7 @@ components:
         ManagedPolicyArn:
           allOf:
             - $ref: '#/components/schemas/ManagedPolicyArn'
-            - description: The IAM managed policy ARN to be attached to a permission set.
-    ResourceNotFoundException: {}
-    InternalServerException: {}
-    ServiceQuotaExceededException: {}
-    ThrottlingException: {}
-    ValidationException: {}
-    AccessDeniedException: {}
-    ConflictException: {}
+            - description: The AWS managed policy ARN to be attached to a permission set.
     CreateAccountAssignmentResponse:
       type: object
       properties:
@@ -2399,11 +2836,11 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         TargetId:
           allOf:
             - $ref: '#/components/schemas/TargetId'
-            - description: 'TargetID is an Amazon Web Services account identifier, typically a 10-12 digit string (For example, 123456789012).'
+            - description: 'TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).'
         TargetType:
           allOf:
             - $ref: '#/components/schemas/TargetType'
@@ -2419,7 +2856,7 @@ components:
         PrincipalId:
           allOf:
             - $ref: '#/components/schemas/PrincipalId'
-            - description: 'An identifier for an object in Amazon Web Services SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in Amazon Web Services SSO, see the <a href="/singlesignon/latest/IdentityStoreAPIReference/welcome.html">Amazon Web Services SSO Identity Store API Reference</a>.'
+            - description: 'An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href="/singlesignon/latest/IdentityStoreAPIReference/welcome.html">IAM Identity Center Identity Store API Reference</a>.'
     CreateInstanceAccessControlAttributeConfigurationResponse:
       type: object
       properties: {}
@@ -2433,18 +2870,18 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: The ARN of the SSO instance under which the operation will be executed.
+            - description: The ARN of the IAM Identity Center instance under which the operation will be executed.
         InstanceAccessControlAttributeConfiguration:
           allOf:
             - $ref: '#/components/schemas/InstanceAccessControlAttributeConfiguration'
-            - description: 'Specifies the Amazon Web Services SSO identity store attributes to add to your ABAC configuration. When using an external identity provider as an identity source, you can pass attributes through the SAML assertion. Doing so provides an alternative to configuring attributes from the Amazon Web Services SSO identity store. If a SAML assertion passes any of these attributes, Amazon Web Services SSO will replace the attribute value with the value from the Amazon Web Services SSO identity store.'
+            - description: 'Specifies the IAM Identity Center identity store attributes to add to your ABAC configuration. When using an external identity provider as an identity source, you can pass attributes through the SAML assertion. Doing so provides an alternative to configuring attributes from the IAM Identity Center identity store. If a SAML assertion passes any of these attributes, IAM Identity Center will replace the attribute value with the value from the IAM Identity Center identity store.'
     CreatePermissionSetResponse:
       type: object
       properties:
         PermissionSet:
           allOf:
             - $ref: '#/components/schemas/PermissionSet'
-            - description: Defines the level of access on an Amazon Web Services account.
+            - description: Defines the level of access on an AWS account.
     CreatePermissionSetRequest:
       type: object
       required:
@@ -2463,7 +2900,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         SessionDuration:
           allOf:
             - $ref: '#/components/schemas/Duration'
@@ -2497,11 +2934,11 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         TargetId:
           allOf:
             - $ref: '#/components/schemas/TargetId'
-            - description: 'TargetID is an Amazon Web Services account identifier, typically a 10-12 digit string (For example, 123456789012).'
+            - description: 'TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).'
         TargetType:
           allOf:
             - $ref: '#/components/schemas/TargetType'
@@ -2517,7 +2954,7 @@ components:
         PrincipalId:
           allOf:
             - $ref: '#/components/schemas/PrincipalId'
-            - description: 'An identifier for an object in Amazon Web Services SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in Amazon Web Services SSO, see the <a href="/singlesignon/latest/IdentityStoreAPIReference/welcome.html">Amazon Web Services SSO Identity Store API Reference</a>.'
+            - description: 'An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href="/singlesignon/latest/IdentityStoreAPIReference/welcome.html">IAM Identity Center Identity Store API Reference</a>.'
     DeleteInlinePolicyFromPermissionSetResponse:
       type: object
       properties: {}
@@ -2531,7 +2968,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
@@ -2548,7 +2985,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: The ARN of the SSO instance under which the operation will be executed.
+            - description: The ARN of the IAM Identity Center instance under which the operation will be executed.
     DeletePermissionSetResponse:
       type: object
       properties: {}
@@ -2562,11 +2999,29 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
             - description: The ARN of the permission set that should be deleted.
+    DeletePermissionsBoundaryFromPermissionSetResponse:
+      type: object
+      properties: {}
+    DeletePermissionsBoundaryFromPermissionSetRequest:
+      type: object
+      required:
+        - InstanceArn
+        - PermissionSetArn
+      title: DeletePermissionsBoundaryFromPermissionSetRequest
+      properties:
+        InstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/InstanceArn'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. '
+        PermissionSetArn:
+          allOf:
+            - $ref: '#/components/schemas/PermissionSetArn'
+            - description: The ARN of the <code>PermissionSet</code>.
     DescribeAccountAssignmentCreationStatusResponse:
       type: object
       properties:
@@ -2584,7 +3039,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         AccountAssignmentCreationRequestId:
           allOf:
             - $ref: '#/components/schemas/UUId'
@@ -2606,7 +3061,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         AccountAssignmentDeletionRequestId:
           allOf:
             - $ref: '#/components/schemas/UUId'
@@ -2625,7 +3080,7 @@ components:
         InstanceAccessControlAttributeConfiguration:
           allOf:
             - $ref: '#/components/schemas/InstanceAccessControlAttributeConfiguration'
-            - description: Gets the list of Amazon Web Services SSO identity store attributes that have been added to your ABAC configuration.
+            - description: Gets the list of IAM Identity Center identity store attributes that have been added to your ABAC configuration.
     DescribeInstanceAccessControlAttributeConfigurationRequest:
       type: object
       required:
@@ -2635,14 +3090,14 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: The ARN of the SSO instance under which the operation will be executed.
+            - description: The ARN of the IAM Identity Center instance under which the operation will be executed.
     DescribePermissionSetResponse:
       type: object
       properties:
         PermissionSet:
           allOf:
             - $ref: '#/components/schemas/PermissionSet'
-            - description: Describes the level of access on an Amazon Web Services account.
+            - description: Describes the level of access on an AWS account.
     DescribePermissionSetRequest:
       type: object
       required:
@@ -2653,11 +3108,11 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
-            - description: The ARN of the permission set.
+            - description: 'The ARN of the permission set. '
     DescribePermissionSetProvisioningStatusResponse:
       type: object
       properties:
@@ -2675,11 +3130,34 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         ProvisionPermissionSetRequestId:
           allOf:
             - $ref: '#/components/schemas/UUId'
             - description: The identifier that is provided by the <a>ProvisionPermissionSet</a> call to retrieve the current status of the provisioning workflow.
+    DetachCustomerManagedPolicyReferenceFromPermissionSetResponse:
+      type: object
+      properties: {}
+    DetachCustomerManagedPolicyReferenceFromPermissionSetRequest:
+      type: object
+      required:
+        - InstanceArn
+        - PermissionSetArn
+        - CustomerManagedPolicyReference
+      title: DetachCustomerManagedPolicyReferenceFromPermissionSetRequest
+      properties:
+        InstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/InstanceArn'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. '
+        PermissionSetArn:
+          allOf:
+            - $ref: '#/components/schemas/PermissionSetArn'
+            - description: The ARN of the <code>PermissionSet</code>.
+        CustomerManagedPolicyReference:
+          allOf:
+            - $ref: '#/components/schemas/CustomerManagedPolicyReference'
+            - description: Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each AWS account where you want to deploy your permission set.
     DetachManagedPolicyFromPermissionSetResponse:
       type: object
       properties: {}
@@ -2694,7 +3172,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
@@ -2702,14 +3180,14 @@ components:
         ManagedPolicyArn:
           allOf:
             - $ref: '#/components/schemas/ManagedPolicyArn'
-            - description: The IAM managed policy ARN to be attached to a permission set.
+            - description: The AWS managed policy ARN to be detached from a permission set.
     GetInlinePolicyForPermissionSetResponse:
       type: object
       properties:
         InlinePolicy:
           allOf:
             - $ref: '#/components/schemas/PermissionSetPolicyDocument'
-            - description: The IAM inline policy that is attached to the permission set.
+            - description: The inline policy that is attached to the permission set.
     GetInlinePolicyForPermissionSetRequest:
       type: object
       required:
@@ -2720,11 +3198,33 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
             - description: The ARN of the permission set.
+    GetPermissionsBoundaryForPermissionSetResponse:
+      type: object
+      properties:
+        PermissionsBoundary:
+          allOf:
+            - $ref: '#/components/schemas/PermissionsBoundary'
+            - description: The permissions boundary attached to the specified permission set.
+    GetPermissionsBoundaryForPermissionSetRequest:
+      type: object
+      required:
+        - InstanceArn
+        - PermissionSetArn
+      title: GetPermissionsBoundaryForPermissionSetRequest
+      properties:
+        InstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/InstanceArn'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. '
+        PermissionSetArn:
+          allOf:
+            - $ref: '#/components/schemas/PermissionSetArn'
+            - description: The ARN of the <code>PermissionSet</code>.
     ListAccountAssignmentCreationStatusResponse:
       type: object
       properties:
@@ -2745,7 +3245,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
@@ -2778,7 +3278,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
@@ -2797,7 +3297,7 @@ components:
         AccountAssignments:
           allOf:
             - $ref: '#/components/schemas/AccountAssignmentList'
-            - description: The list of assignments that match the input Amazon Web Services account and permission set.
+            - description: The list of assignments that match the input AWS account and permission set.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
@@ -2813,11 +3313,11 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         AccountId:
           allOf:
             - $ref: '#/components/schemas/TargetId'
-            - description: The identifier of the Amazon Web Services account from which to list the assignments.
+            - description: The identifier of the AWS account from which to list the assignments.
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
@@ -2836,7 +3336,7 @@ components:
         AccountIds:
           allOf:
             - $ref: '#/components/schemas/AccountList'
-            - description: The list of Amazon Web Services <code>AccountIds</code>.
+            - description: The list of AWS <code>AccountIds</code>.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
@@ -2851,19 +3351,53 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
-            - description: The ARN of the <a>PermissionSet</a> from which the associated Amazon Web Services accounts will be listed.
+            - description: The ARN of the <a>PermissionSet</a> from which the associated AWS accounts will be listed.
         ProvisioningStatus:
           allOf:
             - $ref: '#/components/schemas/ProvisioningStatus'
-            - description: The permission set provisioning status for an Amazon Web Services account.
+            - description: The permission set provisioning status for an AWS account.
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: The maximum number of results to display for the <a>PermissionSet</a>.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+    ListCustomerManagedPolicyReferencesInPermissionSetResponse:
+      type: object
+      properties:
+        CustomerManagedPolicyReferences:
+          allOf:
+            - $ref: '#/components/schemas/CustomerManagedPolicyReferenceList'
+            - description: Specifies the names and paths of the customer managed policies that you have attached to your permission set.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+    ListCustomerManagedPolicyReferencesInPermissionSetRequest:
+      type: object
+      required:
+        - InstanceArn
+        - PermissionSetArn
+      title: ListCustomerManagedPolicyReferencesInPermissionSetRequest
+      properties:
+        InstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/InstanceArn'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. '
+        PermissionSetArn:
+          allOf:
+            - $ref: '#/components/schemas/PermissionSetArn'
+            - description: 'The ARN of the <code>PermissionSet</code>. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of results to display for the list call.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
@@ -2874,7 +3408,7 @@ components:
         Instances:
           allOf:
             - $ref: '#/components/schemas/InstanceList'
-            - description: Lists the SSO instances that the caller has access to.
+            - description: Lists the IAM Identity Center instances that the caller has access to.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
@@ -2897,7 +3431,7 @@ components:
         AttachedManagedPolicies:
           allOf:
             - $ref: '#/components/schemas/AttachedManagedPolicyList'
-            - description: The array of the <a>AttachedManagedPolicy</a> data type object.
+            - description: An array of the <a>AttachedManagedPolicy</a> data type object.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
@@ -2912,7 +3446,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
@@ -2945,7 +3479,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
@@ -2964,7 +3498,7 @@ components:
         PermissionSets:
           allOf:
             - $ref: '#/components/schemas/PermissionSetList'
-            - description: Defines the level of access on an Amazon Web Services account.
+            - description: Defines the level of access on an AWS account.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
@@ -2978,7 +3512,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
@@ -2997,7 +3531,7 @@ components:
         PermissionSets:
           allOf:
             - $ref: '#/components/schemas/PermissionSetList'
-            - description: Defines the level of access that an Amazon Web Services account has.
+            - description: Defines the level of access that an AWS account has.
     ListPermissionSetsProvisionedToAccountRequest:
       type: object
       required:
@@ -3008,11 +3542,11 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         AccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The identifier of the Amazon Web Services account from which to list the assignments.
+            - description: The identifier of the AWS account from which to list the assignments.
         ProvisioningStatus:
           allOf:
             - $ref: '#/components/schemas/ProvisioningStatus'
@@ -3046,10 +3580,10 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         ResourceArn:
           allOf:
-            - $ref: '#/components/schemas/GeneralArn'
+            - $ref: '#/components/schemas/TaggableResourceArn'
             - description: The ARN of the resource with the tags to be listed.
         NextToken:
           allOf:
@@ -3073,7 +3607,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
@@ -3081,7 +3615,7 @@ components:
         TargetId:
           allOf:
             - $ref: '#/components/schemas/TargetId'
-            - description: 'TargetID is an Amazon Web Services account identifier, typically a 10-12 digit string (For example, 123456789012).'
+            - description: 'TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).'
         TargetType:
           allOf:
             - $ref: '#/components/schemas/ProvisionTargetType'
@@ -3100,7 +3634,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
@@ -3108,7 +3642,30 @@ components:
         InlinePolicy:
           allOf:
             - $ref: '#/components/schemas/PermissionSetPolicyDocument'
-            - description: The IAM inline policy to attach to a <a>PermissionSet</a>.
+            - description: The inline policy to attach to a <a>PermissionSet</a>.
+    PutPermissionsBoundaryToPermissionSetResponse:
+      type: object
+      properties: {}
+    PutPermissionsBoundaryToPermissionSetRequest:
+      type: object
+      required:
+        - InstanceArn
+        - PermissionSetArn
+        - PermissionsBoundary
+      title: PutPermissionsBoundaryToPermissionSetRequest
+      properties:
+        InstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/InstanceArn'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. '
+        PermissionSetArn:
+          allOf:
+            - $ref: '#/components/schemas/PermissionSetArn'
+            - description: The ARN of the <code>PermissionSet</code>.
+        PermissionsBoundary:
+          allOf:
+            - $ref: '#/components/schemas/PermissionsBoundary'
+            - description: The permissions boundary that you want to attach to a <code>PermissionSet</code>.
     TagResourceResponse:
       type: object
       properties: {}
@@ -3123,10 +3680,10 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         ResourceArn:
           allOf:
-            - $ref: '#/components/schemas/GeneralArn'
+            - $ref: '#/components/schemas/TaggableResourceArn'
             - description: The ARN of the resource with the tags to be listed.
         Tags:
           allOf:
@@ -3146,10 +3703,10 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         ResourceArn:
           allOf:
-            - $ref: '#/components/schemas/GeneralArn'
+            - $ref: '#/components/schemas/TaggableResourceArn'
             - description: The ARN of the resource with the tags to be listed.
         TagKeys:
           allOf:
@@ -3168,7 +3725,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: The ARN of the SSO instance under which the operation will be executed.
+            - description: The ARN of the IAM Identity Center instance under which the operation will be executed.
         InstanceAccessControlAttributeConfiguration:
           allOf:
             - $ref: '#/components/schemas/InstanceAccessControlAttributeConfiguration'
@@ -3186,7 +3743,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
@@ -3216,8 +3773,8 @@ components:
         Source:
           allOf:
             - $ref: '#/components/schemas/AccessControlAttributeValueSourceList'
-            - description: The identity source to use when mapping a specified attribute to Amazon Web Services SSO.
-      description: The value used for mapping a specified attribute to an identity source.
+            - description: The identity source to use when mapping a specified attribute to IAM Identity Center.
+      description: 'The value used for mapping a specified attribute to an identity source. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/attributemappingsconcept.html">Attribute mappings</a> in the <i>IAM Identity Center User Guide</i>.'
     AccessControlAttribute:
       type: object
       required:
@@ -3227,12 +3784,12 @@ components:
         Key:
           allOf:
             - $ref: '#/components/schemas/AccessControlAttributeKey'
-            - description: The name of the attribute associated with your identities in your identity source. This is used to map a specified attribute in your identity source with an attribute in Amazon Web Services SSO.
+            - description: The name of the attribute associated with your identities in your identity source. This is used to map a specified attribute in your identity source with an attribute in IAM Identity Center.
         Value:
           allOf:
             - $ref: '#/components/schemas/AccessControlAttributeValue'
             - description: The value used for mapping a specified attribute to an identity source.
-      description: 'These are Amazon Web Services SSO identity store attributes that you can configure for use in attributes-based access control (ABAC). You can create permissions policies that determine who can access your Amazon Web Services resources based upon the configured attribute values. When you enable ABAC and specify <code>AccessControlAttributes</code>, Amazon Web Services SSO passes the attribute values of the authenticated user into IAM for use in policy evaluation.'
+      description: 'These are IAM Identity Center identity store attributes that you can configure for use in attributes-based access control (ABAC). You can create permissions policies that determine who can access your AWS resources based upon the configured attribute values. When you enable ABAC and specify <code>AccessControlAttributes</code>, IAM Identity Center passes the attribute values of the authenticated user into IAM for use in policy evaluation.'
     AccessControlAttributeList:
       type: array
       items:
@@ -3253,9 +3810,11 @@ components:
     AccountId:
       type: string
       pattern: '\d{12}'
+      minLength: 12
+      maxLength: 12
     PermissionSetArn:
       type: string
-      pattern: 'arn:aws:sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}'
+      pattern: 'arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}'
       minLength: 10
       maxLength: 1224
     PrincipalType:
@@ -3274,11 +3833,11 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The identifier of the Amazon Web Services account.
+            - description: The identifier of the AWS account.
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
-            - description: 'The ARN of the permission set. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the permission set. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         PrincipalType:
           allOf:
             - $ref: '#/components/schemas/PrincipalType'
@@ -3286,8 +3845,8 @@ components:
         PrincipalId:
           allOf:
             - $ref: '#/components/schemas/PrincipalId'
-            - description: 'An identifier for an object in Amazon Web Services SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in Amazon Web Services SSO, see the <a href="/singlesignon/latest/IdentityStoreAPIReference/welcome.html">Amazon Web Services SSO Identity Store API Reference</a>.'
-      description: <p>The assignment that indicates a principal's limited access to a specified Amazon Web Services account with a specified permission set.</p> <note> <p>The term <i>principal</i> here refers to a user or group that is defined in Amazon Web Services SSO.</p> </note>
+            - description: 'An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href="/singlesignon/latest/IdentityStoreAPIReference/welcome.html">IAM Identity Center Identity Store API Reference</a>.'
+      description: <p>The assignment that indicates a principal's limited access to a specified AWS account with a specified permission set.</p> <note> <p>The term <i>principal</i> here refers to a user or group that is defined in IAM Identity Center.</p> </note>
     AccountAssignmentList:
       type: array
       items:
@@ -3301,12 +3860,16 @@ components:
     UUId:
       type: string
       pattern: '\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b'
+      minLength: 36
+      maxLength: 36
     Reason:
       type: string
       pattern: '[\p{L}\p{M}\p{Z}\p{S}\p{N}\p{P}]*'
     TargetId:
       type: string
       pattern: '\d{12}'
+      minLength: 12
+      maxLength: 12
     TargetType:
       type: string
       enum:
@@ -3332,7 +3895,7 @@ components:
         TargetId:
           allOf:
             - $ref: '#/components/schemas/TargetId'
-            - description: 'TargetID is an Amazon Web Services account identifier, typically a 10-12 digit string (For example, 123456789012).'
+            - description: 'TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).'
         TargetType:
           allOf:
             - $ref: '#/components/schemas/TargetType'
@@ -3340,7 +3903,7 @@ components:
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
-            - description: 'The ARN of the permission set. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the permission set. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         PrincipalType:
           allOf:
             - $ref: '#/components/schemas/PrincipalType'
@@ -3348,7 +3911,7 @@ components:
         PrincipalId:
           allOf:
             - $ref: '#/components/schemas/PrincipalId'
-            - description: 'An identifier for an object in Amazon Web Services SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in Amazon Web Services SSO, see the <a href="/singlesignon/latest/IdentityStoreAPIReference/welcome.html">Amazon Web Services SSO Identity Store API Reference</a>.'
+            - description: 'An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href="/singlesignon/latest/IdentityStoreAPIReference/welcome.html">IAM Identity Center Identity Store API Reference</a>.'
         CreatedDate:
           allOf:
             - $ref: '#/components/schemas/Date'
@@ -3380,11 +3943,26 @@ components:
         $ref: '#/components/schemas/AccountId'
     InstanceArn:
       type: string
-      pattern: 'arn:aws:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}'
+      pattern: 'arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}'
       minLength: 10
       maxLength: 1224
+    CustomerManagedPolicyReference:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ManagedPolicyName'
+            - description: The name of the IAM policy that you have configured in each account where you want to deploy your permission set.
+        Path:
+          allOf:
+            - $ref: '#/components/schemas/ManagedPolicyPath'
+            - description: 'The path to the IAM policy that you have configured in each account where you want to deploy your permission set. The default is <code>/</code>. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names">Friendly names and paths</a> in the <i>IAM User Guide</i>.'
+      description: Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each AWS account where you want to deploy your permission set.
     ManagedPolicyArn:
       type: string
+      pattern: 'arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::aws:policy/[\p{L}\p{M}\p{Z}\p{S}\p{N}\p{P}]+'
       minLength: 20
       maxLength: 2048
     Name:
@@ -3397,12 +3975,12 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The name of the IAM managed policy.
+            - description: The name of the AWS managed policy.
         Arn:
           allOf:
             - $ref: '#/components/schemas/ManagedPolicyArn'
-            - description: 'The ARN of the IAM managed policy. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
-      description: A structure that stores the details of the IAM managed policy.
+            - description: 'The ARN of the AWS managed policy. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+      description: A structure that stores the details of the AWS managed policy.
     AttachedManagedPolicyList:
       type: array
       items:
@@ -3415,7 +3993,7 @@ components:
         AccessControlAttributes:
           allOf:
             - $ref: '#/components/schemas/AccessControlAttributeList'
-            - description: Lists the attributes that are configured for ABAC in the specified Amazon Web Services SSO instance.
+            - description: Lists the attributes that are configured for ABAC in the specified IAM Identity Center instance.
       description: Specifies the attributes to add to your attribute-based access control (ABAC) configuration.
     PermissionSetName:
       type: string
@@ -3424,7 +4002,7 @@ components:
       maxLength: 32
     PermissionSetDescription:
       type: string
-      pattern: '[\p{L}\p{M}\p{Z}\p{S}\p{N}\p{P}]*'
+      pattern: '[\u0009\u000A\u000D\u0020-\u007E\u00A0-\u00FF]*'
       minLength: 1
       maxLength: 700
     Duration:
@@ -3453,7 +4031,7 @@ components:
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
-            - description: 'The ARN of the permission set. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the permission set. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         Description:
           allOf:
             - $ref: '#/components/schemas/PermissionSetDescription'
@@ -3471,6 +4049,20 @@ components:
             - $ref: '#/components/schemas/RelayState'
             - description: Used to redirect users within the application during the federation authentication process.
       description: An entity that contains IAM policies.
+    ManagedPolicyName:
+      type: string
+      pattern: '[\w+=,.@-]+'
+      minLength: 1
+      maxLength: 128
+    ManagedPolicyPath:
+      type: string
+      pattern: '((/[A-Za-z0-9\.,\+@=_-]+)*)/'
+      minLength: 1
+      maxLength: 512
+    CustomerManagedPolicyReferenceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CustomerManagedPolicyReference'
     InstanceAccessControlAttributeConfigurationStatus:
       type: string
       enum:
@@ -3493,11 +4085,11 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The identifier of the Amazon Web Services account from which to list the assignments.
+            - description: The identifier of the AWS account from which to list the assignments.
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
-            - description: 'The ARN of the permission set that is being provisioned. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the permission set that is being provisioned. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         FailureReason:
           allOf:
             - $ref: '#/components/schemas/Reason'
@@ -3507,17 +4099,23 @@ components:
             - $ref: '#/components/schemas/Date'
             - description: The date that the permission set was created.
       description: A structure that is used to provide the status of the provisioning operation for a specified permission set.
-    GeneralArn:
-      type: string
-      pattern: 'arn:aws:sso:([a-zA-Z0-9-]+)?:(\d{12})?:[a-zA-Z0-9-]+/[a-zA-Z0-9-/.]+'
-      minLength: 10
-      maxLength: 2048
     PermissionSetPolicyDocument:
       type: string
       pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
       minLength: 1
       maxLength: 10240
-      format: password
+    PermissionsBoundary:
+      type: object
+      properties:
+        CustomerManagedPolicyReference:
+          allOf:
+            - $ref: '#/components/schemas/CustomerManagedPolicyReference'
+            - description: Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each AWS account where you want to deploy your permission set.
+        ManagedPolicyArn:
+          allOf:
+            - $ref: '#/components/schemas/ManagedPolicyArn'
+            - description: The AWS managed policy ARN that you want to attach to a permission set as a permissions boundary.
+      description: '<p>Specifies the configuration of the AWS managed or customer managed policy that you want to set as a permissions boundary. Specify either <code>CustomerManagedPolicyReference</code> to use the name and path of a customer managed policy, or <code>ManagedPolicyArn</code> to use the ARN of an AWS managed policy. A permissions boundary represents the maximum permissions that any policy can grant your role. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html">Permissions boundaries for IAM entities</a> in the <i>IAM User Guide</i>.</p> <important> <p>Policies used as permissions boundaries don''t provide permissions. You must also attach an IAM policy to the role. To learn how the effective permissions for a role are evaluated, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html">IAM JSON policy evaluation logic</a> in the <i>IAM User Guide</i>.</p> </important>'
     Id:
       type: string
       pattern: '^[a-zA-Z0-9-]*'
@@ -3529,12 +4127,12 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
+            - description: 'The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
         IdentityStoreId:
           allOf:
             - $ref: '#/components/schemas/Id'
-            - description: The identifier of the identity store that is connected to the SSO instance.
-      description: Provides information about the SSO instance.
+            - description: The identifier of the identity store that is connected to the IAM Identity Center instance.
+      description: Provides information about the IAM Identity Center instance.
     InstanceList:
       type: array
       items:
@@ -3568,6 +4166,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/PermissionSetArn'
+    TaggableResourceArn:
+      type: string
+      pattern: 'arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}'
+      minLength: 10
+      maxLength: 2048
     PermissionSetProvisioningStatusMetadata:
       type: object
       properties:
@@ -3601,6 +4204,9 @@ components:
       maxLength: 256
     Tag:
       type: object
+      required:
+        - Key
+        - Value
       properties:
         Key:
           allOf:
@@ -3610,7 +4216,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagValue'
             - description: The value of the tag.
-      description: A set of key-value pairs that are used to manage the resource. Tags can only be applied to permission sets and cannot be applied to corresponding roles that Amazon Web Services SSO creates in Amazon Web Services accounts.
+      description: A set of key-value pairs that are used to manage the resource. Tags can only be applied to permission sets and cannot be applied to corresponding roles that IAM Identity Center creates in AWS accounts.
     TagKeyList:
       type: array
       items:

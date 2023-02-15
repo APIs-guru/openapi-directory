@@ -1,0 +1,3466 @@
+openapi: 3.0.0
+info:
+  version: '2021-11-01'
+  x-release: v4
+  title: OpenSearch Service Serverless
+  description: '<p>Use the Amazon OpenSearch Serverless API to create, configure, and manage OpenSearch Serverless collections and security policies.</p> <p>OpenSearch Serverless is an on-demand, pre-provisioned serverless configuration for Amazon OpenSearch Service. OpenSearch Serverless removes the operational complexities of provisioning, configuring, and tuning your OpenSearch clusters. It enables you to easily search and analyze petabytes of data without having to worry about the underlying infrastructure and data management.</p> <p> To learn more about OpenSearch Serverless, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-overview.html">What is Amazon OpenSearch Serverless?</a> </p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: opensearchserverless
+  x-aws-signingName: aoss
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/opensearchserverless-2021-11-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/aoss/'
+servers:
+  - url: 'http://aoss.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The OpenSearch Service Serverless multi-region endpoint
+  - url: 'https://aoss.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The OpenSearch Service Serverless multi-region endpoint
+  - url: 'http://aoss.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The OpenSearch Service Serverless endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://aoss.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The OpenSearch Service Serverless endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /#X-Amz-Target=OpenSearchServerless.BatchGetCollection:
+    post:
+      operationId: BatchGetCollection
+      description: 'Returns attributes for one or more collections, including the collection endpoint and the OpenSearch Dashboards endpoint. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html">Creating and managing Amazon OpenSearch Serverless collections</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetCollectionResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGetCollectionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.BatchGetCollection
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.BatchGetVpcEndpoint:
+    post:
+      operationId: BatchGetVpcEndpoint
+      description: 'Returns attributes for one or more VPC endpoints associated with the current account. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html">Access Amazon OpenSearch Serverless using an interface endpoint</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetVpcEndpointResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGetVpcEndpointRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.BatchGetVpcEndpoint
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.CreateAccessPolicy:
+    post:
+      operationId: CreateAccessPolicy
+      description: 'Creates a data access policy for OpenSearch Serverless. Access policies limit access to collections and the resources within them, and allow a user to access that data irrespective of the access mechanism or network source. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html">Data access control for Amazon OpenSearch Serverless</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAccessPolicyResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccessPolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.CreateAccessPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.CreateCollection:
+    post:
+      operationId: CreateCollection
+      description: 'Creates a new OpenSearch Serverless collection. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html">Creating and managing Amazon OpenSearch Serverless collections</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCollectionResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCollectionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.CreateCollection
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.CreateSecurityConfig:
+    post:
+      operationId: CreateSecurityConfig
+      description: 'Specifies a security configuration for OpenSearch Serverless. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html">SAML authentication for Amazon OpenSearch Serverless</a>. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSecurityConfigResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSecurityConfigRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.CreateSecurityConfig
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.CreateSecurityPolicy:
+    post:
+      operationId: CreateSecurityPolicy
+      description: 'Creates a security policy to be used by one or more OpenSearch Serverless collections. Security policies provide access to a collection and its OpenSearch Dashboards endpoint from public networks or specific VPC endpoints. They also allow you to secure a collection with a KMS encryption key. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html">Network access for Amazon OpenSearch Serverless</a> and <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html">Encryption at rest for Amazon OpenSearch Serverless</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSecurityPolicyResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSecurityPolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.CreateSecurityPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.CreateVpcEndpoint:
+    post:
+      operationId: CreateVpcEndpoint
+      description: 'Creates an OpenSearch Serverless-managed interface VPC endpoint. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html">Access Amazon OpenSearch Serverless using an interface endpoint</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateVpcEndpointResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVpcEndpointRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.CreateVpcEndpoint
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.DeleteAccessPolicy:
+    post:
+      operationId: DeleteAccessPolicy
+      description: 'Deletes an OpenSearch Serverless access policy. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html">Data access control for Amazon OpenSearch Serverless</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAccessPolicyResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteAccessPolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.DeleteAccessPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.DeleteCollection:
+    post:
+      operationId: DeleteCollection
+      description: 'Deletes an OpenSearch Serverless collection. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html">Creating and managing Amazon OpenSearch Serverless collections</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCollectionResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteCollectionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.DeleteCollection
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.DeleteSecurityConfig:
+    post:
+      operationId: DeleteSecurityConfig
+      description: 'Deletes a security configuration for OpenSearch Serverless. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html">SAML authentication for Amazon OpenSearch Serverless</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSecurityConfigResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteSecurityConfigRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.DeleteSecurityConfig
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.DeleteSecurityPolicy:
+    post:
+      operationId: DeleteSecurityPolicy
+      description: Deletes an OpenSearch Serverless security policy.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSecurityPolicyResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteSecurityPolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.DeleteSecurityPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.DeleteVpcEndpoint:
+    post:
+      operationId: DeleteVpcEndpoint
+      description: 'Deletes an OpenSearch Serverless-managed interface endpoint. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html">Access Amazon OpenSearch Serverless using an interface endpoint</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteVpcEndpointResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteVpcEndpointRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.DeleteVpcEndpoint
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.GetAccessPolicy:
+    post:
+      operationId: GetAccessPolicy
+      description: 'Returns an OpenSearch Serverless access policy. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html">Data access control for Amazon OpenSearch Serverless</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAccessPolicyResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetAccessPolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.GetAccessPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.GetAccountSettings:
+    post:
+      operationId: GetAccountSettings
+      description: Returns account-level settings related to OpenSearch Serverless.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAccountSettingsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetAccountSettingsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.GetAccountSettings
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.GetPoliciesStats:
+    post:
+      operationId: GetPoliciesStats
+      description: 'Returns statistical information about your OpenSearch Serverless access policies, security configurations, and security policies.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPoliciesStatsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetPoliciesStatsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.GetPoliciesStats
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.GetSecurityConfig:
+    post:
+      operationId: GetSecurityConfig
+      description: 'Returns information about an OpenSearch Serverless security configuration. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html">SAML authentication for Amazon OpenSearch Serverless</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSecurityConfigResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSecurityConfigRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.GetSecurityConfig
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.GetSecurityPolicy:
+    post:
+      operationId: GetSecurityPolicy
+      description: 'Returns information about a configured OpenSearch Serverless security policy. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html">Network access for Amazon OpenSearch Serverless</a> and <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html">Encryption at rest for Amazon OpenSearch Serverless</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSecurityPolicyResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSecurityPolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.GetSecurityPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.ListAccessPolicies:
+    post:
+      operationId: ListAccessPolicies
+      description: Returns information about a list of OpenSearch Serverless access policies.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAccessPoliciesResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListAccessPoliciesRequest'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.ListAccessPolicies
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.ListCollections:
+    post:
+      operationId: ListCollections
+      description: '<p>Lists all OpenSearch Serverless collections. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html">Creating and managing Amazon OpenSearch Serverless collections</a>.</p> <note> <p>Make sure to include an empty request body {} if you don''t include any collection filters in the request.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCollectionsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListCollectionsRequest'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.ListCollections
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.ListSecurityConfigs:
+    post:
+      operationId: ListSecurityConfigs
+      description: 'Returns information about configured OpenSearch Serverless security configurations. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html">SAML authentication for Amazon OpenSearch Serverless</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSecurityConfigsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListSecurityConfigsRequest'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.ListSecurityConfigs
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.ListSecurityPolicies:
+    post:
+      operationId: ListSecurityPolicies
+      description: Returns information about configured OpenSearch Serverless security policies.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSecurityPoliciesResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListSecurityPoliciesRequest'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.ListSecurityPolicies
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.ListTagsForResource:
+    post:
+      operationId: ListTagsForResource
+      description: 'Returns the tags for an OpenSearch Serverless resource. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html">Tagging Amazon OpenSearch Serverless collections</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsForResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.ListTagsForResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.ListVpcEndpoints:
+    post:
+      operationId: ListVpcEndpoints
+      description: 'Returns the OpenSearch Serverless-managed interface VPC endpoints associated with the current account. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html">Access Amazon OpenSearch Serverless using an interface endpoint</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListVpcEndpointsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListVpcEndpointsRequest'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.ListVpcEndpoints
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.TagResource:
+    post:
+      operationId: TagResource
+      description: 'Associates tags with an OpenSearch Serverless resource. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html">Tagging Amazon OpenSearch Serverless collections</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.TagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.UntagResource:
+    post:
+      operationId: UntagResource
+      description: 'Removes a tag or set of tags from an OpenSearch Serverless resource. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html">Tagging Amazon OpenSearch Serverless collections</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UntagResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.UntagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.UpdateAccessPolicy:
+    post:
+      operationId: UpdateAccessPolicy
+      description: 'Updates an OpenSearch Serverless access policy. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html">Data access control for Amazon OpenSearch Serverless</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAccessPolicyResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAccessPolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.UpdateAccessPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.UpdateAccountSettings:
+    post:
+      operationId: UpdateAccountSettings
+      description: 'Update the OpenSearch Serverless settings for the current Amazon Web Services account. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-overview.html#serverless-scaling">Autoscaling</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAccountSettingsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAccountSettingsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.UpdateAccountSettings
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.UpdateCollection:
+    post:
+      operationId: UpdateCollection
+      description: Updates an OpenSearch Serverless collection.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateCollectionResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCollectionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.UpdateCollection
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.UpdateSecurityConfig:
+    post:
+      operationId: UpdateSecurityConfig
+      description: 'Updates a security configuration for OpenSearch Serverless. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html">SAML authentication for Amazon OpenSearch Serverless</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSecurityConfigResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSecurityConfigRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.UpdateSecurityConfig
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.UpdateSecurityPolicy:
+    post:
+      operationId: UpdateSecurityPolicy
+      description: 'Updates an OpenSearch Serverless security policy. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-network.html">Network access for Amazon OpenSearch Serverless</a> and <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-encryption.html">Encryption at rest for Amazon OpenSearch Serverless</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSecurityPolicyResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSecurityPolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.UpdateSecurityPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OpenSearchServerless.UpdateVpcEndpoint:
+    post:
+      operationId: UpdateVpcEndpoint
+      description: 'Updates an OpenSearch Serverless-managed interface endpoint. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html">Access Amazon OpenSearch Serverless using an interface endpoint</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateVpcEndpointResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateVpcEndpointRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OpenSearchServerless.UpdateVpcEndpoint
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    BatchGetCollectionResponse:
+      type: object
+      properties:
+        collectionDetails:
+          allOf:
+            - $ref: '#/components/schemas/CollectionDetails'
+            - description: Details about each collection.
+        collectionErrorDetails:
+          allOf:
+            - $ref: '#/components/schemas/CollectionErrorDetails'
+            - description: Error information for the request.
+    BatchGetCollectionRequest:
+      type: object
+      title: BatchGetCollectionRequest
+      properties:
+        ids:
+          allOf:
+            - $ref: '#/components/schemas/CollectionIds'
+            - description: 'A list of collection IDs. You can''t provide names and IDs in the same request. The ID is part of the collection endpoint. You can also retrieve it using the <a href="https://docs.aws.amazon.com/opensearch-service/latest/ServerlessAPIReference/API_ListCollections.html">ListCollections</a> API.'
+        names:
+          allOf:
+            - $ref: '#/components/schemas/CollectionNames'
+            - description: A list of collection names. You can't provide names and IDs in the same request.
+    InternalServerException: {}
+    ValidationException: {}
+    BatchGetVpcEndpointResponse:
+      type: object
+      properties:
+        vpcEndpointDetails:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointDetails'
+            - description: Details about the specified VPC endpoint.
+        vpcEndpointErrorDetails:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointErrorDetails'
+            - description: Error information for a failed request.
+    BatchGetVpcEndpointRequest:
+      type: object
+      required:
+        - ids
+      title: BatchGetVpcEndpointRequest
+      properties:
+        ids:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointIds'
+            - description: A list of VPC endpoint identifiers.
+    CreateAccessPolicyResponse:
+      type: object
+      properties:
+        accessPolicyDetail:
+          allOf:
+            - $ref: '#/components/schemas/AccessPolicyDetail'
+            - description: Details about the created access policy.
+    CreateAccessPolicyRequest:
+      type: object
+      required:
+        - name
+        - policy
+        - type
+      title: CreateAccessPolicyRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier to ensure idempotency of the request.'
+        description:
+          allOf:
+            - $ref: '#/components/schemas/PolicyDescription'
+            - description: A description of the policy. Typically used to store information about the permissions defined in the policy.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the policy.
+        policy:
+          allOf:
+            - $ref: '#/components/schemas/PolicyDocument'
+            - description: The JSON policy document to use as the content for the policy.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/AccessPolicyType'
+            - description: The type of policy.
+    ConflictException: {}
+    CreateCollectionResponse:
+      type: object
+      properties:
+        createCollectionDetail:
+          allOf:
+            - $ref: '#/components/schemas/CreateCollectionDetail'
+            - description: Details about the collection.
+    CreateCollectionRequest:
+      type: object
+      required:
+        - name
+      title: CreateCollectionRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier to ensure idempotency of the request.'
+        description:
+          allOf:
+            - $ref: '#/components/schemas/CreateCollectionRequestDescriptionString'
+            - description: Description of the collection.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/CollectionName'
+            - description: Name of the collection.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: An arbitrary set of tags (key–value pairs) to associate with the OpenSearch Serverless collection.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/CollectionType'
+            - description: The type of collection.
+    CreateSecurityConfigResponse:
+      type: object
+      properties:
+        securityConfigDetail:
+          allOf:
+            - $ref: '#/components/schemas/SecurityConfigDetail'
+            - description: 'Details about the created security configuration. '
+    CreateSecurityConfigRequest:
+      type: object
+      required:
+        - name
+        - type
+      title: CreateSecurityConfigRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier to ensure idempotency of the request.'
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ConfigDescription'
+            - description: A description of the security configuration.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ConfigName'
+            - description: The name of the security configuration.
+        samlOptions:
+          allOf:
+            - $ref: '#/components/schemas/SamlConfigOptions'
+            - description: Describes SAML options in in the form of a key-value map.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/SecurityConfigType'
+            - description: The type of security configuration.
+    CreateSecurityPolicyResponse:
+      type: object
+      properties:
+        securityPolicyDetail:
+          allOf:
+            - $ref: '#/components/schemas/SecurityPolicyDetail'
+            - description: Details about the created security policy.
+    CreateSecurityPolicyRequest:
+      type: object
+      required:
+        - name
+        - policy
+        - type
+      title: CreateSecurityPolicyRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier to ensure idempotency of the request.'
+        description:
+          allOf:
+            - $ref: '#/components/schemas/PolicyDescription'
+            - description: A description of the policy. Typically used to store information about the permissions defined in the policy.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the policy.
+        policy:
+          allOf:
+            - $ref: '#/components/schemas/PolicyDocument'
+            - description: The JSON policy document to use as the content for the new policy.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/SecurityPolicyType'
+            - description: The type of security policy.
+    CreateVpcEndpointResponse:
+      type: object
+      properties:
+        createVpcEndpointDetail:
+          allOf:
+            - $ref: '#/components/schemas/CreateVpcEndpointDetail'
+            - description: Details about the created interface VPC endpoint.
+    CreateVpcEndpointRequest:
+      type: object
+      required:
+        - name
+        - subnetIds
+        - vpcId
+      title: CreateVpcEndpointRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier to ensure idempotency of the request.'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointName'
+            - description: The name of the interface endpoint.
+        securityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIds'
+            - description: 'The unique identifiers of the security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.'
+        subnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIds'
+            - description: The ID of one or more subnets from which you'll access OpenSearch Serverless.
+        vpcId:
+          allOf:
+            - $ref: '#/components/schemas/VpcId'
+            - description: The ID of the VPC from which you'll access OpenSearch Serverless.
+    DeleteAccessPolicyResponse:
+      type: object
+      properties: {}
+    DeleteAccessPolicyRequest:
+      type: object
+      required:
+        - name
+        - type
+      title: DeleteAccessPolicyRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier to ensure idempotency of the request.'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the policy to delete.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/AccessPolicyType'
+            - description: The type of policy.
+    ResourceNotFoundException: {}
+    DeleteCollectionResponse:
+      type: object
+      properties:
+        deleteCollectionDetail:
+          allOf:
+            - $ref: '#/components/schemas/DeleteCollectionDetail'
+            - description: Details of the deleted collection.
+    DeleteCollectionRequest:
+      type: object
+      required:
+        - id
+      title: DeleteCollectionRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'A unique, case-sensitive identifier to ensure idempotency of the request.'
+        id:
+          allOf:
+            - $ref: '#/components/schemas/CollectionId'
+            - description: 'The unique identifier of the collection. For example, <code>1iu5usc406kd</code>. The ID is part of the collection endpoint. You can also retrieve it using the <a href="https://docs.aws.amazon.com/opensearch-service/latest/ServerlessAPIReference/API_ListCollections.html">ListCollections</a> API.'
+    DeleteSecurityConfigResponse:
+      type: object
+      properties: {}
+    DeleteSecurityConfigRequest:
+      type: object
+      required:
+        - id
+      title: DeleteSecurityConfigRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier to ensure idempotency of the request.'
+        id:
+          allOf:
+            - $ref: '#/components/schemas/SecurityConfigId'
+            - description: 'The security configuration identifier. For SAML the ID will be <code>saml/&lt;accountId&gt;/&lt;idpProviderName&gt;</code>. For example, <code>saml/123456789123/OKTADev</code>.'
+    DeleteSecurityPolicyResponse:
+      type: object
+      properties: {}
+    DeleteSecurityPolicyRequest:
+      type: object
+      required:
+        - name
+        - type
+      title: DeleteSecurityPolicyRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier to ensure idempotency of the request.'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the policy to delete.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/SecurityPolicyType'
+            - description: The type of policy.
+    DeleteVpcEndpointResponse:
+      type: object
+      properties:
+        deleteVpcEndpointDetail:
+          allOf:
+            - $ref: '#/components/schemas/DeleteVpcEndpointDetail'
+            - description: Details about the deleted endpoint.
+    DeleteVpcEndpointRequest:
+      type: object
+      required:
+        - id
+      title: DeleteVpcEndpointRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier to ensure idempotency of the request.'
+        id:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointId'
+            - description: The VPC endpoint identifier.
+    GetAccessPolicyResponse:
+      type: object
+      properties:
+        accessPolicyDetail:
+          allOf:
+            - $ref: '#/components/schemas/AccessPolicyDetail'
+            - description: Details about the requested access policy.
+    GetAccessPolicyRequest:
+      type: object
+      required:
+        - name
+        - type
+      title: GetAccessPolicyRequest
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the access policy.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/AccessPolicyType'
+            - description: Tye type of policy. Currently the only supported value is <code>data</code>.
+    GetAccountSettingsResponse:
+      type: object
+      properties:
+        accountSettingsDetail:
+          allOf:
+            - $ref: '#/components/schemas/AccountSettingsDetail'
+            - description: OpenSearch Serverless-related details for the current account.
+    GetAccountSettingsRequest:
+      type: object
+      title: GetAccountSettingsRequest
+      properties: {}
+    GetPoliciesStatsResponse:
+      type: object
+      properties:
+        AccessPolicyStats:
+          allOf:
+            - $ref: '#/components/schemas/AccessPolicyStats'
+            - description: Information about the data access policies in your account.
+        SecurityConfigStats:
+          allOf:
+            - $ref: '#/components/schemas/SecurityConfigStats'
+            - description: Information about the security configurations in your account.
+        SecurityPolicyStats:
+          allOf:
+            - $ref: '#/components/schemas/SecurityPolicyStats'
+            - description: Information about the security policies in your account.
+        TotalPolicyCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The total number of OpenSearch Serverless security policies and configurations in your account.
+    GetPoliciesStatsRequest:
+      type: object
+      title: GetPoliciesStatsRequest
+      properties: {}
+    GetSecurityConfigResponse:
+      type: object
+      properties:
+        securityConfigDetail:
+          allOf:
+            - $ref: '#/components/schemas/SecurityConfigDetail'
+            - description: Details of the requested security configuration.
+    GetSecurityConfigRequest:
+      type: object
+      required:
+        - id
+      title: GetSecurityConfigRequest
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/SecurityConfigId'
+            - description: The unique identifier of the security configuration.
+    GetSecurityPolicyResponse:
+      type: object
+      properties:
+        securityPolicyDetail:
+          allOf:
+            - $ref: '#/components/schemas/SecurityPolicyDetail'
+            - description: Details about the requested security policy.
+    GetSecurityPolicyRequest:
+      type: object
+      required:
+        - name
+        - type
+      title: GetSecurityPolicyRequest
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the security policy.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/SecurityPolicyType'
+            - description: The type of security policy.
+    ListAccessPoliciesResponse:
+      type: object
+      properties:
+        accessPolicySummaries:
+          allOf:
+            - $ref: '#/components/schemas/AccessPolicySummaries'
+            - description: Details about the requested access policies.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.'
+    ListAccessPoliciesRequest:
+      type: object
+      required:
+        - type
+      title: ListAccessPoliciesRequest
+      properties:
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListAccessPoliciesRequestMaxResultsInteger'
+            - description: An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to get the next page of results. The default is 20.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'If your initial <code>ListAccessPolicies</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListAccessPolicies</code> operations, which returns results in the next page. '
+        resource:
+          allOf:
+            - $ref: '#/components/schemas/ListAccessPoliciesRequestResourceList'
+            - description: Resource filters (can be collection or indexes) that policies can apply to.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/AccessPolicyType'
+            - description: The type of access policy.
+    ListCollectionsResponse:
+      type: object
+      properties:
+        collectionSummaries:
+          allOf:
+            - $ref: '#/components/schemas/CollectionSummaries'
+            - description: Details about each collection.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.'
+    ListCollectionsRequest:
+      type: object
+      title: ListCollectionsRequest
+      properties:
+        collectionFilters:
+          allOf:
+            - $ref: '#/components/schemas/CollectionFilters'
+            - description: List of filter names and values that you can use for requests.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListCollectionsRequestMaxResultsInteger'
+            - description: The maximum number of results to return. Default is 20. You can use <code>nextToken</code> to get the next page of results.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'If your initial <code>ListCollections</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListCollections</code> operations, which returns results in the next page.'
+    ListSecurityConfigsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.'
+        securityConfigSummaries:
+          allOf:
+            - $ref: '#/components/schemas/SecurityConfigSummaries'
+            - description: Details about the security configurations in your account.
+    ListSecurityConfigsRequest:
+      type: object
+      required:
+        - type
+      title: ListSecurityConfigsRequest
+      properties:
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListSecurityConfigsRequestMaxResultsInteger'
+            - description: An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to get the next page of results. The default is 20.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'If your initial <code>ListSecurityConfigs</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListSecurityConfigs</code> operations, which returns results in the next page. '
+        type:
+          allOf:
+            - $ref: '#/components/schemas/SecurityConfigType'
+            - description: The type of security configuration.
+    ListSecurityPoliciesResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.'
+        securityPolicySummaries:
+          allOf:
+            - $ref: '#/components/schemas/SecurityPolicySummaries'
+            - description: Details about the security policies in your account.
+    ListSecurityPoliciesRequest:
+      type: object
+      required:
+        - type
+      title: ListSecurityPoliciesRequest
+      properties:
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListSecurityPoliciesRequestMaxResultsInteger'
+            - description: An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to get the next page of results. The default is 20.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'If your initial <code>ListSecurityPolicies</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListSecurityPolicies</code> operations, which returns results in the next page. '
+        resource:
+          allOf:
+            - $ref: '#/components/schemas/ListSecurityPoliciesRequestResourceList'
+            - description: 'Resource filters (can be collection or indexes) that policies can apply to. '
+        type:
+          allOf:
+            - $ref: '#/components/schemas/SecurityPolicyType'
+            - description: The type of policy.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: The tags associated with the resource.
+    ListTagsForResourceRequest:
+      type: object
+      required:
+        - resourceArn
+      title: ListTagsForResourceRequest
+      properties:
+        resourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The Amazon Resource Name (ARN) of the resource. The resource must be active (not in the <code>DELETING</code> state), and must be owned by the account ID included in the request.'
+    ListVpcEndpointsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.'
+        vpcEndpointSummaries:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointSummaries'
+            - description: 'Details about each VPC endpoint, including the name and current status.'
+    ListVpcEndpointsRequest:
+      type: object
+      title: ListVpcEndpointsRequest
+      properties:
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListVpcEndpointsRequestMaxResultsInteger'
+            - description: An optional parameter that specifies the maximum number of results to return. You can use <code>nextToken</code> to get the next page of results. The default is 20.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'If your initial <code>ListVpcEndpoints</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListVpcEndpoints</code> operations, which returns results in the next page. '
+        vpcEndpointFilters:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointFilters'
+            - description: 'Filter the results according to the current status of the VPC endpoint. Possible statuses are <code>CREATING</code>, <code>DELETING</code>, <code>UPDATING</code>, <code>ACTIVE</code>, and <code>FAILED</code>.'
+    TagResourceResponse:
+      type: object
+      properties: {}
+    TagResourceRequest:
+      type: object
+      required:
+        - resourceArn
+        - tags
+      title: TagResourceRequest
+      properties:
+        resourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The Amazon Resource Name (ARN) of the resource. The resource must be active (not in the <code>DELETING</code> state), and must be owned by the account ID included in the request.'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: A list of tags (key-value pairs) to add to the resource. All tag keys in the request must be unique.
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceRequest:
+      type: object
+      required:
+        - resourceArn
+        - tagKeys
+      title: UntagResourceRequest
+      properties:
+        resourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The Amazon Resource Name (ARN) of the resource to remove tags from. The resource must be active (not in the <code>DELETING</code> state), and must be owned by the account ID included in the request.'
+        tagKeys:
+          allOf:
+            - $ref: '#/components/schemas/TagKeys'
+            - description: The tag or set of tags to remove from the resource. All tag keys in the request must be unique.
+    UpdateAccessPolicyResponse:
+      type: object
+      properties:
+        accessPolicyDetail:
+          allOf:
+            - $ref: '#/components/schemas/AccessPolicyDetail'
+            - description: Details about the updated access policy.
+    UpdateAccessPolicyRequest:
+      type: object
+      required:
+        - name
+        - policyVersion
+        - type
+      title: UpdateAccessPolicyRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier to ensure idempotency of the request.'
+        description:
+          allOf:
+            - $ref: '#/components/schemas/PolicyDescription'
+            - description: A description of the policy. Typically used to store information about the permissions defined in the policy.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the policy.
+        policy:
+          allOf:
+            - $ref: '#/components/schemas/PolicyDocument'
+            - description: The JSON policy document to use as the content for the policy.
+        policyVersion:
+          allOf:
+            - $ref: '#/components/schemas/PolicyVersion'
+            - description: The version of the policy being updated.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/AccessPolicyType'
+            - description: The type of policy.
+    UpdateAccountSettingsResponse:
+      type: object
+      properties:
+        accountSettingsDetail:
+          allOf:
+            - $ref: '#/components/schemas/AccountSettingsDetail'
+            - description: 'OpenSearch Serverless-related settings for the current Amazon Web Services account. '
+    UpdateAccountSettingsRequest:
+      type: object
+      title: UpdateAccountSettingsRequest
+      properties:
+        capacityLimits:
+          $ref: '#/components/schemas/CapacityLimits'
+    UpdateCollectionResponse:
+      type: object
+      properties:
+        updateCollectionDetail:
+          allOf:
+            - $ref: '#/components/schemas/UpdateCollectionDetail'
+            - description: Details about the updated collection.
+    UpdateCollectionRequest:
+      type: object
+      required:
+        - id
+      title: UpdateCollectionRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier to ensure idempotency of the request.'
+        description:
+          allOf:
+            - $ref: '#/components/schemas/UpdateCollectionRequestDescriptionString'
+            - description: A description of the collection.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/CollectionId'
+            - description: The unique identifier of the collection.
+    UpdateSecurityConfigResponse:
+      type: object
+      properties:
+        securityConfigDetail:
+          allOf:
+            - $ref: '#/components/schemas/SecurityConfigDetail'
+            - description: 'Details about the updated security configuration. '
+    UpdateSecurityConfigRequest:
+      type: object
+      required:
+        - configVersion
+        - id
+      title: UpdateSecurityConfigRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier to ensure idempotency of the request.'
+        configVersion:
+          allOf:
+            - $ref: '#/components/schemas/PolicyVersion'
+            - description: The version of the security configuration to be updated. You can find the most recent version of a security configuration using the <code>GetSecurityPolicy</code> command.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ConfigDescription'
+            - description: A description of the security configuration.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/SecurityConfigId'
+            - description: 'The security configuration identifier. For SAML the ID will be <code>saml/&lt;accountId&gt;/&lt;idpProviderName&gt;</code>. For example, <code>saml/123456789123/OKTADev</code>.'
+        samlOptions:
+          allOf:
+            - $ref: '#/components/schemas/SamlConfigOptions'
+            - description: SAML options in in the form of a key-value map.
+    UpdateSecurityPolicyResponse:
+      type: object
+      properties:
+        securityPolicyDetail:
+          allOf:
+            - $ref: '#/components/schemas/SecurityPolicyDetail'
+            - description: Details about the updated security policy.
+    UpdateSecurityPolicyRequest:
+      type: object
+      required:
+        - name
+        - policyVersion
+        - type
+      title: UpdateSecurityPolicyRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier to ensure idempotency of the request.'
+        description:
+          allOf:
+            - $ref: '#/components/schemas/PolicyDescription'
+            - description: A description of the policy. Typically used to store information about the permissions defined in the policy.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the policy.
+        policy:
+          allOf:
+            - $ref: '#/components/schemas/PolicyDocument'
+            - description: The JSON policy document to use as the content for the new policy.
+        policyVersion:
+          allOf:
+            - $ref: '#/components/schemas/PolicyVersion'
+            - description: The version of the policy being updated.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/SecurityPolicyType'
+            - description: The type of access policy.
+    UpdateVpcEndpointResponse:
+      type: object
+      properties:
+        UpdateVpcEndpointDetail:
+          allOf:
+            - $ref: '#/components/schemas/UpdateVpcEndpointDetail'
+            - description: Details about the updated VPC endpoint.
+    UpdateVpcEndpointRequest:
+      type: object
+      required:
+        - id
+      title: UpdateVpcEndpointRequest
+      properties:
+        addSecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIds'
+            - description: 'The unique identifiers of the security groups to add to the endpoint. Security groups define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.'
+        addSubnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIds'
+            - description: The ID of one or more subnets to add to the endpoint.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier to ensure idempotency of the request.'
+        id:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointId'
+            - description: The unique identifier of the interface endpoint to update.
+        removeSecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIds'
+            - description: The unique identifiers of the security groups to remove from the endpoint.
+        removeSubnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIds'
+            - description: The unique identifiers of the subnets to remove from the endpoint.
+    Long:
+      type: integer
+    PolicyDescription:
+      type: string
+      minLength: 1
+      maxLength: 1000
+    PolicyName:
+      type: string
+      pattern: '^[a-z][a-z0-9-]+$'
+      minLength: 3
+      maxLength: 32
+    Document:
+      type: object
+      properties: {}
+    PolicyVersion:
+      type: string
+      pattern: '^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$'
+      minLength: 20
+      maxLength: 36
+    AccessPolicyType:
+      type: string
+      enum:
+        - data
+    AccessPolicyDetail:
+      type: object
+      properties:
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The date the policy was created.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/PolicyDescription'
+            - description: The description of the policy.
+        lastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The timestamp of when the policy was last modified.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the policy.
+        policy:
+          allOf:
+            - $ref: '#/components/schemas/Document'
+            - description: The JSON policy document without any whitespaces.
+        policyVersion:
+          allOf:
+            - $ref: '#/components/schemas/PolicyVersion'
+            - description: The version of the policy.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/AccessPolicyType'
+            - description: The type of access policy.
+      description: Details about an OpenSearch Serverless access policy.
+    AccessPolicyStats:
+      type: object
+      properties:
+        DataPolicyCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of data access policies in the current account.
+      description: Statistics for an OpenSearch Serverless access policy.
+    AccessPolicySummary:
+      type: object
+      properties:
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The Epoch time when the access policy was created.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/PolicyDescription'
+            - description: The description of the access policy.
+        lastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The date and time when the collection was last modified.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the access policy.
+        policyVersion:
+          allOf:
+            - $ref: '#/components/schemas/PolicyVersion'
+            - description: The version of the policy.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/AccessPolicyType'
+            - description: The type of access policy. Currently the only available type is <code>data</code>.
+      description: A summary of the data access policy.
+    AccessPolicySummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccessPolicySummary'
+    CapacityLimits:
+      type: object
+      properties:
+        maxIndexingCapacityInOCU:
+          allOf:
+            - $ref: '#/components/schemas/IndexingCapacityValue'
+            - description: The maximum indexing capacity for collections.
+        maxSearchCapacityInOCU:
+          allOf:
+            - $ref: '#/components/schemas/SearchCapacityValue'
+            - description: The maximum search capacity for collections.
+      description: 'The maximum capacity limits for all OpenSearch Serverless collections, in OpenSearch Compute Units (OCUs). These limits are used to scale your collections based on the current workload. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-overview.html#serverless-scaling">Autoscaling</a>.'
+    AccountSettingsDetail:
+      type: object
+      properties:
+        capacityLimits:
+          $ref: '#/components/schemas/CapacityLimits'
+      description: OpenSearch Serverless-related information for the current account.
+    Arn:
+      type: string
+      minLength: 1
+      maxLength: 1011
+    CollectionIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/CollectionId'
+      minItems: 1
+      maxItems: 100
+    CollectionNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/CollectionName'
+      minItems: 1
+      maxItems: 100
+    CollectionDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/CollectionDetail'
+    CollectionErrorDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/CollectionErrorDetail'
+    VpcEndpointIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/VpcEndpointId'
+      minItems: 1
+    VpcEndpointDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/VpcEndpointDetail'
+    VpcEndpointErrorDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/VpcEndpointErrorDetail'
+    IndexingCapacityValue:
+      type: integer
+      minimum: 2
+    SearchCapacityValue:
+      type: integer
+      minimum: 2
+    ClientToken:
+      type: string
+      minLength: 1
+      maxLength: 512
+    String:
+      type: string
+    CollectionId:
+      type: string
+      pattern: '^[a-z0-9]{3,40}$'
+      minLength: 3
+      maxLength: 40
+    CollectionName:
+      type: string
+      pattern: '^[a-z][a-z0-9-]+$'
+      minLength: 3
+      maxLength: 32
+    CollectionStatus:
+      type: string
+      enum:
+        - CREATING
+        - DELETING
+        - ACTIVE
+        - FAILED
+    CollectionType:
+      type: string
+      enum:
+        - SEARCH
+        - TIMESERIES
+    CollectionDetail:
+      type: object
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the collection.
+        collectionEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Collection-specific endpoint used to submit index, search, and data upload requests to an OpenSearch Serverless collection.'
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The Epoch time when the collection was created.
+        dashboardEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Collection-specific endpoint used to access OpenSearch Dashboards.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description of the collection.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/CollectionId'
+            - description: A unique identifier for the collection.
+        kmsKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the Amazon Web Services KMS key used to encrypt the collection.
+        lastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The date and time when the collection was last modified.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/CollectionName'
+            - description: The name of the collection.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/CollectionStatus'
+            - description: The current status of the collection.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/CollectionType'
+            - description: The type of collection.
+      description: 'Details about each OpenSearch Serverless collection, including the collection endpoint and the OpenSearch Dashboards endpoint.'
+    CollectionErrorDetail:
+      type: object
+      properties:
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The error code for the request. For example, <code>NOT_FOUND</code>.'
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A description of the error. For example, <code>The specified Collection is not found.</code> '
+        id:
+          allOf:
+            - $ref: '#/components/schemas/CollectionId'
+            - description: 'If the request contains collection IDs, the response includes the IDs provided in the request.'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/CollectionName'
+            - description: 'If the request contains collection names, the response includes the names provided in the request.'
+      description: Error information for an OpenSearch Serverless request.
+    CollectionFilters:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/CollectionName'
+            - description: The name of the collection.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/CollectionStatus'
+            - description: The current status of the collection.
+      description: 'List of filter keys that you can use for LIST, UPDATE, and DELETE requests to OpenSearch Serverless collections.'
+    CollectionSummary:
+      type: object
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the collection.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/CollectionId'
+            - description: The unique identifier of the collection.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/CollectionName'
+            - description: The name of the collection.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/CollectionStatus'
+            - description: The current status of the collection.
+      description: Details about each OpenSearch Serverless collection.
+    CollectionSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/CollectionSummary'
+    ConfigDescription:
+      type: string
+      minLength: 1
+      maxLength: 1000
+    ConfigName:
+      type: string
+      pattern: '^[a-z][a-z0-9-]+$'
+      minLength: 3
+      maxLength: 32
+    PolicyDocument:
+      type: string
+      pattern: '[\u0009\u000A\u000D\u0020-\u007E\u00A1-\u00FF]+'
+      minLength: 1
+      maxLength: 20480
+    CreateCollectionDetail:
+      type: object
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the collection.
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The Epoch time when the collection was created.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description of the collection.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/CollectionId'
+            - description: The unique identifier of the collection.
+        kmsKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the KMS key with which to encrypt the collection.
+        lastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The date and time when the collection was last modified.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/CollectionName'
+            - description: The name of the collection.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/CollectionStatus'
+            - description: The current status of the collection.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/CollectionType'
+            - description: The type of collection.
+      description: Details about the created OpenSearch Serverless collection.
+    CreateCollectionRequestDescriptionString:
+      type: string
+      minLength: 0
+      maxLength: 1000
+    Tags:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 0
+      maxItems: 50
+    SamlConfigOptions:
+      type: object
+      required:
+        - metadata
+      properties:
+        groupAttribute:
+          allOf:
+            - $ref: '#/components/schemas/samlGroupAttribute'
+            - description: The group attribute for this SAML integration.
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/samlMetadata'
+            - description: The XML IdP metadata file generated from your identity provider.
+        sessionTimeout:
+          allOf:
+            - $ref: '#/components/schemas/SamlConfigOptionsSessionTimeoutInteger'
+            - description: 'The session timeout, in minutes. Minimum is 15 minutes and maximum is 1440 minutes (24 hours or 1 day). Default is 60 minutes.'
+        userAttribute:
+          allOf:
+            - $ref: '#/components/schemas/samlUserAttribute'
+            - description: A user attribute for this SAML integration.
+      description: Describes SAML options for an OpenSearch Serverless security configuration in the form of a key-value map.
+    SecurityConfigType:
+      type: string
+      enum:
+        - saml
+    SecurityConfigDetail:
+      type: object
+      properties:
+        configVersion:
+          allOf:
+            - $ref: '#/components/schemas/PolicyVersion'
+            - description: The version of the security configuration.
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The date the configuration was created.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ConfigDescription'
+            - description: The description of the security configuration.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/SecurityConfigId'
+            - description: The unique identifier of the security configuration.
+        lastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The timestamp of when the configuration was last modified.
+        samlOptions:
+          allOf:
+            - $ref: '#/components/schemas/SamlConfigOptions'
+            - description: SAML options for the security configuration in the form of a key-value map.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/SecurityConfigType'
+            - description: The type of security configuration.
+      description: 'Details about a security configuration for OpenSearch Serverless. '
+    SecurityPolicyType:
+      type: string
+      enum:
+        - encryption
+        - network
+    SecurityPolicyDetail:
+      type: object
+      properties:
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The date the policy was created.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/PolicyDescription'
+            - description: The description of the security policy.
+        lastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The timestamp of when the policy was last modified.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the policy.
+        policy:
+          allOf:
+            - $ref: '#/components/schemas/Document'
+            - description: The JSON policy document without any whitespaces.
+        policyVersion:
+          allOf:
+            - $ref: '#/components/schemas/PolicyVersion'
+            - description: The version of the policy.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/SecurityPolicyType'
+            - description: The type of security policy.
+      description: Details about an OpenSearch Serverless security policy.
+    VpcEndpointId:
+      type: string
+      pattern: '^vpce-[0-9a-z]*$'
+      minLength: 1
+      maxLength: 255
+    VpcEndpointName:
+      type: string
+      pattern: '^[a-z][a-z0-9-]+$'
+      minLength: 3
+      maxLength: 32
+    VpcEndpointStatus:
+      type: string
+      enum:
+        - PENDING
+        - DELETING
+        - ACTIVE
+        - FAILED
+    CreateVpcEndpointDetail:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointId'
+            - description: The unique identifier of the endpoint.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointName'
+            - description: The name of the endpoint.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointStatus'
+            - description: The current status in the endpoint creation process.
+      description: 'Creation details for an OpenSearch Serverless-managed interface endpoint. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html">Access Amazon OpenSearch Serverless using an interface endpoint</a>.'
+    SecurityGroupIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityGroupId'
+      minItems: 1
+      maxItems: 5
+    SubnetIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubnetId'
+      minItems: 1
+      maxItems: 6
+    VpcId:
+      type: string
+      pattern: '^vpc-[0-9a-z]*$'
+      minLength: 1
+      maxLength: 255
+    DeleteCollectionDetail:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/CollectionId'
+            - description: The unique identifier of the collection.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/CollectionName'
+            - description: The name of the collection.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/CollectionStatus'
+            - description: The current status of the collection.
+      description: Details about a deleted OpenSearch Serverless collection.
+    SecurityConfigId:
+      type: string
+      minLength: 1
+      maxLength: 100
+    DeleteVpcEndpointDetail:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointId'
+            - description: The unique identifier of the endpoint.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointName'
+            - description: The name of the endpoint.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointStatus'
+            - description: The current status of the endpoint deletion process.
+      description: Deletion details for an OpenSearch Serverless-managed interface endpoint.
+    SecurityConfigStats:
+      type: object
+      properties:
+        SamlConfigCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of security configurations in the current account.
+      description: Statistics for an OpenSearch Serverless security configuration.
+    SecurityPolicyStats:
+      type: object
+      properties:
+        EncryptionPolicyCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of encryption policies in the current account.
+        NetworkPolicyCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of network policies in the current account.
+      description: Statistics for an OpenSearch Serverless security policy.
+    ListAccessPoliciesRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListAccessPoliciesRequestResourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Resource'
+      minItems: 1
+      maxItems: 1000
+    Resource:
+      type: string
+    ListCollectionsRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListSecurityConfigsRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    SecurityConfigSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityConfigSummary'
+    ListSecurityPoliciesRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListSecurityPoliciesRequestResourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Resource'
+      minItems: 1
+      maxItems: 1000
+    SecurityPolicySummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityPolicySummary'
+    ListVpcEndpointsRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    VpcEndpointFilters:
+      type: object
+      properties:
+        status:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointStatus'
+            - description: The current status of the endpoint.
+      description: Filter the results of a <code>ListVpcEndpoints</code> request.
+    VpcEndpointSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/VpcEndpointSummary'
+    samlGroupAttribute:
+      type: string
+      pattern: '[\w+=,.@-]+'
+      minLength: 1
+      maxLength: 2048
+    samlMetadata:
+      type: string
+      pattern: '[\u0009\u000A\u000D\u0020-\u007E\u00A1-\u00FF]+'
+      minLength: 1
+      maxLength: 20480
+    SamlConfigOptionsSessionTimeoutInteger:
+      type: integer
+      minimum: 5
+      maximum: 720
+    samlUserAttribute:
+      type: string
+      pattern: '[\w+=,.@-]+'
+      minLength: 1
+      maxLength: 2048
+    SecurityConfigSummary:
+      type: object
+      properties:
+        configVersion:
+          allOf:
+            - $ref: '#/components/schemas/PolicyVersion'
+            - description: The version of the security configuration.
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The Epoch time when the security configuration was created.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ConfigDescription'
+            - description: The description of the security configuration.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/SecurityConfigId'
+            - description: The unique identifier of the security configuration.
+        lastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The timestamp of when the configuration was last modified.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/SecurityConfigType'
+            - description: The type of security configuration.
+      description: A summary of a security configuration for OpenSearch Serverless.
+    SecurityGroupId:
+      type: string
+      pattern: '^[\w+\-]+$'
+      minLength: 1
+      maxLength: 128
+    SecurityPolicySummary:
+      type: object
+      properties:
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The date the policy was created.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/PolicyDescription'
+            - description: The description of the security policy.
+        lastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The timestamp of when the policy was last modified.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the policy.
+        policyVersion:
+          allOf:
+            - $ref: '#/components/schemas/PolicyVersion'
+            - description: The version of the policy.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/SecurityPolicyType'
+            - description: The type of security policy.
+      description: A summary of a security policy for OpenSearch Serverless.
+    SubnetId:
+      type: string
+      pattern: '^subnet-([0-9a-f]{8}|[0-9a-f]{17})$'
+      minLength: 1
+      maxLength: 32
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    Tag:
+      type: object
+      required:
+        - key
+        - value
+      properties:
+        key:
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The key to use in the tag.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The value of the tag.
+      description: A map of key-value pairs associated to an OpenSearch Serverless resource.
+    TagKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 0
+      maxItems: 50
+    UpdateCollectionDetail:
+      type: object
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the collection.
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The date and time when the collection was created.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the collection.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/CollectionId'
+            - description: The unique identifier of the collection.
+        lastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The date and time when the collection was last modified.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/CollectionName'
+            - description: The name of the collection.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/CollectionStatus'
+            - description: The current status of the collection.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/CollectionType'
+            - description: The collection type.
+      description: Details about an updated OpenSearch Serverless collection.
+    UpdateCollectionRequestDescriptionString:
+      type: string
+      minLength: 0
+      maxLength: 1000
+    UpdateVpcEndpointDetail:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointId'
+            - description: The unique identifier of the endpoint.
+        lastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The timestamp of when the endpoint was last modified.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointName'
+            - description: The name of the endpoint.
+        securityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIds'
+            - description: 'The unique identifiers of the security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.'
+        status:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointStatus'
+            - description: The current status of the endpoint update process.
+        subnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIds'
+            - description: The ID of the subnets from which you access OpenSearch Serverless.
+      description: Update details for an OpenSearch Serverless-managed interface endpoint.
+    VpcEndpointDetail:
+      type: object
+      properties:
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The date the endpoint was created.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointId'
+            - description: The unique identifier of the endpoint.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointName'
+            - description: The name of the endpoint.
+        securityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIds'
+            - description: 'The unique identifiers of the security groups that define the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.'
+        status:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointStatus'
+            - description: The current status of the endpoint.
+        subnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIds'
+            - description: The ID of the subnets from which you access OpenSearch Serverless.
+        vpcId:
+          allOf:
+            - $ref: '#/components/schemas/VpcId'
+            - description: The ID of the VPC from which you access OpenSearch Serverless
+      description: Details about an OpenSearch Serverless-managed interface endpoint.
+    VpcEndpointErrorDetail:
+      type: object
+      properties:
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error code for the failed request.
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: An error message describing the reason for the failure.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointId'
+            - description: The unique identifier of the VPC endpoint.
+      description: Error information for a failed <code>BatchGetVpcEndpoint</code> request.
+    VpcEndpointSummary:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointId'
+            - description: The unique identifier of the endpoint.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointName'
+            - description: The name of the endpoint.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointStatus'
+            - description: The current status of the endpoint.
+      description: The VPC endpoint object.
+security:
+  - hmac: []

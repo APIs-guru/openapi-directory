@@ -3,7 +3,7 @@ info:
   version: '2019-11-01'
   x-release: v4
   title: AWS Compute Optimizer
-  description: 'Compute Optimizer is a service that analyzes the configuration and utilization metrics of your Amazon Web Services compute resources, such as Amazon EC2 instances, Amazon EC2 Auto Scaling groups, Lambda functions, and Amazon EBS volumes. It reports whether your resources are optimal, and generates optimization recommendations to reduce the cost and improve the performance of your workloads. Compute Optimizer also provides recent utilization metric data, in addition to projected utilization metric data for the recommendations, which you can use to evaluate which recommendation provides the best price-performance trade-off. The analysis of your usage patterns can help you decide when to move or resize your running resources, and still meet your performance and capacity requirements. For more information about Compute Optimizer, including the required permissions to use the service, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/">Compute Optimizer User Guide</a>.'
+  description: 'Compute Optimizer is a service that analyzes the configuration and utilization metrics of your Amazon Web Services compute resources, such as Amazon EC2 instances, Amazon EC2 Auto Scaling groups, Lambda functions, Amazon EBS volumes, and Amazon ECS services on Fargate. It reports whether your resources are optimal, and generates optimization recommendations to reduce the cost and improve the performance of your workloads. Compute Optimizer also provides recent utilization metric data, in addition to projected utilization metric data for the recommendations, which you can use to evaluate which recommendation provides the best price-performance trade-off. The analysis of your usage patterns can help you decide when to move or resize your running resources, and still meet your performance and capacity requirements. For more information about Compute Optimizer, including the required permissions to use the service, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/">Compute Optimizer User Guide</a>.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -115,6 +115,87 @@ servers:
     description: The AWS Compute Optimizer endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /#X-Amz-Target=ComputeOptimizerService.DeleteRecommendationPreferences:
+    post:
+      operationId: DeleteRecommendationPreferences
+      description: '<p>Deletes a recommendation preference, such as enhanced infrastructure metrics.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html">Activating enhanced infrastructure metrics</a> in the <i>Compute Optimizer User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRecommendationPreferencesResponse'
+        '480':
+          description: OptInRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptInRequiredException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: MissingAuthenticationToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingAuthenticationToken'
+        '487':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRecommendationPreferencesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ComputeOptimizerService.DeleteRecommendationPreferences
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=ComputeOptimizerService.DescribeRecommendationExportJobs:
     post:
       operationId: DescribeRecommendationExportJobs
@@ -181,6 +262,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeRecommendationExportJobsRequest'
       parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -431,6 +524,87 @@ paths:
             type: string
             enum:
               - ComputeOptimizerService.ExportEC2InstanceRecommendations
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ComputeOptimizerService.ExportECSServiceRecommendations:
+    post:
+      operationId: ExportECSServiceRecommendations
+      description: '<p> Exports optimization recommendations for Amazon ECS services on Fargate. </p> <p>Recommendations are exported in a CSV file, and its metadata in a JSON file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html">Exporting Recommendations</a> in the <i>Compute Optimizer User Guide</i>.</p> <p>You can only have one Amazon ECS service export job in progress per Amazon Web Services Region.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportECSServiceRecommendationsResponse'
+        '480':
+          description: OptInRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptInRequiredException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '485':
+          description: MissingAuthenticationToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingAuthenticationToken'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '487':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExportECSServiceRecommendationsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ComputeOptimizerService.ExportECSServiceRecommendations
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -844,6 +1018,249 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ComputeOptimizerService.GetECSServiceRecommendationProjectedMetrics:
+    post:
+      operationId: GetECSServiceRecommendationProjectedMetrics
+      description: ' Returns the projected metrics of Amazon ECS service recommendations. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetECSServiceRecommendationProjectedMetricsResponse'
+        '480':
+          description: OptInRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptInRequiredException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: MissingAuthenticationToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingAuthenticationToken'
+        '487':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetECSServiceRecommendationProjectedMetricsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ComputeOptimizerService.GetECSServiceRecommendationProjectedMetrics
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ComputeOptimizerService.GetECSServiceRecommendations:
+    post:
+      operationId: GetECSServiceRecommendations
+      description: '<p> Returns Amazon ECS service recommendations. </p> <p> Compute Optimizer generates recommendations for Amazon ECS services on Fargate that meet a specific set of requirements. For more information, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html">Supported resources and requirements</a> in the <i>Compute Optimizer User Guide</i>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetECSServiceRecommendationsResponse'
+        '480':
+          description: OptInRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptInRequiredException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: MissingAuthenticationToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingAuthenticationToken'
+        '487':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetECSServiceRecommendationsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ComputeOptimizerService.GetECSServiceRecommendations
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ComputeOptimizerService.GetEffectiveRecommendationPreferences:
+    post:
+      operationId: GetEffectiveRecommendationPreferences
+      description: '<p>Returns the recommendation preferences that are in effect for a given resource, such as enhanced infrastructure metrics. Considers all applicable preferences that you might have set at the resource, account, and organization level.</p> <p>When you create a recommendation preference, you can set its status to <code>Active</code> or <code>Inactive</code>. Use this action to view the recommendation preferences that are in effect, or <code>Active</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEffectiveRecommendationPreferencesResponse'
+        '480':
+          description: OptInRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptInRequiredException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: MissingAuthenticationToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingAuthenticationToken'
+        '487':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetEffectiveRecommendationPreferencesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ComputeOptimizerService.GetEffectiveRecommendationPreferences
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=ComputeOptimizerService.GetEnrollmentStatus:
     post:
       operationId: GetEnrollmentStatus
@@ -967,6 +1384,18 @@ paths:
             schema:
               $ref: '#/components/schemas/GetEnrollmentStatusesForOrganizationRequest'
       parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1048,6 +1477,18 @@ paths:
             schema:
               $ref: '#/components/schemas/GetLambdaFunctionRecommendationsRequest'
       parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1063,10 +1504,103 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ComputeOptimizerService.GetRecommendationPreferences:
+    post:
+      operationId: GetRecommendationPreferences
+      description: '<p>Returns existing recommendation preferences, such as enhanced infrastructure metrics.</p> <p>Use the <code>scope</code> parameter to specify which preferences to return. You can specify to return preferences for an organization, a specific account ID, or a specific EC2 instance or Auto Scaling group Amazon Resource Name (ARN).</p> <p>For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html">Activating enhanced infrastructure metrics</a> in the <i>Compute Optimizer User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRecommendationPreferencesResponse'
+        '480':
+          description: OptInRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptInRequiredException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: MissingAuthenticationToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingAuthenticationToken'
+        '487':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRecommendationPreferencesRequest'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ComputeOptimizerService.GetRecommendationPreferences
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=ComputeOptimizerService.GetRecommendationSummaries:
     post:
       operationId: GetRecommendationSummaries
-      description: '<p>Returns the optimization findings for an account.</p> <p>It returns the number of:</p> <ul> <li> <p>Amazon EC2 instances in an account that are <code>Underprovisioned</code>, <code>Overprovisioned</code>, or <code>Optimized</code>.</p> </li> <li> <p>Auto Scaling groups in an account that are <code>NotOptimized</code>, or <code>Optimized</code>.</p> </li> <li> <p>Amazon EBS volumes in an account that are <code>NotOptimized</code>, or <code>Optimized</code>.</p> </li> <li> <p>Lambda functions in an account that are <code>NotOptimized</code>, or <code>Optimized</code>.</p> </li> </ul>'
+      description: '<p>Returns the optimization findings for an account.</p> <p>It returns the number of:</p> <ul> <li> <p>Amazon EC2 instances in an account that are <code>Underprovisioned</code>, <code>Overprovisioned</code>, or <code>Optimized</code>.</p> </li> <li> <p>Auto Scaling groups in an account that are <code>NotOptimized</code>, or <code>Optimized</code>.</p> </li> <li> <p>Amazon EBS volumes in an account that are <code>NotOptimized</code>, or <code>Optimized</code>.</p> </li> <li> <p>Lambda functions in an account that are <code>NotOptimized</code>, or <code>Optimized</code>.</p> </li> <li> <p>Amazon ECS services in an account that are <code>Underprovisioned</code>, <code>Overprovisioned</code>, or <code>Optimized</code>.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1123,6 +1657,18 @@ paths:
             schema:
               $ref: '#/components/schemas/GetRecommendationSummariesRequest'
       parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1130,6 +1676,87 @@ paths:
             type: string
             enum:
               - ComputeOptimizerService.GetRecommendationSummaries
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ComputeOptimizerService.PutRecommendationPreferences:
+    post:
+      operationId: PutRecommendationPreferences
+      description: '<p>Creates a new recommendation preference or updates an existing recommendation preference, such as enhanced infrastructure metrics.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html">Activating enhanced infrastructure metrics</a> in the <i>Compute Optimizer User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutRecommendationPreferencesResponse'
+        '480':
+          description: OptInRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptInRequiredException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: MissingAuthenticationToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingAuthenticationToken'
+        '487':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutRecommendationPreferencesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ComputeOptimizerService.PutRecommendationPreferences
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1259,6 +1886,36 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    DeleteRecommendationPreferencesResponse:
+      type: object
+      properties: {}
+    DeleteRecommendationPreferencesRequest:
+      type: object
+      required:
+        - resourceType
+        - recommendationPreferenceNames
+      title: DeleteRecommendationPreferencesRequest
+      properties:
+        resourceType:
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: <p>The target resource type of the recommendation preference to delete.</p> <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances that are part of Auto Scaling groups. The <code>AutoScalingGroup</code> option encompasses only instances that are part of an Auto Scaling group.</p> <note> <p>The valid values for this parameter are <code>Ec2Instance</code> and <code>AutoScalingGroup</code>.</p> </note>
+        scope:
+          allOf:
+            - $ref: '#/components/schemas/Scope'
+            - description: '<p>An object that describes the scope of the recommendation preference to delete.</p> <p>You can delete recommendation preferences that are created at the organization level (for management accounts of an organization only), account level, and resource level. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html">Activating enhanced infrastructure metrics</a> in the <i>Compute Optimizer User Guide</i>.</p>'
+        recommendationPreferenceNames:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationPreferenceNames'
+            - description: The name of the recommendation preference to delete.
+    OptInRequiredException: {}
+    InternalServerException: {}
+    ServiceUnavailableException: {}
+    AccessDeniedException: {}
+    InvalidParameterValueException: {}
+    ResourceNotFoundException: {}
+    MissingAuthenticationToken: {}
+    ThrottlingException: {}
     DescribeRecommendationExportJobsResponse:
       type: object
       properties:
@@ -1290,14 +1947,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: '<p>The maximum number of export jobs to return with a single request.</p> <p>To retrieve the remaining results, make another request with the returned <code>nextToken</code> value.</p>'
-    OptInRequiredException: {}
-    InternalServerException: {}
-    ServiceUnavailableException: {}
-    AccessDeniedException: {}
-    InvalidParameterValueException: {}
-    ResourceNotFoundException: {}
-    MissingAuthenticationToken: {}
-    ThrottlingException: {}
     ExportAutoScalingGroupRecommendationsResponse:
       type: object
       properties:
@@ -1413,7 +2062,7 @@ components:
         s3DestinationConfig:
           allOf:
             - $ref: '#/components/schemas/S3DestinationConfig'
-            - description: '<p>An object to specify the destination Amazon Simple Storage Service (Amazon S3) bucket name and key prefix for the export job.</p> <p>You must create the destination Amazon S3 bucket for your recommendations export before you create the export job. Compute Optimizer does not create the S3 bucket for you. After you create the S3 bucket, ensure that it has the required permissions policy policy to allow Compute Optimizer to write the export file to it. If you plan to specify an object prefix when you create the export job, you must include the object prefix in the that you add to the S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html">Amazon S3 Bucket Policy for Compute Optimizer</a> in the <i>Compute Optimizer User Guide</i>.</p>'
+            - description: '<p>An object to specify the destination Amazon Simple Storage Service (Amazon S3) bucket name and key prefix for the export job.</p> <p>You must create the destination Amazon S3 bucket for your recommendations export before you create the export job. Compute Optimizer does not create the S3 bucket for you. After you create the S3 bucket, ensure that it has the required permissions policy to allow Compute Optimizer to write the export file to it. If you plan to specify an object prefix when you create the export job, you must include the object prefix in the policy that you add to the S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html">Amazon S3 Bucket Policy for Compute Optimizer</a> in the <i>Compute Optimizer User Guide</i>.</p>'
         fileFormat:
           allOf:
             - $ref: '#/components/schemas/FileFormat'
@@ -1426,6 +2075,43 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecommendationPreferences'
             - description: An object to specify the preferences for the Amazon EC2 instance recommendations to export.
+    ExportECSServiceRecommendationsResponse:
+      type: object
+      properties:
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: '<p> The identification number of the export job. </p> <p>To view the status of an export job, use the <a>DescribeRecommendationExportJobs</a> action and specify the job ID. </p>'
+        s3Destination:
+          $ref: '#/components/schemas/S3Destination'
+    ExportECSServiceRecommendationsRequest:
+      type: object
+      required:
+        - s3DestinationConfig
+      title: ExportECSServiceRecommendationsRequest
+      properties:
+        accountIds:
+          allOf:
+            - $ref: '#/components/schemas/AccountIds'
+            - description: '<p> The Amazon Web Services account IDs for the export Amazon ECS service recommendations. </p> <p>If your account is the management account or the delegated administrator of an organization, use this parameter to specify the member account you want to export recommendations to.</p> <p>This parameter can''t be specified together with the include member accounts parameter. The parameters are mutually exclusive.</p> <p>If this parameter or the include member accounts parameter is omitted, the recommendations for member accounts aren''t included in the export.</p> <p>You can specify multiple account IDs per request.</p>'
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/ECSServiceRecommendationFilters'
+            - description: ' An array of objects to specify a filter that exports a more specific set of Amazon ECS service recommendations. '
+        fieldsToExport:
+          allOf:
+            - $ref: '#/components/schemas/ExportableECSServiceFields'
+            - description: 'The recommendations data to include in the export file. For more information about the fields that can be exported, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files">Exported files</a> in the <i>Compute Optimizer User Guide</i>.'
+        s3DestinationConfig:
+          $ref: '#/components/schemas/S3DestinationConfig'
+        fileFormat:
+          allOf:
+            - $ref: '#/components/schemas/FileFormat'
+            - description: <p> The format of the export file. </p> <p>The CSV file is the only export file format currently supported.</p>
+        includeMemberAccounts:
+          allOf:
+            - $ref: '#/components/schemas/IncludeMemberAccounts'
+            - description: '<p>If your account is the management account or the delegated administrator of an organization, this parameter indicates whether to include recommendations for resources in all member accounts of the organization.</p> <p>The member accounts must also be opted in to Compute Optimizer, and trusted access for Compute Optimizer must be enabled in the organization account. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access">Compute Optimizer and Amazon Web Services Organizations trusted access</a> in the <i>Compute Optimizer User Guide</i>.</p> <p>If this parameter is omitted, recommendations for member accounts of the organization aren''t included in the export file.</p> <p>If this parameter or the account ID parameter is omitted, recommendations for member accounts aren''t included in the export.</p>'
     ExportLambdaFunctionRecommendationsResponse:
       type: object
       properties:
@@ -1629,6 +2315,103 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecommendationPreferences'
             - description: An object to specify the preferences for the Amazon EC2 recommendation projected metrics to return in the response.
+    GetECSServiceRecommendationProjectedMetricsResponse:
+      type: object
+      properties:
+        recommendedOptionProjectedMetrics:
+          allOf:
+            - $ref: '#/components/schemas/ECSServiceRecommendedOptionProjectedMetrics'
+            - description: ' An array of objects that describes the projected metrics. '
+    GetECSServiceRecommendationProjectedMetricsRequest:
+      type: object
+      required:
+        - serviceArn
+        - stat
+        - period
+        - startTime
+        - endTime
+      title: GetECSServiceRecommendationProjectedMetricsRequest
+      properties:
+        serviceArn:
+          allOf:
+            - $ref: '#/components/schemas/ServiceArn'
+            - description: '<p> The ARN that identifies the Amazon ECS service. </p> <p> The following is the format of the ARN: </p> <p> <code>arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name</code> </p>'
+        stat:
+          allOf:
+            - $ref: '#/components/schemas/MetricStatistic'
+            - description: ' The statistic of the projected metrics. '
+        period:
+          allOf:
+            - $ref: '#/components/schemas/Period'
+            - description: ' The granularity, in seconds, of the projected metrics data points. '
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The timestamp of the first projected metrics data point to return. '
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The timestamp of the last projected metrics data point to return. '
+    GetECSServiceRecommendationsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' The token to advance to the next page of Amazon ECS service recommendations. '
+        ecsServiceRecommendations:
+          allOf:
+            - $ref: '#/components/schemas/ECSServiceRecommendations'
+            - description: ' An array of objects that describe the Amazon ECS service recommendations. '
+        errors:
+          allOf:
+            - $ref: '#/components/schemas/GetRecommendationErrors'
+            - description: ' An array of objects that describe errors of the request. '
+    GetECSServiceRecommendationsRequest:
+      type: object
+      title: GetECSServiceRecommendationsRequest
+      properties:
+        serviceArns:
+          allOf:
+            - $ref: '#/components/schemas/ServiceArns'
+            - description: '<p> The ARN that identifies the Amazon ECS service. </p> <p> The following is the format of the ARN: </p> <p> <code>arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name</code> </p>'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' The token to advance to the next page of Amazon ECS service recommendations. '
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: '<p> The maximum number of Amazon ECS service recommendations to return with a single request. </p> <p>To retrieve the remaining results, make another request with the returned <code>nextToken</code> value.</p>'
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/ECSServiceRecommendationFilters'
+            - description: ' An array of objects to specify a filter that returns a more specific list of Amazon ECS service recommendations. '
+        accountIds:
+          allOf:
+            - $ref: '#/components/schemas/AccountIds'
+            - description: '<p> Return the Amazon ECS service recommendations to the specified Amazon Web Services account IDs. </p> <p>If your account is the management account or the delegated administrator of an organization, use this parameter to return the Amazon ECS service recommendations to specific member accounts.</p> <p>You can only specify one account ID per request.</p>'
+    GetEffectiveRecommendationPreferencesResponse:
+      type: object
+      properties:
+        enhancedInfrastructureMetrics:
+          allOf:
+            - $ref: '#/components/schemas/EnhancedInfrastructureMetrics'
+            - description: '<p>The status of the enhanced infrastructure metrics recommendation preference. Considers all applicable preferences that you might have set at the resource, account, and organization level.</p> <p>A status of <code>Active</code> confirms that the preference is applied in the latest recommendation refresh, and a status of <code>Inactive</code> confirms that it''s not yet applied to recommendations.</p> <p>To validate whether the preference is applied to your last generated set of recommendations, review the <code>effectiveRecommendationPreferences</code> value in the response of the <a>GetAutoScalingGroupRecommendations</a> and <a>GetEC2InstanceRecommendations</a> actions.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html">Enhanced infrastructure metrics</a> in the <i>Compute Optimizer User Guide</i>.</p>'
+        externalMetricsPreference:
+          allOf:
+            - $ref: '#/components/schemas/ExternalMetricsPreference'
+            - description: '<p>The provider of the external metrics recommendation preference. Considers all applicable preferences that you might have set at the account and organization level.</p> <p>If the preference is applied in the latest recommendation refresh, an object with a valid <code>source</code> value appears in the response. If the preference isn''t applied to the recommendations already, then this object doesn''t appear in the response.</p> <p>To validate whether the preference is applied to your last generated set of recommendations, review the <code>effectiveRecommendationPreferences</code> value in the response of the <a>GetEC2InstanceRecommendations</a> actions.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/external-metrics-ingestion.html">Enhanced infrastructure metrics</a> in the <i>Compute Optimizer User Guide</i>.</p>'
+    GetEffectiveRecommendationPreferencesRequest:
+      type: object
+      required:
+        - resourceArn
+      title: GetEffectiveRecommendationPreferencesRequest
+      properties:
+        resourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the resource for which to confirm effective recommendation preferences. Only EC2 instance and Auto Scaling group ARNs are currently supported.
     GetEnrollmentStatusResponse:
       type: object
       properties:
@@ -1718,6 +2501,39 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: '<p>The maximum number of function recommendations to return with a single request.</p> <p>To retrieve the remaining results, make another request with the returned <code>nextToken</code> value.</p>'
+    GetRecommendationPreferencesResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: <p>The token to use to advance to the next page of recommendation preferences.</p> <p>This value is null when there are no more pages of recommendation preferences to return.</p>
+        recommendationPreferencesDetails:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationPreferencesDetails'
+            - description: An array of objects that describe recommendation preferences.
+    GetRecommendationPreferencesRequest:
+      type: object
+      required:
+        - resourceType
+      title: GetRecommendationPreferencesRequest
+      properties:
+        resourceType:
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: <p>The target resource type of the recommendation preference for which to return preferences.</p> <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances that are part of Auto Scaling groups. The <code>AutoScalingGroup</code> option encompasses only instances that are part of an Auto Scaling group.</p> <note> <p>The valid values for this parameter are <code>Ec2Instance</code> and <code>AutoScalingGroup</code>.</p> </note>
+        scope:
+          allOf:
+            - $ref: '#/components/schemas/Scope'
+            - description: '<p>An object that describes the scope of the recommendation preference to return.</p> <p>You can return recommendation preferences that are created at the organization level (for management accounts of an organization only), account level, and resource level. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html">Activating enhanced infrastructure metrics</a> in the <i>Compute Optimizer User Guide</i>.</p>'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to advance to the next page of recommendation preferences.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: '<p>The maximum number of recommendation preferences to return with a single request.</p> <p>To retrieve the remaining results, make another request with the returned <code>nextToken</code> value.</p>'
     GetRecommendationSummariesResponse:
       type: object
       properties:
@@ -1745,6 +2561,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: '<p>The maximum number of recommendation summaries to return with a single request.</p> <p>To retrieve the remaining results, make another request with the returned <code>nextToken</code> value.</p>'
+    PutRecommendationPreferencesResponse:
+      type: object
+      properties: {}
+    PutRecommendationPreferencesRequest:
+      type: object
+      required:
+        - resourceType
+      title: PutRecommendationPreferencesRequest
+      properties:
+        resourceType:
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: <p>The target resource type of the recommendation preference to create.</p> <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances that are part of Auto Scaling groups. The <code>AutoScalingGroup</code> option encompasses only instances that are part of an Auto Scaling group.</p> <note> <p>The valid values for this parameter are <code>Ec2Instance</code> and <code>AutoScalingGroup</code>.</p> </note>
+        scope:
+          allOf:
+            - $ref: '#/components/schemas/Scope'
+            - description: '<p>An object that describes the scope of the recommendation preference to create.</p> <p>You can create recommendation preferences at the organization level (for management accounts of an organization only), account level, and resource level. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html">Activating enhanced infrastructure metrics</a> in the <i>Compute Optimizer User Guide</i>.</p> <note> <p>You cannot create recommendation preferences for Auto Scaling groups at the organization and account levels. You can create recommendation preferences for Auto Scaling groups only at the resource level by specifying a scope name of <code>ResourceArn</code> and a scope value of the Auto Scaling group Amazon Resource Name (ARN). This will configure the preference for all instances that are part of the specified Auto Scaling group. You also cannot create recommendation preferences at the resource level for instances that are part of an Auto Scaling group. You can create recommendation preferences at the resource level only for standalone instances.</p> </note>'
+        enhancedInfrastructureMetrics:
+          allOf:
+            - $ref: '#/components/schemas/EnhancedInfrastructureMetrics'
+            - description: '<p>The status of the enhanced infrastructure metrics recommendation preference to create or update.</p> <p>Specify the <code>Active</code> status to activate the preference, or specify <code>Inactive</code> to deactivate the preference.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html">Enhanced infrastructure metrics</a> in the <i>Compute Optimizer User Guide</i>.</p>'
+        inferredWorkloadTypes:
+          allOf:
+            - $ref: '#/components/schemas/InferredWorkloadTypesPreference'
+            - description: '<p>The status of the inferred workload types recommendation preference to create or update.</p> <note> <p>The inferred workload type feature is active by default. To deactivate it, create a recommendation preference.</p> </note> <p>Specify the <code>Inactive</code> status to deactivate the feature, or specify <code>Active</code> to activate it.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/inferred-workload-types.html">Inferred workload types</a> in the <i>Compute Optimizer User Guide</i>.</p>'
+        externalMetricsPreference:
+          allOf:
+            - $ref: '#/components/schemas/ExternalMetricsPreference'
+            - description: '<p>The provider of the external metrics recommendation preference to create or update.</p> <p>Specify a valid provider in the <code>source</code> field to activate the preference. To delete this preference, see the <a>DeleteRecommendationPreferences</a> action.</p> <p>This preference can only be set for the <code>Ec2Instance</code> resource type.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/external-metrics-ingestion.html">External metrics ingestion</a> in the <i>Compute Optimizer User Guide</i>.</p>'
     UpdateEnrollmentStatusResponse:
       type: object
       properties:
@@ -1812,6 +2657,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AccountId'
+    AutoScalingConfiguration:
+      type: string
+      enum:
+        - TargetTrackingScalingCpu
+        - TargetTrackingScalingMemory
     AutoScalingGroupArn:
       type: string
     AutoScalingGroupArns:
@@ -1869,6 +2719,37 @@ components:
     LastRefreshTimestamp:
       type: string
       format: date-time
+    CurrentPerformanceRisk:
+      type: string
+      enum:
+        - VeryLow
+        - Low
+        - Medium
+        - High
+    EffectiveRecommendationPreferences:
+      type: object
+      properties:
+        cpuVendorArchitectures:
+          allOf:
+            - $ref: '#/components/schemas/CpuVendorArchitectures'
+            - description: '<p>Describes the CPU vendor and architecture for an instance or Auto Scaling group recommendations.</p> <p>For example, when you specify <code>AWS_ARM64</code> with:</p> <ul> <li> <p>A <a>GetEC2InstanceRecommendations</a> or <a>GetAutoScalingGroupRecommendations</a> request, Compute Optimizer returns recommendations that consist of Graviton2 instance types only.</p> </li> <li> <p>A <a>GetEC2RecommendationProjectedMetrics</a> request, Compute Optimizer returns projected utilization metrics for Graviton2 instance type recommendations only.</p> </li> <li> <p>A <a>ExportEC2InstanceRecommendations</a> or <a>ExportAutoScalingGroupRecommendations</a> request, Compute Optimizer exports recommendations that consist of Graviton2 instance types only.</p> </li> </ul>'
+        enhancedInfrastructureMetrics:
+          allOf:
+            - $ref: '#/components/schemas/EnhancedInfrastructureMetrics'
+            - description: '<p>Describes the activation status of the enhanced infrastructure metrics preference.</p> <p>A status of <code>Active</code> confirms that the preference is applied in the latest recommendation refresh, and a status of <code>Inactive</code> confirms that it''s not yet applied to recommendations.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html">Enhanced infrastructure metrics</a> in the <i>Compute Optimizer User Guide</i>.</p>'
+        inferredWorkloadTypes:
+          allOf:
+            - $ref: '#/components/schemas/InferredWorkloadTypesPreference'
+            - description: <p>Describes the activation status of the inferred workload types preference.</p> <p>A status of <code>Active</code> confirms that the preference is applied in the latest recommendation refresh. A status of <code>Inactive</code> confirms that it's not yet applied to recommendations.</p>
+        externalMetricsPreference:
+          allOf:
+            - $ref: '#/components/schemas/ExternalMetricsPreference'
+            - description: '<p> An object that describes the external metrics recommendation preference. </p> <p> If the preference is applied in the latest recommendation refresh, an object with a valid <code>source</code> value appears in the response. If the preference isn''t applied to the recommendations already, then this object doesn''t appear in the response. </p>'
+      description: Describes the effective recommendation preferences for a resource.
+    InferredWorkloadTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/InferredWorkloadType'
     AutoScalingGroupRecommendation:
       type: object
       properties:
@@ -1907,7 +2788,19 @@ components:
         lastRefreshTimestamp:
           allOf:
             - $ref: '#/components/schemas/LastRefreshTimestamp'
-            - description: The timestamp of when the Auto Scaling group recommendation was last refreshed.
+            - description: The timestamp of when the Auto Scaling group recommendation was last generated.
+        currentPerformanceRisk:
+          allOf:
+            - $ref: '#/components/schemas/CurrentPerformanceRisk'
+            - description: 'The risk of the current Auto Scaling group not meeting the performance needs of its workloads. The higher the risk, the more likely the current Auto Scaling group configuration has insufficient capacity and cannot meet workload requirements.'
+        effectiveRecommendationPreferences:
+          allOf:
+            - $ref: '#/components/schemas/EffectiveRecommendationPreferences'
+            - description: An object that describes the effective recommendation preferences for the Auto Scaling group.
+        inferredWorkloadTypes:
+          allOf:
+            - $ref: '#/components/schemas/InferredWorkloadTypes'
+            - description: '<p>The applications that might be running on the instances in the Auto Scaling group as inferred by Compute Optimizer.</p> <p>Compute Optimizer can infer if one of the following applications might be running on the instances:</p> <ul> <li> <p> <code>AmazonEmr</code> - Infers that Amazon EMR might be running on the instances.</p> </li> <li> <p> <code>ApacheCassandra</code> - Infers that Apache Cassandra might be running on the instances.</p> </li> <li> <p> <code>ApacheHadoop</code> - Infers that Apache Hadoop might be running on the instances.</p> </li> <li> <p> <code>Memcached</code> - Infers that Memcached might be running on the instances.</p> </li> <li> <p> <code>NGINX</code> - Infers that NGINX might be running on the instances.</p> </li> <li> <p> <code>PostgreSql</code> - Infers that PostgreSQL might be running on the instances.</p> </li> <li> <p> <code>Redis</code> - Infers that Redis might be running on the instances.</p> </li> </ul>'
       description: Describes an Auto Scaling group recommendation.
     ProjectedUtilizationMetrics:
       type: array
@@ -1920,6 +2813,25 @@ components:
       maximum: 4
     Rank:
       type: integer
+    SavingsOpportunity:
+      type: object
+      properties:
+        savingsOpportunityPercentage:
+          allOf:
+            - $ref: '#/components/schemas/SavingsOpportunityPercentage'
+            - description: The estimated monthly savings possible as a percentage of monthly cost by adopting Compute Optimizer recommendations for a given resource.
+        estimatedMonthlySavings:
+          allOf:
+            - $ref: '#/components/schemas/EstimatedMonthlySavings'
+            - description: 'An object that describes the estimated monthly savings amount possible, based on On-Demand instance pricing, by adopting Compute Optimizer recommendations for a given resource.'
+      description: '<p>Describes the savings opportunity for recommendations of a given resource type or for the recommendation option of an individual resource.</p> <p>Savings opportunity represents the estimated monthly savings you can achieve by implementing a given Compute Optimizer recommendation.</p> <important> <p>Savings opportunity data requires that you opt in to Cost Explorer, as well as activate <b>Receive Amazon EC2 resource recommendations</b> in the Cost Explorer preferences page. That creates a connection between Cost Explorer and Compute Optimizer. With this connection, Cost Explorer generates savings estimates considering the price of existing resources, the price of recommended resources, and historical usage data. Estimated monthly savings reflects the projected dollar savings associated with each of the recommendations generated. For more information, see <a href="https://docs.aws.amazon.com/cost-management/latest/userguide/ce-enable.html">Enabling Cost Explorer</a> and <a href="https://docs.aws.amazon.com/cost-management/latest/userguide/ce-rightsizing.html">Optimizing your cost with Rightsizing Recommendations</a> in the <i>Cost Management User Guide</i>.</p> </important>'
+    MigrationEffort:
+      type: string
+      enum:
+        - VeryLow
+        - Low
+        - Medium
+        - High
     AutoScalingGroupRecommendationOption:
       type: object
       properties:
@@ -1939,6 +2851,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Rank'
             - description: <p>The rank of the Auto Scaling group recommendation option.</p> <p>The top recommendation option is ranked as <code>1</code>.</p>
+        savingsOpportunity:
+          allOf:
+            - $ref: '#/components/schemas/SavingsOpportunity'
+            - description: An object that describes the savings opportunity for the Auto Scaling group recommendation option. Savings opportunity includes the estimated monthly savings amount and percentage.
+        migrationEffort:
+          allOf:
+            - $ref: '#/components/schemas/MigrationEffort'
+            - description: '<p>The level of effort required to migrate from the current instance type to the recommended instance type.</p> <p>For example, the migration effort is <code>Low</code> if Amazon EMR is the inferred workload type and an Amazon Web Services Graviton instance type is recommended. The migration effort is <code>Medium</code> if a workload type couldn''t be inferred but an Amazon Web Services Graviton instance type is recommended. The migration effort is <code>VeryLow</code> if both the current and recommended instance types are of the same CPU architecture.</p>'
       description: Describes a recommendation option for an Auto Scaling group.
     AutoScalingGroupRecommendations:
       type: array
@@ -1946,6 +2866,64 @@ components:
         $ref: '#/components/schemas/AutoScalingGroupRecommendation'
     Code:
       type: string
+    ContainerName:
+      type: string
+    MemorySizeConfiguration:
+      type: object
+      properties:
+        memory:
+          allOf:
+            - $ref: '#/components/schemas/NullableMemory'
+            - description: ' The amount of memory in the container. '
+        memoryReservation:
+          allOf:
+            - $ref: '#/components/schemas/NullableMemoryReservation'
+            - description: ' The limit of memory reserve for the container. '
+      description: ' The memory size configurations of a container. '
+    NullableCpu:
+      type: integer
+    ContainerConfiguration:
+      type: object
+      properties:
+        containerName:
+          allOf:
+            - $ref: '#/components/schemas/ContainerName'
+            - description: ' The name of the container. '
+        memorySizeConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/MemorySizeConfiguration'
+            - description: ' The memory size configurations for the container. '
+        cpu:
+          allOf:
+            - $ref: '#/components/schemas/NullableCpu'
+            - description: ' The number of CPU units reserved for the container. '
+      description: ' Describes the container configurations within the tasks of your Amazon ECS service. '
+    ContainerConfigurations:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContainerConfiguration'
+    ContainerRecommendation:
+      type: object
+      properties:
+        containerName:
+          allOf:
+            - $ref: '#/components/schemas/ContainerName'
+            - description: ' The name of the container. '
+        memorySizeConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/MemorySizeConfiguration'
+            - description: ' The recommended memory size configurations for the container. '
+        cpu:
+          allOf:
+            - $ref: '#/components/schemas/NullableCpu'
+            - description: ' The recommended number of CPU units reserved for the container. '
+      description: ' The CPU and memory recommendations for a container within the tasks of your Amazon ECS service. '
+    ContainerRecommendations:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContainerRecommendation'
+    CpuSize:
+      type: integer
     CpuVendorArchitecture:
       type: string
       enum:
@@ -1958,8 +2936,66 @@ components:
     CreationTimestamp:
       type: string
       format: date-time
+    Currency:
+      type: string
+      enum:
+        - USD
+        - CNY
     CurrentInstanceType:
       type: string
+    High:
+      type: integer
+    Medium:
+      type: integer
+    Low:
+      type: integer
+    VeryLow:
+      type: integer
+    CurrentPerformanceRiskRatings:
+      type: object
+      properties:
+        high:
+          allOf:
+            - $ref: '#/components/schemas/High'
+            - description: A count of the applicable resource types with a high performance risk rating.
+        medium:
+          allOf:
+            - $ref: '#/components/schemas/Medium'
+            - description: A count of the applicable resource types with a medium performance risk rating.
+        low:
+          allOf:
+            - $ref: '#/components/schemas/Low'
+            - description: A count of the applicable resource types with a low performance risk rating.
+        veryLow:
+          allOf:
+            - $ref: '#/components/schemas/VeryLow'
+            - description: A count of the applicable resource types with a very low performance risk rating.
+      description: '<p>Describes the performance risk ratings for a given resource type.</p> <p>Resources with a <code>high</code> or <code>medium</code> rating are at risk of not meeting the performance needs of their workloads, while resources with a <code>low</code> rating are performing well in their workloads.</p>'
+    ResourceType:
+      type: string
+      enum:
+        - Ec2Instance
+        - AutoScalingGroup
+        - EbsVolume
+        - LambdaFunction
+        - NotApplicable
+        - EcsService
+    Scope:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ScopeName'
+            - description: '<p>The name of the scope.</p> <p>The following scopes are possible:</p> <ul> <li> <p> <code>Organization</code> - Specifies that the recommendation preference applies at the organization level, for all member accounts of an organization.</p> </li> <li> <p> <code>AccountId</code> - Specifies that the recommendation preference applies at the account level, for all resources of a given resource type in an account.</p> </li> <li> <p> <code>ResourceArn</code> - Specifies that the recommendation preference applies at the individual resource level.</p> </li> </ul>'
+        value:
+          allOf:
+            - $ref: '#/components/schemas/ScopeValue'
+            - description: '<p>The value of the scope.</p> <p>If you specified the <code>name</code> of the scope as:</p> <ul> <li> <p> <code>Organization</code> - The <code>value</code> must be <code>ALL_ACCOUNTS</code>.</p> </li> <li> <p> <code>AccountId</code> - The <code>value</code> must be a 12-digit Amazon Web Services account ID.</p> </li> <li> <p> <code>ResourceArn</code> - The <code>value</code> must be the Amazon Resource Name (ARN) of an EC2 instance or an Auto Scaling group.</p> </li> </ul> <p>Only EC2 instance and Auto Scaling group ARNs are currently supported.</p>'
+      description: '<p>Describes the scope of a recommendation preference.</p> <p>Recommendation preferences can be created at the organization level (for management accounts of an organization only), account level, and resource level. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html">Activating enhanced infrastructure metrics</a> in the <i>Compute Optimizer User Guide</i>.</p> <note> <p>You cannot create recommendation preferences for Auto Scaling groups at the organization and account levels. You can create recommendation preferences for Auto Scaling groups only at the resource level by specifying a scope name of <code>ResourceArn</code> and a scope value of the Auto Scaling group Amazon Resource Name (ARN). This will configure the preference for all instances that are part of the specified Auto Scaling group. You also cannot create recommendation preferences at the resource level for instances that are part of an Auto Scaling group. You can create recommendation preferences at the resource level only for standalone instances.</p> </note>'
+    RecommendationPreferenceNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecommendationPreferenceName'
     JobIds:
       type: array
       items:
@@ -1972,6 +3008,8 @@ components:
       type: string
     MaxResults:
       type: integer
+      minimum: 0
+      maximum: 1000
     RecommendationExportJobs:
       type: array
       items:
@@ -2046,6 +3084,287 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/EBSUtilizationMetric'
+    ECSServiceLaunchType:
+      type: string
+      enum:
+        - EC2
+        - Fargate
+    ECSServiceMetricName:
+      type: string
+      enum:
+        - Cpu
+        - Memory
+    ECSServiceMetricStatistic:
+      type: string
+      enum:
+        - Maximum
+        - Average
+    Timestamps:
+      type: array
+      items:
+        $ref: '#/components/schemas/Timestamp'
+    MetricValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricValue'
+    ECSServiceProjectedMetric:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ECSServiceMetricName'
+            - description: '<p> The name of the projected metric. </p> <p>The following metrics are available:</p> <ul> <li> <p> <code>Cpu</code> — The percentage of allocated compute units that are currently in use on the service tasks.</p> </li> <li> <p> <code>Memory</code> — The percentage of memory that''s currently in use on the service tasks.</p> </li> </ul>'
+        timestamps:
+          allOf:
+            - $ref: '#/components/schemas/Timestamps'
+            - description: ' The timestamps of the projected metric. '
+        upperBoundValues:
+          allOf:
+            - $ref: '#/components/schemas/MetricValues'
+            - description: ' The upper bound values for the projected metric. '
+        lowerBoundValues:
+          allOf:
+            - $ref: '#/components/schemas/MetricValues'
+            - description: ' The lower bound values for the projected metric. '
+      description: '<p> Describes the projected metrics of an Amazon ECS service recommendation option. </p> <p>To determine the performance difference between your current Amazon ECS service and the recommended option, compare the metric data of your service against its projected metric data.</p>'
+    ECSServiceProjectedMetrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/ECSServiceProjectedMetric'
+    LowerBoundValue:
+      type: number
+      format: double
+    UpperBoundValue:
+      type: number
+      format: double
+    ECSServiceProjectedUtilizationMetric:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ECSServiceMetricName'
+            - description: '<p> The name of the projected utilization metric. </p> <p>The following utilization metrics are available:</p> <ul> <li> <p> <code>Cpu</code> — The percentage of allocated compute units that are currently in use on the service tasks.</p> </li> <li> <p> <code>Memory</code> — The percentage of memory that''s currently in use on the service tasks.</p> </li> </ul>'
+        statistic:
+          allOf:
+            - $ref: '#/components/schemas/ECSServiceMetricStatistic'
+            - description: '<p>The statistic of the projected utilization metric.</p> <p>The Compute Optimizer API, Command Line Interface (CLI), and SDKs return utilization metrics using only the <code>Maximum</code> statistic, which is the highest value observed during the specified period.</p> <p>The Compute Optimizer console displays graphs for some utilization metrics using the <code>Average</code> statistic, which is the value of <code>Sum</code> / <code>SampleCount</code> during the specified period. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html">Viewing resource recommendations</a> in the <i>Compute Optimizer User Guide</i>. You can also get averaged utilization metric data for your resources using Amazon CloudWatch. For more information, see the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html">Amazon CloudWatch User Guide</a>.</p>'
+        lowerBoundValue:
+          allOf:
+            - $ref: '#/components/schemas/LowerBoundValue'
+            - description: ' The lower bound values for the projected utilization metrics. '
+        upperBoundValue:
+          allOf:
+            - $ref: '#/components/schemas/UpperBoundValue'
+            - description: ' The upper bound values for the projected utilization metrics. '
+      description: '<p> Describes the projected utilization metrics of an Amazon ECS service recommendation option. </p> <p>To determine the performance difference between your current Amazon ECS service and the recommended option, compare the utilization metric data of your service against its projected utilization metric data.</p>'
+    ECSServiceProjectedUtilizationMetrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/ECSServiceProjectedUtilizationMetric'
+    ServiceArn:
+      type: string
+    ServiceConfiguration:
+      type: object
+      properties:
+        memory:
+          allOf:
+            - $ref: '#/components/schemas/NullableMemory'
+            - description: ' The amount of memory used by the tasks in the Amazon ECS service. '
+        cpu:
+          allOf:
+            - $ref: '#/components/schemas/NullableCpu'
+            - description: ' The number of CPU units used by the tasks in the Amazon ECS service. '
+        containerConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/ContainerConfigurations'
+            - description: ' The container configurations within a task of an Amazon ECS service. '
+        autoScalingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AutoScalingConfiguration'
+            - description: '<p> Describes the Auto Scaling configuration methods for an Amazon ECS service. This affects the generated recommendations. For example, if Auto Scaling is configured on a service’s CPU, then Compute Optimizer doesn’t generate CPU size recommendations. </p> <p>The Auto Scaling configuration methods include:</p> <ul> <li> <p> <code>TARGET_TRACKING_SCALING_CPU</code> — If the Amazon ECS service is configured to use target scaling on CPU, Compute Optimizer doesn''t generate CPU recommendations.</p> </li> <li> <p> <code>TARGET_TRACKING_SCALING_MEMORY</code> — If the Amazon ECS service is configured to use target scaling on memory, Compute Optimizer doesn''t generate memory recommendations.</p> </li> </ul> <p>For more information about step scaling and target scaling, see <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html"> Step scaling policies for Application Auto Scaling</a> and <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html"> Target tracking scaling policies for Application Auto Scaling</a> in the <i>Application Auto Scaling User Guide</i>.</p>'
+        taskDefinitionArn:
+          allOf:
+            - $ref: '#/components/schemas/TaskDefinitionArn'
+            - description: ' The task definition ARN used by the tasks in the Amazon ECS service. '
+      description: ' The Amazon ECS service configurations used for recommendations. '
+    ECSServiceUtilizationMetrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/ECSServiceUtilizationMetric'
+    ECSServiceRecommendationFinding:
+      type: string
+      enum:
+        - Optimized
+        - Underprovisioned
+        - Overprovisioned
+    ECSServiceRecommendationFindingReasonCodes:
+      type: array
+      items:
+        $ref: '#/components/schemas/ECSServiceRecommendationFindingReasonCode'
+    ECSServiceRecommendationOptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/ECSServiceRecommendationOption'
+    ECSServiceRecommendation:
+      type: object
+      properties:
+        serviceArn:
+          allOf:
+            - $ref: '#/components/schemas/ServiceArn'
+            - description: '<p> The Amazon Resource Name (ARN) of the current Amazon ECS service. </p> <p> The following is the format of the ARN: </p> <p> <code>arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name</code> </p>'
+        accountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: ' The Amazon Web Services account ID of the Amazon ECS service. '
+        currentServiceConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ServiceConfiguration'
+            - description: ' The configuration of the current Amazon ECS service. '
+        utilizationMetrics:
+          allOf:
+            - $ref: '#/components/schemas/ECSServiceUtilizationMetrics'
+            - description: ' An array of objects that describe the utilization metrics of the Amazon ECS service. '
+        lookbackPeriodInDays:
+          allOf:
+            - $ref: '#/components/schemas/LookBackPeriodInDays'
+            - description: ' The number of days the Amazon ECS service utilization metrics were analyzed. '
+        launchType:
+          allOf:
+            - $ref: '#/components/schemas/ECSServiceLaunchType'
+            - description: <p> The launch type the Amazon ECS service is using. </p> <note> <p>Compute Optimizer only supports the Fargate launch type.</p> </note>
+        lastRefreshTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/LastRefreshTimestamp'
+            - description: ' The timestamp of when the Amazon ECS service recommendation was last generated. '
+        finding:
+          allOf:
+            - $ref: '#/components/schemas/ECSServiceRecommendationFinding'
+            - description: '<p> The finding classification of an Amazon ECS service. </p> <p>Findings for Amazon ECS services include:</p> <ul> <li> <p> <b> <code>Underprovisioned</code> </b> — When Compute Optimizer detects that there’s not enough memory or CPU, an Amazon ECS service is considered under-provisioned. An under-provisioned service might result in poor application performance.</p> </li> <li> <p> <b> <code>Overprovisioned</code> </b> — When Compute Optimizer detects that there’s excessive memory or CPU, an Amazon ECS service is considered over-provisioned. An over-provisioned service might result in additional infrastructure costs. </p> </li> <li> <p> <b> <code>Optimized</code> </b> — When both the CPU and memory of your Amazon ECS service meet the performance requirements of your workload, the service is considered optimized.</p> </li> </ul>'
+        findingReasonCodes:
+          allOf:
+            - $ref: '#/components/schemas/ECSServiceRecommendationFindingReasonCodes'
+            - description: '<p> The reason for the finding classification of an Amazon ECS service. </p> <p>Finding reason codes for Amazon ECS services include:</p> <ul> <li> <p> <b> <code>CPUUnderprovisioned</code> </b> — The service CPU configuration can be sized up to enhance the performance of your workload. This is identified by analyzing the <code>CPUUtilization</code> metric of the current service during the look-back period.</p> </li> <li> <p> <b> <code>CPUOverprovisioned</code> </b> — The service CPU configuration can be sized down while still meeting the performance requirements of your workload. This is identified by analyzing the <code>CPUUtilization</code> metric of the current service during the look-back period. </p> </li> <li> <p> <b> <code>MemoryUnderprovisioned</code> </b> — The service memory configuration can be sized up to enhance the performance of your workload. This is identified by analyzing the <code>MemoryUtilization</code> metric of the current service during the look-back period.</p> </li> <li> <p> <b> <code>MemoryOverprovisioned</code> </b> — The service memory configuration can be sized down while still meeting the performance requirements of your workload. This is identified by analyzing the <code>MemoryUtilization</code> metric of the current service during the look-back period.</p> </li> </ul>'
+        serviceRecommendationOptions:
+          allOf:
+            - $ref: '#/components/schemas/ECSServiceRecommendationOptions'
+            - description: ' An array of objects that describe the recommendation options for the Amazon ECS service. '
+        currentPerformanceRisk:
+          allOf:
+            - $ref: '#/components/schemas/CurrentPerformanceRisk'
+            - description: ' The risk of the current Amazon ECS service not meeting the performance needs of its workloads. The higher the risk, the more likely the current service can''t meet the performance requirements of its workload. '
+      description: ' Describes an Amazon ECS service recommendation. '
+    ECSServiceRecommendationFilterName:
+      type: string
+      enum:
+        - Finding
+        - FindingReasonCode
+    ECSServiceRecommendationFilter:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ECSServiceRecommendationFilterName'
+            - description: <p> The name of the filter. </p> <p> Specify <code>Finding</code> to return recommendations with a specific finding classification. </p> <p> Specify <code>FindingReasonCode</code> to return recommendations with a specific finding reason code. </p>
+        values:
+          allOf:
+            - $ref: '#/components/schemas/FilterValues'
+            - description: '<p> The value of the filter. </p> <p>The valid values for this parameter are as follows:</p> <ul> <li> <p>If you specify the <code>name</code> parameter as <code>Finding</code>, specify <code>Optimized</code>, <code>NotOptimized</code>, or <code>Unavailable</code>.</p> </li> <li> <p>If you specify the <code>name</code> parameter as <code>FindingReasonCode</code>, specify <code>CPUUnderprovisioned</code>, <code>CPUOverprovisioned</code>, <code>MemoryUnderprovisioned</code>, or <code>MemoryOverprovisioned</code>.</p> </li> </ul>'
+      description: ' Describes a filter that returns a more specific list of Amazon ECS service recommendations. Use this filter with the <a>GetECSServiceRecommendations</a> action. '
+    ECSServiceRecommendationFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/ECSServiceRecommendationFilter'
+    ECSServiceRecommendationFindingReasonCode:
+      type: string
+      enum:
+        - MemoryOverprovisioned
+        - MemoryUnderprovisioned
+        - CPUOverprovisioned
+        - CPUUnderprovisioned
+    NullableMemory:
+      type: integer
+    ECSServiceRecommendationOption:
+      type: object
+      properties:
+        memory:
+          allOf:
+            - $ref: '#/components/schemas/NullableMemory'
+            - description: ' The memory size of the Amazon ECS service recommendation option. '
+        cpu:
+          allOf:
+            - $ref: '#/components/schemas/NullableCpu'
+            - description: ' The CPU size of the Amazon ECS service recommendation option. '
+        savingsOpportunity:
+          $ref: '#/components/schemas/SavingsOpportunity'
+        projectedUtilizationMetrics:
+          allOf:
+            - $ref: '#/components/schemas/ECSServiceProjectedUtilizationMetrics'
+            - description: ' An array of objects that describe the projected utilization metrics of the Amazon ECS service recommendation option. '
+        containerRecommendations:
+          allOf:
+            - $ref: '#/components/schemas/ContainerRecommendations'
+            - description: ' The CPU and memory size recommendations for the containers within the task of your Amazon ECS service. '
+      description: ' Describes the recommendation options for an Amazon ECS service. '
+    ECSServiceRecommendations:
+      type: array
+      items:
+        $ref: '#/components/schemas/ECSServiceRecommendation'
+    MemorySize:
+      type: integer
+    ECSServiceRecommendedOptionProjectedMetric:
+      type: object
+      properties:
+        recommendedCpuUnits:
+          allOf:
+            - $ref: '#/components/schemas/CpuSize'
+            - description: ' The recommended CPU size for the Amazon ECS service. '
+        recommendedMemorySize:
+          allOf:
+            - $ref: '#/components/schemas/MemorySize'
+            - description: ' The recommended memory size for the Amazon ECS service. '
+        projectedMetrics:
+          allOf:
+            - $ref: '#/components/schemas/ECSServiceProjectedMetrics'
+            - description: ' An array of objects that describe the projected metric. '
+      description: '<p> Describes the projected metrics of an Amazon ECS service recommendation option. </p> <p>To determine the performance difference between your current Amazon ECS service and the recommended option, compare the metric data of your service against its projected metric data.</p>'
+    ECSServiceRecommendedOptionProjectedMetrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/ECSServiceRecommendedOptionProjectedMetric'
+    ECSServiceUtilizationMetric:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ECSServiceMetricName'
+            - description: '<p> The name of the utilization metric. </p> <p>The following utilization metrics are available:</p> <ul> <li> <p> <code>Cpu</code> — The amount of CPU capacity that''s used in the service.</p> </li> <li> <p> <code>Memory</code> — The amount of memory that''s used in the service.</p> </li> </ul>'
+        statistic:
+          allOf:
+            - $ref: '#/components/schemas/ECSServiceMetricStatistic'
+            - description: '<p>The statistic of the utilization metric.</p> <p>The Compute Optimizer API, Command Line Interface (CLI), and SDKs return utilization metrics using only the <code>Maximum</code> statistic, which is the highest value observed during the specified period.</p> <p>The Compute Optimizer console displays graphs for some utilization metrics using the <code>Average</code> statistic, which is the value of <code>Sum</code> / <code>SampleCount</code> during the specified period. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html">Viewing resource recommendations</a> in the <i>Compute Optimizer User Guide</i>. You can also get averaged utilization metric data for your resources using Amazon CloudWatch. For more information, see the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html">Amazon CloudWatch User Guide</a>.</p>'
+        value:
+          allOf:
+            - $ref: '#/components/schemas/MetricValue'
+            - description: ' The value of the utilization metric. '
+      description: '<p> Describes the utilization metric of an Amazon ECS service. </p> <p>To determine the performance difference between your current Amazon ECS service and the recommended option, compare the utilization metric data of your service against its projected utilization metric data.</p>'
+    EnhancedInfrastructureMetrics:
+      type: string
+      enum:
+        - Active
+        - Inactive
+    InferredWorkloadTypesPreference:
+      type: string
+      enum:
+        - Active
+        - Inactive
+    ExternalMetricsPreference:
+      type: object
+      properties:
+        source:
+          allOf:
+            - $ref: '#/components/schemas/ExternalMetricsSource'
+            - description: ' Contains the source options for external metrics preferences. '
+      description: ' Describes the external metrics preferences for EC2 rightsizing recommendations. '
     EnrollmentFilterName:
       type: string
       enum:
@@ -2066,6 +3385,21 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/EnrollmentFilter'
+    Value:
+      type: number
+      format: double
+    EstimatedMonthlySavings:
+      type: object
+      properties:
+        currency:
+          allOf:
+            - $ref: '#/components/schemas/Currency'
+            - description: The currency of the estimated monthly savings.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/Value'
+            - description: The value of the estimated monthly savings.
+      description: '<p>Describes the estimated monthly savings amount possible, based on On-Demand instance pricing, by adopting Compute Optimizer recommendations for a given resource.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/view-ec2-recommendations.html#ec2-savings-calculation">Estimated monthly savings and savings opportunities</a> in the <i>Compute Optimizer User Guide</i>.</p>'
     Filters:
       type: array
       items:
@@ -2099,7 +3433,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CpuVendorArchitectures'
             - description: '<p>Specifies the CPU vendor and architecture for Amazon EC2 instance and Auto Scaling group recommendations.</p> <p>For example, when you specify <code>AWS_ARM64</code> with:</p> <ul> <li> <p>A <a>GetEC2InstanceRecommendations</a> or <a>GetAutoScalingGroupRecommendations</a> request, Compute Optimizer returns recommendations that consist of Graviton2 instance types only.</p> </li> <li> <p>A <a>GetEC2RecommendationProjectedMetrics</a> request, Compute Optimizer returns projected utilization metrics for Graviton2 instance type recommendations only.</p> </li> <li> <p>A <a>ExportEC2InstanceRecommendations</a> or <a>ExportAutoScalingGroupRecommendations</a> request, Compute Optimizer exports recommendations that consist of Graviton2 instance types only.</p> </li> </ul>'
-      description: Describes preferences for recommendations.
+      description: 'Describes the recommendation preferences to return in the response of a <a>GetAutoScalingGroupRecommendations</a>, <a>GetEC2InstanceRecommendations</a>, and <a>GetEC2RecommendationProjectedMetrics</a> request.'
     JobId:
       type: string
     S3Destination:
@@ -2134,6 +3468,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ExportableInstanceField'
+    ExportableECSServiceFields:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExportableECSServiceField'
     LambdaFunctionRecommendationFilters:
       type: array
       items:
@@ -2190,6 +3528,41 @@ components:
         - RecommendationOptionsStorage
         - RecommendationOptionsNetwork
         - LastRefreshTimestamp
+        - CurrentPerformanceRisk
+        - RecommendationOptionsSavingsOpportunityPercentage
+        - RecommendationOptionsEstimatedMonthlySavingsCurrency
+        - RecommendationOptionsEstimatedMonthlySavingsValue
+        - EffectiveRecommendationPreferencesCpuVendorArchitectures
+        - EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics
+        - EffectiveRecommendationPreferencesInferredWorkloadTypes
+        - InferredWorkloadTypes
+        - RecommendationOptionsMigrationEffort
+    ExportableECSServiceField:
+      type: string
+      enum:
+        - AccountId
+        - ServiceArn
+        - LookbackPeriodInDays
+        - LastRefreshTimestamp
+        - LaunchType
+        - CurrentPerformanceRisk
+        - CurrentServiceConfigurationMemory
+        - CurrentServiceConfigurationCpu
+        - CurrentServiceConfigurationTaskDefinitionArn
+        - CurrentServiceConfigurationAutoScalingConfiguration
+        - CurrentServiceContainerConfigurations
+        - UtilizationMetricsCpuMaximum
+        - UtilizationMetricsMemoryMaximum
+        - Finding
+        - FindingReasonCodes
+        - RecommendationOptionsMemory
+        - RecommendationOptionsCpu
+        - RecommendationOptionsSavingsOpportunityPercentage
+        - RecommendationOptionsEstimatedMonthlySavingsCurrency
+        - RecommendationOptionsEstimatedMonthlySavingsValue
+        - RecommendationOptionsContainerRecommendations
+        - RecommendationOptionsProjectedUtilizationMetricsCpuMaximum
+        - RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum
     ExportableInstanceField:
       type: string
       enum:
@@ -2236,6 +3609,16 @@ components:
         - RecommendationsSourcesRecommendationSourceArn
         - RecommendationsSourcesRecommendationSourceType
         - LastRefreshTimestamp
+        - CurrentPerformanceRisk
+        - RecommendationOptionsSavingsOpportunityPercentage
+        - RecommendationOptionsEstimatedMonthlySavingsCurrency
+        - RecommendationOptionsEstimatedMonthlySavingsValue
+        - EffectiveRecommendationPreferencesCpuVendorArchitectures
+        - EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics
+        - EffectiveRecommendationPreferencesInferredWorkloadTypes
+        - InferredWorkloadTypes
+        - RecommendationOptionsMigrationEffort
+        - EffectiveRecommendationPreferencesExternalMetricsSource
     ExportableLambdaFunctionField:
       type: string
       enum:
@@ -2261,6 +3644,10 @@ components:
         - RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound
         - RecommendationOptionsProjectedUtilizationMetricsDurationExpected
         - LastRefreshTimestamp
+        - CurrentPerformanceRisk
+        - RecommendationOptionsSavingsOpportunityPercentage
+        - RecommendationOptionsEstimatedMonthlySavingsCurrency
+        - RecommendationOptionsEstimatedMonthlySavingsValue
     ExportableVolumeField:
       type: string
       enum:
@@ -2288,6 +3675,17 @@ components:
         - RecommendationOptionsMonthlyPrice
         - RecommendationOptionsPerformanceRisk
         - LastRefreshTimestamp
+        - CurrentPerformanceRisk
+        - RecommendationOptionsSavingsOpportunityPercentage
+        - RecommendationOptionsEstimatedMonthlySavingsCurrency
+        - RecommendationOptionsEstimatedMonthlySavingsValue
+    ExternalMetricsSource:
+      type: string
+      enum:
+        - Datadog
+        - Dynatrace
+        - NewRelic
+        - Instana
     FailureReason:
       type: string
     FilterName:
@@ -2354,6 +3752,12 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/RecommendedOptionProjectedMetric'
+    ServiceArns:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServiceArn'
+    ResourceArn:
+      type: string
     MemberAccountsEnrolled:
       type: boolean
     NumberOfMemberAccountsOptedIn:
@@ -2382,10 +3786,25 @@ components:
             - $ref: '#/components/schemas/Message'
             - description: 'The message, or reason, for the error.'
       description: '<p>Describes an error experienced when getting recommendations.</p> <p>For example, an error is returned if you request recommendations for an unsupported Auto Scaling group, or if you request recommendations for an instance of an unsupported instance family.</p>'
+    RecommendationPreferencesDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecommendationPreferencesDetail'
     RecommendationSummaries:
       type: array
       items:
         $ref: '#/components/schemas/RecommendationSummary'
+    InferredWorkloadType:
+      type: string
+      enum:
+        - AmazonEmr
+        - ApacheCassandra
+        - ApacheHadoop
+        - Memcached
+        - Nginx
+        - PostgreSql
+        - Redis
+        - Kafka
     InstanceName:
       type: string
     InstanceRecommendationFindingReasonCodes:
@@ -2446,7 +3865,19 @@ components:
         lastRefreshTimestamp:
           allOf:
             - $ref: '#/components/schemas/LastRefreshTimestamp'
-            - description: The timestamp of when the instance recommendation was last refreshed.
+            - description: The timestamp of when the instance recommendation was last generated.
+        currentPerformanceRisk:
+          allOf:
+            - $ref: '#/components/schemas/CurrentPerformanceRisk'
+            - description: 'The risk of the current instance not meeting the performance needs of its workloads. The higher the risk, the more likely the current instance cannot meet the performance requirements of its workload.'
+        effectiveRecommendationPreferences:
+          allOf:
+            - $ref: '#/components/schemas/EffectiveRecommendationPreferences'
+            - description: An object that describes the effective recommendation preferences for the instance.
+        inferredWorkloadTypes:
+          allOf:
+            - $ref: '#/components/schemas/InferredWorkloadTypes'
+            - description: '<p>The applications that might be running on the instance as inferred by Compute Optimizer.</p> <p>Compute Optimizer can infer if one of the following applications might be running on the instance:</p> <ul> <li> <p> <code>AmazonEmr</code> - Infers that Amazon EMR might be running on the instance.</p> </li> <li> <p> <code>ApacheCassandra</code> - Infers that Apache Cassandra might be running on the instance.</p> </li> <li> <p> <code>ApacheHadoop</code> - Infers that Apache Hadoop might be running on the instance.</p> </li> <li> <p> <code>Memcached</code> - Infers that Memcached might be running on the instance.</p> </li> <li> <p> <code>NGINX</code> - Infers that NGINX might be running on the instance.</p> </li> <li> <p> <code>PostgreSql</code> - Infers that PostgreSQL might be running on the instance.</p> </li> <li> <p> <code>Redis</code> - Infers that Redis might be running on the instance.</p> </li> <li> <p> <code>Kafka</code> - Infers that Kafka might be running on the instance.</p> </li> </ul>'
       description: Describes an Amazon EC2 instance recommendation.
     InstanceRecommendationFindingReasonCode:
       type: string
@@ -2494,6 +3925,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Rank'
             - description: <p>The rank of the instance recommendation option.</p> <p>The top recommendation option is ranked as <code>1</code>.</p>
+        savingsOpportunity:
+          allOf:
+            - $ref: '#/components/schemas/SavingsOpportunity'
+            - description: An object that describes the savings opportunity for the instance recommendation option. Savings opportunity includes the estimated monthly savings amount and percentage.
+        migrationEffort:
+          allOf:
+            - $ref: '#/components/schemas/MigrationEffort'
+            - description: '<p>The level of effort required to migrate from the current instance type to the recommended instance type.</p> <p>For example, the migration effort is <code>Low</code> if Amazon EMR is the inferred workload type and an Amazon Web Services Graviton instance type is recommended. The migration effort is <code>Medium</code> if a workload type couldn''t be inferred but an Amazon Web Services Graviton instance type is recommended. The migration effort is <code>VeryLow</code> if both the current and recommended instance types are of the same CPU architecture.</p>'
       description: Describes a recommendation option for an Amazon EC2 instance.
     JobFilterName:
       type: string
@@ -2549,8 +3988,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/LambdaFunctionMemoryProjectedMetric'
-    MemorySize:
-      type: integer
     LambdaFunctionMemoryRecommendationOption:
       type: object
       properties:
@@ -2566,6 +4003,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LambdaFunctionMemoryProjectedMetrics'
             - description: An array of objects that describe the projected utilization metrics of the function recommendation option.
+        savingsOpportunity:
+          allOf:
+            - $ref: '#/components/schemas/SavingsOpportunity'
+            - description: An object that describes the savings opportunity for the Lambda function recommendation option. Savings opportunity includes the estimated monthly savings amount and percentage.
       description: Describes a recommendation option for an Lambda function.
     LambdaFunctionMemoryRecommendationOptions:
       type: array
@@ -2631,7 +4072,7 @@ components:
         lastRefreshTimestamp:
           allOf:
             - $ref: '#/components/schemas/LastRefreshTimestamp'
-            - description: The timestamp of when the function recommendation was last refreshed.
+            - description: The timestamp of when the function recommendation was last generated.
         finding:
           allOf:
             - $ref: '#/components/schemas/LambdaFunctionRecommendationFinding'
@@ -2644,6 +4085,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LambdaFunctionMemoryRecommendationOptions'
             - description: An array of objects that describe the memory configuration recommendation options for the function.
+        currentPerformanceRisk:
+          allOf:
+            - $ref: '#/components/schemas/CurrentPerformanceRisk'
+            - description: 'The risk of the current Lambda function not meeting the performance needs of its workloads. The higher the risk, the more likely the current Lambda function requires more memory.'
       description: Describes an Lambda function recommendation.
     LambdaFunctionRecommendationFilterName:
       type: string
@@ -2685,6 +4130,8 @@ components:
             - $ref: '#/components/schemas/MetricValue'
             - description: The value of the utilization metric.
       description: Describes a utilization metric of an Lambda function.
+    NullableMemoryReservation:
+      type: integer
     MetadataKey:
       type: string
     MetricName:
@@ -2704,10 +4151,6 @@ components:
         - NETWORK_OUT_BYTES_PER_SECOND
         - NETWORK_PACKETS_IN_PER_SECOND
         - NETWORK_PACKETS_OUT_PER_SECOND
-    MetricValues:
-      type: array
-      items:
-        $ref: '#/components/schemas/MetricValue'
     PlatformDifference:
       type: string
       enum:
@@ -2717,10 +4160,6 @@ components:
         - InstanceStoreAvailability
         - VirtualizationType
         - Architecture
-    Timestamps:
-      type: array
-      items:
-        $ref: '#/components/schemas/Timestamp'
     ProjectedMetric:
       type: object
       properties:
@@ -2776,13 +4215,6 @@ components:
     SummaryValue:
       type: number
       format: double
-    ResourceType:
-      type: string
-      enum:
-        - Ec2Instance
-        - AutoScalingGroup
-        - EbsVolume
-        - LambdaFunction
     RecommendationExportJob:
       type: object
       properties:
@@ -2815,6 +4247,36 @@ components:
             - $ref: '#/components/schemas/FailureReason'
             - description: The reason for an export job failure.
       description: <p>Describes a recommendation export job.</p> <p>Use the <a>DescribeRecommendationExportJobs</a> action to view your recommendation export jobs.</p> <p>Use the <a>ExportAutoScalingGroupRecommendations</a> or <a>ExportEC2InstanceRecommendations</a> actions to request an export of your recommendations.</p>
+    RecommendationPreferenceName:
+      type: string
+      enum:
+        - EnhancedInfrastructureMetrics
+        - InferredWorkloadTypes
+        - ExternalMetricsPreference
+    RecommendationPreferencesDetail:
+      type: object
+      properties:
+        scope:
+          allOf:
+            - $ref: '#/components/schemas/Scope'
+            - description: '<p>An object that describes the scope of the recommendation preference.</p> <p>Recommendation preferences can be created at the organization level (for management accounts of an organization only), account level, and resource level. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html">Activating enhanced infrastructure metrics</a> in the <i>Compute Optimizer User Guide</i>.</p>'
+        resourceType:
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: <p>The target resource type of the recommendation preference to create.</p> <p>The <code>Ec2Instance</code> option encompasses standalone instances and instances that are part of Auto Scaling groups. The <code>AutoScalingGroup</code> option encompasses only instances that are part of an Auto Scaling group.</p>
+        enhancedInfrastructureMetrics:
+          allOf:
+            - $ref: '#/components/schemas/EnhancedInfrastructureMetrics'
+            - description: '<p>The status of the enhanced infrastructure metrics recommendation preference.</p> <p>When the recommendations page is refreshed, a status of <code>Active</code> confirms that the preference is applied to the recommendations, and a status of <code>Inactive</code> confirms that the preference isn''t yet applied to recommendations.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html">Enhanced infrastructure metrics</a> in the <i>Compute Optimizer User Guide</i>.</p>'
+        inferredWorkloadTypes:
+          allOf:
+            - $ref: '#/components/schemas/InferredWorkloadTypesPreference'
+            - description: '<p>The status of the inferred workload types recommendation preference.</p> <p>When the recommendations page is refreshed, a status of <code>Active</code> confirms that the preference is applied to the recommendations, and a status of <code>Inactive</code> confirms that the preference isn''t yet applied to recommendations.</p>'
+        externalMetricsPreference:
+          allOf:
+            - $ref: '#/components/schemas/ExternalMetricsPreference'
+            - description: '<p> An object that describes the external metrics recommendation preference. </p> <p> If the preference is applied in the latest recommendation refresh, an object with a valid <code>source</code> value appears in the response. If the preference isn''t applied to the recommendations already, then this object doesn''t appear in the response. </p>'
+      description: Describes a recommendation preference.
     RecommendationSourceArn:
       type: string
     RecommendationSourceType:
@@ -2824,6 +4286,7 @@ components:
         - AutoScalingGroup
         - EbsVolume
         - LambdaFunction
+        - EcsService
     RecommendationSource:
       type: object
       properties:
@@ -2846,11 +4309,19 @@ components:
         recommendationResourceType:
           allOf:
             - $ref: '#/components/schemas/RecommendationSourceType'
-            - description: The resource type of the recommendation.
+            - description: The resource type that the recommendation summary applies to.
         accountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
             - description: The Amazon Web Services account ID of the recommendation summary.
+        savingsOpportunity:
+          allOf:
+            - $ref: '#/components/schemas/SavingsOpportunity'
+            - description: An object that describes the savings opportunity for a given resource type. Savings opportunity includes the estimated monthly savings amount and percentage.
+        currentPerformanceRiskRatings:
+          allOf:
+            - $ref: '#/components/schemas/CurrentPerformanceRiskRatings'
+            - description: An object that describes the performance risk ratings for a given resource type.
       description: A summary of a recommendation.
     Summaries:
       type: array
@@ -2874,6 +4345,19 @@ components:
             - $ref: '#/components/schemas/ProjectedMetrics'
             - description: An array of objects that describe a projected utilization metric.
       description: '<p>Describes a projected utilization metric of a recommendation option.</p> <note> <p>The <code>Cpu</code> and <code>Memory</code> metrics are the only projected utilization metrics returned when you run the <a>GetEC2RecommendationProjectedMetrics</a> action. Additionally, the <code>Memory</code> metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent">Enabling Memory Utilization with the CloudWatch Agent</a>.</p> </note>'
+    SavingsOpportunityPercentage:
+      type: number
+      format: double
+    ScopeName:
+      type: string
+      enum:
+        - Organization
+        - AccountId
+        - ResourceArn
+    ScopeValue:
+      type: string
+    TaskDefinitionArn:
+      type: string
     Summary:
       type: object
       properties:
@@ -2970,7 +4454,11 @@ components:
         lastRefreshTimestamp:
           allOf:
             - $ref: '#/components/schemas/LastRefreshTimestamp'
-            - description: The timestamp of when the volume recommendation was last refreshed.
+            - description: The timestamp of when the volume recommendation was last generated.
+        currentPerformanceRisk:
+          allOf:
+            - $ref: '#/components/schemas/CurrentPerformanceRisk'
+            - description: 'The risk of the current EBS volume not meeting the performance needs of its workloads. The higher the risk, the more likely the current EBS volume doesn''t have sufficient capacity.'
       description: Describes an Amazon Elastic Block Store (Amazon EBS) volume recommendation.
     VolumeRecommendationOption:
       type: object
@@ -2987,6 +4475,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Rank'
             - description: <p>The rank of the volume recommendation option.</p> <p>The top recommendation option is ranked as <code>1</code>.</p>
+        savingsOpportunity:
+          allOf:
+            - $ref: '#/components/schemas/SavingsOpportunity'
+            - description: An object that describes the savings opportunity for the EBS volume recommendation option. Savings opportunity includes the estimated monthly savings amount and percentage.
       description: Describes a recommendation option for an Amazon Elastic Block Store (Amazon EBS) instance.
 security:
   - hmac: []

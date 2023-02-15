@@ -1,0 +1,2358 @@
+openapi: 3.0.0
+info:
+  version: '2021-07-13'
+  x-release: v4
+  title: EMR Serverless
+  description: '<p>Amazon EMR Serverless is a new deployment option for Amazon EMR. EMR Serverless provides a serverless runtime environment that simplifies running analytics applications using the latest open source frameworks such as Apache Spark and Apache Hive. With EMR Serverless, you don’t have to configure, optimize, secure, or operate clusters to run applications with these frameworks.</p> <p>The API reference to Amazon EMR Serverless is <code>emr-serverless</code>. The <code>emr-serverless</code> prefix is used in the following scenarios: </p> <ul> <li> <p>It is the prefix in the CLI commands for Amazon EMR Serverless. For example, <code>aws emr-serverless start-job-run</code>.</p> </li> <li> <p>It is the prefix before IAM policy actions for Amazon EMR Serverless. For example, <code>"Action": ["emr-serverless:StartJobRun"]</code>. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions">Policy actions for Amazon EMR Serverless</a>.</p> </li> <li> <p>It is the prefix used in Amazon EMR Serverless service endpoints. For example, <code>emr-serverless.us-east-2.amazonaws.com</code>.</p> </li> </ul>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: emr-serverless
+  x-aws-signingName: emr-serverless
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/emr-serverless-2021-07-13.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/emr-serverless/'
+servers:
+  - url: 'http://emr-serverless.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The EMR Serverless multi-region endpoint
+  - url: 'https://emr-serverless.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The EMR Serverless multi-region endpoint
+  - url: 'http://emr-serverless.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The EMR Serverless endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://emr-serverless.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The EMR Serverless endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  '/applications/{applicationId}/jobruns/{jobRunId}':
+    delete:
+      operationId: CancelJobRun
+      description: Cancels a job run.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelJobRunResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          description: The ID of the application on which the job run will be canceled.
+          schema:
+            type: string
+            pattern: '[0-9a-z]+'
+            minLength: 1
+            maxLength: 64
+        - name: jobRunId
+          in: path
+          required: true
+          description: The ID of the job run to cancel.
+          schema:
+            type: string
+            pattern: '[0-9a-z]+'
+            minLength: 1
+            maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetJobRun
+      description: Displays detailed information about a job run.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetJobRunResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          description: The ID of the application on which the job run is submitted.
+          schema:
+            type: string
+            pattern: '[0-9a-z]+'
+            minLength: 1
+            maxLength: 64
+        - name: jobRunId
+          in: path
+          required: true
+          description: The ID of the job run.
+          schema:
+            type: string
+            pattern: '[0-9a-z]+'
+            minLength: 1
+            maxLength: 64
+  /applications:
+    post:
+      operationId: CreateApplication
+      description: Creates an application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateApplicationResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - releaseLabel
+                - type
+                - clientToken
+              properties:
+                name:
+                  description: The name of the application.
+                  type: string
+                  pattern: '[A-Za-z0-9._/#-]+'
+                  minLength: 1
+                  maxLength: 64
+                releaseLabel:
+                  description: The EMR release associated with the application.
+                  type: string
+                  pattern: '[A-Za-z0-9._/-]+'
+                  minLength: 1
+                  maxLength: 64
+                type:
+                  description: 'The type of application you want to start, such as Spark or Hive.'
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                clientToken:
+                  description: The client idempotency token of the application to create. Its value must be unique for each request.
+                  type: string
+                  pattern: '[A-Za-z0-9._-]+'
+                  minLength: 1
+                  maxLength: 64
+                initialCapacity:
+                  description: The capacity to initialize when the application is created.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 10
+                  additionalProperties:
+                    $ref: '#/components/schemas/InitialCapacityConfig'
+                maximumCapacity:
+                  description: The maximum allowed cumulative resources for an application. No new resources will be created once the limit is hit.
+                  type: object
+                  properties:
+                    cpu:
+                      allOf:
+                        - $ref: '#/components/schemas/CpuSize'
+                        - description: The maximum allowed CPU for an application.
+                    memory:
+                      allOf:
+                        - $ref: '#/components/schemas/MemorySize'
+                        - description: The maximum allowed resources for an application.
+                    disk:
+                      allOf:
+                        - $ref: '#/components/schemas/DiskSize'
+                        - description: The maximum allowed disk for an application.
+                tags:
+                  description: The tags assigned to the application.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+                autoStartConfiguration:
+                  description: The configuration for an application to automatically start on job submission.
+                  type: object
+                  properties:
+                    enabled:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Enables the application to automatically start on job submission. Defaults to true.
+                autoStopConfiguration:
+                  description: The configuration for an application to automatically stop after a certain amount of time being idle.
+                  type: object
+                  properties:
+                    enabled:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Enables the application to automatically stop after a certain amount of time being idle. Defaults to true.
+                    idleTimeoutMinutes:
+                      allOf:
+                        - $ref: '#/components/schemas/AutoStopConfigIdleTimeoutMinutesInteger'
+                        - description: The amount of idle time in minutes after which your application will automatically stop. Defaults to 15 minutes.
+                networkConfiguration:
+                  description: The network configuration for customer VPC connectivity.
+                  type: object
+                  properties:
+                    subnetIds:
+                      allOf:
+                        - $ref: '#/components/schemas/SubnetIds'
+                        - description: The array of subnet Ids for customer VPC connectivity.
+                    securityGroupIds:
+                      allOf:
+                        - $ref: '#/components/schemas/SecurityGroupIds'
+                        - description: The array of security group Ids for customer VPC connectivity.
+                architecture:
+                  description: The CPU architecture of an application.
+                  type: string
+                  enum:
+                    - ARM64
+                    - X86_64
+                imageConfiguration:
+                  description: The image configuration.
+                  type: object
+                  properties:
+                    imageUri:
+                      allOf:
+                        - $ref: '#/components/schemas/ImageUri'
+                        - description: 'The URI of an image in the Amazon ECR registry. This field is required when you create a new application. If you leave this field blank in an update, Amazon EMR will remove the image configuration.'
+                workerTypeSpecifications:
+                  description: 'The key-value pairs that specify worker type to <code>WorkerTypeSpecificationInput</code>. This parameter must contain all valid worker types for a Spark or Hive application. Valid worker types include <code>Driver</code> and <code>Executor</code> for Spark applications and <code>HiveDriver</code> and <code>TezTask</code> for Hive applications. You can either set image details in this parameter for each worker type, or in <code>imageConfiguration</code> for all worker types.'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/WorkerTypeSpecificationInput'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListApplications
+      description: Lists applications based on a set of parameters.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListApplicationsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of application results.
+          schema:
+            type: string
+            pattern: '[A-Za-z0-9_=-]+'
+            minLength: 1
+            maxLength: 1024
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of applications that can be listed.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: states
+          in: query
+          required: false
+          description: 'An optional filter for application states. Note that if this filter contains multiple states, the resulting list will be grouped by the state.'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/ApplicationState'
+            minItems: 1
+            maxItems: 7
+  '/applications/{applicationId}':
+    delete:
+      operationId: DeleteApplication
+      description: Deletes an application. An application has to be in a stopped or created state in order to be deleted.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteApplicationResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          description: The ID of the application that will be deleted.
+          schema:
+            type: string
+            pattern: '[0-9a-z]+'
+            minLength: 1
+            maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetApplication
+      description: Displays detailed information about a specified application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetApplicationResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          description: The ID of the application that will be described.
+          schema:
+            type: string
+            pattern: '[0-9a-z]+'
+            minLength: 1
+            maxLength: 64
+    patch:
+      operationId: UpdateApplication
+      description: Updates a specified application. An application has to be in a stopped or created state in order to be updated.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateApplicationResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          description: The ID of the application to update.
+          schema:
+            type: string
+            pattern: '[0-9a-z]+'
+            minLength: 1
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - clientToken
+              properties:
+                clientToken:
+                  description: The client idempotency token of the application to update. Its value must be unique for each request.
+                  type: string
+                  pattern: '[A-Za-z0-9._-]+'
+                  minLength: 1
+                  maxLength: 64
+                initialCapacity:
+                  description: The capacity to initialize when the application is updated.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 10
+                  additionalProperties:
+                    $ref: '#/components/schemas/InitialCapacityConfig'
+                maximumCapacity:
+                  description: The maximum allowed cumulative resources for an application. No new resources will be created once the limit is hit.
+                  type: object
+                  properties:
+                    cpu:
+                      allOf:
+                        - $ref: '#/components/schemas/CpuSize'
+                        - description: The maximum allowed CPU for an application.
+                    memory:
+                      allOf:
+                        - $ref: '#/components/schemas/MemorySize'
+                        - description: The maximum allowed resources for an application.
+                    disk:
+                      allOf:
+                        - $ref: '#/components/schemas/DiskSize'
+                        - description: The maximum allowed disk for an application.
+                autoStartConfiguration:
+                  description: The configuration for an application to automatically start on job submission.
+                  type: object
+                  properties:
+                    enabled:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Enables the application to automatically start on job submission. Defaults to true.
+                autoStopConfiguration:
+                  description: The configuration for an application to automatically stop after a certain amount of time being idle.
+                  type: object
+                  properties:
+                    enabled:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Enables the application to automatically stop after a certain amount of time being idle. Defaults to true.
+                    idleTimeoutMinutes:
+                      allOf:
+                        - $ref: '#/components/schemas/AutoStopConfigIdleTimeoutMinutesInteger'
+                        - description: The amount of idle time in minutes after which your application will automatically stop. Defaults to 15 minutes.
+                networkConfiguration:
+                  description: The network configuration for customer VPC connectivity.
+                  type: object
+                  properties:
+                    subnetIds:
+                      allOf:
+                        - $ref: '#/components/schemas/SubnetIds'
+                        - description: The array of subnet Ids for customer VPC connectivity.
+                    securityGroupIds:
+                      allOf:
+                        - $ref: '#/components/schemas/SecurityGroupIds'
+                        - description: The array of security group Ids for customer VPC connectivity.
+                architecture:
+                  description: The CPU architecture of an application.
+                  type: string
+                  enum:
+                    - ARM64
+                    - X86_64
+                imageConfiguration:
+                  description: The image configuration.
+                  type: object
+                  properties:
+                    imageUri:
+                      allOf:
+                        - $ref: '#/components/schemas/ImageUri'
+                        - description: 'The URI of an image in the Amazon ECR registry. This field is required when you create a new application. If you leave this field blank in an update, Amazon EMR will remove the image configuration.'
+                workerTypeSpecifications:
+                  description: 'The key-value pairs that specify worker type to <code>WorkerTypeSpecificationInput</code>. This parameter must contain all valid worker types for a Spark or Hive application. Valid worker types include <code>Driver</code> and <code>Executor</code> for Spark applications and <code>HiveDriver</code> and <code>TezTask</code> for Hive applications. You can either set image details in this parameter for each worker type, or in <code>imageConfiguration</code> for all worker types.'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/WorkerTypeSpecificationInput'
+  '/applications/{applicationId}/jobruns/{jobRunId}/dashboard':
+    get:
+      operationId: GetDashboardForJobRun
+      description: Returns a URL to access the job run dashboard.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDashboardForJobRunResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          description: The ID of the application.
+          schema:
+            type: string
+            pattern: '[0-9a-z]+'
+            minLength: 1
+            maxLength: 64
+        - name: jobRunId
+          in: path
+          required: true
+          description: The ID of the job run.
+          schema:
+            type: string
+            pattern: '[0-9a-z]+'
+            minLength: 1
+            maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/applications/{applicationId}/jobruns':
+    get:
+      operationId: ListJobRuns
+      description: Lists job runs based on a set of parameters.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListJobRunsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          description: The ID of the application for which to list the job run.
+          schema:
+            type: string
+            pattern: '[0-9a-z]+'
+            minLength: 1
+            maxLength: 64
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of job run results.
+          schema:
+            type: string
+            pattern: '[A-Za-z0-9_=-]+'
+            minLength: 1
+            maxLength: 1024
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of job runs that can be listed.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: createdAtAfter
+          in: query
+          required: false
+          description: The lower bound of the option to filter by creation date and time.
+          schema:
+            type: string
+            format: date-time
+        - name: createdAtBefore
+          in: query
+          required: false
+          description: The upper bound of the option to filter by creation date and time.
+          schema:
+            type: string
+            format: date-time
+        - name: states
+          in: query
+          required: false
+          description: 'An optional filter for job run states. Note that if this filter contains multiple states, the resulting list will be grouped by the state.'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/JobRunState'
+            minItems: 0
+            maxItems: 8
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartJobRun
+      description: Starts a job run.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartJobRunResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          description: The ID of the application on which to run the job.
+          schema:
+            type: string
+            pattern: '[0-9a-z]+'
+            minLength: 1
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - clientToken
+                - executionRoleArn
+              properties:
+                clientToken:
+                  description: The client idempotency token of the job run to start. Its value must be unique for each request.
+                  type: string
+                  pattern: '[A-Za-z0-9._-]+'
+                  minLength: 1
+                  maxLength: 64
+                executionRoleArn:
+                  description: The execution role ARN for the job run.
+                  type: string
+                  pattern: 'arn:(aws[a-zA-Z0-9-]*):iam::(\d{12})?:(role((\u002F)|(\u002F[\u0021-\u007F]+\u002F))[\w+=,.@-]+)'
+                  minLength: 20
+                  maxLength: 2048
+                jobDriver:
+                  description: The driver that the job runs on.
+                  type: object
+                  properties:
+                    sparkSubmit:
+                      allOf:
+                        - $ref: '#/components/schemas/SparkSubmit'
+                        - description: The job driver parameters specified for Spark.
+                    hive:
+                      allOf:
+                        - $ref: '#/components/schemas/Hive'
+                        - description: The job driver parameters specified for Hive.
+                configurationOverrides:
+                  description: A configuration specification to be used to override existing configurations.
+                  type: object
+                  properties:
+                    applicationConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/ConfigurationList'
+                        - description: The override configurations for the application.
+                    monitoringConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/MonitoringConfiguration'
+                        - description: The override configurations for monitoring.
+                tags:
+                  description: The tags assigned to the job run.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+                executionTimeoutMinutes:
+                  description: 'The maximum duration for the job run to run. If the job run runs beyond this duration, it will be automatically cancelled.'
+                  type: integer
+                  minimum: 0
+                  maximum: 1000000
+                name:
+                  description: The optional job run name. This doesn't have to be unique.
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 256
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags assigned to the resources.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: 'The Amazon Resource Name (ARN) that identifies the resource to list the tags for. Currently, the supported resources are Amazon EMR Serverless applications and job runs.'
+          schema:
+            type: string
+            pattern: 'arn:(aws[a-zA-Z0-9-]*):emr-serverless:.+:(\d{12}):\/applications\/[0-9a-zA-Z]+(\/jobruns\/[0-9a-zA-Z]+)?'
+            minLength: 60
+            maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: 'Assigns tags to resources. A tag is a label that you assign to an AWS resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your AWS resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you''ve assigned to it. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: 'The Amazon Resource Name (ARN) that identifies the resource to list the tags for. Currently, the supported resources are Amazon EMR Serverless applications and job runs.'
+          schema:
+            type: string
+            pattern: 'arn:(aws[a-zA-Z0-9-]*):emr-serverless:.+:(\d{12}):\/applications\/[0-9a-zA-Z]+(\/jobruns\/[0-9a-zA-Z]+)?'
+            minLength: 60
+            maxLength: 1024
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: The tags to add to the resource. A tag is an array of key-value pairs.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  '/applications/{applicationId}/start':
+    post:
+      operationId: StartApplication
+      description: Starts a specified application and initializes initial capacity if configured.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartApplicationResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          description: The ID of the application to start.
+          schema:
+            type: string
+            pattern: '[0-9a-z]+'
+            minLength: 1
+            maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/applications/{applicationId}/stop':
+    post:
+      operationId: StopApplication
+      description: Stops a specified application and releases initial capacity if configured. All scheduled and running jobs must be completed or cancelled before stopping an application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopApplicationResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          description: The ID of the application to stop.
+          schema:
+            type: string
+            pattern: '[0-9a-z]+'
+            minLength: 1
+            maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes tags from resources.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: 'The Amazon Resource Name (ARN) that identifies the resource to list the tags for. Currently, the supported resources are Amazon EMR Serverless applications and job runs.'
+          schema:
+            type: string
+            pattern: 'arn:(aws[a-zA-Z0-9-]*):emr-serverless:.+:(\d{12}):\/applications\/[0-9a-zA-Z]+(\/jobruns\/[0-9a-zA-Z]+)?'
+            minLength: 60
+            maxLength: 1024
+        - name: tagKeys
+          in: query
+          required: true
+          description: The keys of the tags to be removed.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 1
+            maxItems: 200
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CancelJobRunResponse:
+      type: object
+      required:
+        - applicationId
+        - jobRunId
+      properties:
+        applicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The output contains the application ID on which the job run is cancelled.
+        jobRunId:
+          allOf:
+            - $ref: '#/components/schemas/JobRunId'
+            - description: The output contains the ID of the cancelled job run.
+    ValidationException: {}
+    ResourceNotFoundException: {}
+    InternalServerException: {}
+    CreateApplicationResponse:
+      type: object
+      required:
+        - applicationId
+        - arn
+      properties:
+        applicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The output contains the application ID.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: The output contains the name of the application.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationArn'
+            - description: The output contains the ARN of the application.
+    InitialCapacityConfig:
+      type: object
+      required:
+        - workerCount
+      properties:
+        workerCount:
+          allOf:
+            - $ref: '#/components/schemas/WorkerCounts'
+            - description: The number of workers in the initial capacity configuration.
+        workerConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/WorkerResourceConfig'
+            - description: The resource configuration of the initial capacity configuration.
+      description: The initial capacity configuration per worker.
+    CpuSize:
+      type: string
+      pattern: '[1-9][0-9]*(\s)?(vCPU|vcpu|VCPU)?'
+      minLength: 1
+      maxLength: 15
+    MemorySize:
+      type: string
+      pattern: '[1-9][0-9]*(\s)?(GB|gb|gB|Gb)?'
+      minLength: 1
+      maxLength: 15
+    DiskSize:
+      type: string
+      pattern: '[1-9][0-9]*(\s)?(GB|gb|gB|Gb)'
+      minLength: 1
+      maxLength: 15
+    TagValue:
+      type: string
+      pattern: '[A-Za-z0-9 /_.:=+@-]*'
+      minLength: 0
+      maxLength: 256
+    Boolean:
+      type: boolean
+    AutoStopConfigIdleTimeoutMinutesInteger:
+      type: integer
+      minimum: 1
+      maximum: 10080
+    SubnetIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubnetString'
+      minItems: 0
+      maxItems: 16
+    SecurityGroupIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityGroupString'
+      minItems: 0
+      maxItems: 5
+    ImageUri:
+      type: string
+      pattern: '([a-z0-9]+[a-z0-9-.]*)\/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*\/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?:\:([a-zA-Z0-9_][a-zA-Z0-9-._]{0,299})|@(sha256:[0-9a-f]{64}))'
+      description: Image URI
+      minLength: 1
+      maxLength: 1024
+    WorkerTypeSpecificationInput:
+      type: object
+      properties:
+        imageConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ImageConfigurationInput'
+            - description: The image configuration for a worker type.
+      description: The specifications for a worker type.
+    ConflictException: {}
+    DeleteApplicationResponse:
+      type: object
+      properties: {}
+    GetApplicationResponse:
+      type: object
+      required:
+        - application
+      properties:
+        application:
+          allOf:
+            - $ref: '#/components/schemas/Application'
+            - description: The output displays information about the specified application.
+    GetDashboardForJobRunResponse:
+      type: object
+      properties:
+        url:
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: The URL to view job run's dashboard.
+    GetJobRunResponse:
+      type: object
+      required:
+        - jobRun
+      properties:
+        jobRun:
+          allOf:
+            - $ref: '#/components/schemas/JobRun'
+            - description: The output displays information about the job run.
+    ListApplicationsResponse:
+      type: object
+      required:
+        - applications
+      properties:
+        applications:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationList'
+            - description: The output lists the specified applications.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The output displays the token for the next set of application results. This is required for pagination and is available as a response of the previous request.
+    ApplicationState:
+      type: string
+      enum:
+        - CREATING
+        - CREATED
+        - STARTING
+        - STARTED
+        - STOPPING
+        - STOPPED
+        - TERMINATED
+    ListJobRunsResponse:
+      type: object
+      required:
+        - jobRuns
+      properties:
+        jobRuns:
+          allOf:
+            - $ref: '#/components/schemas/JobRuns'
+            - description: The output lists information about the specified job runs.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The output displays the token for the next set of job run results. This is required for pagination and is available as a response of the previous request.
+    JobRunState:
+      type: string
+      enum:
+        - SUBMITTED
+        - PENDING
+        - SCHEDULED
+        - RUNNING
+        - SUCCESS
+        - FAILED
+        - CANCELLING
+        - CANCELLED
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags for the resource.
+    StartApplicationResponse:
+      type: object
+      properties: {}
+    ServiceQuotaExceededException: {}
+    StartJobRunResponse:
+      type: object
+      required:
+        - applicationId
+        - jobRunId
+        - arn
+      properties:
+        applicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: This output displays the application ID on which the job run was submitted.
+        jobRunId:
+          allOf:
+            - $ref: '#/components/schemas/JobRunId'
+            - description: The output contains the ID of the started job run.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/JobArn'
+            - description: The output lists the execution role ARN of the job run.
+    SparkSubmit:
+      type: object
+      required:
+        - entryPoint
+      properties:
+        entryPoint:
+          allOf:
+            - $ref: '#/components/schemas/EntryPointPath'
+            - description: The entry point for the Spark submit job run.
+        entryPointArguments:
+          allOf:
+            - $ref: '#/components/schemas/EntryPointArguments'
+            - description: The arguments for the Spark submit job run.
+        sparkSubmitParameters:
+          allOf:
+            - $ref: '#/components/schemas/SparkSubmitParameters'
+            - description: The parameters for the Spark submit job run.
+      description: The configurations for the Spark submit job driver.
+    Hive:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          allOf:
+            - $ref: '#/components/schemas/Query'
+            - description: The query for the Hive job run.
+        initQueryFile:
+          allOf:
+            - $ref: '#/components/schemas/InitScriptPath'
+            - description: The query file for the Hive job run.
+        parameters:
+          allOf:
+            - $ref: '#/components/schemas/HiveCliParameters'
+            - description: The parameters for the Hive job run.
+      description: The configurations for the Hive job driver.
+    ConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Configuration'
+      minItems: 0
+      maxItems: 100
+    MonitoringConfiguration:
+      type: object
+      properties:
+        s3MonitoringConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/S3MonitoringConfiguration'
+            - description: The Amazon S3 configuration for monitoring log publishing.
+        managedPersistenceMonitoringConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ManagedPersistenceMonitoringConfiguration'
+            - description: The managed log persistence configuration for a job run.
+      description: The configuration setting for monitoring.
+    StopApplicationResponse:
+      type: object
+      properties: {}
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      pattern: '[A-Za-z0-9 /_.:=+@-]+'
+      minLength: 1
+      maxLength: 128
+    UpdateApplicationResponse:
+      type: object
+      required:
+        - application
+      properties:
+        application:
+          allOf:
+            - $ref: '#/components/schemas/Application'
+            - description: Information about the updated application.
+    ApplicationId:
+      type: string
+      pattern: '[0-9a-z]+'
+      minLength: 1
+      maxLength: 64
+    ApplicationName:
+      type: string
+      pattern: '[A-Za-z0-9._/#-]+'
+      minLength: 1
+      maxLength: 64
+    ApplicationArn:
+      type: string
+      pattern: 'arn:(aws[a-zA-Z0-9-]*):emr-serverless:.+:(\d{12}):\/applications\/[0-9a-zA-Z]+'
+      minLength: 60
+      maxLength: 1024
+    ReleaseLabel:
+      type: string
+      pattern: '[A-Za-z0-9._/-]+'
+      minLength: 1
+      maxLength: 64
+    EngineType:
+      type: string
+      minLength: 1
+      maxLength: 64
+    String256:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 256
+    InitialCapacityConfigMap:
+      type: object
+      minProperties: 0
+      maxProperties: 10
+      additionalProperties:
+        $ref: '#/components/schemas/InitialCapacityConfig'
+    MaximumAllowedResources:
+      type: object
+      required:
+        - cpu
+        - memory
+      properties:
+        cpu:
+          allOf:
+            - $ref: '#/components/schemas/CpuSize'
+            - description: The maximum allowed CPU for an application.
+        memory:
+          allOf:
+            - $ref: '#/components/schemas/MemorySize'
+            - description: The maximum allowed resources for an application.
+        disk:
+          allOf:
+            - $ref: '#/components/schemas/DiskSize'
+            - description: The maximum allowed disk for an application.
+      description: The maximum allowed cumulative resources for an application. No new resources will be created once the limit is hit.
+    Date:
+      type: string
+      format: date-time
+    TagMap:
+      type: object
+      minProperties: 0
+      maxProperties: 200
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    AutoStartConfig:
+      type: object
+      properties:
+        enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Enables the application to automatically start on job submission. Defaults to true.
+      description: The configuration for an application to automatically start on job submission.
+    AutoStopConfig:
+      type: object
+      properties:
+        enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Enables the application to automatically stop after a certain amount of time being idle. Defaults to true.
+        idleTimeoutMinutes:
+          allOf:
+            - $ref: '#/components/schemas/AutoStopConfigIdleTimeoutMinutesInteger'
+            - description: The amount of idle time in minutes after which your application will automatically stop. Defaults to 15 minutes.
+      description: The configuration for an application to automatically stop after a certain amount of time being idle.
+    NetworkConfiguration:
+      type: object
+      properties:
+        subnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIds'
+            - description: The array of subnet Ids for customer VPC connectivity.
+        securityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIds'
+            - description: The array of security group Ids for customer VPC connectivity.
+      description: The network configuration for customer VPC connectivity.
+    Architecture:
+      type: string
+      enum:
+        - ARM64
+        - X86_64
+    ImageConfiguration:
+      type: object
+      required:
+        - imageUri
+      properties:
+        imageUri:
+          allOf:
+            - $ref: '#/components/schemas/ImageUri'
+            - description: The image URI.
+        resolvedImageDigest:
+          allOf:
+            - $ref: '#/components/schemas/ImageDigest'
+            - description: The SHA256 digest of the image URI. This indicates which specific image the application is configured for. The image digest doesn't exist until an application has started.
+      description: The applied image configuration.
+    WorkerTypeSpecificationMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/WorkerTypeSpecification'
+    Application:
+      type: object
+      required:
+        - applicationId
+        - arn
+        - releaseLabel
+        - type
+        - state
+        - createdAt
+        - updatedAt
+      properties:
+        applicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: The name of the application.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationArn'
+            - description: The ARN of the application.
+        releaseLabel:
+          allOf:
+            - $ref: '#/components/schemas/ReleaseLabel'
+            - description: The EMR release associated with the application.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/EngineType'
+            - description: 'The type of application, such as Spark or Hive.'
+        state:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationState'
+            - description: The state of the application.
+        stateDetails:
+          allOf:
+            - $ref: '#/components/schemas/String256'
+            - description: The state details of the application.
+        initialCapacity:
+          allOf:
+            - $ref: '#/components/schemas/InitialCapacityConfigMap'
+            - description: The initial capacity of the application.
+        maximumCapacity:
+          allOf:
+            - $ref: '#/components/schemas/MaximumAllowedResources'
+            - description: The maximum capacity of the application. This is cumulative across all workers at any given point in time during the lifespan of the application is created. No new resources will be created once any one of the defined limits is hit.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time when the application run was created.
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time when the application run was last updated.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags assigned to the application.
+        autoStartConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AutoStartConfig'
+            - description: The configuration for an application to automatically start on job submission.
+        autoStopConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AutoStopConfig'
+            - description: The configuration for an application to automatically stop after a certain amount of time being idle.
+        networkConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/NetworkConfiguration'
+            - description: The network configuration for customer VPC connectivity for the application.
+        architecture:
+          allOf:
+            - $ref: '#/components/schemas/Architecture'
+            - description: The CPU architecture of an application.
+        imageConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ImageConfiguration'
+            - description: The image configuration applied to all worker types.
+        workerTypeSpecifications:
+          allOf:
+            - $ref: '#/components/schemas/WorkerTypeSpecificationMap'
+            - description: The specification applied to each worker type.
+      description: Information about an application. EMR Serverless uses applications to run jobs.
+    ApplicationSummary:
+      type: object
+      required:
+        - id
+        - arn
+        - releaseLabel
+        - type
+        - state
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: The name of the application.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationArn'
+            - description: The ARN of the application.
+        releaseLabel:
+          allOf:
+            - $ref: '#/components/schemas/ReleaseLabel'
+            - description: The EMR release associated with the application.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/EngineType'
+            - description: 'The type of application, such as Spark or Hive.'
+        state:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationState'
+            - description: The state of the application.
+        stateDetails:
+          allOf:
+            - $ref: '#/components/schemas/String256'
+            - description: The state details of the application.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time when the application was created.
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time when the application was last updated.
+        architecture:
+          allOf:
+            - $ref: '#/components/schemas/Architecture'
+            - description: The CPU architecture of an application.
+      description: The summary of attributes associated with an application.
+    ApplicationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationSummary'
+    ApplicationStateSet:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationState'
+      minItems: 1
+      maxItems: 7
+    JobRunId:
+      type: string
+      pattern: '[0-9a-z]+'
+      minLength: 1
+      maxLength: 64
+    CancelJobRunRequest:
+      type: object
+      title: CancelJobRunRequest
+      properties: {}
+    ClientToken:
+      type: string
+      pattern: '[A-Za-z0-9._-]+'
+      minLength: 1
+      maxLength: 64
+    String1024:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 1024
+    Configuration:
+      type: object
+      required:
+        - classification
+      properties:
+        classification:
+          allOf:
+            - $ref: '#/components/schemas/String1024'
+            - description: The classification within a configuration.
+        properties:
+          description: A set of properties specified within a configuration classification.
+        configurations:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationList'
+            - description: A list of additional configurations to apply within a configuration object.
+      description: 'A configuration specification to be used when provisioning an application. A configuration consists of a classification, properties, and optional nested configurations. A classification refers to an application-specific configuration file. Properties are the settings you want to change in that file.'
+    ConfigurationOverrides:
+      type: object
+      properties:
+        applicationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationList'
+            - description: The override configurations for the application.
+        monitoringConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringConfiguration'
+            - description: The override configurations for monitoring.
+      description: A configuration specification to be used to override existing configurations.
+    ImageConfigurationInput:
+      type: object
+      properties:
+        imageUri:
+          allOf:
+            - $ref: '#/components/schemas/ImageUri'
+            - description: 'The URI of an image in the Amazon ECR registry. This field is required when you create a new application. If you leave this field blank in an update, Amazon EMR will remove the image configuration.'
+      description: The image configuration.
+    WorkerTypeSpecificationInputMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/WorkerTypeSpecificationInput'
+    CreateApplicationRequest:
+      type: object
+      required:
+        - releaseLabel
+        - type
+        - clientToken
+      title: CreateApplicationRequest
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: The name of the application.
+        releaseLabel:
+          allOf:
+            - $ref: '#/components/schemas/ReleaseLabel'
+            - description: The EMR release associated with the application.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/EngineType'
+            - description: 'The type of application you want to start, such as Spark or Hive.'
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: The client idempotency token of the application to create. Its value must be unique for each request.
+        initialCapacity:
+          allOf:
+            - $ref: '#/components/schemas/InitialCapacityConfigMap'
+            - description: The capacity to initialize when the application is created.
+        maximumCapacity:
+          allOf:
+            - $ref: '#/components/schemas/MaximumAllowedResources'
+            - description: 'The maximum capacity to allocate when the application is created. This is cumulative across all workers at any given point in time, not just when an application is created. No new resources will be created once any one of the defined limits is hit.'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags assigned to the application.
+        autoStartConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AutoStartConfig'
+            - description: The configuration for an application to automatically start on job submission.
+        autoStopConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AutoStopConfig'
+            - description: The configuration for an application to automatically stop after a certain amount of time being idle.
+        networkConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/NetworkConfiguration'
+            - description: The network configuration for customer VPC connectivity.
+        architecture:
+          allOf:
+            - $ref: '#/components/schemas/Architecture'
+            - description: The CPU architecture of an application.
+        imageConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ImageConfigurationInput'
+            - description: The image configuration for all worker types. You can either set this parameter or <code>imageConfiguration</code> for each worker type in <code>workerTypeSpecifications</code>.
+        workerTypeSpecifications:
+          allOf:
+            - $ref: '#/components/schemas/WorkerTypeSpecificationInputMap'
+            - description: 'The key-value pairs that specify worker type to <code>WorkerTypeSpecificationInput</code>. This parameter must contain all valid worker types for a Spark or Hive application. Valid worker types include <code>Driver</code> and <code>Executor</code> for Spark applications and <code>HiveDriver</code> and <code>TezTask</code> for Hive applications. You can either set image details in this parameter for each worker type, or in <code>imageConfiguration</code> for all worker types.'
+    DeleteApplicationRequest:
+      type: object
+      title: DeleteApplicationRequest
+      properties: {}
+    Double:
+      type: number
+      format: double
+    Duration:
+      type: integer
+      minimum: 0
+      maximum: 1000000
+    EncryptionKeyArn:
+      type: string
+      pattern: 'arn:(aws[a-zA-Z0-9-]*):kms:[a-zA-Z0-9\-]*:(\d{12})?:key\/[a-zA-Z0-9-]+'
+      minLength: 20
+      maxLength: 2048
+    EntryPointArgument:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 10280
+      format: password
+    EntryPointArguments:
+      type: array
+      items:
+        $ref: '#/components/schemas/EntryPointArgument'
+    EntryPointPath:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 256
+      format: password
+    GetApplicationRequest:
+      type: object
+      title: GetApplicationRequest
+      properties: {}
+    GetDashboardForJobRunRequest:
+      type: object
+      title: GetDashboardForJobRunRequest
+      properties: {}
+    Url:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    GetJobRunRequest:
+      type: object
+      title: GetJobRunRequest
+      properties: {}
+    JobRun:
+      type: object
+      required:
+        - applicationId
+        - jobRunId
+        - arn
+        - createdBy
+        - createdAt
+        - updatedAt
+        - executionRole
+        - state
+        - stateDetails
+        - releaseLabel
+        - jobDriver
+      properties:
+        applicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application the job is running on.
+        jobRunId:
+          allOf:
+            - $ref: '#/components/schemas/JobRunId'
+            - description: The ID of the job run.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String256'
+            - description: The optional job run name. This doesn't have to be unique.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/JobArn'
+            - description: The execution role ARN of the job run.
+        createdBy:
+          allOf:
+            - $ref: '#/components/schemas/RequestIdentityUserArn'
+            - description: The user who created the job run.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time when the job run was created.
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time when the job run was updated.
+        executionRole:
+          allOf:
+            - $ref: '#/components/schemas/IAMRoleArn'
+            - description: The execution role ARN of the job run.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/JobRunState'
+            - description: The state of the job run.
+        stateDetails:
+          allOf:
+            - $ref: '#/components/schemas/String256'
+            - description: The state details of the job run.
+        releaseLabel:
+          allOf:
+            - $ref: '#/components/schemas/ReleaseLabel'
+            - description: The EMR release associated with the application your job is running on.
+        configurationOverrides:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationOverrides'
+            - description: The configuration settings that are used to override default configuration.
+        jobDriver:
+          allOf:
+            - $ref: '#/components/schemas/JobDriver'
+            - description: The job driver for the job run.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags assigned to the job run.
+        totalResourceUtilization:
+          allOf:
+            - $ref: '#/components/schemas/TotalResourceUtilization'
+            - description: 'The aggregate vCPU, memory, and storage resources used from the time job start executing till the time job is terminated, rounded up to the nearest second.'
+        networkConfiguration:
+          $ref: '#/components/schemas/NetworkConfiguration'
+        totalExecutionDurationSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The job run total execution duration in seconds. This field is only available for job runs in a <code>COMPLETED</code>, <code>FAILED</code>, or <code>CANCELLED</code> state.'
+      description: 'Information about a job run. A job run is a unit of work, such as a Spark JAR, Hive query, or SparkSQL query, that you submit to an EMR Serverless application.'
+    Query:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 10280
+      format: password
+    InitScriptPath:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 256
+      format: password
+    HiveCliParameters:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 102400
+      format: password
+    IAMRoleArn:
+      type: string
+      pattern: 'arn:(aws[a-zA-Z0-9-]*):iam::(\d{12})?:(role((\u002F)|(\u002F[\u0021-\u007F]+\u002F))[\w+=,.@-]+)'
+      minLength: 20
+      maxLength: 2048
+    ImageDigest:
+      type: string
+      pattern: 'sha256:[0-9a-f]{64}'
+      description: Image Digest
+    WorkerCounts:
+      type: integer
+      minimum: 1
+      maximum: 1000000
+    WorkerResourceConfig:
+      type: object
+      required:
+        - cpu
+        - memory
+      properties:
+        cpu:
+          allOf:
+            - $ref: '#/components/schemas/CpuSize'
+            - description: The CPU requirements for every worker instance of the worker type.
+        memory:
+          allOf:
+            - $ref: '#/components/schemas/MemorySize'
+            - description: The memory requirements for every worker instance of the worker type.
+        disk:
+          allOf:
+            - $ref: '#/components/schemas/DiskSize'
+            - description: The disk requirements for every worker instance of the worker type.
+      description: The cumulative configuration requirements for every worker instance of the worker type.
+    Integer:
+      type: integer
+    JobArn:
+      type: string
+      pattern: 'arn:(aws[a-zA-Z0-9-]*):emr-serverless:.+:(\d{12}):\/applications\/[0-9a-zA-Z]+\/jobruns\/[0-9a-zA-Z]+'
+      minLength: 60
+      maxLength: 1024
+    JobDriver:
+      type: object
+      properties:
+        sparkSubmit:
+          allOf:
+            - $ref: '#/components/schemas/SparkSubmit'
+            - description: The job driver parameters specified for Spark.
+        hive:
+          allOf:
+            - $ref: '#/components/schemas/Hive'
+            - description: The job driver parameters specified for Hive.
+      description: The driver that the job runs on.
+    RequestIdentityUserArn:
+      type: string
+      pattern: 'arn:(aws[a-zA-Z0-9-]*):(iam|sts)::(\d{12})?:[\w/+=,.@-]+'
+      minLength: 20
+      maxLength: 2048
+    TotalResourceUtilization:
+      type: object
+      properties:
+        vCPUHour:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The aggregated vCPU used per hour from the time job start executing till the time job is terminated.
+        memoryGBHour:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The aggregated memory used per hour from the time job start executing till the time job is terminated.
+        storageGBHour:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The aggregated storage used per hour from the time job start executing till the time job is terminated.
+      description: 'The aggregate vCPU, memory, and storage resources used from the time job start executing till the time job is terminated, rounded up to the nearest second.'
+    JobRunStateSet:
+      type: array
+      items:
+        $ref: '#/components/schemas/JobRunState'
+      minItems: 0
+      maxItems: 8
+    JobRunType:
+      type: string
+    JobRunSummary:
+      type: object
+      required:
+        - applicationId
+        - id
+        - arn
+        - createdBy
+        - createdAt
+        - updatedAt
+        - executionRole
+        - state
+        - stateDetails
+        - releaseLabel
+      properties:
+        applicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application the job is running on.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/JobRunId'
+            - description: The ID of the job run.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String256'
+            - description: The optional job run name. This doesn't have to be unique.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/JobArn'
+            - description: The ARN of the job run.
+        createdBy:
+          allOf:
+            - $ref: '#/components/schemas/RequestIdentityUserArn'
+            - description: The user who created the job run.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time when the job run was created.
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time when the job run was last updated.
+        executionRole:
+          allOf:
+            - $ref: '#/components/schemas/IAMRoleArn'
+            - description: The execution role ARN of the job run.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/JobRunState'
+            - description: The state of the job run.
+        stateDetails:
+          allOf:
+            - $ref: '#/components/schemas/String256'
+            - description: The state details of the job run.
+        releaseLabel:
+          allOf:
+            - $ref: '#/components/schemas/ReleaseLabel'
+            - description: The EMR release associated with the application your job is running on.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/JobRunType'
+            - description: 'The type of job run, such as Spark or Hive.'
+      description: The summary of attributes associated with a job run.
+    JobRuns:
+      type: array
+      items:
+        $ref: '#/components/schemas/JobRunSummary'
+    NextToken:
+      type: string
+      pattern: '[A-Za-z0-9_=-]+'
+      minLength: 1
+      maxLength: 1024
+    ListApplicationsRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 50
+    ListApplicationsRequest:
+      type: object
+      title: ListApplicationsRequest
+      properties: {}
+    ListJobRunsRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 50
+    ListJobRunsRequest:
+      type: object
+      title: ListJobRunsRequest
+      properties: {}
+    ResourceArn:
+      type: string
+      pattern: 'arn:(aws[a-zA-Z0-9-]*):emr-serverless:.+:(\d{12}):\/applications\/[0-9a-zA-Z]+(\/jobruns\/[0-9a-zA-Z]+)?'
+      minLength: 60
+      maxLength: 1024
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    ManagedPersistenceMonitoringConfiguration:
+      type: object
+      properties:
+        enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Enables managed logging and defaults to true. If set to false, managed logging will be turned off.'
+        encryptionKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionKeyArn'
+            - description: The KMS key ARN to encrypt the logs stored in managed log persistence.
+      description: The managed log persistence configuration for a job run.
+    S3MonitoringConfiguration:
+      type: object
+      properties:
+        logUri:
+          allOf:
+            - $ref: '#/components/schemas/UriString'
+            - description: The Amazon S3 destination URI for log publishing.
+        encryptionKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionKeyArn'
+            - description: The KMS key ARN to encrypt the logs published to the given Amazon S3 destination.
+      description: The Amazon S3 configuration for monitoring log publishing. You can configure your jobs to send log information to Amazon S3.
+    UriString:
+      type: string
+      pattern: '.*[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\r\n\t]*.*'
+      minLength: 1
+      maxLength: 10280
+    SecurityGroupString:
+      type: string
+      pattern: '[-0-9a-zA-Z]+.*'
+      minLength: 1
+      maxLength: 32
+    SensitivePropertiesMap:
+      type: object
+      minProperties: 0
+      maxProperties: 100
+      additionalProperties:
+        $ref: '#/components/schemas/String1024'
+    SparkSubmitParameters:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 102400
+      format: password
+    StartApplicationRequest:
+      type: object
+      title: StartApplicationRequest
+      properties: {}
+    StartJobRunRequest:
+      type: object
+      required:
+        - clientToken
+        - executionRoleArn
+      title: StartJobRunRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: The client idempotency token of the job run to start. Its value must be unique for each request.
+        executionRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IAMRoleArn'
+            - description: The execution role ARN for the job run.
+        jobDriver:
+          allOf:
+            - $ref: '#/components/schemas/JobDriver'
+            - description: The job driver for the job run.
+        configurationOverrides:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationOverrides'
+            - description: The configuration overrides for the job run.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags assigned to the job run.
+        executionTimeoutMinutes:
+          allOf:
+            - $ref: '#/components/schemas/Duration'
+            - description: 'The maximum duration for the job run to run. If the job run runs beyond this duration, it will be automatically cancelled.'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String256'
+            - description: The optional job run name. This doesn't have to be unique.
+    StopApplicationRequest:
+      type: object
+      title: StopApplicationRequest
+      properties: {}
+    SubnetString:
+      type: string
+      pattern: '[-0-9a-zA-Z]+.*'
+      minLength: 1
+      maxLength: 32
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 1
+      maxItems: 200
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags to add to the resource. A tag is an array of key-value pairs.
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+    UpdateApplicationRequest:
+      type: object
+      required:
+        - clientToken
+      title: UpdateApplicationRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: The client idempotency token of the application to update. Its value must be unique for each request.
+        initialCapacity:
+          allOf:
+            - $ref: '#/components/schemas/InitialCapacityConfigMap'
+            - description: The capacity to initialize when the application is updated.
+        maximumCapacity:
+          allOf:
+            - $ref: '#/components/schemas/MaximumAllowedResources'
+            - description: The maximum capacity to allocate when the application is updated. This is cumulative across all workers at any given point in time during the lifespan of the application. No new resources will be created once any one of the defined limits is hit.
+        autoStartConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AutoStartConfig'
+            - description: The configuration for an application to automatically start on job submission.
+        autoStopConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AutoStopConfig'
+            - description: The configuration for an application to automatically stop after a certain amount of time being idle.
+        networkConfiguration:
+          $ref: '#/components/schemas/NetworkConfiguration'
+        architecture:
+          allOf:
+            - $ref: '#/components/schemas/Architecture'
+            - description: The CPU architecture of an application.
+        imageConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ImageConfigurationInput'
+            - description: The image configuration to be used for all worker types. You can either set this parameter or <code>imageConfiguration</code> for each worker type in <code>WorkerTypeSpecificationInput</code>.
+        workerTypeSpecifications:
+          allOf:
+            - $ref: '#/components/schemas/WorkerTypeSpecificationInputMap'
+            - description: 'The key-value pairs that specify worker type to <code>WorkerTypeSpecificationInput</code>. This parameter must contain all valid worker types for a Spark or Hive application. Valid worker types include <code>Driver</code> and <code>Executor</code> for Spark applications and <code>HiveDriver</code> and <code>TezTask</code> for Hive applications. You can either set image details in this parameter for each worker type, or in <code>imageConfiguration</code> for all worker types.'
+    WorkerTypeSpecification:
+      type: object
+      properties:
+        imageConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ImageConfiguration'
+            - description: The image configuration for a worker type.
+      description: The specifications for a worker type.
+    WorkerTypeString:
+      type: string
+      pattern: '[a-zA-Z]+[-_]*[a-zA-Z]+'
+      minLength: 1
+      maxLength: 50
+security:
+  - hmac: []

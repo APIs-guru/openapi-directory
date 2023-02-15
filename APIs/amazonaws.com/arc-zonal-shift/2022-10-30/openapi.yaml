@@ -1,0 +1,894 @@
+openapi: 3.0.0
+info:
+  version: '2022-10-30'
+  x-release: v4
+  title: AWS ARC - Zonal Shift
+  description: '<p>This is the API Reference Guide for the zonal shift feature of Amazon Route 53 Application Recovery Controller. This guide is for developers who need detailed information about zonal shift API actions, data types, and errors.</p> <p>Zonal shift is in preview release for Amazon Route 53 Application Recovery Controller and is subject to change.</p> <p>Zonal shift in Route 53 ARC enables you to move traffic for a load balancer resource away from an Availability Zone. Starting a zonal shift helps your application recover immediately, for example, from a developer''s bad code deployment or from an AWS infrastructure failure in a single Availability Zone, reducing the impact and time lost from an issue in one zone. </p> <p>Supported AWS resources are automatically registered with Route 53 ARC. Resources that are registered for zonal shifts in Route 53 ARC are managed resources in Route 53 ARC. You can start a zonal shift for any managed resource in your account in a Region. At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p> <p>Zonal shifts are temporary. You must specify an expiration when you start a zonal shift, of up to three days initially. If you want to still keep traffic away from an Availability Zone, you can update the zonal shift and set a new expiration. You can also cancel a zonal shift, before it expires, for example, if you''re ready to restore traffic to the Availability Zone.</p> <p>For more information about using zonal shift, see the <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/what-is-route53-recovery.html">Amazon Route 53 Application Recovery Controller Developer Guide</a>.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: arc-zonal-shift
+  x-aws-signingName: arc-zonal-shift
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/arc-zonal-shift-2022-10-30.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/arc-zonal-shift/'
+servers:
+  - url: 'http://arc-zonal-shift.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS ARC - Zonal Shift multi-region endpoint
+  - url: 'https://arc-zonal-shift.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS ARC - Zonal Shift multi-region endpoint
+  - url: 'http://arc-zonal-shift.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS ARC - Zonal Shift endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://arc-zonal-shift.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS ARC - Zonal Shift endpoint for China (Beijing) and China (Ningxia)
+paths:
+  '/zonalshifts/{zonalShiftId}':
+    delete:
+      operationId: CancelZonalShift
+      description: 'Cancel a zonal shift in Amazon Route 53 Application Recovery Controller that you''ve started for a resource in your AWS account in an AWS Region. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZonalShift'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: zonalShiftId
+          in: path
+          required: true
+          description: The internally-generated identifier of a zonal shift.
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9-]+$'
+            minLength: 6
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    patch:
+      operationId: UpdateZonalShift
+      description: 'Update an active zonal shift in Amazon Route 53 Application Recovery Controller in your AWS account. You can update a zonal shift to set a new expiration, or edit or replace the comment for the zonal shift. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZonalShift'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: zonalShiftId
+          in: path
+          required: true
+          description: The identifier of a zonal shift.
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9-]+$'
+            minLength: 6
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment:
+                  description: A comment that you enter about the zonal shift. Only the latest comment is retained; no comment history is maintained. A new comment overwrites any existing comment string.
+                  type: string
+                  minLength: 0
+                  maxLength: 128
+                expiresIn:
+                  description: '<p>The length of time that you want a zonal shift to be active, which Route 53 ARC converts to an expiry time (expiration time). Zonal shifts are temporary. You can set a zonal shift to be active initially for up to three days (72 hours).</p> <p>If you want to still keep traffic away from an Availability Zone, you can update the zonal shift and set a new expiration. You can also cancel a zonal shift, before it expires, for example, if you''re ready to restore traffic to the Availability Zone.</p> <p>To set a length of time for a zonal shift to be active, specify a whole number, and then one of the following, with no space:</p> <ul> <li> <p> <b>A lowercase letter m:</b> To specify that the value is in minutes.</p> </li> <li> <p> <b>A lowercase letter h:</b> To specify that the value is in hours.</p> </li> </ul> <p>For example: <code>20h</code> means the zonal shift expires in 20 hours. <code>120m</code> means the zonal shift expires in 120 minutes (2 hours).</p>'
+                  type: string
+                  pattern: '^([1-9][0-9]*)(m|h)$'
+                  minLength: 2
+                  maxLength: 5
+  '/managedresources/{resourceIdentifier}':
+    get:
+      operationId: GetManagedResource
+      description: '<p>Get information about a resource that''s been registered for zonal shifts with Amazon Route 53 Application Recovery Controller in this AWS Region. Resources that are registered for zonal shifts are managed resources in Route 53 ARC.</p> <p>At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetManagedResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: resourceIdentifier
+          in: path
+          required: true
+          description: '<p>The identifier for the resource to include in a zonal shift. The identifier is the Amazon Resource Name (ARN) for the resource.</p> <p>At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>'
+          schema:
+            type: string
+            minLength: 8
+            maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /managedresources:
+    get:
+      operationId: ListManagedResources
+      description: 'Lists all the resources in your AWS account in this AWS Region that are managed for zonal shifts in Amazon Route 53 Application Recovery Controller, and information about them. The information includes their Amazon Resource Names (ARNs), the Availability Zones the resources are deployed in, and the resource name.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListManagedResourcesResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The number of objects that you want to return with this call.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /zonalshifts:
+    get:
+      operationId: ListZonalShifts
+      description: Lists all the active zonal shifts in Amazon Route 53 Application Recovery Controller in your AWS account in this AWS Region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListZonalShiftsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The number of objects that you want to return with this call.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
+          schema:
+            type: string
+        - name: status
+          in: query
+          required: false
+          description: '<p>A status for a zonal shift.</p> <p>The <code>Status</code> for a zonal shift can have one of the following values:</p> <ul> <li> <p> <b>ACTIVE</b>: The zonal shift is started and active.</p> </li> <li> <p> <b>EXPIRED</b>: The zonal shift has expired (the expiry time was exceeded).</p> </li> <li> <p> <b>CANCELED</b>: The zonal shift was canceled.</p> </li> </ul>'
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - EXPIRED
+              - CANCELED
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartZonalShift
+      description: '<p>You start a zonal shift to temporarily move load balancer traffic away from an Availability Zone in a AWS Region, to help your application recover immediately, for example, from a developer''s bad code deployment or from an AWS infrastructure failure in a single Availability Zone. You can start a zonal shift in Route 53 ARC only for managed resources in your account in an AWS Region. Resources are automatically registered with Route 53 ARC by AWS services.</p> <p>At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p> <p>When you start a zonal shift, traffic for the resource is no longer routed to the Availability Zone. The zonal shift is created immediately in Route 53 ARC. However, it can take a short time, typically up to a few minutes, for existing, in-progress connections in the Availability Zone to complete.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.html">Zonal shift</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ZonalShift'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - awayFrom
+                - comment
+                - expiresIn
+                - resourceIdentifier
+              properties:
+                awayFrom:
+                  description: 'The Availability Zone that traffic is moved away from for a resource when you start a zonal shift. Until the zonal shift expires or you cancel it, traffic for the resource is instead moved to other Availability Zones in the AWS Region.'
+                  type: string
+                  minLength: 0
+                  maxLength: 20
+                comment:
+                  description: A comment that you enter about the zonal shift. Only the latest comment is retained; no comment history is maintained. A new comment overwrites any existing comment string.
+                  type: string
+                  minLength: 0
+                  maxLength: 128
+                expiresIn:
+                  description: '<p>The length of time that you want a zonal shift to be active, which Route 53 ARC converts to an expiry time (expiration time). Zonal shifts are temporary. You can set a zonal shift to be active initially for up to three days (72 hours).</p> <p>If you want to still keep traffic away from an Availability Zone, you can update the zonal shift and set a new expiration. You can also cancel a zonal shift, before it expires, for example, if you''re ready to restore traffic to the Availability Zone.</p> <p>To set a length of time for a zonal shift to be active, specify a whole number, and then one of the following, with no space:</p> <pre><code> &lt;ul&gt; &lt;li&gt; &lt;p&gt; &lt;b&gt;A lowercase letter m:&lt;/b&gt; To specify that the value is in minutes.&lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;b&gt;A lowercase letter h:&lt;/b&gt; To specify that the value is in hours.&lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; &lt;p&gt;For example: &lt;code&gt;20h&lt;/code&gt; means the zonal shift expires in 20 hours. &lt;code&gt;120m&lt;/code&gt; means the zonal shift expires in 120 minutes (2 hours).&lt;/p&gt; </code></pre>'
+                  type: string
+                  pattern: '^([1-9][0-9]*)(m|h)$'
+                  minLength: 2
+                  maxLength: 5
+                resourceIdentifier:
+                  description: '<p>The identifier for the resource to include in a zonal shift. The identifier is the Amazon Resource Name (ARN) for the resource.</p> <p>At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>'
+                  type: string
+                  minLength: 8
+                  maxLength: 1024
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    ZonalShift:
+      type: object
+      required:
+        - awayFrom
+        - comment
+        - expiryTime
+        - resourceIdentifier
+        - startTime
+        - status
+        - zonalShiftId
+      properties:
+        awayFrom:
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZone'
+            - description: 'The Availability Zone that traffic is moved away from for a resource when you start a zonal shift. Until the zonal shift expires or you cancel it, traffic for the resource is instead moved to other Availability Zones in the AWS Region.'
+        comment:
+          allOf:
+            - $ref: '#/components/schemas/ZonalShiftComment'
+            - description: A comment that you enter about the zonal shift. Only the latest comment is retained; no comment history is maintained. A new comment overwrites any existing comment string.
+        expiryTime:
+          allOf:
+            - $ref: '#/components/schemas/ExpiryTime'
+            - description: '<p>The expiry time (expiration time) for the zonal shift. A zonal shift is temporary and must be set to expire when you start the zonal shift. You can initially set a zonal shift to expire in a maximum of three days (72 hours). However, you can update a zonal shift to set a new expiration at any time. </p> <p>When you start a zonal shift, you specify how long you want it to be active, which Route 53 ARC converts to an expiry time (expiration time). You can cancel a zonal shift, for example, if you''re ready to restore traffic to the Availability Zone. Or you can update the zonal shift to specify another length of time to expire in.</p>'
+        resourceIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdentifier'
+            - description: '<p>The identifier for the resource to include in a zonal shift. The identifier is the Amazon Resource Name (ARN) for the resource.</p> <p>At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>'
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/StartTime'
+            - description: The time (UTC) when the zonal shift is started.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ZonalShiftStatus'
+            - description: '<p>A status for a zonal shift.</p> <p>The <code>Status</code> for a zonal shift can have one of the following values:</p> <ul> <li> <p> <b>ACTIVE:</b> The zonal shift is started and active.</p> </li> <li> <p> <b>EXPIRED:</b> The zonal shift has expired (the expiry time was exceeded).</p> </li> <li> <p> <b>CANCELED:</b> The zonal shift was canceled.</p> </li> </ul>'
+        zonalShiftId:
+          allOf:
+            - $ref: '#/components/schemas/ZonalShiftId'
+            - description: The identifier of a zonal shift.
+    InternalServerException: {}
+    ConflictException: {}
+    ResourceNotFoundException: {}
+    ThrottlingException: {}
+    ValidationException: {}
+    AccessDeniedException: {}
+    GetManagedResourceResponse:
+      type: object
+      required:
+        - appliedWeights
+        - zonalShifts
+      properties:
+        appliedWeights:
+          allOf:
+            - $ref: '#/components/schemas/AppliedWeights'
+            - description: A collection of key-value pairs that indicate whether resources are active in Availability Zones or not. The key name is the Availability Zone where the resource is deployed. The value is 1 or 0.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) for the resource.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the resource.
+        zonalShifts:
+          allOf:
+            - $ref: '#/components/schemas/ZonalShiftsInResource'
+            - description: 'The zonal shifts that are currently active for a resource. '
+    ListManagedResourcesResponse:
+      type: object
+      required:
+        - items
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/ManagedResourceSummaries'
+            - description: The items in the response list.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
+    ListZonalShiftsResponse:
+      type: object
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/ZonalShiftSummaries'
+            - description: The items in the response list.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
+    AppliedStatus:
+      type: string
+      enum:
+        - APPLIED
+        - NOT_APPLIED
+    Weight:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 1
+    AppliedWeights:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Weight'
+    AvailabilityZone:
+      type: string
+      minLength: 0
+      maxLength: 20
+    AvailabilityZones:
+      type: array
+      items:
+        $ref: '#/components/schemas/AvailabilityZone'
+    ZonalShiftId:
+      type: string
+      pattern: '^[A-Za-z0-9-]+$'
+      minLength: 6
+      maxLength: 36
+    CancelZonalShiftRequest:
+      type: object
+      title: CancelZonalShiftRequest
+      properties: {}
+    ExpiresIn:
+      type: string
+      pattern: '^([1-9][0-9]*)(m|h)$'
+      minLength: 2
+      maxLength: 5
+    ExpiryTime:
+      type: string
+      format: date-time
+    ResourceIdentifier:
+      type: string
+      minLength: 8
+      maxLength: 1024
+    GetManagedResourceRequest:
+      type: object
+      title: GetManagedResourceRequest
+      properties: {}
+    ResourceArn:
+      type: string
+      pattern: '^arn:.*$'
+      minLength: 8
+      maxLength: 1024
+    ResourceName:
+      type: string
+      minLength: 1
+      maxLength: 256
+    ZonalShiftsInResource:
+      type: array
+      items:
+        $ref: '#/components/schemas/ZonalShiftInResource'
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    String:
+      type: string
+    ListManagedResourcesRequest:
+      type: object
+      title: ListManagedResourcesRequest
+      properties: {}
+    ManagedResourceSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ManagedResourceSummary'
+    ZonalShiftStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - EXPIRED
+        - CANCELED
+    ListZonalShiftsRequest:
+      type: object
+      title: ListZonalShiftsRequest
+      properties: {}
+    ZonalShiftSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ZonalShiftSummary'
+    ManagedResourceSummary:
+      type: object
+      required:
+        - availabilityZones
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) for the managed resource.
+        availabilityZones:
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZones'
+            - description: The Availability Zones that a resource is deployed in.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the managed resource.
+      description: '<p>A complex structure for a managed resource in an account.</p> <p>A managed resource is a Network Load Balancer or Application Load Balancer that has been registered with Route 53 ARC by Elastic Load Balancing. You can start a zonal shift in Route 53 ARC for a managed resource to temporarily move traffic for the resource away from an Availability Zone in an AWS Region.</p> <note> <p>At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p> </note>'
+    StartTime:
+      type: string
+      format: date-time
+    ZonalShiftComment:
+      type: string
+      minLength: 0
+      maxLength: 128
+    StartZonalShiftRequest:
+      type: object
+      required:
+        - awayFrom
+        - comment
+        - expiresIn
+        - resourceIdentifier
+      title: StartZonalShiftRequest
+      properties:
+        awayFrom:
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZone'
+            - description: 'The Availability Zone that traffic is moved away from for a resource when you start a zonal shift. Until the zonal shift expires or you cancel it, traffic for the resource is instead moved to other Availability Zones in the AWS Region.'
+        comment:
+          allOf:
+            - $ref: '#/components/schemas/ZonalShiftComment'
+            - description: A comment that you enter about the zonal shift. Only the latest comment is retained; no comment history is maintained. A new comment overwrites any existing comment string.
+        expiresIn:
+          allOf:
+            - $ref: '#/components/schemas/ExpiresIn'
+            - description: '<p>The length of time that you want a zonal shift to be active, which Route 53 ARC converts to an expiry time (expiration time). Zonal shifts are temporary. You can set a zonal shift to be active initially for up to three days (72 hours).</p> <p>If you want to still keep traffic away from an Availability Zone, you can update the zonal shift and set a new expiration. You can also cancel a zonal shift, before it expires, for example, if you''re ready to restore traffic to the Availability Zone.</p> <p>To set a length of time for a zonal shift to be active, specify a whole number, and then one of the following, with no space:</p> <pre><code> &lt;ul&gt; &lt;li&gt; &lt;p&gt; &lt;b&gt;A lowercase letter m:&lt;/b&gt; To specify that the value is in minutes.&lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;b&gt;A lowercase letter h:&lt;/b&gt; To specify that the value is in hours.&lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; &lt;p&gt;For example: &lt;code&gt;20h&lt;/code&gt; means the zonal shift expires in 20 hours. &lt;code&gt;120m&lt;/code&gt; means the zonal shift expires in 120 minutes (2 hours).&lt;/p&gt; </code></pre>'
+        resourceIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdentifier'
+            - description: '<p>The identifier for the resource to include in a zonal shift. The identifier is the Amazon Resource Name (ARN) for the resource.</p> <p>At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>'
+    UpdateZonalShiftRequest:
+      type: object
+      title: UpdateZonalShiftRequest
+      properties:
+        comment:
+          allOf:
+            - $ref: '#/components/schemas/ZonalShiftComment'
+            - description: A comment that you enter about the zonal shift. Only the latest comment is retained; no comment history is maintained. A new comment overwrites any existing comment string.
+        expiresIn:
+          allOf:
+            - $ref: '#/components/schemas/ExpiresIn'
+            - description: '<p>The length of time that you want a zonal shift to be active, which Route 53 ARC converts to an expiry time (expiration time). Zonal shifts are temporary. You can set a zonal shift to be active initially for up to three days (72 hours).</p> <p>If you want to still keep traffic away from an Availability Zone, you can update the zonal shift and set a new expiration. You can also cancel a zonal shift, before it expires, for example, if you''re ready to restore traffic to the Availability Zone.</p> <p>To set a length of time for a zonal shift to be active, specify a whole number, and then one of the following, with no space:</p> <ul> <li> <p> <b>A lowercase letter m:</b> To specify that the value is in minutes.</p> </li> <li> <p> <b>A lowercase letter h:</b> To specify that the value is in hours.</p> </li> </ul> <p>For example: <code>20h</code> means the zonal shift expires in 20 hours. <code>120m</code> means the zonal shift expires in 120 minutes (2 hours).</p>'
+    ZonalShiftInResource:
+      type: object
+      required:
+        - appliedStatus
+        - awayFrom
+        - comment
+        - expiryTime
+        - resourceIdentifier
+        - startTime
+        - zonalShiftId
+      properties:
+        appliedStatus:
+          allOf:
+            - $ref: '#/components/schemas/AppliedStatus'
+            - description: 'An <code>appliedStatus</code> for a zonal shift for a resource can have one of two values: <code>APPLIED</code> or <code>NOT_APPLIED</code>. '
+        awayFrom:
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZone'
+            - description: 'The Availability Zone that traffic is moved away from for a resource when you start a zonal shift. Until the zonal shift expires or you cancel it, traffic for the resource is instead moved to other Availability Zones in the AWS Region.'
+        comment:
+          allOf:
+            - $ref: '#/components/schemas/ZonalShiftComment'
+            - description: 'A comment that you enter about the zonal shift. Only the latest comment is retained; no comment history is maintained. That is, a new comment overwrites any existing comment string.'
+        expiryTime:
+          allOf:
+            - $ref: '#/components/schemas/ExpiryTime'
+            - description: '<p>The expiry time (expiration time) for the zonal shift. A zonal shift is temporary and must be set to expire when you start the zonal shift. You can initially set a zonal shift to expire in a maximum of three days (72 hours). However, you can update a zonal shift to set a new expiration at any time. </p> <p>When you start a zonal shift, you specify how long you want it to be active, which Route 53 ARC converts to an expiry time (expiration time). You can cancel a zonal shift, for example, if you''re ready to restore traffic to the Availability Zone. Or you can update the zonal shift to specify another length of time to expire in.</p>'
+        resourceIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdentifier'
+            - description: '<p>The identifier for the resource to include in a zonal shift. The identifier is the Amazon Resource Name (ARN) for the resource.</p> <p>At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>'
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/StartTime'
+            - description: The time (UTC) when the zonal shift is started.
+        zonalShiftId:
+          allOf:
+            - $ref: '#/components/schemas/ZonalShiftId'
+            - description: The identifier of a zonal shift.
+      description: A complex structure that lists the zonal shifts for a managed resource and their statuses for the resource.
+    ZonalShiftSummary:
+      type: object
+      required:
+        - awayFrom
+        - comment
+        - expiryTime
+        - resourceIdentifier
+        - startTime
+        - status
+        - zonalShiftId
+      properties:
+        awayFrom:
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZone'
+            - description: 'The Availability Zone that traffic is moved away from for a resource when you start a zonal shift. Until the zonal shift expires or you cancel it, traffic for the resource is instead moved to other Availability Zones in the AWS Region.'
+        comment:
+          allOf:
+            - $ref: '#/components/schemas/ZonalShiftComment'
+            - description: 'A comment that you enter about the zonal shift. Only the latest comment is retained; no comment history is maintained. That is, a new comment overwrites any existing comment string.'
+        expiryTime:
+          allOf:
+            - $ref: '#/components/schemas/ExpiryTime'
+            - description: '<p>The expiry time (expiration time) for the zonal shift. A zonal shift is temporary and must be set to expire when you start the zonal shift. You can initially set a zonal shift to expire in a maximum of three days (72 hours). However, you can update a zonal shift to set a new expiration at any time. </p> <p>When you start a zonal shift, you specify how long you want it to be active, which Route 53 ARC converts to an expiry time (expiration time). You can cancel a zonal shift, for example, if you''re ready to restore traffic to the Availability Zone. Or you can update the zonal shift to specify another length of time to expire in.</p>'
+        resourceIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdentifier'
+            - description: '<p>The identifier for the resource to include in a zonal shift. The identifier is the Amazon Resource Name (ARN) for the resource.</p> <p>At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>'
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/StartTime'
+            - description: The time (UTC) when the zonal shift is started.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ZonalShiftStatus'
+            - description: '<p>A status for a zonal shift.</p> <p>The <code>Status</code> for a zonal shift can have one of the following values:</p> <ul> <li> <p> <b>ACTIVE:</b> The zonal shift is started and active.</p> </li> <li> <p> <b>EXPIRED:</b> The zonal shift has expired (the expiry time was exceeded).</p> </li> <li> <p> <b>CANCELED:</b> The zonal shift was canceled.</p> </li> </ul>'
+        zonalShiftId:
+          allOf:
+            - $ref: '#/components/schemas/ZonalShiftId'
+            - description: The identifier of a zonal shift.
+      description: '<p>You start a zonal shift to temporarily move load balancer traffic away from an Availability Zone in a AWS Region. A zonal shift helps your application recover immediately, for example, from a developer''s bad code deployment or from an AWS infrastructure failure in a single Availability Zone. You can start a zonal shift in Route 53 ARC only for managed resources in your account in an AWS Region. Supported AWS resources are automatically registered with Route 53 ARC.</p> <p>Zonal shifts are temporary. A zonal shift can be active for up to three days (72 hours).</p> <p>When you start a zonal shift, you specify how long you want it to be active, which Amazon Route 53 Application Recovery Controller converts to an expiry time (expiration time). You can cancel a zonal shift, for example, if you''re ready to restore traffic to the Availability Zone. Or you can extend the zonal shift by updating the expiration so the zonal shift is active longer.</p>'
+security:
+  - hmac: []

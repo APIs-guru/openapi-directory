@@ -1,0 +1,1229 @@
+openapi: 3.0.0
+info:
+  version: '2021-02-01'
+  x-release: v4
+  title: AWS Account
+  description: Operations for Amazon Web Services Account Management
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: account
+  x-aws-signingName: account
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/account-2021-02-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/account/'
+servers:
+  - url: 'http://account.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Account multi-region endpoint
+  - url: 'https://account.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Account multi-region endpoint
+  - url: 'http://account.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Account endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://account.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Account endpoint for China (Beijing) and China (Ningxia)
+paths:
+  /deleteAlternateContact:
+    post:
+      operationId: DeleteAlternateContact
+      description: '<p>Deletes the specified alternate contact from an Amazon Web Services account.</p> <p>For complete details about how to use the alternate contact operations, see <a href="https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html">Access or updating the alternate contacts</a>.</p> <note> <p>Before you can update the alternate contact information for an Amazon Web Services account that is managed by Organizations, you must first enable integration between Amazon Web Services Account Management and Organizations. For more information, see <a href="https://docs.aws.amazon.com/accounts/latest/reference/using-orgs-trusted-access.html">Enabling trusted access for Amazon Web Services Account Management</a>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AlternateContactType
+              properties:
+                AccountId:
+                  description: '<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization''s management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can''t specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don''t specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>'
+                  type: string
+                  pattern: '^\d{12}$'
+                AlternateContactType:
+                  description: 'Specifies which of the alternate contacts to delete. '
+                  type: string
+                  enum:
+                    - BILLING
+                    - OPERATIONS
+                    - SECURITY
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /disableRegion:
+    post:
+      operationId: DisableRegion
+      description: Disables (opts-out) a particular Region for an account.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - RegionName
+              properties:
+                AccountId:
+                  description: '<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don''t specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization''s management account</a> or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can''t specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don''t specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>'
+                  type: string
+                  pattern: '^\d{12}$'
+                RegionName:
+                  description: 'Specifies the Region-code for a given Region name (for example, <code>af-south-1</code>). When you disable a Region, AWS performs actions to deactivate that Region in your account, such as destroying IAM resources in the Region. This process takes a few minutes for most accounts, but this can take several hours. You cannot enable the Region until the disabling process is fully completed.'
+                  type: string
+                  minLength: 1
+                  maxLength: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /enableRegion:
+    post:
+      operationId: EnableRegion
+      description: Enables (opts-in) a particular Region for an account.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - RegionName
+              properties:
+                AccountId:
+                  description: '<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don''t specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization''s management account</a> or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can''t specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don''t specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>'
+                  type: string
+                  pattern: '^\d{12}$'
+                RegionName:
+                  description: 'Specifies the Region-code for a given Region name (for example, <code>af-south-1</code>). When you enable a Region, AWS performs actions to prepare your account in that Region, such as distributing your IAM resources to the Region. This process takes a few minutes for most accounts, but it can take several hours. You cannot use the Region until this process is complete. Furthermore, you cannot disable the Region until the enabling process is fully completed.'
+                  type: string
+                  minLength: 1
+                  maxLength: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /getAlternateContact:
+    post:
+      operationId: GetAlternateContact
+      description: '<p>Retrieves the specified alternate contact attached to an Amazon Web Services account.</p> <p>For complete details about how to use the alternate contact operations, see <a href="https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html">Access or updating the alternate contacts</a>.</p> <note> <p>Before you can update the alternate contact information for an Amazon Web Services account that is managed by Organizations, you must first enable integration between Amazon Web Services Account Management and Organizations. For more information, see <a href="https://docs.aws.amazon.com/accounts/latest/reference/using-orgs-trusted-access.html">Enabling trusted access for Amazon Web Services Account Management</a>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAlternateContactResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AlternateContactType
+              properties:
+                AccountId:
+                  description: '<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization''s management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can''t specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don''t specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>'
+                  type: string
+                  pattern: '^\d{12}$'
+                AlternateContactType:
+                  description: Specifies which alternate contact you want to retrieve.
+                  type: string
+                  enum:
+                    - BILLING
+                    - OPERATIONS
+                    - SECURITY
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /getContactInformation:
+    post:
+      operationId: GetContactInformation
+      description: '<p>Retrieves the primary contact information of an Amazon Web Services account.</p> <p>For complete details about how to use the primary contact operations, see <a href="https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html">Update the primary and alternate contact information</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetContactInformationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                AccountId:
+                  description: '<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don''t specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization''s management account</a> or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can''t specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don''t specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>'
+                  type: string
+                  pattern: '^\d{12}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /getRegionOptStatus:
+    post:
+      operationId: GetRegionOptStatus
+      description: Retrieves the opt-in status of a particular Region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRegionOptStatusResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - RegionName
+              properties:
+                AccountId:
+                  description: '<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don''t specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization''s management account</a> or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can''t specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don''t specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>'
+                  type: string
+                  pattern: '^\d{12}$'
+                RegionName:
+                  description: 'Specifies the Region-code for a given Region name (for example, <code>af-south-1</code>). This function will return the status of whatever Region you pass into this parameter. '
+                  type: string
+                  minLength: 1
+                  maxLength: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /listRegions:
+    post:
+      operationId: ListRegions
+      description: 'Lists all the Regions for a given account and their respective opt-in statuses. Optionally, this list can be filtered by the <code>region-opt-status-contains</code> parameter. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRegionsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                AccountId:
+                  description: '<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don''t specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization''s management account</a> or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can''t specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don''t specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>'
+                  type: string
+                  pattern: '^\d{12}$'
+                MaxResults:
+                  description: 'The total number of items to return in the command’s output. If the total number of items available is more than the value specified, a <code>NextToken</code> is provided in the command’s output. To resume pagination, provide the <code>NextToken</code> value in the <code>starting-token</code> argument of a subsequent command. Do not use the <code>NextToken</code> response element directly outside of the Amazon Web Services CLI. For usage examples, see <a href="http://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Pagination</a> in the <i>Amazon Web Services Command Line Interface User Guide</i>. '
+                  type: integer
+                  minimum: 1
+                  maximum: 50
+                NextToken:
+                  description: 'A token used to specify where to start paginating. This is the <code>NextToken</code> from a previously truncated response. For usage examples, see <a href="http://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Pagination</a> in the <i>Amazon Web Services Command Line Interface User Guide</i>.'
+                  type: string
+                  minLength: 0
+                  maxLength: 1000
+                RegionOptStatusContains:
+                  description: 'A list of Region statuses (Enabling, Enabled, Disabling, Disabled, Enabled_by_default) to use to filter the list of Regions for a given account. For example, passing in a value of ENABLING will only return a list of Regions with a Region status of ENABLING.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RegionOptStatus'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /putAlternateContact:
+    post:
+      operationId: PutAlternateContact
+      description: '<p>Modifies the specified alternate contact attached to an Amazon Web Services account.</p> <p>For complete details about how to use the alternate contact operations, see <a href="https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html">Access or updating the alternate contacts</a>.</p> <note> <p>Before you can update the alternate contact information for an Amazon Web Services account that is managed by Organizations, you must first enable integration between Amazon Web Services Account Management and Organizations. For more information, see <a href="https://docs.aws.amazon.com/accounts/latest/reference/using-orgs-trusted-access.html">Enabling trusted access for Amazon Web Services Account Management</a>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AlternateContactType
+                - EmailAddress
+                - Name
+                - PhoneNumber
+                - Title
+              properties:
+                AccountId:
+                  description: '<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization''s management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can''t specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don''t specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>'
+                  type: string
+                  pattern: '^\d{12}$'
+                AlternateContactType:
+                  description: Specifies which alternate contact you want to create or update.
+                  type: string
+                  enum:
+                    - BILLING
+                    - OPERATIONS
+                    - SECURITY
+                EmailAddress:
+                  description: 'Specifies an email address for the alternate contact. '
+                  type: string
+                  pattern: '^[\s]*[\w+=.#!&-]+@[\w.-]+\.[\w]+[\s]*$'
+                  minLength: 1
+                  maxLength: 64
+                  format: password
+                Name:
+                  description: Specifies a name for the alternate contact.
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                  format: password
+                PhoneNumber:
+                  description: Specifies a phone number for the alternate contact.
+                  type: string
+                  pattern: '^[\s0-9()+-]+$'
+                  minLength: 1
+                  maxLength: 25
+                  format: password
+                Title:
+                  description: Specifies a title for the alternate contact.
+                  type: string
+                  minLength: 1
+                  maxLength: 50
+                  format: password
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /putContactInformation:
+    post:
+      operationId: PutContactInformation
+      description: '<p>Updates the primary contact information of an Amazon Web Services account.</p> <p>For complete details about how to use the primary contact operations, see <a href="https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html">Update the primary and alternate contact information</a>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ContactInformation
+              properties:
+                AccountId:
+                  description: '<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don''t specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization''s management account</a> or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can''t specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don''t specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>'
+                  type: string
+                  pattern: '^\d{12}$'
+                ContactInformation:
+                  description: Contains the details of the primary contact information associated with an Amazon Web Services account.
+                  type: object
+                  properties:
+                    AddressLine1:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressLine'
+                        - description: The first line of the primary contact address.
+                    AddressLine2:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressLine'
+                        - description: 'The second line of the primary contact address, if any.'
+                    AddressLine3:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressLine'
+                        - description: 'The third line of the primary contact address, if any.'
+                    City:
+                      allOf:
+                        - $ref: '#/components/schemas/City'
+                        - description: The city of the primary contact address.
+                    CompanyName:
+                      allOf:
+                        - $ref: '#/components/schemas/CompanyName'
+                        - description: 'The name of the company associated with the primary contact information, if any.'
+                    CountryCode:
+                      allOf:
+                        - $ref: '#/components/schemas/CountryCode'
+                        - description: The ISO-3166 two-letter country code for the primary contact address.
+                    DistrictOrCounty:
+                      allOf:
+                        - $ref: '#/components/schemas/DistrictOrCounty'
+                        - description: 'The district or county of the primary contact address, if any.'
+                    FullName:
+                      allOf:
+                        - $ref: '#/components/schemas/FullName'
+                        - description: The full name of the primary contact address.
+                    PhoneNumber:
+                      allOf:
+                        - $ref: '#/components/schemas/ContactInformationPhoneNumber'
+                        - description: 'The phone number of the primary contact information. The number will be validated and, in some countries, checked for activation.'
+                    PostalCode:
+                      allOf:
+                        - $ref: '#/components/schemas/PostalCode'
+                        - description: The postal code of the primary contact address.
+                    StateOrRegion:
+                      allOf:
+                        - $ref: '#/components/schemas/StateOrRegion'
+                        - description: The state or region of the primary contact address. This field is required in selected countries.
+                    WebsiteUrl:
+                      allOf:
+                        - $ref: '#/components/schemas/WebsiteUrl'
+                        - description: 'The URL of the website associated with the primary contact information, if any.'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    ResourceNotFoundException: {}
+    ValidationException: {}
+    AccessDeniedException: {}
+    TooManyRequestsException: {}
+    InternalServerException: {}
+    ConflictException: {}
+    GetAlternateContactResponse:
+      type: object
+      properties:
+        AlternateContact:
+          allOf:
+            - $ref: '#/components/schemas/AlternateContact'
+            - description: A structure that contains the details for the specified alternate contact.
+    GetContactInformationResponse:
+      type: object
+      properties:
+        ContactInformation:
+          allOf:
+            - $ref: '#/components/schemas/ContactInformation'
+            - description: Contains the details of the primary contact information associated with an Amazon Web Services account.
+    GetRegionOptStatusResponse:
+      type: object
+      properties:
+        RegionName:
+          allOf:
+            - $ref: '#/components/schemas/RegionName'
+            - description: The Region code that was passed in.
+        RegionOptStatus:
+          allOf:
+            - $ref: '#/components/schemas/RegionOptStatus'
+            - description: 'One of the potential statuses a Region can undergo (Enabled, Enabling, Disabled, Disabling, Enabled_By_Default).'
+    ListRegionsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'If there is more data to be returned, this will be populated. It should be passed into the <code>next-token</code> request parameter of <code>list-regions</code>.'
+        Regions:
+          allOf:
+            - $ref: '#/components/schemas/RegionOptList'
+            - description: 'This is a list of Regions for a given account, or if the filtered parameter was used, a list of Regions that match the filter criteria set in the <code>filter</code> parameter.'
+    RegionOptStatus:
+      type: string
+      enum:
+        - ENABLED
+        - ENABLING
+        - DISABLING
+        - DISABLED
+        - ENABLED_BY_DEFAULT
+    AddressLine:
+      type: string
+      minLength: 1
+      maxLength: 60
+      format: password
+    City:
+      type: string
+      minLength: 1
+      maxLength: 50
+      format: password
+    CompanyName:
+      type: string
+      minLength: 1
+      maxLength: 50
+      format: password
+    CountryCode:
+      type: string
+      minLength: 2
+      maxLength: 2
+      format: password
+    DistrictOrCounty:
+      type: string
+      minLength: 1
+      maxLength: 50
+      format: password
+    FullName:
+      type: string
+      minLength: 1
+      maxLength: 50
+      format: password
+    ContactInformationPhoneNumber:
+      type: string
+      pattern: '^[+][\s0-9()-]+$'
+      minLength: 1
+      maxLength: 20
+      format: password
+    PostalCode:
+      type: string
+      minLength: 1
+      maxLength: 20
+      format: password
+    StateOrRegion:
+      type: string
+      minLength: 1
+      maxLength: 50
+      format: password
+    WebsiteUrl:
+      type: string
+      minLength: 1
+      maxLength: 256
+      format: password
+    AccountId:
+      type: string
+      pattern: '^\d{12}$'
+    AlternateContactType:
+      type: string
+      enum:
+        - BILLING
+        - OPERATIONS
+        - SECURITY
+    EmailAddress:
+      type: string
+      pattern: '^[\s]*[\w+=.#!&-]+@[\w.-]+\.[\w]+[\s]*$'
+      minLength: 1
+      maxLength: 64
+      format: password
+    Name:
+      type: string
+      minLength: 1
+      maxLength: 64
+      format: password
+    PhoneNumber:
+      type: string
+      pattern: '^[\s0-9()+-]+$'
+      minLength: 1
+      maxLength: 25
+      format: password
+    Title:
+      type: string
+      minLength: 1
+      maxLength: 50
+      format: password
+    AlternateContact:
+      type: object
+      properties:
+        AlternateContactType:
+          allOf:
+            - $ref: '#/components/schemas/AlternateContactType'
+            - description: The type of alternate contact.
+        EmailAddress:
+          allOf:
+            - $ref: '#/components/schemas/EmailAddress'
+            - description: The email address associated with this alternate contact.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name associated with this alternate contact.
+        PhoneNumber:
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumber'
+            - description: The phone number associated with this alternate contact.
+        Title:
+          allOf:
+            - $ref: '#/components/schemas/Title'
+            - description: The title associated with this alternate contact.
+      description: A structure that contains the details of an alternate contact associated with an Amazon Web Services account
+    ContactInformation:
+      type: object
+      required:
+        - AddressLine1
+        - City
+        - CountryCode
+        - FullName
+        - PhoneNumber
+        - PostalCode
+      properties:
+        AddressLine1:
+          allOf:
+            - $ref: '#/components/schemas/AddressLine'
+            - description: The first line of the primary contact address.
+        AddressLine2:
+          allOf:
+            - $ref: '#/components/schemas/AddressLine'
+            - description: 'The second line of the primary contact address, if any.'
+        AddressLine3:
+          allOf:
+            - $ref: '#/components/schemas/AddressLine'
+            - description: 'The third line of the primary contact address, if any.'
+        City:
+          allOf:
+            - $ref: '#/components/schemas/City'
+            - description: The city of the primary contact address.
+        CompanyName:
+          allOf:
+            - $ref: '#/components/schemas/CompanyName'
+            - description: 'The name of the company associated with the primary contact information, if any.'
+        CountryCode:
+          allOf:
+            - $ref: '#/components/schemas/CountryCode'
+            - description: The ISO-3166 two-letter country code for the primary contact address.
+        DistrictOrCounty:
+          allOf:
+            - $ref: '#/components/schemas/DistrictOrCounty'
+            - description: 'The district or county of the primary contact address, if any.'
+        FullName:
+          allOf:
+            - $ref: '#/components/schemas/FullName'
+            - description: The full name of the primary contact address.
+        PhoneNumber:
+          allOf:
+            - $ref: '#/components/schemas/ContactInformationPhoneNumber'
+            - description: 'The phone number of the primary contact information. The number will be validated and, in some countries, checked for activation.'
+        PostalCode:
+          allOf:
+            - $ref: '#/components/schemas/PostalCode'
+            - description: The postal code of the primary contact address.
+        StateOrRegion:
+          allOf:
+            - $ref: '#/components/schemas/StateOrRegion'
+            - description: The state or region of the primary contact address. This field is required in selected countries.
+        WebsiteUrl:
+          allOf:
+            - $ref: '#/components/schemas/WebsiteUrl'
+            - description: 'The URL of the website associated with the primary contact information, if any.'
+      description: Contains the details of the primary contact information associated with an Amazon Web Services account.
+    DeleteAlternateContactRequest:
+      type: object
+      required:
+        - AlternateContactType
+      title: DeleteAlternateContactRequest
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: '<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization''s management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can''t specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don''t specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>'
+        AlternateContactType:
+          allOf:
+            - $ref: '#/components/schemas/AlternateContactType'
+            - description: 'Specifies which of the alternate contacts to delete. '
+    RegionName:
+      type: string
+      minLength: 1
+      maxLength: 50
+    DisableRegionRequest:
+      type: object
+      required:
+        - RegionName
+      title: DisableRegionRequest
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: '<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don''t specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization''s management account</a> or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can''t specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don''t specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>'
+        RegionName:
+          allOf:
+            - $ref: '#/components/schemas/RegionName'
+            - description: 'Specifies the Region-code for a given Region name (for example, <code>af-south-1</code>). When you disable a Region, AWS performs actions to deactivate that Region in your account, such as destroying IAM resources in the Region. This process takes a few minutes for most accounts, but this can take several hours. You cannot enable the Region until the disabling process is fully completed.'
+    EnableRegionRequest:
+      type: object
+      required:
+        - RegionName
+      title: EnableRegionRequest
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: '<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don''t specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization''s management account</a> or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can''t specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don''t specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>'
+        RegionName:
+          allOf:
+            - $ref: '#/components/schemas/RegionName'
+            - description: 'Specifies the Region-code for a given Region name (for example, <code>af-south-1</code>). When you enable a Region, AWS performs actions to prepare your account in that Region, such as distributing your IAM resources to the Region. This process takes a few minutes for most accounts, but it can take several hours. You cannot use the Region until this process is complete. Furthermore, you cannot disable the Region until the enabling process is fully completed.'
+    GetAlternateContactRequest:
+      type: object
+      required:
+        - AlternateContactType
+      title: GetAlternateContactRequest
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: '<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization''s management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can''t specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don''t specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>'
+        AlternateContactType:
+          allOf:
+            - $ref: '#/components/schemas/AlternateContactType'
+            - description: Specifies which alternate contact you want to retrieve.
+    GetContactInformationRequest:
+      type: object
+      title: GetContactInformationRequest
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: '<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don''t specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization''s management account</a> or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can''t specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don''t specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>'
+    GetRegionOptStatusRequest:
+      type: object
+      required:
+        - RegionName
+      title: GetRegionOptStatusRequest
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: '<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don''t specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization''s management account</a> or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can''t specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don''t specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>'
+        RegionName:
+          allOf:
+            - $ref: '#/components/schemas/RegionName'
+            - description: 'Specifies the Region-code for a given Region name (for example, <code>af-south-1</code>). This function will return the status of whatever Region you pass into this parameter. '
+    ListRegionsRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 50
+    ListRegionsRequestNextTokenString:
+      type: string
+      minLength: 0
+      maxLength: 1000
+    RegionOptStatusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RegionOptStatus'
+    ListRegionsRequest:
+      type: object
+      title: ListRegionsRequest
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: '<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don''t specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization''s management account</a> or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can''t specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don''t specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListRegionsRequestMaxResultsInteger'
+            - description: 'The total number of items to return in the command’s output. If the total number of items available is more than the value specified, a <code>NextToken</code> is provided in the command’s output. To resume pagination, provide the <code>NextToken</code> value in the <code>starting-token</code> argument of a subsequent command. Do not use the <code>NextToken</code> response element directly outside of the Amazon Web Services CLI. For usage examples, see <a href="http://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Pagination</a> in the <i>Amazon Web Services Command Line Interface User Guide</i>. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/ListRegionsRequestNextTokenString'
+            - description: 'A token used to specify where to start paginating. This is the <code>NextToken</code> from a previously truncated response. For usage examples, see <a href="http://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Pagination</a> in the <i>Amazon Web Services Command Line Interface User Guide</i>.'
+        RegionOptStatusContains:
+          allOf:
+            - $ref: '#/components/schemas/RegionOptStatusList'
+            - description: 'A list of Region statuses (Enabling, Enabled, Disabling, Disabled, Enabled_by_default) to use to filter the list of Regions for a given account. For example, passing in a value of ENABLING will only return a list of Regions with a Region status of ENABLING.'
+    String:
+      type: string
+    RegionOptList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Region'
+    PutAlternateContactRequest:
+      type: object
+      required:
+        - AlternateContactType
+        - EmailAddress
+        - Name
+        - PhoneNumber
+        - Title
+      title: PutAlternateContactRequest
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: '<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization''s management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can''t specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don''t specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>'
+        AlternateContactType:
+          allOf:
+            - $ref: '#/components/schemas/AlternateContactType'
+            - description: Specifies which alternate contact you want to create or update.
+        EmailAddress:
+          allOf:
+            - $ref: '#/components/schemas/EmailAddress'
+            - description: 'Specifies an email address for the alternate contact. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: Specifies a name for the alternate contact.
+        PhoneNumber:
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumber'
+            - description: Specifies a phone number for the alternate contact.
+        Title:
+          allOf:
+            - $ref: '#/components/schemas/Title'
+            - description: Specifies a title for the alternate contact.
+    PutContactInformationRequest:
+      type: object
+      required:
+        - ContactInformation
+      title: PutContactInformationRequest
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: '<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don''t specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">organization''s management account</a> or a delegated administrator account. The specified account ID must also be a member account in the same organization. The organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features enabled</a>, and the organization must have <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html">trusted access</a> enabled for the Account Management service, and optionally a <a href="https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html">delegated admin</a> account assigned.</p> <note> <p>The management account can''t specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don''t specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>'
+        ContactInformation:
+          allOf:
+            - $ref: '#/components/schemas/ContactInformation'
+            - description: Contains the details of the primary contact information associated with an Amazon Web Services account.
+    Region:
+      type: object
+      properties:
+        RegionName:
+          allOf:
+            - $ref: '#/components/schemas/RegionName'
+            - description: 'The Region code of a given Region (for example, <code>us-east-1</code>).'
+        RegionOptStatus:
+          allOf:
+            - $ref: '#/components/schemas/RegionOptStatus'
+            - description: 'One of potential statuses a Region can undergo (Enabled, Enabling, Disabled, Disabling, Enabled_By_Default).'
+      description: 'This is a structure that expresses the Region for a given account, consisting of a name and opt-in status.'
+security:
+  - hmac: []

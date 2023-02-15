@@ -3,7 +3,7 @@ info:
   version: '2018-10-23'
   x-release: v4
   title: AWS IoT Events Data
-  description: '<p>AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur. You can use AWS IoT Events Data API commands to send inputs to detectors, list detectors, and view or update a detector''s status.</p> <p> For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/what-is-iotevents.html">What is AWS IoT Events?</a> in the <i>AWS IoT Events Developer Guide</i>.</p>'
+  description: '<p>IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur. You can use IoT Events Data API commands to send inputs to detectors, list detectors, and view or update a detector''s status.</p> <p> For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/what-is-iotevents.html">What is IoT Events?</a> in the <i>IoT Events Developer Guide</i>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -173,6 +173,65 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /detectors/delete:
+    post:
+      operationId: BatchDeleteDetector
+      description: 'Deletes one or more detectors that were created. When a detector is deleted, its state will be cleared and the detector will be removed from the list of detectors. The deleted detector will no longer appear if referenced in the <a href="https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_ListDetectors.html">ListDetectors</a> API call.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchDeleteDetectorResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - detectors
+              properties:
+                detectors:
+                  description: The list of one or more detectors to be deleted.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DeleteDetectorRequest'
+                  minItems: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /alarms/disable:
     post:
       operationId: BatchDisableAlarm
@@ -294,7 +353,7 @@ paths:
   /inputs/messages:
     post:
       operationId: BatchPutMessage
-      description: 'Sends a set of messages to the AWS IoT Events system. Each message payload is transformed into the input you specify (<code>"inputName"</code>) and ingested into any detectors that monitor that input. If multiple messages are sent, the order in which the messages are processed isn''t guaranteed. To guarantee ordering, you must send messages one at a time and wait for a successful response.'
+      description: 'Sends a set of messages to the IoT Events system. Each message payload is transformed into the input you specify (<code>"inputName"</code>) and ingested into any detectors that monitor that input. If multiple messages are sent, the order in which the messages are processed isn''t guaranteed. To guarantee ordering, you must send messages one at a time and wait for a successful response.'
       responses:
         '200':
           description: Success
@@ -903,6 +962,32 @@ components:
     InternalFailureException: {}
     ServiceUnavailableException: {}
     ThrottlingException: {}
+    BatchDeleteDetectorResponse:
+      type: object
+      properties:
+        batchDeleteDetectorErrorEntries:
+          allOf:
+            - $ref: '#/components/schemas/BatchDeleteDetectorErrorEntries'
+            - description: 'A list of errors associated with the request, or an empty array (<code>[]</code>) if there are no errors. Each error entry contains a <code>messageId</code> that helps you identify the entry that failed.'
+    DeleteDetectorRequest:
+      type: object
+      required:
+        - messageId
+        - detectorModelName
+      properties:
+        messageId:
+          allOf:
+            - $ref: '#/components/schemas/MessageId'
+            - description: The ID to assign to the <code>DeleteDetectorRequest</code>. Each <code>"messageId"</code> must be unique within each batch sent.
+        detectorModelName:
+          allOf:
+            - $ref: '#/components/schemas/DetectorModelName'
+            - description: The name of the detector model that was used to create the detector instance.
+        keyValue:
+          allOf:
+            - $ref: '#/components/schemas/KeyValue'
+            - description: 'The value of the <a href="https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateDetectorModel.html#iotevents-CreateDetectorModel-request-key">key</a> used to identify the detector. '
+      description: Information used to delete the detector model.
     BatchDisableAlarmResponse:
       type: object
       properties:
@@ -1350,6 +1435,46 @@ components:
         - ThrottlingException
     ErrorMessage:
       type: string
+    BatchDeleteDetectorErrorEntry:
+      type: object
+      properties:
+        messageId:
+          allOf:
+            - $ref: '#/components/schemas/MessageId'
+            - description: 'The ID of the message that caused the error. (See the value of the <code>"messageId"</code> in the <a href="https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchDeleteDetector.html#iotevents-iotevents-data_BatchDeleteDetector-request-detectors">detectors</a> object of the <code>DeleteDetectorRequest</code>.)'
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: The error code.
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: A message that describes the error.
+      description: Contains error messages associated with the deletion request.
+    BatchDeleteDetectorErrorEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchDeleteDetectorErrorEntry'
+    MessageId:
+      type: string
+      pattern: '^[a-zA-Z0-9_-]+$'
+      minLength: 1
+      maxLength: 64
+    DeleteDetectorRequests:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeleteDetectorRequest'
+      minItems: 1
+    BatchDeleteDetectorRequest:
+      type: object
+      required:
+        - detectors
+      title: BatchDeleteDetectorRequest
+      properties:
+        detectors:
+          allOf:
+            - $ref: '#/components/schemas/DeleteDetectorRequests'
+            - description: The list of one or more detectors to be deleted.
     DisableAlarmActionRequests:
       type: array
       items:
@@ -1400,11 +1525,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/BatchPutMessageErrorEntry'
-    MessageId:
-      type: string
-      pattern: '^[a-zA-Z0-9_-]+$'
-      minLength: 1
-      maxLength: 64
     Messages:
       type: array
       items:
@@ -1538,15 +1658,15 @@ components:
             - $ref: '#/components/schemas/Note'
             - description: The note that you can leave when you reset the alarm.
       description: Contains the configuration information of a reset action.
-    DescribeAlarmRequest:
-      type: object
-      title: DescribeAlarmRequest
-      properties: {}
     DetectorModelName:
       type: string
       pattern: '^[a-zA-Z0-9_-]+$'
       minLength: 1
       maxLength: 128
+    DescribeAlarmRequest:
+      type: object
+      title: DescribeAlarmRequest
+      properties: {}
     DescribeDetectorRequest:
       type: object
       title: DescribeDetectorRequest
@@ -1773,7 +1893,7 @@ components:
         timestamp:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The number of seconds which have elapsed on the timer.
+            - description: The expiration time for the timer.
       description: The current state of a timer.
     TimerDefinition:
       type: object

@@ -113,11 +113,12 @@ servers:
           - cn-northwest-1
         default: cn-north-1
     description: The AWS Route53 Recovery Control Config endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 paths:
   /cluster:
     post:
       operationId: CreateCluster
-      description: 'Create a new cluster. A cluster is a set of redundant Regional endpoints against which you can run API calls to update or get the state of one or more routing controls. Each cluster has a name, status, Amazon Resource Name (ARN), and an array of the five cluster endpoints (one for each supported Amazon Web Services Region) that you can use with API calls to the Amazon Route 53 Application Recovery Controller cluster data plane.'
+      description: 'Create a new cluster. A cluster is a set of redundant Regional endpoints against which you can run API calls to update or get the state of one or more routing controls. Each cluster has a name, status, Amazon Resource Name (ARN), and an array of the five cluster endpoints (one for each supported Amazon Web Services Region) that you can use with API calls to the cluster data plane.'
       responses:
         '200':
           description: Success
@@ -178,8 +179,10 @@ paths:
                 - ClusterName
               properties:
                 ClientToken:
-                  description: Unique client idempotency token.
+                  description: 'A unique, case-sensitive string of up to 64 ASCII characters. To make an idempotent API request with an action, specify a client token in the request.'
                   type: string
+                  pattern: ^\S+$
+                  minLength: 1
                   maxLength: 64
                 ClusterName:
                   description: The name of the cluster.
@@ -187,6 +190,11 @@ paths:
                   pattern: ^\S+$
                   minLength: 1
                   maxLength: 64
+                Tags:
+                  description: The tags associated with the cluster.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/__stringMin0Max256PatternS'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -253,7 +261,7 @@ paths:
   /controlpanel:
     post:
       operationId: CreateControlPanel
-      description: 'Creates a new control panel. A control panel represents a group of routing controls that can be changed together in a single transaction. You can use a control panel to centrally view the operational status of applications across your organization, and trigger multi-app failovers in a single transaction, for example, to fail over an Availability Zone or AWS Region.'
+      description: 'Creates a new control panel. A control panel represents a group of routing controls that can be changed together in a single transaction. You can use a control panel to centrally view the operational status of applications across your organization, and trigger multi-app failovers in a single transaction, for example, to fail over an Availability Zone or Amazon Web Services Region.'
       responses:
         '200':
           description: Success
@@ -315,18 +323,28 @@ paths:
                 - ControlPanelName
               properties:
                 ClientToken:
-                  description: Unique client idempotency token.
+                  description: 'A unique, case-sensitive string of up to 64 ASCII characters. To make an idempotent API request with an action, specify a client token in the request.'
                   type: string
+                  pattern: ^\S+$
+                  minLength: 1
                   maxLength: 64
                 ClusterArn:
                   description: The Amazon Resource Name (ARN) of the cluster for the control panel.
                   type: string
+                  pattern: '^[A-Za-z0-9:\/_-]*$'
+                  minLength: 1
+                  maxLength: 256
                 ControlPanelName:
                   description: The name of the control panel.
                   type: string
                   pattern: ^\S+$
                   minLength: 1
                   maxLength: 64
+                Tags:
+                  description: The tags associated with the control panel.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/__stringMin0Max256PatternS'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -395,6 +413,9 @@ paths:
                 ControlPanelArn:
                   description: The Amazon Resource Name (ARN) of the control panel.
                   type: string
+                  pattern: '^[A-Za-z0-9:\/_-]*$'
+                  minLength: 1
+                  maxLength: 256
                 ControlPanelName:
                   description: The name of the control panel.
                   type: string
@@ -466,15 +487,23 @@ paths:
                 - RoutingControlName
               properties:
                 ClientToken:
-                  description: Unique client idempotency token.
+                  description: 'A unique, case-sensitive string of up to 64 ASCII characters. To make an idempotent API request with an action, specify a client token in the request.'
                   type: string
+                  pattern: ^\S+$
+                  minLength: 1
                   maxLength: 64
                 ClusterArn:
                   description: The Amazon Resource Name (ARN) of the cluster that includes the routing control.
                   type: string
+                  pattern: '^[A-Za-z0-9:\/_-]*$'
+                  minLength: 1
+                  maxLength: 256
                 ControlPanelArn:
                   description: The Amazon Resource Name (ARN) of the control panel that includes the routing control.
                   type: string
+                  pattern: '^[A-Za-z0-9:\/_-]*$'
+                  minLength: 1
+                  maxLength: 256
                 RoutingControlName:
                   description: The name of the routing control.
                   type: string
@@ -549,6 +578,9 @@ paths:
                 RoutingControlArn:
                   description: The Amazon Resource Name (ARN) of the routing control.
                   type: string
+                  pattern: '^[A-Za-z0-9:\/_-]*$'
+                  minLength: 1
+                  maxLength: 256
                 RoutingControlName:
                   description: The name of the routing control.
                   type: string
@@ -558,7 +590,7 @@ paths:
   /safetyrule:
     post:
       operationId: CreateSafetyRule
-      description: '<p>Creates a safety rule in a control panel. Safety rules let you add safeguards around enabling and disabling routing controls, to help prevent unexpected outcomes.</p> <p>There are two types of safety rules: assertion rules and gating rules.</p> <p>Assertion rule: An assertion rule enforces that, when a routing control state is changed, the criteria set by the rule configuration is met. Otherwise, the change to the routing control is not accepted.</p> <p>Gating rule: A gating rule verifies that a set of gating controls evaluates as true, based on a rule configuration that you specify. If the gating rule evaluates to true, Amazon Route 53 Application Recovery Controller allows a set of routing control state changes to run and complete against the set of target controls.</p>'
+      description: '<p>Creates a safety rule in a control panel. Safety rules let you add safeguards around changing routing control states, and for enabling and disabling routing controls, to help prevent unexpected outcomes.</p> <p>There are two types of safety rules: assertion rules and gating rules.</p> <p>Assertion rule: An assertion rule enforces that, when you change a routing control state, that a certain criteria is met. For example, the criteria might be that at least one routing control state is On after the transaction so that traffic continues to flow to at least one cell for the application. This ensures that you avoid a fail-open scenario.</p> <p>Gating rule: A gating rule lets you configure a gating routing control as an overall "on/off" switch for a group of routing controls. Or, you can configure more complex gating scenarios, for example by configuring multiple gating routing controls.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.safety-rules.html">Safety rules</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>'
       responses:
         '200':
           description: Success
@@ -592,11 +624,11 @@ paths:
                   properties:
                     AssertedControls:
                       allOf:
-                        - $ref: '#/components/schemas/__listOf__string'
+                        - $ref: '#/components/schemas/__listOf__stringMin1Max256PatternAZaZ09'
                         - description: 'The routing controls that are part of transactions that are evaluated to determine if a request to change a routing control state is allowed. For example, you might include three routing controls, one for each of three Amazon Web Services Regions.'
                     ControlPanelArn:
                       allOf:
-                        - $ref: '#/components/schemas/__string'
+                        - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
                         - description: The Amazon Resource Name (ARN) for the control panel.
                     Name:
                       allOf:
@@ -605,14 +637,16 @@ paths:
                     RuleConfig:
                       allOf:
                         - $ref: '#/components/schemas/RuleConfig'
-                        - description: 'The criteria that you set for specific assertion controls (routing controls) that designate how many controls must be enabled as the result of a transaction. For example, if you have three assertion controls, you might specify atleast 2 for your rule configuration. This means that at least two assertion controls must be enabled, so that at least two Amazon Web Services Regions are enabled.'
+                        - description: 'The criteria that you set for specific assertion controls (routing controls) that designate how many control states must be ON as the result of a transaction. For example, if you have three assertion controls, you might specify ATLEAST 2 for your rule configuration. This means that at least two assertion controls must be ON, so that at least two Amazon Web Services Regions have traffic flowing to them.'
                     WaitPeriodMs:
                       allOf:
                         - $ref: '#/components/schemas/__integer'
                         - description: 'An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent "flapping" of state. The wait period is 5000 ms by default, but you can choose a custom value.'
                 ClientToken:
-                  description: Unique client idempotency token.
+                  description: 'A unique, case-sensitive string of up to 64 ASCII characters. To make an idempotent API request with an action, specify a client token in the request.'
                   type: string
+                  pattern: ^\S+$
+                  minLength: 1
                   maxLength: 64
                 GatingRule:
                   description: A new gating rule for a control panel.
@@ -620,11 +654,11 @@ paths:
                   properties:
                     ControlPanelArn:
                       allOf:
-                        - $ref: '#/components/schemas/__string'
+                        - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
                         - description: The Amazon Resource Name (ARN) of the control panel.
                     GatingControls:
                       allOf:
-                        - $ref: '#/components/schemas/__listOf__string'
+                        - $ref: '#/components/schemas/__listOf__stringMin1Max256PatternAZaZ09'
                         - description: 'The gating controls for the new gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.'
                     Name:
                       allOf:
@@ -633,15 +667,20 @@ paths:
                     RuleConfig:
                       allOf:
                         - $ref: '#/components/schemas/RuleConfig'
-                        - description: The criteria that you set for specific gating controls (routing controls) that designates how many controls must be enabled to allow you to change (set or unset) the target controls.
+                        - description: The criteria that you set for specific gating controls (routing controls) that designate how many control states must be ON to allow you to change (set or unset) the target control states.
                     TargetControls:
                       allOf:
-                        - $ref: '#/components/schemas/__listOf__string'
-                        - description: '<p>Routing controls that can only be set or unset if the specified RuleConfig evaluates to true for the specified GatingControls. For example, say you have three gating controls, one for each of three Amazon Web Services Regions. Now you specify AtLeast 2 as your RuleConfig. With these settings, you can only change (set or unset) the routing controls that you have specified as TargetControls if that rule evaluates to true.</p> <p>In other words, your ability to change the routing controls that you have specified as TargetControls is gated by the rule that you set for the routing controls in GatingControls.</p>'
+                        - $ref: '#/components/schemas/__listOf__stringMin1Max256PatternAZaZ09'
+                        - description: '<p>Routing controls that can only be set or unset if the specified RuleConfig evaluates to true for the specified GatingControls. For example, say you have three gating controls, one for each of three Amazon Web Services Regions. Now you specify ATLEAST 2 as your RuleConfig. With these settings, you can only change (set or unset) the routing controls that you have specified as TargetControls if that rule evaluates to true.</p> <p>In other words, your ability to change the routing controls that you have specified as TargetControls is gated by the rule that you set for the routing controls in GatingControls.</p>'
                     WaitPeriodMs:
                       allOf:
                         - $ref: '#/components/schemas/__integer'
                         - description: 'An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent "flapping" of state. The wait period is 5000 ms by default, but you can choose a custom value.'
+                Tags:
+                  description: The tags associated with the safety rule.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/__stringMin0Max256PatternS'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -652,7 +691,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateSafetyRule
-      description: 'Update a safety rule (an assertion rule or gating rule) for the routing controls in a control panel. You can only update the name and the waiting period for a safety rule. To make other updates, delete the safety rule and create a new safety rule.'
+      description: 'Update a safety rule (an assertion rule or gating rule). You can only update the name and the waiting period for a safety rule. To make other updates, delete the safety rule and create a new one.'
       responses:
         '200':
           description: Success
@@ -696,7 +735,7 @@ paths:
                         - description: The name of the assertion rule. You can use any non-white space character in the name.
                     SafetyRuleArn:
                       allOf:
-                        - $ref: '#/components/schemas/__string'
+                        - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
                         - description: The Amazon Resource Name (ARN) of the assertion rule.
                     WaitPeriodMs:
                       allOf:
@@ -709,10 +748,10 @@ paths:
                     Name:
                       allOf:
                         - $ref: '#/components/schemas/__stringMin1Max64PatternS'
-                        - description: The name for the gating rule.
+                        - description: The name for the gating rule. You can use any non-white space character in the name.
                     SafetyRuleArn:
                       allOf:
-                        - $ref: '#/components/schemas/__string'
+                        - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
                         - description: The Amazon Resource Name (ARN) of the gating rule.
                     WaitPeriodMs:
                       allOf:
@@ -830,7 +869,7 @@ paths:
         - name: ClusterArn
           in: path
           required: true
-          description: The Amazon Resource Name (ARN) of the cluster that you're getting details for.
+          description: The Amazon Resource Name (ARN) of the cluster.
           schema:
             type: string
   '/controlpanel/{ControlPanelArn}':
@@ -884,7 +923,7 @@ paths:
         - name: ControlPanelArn
           in: path
           required: true
-          description: The Amazon Resource Name (ARN) of the control panel that you're deleting.
+          description: The Amazon Resource Name (ARN) of the control panel.
           schema:
             type: string
     parameters:
@@ -945,7 +984,7 @@ paths:
         - name: ControlPanelArn
           in: path
           required: true
-          description: The Amazon Resource Name (ARN) of the control panel that you're getting details for.
+          description: The Amazon Resource Name (ARN) of the control panel.
           schema:
             type: string
   '/routingcontrol/{RoutingControlArn}':
@@ -1060,7 +1099,7 @@ paths:
         - name: RoutingControlArn
           in: path
           required: true
-          description: The Amazon Resource Name (ARN) of the routing control that you're getting details for.
+          description: The Amazon Resource Name (ARN) of the routing control.
           schema:
             type: string
   '/safetyrule/{SafetyRuleArn}':
@@ -1096,7 +1135,7 @@ paths:
         - name: SafetyRuleArn
           in: path
           required: true
-          description: The request body that you include when you update a safety rule.
+          description: The ARN of the safety rule.
           schema:
             type: string
     parameters:
@@ -1109,7 +1148,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeSafetyRule
-      description: 'Describes the safety rules (that is, the assertion rules and gating rules) for the routing controls in a control panel.'
+      description: Returns information about a safety rule.
       responses:
         '200':
           description: Success
@@ -1133,7 +1172,7 @@ paths:
         - name: SafetyRuleArn
           in: path
           required: true
-          description: The request body that you include when you update a safety rule.
+          description: The ARN of the safety rule.
           schema:
             type: string
   '/routingcontrol/{RoutingControlArn}/associatedRoute53HealthChecks':
@@ -1183,7 +1222,7 @@ paths:
         - name: RoutingControlArn
           in: path
           required: true
-          description: The Amazon Resource Name (ARN) of the routing control that you're getting details for.
+          description: The Amazon Resource Name (ARN) of the routing control.
           schema:
             type: string
     parameters:
@@ -1197,7 +1236,7 @@ paths:
   /controlpanels:
     get:
       operationId: ListControlPanels
-      description: Returns an array of control panels for a cluster.
+      description: Returns an array of control panels in an account or in a cluster.
       responses:
         '200':
           description: Success
@@ -1309,7 +1348,7 @@ paths:
         - name: ControlPanelArn
           in: path
           required: true
-          description: The Amazon Resource Name (ARN) of the control panel that you're getting routing control details for.
+          description: The Amazon Resource Name (ARN) of the control panel.
           schema:
             type: string
         - name: MaxResults
@@ -1379,7 +1418,7 @@ paths:
         - name: ControlPanelArn
           in: path
           required: true
-          description: The Amazon Resource Name (ARN) of the control panel that you're getting details for.
+          description: The Amazon Resource Name (ARN) of the control panel.
           schema:
             type: string
         - name: MaxResults
@@ -1396,6 +1435,151 @@ paths:
           description: The token that identifies which batch of results you want to see.
           schema:
             type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{ResourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags for a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) for the resource that's tagged.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Adds a tag to a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) for the resource that's tagged.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Tags
+              properties:
+                Tags:
+                  description: The tags associated with the resource.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/__stringMin0Max256PatternS'
+  '/tags/{ResourceArn}#TagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes a tag from a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) for the resource that's tagged.
+          schema:
+            type: string
+        - name: TagKeys
+          in: query
+          required: true
+          description: Keys for the tags to be removed.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/__string'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1463,6 +1647,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/Cluster'
             - description: The cluster that was created.
+    __stringMin0Max256PatternS:
+      type: string
+      pattern: ^\S+$
+      minLength: 0
+      maxLength: 256
     ValidationException: {}
     InternalServerException: {}
     ServiceQuotaExceededException: {}
@@ -1488,15 +1677,22 @@ components:
       type: object
       properties:
         AssertionRule:
-          $ref: '#/components/schemas/AssertionRule'
+          allOf:
+            - $ref: '#/components/schemas/AssertionRule'
+            - description: The assertion rule created.
         GatingRule:
-          $ref: '#/components/schemas/GatingRule'
-    __listOf__string:
+          allOf:
+            - $ref: '#/components/schemas/GatingRule'
+            - description: The gating rule created.
+    __listOf__stringMin1Max256PatternAZaZ09:
       type: array
       items:
-        $ref: '#/components/schemas/__string'
-    __string:
+        $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
+    __stringMin1Max256PatternAZaZ09:
       type: string
+      pattern: '^[A-Za-z0-9:\/_-]*$'
+      minLength: 1
+      maxLength: 256
     __stringMin1Max64PatternS:
       type: string
       pattern: ^\S+$
@@ -1521,7 +1717,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/RuleType'
             - description: 'A rule can be one of the following: ATLEAST, AND, or OR.'
-      description: 'The rule configuration for an assertion rule. That is, the criteria that you set for specific assertion controls (routing controls) that specify how many controls must be enabled after a transaction completes.'
+      description: 'The rule configuration for an assertion rule. That is, the criteria that you set for specific assertion controls (routing controls) that specify how many control states must be ON after a transaction completes.'
     __integer:
       type: integer
     DeleteClusterResponse:
@@ -1561,20 +1757,24 @@ components:
       type: object
       properties:
         AssertionRule:
-          $ref: '#/components/schemas/AssertionRule'
+          allOf:
+            - $ref: '#/components/schemas/AssertionRule'
+            - description: The assertion rule in the response.
         GatingRule:
-          $ref: '#/components/schemas/GatingRule'
+          allOf:
+            - $ref: '#/components/schemas/GatingRule'
+            - description: The gating rule in the response.
     ListAssociatedRoute53HealthChecksResponse:
       type: object
       properties:
         HealthCheckIds:
           allOf:
-            - $ref: '#/components/schemas/__listOf__string'
+            - $ref: '#/components/schemas/__listOf__stringMax36PatternS'
             - description: Identifiers for the health checks.
         NextToken:
           allOf:
-            - $ref: '#/components/schemas/__stringMax8096'
-            - description: The token that identifies which batch of results you want to see.
+            - $ref: '#/components/schemas/__stringMin1Max8096PatternS'
+            - description: Next token for listing health checks.
     ListClustersResponse:
       type: object
       properties:
@@ -1584,7 +1784,7 @@ components:
             - description: An array of the clusters in an account.
         NextToken:
           allOf:
-            - $ref: '#/components/schemas/__stringMax8096'
+            - $ref: '#/components/schemas/__stringMin1Max8096PatternS'
             - description: The token that identifies which batch of results you want to see.
     ListControlPanelsResponse:
       type: object
@@ -1595,14 +1795,14 @@ components:
             - description: The result of a successful ListControlPanel request.
         NextToken:
           allOf:
-            - $ref: '#/components/schemas/__stringMax8096'
+            - $ref: '#/components/schemas/__stringMin1Max8096PatternS'
             - description: The token that identifies which batch of results you want to see.
     ListRoutingControlsResponse:
       type: object
       properties:
         NextToken:
           allOf:
-            - $ref: '#/components/schemas/__stringMax8096'
+            - $ref: '#/components/schemas/__stringMin1Max8096PatternS'
             - description: The token that identifies which batch of results you want to see.
         RoutingControls:
           allOf:
@@ -1613,12 +1813,27 @@ components:
       properties:
         NextToken:
           allOf:
-            - $ref: '#/components/schemas/__stringMax8096'
+            - $ref: '#/components/schemas/__stringMin1Max8096PatternS'
             - description: The token that identifies which batch of results you want to see.
         SafetyRules:
           allOf:
             - $ref: '#/components/schemas/__listOfRule'
             - description: The list of safety rules in a control panel.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__stringMin0Max256PatternS'
+            - description: The tags associated with the resource.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    __string:
+      type: string
     UpdateControlPanelResponse:
       type: object
       properties:
@@ -1637,9 +1852,13 @@ components:
       type: object
       properties:
         AssertionRule:
-          $ref: '#/components/schemas/AssertionRule'
+          allOf:
+            - $ref: '#/components/schemas/AssertionRule'
+            - description: The assertion rule updated.
         GatingRule:
-          $ref: '#/components/schemas/GatingRule'
+          allOf:
+            - $ref: '#/components/schemas/GatingRule'
+            - description: The gating rule updated.
     Status:
       type: string
       enum:
@@ -1660,11 +1879,11 @@ components:
       properties:
         AssertedControls:
           allOf:
-            - $ref: '#/components/schemas/__listOf__string'
+            - $ref: '#/components/schemas/__listOf__stringMin1Max256PatternAZaZ09'
             - description: 'The routing controls that are part of transactions that are evaluated to determine if a request to change a routing control state is allowed. For example, you might include three routing controls, one for each of three Amazon Web Services Regions.'
         ControlPanelArn:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
             - description: The Amazon Resource Name (ARN) of the control panel.
         Name:
           allOf:
@@ -1673,10 +1892,10 @@ components:
         RuleConfig:
           allOf:
             - $ref: '#/components/schemas/RuleConfig'
-            - description: 'The criteria that you set for specific assertion controls (routing controls) that designate how many controls must be enabled as the result of a transaction. For example, if you have three assertion controls, you might specify atleast 2 for your rule configuration. This means that at least two assertion controls must be enabled, so that at least two Amazon Web Services Regions are enabled.'
+            - description: 'The criteria that you set for specific assertion routing controls (AssertedControls) that designate how many routing control states must be ON as the result of a transaction. For example, if you have three assertion routing controls, you might specify ATLEAST 2 for your rule configuration. This means that at least two assertion routing control states must be ON, so that at least two Amazon Web Services Regions have traffic flowing to them.'
         SafetyRuleArn:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
             - description: The Amazon Resource Name (ARN) of the assertion rule.
         Status:
           allOf:
@@ -1686,7 +1905,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/__integer'
             - description: 'An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent "flapping" of state. The wait period is 5000 ms by default, but you can choose a custom value.'
-      description: 'An assertion rule enforces that, when a routing control state is changed, the criteria set by the rule configuration is met. Otherwise, the change to the routing control is not accepted.'
+      description: 'An assertion rule enforces that, when you change a routing control state, that the criteria that you set in the rule configuration is met. Otherwise, the change to the routing control is not accepted. For example, the criteria might be that at least one routing control state is On after the transaction so that traffic continues to flow to at least one cell for the application. This ensures that you avoid a fail-open scenario.'
     AssertionRuleUpdate:
       type: object
       required:
@@ -1700,7 +1919,7 @@ components:
             - description: The name of the assertion rule. You can use any non-white space character in the name.
         SafetyRuleArn:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
             - description: The Amazon Resource Name (ARN) of the assertion rule.
         WaitPeriodMs:
           allOf:
@@ -1716,12 +1935,12 @@ components:
       properties:
         ClusterArn:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
             - description: The Amazon Resource Name (ARN) of the cluster.
         ClusterEndpoints:
           allOf:
             - $ref: '#/components/schemas/__listOfClusterEndpoint'
-            - description: '<p>Endpoints for a cluster. Specify one of these endpoints when you want to set or retrieve a routing control state in the cluster.</p> <p>To get or update the routing control state, see the Amazon Route 53 Application Recovery Controller Cluster (Data Plane) Actions.</p>'
+            - description: '<p>Endpoints for a cluster. Specify one of these endpoints when you want to set or retrieve a routing control state in the cluster.</p> <p>To get or update the routing control state, see the Amazon Route 53 Application Recovery Controller Routing Control Actions.</p>'
         Name:
           allOf:
             - $ref: '#/components/schemas/__stringMin1Max64PatternS'
@@ -1730,13 +1949,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/Status'
             - description: 'Deployment status of a resource. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.'
-      description: 'A cluster is a set of five consensus-forming Regional endpoints that represent the infrastructure that hosts your routing controls. Typically, you host together on one cluster all of the routing controls for your applications.'
-    __stringMin1Max128:
+      description: A set of five redundant Regional endpoints against which you can execute API calls to update or get the state of routing controls. You can host multiple control panels and routing controls on one cluster.
+    __stringMin1Max128PatternAZaZ09:
       type: string
+      pattern: '^[A-Za-z0-9:.\/_-]*$'
       minLength: 1
       maxLength: 128
-    __stringMin1Max32:
+    __stringMin1Max32PatternS:
       type: string
+      pattern: ^\S+$
       minLength: 1
       maxLength: 32
     ClusterEndpoint:
@@ -1744,11 +1965,11 @@ components:
       properties:
         Endpoint:
           allOf:
-            - $ref: '#/components/schemas/__stringMin1Max128'
-            - description: '<p>A cluster endpoint. Specify an endpoint and Amazon Web Services Region when you want to set or retrieve a routing control state in the cluster.</p> <p>To get or update the routing control state, see the Amazon Route 53 Application Recovery Controller Cluster (Data Plane) Actions.</p>'
+            - $ref: '#/components/schemas/__stringMin1Max128PatternAZaZ09'
+            - description: '<p>A cluster endpoint. Specify an endpoint and Amazon Web Services Region when you want to set or retrieve a routing control state in the cluster.</p> <p>To get or update the routing control state, see the Amazon Route 53 Application Recovery Controller Routing Control Actions.</p>'
         Region:
           allOf:
-            - $ref: '#/components/schemas/__stringMin1Max32'
+            - $ref: '#/components/schemas/__stringMin1Max32PatternS'
             - description: The Amazon Web Services Region for a cluster endpoint.
       description: A cluster endpoint. Specify an endpoint when you want to set or retrieve a routing control state in the cluster.
     __boolean:
@@ -1758,11 +1979,11 @@ components:
       properties:
         ClusterArn:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
             - description: The Amazon Resource Name (ARN) of the cluster that includes the control panel.
         ControlPanelArn:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
             - description: The Amazon Resource Name (ARN) of the control panel.
         DefaultControlPanel:
           allOf:
@@ -1781,9 +2002,10 @@ components:
             - $ref: '#/components/schemas/Status'
             - description: 'The deployment status of control panel. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.'
       description: A control panel represents a group of routing controls that can be changed together in a single transaction.
-    __stringMax64:
-      type: string
-      maxLength: 64
+    __mapOf__stringMin0Max256PatternS:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/__stringMin0Max256PatternS'
     CreateClusterRequest:
       type: object
       required:
@@ -1792,12 +2014,16 @@ components:
       properties:
         ClientToken:
           allOf:
-            - $ref: '#/components/schemas/__stringMax64'
-            - description: Unique client idempotency token.
+            - $ref: '#/components/schemas/__stringMin1Max64PatternS'
+            - description: 'A unique, case-sensitive string of up to 64 ASCII characters. To make an idempotent API request with an action, specify a client token in the request.'
         ClusterName:
           allOf:
             - $ref: '#/components/schemas/__stringMin1Max64PatternS'
             - description: The name of the cluster.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__stringMin0Max256PatternS'
+            - description: The tags associated with the cluster.
       description: Creates a cluster.
     CreateControlPanelRequest:
       type: object
@@ -1808,16 +2034,20 @@ components:
       properties:
         ClientToken:
           allOf:
-            - $ref: '#/components/schemas/__stringMax64'
-            - description: Unique client idempotency token.
+            - $ref: '#/components/schemas/__stringMin1Max64PatternS'
+            - description: 'A unique, case-sensitive string of up to 64 ASCII characters. To make an idempotent API request with an action, specify a client token in the request.'
         ClusterArn:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
             - description: The Amazon Resource Name (ARN) of the cluster for the control panel.
         ControlPanelName:
           allOf:
             - $ref: '#/components/schemas/__stringMin1Max64PatternS'
             - description: The name of the control panel.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__stringMin0Max256PatternS'
+            - description: The tags associated with the control panel.
       description: The details of the control panel that you're creating.
     CreateRoutingControlRequest:
       type: object
@@ -1828,15 +2058,15 @@ components:
       properties:
         ClientToken:
           allOf:
-            - $ref: '#/components/schemas/__stringMax64'
-            - description: Unique client idempotency token.
+            - $ref: '#/components/schemas/__stringMin1Max64PatternS'
+            - description: 'A unique, case-sensitive string of up to 64 ASCII characters. To make an idempotent API request with an action, specify a client token in the request.'
         ClusterArn:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
             - description: The Amazon Resource Name (ARN) of the cluster that includes the routing control.
         ControlPanelArn:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
             - description: The Amazon Resource Name (ARN) of the control panel that includes the routing control.
         RoutingControlName:
           allOf:
@@ -1848,7 +2078,7 @@ components:
       properties:
         ControlPanelArn:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
             - description: The Amazon Resource Name (ARN) of the control panel that includes the routing control.
         Name:
           allOf:
@@ -1856,7 +2086,7 @@ components:
             - description: The name of the routing control.
         RoutingControlArn:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
             - description: The Amazon Resource Name (ARN) of the routing control.
         Status:
           allOf:
@@ -1874,11 +2104,11 @@ components:
       properties:
         AssertedControls:
           allOf:
-            - $ref: '#/components/schemas/__listOf__string'
+            - $ref: '#/components/schemas/__listOf__stringMin1Max256PatternAZaZ09'
             - description: 'The routing controls that are part of transactions that are evaluated to determine if a request to change a routing control state is allowed. For example, you might include three routing controls, one for each of three Amazon Web Services Regions.'
         ControlPanelArn:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
             - description: The Amazon Resource Name (ARN) for the control panel.
         Name:
           allOf:
@@ -1887,7 +2117,7 @@ components:
         RuleConfig:
           allOf:
             - $ref: '#/components/schemas/RuleConfig'
-            - description: 'The criteria that you set for specific assertion controls (routing controls) that designate how many controls must be enabled as the result of a transaction. For example, if you have three assertion controls, you might specify atleast 2 for your rule configuration. This means that at least two assertion controls must be enabled, so that at least two Amazon Web Services Regions are enabled.'
+            - description: 'The criteria that you set for specific assertion controls (routing controls) that designate how many control states must be ON as the result of a transaction. For example, if you have three assertion controls, you might specify ATLEAST 2 for your rule configuration. This means that at least two assertion controls must be ON, so that at least two Amazon Web Services Regions have traffic flowing to them.'
         WaitPeriodMs:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -1905,11 +2135,11 @@ components:
       properties:
         ControlPanelArn:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
             - description: The Amazon Resource Name (ARN) of the control panel.
         GatingControls:
           allOf:
-            - $ref: '#/components/schemas/__listOf__string'
+            - $ref: '#/components/schemas/__listOf__stringMin1Max256PatternAZaZ09'
             - description: 'The gating controls for the new gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.'
         Name:
           allOf:
@@ -1918,11 +2148,11 @@ components:
         RuleConfig:
           allOf:
             - $ref: '#/components/schemas/RuleConfig'
-            - description: The criteria that you set for specific gating controls (routing controls) that designates how many controls must be enabled to allow you to change (set or unset) the target controls.
+            - description: The criteria that you set for specific gating controls (routing controls) that designate how many control states must be ON to allow you to change (set or unset) the target control states.
         TargetControls:
           allOf:
-            - $ref: '#/components/schemas/__listOf__string'
-            - description: '<p>Routing controls that can only be set or unset if the specified RuleConfig evaluates to true for the specified GatingControls. For example, say you have three gating controls, one for each of three Amazon Web Services Regions. Now you specify AtLeast 2 as your RuleConfig. With these settings, you can only change (set or unset) the routing controls that you have specified as TargetControls if that rule evaluates to true.</p> <p>In other words, your ability to change the routing controls that you have specified as TargetControls is gated by the rule that you set for the routing controls in GatingControls.</p>'
+            - $ref: '#/components/schemas/__listOf__stringMin1Max256PatternAZaZ09'
+            - description: '<p>Routing controls that can only be set or unset if the specified RuleConfig evaluates to true for the specified GatingControls. For example, say you have three gating controls, one for each of three Amazon Web Services Regions. Now you specify ATLEAST 2 as your RuleConfig. With these settings, you can only change (set or unset) the routing controls that you have specified as TargetControls if that rule evaluates to true.</p> <p>In other words, your ability to change the routing controls that you have specified as TargetControls is gated by the rule that you set for the routing controls in GatingControls.</p>'
         WaitPeriodMs:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -1933,13 +2163,21 @@ components:
       title: CreateSafetyRuleRequest
       properties:
         AssertionRule:
-          $ref: '#/components/schemas/NewAssertionRule'
+          allOf:
+            - $ref: '#/components/schemas/NewAssertionRule'
+            - description: The assertion rule requested.
         ClientToken:
           allOf:
-            - $ref: '#/components/schemas/__stringMax64'
-            - description: Unique client idempotency token.
+            - $ref: '#/components/schemas/__stringMin1Max64PatternS'
+            - description: 'A unique, case-sensitive string of up to 64 ASCII characters. To make an idempotent API request with an action, specify a client token in the request.'
         GatingRule:
-          $ref: '#/components/schemas/NewGatingRule'
+          allOf:
+            - $ref: '#/components/schemas/NewGatingRule'
+            - description: The gating rule requested.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__stringMin0Max256PatternS'
+            - description: The tags associated with the safety rule.
       description: The request body that you include when you create a safety rule.
     GatingRule:
       type: object
@@ -1955,23 +2193,23 @@ components:
       properties:
         ControlPanelArn:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
             - description: The Amazon Resource Name (ARN) of the control panel.
         GatingControls:
           allOf:
-            - $ref: '#/components/schemas/__listOf__string'
-            - description: 'The gating controls for the gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.'
+            - $ref: '#/components/schemas/__listOf__stringMin1Max256PatternAZaZ09'
+            - description: 'An array of gating routing control Amazon Resource Names (ARNs). For a simple "on/off" switch, specify the ARN for one routing control. The gating routing controls are evaluated by the rule configuration that you specify to determine if the target routing control states can be changed.'
         Name:
           allOf:
             - $ref: '#/components/schemas/__stringMin1Max64PatternS'
-            - description: The name for the gating rule.
+            - description: The name for the gating rule. You can use any non-white space character in the name.
         RuleConfig:
           allOf:
             - $ref: '#/components/schemas/RuleConfig'
-            - description: The criteria that you set for specific gating controls (routing controls) that designates how many controls must be enabled to allow you to change (set or unset) the target controls.
+            - description: The criteria that you set for gating routing controls that designate how many of the routing control states must be ON to allow you to update target routing control states.
         SafetyRuleArn:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
             - description: The Amazon Resource Name (ARN) of the gating rule.
         Status:
           allOf:
@@ -1979,13 +2217,13 @@ components:
             - description: 'The deployment status of a gating rule. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.'
         TargetControls:
           allOf:
-            - $ref: '#/components/schemas/__listOf__string'
-            - description: '<p>Routing controls that can only be set or unset if the specified RuleConfig evaluates to true for the specified GatingControls. For example, say you have three gating controls, one for each of three Amazon Web Services Regions. Now you specify ATLEAST 2 as your RuleConfig. With these settings, you can only change (set or unset) the routing controls that you have specified as TargetControls if that rule evaluates to true.</p> <p>In other words, your ability to change the routing controls that you have specified as TargetControls is gated by the rule that you set for the routing controls in GatingControls.</p>'
+            - $ref: '#/components/schemas/__listOf__stringMin1Max256PatternAZaZ09'
+            - description: 'An array of target routing control Amazon Resource Names (ARNs) for which the states can only be updated if the rule configuration that you specify evaluates to true for the gating routing control. As a simple example, if you have a single gating control, it acts as an overall "on/off" switch for a set of target routing controls. You can use this to manually override automated failover, for example.'
         WaitPeriodMs:
           allOf:
             - $ref: '#/components/schemas/__integer'
             - description: 'An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent "flapping" of state. The wait period is 5000 ms by default, but you can choose a custom value.'
-      description: 'A gating rule verifies that a set of gating controls evaluates as true, based on a rule configuration that you specify. If the gating rule evaluates to true, Amazon Route 53 Application Recovery Controller allows a set of routing control state changes to run and complete against the set of target controls.'
+      description: '<p>A gating rule verifies that a gating routing control or set of gating routing controls, evaluates as true, based on a rule configuration that you specify, which allows a set of routing control state changes to complete.</p> <p>For example, if you specify one gating routing control and you set the Type in the rule configuration to OR, that indicates that you must set the gating routing control to On for the rule to evaluate as true; that is, for the gating control "switch" to be "On". When you do that, then you can update the routing control states for the target routing controls that you specify in the gating rule.</p>'
     DeleteClusterRequest:
       type: object
       title: DeleteClusterRequest
@@ -2028,10 +2266,10 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/__stringMin1Max64PatternS'
-            - description: The name for the gating rule.
+            - description: The name for the gating rule. You can use any non-white space character in the name.
         SafetyRuleArn:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
             - description: The Amazon Resource Name (ARN) of the gating rule.
         WaitPeriodMs:
           allOf:
@@ -2046,8 +2284,14 @@ components:
       type: object
       title: ListAssociatedRoute53HealthChecksRequest
       properties: {}
-    __stringMax8096:
+    __listOf__stringMax36PatternS:
+      type: array
+      items:
+        $ref: '#/components/schemas/__stringMax36PatternS'
+    __stringMin1Max8096PatternS:
       type: string
+      pattern: '[\S]*'
+      minLength: 1
       maxLength: 8096
     ListClustersRequest:
       type: object
@@ -2081,17 +2325,21 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Rule'
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
     Rule:
       type: object
       properties:
         ASSERTION:
           allOf:
             - $ref: '#/components/schemas/AssertionRule'
-            - description: 'An assertion rule enforces that, when a routing control state is changed, the criteria set by the rule configuration is met. Otherwise, the change to the routing control is not accepted.'
+            - description: 'An assertion rule enforces that, when a routing control state is changed, the criteria set by the rule configuration is met. Otherwise, the change to the routing control state is not accepted. For example, the criteria might be that at least one routing control state is On after the transaction so that traffic continues to flow to at least one cell for the application. This ensures that you avoid a fail-open scenario.'
         GATING:
           allOf:
             - $ref: '#/components/schemas/GatingRule'
-            - description: 'A gating rule verifies that a set of gating controls evaluates as true, based on a rule configuration that you specify. If the gating rule evaluates to true, Amazon Route 53 Application Recovery Controller allows a set of routing control state changes to run and complete against the set of target controls.'
+            - description: '<p>A gating rule verifies that a gating routing control or set of gating routing controls, evaluates as true, based on a rule configuration that you specify, which allows a set of routing control state changes to complete.</p> <p>For example, if you specify one gating routing control and you set the Type in the rule configuration to OR, that indicates that you must set the gating routing control to On for the rule to evaluate as true; that is, for the gating control "switch" to be "On". When you do that, then you can update the routing control states for the target routing controls that you specify in the gating rule.</p>'
       description: A safety rule. A safety rule can be an assertion rule or a gating rule.
     RuleType:
       type: string
@@ -2100,6 +2348,25 @@ components:
         - AND
         - OR
       description: '<p>An enumerated type that determines how the evaluated rules are processed. RuleType can be one of the following:</p> <p>ATLEAST - At least N routing controls must be set. You specify N as the Threshold in the rule configuration.</p> <p>AND - All routing controls must be set. This is a shortcut for "At least N," where N is the total number of controls in the rule.</p> <p>OR - Any control must be set. This is a shortcut for "At least N," where N is 1.</p>'
+    TagResourceRequest:
+      type: object
+      required:
+        - Tags
+      title: TagResourceRequest
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__stringMin0Max256PatternS'
+            - description: The tags associated with the resource.
+      description: Request of adding tag to the resource
+    __listOf__string:
+      type: array
+      items:
+        $ref: '#/components/schemas/__string'
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
     UpdateControlPanelRequest:
       type: object
       required:
@@ -2109,7 +2376,7 @@ components:
       properties:
         ControlPanelArn:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
             - description: The Amazon Resource Name (ARN) of the control panel.
         ControlPanelName:
           allOf:
@@ -2125,7 +2392,7 @@ components:
       properties:
         RoutingControlArn:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/__stringMin1Max256PatternAZaZ09'
             - description: The Amazon Resource Name (ARN) of the routing control.
         RoutingControlName:
           allOf:
@@ -2137,8 +2404,17 @@ components:
       title: UpdateSafetyRuleRequest
       properties:
         AssertionRuleUpdate:
-          $ref: '#/components/schemas/AssertionRuleUpdate'
+          allOf:
+            - $ref: '#/components/schemas/AssertionRuleUpdate'
+            - description: The assertion rule to update.
         GatingRuleUpdate:
-          $ref: '#/components/schemas/GatingRuleUpdate'
+          allOf:
+            - $ref: '#/components/schemas/GatingRuleUpdate'
+            - description: The gating rule to update.
+      description: A rule that you add to Application Recovery Controller to ensure that recovery actions don't accidentally impair your application's availability.
+    __stringMax36PatternS:
+      type: string
+      pattern: ^\S+$
+      maxLength: 36
 security:
   - hmac: []

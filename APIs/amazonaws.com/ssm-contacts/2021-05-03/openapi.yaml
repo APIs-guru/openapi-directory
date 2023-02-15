@@ -1423,7 +1423,7 @@ paths:
   /#X-Amz-Target=SSMContacts.PutContactPolicy:
     post:
       operationId: PutContactPolicy
-      description: Adds a resource to the specified contact or escalation plan.
+      description: 'Adds a resource policy to the specified contact or escalation plan. The resource policy is used to share the contact or escalation plan using Resource Access Manager (RAM). For more information about cross-account sharing, see <a href="https://docs.aws.amazon.com/incident-manager/latest/userguide/xa.html">Setting up cross-account functionality</a>.'
       responses:
         '200':
           description: Success
@@ -2237,7 +2237,7 @@ components:
         PublicContent: Testing engagements
         PublicSubject: test
         Sender: tester
-        StartTime: '$2021-05-18T18:25:41.151000+00:00'
+        StartTime: '2021-05-18T18:25:41.151000+00:00'
         Subject: test
       properties:
         ContactArn:

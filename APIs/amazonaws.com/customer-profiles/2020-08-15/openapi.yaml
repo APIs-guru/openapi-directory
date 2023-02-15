@@ -3,7 +3,7 @@ info:
   version: '2020-08-15'
   x-release: v4
   title: Amazon Connect Customer Profiles
-  description: '<fullname>Amazon Connect Customer Profiles</fullname> <p>Welcome to the Amazon Connect Customer Profiles API Reference. This guide provides information about the Amazon Connect Customer Profiles API, including supported operations, data types, parameters, and schemas.</p> <p>Amazon Connect Customer Profiles is a unified customer profile for your contact center that has pre-built connectors powered by AppFlow that make it easy to combine customer information from third party applications, such as Salesforce (CRM), ServiceNow (ITSM), and your enterprise resource planning (ERP), with contact history from your Amazon Connect contact center.</p> <p>If you''re new to Amazon Connect , you might find it helpful to also review the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/what-is-amazon-connect.html">Amazon Connect Administrator Guide</a>.</p>'
+  description: '<fullname>Amazon Connect Customer Profiles</fullname> <p>Amazon Connect Customer Profiles is a unified customer profile for your contact center that has pre-built connectors powered by AppFlow that make it easy to combine customer information from third party applications, such as Salesforce (CRM), ServiceNow (ITSM), and your enterprise resource planning (ERP), with contact history from your Amazon Connect contact center. If you''re new to Amazon Connect, you might find it helpful to review the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/">Amazon Connect Administrator Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -118,7 +118,7 @@ paths:
   '/domains/{DomainName}/profiles/keys':
     post:
       operationId: AddProfileKey
-      description: '<p>Associates a new key value with a specific profile, such as a Contact Trace Record (CTR) ContactId.</p> <p>A profile object can have a single unique key and any number of additional keys that can be used to identify the profile that it belongs to.</p>'
+      description: '<p>Associates a new key value with a specific profile, such as a Contact Record ContactId.</p> <p>A profile object can have a single unique key and any number of additional keys that can be used to identify the profile that it belongs to.</p>'
       responses:
         '200':
           description: Success
@@ -182,7 +182,7 @@ paths:
                   type: string
                   pattern: '[a-f0-9]{32}'
                 KeyName:
-                  description: A searchable identifier of a customer profile.
+                  description: 'A searchable identifier of a customer profile. The predefined keys you can use include: _account, _profileId, _assetId, _caseId, _orderId, _fullName, _phone, _email, _ctrContactId, _marketoLeadId, _salesforceAccountId, _salesforceContactId, _salesforceAssetId, _zendeskUserId, _zendeskExternalId, _zendeskTicketId, _serviceNowSystemId, _serviceNowIncidentId, _segmentUserId, _shopifyCustomerId, _shopifyOrderId.'
                   type: string
                   pattern: '^[a-zA-Z0-9_-]+$'
                   minLength: 1
@@ -203,7 +203,7 @@ paths:
   '/domains/{DomainName}':
     post:
       operationId: CreateDomain
-      description: '<p>Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations.</p> <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain.</p> <p>Use this API or <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html">UpdateDomain</a> to enable <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">identity resolution</a>: set <code>Matching</code> to true. </p>'
+      description: '<p>Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations.</p> <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain.</p> <p>Use this API or <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html">UpdateDomain</a> to enable <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">identity resolution</a>: set <code>Matching</code> to true. </p> <p>To prevent cross-service impersonation when you call this API, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html">Cross-service confused deputy prevention</a> for sample policies that you should apply. </p>'
       responses:
         '200':
           description: Success
@@ -283,6 +283,18 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/optionalBoolean'
                         - description: The flag that enables the matching process of duplicate profiles.
+                    JobSchedule:
+                      allOf:
+                        - $ref: '#/components/schemas/JobSchedule'
+                        - description: The day and time when do you want to start the Identity Resolution Job every week.
+                    AutoMerging:
+                      allOf:
+                        - $ref: '#/components/schemas/AutoMerging'
+                        - description: Configuration information about the auto-merging process.
+                    ExportingConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/ExportingConfig'
+                        - description: 'Configuration information for exporting Identity Resolution results, for example, to an S3 bucket.'
                 Tags:
                   description: 'The tags used to organize, track, or control access for this resource.'
                   type: object
@@ -400,7 +412,7 @@ paths:
             maxLength: 64
     put:
       operationId: UpdateDomain
-      description: '<p>Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key.</p> <p>After a domain is created, the name can’t be changed.</p> <p>Use this API or <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html">CreateDomain</a> to enable <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">identity resolution</a>: set <code>Matching</code> to true. </p>'
+      description: '<p>Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key.</p> <p>After a domain is created, the name can’t be changed.</p> <p>Use this API or <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html">CreateDomain</a> to enable <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">identity resolution</a>: set <code>Matching</code> to true. </p> <p>To prevent cross-service impersonation when you call this API, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html">Cross-service confused deputy prevention</a> for sample policies that you should apply. </p> <p>To add or remove tags on an existing Domain, see <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html">TagResource</a>/<a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html">UntagResource</a>.</p>'
       responses:
         '200':
           description: Success
@@ -478,6 +490,18 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/optionalBoolean'
                         - description: The flag that enables the matching process of duplicate profiles.
+                    JobSchedule:
+                      allOf:
+                        - $ref: '#/components/schemas/JobSchedule'
+                        - description: The day and time when do you want to start the Identity Resolution Job every week.
+                    AutoMerging:
+                      allOf:
+                        - $ref: '#/components/schemas/AutoMerging'
+                        - description: Configuration information about the auto-merging process.
+                    ExportingConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/ExportingConfig'
+                        - description: 'Configuration information for exporting Identity Resolution results, for example, to an S3 bucket.'
                 Tags:
                   description: 'The tags used to organize, track, or control access for this resource.'
                   type: object
@@ -485,6 +509,108 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+  '/domains/{DomainName}/workflows/integrations':
+    post:
+      operationId: CreateIntegrationWorkflow
+      description: ' Creates an integration workflow. An integration workflow is an async process which ingests historic data and sets up an integration for ongoing updates. The supported Amazon AppFlow sources are Salesforce, ServiceNow, and Marketo. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateIntegrationWorkflowResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - WorkflowType
+                - IntegrationConfig
+                - ObjectTypeName
+                - RoleArn
+              properties:
+                WorkflowType:
+                  description: The type of workflow. The only supported value is APPFLOW_INTEGRATION.
+                  type: string
+                  enum:
+                    - APPFLOW_INTEGRATION
+                IntegrationConfig:
+                  description: Configuration data for integration workflow.
+                  type: object
+                  properties:
+                    AppflowIntegration:
+                      allOf:
+                        - $ref: '#/components/schemas/AppflowIntegration'
+                        - description: Configuration data for <code>APPFLOW_INTEGRATION</code> workflow type.
+                ObjectTypeName:
+                  description: The name of the profile object type.
+                  type: string
+                  pattern: '^[a-zA-Z_][a-zA-Z_0-9-]*$'
+                  minLength: 1
+                  maxLength: 255
+                RoleArn:
+                  description: The Amazon Resource Name (ARN) of the IAM role. Customer Profiles assumes this role to create resources on your behalf as part of workflow execution.
+                  type: string
+                  pattern: 'arn:aws:iam:.*:[0-9]+:.*'
+                  maxLength: 512
+                Tags:
+                  description: 'The tags used to organize, track, or control access for this resource.'
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/domains/{DomainName}/profiles':
     post:
       operationId: CreateProfile
@@ -556,6 +682,7 @@ paths:
                 PartyType:
                   description: The type of profile used to describe the customer.
                   type: string
+                  deprecated: true
                   enum:
                     - INDIVIDUAL
                     - BUSINESS
@@ -588,6 +715,7 @@ paths:
                 Gender:
                   description: 'The gender with which the customer identifies. '
                   type: string
+                  deprecated: true
                   enum:
                     - MALE
                     - FEMALE
@@ -808,6 +936,16 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/string1To255'
+                PartyTypeString:
+                  description: An alternative to <code>PartyType</code> which accepts any string as input.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                GenderString:
+                  description: An alternative to <code>Gender</code> which accepts any string as input.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -892,6 +1030,7 @@ paths:
                 PartyType:
                   description: The type of profile used to describe the customer.
                   type: string
+                  deprecated: true
                   enum:
                     - INDIVIDUAL
                     - BUSINESS
@@ -924,6 +1063,7 @@ paths:
                 Gender:
                   description: 'The gender with which the customer identifies. '
                   type: string
+                  deprecated: true
                   enum:
                     - MALE
                     - FEMALE
@@ -1144,6 +1284,16 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/string0To255'
+                PartyTypeString:
+                  description: An alternative to <code>PartyType</code> which accepts any string as input.
+                  type: string
+                  minLength: 0
+                  maxLength: 255
+                GenderString:
+                  description: An alternative to <code>Gender</code> which accepts any string as input.
+                  type: string
+                  minLength: 0
+                  maxLength: 255
   '/domains/{DomainName}/integrations/delete':
     post:
       operationId: DeleteIntegration
@@ -1588,7 +1738,7 @@ paths:
             maxLength: 255
     put:
       operationId: PutProfileObjectType
-      description: Defines a ProfileObjectType.
+      description: '<p>Defines a ProfileObjectType.</p> <p>To add or remove tags on an existing ObjectType, see <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html"> TagResource</a>/<a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html">UntagResource</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1660,7 +1810,7 @@ paths:
                   minLength: 1
                   maxLength: 1000
                 TemplateId:
-                  description: A unique identifier for the object template.
+                  description: 'A unique identifier for the object template. For some attributes in the request, the service will use the default value from the object template when TemplateId is present. If these attributes are present in the request, the service may return a <code>BadRequestException</code>. These attributes include: AllowProfileCreation, SourceLastUpdatedTimestampFormat, Fields, and Keys. For example, if AllowProfileCreation is set to true when TemplateId is set, the service may return a <code>BadRequestException</code>.'
                   type: string
                   pattern: '^[a-zA-Z0-9_-]+$'
                   minLength: 1
@@ -1678,6 +1828,11 @@ paths:
                 AllowProfileCreation:
                   description: 'Indicates whether a profile should be created when data is received if one doesn’t exist for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and associate this object with the profile. If it is set to <code>TRUE</code>, and if no match is found, then the service creates a new standard profile.'
                   type: boolean
+                SourceLastUpdatedTimestampFormat:
+                  description: 'The format of your <code>sourceLastUpdatedTimestamp</code> that was previously set up. '
+                  type: string
+                  minLength: 1
+                  maxLength: 255
                 Fields:
                   description: A map of the name and ObjectType field.
                   type: object
@@ -1695,6 +1850,291 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+  '/domains/{DomainName}/workflows/{WorkflowId}':
+    delete:
+      operationId: DeleteWorkflow
+      description: Deletes the specified workflow and all its corresponding resources. This is an async process.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteWorkflowResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+        - name: WorkflowId
+          in: path
+          required: true
+          description: Unique identifier for the workflow.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetWorkflow
+      description: Get details of specified workflow.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkflowResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+        - name: WorkflowId
+          in: path
+          required: true
+          description: Unique identifier for the workflow.
+          schema:
+            type: string
+            pattern: '[a-f0-9]{32}'
+  '/domains/{DomainName}/identity-resolution-jobs/auto-merging-preview':
+    post:
+      operationId: GetAutoMergingPreview
+      description: '<p>Tests the auto-merging settings of your Identity Resolution Job without merging your data. It randomly selects a sample of matching groups from the existing matching results, and applies the automerging settings that you provided. You can then view the number of profiles in the sample, the number of matches, and the number of profiles identified to be merged. This enables you to evaluate the accuracy of the attributes in your matching list. </p> <p>You can''t view which profiles are matched and would be merged.</p> <important> <p>We strongly recommend you use this API to do a dry run of the automerging process before running the Identity Resolution Job. Include <b>at least</b> two matching attributes. If your matching list includes too few attributes (such as only <code>FirstName</code> or only <code>LastName</code>), there may be a large number of matches. This increases the chances of erroneous merges.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAutoMergingPreviewResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Consolidation
+                - ConflictResolution
+              properties:
+                Consolidation:
+                  description: 'The matching criteria to be used during the auto-merging process. '
+                  type: object
+                  properties:
+                    MatchingAttributesList:
+                      allOf:
+                        - $ref: '#/components/schemas/MatchingAttributesList'
+                        - description: A list of matching criteria.
+                ConflictResolution:
+                  description: How the auto-merging process should resolve conflicts between different profiles.
+                  type: object
+                  properties:
+                    ConflictResolvingModel:
+                      allOf:
+                        - $ref: '#/components/schemas/ConflictResolvingModel'
+                        - description: '<p>How the auto-merging process should resolve conflicts between different profiles.</p> <ul> <li> <p> <code>RECENCY</code>: Uses the data that was most recently updated.</p> </li> <li> <p> <code>SOURCE</code>: Uses the data from a specific source. For example, if a company has been aquired or two departments have merged, data from the specified source is used. If two duplicate profiles are from the same source, then <code>RECENCY</code> is used again.</p> </li> </ul>'
+                    SourceName:
+                      allOf:
+                        - $ref: '#/components/schemas/string1To255'
+                        - description: The <code>ObjectType</code> name that is used to resolve profile merging conflicts when choosing <code>SOURCE</code> as the <code>ConflictResolvingModel</code>.
+                MinAllowedConfidenceScoreForMerging:
+                  description: Minimum confidence score required for profiles within a matching group to be merged during the auto-merge process.
+                  type: number
+                  format: double
+                  minimum: 0
+                  maximum: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{DomainName}/identity-resolution-jobs/{JobId}':
+    get:
+      operationId: GetIdentityResolutionJob
+      description: '<p>Returns information about an Identity Resolution Job in a specific domain. </p> <p>Identity Resolution Jobs are set up using the Amazon Connect admin console. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/use-identity-resolution.html">Use Identity Resolution to consolidate similar profiles</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetIdentityResolutionJobResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+        - name: JobId
+          in: path
+          required: true
+          description: The unique identifier of the Identity Resolution Job.
+          schema:
+            type: string
+            pattern: '[a-f0-9]{32}'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/domains/{DomainName}/integrations':
     post:
       operationId: GetIntegration
@@ -1834,9 +2274,15 @@ paths:
             type: integer
             minimum: 1
             maximum: 100
+        - name: include-hidden
+          in: query
+          required: false
+          description: Boolean to indicate if hidden integration should be returned. Defaults to <code>False</code>.
+          schema:
+            type: boolean
     put:
       operationId: PutIntegration
-      description: '<p>Adds an integration between the service and a third-party service, which includes Amazon AppFlow and Amazon Connect.</p> <p>An integration can belong to only one domain.</p>'
+      description: '<p>Adds an integration between the service and a third-party service, which includes Amazon AppFlow and Amazon Connect.</p> <p>An integration can belong to only one domain.</p> <p>To add or remove tags on an existing Integration, see <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html"> TagResource </a>/<a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html"> UntagResource</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1890,8 +2336,6 @@ paths:
           application/json:
             schema:
               type: object
-              required:
-                - ObjectTypeName
               properties:
                 Uri:
                   description: The URI of the S3 bucket or any other type of data source.
@@ -1939,10 +2383,15 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/TriggerConfig'
                         - description: The trigger settings that determine how and when the flow runs.
+                ObjectTypeNames:
+                  description: 'A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event. It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, <code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/typeName'
   '/domains/{DomainName}/matches':
     get:
       operationId: GetMatches
-      description: '<p>This API is in preview release for Amazon Connect and subject to change.</p> <p>Before calling this API, use <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html">CreateDomain</a> or <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html">UpdateDomain</a> to enable identity resolution: set <code>Matching</code> to true.</p> <p>GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process. </p> <important> <p>Amazon Connect starts a batch process every Saturday at 12AM UTC to identify matching profiles. The results are returned up to seven days after the Saturday run.</p> </important> <p>Amazon Connect uses the following profile attributes to identify matches:</p> <ul> <li> <p>PhoneNumber</p> </li> <li> <p>HomePhoneNumber</p> </li> <li> <p>BusinessPhoneNumber</p> </li> <li> <p>MobilePhoneNumber</p> </li> <li> <p>EmailAddress</p> </li> <li> <p>PersonalEmailAddress</p> </li> <li> <p>BusinessEmailAddress</p> </li> <li> <p>FullName</p> </li> <li> <p>BusinessName</p> </li> </ul> <p>For example, two or more profiles—with spelling mistakes such as <b>John Doe</b> and <b>Jhn Doe</b>, or different casing email addresses such as <b>JOHN_DOE@ANYCOMPANY.COM</b> and <b>johndoe@anycompany.com</b>, or different phone number formats such as <b>555-010-0000</b> and <b>+1-555-010-0000</b>—can be detected as belonging to the same customer <b>John Doe</b> and merged into a unified profile.</p>'
+      description: '<p>Before calling this API, use <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html">CreateDomain</a> or <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html">UpdateDomain</a> to enable identity resolution: set <code>Matching</code> to true.</p> <p>GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process. </p> <important> <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains. </p> <p>After the Identity Resolution Job completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from S3.</p> </important> <p>Amazon Connect uses the following profile attributes to identify matches:</p> <ul> <li> <p>PhoneNumber</p> </li> <li> <p>HomePhoneNumber</p> </li> <li> <p>BusinessPhoneNumber</p> </li> <li> <p>MobilePhoneNumber</p> </li> <li> <p>EmailAddress</p> </li> <li> <p>PersonalEmailAddress</p> </li> <li> <p>BusinessEmailAddress</p> </li> <li> <p>FullName</p> </li> </ul> <p>For example, two or more profiles—with spelling mistakes such as <b>John Doe</b> and <b>Jhn Doe</b>, or different casing email addresses such as <b>JOHN_DOE@ANYCOMPANY.COM</b> and <b>johndoe@anycompany.com</b>, or different phone number formats such as <b>555-010-0000</b> and <b>+1-555-010-0000</b>—can be detected as belonging to the same customer <b>John Doe</b> and merged into a unified profile.</p>'
       responses:
         '200':
           description: Success
@@ -2073,6 +2522,88 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{DomainName}/workflows/{WorkflowId}/steps':
+    get:
+      operationId: GetWorkflowSteps
+      description: Get granular list of steps in workflow.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkflowStepsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+        - name: WorkflowId
+          in: path
+          required: true
+          description: Unique identifier for the workflow.
+          schema:
+            type: string
+            pattern: '[a-f0-9]{32}'
+        - name: next-token
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1024
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /integrations:
     post:
       operationId: ListAccountIntegrations
@@ -2131,6 +2662,12 @@ paths:
             type: integer
             minimum: 1
             maximum: 100
+        - name: include-hidden
+          in: query
+          required: false
+          description: Boolean to indicate if hidden integration should be returned. Defaults to <code>False</code>.
+          schema:
+            type: boolean
       requestBody:
         required: true
         content:
@@ -2207,6 +2744,81 @@ paths:
           in: query
           required: false
           description: The maximum number of objects returned per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{DomainName}/identity-resolution-jobs':
+    get:
+      operationId: ListIdentityResolutionJobs
+      description: Lists all of the Identity Resolution Jobs in your domain. The response sorts the list by <code>JobStartTime</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListIdentityResolutionJobsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+        - name: next-token
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1024
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return per page.
           schema:
             type: integer
             minimum: 1
@@ -2448,13 +3060,13 @@ paths:
                   type: string
                   pattern: '[a-f0-9]{32}'
                 ObjectFilter:
-                  description: The filter applied to ListProfileObjects response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset and _case.
+                  description: 'The filter applied to ListProfileObjects response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset, _case and _order.'
                   type: object
                   properties:
                     KeyName:
                       allOf:
                         - $ref: '#/components/schemas/name'
-                        - description: 'A searchable identifier of a standard profile object. The predefined keys you can use to search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can use to search for _case include: _caseId.'
+                        - description: 'A searchable identifier of a standard profile object. The predefined keys you can use to search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can use to search for _case include: _caseId. The predefined keys you can use to search for _order include: _orderId.'
                     Values:
                       allOf:
                         - $ref: '#/components/schemas/requestValueList'
@@ -2469,7 +3081,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
       operationId: PutProfileObject
-      description: '<p>Adds additional objects to customer profiles of a given ObjectType.</p> <p>When adding a specific profile object, like a Contact Trace Record (CTR), an inferred profile can get created if it is not mapped to an existing profile. The resulting profile will only have a phone number populated in the standard ProfileObject. Any additional CTRs with the same phone number will be mapped to the same inferred profile.</p> <p>When a ProfileObject is created and if a ProfileObjectType already exists for the ProfileObject, it will provide data to a standard profile depending on the ProfileObjectType definition.</p> <p>PutProfileObject needs an ObjectType, which can be created using PutProfileObjectType.</p>'
+      description: '<p>Adds additional objects to customer profiles of a given ObjectType.</p> <p>When adding a specific profile object, like a Contact Record, an inferred profile can get created if it is not mapped to an existing profile. The resulting profile will only have a phone number populated in the standard ProfileObject. Any additional Contact Records with the same phone number will be mapped to the same inferred profile.</p> <p>When a ProfileObject is created and if a ProfileObjectType already exists for the ProfileObject, it will provide data to a standard profile depending on the ProfileObjectType definition.</p> <p>PutProfileObject needs an ObjectType, which can be created using PutProfileObjectType.</p>'
       responses:
         '200':
           description: Success
@@ -2637,10 +3249,116 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+  '/domains/{DomainName}/workflows':
+    post:
+      operationId: ListWorkflows
+      description: Query to list all workflows.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWorkflowsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+        - name: next-token
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1024
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                WorkflowType:
+                  description: The type of workflow. The only supported value is APPFLOW_INTEGRATION.
+                  type: string
+                  enum:
+                    - APPFLOW_INTEGRATION
+                Status:
+                  description: Status of workflow execution.
+                  type: string
+                  enum:
+                    - NOT_STARTED
+                    - IN_PROGRESS
+                    - COMPLETE
+                    - FAILED
+                    - SPLIT
+                    - RETRY
+                    - CANCELLED
+                QueryStartDate:
+                  description: Retrieve workflows started after timestamp.
+                  type: string
+                  format: date-time
+                QueryEndDate:
+                  description: Retrieve workflows ended after timestamp.
+                  type: string
+                  format: date-time
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/domains/{DomainName}/profiles/objects/merge':
     post:
       operationId: MergeProfiles
-      description: '<p>This API is in preview release for Amazon Connect and subject to change.</p> <p>Runs an AWS Lambda job that does the following:</p> <ol> <li> <p>All the profileKeys in the <code>ProfileToBeMerged</code> will be moved to the main profile.</p> </li> <li> <p>All the objects in the <code>ProfileToBeMerged</code> will be moved to the main profile.</p> </li> <li> <p>All the <code>ProfileToBeMerged</code> will be deleted at the end.</p> </li> <li> <p>All the profileKeys in the <code>ProfileIdsToBeMerged</code> will be moved to the main profile.</p> </li> <li> <p>Standard fields are merged as follows:</p> <ol> <li> <p>Fields are always "union"-ed if there are no conflicts in standard fields or attributeKeys.</p> </li> <li> <p>When there are conflicting fields:</p> <ol> <li> <p>If no <code>SourceProfileIds</code> entry is specified, the main Profile value is always taken. </p> </li> <li> <p>If a <code>SourceProfileIds</code> entry is specified, the specified profileId is always taken, even if it is a NULL value.</p> </li> </ol> </li> </ol> </li> </ol> <p>You can use MergeProfiles together with <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a>, which returns potentially matching profiles, or use it with the results of another matching system. After profiles have been merged, they cannot be separated (unmerged).</p>'
+      description: '<p>Runs an AWS Lambda job that does the following:</p> <ol> <li> <p>All the profileKeys in the <code>ProfileToBeMerged</code> will be moved to the main profile.</p> </li> <li> <p>All the objects in the <code>ProfileToBeMerged</code> will be moved to the main profile.</p> </li> <li> <p>All the <code>ProfileToBeMerged</code> will be deleted at the end.</p> </li> <li> <p>All the profileKeys in the <code>ProfileIdsToBeMerged</code> will be moved to the main profile.</p> </li> <li> <p>Standard fields are merged as follows:</p> <ol> <li> <p>Fields are always "union"-ed if there are no conflicts in standard fields or attributeKeys.</p> </li> <li> <p>When there are conflicting fields:</p> <ol> <li> <p>If no <code>SourceProfileIds</code> entry is specified, the main Profile value is always taken. </p> </li> <li> <p>If a <code>SourceProfileIds</code> entry is specified, the specified profileId is always taken, even if it is a NULL value.</p> </li> </ol> </li> </ol> </li> </ol> <p>You can use MergeProfiles together with <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a>, which returns potentially matching profiles, or use it with the results of another matching system. After profiles have been merged, they cannot be separated (unmerged).</p>'
       responses:
         '200':
           description: Success
@@ -2802,7 +3520,7 @@ paths:
   '/domains/{DomainName}/profiles/search':
     post:
       operationId: SearchProfiles
-      description: 'Searches for profiles within a specific domain name using name, phone number, email address, account number, or a custom defined index.'
+      description: '<p>Searches for profiles within a specific domain using one or more predefined search keys (e.g., _fullName, _phone, _email, _account, etc.) and/or custom-defined search keys. A search key is a data type pair that consists of a <code>KeyName</code> and <code>Values</code> list.</p> <p>This operation supports searching for profiles with a minimum of 1 key-value(s) pair and up to 5 key-value(s) pairs using either <code>AND</code> or <code>OR</code> logic.</p>'
       responses:
         '200':
           description: Success
@@ -2852,7 +3570,7 @@ paths:
         - name: max-results
           in: query
           required: false
-          description: The maximum number of objects returned per page.
+          description: <p>The maximum number of objects returned per page.</p> <p>The default is 20 if this parameter is not included in the request.</p>
           schema:
             type: integer
             minimum: 1
@@ -2877,7 +3595,7 @@ paths:
                 - Values
               properties:
                 KeyName:
-                  description: 'A searchable identifier of a customer profile. The predefined keys you can use to search include: _account, _profileId, _fullName, _phone, _email, _ctrContactId, _marketoLeadId, _salesforceAccountId, _salesforceContactId, _zendeskUserId, _zendeskExternalId, _serviceNowSystemId.'
+                  description: 'A searchable identifier of a customer profile. The predefined keys you can use to search include: _account, _profileId, _assetId, _caseId, _orderId, _fullName, _phone, _email, _ctrContactId, _marketoLeadId, _salesforceAccountId, _salesforceContactId, _salesforceAssetId, _zendeskUserId, _zendeskExternalId, _zendeskTicketId, _serviceNowSystemId, _serviceNowIncidentId, _segmentUserId, _shopifyCustomerId, _shopifyOrderId.'
                   type: string
                   pattern: '^[a-zA-Z0-9_-]+$'
                   minLength: 1
@@ -2887,6 +3605,19 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/string1To255'
+                AdditionalSearchKeys:
+                  description: 'A list of <code>AdditionalSearchKey</code> objects that are each searchable identifiers of a profile. Each <code>AdditionalSearchKey</code> object contains a <code>KeyName</code> and a list of <code>Values</code> associated with that specific key (i.e., a key-value(s) pair). These additional search keys will be used in conjunction with the <code>LogicalOperator</code> and the required <code>KeyName</code> and <code>Values</code> parameters to search for profiles that satisfy the search criteria. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AdditionalSearchKey'
+                  minItems: 1
+                  maxItems: 4
+                LogicalOperator:
+                  description: '<p>Relationship between all specified search keys that will be used to search for profiles. This includes the required <code>KeyName</code> and <code>Values</code> parameters as well as any key-value(s) pairs specified in the <code>AdditionalSearchKeys</code> list.</p> <p>This parameter influences which profiles will be returned in the response in the following manner:</p> <ul> <li> <p> <code>AND</code> - The response only includes profiles that match all of the search keys.</p> </li> <li> <p> <code>OR</code> - The response includes profiles that match at least one of the search keys.</p> </li> </ul> <p>The <code>OR</code> relationship is the default behavior if this parameter is not included in the request.</p>'
+                  type: string
+                  enum:
+                    - AND
+                    - OR
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3050,7 +3781,7 @@ components:
         Matching:
           allOf:
             - $ref: '#/components/schemas/MatchingResponse'
-            - description: 'The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. '
+            - description: '<p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains. </p> <p>After the Identity Resolution Job completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from S3.</p>'
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/timestamp'
@@ -3065,9 +3796,80 @@ components:
             - description: 'The tags used to organize, track, or control access for this resource.'
     optionalBoolean:
       type: boolean
+    JobSchedule:
+      type: object
+      required:
+        - DayOfTheWeek
+        - Time
+      properties:
+        DayOfTheWeek:
+          allOf:
+            - $ref: '#/components/schemas/JobScheduleDayOfTheWeek'
+            - description: The day when the Identity Resolution Job should run every week.
+        Time:
+          allOf:
+            - $ref: '#/components/schemas/JobScheduleTime'
+            - description: The time when the Identity Resolution Job should run every week.
+      description: The day and time when do you want to start the Identity Resolution Job every week.
+    AutoMerging:
+      type: object
+      required:
+        - Enabled
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/optionalBoolean'
+            - description: The flag that enables the auto-merging of duplicate profiles.
+        Consolidation:
+          allOf:
+            - $ref: '#/components/schemas/Consolidation'
+            - description: 'A list of matching attributes that represent matching criteria. If two profiles meet at least one of the requirements in the matching attributes list, they will be merged.'
+        ConflictResolution:
+          allOf:
+            - $ref: '#/components/schemas/ConflictResolution'
+            - description: 'How the auto-merging process should resolve conflicts between different profiles. For example, if Profile A and Profile B have the same <code>FirstName</code> and <code>LastName</code> (and that is the matching criteria), which <code>EmailAddress</code> should be used? '
+        MinAllowedConfidenceScoreForMerging:
+          allOf:
+            - $ref: '#/components/schemas/Double0To1'
+            - description: 'A number between 0 and 1 that represents the minimum confidence score required for profiles within a matching group to be merged during the auto-merge process. A higher score means higher similarity required to merge profiles. '
+      description: Configuration settings for how to perform the auto-merging of profiles.
+    ExportingConfig:
+      type: object
+      properties:
+        S3Exporting:
+          allOf:
+            - $ref: '#/components/schemas/S3ExportingConfig'
+            - description: The S3 location where Identity Resolution Jobs write result files.
+      description: '<p>Configuration information about the S3 bucket where Identity Resolution Jobs writes result files. </p> <note> <p>You need to give Customer Profiles service principal write permission to your S3 bucket. Otherwise, you''ll get an exception in the API response. For an example policy, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service">Amazon Connect Customer Profiles cross-service confused deputy prevention</a>. </p> </note>'
     TagValue:
       type: string
       maxLength: 256
+    CreateIntegrationWorkflowResponse:
+      type: object
+      required:
+        - WorkflowId
+        - Message
+      properties:
+        WorkflowId:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: Unique identifier for the workflow.
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: A message indicating create request was received.
+    AppflowIntegration:
+      type: object
+      required:
+        - FlowDefinition
+      properties:
+        FlowDefinition:
+          $ref: '#/components/schemas/FlowDefinition'
+        Batches:
+          allOf:
+            - $ref: '#/components/schemas/Batches'
+            - description: Batches in workflow of type <code>APPFLOW_INTEGRATION</code>.
+      description: Details for workflow of type <code>APPFLOW_INTEGRATION</code>.
     CreateProfileResponse:
       type: object
       required:
@@ -3125,6 +3927,41 @@ components:
           allOf:
             - $ref: '#/components/schemas/message'
             - description: A message that indicates the delete request is done.
+    DeleteWorkflowResponse:
+      type: object
+      properties: {}
+    GetAutoMergingPreviewResponse:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/name'
+            - description: The unique name of the domain.
+        NumberOfMatchesInSample:
+          allOf:
+            - $ref: '#/components/schemas/long'
+            - description: The number of match groups in the domain that have been reviewed in this preview dry run.
+        NumberOfProfilesInSample:
+          allOf:
+            - $ref: '#/components/schemas/long'
+            - description: The number of profiles found in this preview dry run.
+        NumberOfProfilesWillBeMerged:
+          allOf:
+            - $ref: '#/components/schemas/long'
+            - description: The number of profiles that would be merged if this wasn't a preview dry run.
+    MatchingAttributesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MatchingAttributes'
+      minItems: 1
+      maxItems: 10
+    ConflictResolvingModel:
+      type: string
+      enum:
+        - RECENCY
+        - SOURCE
     GetDomainResponse:
       type: object
       required:
@@ -3155,7 +3992,7 @@ components:
         Matching:
           allOf:
             - $ref: '#/components/schemas/MatchingResponse'
-            - description: 'The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. '
+            - description: '<p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains. </p> <p>After the Identity Resolution Job completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from S3.</p>'
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/timestamp'
@@ -3168,12 +4005,58 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'The tags used to organize, track, or control access for this resource.'
+    GetIdentityResolutionJobResponse:
+      type: object
+      properties:
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/name'
+            - description: The unique name of the domain.
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: The unique identifier of the Identity Resolution Job.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/IdentityResolutionJobStatus'
+            - description: '<p>The status of the Identity Resolution Job.</p> <ul> <li> <p> <code>PENDING</code>: The Identity Resolution Job is scheduled but has not started yet. If you turn off the Identity Resolution feature in your domain, jobs in the <code>PENDING</code> state are deleted.</p> </li> <li> <p> <code>PREPROCESSING</code>: The Identity Resolution Job is loading your data.</p> </li> <li> <p> <code>FIND_MATCHING</code>: The Identity Resolution Job is using the machine learning model to identify profiles that belong to the same matching group.</p> </li> <li> <p> <code>MERGING</code>: The Identity Resolution Job is merging duplicate profiles.</p> </li> <li> <p> <code>COMPLETED</code>: The Identity Resolution Job completed successfully.</p> </li> <li> <p> <code>PARTIAL_SUCCESS</code>: There''s a system error and not all of the data is merged. The Identity Resolution Job writes a message indicating the source of the problem.</p> </li> <li> <p> <code>FAILED</code>: The Identity Resolution Job did not merge any data. It writes a message indicating the source of the problem.</p> </li> </ul>'
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/stringTo2048'
+            - description: The error messages that are generated when the Identity Resolution Job runs.
+        JobStartTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp of when the Identity Resolution Job was started or will be started.
+        JobEndTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp of when the Identity Resolution Job was completed.
+        LastUpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp of when the Identity Resolution Job was most recently edited.
+        JobExpirationTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp of when the Identity Resolution Job will expire.
+        AutoMerging:
+          allOf:
+            - $ref: '#/components/schemas/AutoMerging'
+            - description: Configuration settings for how to perform the auto-merging of profiles.
+        ExportingLocation:
+          allOf:
+            - $ref: '#/components/schemas/ExportingLocation'
+            - description: The S3 location where the Identity Resolution Job writes result files.
+        JobStats:
+          allOf:
+            - $ref: '#/components/schemas/JobStats'
+            - description: Statistics about the Identity Resolution Job.
     GetIntegrationResponse:
       type: object
       required:
         - DomainName
         - Uri
-        - ObjectTypeName
         - CreatedAt
         - LastUpdatedAt
       properties:
@@ -3201,6 +4084,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'The tags used to organize, track, or control access for this resource.'
+        ObjectTypeNames:
+          allOf:
+            - $ref: '#/components/schemas/ObjectTypeNames'
+            - description: 'A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event. It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, <code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.'
+        WorkflowId:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: Unique identifier for the workflow.
+        IsUnstructured:
+          allOf:
+            - $ref: '#/components/schemas/optionalBoolean'
+            - description: 'Boolean that shows if the Flow that''s associated with the Integration is created in Amazon Appflow, or with ObjectTypeName equals _unstructured via API/CLI in flowDefinition.'
     GetMatchesResponse:
       type: object
       properties:
@@ -3250,6 +4145,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/boolean'
             - description: 'Indicates whether a profile should be created when data is received if one doesn’t exist for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and associate this object with the profile. If it is set to <code>TRUE</code>, and if no match is found, then the service creates a new standard profile.'
+        SourceLastUpdatedTimestampFormat:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: The format of your <code>sourceLastUpdatedTimestamp</code> that was previously set up.
         Fields:
           allOf:
             - $ref: '#/components/schemas/FieldMap'
@@ -3289,6 +4188,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/boolean'
             - description: 'Indicates whether a profile should be created when data is received if one doesn’t exist for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and associate this object with the profile. If it is set to <code>TRUE</code>, and if no match is found, then the service creates a new standard profile.'
+        SourceLastUpdatedTimestampFormat:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: The format of your <code>sourceLastUpdatedTimestamp</code> that was previously set up.
         Fields:
           allOf:
             - $ref: '#/components/schemas/FieldMap'
@@ -3297,6 +4200,60 @@ components:
           allOf:
             - $ref: '#/components/schemas/KeyMap'
             - description: A list of unique keys that can be used to map data to the profile.
+    GetWorkflowResponse:
+      type: object
+      properties:
+        WorkflowId:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: Unique identifier for the workflow.
+        WorkflowType:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowType'
+            - description: The type of workflow. The only supported value is APPFLOW_INTEGRATION.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: Status of workflow execution.
+        ErrorDescription:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: Workflow error messages during execution (if any).
+        StartDate:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp that represents when workflow execution started.
+        LastUpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp that represents when workflow execution last updated.
+        Attributes:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowAttributes'
+            - description: Attributes provided for workflow execution.
+        Metrics:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowMetrics'
+            - description: Workflow specific execution metrics.
+    GetWorkflowStepsResponse:
+      type: object
+      properties:
+        WorkflowId:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: Unique identifier for the workflow.
+        WorkflowType:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowType'
+            - description: The type of workflow. The only supported value is APPFLOW_INTEGRATION.
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowStepsList'
+            - description: List containing workflow step details.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/token'
+            - description: 'If there are additional results, this is the token for the next set of results.'
     ListAccountIntegrationsResponse:
       type: object
       properties:
@@ -3319,6 +4276,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/token'
             - description: The pagination token from the previous ListDomains API call.
+    ListIdentityResolutionJobsResponse:
+      type: object
+      properties:
+        IdentityResolutionJobsList:
+          allOf:
+            - $ref: '#/components/schemas/IdentityResolutionJobsList'
+            - description: A list of Identity Resolution Jobs.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/token'
+            - description: 'If there are additional results, this is the token for the next set of results.'
     ListIntegrationsResponse:
       type: object
       properties:
@@ -3379,6 +4347,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'The tags used to organize, track, or control access for this resource.'
+    ListWorkflowsResponse:
+      type: object
+      properties:
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowList'
+            - description: List containing workflow details.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/token'
+            - description: 'If there are additional results, this is the token for the next set of results.'
     MergeProfilesResponse:
       type: object
       properties:
@@ -3398,7 +4377,6 @@ components:
       required:
         - DomainName
         - Uri
-        - ObjectTypeName
         - CreatedAt
         - LastUpdatedAt
       properties:
@@ -3426,6 +4404,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'The tags used to organize, track, or control access for this resource.'
+        ObjectTypeNames:
+          allOf:
+            - $ref: '#/components/schemas/ObjectTypeNames'
+            - description: 'A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event. It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, <code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.'
+        WorkflowId:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: Unique identifier for the workflow.
+        IsUnstructured:
+          allOf:
+            - $ref: '#/components/schemas/optionalBoolean'
+            - description: 'Boolean that shows if the Flow that''s associated with the Integration is created in Amazon Appflow, or with ObjectTypeName equals _unstructured via API/CLI in flowDefinition.'
     FlowDescription:
       type: string
       pattern: '[\w!@#\-.?,\s]*'
@@ -3480,6 +4470,11 @@ components:
             - $ref: '#/components/schemas/TriggerProperties'
             - description: 'Specifies the configuration details of a schedule-triggered flow that you define. Currently, these settings only apply to the Scheduled trigger type.'
       description: The trigger settings that determine how and when Amazon AppFlow runs the specified flow.
+    typeName:
+      type: string
+      pattern: '^[a-zA-Z_][a-zA-Z_0-9-]*$'
+      minLength: 1
+      maxLength: 255
     PutProfileObjectResponse:
       type: object
       properties:
@@ -3517,6 +4512,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/boolean'
             - description: 'Indicates whether a profile should be created when data is received if one doesn’t exist for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and associate this object with the profile. If it is set to <code>TRUE</code>, and if no match is found, then the service creates a new standard profile.'
+        SourceLastUpdatedTimestampFormat:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: 'The format of your <code>sourceLastUpdatedTimestamp</code> that was previously set up in fields that were parsed using <a href="https://docs.oracle.com/javase/10/docs/api/java/text/SimpleDateFormat.html">SimpleDateFormat</a>. If you have <code>sourceLastUpdatedTimestamp</code> in your field, you must set up <code>sourceLastUpdatedTimestampFormat</code>.'
         Fields:
           allOf:
             - $ref: '#/components/schemas/FieldMap'
@@ -3563,11 +4562,26 @@ components:
         Items:
           allOf:
             - $ref: '#/components/schemas/ProfileList'
-            - description: The list of SearchProfiles instances.
+            - description: The list of Profiles matching the search criteria.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/token'
             - description: The pagination token from the previous SearchProfiles API call.
+    AdditionalSearchKey:
+      type: object
+      required:
+        - KeyName
+        - Values
+      properties:
+        KeyName:
+          allOf:
+            - $ref: '#/components/schemas/name'
+            - description: A searchable identifier of a customer profile.
+        Values:
+          allOf:
+            - $ref: '#/components/schemas/requestValueList'
+            - description: A list of key values.
+      description: 'A data type pair that consists of a <code>KeyName</code> and <code>Values</code> list that is used in conjunction with the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html#customerprofiles-SearchProfiles-request-KeyName">KeyName</a> and <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html#customerprofiles-SearchProfiles-request-Values">Values</a> parameters to search for profiles using the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html">SearchProfiles</a> API.'
     TagResourceResponse:
       type: object
       properties: {}
@@ -3605,7 +4619,7 @@ components:
         Matching:
           allOf:
             - $ref: '#/components/schemas/MatchingResponse'
-            - description: 'The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. '
+            - description: '<p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains. </p> <p>After the Identity Resolution Job completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from S3.</p>'
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/timestamp'
@@ -3646,7 +4660,7 @@ components:
         KeyName:
           allOf:
             - $ref: '#/components/schemas/name'
-            - description: A searchable identifier of a customer profile.
+            - description: 'A searchable identifier of a customer profile. The predefined keys you can use include: _account, _profileId, _assetId, _caseId, _orderId, _fullName, _phone, _email, _ctrContactId, _marketoLeadId, _salesforceAccountId, _salesforceContactId, _salesforceAssetId, _zendeskUserId, _zendeskExternalId, _zendeskTicketId, _serviceNowSystemId, _serviceNowIncidentId, _segmentUserId, _shopifyCustomerId, _shopifyOrderId.'
         Values:
           allOf:
             - $ref: '#/components/schemas/requestValueList'
@@ -3695,10 +4709,203 @@ components:
             - $ref: '#/components/schemas/string1To255'
             - description: The postal code of a customer address.
       description: 'A generic address associated with the customer that is not mailing, shipping, or billing.'
+    FlowDefinition:
+      type: object
+      required:
+        - FlowName
+        - KmsArn
+        - SourceFlowConfig
+        - Tasks
+        - TriggerConfig
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/FlowDescription'
+            - description: A description of the flow you want to create.
+        FlowName:
+          allOf:
+            - $ref: '#/components/schemas/FlowName'
+            - description: The specified name of the flow. Use underscores (_) or hyphens (-) only. Spaces are not allowed.
+        KmsArn:
+          allOf:
+            - $ref: '#/components/schemas/KmsArn'
+            - description: The Amazon Resource Name of the AWS Key Management Service (KMS) key you provide for encryption.
+        SourceFlowConfig:
+          allOf:
+            - $ref: '#/components/schemas/SourceFlowConfig'
+            - description: The configuration that controls how Customer Profiles retrieves data from the source.
+        Tasks:
+          allOf:
+            - $ref: '#/components/schemas/Tasks'
+            - description: A list of tasks that Customer Profiles performs while transferring the data in the flow run.
+        TriggerConfig:
+          allOf:
+            - $ref: '#/components/schemas/TriggerConfig'
+            - description: The trigger settings that determine how and when the flow runs.
+      description: 'The configurations that control how Customer Profiles retrieves data from the source, Amazon AppFlow. Customer Profiles uses this information to create an AppFlow flow on behalf of customers.'
+    Batches:
+      type: array
+      items:
+        $ref: '#/components/schemas/Batch'
+    SourceConnectorType:
+      type: string
+      enum:
+        - Salesforce
+        - Marketo
+        - Zendesk
+        - Servicenow
+        - S3
+    ConnectorProfileName:
+      type: string
+      pattern: '[\w/!@#+=.-]+'
+      maxLength: 256
+    AppflowIntegrationWorkflowAttributes:
+      type: object
+      required:
+        - SourceConnectorType
+        - ConnectorProfileName
+      properties:
+        SourceConnectorType:
+          allOf:
+            - $ref: '#/components/schemas/SourceConnectorType'
+            - description: 'Specifies the source connector type, such as Salesforce, ServiceNow, and Marketo. Indicates source of ingestion.'
+        ConnectorProfileName:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileName'
+            - description: The name of the AppFlow connector profile used for ingestion.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: The Amazon Resource Name (ARN) of the IAM role. Customer Profiles assumes this role to create resources on your behalf as part of workflow execution.
+      description: Structure holding all <code>APPFLOW_INTEGRATION</code> specific workflow attributes.
+    long:
+      type: integer
+    AppflowIntegrationWorkflowMetrics:
+      type: object
+      required:
+        - RecordsProcessed
+        - StepsCompleted
+        - TotalSteps
+      properties:
+        RecordsProcessed:
+          allOf:
+            - $ref: '#/components/schemas/long'
+            - description: Number of records processed in <code>APPFLOW_INTEGRATION</code> workflow.
+        StepsCompleted:
+          allOf:
+            - $ref: '#/components/schemas/long'
+            - description: Total steps completed in <code>APPFLOW_INTEGRATION</code> workflow.
+        TotalSteps:
+          allOf:
+            - $ref: '#/components/schemas/long'
+            - description: Total steps in <code>APPFLOW_INTEGRATION</code> workflow.
+      description: Workflow specific execution metrics for <code>APPFLOW_INTEGRATION</code> workflow.
+    Status:
+      type: string
+      enum:
+        - NOT_STARTED
+        - IN_PROGRESS
+        - COMPLETE
+        - FAILED
+        - SPLIT
+        - RETRY
+        - CANCELLED
+    timestamp:
+      type: string
+      format: date-time
+    AppflowIntegrationWorkflowStep:
+      type: object
+      required:
+        - FlowName
+        - Status
+        - ExecutionMessage
+        - RecordsProcessed
+        - BatchRecordsStartTime
+        - BatchRecordsEndTime
+        - CreatedAt
+        - LastUpdatedAt
+      properties:
+        FlowName:
+          allOf:
+            - $ref: '#/components/schemas/FlowName'
+            - description: Name of the flow created during execution of workflow step. <code>APPFLOW_INTEGRATION</code> workflow type creates an appflow flow during workflow step execution on the customers behalf.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: Workflow step status for <code>APPFLOW_INTEGRATION</code> workflow.
+        ExecutionMessage:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: Message indicating execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.
+        RecordsProcessed:
+          allOf:
+            - $ref: '#/components/schemas/long'
+            - description: Total number of records processed during execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.
+        BatchRecordsStartTime:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: Start datetime of records pulled in batch during execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.
+        BatchRecordsEndTime:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: End datetime of records pulled in batch during execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: Creation timestamp of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.
+        LastUpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: Last updated timestamp for workflow step for <code>APPFLOW_INTEGRATION</code> workflow.
+      description: Workflow step details for <code>APPFLOW_INTEGRATION</code> workflow.
     Attributes:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/string1To255'
+    Consolidation:
+      type: object
+      required:
+        - MatchingAttributesList
+      properties:
+        MatchingAttributesList:
+          allOf:
+            - $ref: '#/components/schemas/MatchingAttributesList'
+            - description: A list of matching criteria.
+      description: 'The matching criteria to be used during the auto-merging process. '
+    ConflictResolution:
+      type: object
+      required:
+        - ConflictResolvingModel
+      properties:
+        ConflictResolvingModel:
+          allOf:
+            - $ref: '#/components/schemas/ConflictResolvingModel'
+            - description: '<p>How the auto-merging process should resolve conflicts between different profiles.</p> <ul> <li> <p> <code>RECENCY</code>: Uses the data that was most recently updated.</p> </li> <li> <p> <code>SOURCE</code>: Uses the data from a specific source. For example, if a company has been aquired or two departments have merged, data from the specified source is used. If two duplicate profiles are from the same source, then <code>RECENCY</code> is used again.</p> </li> </ul>'
+        SourceName:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: The <code>ObjectType</code> name that is used to resolve profile merging conflicts when choosing <code>SOURCE</code> as the <code>ConflictResolvingModel</code>.
+      description: How the auto-merging process should resolve conflicts between different profiles.
+    Double0To1:
+      type: number
+      format: double
+      minimum: 0
+      maximum: 1
+    Batch:
+      type: object
+      required:
+        - StartTime
+        - EndTime
+      properties:
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: Start time of batch to split ingestion.
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: End time of batch to split ingestion.
+      description: Batch defines the boundaries for ingestion for each step in <code>APPFLOW_INTEGRATION</code> workflow. <code>APPFLOW_INTEGRATION</code> workflow splits ingestion based on these boundaries.
     BucketName:
       type: string
       pattern: \S+
@@ -3839,10 +5046,6 @@ components:
             - $ref: '#/components/schemas/ZendeskConnectorOperator'
             - description: The operation to be performed on the provided Zendesk source fields.
       description: The operation to be performed on the provided source fields.
-    ConnectorProfileName:
-      type: string
-      pattern: '[\w/!@#+=.-]+'
-      maxLength: 256
     expirationDaysInteger:
       type: integer
       minimum: 1
@@ -3864,6 +5067,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/optionalBoolean'
             - description: The flag that enables the matching process of duplicate profiles.
+        JobSchedule:
+          allOf:
+            - $ref: '#/components/schemas/JobSchedule'
+            - description: The day and time when do you want to start the Identity Resolution Job every week.
+        AutoMerging:
+          allOf:
+            - $ref: '#/components/schemas/AutoMerging'
+            - description: Configuration information about the auto-merging process.
+        ExportingConfig:
+          allOf:
+            - $ref: '#/components/schemas/ExportingConfig'
+            - description: 'Configuration information for exporting Identity Resolution results, for example, to an S3 bucket.'
       description: The flag that enables the matching process of duplicate profiles.
     TagMap:
       type: object
@@ -3892,7 +5107,7 @@ components:
         Matching:
           allOf:
             - $ref: '#/components/schemas/MatchingRequest'
-            - description: 'The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. '
+            - description: '<p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains. </p> <p>After the Identity Resolution Job completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from S3.</p>'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -3904,22 +5119,78 @@ components:
           allOf:
             - $ref: '#/components/schemas/optionalBoolean'
             - description: The flag that enables the matching process of duplicate profiles.
+        JobSchedule:
+          allOf:
+            - $ref: '#/components/schemas/JobSchedule'
+            - description: The day and time when do you want to start the Identity Resolution Job every week.
+        AutoMerging:
+          allOf:
+            - $ref: '#/components/schemas/AutoMerging'
+            - description: Configuration information about the auto-merging process.
+        ExportingConfig:
+          allOf:
+            - $ref: '#/components/schemas/ExportingConfig'
+            - description: 'Configuration information for exporting Identity Resolution results, for example, to an S3 bucket.'
       description: The flag that enables the matching process of duplicate profiles.
-    timestamp:
+    WorkflowType:
       type: string
-      format: date-time
+      enum:
+        - APPFLOW_INTEGRATION
+    IntegrationConfig:
+      type: object
+      properties:
+        AppflowIntegration:
+          allOf:
+            - $ref: '#/components/schemas/AppflowIntegration'
+            - description: Configuration data for <code>APPFLOW_INTEGRATION</code> workflow type.
+      description: Configuration data for integration workflow.
+    RoleArn:
+      type: string
+      pattern: 'arn:aws:iam:.*:[0-9]+:.*'
+      maxLength: 512
+    CreateIntegrationWorkflowRequest:
+      type: object
+      required:
+        - WorkflowType
+        - IntegrationConfig
+        - ObjectTypeName
+        - RoleArn
+      title: CreateIntegrationWorkflowRequest
+      properties:
+        WorkflowType:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowType'
+            - description: The type of workflow. The only supported value is APPFLOW_INTEGRATION.
+        IntegrationConfig:
+          allOf:
+            - $ref: '#/components/schemas/IntegrationConfig'
+            - description: Configuration data for integration workflow.
+        ObjectTypeName:
+          allOf:
+            - $ref: '#/components/schemas/typeName'
+            - description: The name of the profile object type.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of the IAM role. Customer Profiles assumes this role to create resources on your behalf as part of workflow execution.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags used to organize, track, or control access for this resource.'
     string1To1000:
       type: string
       minLength: 1
       maxLength: 1000
     PartyType:
       type: string
+      deprecated: true
       enum:
         - INDIVIDUAL
         - BUSINESS
         - OTHER
     Gender:
       type: string
+      deprecated: true
       enum:
         - MALE
         - FEMALE
@@ -4012,6 +5283,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Attributes'
             - description: A key value pair of attributes of a customer profile.
+        PartyTypeString:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: An alternative to <code>PartyType</code> which accepts any string as input.
+        GenderString:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: An alternative to <code>Gender</code> which accepts any string as input.
     DataPullMode:
       type: string
       enum:
@@ -4060,11 +5339,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/requestValueList'
             - description: A list of key values.
-    typeName:
-      type: string
-      pattern: '^[a-zA-Z_][a-zA-Z_0-9-]*$'
-      minLength: 1
-      maxLength: 255
     DeleteProfileObjectRequest:
       type: object
       required:
@@ -4099,6 +5373,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/uuid'
             - description: The unique identifier of a customer profile.
+    DeleteWorkflowRequest:
+      type: object
+      title: DeleteWorkflowRequest
+      properties: {}
     DestinationField:
       type: string
       pattern: .*
@@ -4131,8 +5409,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ListDomainItem'
-    long:
-      type: integer
     DomainStats:
       type: object
       properties:
@@ -4153,6 +5429,43 @@ components:
             - $ref: '#/components/schemas/long'
             - description: 'The total size, in bytes, of all objects in the domain.'
       description: Usage-specific statistics about the domain.
+    Double:
+      type: number
+      format: double
+    S3ExportingConfig:
+      type: object
+      required:
+        - S3BucketName
+      properties:
+        S3BucketName:
+          allOf:
+            - $ref: '#/components/schemas/s3BucketName'
+            - description: The name of the S3 bucket where Identity Resolution Jobs write result files.
+        S3KeyName:
+          allOf:
+            - $ref: '#/components/schemas/s3KeyNameCustomerOutputConfig'
+            - description: The S3 key name of the location where Identity Resolution Jobs write result files.
+      description: Configuration information about the S3 bucket where Identity Resolution Jobs write result files.
+    S3ExportingLocation:
+      type: object
+      properties:
+        S3BucketName:
+          allOf:
+            - $ref: '#/components/schemas/s3BucketName'
+            - description: The name of the S3 bucket name where Identity Resolution Jobs write result files.
+        S3KeyName:
+          allOf:
+            - $ref: '#/components/schemas/s3KeyName'
+            - description: The S3 key name of the location where Identity Resolution Jobs write result files.
+      description: The S3 location where Identity Resolution Jobs write result files.
+    ExportingLocation:
+      type: object
+      properties:
+        S3Exporting:
+          allOf:
+            - $ref: '#/components/schemas/S3ExportingLocation'
+            - description: Information about the S3 location where Identity Resolution Jobs write result files.
+      description: The S3 location where Identity Resolution Jobs write result files.
     FieldContentType:
       type: string
       enum:
@@ -4257,44 +5570,75 @@ components:
             - $ref: '#/components/schemas/AttributeSourceIdMap'
             - description: A unique identifier for the attributes field to be merged.
       description: 'A duplicate customer profile that is to be merged into a main profile. '
-    FlowDefinition:
+    FoundByKeyValue:
+      type: object
+      properties:
+        KeyName:
+          allOf:
+            - $ref: '#/components/schemas/name'
+            - description: A searchable identifier of a customer profile.
+        Values:
+          allOf:
+            - $ref: '#/components/schemas/requestValueList'
+            - description: A list of key values.
+      description: 'A data type pair that consists of a <code>KeyName</code> and <code>Values</code> list that were used to find a profile returned in response to a <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html">SearchProfiles</a> request. '
+    GetAutoMergingPreviewRequest:
       type: object
       required:
-        - FlowName
-        - KmsArn
-        - SourceFlowConfig
-        - Tasks
-        - TriggerConfig
+        - Consolidation
+        - ConflictResolution
+      title: GetAutoMergingPreviewRequest
       properties:
-        Description:
+        Consolidation:
           allOf:
-            - $ref: '#/components/schemas/FlowDescription'
-            - description: A description of the flow you want to create.
-        FlowName:
+            - $ref: '#/components/schemas/Consolidation'
+            - description: A list of matching attributes that represent matching criteria.
+        ConflictResolution:
           allOf:
-            - $ref: '#/components/schemas/FlowName'
-            - description: The specified name of the flow. Use underscores (_) or hyphens (-) only. Spaces are not allowed.
-        KmsArn:
+            - $ref: '#/components/schemas/ConflictResolution'
+            - description: How the auto-merging process should resolve conflicts between different profiles.
+        MinAllowedConfidenceScoreForMerging:
           allOf:
-            - $ref: '#/components/schemas/KmsArn'
-            - description: The Amazon Resource Name of the AWS Key Management Service (KMS) key you provide for encryption.
-        SourceFlowConfig:
-          allOf:
-            - $ref: '#/components/schemas/SourceFlowConfig'
-            - description: The configuration that controls how Customer Profiles retrieves data from the source.
-        Tasks:
-          allOf:
-            - $ref: '#/components/schemas/Tasks'
-            - description: A list of tasks that Customer Profiles performs while transferring the data in the flow run.
-        TriggerConfig:
-          allOf:
-            - $ref: '#/components/schemas/TriggerConfig'
-            - description: The trigger settings that determine how and when the flow runs.
-      description: 'The configurations that control how Customer Profiles retrieves data from the source, Amazon AppFlow. Customer Profiles uses this information to create an AppFlow flow on behalf of customers.'
+            - $ref: '#/components/schemas/Double0To1'
+            - description: Minimum confidence score required for profiles within a matching group to be merged during the auto-merge process.
     GetDomainRequest:
       type: object
       title: GetDomainRequest
       properties: {}
+    GetIdentityResolutionJobRequest:
+      type: object
+      title: GetIdentityResolutionJobRequest
+      properties: {}
+    IdentityResolutionJobStatus:
+      type: string
+      enum:
+        - PENDING
+        - PREPROCESSING
+        - FIND_MATCHING
+        - MERGING
+        - COMPLETED
+        - PARTIAL_SUCCESS
+        - FAILED
+    stringTo2048:
+      type: string
+      pattern: .*
+      maxLength: 2048
+    JobStats:
+      type: object
+      properties:
+        NumberOfProfilesReviewed:
+          allOf:
+            - $ref: '#/components/schemas/long'
+            - description: The number of profiles reviewed.
+        NumberOfMatchesFound:
+          allOf:
+            - $ref: '#/components/schemas/long'
+            - description: The number of matches found.
+        NumberOfMergesDone:
+          allOf:
+            - $ref: '#/components/schemas/long'
+            - description: The number of merges completed.
+      description: Statistics about the Identity Resolution Job.
     GetIntegrationRequest:
       type: object
       required:
@@ -4305,6 +5649,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/string1To255'
             - description: The URI of the S3 bucket or any other type of data source.
+    ObjectTypeNames:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/typeName'
     token:
       type: string
       minLength: 1
@@ -4342,6 +5690,74 @@ components:
       type: object
       title: GetProfileObjectTypeTemplateRequest
       properties: {}
+    GetWorkflowRequest:
+      type: object
+      title: GetWorkflowRequest
+      properties: {}
+    WorkflowAttributes:
+      type: object
+      properties:
+        AppflowIntegration:
+          allOf:
+            - $ref: '#/components/schemas/AppflowIntegrationWorkflowAttributes'
+            - description: Workflow attributes specific to <code>APPFLOW_INTEGRATION</code> workflow.
+      description: Structure to hold workflow attributes.
+    WorkflowMetrics:
+      type: object
+      properties:
+        AppflowIntegration:
+          allOf:
+            - $ref: '#/components/schemas/AppflowIntegrationWorkflowMetrics'
+            - description: Workflow execution metrics for <code>APPFLOW_INTEGRATION</code> workflow.
+      description: Generic object containing workflow execution metrics.
+    GetWorkflowStepsRequest:
+      type: object
+      title: GetWorkflowStepsRequest
+      properties: {}
+    WorkflowStepsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorkflowStepItem'
+    IdentityResolutionJob:
+      type: object
+      properties:
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/name'
+            - description: The unique name of the domain.
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/uuid'
+            - description: The unique identifier of the Identity Resolution Job.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/IdentityResolutionJobStatus'
+            - description: '<p>The status of the Identity Resolution Job.</p> <ul> <li> <p> <code>PENDING</code>: The Identity Resolution Job is scheduled but has not started yet. If you turn off the Identity Resolution feature in your domain, jobs in the <code>PENDING</code> state are deleted.</p> </li> <li> <p> <code>PREPROCESSING</code>: The Identity Resolution Job is loading your data.</p> </li> <li> <p> <code>FIND_MATCHING</code>: The Identity Resolution Job is using the machine learning model to identify profiles that belong to the same matching group.</p> </li> <li> <p> <code>MERGING</code>: The Identity Resolution Job is merging duplicate profiles.</p> </li> <li> <p> <code>COMPLETED</code>: The Identity Resolution Job completed successfully.</p> </li> <li> <p> <code>PARTIAL_SUCCESS</code>: There''s a system error and not all of the data is merged. The Identity Resolution Job writes a message indicating the source of the problem.</p> </li> <li> <p> <code>FAILED</code>: The Identity Resolution Job did not merge any data. It writes a message indicating the source of the problem.</p> </li> </ul>'
+        JobStartTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp of when the job was started or will be started.
+        JobEndTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp of when the job was completed.
+        JobStats:
+          allOf:
+            - $ref: '#/components/schemas/JobStats'
+            - description: Statistics about an Identity Resolution Job.
+        ExportingLocation:
+          allOf:
+            - $ref: '#/components/schemas/ExportingLocation'
+            - description: The S3 location where the Identity Resolution Job writes result files.
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/stringTo2048'
+            - description: The error messages that are generated when the Identity Resolution Job runs.
+      description: Information about the Identity Resolution Job.
+    IdentityResolutionJobsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/IdentityResolutionJob'
     IncrementalPullConfig:
       type: object
       properties:
@@ -4355,7 +5771,6 @@ components:
       required:
         - DomainName
         - Uri
-        - ObjectTypeName
         - CreatedAt
         - LastUpdatedAt
       properties:
@@ -4383,11 +5798,38 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'The tags used to organize, track, or control access for this resource.'
+        ObjectTypeNames:
+          allOf:
+            - $ref: '#/components/schemas/ObjectTypeNames'
+            - description: 'A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event. It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, <code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.'
+        WorkflowId:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: Unique identifier for the workflow.
+        IsUnstructured:
+          allOf:
+            - $ref: '#/components/schemas/optionalBoolean'
+            - description: 'Boolean that shows if the Flow that''s associated with the Integration is created in Amazon Appflow, or with ObjectTypeName equals _unstructured via API/CLI in flowDefinition.'
       description: An integration in list of integrations.
     IntegrationList:
       type: array
       items:
         $ref: '#/components/schemas/ListIntegrationItem'
+    JobScheduleDayOfTheWeek:
+      type: string
+      enum:
+        - SUNDAY
+        - MONDAY
+        - TUESDAY
+        - WEDNESDAY
+        - THURSDAY
+        - FRIDAY
+        - SATURDAY
+    JobScheduleTime:
+      type: string
+      pattern: '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+      minLength: 3
+      maxLength: 5
     ListAccountIntegrationsRequest:
       type: object
       required:
@@ -4401,6 +5843,10 @@ components:
     ListDomainsRequest:
       type: object
       title: ListDomainsRequest
+      properties: {}
+    ListIdentityResolutionJobsRequest:
+      type: object
+      title: ListIdentityResolutionJobsRequest
       properties: {}
     ListIntegrationsRequest:
       type: object
@@ -4494,12 +5940,12 @@ components:
         KeyName:
           allOf:
             - $ref: '#/components/schemas/name'
-            - description: 'A searchable identifier of a standard profile object. The predefined keys you can use to search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can use to search for _case include: _caseId.'
+            - description: 'A searchable identifier of a standard profile object. The predefined keys you can use to search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can use to search for _case include: _caseId. The predefined keys you can use to search for _order include: _orderId.'
         Values:
           allOf:
             - $ref: '#/components/schemas/requestValueList'
             - description: A list of key values.
-      description: The filter applied to ListProfileObjects response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset and _case.
+      description: 'The filter applied to ListProfileObjects response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset, _case and _order.'
     ListProfileObjectsRequest:
       type: object
       required:
@@ -4518,7 +5964,7 @@ components:
         ObjectFilter:
           allOf:
             - $ref: '#/components/schemas/ObjectFilter'
-            - description: Applies a filter to the response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset and _case.
+            - description: 'Applies a filter to the response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset, _case and _order.'
     ProfileObjectList:
       type: array
       items:
@@ -4531,6 +5977,65 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    ListWorkflowsItem:
+      type: object
+      required:
+        - WorkflowType
+        - WorkflowId
+        - Status
+        - StatusDescription
+        - CreatedAt
+        - LastUpdatedAt
+      properties:
+        WorkflowType:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowType'
+            - description: The type of workflow. The only supported value is APPFLOW_INTEGRATION.
+        WorkflowId:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: Unique identifier for the workflow.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: Status of workflow execution.
+        StatusDescription:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: Description for workflow execution status.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: Creation timestamp for workflow.
+        LastUpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: Last updated timestamp for workflow.
+      description: A workflow in list of workflows.
+    ListWorkflowsRequest:
+      type: object
+      title: ListWorkflowsRequest
+      properties:
+        WorkflowType:
+          allOf:
+            - $ref: '#/components/schemas/WorkflowType'
+            - description: The type of workflow. The only supported value is APPFLOW_INTEGRATION.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: Status of workflow execution.
+        QueryStartDate:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: Retrieve workflows started after timestamp.
+        QueryEndDate:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: Retrieve workflows ended after timestamp.
+    WorkflowList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListWorkflowsItem'
     Object:
       type: string
       pattern: \S+
@@ -4560,7 +6065,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProfileIdList'
             - description: A list of identifiers for profiles that match.
+        ConfidenceScore:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: 'A number between 0 and 1, where a higher score means higher similarity. Examining match confidence scores lets you distinguish between groups of similar records in which the system is highly confident (which you may decide to merge), groups of similar records about which the system is uncertain (which you may decide to have reviewed by a human), and groups of similar records that the system deems to be unlikely (which you may decide to reject). Given confidence scores vary as per the data input, it should not be used an absolute measure of matching quality.'
       description: The Match group object.
+    MatchingAttributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/string1To255'
+      minItems: 1
+      maxItems: 20
     ProfileIdToBeMergedList:
       type: array
       items:
@@ -4596,7 +6111,7 @@ components:
         StandardIdentifiers:
           allOf:
             - $ref: '#/components/schemas/StandardIdentifierList'
-            - description: 'The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE, ASSET or CASE means that this key can be used to tie an object to a PROFILE, ASSET or CASE respectively. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.'
+            - description: 'The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE, ASSET, CASE, or ORDER means that this key can be used to tie an object to a PROFILE, ASSET, CASE, or ORDER respectively. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.'
         FieldNames:
           allOf:
             - $ref: '#/components/schemas/FieldNameList'
@@ -4619,6 +6134,12 @@ components:
         - MATH_OPERATION_FIELDS_ORDER
         - CONCAT_FORMAT
         - SUBFIELD_CATEGORY_MAP
+    foundByList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FoundByKeyValue'
+      minItems: 1
+      maxItems: 5
     Profile:
       type: object
       properties:
@@ -4710,6 +6231,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/Attributes'
             - description: A key value pair of attributes of a customer profile.
+        FoundByItems:
+          allOf:
+            - $ref: '#/components/schemas/foundByList'
+            - description: '<p>A list of items used to find a profile returned in a <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html">SearchProfiles</a> response. An item is a key-value(s) pair that matches an attribute in the profile.</p> <p>If the optional <code>AdditionalSearchKeys</code> parameter was included in the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html">SearchProfiles</a> request, the <code>FoundByItems</code> list should be interpreted based on the <code>LogicalOperator</code> used in the request:</p> <ul> <li> <p> <code>AND</code> - The profile included in the response matched all of the search keys specified in the request. The <code>FoundByItems</code> will include all of the key-value(s) pairs that were specified in the request (as this is a requirement of <code>AND</code> search logic).</p> </li> <li> <p> <code>OR</code> - The profile included in the response matched at least one of the search keys specified in the request. The <code>FoundByItems</code> will include each of the key-value(s) pairs that the profile was found by.</p> </li> </ul> <p>The <code>OR</code> relationship is the default behavior if the <code>LogicalOperator</code> parameter is not included in the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html">SearchProfiles</a> request.</p>'
+        PartyTypeString:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: An alternative to PartyType which accepts any string as input.
+        GenderString:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: An alternative to Gender which accepts any string as input.
       description: The standard profile of a customer.
     ProfileList:
       type: array
@@ -4721,8 +6254,6 @@ components:
       maxLength: 2048
     PutIntegrationRequest:
       type: object
-      required:
-        - ObjectTypeName
       title: PutIntegrationRequest
       properties:
         Uri:
@@ -4741,6 +6272,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/FlowDefinition'
             - description: The configuration that controls how Customer Profiles retrieves data from the source.
+        ObjectTypeNames:
+          allOf:
+            - $ref: '#/components/schemas/ObjectTypeNames'
+            - description: 'A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event. It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, <code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.'
     PutProfileObjectRequest:
       type: object
       required:
@@ -4769,7 +6304,7 @@ components:
         TemplateId:
           allOf:
             - $ref: '#/components/schemas/name'
-            - description: A unique identifier for the object template.
+            - description: 'A unique identifier for the object template. For some attributes in the request, the service will use the default value from the object template when TemplateId is present. If these attributes are present in the request, the service may return a <code>BadRequestException</code>. These attributes include: AllowProfileCreation, SourceLastUpdatedTimestampFormat, Fields, and Keys. For example, if AllowProfileCreation is set to true when TemplateId is set, the service may return a <code>BadRequestException</code>.'
         ExpirationDays:
           allOf:
             - $ref: '#/components/schemas/expirationDaysInteger'
@@ -4782,6 +6317,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/boolean'
             - description: 'Indicates whether a profile should be created when data is received if one doesn’t exist for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and associate this object with the profile. If it is set to <code>TRUE</code>, and if no match is found, then the service creates a new standard profile.'
+        SourceLastUpdatedTimestampFormat:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: 'The format of your <code>sourceLastUpdatedTimestamp</code> that was previously set up. '
         Fields:
           allOf:
             - $ref: '#/components/schemas/FieldMap'
@@ -4794,6 +6333,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'The tags used to organize, track, or control access for this resource.'
+    s3BucketName:
+      type: string
+      pattern: '^[a-z0-9.-]+$'
+      minLength: 3
+      maxLength: 63
+    s3KeyNameCustomerOutputConfig:
+      type: string
+      pattern: .*
+      minLength: 1
+      maxLength: 800
+    s3KeyName:
+      type: string
+      pattern: .*
+      minLength: 1
+      maxLength: 1024
     S3SourceProperties:
       type: object
       required:
@@ -4872,6 +6426,17 @@ components:
             - $ref: '#/components/schemas/Date'
             - description: Specifies the date range for the records to import from the connector in the first flow run.
       description: 'Specifies the configuration details of a scheduled-trigger flow that you define. Currently, these settings only apply to the scheduled-trigger type.'
+    additionalSearchKeysList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AdditionalSearchKey'
+      minItems: 1
+      maxItems: 4
+    logicalOperator:
+      type: string
+      enum:
+        - AND
+        - OR
     SearchProfilesRequest:
       type: object
       required:
@@ -4882,11 +6447,19 @@ components:
         KeyName:
           allOf:
             - $ref: '#/components/schemas/name'
-            - description: 'A searchable identifier of a customer profile. The predefined keys you can use to search include: _account, _profileId, _fullName, _phone, _email, _ctrContactId, _marketoLeadId, _salesforceAccountId, _salesforceContactId, _zendeskUserId, _zendeskExternalId, _serviceNowSystemId.'
+            - description: 'A searchable identifier of a customer profile. The predefined keys you can use to search include: _account, _profileId, _assetId, _caseId, _orderId, _fullName, _phone, _email, _ctrContactId, _marketoLeadId, _salesforceAccountId, _salesforceContactId, _salesforceAssetId, _zendeskUserId, _zendeskExternalId, _zendeskTicketId, _serviceNowSystemId, _serviceNowIncidentId, _segmentUserId, _shopifyCustomerId, _shopifyOrderId.'
         Values:
           allOf:
             - $ref: '#/components/schemas/requestValueList'
             - description: A list of key values.
+        AdditionalSearchKeys:
+          allOf:
+            - $ref: '#/components/schemas/additionalSearchKeysList'
+            - description: 'A list of <code>AdditionalSearchKey</code> objects that are each searchable identifiers of a profile. Each <code>AdditionalSearchKey</code> object contains a <code>KeyName</code> and a list of <code>Values</code> associated with that specific key (i.e., a key-value(s) pair). These additional search keys will be used in conjunction with the <code>LogicalOperator</code> and the required <code>KeyName</code> and <code>Values</code> parameters to search for profiles that satisfy the search criteria. '
+        LogicalOperator:
+          allOf:
+            - $ref: '#/components/schemas/logicalOperator'
+            - description: '<p>Relationship between all specified search keys that will be used to search for profiles. This includes the required <code>KeyName</code> and <code>Values</code> parameters as well as any key-value(s) pairs specified in the <code>AdditionalSearchKeys</code> list.</p> <p>This parameter influences which profiles will be returned in the response in the following manner:</p> <ul> <li> <p> <code>AND</code> - The response only includes profiles that match all of the search keys.</p> </li> <li> <p> <code>OR</code> - The response includes profiles that match at least one of the search keys.</p> </li> </ul> <p>The <code>OR</code> relationship is the default behavior if this parameter is not included in the request.</p>'
     ServiceNowSourceProperties:
       type: object
       required:
@@ -4931,18 +6504,6 @@ components:
             - $ref: '#/components/schemas/ZendeskSourceProperties'
             - description: The properties that are applied when using Zendesk as a flow source.
       description: 'Specifies the information that is required to query a particular Amazon AppFlow connector. Customer Profiles supports Salesforce, Zendesk, Marketo, ServiceNow and Amazon S3.'
-    SourceConnectorType:
-      type: string
-      enum:
-        - Salesforce
-        - Marketo
-        - Zendesk
-        - Servicenow
-        - S3
-    stringTo2048:
-      type: string
-      pattern: .*
-      maxLength: 2048
     SourceFields:
       type: array
       items:
@@ -4957,6 +6518,7 @@ components:
         - SECONDARY
         - LOOKUP_ONLY
         - NEW_ONLY
+        - ORDER
     TagKeyList:
       type: array
       items:
@@ -5099,7 +6661,7 @@ components:
         Matching:
           allOf:
             - $ref: '#/components/schemas/MatchingRequest'
-            - description: 'The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. '
+            - description: '<p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains. </p> <p>After the Identity Resolution Job completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from S3.</p>'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -5202,5 +6764,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/UpdateAttributes'
             - description: A key value pair of attributes of a customer profile.
+        PartyTypeString:
+          allOf:
+            - $ref: '#/components/schemas/string0To255'
+            - description: An alternative to <code>PartyType</code> which accepts any string as input.
+        GenderString:
+          allOf:
+            - $ref: '#/components/schemas/string0To255'
+            - description: An alternative to <code>Gender</code> which accepts any string as input.
+    WorkflowStepItem:
+      type: object
+      properties:
+        AppflowIntegration:
+          allOf:
+            - $ref: '#/components/schemas/AppflowIntegrationWorkflowStep'
+            - description: Workflow step information specific to <code>APPFLOW_INTEGRATION</code> workflow.
+      description: List containing steps in workflow.
 security:
   - hmac: []

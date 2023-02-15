@@ -1,0 +1,3844 @@
+openapi: 3.0.0
+info:
+  version: '2021-10-26'
+  x-release: v4
+  title: AWS Migration Hub Refactor Spaces
+  description: '<p><fullname>Amazon Web Services Migration Hub Refactor Spaces</fullname> <p>This API reference provides descriptions, syntax, and other details about each of the actions and data types for Amazon Web Services Migration Hub Refactor Spaces (Refactor Spaces). The topic for each action shows the API request parameters and the response. Alternatively, you can use one of the Amazon Web Services SDKs to access an API that is tailored to the programming language or platform that you''re using. For more information, see <a href="https://aws.amazon.com/tools/#SDKs">Amazon Web Services SDKs</a>.</p> <p>To share Refactor Spaces environments with other Amazon Web Services accounts or with Organizations and their OUs, use Resource Access Manager''s <code>CreateResourceShare</code> API. See <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html">CreateResourceShare</a> in the <i>Amazon Web Services RAM API Reference</i>.</p></p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: migration-hub-refactor-spaces
+  x-aws-signingName: refactor-spaces
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/migration-hub-refactor-spaces-2021-10-26.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/refactor-spaces/'
+servers:
+  - url: 'http://refactor-spaces.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Migration Hub Refactor Spaces multi-region endpoint
+  - url: 'https://refactor-spaces.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Migration Hub Refactor Spaces multi-region endpoint
+  - url: 'http://refactor-spaces.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Migration Hub Refactor Spaces endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://refactor-spaces.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Migration Hub Refactor Spaces endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  '/environments/{EnvironmentIdentifier}/applications':
+    post:
+      operationId: CreateApplication
+      description: 'Creates an Amazon Web Services Migration Hub Refactor Spaces application. The account that owns the environment also owns the applications created inside the environment, regardless of the account that creates the application. Refactor Spaces provisions an Amazon API Gateway, API Gateway VPC link, and Network Load Balancer for the application proxy inside your account.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateApplicationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: EnvironmentIdentifier
+          in: path
+          required: true
+          description: The unique identifier of the environment.
+          schema:
+            type: string
+            pattern: '^env-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - ProxyType
+                - VpcId
+              properties:
+                ApiGatewayProxy:
+                  description: 'A wrapper object holding the Amazon API Gateway endpoint input. '
+                  type: object
+                  properties:
+                    EndpointType:
+                      allOf:
+                        - $ref: '#/components/schemas/ApiGatewayEndpointType'
+                        - description: '<p>The type of endpoint to use for the API Gateway proxy. If no value is specified in the request, the value is set to <code>REGIONAL</code> by default.</p> <p>If the value is set to <code>PRIVATE</code> in the request, this creates a private API endpoint that is isolated from the public internet. The private endpoint can only be accessed by using Amazon Virtual Private Cloud (Amazon VPC) endpoints for Amazon API Gateway that have been granted access. </p>'
+                    StageName:
+                      allOf:
+                        - $ref: '#/components/schemas/StageName'
+                        - description: 'The name of the API Gateway stage. The name defaults to <code>prod</code>. '
+                ClientToken:
+                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  type: string
+                  pattern: '^[\x20-\x7E]{1,64}$'
+                  minLength: 1
+                  maxLength: 64
+                Name:
+                  description: 'The name to use for the application. '
+                  type: string
+                  pattern: '^(?!app-)[a-zA-Z0-9]+[a-zA-Z0-9-_ ]+$'
+                  minLength: 3
+                  maxLength: 63
+                ProxyType:
+                  description: 'The proxy type of the proxy created within the application. '
+                  type: string
+                  enum:
+                    - API_GATEWAY
+                Tags:
+                  description: A collection of up to 50 unique tags
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagMapValueString'
+                VpcId:
+                  description: The ID of the virtual private cloud (VPC).
+                  type: string
+                  pattern: '^vpc-[-a-f0-9]{8}([-a-f0-9]{9})?$'
+                  minLength: 12
+                  maxLength: 21
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListApplications
+      description: 'Lists all the Amazon Web Services Migration Hub Refactor Spaces applications within an environment. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListApplicationsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: EnvironmentIdentifier
+          in: path
+          required: true
+          description: 'The ID of the environment. '
+          schema:
+            type: string
+            pattern: '^env-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9/\+\=]{0,2048}$'
+            minLength: 1
+            maxLength: 2048
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  /environments:
+    post:
+      operationId: CreateEnvironment
+      description: '<p>Creates an Amazon Web Services Migration Hub Refactor Spaces environment. The caller owns the environment resource, and all Refactor Spaces applications, services, and routes created within the environment. They are referred to as the <i>environment owner</i>. The environment owner has cross-account visibility and control of Refactor Spaces resources that are added to the environment by other accounts that the environment is shared with.</p> <p>When creating an environment with a network fabric type of <code>TRANSIT_GATEWAY</code>, Refactor Spaces provisions a transit gateway in your account.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEnvironmentResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - NetworkFabricType
+              properties:
+                ClientToken:
+                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  type: string
+                  pattern: '^[\x20-\x7E]{1,64}$'
+                  minLength: 1
+                  maxLength: 64
+                Description:
+                  description: The description of the environment.
+                  type: string
+                  pattern: '^[a-zA-Z0-9-_\s\.\!\*\#\@\'']+$'
+                  minLength: 1
+                  maxLength: 256
+                Name:
+                  description: The name of the environment.
+                  type: string
+                  pattern: '^(?!env-)[a-zA-Z0-9]+[a-zA-Z0-9-_ ]+$'
+                  minLength: 3
+                  maxLength: 63
+                NetworkFabricType:
+                  description: The network fabric type of the environment.
+                  type: string
+                  enum:
+                    - TRANSIT_GATEWAY
+                    - NONE
+                Tags:
+                  description: A collection of up to 50 unique tags
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagMapValueString'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListEnvironments
+      description: 'Lists Amazon Web Services Migration Hub Refactor Spaces environments owned by a caller account or shared with the caller account. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEnvironmentsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9/\+\=]{0,2048}$'
+            minLength: 1
+            maxLength: 2048
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  '/environments/{EnvironmentIdentifier}/applications/{ApplicationIdentifier}/routes':
+    post:
+      operationId: CreateRoute
+      description: '<p>Creates an Amazon Web Services Migration Hub Refactor Spaces route. The account owner of the service resource is always the environment owner, regardless of which account creates the route. Routes target a service in the application. If an application does not have any routes, then the first route must be created as a <code>DEFAULT</code> <code>RouteType</code>.</p> <p>When created, the default route defaults to an active state so state is not a required input. However, like all other state values the state of the default route can be updated after creation, but only when all other routes are also inactive. Conversely, no route can be active without the default route also being active.</p> <p>When you create a route, Refactor Spaces configures the Amazon API Gateway to send traffic to the target service as follows:</p> <ul> <li> <p>If the service has a URL endpoint, and the endpoint resolves to a private IP address, Refactor Spaces routes traffic using the API Gateway VPC link. </p> </li> <li> <p>If the service has a URL endpoint, and the endpoint resolves to a public IP address, Refactor Spaces routes traffic over the public internet.</p> </li> <li> <p>If the service has an Lambda function endpoint, then Refactor Spaces configures the Lambda function''s resource policy to allow the application''s API Gateway to invoke the function.</p> </li> </ul> <p>A one-time health check is performed on the service when either the route is updated from inactive to active, or when it is created with an active state. If the health check fails, the route transitions the route state to <code>FAILED</code>, an error code of <code>SERVICE_ENDPOINT_HEALTH_CHECK_FAILURE</code> is provided, and no traffic is sent to the service.</p> <p>For Lambda functions, the Lambda function state is checked. If the function is not active, the function configuration is updated so that Lambda resources are provisioned. If the Lambda state is <code>Failed</code>, then the route creation fails. For more information, see the <a href="https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunctionConfiguration.html#SSS-GetFunctionConfiguration-response-State">GetFunctionConfiguration''s State response parameter</a> in the <i>Lambda Developer Guide</i>.</p> <p>For Lambda endpoints, a check is performed to determine that a Lambda function with the specified ARN exists. If it does not exist, the health check fails. For public URLs, a connection is opened to the public endpoint. If the URL is not reachable, the health check fails. </p> <p>Refactor Spaces automatically resolves the public Domain Name System (DNS) names that are set in <a>CreateServiceRequest$UrlEndpoint</a> when you create a service. The DNS names resolve when the DNS time-to-live (TTL) expires, or every 60 seconds for TTLs less than 60 seconds. This periodic DNS resolution ensures that the route configuration remains up-to-date. </p> <p>For private URLS, a target group is created on the Elastic Load Balancing and the target group health check is run. The <code>HealthCheckProtocol</code>, <code>HealthCheckPort</code>, and <code>HealthCheckPath</code> are the same protocol, port, and path specified in the URL or health URL, if used. All other settings use the default values, as described in <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html">Health checks for your target groups</a>. The health check is considered successful if at least one target within the target group transitions to a healthy state.</p> <p>Services can have HTTP or HTTPS URL endpoints. For HTTPS URLs, publicly-signed certificates are supported. Private Certificate Authorities (CAs) are permitted only if the CA''s domain is also publicly resolvable.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRouteResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: ApplicationIdentifier
+          in: path
+          required: true
+          description: The ID of the application within which the route is being created.
+          schema:
+            type: string
+            pattern: '^app-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+        - name: EnvironmentIdentifier
+          in: path
+          required: true
+          description: The ID of the environment in which the route is created.
+          schema:
+            type: string
+            pattern: '^env-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - RouteType
+                - ServiceIdentifier
+              properties:
+                ClientToken:
+                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  type: string
+                  pattern: '^[\x20-\x7E]{1,64}$'
+                  minLength: 1
+                  maxLength: 64
+                DefaultRoute:
+                  description: ' The configuration for the default route type. '
+                  type: object
+                  properties:
+                    ActivationState:
+                      allOf:
+                        - $ref: '#/components/schemas/RouteActivationState'
+                        - description: 'If set to <code>ACTIVE</code>, traffic is forwarded to this route’s service after the route is created. '
+                RouteType:
+                  description: The route type of the route. <code>DEFAULT</code> indicates that all traffic that does not match another route is forwarded to the default route. Applications must have a default route before any other routes can be created. <code>URI_PATH</code> indicates a route that is based on a URI path.
+                  type: string
+                  enum:
+                    - DEFAULT
+                    - URI_PATH
+                ServiceIdentifier:
+                  description: The ID of the service in which the route is created. Traffic that matches this route is forwarded to this service.
+                  type: string
+                  pattern: '^svc-[0-9A-Za-z]{10}$'
+                  minLength: 14
+                  maxLength: 14
+                Tags:
+                  description: A collection of up to 50 unique tags
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagMapValueString'
+                UriPathRoute:
+                  description: 'The configuration for the URI path route type. '
+                  type: object
+                  properties:
+                    ActivationState:
+                      allOf:
+                        - $ref: '#/components/schemas/RouteActivationState'
+                        - description: 'If set to <code>ACTIVE</code>, traffic is forwarded to this route’s service after the route is created. '
+                    IncludeChildPaths:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'Indicates whether to match all subpaths of the given source path. If this value is <code>false</code>, requests must match the source path exactly before they are forwarded to this route''s service. '
+                    Methods:
+                      allOf:
+                        - $ref: '#/components/schemas/HttpMethods'
+                        - description: 'A list of HTTP methods to match. An empty list matches all values. If a method is present, only HTTP requests using that method are forwarded to this route’s service. '
+                    SourcePath:
+                      allOf:
+                        - $ref: '#/components/schemas/UriPath'
+                        - description: The path to use to match traffic. Paths must start with <code>/</code> and are relative to the base of the application.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListRoutes
+      description: 'Lists all the Amazon Web Services Migration Hub Refactor Spaces routes within an application. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRoutesResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: ApplicationIdentifier
+          in: path
+          required: true
+          description: 'The ID of the application. '
+          schema:
+            type: string
+            pattern: '^app-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+        - name: EnvironmentIdentifier
+          in: path
+          required: true
+          description: 'The ID of the environment. '
+          schema:
+            type: string
+            pattern: '^env-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9/\+\=]{0,2048}$'
+            minLength: 1
+            maxLength: 2048
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  '/environments/{EnvironmentIdentifier}/applications/{ApplicationIdentifier}/services':
+    post:
+      operationId: CreateService
+      description: '<p>Creates an Amazon Web Services Migration Hub Refactor Spaces service. The account owner of the service is always the environment owner, regardless of which account in the environment creates the service. Services have either a URL endpoint in a virtual private cloud (VPC), or a Lambda function endpoint.</p> <important> <p>If an Amazon Web Services resource is launched in a service VPC, and you want it to be accessible to all of an environment’s services with VPCs and routes, apply the <code>RefactorSpacesSecurityGroup</code> to the resource. Alternatively, to add more cross-account constraints, apply your own security group.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateServiceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: ApplicationIdentifier
+          in: path
+          required: true
+          description: The ID of the application which the service is created.
+          schema:
+            type: string
+            pattern: '^app-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+        - name: EnvironmentIdentifier
+          in: path
+          required: true
+          description: The ID of the environment in which the service is created.
+          schema:
+            type: string
+            pattern: '^env-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - EndpointType
+                - Name
+              properties:
+                ClientToken:
+                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  type: string
+                  pattern: '^[\x20-\x7E]{1,64}$'
+                  minLength: 1
+                  maxLength: 64
+                Description:
+                  description: The description of the service.
+                  type: string
+                  pattern: '^[a-zA-Z0-9-_\s\.\!\*\#\@\'']+$'
+                  minLength: 1
+                  maxLength: 256
+                EndpointType:
+                  description: The type of endpoint to use for the service. The type can be a URL in a VPC or an Lambda function.
+                  type: string
+                  enum:
+                    - LAMBDA
+                    - URL
+                LambdaEndpoint:
+                  description: 'The input for the Lambda endpoint type. '
+                  type: object
+                  properties:
+                    Arn:
+                      allOf:
+                        - $ref: '#/components/schemas/LambdaArn'
+                        - description: The Amazon Resource Name (ARN) of the Lambda function or alias.
+                Name:
+                  description: The name of the service.
+                  type: string
+                  pattern: '^(?!svc-)[a-zA-Z0-9]+[a-zA-Z0-9-_ ]+$'
+                  minLength: 3
+                  maxLength: 63
+                Tags:
+                  description: A collection of up to 50 unique tags
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagMapValueString'
+                UrlEndpoint:
+                  description: 'The configuration for the URL endpoint type. '
+                  type: object
+                  properties:
+                    HealthUrl:
+                      allOf:
+                        - $ref: '#/components/schemas/Uri'
+                        - description: 'The health check URL of the URL endpoint type. If the URL is a public endpoint, the <code>HealthUrl</code> must also be a public endpoint. If the URL is a private endpoint inside a virtual private cloud (VPC), the health URL must also be a private endpoint, and the host must be the same as the URL. '
+                    Url:
+                      allOf:
+                        - $ref: '#/components/schemas/Uri'
+                        - description: 'The URL to route traffic to. The URL must be an <a href="https://datatracker.ietf.org/doc/html/rfc3986">rfc3986-formatted URL</a>. If the host is a domain name, the name must be resolvable over the public internet. If the scheme is <code>https</code>, the top level domain of the host must be listed in the <a href="https://www.iana.org/domains/root/db">IANA root zone database</a>. '
+                VpcId:
+                  description: The ID of the VPC.
+                  type: string
+                  pattern: '^vpc-[-a-f0-9]{8}([-a-f0-9]{9})?$'
+                  minLength: 12
+                  maxLength: 21
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListServices
+      description: 'Lists all the Amazon Web Services Migration Hub Refactor Spaces services within an application. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListServicesResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: ApplicationIdentifier
+          in: path
+          required: true
+          description: 'The ID of the application. '
+          schema:
+            type: string
+            pattern: '^app-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+        - name: EnvironmentIdentifier
+          in: path
+          required: true
+          description: 'The ID of the environment. '
+          schema:
+            type: string
+            pattern: '^env-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9/\+\=]{0,2048}$'
+            minLength: 1
+            maxLength: 2048
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  '/environments/{EnvironmentIdentifier}/applications/{ApplicationIdentifier}':
+    delete:
+      operationId: DeleteApplication
+      description: 'Deletes an Amazon Web Services Migration Hub Refactor Spaces application. Before you can delete an application, you must first delete any services or routes within the application.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteApplicationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: ApplicationIdentifier
+          in: path
+          required: true
+          description: The ID of the application.
+          schema:
+            type: string
+            pattern: '^app-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+        - name: EnvironmentIdentifier
+          in: path
+          required: true
+          description: 'The ID of the environment. '
+          schema:
+            type: string
+            pattern: '^env-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetApplication
+      description: Gets an Amazon Web Services Migration Hub Refactor Spaces application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetApplicationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: ApplicationIdentifier
+          in: path
+          required: true
+          description: The ID of the application.
+          schema:
+            type: string
+            pattern: '^app-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+        - name: EnvironmentIdentifier
+          in: path
+          required: true
+          description: 'The ID of the environment. '
+          schema:
+            type: string
+            pattern: '^env-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+  '/environments/{EnvironmentIdentifier}':
+    delete:
+      operationId: DeleteEnvironment
+      description: 'Deletes an Amazon Web Services Migration Hub Refactor Spaces environment. Before you can delete an environment, you must first delete any applications and services within the environment.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteEnvironmentResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: EnvironmentIdentifier
+          in: path
+          required: true
+          description: 'The ID of the environment. '
+          schema:
+            type: string
+            pattern: '^env-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetEnvironment
+      description: Gets an Amazon Web Services Migration Hub Refactor Spaces environment.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEnvironmentResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: EnvironmentIdentifier
+          in: path
+          required: true
+          description: The ID of the environment.
+          schema:
+            type: string
+            pattern: '^env-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+  '/resourcepolicy/{Identifier}':
+    delete:
+      operationId: DeleteResourcePolicy
+      description: 'Deletes the resource policy set for the environment. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResourcePolicyResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: Identifier
+          in: path
+          required: true
+          description: 'Amazon Resource Name (ARN) of the resource associated with the policy. '
+          schema:
+            type: string
+            pattern: '^arn:aws:refactor-spaces:[a-zA-Z0-9\-]+:\w{12}:[a-zA-Z_0-9+=,.@\-_/]+$'
+            minLength: 20
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetResourcePolicy
+      description: 'Gets the resource-based permission policy that is set for the given environment. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetResourcePolicyResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: Identifier
+          in: path
+          required: true
+          description: 'The Amazon Resource Name (ARN) of the resource associated with the policy. '
+          schema:
+            type: string
+            pattern: '^arn:aws:refactor-spaces:[a-zA-Z0-9\-]+:\w{12}:[a-zA-Z_0-9+=,.@\-_/]+$'
+            minLength: 20
+            maxLength: 2048
+  '/environments/{EnvironmentIdentifier}/applications/{ApplicationIdentifier}/routes/{RouteIdentifier}':
+    delete:
+      operationId: DeleteRoute
+      description: Deletes an Amazon Web Services Migration Hub Refactor Spaces route.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRouteResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: ApplicationIdentifier
+          in: path
+          required: true
+          description: The ID of the application to delete the route from.
+          schema:
+            type: string
+            pattern: '^app-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+        - name: EnvironmentIdentifier
+          in: path
+          required: true
+          description: The ID of the environment to delete the route from.
+          schema:
+            type: string
+            pattern: '^env-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+        - name: RouteIdentifier
+          in: path
+          required: true
+          description: The ID of the route to delete.
+          schema:
+            type: string
+            pattern: '^rte-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetRoute
+      description: Gets an Amazon Web Services Migration Hub Refactor Spaces route.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRouteResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: ApplicationIdentifier
+          in: path
+          required: true
+          description: 'The ID of the application. '
+          schema:
+            type: string
+            pattern: '^app-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+        - name: EnvironmentIdentifier
+          in: path
+          required: true
+          description: The ID of the environment.
+          schema:
+            type: string
+            pattern: '^env-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+        - name: RouteIdentifier
+          in: path
+          required: true
+          description: The ID of the route.
+          schema:
+            type: string
+            pattern: '^rte-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+    patch:
+      operationId: UpdateRoute
+      description: ' Updates an Amazon Web Services Migration Hub Refactor Spaces route. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRouteResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: ApplicationIdentifier
+          in: path
+          required: true
+          description: ' The ID of the application within which the route is being updated. '
+          schema:
+            type: string
+            pattern: '^app-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+        - name: EnvironmentIdentifier
+          in: path
+          required: true
+          description: ' The ID of the environment in which the route is being updated. '
+          schema:
+            type: string
+            pattern: '^env-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+        - name: RouteIdentifier
+          in: path
+          required: true
+          description: ' The unique identifier of the route to update. '
+          schema:
+            type: string
+            pattern: '^rte-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ActivationState
+              properties:
+                ActivationState:
+                  description: ' If set to <code>ACTIVE</code>, traffic is forwarded to this route’s service after the route is updated. '
+                  type: string
+                  enum:
+                    - ACTIVE
+                    - INACTIVE
+  '/environments/{EnvironmentIdentifier}/applications/{ApplicationIdentifier}/services/{ServiceIdentifier}':
+    delete:
+      operationId: DeleteService
+      description: 'Deletes an Amazon Web Services Migration Hub Refactor Spaces service. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteServiceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: ApplicationIdentifier
+          in: path
+          required: true
+          description: <p>Deletes a Refactor Spaces service.</p> <note> <p>The <code>RefactorSpacesSecurityGroup</code> security group must be removed from all Amazon Web Services resources in the virtual private cloud (VPC) prior to deleting a service with a URL endpoint in a VPC.</p> </note>
+          schema:
+            type: string
+            pattern: '^app-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+        - name: EnvironmentIdentifier
+          in: path
+          required: true
+          description: The ID of the environment that the service is in.
+          schema:
+            type: string
+            pattern: '^env-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+        - name: ServiceIdentifier
+          in: path
+          required: true
+          description: The ID of the service to delete.
+          schema:
+            type: string
+            pattern: '^svc-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetService
+      description: 'Gets an Amazon Web Services Migration Hub Refactor Spaces service. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetServiceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: ApplicationIdentifier
+          in: path
+          required: true
+          description: The ID of the application.
+          schema:
+            type: string
+            pattern: '^app-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+        - name: EnvironmentIdentifier
+          in: path
+          required: true
+          description: The ID of the environment.
+          schema:
+            type: string
+            pattern: '^env-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+        - name: ServiceIdentifier
+          in: path
+          required: true
+          description: The ID of the service.
+          schema:
+            type: string
+            pattern: '^svc-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+  '/environments/{EnvironmentIdentifier}/vpcs':
+    get:
+      operationId: ListEnvironmentVpcs
+      description: 'Lists all Amazon Web Services Migration Hub Refactor Spaces service virtual private clouds (VPCs) that are part of the environment. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEnvironmentVpcsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: EnvironmentIdentifier
+          in: path
+          required: true
+          description: 'The ID of the environment. '
+          schema:
+            type: string
+            pattern: '^env-[0-9A-Za-z]{10}$'
+            minLength: 14
+            maxLength: 14
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9/\+\=]{0,2048}$'
+            minLength: 1
+            maxLength: 2048
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{ResourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: 'Lists the tags of a resource. The caller account must be the same as the resource’s <code>OwnerAccountId</code>. Listing tags in other accounts is not supported. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: 'The Amazon Resource Name (ARN) of the resource. '
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: '<p>Removes the tags of a given resource. Tags are metadata which can be used to manage a resource. To tag a resource, the caller account must be the same as the resource’s <code>OwnerAccountId</code>. Tagging resources in other accounts is not supported.</p> <note> <p>Amazon Web Services Migration Hub Refactor Spaces does not propagate tags to orchestrated resources, such as an environment’s transit gateway.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Tags
+              properties:
+                Tags:
+                  description: A collection of up to 50 unique tags
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagMapValueString'
+  /resourcepolicy:
+    put:
+      operationId: PutResourcePolicy
+      description: 'Attaches a resource-based permission policy to the Amazon Web Services Migration Hub Refactor Spaces environment. The policy must contain the same actions and condition statements as the <code>arn:aws:ram::aws:permission/AWSRAMDefaultPermissionRefactorSpacesEnvironment</code> permission in Resource Access Manager. The policy must not contain new lines or blank lines. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutResourcePolicyResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: InvalidResourcePolicyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourcePolicyException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Policy
+                - ResourceArn
+              properties:
+                Policy:
+                  description: 'A JSON-formatted string for an Amazon Web Services resource-based policy. '
+                  type: string
+                  pattern: ^.*\S.*$
+                  minLength: 1
+                  maxLength: 300000
+                ResourceArn:
+                  description: 'The Amazon Resource Name (ARN) of the resource to which the policy is being attached. '
+                  type: string
+                  pattern: '^arn:aws:refactor-spaces:[a-zA-Z0-9\-]+:\w{12}:[a-zA-Z_0-9+=,.@\-_/]+$'
+                  minLength: 20
+                  maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{ResourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: 'Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource. To untag a resource, the caller account must be the same as the resource’s <code>OwnerAccountId</code>. Untagging resources across accounts is not supported. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: 'The Amazon Resource Name (ARN) of the resource. '
+          schema:
+            type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: 'The list of keys of the tags to be removed from the resource. '
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateApplicationResponse:
+      type: object
+      properties:
+        ApiGatewayProxy:
+          allOf:
+            - $ref: '#/components/schemas/ApiGatewayProxyInput'
+            - description: 'A wrapper object holding the API Gateway endpoint type and stage name for the proxy. '
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The unique identifier of the application.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: 'The Amazon Resource Name (ARN) of the application. The format for this ARN is <code>arn:aws:refactor-spaces:<i>region</i>:<i>account-id</i>:<i>resource-type/resource-id</i> </code>. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html"> Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.'
+        CreatedByAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The Amazon Web Services account ID of application creator.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A timestamp that indicates when the application is created.
+        EnvironmentId:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentId'
+            - description: The ID of the environment in which the application is created.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the application was last updated. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: The name of the application.
+        OwnerAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The Amazon Web Services account ID of the application owner (which is always the same as the environment owner account ID).
+        ProxyType:
+          allOf:
+            - $ref: '#/components/schemas/ProxyType'
+            - description: 'The proxy type of the proxy created within the application. '
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationState'
+            - description: 'The current state of the application. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags assigned to the application. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key-value pair. '
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/VpcId'
+            - description: 'The ID of the Amazon VPC. '
+    ApiGatewayEndpointType:
+      type: string
+      enum:
+        - REGIONAL
+        - PRIVATE
+    StageName:
+      type: string
+      pattern: '^[-a-zA-Z0-9_]*$'
+      minLength: 1
+      maxLength: 128
+    TagMapValueString:
+      type: string
+      minLength: 0
+      maxLength: 256
+    ResourceNotFoundException: {}
+    InternalServerException: {}
+    ConflictException: {}
+    ServiceQuotaExceededException: {}
+    ValidationException: {}
+    ThrottlingException: {}
+    AccessDeniedException: {}
+    CreateEnvironmentResponse:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the environment.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A timestamp that indicates when the environment is created.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the environment.
+        EnvironmentId:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentId'
+            - description: The unique identifier of the environment.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the environment was last updated. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentName'
+            - description: The name of the environment.
+        NetworkFabricType:
+          allOf:
+            - $ref: '#/components/schemas/NetworkFabricType'
+            - description: The network fabric type of the environment.
+        OwnerAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The Amazon Web Services account ID of environment owner.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentState'
+            - description: 'The current state of the environment. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags assigned to the created environment. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key-value pair..
+    CreateRouteResponse:
+      type: object
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application in which the route is created.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: 'The Amazon Resource Name (ARN) of the route. The format for this ARN is <code>arn:aws:refactor-spaces:<i>region</i>:<i>account-id</i>:<i>resource-type/resource-id</i> </code>. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html"> Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.'
+        CreatedByAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The Amazon Web Services account ID of the route creator.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A timestamp that indicates when the route is created.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the route was last updated. '
+        OwnerAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The Amazon Web Services account ID of the route owner.
+        RouteId:
+          allOf:
+            - $ref: '#/components/schemas/RouteId'
+            - description: The unique identifier of the route.
+        RouteType:
+          allOf:
+            - $ref: '#/components/schemas/RouteType'
+            - description: The route type of the route.
+        ServiceId:
+          allOf:
+            - $ref: '#/components/schemas/ServiceId'
+            - description: The ID of service in which the route is created. Traffic that matches this route is forwarded to this service.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/RouteState'
+            - description: The current state of the route. Activation state only allows <code>ACTIVE</code> or <code>INACTIVE</code> as user inputs. <code>FAILED</code> is a route state that is system generated.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags assigned to the created route. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key-value pair. '
+        UriPathRoute:
+          allOf:
+            - $ref: '#/components/schemas/UriPathRouteInput'
+            - description: 'Configuration for the URI path route type. '
+    RouteActivationState:
+      type: string
+      enum:
+        - ACTIVE
+        - INACTIVE
+    Boolean:
+      type: boolean
+    HttpMethods:
+      type: array
+      items:
+        $ref: '#/components/schemas/HttpMethod'
+    UriPath:
+      type: string
+      pattern: '^(/[a-zA-Z0-9._-]+)+$'
+      minLength: 1
+      maxLength: 2048
+    CreateServiceResponse:
+      type: object
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: 'The ID of the application that the created service belongs to. '
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the service.
+        CreatedByAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The Amazon Web Services account ID of the service creator.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A timestamp that indicates when the service is created.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the created service.
+        EndpointType:
+          allOf:
+            - $ref: '#/components/schemas/ServiceEndpointType'
+            - description: The endpoint type of the service.
+        EnvironmentId:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentId'
+            - description: The unique identifier of the environment.
+        LambdaEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/LambdaEndpointInput'
+            - description: The configuration for the Lambda endpoint type.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the service was last updated. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ServiceName'
+            - description: The name of the service.
+        OwnerAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The Amazon Web Services account ID of the service owner.
+        ServiceId:
+          allOf:
+            - $ref: '#/components/schemas/ServiceId'
+            - description: The unique identifier of the service.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ServiceState'
+            - description: 'The current state of the service. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags assigned to the created service. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key-value pair.. '
+        UrlEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/UrlEndpointInput'
+            - description: 'The configuration for the URL endpoint type. '
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/VpcId'
+            - description: 'The ID of the VPC. '
+    LambdaArn:
+      type: string
+      pattern: '^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?$'
+      minLength: 1
+      maxLength: 2048
+    Uri:
+      type: string
+      pattern: '^https?://[-a-zA-Z0-9+\x38@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\x38@#/%=~_|]$'
+      minLength: 1
+      maxLength: 2048
+    DeleteApplicationResponse:
+      type: object
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the application.
+        EnvironmentId:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentId'
+            - description: The unique identifier of the application’s environment.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the environment was last updated. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: The name of the application.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationState'
+            - description: 'The current state of the application. '
+    DeleteEnvironmentResponse:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the environment.
+        EnvironmentId:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentId'
+            - description: The unique identifier of the environment.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the environment was last updated. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentName'
+            - description: The name of the environment.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentState'
+            - description: 'The current state of the environment. '
+    DeleteResourcePolicyResponse:
+      type: object
+      properties: {}
+    DeleteRouteResponse:
+      type: object
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application that the route belongs to.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the route.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the route was last updated. '
+        RouteId:
+          allOf:
+            - $ref: '#/components/schemas/RouteId'
+            - description: The ID of the route to delete.
+        ServiceId:
+          allOf:
+            - $ref: '#/components/schemas/ServiceId'
+            - description: The ID of the service that the route belongs to.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/RouteState'
+            - description: 'The current state of the route. '
+    DeleteServiceResponse:
+      type: object
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application that the service is in.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the service.
+        EnvironmentId:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentId'
+            - description: The unique identifier of the environment.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the service was last updated. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ServiceName'
+            - description: The name of the service.
+        ServiceId:
+          allOf:
+            - $ref: '#/components/schemas/ServiceId'
+            - description: The unique identifier of the service.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ServiceState'
+            - description: 'The current state of the service. '
+    GetApplicationResponse:
+      type: object
+      properties:
+        ApiGatewayProxy:
+          allOf:
+            - $ref: '#/components/schemas/ApiGatewayProxyConfig'
+            - description: 'The endpoint URL of the API Gateway proxy. '
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The unique identifier of the application.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the application.
+        CreatedByAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: 'The Amazon Web Services account ID of the application creator. '
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the application is created. '
+        EnvironmentId:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentId'
+            - description: The unique identifier of the environment.
+        Error:
+          allOf:
+            - $ref: '#/components/schemas/ErrorResponse'
+            - description: 'Any error associated with the application resource. '
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the application was last updated. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: The name of the application.
+        OwnerAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The Amazon Web Services account ID of the application owner (which is always the same as the environment owner account ID).
+        ProxyType:
+          allOf:
+            - $ref: '#/components/schemas/ProxyType'
+            - description: 'The proxy type of the proxy created within the application. '
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationState'
+            - description: 'The current state of the application. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags assigned to the application. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key-value pair. '
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/VpcId'
+            - description: 'The ID of the virtual private cloud (VPC). '
+    GetEnvironmentResponse:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the environment.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the environment is created. '
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: 'The description of the environment. '
+        EnvironmentId:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentId'
+            - description: 'The unique identifier of the environment. '
+        Error:
+          allOf:
+            - $ref: '#/components/schemas/ErrorResponse'
+            - description: 'Any error associated with the environment resource. '
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the environment was last updated. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentName'
+            - description: The name of the environment.
+        NetworkFabricType:
+          allOf:
+            - $ref: '#/components/schemas/NetworkFabricType'
+            - description: 'The network fabric type of the environment. '
+        OwnerAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The Amazon Web Services account ID of the environment owner.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentState'
+            - description: 'The current state of the environment. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags to assign to the environment. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key-value pair. '
+        TransitGatewayId:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayId'
+            - description: 'The ID of the transit gateway set up by the environment. '
+    GetResourcePolicyResponse:
+      type: object
+      properties:
+        Policy:
+          allOf:
+            - $ref: '#/components/schemas/PolicyString'
+            - description: 'A JSON-formatted string for an Amazon Web Services resource-based policy. '
+    GetRouteResponse:
+      type: object
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: 'The ID of the application that the route belongs to. '
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the route.
+        CreatedByAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The Amazon Web Services account ID of the route creator.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The timestamp of when the route is created. '
+        EnvironmentId:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentId'
+            - description: Unique identifier of the environment.
+        Error:
+          allOf:
+            - $ref: '#/components/schemas/ErrorResponse'
+            - description: 'Any error associated with the route resource. '
+        IncludeChildPaths:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Indicates whether to match all subpaths of the given source path. If this value is <code>false</code>, requests must match the source path exactly before they are forwarded to this route''s service. '
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the route was last updated. '
+        Methods:
+          allOf:
+            - $ref: '#/components/schemas/HttpMethods'
+            - description: 'A list of HTTP methods to match. An empty list matches all values. If a method is present, only HTTP requests using that method are forwarded to this route’s service. '
+        OwnerAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The Amazon Web Services account ID of the route owner.
+        PathResourceToId:
+          allOf:
+            - $ref: '#/components/schemas/PathResourceToId'
+            - description: 'A mapping of Amazon API Gateway path resources to resource IDs. '
+        RouteId:
+          allOf:
+            - $ref: '#/components/schemas/RouteId'
+            - description: '<p>The unique identifier of the route.</p> <p> <b>DEFAULT</b>: All traffic that does not match another route is forwarded to the default route. Applications must have a default route before any other routes can be created.</p> <p> <b>URI_PATH</b>: A route that is based on a URI path.</p>'
+        RouteType:
+          allOf:
+            - $ref: '#/components/schemas/RouteType'
+            - description: The type of route.
+        ServiceId:
+          allOf:
+            - $ref: '#/components/schemas/ServiceId'
+            - description: The unique identifier of the service.
+        SourcePath:
+          allOf:
+            - $ref: '#/components/schemas/UriPath'
+            - description: 'The path to use to match traffic. Paths must start with <code>/</code> and are relative to the base of the application. '
+        State:
+          allOf:
+            - $ref: '#/components/schemas/RouteState'
+            - description: 'The current state of the route. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags assigned to the route. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key-value pair. '
+    GetServiceResponse:
+      type: object
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the service.
+        CreatedByAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The Amazon Web Services account ID of the service creator.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of when the service is created.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: 'The description of the service. '
+        EndpointType:
+          allOf:
+            - $ref: '#/components/schemas/ServiceEndpointType'
+            - description: The endpoint type of the service.
+        EnvironmentId:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentId'
+            - description: The unique identifier of the environment.
+        Error:
+          allOf:
+            - $ref: '#/components/schemas/ErrorResponse'
+            - description: 'Any error associated with the service resource. '
+        LambdaEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/LambdaEndpointConfig'
+            - description: <p>The configuration for the Lambda endpoint type.</p> <p>The <b>Arn</b> is the Amazon Resource Name (ARN) of the Lambda function associated with this service. </p>
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the service was last updated. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ServiceName'
+            - description: The name of the service.
+        OwnerAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The Amazon Web Services account ID of the service owner.
+        ServiceId:
+          allOf:
+            - $ref: '#/components/schemas/ServiceId'
+            - description: The unique identifier of the service.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ServiceState'
+            - description: 'The current state of the service. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags assigned to the service. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key-value pair. '
+        UrlEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/UrlEndpointConfig'
+            - description: <p>The configuration for the URL endpoint type.</p> <p>The <b>Url</b> isthe URL of the endpoint type.</p> <p>The <b>HealthUrl</b> is the health check URL of the endpoint type. </p>
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/VpcId'
+            - description: 'The ID of the virtual private cloud (VPC). '
+    ListApplicationsResponse:
+      type: object
+      properties:
+        ApplicationSummaryList:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationSummaries'
+            - description: 'The list of <code>ApplicationSummary</code> objects. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next page of results.
+    ListEnvironmentVpcsResponse:
+      type: object
+      properties:
+        EnvironmentVpcList:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentVpcs'
+            - description: 'The list of <code>EnvironmentVpc</code> objects. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next page of results.
+    ListEnvironmentsResponse:
+      type: object
+      properties:
+        EnvironmentSummaryList:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentSummaries'
+            - description: 'The list of <code>EnvironmentSummary</code> objects. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next page of results.
+    ListRoutesResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next page of results.
+        RouteSummaryList:
+          allOf:
+            - $ref: '#/components/schemas/RouteSummaries'
+            - description: 'The list of <code>RouteSummary</code> objects. '
+    ListServicesResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next page of results.
+        ServiceSummaryList:
+          allOf:
+            - $ref: '#/components/schemas/ServiceSummaries'
+            - description: ' The list of <code>ServiceSummary</code> objects. '
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The list of tags assigned to the resource. '
+    PutResourcePolicyResponse:
+      type: object
+      properties: {}
+    InvalidResourcePolicyException: {}
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    String:
+      type: string
+    UpdateRouteResponse:
+      type: object
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: ' The ID of the application in which the route is being updated. '
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: ' The Amazon Resource Name (ARN) of the route. The format for this ARN is <code>arn:aws:refactor-spaces:<i>region</i>:<i>account-id</i>:<i>resource-type/resource-id</i> </code>. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html"> Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>. '
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' A timestamp that indicates when the route was last updated. '
+        RouteId:
+          allOf:
+            - $ref: '#/components/schemas/RouteId'
+            - description: ' The unique identifier of the route. '
+        ServiceId:
+          allOf:
+            - $ref: '#/components/schemas/ServiceId'
+            - description: ' The ID of service in which the route was created. Traffic that matches this route is forwarded to this service. '
+        State:
+          allOf:
+            - $ref: '#/components/schemas/RouteState'
+            - description: ' The current state of the route. '
+    AccountId:
+      type: string
+      pattern: '^\d{12}$'
+      minLength: 12
+      maxLength: 12
+    AdditionalDetailsValue:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    AdditionalDetails:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/AdditionalDetailsValue'
+    AdditionalDetailsKey:
+      type: string
+      minLength: 1
+      maxLength: 50
+    ApiGatewayId:
+      type: string
+      pattern: '^[a-z0-9]{10}$'
+      minLength: 10
+      maxLength: 10
+    NlbArn:
+      type: string
+      pattern: '^arn:aws:elasticloadbalancing:[a-zA-Z0-9\-]+:\w{12}:[a-zA-Z_0-9+=,.@\-_/]+$'
+      minLength: 20
+      maxLength: 2048
+    NlbName:
+      type: string
+      pattern: '^(?!internal-)[a-zA-Z0-9]+[a-zA-Z0-9-_ ]+.*[^-]$'
+      minLength: 1
+      maxLength: 32
+    VpcLinkId:
+      type: string
+      pattern: '^[a-z0-9]{10}$'
+      minLength: 10
+      maxLength: 10
+    ApiGatewayProxyConfig:
+      type: object
+      properties:
+        ApiGatewayId:
+          allOf:
+            - $ref: '#/components/schemas/ApiGatewayId'
+            - description: 'The resource ID of the API Gateway for the proxy. '
+        EndpointType:
+          allOf:
+            - $ref: '#/components/schemas/ApiGatewayEndpointType'
+            - description: 'The type of API Gateway endpoint created. '
+        NlbArn:
+          allOf:
+            - $ref: '#/components/schemas/NlbArn'
+            - description: 'The Amazon Resource Name (ARN) of the Network Load Balancer configured by the API Gateway proxy. '
+        NlbName:
+          allOf:
+            - $ref: '#/components/schemas/NlbName'
+            - description: 'The name of the Network Load Balancer that is configured by the API Gateway proxy. '
+        ProxyUrl:
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: 'The endpoint URL of the API Gateway proxy. '
+        StageName:
+          allOf:
+            - $ref: '#/components/schemas/StageName'
+            - description: 'The name of the API Gateway stage. The name defaults to <code>prod</code>. '
+        VpcLinkId:
+          allOf:
+            - $ref: '#/components/schemas/VpcLinkId'
+            - description: 'The <code>VpcLink</code> ID of the API Gateway proxy. '
+      description: 'A wrapper object holding the Amazon API Gateway proxy configuration. '
+    ApiGatewayProxyInput:
+      type: object
+      properties:
+        EndpointType:
+          allOf:
+            - $ref: '#/components/schemas/ApiGatewayEndpointType'
+            - description: '<p>The type of endpoint to use for the API Gateway proxy. If no value is specified in the request, the value is set to <code>REGIONAL</code> by default.</p> <p>If the value is set to <code>PRIVATE</code> in the request, this creates a private API endpoint that is isolated from the public internet. The private endpoint can only be accessed by using Amazon Virtual Private Cloud (Amazon VPC) endpoints for Amazon API Gateway that have been granted access. </p>'
+        StageName:
+          allOf:
+            - $ref: '#/components/schemas/StageName'
+            - description: 'The name of the API Gateway stage. The name defaults to <code>prod</code>. '
+      description: 'A wrapper object holding the Amazon API Gateway endpoint input. '
+    ApiGatewayProxySummary:
+      type: object
+      properties:
+        ApiGatewayId:
+          allOf:
+            - $ref: '#/components/schemas/ApiGatewayId'
+            - description: 'The resource ID of the API Gateway for the proxy. '
+        EndpointType:
+          allOf:
+            - $ref: '#/components/schemas/ApiGatewayEndpointType'
+            - description: 'The type of API Gateway endpoint created. '
+        NlbArn:
+          allOf:
+            - $ref: '#/components/schemas/NlbArn'
+            - description: 'The Amazon Resource Name (ARN) of the Network Load Balancer configured by the API Gateway proxy. '
+        NlbName:
+          allOf:
+            - $ref: '#/components/schemas/NlbName'
+            - description: 'The name of the Network Load Balancer that is configured by the API Gateway proxy. '
+        ProxyUrl:
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: 'The endpoint URL of the API Gateway proxy. '
+        StageName:
+          allOf:
+            - $ref: '#/components/schemas/StageName'
+            - description: 'The name of the API Gateway stage. The name defaults to <code>prod</code>. '
+        VpcLinkId:
+          allOf:
+            - $ref: '#/components/schemas/VpcLinkId'
+            - description: 'The <code>VpcLink</code> ID of the API Gateway proxy. '
+      description: 'A wrapper object holding the Amazon API Gateway proxy summary. '
+    ApplicationId:
+      type: string
+      pattern: '^app-[0-9A-Za-z]{10}$'
+      minLength: 14
+      maxLength: 14
+    ApplicationName:
+      type: string
+      pattern: '^(?!app-)[a-zA-Z0-9]+[a-zA-Z0-9-_ ]+$'
+      minLength: 3
+      maxLength: 63
+    ApplicationState:
+      type: string
+      enum:
+        - CREATING
+        - ACTIVE
+        - DELETING
+        - FAILED
+        - UPDATING
+    ApplicationSummary:
+      type: object
+      properties:
+        ApiGatewayProxy:
+          allOf:
+            - $ref: '#/components/schemas/ApiGatewayProxySummary'
+            - description: 'The endpoint URL of the Amazon API Gateway proxy. '
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: 'The unique identifier of the application. '
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: 'The Amazon Resource Name (ARN) of the application. '
+        CreatedByAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: 'The Amazon Web Services account ID of the application creator. '
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the application is created. '
+        EnvironmentId:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentId'
+            - description: 'The unique identifier of the environment. '
+        Error:
+          allOf:
+            - $ref: '#/components/schemas/ErrorResponse'
+            - description: 'Any error associated with the application resource. '
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the application was last updated. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: 'The name of the application. '
+        OwnerAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The Amazon Web Services account ID of the application owner (which is always the same as the environment owner account ID).
+        ProxyType:
+          allOf:
+            - $ref: '#/components/schemas/ProxyType'
+            - description: 'The proxy type of the proxy created within the application. '
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationState'
+            - description: 'The current state of the application. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags assigned to the application. '
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/VpcId'
+            - description: 'The ID of the virtual private cloud (VPC). '
+      description: 'The list of <code>ApplicationSummary</code> objects. '
+    ApplicationSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationSummary'
+    ResourceArn:
+      type: string
+      pattern: '^arn:aws:refactor-spaces:[a-zA-Z0-9\-]+:\w{12}:[a-zA-Z_0-9+=,.@\-_/]+$'
+      minLength: 20
+      maxLength: 2048
+    Timestamp:
+      type: string
+      format: date-time
+    EnvironmentId:
+      type: string
+      pattern: '^env-[0-9A-Za-z]{10}$'
+      minLength: 14
+      maxLength: 14
+    ErrorResponse:
+      type: object
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: 'The Amazon Web Services account ID of the resource owner. '
+        AdditionalDetails:
+          allOf:
+            - $ref: '#/components/schemas/AdditionalDetails'
+            - description: 'Additional details about the error. '
+        Code:
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: 'The error code associated with the error. '
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: 'The message associated with the error. '
+        ResourceIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdentifier'
+            - description: 'The ID of the resource. '
+        ResourceType:
+          allOf:
+            - $ref: '#/components/schemas/ErrorResourceType'
+            - description: 'The type of resource. '
+      description: 'Error associated with a resource returned for a Get or List resource response. '
+    ProxyType:
+      type: string
+      enum:
+        - API_GATEWAY
+    TagMap:
+      type: object
+      description: A collection of up to 50 unique tags
+      minProperties: 0
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/TagMapValueString'
+    VpcId:
+      type: string
+      pattern: '^vpc-[-a-f0-9]{8}([-a-f0-9]{9})?$'
+      minLength: 12
+      maxLength: 21
+    CidrBlock:
+      type: string
+    CidrBlocks:
+      type: array
+      items:
+        $ref: '#/components/schemas/CidrBlock'
+      minItems: 1
+    ClientToken:
+      type: string
+      pattern: '^[\x20-\x7E]{1,64}$'
+      minLength: 1
+      maxLength: 64
+    CreateApplicationRequest:
+      type: object
+      required:
+        - Name
+        - ProxyType
+        - VpcId
+      title: CreateApplicationRequest
+      properties:
+        ApiGatewayProxy:
+          allOf:
+            - $ref: '#/components/schemas/ApiGatewayProxyInput'
+            - description: 'A wrapper object holding the API Gateway endpoint type and stage name for the proxy. '
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: 'The name to use for the application. '
+        ProxyType:
+          allOf:
+            - $ref: '#/components/schemas/ProxyType'
+            - description: 'The proxy type of the proxy created within the application. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags to assign to the application. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key-value pair.
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/VpcId'
+            - description: The ID of the virtual private cloud (VPC).
+    Description:
+      type: string
+      pattern: '^[a-zA-Z0-9-_\s\.\!\*\#\@\'']+$'
+      minLength: 1
+      maxLength: 256
+    EnvironmentName:
+      type: string
+      pattern: '^(?!env-)[a-zA-Z0-9]+[a-zA-Z0-9-_ ]+$'
+      minLength: 3
+      maxLength: 63
+    NetworkFabricType:
+      type: string
+      enum:
+        - TRANSIT_GATEWAY
+        - NONE
+    CreateEnvironmentRequest:
+      type: object
+      required:
+        - Name
+        - NetworkFabricType
+      title: CreateEnvironmentRequest
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the environment.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentName'
+            - description: The name of the environment.
+        NetworkFabricType:
+          allOf:
+            - $ref: '#/components/schemas/NetworkFabricType'
+            - description: The network fabric type of the environment.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags to assign to the environment. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key-value pair.
+    EnvironmentState:
+      type: string
+      enum:
+        - CREATING
+        - ACTIVE
+        - DELETING
+        - FAILED
+    DefaultRouteInput:
+      type: object
+      properties:
+        ActivationState:
+          allOf:
+            - $ref: '#/components/schemas/RouteActivationState'
+            - description: 'If set to <code>ACTIVE</code>, traffic is forwarded to this route’s service after the route is created. '
+      description: ' The configuration for the default route type. '
+    RouteType:
+      type: string
+      enum:
+        - DEFAULT
+        - URI_PATH
+    ServiceId:
+      type: string
+      pattern: '^svc-[0-9A-Za-z]{10}$'
+      minLength: 14
+      maxLength: 14
+    UriPathRouteInput:
+      type: object
+      required:
+        - ActivationState
+        - SourcePath
+      properties:
+        ActivationState:
+          allOf:
+            - $ref: '#/components/schemas/RouteActivationState'
+            - description: 'If set to <code>ACTIVE</code>, traffic is forwarded to this route’s service after the route is created. '
+        IncludeChildPaths:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Indicates whether to match all subpaths of the given source path. If this value is <code>false</code>, requests must match the source path exactly before they are forwarded to this route''s service. '
+        Methods:
+          allOf:
+            - $ref: '#/components/schemas/HttpMethods'
+            - description: 'A list of HTTP methods to match. An empty list matches all values. If a method is present, only HTTP requests using that method are forwarded to this route’s service. '
+        SourcePath:
+          allOf:
+            - $ref: '#/components/schemas/UriPath'
+            - description: The path to use to match traffic. Paths must start with <code>/</code> and are relative to the base of the application.
+      description: 'The configuration for the URI path route type. '
+    CreateRouteRequest:
+      type: object
+      required:
+        - RouteType
+        - ServiceIdentifier
+      title: CreateRouteRequest
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        DefaultRoute:
+          allOf:
+            - $ref: '#/components/schemas/DefaultRouteInput'
+            - description: ' Configuration for the default route type. '
+        RouteType:
+          allOf:
+            - $ref: '#/components/schemas/RouteType'
+            - description: The route type of the route. <code>DEFAULT</code> indicates that all traffic that does not match another route is forwarded to the default route. Applications must have a default route before any other routes can be created. <code>URI_PATH</code> indicates a route that is based on a URI path.
+        ServiceIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/ServiceId'
+            - description: The ID of the service in which the route is created. Traffic that matches this route is forwarded to this service.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags to assign to the route. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key-value pair.. '
+        UriPathRoute:
+          allOf:
+            - $ref: '#/components/schemas/UriPathRouteInput'
+            - description: 'The configuration for the URI path route type. '
+    RouteId:
+      type: string
+      pattern: '^rte-[0-9A-Za-z]{10}$'
+      minLength: 14
+      maxLength: 14
+    RouteState:
+      type: string
+      enum:
+        - CREATING
+        - ACTIVE
+        - DELETING
+        - FAILED
+        - UPDATING
+        - INACTIVE
+    ServiceEndpointType:
+      type: string
+      enum:
+        - LAMBDA
+        - URL
+    LambdaEndpointInput:
+      type: object
+      required:
+        - Arn
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/LambdaArn'
+            - description: The Amazon Resource Name (ARN) of the Lambda function or alias.
+      description: 'The input for the Lambda endpoint type. '
+    ServiceName:
+      type: string
+      pattern: '^(?!svc-)[a-zA-Z0-9]+[a-zA-Z0-9-_ ]+$'
+      minLength: 3
+      maxLength: 63
+    UrlEndpointInput:
+      type: object
+      required:
+        - Url
+      properties:
+        HealthUrl:
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: 'The health check URL of the URL endpoint type. If the URL is a public endpoint, the <code>HealthUrl</code> must also be a public endpoint. If the URL is a private endpoint inside a virtual private cloud (VPC), the health URL must also be a private endpoint, and the host must be the same as the URL. '
+        Url:
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: 'The URL to route traffic to. The URL must be an <a href="https://datatracker.ietf.org/doc/html/rfc3986">rfc3986-formatted URL</a>. If the host is a domain name, the name must be resolvable over the public internet. If the scheme is <code>https</code>, the top level domain of the host must be listed in the <a href="https://www.iana.org/domains/root/db">IANA root zone database</a>. '
+      description: 'The configuration for the URL endpoint type. '
+    CreateServiceRequest:
+      type: object
+      required:
+        - EndpointType
+        - Name
+      title: CreateServiceRequest
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the service.
+        EndpointType:
+          allOf:
+            - $ref: '#/components/schemas/ServiceEndpointType'
+            - description: The type of endpoint to use for the service. The type can be a URL in a VPC or an Lambda function.
+        LambdaEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/LambdaEndpointInput'
+            - description: The configuration for the Lambda endpoint type.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ServiceName'
+            - description: The name of the service.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags to assign to the service. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key-value pair.. '
+        UrlEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/UrlEndpointInput'
+            - description: 'The configuration for the URL endpoint type. When creating a route to a service, Refactor Spaces automatically resolves the address in the <code>UrlEndpointInput</code> object URL when the Domain Name System (DNS) time-to-live (TTL) expires, or every 60 seconds for TTLs less than 60 seconds.'
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/VpcId'
+            - description: The ID of the VPC.
+    ServiceState:
+      type: string
+      enum:
+        - CREATING
+        - ACTIVE
+        - DELETING
+        - FAILED
+    DeleteApplicationRequest:
+      type: object
+      title: DeleteApplicationRequest
+      properties: {}
+    DeleteEnvironmentRequest:
+      type: object
+      title: DeleteEnvironmentRequest
+      properties: {}
+    ResourcePolicyIdentifier:
+      type: string
+      pattern: '^arn:aws:refactor-spaces:[a-zA-Z0-9\-]+:\w{12}:[a-zA-Z_0-9+=,.@\-_/]+$'
+      minLength: 20
+      maxLength: 2048
+    DeleteResourcePolicyRequest:
+      type: object
+      title: DeleteResourcePolicyRequest
+      properties: {}
+    DeleteRouteRequest:
+      type: object
+      title: DeleteRouteRequest
+      properties: {}
+    DeleteServiceRequest:
+      type: object
+      title: DeleteServiceRequest
+      properties: {}
+    Ec2TagValue:
+      type: string
+      pattern: ^.*$
+      minLength: 0
+      maxLength: 255
+    EnvironmentSummary:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: 'The Amazon Resource Name (ARN) of the environment. '
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the environment is created. '
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: 'A description of the environment. '
+        EnvironmentId:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentId'
+            - description: 'The unique identifier of the environment. '
+        Error:
+          allOf:
+            - $ref: '#/components/schemas/ErrorResponse'
+            - description: 'Any error associated with the environment resource. '
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the environment was last updated. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentName'
+            - description: 'The name of the environment. '
+        NetworkFabricType:
+          allOf:
+            - $ref: '#/components/schemas/NetworkFabricType'
+            - description: 'The network fabric type of the environment. '
+        OwnerAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The Amazon Web Services account ID of the environment owner.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentState'
+            - description: 'The current state of the environment. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags assigned to the environment. '
+        TransitGatewayId:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayId'
+            - description: 'The ID of the transit gateway set up by the environment. '
+      description: 'The summary information for environments as a response to <code>ListEnvironments</code>. '
+    EnvironmentSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/EnvironmentSummary'
+    TransitGatewayId:
+      type: string
+      pattern: '^tgw-[-a-f0-9]{17}$'
+      minLength: 21
+      maxLength: 21
+    EnvironmentVpc:
+      type: object
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: 'The Amazon Web Services account ID of the virtual private cloud (VPC) owner. '
+        CidrBlocks:
+          allOf:
+            - $ref: '#/components/schemas/CidrBlocks'
+            - description: 'The list of Amazon Virtual Private Cloud (Amazon VPC) CIDR blocks. '
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the VPC is first added to the environment. '
+        EnvironmentId:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentId'
+            - description: 'The unique identifier of the environment. '
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the VPC was last updated by the environment. '
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/VpcId'
+            - description: 'The ID of the VPC. '
+        VpcName:
+          allOf:
+            - $ref: '#/components/schemas/Ec2TagValue'
+            - description: 'The name of the VPC at the time it is added to the environment. '
+      description: Provides summary information for the <code>EnvironmentVpc</code> resource as a response to <code>ListEnvironmentVpc</code>.
+    EnvironmentVpcs:
+      type: array
+      items:
+        $ref: '#/components/schemas/EnvironmentVpc'
+    ErrorCode:
+      type: string
+      enum:
+        - INVALID_RESOURCE_STATE
+        - RESOURCE_LIMIT_EXCEEDED
+        - RESOURCE_CREATION_FAILURE
+        - RESOURCE_UPDATE_FAILURE
+        - SERVICE_ENDPOINT_HEALTH_CHECK_FAILURE
+        - RESOURCE_DELETION_FAILURE
+        - RESOURCE_RETRIEVAL_FAILURE
+        - RESOURCE_IN_USE
+        - RESOURCE_NOT_FOUND
+        - STATE_TRANSITION_FAILURE
+        - REQUEST_LIMIT_EXCEEDED
+        - NOT_AUTHORIZED
+    ErrorMessage:
+      type: string
+      pattern: '^[\p{Alnum}\p{Punct}\p{Blank}]*$'
+      minLength: 0
+      maxLength: 255
+    ErrorResourceType:
+      type: string
+      enum:
+        - ENVIRONMENT
+        - APPLICATION
+        - ROUTE
+        - SERVICE
+        - TRANSIT_GATEWAY
+        - TRANSIT_GATEWAY_ATTACHMENT
+        - API_GATEWAY
+        - NLB
+        - TARGET_GROUP
+        - LOAD_BALANCER_LISTENER
+        - VPC_LINK
+        - LAMBDA
+        - VPC
+        - SUBNET
+        - ROUTE_TABLE
+        - SECURITY_GROUP
+        - VPC_ENDPOINT_SERVICE_CONFIGURATION
+        - RESOURCE_SHARE
+        - IAM_ROLE
+    ResourceIdentifier:
+      type: string
+      pattern: '(^(env|svc|pxy|rte|app)-([0-9A-Za-z]{10}$))'
+      minLength: 3
+      maxLength: 63
+    GetApplicationRequest:
+      type: object
+      title: GetApplicationRequest
+      properties: {}
+    GetEnvironmentRequest:
+      type: object
+      title: GetEnvironmentRequest
+      properties: {}
+    GetResourcePolicyRequest:
+      type: object
+      title: GetResourcePolicyRequest
+      properties: {}
+    PolicyString:
+      type: string
+      pattern: ^.*\S.*$
+      minLength: 1
+      maxLength: 300000
+    GetRouteRequest:
+      type: object
+      title: GetRouteRequest
+      properties: {}
+    PathResourceToId:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/PathResourceToIdValue'
+    GetServiceRequest:
+      type: object
+      title: GetServiceRequest
+      properties: {}
+    LambdaEndpointConfig:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/LambdaArn'
+            - description: 'The Amazon Resource Name (ARN) of the Lambda endpoint. '
+      description: 'The configuration for the Lambda endpoint type. '
+    UrlEndpointConfig:
+      type: object
+      properties:
+        HealthUrl:
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: 'The health check URL of the URL endpoint type. '
+        Url:
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: 'The HTTP URL endpoint. '
+      description: 'The configuration for the URL endpoint type. '
+    HttpMethod:
+      type: string
+      enum:
+        - DELETE
+        - GET
+        - HEAD
+        - OPTIONS
+        - PATCH
+        - POST
+        - PUT
+    LambdaEndpointSummary:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/LambdaArn'
+            - description: 'The Amazon Resource Name (ARN) of the Lambda endpoint. '
+      description: 'The summary for the Lambda endpoint type. '
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    NextToken:
+      type: string
+      pattern: '^[a-zA-Z0-9/\+\=]{0,2048}$'
+      minLength: 1
+      maxLength: 2048
+    ListApplicationsRequest:
+      type: object
+      title: ListApplicationsRequest
+      properties: {}
+    ListEnvironmentVpcsRequest:
+      type: object
+      title: ListEnvironmentVpcsRequest
+      properties: {}
+    ListEnvironmentsRequest:
+      type: object
+      title: ListEnvironmentsRequest
+      properties: {}
+    ListRoutesRequest:
+      type: object
+      title: ListRoutesRequest
+      properties: {}
+    RouteSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/RouteSummary'
+    ListServicesRequest:
+      type: object
+      title: ListServicesRequest
+      properties: {}
+    ServiceSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServiceSummary'
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    PathResourceToIdValue:
+      type: string
+      pattern: '^[a-z0-9]{10}$'
+      minLength: 10
+      maxLength: 10
+    PathResourceToIdKey:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    PutResourcePolicyRequest:
+      type: object
+      required:
+        - Policy
+        - ResourceArn
+      title: PutResourcePolicyRequest
+      properties:
+        Policy:
+          allOf:
+            - $ref: '#/components/schemas/PolicyString'
+            - description: 'A JSON-formatted string for an Amazon Web Services resource-based policy. '
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: 'The Amazon Resource Name (ARN) of the resource to which the policy is being attached. '
+    RouteSummary:
+      type: object
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: 'The unique identifier of the application. '
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: 'The Amazon Resource Name (ARN) of the route. '
+        CreatedByAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: 'The Amazon Web Services account ID of the route creator. '
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the route is created. '
+        EnvironmentId:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentId'
+            - description: 'The unique identifier of the environment. '
+        Error:
+          allOf:
+            - $ref: '#/components/schemas/ErrorResponse'
+            - description: 'Any error associated with the route resource. '
+        IncludeChildPaths:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Indicates whether to match all subpaths of the given source path. If this value is <code>false</code>, requests must match the source path exactly before they are forwarded to this route''s service.'
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the route was last updated. '
+        Methods:
+          allOf:
+            - $ref: '#/components/schemas/HttpMethods'
+            - description: 'A list of HTTP methods to match. An empty list matches all values. If a method is present, only HTTP requests using that method are forwarded to this route’s service. '
+        OwnerAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The Amazon Web Services account ID of the route owner.
+        PathResourceToId:
+          allOf:
+            - $ref: '#/components/schemas/PathResourceToId'
+            - description: 'A mapping of Amazon API Gateway path resources to resource IDs. '
+        RouteId:
+          allOf:
+            - $ref: '#/components/schemas/RouteId'
+            - description: 'The unique identifier of the route. '
+        RouteType:
+          allOf:
+            - $ref: '#/components/schemas/RouteType'
+            - description: 'The route type of the route. '
+        ServiceId:
+          allOf:
+            - $ref: '#/components/schemas/ServiceId'
+            - description: 'The unique identifier of the service. '
+        SourcePath:
+          allOf:
+            - $ref: '#/components/schemas/UriPath'
+            - description: The path to use to match traffic. Paths must start with <code>/</code> and are relative to the base of the application.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/RouteState'
+            - description: 'The current state of the route. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags assigned to the route. '
+      description: 'The summary information for the routes as a response to <code>ListRoutes</code>. '
+    ServiceSummary:
+      type: object
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: 'The unique identifier of the application. '
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: 'The Amazon Resource Name (ARN) of the service. '
+        CreatedByAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: 'The Amazon Web Services account ID of the service creator. '
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the service is created. '
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: 'A description of the service. '
+        EndpointType:
+          allOf:
+            - $ref: '#/components/schemas/ServiceEndpointType'
+            - description: 'The endpoint type of the service. '
+        EnvironmentId:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentId'
+            - description: 'The unique identifier of the environment. '
+        Error:
+          allOf:
+            - $ref: '#/components/schemas/ErrorResponse'
+            - description: 'Any error associated with the service resource. '
+        LambdaEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/LambdaEndpointSummary'
+            - description: 'A summary of the configuration for the Lambda endpoint type. '
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A timestamp that indicates when the service was last updated. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ServiceName'
+            - description: 'The name of the service. '
+        OwnerAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The Amazon Web Services account ID of the service owner.
+        ServiceId:
+          allOf:
+            - $ref: '#/components/schemas/ServiceId'
+            - description: 'The unique identifier of the service. '
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ServiceState'
+            - description: 'The current state of the service. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags assigned to the service. '
+        UrlEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/UrlEndpointSummary'
+            - description: 'The summary of the configuration for the URL endpoint type. '
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/VpcId'
+            - description: 'The ID of the virtual private cloud (VPC). '
+      description: 'A summary for the service as a response to <code>ListServices</code>. '
+    UrlEndpointSummary:
+      type: object
+      properties:
+        HealthUrl:
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: 'The health check URL of the URL endpoint type. If the URL is a public endpoint, the <code>HealthUrl</code> must also be a public endpoint. If the URL is a private endpoint inside a virtual private cloud (VPC), the health URL must also be a private endpoint, and the host must be the same as the URL.'
+        Url:
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: ' The URL to route traffic to. The URL must be an <a href="https://datatracker.ietf.org/doc/html/rfc3986">rfc3986-formatted URL</a>. If the host is a domain name, the name must be resolvable over the public internet. If the scheme is <code>https</code>, the top level domain of the host must be listed in the <a href="https://www.iana.org/domains/root/db">IANA root zone database</a>. '
+      description: 'The summary of the configuration for the URL endpoint type. '
+    TagKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    TagMapKeyString:
+      type: string
+      pattern: '^(?!aws:).+'
+      minLength: 1
+      maxLength: 128
+    TagResourceRequest:
+      type: object
+      required:
+        - Tags
+      title: TagResourceRequest
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The new or modified tags for the resource.
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+    UpdateRouteRequest:
+      type: object
+      required:
+        - ActivationState
+      title: UpdateRouteRequest
+      properties:
+        ActivationState:
+          allOf:
+            - $ref: '#/components/schemas/RouteActivationState'
+            - description: ' If set to <code>ACTIVE</code>, traffic is forwarded to this route’s service after the route is updated. '
+security:
+  - hmac: []

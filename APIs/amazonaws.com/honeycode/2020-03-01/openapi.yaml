@@ -113,6 +113,7 @@ servers:
           - cn-northwest-1
         default: cn-north-1
     description: The Honeycode endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 paths:
   '/workbooks/{workbookId}/tables/{tableId}/rows/batchcreate':
     post:
@@ -579,6 +580,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
+        '486':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
       parameters:
         - name: workbookId
           in: path
@@ -687,7 +694,7 @@ paths:
                   minLength: 36
                   maxLength: 36
                 appId:
-                  description: The ID of the app that contains the screem.
+                  description: The ID of the app that contains the screen.
                   type: string
                   pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
                   minLength: 36
@@ -787,6 +794,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RequestTimeoutException'
+        '489':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
       parameters:
         - name: workbookId
           in: path
@@ -1150,6 +1163,154 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: ' The ListTagsForResource API allows you to return a resource''s tags. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The resource's Amazon Resource Name (ARN).
+          schema:
+            type: string
+            pattern: '^arn:aws:honeycode:.+:[0-9]{12}:.+:.+$'
+            minLength: 1
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: ' The TagResource API allows you to add tags to an ARN-able resource. Resource includes workbook, table, screen and screen-automation. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The resource's Amazon Resource Name (ARN).
+          schema:
+            type: string
+            pattern: '^arn:aws:honeycode:.+:[0-9]{12}:.+:.+$'
+            minLength: 1
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: A string to string map representing tags
+                  type: object
+                  maxProperties: 100
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
   '/workbooks/{workbookId}/tables/{tableId}/rows/query':
     post:
       operationId: QueryTableRows
@@ -1321,6 +1482,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
+        '486':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+        '487':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
       parameters:
         - name: workbookId
           in: path
@@ -1383,6 +1556,87 @@ paths:
                   pattern: ^(?!\s*$).+
                   minLength: 32
                   maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: ' The UntagResource API allows you to removes tags from an ARN-able resource. Resource includes workbook, table, screen and screen-automation. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The resource's Amazon Resource Name (ARN).
+          schema:
+            type: string
+            pattern: '^arn:aws:honeycode:.+:[0-9]{12}:.+:.+$'
+            minLength: 1
+            maxLength: 256
+        - name: tagKeys
+          in: query
+          required: true
+          description: A list of tag keys to remove from the resource.
+          schema:
+            type: array
+            description: A list of tag keys
+            items:
+              $ref: '#/components/schemas/TagKey'
+            maxItems: 100
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1587,6 +1841,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TableDataImportJobMetadata'
             - description: ' The metadata about the job that was submitted for import. '
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: ' If job status is failed, error code to understand reason for the failure. '
     GetScreenDataResult:
       type: object
       required:
@@ -1687,6 +1945,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkbookCursor'
             - description: ' Indicates the cursor of the workbook at which the data returned by this request is read. Workbook cursor keeps increasing with every update and the increments are not sequential. '
+    ListTagsForResourceResult:
+      type: object
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: The resource's tags.
     QueryTableRowsResult:
       type: object
       required:
@@ -1768,6 +2033,22 @@ components:
             - $ref: '#/components/schemas/ImportDataCharacterEncoding'
             - description: The encoding of the data in the input file.
       description: ' An object that contains the options relating to parsing delimited text as part of an import request. '
+    TagResourceResult:
+      type: object
+      properties: {}
+    TagValue:
+      type: string
+      pattern: '^[^\n\r\x00\x08\x0B\x0C\x0E\x1F]*$'
+      minLength: 1
+      maxLength: 100
+    UntagResourceResult:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      pattern: '^[^\n\r\x00\x08\x0B\x0C\x0E\x1F]*$'
+      minLength: 1
+      maxLength: 100
     AwsUserArn:
       type: string
       minLength: 20
@@ -1898,6 +2179,7 @@ components:
         - ACCOUNTING
         - CONTACT
         - ROWLINK
+        - ROWSET
     RawValue:
       type: string
       pattern: '[\s\S]*'
@@ -1908,6 +2190,12 @@ components:
       pattern: '[\s\S]*'
       minLength: 0
       maxLength: 8192
+    FormattedValuesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FormattedValue'
+      minItems: 0
+      maxItems: 220
     Cell:
       type: object
       properties:
@@ -1922,11 +2210,15 @@ components:
         rawValue:
           allOf:
             - $ref: '#/components/schemas/RawValue'
-            - description: '<p> The raw value of the data contained in the cell. The raw value depends on the format of the data in the cell. However the attribute in the API return value is always a string containing the raw value. </p> <p> Cells with format DATE, DATE_TIME or TIME have the raw value as a floating point number where the whole number represents the number of days since 1/1/1900 and the fractional part represents the fraction of the day since midnight. For example, a cell with date 11/3/2020 has the raw value "44138". A cell with the time 9:00 AM has the raw value "0.375" and a cell with date/time value of 11/3/2020 9:00 AM has the raw value "44138.375". Notice that even though the raw value is a number in all three cases, it is still represented as a string. </p> <p> Cells with format NUMBER, CURRENCY, PERCENTAGE and ACCOUNTING have the raw value of the data as the number representing the data being displayed. For example, the number 1.325 with two decimal places in the format will have it''s raw value as "1.325" and formatted value as "1.33". A currency value for $10 will have the raw value as "10" and formatted value as "$10.00". A value representing 20% with two decimal places in the format will have its raw value as "0.2" and the formatted value as "20.00%". An accounting value of -$25 will have "-25" as the raw value and "$ (25.00)" as the formatted value. </p> <p> Cells with format TEXT will have the raw text as the raw value. For example, a cell with text "John Smith" will have "John Smith" as both the raw value and the formatted value. </p> <p> Cells with format CONTACT will have the name of the contact as a formatted value and the email address of the contact as the raw value. For example, a contact for John Smith will have "John Smith" as the formatted value and "john.smith@example.com" as the raw value. </p> <p> Cells with format ROWLINK (aka picklist) will have the first column of the linked row as the formatted value and the row id of the linked row as the raw value. For example, a cell containing a picklist to a table that displays task status might have "Completed" as the formatted value and "row:dfcefaee-5b37-4355-8f28-40c3e4ff5dd4/ca432b2f-b8eb-431d-9fb5-cbe0342f9f03" as the raw value. </p> <p> Cells with format AUTO or cells without any format that are auto-detected as one of the formats above will contain the raw and formatted values as mentioned above, based on the auto-detected formats. If there is no auto-detected format, the raw and formatted values will be the same as the data in the cell. </p>'
+            - description: '<p> The raw value of the data contained in the cell. The raw value depends on the format of the data in the cell. However the attribute in the API return value is always a string containing the raw value. </p> <p> Cells with format DATE, DATE_TIME or TIME have the raw value as a floating point number where the whole number represents the number of days since 1/1/1900 and the fractional part represents the fraction of the day since midnight. For example, a cell with date 11/3/2020 has the raw value "44138". A cell with the time 9:00 AM has the raw value "0.375" and a cell with date/time value of 11/3/2020 9:00 AM has the raw value "44138.375". Notice that even though the raw value is a number in all three cases, it is still represented as a string. </p> <p> Cells with format NUMBER, CURRENCY, PERCENTAGE and ACCOUNTING have the raw value of the data as the number representing the data being displayed. For example, the number 1.325 with two decimal places in the format will have it''s raw value as "1.325" and formatted value as "1.33". A currency value for $10 will have the raw value as "10" and formatted value as "$10.00". A value representing 20% with two decimal places in the format will have its raw value as "0.2" and the formatted value as "20.00%". An accounting value of -$25 will have "-25" as the raw value and "$ (25.00)" as the formatted value. </p> <p> Cells with format TEXT will have the raw text as the raw value. For example, a cell with text "John Smith" will have "John Smith" as both the raw value and the formatted value. </p> <p> Cells with format CONTACT will have the name of the contact as a formatted value and the email address of the contact as the raw value. For example, a contact for John Smith will have "John Smith" as the formatted value and "john.smith@example.com" as the raw value. </p> <p> Cells with format ROWLINK (aka picklist) will have the first column of the linked row as the formatted value and the row id of the linked row as the raw value. For example, a cell containing a picklist to a table that displays task status might have "Completed" as the formatted value and "row:dfcefaee-5b37-4355-8f28-40c3e4ff5dd4/ca432b2f-b8eb-431d-9fb5-cbe0342f9f03" as the raw value. </p> <p> Cells with format ROWSET (aka multi-select or multi-record picklist) will by default have the first column of each of the linked rows as the formatted value in the list, and the rowset id of the linked rows as the raw value. For example, a cell containing a multi-select picklist to a table that contains items might have "Item A", "Item B" in the formatted value list and "rows:b742c1f4-6cb0-4650-a845-35eb86fcc2bb/ [fdea123b-8f68-474a-aa8a-5ff87aa333af,6daf41f0-a138-4eee-89da-123086d36ecf]" as the raw value. </p> <p> Cells with format ATTACHMENT will have the name of the attachment as the formatted value and the attachment id as the raw value. For example, a cell containing an attachment named "image.jpeg" will have "image.jpeg" as the formatted value and "attachment:ca432b2f-b8eb-431d-9fb5-cbe0342f9f03" as the raw value. </p> <p> Cells with format AUTO or cells without any format that are auto-detected as one of the formats above will contain the raw and formatted values as mentioned above, based on the auto-detected formats. If there is no auto-detected format, the raw and formatted values will be the same as the data in the cell. </p>'
         formattedValue:
           allOf:
             - $ref: '#/components/schemas/FormattedValue'
             - description: '<p> The formatted value of the cell. This is the value that you see displayed in the cell in the UI. </p> <p> Note that the formatted value of a cell is always represented as a string irrespective of the data that is stored in the cell. For example, if a cell contains a date, the formatted value of the cell is the string representation of the formatted date being shown in the cell in the UI. See details in the rawValue field below for how cells of different formats will have different raw and formatted values. </p>'
+        formattedValues:
+          allOf:
+            - $ref: '#/components/schemas/FormattedValuesList'
+            - description: ' A list of formatted values of the cell. This field is only returned when the cell is ROWSET format (aka multi-select or multi-record picklist). Values in the list are always represented as strings. The formattedValue field will be empty if this field is returned. '
       description: An object that represents a single cell in a table.
     Fact:
       type: string
@@ -1934,6 +2226,12 @@ components:
       minLength: 0
       maxLength: 8192
       format: password
+    FactList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Fact'
+      minItems: 0
+      maxItems: 220
     CellInput:
       type: object
       properties:
@@ -1941,7 +2239,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/Fact'
             - description: ' Fact represents the data that is entered into a cell. This data can be free text or a formula. Formulas need to start with the equals (=) sign. '
-      description: ' CellInput object contains the data needed to create or update cells in a table. '
+        facts:
+          allOf:
+            - $ref: '#/components/schemas/FactList'
+            - description: ' A list representing the values that are entered into a ROWSET cell. Facts list can have either only values or rowIDs, and rowIDs should from the same table. '
+      description: '<p> CellInput object contains the data needed to create or update cells in a table. </p> <note> <p> CellInput object has only a facts field or a fact field, but not both. A 400 bad request will be thrown if both fact and facts field are present. </p> </note>'
     Cells:
       type: array
       items:
@@ -2051,6 +2353,23 @@ components:
             - $ref: '#/components/schemas/ImportDataSource'
             - description: The source of the data that was submitted for import.
       description: The metadata associated with the table data import job that was submitted.
+    ErrorCode:
+      type: string
+      enum:
+        - ACCESS_DENIED
+        - INVALID_URL_ERROR
+        - INVALID_IMPORT_OPTIONS_ERROR
+        - INVALID_TABLE_ID_ERROR
+        - INVALID_TABLE_COLUMN_ID_ERROR
+        - TABLE_NOT_FOUND_ERROR
+        - FILE_EMPTY_ERROR
+        - INVALID_FILE_TYPE_ERROR
+        - FILE_PARSING_ERROR
+        - FILE_SIZE_LIMIT_ERROR
+        - FILE_NOT_FOUND_ERROR
+        - UNKNOWN_ERROR
+        - RESOURCE_NOT_FOUND_ERROR
+        - SYSTEM_LIMIT_ERROR
     ImportColumnMap:
       type: object
       maxProperties: 100
@@ -2119,7 +2438,7 @@ components:
         appId:
           allOf:
             - $ref: '#/components/schemas/ResourceId'
-            - description: The ID of the app that contains the screem.
+            - description: The ID of the app that contains the screen.
         screenId:
           allOf:
             - $ref: '#/components/schemas/ResourceId'
@@ -2163,6 +2482,7 @@ components:
       pattern: '^https:\/\/[^\n\r\x00\x08\x0B\x0C\x0E\x1F]*$'
       minLength: 1
       maxLength: 8000
+      format: password
     ImportJobSubmitter:
       type: object
       properties:
@@ -2249,6 +2569,21 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Table'
+    ResourceArn:
+      type: string
+      pattern: '^arn:aws:honeycode:.+:[0-9]{12}:.+:.+$'
+      minLength: 1
+      maxLength: 256
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    TagsMap:
+      type: object
+      description: A string to string map representing tags
+      maxProperties: 100
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
     QueryTableRowsRequest:
       type: object
       required:
@@ -2382,6 +2717,26 @@ components:
             - $ref: '#/components/schemas/Cells'
             - description: 'A list of cells in the table row. The cells appear in the same order as the columns of the table. '
       description: An object that contains attributes about a single row in a table
+    TagKeysList:
+      type: array
+      description: A list of tag keys
+      items:
+        $ref: '#/components/schemas/TagKey'
+      maxItems: 100
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: A list of tags to apply to the resource.
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
     UpsertAction:
       type: string
       enum:
@@ -2405,6 +2760,8 @@ components:
     VariableName:
       type: string
       pattern: ^(?!\s*$).+
+      minLength: 1
+      maxLength: 255
       format: password
 security:
   - hmac: []

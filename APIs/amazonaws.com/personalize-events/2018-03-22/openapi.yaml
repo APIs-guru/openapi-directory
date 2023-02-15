@@ -149,6 +149,7 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 256
+                  format: password
                 sessionId:
                   description: 'The session ID associated with the user''s visit. Your application generates the sessionId when a user first visits your website or uses your application. Amazon Personalize uses the sessionId to associate events with the user before they log in. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html">Recording Events</a>.'
                   type: string
@@ -364,11 +365,15 @@ components:
         recommendationId:
           allOf:
             - $ref: '#/components/schemas/RecommendationId'
-            - description: The ID of the recommendation.
+            - description: '<p>The ID of the list of recommendations that contains the item the user interacted with. Provide a <code>recommendationId</code> to have Amazon Personalize implicitly record the recommendations you show your user as impressions data. Or provide a <code>recommendationId</code> if you use a metric attribution to measure the impact of recommendations. </p> <p> For more information on recording impressions data, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html#putevents-including-impressions-data">Recording impressions data</a>. For more information on creating a metric attribution see <a href="https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html">Measuring impact of recommendations</a>. </p>'
         impression:
           allOf:
             - $ref: '#/components/schemas/Impression'
-            - description: 'A list of item IDs that represents the sequence of items you have shown the user. For example, <code>["itemId1", "itemId2", "itemId3"]</code>.'
+            - description: 'A list of item IDs that represents the sequence of items you have shown the user. For example, <code>["itemId1", "itemId2", "itemId3"]</code>. Provide a list of items to manually record impressions data for an event. For more information on recording impressions data, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html#putevents-including-impressions-data">Recording impressions data</a>. '
+        metricAttribution:
+          allOf:
+            - $ref: '#/components/schemas/MetricAttribution'
+            - description: 'Contains information about the metric attribution associated with an event. For more information about metric attributions, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html">Measuring impact of recommendations</a>.'
       description: Represents user interaction event information sent using the <code>PutEvents</code> API.
     InvalidInputException: {}
     Item:
@@ -415,6 +420,7 @@ components:
       type: string
       minLength: 1
       maxLength: 256
+      format: password
     RecommendationId:
       type: string
       minLength: 1
@@ -425,6 +431,20 @@ components:
         $ref: '#/components/schemas/ItemId'
       minItems: 1
       maxItems: 25
+    MetricAttribution:
+      type: object
+      required:
+        - eventAttributionSource
+      properties:
+        eventAttributionSource:
+          allOf:
+            - $ref: '#/components/schemas/EventAttributionSource'
+            - description: 'The source of the event, such as a third party.'
+      description: 'Contains information about a metric attribution associated with an event. For more information about metric attributions, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html">Measuring impact of recommendations</a>.'
+    EventAttributionSource:
+      type: string
+      pattern: '^[\x20-\x7E]*[\x21-\x7E]+[\x20-\x7E]*$'
+      maxLength: 1024
     EventList:
       type: array
       items:
@@ -435,6 +455,7 @@ components:
       type: string
       minLength: 1
       maxLength: 1024
+      format: password
     ItemList:
       type: array
       items:
@@ -445,10 +466,12 @@ components:
       type: string
       minLength: 1
       maxLength: 24262
+      format: password
     UserId:
       type: string
       minLength: 1
       maxLength: 256
+      format: password
     PutEventsRequest:
       type: object
       required:
@@ -513,5 +536,6 @@ components:
       type: string
       minLength: 1
       maxLength: 4096
+      format: password
 security:
   - hmac: []

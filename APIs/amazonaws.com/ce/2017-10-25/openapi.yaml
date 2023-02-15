@@ -157,7 +157,7 @@ paths:
   /#X-Amz-Target=AWSInsightsIndexService.CreateAnomalySubscription:
     post:
       operationId: CreateAnomalySubscription
-      description: 'Adds a subscription to a cost anomaly detection monitor. You can use each subscription to define subscribers with email or SNS notifications. Email subscribers can set a dollar threshold and a time frequency for receiving notifications. '
+      description: 'Adds an alert subscription to a cost anomaly detection monitor. You can use each subscription to define subscribers with email or SNS notifications. Email subscribers can set an absolute or percentage threshold and a time frequency for receiving notifications. '
       responses:
         '200':
           description: Success
@@ -382,7 +382,7 @@ paths:
   /#X-Amz-Target=AWSInsightsIndexService.DescribeCostCategoryDefinition:
     post:
       operationId: DescribeCostCategoryDefinition
-      description: '<p>Returns the name, ARN, rules, definition, and effective dates of a Cost Category that''s defined in the account.</p> <p>You have the option to use <code>EffectiveOn</code> to return a Cost Category that is active on a specific date. If there is no <code>EffectiveOn</code> specified, you’ll see a Cost Category that is effective on the current date. If Cost Category is still effective, <code>EffectiveEnd</code> is omitted in the response. </p>'
+      description: '<p>Returns the name, Amazon Resource Name (ARN), rules, definition, and effective dates of a Cost Category that''s defined in the account.</p> <p>You have the option to use <code>EffectiveOn</code> to return a Cost Category that''s active on a specific date. If there''s no <code>EffectiveOn</code> specified, you see a Cost Category that''s effective on the current date. If Cost Category is still effective, <code>EffectiveEnd</code> is omitted in the response. </p>'
       responses:
         '200':
           description: Success
@@ -427,7 +427,7 @@ paths:
   /#X-Amz-Target=AWSInsightsIndexService.GetAnomalies:
     post:
       operationId: GetAnomalies
-      description: 'Retrieves all of the cost anomalies detected on your account during the time period that''s specified by the <code>DateInterval</code> object. '
+      description: Retrieves all of the cost anomalies detected on your account during the time period that's specified by the <code>DateInterval</code> object. Anomalies are available for up to 90 days.
       responses:
         '200':
           description: Success
@@ -637,7 +637,7 @@ paths:
   /#X-Amz-Target=AWSInsightsIndexService.GetCostAndUsageWithResources:
     post:
       operationId: GetCostAndUsageWithResources
-      description: '<p>Retrieves cost and usage metrics with resources for your account. You can specify which cost and usage-related metric, such as <code>BlendedCosts</code> or <code>UsageQuantity</code>, that you want the request to return. You can also filter and group your data by various dimensions, such as <code>SERVICE</code> or <code>AZ</code>, in a specific time range. For a complete list of valid dimensions, see the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html">GetDimensionValues</a> operation. Management account in an organization in Organizations have access to all member accounts. This API is currently available for the Amazon Elastic Compute Cloud – Compute service only.</p> <note> <p>This is an opt-in only feature. You can enable this feature from the Cost Explorer Settings page. For information on how to access the Settings page, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-access.html">Controlling Access for Cost Explorer</a> in the <i>Billing and Cost Management User Guide</i>.</p> </note>'
+      description: '<p>Retrieves cost and usage metrics with resources for your account. You can specify which cost and usage-related metric, such as <code>BlendedCosts</code> or <code>UsageQuantity</code>, that you want the request to return. You can also filter and group your data by various dimensions, such as <code>SERVICE</code> or <code>AZ</code>, in a specific time range. For a complete list of valid dimensions, see the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html">GetDimensionValues</a> operation. Management account in an organization in Organizations have access to all member accounts. This API is currently available for the Amazon Elastic Compute Cloud – Compute service only.</p> <note> <p>This is an opt-in only feature. You can enable this feature from the Cost Explorer Settings page. For information about how to access the Settings page, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-access.html">Controlling Access for Cost Explorer</a> in the <i>Billing and Cost Management User Guide</i>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -871,7 +871,7 @@ paths:
   /#X-Amz-Target=AWSInsightsIndexService.GetReservationCoverage:
     post:
       operationId: GetReservationCoverage
-      description: '<p>Retrieves the reservation coverage for your account. This enables you to see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service, or Amazon Redshift usage is covered by a reservation. An organization''s management account can see the coverage of the associated member accounts. This supports dimensions, Cost Categories, and nested expressions. For any time period, you can filter data about reservation usage by the following dimensions:</p> <ul> <li> <p>AZ</p> </li> <li> <p>CACHE_ENGINE</p> </li> <li> <p>DATABASE_ENGINE</p> </li> <li> <p>DEPLOYMENT_OPTION</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>OPERATING_SYSTEM</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>SERVICE</p> </li> <li> <p>TAG</p> </li> <li> <p>TENANCY</p> </li> </ul> <p>To determine valid values for a dimension, use the <code>GetDimensionValues</code> operation. </p>'
+      description: '<p>Retrieves the reservation coverage for your account, which you can use to see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service, or Amazon Redshift usage is covered by a reservation. An organization''s management account can see the coverage of the associated member accounts. This supports dimensions, Cost Categories, and nested expressions. For any time period, you can filter data about reservation usage by the following dimensions:</p> <ul> <li> <p>AZ</p> </li> <li> <p>CACHE_ENGINE</p> </li> <li> <p>DATABASE_ENGINE</p> </li> <li> <p>DEPLOYMENT_OPTION</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>OPERATING_SYSTEM</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>SERVICE</p> </li> <li> <p>TAG</p> </li> <li> <p>TENANCY</p> </li> </ul> <p>To determine valid values for a dimension, use the <code>GetDimensionValues</code> operation. </p>'
       responses:
         '200':
           description: Success
@@ -922,7 +922,7 @@ paths:
   /#X-Amz-Target=AWSInsightsIndexService.GetReservationPurchaseRecommendation:
     post:
       operationId: GetReservationPurchaseRecommendation
-      description: '<p>Gets recommendations for which reservations to purchase. These recommendations could help you reduce your costs. Reservations provide a discounted hourly rate (up to 75%) compared to On-Demand pricing.</p> <p>Amazon Web Services generates your recommendations by identifying your On-Demand usage during a specific time period and collecting your usage into categories that are eligible for a reservation. After Amazon Web Services has these categories, it simulates every combination of reservations in each category of usage to identify the best number of each type of RI to purchase to maximize your estimated savings. </p> <p>For example, Amazon Web Services automatically aggregates your Amazon EC2 Linux, shared tenancy, and c4 family usage in the US West (Oregon) Region and recommends that you buy size-flexible regional reservations to apply to the c4 family usage. Amazon Web Services recommends the smallest size instance in an instance family. This makes it easier to purchase a size-flexible RI. Amazon Web Services also shows the equal number of normalized units so that you can purchase any instance size that you want. For this example, your RI recommendation would be for <code>c4.large</code> because that is the smallest size instance in the c4 instance family.</p>'
+      description: '<p>Gets recommendations for reservation purchases. These recommendations might help you to reduce your costs. Reservations provide a discounted hourly rate (up to 75%) compared to On-Demand pricing.</p> <p>Amazon Web Services generates your recommendations by identifying your On-Demand usage during a specific time period and collecting your usage into categories that are eligible for a reservation. After Amazon Web Services has these categories, it simulates every combination of reservations in each category of usage to identify the best number of each type of Reserved Instance (RI) to purchase to maximize your estimated savings. </p> <p>For example, Amazon Web Services automatically aggregates your Amazon EC2 Linux, shared tenancy, and c4 family usage in the US West (Oregon) Region and recommends that you buy size-flexible regional reservations to apply to the c4 family usage. Amazon Web Services recommends the smallest size instance in an instance family. This makes it easier to purchase a size-flexible Reserved Instance (RI). Amazon Web Services also shows the equal number of normalized units. This way, you can purchase any instance size that you want. For this example, your RI recommendation is for <code>c4.large</code> because that is the smallest size instance in the c4 instance family.</p>'
       responses:
         '200':
           description: Success
@@ -1024,7 +1024,7 @@ paths:
   /#X-Amz-Target=AWSInsightsIndexService.GetRightsizingRecommendation:
     post:
       operationId: GetRightsizingRecommendation
-      description: '<p>Creates recommendations that help you save cost by identifying idle and underutilized Amazon EC2 instances.</p> <p>Recommendations are generated to either downsize or terminate instances, along with providing savings detail and metrics. For details on calculation and function, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-rightsizing.html">Optimizing Your Cost with Rightsizing Recommendations</a> in the <i>Billing and Cost Management User Guide</i>.</p>'
+      description: '<p>Creates recommendations that help you save cost by identifying idle and underutilized Amazon EC2 instances.</p> <p>Recommendations are generated to either downsize or terminate instances, along with providing savings detail and metrics. For more information about calculation and function, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-rightsizing.html">Optimizing Your Cost with Rightsizing Recommendations</a> in the <i>Billing and Cost Management User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1132,7 +1132,7 @@ paths:
   /#X-Amz-Target=AWSInsightsIndexService.GetSavingsPlansPurchaseRecommendation:
     post:
       operationId: GetSavingsPlansPurchaseRecommendation
-      description: 'Retrieves your request parameters, Savings Plan Recommendations Summary and Details. '
+      description: 'Retrieves the Savings Plans recommendations for your account. First use <code>StartSavingsPlansPurchaseRecommendationGeneration</code> to generate a new set of recommendations, and then use <code>GetSavingsPlansPurchaseRecommendation</code> to retrieve them.'
       responses:
         '200':
           description: Success
@@ -1177,7 +1177,7 @@ paths:
   /#X-Amz-Target=AWSInsightsIndexService.GetSavingsPlansUtilization:
     post:
       operationId: GetSavingsPlansUtilization
-      description: <p>Retrieves the Savings Plans utilization for your account across date ranges with daily or monthly granularity. Management account in an organization have access to member accounts. You can use <code>GetDimensionValues</code> in <code>SAVINGS_PLANS</code> to determine the possible dimension values.</p> <note> <p>You cannot group by any dimension values for <code>GetSavingsPlansUtilization</code>.</p> </note>
+      description: <p>Retrieves the Savings Plans utilization for your account across date ranges with daily or monthly granularity. Management account in an organization have access to member accounts. You can use <code>GetDimensionValues</code> in <code>SAVINGS_PLANS</code> to determine the possible dimension values.</p> <note> <p>You can't group by any dimension values for <code>GetSavingsPlansUtilization</code>.</p> </note>
       responses:
         '200':
           description: Success
@@ -1396,10 +1396,67 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSInsightsIndexService.ListCostAllocationTags:
+    post:
+      operationId: ListCostAllocationTags
+      description: 'Get a list of cost allocation tags. All inputs in the API are optional and serve as filters. By default, all cost allocation tags are returned. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCostAllocationTagsResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListCostAllocationTagsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSInsightsIndexService.ListCostAllocationTags
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSInsightsIndexService.ListCostCategoryDefinitions:
     post:
       operationId: ListCostCategoryDefinitions
-      description: 'Returns the name, ARN, <code>NumberOfRules</code> and effective dates of all Cost Categories defined in the account. You have the option to use <code>EffectiveOn</code> to return a list of Cost Categories that were active on a specific date. If there is no <code>EffectiveOn</code> specified, you’ll see Cost Categories that are effective on the current date. If Cost Category is still effective, <code>EffectiveEnd</code> is omitted in the response. <code>ListCostCategoryDefinitions</code> supports pagination. The request can have a <code>MaxResults</code> range up to 100.'
+      description: 'Returns the name, Amazon Resource Name (ARN), <code>NumberOfRules</code> and effective dates of all Cost Categories defined in the account. You have the option to use <code>EffectiveOn</code> to return a list of Cost Categories that were active on a specific date. If there is no <code>EffectiveOn</code> specified, you’ll see Cost Categories that are effective on the current date. If Cost Category is still effective, <code>EffectiveEnd</code> is omitted in the response. <code>ListCostCategoryDefinitions</code> supports pagination. The request can have a <code>MaxResults</code> range up to 100.'
       responses:
         '200':
           description: Success
@@ -1447,6 +1504,96 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSInsightsIndexService.ListSavingsPlansPurchaseRecommendationGeneration:
+    post:
+      operationId: ListSavingsPlansPurchaseRecommendationGeneration
+      description: Retrieves a list of your historical recommendation generations within the past 30 days.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSavingsPlansPurchaseRecommendationGenerationResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListSavingsPlansPurchaseRecommendationGenerationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSInsightsIndexService.ListSavingsPlansPurchaseRecommendationGeneration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSInsightsIndexService.ListTagsForResource:
+    post:
+      operationId: ListTagsForResource
+      description: 'Returns a list of resource tags associated with the resource specified by the Amazon Resource Name (ARN). '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsForResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSInsightsIndexService.ListTagsForResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSInsightsIndexService.ProvideAnomalyFeedback:
     post:
       operationId: ProvideAnomalyFeedback
@@ -1486,10 +1633,157 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSInsightsIndexService.StartSavingsPlansPurchaseRecommendationGeneration:
+    post:
+      operationId: StartSavingsPlansPurchaseRecommendationGeneration
+      description: <p>Requests a Savings Plans recommendation generation. This enables you to calculate a fresh set of Savings Plans recommendations that takes your latest usage data and current Savings Plans inventory into account. You can refresh Savings Plans recommendations up to three times daily for a consolidated billing family.</p> <note> <p> <code>StartSavingsPlansPurchaseRecommendationGeneration</code> has no request syntax because no input parameters are needed to support this operation.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartSavingsPlansPurchaseRecommendationGenerationResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: GenerationExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerationExistsException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartSavingsPlansPurchaseRecommendationGenerationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSInsightsIndexService.StartSavingsPlansPurchaseRecommendationGeneration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSInsightsIndexService.TagResource:
+    post:
+      operationId: TagResource
+      description: '<p>An API operation for adding one or more tags (key-value pairs) to a resource.</p> <p>You can use the <code>TagResource</code> operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value you specify replaces the previous value for that tag.</p> <p>Although the maximum number of array members is 200, user-tag maximum is 50. The remaining are reserved for Amazon Web Services use.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSInsightsIndexService.TagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSInsightsIndexService.UntagResource:
+    post:
+      operationId: UntagResource
+      description: 'Removes one or more tags from a resource. Specify only tag keys in your request. Don''t specify the value. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UntagResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSInsightsIndexService.UntagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSInsightsIndexService.UpdateAnomalyMonitor:
     post:
       operationId: UpdateAnomalyMonitor
-      description: 'Updates an existing cost anomaly monitor. The changes made are applied going forward, and doesn''tt change anomalies detected in the past. '
+      description: 'Updates an existing cost anomaly monitor. The changes made are applied going forward, and doesn''t change anomalies detected in the past. '
       responses:
         '200':
           description: Success
@@ -1574,6 +1868,45 @@ paths:
             type: string
             enum:
               - AWSInsightsIndexService.UpdateAnomalySubscription
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSInsightsIndexService.UpdateCostAllocationTagsStatus:
+    post:
+      operationId: UpdateCostAllocationTagsStatus
+      description: 'Updates status for cost allocation tags in bulk, with maximum batch size of 20. If the tag status that''s updated is the same as the existing tag status, the request doesn''t fail. Instead, it doesn''t have any effect on the tag status (for example, activating the active tag). '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateCostAllocationTagsStatusResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCostAllocationTagsStatusRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSInsightsIndexService.UpdateCostAllocationTagsStatus
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1704,6 +2037,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AnomalyMonitor'
             - description: The cost anomaly detection monitor object that you want to create.
+        ResourceTags:
+          allOf:
+            - $ref: '#/components/schemas/ResourceTagList'
+            - description: '<p>An optional list of tags to associate with the specified <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalyMonitor.html"> <code>AnomalyMonitor</code> </a>. You can use resource tags to control access to your <code>monitor</code> using IAM policies.</p> <p>Each tag consists of a key and a value, and each key must be unique for the resource. The following restrictions apply to resource tags:</p> <ul> <li> <p>Although the maximum number of array members is 200, you can assign a maximum of 50 user-tags to one resource. The remaining are reserved for Amazon Web Services use</p> </li> <li> <p>The maximum length of a key is 128 characters</p> </li> <li> <p>The maximum length of a value is 256 characters</p> </li> <li> <p>Keys and values can only contain alphanumeric characters, spaces, and any of the following: <code>_.:/=+@-</code> </p> </li> <li> <p>Keys and values are case sensitive</p> </li> <li> <p>Keys and values are trimmed for any leading or trailing whitespaces</p> </li> <li> <p>Don’t use <code>aws:</code> as a prefix for your keys. This prefix is reserved for Amazon Web Services use</p> </li> </ul>'
     LimitExceededException: {}
     CreateAnomalySubscriptionResponse:
       type: object
@@ -1724,6 +2061,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AnomalySubscription'
             - description: 'The cost anomaly subscription object that you want to create. '
+        ResourceTags:
+          allOf:
+            - $ref: '#/components/schemas/ResourceTagList'
+            - description: '<p>An optional list of tags to associate with the specified <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html"> <code>AnomalySubscription</code> </a>. You can use resource tags to control access to your <code>subscription</code> using IAM policies.</p> <p>Each tag consists of a key and a value, and each key must be unique for the resource. The following restrictions apply to resource tags:</p> <ul> <li> <p>Although the maximum number of array members is 200, you can assign a maximum of 50 user-tags to one resource. The remaining are reserved for Amazon Web Services use</p> </li> <li> <p>The maximum length of a key is 128 characters</p> </li> <li> <p>The maximum length of a value is 256 characters</p> </li> <li> <p>Keys and values can only contain alphanumeric characters, spaces, and any of the following: <code>_.:/=+@-</code> </p> </li> <li> <p>Keys and values are case sensitive</p> </li> <li> <p>Keys and values are trimmed for any leading or trailing whitespaces</p> </li> <li> <p>Don’t use <code>aws:</code> as a prefix for your keys. This prefix is reserved for Amazon Web Services use</p> </li> </ul>'
     UnknownMonitorException: {}
     CreateCostCategoryDefinitionResponse:
       type: object
@@ -1731,11 +2072,11 @@ components:
         CostCategoryArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: ' The unique identifier for your newly created Cost Category. '
+            - description: 'The unique identifier for your newly created Cost Category. '
         EffectiveStart:
           allOf:
             - $ref: '#/components/schemas/ZonedDateTime'
-            - description: ' The Cost Category''s effective start date. '
+            - description: The Cost Category's effective start date. It can only be a billing start date (first day of the month).
     CreateCostCategoryDefinitionRequest:
       type: object
       required:
@@ -1746,6 +2087,10 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/CostCategoryName'
+        EffectiveStart:
+          allOf:
+            - $ref: '#/components/schemas/ZonedDateTime'
+            - description: 'The Cost Category''s effective start date. It can only be a billing start date (first day of the month). If the date isn''t provided, it''s the first day of the current month. Dates can''t be before the previous twelve months, or in the future.'
         RuleVersion:
           $ref: '#/components/schemas/CostCategoryRuleVersion'
         Rules:
@@ -1758,6 +2103,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CostCategorySplitChargeRulesList'
             - description: ' The split charge rules used to allocate your charges between your Cost Category values. '
+        ResourceTags:
+          allOf:
+            - $ref: '#/components/schemas/ResourceTagList'
+            - description: '<p>An optional list of tags to associate with the specified <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategory.html"> <code>CostCategory</code> </a>. You can use resource tags to control access to your <code>cost category</code> using IAM policies.</p> <p>Each tag consists of a key and a value, and each key must be unique for the resource. The following restrictions apply to resource tags:</p> <ul> <li> <p>Although the maximum number of array members is 200, you can assign a maximum of 50 user-tags to one resource. The remaining are reserved for Amazon Web Services use</p> </li> <li> <p>The maximum length of a key is 128 characters</p> </li> <li> <p>The maximum length of a value is 256 characters</p> </li> <li> <p>Keys and values can only contain alphanumeric characters, spaces, and any of the following: <code>_.:/=+@-</code> </p> </li> <li> <p>Keys and values are case sensitive</p> </li> <li> <p>Keys and values are trimmed for any leading or trailing whitespaces</p> </li> <li> <p>Don’t use <code>aws:</code> as a prefix for your keys. This prefix is reserved for Amazon Web Services use</p> </li> </ul>'
     ServiceQuotaExceededException: {}
     DeleteAnomalyMonitorResponse:
       type: object
@@ -1792,11 +2141,11 @@ components:
         CostCategoryArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: ' The unique identifier for your Cost Category. '
+            - description: 'The unique identifier for your Cost Category. '
         EffectiveEnd:
           allOf:
             - $ref: '#/components/schemas/ZonedDateTime'
-            - description: ' The effective end date of the Cost Category as a result of deleting it. No costs after this date will be categorized by the deleted Cost Category. '
+            - description: 'The effective end date of the Cost Category as a result of deleting it. No costs after this date is categorized by the deleted Cost Category. '
     DeleteCostCategoryDefinitionRequest:
       type: object
       required:
@@ -1806,7 +2155,7 @@ components:
         CostCategoryArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: ' The unique identifier for your Cost Category. '
+            - description: 'The unique identifier for your Cost Category. '
     ResourceNotFoundException: {}
     DescribeCostCategoryDefinitionResponse:
       type: object
@@ -1822,11 +2171,11 @@ components:
         CostCategoryArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: ' The unique identifier for your Cost Category. '
+            - description: 'The unique identifier for your Cost Category. '
         EffectiveOn:
           allOf:
             - $ref: '#/components/schemas/ZonedDateTime'
-            - description: ' The date when the Cost Category was effective. '
+            - description: 'The date when the Cost Category was effective. '
     GetAnomaliesResponse:
       type: object
       required:
@@ -1971,7 +2320,7 @@ components:
         Filter:
           allOf:
             - $ref: '#/components/schemas/Expression'
-            - description: 'Filters Amazon Web Services costs by different dimensions. For example, you can specify <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> and get the costs that are associated with that account''s usage of that service. You can nest <code>Expression</code> objects to define any combination of dimension filters. For more information, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a>. '
+            - description: '<p>Filters Amazon Web Services costs by different dimensions. For example, you can specify <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> and get the costs that are associated with that account''s usage of that service. You can nest <code>Expression</code> objects to define any combination of dimension filters. For more information, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a>. </p> <p>Valid values for <code>MatchOptions</code> for <code>Dimensions</code> are <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.</p> <p>Valid values for <code>MatchOptions</code> for <code>CostCategories</code> and <code>Tags</code> are <code>EQUALS</code>, <code>ABSENT</code>, and <code>CASE_SENSITIVE</code>. Default values are <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.</p>'
         Metrics:
           allOf:
             - $ref: '#/components/schemas/MetricNames'
@@ -1979,7 +2328,7 @@ components:
         GroupBy:
           allOf:
             - $ref: '#/components/schemas/GroupDefinitions'
-            - description: '<p>You can group Amazon Web Services costs using up to two different groups, either dimensions, tag keys, cost categories, or any two group by types.</p> <p>Valid values for the <code>DIMENSION</code> type are <code>AZ</code>, <code>INSTANCE_TYPE</code>, <code>LEGAL_ENTITY_NAME</code>, <code>LINKED_ACCOUNT</code>, <code>OPERATION</code>, <code>PLATFORM</code>, <code>PURCHASE_TYPE</code>, <code>SERVICE</code>, <code>TENANCY</code>, <code>RECORD_TYPE</code>, and <code>USAGE_TYPE</code>.</p> <p>When you group by the <code>TAG</code> type and include a valid tag key, you get all tag values, including empty strings.</p>'
+            - description: '<p>You can group Amazon Web Services costs using up to two different groups, either dimensions, tag keys, cost categories, or any two group by types.</p> <p>Valid values for the <code>DIMENSION</code> type are <code>AZ</code>, <code>INSTANCE_TYPE</code>, <code>LEGAL_ENTITY_NAME</code>, <code>INVOICING_ENTITY</code>, <code>LINKED_ACCOUNT</code>, <code>OPERATION</code>, <code>PLATFORM</code>, <code>PURCHASE_TYPE</code>, <code>SERVICE</code>, <code>TENANCY</code>, <code>RECORD_TYPE</code>, and <code>USAGE_TYPE</code>.</p> <p>When you group by the <code>TAG</code> type and include a valid tag key, you get all tag values, including empty strings.</p>'
         NextPageToken:
           allOf:
             - $ref: '#/components/schemas/NextPageToken'
@@ -2001,7 +2350,7 @@ components:
         ResultsByTime:
           allOf:
             - $ref: '#/components/schemas/ResultsByTime'
-            - description: The time period that is covered by the results in the response.
+            - description: The time period that's covered by the results in the response.
         DimensionValueAttributes:
           allOf:
             - $ref: '#/components/schemas/DimensionValuesWithAttributesList'
@@ -2025,11 +2374,11 @@ components:
         Filter:
           allOf:
             - $ref: '#/components/schemas/Expression'
-            - description: '<p>Filters Amazon Web Services costs by different dimensions. For example, you can specify <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> and get the costs that are associated with that account''s usage of that service. You can nest <code>Expression</code> objects to define any combination of dimension filters. For more information, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a>. </p> <p>The <code>GetCostAndUsageWithResources</code> operation requires that you either group by or filter by a <code>ResourceId</code>. It requires the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> <code>"SERVICE = Amazon Elastic Compute Cloud - Compute"</code> in the filter.</p>'
+            - description: '<p>Filters Amazon Web Services costs by different dimensions. For example, you can specify <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> and get the costs that are associated with that account''s usage of that service. You can nest <code>Expression</code> objects to define any combination of dimension filters. For more information, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a>. </p> <p>The <code>GetCostAndUsageWithResources</code> operation requires that you either group by or filter by a <code>ResourceId</code>. It requires the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> <code>"SERVICE = Amazon Elastic Compute Cloud - Compute"</code> in the filter.</p> <p>Valid values for <code>MatchOptions</code> for <code>Dimensions</code> are <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.</p> <p>Valid values for <code>MatchOptions</code> for <code>CostCategories</code> and <code>Tags</code> are <code>EQUALS</code>, <code>ABSENT</code>, and <code>CASE_SENSITIVE</code>. Default values are <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.</p>'
         Metrics:
           allOf:
             - $ref: '#/components/schemas/MetricNames'
-            - description: '<p>Which metrics are returned in the query. For more information about blended and unblended rates, see <a href="http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/">Why does the "blended" annotation appear on some line items in my bill?</a>. </p> <p>Valid values are <code>AmortizedCost</code>, <code>BlendedCost</code>, <code>NetAmortizedCost</code>, <code>NetUnblendedCost</code>, <code>NormalizedUsageAmount</code>, <code>UnblendedCost</code>, and <code>UsageQuantity</code>. </p> <note> <p>If you return the <code>UsageQuantity</code> metric, the service aggregates all usage numbers without taking the units into account. For example, if you aggregate <code>usageQuantity</code> across all of Amazon EC2, the results aren''t meaningful because Amazon EC2 compute hours and data transfer are measured in different units (for example, hours vs. GB). To get more meaningful <code>UsageQuantity</code> metrics, filter by <code>UsageType</code> or <code>UsageTypeGroups</code>. </p> </note> <p> <code>Metrics</code> is required for <code>GetCostAndUsageWithResources</code> requests.</p>'
+            - description: '<p>Which metrics are returned in the query. For more information about blended and unblended rates, see <a href="http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/">Why does the "blended" annotation appear on some line items in my bill?</a>. </p> <p>Valid values are <code>AmortizedCost</code>, <code>BlendedCost</code>, <code>NetAmortizedCost</code>, <code>NetUnblendedCost</code>, <code>NormalizedUsageAmount</code>, <code>UnblendedCost</code>, and <code>UsageQuantity</code>. </p> <note> <p>If you return the <code>UsageQuantity</code> metric, the service aggregates all usage numbers without taking the units into account. For example, if you aggregate <code>usageQuantity</code> across all of Amazon EC2, the results aren''t meaningful because Amazon EC2 compute hours and data transfer are measured in different units (for example, hour or GB). To get more meaningful <code>UsageQuantity</code> metrics, filter by <code>UsageType</code> or <code>UsageTypeGroups</code>. </p> </note> <p> <code>Metrics</code> is required for <code>GetCostAndUsageWithResources</code> requests.</p>'
         GroupBy:
           allOf:
             - $ref: '#/components/schemas/GroupDefinitions'
@@ -2047,7 +2396,7 @@ components:
         NextPageToken:
           allOf:
             - $ref: '#/components/schemas/NextPageToken'
-            - description: 'If the number of objects that are still available for retrieval exceeds the limit, Amazon Web Services returns a NextPageToken value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.'
+            - description: 'If the number of objects that are still available for retrieval exceeds the quota, Amazon Web Services returns a NextPageToken value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.'
         CostCategoryNames:
           allOf:
             - $ref: '#/components/schemas/CostCategoryNamesList'
@@ -2055,11 +2404,11 @@ components:
         CostCategoryValues:
           allOf:
             - $ref: '#/components/schemas/CostCategoryValuesList'
-            - description: <p>The Cost Category values.</p> <p> <code>CostCategoryValues</code> are not returned if <code>CostCategoryName</code> is not specified in the request. </p>
+            - description: '<p>The Cost Category values.</p> <p>If the <code>CostCategoryName</code> key isn''t specified in the request, the <code>CostCategoryValues</code> fields aren''t returned. </p>'
         ReturnSize:
           allOf:
             - $ref: '#/components/schemas/PageSize'
-            - description: The number of objects returned.
+            - description: The number of objects that are returned.
         TotalSize:
           allOf:
             - $ref: '#/components/schemas/PageSize'
@@ -2073,7 +2422,7 @@ components:
         SearchString:
           allOf:
             - $ref: '#/components/schemas/SearchString'
-            - description: '<p>The value that you want to search the filter values for.</p> <p>If you do not specify a <code>CostCategoryName</code>, <code>SearchString</code> will be used to filter Cost Category names that match the <code>SearchString</code> pattern. If you do specifiy a <code>CostCategoryName</code>, <code>SearchString</code> will be used to filter Cost Category values that match the <code>SearchString</code> pattern.</p>'
+            - description: '<p>The value that you want to search the filter values for.</p> <p>If you don''t specify a <code>CostCategoryName</code>, <code>SearchString</code> is used to filter Cost Category names that match the <code>SearchString</code> pattern. If you specify a <code>CostCategoryName</code>, <code>SearchString</code> is used to filter Cost Category values that match the <code>SearchString</code> pattern.</p>'
         TimePeriod:
           $ref: '#/components/schemas/DateInterval'
         CostCategoryName:
@@ -2083,15 +2432,15 @@ components:
         SortBy:
           allOf:
             - $ref: '#/components/schemas/SortDefinitions'
-            - description: '<p>The value by which you want to sort the data.</p> <p>The key represents cost and usage metrics. The following values are supported:</p> <ul> <li> <p> <code>BlendedCost</code> </p> </li> <li> <p> <code>UnblendedCost</code> </p> </li> <li> <p> <code>AmortizedCost</code> </p> </li> <li> <p> <code>NetAmortizedCost</code> </p> </li> <li> <p> <code>NetUnblendedCost</code> </p> </li> <li> <p> <code>UsageQuantity</code> </p> </li> <li> <p> <code>NormalizedUsageAmount</code> </p> </li> </ul> <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p> <p>When using <code>SortBy</code>, <code>NextPageToken</code> and <code>SearchString</code> are not supported.</p>'
+            - description: '<p>The value that you sort the data by.</p> <p>The key represents the cost and usage metrics. The following values are supported:</p> <ul> <li> <p> <code>BlendedCost</code> </p> </li> <li> <p> <code>UnblendedCost</code> </p> </li> <li> <p> <code>AmortizedCost</code> </p> </li> <li> <p> <code>NetAmortizedCost</code> </p> </li> <li> <p> <code>NetUnblendedCost</code> </p> </li> <li> <p> <code>UsageQuantity</code> </p> </li> <li> <p> <code>NormalizedUsageAmount</code> </p> </li> </ul> <p>The supported key values for the <code>SortOrder</code> value are <code>ASCENDING</code> and <code>DESCENDING</code>.</p> <p>When you use the <code>SortBy</code> value, the <code>NextPageToken</code> and <code>SearchString</code> key values aren''t supported.</p>'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: '<p>This field is only used when <code>SortBy</code> is provided in the request.</p> <p>The maximum number of objects that to be returned for this request. If <code>MaxResults</code> is not specified with <code>SortBy</code>, the request will return 1000 results as the default value for this parameter.</p> <p>For <code>GetCostCategories</code>, MaxResults has an upper limit of 1000.</p>'
+            - description: '<p>This field is only used when the <code>SortBy</code> value is provided in the request.</p> <p>The maximum number of objects that are returned for this request. If <code>MaxResults</code> isn''t specified with the <code>SortBy</code> value, the request returns 1000 results as the default value for this parameter.</p> <p>For <code>GetCostCategories</code>, MaxResults has an upper quota of 1000.</p>'
         NextPageToken:
           allOf:
             - $ref: '#/components/schemas/NextPageToken'
-            - description: 'If the number of objects that are still available for retrieval exceeds the limit, Amazon Web Services returns a NextPageToken value in the response. To retrieve the next batch of objects, provide the NextPageToken from the prior call in your next request.'
+            - description: 'If the number of objects that are still available for retrieval exceeds the quota, Amazon Web Services returns a NextPageToken value in the response. To retrieve the next batch of objects, provide the NextPageToken from the previous call in your next request.'
     GetCostForecastResponse:
       type: object
       properties:
@@ -2141,7 +2490,7 @@ components:
         DimensionValues:
           allOf:
             - $ref: '#/components/schemas/DimensionValuesWithAttributesList'
-            - description: '<p>The filters that you used to filter your request. Some dimensions are available only for a specific context.</p> <p>If you set the context to <code>COST_AND_USAGE</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.</p> </li> <li> <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p> </li> <li> <p>LEGAL_ENTITY_NAME - The name of the organization that sells you Amazon Web Services services, such as Amazon Web Services.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.</p> </li> <li> <p>OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.</p> </li> <li> <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and <code>CreateBucket</code>.</p> </li> <li> <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p> </li> <li> <p>PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.</p> </li> <li> <p>SERVICE - The Amazon Web Services service such as Amazon DynamoDB.</p> </li> <li> <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the <code>GetDimensionValues</code> operation includes a unit attribute. Examples include GB and Hrs.</p> </li> <li> <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.</p> </li> <li> <p>RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.</p> </li> <li> <p>RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in feature only available for last 14 days for EC2-Compute Service.</p> </li> </ul> <p>If you set the context to <code>RESERVATIONS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.</p> </li> <li> <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p> </li> <li> <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.</p> </li> <li> <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p> </li> <li> <p>REGION - The Amazon Web Services Region.</p> </li> <li> <p>SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.</p> </li> <li> <p>TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).</p> </li> <li> <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p> </li> </ul> <p>If you set the context to <code>SAVINGS_PLANS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)</p> </li> <li> <p>PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All Upfront)</p> </li> <li> <p>REGION - The Amazon Web Services Region.</p> </li> <li> <p>INSTANCE_TYPE_FAMILY - The family of instances (For example, <code>m5</code>)</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.</p> </li> <li> <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan</p> </li> </ul>'
+            - description: '<p>The filters that you used to filter your request. Some dimensions are available only for a specific context.</p> <p>If you set the context to <code>COST_AND_USAGE</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.</p> </li> <li> <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p> </li> <li> <p>LEGAL_ENTITY_NAME - The name of the organization that sells you Amazon Web Services services, such as Amazon Web Services.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.</p> </li> <li> <p>OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.</p> </li> <li> <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and <code>CreateBucket</code>.</p> </li> <li> <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p> </li> <li> <p>PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.</p> </li> <li> <p>SERVICE - The Amazon Web Services service such as Amazon DynamoDB.</p> </li> <li> <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the <code>GetDimensionValues</code> operation includes a unit attribute. Examples include GB and Hrs.</p> </li> <li> <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.</p> </li> <li> <p>RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.</p> </li> <li> <p>RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in feature only available for last 14 days for EC2-Compute Service. You can opt-in by enabling <code>Hourly</code> and <code>Resource Level Data</code> in Cost Management Console preferences.</p> </li> </ul> <p>If you set the context to <code>RESERVATIONS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.</p> </li> <li> <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p> </li> <li> <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.</p> </li> <li> <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p> </li> <li> <p>REGION - The Amazon Web Services Region.</p> </li> <li> <p>SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.</p> </li> <li> <p>TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).</p> </li> <li> <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p> </li> </ul> <p>If you set the context to <code>SAVINGS_PLANS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)</p> </li> <li> <p>PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All Upfront)</p> </li> <li> <p>REGION - The Amazon Web Services Region.</p> </li> <li> <p>INSTANCE_TYPE_FAMILY - The family of instances (For example, <code>m5</code>)</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.</p> </li> <li> <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan</p> </li> </ul>'
         ReturnSize:
           allOf:
             - $ref: '#/components/schemas/PageSize'
@@ -2172,21 +2521,21 @@ components:
         Dimension:
           allOf:
             - $ref: '#/components/schemas/Dimension'
-            - description: 'The name of the dimension. Each <code>Dimension</code> is available for a different <code>Context</code>. For more information, see <code>Context</code>. '
+            - description: 'The name of the dimension. Each <code>Dimension</code> is available for a different <code>Context</code>. For more information, see <code>Context</code>. <code>LINK_ACCOUNT_NAME</code> and <code>SERVICE_CODE</code> can only be used in <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/AAPI_CostCategoryRule.html">CostCategoryRule</a>. '
         Context:
           allOf:
             - $ref: '#/components/schemas/Context'
-            - description: '<p>The context for the call to <code>GetDimensionValues</code>. This can be <code>RESERVATIONS</code> or <code>COST_AND_USAGE</code>. The default value is <code>COST_AND_USAGE</code>. If the context is set to <code>RESERVATIONS</code>, the resulting dimension values can be used in the <code>GetReservationUtilization</code> operation. If the context is set to <code>COST_AND_USAGE</code>, the resulting dimension values can be used in the <code>GetCostAndUsage</code> operation.</p> <p>If you set the context to <code>COST_AND_USAGE</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.</p> </li> <li> <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p> </li> <li> <p>LEGAL_ENTITY_NAME - The name of the organization that sells you Amazon Web Services services, such as Amazon Web Services.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.</p> </li> <li> <p>OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.</p> </li> <li> <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and <code>CreateBucket</code>.</p> </li> <li> <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p> </li> <li> <p>PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.</p> </li> <li> <p>SERVICE - The Amazon Web Services service such as Amazon DynamoDB.</p> </li> <li> <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the <code>GetDimensionValues</code> operation includes a unit attribute. Examples include GB and Hrs.</p> </li> <li> <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.</p> </li> <li> <p>REGION - The Amazon Web Services Region.</p> </li> <li> <p>RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.</p> </li> <li> <p>RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in feature only available for last 14 days for EC2-Compute Service.</p> </li> </ul> <p>If you set the context to <code>RESERVATIONS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.</p> </li> <li> <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p> </li> <li> <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.</p> </li> <li> <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p> </li> <li> <p>REGION - The Amazon Web Services Region.</p> </li> <li> <p>SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.</p> </li> <li> <p>TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).</p> </li> <li> <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p> </li> </ul> <p>If you set the context to <code>SAVINGS_PLANS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)</p> </li> <li> <p>PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All Upfront)</p> </li> <li> <p>REGION - The Amazon Web Services Region.</p> </li> <li> <p>INSTANCE_TYPE_FAMILY - The family of instances (For example, <code>m5</code>)</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.</p> </li> <li> <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan</p> </li> </ul>'
+            - description: '<p>The context for the call to <code>GetDimensionValues</code>. This can be <code>RESERVATIONS</code> or <code>COST_AND_USAGE</code>. The default value is <code>COST_AND_USAGE</code>. If the context is set to <code>RESERVATIONS</code>, the resulting dimension values can be used in the <code>GetReservationUtilization</code> operation. If the context is set to <code>COST_AND_USAGE</code>, the resulting dimension values can be used in the <code>GetCostAndUsage</code> operation.</p> <p>If you set the context to <code>COST_AND_USAGE</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>BILLING_ENTITY - The Amazon Web Services seller that your account is with. Possible values are the following:</p> <p>- Amazon Web Services(Amazon Web Services): The entity that sells Amazon Web Services.</p> <p>- AISPL (Amazon Internet Services Pvt. Ltd.): The local Indian entity that''s an acting reseller for Amazon Web Services in India.</p> <p>- Amazon Web Services Marketplace: The entity that supports the sale of solutions that are built on Amazon Web Services by third-party software providers.</p> </li> <li> <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.</p> </li> <li> <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p> </li> <li> <p>DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.</p> </li> <li> <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p> </li> <li> <p>INSTANCE_TYPE_FAMILY - A family of instance types optimized to fit different use cases. Examples are <code>Compute Optimized</code> (for example, <code>C4</code>, <code>C5</code>, <code>C6g</code>, and <code>C7g</code>), <code>Memory Optimization</code> (for example, <code>R4</code>, <code>R5n</code>, <code>R5b</code>, and <code>R6g</code>).</p> </li> <li> <p>INVOICING_ENTITY - The name of the entity that issues the Amazon Web Services invoice.</p> </li> <li> <p>LEGAL_ENTITY_NAME - The name of the organization that sells you Amazon Web Services services, such as Amazon Web Services.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.</p> </li> <li> <p>OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.</p> </li> <li> <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and <code>CreateBucket</code>.</p> </li> <li> <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p> </li> <li> <p>PURCHASE_TYPE - The reservation type of the purchase that this usage is related to. Examples include On-Demand Instances and Standard Reserved Instances.</p> </li> <li> <p>RESERVATION_ID - The unique identifier for an Amazon Web Services Reservation Instance.</p> </li> <li> <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plans.</p> </li> <li> <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute).</p> </li> <li> <p>SERVICE - The Amazon Web Services service such as Amazon DynamoDB.</p> </li> <li> <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p> </li> <li> <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the <code>GetDimensionValues</code> operation includes a unit attribute. Examples include GB and Hrs.</p> </li> <li> <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.</p> </li> <li> <p>REGION - The Amazon Web Services Region.</p> </li> <li> <p>RECORD_TYPE - The different types of charges such as Reserved Instance (RI) fees, usage costs, tax refunds, and credits.</p> </li> <li> <p>RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in feature only available for last 14 days for EC2-Compute Service.</p> </li> </ul> <p>If you set the context to <code>RESERVATIONS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.</p> </li> <li> <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p> </li> <li> <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.</p> </li> <li> <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p> </li> <li> <p>REGION - The Amazon Web Services Region.</p> </li> <li> <p>SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.</p> </li> <li> <p>TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).</p> </li> <li> <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p> </li> </ul> <p>If you set the context to <code>SAVINGS_PLANS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)</p> </li> <li> <p>PAYMENT_OPTION - The payment option for the given Savings Plans (for example, All Upfront)</p> </li> <li> <p>REGION - The Amazon Web Services Region.</p> </li> <li> <p>INSTANCE_TYPE_FAMILY - The family of instances (For example, <code>m5</code>)</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.</p> </li> <li> <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plans.</p> </li> </ul>'
         Filter:
           $ref: '#/components/schemas/Expression'
         SortBy:
           allOf:
             - $ref: '#/components/schemas/SortDefinitions'
-            - description: '<p>The value by which you want to sort the data.</p> <p>The key represents cost and usage metrics. The following values are supported:</p> <ul> <li> <p> <code>BlendedCost</code> </p> </li> <li> <p> <code>UnblendedCost</code> </p> </li> <li> <p> <code>AmortizedCost</code> </p> </li> <li> <p> <code>NetAmortizedCost</code> </p> </li> <li> <p> <code>NetUnblendedCost</code> </p> </li> <li> <p> <code>UsageQuantity</code> </p> </li> <li> <p> <code>NormalizedUsageAmount</code> </p> </li> </ul> <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p> <p>When you specify a <code>SortBy</code> paramater, the context must be <code>COST_AND_USAGE</code>. Further, when using <code>SortBy</code>, <code>NextPageToken</code> and <code>SearchString</code> are not supported.</p>'
+            - description: '<p>The value that you want to sort the data by.</p> <p>The key represents cost and usage metrics. The following values are supported:</p> <ul> <li> <p> <code>BlendedCost</code> </p> </li> <li> <p> <code>UnblendedCost</code> </p> </li> <li> <p> <code>AmortizedCost</code> </p> </li> <li> <p> <code>NetAmortizedCost</code> </p> </li> <li> <p> <code>NetUnblendedCost</code> </p> </li> <li> <p> <code>UsageQuantity</code> </p> </li> <li> <p> <code>NormalizedUsageAmount</code> </p> </li> </ul> <p>The supported values for the <code>SortOrder</code> key are <code>ASCENDING</code> or <code>DESCENDING</code>.</p> <p>When you specify a <code>SortBy</code> paramater, the context must be <code>COST_AND_USAGE</code>. Further, when using <code>SortBy</code>, <code>NextPageToken</code> and <code>SearchString</code> aren''t supported.</p>'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: '<p>This field is only used when SortBy is provided in the request. The maximum number of objects that to be returned for this request. If MaxResults is not specified with SortBy, the request will return 1000 results as the default value for this parameter.</p> <p>For <code>GetDimensionValues</code>, MaxResults has an upper limit of 1000.</p>'
+            - description: '<p>This field is only used when SortBy is provided in the request. The maximum number of objects that are returned for this request. If MaxResults isn''t specified with SortBy, the request returns 1000 results as the default value for this parameter.</p> <p>For <code>GetDimensionValues</code>, MaxResults has an upper limit of 1000.</p>'
         NextPageToken:
           allOf:
             - $ref: '#/components/schemas/NextPageToken'
@@ -2221,7 +2570,7 @@ components:
         GroupBy:
           allOf:
             - $ref: '#/components/schemas/GroupDefinitions'
-            - description: '<p>You can group the data by the following attributes:</p> <ul> <li> <p>AZ</p> </li> <li> <p>CACHE_ENGINE</p> </li> <li> <p>DATABASE_ENGINE</p> </li> <li> <p>DEPLOYMENT_OPTION</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>OPERATING_SYSTEM</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>TENANCY</p> </li> </ul>'
+            - description: '<p>You can group the data by the following attributes:</p> <ul> <li> <p>AZ</p> </li> <li> <p>CACHE_ENGINE</p> </li> <li> <p>DATABASE_ENGINE</p> </li> <li> <p>DEPLOYMENT_OPTION</p> </li> <li> <p>INSTANCE_TYPE</p> </li> <li> <p>INVOICING_ENTITY</p> </li> <li> <p>LINKED_ACCOUNT</p> </li> <li> <p>OPERATING_SYSTEM</p> </li> <li> <p>PLATFORM</p> </li> <li> <p>REGION</p> </li> <li> <p>TENANCY</p> </li> </ul>'
         Granularity:
           allOf:
             - $ref: '#/components/schemas/Granularity'
@@ -2271,7 +2620,7 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: 'The account ID that is associated with the recommendation. '
+            - description: 'The account ID that''s associated with the recommendation. '
         Service:
           allOf:
             - $ref: '#/components/schemas/GenericString'
@@ -2314,11 +2663,11 @@ components:
         UtilizationsByTime:
           allOf:
             - $ref: '#/components/schemas/UtilizationsByTime'
-            - description: The amount of time that you used your RIs.
+            - description: The amount of time that you used your Reserved Instances (RIs).
         Total:
           allOf:
             - $ref: '#/components/schemas/ReservationAggregates'
-            - description: The total amount of time that you used your RIs.
+            - description: The total amount of time that you used your Reserved Instances (RIs).
         NextPageToken:
           allOf:
             - $ref: '#/components/schemas/NextPageToken'
@@ -2332,7 +2681,7 @@ components:
         TimePeriod:
           allOf:
             - $ref: '#/components/schemas/DateInterval'
-            - description: 'Sets the start and end dates for retrieving RI utilization. The start date is inclusive, but the end date is exclusive. For example, if <code>start</code> is <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and usage data is retrieved from <code>2017-01-01</code> up to and including <code>2017-04-30</code> but not including <code>2017-05-01</code>. '
+            - description: 'Sets the start and end dates for retrieving Reserved Instance (RI) utilization. The start date is inclusive, but the end date is exclusive. For example, if <code>start</code> is <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and usage data is retrieved from <code>2017-01-01</code> up to and including <code>2017-04-30</code> but not including <code>2017-05-01</code>. '
         GroupBy:
           allOf:
             - $ref: '#/components/schemas/GroupDefinitions'
@@ -2348,7 +2697,7 @@ components:
         SortBy:
           allOf:
             - $ref: '#/components/schemas/SortDefinition'
-            - description: '<p>The value by which you want to sort the data.</p> <p>The following values are supported for <code>Key</code>:</p> <ul> <li> <p> <code>UtilizationPercentage</code> </p> </li> <li> <p> <code>UtilizationPercentageInUnits</code> </p> </li> <li> <p> <code>PurchasedHours</code> </p> </li> <li> <p> <code>PurchasedUnits</code> </p> </li> <li> <p> <code>TotalActualHours</code> </p> </li> <li> <p> <code>TotalActualUnits</code> </p> </li> <li> <p> <code>UnusedHours</code> </p> </li> <li> <p> <code>UnusedUnits</code> </p> </li> <li> <p> <code>OnDemandCostOfRIHoursUsed</code> </p> </li> <li> <p> <code>NetRISavings</code> </p> </li> <li> <p> <code>TotalPotentialRISavings</code> </p> </li> <li> <p> <code>AmortizedUpfrontFee</code> </p> </li> <li> <p> <code>AmortizedRecurringFee</code> </p> </li> <li> <p> <code>TotalAmortizedFee</code> </p> </li> <li> <p> <code>RICostForUnusedHours</code> </p> </li> <li> <p> <code>RealizedSavings</code> </p> </li> <li> <p> <code>UnrealizedSavings</code> </p> </li> </ul> <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>'
+            - description: '<p>The value that you want to sort the data by.</p> <p>The following values are supported for <code>Key</code>:</p> <ul> <li> <p> <code>UtilizationPercentage</code> </p> </li> <li> <p> <code>UtilizationPercentageInUnits</code> </p> </li> <li> <p> <code>PurchasedHours</code> </p> </li> <li> <p> <code>PurchasedUnits</code> </p> </li> <li> <p> <code>TotalActualHours</code> </p> </li> <li> <p> <code>TotalActualUnits</code> </p> </li> <li> <p> <code>UnusedHours</code> </p> </li> <li> <p> <code>UnusedUnits</code> </p> </li> <li> <p> <code>OnDemandCostOfRIHoursUsed</code> </p> </li> <li> <p> <code>NetRISavings</code> </p> </li> <li> <p> <code>TotalPotentialRISavings</code> </p> </li> <li> <p> <code>AmortizedUpfrontFee</code> </p> </li> <li> <p> <code>AmortizedRecurringFee</code> </p> </li> <li> <p> <code>TotalAmortizedFee</code> </p> </li> <li> <p> <code>RICostForUnusedHours</code> </p> </li> <li> <p> <code>RealizedSavings</code> </p> </li> <li> <p> <code>UnrealizedSavings</code> </p> </li> </ul> <p>The supported values for <code>SortOrder</code> are <code>ASCENDING</code> and <code>DESCENDING</code>.</p>'
         NextPageToken:
           allOf:
             - $ref: '#/components/schemas/NextPageToken'
@@ -2379,7 +2728,7 @@ components:
         Configuration:
           allOf:
             - $ref: '#/components/schemas/RightsizingRecommendationConfiguration'
-            - description: ' Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or neither. '
+            - description: 'You can use Configuration to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings that are associated with recommendations with consideration of existing Savings Plans or RI benefits, or neither. '
     GetRightsizingRecommendationRequest:
       type: object
       required:
@@ -2391,7 +2740,7 @@ components:
         Configuration:
           allOf:
             - $ref: '#/components/schemas/RightsizingRecommendationConfiguration'
-            - description: ' Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or neither. '
+            - description: 'You can use Configuration to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings that are associated with recommendations with consideration of existing Savings Plans or RI benefits, or neither. '
         Service:
           allOf:
             - $ref: '#/components/schemas/GenericString'
@@ -2454,14 +2803,14 @@ components:
         SortBy:
           allOf:
             - $ref: '#/components/schemas/SortDefinition'
-            - description: '<p>The value by which you want to sort the data.</p> <p>The following values are supported for <code>Key</code>:</p> <ul> <li> <p> <code>SpendCoveredBySavingsPlan</code> </p> </li> <li> <p> <code>OnDemandCost</code> </p> </li> <li> <p> <code>CoveragePercentage</code> </p> </li> <li> <p> <code>TotalCost</code> </p> </li> <li> <p> <code>InstanceFamily</code> </p> </li> <li> <p> <code>Region</code> </p> </li> <li> <p> <code>Service</code> </p> </li> </ul> <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>'
+            - description: '<p>The value that you want to sort the data by.</p> <p>The following values are supported for <code>Key</code>:</p> <ul> <li> <p> <code>SpendCoveredBySavingsPlan</code> </p> </li> <li> <p> <code>OnDemandCost</code> </p> </li> <li> <p> <code>CoveragePercentage</code> </p> </li> <li> <p> <code>TotalCost</code> </p> </li> <li> <p> <code>InstanceFamily</code> </p> </li> <li> <p> <code>Region</code> </p> </li> <li> <p> <code>Service</code> </p> </li> </ul> <p>The supported values for <code>SortOrder</code> are <code>ASCENDING</code> and <code>DESCENDING</code>.</p>'
     GetSavingsPlansPurchaseRecommendationResponse:
       type: object
       properties:
         Metadata:
           allOf:
             - $ref: '#/components/schemas/SavingsPlansPurchaseRecommendationMetadata'
-            - description: Information regarding this specific recommendation set.
+            - description: Information that regards this specific recommendation set.
         SavingsPlansPurchaseRecommendation:
           allOf:
             - $ref: '#/components/schemas/SavingsPlansPurchaseRecommendation'
@@ -2482,15 +2831,15 @@ components:
         SavingsPlansType:
           allOf:
             - $ref: '#/components/schemas/SupportedSavingsPlansType'
-            - description: The Savings Plans recommendation type requested.
+            - description: The Savings Plans recommendation type that's requested.
         TermInYears:
           allOf:
             - $ref: '#/components/schemas/TermInYears'
-            - description: The savings plan recommendation term used to generate these recommendations.
+            - description: The savings plan recommendation term that's used to generate these recommendations.
         PaymentOption:
           allOf:
             - $ref: '#/components/schemas/PaymentOption'
-            - description: The payment option used to generate these recommendations.
+            - description: The payment option that's used to generate these recommendations.
         AccountScope:
           allOf:
             - $ref: '#/components/schemas/AccountScope'
@@ -2506,11 +2855,11 @@ components:
         LookbackPeriodInDays:
           allOf:
             - $ref: '#/components/schemas/LookbackPeriodInDays'
-            - description: The lookback period used to generate the recommendation.
+            - description: The lookback period that's used to generate the recommendation.
         Filter:
           allOf:
             - $ref: '#/components/schemas/Expression'
-            - description: '<p>You can filter your recommendations by Account ID with the <code>LINKED_ACCOUNT</code> dimension. To filter your recommendations by Account ID, specify <code>Key</code> as <code>LINKED_ACCOUNT</code> and <code>Value</code> as the comma-separated Acount ID(s) for which you want to see Savings Plans purchase recommendations.</p> <p>For GetSavingsPlansPurchaseRecommendation, the <code>Filter</code> does not include <code>CostCategories</code> or <code>Tags</code>. It only includes <code>Dimensions</code>. With <code>Dimensions</code>, <code>Key</code> must be <code>LINKED_ACCOUNT</code> and <code>Value</code> can be a single Account ID or multiple comma-separated Account IDs for which you want to see Savings Plans Purchase Recommendations. <code>AND</code> and <code>OR</code> operators are not supported.</p>'
+            - description: '<p>You can filter your recommendations by Account ID with the <code>LINKED_ACCOUNT</code> dimension. To filter your recommendations by Account ID, specify <code>Key</code> as <code>LINKED_ACCOUNT</code> and <code>Value</code> as the comma-separated Acount ID(s) that you want to see Savings Plans purchase recommendations for.</p> <p>For GetSavingsPlansPurchaseRecommendation, the <code>Filter</code> doesn''t include <code>CostCategories</code> or <code>Tags</code>. It only includes <code>Dimensions</code>. With <code>Dimensions</code>, <code>Key</code> must be <code>LINKED_ACCOUNT</code> and <code>Value</code> can be a single Account ID or multiple comma-separated Account IDs that you want to see Savings Plans Purchase Recommendations for. <code>AND</code> and <code>OR</code> operators are not supported.</p>'
     GetSavingsPlansUtilizationResponse:
       type: object
       required:
@@ -2519,7 +2868,7 @@ components:
         SavingsPlansUtilizationsByTime:
           allOf:
             - $ref: '#/components/schemas/SavingsPlansUtilizationsByTime'
-            - description: The amount of cost/commitment you used your Savings Plans. This allows you to specify date ranges.
+            - description: The amount of cost/commitment that you used your Savings Plans. You can use it to specify date ranges.
         Total:
           allOf:
             - $ref: '#/components/schemas/SavingsPlansUtilizationAggregates'
@@ -2545,7 +2894,7 @@ components:
         SortBy:
           allOf:
             - $ref: '#/components/schemas/SortDefinition'
-            - description: '<p>The value by which you want to sort the data.</p> <p>The following values are supported for <code>Key</code>:</p> <ul> <li> <p> <code>UtilizationPercentage</code> </p> </li> <li> <p> <code>TotalCommitment</code> </p> </li> <li> <p> <code>UsedCommitment</code> </p> </li> <li> <p> <code>UnusedCommitment</code> </p> </li> <li> <p> <code>NetSavings</code> </p> </li> </ul> <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>'
+            - description: '<p>The value that you want to sort the data by.</p> <p>The following values are supported for <code>Key</code>:</p> <ul> <li> <p> <code>UtilizationPercentage</code> </p> </li> <li> <p> <code>TotalCommitment</code> </p> </li> <li> <p> <code>UsedCommitment</code> </p> </li> <li> <p> <code>UnusedCommitment</code> </p> </li> <li> <p> <code>NetSavings</code> </p> </li> </ul> <p>The supported values for <code>SortOrder</code> are <code>ASCENDING</code> and <code>DESCENDING</code>.</p>'
     GetSavingsPlansUtilizationDetailsResponse:
       type: object
       required:
@@ -2595,7 +2944,7 @@ components:
         SortBy:
           allOf:
             - $ref: '#/components/schemas/SortDefinition'
-            - description: '<p>The value by which you want to sort the data.</p> <p>The following values are supported for <code>Key</code>:</p> <ul> <li> <p> <code>UtilizationPercentage</code> </p> </li> <li> <p> <code>TotalCommitment</code> </p> </li> <li> <p> <code>UsedCommitment</code> </p> </li> <li> <p> <code>UnusedCommitment</code> </p> </li> <li> <p> <code>NetSavings</code> </p> </li> <li> <p> <code>AmortizedRecurringCommitment</code> </p> </li> <li> <p> <code>AmortizedUpfrontCommitment</code> </p> </li> </ul> <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>'
+            - description: '<p>The value that you want to sort the data by.</p> <p>The following values are supported for <code>Key</code>:</p> <ul> <li> <p> <code>UtilizationPercentage</code> </p> </li> <li> <p> <code>TotalCommitment</code> </p> </li> <li> <p> <code>UsedCommitment</code> </p> </li> <li> <p> <code>UnusedCommitment</code> </p> </li> <li> <p> <code>NetSavings</code> </p> </li> <li> <p> <code>AmortizedRecurringCommitment</code> </p> </li> <li> <p> <code>AmortizedUpfrontCommitment</code> </p> </li> </ul> <p>The supported values for <code>SortOrder</code> are <code>ASCENDING</code> and <code>DESCENDING</code>.</p>'
     GetTagsResponse:
       type: object
       required:
@@ -2642,11 +2991,11 @@ components:
         SortBy:
           allOf:
             - $ref: '#/components/schemas/SortDefinitions'
-            - description: '<p>The value by which you want to sort the data.</p> <p>The key represents cost and usage metrics. The following values are supported:</p> <ul> <li> <p> <code>BlendedCost</code> </p> </li> <li> <p> <code>UnblendedCost</code> </p> </li> <li> <p> <code>AmortizedCost</code> </p> </li> <li> <p> <code>NetAmortizedCost</code> </p> </li> <li> <p> <code>NetUnblendedCost</code> </p> </li> <li> <p> <code>UsageQuantity</code> </p> </li> <li> <p> <code>NormalizedUsageAmount</code> </p> </li> </ul> <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p> <p>When using <code>SortBy</code>, <code>NextPageToken</code> and <code>SearchString</code> are not supported.</p>'
+            - description: '<p>The value that you want to sort the data by.</p> <p>The key represents cost and usage metrics. The following values are supported:</p> <ul> <li> <p> <code>BlendedCost</code> </p> </li> <li> <p> <code>UnblendedCost</code> </p> </li> <li> <p> <code>AmortizedCost</code> </p> </li> <li> <p> <code>NetAmortizedCost</code> </p> </li> <li> <p> <code>NetUnblendedCost</code> </p> </li> <li> <p> <code>UsageQuantity</code> </p> </li> <li> <p> <code>NormalizedUsageAmount</code> </p> </li> </ul> <p>The supported values for <code>SortOrder</code> are <code>ASCENDING</code> and <code>DESCENDING</code>.</p> <p>When you use <code>SortBy</code>, <code>NextPageToken</code> and <code>SearchString</code> aren''t supported.</p>'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: '<p>This field is only used when SortBy is provided in the request. The maximum number of objects that to be returned for this request. If MaxResults is not specified with SortBy, the request will return 1000 results as the default value for this parameter.</p> <p>For <code>GetTags</code>, MaxResults has an upper limit of 1000.</p>'
+            - description: '<p>This field is only used when SortBy is provided in the request. The maximum number of objects that are returned for this request. If MaxResults isn''t specified with SortBy, the request returns 1000 results as the default value for this parameter.</p> <p>For <code>GetTags</code>, MaxResults has an upper quota of 1000.</p>'
         NextPageToken:
           allOf:
             - $ref: '#/components/schemas/NextPageToken'
@@ -2673,7 +3022,7 @@ components:
         TimePeriod:
           allOf:
             - $ref: '#/components/schemas/DateInterval'
-            - description: 'The start and end dates of the period that you want to retrieve usage forecast for. The start date is inclusive, but the end date is exclusive. For example, if <code>start</code> is <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and usage data is retrieved from <code>2017-01-01</code> up to and including <code>2017-04-30</code> but not including <code>2017-05-01</code>. The start date must be equal to or later than the current date to avoid a validation error.'
+            - description: 'The start and end dates of the period that you want to retrieve usage forecast for. The start date is included in the period, but the end date isn''t included in the period. For example, if <code>start</code> is <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and usage data is retrieved from <code>2017-01-01</code> up to and including <code>2017-04-30</code> but not including <code>2017-05-01</code>. The start date must be equal to or later than the current date to avoid a validation error.'
         Metric:
           allOf:
             - $ref: '#/components/schemas/Metric'
@@ -2689,19 +3038,54 @@ components:
         PredictionIntervalLevel:
           allOf:
             - $ref: '#/components/schemas/PredictionIntervalLevel'
-            - description: 'Cost Explorer always returns the mean forecast as a single point. You can request a prediction interval around the mean by specifying a confidence level. The higher the confidence level, the more confident Cost Explorer is about the actual value falling in the prediction interval. Higher confidence levels result in wider prediction intervals.'
+            - description: 'Amazon Web Services Cost Explorer always returns the mean forecast as a single point. You can request a prediction interval around the mean by specifying a confidence level. The higher the confidence level, the more confident Cost Explorer is about the actual value falling in the prediction interval. Higher confidence levels result in wider prediction intervals.'
     UnresolvableUsageUnitException: {}
+    ListCostAllocationTagsResponse:
+      type: object
+      properties:
+        CostAllocationTags:
+          allOf:
+            - $ref: '#/components/schemas/CostAllocationTagList'
+            - description: 'A list of cost allocation tags that includes the detailed metadata for each one. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextPageToken'
+            - description: 'The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. '
+    ListCostAllocationTagsRequest:
+      type: object
+      title: ListCostAllocationTagsRequest
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/CostAllocationTagStatus'
+            - description: 'The status of cost allocation tag keys that are returned for this request. '
+        TagKeys:
+          allOf:
+            - $ref: '#/components/schemas/CostAllocationTagKeyList'
+            - description: 'The list of cost allocation tag keys that are returned for this request. '
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/CostAllocationTagType'
+            - description: 'The type of <code>CostAllocationTag</code> object that are returned for this request. The <code>AWSGenerated</code> type tags are tags that Amazon Web Services defines and applies to support Amazon Web Services resources for cost allocation purposes. The <code>UserDefined</code> type tags are tags that you define, create, and apply to resources. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextPageToken'
+            - description: 'The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/CostAllocationTagsMaxResults'
+            - description: 'The maximum number of objects that are returned for this request. By default, the request returns 100 results. '
     ListCostCategoryDefinitionsResponse:
       type: object
       properties:
         CostCategoryReferences:
           allOf:
             - $ref: '#/components/schemas/CostCategoryReferencesList'
-            - description: ' A reference to a Cost Category containing enough information to identify the Cost Category. '
+            - description: 'A reference to a Cost Category that contains enough information to identify the Cost Category. '
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextPageToken'
-            - description: ' The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. '
+            - description: 'The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. '
     ListCostCategoryDefinitionsRequest:
       type: object
       title: ListCostCategoryDefinitionsRequest
@@ -2709,15 +3093,63 @@ components:
         EffectiveOn:
           allOf:
             - $ref: '#/components/schemas/ZonedDateTime'
-            - description: ' The date when the Cost Category was effective. '
+            - description: 'The date when the Cost Category was effective. '
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextPageToken'
-            - description: ' The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. '
+            - description: 'The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. '
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/CostCategoryMaxResults'
-            - description: ' The number of entries a paginated response contains. '
+            - description: 'The number of entries a paginated response contains. '
+    ListSavingsPlansPurchaseRecommendationGenerationResponse:
+      type: object
+      properties:
+        GenerationSummaryList:
+          allOf:
+            - $ref: '#/components/schemas/GenerationSummaryList'
+            - description: The list of historical recommendation generations.
+        NextPageToken:
+          allOf:
+            - $ref: '#/components/schemas/NextPageToken'
+            - description: The token to retrieve the next set of results.
+    ListSavingsPlansPurchaseRecommendationGenerationRequest:
+      type: object
+      title: ListSavingsPlansPurchaseRecommendationGenerationRequest
+      properties:
+        GenerationStatus:
+          allOf:
+            - $ref: '#/components/schemas/GenerationStatus'
+            - description: The status of the recommendation generation.
+        RecommendationIds:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationIdList'
+            - description: The IDs for each specific recommendation.
+        PageSize:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeInteger'
+            - description: The number of recommendations that you want returned in a single response object.
+        NextPageToken:
+          allOf:
+            - $ref: '#/components/schemas/NextPageToken'
+            - description: The token to retrieve the next set of results.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        ResourceTags:
+          allOf:
+            - $ref: '#/components/schemas/ResourceTagList'
+            - description: 'A list of tag key value pairs that are associated with the resource. '
+    ListTagsForResourceRequest:
+      type: object
+      required:
+        - ResourceArn
+      title: ListTagsForResourceRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The Amazon Resource Name (ARN) of the resource. For a list of supported resources, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html">ResourceTag</a>.'
     ProvideAnomalyFeedbackResponse:
       type: object
       required:
@@ -2742,6 +3174,63 @@ components:
           allOf:
             - $ref: '#/components/schemas/AnomalyFeedbackType'
             - description: 'Describes whether the cost anomaly was a planned activity or you considered it an anomaly. '
+    StartSavingsPlansPurchaseRecommendationGenerationResponse:
+      type: object
+      properties:
+        RecommendationId:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationId'
+            - description: The ID for this specific recommendation.
+        GenerationStartedTime:
+          allOf:
+            - $ref: '#/components/schemas/ZonedDateTime'
+            - description: The start time of the recommendation generation.
+        EstimatedCompletionTime:
+          allOf:
+            - $ref: '#/components/schemas/ZonedDateTime'
+            - description: The estimated time for when the recommendation generation will complete.
+    StartSavingsPlansPurchaseRecommendationGenerationRequest:
+      type: object
+      title: StartSavingsPlansPurchaseRecommendationGenerationRequest
+      properties: {}
+    GenerationExistsException: {}
+    TagResourceResponse:
+      type: object
+      properties: {}
+    TagResourceRequest:
+      type: object
+      required:
+        - ResourceArn
+        - ResourceTags
+      title: TagResourceRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The Amazon Resource Name (ARN) of the resource. For a list of supported resources, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html">ResourceTag</a>. '
+        ResourceTags:
+          allOf:
+            - $ref: '#/components/schemas/ResourceTagList'
+            - description: '<p> A list of tag key-value pairs to be added to the resource.</p> <p>Each tag consists of a key and a value, and each key must be unique for the resource. The following restrictions apply to resource tags:</p> <ul> <li> <p>Although the maximum number of array members is 200, you can assign a maximum of 50 user-tags to one resource. The remaining are reserved for Amazon Web Services use</p> </li> <li> <p>The maximum length of a key is 128 characters</p> </li> <li> <p>The maximum length of a value is 256 characters</p> </li> <li> <p>Keys and values can only contain alphanumeric characters, spaces, and any of the following: <code>_.:/=+@-</code> </p> </li> <li> <p>Keys and values are case sensitive</p> </li> <li> <p>Keys and values are trimmed for any leading or trailing whitespaces</p> </li> <li> <p>Don’t use <code>aws:</code> as a prefix for your keys. This prefix is reserved for Amazon Web Services use</p> </li> </ul>'
+    TooManyTagsException: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceRequest:
+      type: object
+      required:
+        - ResourceArn
+        - ResourceTagKeys
+      title: UntagResourceRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The Amazon Resource Name (ARN) of the resource. For a list of supported resources, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html">ResourceTag</a>. '
+        ResourceTagKeys:
+          allOf:
+            - $ref: '#/components/schemas/ResourceTagKeyList'
+            - description: 'A list of tag keys associated with tags that need to be removed from the resource. If you specify a tag key that doesn''t exist, it''s ignored. Although the maximum number of array members is 200, user-tag maximum is 50. The remaining are reserved for Amazon Web Services use. '
     UpdateAnomalyMonitorResponse:
       type: object
       required:
@@ -2787,7 +3276,8 @@ components:
         Threshold:
           allOf:
             - $ref: '#/components/schemas/NullableNonNegativeDouble'
-            - description: 'The update to the threshold value for receiving notifications. '
+            - deprecated: true
+              description: '<p>(deprecated)</p> <p>The update to the threshold value for receiving notifications. </p> <p>This field has been deprecated. To update a threshold, use ThresholdExpression. Continued use of Threshold will be treated as shorthand syntax for a ThresholdExpression.</p>Threshold has been deprecated in favor of ThresholdExpression'
         Frequency:
           allOf:
             - $ref: '#/components/schemas/AnomalySubscriptionFrequency'
@@ -2804,17 +3294,38 @@ components:
           allOf:
             - $ref: '#/components/schemas/GenericString'
             - description: 'The new name of the subscription. '
+        ThresholdExpression:
+          allOf:
+            - $ref: '#/components/schemas/Expression'
+            - description: '<p>The update to the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> object used to specify the anomalies that you want to generate alerts for. This supports dimensions and nested expressions. The supported dimensions are <code>ANOMALY_TOTAL_IMPACT_ABSOLUTE</code> and <code>ANOMALY_TOTAL_IMPACT_PERCENTAGE</code>. The supported nested expression types are <code>AND</code> and <code>OR</code>. The match option <code>GREATER_THAN_OR_EQUAL</code> is required. Values must be numbers between 0 and 10,000,000,000.</p> <p>The following are examples of valid ThresholdExpressions:</p> <ul> <li> <p>Absolute threshold: <code>{ "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }</code> </p> </li> <li> <p>Percentage threshold: <code>{ "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }</code> </p> </li> <li> <p> <code>AND</code> two thresholds together: <code>{ "And": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }</code> </p> </li> <li> <p> <code>OR</code> two thresholds together: <code>{ "Or": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }</code> </p> </li> </ul>'
+    UpdateCostAllocationTagsStatusResponse:
+      type: object
+      properties:
+        Errors:
+          allOf:
+            - $ref: '#/components/schemas/UpdateCostAllocationTagsStatusErrors'
+            - description: 'A list of <code>UpdateCostAllocationTagsStatusError</code> objects with error details about each cost allocation tag that can''t be updated. If there''s no failure, an empty array returns. '
+    UpdateCostAllocationTagsStatusRequest:
+      type: object
+      required:
+        - CostAllocationTagsStatus
+      title: UpdateCostAllocationTagsStatusRequest
+      properties:
+        CostAllocationTagsStatus:
+          allOf:
+            - $ref: '#/components/schemas/CostAllocationTagStatusList'
+            - description: 'The list of <code>CostAllocationTagStatusEntry</code> objects that are used to update cost allocation tags status for this request. '
     UpdateCostCategoryDefinitionResponse:
       type: object
       properties:
         CostCategoryArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: ' The unique identifier for your Cost Category. '
+            - description: 'The unique identifier for your Cost Category. '
         EffectiveStart:
           allOf:
             - $ref: '#/components/schemas/ZonedDateTime'
-            - description: ' The Cost Category''s effective start date. '
+            - description: The Cost Category's effective start date. It can only be a billing start date (first day of the month).
     UpdateCostCategoryDefinitionRequest:
       type: object
       required:
@@ -2827,6 +3338,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The unique identifier for your Cost Category.
+        EffectiveStart:
+          allOf:
+            - $ref: '#/components/schemas/ZonedDateTime'
+            - description: 'The Cost Category''s effective start date. It can only be a billing start date (first day of the month). If the date isn''t provided, it''s the first day of the current month. Dates can''t be before the previous twelve months, or in the future.'
         RuleVersion:
           $ref: '#/components/schemas/CostCategoryRuleVersion'
         Rules:
@@ -2871,7 +3386,7 @@ components:
         DimensionValue:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: 'The dimension for the anomaly (for example, an Amazon Web Services service in a service monitor). '
+            - description: 'The dimension for the anomaly (for example, an Amazon Web Service in a service monitor). '
         RootCauses:
           allOf:
             - $ref: '#/components/schemas/RootCauses'
@@ -2934,11 +3449,23 @@ components:
         MaxImpact:
           allOf:
             - $ref: '#/components/schemas/GenericDouble'
-            - description: 'The maximum dollar value that''s observed for an anomaly. '
+            - description: The maximum dollar value that's observed for an anomaly.
         TotalImpact:
           allOf:
             - $ref: '#/components/schemas/GenericDouble'
-            - description: 'The cumulative dollar value that''s observed for an anomaly. '
+            - description: The cumulative dollar difference between the total actual spend and total expected spend. It is calculated as <code>TotalActualSpend - TotalExpectedSpend</code>.
+        TotalActualSpend:
+          allOf:
+            - $ref: '#/components/schemas/NullableNonNegativeDouble'
+            - description: The cumulative dollar amount that was actually spent during the anomaly.
+        TotalExpectedSpend:
+          allOf:
+            - $ref: '#/components/schemas/NullableNonNegativeDouble'
+            - description: The cumulative dollar amount that was expected to be spent during the anomaly. It is calculated using advanced machine learning models to determine the typical spending pattern based on historical data for a customer.
+        TotalImpactPercentage:
+          allOf:
+            - $ref: '#/components/schemas/NullableNonNegativeDouble'
+            - description: 'The cumulative percentage difference between the total actual spend and total expected spend. It is calculated as <code>(TotalImpact / TotalExpectedSpend) * 100</code>. When <code>TotalExpectedSpend</code> is zero, this field is omitted. Expected spend can be zero in situations such as when you start to use a service for the first time.'
       description: 'The dollar value of the anomaly. '
     AnomalyFeedbackType:
       type: string
@@ -2996,7 +3523,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CostCategoryValues'
             - description: The filter that's based on <code>CostCategory</code> values.
-      description: '<p>Use <code>Expression</code> to filter by cost or by usage. There are two patterns: </p> <ul> <li> <p>Simple dimension values - You can set the dimension name and values for the filters that you plan to use. For example, you can filter for <code>REGION==us-east-1 OR REGION==us-west-1</code>. For <code>GetRightsizingRecommendation</code>, the Region is a full name (for example, <code>REGION==US East (N. Virginia)</code>. The <code>Expression</code> example is as follows:</p> <p> <code>{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ] } }</code> </p> <p>The list of dimension values are OR''d together to retrieve cost or usage data. You can create <code>Expression</code> and <code>DimensionValues</code> objects using either <code>with*</code> methods or <code>set*</code> methods in multiple lines. </p> </li> <li> <p>Compound dimension values with logical operations - You can use multiple <code>Expression</code> types and the logical operators <code>AND/OR/NOT</code> to create a list of one or more <code>Expression</code> objects. By doing this, you can filter on more advanced options. For example, you can filter on <code>((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)</code>. The <code>Expression</code> for that is as follows:</p> <p> <code>{ "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } </code> </p> <note> <p>Because each <code>Expression</code> can have only one operator, the service returns an error if more than one is specified. The following example shows an <code>Expression</code> object that creates an error.</p> </note> <p> <code> { "And": [ ... ], "DimensionValues": { "Dimension": "USAGE_TYPE", "Values": [ "DataTransfer" ] } } </code> </p> </li> </ul> <note> <p>For the <code>GetRightsizingRecommendation</code> action, a combination of OR and NOT isn''t supported. OR isn''t supported between different dimensions, or dimensions and tags. NOT operators aren''t supported. Dimensions are also limited to <code>LINKED_ACCOUNT</code>, <code>REGION</code>, or <code>RIGHTSIZING_TYPE</code>.</p> <p>For the <code>GetReservationPurchaseRecommendation</code> action, only NOT is supported. AND and OR aren''t supported. Dimensions are limited to <code>LINKED_ACCOUNT</code>.</p> </note>'
+      description: '<p>Use <code>Expression</code> to filter in various Cost Explorer APIs.</p> <p>Not all <code>Expression</code> types are supported in each API. Refer to the documentation for each specific API to see what is supported.</p> <p>There are two patterns:</p> <ul> <li> <p>Simple dimension values.</p> <ul> <li> <p>There are three types of simple dimension values: <code>CostCategories</code>, <code>Tags</code>, and <code>Dimensions</code>.</p> <ul> <li> <p>Specify the <code>CostCategories</code> field to define a filter that acts on Cost Categories.</p> </li> <li> <p>Specify the <code>Tags</code> field to define a filter that acts on Cost Allocation Tags.</p> </li> <li> <p>Specify the <code>Dimensions</code> field to define a filter that acts on the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html"> <code>DimensionValues</code> </a>.</p> </li> </ul> </li> <li> <p>For each filter type, you can set the dimension name and values for the filters that you plan to use.</p> <ul> <li> <p>For example, you can filter for <code>REGION==us-east-1 OR REGION==us-west-1</code>. For <code>GetRightsizingRecommendation</code>, the Region is a full name (for example, <code>REGION==US East (N. Virginia)</code>.</p> </li> <li> <p>The corresponding <code>Expression</code> for this example is as follows: <code>{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ] } }</code> </p> </li> <li> <p>As shown in the previous example, lists of dimension values are combined with <code>OR</code> when applying the filter.</p> </li> </ul> </li> <li> <p>You can also set different match options to further control how the filter behaves. Not all APIs support match options. Refer to the documentation for each specific API to see what is supported.</p> <ul> <li> <p>For example, you can filter for linked account names that start with “a”.</p> </li> <li> <p>The corresponding <code>Expression</code> for this example is as follows: <code>{ "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions": [ "STARTS_WITH" ], "Values": [ "a" ] } }</code> </p> </li> </ul> </li> </ul> </li> <li> <p>Compound <code>Expression</code> types with logical operations.</p> <ul> <li> <p>You can use multiple <code>Expression</code> types and the logical operators <code>AND/OR/NOT</code> to create a list of one or more <code>Expression</code> objects. By doing this, you can filter by more advanced options.</p> </li> <li> <p>For example, you can filter by <code>((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)</code>.</p> </li> <li> <p>The corresponding <code>Expression</code> for this example is as follows: <code>{ "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } </code> </p> </li> </ul> <note> <p>Because each <code>Expression</code> can have only one operator, the service returns an error if more than one is specified. The following example shows an <code>Expression</code> object that creates an error: <code> { "And": [ ... ], "Dimensions": { "Key": "USAGE_TYPE", "Values": [ "DataTransfer" ] } } </code> </p> <p>The following is an example of the corresponding error message: <code>"Expression has more than one roots. Only one root operator is allowed for each expression: And, Or, Not, Dimensions, Tags, CostCategories"</code> </p> </note> </li> </ul> <note> <p>For the <code>GetRightsizingRecommendation</code> action, a combination of OR and NOT isn''t supported. OR isn''t supported between different dimensions, or dimensions and tags. NOT operators aren''t supported. Dimensions are also limited to <code>LINKED_ACCOUNT</code>, <code>REGION</code>, or <code>RIGHTSIZING_TYPE</code>.</p> <p>For the <code>GetReservationPurchaseRecommendation</code> action, only NOT is supported. AND and OR aren''t supported. Dimensions are limited to <code>LINKED_ACCOUNT</code>.</p> </note>'
     NonNegativeInteger:
       type: integer
       minimum: 0
@@ -3071,7 +3598,6 @@ components:
       required:
         - MonitorArnList
         - Subscribers
-        - Threshold
         - Frequency
         - SubscriptionName
       properties:
@@ -3094,7 +3620,8 @@ components:
         Threshold:
           allOf:
             - $ref: '#/components/schemas/NullableNonNegativeDouble'
-            - description: 'The dollar value that triggers a notification if the threshold is exceeded. '
+            - deprecated: true
+              description: '<p>(deprecated)</p> <p>The dollar value that triggers a notification if the threshold is exceeded. </p> <p>This field has been deprecated. To specify a threshold, use ThresholdExpression. Continued use of Threshold will be treated as shorthand syntax for a ThresholdExpression.</p> <p>One of Threshold or ThresholdExpression is required for this resource.</p>Threshold has been deprecated in favor of ThresholdExpression'
         Frequency:
           allOf:
             - $ref: '#/components/schemas/AnomalySubscriptionFrequency'
@@ -3103,6 +3630,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/GenericString'
             - description: 'The name for the subscription. '
+        ThresholdExpression:
+          allOf:
+            - $ref: '#/components/schemas/Expression'
+            - description: '<p>An <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> object used to specify the anomalies that you want to generate alerts for. This supports dimensions and nested expressions. The supported dimensions are <code>ANOMALY_TOTAL_IMPACT_ABSOLUTE</code> and <code>ANOMALY_TOTAL_IMPACT_PERCENTAGE</code>. The supported nested expression types are <code>AND</code> and <code>OR</code>. The match option <code>GREATER_THAN_OR_EQUAL</code> is required. Values must be numbers between 0 and 10,000,000,000.</p> <p>One of Threshold or ThresholdExpression is required for this resource.</p> <p>The following are examples of valid ThresholdExpressions:</p> <ul> <li> <p>Absolute threshold: <code>{ "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }</code> </p> </li> <li> <p>Percentage threshold: <code>{ "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }</code> </p> </li> <li> <p> <code>AND</code> two thresholds together: <code>{ "And": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }</code> </p> </li> <li> <p> <code>OR</code> two thresholds together: <code>{ "Or": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }</code> </p> </li> </ul>'
       description: 'The association between a monitor, threshold, and list of subscribers used to deliver notifications about anomalies detected by a monitor that exceeds a threshold. The content consists of the detailed metadata and the current status of the <code>AnomalySubscription</code> object. '
     AnomalySubscriptions:
       type: array
@@ -3127,10 +3658,82 @@ components:
         - COST_AND_USAGE
         - RESERVATIONS
         - SAVINGS_PLANS
+    TagKey:
+      type: string
+      pattern: '[\S\s]*'
+      minLength: 0
+      maxLength: 1024
+    CostAllocationTagType:
+      type: string
+      enum:
+        - AWSGenerated
+        - UserDefined
+    CostAllocationTagStatus:
+      type: string
+      enum:
+        - Active
+        - Inactive
+    CostAllocationTag:
+      type: object
+      required:
+        - TagKey
+        - Type
+        - Status
+      properties:
+        TagKey:
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: 'The key for the cost allocation tag. '
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/CostAllocationTagType'
+            - description: 'The type of cost allocation tag. You can use <code>AWSGenerated</code> or <code>UserDefined</code> type tags. <code>AWSGenerated</code> type tags are tags that Amazon Web Services defines and applies to support Amazon Web Services resources for cost allocation purposes. <code>UserDefined</code> type tags are tags that you define, create, and apply to resources. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/CostAllocationTagStatus'
+            - description: 'The status of a cost allocation tag. '
+      description: 'The cost allocation tag structure. This includes detailed metadata for the <code>CostAllocationTag</code> object. '
+    CostAllocationTagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 1
+      maxItems: 100
+    CostAllocationTagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CostAllocationTag'
+      minItems: 0
+      maxItems: 100
+    CostAllocationTagStatusEntry:
+      type: object
+      required:
+        - TagKey
+        - Status
+      properties:
+        TagKey:
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: 'The key for the cost allocation tag. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/CostAllocationTagStatus'
+            - description: 'The status of a cost allocation tag. '
+      description: 'The cost allocation tag status. The status of a key can either be active or inactive. '
+    CostAllocationTagStatusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CostAllocationTagStatusEntry'
+      minItems: 1
+      maxItems: 20
+    CostAllocationTagsMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 1000
     ZonedDateTime:
       type: string
       pattern: '^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(([+-]\d\d:\d\d)|Z)$'
-      description: The time period that you want the usage and costs for.
+      description: The period of time that you want the usage and costs for.
       minLength: 20
       maxLength: 25
     CostCategoryName:
@@ -3182,11 +3785,11 @@ components:
         EffectiveStart:
           allOf:
             - $ref: '#/components/schemas/ZonedDateTime'
-            - description: The effective state data of your Cost Category.
+            - description: The effective start date of your Cost Category.
         EffectiveEnd:
           allOf:
             - $ref: '#/components/schemas/ZonedDateTime'
-            - description: ' The effective end data of your Cost Category.'
+            - description: The effective end date of your Cost Category.
         Name:
           $ref: '#/components/schemas/CostCategoryName'
         RuleVersion:
@@ -3217,12 +3820,12 @@ components:
         DimensionName:
           allOf:
             - $ref: '#/components/schemas/CostCategoryInheritedValueDimensionName'
-            - description: '<p>The name of the dimension that''s used to group costs.</p> <p>If you specify <code>LINKED_ACCOUNT_NAME</code>, the cost category value is based on account name. If you specify <code>TAG</code>, the cost category value will be based on the value of the specified tag key.</p>'
+            - description: '<p>The name of the dimension that''s used to group costs.</p> <p>If you specify <code>LINKED_ACCOUNT_NAME</code>, the cost category value is based on account name. If you specify <code>TAG</code>, the cost category value is based on the value of the specified tag key.</p>'
         DimensionKey:
           allOf:
             - $ref: '#/components/schemas/GenericString'
             - description: The key to extract cost category values.
-      description: 'When creating or updating a cost category, you can define the <code>CostCategoryRule</code> rule type as <code>INHERITED_VALUE</code>. This rule type adds the flexibility of defining a rule that dynamically inherits the cost category value from the dimension value defined by <code>CostCategoryInheritedValueDimension</code>. For example, if you want to dynamically group costs that are based on the value of a specific tag key, first choose an inherited value rule type, then choose the tag dimension and specify the tag key to use.'
+      description: 'When you create or update a cost category, you can define the <code>CostCategoryRule</code> rule type as <code>INHERITED_VALUE</code>. This rule type adds the flexibility to define a rule that dynamically inherits the cost category value from the dimension value that''s defined by <code>CostCategoryInheritedValueDimension</code>. For example, suppose that you want to dynamically group costs that are based on the value of a specific tag key. First, choose an inherited value rule type, and then choose the tag dimension and specify the tag key to use.'
     CostCategoryMaxResults:
       type: integer
       minimum: 1
@@ -3313,7 +3916,7 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/CostCategoryRuleType'
-            - description: 'You can define the <code>CostCategoryRule</code> rule type as either <code>REGULAR</code> or <code>INHERITED_VALUE</code>. The <code>INHERITED_VALUE</code> rule type adds the flexibility of defining a rule that dynamically inherits the cost category value from the dimension value defined by <code>CostCategoryInheritedValueDimension</code>. For example, if you want to dynamically group costs based on the value of a specific tag key, first choose an inherited value rule type, then choose the tag dimension and specify the tag key to use.'
+            - description: 'You can define the <code>CostCategoryRule</code> rule type as either <code>REGULAR</code> or <code>INHERITED_VALUE</code>. The <code>INHERITED_VALUE</code> rule type adds the flexibility to define a rule that dynamically inherits the cost category value. This value is from the dimension value that''s defined by <code>CostCategoryInheritedValueDimension</code>. For example, suppose that you want to costs to be dynamically grouped based on the value of a specific tag key. First, choose an inherited value rule type, and then choose the tag dimension and specify the tag key to use.'
       description: 'Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value.'
     CostCategorySplitChargeMethod:
       type: string
@@ -3525,6 +4128,12 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/CoverageByTime'
+    ResourceTagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceTag'
+      minItems: 0
+      maxItems: 200
     TagValuesList:
       type: array
       items:
@@ -3535,8 +4144,8 @@ components:
         EC2ResourceDetails:
           allOf:
             - $ref: '#/components/schemas/EC2ResourceDetails'
-            - description: Details on the Amazon EC2 resource.
-      description: Details on the resource.
+            - description: Details for the Amazon EC2 resource.
+      description: Details for the resource.
     ResourceUtilization:
       type: object
       properties:
@@ -3571,7 +4180,7 @@ components:
         ReservationCoveredHoursInLookbackPeriod:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The number of hours during the lookback period that''s covered by reservations.'
+            - description: The number of hours during the lookback period that's covered by reservations.
         SavingsPlansCoveredHoursInLookbackPeriod:
           allOf:
             - $ref: '#/components/schemas/GenericString'
@@ -3579,7 +4188,7 @@ components:
         OnDemandHoursInLookbackPeriod:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The number of hours during the lookback period that''s billed at On-Demand rates.'
+            - description: The number of hours during the lookback period that's billed at On-Demand rates.
         TotalRunningHoursInLookbackPeriod:
           allOf:
             - $ref: '#/components/schemas/GenericString'
@@ -3591,7 +4200,7 @@ components:
         CurrencyCode:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The currency code that Amazon Web Services used to calculate the costs for this instance.'
+            - description: The currency code that Amazon Web Services used to calculate the costs for this instance.
       description: Context about the current instance.
     Dimension:
       type: string
@@ -3627,13 +4236,16 @@ components:
         - PAYMENT_OPTION
         - AGREEMENT_END_DATE_TIME_AFTER
         - AGREEMENT_END_DATE_TIME_BEFORE
+        - INVOICING_ENTITY
+        - ANOMALY_TOTAL_IMPACT_ABSOLUTE
+        - ANOMALY_TOTAL_IMPACT_PERCENTAGE
     DimensionValues:
       type: object
       properties:
         Key:
           allOf:
             - $ref: '#/components/schemas/Dimension'
-            - description: 'The names of the metadata types that you can use to filter and group your results. For example, <code>AZ</code> returns a list of Availability Zones.'
+            - description: '<p>The names of the metadata types that you can use to filter and group your results. For example, <code>AZ</code> returns a list of Availability Zones.</p> <p>Not all dimensions are supported in each API. Refer to the documentation for each specific API to see what is supported.</p> <p> <code>LINK_ACCOUNT_NAME</code> and <code>SERVICE_CODE</code> can only be used in <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html">CostCategoryRule</a>.</p> <p> <code>ANOMALY_TOTAL_IMPACT_ABSOLUTE</code> and <code>ANOMALY_TOTAL_IMPACT_PERCENTAGE</code> can only be used in <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html">AnomalySubscriptions</a>.</p>'
         Values:
           allOf:
             - $ref: '#/components/schemas/Values'
@@ -3641,7 +4253,7 @@ components:
         MatchOptions:
           allOf:
             - $ref: '#/components/schemas/MatchOptions'
-            - description: The match options that you can use to filter your results. <code>MatchOptions</code> is only applicable for actions related to Cost Category. The default values for <code>MatchOptions</code> are <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.
+            - description: <p>The match options that you can use to filter your results.</p> <p> <code>MatchOptions</code> is only applicable for actions related to Cost Category and Anomaly Subscriptions. Refer to the documentation for each specific API to see what is supported.</p> <p>The default values for <code>MatchOptions</code> are <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.</p>
       description: The metadata that you can use to filter and group your results. You can use <code>GetDimensionValues</code> to find specific values.
     Value:
       type: string
@@ -3670,20 +4282,20 @@ components:
         DiskReadOpsPerSecond:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The maximum number of read operations per second. '
+            - description: 'The maximum number of read operations per second. '
         DiskWriteOpsPerSecond:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The maximum number of write operations per second. '
+            - description: 'The maximum number of write operations per second. '
         DiskReadBytesPerSecond:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The maximum read throughput operations per second. '
+            - description: 'The maximum read throughput operations per second. '
         DiskWriteBytesPerSecond:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The maximum write throughput operations per second. '
-      description: ' The field that contains a list of disk (local storage) metrics that are associated with the current instance. '
+            - description: 'The maximum write throughput operations per second. '
+      description: 'The field that contains a list of disk (local storage) metrics that are associated with the current instance. '
     EBSResourceUtilization:
       type: object
       properties:
@@ -3780,7 +4392,7 @@ components:
         Vcpu:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The number of VCPU cores in the Amazon Web Services instance type.'
+            - description: The number of VCPU cores in the Amazon Web Services instance type.
       description: Details on the Amazon EC2 Resource.
     NetworkResourceUtilization:
       type: object
@@ -3788,35 +4400,35 @@ components:
         NetworkInBytesPerSecond:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The network inbound throughput utilization measured in Bytes per second. '
+            - description: 'The network inbound throughput utilization measured in Bytes per second (Bps). '
         NetworkOutBytesPerSecond:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The network outbound throughput utilization measured in Bytes per second. '
+            - description: 'The network outbound throughput utilization measured in Bytes per second (Bps). '
         NetworkPacketsInPerSecond:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The network ingress packets that are measured in packets per second. '
+            - description: 'The network inbound packets that are measured in packets per second. '
         NetworkPacketsOutPerSecond:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The network outgress packets that are measured in packets per second. '
-      description: ' The network field that contains a list of network metrics that are associated with the current instance. '
+            - description: 'The network outbound packets that are measured in packets per second. '
+      description: 'The network field that contains a list of network metrics that are associated with the current instance. '
     EC2ResourceUtilization:
       type: object
       properties:
         MaxCpuUtilizationPercentage:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The maximum observed or expected CPU utilization of the instance.'
+            - description: The maximum observed or expected CPU utilization of the instance.
         MaxMemoryUtilizationPercentage:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The maximum observed or expected memory utilization of the instance.'
+            - description: The maximum observed or expected memory utilization of the instance.
         MaxStorageUtilizationPercentage:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The maximum observed or expected storage utilization of the instance. This doesn''t include EBS storage.'
+            - description: The maximum observed or expected storage utilization of the instance. This doesn't include EBS storage.
         EBSResourceUtilization:
           allOf:
             - $ref: '#/components/schemas/EBSResourceUtilization'
@@ -3824,12 +4436,12 @@ components:
         DiskResourceUtilization:
           allOf:
             - $ref: '#/components/schemas/DiskResourceUtilization'
-            - description: ' The field that contains a list of disk (local storage) metrics that are associated with the current instance. '
+            - description: 'The field that contains a list of disk (local storage) metrics that are associated with the current instance. '
         NetworkResourceUtilization:
           allOf:
             - $ref: '#/components/schemas/NetworkResourceUtilization'
-            - description: ' The network field that contains a list of network metrics that are associated with the current instance. '
-      description: 'Utilization metrics of the instance. '
+            - description: 'The network field that contains a list of network metrics that are associated with the current instance. '
+      description: 'Utilization metrics for the instance. '
     OfferingClass:
       type: string
       enum:
@@ -3866,7 +4478,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/GenericBoolean'
             - description: Determines whether the recommended reservation is size flexible.
-      description: Details about the Amazon ES instances that Amazon Web Services recommends that you purchase.
+      description: Details about the Amazon OpenSearch Service instances that Amazon Web Services recommends that you purchase.
     ElastiCacheInstanceDetails:
       type: object
       properties:
@@ -3897,6 +4509,8 @@ components:
       description: Details about the Amazon ElastiCache instances that Amazon Web Services recommends that you purchase.
     Entity:
       type: string
+    ErrorMessage:
+      type: string
     Estimated:
       type: boolean
     Expressions:
@@ -3918,7 +4532,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/MatchOptions'
             - description: The match options that you can use to filter your results. <code>MatchOptions</code> is only applicable for actions related to Cost Category. The default values for <code>MatchOptions</code> are <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.
-      description: '<p>The values that are available for a tag.</p> <p>If <code>Values</code> and <code>Key</code> aren''t specified, the <code>ABSENT</code> <code>MatchOption</code> is applied to all tags. That is, it''s filtered on resources with no tags.</p> <p>If <code>Values</code> is provided and <code>Key</code> isn''t specified, the <code>ABSENT</code> <code>MatchOption</code> is applied to the tag <code>Key</code> only. That is, it''s filtered on resources without the given tag key.</p>'
+      description: '<p>The values that are available for a tag.</p> <p>If <code>Values</code> and <code>Key</code> aren''t specified, the <code>ABSENT</code> <code>MatchOption</code> is applied to all tags. That is, it''s filtered on resources with no tags.</p> <p>If <code>Key</code> is provided and <code>Values</code> isn''t specified, the <code>ABSENT</code> <code>MatchOption</code> is applied to the tag <code>Key</code> only. That is, it''s filtered on resources without the given tag key.</p>'
     FindingReasonCode:
       type: string
       enum:
@@ -3966,6 +4580,45 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ForecastResult'
+    GenerationStatus:
+      type: string
+      enum:
+        - SUCCEEDED
+        - PROCESSING
+        - FAILED
+    RecommendationId:
+      type: string
+      pattern: '^[\S\s]{8}-[\S\s]{4}-[\S\s]{4}-[\S\s]{4}-[\S\s]{12}$'
+      minLength: 36
+      maxLength: 36
+    GenerationSummary:
+      type: object
+      properties:
+        RecommendationId:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationId'
+            - description: Indicates the ID for this specific recommendation.
+        GenerationStatus:
+          allOf:
+            - $ref: '#/components/schemas/GenerationStatus'
+            - description: 'Indicates whether the recommendation generation succeeded, is processing, or failed.'
+        GenerationStartedTime:
+          allOf:
+            - $ref: '#/components/schemas/ZonedDateTime'
+            - description: Indicates the start time of the recommendation generation.
+        GenerationCompletionTime:
+          allOf:
+            - $ref: '#/components/schemas/ZonedDateTime'
+            - description: Indicates the completion time of the recommendation generation.
+        EstimatedCompletionTime:
+          allOf:
+            - $ref: '#/components/schemas/ZonedDateTime'
+            - description: Indicates the estimated time for when the recommendation generation will complete.
+      description: The summary of the Savings Plans recommendation generation.
+    GenerationSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GenerationSummary'
     TotalImpactFilter:
       type: object
       required:
@@ -4061,7 +4714,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/SortOrder'
             - description: The order that's used to sort the data.
-      description: The details of how to sort the data.
+      description: The details for how to sort the data.
     LookbackPeriodInDays:
       type: string
       enum:
@@ -4196,7 +4849,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/GenericBoolean'
             - description: 'The option to consider RI or Savings Plans discount benefits in your savings calculation. The default value is <code>TRUE</code>. '
-      description: 'You can use <code>RightsizingRecommendationConfiguration</code> to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings that are associated with recommendations with consideration of existing Savings Plans or RI benefits, or neither. '
+      description: 'You can use <code>RightsizingRecommendationConfiguration</code> to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings that are associated with recommendations with consideration of existing Savings Plans or Reserved Instance (RI) benefits, or neither. '
     RightsizingRecommendationMetadata:
       type: object
       properties:
@@ -4261,7 +4914,7 @@ components:
         GenerationTimestamp:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: The timestamp showing when the recommendations were generated.
+            - description: The timestamp that shows when the recommendations were generated.
         AdditionalMetadata:
           allOf:
             - $ref: '#/components/schemas/GenericString'
@@ -4285,15 +4938,15 @@ components:
         PaymentOption:
           allOf:
             - $ref: '#/components/schemas/PaymentOption'
-            - description: The payment option used to generate the recommendation.
+            - description: The payment option that's used to generate the recommendation.
         LookbackPeriodInDays:
           allOf:
             - $ref: '#/components/schemas/LookbackPeriodInDays'
-            - description: 'The lookback period in days, used to generate the recommendation.'
+            - description: The lookback period in days that's used to generate the recommendation.
         SavingsPlansPurchaseRecommendationDetails:
           allOf:
             - $ref: '#/components/schemas/SavingsPlansPurchaseRecommendationDetailList'
-            - description: Details for the Savings Plans we recommend that you purchase to cover existing Savings Plans eligible workloads.
+            - description: Details for the Savings Plans that we recommend that you purchase to cover existing Savings Plans eligible workloads.
         SavingsPlansPurchaseRecommendationSummary:
           allOf:
             - $ref: '#/components/schemas/SavingsPlansPurchaseRecommendationSummary'
@@ -4319,7 +4972,7 @@ components:
         Savings:
           allOf:
             - $ref: '#/components/schemas/SavingsPlansSavings'
-            - description: 'The amount saved by using existing Savings Plans. Savings returns both net savings from Savings Plans, as well as the <code>onDemandCostEquivalent</code> of the Savings Plans when considering the utilization rate.'
+            - description: The amount that's saved by using existing Savings Plans. Savings returns both net savings from Savings Plans and also the <code>onDemandCostEquivalent</code> of the Savings Plans when considering the utilization rate.
         AmortizedCommitment:
           allOf:
             - $ref: '#/components/schemas/SavingsPlansAmortizedCommitment'
@@ -4329,11 +4982,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SavingsPlansUtilizationByTime'
-    TagKey:
-      type: string
-      pattern: '[\S\s]*'
-      minLength: 0
-      maxLength: 1024
     TagList:
       type: array
       items:
@@ -4471,10 +5119,14 @@ components:
         ESInstanceDetails:
           allOf:
             - $ref: '#/components/schemas/ESInstanceDetails'
-            - description: The Amazon ES instances that Amazon Web Services recommends that you purchase.
+            - description: The Amazon OpenSearch Service instances that Amazon Web Services recommends that you purchase.
       description: Details about the instances that Amazon Web Services recommends that you purchase.
     Key:
       type: string
+    RecommendationIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecommendationId'
     MatchOption:
       type: string
       enum:
@@ -4485,6 +5137,7 @@ components:
         - CONTAINS
         - CASE_SENSITIVE
         - CASE_INSENSITIVE
+        - GREATER_THAN_OR_EQUAL
     MetricAmount:
       type: string
     MetricName:
@@ -4505,7 +5158,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TargetInstancesList'
             - description: Determines whether this instance type is the Amazon Web Services default recommendation.
-      description: ' Details on the modification recommendation.'
+      description: Details for the modification recommendation.
     NetRISavings:
       type: string
     NumericOperator:
@@ -4636,7 +5289,7 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: The account that this RI recommendation is for.
+            - description: The account that this Reserved Instance (RI) recommendation is for.
         InstanceDetails:
           allOf:
             - $ref: '#/components/schemas/InstanceDetails'
@@ -4688,11 +5341,11 @@ components:
         EstimatedMonthlySavingsAmount:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: How much Amazon Web Services estimates that this specific recommendation could save you in a month.
+            - description: How much Amazon Web Services estimates that this specific recommendation might save you in a month.
         EstimatedMonthlySavingsPercentage:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: 'How much Amazon Web Services estimates that this specific recommendation could save you in a month, as a percentage of your overall costs.'
+            - description: 'How much Amazon Web Services estimates that this specific recommendation might save you in a month, as a percentage of your overall costs.'
         EstimatedMonthlyOnDemandCost:
           allOf:
             - $ref: '#/components/schemas/GenericString'
@@ -4700,7 +5353,7 @@ components:
         EstimatedReservationCostForLookbackPeriod:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: How much Amazon Web Services estimates that you would have spent for all usage during the specified historical period if you had a reservation.
+            - description: How much Amazon Web Services estimates that you might spend for all usage during the specified historical period if you had a reservation.
         UpfrontCost:
           allOf:
             - $ref: '#/components/schemas/GenericString'
@@ -4734,6 +5387,37 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ReservationUtilizationGroup'
+    ResourceTagKey:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 1
+      maxLength: 128
+    ResourceTagValue:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 0
+      maxLength: 256
+    ResourceTag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/ResourceTagKey'
+            - description: 'The key that''s associated with the tag. '
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/ResourceTagValue'
+            - description: 'The value that''s associated with the tag. '
+      description: '<p>The tag structure that contains a tag key and value. </p> <note> <p>Tagging is supported only for the following Cost Explorer resource types: <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalyMonitor.html"> <code>AnomalyMonitor</code> </a>, <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html"> <code>AnomalySubscription</code> </a>, <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategory.html"> <code>CostCategory</code> </a>.</p> </note>'
+    ResourceTagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceTagKey'
+      minItems: 0
+      maxItems: 200
     ResultByTime:
       type: object
       properties:
@@ -4797,7 +5481,7 @@ components:
         FindingReasonCodes:
           allOf:
             - $ref: '#/components/schemas/FindingReasonCodes'
-            - description: ' The list of possible reasons why the recommendation is generated such as under or over utilization of specific metrics (for example, CPU, Memory, Network). '
+            - description: 'The list of possible reasons why the recommendation is generated, such as under- or over-utilization of specific metrics (for example, CPU, Memory, Network). '
       description: Recommendations to rightsize resources.
     RootCause:
       type: object
@@ -4805,7 +5489,7 @@ components:
         Service:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: 'The Amazon Web Services service name that''s associated with the cost anomaly. '
+            - description: 'The Amazon Web Service name that''s associated with the cost anomaly. '
         Region:
           allOf:
             - $ref: '#/components/schemas/GenericString'
@@ -4818,7 +5502,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/GenericString'
             - description: 'The <code>UsageType</code> value that''s associated with the cost anomaly. '
-      description: 'The combination of Amazon Web Services service, linked account, Region, and usage type where a cost anomaly is observed. '
+        LinkedAccountName:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The member account name value that's associated with the cost anomaly.
+      description: 'The combination of Amazon Web Service, linked account, linked account name, Region, and usage type where a cost anomaly is observed. The linked account name will only be available when the account name can be identified.'
     SavingsPlanArn:
       type: string
     SavingsPlansAmortizedCommitment:
@@ -4843,7 +5531,7 @@ components:
         SpendCoveredBySavingsPlans:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: The amount of your Amazon Web Services usage that is covered by a Savings Plans.
+            - description: The amount of your Amazon Web Services usage that's covered by a Savings Plans.
         OnDemandCost:
           allOf:
             - $ref: '#/components/schemas/GenericString'
@@ -4870,7 +5558,7 @@ components:
             - description: The amount of Savings Plans eligible usage that the Savings Plans covered.
         TimePeriod:
           $ref: '#/components/schemas/DateInterval'
-      description: The amount of Savings Plans eligible usage that is covered by Savings Plans. All calculations consider the On-Demand equivalent of your Savings Plans usage.
+      description: The amount of Savings Plans eligible usage that's covered by Savings Plans. All calculations consider the On-Demand equivalent of your Savings Plans usage.
     SavingsPlansDataType:
       type: string
       enum:
@@ -4944,7 +5632,7 @@ components:
         EstimatedOnDemandCostWithCurrentCommitment:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The estimated On-Demand costs you would expect with no additional commitment. It''s based on your usage of the selected time period and the Savings Plans you own. '
+            - description: 'The estimated On-Demand costs you expect with no additional commitment. It''s based on your usage of the selected time period and the Savings Plans you own. '
       description: Summary metrics for your Savings Plans Purchase Recommendations.
     SavingsPlansPurchaseRecommendationDetail:
       type: object
@@ -4980,7 +5668,7 @@ components:
         EstimatedOnDemandCostWithCurrentCommitment:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The estimated On-Demand costs you would expect with no additional commitment, based on your usage of the selected time period and the Savings Plans you own. '
+            - description: ' The estimated On-Demand costs you expect with no additional commitment, based on your usage of the selected time period and the Savings Plans you own. '
         EstimatedSavingsAmount:
           allOf:
             - $ref: '#/components/schemas/GenericString'
@@ -5061,12 +5749,12 @@ components:
         Savings:
           allOf:
             - $ref: '#/components/schemas/SavingsPlansSavings'
-            - description: The amount saved by using existing Savings Plans. Savings returns both net savings from Savings Plans as well as the <code>onDemandCostEquivalent</code> of the Savings Plans when considering the utilization rate.
+            - description: The amount that's saved by using existing Savings Plans. Savings returns both net savings from Savings Plans and also the <code>onDemandCostEquivalent</code> of the Savings Plans when considering the utilization rate.
         AmortizedCommitment:
           allOf:
             - $ref: '#/components/schemas/SavingsPlansAmortizedCommitment'
             - description: The total amortized commitment for a Savings Plans. This includes the sum of the upfront and recurring Savings Plans fees.
-      description: 'The amount of Savings Plans utilization, in hours.'
+      description: The amount of Savings Plans utilization (in hours).
     SavingsPlansUtilizationDetail:
       type: object
       properties:
@@ -5085,12 +5773,12 @@ components:
         Savings:
           allOf:
             - $ref: '#/components/schemas/SavingsPlansSavings'
-            - description: The amount saved by using existing Savings Plans. Savings returns both net savings from savings plans as well as the <code>onDemandCostEquivalent</code> of the Savings Plans when considering the utilization rate.
+            - description: The amount saved by using existing Savings Plans. Savings returns both net savings from savings plans and also the <code>onDemandCostEquivalent</code> of the Savings Plans when considering the utilization rate.
         AmortizedCommitment:
           allOf:
             - $ref: '#/components/schemas/SavingsPlansAmortizedCommitment'
             - description: The total amortized commitment for a Savings Plans. Includes the sum of the upfront and recurring Savings Plans fees.
-      description: 'A single daily or monthly Savings Plans utilization rate, and details for your account. A management account in an organization have access to member accounts. You can use <code>GetDimensionValues</code> to determine the possible dimension values. '
+      description: 'A single daily or monthly Savings Plans utilization rate and details for your account. A management account in an organization have access to member accounts. You can use <code>GetDimensionValues</code> to determine the possible dimension values. '
     SortDefinitionKey:
       type: string
       pattern: '[\S\s]*'
@@ -5103,7 +5791,7 @@ components:
         - DESCENDING
     SubscriberAddress:
       type: string
-      pattern: '(^[a-zA-Z0-9.!#$%&''*+=?^_‘{|}~-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$)|(^arn:(aws[a-zA-Z-]*):sns:[a-zA-Z0-9-]+:[0-9]{12}:[a-zA-Z0-9_-]+$)'
+      pattern: '(^[a-zA-Z0-9.!#$%&''*+=?^_‘{|}~-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$)|(^arn:(aws[a-zA-Z-]*):sns:[a-zA-Z0-9-]+:[0-9]{12}:[a-zA-Z0-9_-]+(\.fifo)?$)'
       minLength: 6
       maxLength: 302
     SubscriberType:
@@ -5162,8 +5850,30 @@ components:
         PlatformDifferences:
           allOf:
             - $ref: '#/components/schemas/PlatformDifferences'
-            - description: ' Explains the actions you might need to take in order to successfully migrate your workloads from the current instance type to the recommended instance type. '
+            - description: 'Explains the actions that you might need to take to successfully migrate your workloads from the current instance type to the recommended instance type. '
       description: Details on recommended instance.
+    UpdateCostAllocationTagsStatusError:
+      type: object
+      properties:
+        TagKey:
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: 'The key for the cost allocation tag. '
+        Code:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'An error code representing why the action failed on this entry. '
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: 'A message explaining why the action failed on this entry. '
+      description: 'Gives a detailed description of the result of an action. It''s on each cost allocation tag entry in the request. '
+    UpdateCostAllocationTagsStatusErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/UpdateCostAllocationTagsStatusError'
+      minItems: 0
+      maxItems: 20
     UtilizationByTime:
       type: object
       properties:

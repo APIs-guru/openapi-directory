@@ -1,0 +1,2535 @@
+openapi: 3.0.0
+info:
+  version: '2020-08-18'
+  x-release: v4
+  title: Amazon Managed Grafana
+  description: '<p>Amazon Managed Grafana is a fully managed and secure data visualization service that you can use to instantly query, correlate, and visualize operational metrics, logs, and traces from multiple sources. Amazon Managed Grafana makes it easy to deploy, operate, and scale Grafana, a widely deployed data visualization tool that is popular for its extensible data support.</p> <p>With Amazon Managed Grafana, you create logically isolated Grafana servers called <i>workspaces</i>. In a workspace, you can create Grafana dashboards and visualizations to analyze your metrics, logs, and traces without having to build, package, or deploy any hardware to run Grafana servers. </p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: grafana
+  x-aws-signingName: grafana
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/grafana-2020-08-18.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/grafana/'
+servers:
+  - url: 'http://grafana.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon Managed Grafana multi-region endpoint
+  - url: 'https://grafana.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon Managed Grafana multi-region endpoint
+  - url: 'http://grafana.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Managed Grafana endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://grafana.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Managed Grafana endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  '/workspaces/{workspaceId}/licenses/{licenseType}':
+    post:
+      operationId: AssociateLicense
+      description: 'Assigns a Grafana Enterprise license to a workspace. Upgrading to Grafana Enterprise incurs additional fees. For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html">Upgrade a workspace to Grafana Enterprise</a>.'
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateLicenseResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: licenseType
+          in: path
+          required: true
+          description: The type of license to associate with the workspace.
+          schema:
+            type: string
+            enum:
+              - ENTERPRISE
+              - ENTERPRISE_FREE_TRIAL
+        - name: workspaceId
+          in: path
+          required: true
+          description: The ID of the workspace to associate the license with.
+          schema:
+            type: string
+            pattern: '^g-[0-9a-f]{10}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DisassociateLicense
+      description: Removes the Grafana Enterprise license from a workspace.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateLicenseResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: licenseType
+          in: path
+          required: true
+          description: The type of license to remove from the workspace.
+          schema:
+            type: string
+            enum:
+              - ENTERPRISE
+              - ENTERPRISE_FREE_TRIAL
+        - name: workspaceId
+          in: path
+          required: true
+          description: The ID of the workspace to remove the Grafana Enterprise license from.
+          schema:
+            type: string
+            pattern: '^g-[0-9a-f]{10}$'
+  /workspaces:
+    post:
+      operationId: CreateWorkspace
+      description: '<p>Creates a <i>workspace</i>. In a workspace, you can create Grafana dashboards and visualizations to analyze your metrics, logs, and traces. You don''t have to build, package, or deploy any hardware to run the Grafana server.</p> <p>Don''t use <code>CreateWorkspace</code> to modify an existing workspace. Instead, use <a href="https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspace.html">UpdateWorkspace</a>.</p>'
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorkspaceResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - accountAccessType
+                - authenticationProviders
+                - permissionType
+              properties:
+                accountAccessType:
+                  description: 'Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in other accounts in the same organization. If you specify <code>ORGANIZATION</code>, you must specify which organizational units the workspace can access in the <code>workspaceOrganizationalUnits</code> parameter.'
+                  type: string
+                  enum:
+                    - CURRENT_ACCOUNT
+                    - ORGANIZATION
+                authenticationProviders:
+                  description: 'Specifies whether this workspace uses SAML 2.0, IAM Identity Center (successor to Single Sign-On), or both to authenticate users for using the Grafana console within a workspace. For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html">User authentication in Amazon Managed Grafana</a>.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AuthenticationProviderTypes'
+                clientToken:
+                  description: 'A unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
+                  type: string
+                  pattern: '^[!-~]{1,64}$'
+                configuration:
+                  description: 'The configuration string for the workspace that you create. For more information about the format and configuration options available, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html">Working in your Grafana workspace</a>.'
+                  type: string
+                  minLength: 2
+                  maxLength: 65536
+                organizationRoleName:
+                  description: The name of an IAM role that already exists to use with Organizations to access Amazon Web Services data sources and notification channels in other accounts in an organization.
+                  type: string
+                  minLength: 1
+                  maxLength: 2048
+                  format: password
+                permissionType:
+                  description: '<p>If you specify <code>SERVICE_MANAGED</code> on AWS Grafana console, Amazon Managed Grafana automatically creates the IAM roles and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels. In the CLI mode, the permissionType <code>SERVICE_MANAGED</code> will not create the IAM role for you. The ability for the Amazon Managed Grafana to create the IAM role on behalf of the user is supported only in the Amazon Managed Grafana AWS console. Use only the <code>CUSTOMER_MANAGED</code> permission type when creating a workspace in the CLI. </p> <p>If you specify <code>CUSTOMER_MANAGED</code>, you will manage those roles and permissions yourself. If you are creating this workspace in a member account of an organization that is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, you must choose <code>CUSTOMER_MANAGED</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html">Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels</a>.</p>'
+                  type: string
+                  enum:
+                    - CUSTOMER_MANAGED
+                    - SERVICE_MANAGED
+                stackSetName:
+                  description: The name of the CloudFormation stack set to use to generate IAM roles to be used for this workspace.
+                  type: string
+                tags:
+                  description: The list of tags associated with the workspace.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+                vpcConfiguration:
+                  description: The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.
+                  type: object
+                  properties:
+                    securityGroupIds:
+                      allOf:
+                        - $ref: '#/components/schemas/SecurityGroupIds'
+                        - description: The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.
+                    subnetIds:
+                      allOf:
+                        - $ref: '#/components/schemas/SubnetIds'
+                        - description: The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.
+                workspaceDataSources:
+                  description: '<p>Specify the Amazon Web Services data sources that you want to be queried in this workspace. Specifying these data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow Amazon Managed Grafana to read data from these sources. You must still add them as data sources in the Grafana console in the workspace.</p> <p>If you don''t specify a data source here, you can still add it as a data source in the workspace console later. However, you will then have to manually configure permissions for it.</p>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DataSourceType'
+                workspaceDescription:
+                  description: '<p>A description for the workspace. This is used only to help you identify this workspace.</p> <p>Pattern: <code>^[\\p{L}\\p{Z}\\p{N}\\p{P}]{0,2048}$</code> </p>'
+                  type: string
+                  minLength: 0
+                  maxLength: 2048
+                  format: password
+                workspaceName:
+                  description: The name for the workspace. It does not have to be unique.
+                  type: string
+                  pattern: '^[a-zA-Z0-9-._~]{1,255}$'
+                  format: password
+                workspaceNotificationDestinations:
+                  description: Specify the Amazon Web Services notification channels that you plan to use in this workspace. Specifying these data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow Amazon Managed Grafana to use these channels.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/NotificationDestinationType'
+                workspaceOrganizationalUnits:
+                  description: 'Specifies the organizational units that this workspace is allowed to use data sources from, if this workspace is in an account that is part of an organization.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/OrganizationalUnit'
+                workspaceRoleArn:
+                  description: 'The workspace needs an IAM role that grants permissions to the Amazon Web Services resources that the workspace will view data from. If you already have a role that you want to use, specify it here. The permission type should be set to <code>CUSTOMER_MANAGED</code>.'
+                  type: string
+                  minLength: 1
+                  maxLength: 2048
+                  format: password
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListWorkspaces
+      description: 'Returns a list of Amazon Managed Grafana workspaces in the account, with some information about each workspace. For more complete information about one workspace, use <a href="https://docs.aws.amazon.com/AAMG/latest/APIReference/API_DescribeWorkspace.html">DescribeWorkspace</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWorkspacesResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of workspaces to include in the results.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of workspaces to return. (You receive this token from a previous <code>ListWorkspaces</code> operation.)
+          schema:
+            type: string
+  '/workspaces/{workspaceId}/apikeys':
+    post:
+      operationId: CreateWorkspaceApiKey
+      description: 'Creates a Grafana API key for the workspace. This key can be used to authenticate requests sent to the workspace''s HTTP API. See <a href="https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html">https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html</a> for available APIs and example requests.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorkspaceApiKeyResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '486':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          description: The ID of the workspace to create an API key.
+          schema:
+            type: string
+            pattern: '^g-[0-9a-f]{10}$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - keyName
+                - keyRole
+                - secondsToLive
+              properties:
+                keyName:
+                  description: Specifies the name of the key. Keynames must be unique to the workspace.
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                keyRole:
+                  description: '<p>Specifies the permission level of the key.</p> <p> Valid values: <code>VIEWER</code>|<code>EDITOR</code>|<code>ADMIN</code> </p>'
+                  type: string
+                secondsToLive:
+                  description: Specifies the time in seconds until the key expires. Keys can be valid for up to 30 days.
+                  type: integer
+                  minimum: 1
+                  maximum: 2592000
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/workspaces/{workspaceId}':
+    delete:
+      operationId: DeleteWorkspace
+      description: Deletes an Amazon Managed Grafana workspace.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteWorkspaceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          description: The ID of the workspace to delete.
+          schema:
+            type: string
+            pattern: '^g-[0-9a-f]{10}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeWorkspace
+      description: Displays information about one Amazon Managed Grafana workspace.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeWorkspaceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          description: The ID of the workspace to display information about.
+          schema:
+            type: string
+            pattern: '^g-[0-9a-f]{10}$'
+    put:
+      operationId: UpdateWorkspace
+      description: '<p>Modifies an existing Amazon Managed Grafana workspace. If you use this operation and omit any optional parameters, the existing values of those parameters are not changed.</p> <p>To modify the user authentication methods that the workspace uses, such as SAML or IAM Identity Center, use <a href="https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspaceAuthentication.html">UpdateWorkspaceAuthentication</a>.</p> <p>To modify which users in the workspace have the <code>Admin</code> and <code>Editor</code> Grafana roles, use <a href="https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html">UpdatePermissions</a>.</p>'
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateWorkspaceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          description: The ID of the workspace to update.
+          schema:
+            type: string
+            pattern: '^g-[0-9a-f]{10}$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accountAccessType:
+                  description: 'Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in other accounts in the same organization. If you specify <code>ORGANIZATION</code>, you must specify which organizational units the workspace can access in the <code>workspaceOrganizationalUnits</code> parameter.'
+                  type: string
+                  enum:
+                    - CURRENT_ACCOUNT
+                    - ORGANIZATION
+                organizationRoleName:
+                  description: The name of an IAM role that already exists to use to access resources through Organizations.
+                  type: string
+                  minLength: 1
+                  maxLength: 2048
+                  format: password
+                permissionType:
+                  description: '<p>If you specify <code>Service Managed</code>, Amazon Managed Grafana automatically creates the IAM roles and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels.</p> <p>If you specify <code>CUSTOMER_MANAGED</code>, you will manage those roles and permissions yourself. If you are creating this workspace in a member account of an organization and that account is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, you must choose <code>CUSTOMER_MANAGED</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html">Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels</a> </p>'
+                  type: string
+                  enum:
+                    - CUSTOMER_MANAGED
+                    - SERVICE_MANAGED
+                removeVpcConfiguration:
+                  description: <p>Whether to remove the VPC configuration from the workspace.</p> <p>Setting this to <code>true</code> and providing a <code>vpcConfiguration</code> to set will return an error.</p>
+                  type: boolean
+                stackSetName:
+                  description: The name of the CloudFormation stack set to use to generate IAM roles to be used for this workspace.
+                  type: string
+                vpcConfiguration:
+                  description: The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.
+                  type: object
+                  properties:
+                    securityGroupIds:
+                      allOf:
+                        - $ref: '#/components/schemas/SecurityGroupIds'
+                        - description: The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.
+                    subnetIds:
+                      allOf:
+                        - $ref: '#/components/schemas/SubnetIds'
+                        - description: The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.
+                workspaceDataSources:
+                  description: '<p>Specify the Amazon Web Services data sources that you want to be queried in this workspace. Specifying these data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow Amazon Managed Grafana to read data from these sources. You must still add them as data sources in the Grafana console in the workspace.</p> <p>If you don''t specify a data source here, you can still add it as a data source later in the workspace console. However, you will then have to manually configure permissions for it.</p>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DataSourceType'
+                workspaceDescription:
+                  description: A description for the workspace. This is used only to help you identify this workspace.
+                  type: string
+                  minLength: 0
+                  maxLength: 2048
+                  format: password
+                workspaceName:
+                  description: A new name for the workspace to update.
+                  type: string
+                  pattern: '^[a-zA-Z0-9-._~]{1,255}$'
+                  format: password
+                workspaceNotificationDestinations:
+                  description: Specify the Amazon Web Services notification channels that you plan to use in this workspace. Specifying these data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow Amazon Managed Grafana to use these channels.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/NotificationDestinationType'
+                workspaceOrganizationalUnits:
+                  description: 'Specifies the organizational units that this workspace is allowed to use data sources from, if this workspace is in an account that is part of an organization.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/OrganizationalUnit'
+                workspaceRoleArn:
+                  description: 'The workspace needs an IAM role that grants permissions to the Amazon Web Services resources that the workspace will view data from. If you already have a role that you want to use, specify it here. If you omit this field and you specify some Amazon Web Services resources in <code>workspaceDataSources</code> or <code>workspaceNotificationDestinations</code>, a new IAM role with the necessary permissions is automatically created.'
+                  type: string
+                  minLength: 1
+                  maxLength: 2048
+                  format: password
+  '/workspaces/{workspaceId}/apikeys/{keyName}':
+    delete:
+      operationId: DeleteWorkspaceApiKey
+      description: Deletes a Grafana API key for the workspace.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteWorkspaceApiKeyResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: keyName
+          in: path
+          required: true
+          description: The name of the API key to delete.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: workspaceId
+          in: path
+          required: true
+          description: The ID of the workspace to delete.
+          schema:
+            type: string
+            pattern: '^g-[0-9a-f]{10}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/workspaces/{workspaceId}/authentication':
+    get:
+      operationId: DescribeWorkspaceAuthentication
+      description: Displays information about the authentication methods used in one Amazon Managed Grafana workspace.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeWorkspaceAuthenticationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          description: The ID of the workspace to return authentication information about.
+          schema:
+            type: string
+            pattern: '^g-[0-9a-f]{10}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: UpdateWorkspaceAuthentication
+      description: 'Use this operation to define the identity provider (IdP) that this workspace authenticates users from, using SAML. You can also map SAML assertion attributes to workspace user information and define which groups in the assertion attribute are to have the <code>Admin</code> and <code>Editor</code> roles in the workspace.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateWorkspaceAuthenticationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          description: The ID of the workspace to update the authentication for.
+          schema:
+            type: string
+            pattern: '^g-[0-9a-f]{10}$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - authenticationProviders
+              properties:
+                authenticationProviders:
+                  description: 'Specifies whether this workspace uses SAML 2.0, IAM Identity Center (successor to Single Sign-On), or both to authenticate users for using the Grafana console within a workspace. For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html">User authentication in Amazon Managed Grafana</a>.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AuthenticationProviderTypes'
+                samlConfiguration:
+                  description: 'A structure containing information about how this workspace works with SAML. '
+                  type: object
+                  properties:
+                    allowedOrganizations:
+                      allOf:
+                        - $ref: '#/components/schemas/AllowedOrganizations'
+                        - description: 'Lists which organizations defined in the SAML assertion are allowed to use the Amazon Managed Grafana workspace. If this is empty, all organizations in the assertion attribute have access.'
+                    assertionAttributes:
+                      allOf:
+                        - $ref: '#/components/schemas/AssertionAttributes'
+                        - description: A structure that defines which attributes in the SAML assertion are to be used to define information about the users authenticated by that IdP to use the workspace.
+                    idpMetadata:
+                      allOf:
+                        - $ref: '#/components/schemas/IdpMetadata'
+                        - description: A structure containing the identity provider (IdP) metadata used to integrate the identity provider with this workspace.
+                    loginValidityDuration:
+                      allOf:
+                        - $ref: '#/components/schemas/LoginValidityDuration'
+                        - description: 'How long a sign-on session by a SAML user is valid, before the user has to sign on again.'
+                    roleValues:
+                      allOf:
+                        - $ref: '#/components/schemas/RoleValues'
+                        - description: A structure containing arrays that map group names in the SAML assertion to the Grafana <code>Admin</code> and <code>Editor</code> roles in the workspace.
+  '/workspaces/{workspaceId}/configuration':
+    get:
+      operationId: DescribeWorkspaceConfiguration
+      description: Gets the current configuration string for the given workspace.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeWorkspaceConfigurationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          description: The ID of the workspace to get configuration information for.
+          schema:
+            type: string
+            pattern: '^g-[0-9a-f]{10}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateWorkspaceConfiguration
+      description: Updates the configuration string for the given workspace
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateWorkspaceConfigurationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          description: The ID of the workspace to update.
+          schema:
+            type: string
+            pattern: '^g-[0-9a-f]{10}$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - configuration
+              properties:
+                configuration:
+                  description: 'The new configuration string for the workspace. For more information about the format and configuration options available, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html">Working in your Grafana workspace</a>.'
+                  type: string
+                  minLength: 2
+                  maxLength: 65536
+  '/workspaces/{workspaceId}/permissions':
+    get:
+      operationId: ListPermissions
+      description: 'Lists the users and groups who have the Grafana <code>Admin</code> and <code>Editor</code> roles in this workspace. If you use this operation without specifying <code>userId</code> or <code>groupId</code>, the operation returns the roles of all users and groups. If you specify a <code>userId</code> or a <code>groupId</code>, only the roles for that user or group are returned. If you do this, you can specify only one <code>userId</code> or one <code>groupId</code>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPermissionsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: groupId
+          in: query
+          required: false
+          description: (Optional) Limits the results to only the group that matches this ID.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 47
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to include in the response.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token to use when requesting the next set of results. You received this token from a previous <code>ListPermissions</code> operation.
+          schema:
+            type: string
+        - name: userId
+          in: query
+          required: false
+          description: (Optional) Limits the results to only the user that matches this ID.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 47
+        - name: userType
+          in: query
+          required: false
+          description: '(Optional) If you specify <code>SSO_USER</code>, then only the permissions of IAM Identity Center users are returned. If you specify <code>SSO_GROUP</code>, only the permissions of IAM Identity Center groups are returned.'
+          schema:
+            type: string
+            enum:
+              - SSO_USER
+              - SSO_GROUP
+        - name: workspaceId
+          in: path
+          required: true
+          description: The ID of the workspace to list permissions for. This parameter is required.
+          schema:
+            type: string
+            pattern: '^g-[0-9a-f]{10}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    patch:
+      operationId: UpdatePermissions
+      description: Updates which users in a workspace have the Grafana <code>Admin</code> or <code>Editor</code> roles.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePermissionsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          description: The ID of the workspace to update.
+          schema:
+            type: string
+            pattern: '^g-[0-9a-f]{10}$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - updateInstructionBatch
+              properties:
+                updateInstructionBatch:
+                  description: An array of structures that contain the permission updates to make.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/UpdateInstruction'
+                  minItems: 0
+                  maxItems: 20
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: 'The <code>ListTagsForResource</code> operation returns the tags that are associated with the Amazon Managed Service for Grafana resource specified by the <code>resourceArn</code>. Currently, the only resource that can be tagged is a workspace. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the resource the list of tags are associated with.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: '<p>The <code>TagResource</code> operation associates tags with an Amazon Managed Grafana resource. Currently, the only resource that can be tagged is workspaces. </p> <p>If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the resource the tag is associated with.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: 'The list of tag keys and values to associate with the resource. You can associate tag keys only, tags (key and values) only or a combination of tag keys and tags.'
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: 'The <code>UntagResource</code> operation removes the association of the tag with the Amazon Managed Grafana resource. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: 'The ARN of the resource the tag association is removed from. '
+          schema:
+            type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: The key values of the tag to be removed from the resource.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    AssociateLicenseResponse:
+      type: object
+      required:
+        - workspace
+      properties:
+        workspace:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceDescription'
+            - description: A structure containing data about the workspace.
+    ResourceNotFoundException: {}
+    ThrottlingException: {}
+    ValidationException: {}
+    AccessDeniedException: {}
+    InternalServerException: {}
+    CreateWorkspaceResponse:
+      type: object
+      required:
+        - workspace
+      properties:
+        workspace:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceDescription'
+            - description: A structure containing data about the workspace that was created.
+    AuthenticationProviderTypes:
+      type: string
+      enum:
+        - AWS_SSO
+        - SAML
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    SecurityGroupIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityGroupId'
+      minItems: 1
+      maxItems: 100
+    SubnetIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubnetId'
+      minItems: 1
+      maxItems: 100
+    DataSourceType:
+      type: string
+      enum:
+        - AMAZON_OPENSEARCH_SERVICE
+        - CLOUDWATCH
+        - PROMETHEUS
+        - XRAY
+        - TIMESTREAM
+        - SITEWISE
+        - ATHENA
+        - REDSHIFT
+        - TWINMAKER
+    NotificationDestinationType:
+      type: string
+      enum:
+        - SNS
+    OrganizationalUnit:
+      type: string
+    ConflictException: {}
+    ServiceQuotaExceededException: {}
+    CreateWorkspaceApiKeyResponse:
+      type: object
+      required:
+        - key
+        - keyName
+        - workspaceId
+      properties:
+        key:
+          allOf:
+            - $ref: '#/components/schemas/ApiKeyToken'
+            - description: The key token. Use this value as a bearer token to authenticate HTTP requests to the workspace.
+        keyName:
+          allOf:
+            - $ref: '#/components/schemas/ApiKeyName'
+            - description: The name of the key that was created.
+        workspaceId:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The ID of the workspace that the key is valid for.
+    DeleteWorkspaceResponse:
+      type: object
+      required:
+        - workspace
+      properties:
+        workspace:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceDescription'
+            - description: A structure containing information about the workspace that was deleted.
+    DeleteWorkspaceApiKeyResponse:
+      type: object
+      required:
+        - keyName
+        - workspaceId
+      properties:
+        keyName:
+          allOf:
+            - $ref: '#/components/schemas/ApiKeyName'
+            - description: The name of the key that was deleted.
+        workspaceId:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The ID of the workspace where the key was deleted.
+    DescribeWorkspaceResponse:
+      type: object
+      required:
+        - workspace
+      properties:
+        workspace:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceDescription'
+            - description: A structure containing information about the workspace.
+    DescribeWorkspaceAuthenticationResponse:
+      type: object
+      required:
+        - authentication
+      properties:
+        authentication:
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationDescription'
+            - description: A structure containing information about the authentication methods used in the workspace.
+    DescribeWorkspaceConfigurationResponse:
+      type: object
+      required:
+        - configuration
+      properties:
+        configuration:
+          allOf:
+            - $ref: '#/components/schemas/OverridableConfigurationJson'
+            - description: 'The configuration string for the workspace that you requested. For more information about the format and configuration options available, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html">Working in your Grafana workspace</a>.'
+    DisassociateLicenseResponse:
+      type: object
+      required:
+        - workspace
+      properties:
+        workspace:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceDescription'
+            - description: A structure containing information about the workspace.
+    ListPermissionsResponse:
+      type: object
+      required:
+        - permissions
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token to use in a subsequent <code>ListPermissions</code> operation to return the next set of results.
+        permissions:
+          allOf:
+            - $ref: '#/components/schemas/PermissionEntryList'
+            - description: The permissions returned by the operation.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The list of tags that are associated with the resource.
+    ListWorkspacesResponse:
+      type: object
+      required:
+        - workspaces
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token to use when requesting the next set of workspaces.
+        workspaces:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceList'
+            - description: An array of structures that contain some information about the workspaces in the account.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    UpdatePermissionsResponse:
+      type: object
+      required:
+        - errors
+      properties:
+        errors:
+          allOf:
+            - $ref: '#/components/schemas/UpdateErrorList'
+            - description: 'An array of structures that contain the errors from the operation, if any.'
+    UpdateInstruction:
+      type: object
+      required:
+        - action
+        - role
+        - users
+      properties:
+        action:
+          allOf:
+            - $ref: '#/components/schemas/UpdateAction'
+            - description: Specifies whether this update is to add or revoke role permissions.
+        role:
+          allOf:
+            - $ref: '#/components/schemas/Role'
+            - description: The role to add or revoke for the user or the group specified in <code>users</code>.
+        users:
+          allOf:
+            - $ref: '#/components/schemas/UserList'
+            - description: A structure that specifies the user or group to add or revoke the role for.
+      description: 'Contains the instructions for one Grafana role permission update in a <a href="https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html">UpdatePermissions</a> operation.'
+    UpdateWorkspaceResponse:
+      type: object
+      required:
+        - workspace
+      properties:
+        workspace:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceDescription'
+            - description: A structure containing data about the workspace that was created.
+    UpdateWorkspaceAuthenticationResponse:
+      type: object
+      required:
+        - authentication
+      properties:
+        authentication:
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationDescription'
+            - description: A structure that describes the user authentication for this workspace after the update is made.
+    AllowedOrganizations:
+      type: array
+      items:
+        $ref: '#/components/schemas/AllowedOrganization'
+    AssertionAttributes:
+      type: object
+      properties:
+        email:
+          allOf:
+            - $ref: '#/components/schemas/AssertionAttribute'
+            - description: The name of the attribute within the SAML assertion to use as the email names for SAML users.
+        groups:
+          allOf:
+            - $ref: '#/components/schemas/AssertionAttribute'
+            - description: The name of the attribute within the SAML assertion to use as the user full "friendly" names for user groups.
+        login:
+          allOf:
+            - $ref: '#/components/schemas/AssertionAttribute'
+            - description: The name of the attribute within the SAML assertion to use as the login names for SAML users.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AssertionAttribute'
+            - description: The name of the attribute within the SAML assertion to use as the user full "friendly" names for SAML users.
+        org:
+          allOf:
+            - $ref: '#/components/schemas/AssertionAttribute'
+            - description: The name of the attribute within the SAML assertion to use as the user full "friendly" names for the users' organizations.
+        role:
+          allOf:
+            - $ref: '#/components/schemas/AssertionAttribute'
+            - description: The name of the attribute within the SAML assertion to use as the user roles.
+      description: A structure that defines which attributes in the IdP assertion are to be used to define information about the users authenticated by the IdP to use the workspace.
+    IdpMetadata:
+      type: object
+      properties:
+        url:
+          allOf:
+            - $ref: '#/components/schemas/IdpMetadataUrl'
+            - description: The URL of the location containing the IdP metadata.
+        xml:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The full IdP metadata, in XML format.'
+      description: 'A structure containing the identity provider (IdP) metadata used to integrate the identity provider with this workspace. You can specify the metadata either by providing a URL to its location in the <code>url</code> parameter, or by specifying the full metadata in XML format in the <code>xml</code> parameter. Specifying both will cause an error.'
+    LoginValidityDuration:
+      type: integer
+    RoleValues:
+      type: object
+      properties:
+        admin:
+          allOf:
+            - $ref: '#/components/schemas/RoleValueList'
+            - description: A list of groups from the SAML assertion attribute to grant the Grafana <code>Admin</code> role to.
+        editor:
+          allOf:
+            - $ref: '#/components/schemas/RoleValueList'
+            - description: A list of groups from the SAML assertion attribute to grant the Grafana <code>Editor</code> role to.
+      description: This structure defines which groups defined in the SAML assertion attribute are to be mapped to the Grafana <code>Admin</code> and <code>Editor</code> roles in the workspace. SAML authenticated users not part of <code>Admin</code> or <code>Editor</code> role groups have <code>Viewer</code> permission over the workspace.
+    UpdateWorkspaceConfigurationResponse:
+      type: object
+      properties: {}
+    AccountAccessType:
+      type: string
+      enum:
+        - CURRENT_ACCOUNT
+        - ORGANIZATION
+    AllowedOrganization:
+      type: string
+      minLength: 1
+      maxLength: 256
+    ApiKeyName:
+      type: string
+      minLength: 1
+      maxLength: 100
+    ApiKeyToken:
+      type: string
+      format: password
+    AssertionAttribute:
+      type: string
+      minLength: 1
+      maxLength: 256
+    LicenseType:
+      type: string
+      enum:
+        - ENTERPRISE
+        - ENTERPRISE_FREE_TRIAL
+    WorkspaceId:
+      type: string
+      pattern: '^g-[0-9a-f]{10}$'
+    AssociateLicenseRequest:
+      type: object
+      title: AssociateLicenseRequest
+      properties: {}
+    WorkspaceDescription:
+      type: object
+      required:
+        - authentication
+        - created
+        - dataSources
+        - endpoint
+        - grafanaVersion
+        - id
+        - modified
+        - status
+      properties:
+        accountAccessType:
+          allOf:
+            - $ref: '#/components/schemas/AccountAccessType'
+            - description: 'Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in other accounts in the same organization. If this is <code>ORGANIZATION</code>, the <code>workspaceOrganizationalUnits</code> parameter specifies which organizational units the workspace can access.'
+        authentication:
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationSummary'
+            - description: 'A structure that describes whether the workspace uses SAML, IAM Identity Center, or both methods for user authentication.'
+        created:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date that the workspace was created.
+        dataSources:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceTypesList'
+            - description: Specifies the Amazon Web Services data sources that have been configured to have IAM roles and permissions created to allow Amazon Managed Grafana to read data from these sources.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The user-defined description of the workspace.
+        endpoint:
+          allOf:
+            - $ref: '#/components/schemas/Endpoint'
+            - description: The URL that users can use to access the Grafana console in the workspace.
+        freeTrialConsumed:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether this workspace has already fully used its free trial for Grafana Enterprise.
+        freeTrialExpiration:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'If this workspace is currently in the free trial period for Grafana Enterprise, this value specifies when that free trial ends.'
+        grafanaVersion:
+          allOf:
+            - $ref: '#/components/schemas/GrafanaVersion'
+            - description: The version of Grafana supported in this workspace.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The unique ID of this workspace.
+        licenseExpiration:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'If this workspace has a full Grafana Enterprise license, this specifies when the license ends and will need to be renewed.'
+        licenseType:
+          allOf:
+            - $ref: '#/components/schemas/LicenseType'
+            - description: Specifies whether this workspace has a full Grafana Enterprise license or a free trial license.
+        modified:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The most recent date that the workspace was modified.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceName'
+            - description: The name of the workspace.
+        notificationDestinations:
+          allOf:
+            - $ref: '#/components/schemas/NotificationDestinationsList'
+            - description: 'The Amazon Web Services notification channels that Amazon Managed Grafana can automatically create IAM roles and permissions for, to allow Amazon Managed Grafana to use these channels.'
+        organizationRoleName:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationRoleName'
+            - description: The name of the IAM role that is used to access resources through Organizations.
+        organizationalUnits:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationalUnitList'
+            - description: 'Specifies the organizational units that this workspace is allowed to use data sources from, if this workspace is in an account that is part of an organization.'
+        permissionType:
+          allOf:
+            - $ref: '#/components/schemas/PermissionType'
+            - description: '<p>If this is <code>Service Managed</code>, Amazon Managed Grafana automatically creates the IAM roles and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels.</p> <p>If this is <code>CUSTOMER_MANAGED</code>, you manage those roles and permissions yourself. If you are creating this workspace in a member account of an organization and that account is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, you must choose <code>CUSTOMER_MANAGED</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html">Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels</a> </p>'
+        stackSetName:
+          allOf:
+            - $ref: '#/components/schemas/StackSetName'
+            - description: The name of the CloudFormation stack set that is used to generate IAM roles to be used for this workspace.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceStatus'
+            - description: The current status of the workspace.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The list of tags associated with the workspace.
+        vpcConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/VpcConfiguration'
+            - description: The configuration for connecting to data sources in a private VPC (Amazon Virtual Private Cloud).
+        workspaceRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The IAM role that grants permissions to the Amazon Web Services resources that the workspace will view data from. This role must already exist.
+      description: A structure containing information about an Amazon Managed Grafana workspace in your account.
+    AwsSsoAuthentication:
+      type: object
+      properties:
+        ssoClientId:
+          allOf:
+            - $ref: '#/components/schemas/SSOClientId'
+            - description: The ID of the IAM Identity Center-managed application that is created by Amazon Managed Grafana.
+      description: 'A structure containing information about how this workspace works with IAM Identity Center. '
+    AuthenticationProviders:
+      type: array
+      items:
+        $ref: '#/components/schemas/AuthenticationProviderTypes'
+    SamlAuthentication:
+      type: object
+      required:
+        - status
+      properties:
+        configuration:
+          allOf:
+            - $ref: '#/components/schemas/SamlConfiguration'
+            - description: 'A structure containing details about how this workspace works with SAML. '
+        status:
+          allOf:
+            - $ref: '#/components/schemas/SamlConfigurationStatus'
+            - description: Specifies whether the workspace's SAML configuration is complete.
+      description: 'A structure containing information about how this workspace works with SAML. '
+    AuthenticationDescription:
+      type: object
+      required:
+        - providers
+      properties:
+        awsSso:
+          allOf:
+            - $ref: '#/components/schemas/AwsSsoAuthentication'
+            - description: 'A structure containing information about how this workspace works with IAM Identity Center. '
+        providers:
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationProviders'
+            - description: 'Specifies whether this workspace uses IAM Identity Center, SAML, or both methods to authenticate users to use the Grafana console in the Amazon Managed Grafana workspace.'
+        saml:
+          allOf:
+            - $ref: '#/components/schemas/SamlAuthentication'
+            - description: 'A structure containing information about how this workspace works with SAML, including what attributes within the assertion are to be mapped to user information in the workspace. '
+      description: A structure containing information about the user authentication methods used by the workspace.
+    SamlConfigurationStatus:
+      type: string
+      enum:
+        - CONFIGURED
+        - NOT_CONFIGURED
+    AuthenticationSummary:
+      type: object
+      required:
+        - providers
+      properties:
+        providers:
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationProviders'
+            - description: 'Specifies whether the workspace uses SAML, IAM Identity Center, or both methods for user authentication.'
+        samlConfigurationStatus:
+          allOf:
+            - $ref: '#/components/schemas/SamlConfigurationStatus'
+            - description: Specifies whether the workplace's user authentication method is fully configured.
+      description: 'A structure that describes whether the workspace uses SAML, IAM Identity Center, or both methods for user authentication, and whether that authentication is fully configured.'
+    SSOClientId:
+      type: string
+    Boolean:
+      type: boolean
+    ClientToken:
+      type: string
+      pattern: '^[!-~]{1,64}$'
+    String:
+      type: string
+    CreateWorkspaceApiKeyRequestSecondsToLiveInteger:
+      type: integer
+      minimum: 1
+      maximum: 2592000
+    CreateWorkspaceApiKeyRequest:
+      type: object
+      required:
+        - keyName
+        - keyRole
+        - secondsToLive
+      title: CreateWorkspaceApiKeyRequest
+      properties:
+        keyName:
+          allOf:
+            - $ref: '#/components/schemas/ApiKeyName'
+            - description: Specifies the name of the key. Keynames must be unique to the workspace.
+        keyRole:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the permission level of the key.</p> <p> Valid values: <code>VIEWER</code>|<code>EDITOR</code>|<code>ADMIN</code> </p>'
+        secondsToLive:
+          allOf:
+            - $ref: '#/components/schemas/CreateWorkspaceApiKeyRequestSecondsToLiveInteger'
+            - description: Specifies the time in seconds until the key expires. Keys can be valid for up to 30 days.
+    OverridableConfigurationJson:
+      type: string
+      minLength: 2
+      maxLength: 65536
+    OrganizationRoleName:
+      type: string
+      minLength: 1
+      maxLength: 2048
+      format: password
+    PermissionType:
+      type: string
+      enum:
+        - CUSTOMER_MANAGED
+        - SERVICE_MANAGED
+    StackSetName:
+      type: string
+    TagMap:
+      type: object
+      minProperties: 0
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    VpcConfiguration:
+      type: object
+      required:
+        - securityGroupIds
+        - subnetIds
+      properties:
+        securityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIds'
+            - description: The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.
+        subnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIds'
+            - description: The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.
+      description: The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.
+    DataSourceTypesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DataSourceType'
+    Description:
+      type: string
+      minLength: 0
+      maxLength: 2048
+      format: password
+    WorkspaceName:
+      type: string
+      pattern: '^[a-zA-Z0-9-._~]{1,255}$'
+      format: password
+    NotificationDestinationsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NotificationDestinationType'
+    OrganizationalUnitList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OrganizationalUnit'
+    IamRoleArn:
+      type: string
+      minLength: 1
+      maxLength: 2048
+      format: password
+    CreateWorkspaceRequest:
+      type: object
+      required:
+        - accountAccessType
+        - authenticationProviders
+        - permissionType
+      title: CreateWorkspaceRequest
+      properties:
+        accountAccessType:
+          allOf:
+            - $ref: '#/components/schemas/AccountAccessType'
+            - description: 'Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in other accounts in the same organization. If you specify <code>ORGANIZATION</code>, you must specify which organizational units the workspace can access in the <code>workspaceOrganizationalUnits</code> parameter.'
+        authenticationProviders:
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationProviders'
+            - description: 'Specifies whether this workspace uses SAML 2.0, IAM Identity Center (successor to Single Sign-On), or both to authenticate users for using the Grafana console within a workspace. For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html">User authentication in Amazon Managed Grafana</a>.'
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'A unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
+        configuration:
+          allOf:
+            - $ref: '#/components/schemas/OverridableConfigurationJson'
+            - description: 'The configuration string for the workspace that you create. For more information about the format and configuration options available, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html">Working in your Grafana workspace</a>.'
+        organizationRoleName:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationRoleName'
+            - description: The name of an IAM role that already exists to use with Organizations to access Amazon Web Services data sources and notification channels in other accounts in an organization.
+        permissionType:
+          allOf:
+            - $ref: '#/components/schemas/PermissionType'
+            - description: '<p>If you specify <code>SERVICE_MANAGED</code> on AWS Grafana console, Amazon Managed Grafana automatically creates the IAM roles and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels. In the CLI mode, the permissionType <code>SERVICE_MANAGED</code> will not create the IAM role for you. The ability for the Amazon Managed Grafana to create the IAM role on behalf of the user is supported only in the Amazon Managed Grafana AWS console. Use only the <code>CUSTOMER_MANAGED</code> permission type when creating a workspace in the CLI. </p> <p>If you specify <code>CUSTOMER_MANAGED</code>, you will manage those roles and permissions yourself. If you are creating this workspace in a member account of an organization that is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, you must choose <code>CUSTOMER_MANAGED</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html">Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels</a>.</p>'
+        stackSetName:
+          allOf:
+            - $ref: '#/components/schemas/StackSetName'
+            - description: The name of the CloudFormation stack set to use to generate IAM roles to be used for this workspace.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The list of tags associated with the workspace.
+        vpcConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/VpcConfiguration'
+            - description: The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.
+        workspaceDataSources:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceTypesList'
+            - description: '<p>Specify the Amazon Web Services data sources that you want to be queried in this workspace. Specifying these data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow Amazon Managed Grafana to read data from these sources. You must still add them as data sources in the Grafana console in the workspace.</p> <p>If you don''t specify a data source here, you can still add it as a data source in the workspace console later. However, you will then have to manually configure permissions for it.</p>'
+        workspaceDescription:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: '<p>A description for the workspace. This is used only to help you identify this workspace.</p> <p>Pattern: <code>^[\\p{L}\\p{Z}\\p{N}\\p{P}]{0,2048}$</code> </p>'
+        workspaceName:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceName'
+            - description: The name for the workspace. It does not have to be unique.
+        workspaceNotificationDestinations:
+          allOf:
+            - $ref: '#/components/schemas/NotificationDestinationsList'
+            - description: Specify the Amazon Web Services notification channels that you plan to use in this workspace. Specifying these data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow Amazon Managed Grafana to use these channels.
+        workspaceOrganizationalUnits:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationalUnitList'
+            - description: 'Specifies the organizational units that this workspace is allowed to use data sources from, if this workspace is in an account that is part of an organization.'
+        workspaceRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: 'The workspace needs an IAM role that grants permissions to the Amazon Web Services resources that the workspace will view data from. If you already have a role that you want to use, specify it here. The permission type should be set to <code>CUSTOMER_MANAGED</code>.'
+    DeleteWorkspaceApiKeyRequest:
+      type: object
+      title: DeleteWorkspaceApiKeyRequest
+      properties: {}
+    DeleteWorkspaceRequest:
+      type: object
+      title: DeleteWorkspaceRequest
+      properties: {}
+    DescribeWorkspaceAuthenticationRequest:
+      type: object
+      title: DescribeWorkspaceAuthenticationRequest
+      properties: {}
+    DescribeWorkspaceConfigurationRequest:
+      type: object
+      title: DescribeWorkspaceConfigurationRequest
+      properties: {}
+    DescribeWorkspaceRequest:
+      type: object
+      title: DescribeWorkspaceRequest
+      properties: {}
+    DisassociateLicenseRequest:
+      type: object
+      title: DisassociateLicenseRequest
+      properties: {}
+    Endpoint:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    GrafanaVersion:
+      type: string
+      minLength: 1
+      maxLength: 255
+    IdpMetadataUrl:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    SsoId:
+      type: string
+      minLength: 1
+      maxLength: 47
+    ListPermissionsRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    PaginationToken:
+      type: string
+    UserType:
+      type: string
+      enum:
+        - SSO_USER
+        - SSO_GROUP
+    ListPermissionsRequest:
+      type: object
+      title: ListPermissionsRequest
+      properties: {}
+    PermissionEntryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PermissionEntry'
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    ListWorkspacesRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListWorkspacesRequest:
+      type: object
+      title: ListWorkspacesRequest
+      properties: {}
+    WorkspaceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorkspaceSummary'
+    Role:
+      type: string
+      enum:
+        - ADMIN
+        - EDITOR
+        - VIEWER
+    User:
+      type: object
+      required:
+        - id
+        - type
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/SsoId'
+            - description: '<p>The ID of the user or group.</p> <p>Pattern: <code>^([0-9a-fA-F]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$</code> </p>'
+        type:
+          allOf:
+            - $ref: '#/components/schemas/UserType'
+            - description: Specifies whether this is a single user or a group.
+      description: A structure that specifies one user or group in the workspace.
+    PermissionEntry:
+      type: object
+      required:
+        - role
+        - user
+      properties:
+        role:
+          allOf:
+            - $ref: '#/components/schemas/Role'
+            - description: 'Specifies whether the user or group has the <code>Admin</code>, <code>Editor</code>, or <code>Viewer</code> role.'
+        user:
+          allOf:
+            - $ref: '#/components/schemas/User'
+            - description: A structure with the ID of the user or group with this role.
+      description: 'A structure containing the identity of one user or group and the <code>Admin</code>, <code>Editor</code>, or <code>Viewer</code> role that they have.'
+    RoleValue:
+      type: string
+      minLength: 1
+      maxLength: 256
+    RoleValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RoleValue'
+    SamlConfiguration:
+      type: object
+      required:
+        - idpMetadata
+      properties:
+        allowedOrganizations:
+          allOf:
+            - $ref: '#/components/schemas/AllowedOrganizations'
+            - description: 'Lists which organizations defined in the SAML assertion are allowed to use the Amazon Managed Grafana workspace. If this is empty, all organizations in the assertion attribute have access.'
+        assertionAttributes:
+          allOf:
+            - $ref: '#/components/schemas/AssertionAttributes'
+            - description: A structure that defines which attributes in the SAML assertion are to be used to define information about the users authenticated by that IdP to use the workspace.
+        idpMetadata:
+          allOf:
+            - $ref: '#/components/schemas/IdpMetadata'
+            - description: A structure containing the identity provider (IdP) metadata used to integrate the identity provider with this workspace.
+        loginValidityDuration:
+          allOf:
+            - $ref: '#/components/schemas/LoginValidityDuration'
+            - description: 'How long a sign-on session by a SAML user is valid, before the user has to sign on again.'
+        roleValues:
+          allOf:
+            - $ref: '#/components/schemas/RoleValues'
+            - description: A structure containing arrays that map group names in the SAML assertion to the Grafana <code>Admin</code> and <code>Editor</code> roles in the workspace.
+      description: 'A structure containing information about how this workspace works with SAML. '
+    SecurityGroupId:
+      type: string
+      minLength: 0
+      maxLength: 255
+    SubnetId:
+      type: string
+      minLength: 0
+      maxLength: 255
+    TagKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The list of tag keys and values to associate with the resource. You can associate tag keys only, tags (key and values) only or a combination of tag keys and tags.'
+    Timestamp:
+      type: string
+      format: date-time
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+    UpdateAction:
+      type: string
+      enum:
+        - ADD
+        - REVOKE
+    UpdateErrorCodeInteger:
+      type: integer
+      minimum: 100
+      maximum: 999
+    UpdateError:
+      type: object
+      required:
+        - causedBy
+        - code
+        - message
+      properties:
+        causedBy:
+          allOf:
+            - $ref: '#/components/schemas/UpdateInstruction'
+            - description: Specifies which permission update caused the error.
+        code:
+          allOf:
+            - $ref: '#/components/schemas/UpdateErrorCodeInteger'
+            - description: The error code.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The message for this error.
+      description: 'A structure containing information about one error encountered while performing an <a href="https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html">UpdatePermissions</a> operation.'
+    UpdateErrorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UpdateError'
+    UserList:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
+    UpdateInstructionBatch:
+      type: array
+      items:
+        $ref: '#/components/schemas/UpdateInstruction'
+      minItems: 0
+      maxItems: 20
+    UpdatePermissionsRequest:
+      type: object
+      required:
+        - updateInstructionBatch
+      title: UpdatePermissionsRequest
+      properties:
+        updateInstructionBatch:
+          allOf:
+            - $ref: '#/components/schemas/UpdateInstructionBatch'
+            - description: An array of structures that contain the permission updates to make.
+    UpdateWorkspaceAuthenticationRequest:
+      type: object
+      required:
+        - authenticationProviders
+      title: UpdateWorkspaceAuthenticationRequest
+      properties:
+        authenticationProviders:
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationProviders'
+            - description: 'Specifies whether this workspace uses SAML 2.0, IAM Identity Center (successor to Single Sign-On), or both to authenticate users for using the Grafana console within a workspace. For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html">User authentication in Amazon Managed Grafana</a>.'
+        samlConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SamlConfiguration'
+            - description: 'If the workspace uses SAML, use this structure to map SAML assertion attributes to workspace user information and define which groups in the assertion attribute are to have the <code>Admin</code> and <code>Editor</code> roles in the workspace.'
+    UpdateWorkspaceConfigurationRequest:
+      type: object
+      required:
+        - configuration
+      title: UpdateWorkspaceConfigurationRequest
+      properties:
+        configuration:
+          allOf:
+            - $ref: '#/components/schemas/OverridableConfigurationJson'
+            - description: 'The new configuration string for the workspace. For more information about the format and configuration options available, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html">Working in your Grafana workspace</a>.'
+    UpdateWorkspaceRequest:
+      type: object
+      title: UpdateWorkspaceRequest
+      properties:
+        accountAccessType:
+          allOf:
+            - $ref: '#/components/schemas/AccountAccessType'
+            - description: 'Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in other accounts in the same organization. If you specify <code>ORGANIZATION</code>, you must specify which organizational units the workspace can access in the <code>workspaceOrganizationalUnits</code> parameter.'
+        organizationRoleName:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationRoleName'
+            - description: The name of an IAM role that already exists to use to access resources through Organizations.
+        permissionType:
+          allOf:
+            - $ref: '#/components/schemas/PermissionType'
+            - description: '<p>If you specify <code>Service Managed</code>, Amazon Managed Grafana automatically creates the IAM roles and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels.</p> <p>If you specify <code>CUSTOMER_MANAGED</code>, you will manage those roles and permissions yourself. If you are creating this workspace in a member account of an organization and that account is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, you must choose <code>CUSTOMER_MANAGED</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html">Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels</a> </p>'
+        removeVpcConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: <p>Whether to remove the VPC configuration from the workspace.</p> <p>Setting this to <code>true</code> and providing a <code>vpcConfiguration</code> to set will return an error.</p>
+        stackSetName:
+          allOf:
+            - $ref: '#/components/schemas/StackSetName'
+            - description: The name of the CloudFormation stack set to use to generate IAM roles to be used for this workspace.
+        vpcConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/VpcConfiguration'
+            - description: The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.
+        workspaceDataSources:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceTypesList'
+            - description: '<p>Specify the Amazon Web Services data sources that you want to be queried in this workspace. Specifying these data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow Amazon Managed Grafana to read data from these sources. You must still add them as data sources in the Grafana console in the workspace.</p> <p>If you don''t specify a data source here, you can still add it as a data source later in the workspace console. However, you will then have to manually configure permissions for it.</p>'
+        workspaceDescription:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description for the workspace. This is used only to help you identify this workspace.
+        workspaceName:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceName'
+            - description: A new name for the workspace to update.
+        workspaceNotificationDestinations:
+          allOf:
+            - $ref: '#/components/schemas/NotificationDestinationsList'
+            - description: Specify the Amazon Web Services notification channels that you plan to use in this workspace. Specifying these data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow Amazon Managed Grafana to use these channels.
+        workspaceOrganizationalUnits:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationalUnitList'
+            - description: 'Specifies the organizational units that this workspace is allowed to use data sources from, if this workspace is in an account that is part of an organization.'
+        workspaceRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: 'The workspace needs an IAM role that grants permissions to the Amazon Web Services resources that the workspace will view data from. If you already have a role that you want to use, specify it here. If you omit this field and you specify some Amazon Web Services resources in <code>workspaceDataSources</code> or <code>workspaceNotificationDestinations</code>, a new IAM role with the necessary permissions is automatically created.'
+    WorkspaceStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - CREATING
+        - DELETING
+        - FAILED
+        - UPDATING
+        - UPGRADING
+        - DELETION_FAILED
+        - CREATION_FAILED
+        - UPDATE_FAILED
+        - UPGRADE_FAILED
+        - LICENSE_REMOVAL_FAILED
+    WorkspaceSummary:
+      type: object
+      required:
+        - authentication
+        - created
+        - endpoint
+        - grafanaVersion
+        - id
+        - modified
+        - status
+      properties:
+        authentication:
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationSummary'
+            - description: A structure containing information about the authentication methods used in the workspace.
+        created:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date that the workspace was created.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The customer-entered description of the workspace.
+        endpoint:
+          allOf:
+            - $ref: '#/components/schemas/Endpoint'
+            - description: The URL endpoint to use to access the Grafana console in the workspace.
+        grafanaVersion:
+          allOf:
+            - $ref: '#/components/schemas/GrafanaVersion'
+            - description: The Grafana version that the workspace is running.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The unique ID of the workspace.
+        modified:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The most recent date that the workspace was modified.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceName'
+            - description: The name of the workspace.
+        notificationDestinations:
+          allOf:
+            - $ref: '#/components/schemas/NotificationDestinationsList'
+            - description: 'The Amazon Web Services notification channels that Amazon Managed Grafana can automatically create IAM roles and permissions for, which allows Amazon Managed Grafana to use these channels.'
+        status:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceStatus'
+            - description: The current status of the workspace.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The list of tags associated with the workspace.
+      description: A structure that contains some information about one workspace in the account.
+security:
+  - hmac: []

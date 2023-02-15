@@ -1,0 +1,3612 @@
+openapi: 3.0.0
+info:
+  version: '2020-02-19'
+  x-release: v4
+  title: Migration Hub Strategy Recommendations
+  description: '<p><fullname>Migration Hub Strategy Recommendations</fullname></p> <pre><code> &lt;p&gt;This API reference provides descriptions, syntax, and other details about each of the actions and data types for Migration Hub Strategy Recommendations (Strategy Recommendations). The topic for each action shows the API request parameters and the response. Alternatively, you can use one of the AWS SDKs to access an API that is tailored to the programming language or platform that you''re using. For more information, see &lt;a href=&quot;http://aws.amazon.com/tools/#SDKs&quot;&gt;AWS SDKs&lt;/a&gt;.&lt;/p&gt; </code></pre>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: migrationhubstrategy
+  x-aws-signingName: migrationhub-strategy
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/migrationhubstrategy-2020-02-19.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/migrationhub-strategy/'
+servers:
+  - url: 'http://migrationhub-strategy.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Migration Hub Strategy Recommendations multi-region endpoint
+  - url: 'https://migrationhub-strategy.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Migration Hub Strategy Recommendations multi-region endpoint
+  - url: 'http://migrationhub-strategy.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Migration Hub Strategy Recommendations endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://migrationhub-strategy.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Migration Hub Strategy Recommendations endpoint for China (Beijing) and China (Ningxia)
+paths:
+  '/get-applicationcomponent-details/{applicationComponentId}':
+    get:
+      operationId: GetApplicationComponentDetails
+      description: ' Retrieves details about an application component. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetApplicationComponentDetailsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: applicationComponentId
+          in: path
+          required: true
+          description: ' The ID of the application component. The ID is unique within an AWS account.'
+          schema:
+            type: string
+            pattern: '[0-9a-zA-Z-]+'
+            minLength: 0
+            maxLength: 44
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/get-applicationcomponent-strategies/{applicationComponentId}':
+    get:
+      operationId: GetApplicationComponentStrategies
+      description: ' Retrieves a list of all the recommended strategies and tools for an application component running on a server. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetApplicationComponentStrategiesResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: applicationComponentId
+          in: path
+          required: true
+          description: ' The ID of the application component. The ID is unique within an AWS account.'
+          schema:
+            type: string
+            pattern: '[0-9a-zA-Z-]+'
+            minLength: 0
+            maxLength: 44
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/get-assessment/{id}':
+    get:
+      operationId: GetAssessment
+      description: ' Retrieves the status of an on-going assessment. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAssessmentResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ' The <code>assessmentid</code> returned by <a>StartAssessment</a>.'
+          schema:
+            type: string
+            pattern: '[0-9a-z-:]+'
+            minLength: 0
+            maxLength: 52
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/get-import-file-task/{id}':
+    get:
+      operationId: GetImportFileTask
+      description: ' Retrieves the details about a specific import task. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetImportFileTaskResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ' The ID of the import file task. This ID is returned in the response of <a>StartImportFileTask</a>. '
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 0
+            maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /get-latest-assessment-id:
+    get:
+      operationId: GetLatestAssessmentId
+      description: Retrieve the latest ID of a specific assessment task.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLatestAssessmentIdResponse'
+        '480':
+          description: DependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /get-portfolio-preferences:
+    get:
+      operationId: GetPortfolioPreferences
+      description: ' Retrieves your migration and modernization preferences. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPortfolioPreferencesResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /get-portfolio-summary:
+    get:
+      operationId: GetPortfolioSummary
+      description: ' Retrieves overall summary including the number of servers to rehost and the overall number of anti-patterns. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPortfolioSummaryResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/get-recommendation-report-details/{id}':
+    get:
+      operationId: GetRecommendationReportDetails
+      description: ' Retrieves detailed information about the specified recommendation report. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRecommendationReportDetailsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ' The recommendation report generation task <code>id</code> returned by <a>StartRecommendationReportGeneration</a>. '
+          schema:
+            type: string
+            pattern: '[0-9a-z-:]+'
+            minLength: 0
+            maxLength: 52
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/get-server-details/{serverId}':
+    get:
+      operationId: GetServerDetails
+      description: ' Retrieves detailed information about a specified server. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetServerDetailsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: ' The maximum number of items to include in the response. The maximum value is 100. '
+          schema:
+            type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: ' The token from a previous call that you use to retrieve the next set of results. For example, if a previous call to this action returned 100 items, but you set <code>maxResults</code> to 10. You''ll receive a set of 10 results along with a token. You then use the returned token to retrieve the next set of 10. '
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 0
+            maxLength: 2048
+        - name: serverId
+          in: path
+          required: true
+          description: ' The ID of the server. '
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 27
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/get-server-strategies/{serverId}':
+    get:
+      operationId: GetServerStrategies
+      description: ' Retrieves recommended strategies and tools for the specified server. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetServerStrategiesResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: serverId
+          in: path
+          required: true
+          description: ' The ID of the server. '
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 27
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /list-applicationcomponents:
+    post:
+      operationId: ListApplicationComponents
+      description: ' Retrieves a list of all the application components (processes). '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListApplicationComponentsResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ServiceLinkedRoleLockClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleLockClientException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                applicationComponentCriteria:
+                  description: ' Criteria for filtering the list of application components. '
+                  type: string
+                  enum:
+                    - NOT_DEFINED
+                    - APP_NAME
+                    - SERVER_ID
+                    - APP_TYPE
+                    - STRATEGY
+                    - DESTINATION
+                    - ANALYSIS_STATUS
+                    - ERROR_CATEGORY
+                filterValue:
+                  description: ' Specify the value based on the application component criteria type. For example, if <code>applicationComponentCriteria</code> is set to <code>SERVER_ID</code> and <code>filterValue</code> is set to <code>server1</code>, then <a>ListApplicationComponents</a> returns all the application components running on server1. '
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 0
+                  maxLength: 256
+                groupIdFilter:
+                  description: ' The group ID specified in to filter on. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Group'
+                maxResults:
+                  description: ' The maximum number of items to include in the response. The maximum value is 100. '
+                  type: integer
+                nextToken:
+                  description: ' The token from a previous call that you use to retrieve the next set of results. For example, if a previous call to this action returned 100 items, but you set <code>maxResults</code> to 10. You''ll receive a set of 10 results along with a token. You then use the returned token to retrieve the next set of 10. '
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 0
+                  maxLength: 2048
+                sort:
+                  description: ' Specifies whether to sort by ascending (<code>ASC</code>) or descending (<code>DESC</code>) order. '
+                  type: string
+                  enum:
+                    - ASC
+                    - DESC
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /list-collectors:
+    get:
+      operationId: ListCollectors
+      description: ' Retrieves a list of all the installed collectors. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCollectorsResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: ' The maximum number of items to include in the response. The maximum value is 100. '
+          schema:
+            type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: ' The token from a previous call that you use to retrieve the next set of results. For example, if a previous call to this action returned 100 items, but you set <code>maxResults</code> to 10. You''ll receive a set of 10 results along with a token. You then use the returned token to retrieve the next set of 10. '
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 0
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /list-import-file-task:
+    get:
+      operationId: ListImportFileTask
+      description: ' Retrieves a list of all the imports performed. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListImportFileTaskResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: ' The total number of items to return. The maximum value is 100. '
+          schema:
+            type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: ' The token from a previous call that you use to retrieve the next set of results. For example, if a previous call to this action returned 100 items, but you set <code>maxResults</code> to 10. You''ll receive a set of 10 results along with a token. You then use the returned token to retrieve the next set of 10. '
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 0
+            maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /list-servers:
+    post:
+      operationId: ListServers
+      description: ' Returns a list of all the servers. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListServersResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filterValue:
+                  description: ' Specifies the filter value, which is based on the type of server criteria. For example, if <code>serverCriteria</code> is <code>OS_NAME</code>, and the <code>filterValue</code> is equal to <code>WindowsServer</code>, then <code>ListServers</code> returns all of the servers matching the OS name <code>WindowsServer</code>. '
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 0
+                  maxLength: 1024
+                groupIdFilter:
+                  description: ' Specifies the group ID to filter on. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Group'
+                maxResults:
+                  description: ' The maximum number of items to include in the response. The maximum value is 100. '
+                  type: integer
+                nextToken:
+                  description: ' The token from a previous call that you use to retrieve the next set of results. For example, if a previous call to this action returned 100 items, but you set <code>maxResults</code> to 10. You''ll receive a set of 10 results along with a token. You then use the returned token to retrieve the next set of 10. '
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 0
+                  maxLength: 2048
+                serverCriteria:
+                  description: ' Criteria for filtering servers. '
+                  type: string
+                  enum:
+                    - NOT_DEFINED
+                    - OS_NAME
+                    - STRATEGY
+                    - DESTINATION
+                    - SERVER_ID
+                    - ANALYSIS_STATUS
+                    - ERROR_CATEGORY
+                sort:
+                  description: ' Specifies whether to sort by ascending (<code>ASC</code>) or descending (<code>DESC</code>) order. '
+                  type: string
+                  enum:
+                    - ASC
+                    - DESC
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /put-portfolio-preferences:
+    post:
+      operationId: PutPortfolioPreferences
+      description: ' Saves the specified migration and modernization preferences. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutPortfolioPreferencesResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                applicationMode:
+                  description: The classification for application component types.
+                  type: string
+                  enum:
+                    - ALL
+                    - KNOWN
+                    - UNKNOWN
+                applicationPreferences:
+                  description: ' Application preferences that you specify. '
+                  type: object
+                  properties:
+                    managementPreference:
+                      allOf:
+                        - $ref: '#/components/schemas/ManagementPreference'
+                        - description: ' Application preferences that you specify to prefer managed environment. '
+                databasePreferences:
+                  description: ' Preferences on managing your databases on AWS. '
+                  type: object
+                  properties:
+                    databaseManagementPreference:
+                      allOf:
+                        - $ref: '#/components/schemas/DatabaseManagementPreference'
+                        - description: ' Specifies whether you''re interested in self-managed databases or databases managed by AWS. '
+                    databaseMigrationPreference:
+                      allOf:
+                        - $ref: '#/components/schemas/DatabaseMigrationPreference'
+                        - description: ' Specifies your preferred migration path. '
+                prioritizeBusinessGoals:
+                  description: ' Rank of business goals based on priority. '
+                  type: object
+                  properties:
+                    businessGoals:
+                      allOf:
+                        - $ref: '#/components/schemas/BusinessGoals'
+                        - description: ' Rank of business goals based on priority. '
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /start-assessment:
+    post:
+      operationId: StartAssessment
+      description: ' Starts the assessment of an on-premises environment. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartAssessmentResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assessmentTargets:
+                  description: List of criteria for assessment.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AssessmentTarget'
+                  minItems: 0
+                  maxItems: 10
+                s3bucketForAnalysisData:
+                  description: ' The S3 bucket used by the collectors to send analysis data to the service. The bucket name must begin with <code>migrationhub-strategy-</code>. '
+                  type: string
+                  pattern: '[0-9a-z]+[0-9a-z\.\-]*[0-9a-z]+'
+                  minLength: 0
+                  maxLength: 63
+                s3bucketForReportData:
+                  description: ' The S3 bucket where all the reports generated by the service are stored. The bucket name must begin with <code>migrationhub-strategy-</code>. '
+                  type: string
+                  pattern: '[0-9a-z]+[0-9a-z\.\-]*[0-9a-z]+'
+                  minLength: 0
+                  maxLength: 63
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /start-import-file-task:
+    post:
+      operationId: StartImportFileTask
+      description: ' Starts a file import. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartImportFileTaskResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - S3Bucket
+                - name
+                - s3key
+              properties:
+                S3Bucket:
+                  description: ' The S3 bucket where the import file is located. The bucket name is required to begin with <code>migrationhub-strategy-</code>.'
+                  type: string
+                  pattern: '[0-9a-z]+[0-9a-z\.\-]*[0-9a-z]+'
+                  minLength: 0
+                  maxLength: 63
+                dataSourceType:
+                  description: 'Specifies the source that the servers are coming from. By default, Strategy Recommendations assumes that the servers specified in the import file are available in AWS Application Discovery Service. '
+                  type: string
+                  enum:
+                    - ApplicationDiscoveryService
+                    - MPA
+                groupId:
+                  description: 'Groups the resources in the import file together with a unique name. This ID can be as filter in <code>ListApplicationComponents</code> and <code>ListServers</code>. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Group'
+                name:
+                  description: ' A descriptive name for the request. '
+                  type: string
+                  pattern: '[a-zA-Z0-9_-]+'
+                  minLength: 1
+                  maxLength: 50
+                s3bucketForReportData:
+                  description: ' The S3 bucket where Strategy Recommendations uploads import results. The bucket name is required to begin with migrationhub-strategy-. '
+                  type: string
+                  pattern: '[0-9a-z]+[0-9a-z\.\-]*[0-9a-z]+'
+                  minLength: 0
+                  maxLength: 63
+                s3key:
+                  description: ' The Amazon S3 key name of the import file. '
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 0
+                  maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /start-recommendation-report-generation:
+    post:
+      operationId: StartRecommendationReportGeneration
+      description: ' Starts generating a recommendation report. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartRecommendationReportGenerationResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                groupIdFilter:
+                  description: ' Groups the resources in the recommendation report with a unique name. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Group'
+                outputFormat:
+                  description: ' The output format for the recommendation report file. The default format is Microsoft Excel. '
+                  type: string
+                  enum:
+                    - Excel
+                    - Json
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /stop-assessment:
+    post:
+      operationId: StopAssessment
+      description: ' Stops the assessment of an on-premises environment. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopAssessmentResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - assessmentId
+              properties:
+                assessmentId:
+                  description: ' The <code>assessmentId</code> returned by <a>StartAssessment</a>. '
+                  type: string
+                  pattern: '[0-9a-z-:]+'
+                  minLength: 0
+                  maxLength: 52
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /update-applicationcomponent-config/:
+    post:
+      operationId: UpdateApplicationComponentConfig
+      description: ' Updates the configuration of an application component. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateApplicationComponentConfigResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - applicationComponentId
+              properties:
+                appType:
+                  description: The type of known component.
+                  type: string
+                  enum:
+                    - DotNetFramework
+                    - Java
+                    - SQLServer
+                    - IIS
+                    - Oracle
+                    - Other
+                    - Tomcat
+                    - JBoss
+                    - Spring
+                    - Mongo DB
+                    - DB2
+                    - Maria DB
+                    - MySQL
+                    - Sybase
+                    - PostgreSQLServer
+                    - Cassandra
+                    - IBM WebSphere
+                    - Oracle WebLogic
+                    - Visual Basic
+                    - Unknown
+                    - DotnetCore
+                    - Dotnet
+                applicationComponentId:
+                  description: ' The ID of the application component. The ID is unique within an AWS account. '
+                  type: string
+                  pattern: '[0-9a-zA-Z-]+'
+                  minLength: 0
+                  maxLength: 44
+                configureOnly:
+                  description: 'Update the configuration request of an application component. If it is set to true, the source code and/or database credentials are updated. If it is set to false, the source code and/or database credentials are updated and an analysis is initiated.'
+                  type: boolean
+                inclusionStatus:
+                  description: ' Indicates whether the application component has been included for server recommendation or not. '
+                  type: string
+                  enum:
+                    - excludeFromAssessment
+                    - includeInAssessment
+                secretsManagerKey:
+                  description: ' Database credentials. '
+                  type: string
+                  pattern: .*
+                  minLength: 1
+                  maxLength: 512
+                  format: password
+                sourceCodeList:
+                  description: ' The list of source code configurations to update for the application component. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SourceCode'
+                strategyOption:
+                  description: ' Information about all the available strategy options for migrating and modernizing an application component. '
+                  type: object
+                  properties:
+                    isPreferred:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: ' Indicates if a specific strategy is preferred for the application component. '
+                    strategy:
+                      allOf:
+                        - $ref: '#/components/schemas/Strategy'
+                        - description: ' Type of transformation. For example, Rehost, Replatform, and so on. '
+                    targetDestination:
+                      allOf:
+                        - $ref: '#/components/schemas/TargetDestination'
+                        - description: ' Destination information about where the application component can migrate to. For example, <code>EC2</code>, <code>ECS</code>, and so on. '
+                    toolName:
+                      allOf:
+                        - $ref: '#/components/schemas/TransformationToolName'
+                        - description: ' The name of the tool that can be used to transform an application component using this strategy. '
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /update-server-config/:
+    post:
+      operationId: UpdateServerConfig
+      description: ' Updates the configuration of the specified server. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateServerConfigResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - serverId
+              properties:
+                serverId:
+                  description: ' The ID of the server. '
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 27
+                strategyOption:
+                  description: ' Information about all the available strategy options for migrating and modernizing an application component. '
+                  type: object
+                  properties:
+                    isPreferred:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: ' Indicates if a specific strategy is preferred for the application component. '
+                    strategy:
+                      allOf:
+                        - $ref: '#/components/schemas/Strategy'
+                        - description: ' Type of transformation. For example, Rehost, Replatform, and so on. '
+                    targetDestination:
+                      allOf:
+                        - $ref: '#/components/schemas/TargetDestination'
+                        - description: ' Destination information about where the application component can migrate to. For example, <code>EC2</code>, <code>ECS</code>, and so on. '
+                    toolName:
+                      allOf:
+                        - $ref: '#/components/schemas/TransformationToolName'
+                        - description: ' The name of the tool that can be used to transform an application component using this strategy. '
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    GetApplicationComponentDetailsResponse:
+      type: object
+      properties:
+        applicationComponentDetail:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationComponentDetail'
+            - description: ' Detailed information about an application component. '
+        associatedApplications:
+          allOf:
+            - $ref: '#/components/schemas/AssociatedApplications'
+            - description: ' The associated application group as defined in AWS Application Discovery Service. '
+        associatedServerIds:
+          allOf:
+            - $ref: '#/components/schemas/AssociatedServerIDs'
+            - description: ' A list of the IDs of the servers on which the application component is running. '
+        moreApplicationResource:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Set to true if the application component belongs to more than one application group. '
+    ResourceNotFoundException: {}
+    ThrottlingException: {}
+    InternalServerException: {}
+    GetApplicationComponentStrategiesResponse:
+      type: object
+      properties:
+        applicationComponentStrategies:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationComponentStrategies'
+            - description: ' A list of application component strategy recommendations. '
+    GetAssessmentResponse:
+      type: object
+      properties:
+        assessmentTargets:
+          allOf:
+            - $ref: '#/components/schemas/AssessmentTargets'
+            - description: List of criteria for assessment.
+        dataCollectionDetails:
+          allOf:
+            - $ref: '#/components/schemas/DataCollectionDetails'
+            - description: ' Detailed information about the assessment. '
+        id:
+          allOf:
+            - $ref: '#/components/schemas/AsyncTaskId'
+            - description: ' The ID for the specific assessment task. '
+    AccessDeniedException: {}
+    GetImportFileTaskResponse:
+      type: object
+      properties:
+        completionTime:
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: ' The time that the import task completed. '
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The import file task <code>id</code> returned in the response of <a>StartImportFileTask</a>. '
+        importName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The name of the import task given in <a>StartImportFileTask</a>. '
+        inputS3Bucket:
+          allOf:
+            - $ref: '#/components/schemas/importS3Bucket'
+            - description: ' The S3 bucket where import file is located. '
+        inputS3Key:
+          allOf:
+            - $ref: '#/components/schemas/importS3Key'
+            - description: ' The Amazon S3 key name of the import file. '
+        numberOfRecordsFailed:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' The number of records that failed to be imported. '
+        numberOfRecordsSuccess:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' The number of records successfully imported. '
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: ' Start time of the import task. '
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ImportFileTaskStatus'
+            - description: ' Status of import file task. '
+        statusReportS3Bucket:
+          allOf:
+            - $ref: '#/components/schemas/importS3Bucket'
+            - description: ' The S3 bucket name for status report of import task. '
+        statusReportS3Key:
+          allOf:
+            - $ref: '#/components/schemas/importS3Key'
+            - description: ' The Amazon S3 key name for status report of import task. The report contains details about whether each record imported successfully or why it did not.'
+    ValidationException: {}
+    GetLatestAssessmentIdResponse:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/AsyncTaskId'
+            - description: The latest ID for the specific assessment task.
+    DependencyException: {}
+    GetPortfolioPreferencesResponse:
+      type: object
+      properties:
+        applicationMode:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationMode'
+            - description: The classification for application component types.
+        applicationPreferences:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationPreferences'
+            - description: ' The transformation preferences for non-database applications. '
+        databasePreferences:
+          allOf:
+            - $ref: '#/components/schemas/DatabasePreferences'
+            - description: ' The transformation preferences for database applications. '
+        prioritizeBusinessGoals:
+          allOf:
+            - $ref: '#/components/schemas/PrioritizeBusinessGoals'
+            - description: ' The rank of business goals based on priority. '
+    GetPortfolioSummaryResponse:
+      type: object
+      properties:
+        assessmentSummary:
+          allOf:
+            - $ref: '#/components/schemas/AssessmentSummary'
+            - description: ' An assessment summary for the portfolio including the number of servers to rehost and the overall number of anti-patterns. '
+    GetRecommendationReportDetailsResponse:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationTaskId'
+            - description: ' The ID of the recommendation report generation task. See the response of <a>StartRecommendationReportGeneration</a>. '
+        recommendationReportDetails:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationReportDetails'
+            - description: ' Detailed information about the recommendation report. '
+    GetServerDetailsResponse:
+      type: object
+      properties:
+        associatedApplications:
+          allOf:
+            - $ref: '#/components/schemas/AssociatedApplications'
+            - description: ' The associated application group the server belongs to, as defined in AWS Application Discovery Service. '
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The token you use to retrieve the next set of results, or null if there are no more results. '
+        serverDetail:
+          allOf:
+            - $ref: '#/components/schemas/ServerDetail'
+            - description: ' Detailed information about the server. '
+    GetServerStrategiesResponse:
+      type: object
+      properties:
+        serverStrategies:
+          allOf:
+            - $ref: '#/components/schemas/ServerStrategies'
+            - description: ' A list of strategy recommendations for the server. '
+    ListApplicationComponentsResponse:
+      type: object
+      properties:
+        applicationComponentInfos:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationComponentDetails'
+            - description: ' The list of application components with detailed information about each component. '
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' The token you use to retrieve the next set of results, or null if there are no more results. '
+    Group:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/GroupName'
+            - description: ' The key of the specific import group. '
+        value:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The value of the specific import group. '
+      description: ' The object containing information about distinct imports or groups for Strategy Recommendations. '
+    ServiceLinkedRoleLockClientException: {}
+    ListCollectorsResponse:
+      type: object
+      properties:
+        Collectors:
+          allOf:
+            - $ref: '#/components/schemas/Collectors'
+            - description: ' The list of all the installed collectors. '
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' The token you use to retrieve the next set of results, or null if there are no more results. '
+    ListImportFileTaskResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The token you use to retrieve the next set of results, or null if there are no more results. '
+        taskInfos:
+          allOf:
+            - $ref: '#/components/schemas/ListImportFileTaskInformation'
+            - description: ' Lists information about the files you import.'
+    ListServersResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' The token you use to retrieve the next set of results, or null if there are no more results. '
+        serverInfos:
+          allOf:
+            - $ref: '#/components/schemas/ServerDetails'
+            - description: ' The list of servers with detailed information about each server. '
+    PutPortfolioPreferencesResponse:
+      type: object
+      properties: {}
+    ManagementPreference:
+      type: object
+      properties:
+        awsManagedResources:
+          allOf:
+            - $ref: '#/components/schemas/AwsManagedResources'
+            - description: ' Indicates interest in solutions that are managed by AWS. '
+        noPreference:
+          allOf:
+            - $ref: '#/components/schemas/NoManagementPreference'
+            - description: ' No specific preference. '
+        selfManageResources:
+          allOf:
+            - $ref: '#/components/schemas/SelfManageResources'
+            - description: ' Indicates interest in managing your own resources on AWS. '
+      description: ' Preferences for migrating an application to AWS. '
+    DatabaseManagementPreference:
+      type: string
+      enum:
+        - AWS-managed
+        - Self-manage
+        - No preference
+    DatabaseMigrationPreference:
+      type: object
+      properties:
+        heterogeneous:
+          allOf:
+            - $ref: '#/components/schemas/Heterogeneous'
+            - description: ' Indicates whether you are interested in moving from one type of database to another. For example, from SQL Server to Amazon Aurora MySQL-Compatible Edition. '
+        homogeneous:
+          allOf:
+            - $ref: '#/components/schemas/Homogeneous'
+            - description: ' Indicates whether you are interested in moving to the same type of database into AWS. For example, from SQL Server in your environment to SQL Server on AWS. '
+        noPreference:
+          allOf:
+            - $ref: '#/components/schemas/NoDatabaseMigrationPreference'
+            - description: ' Indicated that you do not prefer heterogeneous or homogeneous. '
+      description: ' Preferences for migrating a database to AWS. '
+    BusinessGoals:
+      type: object
+      properties:
+        licenseCostReduction:
+          allOf:
+            - $ref: '#/components/schemas/BusinessGoalsInteger'
+            - description: ' Business goal to reduce license costs. '
+        modernizeInfrastructureWithCloudNativeTechnologies:
+          allOf:
+            - $ref: '#/components/schemas/BusinessGoalsInteger'
+            - description: ' Business goal to modernize infrastructure by moving to cloud native technologies. '
+        reduceOperationalOverheadWithManagedServices:
+          allOf:
+            - $ref: '#/components/schemas/BusinessGoalsInteger'
+            - description: ' Business goal to reduce the operational overhead on the team by moving into managed services. '
+        speedOfMigration:
+          allOf:
+            - $ref: '#/components/schemas/BusinessGoalsInteger'
+            - description: ' Business goal to achieve migration at a fast pace. '
+      description: ' Business goals that you specify. '
+    ConflictException: {}
+    StartAssessmentResponse:
+      type: object
+      properties:
+        assessmentId:
+          allOf:
+            - $ref: '#/components/schemas/AsyncTaskId'
+            - description: ' The ID of the assessment. '
+    AssessmentTarget:
+      type: object
+      required:
+        - condition
+        - name
+        - values
+      properties:
+        condition:
+          allOf:
+            - $ref: '#/components/schemas/Condition'
+            - description: Condition of an assessment.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Name of an assessment.
+        values:
+          allOf:
+            - $ref: '#/components/schemas/AssessmentTargetValues'
+            - description: Values of an assessment.
+      description: Defines the criteria of assessment.
+    ServiceQuotaExceededException: {}
+    StartImportFileTaskResponse:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The ID for a specific import task. The ID is unique within an AWS account. '
+    StartRecommendationReportGenerationResponse:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationTaskId'
+            - description: ' The ID of the recommendation report generation task. '
+    StopAssessmentResponse:
+      type: object
+      properties: {}
+    UpdateApplicationComponentConfigResponse:
+      type: object
+      properties: {}
+    SourceCode:
+      type: object
+      properties:
+        location:
+          allOf:
+            - $ref: '#/components/schemas/Location'
+            - description: ' The repository name for the source code. '
+        projectName:
+          allOf:
+            - $ref: '#/components/schemas/ProjectName'
+            - description: The name of the project.
+        sourceVersion:
+          allOf:
+            - $ref: '#/components/schemas/SourceVersion'
+            - description: ' The branch of the source code. '
+        versionControl:
+          allOf:
+            - $ref: '#/components/schemas/VersionControl'
+            - description: ' The type of repository to use for the source code. '
+      description: ' Object containing source code information that is linked to an application component. '
+    Boolean:
+      type: boolean
+    Strategy:
+      type: string
+      enum:
+        - Rehost
+        - Retirement
+        - Refactor
+        - Replatform
+        - Retain
+        - Relocate
+        - Repurchase
+    TargetDestination:
+      type: string
+      enum:
+        - None specified
+        - AWS Elastic BeanStalk
+        - AWS Fargate
+        - Amazon Elastic Cloud Compute (EC2)
+        - Amazon Elastic Container Service (ECS)
+        - Amazon Elastic Kubernetes Service (EKS)
+        - Aurora MySQL
+        - Aurora PostgreSQL
+        - Amazon Relational Database Service on MySQL
+        - Amazon Relational Database Service on PostgreSQL
+        - Amazon DocumentDB
+        - Amazon DynamoDB
+        - Amazon Relational Database Service
+        - Babelfish for Aurora PostgreSQL
+    TransformationToolName:
+      type: string
+      enum:
+        - App2Container
+        - Porting Assistant For .NET
+        - End of Support Migration
+        - Windows Web Application Migration Assistant
+        - Application Migration Service
+        - Strategy Recommendation Support
+        - In Place Operating System Upgrade
+        - Schema Conversion Tool
+        - Database Migration Service
+        - Native SQL Server Backup/Restore
+    UpdateServerConfigResponse:
+      type: object
+      properties: {}
+    AntipatternReportStatus:
+      type: string
+      enum:
+        - FAILED
+        - IN_PROGRESS
+        - SUCCESS
+    Integer:
+      type: integer
+    Severity:
+      type: string
+      enum:
+        - HIGH
+        - MEDIUM
+        - LOW
+    AntipatternSeveritySummary:
+      type: object
+      properties:
+        count:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' Contains the count of anti-patterns. '
+        severity:
+          allOf:
+            - $ref: '#/components/schemas/Severity'
+            - description: ' Contains the severity of anti-patterns. '
+      description: ' Contains the summary of anti-patterns and their severity. '
+    AppType:
+      type: string
+      enum:
+        - DotNetFramework
+        - Java
+        - SQLServer
+        - IIS
+        - Oracle
+        - Other
+        - Tomcat
+        - JBoss
+        - Spring
+        - Mongo DB
+        - DB2
+        - Maria DB
+        - MySQL
+        - Sybase
+        - PostgreSQLServer
+        - Cassandra
+        - IBM WebSphere
+        - Oracle WebLogic
+        - Visual Basic
+        - Unknown
+        - DotnetCore
+        - Dotnet
+    AppUnitErrorCategory:
+      type: string
+      enum:
+        - CREDENTIAL_ERROR
+        - CONNECTIVITY_ERROR
+        - PERMISSION_ERROR
+        - UNSUPPORTED_ERROR
+        - OTHER_ERROR
+    AppUnitError:
+      type: object
+      properties:
+        appUnitErrorCategory:
+          allOf:
+            - $ref: '#/components/schemas/AppUnitErrorCategory'
+            - description: The category of the error.
+      description: Error in the analysis of the application unit.
+    ApplicationComponentCriteria:
+      type: string
+      enum:
+        - NOT_DEFINED
+        - APP_NAME
+        - SERVER_ID
+        - APP_TYPE
+        - STRATEGY
+        - DESTINATION
+        - ANALYSIS_STATUS
+        - ERROR_CATEGORY
+    SrcCodeOrDbAnalysisStatus:
+      type: string
+      enum:
+        - ANALYSIS_TO_BE_SCHEDULED
+        - ANALYSIS_STARTED
+        - ANALYSIS_SUCCESS
+        - ANALYSIS_FAILED
+        - ANALYSIS_PARTIAL_SUCCESS
+        - UNCONFIGURED
+        - CONFIGURED
+    S3Object:
+      type: object
+      properties:
+        s3Bucket:
+          allOf:
+            - $ref: '#/components/schemas/S3Bucket'
+            - description: ' The S3 bucket name. '
+        s3key:
+          allOf:
+            - $ref: '#/components/schemas/S3Key'
+            - description: ' The Amazon S3 key name. '
+      description: ' Contains the S3 bucket name and the Amazon S3 key name. '
+    StatusMessage:
+      type: string
+      pattern: .*\S.*
+      minLength: 0
+      maxLength: 1024
+    ServerId:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 27
+    DatabaseConfigDetail:
+      type: object
+      properties:
+        secretName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' AWS Secrets Manager key that holds the credentials that you use to connect to a database. '
+      description: ' Configuration information used for assessing databases. '
+    ResourceId:
+      type: string
+      pattern: '^[0-9a-b]+'
+      minLength: 0
+      maxLength: 44
+    InclusionStatus:
+      type: string
+      enum:
+        - excludeFromAssessment
+        - includeInAssessment
+    TimeStamp:
+      type: string
+      format: date-time
+    ListAntipatternSeveritySummary:
+      type: array
+      items:
+        $ref: '#/components/schemas/AntipatternSeveritySummary'
+    ResourceName:
+      type: string
+    String:
+      type: string
+      pattern: .*\S.*
+      minLength: 0
+      maxLength: 1024
+    RecommendationSet:
+      type: object
+      properties:
+        strategy:
+          allOf:
+            - $ref: '#/components/schemas/Strategy'
+            - description: ' The recommended strategy. '
+        targetDestination:
+          allOf:
+            - $ref: '#/components/schemas/TargetDestination'
+            - description: ' The recommended target destination. '
+        transformationTool:
+          allOf:
+            - $ref: '#/components/schemas/TransformationTool'
+            - description: ' The target destination for the recommendation set. '
+      description: ' Contains a recommendation set. '
+    ResourceSubType:
+      type: string
+      enum:
+        - Database
+        - Process
+        - DatabaseProcess
+    RuntimeAnalysisStatus:
+      type: string
+      enum:
+        - ANALYSIS_TO_BE_SCHEDULED
+        - ANALYSIS_STARTED
+        - ANALYSIS_SUCCESS
+        - ANALYSIS_FAILED
+    SourceCodeRepositories:
+      type: array
+      items:
+        $ref: '#/components/schemas/SourceCodeRepository'
+    ApplicationComponentDetail:
+      type: object
+      properties:
+        analysisStatus:
+          allOf:
+            - $ref: '#/components/schemas/SrcCodeOrDbAnalysisStatus'
+            - description: ' The status of analysis, if the application component has source code or an associated database. '
+        antipatternReportS3Object:
+          allOf:
+            - $ref: '#/components/schemas/S3Object'
+            - description: ' The S3 bucket name and the Amazon S3 key name for the anti-pattern report. '
+        antipatternReportStatus:
+          allOf:
+            - $ref: '#/components/schemas/AntipatternReportStatus'
+            - description: ' The status of the anti-pattern report generation.'
+        antipatternReportStatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusMessage'
+            - description: ' The status message for the anti-pattern. '
+        appType:
+          allOf:
+            - $ref: '#/components/schemas/AppType'
+            - description: ' The type of application component. '
+        appUnitError:
+          allOf:
+            - $ref: '#/components/schemas/AppUnitError'
+            - description: The error in the analysis of the source code or database.
+        associatedServerId:
+          allOf:
+            - $ref: '#/components/schemas/ServerId'
+            - description: ' The ID of the server that the application component is running on. '
+        databaseConfigDetail:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseConfigDetail'
+            - description: ' Configuration details for the database associated with the application component. '
+        id:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: ' The ID of the application component. '
+        inclusionStatus:
+          allOf:
+            - $ref: '#/components/schemas/InclusionStatus'
+            - description: ' Indicates whether the application component has been included for server recommendation or not. '
+        lastAnalyzedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: ' The timestamp of when the application component was assessed. '
+        listAntipatternSeveritySummary:
+          allOf:
+            - $ref: '#/components/schemas/ListAntipatternSeveritySummary'
+            - description: ' A list of anti-pattern severity summaries. '
+        moreServerAssociationExists:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Set to true if the application component is running on multiple servers.'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: ' The name of application component. '
+        osDriver:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' OS driver. '
+        osVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' OS version. '
+        recommendationSet:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationSet'
+            - description: ' The top recommendation set for the application component. '
+        resourceSubType:
+          allOf:
+            - $ref: '#/components/schemas/ResourceSubType'
+            - description: ' The application component subtype.'
+        runtimeStatus:
+          allOf:
+            - $ref: '#/components/schemas/RuntimeAnalysisStatus'
+            - description: The status of the application unit.
+        runtimeStatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusMessage'
+            - description: The status message for the application unit.
+        sourceCodeRepositories:
+          allOf:
+            - $ref: '#/components/schemas/SourceCodeRepositories'
+            - description: ' Details about the source code repository associated with the application component. '
+        statusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusMessage'
+            - description: ' A detailed description of the analysis status and any failure message. '
+      description: ' Contains detailed information about an application component. '
+    ApplicationComponentDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationComponentDetail'
+    ApplicationComponentId:
+      type: string
+      pattern: '[0-9a-zA-Z-]+'
+      minLength: 0
+      maxLength: 44
+    ApplicationComponentStatusSummary:
+      type: object
+      properties:
+        count:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The number of application components successfully analyzed, partially successful or failed analysis.'
+        srcCodeOrDbAnalysisStatus:
+          allOf:
+            - $ref: '#/components/schemas/SrcCodeOrDbAnalysisStatus'
+            - description: The status of database analysis.
+      description: Summary of the analysis status of the application component.
+    ApplicationComponentStrategy:
+      type: object
+      properties:
+        isPreferred:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Set to true if the recommendation is set as preferred. '
+        recommendation:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationSet'
+            - description: ' Strategy recommendation for the application component. '
+        status:
+          allOf:
+            - $ref: '#/components/schemas/StrategyRecommendation'
+            - description: ' The recommendation status of a strategy for an application component. '
+      description: ' Contains information about a strategy recommendation for an application component. '
+    ApplicationComponentStrategies:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationComponentStrategy'
+    StrategyRecommendation:
+      type: string
+      enum:
+        - recommended
+        - viableOption
+        - notRecommended
+        - potential
+    ApplicationComponentSummary:
+      type: object
+      properties:
+        appType:
+          allOf:
+            - $ref: '#/components/schemas/AppType'
+            - description: ' Contains the name of application types. '
+        count:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' Contains the count of application type. '
+      description: ' Contains the summary of application components. '
+    ApplicationMode:
+      type: string
+      enum:
+        - ALL
+        - KNOWN
+        - UNKNOWN
+    ApplicationPreferences:
+      type: object
+      properties:
+        managementPreference:
+          allOf:
+            - $ref: '#/components/schemas/ManagementPreference'
+            - description: ' Application preferences that you specify to prefer managed environment. '
+      description: ' Application preferences that you specify. '
+    AssessmentStatus:
+      type: string
+      enum:
+        - IN_PROGRESS
+        - COMPLETE
+        - FAILED
+        - STOPPED
+    AssessmentStatusMessage:
+      type: string
+      pattern: .*\S.*
+      minLength: 0
+      maxLength: 512
+    ListApplicationComponentStatusSummary:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationComponentStatusSummary'
+    ListStrategySummary:
+      type: array
+      items:
+        $ref: '#/components/schemas/StrategySummary'
+    ListApplicationComponentSummary:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationComponentSummary'
+    ListServerStatusSummary:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServerStatusSummary'
+    ListServerSummary:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServerSummary'
+    AssessmentSummary:
+      type: object
+      properties:
+        antipatternReportS3Object:
+          allOf:
+            - $ref: '#/components/schemas/S3Object'
+            - description: ' The Amazon S3 object containing the anti-pattern report. '
+        antipatternReportStatus:
+          allOf:
+            - $ref: '#/components/schemas/AntipatternReportStatus'
+            - description: ' The status of the anti-pattern report. '
+        antipatternReportStatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusMessage'
+            - description: ' The status message of the anti-pattern report. '
+        lastAnalyzedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: ' The time the assessment was performed. '
+        listAntipatternSeveritySummary:
+          allOf:
+            - $ref: '#/components/schemas/ListAntipatternSeveritySummary'
+            - description: ' List of AntipatternSeveritySummary. '
+        listApplicationComponentStatusSummary:
+          allOf:
+            - $ref: '#/components/schemas/ListApplicationComponentStatusSummary'
+            - description: List of status summaries of the analyzed application components.
+        listApplicationComponentStrategySummary:
+          allOf:
+            - $ref: '#/components/schemas/ListStrategySummary'
+            - description: ' List of ApplicationComponentStrategySummary. '
+        listApplicationComponentSummary:
+          allOf:
+            - $ref: '#/components/schemas/ListApplicationComponentSummary'
+            - description: ' List of ApplicationComponentSummary. '
+        listServerStatusSummary:
+          allOf:
+            - $ref: '#/components/schemas/ListServerStatusSummary'
+            - description: List of status summaries of the analyzed servers.
+        listServerStrategySummary:
+          allOf:
+            - $ref: '#/components/schemas/ListStrategySummary'
+            - description: ' List of ServerStrategySummary. '
+        listServerSummary:
+          allOf:
+            - $ref: '#/components/schemas/ListServerSummary'
+            - description: ' List of ServerSummary. '
+      description: ' Contains the summary of the assessment results. '
+    Condition:
+      type: string
+      enum:
+        - EQUALS
+        - NOT_EQUALS
+        - CONTAINS
+        - NOT_CONTAINS
+    AssessmentTargetValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    AssessmentTargets:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssessmentTarget'
+      minItems: 0
+      maxItems: 10
+    AssociatedApplication:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' ID of the application as defined in Application Discovery Service. '
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' Name of the application as defined in Application Discovery Service. '
+      description: ' Object containing details about applications as defined in Application Discovery Service. '
+    AssociatedApplications:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssociatedApplication'
+    AssociatedServerIDs:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    AsyncTaskId:
+      type: string
+      pattern: '[0-9a-z-:]+'
+      minLength: 0
+      maxLength: 52
+    AuthType:
+      type: string
+      enum:
+        - NTLM
+        - SSH
+        - CERT
+    AwsManagedTargetDestinations:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsManagedTargetDestination'
+      minItems: 1
+      maxItems: 1
+    AwsManagedResources:
+      type: object
+      required:
+        - targetDestination
+      properties:
+        targetDestination:
+          allOf:
+            - $ref: '#/components/schemas/AwsManagedTargetDestinations'
+            - description: ' The choice of application destination that you specify. '
+      description: ' Object containing the choice of application destination that you specify. '
+    AwsManagedTargetDestination:
+      type: string
+      enum:
+        - None specified
+        - AWS Elastic BeanStalk
+        - AWS Fargate
+    BusinessGoalsInteger:
+      type: integer
+      minimum: 1
+      maximum: 5
+    CollectorHealth:
+      type: string
+      enum:
+        - COLLECTOR_HEALTHY
+        - COLLECTOR_UNHEALTHY
+    ConfigurationSummary:
+      type: object
+      properties:
+        ipAddressBasedRemoteInfoList:
+          allOf:
+            - $ref: '#/components/schemas/IPAddressBasedRemoteInfoList'
+            - description: IP address based configurations.
+        pipelineInfoList:
+          allOf:
+            - $ref: '#/components/schemas/PipelineInfoList'
+            - description: The list of pipeline info configurations.
+        remoteSourceCodeAnalysisServerInfo:
+          allOf:
+            - $ref: '#/components/schemas/RemoteSourceCodeAnalysisServerInfo'
+            - description: Info about the remote server source code configuration.
+        vcenterBasedRemoteInfoList:
+          allOf:
+            - $ref: '#/components/schemas/VcenterBasedRemoteInfoList'
+            - description: The list of vCenter configurations.
+        versionControlInfoList:
+          allOf:
+            - $ref: '#/components/schemas/VersionControlInfoList'
+            - description: The list of the version control configurations.
+      description: Summary of the collector configuration.
+    Collector:
+      type: object
+      properties:
+        collectorHealth:
+          allOf:
+            - $ref: '#/components/schemas/CollectorHealth'
+            - description: ' Indicates the health of a collector. '
+        collectorId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The ID of the collector. '
+        collectorVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' Current version of the collector that is running in the environment that you specify. '
+        configurationSummary:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationSummary'
+            - description: Summary of the collector configuration.
+        hostName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' Hostname of the server that is hosting the collector. '
+        ipAddress:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' IP address of the server that is hosting the collector. '
+        lastActivityTimeStamp:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' Time when the collector last pinged the service. '
+        registeredTimeStamp:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' Time when the collector registered with the service. '
+      description: ' Process data collector that runs in the environment that you specify. '
+    Collectors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Collector'
+    IPAddressBasedRemoteInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/IPAddressBasedRemoteInfo'
+    PipelineInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PipelineInfo'
+    RemoteSourceCodeAnalysisServerInfo:
+      type: object
+      properties:
+        remoteSourceCodeAnalysisServerConfigurationTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The time when the remote source code server was configured.
+      description: Information about the server configured for source code analysis.
+    VcenterBasedRemoteInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/VcenterBasedRemoteInfo'
+    VersionControlInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/VersionControlInfo'
+    DataCollectionDetails:
+      type: object
+      properties:
+        completionTime:
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: ' The time the assessment completes. '
+        failed:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' The number of failed servers in the assessment. '
+        inProgress:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' The number of servers with the assessment status <code>IN_PROGESS</code>. '
+        servers:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' The total number of servers in the assessment. '
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: ' The start time of assessment. '
+        status:
+          allOf:
+            - $ref: '#/components/schemas/AssessmentStatus'
+            - description: ' The status of the assessment. '
+        statusMessage:
+          allOf:
+            - $ref: '#/components/schemas/AssessmentStatusMessage'
+            - description: The status message of the assessment.
+        success:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' The number of successful servers in the assessment. '
+      description: ' Detailed information about an assessment. '
+    DataSourceType:
+      type: string
+      enum:
+        - ApplicationDiscoveryService
+        - MPA
+    Heterogeneous:
+      type: object
+      required:
+        - targetDatabaseEngine
+      properties:
+        targetDatabaseEngine:
+          allOf:
+            - $ref: '#/components/schemas/HeterogeneousTargetDatabaseEngines'
+            - description: ' The target database engine for heterogeneous database migration preference. '
+      description: ' The object containing details about heterogeneous database preferences. '
+    Homogeneous:
+      type: object
+      properties:
+        targetDatabaseEngine:
+          allOf:
+            - $ref: '#/components/schemas/HomogeneousTargetDatabaseEngines'
+            - description: ' The target database engine for homogeneous database migration preferences. '
+      description: ' The object containing details about homogeneous database preferences. '
+    NoDatabaseMigrationPreference:
+      type: object
+      required:
+        - targetDatabaseEngine
+      properties:
+        targetDatabaseEngine:
+          allOf:
+            - $ref: '#/components/schemas/TargetDatabaseEngines'
+            - description: ' The target database engine for database migration preference that you specify. '
+      description: ' The object containing details about database migration preferences, when you have no particular preference. '
+    DatabasePreferences:
+      type: object
+      properties:
+        databaseManagementPreference:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseManagementPreference'
+            - description: ' Specifies whether you''re interested in self-managed databases or databases managed by AWS. '
+        databaseMigrationPreference:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseMigrationPreference'
+            - description: ' Specifies your preferred migration path. '
+      description: ' Preferences on managing your databases on AWS. '
+    GetApplicationComponentDetailsRequest:
+      type: object
+      title: GetApplicationComponentDetailsRequest
+      properties: {}
+    GetApplicationComponentStrategiesRequest:
+      type: object
+      title: GetApplicationComponentStrategiesRequest
+      properties: {}
+    GetAssessmentRequest:
+      type: object
+      title: GetAssessmentRequest
+      properties: {}
+    GetImportFileTaskRequest:
+      type: object
+      title: GetImportFileTaskRequest
+      properties: {}
+    importS3Bucket:
+      type: string
+      pattern: '[0-9a-z]+[0-9a-z\.\-]*[0-9a-z]+'
+      minLength: 0
+      maxLength: 63
+    importS3Key:
+      type: string
+      pattern: .*\S.*
+      minLength: 0
+      maxLength: 1024
+    ImportFileTaskStatus:
+      type: string
+      enum:
+        - ImportInProgress
+        - ImportFailed
+        - ImportPartialSuccess
+        - ImportSuccess
+        - DeleteInProgress
+        - DeleteFailed
+        - DeletePartialSuccess
+        - DeleteSuccess
+    GetLatestAssessmentIdRequest:
+      type: object
+      title: GetLatestAssessmentIdRequest
+      properties: {}
+    GetPortfolioPreferencesRequest:
+      type: object
+      title: GetPortfolioPreferencesRequest
+      properties: {}
+    PrioritizeBusinessGoals:
+      type: object
+      properties:
+        businessGoals:
+          allOf:
+            - $ref: '#/components/schemas/BusinessGoals'
+            - description: ' Rank of business goals based on priority. '
+      description: ' Rank of business goals based on priority. '
+    GetPortfolioSummaryRequest:
+      type: object
+      title: GetPortfolioSummaryRequest
+      properties: {}
+    RecommendationTaskId:
+      type: string
+      pattern: '[0-9a-z-:]+'
+      minLength: 0
+      maxLength: 52
+    GetRecommendationReportDetailsRequest:
+      type: object
+      title: GetRecommendationReportDetailsRequest
+      properties: {}
+    RecommendationReportDetails:
+      type: object
+      properties:
+        completionTime:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationReportTimeStamp'
+            - description: ' The time that the recommendation report generation task completes. '
+        s3Bucket:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The S3 bucket where the report file is located. '
+        s3Keys:
+          allOf:
+            - $ref: '#/components/schemas/S3Keys'
+            - description: ' The Amazon S3 key name of the report file. '
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationReportTimeStamp'
+            - description: ' The time that the recommendation report generation task starts. '
+        status:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationReportStatus'
+            - description: ' The status of the recommendation report generation task. '
+        statusMessage:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationReportStatusMessage'
+            - description: ' The status message for recommendation report generation. '
+      description: ' Contains detailed information about a recommendation report. '
+    MaxResult:
+      type: integer
+    NextToken:
+      type: string
+      pattern: .*\S.*
+      minLength: 0
+      maxLength: 2048
+    GetServerDetailsRequest:
+      type: object
+      title: GetServerDetailsRequest
+      properties: {}
+    ServerDetail:
+      type: object
+      properties:
+        antipatternReportS3Object:
+          allOf:
+            - $ref: '#/components/schemas/S3Object'
+            - description: ' The S3 bucket name and Amazon S3 key name for anti-pattern report. '
+        antipatternReportStatus:
+          allOf:
+            - $ref: '#/components/schemas/AntipatternReportStatus'
+            - description: ' The status of the anti-pattern report generation. '
+        antipatternReportStatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusMessage'
+            - description: ' A message about the status of the anti-pattern report generation. '
+        applicationComponentStrategySummary:
+          allOf:
+            - $ref: '#/components/schemas/ListStrategySummary'
+            - description: ' A list of strategy summaries. '
+        dataCollectionStatus:
+          allOf:
+            - $ref: '#/components/schemas/RunTimeAssessmentStatus'
+            - description: ' The status of assessment for the server. '
+        id:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: ' The server ID. '
+        lastAnalyzedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: ' The timestamp of when the server was assessed. '
+        listAntipatternSeveritySummary:
+          allOf:
+            - $ref: '#/components/schemas/ListAntipatternSeveritySummary'
+            - description: ' A list of anti-pattern severity summaries. '
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: ' The name of the server. '
+        recommendationSet:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationSet'
+            - description: ' A set of recommendations. '
+        serverError:
+          allOf:
+            - $ref: '#/components/schemas/ServerError'
+            - description: The error in server analysis.
+        serverType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The type of server. '
+        statusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusMessage'
+            - description: ' A message about the status of data collection, which contains detailed descriptions of any error messages. '
+        systemInfo:
+          allOf:
+            - $ref: '#/components/schemas/SystemInfo'
+            - description: ' System information about the server. '
+      description: ' Detailed information about a server. '
+    GetServerStrategiesRequest:
+      type: object
+      title: GetServerStrategiesRequest
+      properties: {}
+    ServerStrategies:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServerStrategy'
+    GroupName:
+      type: string
+      enum:
+        - ExternalId
+    GroupIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/Group'
+    HeterogeneousTargetDatabaseEngines:
+      type: array
+      items:
+        $ref: '#/components/schemas/HeterogeneousTargetDatabaseEngine'
+      minItems: 1
+      maxItems: 1
+    HeterogeneousTargetDatabaseEngine:
+      type: string
+      enum:
+        - None specified
+        - Amazon Aurora
+        - AWS PostgreSQL
+        - MySQL
+        - Microsoft SQL Server
+        - Oracle Database
+        - MariaDB
+        - SAP
+        - Db2 LUW
+        - MongoDB
+    HomogeneousTargetDatabaseEngines:
+      type: array
+      items:
+        $ref: '#/components/schemas/HomogeneousTargetDatabaseEngine'
+      minItems: 0
+      maxItems: 1
+    HomogeneousTargetDatabaseEngine:
+      type: string
+      enum:
+        - None specified
+    IPAddress:
+      type: string
+      pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
+      minLength: 0
+      maxLength: 15
+    OSType:
+      type: string
+      enum:
+        - LINUX
+        - WINDOWS
+    IPAddressBasedRemoteInfo:
+      type: object
+      properties:
+        authType:
+          allOf:
+            - $ref: '#/components/schemas/AuthType'
+            - description: The type of authorization.
+        ipAddressConfigurationTimeStamp:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The time stamp of the configuration.
+        osType:
+          allOf:
+            - $ref: '#/components/schemas/OSType'
+            - description: The type of the operating system.
+      description: IP address based configurations.
+    ImportFileTaskInformation:
+      type: object
+      properties:
+        completionTime:
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: ' The time that the import task completes. '
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The ID of the import file task. '
+        importName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The name of the import task given in <code>StartImportFileTask</code>. '
+        inputS3Bucket:
+          allOf:
+            - $ref: '#/components/schemas/importS3Bucket'
+            - description: ' The S3 bucket where the import file is located. '
+        inputS3Key:
+          allOf:
+            - $ref: '#/components/schemas/importS3Key'
+            - description: ' The Amazon S3 key name of the import file. '
+        numberOfRecordsFailed:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' The number of records that failed to be imported. '
+        numberOfRecordsSuccess:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' The number of records successfully imported. '
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: ' Start time of the import task. '
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ImportFileTaskStatus'
+            - description: ' Status of import file task. '
+        statusReportS3Bucket:
+          allOf:
+            - $ref: '#/components/schemas/importS3Bucket'
+            - description: ' The S3 bucket name for status report of import task. '
+        statusReportS3Key:
+          allOf:
+            - $ref: '#/components/schemas/importS3Key'
+            - description: ' The Amazon S3 key name for status report of import task. The report contains details about whether each record imported successfully or why it did not. '
+      description: ' Information about the import file tasks you request. '
+    InterfaceName:
+      type: string
+      pattern: .*
+      minLength: 0
+      maxLength: 1024
+    ListApplicationComponentsRequestFilterValueString:
+      type: string
+      pattern: .*\S.*
+      minLength: 0
+      maxLength: 256
+    SortOrder:
+      type: string
+      enum:
+        - ASC
+        - DESC
+    ListApplicationComponentsRequest:
+      type: object
+      title: ListApplicationComponentsRequest
+      properties:
+        applicationComponentCriteria:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationComponentCriteria'
+            - description: ' Criteria for filtering the list of application components. '
+        filterValue:
+          allOf:
+            - $ref: '#/components/schemas/ListApplicationComponentsRequestFilterValueString'
+            - description: ' Specify the value based on the application component criteria type. For example, if <code>applicationComponentCriteria</code> is set to <code>SERVER_ID</code> and <code>filterValue</code> is set to <code>server1</code>, then <a>ListApplicationComponents</a> returns all the application components running on server1. '
+        groupIdFilter:
+          allOf:
+            - $ref: '#/components/schemas/GroupIds'
+            - description: ' The group ID specified in to filter on. '
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResult'
+            - description: ' The maximum number of items to include in the response. The maximum value is 100. '
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' The token from a previous call that you use to retrieve the next set of results. For example, if a previous call to this action returned 100 items, but you set <code>maxResults</code> to 10. You''ll receive a set of 10 results along with a token. You then use the returned token to retrieve the next set of 10. '
+        sort:
+          allOf:
+            - $ref: '#/components/schemas/SortOrder'
+            - description: ' Specifies whether to sort by ascending (<code>ASC</code>) or descending (<code>DESC</code>) order. '
+    ListCollectorsRequest:
+      type: object
+      title: ListCollectorsRequest
+      properties: {}
+    ListImportFileTaskInformation:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImportFileTaskInformation'
+    ListImportFileTaskRequest:
+      type: object
+      title: ListImportFileTaskRequest
+      properties: {}
+    ServerStatusSummary:
+      type: object
+      properties:
+        count:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The number of servers successfully analyzed, partially successful or failed analysis.'
+        runTimeAssessmentStatus:
+          allOf:
+            - $ref: '#/components/schemas/RunTimeAssessmentStatus'
+            - description: The status of the run time.
+      description: The status summary of the server analysis.
+    ServerSummary:
+      type: object
+      properties:
+        ServerOsType:
+          allOf:
+            - $ref: '#/components/schemas/ServerOsType'
+            - description: ' Type of operating system for the servers. '
+        count:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' Number of servers. '
+      description: ' Object containing details about the servers imported by Application Discovery Service '
+    ServerCriteria:
+      type: string
+      enum:
+        - NOT_DEFINED
+        - OS_NAME
+        - STRATEGY
+        - DESTINATION
+        - SERVER_ID
+        - ANALYSIS_STATUS
+        - ERROR_CATEGORY
+    ListServersRequest:
+      type: object
+      title: ListServersRequest
+      properties:
+        filterValue:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' Specifies the filter value, which is based on the type of server criteria. For example, if <code>serverCriteria</code> is <code>OS_NAME</code>, and the <code>filterValue</code> is equal to <code>WindowsServer</code>, then <code>ListServers</code> returns all of the servers matching the OS name <code>WindowsServer</code>. '
+        groupIdFilter:
+          allOf:
+            - $ref: '#/components/schemas/GroupIds'
+            - description: ' Specifies the group ID to filter on. '
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResult'
+            - description: ' The maximum number of items to include in the response. The maximum value is 100. '
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' The token from a previous call that you use to retrieve the next set of results. For example, if a previous call to this action returned 100 items, but you set <code>maxResults</code> to 10. You''ll receive a set of 10 results along with a token. You then use the returned token to retrieve the next set of 10. '
+        serverCriteria:
+          allOf:
+            - $ref: '#/components/schemas/ServerCriteria'
+            - description: ' Criteria for filtering servers. '
+        sort:
+          allOf:
+            - $ref: '#/components/schemas/SortOrder'
+            - description: ' Specifies whether to sort by ascending (<code>ASC</code>) or descending (<code>DESC</code>) order. '
+    ServerDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServerDetail'
+    StrategySummary:
+      type: object
+      properties:
+        count:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' The count of recommendations per strategy. '
+        strategy:
+          allOf:
+            - $ref: '#/components/schemas/Strategy'
+            - description: ' The name of recommended strategy. '
+      description: ' Object containing the summary of the strategy recommendations. '
+    Location:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 128
+    MacAddress:
+      type: string
+      pattern: '^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})|([0-9a-fA-F]{4}\\.[0-9a-fA-F]{4}\\.[0-9a-fA-F]{4})$”$'
+      minLength: 0
+      maxLength: 17
+    NoManagementPreference:
+      type: object
+      required:
+        - targetDestination
+      properties:
+        targetDestination:
+          allOf:
+            - $ref: '#/components/schemas/NoPreferenceTargetDestinations'
+            - description: ' The choice of application destination that you specify. '
+      description: ' Object containing the choice of application destination that you specify. '
+    SelfManageResources:
+      type: object
+      required:
+        - targetDestination
+      properties:
+        targetDestination:
+          allOf:
+            - $ref: '#/components/schemas/SelfManageTargetDestinations'
+            - description: ' Self-managed resources target destination. '
+      description: ' Self-managed resources. '
+    NetMask:
+      type: string
+      pattern: .*
+      minLength: 0
+      maxLength: 1024
+    NetworkInfo:
+      type: object
+      required:
+        - interfaceName
+        - ipAddress
+        - macAddress
+        - netMask
+      properties:
+        interfaceName:
+          allOf:
+            - $ref: '#/components/schemas/InterfaceName'
+            - description: ' Information about the name of the interface of the server for which the assessment was run. '
+        ipAddress:
+          allOf:
+            - $ref: '#/components/schemas/IPAddress'
+            - description: ' Information about the IP address of the server for which the assessment was run. '
+        macAddress:
+          allOf:
+            - $ref: '#/components/schemas/MacAddress'
+            - description: ' Information about the MAC address of the server for which the assessment was run. '
+        netMask:
+          allOf:
+            - $ref: '#/components/schemas/NetMask'
+            - description: ' Information about the subnet mask of the server for which the assessment was run. '
+      description: ' Information about the server''s network for which the assessment was run. '
+    NetworkInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NetworkInfo'
+    TargetDatabaseEngines:
+      type: array
+      items:
+        $ref: '#/components/schemas/TargetDatabaseEngine'
+      minItems: 1
+      maxItems: 1
+    NoPreferenceTargetDestinations:
+      type: array
+      items:
+        $ref: '#/components/schemas/NoPreferenceTargetDestination'
+      minItems: 1
+      maxItems: 1
+    NoPreferenceTargetDestination:
+      type: string
+      enum:
+        - None specified
+        - AWS Elastic BeanStalk
+        - AWS Fargate
+        - Amazon Elastic Cloud Compute (EC2)
+        - Amazon Elastic Container Service (ECS)
+        - Amazon Elastic Kubernetes Service (EKS)
+    OSVersion:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 64
+    OSInfo:
+      type: object
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/OSType'
+            - description: ' Information about the type of operating system. '
+        version:
+          allOf:
+            - $ref: '#/components/schemas/OSVersion'
+            - description: ' Information about the version of operating system. '
+      description: ' Information about the operating system. '
+    OutputFormat:
+      type: string
+      enum:
+        - Excel
+        - Json
+    PipelineType:
+      type: string
+      enum:
+        - AZURE_DEVOPS
+    PipelineInfo:
+      type: object
+      properties:
+        pipelineConfigurationTimeStamp:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The time when the pipeline info was configured.
+        pipelineType:
+          allOf:
+            - $ref: '#/components/schemas/PipelineType'
+            - description: The type of pipeline.
+      description: Detailed information of the pipeline.
+    ProjectName:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 128
+    PutPortfolioPreferencesRequest:
+      type: object
+      title: PutPortfolioPreferencesRequest
+      properties:
+        applicationMode:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationMode'
+            - description: The classification for application component types.
+        applicationPreferences:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationPreferences'
+            - description: ' The transformation preferences for non-database applications. '
+        databasePreferences:
+          allOf:
+            - $ref: '#/components/schemas/DatabasePreferences'
+            - description: ' The transformation preferences for database applications. '
+        prioritizeBusinessGoals:
+          allOf:
+            - $ref: '#/components/schemas/PrioritizeBusinessGoals'
+            - description: ' The rank of the business goals based on priority. '
+    RecommendationReportTimeStamp:
+      type: string
+      format: date-time
+    S3Keys:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    RecommendationReportStatus:
+      type: string
+      enum:
+        - FAILED
+        - IN_PROGRESS
+        - SUCCESS
+    RecommendationReportStatusMessage:
+      type: string
+      pattern: .*\S.*
+      minLength: 0
+      maxLength: 512
+    TransformationTool:
+      type: object
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/TranformationToolDescription'
+            - description: ' Description of the tool. '
+        name:
+          allOf:
+            - $ref: '#/components/schemas/TransformationToolName'
+            - description: ' Name of the tool. '
+        tranformationToolInstallationLink:
+          allOf:
+            - $ref: '#/components/schemas/TranformationToolInstallationLink'
+            - description: ' URL for installing the tool. '
+      description: ' Information of the transformation tool that can be used to migrate and modernize the application. '
+    RunTimeAssessmentStatus:
+      type: string
+      enum:
+        - dataCollectionTaskToBeScheduled
+        - dataCollectionTaskScheduled
+        - dataCollectionTaskStarted
+        - dataCollectionTaskStopped
+        - dataCollectionTaskSuccess
+        - dataCollectionTaskFailed
+        - dataCollectionTaskPartialSuccess
+    S3Bucket:
+      type: string
+      pattern: '[0-9a-z]+[0-9a-z\.\-]*[0-9a-z]+'
+      minLength: 0
+      maxLength: 63
+    S3Key:
+      type: string
+      pattern: .*\S.*
+      minLength: 0
+      maxLength: 1024
+    SecretsManagerKey:
+      type: string
+      pattern: .*
+      minLength: 1
+      maxLength: 512
+      format: password
+    SelfManageTargetDestinations:
+      type: array
+      items:
+        $ref: '#/components/schemas/SelfManageTargetDestination'
+      minItems: 1
+      maxItems: 1
+    SelfManageTargetDestination:
+      type: string
+      enum:
+        - None specified
+        - Amazon Elastic Cloud Compute (EC2)
+        - Amazon Elastic Container Service (ECS)
+        - Amazon Elastic Kubernetes Service (EKS)
+    ServerError:
+      type: object
+      properties:
+        serverErrorCategory:
+          allOf:
+            - $ref: '#/components/schemas/ServerErrorCategory'
+            - description: The error category of server analysis.
+      description: The error in server analysis.
+    SystemInfo:
+      type: object
+      properties:
+        cpuArchitecture:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' CPU architecture type for the server. '
+        fileSystemType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' File system type for the server. '
+        networkInfoList:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInfoList'
+            - description: ' Networking information related to a server. '
+        osInfo:
+          allOf:
+            - $ref: '#/components/schemas/OSInfo'
+            - description: ' Operating system corresponding to a server. '
+      description: ' Information about the server that hosts application components. '
+    ServerErrorCategory:
+      type: string
+      enum:
+        - CONNECTIVITY_ERROR
+        - CREDENTIAL_ERROR
+        - PERMISSION_ERROR
+        - ARCHITECTURE_ERROR
+        - OTHER_ERROR
+    ServerOsType:
+      type: string
+      enum:
+        - WindowsServer
+        - AmazonLinux
+        - EndOfSupportWindowsServer
+        - Redhat
+        - Other
+    ServerStrategy:
+      type: object
+      properties:
+        isPreferred:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Set to true if the recommendation is set as preferred. '
+        numberOfApplicationComponents:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' The number of application components with this strategy recommendation running on the server. '
+        recommendation:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationSet'
+            - description: ' Strategy recommendation for the server. '
+        status:
+          allOf:
+            - $ref: '#/components/schemas/StrategyRecommendation'
+            - description: ' The recommendation status of the strategy for the server. '
+      description: ' Contains information about a strategy recommendation for a server. '
+    SourceVersion:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 40
+    VersionControl:
+      type: string
+      enum:
+        - GITHUB
+        - GITHUB_ENTERPRISE
+        - AZURE_DEVOPS_GIT
+    SourceCodeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SourceCode'
+    SourceCodeRepository:
+      type: object
+      properties:
+        branch:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The branch of the source code. '
+        projectName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the project.
+        repository:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The repository name for the source code. '
+        versionControlType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The type of repository to use for the source code. '
+      description: ' Object containing source code information that is linked to an application component. '
+    StartAssessmentRequestS3bucketForAnalysisDataString:
+      type: string
+      pattern: '[0-9a-z]+[0-9a-z\.\-]*[0-9a-z]+'
+      minLength: 0
+      maxLength: 63
+    StartAssessmentRequestS3bucketForReportDataString:
+      type: string
+      pattern: '[0-9a-z]+[0-9a-z\.\-]*[0-9a-z]+'
+      minLength: 0
+      maxLength: 63
+    StartAssessmentRequest:
+      type: object
+      title: StartAssessmentRequest
+      properties:
+        assessmentTargets:
+          allOf:
+            - $ref: '#/components/schemas/AssessmentTargets'
+            - description: List of criteria for assessment.
+        s3bucketForAnalysisData:
+          allOf:
+            - $ref: '#/components/schemas/StartAssessmentRequestS3bucketForAnalysisDataString'
+            - description: ' The S3 bucket used by the collectors to send analysis data to the service. The bucket name must begin with <code>migrationhub-strategy-</code>. '
+        s3bucketForReportData:
+          allOf:
+            - $ref: '#/components/schemas/StartAssessmentRequestS3bucketForReportDataString'
+            - description: ' The S3 bucket where all the reports generated by the service are stored. The bucket name must begin with <code>migrationhub-strategy-</code>. '
+    StartImportFileTaskRequestNameString:
+      type: string
+      pattern: '[a-zA-Z0-9_-]+'
+      minLength: 1
+      maxLength: 50
+    StartImportFileTaskRequestS3bucketForReportDataString:
+      type: string
+      pattern: '[0-9a-z]+[0-9a-z\.\-]*[0-9a-z]+'
+      minLength: 0
+      maxLength: 63
+    StartImportFileTaskRequest:
+      type: object
+      required:
+        - S3Bucket
+        - name
+        - s3key
+      title: StartImportFileTaskRequest
+      properties:
+        S3Bucket:
+          allOf:
+            - $ref: '#/components/schemas/importS3Bucket'
+            - description: ' The S3 bucket where the import file is located. The bucket name is required to begin with <code>migrationhub-strategy-</code>.'
+        dataSourceType:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceType'
+            - description: 'Specifies the source that the servers are coming from. By default, Strategy Recommendations assumes that the servers specified in the import file are available in AWS Application Discovery Service. '
+        groupId:
+          allOf:
+            - $ref: '#/components/schemas/GroupIds'
+            - description: 'Groups the resources in the import file together with a unique name. This ID can be as filter in <code>ListApplicationComponents</code> and <code>ListServers</code>. '
+        name:
+          allOf:
+            - $ref: '#/components/schemas/StartImportFileTaskRequestNameString'
+            - description: ' A descriptive name for the request. '
+        s3bucketForReportData:
+          allOf:
+            - $ref: '#/components/schemas/StartImportFileTaskRequestS3bucketForReportDataString'
+            - description: ' The S3 bucket where Strategy Recommendations uploads import results. The bucket name is required to begin with migrationhub-strategy-. '
+        s3key:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The Amazon S3 key name of the import file. '
+    StartRecommendationReportGenerationRequest:
+      type: object
+      title: StartRecommendationReportGenerationRequest
+      properties:
+        groupIdFilter:
+          allOf:
+            - $ref: '#/components/schemas/GroupIds'
+            - description: ' Groups the resources in the recommendation report with a unique name. '
+        outputFormat:
+          allOf:
+            - $ref: '#/components/schemas/OutputFormat'
+            - description: ' The output format for the recommendation report file. The default format is Microsoft Excel. '
+    StopAssessmentRequest:
+      type: object
+      required:
+        - assessmentId
+      title: StopAssessmentRequest
+      properties:
+        assessmentId:
+          allOf:
+            - $ref: '#/components/schemas/AsyncTaskId'
+            - description: ' The <code>assessmentId</code> returned by <a>StartAssessment</a>. '
+    StrategyOption:
+      type: object
+      properties:
+        isPreferred:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Indicates if a specific strategy is preferred for the application component. '
+        strategy:
+          allOf:
+            - $ref: '#/components/schemas/Strategy'
+            - description: ' Type of transformation. For example, Rehost, Replatform, and so on. '
+        targetDestination:
+          allOf:
+            - $ref: '#/components/schemas/TargetDestination'
+            - description: ' Destination information about where the application component can migrate to. For example, <code>EC2</code>, <code>ECS</code>, and so on. '
+        toolName:
+          allOf:
+            - $ref: '#/components/schemas/TransformationToolName'
+            - description: ' The name of the tool that can be used to transform an application component using this strategy. '
+      description: ' Information about all the available strategy options for migrating and modernizing an application component. '
+    TargetDatabaseEngine:
+      type: string
+      enum:
+        - None specified
+        - Amazon Aurora
+        - AWS PostgreSQL
+        - MySQL
+        - Microsoft SQL Server
+        - Oracle Database
+        - MariaDB
+        - SAP
+        - Db2 LUW
+        - MongoDB
+    TranformationToolDescription:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 1024
+    TranformationToolInstallationLink:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 1024
+    UpdateApplicationComponentConfigRequest:
+      type: object
+      required:
+        - applicationComponentId
+      title: UpdateApplicationComponentConfigRequest
+      properties:
+        appType:
+          allOf:
+            - $ref: '#/components/schemas/AppType'
+            - description: The type of known component.
+        applicationComponentId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationComponentId'
+            - description: ' The ID of the application component. The ID is unique within an AWS account. '
+        configureOnly:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Update the configuration request of an application component. If it is set to true, the source code and/or database credentials are updated. If it is set to false, the source code and/or database credentials are updated and an analysis is initiated.'
+        inclusionStatus:
+          allOf:
+            - $ref: '#/components/schemas/InclusionStatus'
+            - description: ' Indicates whether the application component has been included for server recommendation or not. '
+        secretsManagerKey:
+          allOf:
+            - $ref: '#/components/schemas/SecretsManagerKey'
+            - description: ' Database credentials. '
+        sourceCodeList:
+          allOf:
+            - $ref: '#/components/schemas/SourceCodeList'
+            - description: ' The list of source code configurations to update for the application component. '
+        strategyOption:
+          allOf:
+            - $ref: '#/components/schemas/StrategyOption'
+            - description: ' The preferred strategy options for the application component. Use values from the <a>GetApplicationComponentStrategies</a> response. '
+    UpdateServerConfigRequest:
+      type: object
+      required:
+        - serverId
+      title: UpdateServerConfigRequest
+      properties:
+        serverId:
+          allOf:
+            - $ref: '#/components/schemas/ServerId'
+            - description: ' The ID of the server. '
+        strategyOption:
+          allOf:
+            - $ref: '#/components/schemas/StrategyOption'
+            - description: ' The preferred strategy options for the application component. See the response from <a>GetServerStrategies</a>.'
+    VcenterBasedRemoteInfo:
+      type: object
+      properties:
+        osType:
+          allOf:
+            - $ref: '#/components/schemas/OSType'
+            - description: The type of the operating system.
+        vcenterConfigurationTimeStamp:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The time when the remote server based on vCenter was last configured.
+      description: Details about the server in vCenter.
+    VersionControlType:
+      type: string
+      enum:
+        - GITHUB
+        - GITHUB_ENTERPRISE
+        - AZURE_DEVOPS_GIT
+    VersionControlInfo:
+      type: object
+      properties:
+        versionControlConfigurationTimeStamp:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The time when the version control system was last configured.
+        versionControlType:
+          allOf:
+            - $ref: '#/components/schemas/VersionControlType'
+            - description: The type of version control.
+      description: Details about the version control configuration.
+security:
+  - hmac: []

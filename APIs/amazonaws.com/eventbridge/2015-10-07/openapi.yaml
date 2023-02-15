@@ -407,6 +407,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSEvents.CreateEndpoint:
+    post:
+      operationId: CreateEndpoint
+      description: "Creates a global endpoint. Global endpoints improve your application's availability by making it regional-fault tolerant. To do this, you define a primary and secondary Region with event buses in each Region. You also create a Amazon Route\_53 health check that will tell EventBridge to route events to the secondary Region when an \"unhealthy\" state is encountered and events will be routed back to the primary Region when the health check reports a \"healthy\" state."
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEndpointResponse'
+        '480':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEndpointRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.CreateEndpoint
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSEvents.CreateEventBus:
     post:
       operationId: CreateEventBus
@@ -808,6 +859,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSEvents.DeleteEndpoint:
+    post:
+      operationId: DeleteEndpoint
+      description: 'Delete an existing global endpoint. For more information about global endpoints, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html">Making applications Regional-fault tolerant with global endpoints and event replication</a> in the Amazon EventBridge User Guide.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteEndpointResponse'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteEndpointRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.DeleteEndpoint
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSEvents.DeleteEventBus:
     post:
       operationId: DeleteEventBus
@@ -1082,6 +1184,51 @@ paths:
             type: string
             enum:
               - AWSEvents.DescribeConnection
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSEvents.DescribeEndpoint:
+    post:
+      operationId: DescribeEndpoint
+      description: 'Get the information about an existing global endpoint. For more information about global endpoints, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html">Making applications Regional-fault tolerant with global endpoints and event replication</a> in the Amazon EventBridge User Guide..'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEndpointResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEndpointRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.DescribeEndpoint
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1556,6 +1703,45 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSEvents.ListEndpoints:
+    post:
+      operationId: ListEndpoints
+      description: 'List the global endpoints associated with this account. For more information about global endpoints, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html">Making applications Regional-fault tolerant with global endpoints and event replication</a> in the Amazon EventBridge User Guide..'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEndpointsResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListEndpointsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.ListEndpoints
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSEvents.ListEventBuses:
     post:
       operationId: ListEventBuses
@@ -1958,7 +2144,7 @@ paths:
   /#X-Amz-Target=AWSEvents.PutEvents:
     post:
       operationId: PutEvents
-      description: Sends custom events to Amazon EventBridge so that they can be matched to rules.
+      description: <p>Sends custom events to Amazon EventBridge so that they can be matched to rules.</p> <note> <p>PutEvents will only process nested JSON up to 1100 levels deep.</p> </note>
       responses:
         '200':
           description: Success
@@ -2170,7 +2356,7 @@ paths:
   /#X-Amz-Target=AWSEvents.PutTargets:
     post:
       operationId: PutTargets
-      description: '<p>Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule.</p> <p>Targets are the resources that are invoked when a rule is triggered.</p> <p>You can configure the following as targets for Events:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html">API destination</a> </p> </li> <li> <p>Amazon API Gateway REST API endpoints</p> </li> <li> <p>API Gateway</p> </li> <li> <p>Batch job queue</p> </li> <li> <p>CloudWatch Logs group</p> </li> <li> <p>CodeBuild project</p> </li> <li> <p>CodePipeline</p> </li> <li> <p>Amazon EC2 <code>CreateSnapshot</code> API call</p> </li> <li> <p>Amazon EC2 <code>RebootInstances</code> API call</p> </li> <li> <p>Amazon EC2 <code>StopInstances</code> API call</p> </li> <li> <p>Amazon EC2 <code>TerminateInstances</code> API call</p> </li> <li> <p>Amazon ECS tasks</p> </li> <li> <p>Event bus in a different Amazon Web Services account or Region.</p> <p>You can use an event bus in the US East (N. Virginia) us-east-1, US West (Oregon) us-west-2, or Europe (Ireland) eu-west-1 Regions as a target for a rule.</p> </li> <li> <p>Firehose delivery stream (Kinesis Data Firehose)</p> </li> <li> <p>Inspector assessment template (Amazon Inspector)</p> </li> <li> <p>Kinesis stream (Kinesis Data Stream)</p> </li> <li> <p>Lambda function</p> </li> <li> <p>Redshift clusters (Data API statement execution)</p> </li> <li> <p>Amazon SNS topic</p> </li> <li> <p>Amazon SQS queues (includes FIFO queues</p> </li> <li> <p>SSM Automation</p> </li> <li> <p>SSM OpsItem</p> </li> <li> <p>SSM Run Command</p> </li> <li> <p>Step Functions state machines</p> </li> </ul> <p>Creating rules with built-in targets is supported only in the Amazon Web Services Management Console. The built-in targets are <code>EC2 CreateSnapshot API call</code>, <code>EC2 RebootInstances API call</code>, <code>EC2 StopInstances API call</code>, and <code>EC2 TerminateInstances API call</code>. </p> <p>For some target types, <code>PutTargets</code> provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the <code>KinesisParameters</code> argument. To invoke a command on multiple EC2 instances with one rule, you can use the <code>RunCommandParameters</code> field.</p> <p>To be able to make API calls against the resources that you own, Amazon EventBridge needs the appropriate permissions. For Lambda and Amazon SNS resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis Data Streams, Step Functions state machines and API Gateway REST APIs, EventBridge relies on IAM roles that you specify in the <code>RoleARN</code> argument in <code>PutTargets</code>. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html">Authentication and Access Control</a> in the <i>Amazon EventBridge User Guide</i>.</p> <p>If another Amazon Web Services account is in the same region and has granted you permission (using <code>PutPermission</code>), you can send events to that account. Set that account''s event bus as a target of the rules in your account. To send the matched events to the other account, specify that account''s event bus as the <code>Arn</code> value when you run <code>PutTargets</code>. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see <a href="http://aws.amazon.com/eventbridge/pricing/">Amazon EventBridge Pricing</a>.</p> <note> <p> <code>Input</code>, <code>InputPath</code>, and <code>InputTransformer</code> are not available with <code>PutTarget</code> if the target is an event bus of a different Amazon Web Services account.</p> </note> <p>If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a <code>RoleArn</code> with proper permissions in the <code>Target</code> structure. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html">Sending and Receiving Events Between Amazon Web Services Accounts</a> in the <i>Amazon EventBridge User Guide</i>.</p> <p>For more information about enabling cross-account events, see <a href="https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutPermission.html">PutPermission</a>.</p> <p> <b>Input</b>, <b>InputPath</b>, and <b>InputTransformer</b> are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:</p> <ul> <li> <p>If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).</p> </li> <li> <p>If <b>Input</b> is specified in the form of valid JSON, then the matched event is overridden with this constant.</p> </li> <li> <p>If <b>InputPath</b> is specified in the form of JSONPath (for example, <code>$.detail</code>), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).</p> </li> <li> <p>If <b>InputTransformer</b> is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.</p> </li> </ul> <p>When you specify <code>InputPath</code> or <code>InputTransformer</code>, you must use JSON dot notation, not bracket notation.</p> <p>When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect.</p> <p>This action can partially fail if too many requests are made at the same time. If that happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>'
+      description: '<p>Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule.</p> <p>Targets are the resources that are invoked when a rule is triggered.</p> <note> <p>Each rule can have up to five (5) targets associated with it at one time.</p> </note> <p>You can configure the following as targets for Events:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html">API destination</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-gateway-target.html">API Gateway</a> </p> </li> <li> <p>Batch job queue</p> </li> <li> <p>CloudWatch group</p> </li> <li> <p>CodeBuild project</p> </li> <li> <p>CodePipeline</p> </li> <li> <p>EC2 <code>CreateSnapshot</code> API call</p> </li> <li> <p>EC2 Image Builder</p> </li> <li> <p>EC2 <code>RebootInstances</code> API call</p> </li> <li> <p>EC2 <code>StopInstances</code> API call</p> </li> <li> <p>EC2 <code>TerminateInstances</code> API call</p> </li> <li> <p>ECS task</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-cross-account.html">Event bus in a different account or Region</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-bus-to-bus.html">Event bus in the same account and Region</a> </p> </li> <li> <p>Firehose delivery stream</p> </li> <li> <p>Glue workflow</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/incident-manager/latest/userguide/incident-creation.html#incident-tracking-auto-eventbridge">Incident Manager response plan</a> </p> </li> <li> <p>Inspector assessment template</p> </li> <li> <p>Kinesis stream</p> </li> <li> <p>Lambda function</p> </li> <li> <p>Redshift cluster</p> </li> <li> <p>Redshift Serverless workgroup</p> </li> <li> <p>SageMaker Pipeline</p> </li> <li> <p>SNS topic</p> </li> <li> <p>SQS queue</p> </li> <li> <p>Step Functions state machine</p> </li> <li> <p>Systems Manager Automation</p> </li> <li> <p>Systems Manager OpsItem</p> </li> <li> <p>Systems Manager Run Command</p> </li> </ul> <p>Creating rules with built-in targets is supported only in the Amazon Web Services Management Console. The built-in targets are <code>EC2 CreateSnapshot API call</code>, <code>EC2 RebootInstances API call</code>, <code>EC2 StopInstances API call</code>, and <code>EC2 TerminateInstances API call</code>. </p> <p>For some target types, <code>PutTargets</code> provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the <code>KinesisParameters</code> argument. To invoke a command on multiple EC2 instances with one rule, you can use the <code>RunCommandParameters</code> field.</p> <p>To be able to make API calls against the resources that you own, Amazon EventBridge needs the appropriate permissions. For Lambda and Amazon SNS resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis Data Streams, Step Functions state machines and API Gateway APIs, EventBridge relies on IAM roles that you specify in the <code>RoleARN</code> argument in <code>PutTargets</code>. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html">Authentication and Access Control</a> in the <i>Amazon EventBridge User Guide</i>.</p> <p>If another Amazon Web Services account is in the same region and has granted you permission (using <code>PutPermission</code>), you can send events to that account. Set that account''s event bus as a target of the rules in your account. To send the matched events to the other account, specify that account''s event bus as the <code>Arn</code> value when you run <code>PutTargets</code>. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see <a href="http://aws.amazon.com/eventbridge/pricing/">Amazon EventBridge Pricing</a>.</p> <note> <p> <code>Input</code>, <code>InputPath</code>, and <code>InputTransformer</code> are not available with <code>PutTarget</code> if the target is an event bus of a different Amazon Web Services account.</p> </note> <p>If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a <code>RoleArn</code> with proper permissions in the <code>Target</code> structure. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html">Sending and Receiving Events Between Amazon Web Services Accounts</a> in the <i>Amazon EventBridge User Guide</i>.</p> <p>For more information about enabling cross-account events, see <a href="https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutPermission.html">PutPermission</a>.</p> <p> <b>Input</b>, <b>InputPath</b>, and <b>InputTransformer</b> are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:</p> <ul> <li> <p>If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).</p> </li> <li> <p>If <b>Input</b> is specified in the form of valid JSON, then the matched event is overridden with this constant.</p> </li> <li> <p>If <b>InputPath</b> is specified in the form of JSONPath (for example, <code>$.detail</code>), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).</p> </li> <li> <p>If <b>InputTransformer</b> is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.</p> </li> </ul> <p>When you specify <code>InputPath</code> or <code>InputTransformer</code>, you must use JSON dot notation, not bracket notation.</p> <p>When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect.</p> <p>This action can partially fail if too many requests are made at the same time. If that happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>'
       responses:
         '200':
           description: Success
@@ -2286,7 +2472,7 @@ paths:
   /#X-Amz-Target=AWSEvents.RemoveTargets:
     post:
       operationId: RemoveTargets
-      description: '<p>Removes the specified targets from the specified rule. When the rule is triggered, those targets are no longer be invoked.</p> <p>When you remove a target, when the associated rule triggers, removed targets might continue to be invoked. Allow a short period of time for changes to take effect.</p> <p>This action can partially fail if too many requests are made at the same time. If that happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>'
+      description: '<p>Removes the specified targets from the specified rule. When the rule is triggered, those targets are no longer be invoked.</p> <note> <p>A successful execution of <code>RemoveTargets</code> doesn''t guarantee all targets are removed from the rule, it means that the target(s) listed in the request are removed.</p> </note> <p>When you remove a target, when the associated rule triggers, removed targets might continue to be invoked. Allow a short period of time for changes to take effect.</p> <p>This action can partially fail if too many requests are made at the same time. If that happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>'
       responses:
         '200':
           description: Success
@@ -2739,6 +2925,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSEvents.UpdateEndpoint:
+    post:
+      operationId: UpdateEndpoint
+      description: 'Update an existing endpoint. For more information about global endpoints, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html">Making applications Regional-fault tolerant with global endpoints and event replication</a> in the Amazon EventBridge User Guide..'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateEndpointResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '482':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEndpointRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.UpdateEndpoint
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -2971,11 +3208,74 @@ components:
         AuthorizationType:
           allOf:
             - $ref: '#/components/schemas/ConnectionAuthorizationType'
-            - description: The type of authorization to use for the connection.
+            - description: <p>The type of authorization to use for the connection.</p> <note> <p>OAUTH tokens are refreshed when a 401 or 407 response is returned.</p> </note>
         AuthParameters:
           allOf:
             - $ref: '#/components/schemas/CreateConnectionAuthRequestParameters'
             - description: 'A <code>CreateConnectionAuthRequestParameters</code> object that contains the authorization parameters to use to authorize with the endpoint. '
+    CreateEndpointResponse:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/EndpointName'
+            - description: The name of the endpoint that was created by this request.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/EndpointArn'
+            - description: The ARN of the endpoint that was created by this request.
+        RoutingConfig:
+          allOf:
+            - $ref: '#/components/schemas/RoutingConfig'
+            - description: The routing configuration defined by this request.
+        ReplicationConfig:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationConfig'
+            - description: Whether event replication was enabled or disabled by this request.
+        EventBuses:
+          allOf:
+            - $ref: '#/components/schemas/EndpointEventBusList'
+            - description: The event buses used by this request.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The ARN of the role used by event replication for this request.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/EndpointState'
+            - description: The state of the endpoint that was created by this request.
+    CreateEndpointRequest:
+      type: object
+      required:
+        - Name
+        - RoutingConfig
+        - EventBuses
+      title: CreateEndpointRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/EndpointName'
+            - description: 'The name of the global endpoint. For example, <code>"Name":"us-east-2-custom_bus_A-endpoint"</code>.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/EndpointDescription'
+            - description: A description of the global endpoint.
+        RoutingConfig:
+          allOf:
+            - $ref: '#/components/schemas/RoutingConfig'
+            - description: 'Configure the routing policy, including the health check and secondary Region..'
+        ReplicationConfig:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationConfig'
+            - description: 'Enable or disable event replication. The default state is <code>ENABLED</code> which means you must supply a <code>RoleArn</code>. If you don''t have a <code>RoleArn</code> or you don''t want event replication enabled, set the state to <code>DISABLED</code>.'
+        EventBuses:
+          allOf:
+            - $ref: '#/components/schemas/EndpointEventBusList'
+            - description: <p>Define the event buses used. </p> <important> <p>The names of the event buses must be identical in each Region.</p> </important>
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The ARN of the role used for replication.
     CreateEventBusResponse:
       type: object
       properties:
@@ -2992,7 +3292,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/EventBusName'
-            - description: '<p>The name of the new event bus. </p> <p>Event bus names cannot contain the / character. You can''t use the name <code>default</code> for a custom event bus, as this name is already used for your account''s default event bus.</p> <p>If this is a partner event bus, the name must exactly match the name of the partner event source that this event bus is matched to.</p>'
+            - description: '<p>The name of the new event bus. </p> <p>Custom event bus names can''t contain the <code>/</code> character, but you can use the <code>/</code> character in partner event bus names. In addition, for partner event buses, the name must exactly match the name of the partner event source that this event bus is matched to.</p> <p>You can''t use the name <code>default</code> for a custom event bus, as this name is already used for your account''s default event bus.</p>'
         EventSourceName:
           allOf:
             - $ref: '#/components/schemas/EventSourceName'
@@ -3125,6 +3425,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectionName'
             - description: The name of the connection to delete.
+    DeleteEndpointResponse:
+      type: object
+      properties: {}
+    DeleteEndpointRequest:
+      type: object
+      required:
+        - Name
+      title: DeleteEndpointRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/EndpointName'
+            - description: 'The name of the endpoint you want to delete. For example, <code>"Name":"us-east-2-custom_bus_A-endpoint"</code>..'
     DeleteEventBusRequest:
       type: object
       required:
@@ -3336,6 +3649,75 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectionName'
             - description: The name of the connection to retrieve.
+    DescribeEndpointResponse:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/EndpointName'
+            - description: The name of the endpoint you asked for information about.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/EndpointDescription'
+            - description: The description of the endpoint you asked for information about.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/EndpointArn'
+            - description: The ARN of the endpoint you asked for information about.
+        RoutingConfig:
+          allOf:
+            - $ref: '#/components/schemas/RoutingConfig'
+            - description: The routing configuration of the endpoint you asked for information about.
+        ReplicationConfig:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationConfig'
+            - description: Whether replication is enabled or disabled for the endpoint you asked for information about.
+        EventBuses:
+          allOf:
+            - $ref: '#/components/schemas/EndpointEventBusList'
+            - description: The event buses being used by the endpoint you asked for information about.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The ARN of the role used by the endpoint you asked for information about.
+        EndpointId:
+          allOf:
+            - $ref: '#/components/schemas/EndpointId'
+            - description: The ID of the endpoint you asked for information about.
+        EndpointUrl:
+          allOf:
+            - $ref: '#/components/schemas/EndpointUrl'
+            - description: The URL of the endpoint you asked for information about.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/EndpointState'
+            - description: The current state of the endpoint you asked for information about.
+        StateReason:
+          allOf:
+            - $ref: '#/components/schemas/EndpointStateReason'
+            - description: The reason the endpoint you asked for information about is in its current state.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the endpoint you asked for information about was created.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The last time the endpoint you asked for information about was modified.
+    DescribeEndpointRequest:
+      type: object
+      required:
+        - Name
+      title: DescribeEndpointRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/EndpointName'
+            - description: 'The name of the endpoint you want to get information about. For example, <code>"Name":"us-east-2-custom_bus_A-endpoint"</code>.'
+        HomeRegion:
+          allOf:
+            - $ref: '#/components/schemas/HomeRegion'
+            - description: 'The primary Region of the endpoint you want to get information about. For example <code>"HomeRegion": "us-east-1"</code>.'
     DescribeEventBusResponse:
       type: object
       properties:
@@ -3660,6 +4042,37 @@ components:
           allOf:
             - $ref: '#/components/schemas/LimitMax100'
             - description: The maximum number of connections to return.
+    ListEndpointsResponse:
+      type: object
+      properties:
+        Endpoints:
+          allOf:
+            - $ref: '#/components/schemas/EndpointList'
+            - description: The endpoints returned by the call.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.'
+    ListEndpointsRequest:
+      type: object
+      title: ListEndpointsRequest
+      properties:
+        NamePrefix:
+          allOf:
+            - $ref: '#/components/schemas/EndpointName'
+            - description: 'A value that will return a subset of the endpoints associated with this account. For example, <code>"NamePrefix": "ABC"</code> will return all endpoints with "ABC" in the name.'
+        HomeRegion:
+          allOf:
+            - $ref: '#/components/schemas/HomeRegion'
+            - description: 'The primary Region of the endpoints associated with this account. For example <code>"HomeRegion": "us-east-1"</code>.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/LimitMax100'
+            - description: The maximum number of results returned by the call.
     ListEventBusesResponse:
       type: object
       properties:
@@ -3931,7 +4344,7 @@ components:
         Entries:
           allOf:
             - $ref: '#/components/schemas/PutEventsResultEntryList'
-            - description: 'The successfully and unsuccessfully ingested events results. If the ingestion was successful, the entry has the event ID in it. Otherwise, you can use the error code and error message to identify the problem with the entry.'
+            - description: '<p>The successfully and unsuccessfully ingested events results. If the ingestion was successful, the entry has the event ID in it. Otherwise, you can use the error code and error message to identify the problem with the entry.</p> <p>For each record, the index of the response element is the same as the index in the request array.</p>'
     PutEventsRequest:
       type: object
       required:
@@ -3942,6 +4355,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/PutEventsRequestEntryList'
             - description: 'The entry that defines an event in your system. You can specify several parameters for the entry such as the source and type of the event, resources associated with the event, and so on.'
+        EndpointId:
+          allOf:
+            - $ref: '#/components/schemas/EndpointId'
+            - description: '<p>The URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is <code>abcde.veo</code>.</p> <important> <p>When using Java, you must include <code>auth-crt</code> on the class path.</p> </important>'
     PutPartnerEventsResponse:
       type: object
       properties:
@@ -3982,7 +4399,7 @@ components:
         StatementId:
           allOf:
             - $ref: '#/components/schemas/StatementId'
-            - description: 'An identifier string for the external account that you are granting permissions to. If you later want to revoke the permission for this external account, specify this <code>StatementId</code> when you run <a href="https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_RemovePermission.html">RemovePermission</a>.'
+            - description: '<p>An identifier string for the external account that you are granting permissions to. If you later want to revoke the permission for this external account, specify this <code>StatementId</code> when you run <a href="https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_RemovePermission.html">RemovePermission</a>.</p> <note> <p>Each <code>StatementId</code> must be unique.</p> </note>'
         Condition:
           allOf:
             - $ref: '#/components/schemas/Condition'
@@ -4016,7 +4433,7 @@ components:
         EventPattern:
           allOf:
             - $ref: '#/components/schemas/EventPattern'
-            - description: 'The event pattern. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html">Events and Event Patterns</a> in the <i>Amazon EventBridge User Guide</i>.'
+            - description: 'The event pattern. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html">Amazon EventBridge event patterns</a> in the <i>Amazon EventBridge User Guide</i>.'
         State:
           allOf:
             - $ref: '#/components/schemas/RuleState'
@@ -4363,6 +4780,75 @@ components:
           allOf:
             - $ref: '#/components/schemas/UpdateConnectionAuthRequestParameters'
             - description: The authorization parameters to use for the connection.
+    UpdateEndpointResponse:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/EndpointName'
+            - description: The name of the endpoint you updated in this request.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/EndpointArn'
+            - description: The ARN of the endpoint you updated in this request.
+        RoutingConfig:
+          allOf:
+            - $ref: '#/components/schemas/RoutingConfig'
+            - description: The routing configuration you updated in this request.
+        ReplicationConfig:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationConfig'
+            - description: Whether event replication was enabled or disabled for the endpoint you updated in this request.
+        EventBuses:
+          allOf:
+            - $ref: '#/components/schemas/EndpointEventBusList'
+            - description: The event buses used for replication for the endpoint you updated in this request.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The ARN of the role used by event replication for the endpoint you updated in this request.
+        EndpointId:
+          allOf:
+            - $ref: '#/components/schemas/EndpointId'
+            - description: The ID of the endpoint you updated in this request.
+        EndpointUrl:
+          allOf:
+            - $ref: '#/components/schemas/EndpointUrl'
+            - description: The URL of the endpoint you updated in this request.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/EndpointState'
+            - description: The state of the endpoint you updated in this request.
+    UpdateEndpointRequest:
+      type: object
+      required:
+        - Name
+      title: UpdateEndpointRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/EndpointName'
+            - description: The name of the endpoint you want to update.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/EndpointDescription'
+            - description: A description for the endpoint.
+        RoutingConfig:
+          allOf:
+            - $ref: '#/components/schemas/RoutingConfig'
+            - description: 'Configure the routing policy, including the health check and secondary Region.'
+        ReplicationConfig:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationConfig'
+            - description: Whether event replication was enabled or disabled by this request.
+        EventBuses:
+          allOf:
+            - $ref: '#/components/schemas/EndpointEventBusList'
+            - description: Define event buses used for replication.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The ARN of the role used by event replication for this request.
     AccountId:
       type: string
       pattern: '\d{12}'
@@ -4745,7 +5231,7 @@ components:
         AuthorizationType:
           allOf:
             - $ref: '#/components/schemas/ConnectionAuthorizationType'
-            - description: The authorization type specified for the connection.
+            - description: <p>The authorization type specified for the connection.</p> <note> <p>OAUTH tokens are refreshed when a 401 or 407 response is returned.</p> </note>
         CreationTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -4937,6 +5423,7 @@ components:
         $ref: '#/components/schemas/Connection'
     EventPattern:
       type: string
+      maxLength: 4096
     CreateConnectionApiKeyAuthRequestParameters:
       type: object
       required:
@@ -5026,6 +5513,59 @@ components:
             - $ref: '#/components/schemas/AuthHeaderParameters'
             - description: The client secret associated with the client ID to use for OAuth authorization for the connection.
       description: Contains the Basic authorization parameters to use for the connection.
+    EndpointName:
+      type: string
+      pattern: '[\.\-_A-Za-z0-9]+'
+      minLength: 1
+      maxLength: 64
+    EndpointDescription:
+      type: string
+      pattern: .*
+      maxLength: 512
+    RoutingConfig:
+      type: object
+      required:
+        - FailoverConfig
+      properties:
+        FailoverConfig:
+          allOf:
+            - $ref: '#/components/schemas/FailoverConfig'
+            - description: The failover configuration for an endpoint. This includes what triggers failover and what happens when it's triggered.
+      description: The routing configuration of the endpoint.
+    ReplicationConfig:
+      type: object
+      properties:
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationState'
+            - description: The state of event replication.
+      description: Endpoints can replicate all events to the secondary Region.
+    EndpointEventBusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EndpointEventBus'
+      minItems: 2
+      maxItems: 2
+    IamRoleArn:
+      type: string
+      pattern: '^arn:aws[a-z-]*:iam::\d{12}:role\/[\w+=,.@/-]+$'
+      minLength: 1
+      maxLength: 256
+    EndpointArn:
+      type: string
+      pattern: '^arn:aws([a-z]|\-)*:events:([a-z]|\d|\-)*:([0-9]{12})?:endpoint\/[/\.\-_A-Za-z0-9]+$'
+      minLength: 1
+      maxLength: 1600
+    EndpointState:
+      type: string
+      enum:
+        - ACTIVE
+        - CREATING
+        - UPDATING
+        - DELETING
+        - CREATE_FAILED
+        - UPDATE_FAILED
+        - DELETE_FAILED
     EventBusName:
       type: string
       pattern: '[/\.\-_A-Za-z0-9]+'
@@ -5074,6 +5614,26 @@ components:
       pattern: '^arn:aws([a-z]|\-)*:secretsmanager:([a-z]|\d|\-)*:([0-9]{12})?:secret:[\/_+=\.@\-A-Za-z0-9]+$'
       minLength: 20
       maxLength: 2048
+    HomeRegion:
+      type: string
+      pattern: '^[\-a-z0-9]+$'
+      minLength: 9
+      maxLength: 20
+    EndpointId:
+      type: string
+      pattern: '^[A-Za-z0-9\-]+[\.][A-Za-z0-9\-]+$'
+      minLength: 1
+      maxLength: 50
+    EndpointUrl:
+      type: string
+      pattern: '^(https://)?[\.\-a-z0-9]+$'
+      minLength: 1
+      maxLength: 256
+    EndpointStateReason:
+      type: string
+      pattern: .*
+      minLength: 1
+      maxLength: 512
     EventSourceState:
       type: string
       enum:
@@ -5171,7 +5731,7 @@ components:
         LaunchType:
           allOf:
             - $ref: '#/components/schemas/LaunchType'
-            - description: 'Specifies the launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. The <code>FARGATE</code> value is supported only in the Regions where Fargate witt Amazon ECS is supported. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html">Fargate on Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+            - description: 'Specifies the launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. The <code>FARGATE</code> value is supported only in the Regions where Fargate with Amazon ECS is supported. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html">Fargate on Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
         NetworkConfiguration:
           allOf:
             - $ref: '#/components/schemas/NetworkConfiguration'
@@ -5217,6 +5777,81 @@ components:
             - $ref: '#/components/schemas/TagList'
             - description: 'The metadata that you apply to the task to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. To learn more, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html#ECS-RunTask-request-tags">RunTask</a> in the Amazon ECS API Reference.'
       description: The custom parameters to be used when the target is an Amazon ECS task.
+    Endpoint:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/EndpointName'
+            - description: The name of the endpoint.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/EndpointDescription'
+            - description: A description for the endpoint.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/EndpointArn'
+            - description: The ARN of the endpoint.
+        RoutingConfig:
+          allOf:
+            - $ref: '#/components/schemas/RoutingConfig'
+            - description: The routing configuration of the endpoint.
+        ReplicationConfig:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationConfig'
+            - description: 'Whether event replication was enabled or disabled for this endpoint. The default state is <code>ENABLED</code> which means you must supply a <code>RoleArn</code>. If you don''t have a <code>RoleArn</code> or you don''t want event replication enabled, set the state to <code>DISABLED</code>.'
+        EventBuses:
+          allOf:
+            - $ref: '#/components/schemas/EndpointEventBusList'
+            - description: The event buses being used by the endpoint.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The ARN of the role used by event replication for the endpoint.
+        EndpointId:
+          allOf:
+            - $ref: '#/components/schemas/EndpointId'
+            - description: 'The URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is <code>abcde.veo</code>.'
+        EndpointUrl:
+          allOf:
+            - $ref: '#/components/schemas/EndpointUrl'
+            - description: The URL of the endpoint.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/EndpointState'
+            - description: The current state of the endpoint.
+        StateReason:
+          allOf:
+            - $ref: '#/components/schemas/EndpointStateReason'
+            - description: The reason the endpoint is in its current state.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the endpoint was created.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The last time the endpoint was modified.
+      description: 'A global endpoint used to improve your application''s availability by making it regional-fault tolerant. For more information about global endpoints, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html">Making applications Regional-fault tolerant with global endpoints and event replication</a> in the Amazon EventBridge User Guide.'
+    NonPartnerEventBusArn:
+      type: string
+      pattern: '^arn:aws[a-z-]*:events:[a-z]{2}-[a-z-]+-\d+:\d{12}:event-bus/[\w.-]+$'
+      minLength: 1
+      maxLength: 512
+    EndpointEventBus:
+      type: object
+      required:
+        - EventBusArn
+      properties:
+        EventBusArn:
+          allOf:
+            - $ref: '#/components/schemas/NonPartnerEventBusArn'
+            - description: The ARN of the event bus the endpoint is associated with.
+      description: The event buses the endpoint is associated with.
+    EndpointList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Endpoint'
     ErrorCode:
       type: string
     ErrorMessage:
@@ -5236,15 +5871,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The permissions policy of the event bus, describing which other Amazon Web Services accounts can write events to this event bus.'
-      description: An event bus receives events from a source and routes them to rules associated with that event bus. Your account's default event bus receives events from Amazon Web Services services. A custom event bus can receive events from your custom applications and services. A partner event bus receives events from an event source created by an SaaS partner. These events come from the partners services or applications.
+      description: 'An event bus receives events from a source, uses rules to evaluate them, applies any configured input transformation, and routes them to the appropriate target(s). Your account''s default event bus receives events from Amazon Web Services services. A custom event bus can receive events from your custom applications and services. A partner event bus receives events from an event source created by an SaaS partner. These events come from the partners services or applications.'
     EventBusList:
       type: array
       items:
         $ref: '#/components/schemas/EventBus'
     EventId:
       type: string
+      maxLength: 64
     EventResource:
       type: string
+      maxLength: 2048
     EventResourceList:
       type: array
       items:
@@ -5289,10 +5926,50 @@ components:
     EventTime:
       type: string
       format: date-time
+    Primary:
+      type: object
+      required:
+        - HealthCheck
+      properties:
+        HealthCheck:
+          allOf:
+            - $ref: '#/components/schemas/HealthCheck'
+            - description: The ARN of the health check used by the endpoint to determine whether failover is triggered.
+      description: The primary Region of the endpoint.
+    Secondary:
+      type: object
+      required:
+        - Route
+      properties:
+        Route:
+          allOf:
+            - $ref: '#/components/schemas/Route'
+            - description: Defines the secondary Region.
+      description: The secondary Region that processes events when failover is triggered or replication is enabled.
+    FailoverConfig:
+      type: object
+      required:
+        - Primary
+        - Secondary
+      properties:
+        Primary:
+          allOf:
+            - $ref: '#/components/schemas/Primary'
+            - description: The main Region of the endpoint.
+        Secondary:
+          allOf:
+            - $ref: '#/components/schemas/Secondary'
+            - description: The Region that events are routed to when failover is triggered or event replication is enabled.
+      description: The failover configuration for an endpoint. This includes what triggers failover and what happens when it's triggered.
     HeaderParametersMap:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/HeaderValue'
+    HealthCheck:
+      type: string
+      pattern: '^arn:aws([a-z]|\-)*:route53:::healthcheck/[\-a-z0-9]+$'
+      minLength: 1
+      maxLength: 1600
     PathParameterList:
       type: array
       items:
@@ -5307,16 +5984,16 @@ components:
         PathParameterValues:
           allOf:
             - $ref: '#/components/schemas/PathParameterList'
-            - description: The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
+            - description: The path parameter values to be used to populate API Gateway API or EventBridge ApiDestination path wildcards ("*").
         HeaderParameters:
           allOf:
             - $ref: '#/components/schemas/HeaderParametersMap'
-            - description: The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
+            - description: The headers that need to be sent as part of request invoking the API Gateway API or EventBridge ApiDestination.
         QueryStringParameters:
           allOf:
             - $ref: '#/components/schemas/QueryStringParametersMap'
-            - description: The query string keys/values that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
-      description: 'These are custom parameter to be used when the target is an API Gateway REST APIs or EventBridge ApiDestinations. In the latter case, these are merged with any InvocationParameters specified on the Connection, with any values from the Connection taking precedence.'
+            - description: The query string keys/values that need to be sent as part of request invoking the API Gateway API or EventBridge ApiDestination.
+      description: 'These are custom parameter to be used when the target is an API Gateway APIs or EventBridge ApiDestinations. In the latter case, these are merged with any InvocationParameters specified on the Connection, with any values from the Connection taking precedence.'
     TransformerPaths:
       type: object
       maxProperties: 100
@@ -5338,7 +6015,7 @@ components:
         InputTemplate:
           allOf:
             - $ref: '#/components/schemas/TransformerInput'
-            - description: '<p>Input template where you specify placeholders that will be filled with the values of the keys from <code>InputPathsMap</code> to customize the data sent to the target. Enclose each <code>InputPathsMaps</code> value in brackets: &lt;<i>value</i>&gt; The InputTemplate must be valid JSON.</p> <p>If <code>InputTemplate</code> is a JSON object (surrounded by curly braces), the following restrictions apply:</p> <ul> <li> <p>The placeholder cannot be used as an object key.</p> </li> </ul> <p>The following example shows the syntax for using <code>InputPathsMap</code> and <code>InputTemplate</code>.</p> <p> <code> "InputTransformer":</code> </p> <p> <code>{</code> </p> <p> <code>"InputPathsMap": {"instance": "$.detail.instance","status": "$.detail.status"},</code> </p> <p> <code>"InputTemplate": "&lt;instance&gt; is in state &lt;status&gt;"</code> </p> <p> <code>}</code> </p> <p>To have the <code>InputTemplate</code> include quote marks within a JSON string, escape each quote marks with a slash, as in the following example:</p> <p> <code> "InputTransformer":</code> </p> <p> <code>{</code> </p> <p> <code>"InputPathsMap": {"instance": "$.detail.instance","status": "$.detail.status"},</code> </p> <p> <code>"InputTemplate": "&lt;instance&gt; is in state \"&lt;status&gt;\""</code> </p> <p> <code>}</code> </p> <p>The <code>InputTemplate</code> can also be valid JSON with varibles in quotes or out, as in the following example:</p> <p> <code> "InputTransformer":</code> </p> <p> <code>{</code> </p> <p> <code>"InputPathsMap": {"instance": "$.detail.instance","status": "$.detail.status"},</code> </p> <p> <code>"InputTemplate": ''{"myInstance": &lt;instance&gt;,"myStatus": "&lt;instance&gt; is in state \"&lt;status&gt;\""}''</code> </p> <p> <code>}</code> </p>'
+            - description: '<p>Input template where you specify placeholders that will be filled with the values of the keys from <code>InputPathsMap</code> to customize the data sent to the target. Enclose each <code>InputPathsMaps</code> value in brackets: &lt;<i>value</i>&gt; </p> <p>If <code>InputTemplate</code> is a JSON object (surrounded by curly braces), the following restrictions apply:</p> <ul> <li> <p>The placeholder cannot be used as an object key.</p> </li> </ul> <p>The following example shows the syntax for using <code>InputPathsMap</code> and <code>InputTemplate</code>.</p> <p> <code> "InputTransformer":</code> </p> <p> <code>{</code> </p> <p> <code>"InputPathsMap": {"instance": "$.detail.instance","status": "$.detail.status"},</code> </p> <p> <code>"InputTemplate": "&lt;instance&gt; is in state &lt;status&gt;"</code> </p> <p> <code>}</code> </p> <p>To have the <code>InputTemplate</code> include quote marks within a JSON string, escape each quote marks with a slash, as in the following example:</p> <p> <code> "InputTransformer":</code> </p> <p> <code>{</code> </p> <p> <code>"InputPathsMap": {"instance": "$.detail.instance","status": "$.detail.status"},</code> </p> <p> <code>"InputTemplate": "&lt;instance&gt; is in state \"&lt;status&gt;\""</code> </p> <p> <code>}</code> </p> <p>The <code>InputTemplate</code> can also be valid JSON with varibles in quotes or out, as in the following example:</p> <p> <code> "InputTransformer":</code> </p> <p> <code>{</code> </p> <p> <code>"InputPathsMap": {"instance": "$.detail.instance","status": "$.detail.status"},</code> </p> <p> <code>"InputTemplate": ''{"myInstance": &lt;instance&gt;,"myStatus": "&lt;instance&gt; is in state \"&lt;status&gt;\""}''</code> </p> <p> <code>}</code> </p>'
       description: Contains the parameters needed for you to provide custom input to a target based on one or more pieces of data extracted from the event.
     InputTransformerPathKey:
       type: string
@@ -5411,6 +6088,7 @@ components:
       maximum: 185
     MessageGroupId:
       type: string
+      maxLength: 100
     NonPartnerEventBusName:
       type: string
       pattern: '[\.\-_A-Za-z0-9]+'
@@ -5530,19 +6208,19 @@ components:
         DetailType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Free-form string used to decide what fields to expect in the event detail.
+            - description: 'Free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.'
         Detail:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: A valid JSON string. There is no other schema imposed. The JSON string may contain fields and nested subobjects.
+            - description: A valid JSON object. There is no other schema imposed. The JSON object may contain fields and nested subobjects.
         EventBusName:
           allOf:
             - $ref: '#/components/schemas/NonPartnerEventBusNameOrArn'
-            - description: 'The name or ARN of the event bus to receive the event. Only the rules that are associated with this event bus are used to match the event. If you omit this, the default event bus is used.'
+            - description: '<p>The name or ARN of the event bus to receive the event. Only the rules that are associated with this event bus are used to match the event. If you omit this, the default event bus is used.</p> <note> <p>If you''re using a global endpoint with a custom bus, you must enter the name, not the ARN, of the event bus in either the primary or secondary Region here and the corresponding event bus in the other Region will be determined based on the endpoint referenced by the <code>EndpointId</code>.</p> </note>'
         TraceHeader:
           allOf:
             - $ref: '#/components/schemas/TraceHeader'
-            - description: '<p>An X-Ray trade header, which is an http header (X-Amzn-Trace-Id) that contains the trace-id associated with the event.</p> <p>To learn more about X-Ray trace headers, see <a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader">Tracing header</a> in the X-Ray Developer Guide.</p>'
+            - description: '<p>An X-Ray trace header, which is an http header (X-Amzn-Trace-Id) that contains the trace-id associated with the event.</p> <p>To learn more about X-Ray trace headers, see <a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader">Tracing header</a> in the X-Ray Developer Guide.</p>'
       description: Represents an event to be submitted.
     PutEventsResultEntryList:
       type: array
@@ -5563,7 +6241,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ErrorMessage'
             - description: The error message that explains why the event submission failed.
-      description: Represents an event that failed to be submitted.
+      description: 'Represents an event that failed to be submitted. For information about the errors that are common to all actions, see <a href="https://docs.aws.amazon.com/eventbridge/latest/APIReference/CommonErrors.html">Common Errors</a>.'
     PutPartnerEventsRequestEntryList:
       type: array
       items:
@@ -5588,7 +6266,7 @@ components:
         DetailType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: A free-form string used to decide what fields to expect in the event detail.
+            - description: 'A free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.'
         Detail:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -5674,7 +6352,7 @@ components:
         DbUser:
           allOf:
             - $ref: '#/components/schemas/DbUser'
-            - description: The database user name. Required when authenticating using temporary credentials.
+            - description: <p>The database user name. Required when authenticating using temporary credentials.</p> <p>Do not provide this parameter when connecting to a Redshift Serverless workgroup.</p>
         Sql:
           allOf:
             - $ref: '#/components/schemas/Sql'
@@ -5687,7 +6365,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Indicates whether to send an event back to EventBridge after the SQL statement runs.
-      description: These are custom parameters to be used when the target is a Amazon Redshift cluster to invoke the Amazon Redshift Data API ExecuteStatement based on EventBridge events.
+      description: These are custom parameters to be used when the target is a Amazon Redshift cluster or Redshift Serverless workgroup to invoke the Amazon Redshift Data API ExecuteStatement based on EventBridge events.
     TargetIdList:
       type: array
       items:
@@ -5758,6 +6436,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Arn'
+    ReplicationState:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
     RetryPolicy:
       type: object
       properties:
@@ -5770,6 +6453,11 @@ components:
             - $ref: '#/components/schemas/MaximumEventAgeInSeconds'
             - description: 'The maximum amount of time, in seconds, to continue to make retry attempts.'
       description: A <code>RetryPolicy</code> object that includes information about the retry policy settings.
+    Route:
+      type: string
+      pattern: '^[\-a-z0-9]+$'
+      minLength: 9
+      maxLength: 20
     Rule:
       type: object
       properties:
@@ -5943,7 +6631,7 @@ components:
         Id:
           allOf:
             - $ref: '#/components/schemas/TargetId'
-            - description: The ID of the target. We recommend using a memorable and unique string.
+            - description: The ID of the target within the specified rule. Use this ID to reference the target when updating the rule. We recommend using a memorable and unique string.
         Arn:
           allOf:
             - $ref: '#/components/schemas/TargetArn'
@@ -5959,7 +6647,7 @@ components:
         InputPath:
           allOf:
             - $ref: '#/components/schemas/TargetInputPath'
-            - description: 'The value of the JSONPath that is used for extracting part of the matched event when passing it to the target. You must use JSON dot notation, not bracket notation. For more information about JSON paths, see <a href="http://goessner.net/articles/JsonPath/">JSONPath</a>.'
+            - description: 'The value of the JSONPath that is used for extracting part of the matched event when passing it to the target. You may use JSON dot notation or bracket notation. For more information about JSON paths, see <a href="http://goessner.net/articles/JsonPath/">JSONPath</a>.'
         InputTransformer:
           allOf:
             - $ref: '#/components/schemas/InputTransformer'
@@ -5987,7 +6675,7 @@ components:
         HttpParameters:
           allOf:
             - $ref: '#/components/schemas/HttpParameters'
-            - description: '<p>Contains the HTTP parameters to use when the target is a API Gateway REST endpoint or EventBridge ApiDestination.</p> <p>If you specify an API Gateway REST API or EventBridge ApiDestination as a target, you can use this parameter to specify headers, path parameters, and query string keys/values as part of your target invoking request. If you''re using ApiDestinations, the corresponding Connection can also have these values configured. In case of any conflicting keys, values from the Connection take precedence.</p>'
+            - description: '<p>Contains the HTTP parameters to use when the target is a API Gateway endpoint or EventBridge ApiDestination.</p> <p>If you specify an API Gateway API or EventBridge ApiDestination as a target, you can use this parameter to specify headers, path parameters, and query string keys/values as part of your target invoking request. If you''re using ApiDestinations, the corresponding Connection can also have these values configured. In case of any conflicting keys, values from the Connection take precedence.</p>'
         RedshiftDataParameters:
           allOf:
             - $ref: '#/components/schemas/RedshiftDataParameters'

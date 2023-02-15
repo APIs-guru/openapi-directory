@@ -3,7 +3,7 @@ info:
   version: '2020-08-07'
   x-release: v4
   title: Amazon Lex Runtime V2
-  description: <p/>
+  description: This section contains documentation for the Amazon Lex V2 Runtime V2 API operations.
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -408,7 +408,11 @@ paths:
                     originatingRequestId:
                       allOf:
                         - $ref: '#/components/schemas/NonEmptyString'
-                        - description: <p/>
+                        - description: A unique identifier for a specific request.
+                    runtimeHints:
+                      allOf:
+                        - $ref: '#/components/schemas/RuntimeHints'
+                        - description: Hints for phrases that a customer is likely to use for a slot. Amazon Lex V2 uses the hints to help determine the correct value of a slot.
                 requestAttributes:
                   description: '<p>Request-specific information passed between Amazon Lex V2 and the client application.</p> <p>The namespace <code>x-amz-lex:</code> is reserved for special attributes. Don''t create any request attributes with the prefix <code>x-amz-lex:</code>.</p>'
                   type: object
@@ -417,7 +421,7 @@ paths:
   '/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}/text':
     post:
       operationId: RecognizeText
-      description: '<p>Sends user input to Amazon Lex V2. Client applications use this API to send requests to Amazon Lex V2 at runtime. Amazon Lex V2 then interprets the user input using the machine learning model that it build for the bot.</p> <p>In response, Amazon Lex V2 returns the next message to convey to the user and an optional response card to display.</p>'
+      description: '<p>Sends user input to Amazon Lex V2. Client applications use this API to send requests to Amazon Lex V2 at runtime. Amazon Lex V2 then interprets the user input using the machine learning model that it build for the bot.</p> <p>In response, Amazon Lex V2 returns the next message to convey to the user and an optional response card to display.</p> <p>If the optional post-fulfillment response is specified, the messages are returned as follows. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/API_PostFulfillmentStatusSpecification.html">PostFulfillmentStatusSpecification</a>.</p> <ul> <li> <p> <b>Success message</b> - Returned if the Lambda function completes successfully and the intent state is fulfilled or ready fulfillment if the message is present.</p> </li> <li> <p> <b>Failed message</b> - The failed message is returned if the Lambda function throws an exception or if the Lambda function returns a failed intent state without a message.</p> </li> <li> <p> <b>Timeout message</b> - If you don''t configure a timeout message and a timeout, and the Lambda function doesn''t return within 30 seconds, the timeout message is returned. If you configure a timeout, the timeout message is returned when the period times out. </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete.html">Completion message</a>.</p>'
       responses:
         '200':
           description: Success
@@ -543,7 +547,11 @@ paths:
                     originatingRequestId:
                       allOf:
                         - $ref: '#/components/schemas/NonEmptyString'
-                        - description: <p/>
+                        - description: A unique identifier for a specific request.
+                    runtimeHints:
+                      allOf:
+                        - $ref: '#/components/schemas/RuntimeHints'
+                        - description: Hints for phrases that a customer is likely to use for a slot. Amazon Lex V2 uses the hints to help determine the correct value of a slot.
                 requestAttributes:
                   description: '<p>Request-specific information passed between the client application and Amazon Lex V2 </p> <p>The namespace <code>x-amz-lex:</code> is reserved for special attributes. Don''t create any request attributes with the prefix <code>x-amz-lex:</code>.</p>'
                   type: object
@@ -560,7 +568,7 @@ paths:
   '/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}/utterance#Content-Type':
     post:
       operationId: RecognizeUtterance
-      description: '<p>Sends user input to Amazon Lex V2. You can send text or speech. Clients use this API to send text and audio requests to Amazon Lex V2 at runtime. Amazon Lex V2 interprets the user input using the machine learning model built for the bot.</p> <p>The following request fields must be compressed with gzip and then base64 encoded before you send them to Amazon Lex V2. </p> <ul> <li> <p>requestAttributes</p> </li> <li> <p>sessionState</p> </li> </ul> <p>The following response fields are compressed using gzip and then base64 encoded by Amazon Lex V2. Before you can use these fields, you must decode and decompress them. </p> <ul> <li> <p>inputTranscript</p> </li> <li> <p>interpretations</p> </li> <li> <p>messages</p> </li> <li> <p>requestAttributes</p> </li> <li> <p>sessionState</p> </li> </ul> <p>The example contains a Java application that compresses and encodes a Java object to send to Amazon Lex V2, and a second that decodes and decompresses a response from Amazon Lex V2.</p>'
+      description: '<p>Sends user input to Amazon Lex V2. You can send text or speech. Clients use this API to send text and audio requests to Amazon Lex V2 at runtime. Amazon Lex V2 interprets the user input using the machine learning model built for the bot.</p> <p>The following request fields must be compressed with gzip and then base64 encoded before you send them to Amazon Lex V2. </p> <ul> <li> <p>requestAttributes</p> </li> <li> <p>sessionState</p> </li> </ul> <p>The following response fields are compressed using gzip and then base64 encoded by Amazon Lex V2. Before you can use these fields, you must decode and decompress them. </p> <ul> <li> <p>inputTranscript</p> </li> <li> <p>interpretations</p> </li> <li> <p>messages</p> </li> <li> <p>requestAttributes</p> </li> <li> <p>sessionState</p> </li> </ul> <p>The example contains a Java application that compresses and encodes a Java object to send to Amazon Lex V2, and a second that decodes and decompresses a response from Amazon Lex V2.</p> <p>If the optional post-fulfillment response is specified, the messages are returned as follows. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/API_PostFulfillmentStatusSpecification.html">PostFulfillmentStatusSpecification</a>.</p> <ul> <li> <p> <b>Success message</b> - Returned if the Lambda function completes successfully and the intent state is fulfilled or ready fulfillment if the message is present.</p> </li> <li> <p> <b>Failed message</b> - The failed message is returned if the Lambda function throws an exception or if the Lambda function returns a failed intent state without a message.</p> </li> <li> <p> <b>Timeout message</b> - If you don''t configure a timeout message and a timeout, and the Lambda function doesn''t return within 30 seconds, the timeout message is returned. If you configure a timeout, the timeout message is returned when the period times out. </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete.html">Completion message</a>.</p>'
       responses:
         '200':
           description: Success
@@ -672,7 +680,7 @@ paths:
         - name: Response-Content-Type
           in: header
           required: false
-          description: '<p>The message that Amazon Lex V2 returns in the response can be either text or speech based on the <code>responseContentType</code> value.</p> <ul> <li> <p>If the value is <code>text/plain;charset=utf-8</code>, Amazon Lex V2 returns text in the response.</p> </li> <li> <p>If the value begins with <code>audio/</code>, Amazon Lex V2 returns speech in the response. Amazon Lex V2 uses Amazon Polly to generate the speech using the configuration that you specified in the <code>requestContentType</code> parameter. For example, if you specify <code>audio/mpeg</code> as the value, Amazon Lex V2 returns speech in the MPEG format.</p> </li> <li> <p>If the value is <code>audio/pcm</code>, the speech returned is <code>audio/pcm</code> at 16 KHz in 16-bit, little-endian format.</p> </li> <li> <p>The following are the accepted values:</p> <ul> <li> <p>audio/mpeg</p> </li> <li> <p>audio/ogg</p> </li> <li> <p>audio/pcm (16 KHz)</p> </li> <li> <p>audio/* (defaults to mpeg)</p> </li> <li> <p>text/plain; charset=utf-8</p> </li> </ul> </li> </ul>'
+          description: '<p>The message that Amazon Lex V2 returns in the response can be either text or speech based on the <code>responseContentType</code> value.</p> <ul> <li> <p>If the value is <code>text/plain;charset=utf-8</code>, Amazon Lex V2 returns text in the response.</p> </li> <li> <p>If the value begins with <code>audio/</code>, Amazon Lex V2 returns speech in the response. Amazon Lex V2 uses Amazon Polly to generate the speech using the configuration that you specified in the <code>responseContentType</code> parameter. For example, if you specify <code>audio/mpeg</code> as the value, Amazon Lex V2 returns speech in the MPEG format.</p> </li> <li> <p>If the value is <code>audio/pcm</code>, the speech returned is <code>audio/pcm</code> at 16 KHz in 16-bit, little-endian format.</p> </li> <li> <p>The following are the accepted values:</p> <ul> <li> <p>audio/mpeg</p> </li> <li> <p>audio/ogg</p> </li> <li> <p>audio/pcm (16 KHz)</p> </li> <li> <p>audio/* (defaults to mpeg)</p> </li> <li> <p>text/plain; charset=utf-8</p> </li> </ul> </li> </ul>'
           schema:
             type: string
             minLength: 1
@@ -821,11 +829,19 @@ components:
         type:
           allOf:
             - $ref: '#/components/schemas/DialogActionType'
-            - description: '<p>The next action that the bot should take in its interaction with the user. The possible values are:</p> <ul> <li> <p> <code>Close</code> - Indicates that there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response.</p> </li> <li> <p> <code>ConfirmIntent</code> - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?"</p> </li> <li> <p> <code>Delegate</code> - The next action is determined by Amazon Lex V2.</p> </li> <li> <p> <code>ElicitSlot</code> - The next action is to elicit a slot value from the user.</p> </li> </ul>'
+            - description: '<p>The next action that the bot should take in its interaction with the user. The possible values are:</p> <ul> <li> <p> <code>Close</code> - Indicates that there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response.</p> </li> <li> <p> <code>ConfirmIntent</code> - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?"</p> </li> <li> <p> <code>Delegate</code> - The next action is determined by Amazon Lex V2.</p> </li> <li> <p> <code>ElicitIntent</code> - The next action is to elicit an intent from the user.</p> </li> <li> <p> <code>ElicitSlot</code> - The next action is to elicit a slot value from the user.</p> </li> </ul>'
         slotToElicit:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The name of the slot that should be elicited from the user.
+        slotElicitationStyle:
+          allOf:
+            - $ref: '#/components/schemas/StyleType'
+            - description: '<p>Configures the slot to use spell-by-letter or spell-by-word style. When you use a style on a slot, users can spell out their input to make it clear to your bot.</p> <ul> <li> <p>Spell by letter - "b" "o" "b"</p> </li> <li> <p>Spell by word - "b as in boy" "o as in oscar" "b as in boy"</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/using-spelling.html"> Using spelling to enter slot values </a>.</p>'
+        subSlotToElicit:
+          allOf:
+            - $ref: '#/components/schemas/ElicitSubSlot'
+            - description: The name of the constituent sub slot of the composite slot specified in slotToElicit that should be elicited from the user.
       description: The next action that Amazon Lex V2 should take.
     Intent:
       type: object
@@ -862,6 +878,14 @@ components:
     NonEmptyString:
       type: string
       minLength: 1
+    RuntimeHints:
+      type: object
+      properties:
+        slotHints:
+          allOf:
+            - $ref: '#/components/schemas/SlotHintsIntentMap'
+            - description: '<p>A list of the slots in the intent that should have runtime hints added, and the phrases that should be added for each slot.</p> <p>The first level of the <code>slotHints</code> map is the name of the intent. The second level is the name of the slot within the intent. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html">Using hints to improve accuracy</a>.</p> <p>The intent name and slot name must exist.</p>'
+      description: '<p>You can provide Amazon Lex V2 with hints to the phrases that a customer is likely to use for a slot. When a slot with hints is resolved, the phrases in the runtime hints are preferred in the resolution. You can provide hints for a maximum of 100 intents. You can provide a maximum of 100 slots.</p> <p>Before you can use runtime hints with an existing bot, you must first rebuild the bot.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html">Using runtime hints to improve recognition of slot values</a>.</p>'
     String:
       type: string
     DependencyFailedException: {}
@@ -889,6 +913,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SessionId'
             - description: The identifier of the session in use.
+        recognizedBotMember:
+          allOf:
+            - $ref: '#/components/schemas/RecognizedBotMember'
+            - description: The bot member that recognized the text.
     RecognizeUtteranceResponse:
       type: object
       properties:
@@ -940,7 +968,7 @@ components:
         contextAttributes:
           allOf:
             - $ref: '#/components/schemas/ActiveContextParametersMap'
-            - description: '<p>A lis tof contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request.</p> <p>If you don''t specify a list of contexts, Amazon Lex will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared. </p>'
+            - description: '<p>A list of contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request.</p> <p>If you don''t specify a list of contexts, Amazon Lex V2 will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared. </p>'
       description: '<p>Contains information about the contexts that a user is using in a session. You can configure Amazon Lex V2 to set a context when an intent is fulfilled, or you can set a context using the , , or operations.</p> <p>Use a context to indicate to Amazon Lex V2 intents that should be used as follow-up intents. For example, if the active context is <code>order-fulfilled</code>, only intents that have <code>order-fulfilled</code> configured as a trigger are considered for follow up.</p>'
     Text:
       type: string
@@ -1038,6 +1066,27 @@ components:
         - Delegate
         - ElicitIntent
         - ElicitSlot
+        - None
+    StyleType:
+      type: string
+      enum:
+        - Default
+        - SpellByLetter
+        - SpellByWord
+    ElicitSubSlot:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the slot that should be elicited from the user.
+        subSlotToElicit:
+          allOf:
+            - $ref: '#/components/schemas/ElicitSubSlot'
+            - description: The field is not supported.
+      description: The specific constituent sub slot of the composite slot to elicit in dialog action.
     GetSessionRequest:
       type: object
       title: GetSessionRequest
@@ -1074,7 +1123,11 @@ components:
         originatingRequestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: A unique identifier for a specific request.
+        runtimeHints:
+          allOf:
+            - $ref: '#/components/schemas/RuntimeHints'
+            - description: Hints for phrases that a customer is likely to use for a slot. Amazon Lex V2 uses the hints to help determine the correct value of a slot.
       description: The state of the user's session with Amazon Lex V2.
     ImageResponseCard:
       type: object
@@ -1110,6 +1163,7 @@ components:
         - InProgress
         - ReadyForFulfillment
         - Waiting
+        - FulfillmentInProgress
     SentimentResponse:
       type: object
       properties:
@@ -1143,6 +1197,11 @@ components:
         - ImageResponseCard
         - PlainText
         - SSML
+    Name:
+      type: string
+      pattern: '^([0-9a-zA-Z][_-]?)+$'
+      minLength: 1
+      maxLength: 100
     ParameterName:
       type: string
       minLength: 1
@@ -1183,6 +1242,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/StringMap'
             - description: '<p>Request-specific information passed between the client application and Amazon Lex V2 </p> <p>The namespace <code>x-amz-lex:</code> is reserved for special attributes. Don''t create any request attributes with the prefix <code>x-amz-lex:</code>.</p>'
+    RecognizedBotMember:
+      type: object
+      required:
+        - botId
+      properties:
+        botId:
+          allOf:
+            - $ref: '#/components/schemas/BotIdentifier'
+            - description: The identifier of the bot member that processes the request.
+        botName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the bot member that processes the request.
+      description: The bot member that processes the request.
     SensitiveNonEmptyString:
       type: string
       format: password
@@ -1194,6 +1267,46 @@ components:
           allOf:
             - $ref: '#/components/schemas/BlobStream'
             - description: User input in PCM or Opus audio format or text format as described in the <code>requestContentType</code> parameter.
+    RuntimeHintValuesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RuntimeHintValue'
+      minItems: 1
+      maxItems: 100
+    SlotHintsSlotMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/RuntimeHintDetails'
+    RuntimeHintDetails:
+      type: object
+      properties:
+        runtimeHintValues:
+          allOf:
+            - $ref: '#/components/schemas/RuntimeHintValuesList'
+            - description: One or more strings that Amazon Lex V2 should look for in the input to the bot. Each phrase is given preference when deciding on slot values.
+        subSlotHints:
+          allOf:
+            - $ref: '#/components/schemas/SlotHintsSlotMap'
+            - description: 'A map of constituent sub slot names inside a composite slot in the intent and the phrases that should be added for each sub slot. Inside each composite slot hints, this structure provides a mechanism to add granular sub slot phrases. Only sub slot hints are supported for composite slots. The intent name, composite slot name and the constituent sub slot names must exist.'
+      description: Provides an array of phrases that should be given preference when resolving values for a slot.
+    RuntimeHintPhrase:
+      type: string
+      minLength: 1
+      maxLength: 140
+    RuntimeHintValue:
+      type: object
+      required:
+        - phrase
+      properties:
+        phrase:
+          allOf:
+            - $ref: '#/components/schemas/RuntimeHintPhrase'
+            - description: The phrase that Amazon Lex V2 should look for in the user's input to the bot.
+      description: Provides the phrase that Amazon Lex V2 should look for in the user's input to the bot.
+    SlotHintsIntentMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/SlotHintsSlotMap'
     SentimentType:
       type: string
       enum:
@@ -1226,6 +1339,7 @@ components:
       enum:
         - Scalar
         - List
+        - Composite
     Value:
       type: object
       required:
@@ -1259,6 +1373,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Values'
             - description: 'A list of one or more values that the user provided for the slot. For example, if a for a slot that elicits pizza toppings, the values might be "pepperoni" and "pineapple." '
+        subSlots:
+          allOf:
+            - $ref: '#/components/schemas/Slots'
+            - description: The constituent sub slots of a composite slot.
       description: 'A value that Amazon Lex V2 uses to fulfill an intent. '
     StringList:
       type: array

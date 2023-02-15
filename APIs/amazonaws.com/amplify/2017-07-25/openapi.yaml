@@ -169,34 +169,42 @@ paths:
                 name:
                   description: ' The name for an Amplify app. '
                   type: string
+                  pattern: \(\?s\).\+
                   minLength: 1
                   maxLength: 255
                 description:
                   description: ' The description for an Amplify app. '
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 1000
                 repository:
                   description: ' The repository for an Amplify app. '
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 1000
                 platform:
-                  description: ' The platform or framework for an Amplify app. '
+                  description: ' The platform for the Amplify app. For a static app, set the platform type to <code>WEB</code>. For a dynamic server-side rendered (SSR) app, set the platform type to <code>WEB_COMPUTE</code>. For an app requiring Amplify Hosting''s original SSR support only, set the platform type to <code>WEB_DYNAMIC</code>.'
                   type: string
                   enum:
                     - WEB
+                    - WEB_DYNAMIC
+                    - WEB_COMPUTE
                 iamServiceRoleArn:
                   description: ' The AWS Identity and Access Management (IAM) service role for an Amplify app. '
                   type: string
-                  minLength: 1
+                  pattern: \(\?s\).*
+                  minLength: 0
                   maxLength: 1000
                 oauthToken:
-                  description: ' The OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key. The OAuth token is not stored. '
+                  description: '<p>The OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key using SSH cloning. The OAuth token is not stored.</p> <p>Use <code>oauthToken</code> for repository providers other than GitHub, such as Bitbucket or CodeCommit. To authorize access to GitHub as your repository provider, use <code>accessToken</code>.</p> <p>You must specify either <code>oauthToken</code> or <code>accessToken</code> when you create a new app.</p> <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see <a href="https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth">Migrating an existing OAuth app to the Amplify GitHub App</a> in the <i>Amplify User Guide</i> .</p>'
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 1000
                   format: password
                 accessToken:
-                  description: ' The personal access token for a third-party source control system for an Amplify app. The personal access token is used to create a webhook and a read-only deploy key. The token is not stored. '
+                  description: '<p>The personal access token for a GitHub repository for an Amplify app. The personal access token is used to authorize access to a GitHub repository using the Amplify GitHub App. The token is not stored.</p> <p>Use <code>accessToken</code> for GitHub repositories only. To authorize access to a repository provider such as Bitbucket or CodeCommit, use <code>oauthToken</code>.</p> <p>You must specify either <code>accessToken</code> or <code>oauthToken</code> when you create a new app.</p> <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see <a href="https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth">Migrating an existing OAuth app to the Amplify GitHub App</a> in the <i>Amplify User Guide</i> .</p>'
                   type: string
+                  pattern: \(\?s\).\+
                   minLength: 1
                   maxLength: 255
                   format: password
@@ -215,8 +223,9 @@ paths:
                   description: ' Enables basic authorization for an Amplify app. This will apply to all branches that are part of this app. '
                   type: boolean
                 basicAuthCredentials:
-                  description: ' The credentials for basic authorization for an Amplify app. '
+                  description: ' The credentials for basic authorization for an Amplify app. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.'
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 2000
                   format: password
                 customRules:
@@ -227,19 +236,22 @@ paths:
                 tags:
                   description: ' The tag for an Amplify app. '
                   type: object
-                  minProperties: 1
+                  minProperties: 0
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 buildSpec:
                   description: ' The build specification (build spec) file for an Amplify app build. '
                   type: string
+                  pattern: \(\?s\).\+
                   minLength: 1
                   maxLength: 25000
+                  format: password
                 customHeaders:
                   description: The custom HTTP headers for an Amplify app.
                   type: string
-                  minLength: 1
+                  pattern: \(\?s\).*
+                  minLength: 0
                   maxLength: 25000
                 enableAutoBranchCreation:
                   description: ' Enables automated branch creation for an Amplify app. '
@@ -272,7 +284,7 @@ paths:
                     basicAuthCredentials:
                       allOf:
                         - $ref: '#/components/schemas/BasicAuthCredentials'
-                        - description: ' The basic authorization credentials for the autocreated branch. '
+                        - description: ' The basic authorization credentials for the autocreated branch. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.'
                     enableBasicAuth:
                       allOf:
                         - $ref: '#/components/schemas/EnableBasicAuth'
@@ -336,6 +348,7 @@ paths:
           description: ' A pagination token. If non-null, the pagination token is returned in a result. Pass its value in another request to retrieve more entries. '
           schema:
             type: string
+            pattern: \(\?s\).*
             maxLength: 2000
         - name: maxResults
           in: query
@@ -408,16 +421,19 @@ paths:
                 environmentName:
                   description: ' The name for the backend environment. '
                   type: string
+                  pattern: \(\?s\).\+
                   minLength: 1
                   maxLength: 255
                 stackName:
                   description: ' The AWS CloudFormation stack name of a backend environment. '
                   type: string
+                  pattern: \(\?s\).\+
                   minLength: 1
                   maxLength: 255
                 deploymentArtifacts:
                   description: ' The name of deployment artifacts. '
                   type: string
+                  pattern: \(\?s\).\+
                   minLength: 1
                   maxLength: 1000
     parameters:
@@ -472,6 +488,7 @@ paths:
           description: ' The name of the backend environment '
           schema:
             type: string
+            pattern: \(\?s\).\+
             minLength: 1
             maxLength: 255
         - name: nextToken
@@ -480,6 +497,7 @@ paths:
           description: ' A pagination token. Set to null to start listing backend environments from the start. If a non-null pagination token is returned in a result, pass its value in here to list more backend environments. '
           schema:
             type: string
+            pattern: \(\?s\).*
             maxLength: 2000
         - name: maxResults
           in: query
@@ -558,11 +576,13 @@ paths:
                 branchName:
                   description: ' The name for the branch. '
                   type: string
+                  pattern: \(\?s\).\+
                   minLength: 1
                   maxLength: 255
                 description:
                   description: ' The description for the branch. '
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 1000
                 stage:
                   description: ' Describes the current stage for the branch. '
@@ -576,6 +596,7 @@ paths:
                 framework:
                   description: ' The framework for the branch. '
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 255
                 enableNotification:
                   description: ' Enables notifications for the branch. '
@@ -589,8 +610,9 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/EnvValue'
                 basicAuthCredentials:
-                  description: ' The basic authorization credentials for the branch. '
+                  description: ' The basic authorization credentials for the branch. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.'
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 2000
                   format: password
                 enableBasicAuth:
@@ -602,21 +624,27 @@ paths:
                 tags:
                   description: ' The tag for the branch. '
                   type: object
-                  minProperties: 1
+                  minProperties: 0
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 buildSpec:
                   description: ' The build specification (build spec) file for an Amplify app build. '
                   type: string
+                  pattern: \(\?s\).\+
                   minLength: 1
                   maxLength: 25000
+                  format: password
                 ttl:
                   description: ' The content Time to Live (TTL) for the website in seconds. '
                   type: string
+                  pattern: \d*
+                  minLength: 0
+                  maxLength: 32
                 displayName:
                   description: ' The display name for a branch. This is used as the default domain prefix. '
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 255
                 enablePullRequestPreview:
                   description: ' Enables pull request previews for this branch. '
@@ -624,11 +652,13 @@ paths:
                 pullRequestEnvironmentName:
                   description: ' The Amplify environment name for the pull request. '
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 20
                 backendEnvironmentArn:
                   description: ' The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. '
                   type: string
-                  minLength: 1
+                  pattern: \(\?s\).*
+                  minLength: 0
                   maxLength: 1000
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -682,6 +712,7 @@ paths:
           description: ' A pagination token. Set to null to start listing branches from the start. If a non-null pagination token is returned in a result, pass its value in here to list more branches. '
           schema:
             type: string
+            pattern: \(\?s\).*
             maxLength: 2000
         - name: maxResults
           in: query
@@ -742,6 +773,7 @@ paths:
           description: ' The name for the branch, for the job. '
           schema:
             type: string
+            pattern: \(\?s\).\+
             minLength: 1
             maxLength: 255
       requestBody:
@@ -834,7 +866,8 @@ paths:
                 domainName:
                   description: ' The domain name for the domain association. '
                   type: string
-                  maxLength: 255
+                  pattern: '^(((?!-)[A-Za-z0-9-]{0,62}[A-Za-z0-9])\.)+((?!-)[A-Za-z0-9-]{1,62}[A-Za-z0-9])(\.)?$'
+                  maxLength: 64
                 enableAutoSubDomain:
                   description: ' Enables the automated creation of subdomains for branches. '
                   type: boolean
@@ -843,7 +876,7 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/SubDomainSetting'
-                  maxItems: 255
+                  maxItems: 500
                 autoSubDomainCreationPatterns:
                   description: ' Sets the branch patterns for automatic subdomain creation. '
                   type: array
@@ -906,6 +939,7 @@ paths:
           description: ' A pagination token. Set to null to start listing apps from the start. If non-null, a pagination token is returned in a result. Pass its value in here to list more projects. '
           schema:
             type: string
+            pattern: \(\?s\).*
             maxLength: 2000
         - name: maxResults
           in: query
@@ -984,11 +1018,13 @@ paths:
                 branchName:
                   description: ' The name for a branch that is part of an Amplify app. '
                   type: string
+                  pattern: \(\?s\).\+
                   minLength: 1
                   maxLength: 255
                 description:
                   description: ' The description for a webhook. '
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 1000
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1048,6 +1084,7 @@ paths:
           description: ' A pagination token. Set to null to start listing webhooks from the start. If non-null,the pagination token is returned in a result. Pass its value in here to list more webhooks. '
           schema:
             type: string
+            pattern: \(\?s\).*
             maxLength: 2000
         - name: maxResults
           in: query
@@ -1214,21 +1251,26 @@ paths:
                 name:
                   description: ' The name for an Amplify app. '
                   type: string
+                  pattern: \(\?s\).\+
                   minLength: 1
                   maxLength: 255
                 description:
                   description: ' The description for an Amplify app. '
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 1000
                 platform:
-                  description: ' The platform for an Amplify app. '
+                  description: ' The platform for the Amplify app. For a static app, set the platform type to <code>WEB</code>. For a dynamic server-side rendered (SSR) app, set the platform type to <code>WEB_COMPUTE</code>. For an app requiring Amplify Hosting''s original SSR support only, set the platform type to <code>WEB_DYNAMIC</code>.'
                   type: string
                   enum:
                     - WEB
+                    - WEB_DYNAMIC
+                    - WEB_COMPUTE
                 iamServiceRoleArn:
                   description: ' The AWS Identity and Access Management (IAM) service role for an Amplify app. '
                   type: string
-                  minLength: 1
+                  pattern: \(\?s\).*
+                  minLength: 0
                   maxLength: 1000
                 environmentVariables:
                   description: ' The environment variables for an Amplify app. '
@@ -1245,8 +1287,9 @@ paths:
                   description: ' Enables basic authorization for an Amplify app. '
                   type: boolean
                 basicAuthCredentials:
-                  description: ' The basic authorization credentials for an Amplify app. '
+                  description: ' The basic authorization credentials for an Amplify app. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.'
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 2000
                   format: password
                 customRules:
@@ -1257,12 +1300,15 @@ paths:
                 buildSpec:
                   description: ' The build specification (build spec) file for an Amplify app build. '
                   type: string
+                  pattern: \(\?s\).\+
                   minLength: 1
                   maxLength: 25000
+                  format: password
                 customHeaders:
                   description: The custom HTTP headers for an Amplify app.
                   type: string
-                  minLength: 1
+                  pattern: \(\?s\).*
+                  minLength: 0
                   maxLength: 25000
                 enableAutoBranchCreation:
                   description: ' Enables automated branch creation for an Amplify app. '
@@ -1295,7 +1341,7 @@ paths:
                     basicAuthCredentials:
                       allOf:
                         - $ref: '#/components/schemas/BasicAuthCredentials'
-                        - description: ' The basic authorization credentials for the autocreated branch. '
+                        - description: ' The basic authorization credentials for the autocreated branch. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.'
                     enableBasicAuth:
                       allOf:
                         - $ref: '#/components/schemas/EnableBasicAuth'
@@ -1319,15 +1365,18 @@ paths:
                 repository:
                   description: ' The name of the repository for an Amplify app '
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 1000
                 oauthToken:
-                  description: ' The OAuth token for a third-party source control system for an Amplify app. The token is used to create a webhook and a read-only deploy key. The OAuth token is not stored. '
+                  description: '<p>The OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key using SSH cloning. The OAuth token is not stored.</p> <p>Use <code>oauthToken</code> for repository providers other than GitHub, such as Bitbucket or CodeCommit.</p> <p>To authorize access to GitHub as your repository provider, use <code>accessToken</code>.</p> <p>You must specify either <code>oauthToken</code> or <code>accessToken</code> when you update an app.</p> <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see <a href="https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth">Migrating an existing OAuth app to the Amplify GitHub App</a> in the <i>Amplify User Guide</i> .</p>'
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 1000
                   format: password
                 accessToken:
-                  description: ' The personal access token for a third-party source control system for an Amplify app. The token is used to create webhook and a read-only deploy key. The token is not stored. '
+                  description: '<p>The personal access token for a GitHub repository for an Amplify app. The personal access token is used to authorize access to a GitHub repository using the Amplify GitHub App. The token is not stored.</p> <p>Use <code>accessToken</code> for GitHub repositories only. To authorize access to a repository provider such as Bitbucket or CodeCommit, use <code>oauthToken</code>.</p> <p>You must specify either <code>accessToken</code> or <code>oauthToken</code> when you update an app.</p> <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see <a href="https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth">Migrating an existing OAuth app to the Amplify GitHub App</a> in the <i>Amplify User Guide</i> .</p>'
                   type: string
+                  pattern: \(\?s\).\+
                   minLength: 1
                   maxLength: 255
                   format: password
@@ -1388,6 +1437,7 @@ paths:
           description: ' The name of a backend environment of an Amplify app. '
           schema:
             type: string
+            pattern: \(\?s\).\+
             minLength: 1
             maxLength: 255
     parameters:
@@ -1448,6 +1498,7 @@ paths:
           description: ' The name for the backend environment. '
           schema:
             type: string
+            pattern: \(\?s\).\+
             minLength: 1
             maxLength: 255
   '/apps/{appId}/branches/{branchName}':
@@ -1507,6 +1558,7 @@ paths:
           description: ' The name for the branch. '
           schema:
             type: string
+            pattern: \(\?s\).\+
             minLength: 1
             maxLength: 255
     parameters:
@@ -1567,6 +1619,7 @@ paths:
           description: ' The name for the branch. '
           schema:
             type: string
+            pattern: \(\?s\).\+
             minLength: 1
             maxLength: 255
     post:
@@ -1625,6 +1678,7 @@ paths:
           description: ' The name for the branch. '
           schema:
             type: string
+            pattern: \(\?s\).\+
             minLength: 1
             maxLength: 255
       requestBody:
@@ -1637,10 +1691,12 @@ paths:
                 description:
                   description: ' The description for the branch. '
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 1000
                 framework:
                   description: ' The framework for the branch. '
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 255
                 stage:
                   description: ' Describes the current stage for the branch. '
@@ -1663,8 +1719,9 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/EnvValue'
                 basicAuthCredentials:
-                  description: ' The basic authorization credentials for the branch. '
+                  description: ' The basic authorization credentials for the branch. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.'
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 2000
                   format: password
                 enableBasicAuth:
@@ -1676,14 +1733,20 @@ paths:
                 buildSpec:
                   description: ' The build specification (build spec) file for an Amplify app build. '
                   type: string
+                  pattern: \(\?s\).\+
                   minLength: 1
                   maxLength: 25000
+                  format: password
                 ttl:
                   description: ' The content Time to Live (TTL) for the website in seconds. '
                   type: string
+                  pattern: \d*
+                  minLength: 0
+                  maxLength: 32
                 displayName:
                   description: ' The display name for a branch. This is used as the default domain prefix. '
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 255
                 enablePullRequestPreview:
                   description: ' Enables pull request previews for this branch. '
@@ -1691,11 +1754,13 @@ paths:
                 pullRequestEnvironmentName:
                   description: ' The Amplify environment name for the pull request. '
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 20
                 backendEnvironmentArn:
                   description: ' The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. '
                   type: string
-                  minLength: 1
+                  pattern: \(\?s\).*
+                  minLength: 0
                   maxLength: 1000
   '/apps/{appId}/domains/{domainName}':
     delete:
@@ -1754,7 +1819,8 @@ paths:
           description: ' The name of the domain. '
           schema:
             type: string
-            maxLength: 255
+            pattern: '^(((?!-)[A-Za-z0-9-]{0,62}[A-Za-z0-9])\.)+((?!-)[A-Za-z0-9-]{1,62}[A-Za-z0-9])(\.)?$'
+            maxLength: 64
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1813,7 +1879,8 @@ paths:
           description: ' The name of the domain. '
           schema:
             type: string
-            maxLength: 255
+            pattern: '^(((?!-)[A-Za-z0-9-]{0,62}[A-Za-z0-9])\.)+((?!-)[A-Za-z0-9-]{1,62}[A-Za-z0-9])(\.)?$'
+            maxLength: 64
     post:
       operationId: UpdateDomainAssociation
       description: ' Creates a new domain association for an Amplify app.'
@@ -1870,15 +1937,14 @@ paths:
           description: ' The name of the domain. '
           schema:
             type: string
-            maxLength: 255
+            pattern: '^(((?!-)[A-Za-z0-9-]{0,62}[A-Za-z0-9])\.)+((?!-)[A-Za-z0-9-]{1,62}[A-Za-z0-9])(\.)?$'
+            maxLength: 64
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
-              required:
-                - subDomainSettings
               properties:
                 enableAutoSubDomain:
                   description: ' Enables the automated creation of subdomains for branches. '
@@ -1888,7 +1954,7 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/SubDomainSetting'
-                  maxItems: 255
+                  maxItems: 500
                 autoSubDomainCreationPatterns:
                   description: ' Sets the branch patterns for automatic subdomain creation. '
                   type: array
@@ -1956,6 +2022,7 @@ paths:
           description: ' The name for the branch, for the job. '
           schema:
             type: string
+            pattern: \(\?s\).\+
             minLength: 1
             maxLength: 255
         - name: jobId
@@ -1964,6 +2031,7 @@ paths:
           description: ' The unique ID for the job. '
           schema:
             type: string
+            pattern: '[0-9]+'
             maxLength: 255
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2029,6 +2097,7 @@ paths:
           description: ' The branch name for the job. '
           schema:
             type: string
+            pattern: \(\?s\).\+
             minLength: 1
             maxLength: 255
         - name: jobId
@@ -2037,6 +2106,7 @@ paths:
           description: ' The unique ID for the job. '
           schema:
             type: string
+            pattern: '[0-9]+'
             maxLength: 255
   '/webhooks/{webhookId}':
     delete:
@@ -2086,6 +2156,7 @@ paths:
           description: ' The unique ID for a webhook. '
           schema:
             type: string
+            pattern: \(\?s\).*
             maxLength: 255
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2142,6 +2213,7 @@ paths:
           description: ' The unique ID for a webhook. '
           schema:
             type: string
+            pattern: \(\?s\).*
             maxLength: 255
     post:
       operationId: UpdateWebhook
@@ -2190,6 +2262,7 @@ paths:
           description: ' The unique ID for a webhook. '
           schema:
             type: string
+            pattern: \(\?s\).*
             maxLength: 255
       requestBody:
         required: true
@@ -2201,11 +2274,13 @@ paths:
                 branchName:
                   description: ' The name for a branch that is part of an Amplify app. '
                   type: string
+                  pattern: \(\?s\).\+
                   minLength: 1
                   maxLength: 255
                 description:
                   description: ' The description for a webhook. '
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 1000
   '/apps/{appId}/accesslogs':
     post:
@@ -2272,7 +2347,8 @@ paths:
                 domainName:
                   description: ' The name of the domain. '
                   type: string
-                  maxLength: 255
+                  pattern: '^(((?!-)[A-Za-z0-9-]{0,62}[A-Za-z0-9])\.)+((?!-)[A-Za-z0-9-]{1,62}[A-Za-z0-9])(\.)?$'
+                  maxLength: 64
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2329,6 +2405,7 @@ paths:
           description: ' The unique ID for an artifact. '
           schema:
             type: string
+            pattern: \(\?s\).*
             maxLength: 255
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2389,6 +2466,7 @@ paths:
           description: ' The name of a branch that is part of an Amplify app. '
           schema:
             type: string
+            pattern: \(\?s\).\+
             minLength: 1
             maxLength: 255
         - name: jobId
@@ -2397,6 +2475,7 @@ paths:
           description: ' The unique ID for a job. '
           schema:
             type: string
+            pattern: '[0-9]+'
             maxLength: 255
         - name: nextToken
           in: query
@@ -2404,6 +2483,7 @@ paths:
           description: ' A pagination token. Set to null to start listing artifacts from start. If a non-null pagination token is returned in a result, pass its value in here to list more artifacts. '
           schema:
             type: string
+            pattern: \(\?s\).*
             maxLength: 2000
         - name: maxResults
           in: query
@@ -2472,6 +2552,7 @@ paths:
           description: ' The name for a branch. '
           schema:
             type: string
+            pattern: \(\?s\).\+
             minLength: 1
             maxLength: 255
         - name: nextToken
@@ -2480,6 +2561,7 @@ paths:
           description: ' A pagination token. Set to null to start listing steps from the start. If a non-null pagination token is returned in a result, pass its value in here to list more steps. '
           schema:
             type: string
+            pattern: \(\?s\).*
             maxLength: 2000
         - name: maxResults
           in: query
@@ -2553,6 +2635,7 @@ paths:
           description: ' The branch name for the job. '
           schema:
             type: string
+            pattern: \(\?s\).\+
             minLength: 1
             maxLength: 255
       requestBody:
@@ -2567,6 +2650,7 @@ paths:
                 jobId:
                   description: ' The unique ID for an existing job. This is required if the value of <code>jobType</code> is <code>RETRY</code>. '
                   type: string
+                  pattern: '[0-9]+'
                   maxLength: 255
                 jobType:
                   description: ' Describes the type for the job. The job type <code>RELEASE</code> starts a new job with the latest change from the specified branch. This value is available only for apps that are connected to a repository. The job type <code>RETRY</code> retries an existing job. If the job type value is <code>RETRY</code>, the <code>jobId</code> is also required. '
@@ -2580,14 +2664,17 @@ paths:
                 jobReason:
                   description: ' A descriptive reason for starting this job. '
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 255
                 commitId:
                   description: ' The commit ID from a third-party repository provider for the job. '
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 255
                 commitMessage:
                   description: ' The commit message from a third-party repository provider for the job. '
                   type: string
+                  pattern: \(\?s\).*
                   maxLength: 10000
                 commitTime:
                   description: ' The commit date and time for the job. '
@@ -2630,6 +2717,8 @@ paths:
           schema:
             type: string
             pattern: '^arn:aws:amplify:.*'
+            minLength: 0
+            maxLength: 2048
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2674,6 +2763,8 @@ paths:
           schema:
             type: string
             pattern: '^arn:aws:amplify:.*'
+            minLength: 0
+            maxLength: 2048
       requestBody:
         required: true
         content:
@@ -2686,7 +2777,7 @@ paths:
                 tags:
                   description: ' The tags used to tag the resource. '
                   type: object
-                  minProperties: 1
+                  minProperties: 0
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
@@ -2747,6 +2838,7 @@ paths:
           description: ' The name for the branch, for the job. '
           schema:
             type: string
+            pattern: \(\?s\).\+
             minLength: 1
             maxLength: 255
       requestBody:
@@ -2759,11 +2851,13 @@ paths:
                 jobId:
                   description: ' The job ID for this deployment, generated by the create deployment request. '
                   type: string
+                  pattern: '[0-9]+'
                   maxLength: 255
                 sourceUrl:
                   description: ' The source URL for this deployment, used when calling start deployment without create deployment. The source URL can be any HTTP GET URL that is publicly accessible and downloads a single .zip file. '
                   type: string
-                  maxLength: 1000
+                  pattern: \(\?s\).*
+                  maxLength: 3000
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2829,6 +2923,7 @@ paths:
           description: ' The name for the branch, for the job. '
           schema:
             type: string
+            pattern: \(\?s\).\+
             minLength: 1
             maxLength: 255
         - name: jobId
@@ -2837,6 +2932,7 @@ paths:
           description: ' The unique id for the job. '
           schema:
             type: string
+            pattern: '[0-9]+'
             maxLength: 255
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2883,6 +2979,8 @@ paths:
           schema:
             type: string
             pattern: '^arn:aws:amplify:.*'
+            minLength: 0
+            maxLength: 2048
         - name: tagKeys
           in: query
           required: true
@@ -2962,7 +3060,8 @@ components:
           $ref: '#/components/schemas/App'
     EnvValue:
       type: string
-      maxLength: 1000
+      pattern: \(\?s\).*
+      maxLength: 5500
     CustomRule:
       type: object
       required:
@@ -2988,9 +3087,11 @@ components:
       description: ' Describes a custom rewrite or redirect rule. '
     TagValue:
       type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
       maxLength: 256
     AutoBranchCreationPattern:
       type: string
+      pattern: \(\?s\).\+
       minLength: 1
       maxLength: 2048
     Stage:
@@ -3003,6 +3104,7 @@ components:
         - PULL_REQUEST
     Framework:
       type: string
+      pattern: \(\?s\).*
       maxLength: 255
     EnableAutoBuild:
       type: boolean
@@ -3012,6 +3114,7 @@ components:
         $ref: '#/components/schemas/EnvValue'
     BasicAuthCredentials:
       type: string
+      pattern: \(\?s\).*
       maxLength: 2000
       format: password
     EnableBasicAuth:
@@ -3020,13 +3123,16 @@ components:
       type: boolean
     BuildSpec:
       type: string
+      pattern: \(\?s\).\+
       description: ' The build specification (build spec) file for an Amplify app build. '
       minLength: 1
       maxLength: 25000
+      format: password
     EnablePullRequestPreview:
       type: boolean
     PullRequestEnvironmentName:
       type: string
+      pattern: \(\?s\).*
       maxLength: 20
     BadRequestException: {}
     UnauthorizedException: {}
@@ -3075,6 +3181,7 @@ components:
       description: ' The result structure for the create a new deployment request. '
     MD5Hash:
       type: string
+      pattern: \(\?s\).*
       maxLength: 32
     CreateDomainAssociationResult:
       type: object
@@ -3103,6 +3210,7 @@ components:
       description: ' Describes the settings for the subdomain. '
     AutoSubDomainCreationPattern:
       type: string
+      pattern: \(\?s\).\+
       minLength: 1
       maxLength: 2048
     CreateWebhookResult:
@@ -3434,6 +3542,7 @@ components:
       description: ' The result structure for the update webhook request. '
     AccessToken:
       type: string
+      pattern: \(\?s\).\+
       minLength: 1
       maxLength: 255
       format: password
@@ -3450,24 +3559,29 @@ components:
       maxLength: 1000
     Name:
       type: string
+      pattern: \(\?s\).\+
       minLength: 1
       maxLength: 255
     TagMap:
       type: object
-      minProperties: 1
+      minProperties: 0
       maxProperties: 50
       additionalProperties:
         $ref: '#/components/schemas/TagValue'
     Description:
       type: string
+      pattern: \(\?s\).*
       maxLength: 1000
     Repository:
       type: string
+      pattern: \(\?s\).*
       maxLength: 1000
     Platform:
       type: string
       enum:
         - WEB
+        - WEB_DYNAMIC
+        - WEB_COMPUTE
     CreateTime:
       type: string
       format: date-time
@@ -3476,7 +3590,8 @@ components:
       format: date-time
     ServiceRoleArn:
       type: string
-      minLength: 1
+      pattern: \(\?s\).*
+      minLength: 0
       maxLength: 1000
     DefaultDomain:
       type: string
@@ -3512,7 +3627,8 @@ components:
       description: ' Describes the information about a production branch for an Amplify app. '
     CustomHeaders:
       type: string
-      minLength: 1
+      pattern: \(\?s\).*
+      minLength: 0
       maxLength: 25000
     EnableAutoBranchCreation:
       type: boolean
@@ -3542,7 +3658,7 @@ components:
         basicAuthCredentials:
           allOf:
             - $ref: '#/components/schemas/BasicAuthCredentials'
-            - description: ' The basic authorization credentials for the autocreated branch. '
+            - description: ' The basic authorization credentials for the autocreated branch. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.'
         enableBasicAuth:
           allOf:
             - $ref: '#/components/schemas/EnableBasicAuth'
@@ -3564,6 +3680,12 @@ components:
             - $ref: '#/components/schemas/PullRequestEnvironmentName'
             - description: ' The Amplify environment name for the pull request. '
       description: ' Describes the automated branch creation configuration. '
+    RepositoryCloneMethod:
+      type: string
+      enum:
+        - SSH
+        - TOKEN
+        - SIGV4
     App:
       type: object
       required:
@@ -3603,11 +3725,11 @@ components:
         repository:
           allOf:
             - $ref: '#/components/schemas/Repository'
-            - description: ' The repository for the Amplify app. '
+            - description: ' The Git repository for the Amplify app. '
         platform:
           allOf:
             - $ref: '#/components/schemas/Platform'
-            - description: ' The platform for the Amplify app. '
+            - description: ' The platform for the Amplify app. For a static app, set the platform type to <code>WEB</code>. For a dynamic server-side rendered (SSR) app, set the platform type to <code>WEB_COMPUTE</code>. For an app requiring Amplify Hosting''s original SSR support only, set the platform type to <code>WEB_DYNAMIC</code>.'
         createTime:
           allOf:
             - $ref: '#/components/schemas/CreateTime'
@@ -3643,7 +3765,7 @@ components:
         basicAuthCredentials:
           allOf:
             - $ref: '#/components/schemas/BasicAuthCredentials'
-            - description: ' The basic authorization credentials for branches for the Amplify app. '
+            - description: ' The basic authorization credentials for branches for the Amplify app. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.'
         customRules:
           allOf:
             - $ref: '#/components/schemas/CustomRules'
@@ -3672,6 +3794,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AutoBranchCreationConfig'
             - description: ' Describes the automated branch creation configuration for the Amplify app. '
+        repositoryCloneMethod:
+          allOf:
+            - $ref: '#/components/schemas/RepositoryCloneMethod'
+            - description: '<note> <p>This is for internal use.</p> </note> <p>The Amplify service uses this parameter to specify the authentication protocol to use to access the Git repository for an Amplify app. Amplify specifies <code>TOKEN</code> for a GitHub repository, <code>SIGV4</code> for an Amazon Web Services CodeCommit repository, and <code>SSH</code> for GitLab and Bitbucket repositories.</p>'
       description: ' Represents the different branches of a repository for building, deploying, and hosting an Amplify app. '
     Apps:
       type: array
@@ -3682,6 +3808,7 @@ components:
       maxLength: 1000
     ArtifactId:
       type: string
+      pattern: \(\?s\).*
       maxLength: 255
     Artifact:
       type: object
@@ -3726,18 +3853,22 @@ components:
       maxLength: 1000
     BackendEnvironmentArn:
       type: string
-      minLength: 1
+      pattern: \(\?s\).*
+      minLength: 0
       maxLength: 1000
     EnvironmentName:
       type: string
+      pattern: \(\?s\).\+
       minLength: 1
       maxLength: 255
     StackName:
       type: string
+      pattern: \(\?s\).\+
       minLength: 1
       maxLength: 255
     DeploymentArtifacts:
       type: string
+      pattern: \(\?s\).\+
       minLength: 1
       maxLength: 1000
     BackendEnvironment:
@@ -3779,13 +3910,16 @@ components:
         $ref: '#/components/schemas/BackendEnvironment'
     BranchArn:
       type: string
+      pattern: \(\?s\).*
       maxLength: 1000
     BranchName:
       type: string
+      pattern: \(\?s\).\+
       minLength: 1
       maxLength: 255
     DisplayName:
       type: string
+      pattern: \(\?s\).*
       maxLength: 255
     EnableNotification:
       type: boolean
@@ -3803,7 +3937,10 @@ components:
       maxLength: 2000
     TTL:
       type: string
+      pattern: \d*
       description: ' The content Time to Live (TTL) for the website in seconds. '
+      minLength: 0
+      maxLength: 32
     Branch:
       type: object
       required:
@@ -3900,7 +4037,7 @@ components:
         basicAuthCredentials:
           allOf:
             - $ref: '#/components/schemas/BasicAuthCredentials'
-            - description: ' The basic authorization credentials for a branch of an Amplify app. '
+            - description: ' The basic authorization credentials for a branch of an Amplify app. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.'
         buildSpec:
           allOf:
             - $ref: '#/components/schemas/BuildSpec'
@@ -3944,21 +4081,25 @@ components:
       maxLength: 1000
     CommitId:
       type: string
+      pattern: \(\?s\).*
       maxLength: 255
     CommitMessage:
       type: string
+      pattern: \(\?s\).*
       maxLength: 10000
     CommitTime:
       type: string
       format: date-time
     Condition:
       type: string
-      minLength: 1
+      pattern: \(\?s\).*
+      minLength: 0
       maxLength: 2048
     Context:
       type: string
     OauthToken:
       type: string
+      pattern: \(\?s\).*
       maxLength: 1000
       format: password
     CreateAppRequest:
@@ -3982,7 +4123,7 @@ components:
         platform:
           allOf:
             - $ref: '#/components/schemas/Platform'
-            - description: ' The platform or framework for an Amplify app. '
+            - description: ' The platform for the Amplify app. For a static app, set the platform type to <code>WEB</code>. For a dynamic server-side rendered (SSR) app, set the platform type to <code>WEB_COMPUTE</code>. For an app requiring Amplify Hosting''s original SSR support only, set the platform type to <code>WEB_DYNAMIC</code>.'
         iamServiceRoleArn:
           allOf:
             - $ref: '#/components/schemas/ServiceRoleArn'
@@ -3990,11 +4131,11 @@ components:
         oauthToken:
           allOf:
             - $ref: '#/components/schemas/OauthToken'
-            - description: ' The OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key. The OAuth token is not stored. '
+            - description: '<p>The OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key using SSH cloning. The OAuth token is not stored.</p> <p>Use <code>oauthToken</code> for repository providers other than GitHub, such as Bitbucket or CodeCommit. To authorize access to GitHub as your repository provider, use <code>accessToken</code>.</p> <p>You must specify either <code>oauthToken</code> or <code>accessToken</code> when you create a new app.</p> <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see <a href="https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth">Migrating an existing OAuth app to the Amplify GitHub App</a> in the <i>Amplify User Guide</i> .</p>'
         accessToken:
           allOf:
             - $ref: '#/components/schemas/AccessToken'
-            - description: ' The personal access token for a third-party source control system for an Amplify app. The personal access token is used to create a webhook and a read-only deploy key. The token is not stored. '
+            - description: '<p>The personal access token for a GitHub repository for an Amplify app. The personal access token is used to authorize access to a GitHub repository using the Amplify GitHub App. The token is not stored.</p> <p>Use <code>accessToken</code> for GitHub repositories only. To authorize access to a repository provider such as Bitbucket or CodeCommit, use <code>oauthToken</code>.</p> <p>You must specify either <code>accessToken</code> or <code>oauthToken</code> when you create a new app.</p> <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see <a href="https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth">Migrating an existing OAuth app to the Amplify GitHub App</a> in the <i>Amplify User Guide</i> .</p>'
         environmentVariables:
           allOf:
             - $ref: '#/components/schemas/EnvironmentVariables'
@@ -4014,7 +4155,7 @@ components:
         basicAuthCredentials:
           allOf:
             - $ref: '#/components/schemas/BasicAuthCredentials'
-            - description: ' The credentials for basic authorization for an Amplify app. '
+            - description: ' The credentials for basic authorization for an Amplify app. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.'
         customRules:
           allOf:
             - $ref: '#/components/schemas/CustomRules'
@@ -4100,7 +4241,7 @@ components:
         basicAuthCredentials:
           allOf:
             - $ref: '#/components/schemas/BasicAuthCredentials'
-            - description: ' The basic authorization credentials for the branch. '
+            - description: ' The basic authorization credentials for the branch. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.'
         enableBasicAuth:
           allOf:
             - $ref: '#/components/schemas/EnableBasicAuth'
@@ -4153,6 +4294,7 @@ components:
       description: ' The request structure for the create a new deployment request. '
     JobId:
       type: string
+      pattern: '[0-9]+'
       maxLength: 255
     FileUploadUrls:
       type: object
@@ -4163,14 +4305,15 @@ components:
       maxLength: 1000
     DomainName:
       type: string
-      maxLength: 255
+      pattern: '^(((?!-)[A-Za-z0-9-]{0,62}[A-Za-z0-9])\.)+((?!-)[A-Za-z0-9-]{1,62}[A-Za-z0-9])(\.)?$'
+      maxLength: 64
     EnableAutoSubDomain:
       type: boolean
     SubDomainSettings:
       type: array
       items:
         $ref: '#/components/schemas/SubDomainSetting'
-      maxItems: 255
+      maxItems: 500
     CreateDomainAssociationRequest:
       type: object
       required:
@@ -4306,14 +4449,17 @@ components:
       maxLength: 255
     Source:
       type: string
+      pattern: \(\?s\).\+
       minLength: 1
       maxLength: 2048
     Target:
       type: string
+      pattern: \(\?s\).\+
       minLength: 1
       maxLength: 2048
     Status:
       type: string
+      pattern: '.{3,7}'
       minLength: 3
       maxLength: 7
     DNSRecord:
@@ -4395,6 +4541,7 @@ components:
       description: ' Describes the summary for an execution job for an Amplify app. '
     WebhookId:
       type: string
+      pattern: \(\?s\).*
       maxLength: 255
     DeleteWebhookRequest:
       type: object
@@ -4422,7 +4569,7 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SubDomain'
-      maxItems: 255
+      maxItems: 500
     DomainAssociations:
       type: array
       items:
@@ -4430,15 +4577,18 @@ components:
       maxItems: 255
     DomainPrefix:
       type: string
+      pattern: \(\?s\).*
       maxLength: 255
     EndTime:
       type: string
       format: date-time
     EnvKey:
       type: string
+      pattern: \(\?s\).*
       maxLength: 255
     FileName:
       type: string
+      pattern: \(\?s\).*
       maxLength: 255
     StartTime:
       type: string
@@ -4524,6 +4674,7 @@ components:
       maxLength: 1000
     JobReason:
       type: string
+      pattern: \(\?s\).*
       maxLength: 255
     JobStatus:
       type: string
@@ -4552,6 +4703,7 @@ components:
       format: date-time
     NextToken:
       type: string
+      pattern: \(\?s\).*
       maxLength: 2000
     MaxResults:
       type: integer
@@ -4590,6 +4742,8 @@ components:
     ResourceArn:
       type: string
       pattern: '^arn:aws:amplify:.*'
+      minLength: 0
+      maxLength: 2048
     ListTagsForResourceRequest:
       type: object
       title: ListTagsForResourceRequest
@@ -4610,7 +4764,8 @@ components:
         $ref: '#/components/schemas/ThumbnailUrl'
     SourceUrl:
       type: string
-      maxLength: 1000
+      pattern: \(\?s\).*
+      maxLength: 3000
     StartDeploymentRequest:
       type: object
       title: StartDeploymentRequest
@@ -4784,7 +4939,7 @@ components:
         platform:
           allOf:
             - $ref: '#/components/schemas/Platform'
-            - description: ' The platform for an Amplify app. '
+            - description: ' The platform for the Amplify app. For a static app, set the platform type to <code>WEB</code>. For a dynamic server-side rendered (SSR) app, set the platform type to <code>WEB_COMPUTE</code>. For an app requiring Amplify Hosting''s original SSR support only, set the platform type to <code>WEB_DYNAMIC</code>.'
         iamServiceRoleArn:
           allOf:
             - $ref: '#/components/schemas/ServiceRoleArn'
@@ -4808,7 +4963,7 @@ components:
         basicAuthCredentials:
           allOf:
             - $ref: '#/components/schemas/BasicAuthCredentials'
-            - description: ' The basic authorization credentials for an Amplify app. '
+            - description: ' The basic authorization credentials for an Amplify app. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.'
         customRules:
           allOf:
             - $ref: '#/components/schemas/CustomRules'
@@ -4840,11 +4995,11 @@ components:
         oauthToken:
           allOf:
             - $ref: '#/components/schemas/OauthToken'
-            - description: ' The OAuth token for a third-party source control system for an Amplify app. The token is used to create a webhook and a read-only deploy key. The OAuth token is not stored. '
+            - description: '<p>The OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key using SSH cloning. The OAuth token is not stored.</p> <p>Use <code>oauthToken</code> for repository providers other than GitHub, such as Bitbucket or CodeCommit.</p> <p>To authorize access to GitHub as your repository provider, use <code>accessToken</code>.</p> <p>You must specify either <code>oauthToken</code> or <code>accessToken</code> when you update an app.</p> <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see <a href="https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth">Migrating an existing OAuth app to the Amplify GitHub App</a> in the <i>Amplify User Guide</i> .</p>'
         accessToken:
           allOf:
             - $ref: '#/components/schemas/AccessToken'
-            - description: ' The personal access token for a third-party source control system for an Amplify app. The token is used to create webhook and a read-only deploy key. The token is not stored. '
+            - description: '<p>The personal access token for a GitHub repository for an Amplify app. The personal access token is used to authorize access to a GitHub repository using the Amplify GitHub App. The token is not stored.</p> <p>Use <code>accessToken</code> for GitHub repositories only. To authorize access to a repository provider such as Bitbucket or CodeCommit, use <code>oauthToken</code>.</p> <p>You must specify either <code>accessToken</code> or <code>oauthToken</code> when you update an app.</p> <p>Existing Amplify apps deployed from a GitHub repository using OAuth continue to work with CI/CD. However, we strongly recommend that you migrate these apps to use the GitHub App. For more information, see <a href="https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth">Migrating an existing OAuth app to the Amplify GitHub App</a> in the <i>Amplify User Guide</i> .</p>'
       description: ' The request structure for the update app request. '
     UpdateBranchRequest:
       type: object
@@ -4877,7 +5032,7 @@ components:
         basicAuthCredentials:
           allOf:
             - $ref: '#/components/schemas/BasicAuthCredentials'
-            - description: ' The basic authorization credentials for the branch. '
+            - description: ' The basic authorization credentials for the branch. You must base64-encode the authorization credentials and provide them in the format <code>user:password</code>.'
         enableBasicAuth:
           allOf:
             - $ref: '#/components/schemas/EnableBasicAuth'
@@ -4913,8 +5068,6 @@ components:
       description: ' The request structure for the update branch request. '
     UpdateDomainAssociationRequest:
       type: object
-      required:
-        - subDomainSettings
       title: UpdateDomainAssociationRequest
       properties:
         enableAutoSubDomain:

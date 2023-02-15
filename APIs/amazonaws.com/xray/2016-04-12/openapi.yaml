@@ -395,6 +395,62 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DeleteResourcePolicy:
+    post:
+      operationId: DeleteResourcePolicy
+      description: Deletes a resource policy from the target Amazon Web Services account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResourcePolicyResult'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidPolicyRevisionIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidPolicyRevisionIdException'
+        '482':
+          description: ThrottledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - PolicyName
+              properties:
+                PolicyName:
+                  description: The name of the resource policy to delete.
+                  type: string
+                  pattern: '[\w+=,.@-]+'
+                  minLength: 1
+                  maxLength: 128
+                PolicyRevisionId:
+                  description: 'Specifies a specific policy revision to delete. Provide a <code>PolicyRevisionId</code> to ensure an atomic delete operation. If the provided revision id does not match the latest policy revision id, an <code>InvalidPolicyRevisionIdException</code> exception is returned. '
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /DeleteSamplingRule:
     post:
       operationId: DeleteSamplingRule
@@ -1262,6 +1318,56 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListResourcePolicies:
+    post:
+      operationId: ListResourcePolicies
+      description: Returns the list of resource policies in the target Amazon Web Services account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResourcePoliciesResult'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+      parameters:
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                NextToken:
+                  description: Not currently supported.
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /ListTagsForResource:
     post:
       operationId: ListTagsForResource
@@ -1291,7 +1397,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-      parameters: []
+      parameters:
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
       requestBody:
         required: true
         content:
@@ -1361,6 +1473,87 @@ paths:
                   enum:
                     - NONE
                     - KMS
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /PutResourcePolicy:
+    post:
+      operationId: PutResourcePolicy
+      description: ' Sets the resource policy to grant one or more Amazon Web Services services and accounts permissions to access X-Ray. Each resource policy will be associated with a specific Amazon Web Services account. Each Amazon Web Services account can have a maximum of 5 resource policies, and each policy name must be unique within that account. The maximum size of each resource policy is 5KB. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutResourcePolicyResult'
+        '480':
+          description: MalformedPolicyDocumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MalformedPolicyDocumentException'
+        '481':
+          description: LockoutPreventionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LockoutPreventionException'
+        '482':
+          description: InvalidPolicyRevisionIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidPolicyRevisionIdException'
+        '483':
+          description: PolicySizeLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicySizeLimitExceededException'
+        '484':
+          description: PolicyCountLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyCountLimitExceededException'
+        '485':
+          description: ThrottledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - PolicyName
+                - PolicyDocument
+              properties:
+                PolicyName:
+                  description: The name of the resource policy. Must be unique within a specific Amazon Web Services account.
+                  type: string
+                  pattern: '[\w+=,.@-]+'
+                  minLength: 1
+                  maxLength: 128
+                PolicyDocument:
+                  description: 'The resource policy document, which can be up to 5kb in size.'
+                  type: string
+                PolicyRevisionId:
+                  description: '<p>Specifies a specific policy revision, to ensure an atomic create operation. By default the resource policy is created if it does not exist, or updated with an incremented revision id. The revision id is unique to each policy in the account.</p> <p>If the policy revision id does not match the latest revision id, the operation will fail with an <code>InvalidPolicyRevisionIdException</code> exception. You can also provide a <code>PolicyRevisionId</code> of 0. In this case, the operation will fail with an <code>InvalidPolicyRevisionIdException</code> exception if a resource policy with the same name already exists. </p>'
+                  type: string
+                BypassPolicyLockoutCheck:
+                  description: <p>A flag to indicate whether to bypass the resource policy lockout safety check.</p> <important> <p>Setting this value to true increases the risk that the policy becomes unmanageable. Do not set this value to true indiscriminately.</p> </important> <p>Use this parameter only when you include a policy in the request and you intend to prevent the principal that is making the request from making a subsequent <code>PutResourcePolicy</code> request.</p> <p>The default value is false.</p>
+                  type: boolean
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1908,6 +2101,10 @@ components:
     DeleteGroupResult:
       type: object
       properties: {}
+    DeleteResourcePolicyResult:
+      type: object
+      properties: {}
+    InvalidPolicyRevisionIdException: {}
     DeleteSamplingRuleResult:
       type: object
       properties:
@@ -2152,6 +2349,17 @@ components:
     NullableDouble:
       type: number
       format: double
+    ListResourcePoliciesResult:
+      type: object
+      properties:
+        ResourcePolicies:
+          allOf:
+            - $ref: '#/components/schemas/ResourcePolicyList'
+            - description: The list of resource policies in the target Amazon Web Services account.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/ResourcePolicyNextToken'
+            - description: Pagination token. Not currently supported.
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -2171,6 +2379,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/EncryptionConfig'
             - description: The new encryption configuration.
+    PutResourcePolicyResult:
+      type: object
+      properties:
+        ResourcePolicy:
+          allOf:
+            - $ref: '#/components/schemas/ResourcePolicy'
+            - description: 'The resource policy document, as provided in the <code>PutResourcePolicyRequest</code>.'
+    MalformedPolicyDocumentException: {}
+    LockoutPreventionException: {}
+    PolicySizeLimitExceededException: {}
+    PolicyCountLimitExceededException: {}
     PutTelemetryRecordsResult:
       type: object
       properties: {}
@@ -2444,7 +2663,7 @@ components:
         InsightsConfiguration:
           allOf:
             - $ref: '#/components/schemas/InsightsConfiguration'
-            - description: <p>The structure containing configurations related to insights.</p> <ul> <li> <p>The InsightsEnabled boolean can be set to true to enable insights for the new group or false to disable insights for the new group.</p> </li> <li> <p>The NotifcationsEnabled boolean can be set to true to enable insights notifications for the new group. Notifications may only be enabled on a group with InsightsEnabled set to true.</p> </li> </ul>
+            - description: <p>The structure containing configurations related to insights.</p> <ul> <li> <p>The InsightsEnabled boolean can be set to true to enable insights for the new group or false to disable insights for the new group.</p> </li> <li> <p>The NotificationsEnabled boolean can be set to true to enable insights notifications for the new group. Notifications may only be enabled on a group with InsightsEnabled set to true.</p> </li> </ul>
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -2582,6 +2801,27 @@ components:
           allOf:
             - $ref: '#/components/schemas/GroupARN'
             - description: The ARN of the group that was generated on creation.
+    PolicyName:
+      type: string
+      pattern: '[\w+=,.@-]+'
+      minLength: 1
+      maxLength: 128
+    PolicyRevisionId:
+      type: string
+    DeleteResourcePolicyRequest:
+      type: object
+      required:
+        - PolicyName
+      title: DeleteResourcePolicyRequest
+      properties:
+        PolicyName:
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the resource policy to delete.
+        PolicyRevisionId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyRevisionId'
+            - description: 'Specifies a specific policy revision to delete. Provide a <code>PolicyRevisionId</code> to ensure an atomic delete operation. If the provided revision id does not match the latest policy revision id, an <code>InvalidPolicyRevisionIdException</code> exception is returned. '
     DeleteSamplingRuleRequest:
       type: object
       title: DeleteSamplingRuleRequest
@@ -2653,12 +2893,20 @@ components:
         ResponseTimeHistogram:
           allOf:
             - $ref: '#/components/schemas/Histogram'
-            - description: A histogram that maps the spread of client response times on an edge.
+            - description: A histogram that maps the spread of client response times on an edge. Only populated for synchronous edges.
         Aliases:
           allOf:
             - $ref: '#/components/schemas/AliasList'
             - description: Aliases for the edge.
-      description: Information about a connection between two services.
+        EdgeType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Describes an asynchronous connection, with a value of <code>link</code>.'
+        ReceivedEventAgeHistogram:
+          allOf:
+            - $ref: '#/components/schemas/Histogram'
+            - description: A histogram that maps the spread of event age when received by consumers. Age is calculated each time an event is received. Only populated when <i>EdgeType</i> is <code>link</code>.
+      description: 'Information about a connection between two services. An edge can be a synchronous connection, such as typical call between client and service, or an asynchronous link, such as a Lambda function which retrieves an event from an SNS queue.'
     EdgeList:
       type: array
       items:
@@ -3491,6 +3739,22 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The ID of a corresponding EC2 instance.
       description: 'A list of EC2 instance IDs corresponding to the segments in a trace. '
+    ResourcePolicyNextToken:
+      type: string
+      minLength: 1
+      maxLength: 100
+    ListResourcePoliciesRequest:
+      type: object
+      title: ListResourcePoliciesRequest
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/ResourcePolicyNextToken'
+            - description: Not currently supported.
+    ResourcePolicyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourcePolicy'
     ListTagsForResourceRequest:
       type: object
       required:
@@ -3505,6 +3769,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'A pagination token. If multiple pages of results are returned, use the <code>NextToken</code> value returned with the current page of results as the value of this parameter to get the next page of results.'
+    PolicyDocument:
+      type: string
     PutEncryptionConfigRequest:
       type: object
       required:
@@ -3519,6 +3785,49 @@ components:
           allOf:
             - $ref: '#/components/schemas/EncryptionType'
             - description: The type of encryption. Set to <code>KMS</code> to use your own key for encryption. Set to <code>NONE</code> for default encryption.
+    PutResourcePolicyRequest:
+      type: object
+      required:
+        - PolicyName
+        - PolicyDocument
+      title: PutResourcePolicyRequest
+      properties:
+        PolicyName:
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the resource policy. Must be unique within a specific Amazon Web Services account.
+        PolicyDocument:
+          allOf:
+            - $ref: '#/components/schemas/PolicyDocument'
+            - description: 'The resource policy document, which can be up to 5kb in size.'
+        PolicyRevisionId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyRevisionId'
+            - description: '<p>Specifies a specific policy revision, to ensure an atomic create operation. By default the resource policy is created if it does not exist, or updated with an incremented revision id. The revision id is unique to each policy in the account.</p> <p>If the policy revision id does not match the latest revision id, the operation will fail with an <code>InvalidPolicyRevisionIdException</code> exception. You can also provide a <code>PolicyRevisionId</code> of 0. In this case, the operation will fail with an <code>InvalidPolicyRevisionIdException</code> exception if a resource policy with the same name already exists. </p>'
+        BypassPolicyLockoutCheck:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: <p>A flag to indicate whether to bypass the resource policy lockout safety check.</p> <important> <p>Setting this value to true increases the risk that the policy becomes unmanageable. Do not set this value to true indiscriminately.</p> </important> <p>Use this parameter only when you include a policy in the request and you intend to prevent the principal that is making the request from making a subsequent <code>PutResourcePolicy</code> request.</p> <p>The default value is false.</p>
+    ResourcePolicy:
+      type: object
+      properties:
+        PolicyName:
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the resource policy. Must be unique within a specific Amazon Web Services account.
+        PolicyDocument:
+          allOf:
+            - $ref: '#/components/schemas/PolicyDocument'
+            - description: 'The resource policy document, which can be up to 5kb in size.'
+        PolicyRevisionId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyRevisionId'
+            - description: Returns the current policy revision id for this policy name.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'When the policy was last updated, in Unix time seconds.'
+      description: A resource policy grants one or more Amazon Web Services services and accounts permissions to access X-Ray. Each resource policy is associated with a specific Amazon Web Services account.
     TelemetryRecordList:
       type: array
       items:
@@ -3921,7 +4230,7 @@ components:
         LimitExceeded:
           allOf:
             - $ref: '#/components/schemas/NullableBoolean'
-            - description: 'LimitExceeded is set to true when the trace has exceeded one of the defined quotas. For more information about quotas, see <a href="https://docs.aws.amazon.com/general/latest/gr/xray.html">Amazon Web Services X-Ray endpoints and quotas</a>.'
+            - description: 'LimitExceeded is set to true when the trace has exceeded the <code>Trace document size</code> limit. For more information about this limit and other X-Ray limits and quotas, see <a href="https://docs.aws.amazon.com/general/latest/gr/xray.html">Amazon Web Services X-Ray endpoints and quotas</a>.'
         Segments:
           allOf:
             - $ref: '#/components/schemas/SegmentList'
@@ -4105,7 +4414,7 @@ components:
         InsightsConfiguration:
           allOf:
             - $ref: '#/components/schemas/InsightsConfiguration'
-            - description: <p>The structure containing configurations related to insights.</p> <ul> <li> <p>The InsightsEnabled boolean can be set to true to enable insights for the group or false to disable insights for the group.</p> </li> <li> <p>The NotifcationsEnabled boolean can be set to true to enable insights notifications for the group. Notifications can only be enabled on a group with InsightsEnabled set to true.</p> </li> </ul>
+            - description: <p>The structure containing configurations related to insights.</p> <ul> <li> <p>The InsightsEnabled boolean can be set to true to enable insights for the group or false to disable insights for the group.</p> </li> <li> <p>The NotificationsEnabled boolean can be set to true to enable insights notifications for the group. Notifications can only be enabled on a group with InsightsEnabled set to true.</p> </li> </ul>
     UpdateSamplingRuleRequest:
       type: object
       required:

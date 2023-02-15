@@ -458,6 +458,13 @@ paths:
           schema:
             type: string
             maxLength: 2147483647
+        - name: ConsumerRegion
+          in: query
+          required: false
+          description: 'From a datashare consumer account, associates a datashare with all existing and future namespaces in the specified Amazon Web Services Region.'
+          schema:
+            type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -669,7 +676,7 @@ paths:
     get:
       x-aws-operation-name: AuthorizeDataShare
       operationId: GET_AuthorizeDataShare
-      description: 'From a data producer account, authorizes the sharing of a datashare with one or more consumer accounts. To authorize a datashare for a data consumer, the producer account must have the correct access privileges.'
+      description: 'From a data producer account, authorizes the sharing of a datashare with one or more consumer accounts or managing entities. To authorize a datashare for a data consumer, the producer account must have the correct access permissions.'
       responses:
         '200':
           description: Success
@@ -694,7 +701,7 @@ paths:
         - name: ConsumerIdentifier
           in: query
           required: true
-          description: The identifier of the data consumer that is authorized to access the datashare. This identifier is an AWS account ID.
+          description: 'The identifier of the data consumer that is authorized to access the datashare. This identifier is an Amazon Web Services account ID or a keyword, such as ADX.'
           schema:
             type: string
             maxLength: 2147483647
@@ -723,7 +730,7 @@ paths:
     post:
       x-aws-operation-name: AuthorizeDataShare
       operationId: POST_AuthorizeDataShare
-      description: 'From a data producer account, authorizes the sharing of a datashare with one or more consumer accounts. To authorize a datashare for a data consumer, the producer account must have the correct access privileges.'
+      description: 'From a data producer account, authorizes the sharing of a datashare with one or more consumer accounts or managing entities. To authorize a datashare for a data consumer, the producer account must have the correct access permissions.'
       responses:
         '200':
           description: Success
@@ -968,11 +975,24 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/LimitExceededFault'
+        '486':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
       parameters:
         - name: SnapshotIdentifier
           in: query
-          required: true
+          required: false
           description: The identifier of the snapshot the account is authorized to restore.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: SnapshotArn
+          in: query
+          required: false
+          description: The Amazon Resource Name (ARN) of the snapshot to authorize access to.
           schema:
             type: string
             maxLength: 2147483647
@@ -1059,6 +1079,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/LimitExceededFault'
+        '486':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
       requestBody:
         content:
           text/xml:
@@ -1848,14 +1874,14 @@ paths:
         - name: MasterUsername
           in: query
           required: true
-          description: '<p>The user name associated with the admin user account for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 - 128 alphanumeric characters. The user name can''t be <code>PUBLIC</code>.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide. </p> </li> </ul>'
+          description: '<p>The user name associated with the admin user account for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 - 128 alphanumeric characters or hyphens. The user name can''t be <code>PUBLIC</code>.</p> </li> <li> <p>Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Must not contain a colon (:) or a slash (/).</p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide. </p> </li> </ul>'
           schema:
             type: string
             maxLength: 2147483647
         - name: MasterUserPassword
           in: query
           required: true
-          description: '<p>The password associated with the admin user account for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33 to 126) except '' (single quote), " (double quote), \, /, @, or space.</p> </li> </ul>'
+          description: '<p>The password associated with the admin user account for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33-126) except <code>''</code> (single quote), <code>"</code> (double quote), <code>\</code>, <code>/</code>, or <code>@</code>.</p> </li> </ul>'
           schema:
             type: string
             maxLength: 2147483647
@@ -1975,7 +2001,7 @@ paths:
         - name: ElasticIp
           in: query
           required: false
-          description: '<p>The Elastic IP (EIP) address for the cluster.</p> <p>Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible through an Internet gateway. For more information about provisioning clusters in EC2-VPC, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms">Supported Platforms to Launch Your Cluster</a> in the Amazon Redshift Cluster Management Guide.</p>'
+          description: '<p>The Elastic IP (EIP) address for the cluster.</p> <p>Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible through an Internet gateway. Don''t specify the Elastic IP address for a publicly accessible cluster with availability zone relocation turned on. For more information about provisioning clusters in EC2-VPC, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms">Supported Platforms to Launch Your Cluster</a> in the Amazon Redshift Cluster Management Guide.</p>'
           schema:
             type: string
             maxLength: 2147483647
@@ -2013,7 +2039,7 @@ paths:
         - name: IamRoles
           in: query
           required: false
-          description: <p>A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request.</p> <p>A cluster can have up to 10 IAM roles associated with it at any time.</p>
+          description: '<p>A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. </p> <p>The maximum number of IAM roles that you can associate is subject to a quota. For more information, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Quotas and limits</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
           schema:
             type: array
             items:
@@ -2044,13 +2070,27 @@ paths:
         - name: AquaConfigurationStatus
           in: query
           required: false
-          description: <p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
+          description: This parameter is retired. It does not set the AQUA configuration status. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
           schema:
             type: string
             enum:
               - enabled
               - disabled
               - auto
+        - name: DefaultIamRoleArn
+          in: query
+          required: false
+          description: 'The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was created. '
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: LoadSampleData
+          in: query
+          required: false
+          description: A flag that specifies whether to load sample data once the cluster is created.
+          schema:
+            type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -3899,7 +3939,7 @@ paths:
     get:
       x-aws-operation-name: CreateSnapshotCopyGrant
       operationId: GET_CreateSnapshotCopyGrant
-      description: '<p>Creates a snapshot copy grant that permits Amazon Redshift to use a customer master key (CMK) from Key Management Service (KMS) to encrypt copied snapshots in a destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
+      description: '<p>Creates a snapshot copy grant that permits Amazon Redshift to use an encrypted symmetric key from Key Management Service (KMS) to encrypt copied snapshots in a destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
       responses:
         '200':
           description: Success
@@ -3954,7 +3994,7 @@ paths:
         - name: KmsKeyId
           in: query
           required: false
-          description: 'The unique identifier of the customer master key (CMK) to which to grant Amazon Redshift permission. If no key is specified, the default key is used.'
+          description: 'The unique identifier of the encrypted symmetric key to which to grant Amazon Redshift permission. If no key is specified, the default key is used.'
           schema:
             type: string
             maxLength: 2147483647
@@ -3994,7 +4034,7 @@ paths:
     post:
       x-aws-operation-name: CreateSnapshotCopyGrant
       operationId: POST_CreateSnapshotCopyGrant
-      description: '<p>Creates a snapshot copy grant that permits Amazon Redshift to use a customer master key (CMK) from Key Management Service (KMS) to encrypt copied snapshots in a destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
+      description: '<p>Creates a snapshot copy grant that permits Amazon Redshift to use an encrypted symmetric key from Key Management Service (KMS) to encrypt copied snapshots in a destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
       responses:
         '200':
           description: Success
@@ -4439,10 +4479,11 @@ paths:
             enum:
               - spectrum
               - concurrency-scaling
+              - cross-region-datasharing
         - name: LimitType
           in: query
           required: true
-          description: 'The type of limit. Depending on the feature type, this can be based on a time duration or data size. If <code>FeatureType</code> is <code>spectrum</code>, then <code>LimitType</code> must be <code>data-scanned</code>. If <code>FeatureType</code> is <code>concurrency-scaling</code>, then <code>LimitType</code> must be <code>time</code>. '
+          description: 'The type of limit. Depending on the feature type, this can be based on a time duration or data size. If <code>FeatureType</code> is <code>spectrum</code>, then <code>LimitType</code> must be <code>data-scanned</code>. If <code>FeatureType</code> is <code>concurrency-scaling</code>, then <code>LimitType</code> must be <code>time</code>. If <code>FeatureType</code> is <code>cross-region-datasharing</code>, then <code>LimitType</code> must be <code>data-scanned</code>. '
           schema:
             type: string
             enum:
@@ -4584,7 +4625,7 @@ paths:
     get:
       x-aws-operation-name: DeauthorizeDataShare
       operationId: GET_DeauthorizeDataShare
-      description: 'From the producer account, removes authorization from the specified datashare. '
+      description: 'From a datashare producer account, removes authorization from the specified datashare. '
       responses:
         '200':
           description: Success
@@ -4609,7 +4650,7 @@ paths:
         - name: ConsumerIdentifier
           in: query
           required: true
-          description: The identifier of the data consumer that is to have authorization removed from the datashare. This identifier is an AWS account ID.
+          description: 'The identifier of the data consumer that is to have authorization removed from the datashare. This identifier is an Amazon Web Services account ID or a keyword, such as ADX.'
           schema:
             type: string
             maxLength: 2147483647
@@ -4638,7 +4679,7 @@ paths:
     post:
       x-aws-operation-name: DeauthorizeDataShare
       operationId: POST_DeauthorizeDataShare
-      description: 'From the producer account, removes authorization from the specified datashare. '
+      description: 'From a datashare producer account, removes authorization from the specified datashare. '
       responses:
         '200':
           description: Success
@@ -6882,7 +6923,7 @@ paths:
         - name: ClusterSecurityGroupName
           in: query
           required: false
-          description: '<p>The name of a cluster security group for which you are requesting details. You can specify either the <b>Marker</b> parameter or a <b>ClusterSecurityGroupName</b> parameter, but not both. </p> <p> Example: <code>securitygroup1</code> </p>'
+          description: '<p>The name of a cluster security group for which you are requesting details. You must specify either the <b>Marker</b> parameter or a <b>ClusterSecurityGroupName</b> parameter, but not both. </p> <p> Example: <code>securitygroup1</code> </p>'
           schema:
             type: string
             maxLength: 2147483647
@@ -6895,7 +6936,7 @@ paths:
         - name: Marker
           in: query
           required: false
-          description: '<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterSecurityGroups</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p> <p>Constraints: You can specify either the <b>ClusterSecurityGroupName</b> parameter or the <b>Marker</b> parameter, but not both. </p>'
+          description: '<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterSecurityGroups</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p> <p>Constraints: You must specify either the <b>ClusterSecurityGroupName</b> parameter or the <b>Marker</b> parameter, but not both. </p>'
           schema:
             type: string
             maxLength: 2147483647
@@ -7028,6 +7069,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidTagFault'
+        '483':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
       parameters:
         - name: ClusterIdentifier
           in: query
@@ -7040,6 +7087,13 @@ paths:
           in: query
           required: false
           description: The snapshot identifier of the snapshot about which to return information.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: SnapshotArn
+          in: query
+          required: false
+          description: The Amazon Resource Name (ARN) of the snapshot associated with the message to describe cluster snapshots.
           schema:
             type: string
             maxLength: 2147483647
@@ -7174,6 +7228,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidTagFault'
+        '483':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
       requestBody:
         content:
           text/xml:
@@ -7756,7 +7816,7 @@ paths:
         - name: Marker
           in: query
           required: false
-          description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+          description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
           schema:
             type: string
             maxLength: 2147483647
@@ -7805,6 +7865,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeDataSharesMessage'
       parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -7863,7 +7935,7 @@ paths:
         - name: Marker
           in: query
           required: false
-          description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForConsumer</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+          description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForConsumer</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
           schema:
             type: string
             maxLength: 2147483647
@@ -7912,6 +7984,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeDataSharesForConsumerMessage'
       parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -7973,7 +8057,7 @@ paths:
         - name: Marker
           in: query
           required: false
-          description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForProducer</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+          description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForProducer</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
           schema:
             type: string
             maxLength: 2147483647
@@ -8022,6 +8106,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeDataSharesForProducerMessage'
       parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -8324,7 +8420,7 @@ paths:
         - name: Account
           in: query
           required: false
-          description: 'The AAmazon Web Services account ID of either the cluster owner (grantor) or grantee. If <code>Grantee</code> parameter is true, then the <code>Account</code> value is of the grantor.'
+          description: 'The Amazon Web Services account ID of either the cluster owner (grantor) or grantee. If <code>Grantee</code> parameter is true, then the <code>Account</code> value is of the grantor.'
           schema:
             type: string
             maxLength: 2147483647
@@ -9180,6 +9276,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/AccessToSnapshotDeniedFault'
+        '484':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
       parameters:
         - name: ActionType
           in: query
@@ -9202,6 +9304,13 @@ paths:
           in: query
           required: false
           description: The identifier of the snapshot to evaluate for possible node configurations.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: SnapshotArn
+          in: query
+          required: false
+          description: The Amazon Resource Name (ARN) of the snapshot associated with the message to describe node configuration.
           schema:
             type: string
             maxLength: 2147483647
@@ -9293,6 +9402,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/AccessToSnapshotDeniedFault'
+        '484':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
       requestBody:
         content:
           text/xml:
@@ -9546,6 +9661,147 @@ paths:
             type: string
             enum:
               - DescribePartners
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+  /#Action=DescribeReservedNodeExchangeStatus:
+    get:
+      x-aws-operation-name: DescribeReservedNodeExchangeStatus
+      operationId: GET_DescribeReservedNodeExchangeStatus
+      description: Returns exchange status details and associated metadata for a reserved-node exchange. Statuses include such values as in progress and requested.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeReservedNodeExchangeStatusOutputMessage'
+        '480':
+          description: ReservedNodeNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeNotFoundFault'
+        '481':
+          description: ReservedNodeExchangeNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeExchangeNotFoundFault'
+        '482':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+      parameters:
+        - name: ReservedNodeId
+          in: query
+          required: false
+          description: The identifier of the source reserved node in a reserved-node exchange request.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: ReservedNodeExchangeRequestId
+          in: query
+          required: false
+          description: The identifier of the reserved-node exchange request.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: MaxRecords
+          in: query
+          required: false
+          description: 'The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>Marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.'
+          schema:
+            type: integer
+        - name: Marker
+          in: query
+          required: false
+          description: 'An optional pagination token provided by a previous <code>DescribeReservedNodeExchangeStatus</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the <code>MaxRecords</code> parameter. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request.'
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeReservedNodeExchangeStatus
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeReservedNodeExchangeStatus
+      operationId: POST_DescribeReservedNodeExchangeStatus
+      description: Returns exchange status details and associated metadata for a reserved-node exchange. Statuses include such values as in progress and requested.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeReservedNodeExchangeStatusOutputMessage'
+        '480':
+          description: ReservedNodeNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeNotFoundFault'
+        '481':
+          description: ReservedNodeExchangeNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeExchangeNotFoundFault'
+        '482':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeReservedNodeExchangeStatusInputMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeReservedNodeExchangeStatus
         - name: Version
           in: query
           required: true
@@ -10729,6 +10985,7 @@ paths:
             enum:
               - spectrum
               - concurrency-scaling
+              - cross-region-datasharing
         - name: MaxRecords
           in: query
           required: false
@@ -10942,7 +11199,7 @@ paths:
     get:
       x-aws-operation-name: DisableSnapshotCopy
       operationId: GET_DisableSnapshotCopy
-      description: '<p>Disables the automatic copying of snapshots from one region to another region for a specified cluster.</p> <p>If your cluster and its snapshots are encrypted using a customer master key (CMK) from Key Management Service, use <a>DeleteSnapshotCopyGrant</a> to delete the grant that grants Amazon Redshift permission to the CMK in the destination region. </p>'
+      description: '<p>Disables the automatic copying of snapshots from one region to another region for a specified cluster.</p> <p>If your cluster and its snapshots are encrypted using an encrypted symmetric key from Key Management Service, use <a>DeleteSnapshotCopyGrant</a> to delete the grant that grants Amazon Redshift permission to the key in the destination region. </p>'
       responses:
         '200':
           description: Success
@@ -11007,7 +11264,7 @@ paths:
     post:
       x-aws-operation-name: DisableSnapshotCopy
       operationId: POST_DisableSnapshotCopy
-      description: '<p>Disables the automatic copying of snapshots from one region to another region for a specified cluster.</p> <p>If your cluster and its snapshots are encrypted using a customer master key (CMK) from Key Management Service, use <a>DeleteSnapshotCopyGrant</a> to delete the grant that grants Amazon Redshift permission to the CMK in the destination region. </p>'
+      description: '<p>Disables the automatic copying of snapshots from one region to another region for a specified cluster.</p> <p>If your cluster and its snapshots are encrypted using an encrypted symmetric key from Key Management Service, use <a>DeleteSnapshotCopyGrant</a> to delete the grant that grants Amazon Redshift permission to the key in the destination region. </p>'
       responses:
         '200':
           description: Success
@@ -11063,7 +11320,7 @@ paths:
     get:
       x-aws-operation-name: DisassociateDataShareConsumer
       operationId: GET_DisassociateDataShareConsumer
-      description: 'From a consumer account, remove association for the specified datashare. '
+      description: 'From a datashare consumer account, remove association for the specified datashare. '
       responses:
         '200':
           description: Success
@@ -11104,6 +11361,13 @@ paths:
           schema:
             type: string
             maxLength: 2147483647
+        - name: ConsumerRegion
+          in: query
+          required: false
+          description: 'From a datashare consumer account, removes association of a datashare from all the existing and future namespaces in the specified Amazon Web Services Region.'
+          schema:
+            type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -11129,7 +11393,7 @@ paths:
     post:
       x-aws-operation-name: DisassociateDataShareConsumer
       operationId: POST_DisassociateDataShareConsumer
-      description: 'From a consumer account, remove association for the specified datashare. '
+      description: 'From a datashare consumer account, remove association for the specified datashare. '
       responses:
         '200':
           description: Success
@@ -11227,7 +11491,7 @@ paths:
             maxLength: 2147483647
         - name: BucketName
           in: query
-          required: true
+          required: false
           description: '<p>The name of an existing S3 bucket where the log files are to be stored.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the same region as the cluster</p> </li> <li> <p>The cluster must have read bucket and put object permissions</p> </li> </ul>'
           schema:
             type: string
@@ -11239,6 +11503,23 @@ paths:
           schema:
             type: string
             maxLength: 2147483647
+        - name: LogDestinationType
+          in: query
+          required: false
+          description: The log destination type. An enum with possible values of <code>s3</code> and <code>cloudwatch</code>.
+          schema:
+            type: string
+            enum:
+              - s3
+              - cloudwatch
+        - name: LogExports
+          in: query
+          required: false
+          description: 'The collection of exported log types. Possible values are <code>connectionlog</code>, <code>useractivitylog</code>, and <code>userlog</code>.'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
         - name: Action
           in: query
           required: true
@@ -11563,7 +11844,7 @@ paths:
     get:
       x-aws-operation-name: GetClusterCredentials
       operationId: GET_GetClusterCredentials
-      description: '<p>Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with <code>IAM:</code> if <code>AutoCreate</code> is <code>False</code> or <code>IAMA:</code> if <code>AutoCreate</code> is <code>True</code>. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html">Using IAM Authentication to Generate Database User Credentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>The Identity and Access Management (IAM) user or role that runs GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources">Resource Policies for GetClusterCredentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If the <code>DbGroups</code> parameter is specified, the IAM policy must allow the <code>redshift:JoinGroup</code> action with access to the listed <code>dbgroups</code>. </p> <p>In addition, if the <code>AutoCreate</code> parameter is set to <code>True</code>, then the policy must include the <code>redshift:CreateClusterUser</code> privilege.</p> <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access to the resource <code>dbname</code> for the specified database name. </p>'
+      description: '<p>Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with <code>IAM:</code> if <code>AutoCreate</code> is <code>False</code> or <code>IAMA:</code> if <code>AutoCreate</code> is <code>True</code>. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html">Using IAM Authentication to Generate Database User Credentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>The Identity and Access Management (IAM) user or role that runs GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources">Resource Policies for GetClusterCredentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If the <code>DbGroups</code> parameter is specified, the IAM policy must allow the <code>redshift:JoinGroup</code> action with access to the listed <code>dbgroups</code>. </p> <p>In addition, if the <code>AutoCreate</code> parameter is set to <code>True</code>, then the policy must include the <code>redshift:CreateClusterUser</code> permission.</p> <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access to the resource <code>dbname</code> for the specified database name. </p>'
       responses:
         '200':
           description: Success
@@ -11587,21 +11868,21 @@ paths:
         - name: DbUser
           in: query
           required: true
-          description: '<p>The name of a database user. If a user name matching <code>DbUser</code> exists in the database, the temporary user credentials have the same permissions as the existing user. If <code>DbUser</code> doesn''t exist in the database and <code>Autocreate</code> is <code>True</code>, a new user is created using the value for <code>DbUser</code> with PUBLIC permissions. If a database user matching the value for <code>DbUser</code> doesn''t exist and <code>Autocreate</code> is <code>False</code>, then the command succeeds but the connection attempt will fail because the user doesn''t exist in the database.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html">CREATE USER</a> in the Amazon Redshift Database Developer Guide. </p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 64 alphanumeric characters or hyphens. The user name can''t be <code>PUBLIC</code>.</p> </li> <li> <p>Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Must not contain a colon ( : ) or slash ( / ). </p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide.</p> </li> </ul>'
+          description: '<p>The name of a database user. If a user name matching <code>DbUser</code> exists in the database, the temporary user credentials have the same permissions as the existing user. If <code>DbUser</code> doesn''t exist in the database and <code>Autocreate</code> is <code>True</code>, a new user is created using the value for <code>DbUser</code> with PUBLIC permissions. If a database user matching the value for <code>DbUser</code> doesn''t exist and <code>Autocreate</code> is <code>False</code>, then the command succeeds but the connection attempt will fail because the user doesn''t exist in the database.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html">CREATE USER</a> in the Amazon Redshift Database Developer Guide. </p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 64 alphanumeric characters or hyphens. The user name can''t be <code>PUBLIC</code>.</p> </li> <li> <p>Must contain uppercase or lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Must not contain a colon ( : ) or slash ( / ). </p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide.</p> </li> </ul>'
           schema:
             type: string
             maxLength: 2147483647
         - name: DbName
           in: query
           required: false
-          description: '<p>The name of a database that <code>DbUser</code> is authorized to log on to. If <code>DbName</code> is not specified, <code>DbUser</code> can log on to any existing database.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 64 alphanumeric characters or hyphens</p> </li> <li> <p>Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Must not contain a colon ( : ) or slash ( / ). </p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide.</p> </li> </ul>'
+          description: '<p>The name of a database that <code>DbUser</code> is authorized to log on to. If <code>DbName</code> is not specified, <code>DbUser</code> can log on to any existing database.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 64 alphanumeric characters or hyphens</p> </li> <li> <p>Must contain uppercase or lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Must not contain a colon ( : ) or slash ( / ). </p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide.</p> </li> </ul>'
           schema:
             type: string
             maxLength: 2147483647
         - name: ClusterIdentifier
           in: query
           required: true
-          description: The unique identifier of the cluster that contains the database for which your are requesting credentials. This parameter is case sensitive.
+          description: The unique identifier of the cluster that contains the database for which you are requesting credentials. This parameter is case sensitive.
           schema:
             type: string
             maxLength: 2147483647
@@ -11653,7 +11934,7 @@ paths:
     post:
       x-aws-operation-name: GetClusterCredentials
       operationId: POST_GetClusterCredentials
-      description: '<p>Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with <code>IAM:</code> if <code>AutoCreate</code> is <code>False</code> or <code>IAMA:</code> if <code>AutoCreate</code> is <code>True</code>. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html">Using IAM Authentication to Generate Database User Credentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>The Identity and Access Management (IAM) user or role that runs GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources">Resource Policies for GetClusterCredentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If the <code>DbGroups</code> parameter is specified, the IAM policy must allow the <code>redshift:JoinGroup</code> action with access to the listed <code>dbgroups</code>. </p> <p>In addition, if the <code>AutoCreate</code> parameter is set to <code>True</code>, then the policy must include the <code>redshift:CreateClusterUser</code> privilege.</p> <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access to the resource <code>dbname</code> for the specified database name. </p>'
+      description: '<p>Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with <code>IAM:</code> if <code>AutoCreate</code> is <code>False</code> or <code>IAMA:</code> if <code>AutoCreate</code> is <code>True</code>. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html">Using IAM Authentication to Generate Database User Credentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>The Identity and Access Management (IAM) user or role that runs GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources">Resource Policies for GetClusterCredentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If the <code>DbGroups</code> parameter is specified, the IAM policy must allow the <code>redshift:JoinGroup</code> action with access to the listed <code>dbgroups</code>. </p> <p>In addition, if the <code>AutoCreate</code> parameter is set to <code>True</code>, then the policy must include the <code>redshift:CreateClusterUser</code> permission.</p> <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access to the resource <code>dbname</code> for the specified database name. </p>'
       responses:
         '200':
           description: Success
@@ -11686,6 +11967,326 @@ paths:
             type: string
             enum:
               - GetClusterCredentials
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+  /#Action=GetClusterCredentialsWithIAM:
+    get:
+      x-aws-operation-name: GetClusterCredentialsWithIAM
+      operationId: GET_GetClusterCredentialsWithIAM
+      description: '<p>Returns a database user name and temporary password with temporary authorization to log in to an Amazon Redshift database. The database user is mapped 1:1 to the source Identity and Access Management (IAM) identity. For more information about IAM identities, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html">IAM Identities (users, user groups, and roles)</a> in the Amazon Web Services Identity and Access Management User Guide.</p> <p>The Identity and Access Management (IAM) identity that runs this operation must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html">Using identity-based policies (IAM policies)</a> in the Amazon Redshift Cluster Management Guide. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterExtendedCredentials'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+      parameters:
+        - name: DbName
+          in: query
+          required: false
+          description: 'The name of the database for which you are requesting credentials. If the database name is specified, the IAM policy must allow access to the resource <code>dbname</code> for the specified database name. If the database name is not specified, access to all databases is allowed.'
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: ClusterIdentifier
+          in: query
+          required: true
+          description: 'The unique identifier of the cluster that contains the database for which you are requesting credentials. '
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: DurationSeconds
+          in: query
+          required: false
+          description: '<p>The number of seconds until the returned temporary password expires.</p> <p>Range: 900-3600. Default: 900.</p>'
+          schema:
+            type: integer
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetClusterCredentialsWithIAM
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: GetClusterCredentialsWithIAM
+      operationId: POST_GetClusterCredentialsWithIAM
+      description: '<p>Returns a database user name and temporary password with temporary authorization to log in to an Amazon Redshift database. The database user is mapped 1:1 to the source Identity and Access Management (IAM) identity. For more information about IAM identities, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html">IAM Identities (users, user groups, and roles)</a> in the Amazon Web Services Identity and Access Management User Guide.</p> <p>The Identity and Access Management (IAM) identity that runs this operation must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html">Using identity-based policies (IAM policies)</a> in the Amazon Redshift Cluster Management Guide. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterExtendedCredentials'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GetClusterCredentialsWithIAMMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetClusterCredentialsWithIAM
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+  /#Action=GetReservedNodeExchangeConfigurationOptions:
+    get:
+      x-aws-operation-name: GetReservedNodeExchangeConfigurationOptions
+      operationId: GET_GetReservedNodeExchangeConfigurationOptions
+      description: 'Gets the configuration options for the reserved-node exchange. These options include information about the source reserved node and target reserved node offering. Details include the node type, the price, the node count, and the offering type.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetReservedNodeExchangeConfigurationOptionsOutputMessage'
+        '480':
+          description: ReservedNodeNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeNotFoundFault'
+        '481':
+          description: InvalidReservedNodeStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidReservedNodeStateFault'
+        '482':
+          description: ReservedNodeAlreadyMigratedFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeAlreadyMigratedFault'
+        '483':
+          description: ReservedNodeOfferingNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeOfferingNotFoundFault'
+        '484':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+        '485':
+          description: DependentServiceUnavailableFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DependentServiceUnavailableFault'
+        '486':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '487':
+          description: ClusterSnapshotNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterSnapshotNotFoundFault'
+      parameters:
+        - name: ActionType
+          in: query
+          required: true
+          description: The action type of the reserved-node configuration. The action type can be an exchange initiated from either a snapshot or a resize.
+          schema:
+            type: string
+            enum:
+              - restore-cluster
+              - resize-cluster
+        - name: ClusterIdentifier
+          in: query
+          required: false
+          description: The identifier for the cluster that is the source for a reserved-node exchange.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: SnapshotIdentifier
+          in: query
+          required: false
+          description: The identifier for the snapshot that is the source for the reserved-node exchange.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: MaxRecords
+          in: query
+          required: false
+          description: 'The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>Marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.'
+          schema:
+            type: integer
+        - name: Marker
+          in: query
+          required: false
+          description: 'An optional pagination token provided by a previous <code>GetReservedNodeExchangeConfigurationOptions</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the <code>MaxRecords</code> parameter. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request.'
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetReservedNodeExchangeConfigurationOptions
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: GetReservedNodeExchangeConfigurationOptions
+      operationId: POST_GetReservedNodeExchangeConfigurationOptions
+      description: 'Gets the configuration options for the reserved-node exchange. These options include information about the source reserved node and target reserved node offering. Details include the node type, the price, the node count, and the offering type.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetReservedNodeExchangeConfigurationOptionsOutputMessage'
+        '480':
+          description: ReservedNodeNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeNotFoundFault'
+        '481':
+          description: InvalidReservedNodeStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidReservedNodeStateFault'
+        '482':
+          description: ReservedNodeAlreadyMigratedFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeAlreadyMigratedFault'
+        '483':
+          description: ReservedNodeOfferingNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeOfferingNotFoundFault'
+        '484':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+        '485':
+          description: DependentServiceUnavailableFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DependentServiceUnavailableFault'
+        '486':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '487':
+          description: ClusterSnapshotNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterSnapshotNotFoundFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GetReservedNodeExchangeConfigurationOptionsInputMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetReservedNodeExchangeConfigurationOptions
         - name: Version
           in: query
           required: true
@@ -11867,7 +12468,7 @@ paths:
     get:
       x-aws-operation-name: ModifyAquaConfiguration
       operationId: GET_ModifyAquaConfiguration
-      description: 'Modifies whether a cluster can use AQUA (Advanced Query Accelerator). '
+      description: 'This operation is retired. Calling this operation does not change AQUA configuration. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator). '
       responses:
         '200':
           description: Success
@@ -11904,7 +12505,7 @@ paths:
         - name: AquaConfigurationStatus
           in: query
           required: false
-          description: <p>The new value of AQUA configuration status. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
+          description: This parameter is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
           schema:
             type: string
             enum:
@@ -11936,7 +12537,7 @@ paths:
     post:
       x-aws-operation-name: ModifyAquaConfiguration
       operationId: POST_ModifyAquaConfiguration
-      description: 'Modifies whether a cluster can use AQUA (Advanced Query Accelerator). '
+      description: 'This operation is retired. Calling this operation does not change AQUA configuration. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator). '
       responses:
         '200':
           description: Success
@@ -12278,7 +12879,7 @@ paths:
         - name: MasterUserPassword
           in: query
           required: false
-          description: '<p>The new password for the cluster admin user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the <code>MasterUserPassword</code> element exists in the <code>PendingModifiedValues</code> element of the operation response. </p> <note> <p>Operations never return the password, so this operation provides a way to regain access to the admin user account for a cluster if the password is lost.</p> </note> <p>Default: Uses existing setting.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33 to 126) except '' (single quote), " (double quote), \, /, @, or space.</p> </li> </ul>'
+          description: '<p>The new password for the cluster admin user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the <code>MasterUserPassword</code> element exists in the <code>PendingModifiedValues</code> element of the operation response. </p> <note> <p>Operations never return the password, so this operation provides a way to regain access to the admin user account for a cluster if the password is lost.</p> </note> <p>Default: Uses existing setting.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33-126) except <code>''</code> (single quote), <code>"</code> (double quote), <code>\</code>, <code>/</code>, or <code>@</code>.</p> </li> </ul>'
           schema:
             type: string
             maxLength: 2147483647
@@ -12687,7 +13288,7 @@ paths:
     get:
       x-aws-operation-name: ModifyClusterIamRoles
       operationId: GET_ModifyClusterIamRoles
-      description: <p>Modifies the list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services.</p> <p>A cluster can have up to 10 IAM roles associated at any time.</p>
+      description: '<p>Modifies the list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services.</p> <p>The maximum number of IAM roles that you can associate is subject to a quota. For more information, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Quotas and limits</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -12718,7 +13319,7 @@ paths:
         - name: AddIamRoles
           in: query
           required: false
-          description: Zero or more IAM roles to associate with the cluster. The roles must be in their Amazon Resource Name (ARN) format. You can associate up to 10 IAM roles with a single cluster in a single request.
+          description: 'Zero or more IAM roles to associate with the cluster. The roles must be in their Amazon Resource Name (ARN) format. '
           schema:
             type: array
             items:
@@ -12729,7 +13330,7 @@ paths:
         - name: RemoveIamRoles
           in: query
           required: false
-          description: Zero or more IAM roles in ARN format to disassociate from the cluster. You can disassociate up to 10 IAM roles from a single cluster in a single request.
+          description: 'Zero or more IAM roles in ARN format to disassociate from the cluster. '
           schema:
             type: array
             items:
@@ -12737,6 +13338,13 @@ paths:
                 - $ref: '#/components/schemas/String'
                 - xml:
                     name: IamRoleArn
+        - name: DefaultIamRoleArn
+          in: query
+          required: false
+          description: The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was last modified.
+          schema:
+            type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -12762,7 +13370,7 @@ paths:
     post:
       x-aws-operation-name: ModifyClusterIamRoles
       operationId: POST_ModifyClusterIamRoles
-      description: <p>Modifies the list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services.</p> <p>A cluster can have up to 10 IAM roles associated at any time.</p>
+      description: '<p>Modifies the list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services.</p> <p>The maximum number of IAM roles that you can associate is subject to a quota. For more information, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Quotas and limits</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -14733,7 +15341,7 @@ paths:
     get:
       x-aws-operation-name: RejectDataShare
       operationId: GET_RejectDataShare
-      description: 'From the consumer account, rejects the specified datashare.'
+      description: 'From a datashare consumer account, rejects the specified datashare.'
       responses:
         '200':
           description: Success
@@ -14780,7 +15388,7 @@ paths:
     post:
       x-aws-operation-name: RejectDataShare
       operationId: POST_RejectDataShare
-      description: 'From the consumer account, rejects the specified datashare.'
+      description: 'From a datashare consumer account, rejects the specified datashare.'
       responses:
         '200':
           description: Success
@@ -14994,6 +15602,42 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/LimitExceededFault'
+        '489':
+          description: ReservedNodeNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeNotFoundFault'
+        '490':
+          description: InvalidReservedNodeStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidReservedNodeStateFault'
+        '491':
+          description: ReservedNodeAlreadyMigratedFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeAlreadyMigratedFault'
+        '492':
+          description: ReservedNodeOfferingNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeOfferingNotFoundFault'
+        '493':
+          description: DependentServiceUnavailableFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DependentServiceUnavailableFault'
+        '494':
+          description: ReservedNodeAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeAlreadyExistsFault'
       parameters:
         - name: ClusterIdentifier
           in: query
@@ -15028,6 +15672,20 @@ paths:
           description: 'A boolean value indicating whether the resize operation is using the classic resize process. If you don''t provide this parameter or set the value to <code>false</code>, the resize type is elastic. '
           schema:
             type: boolean
+        - name: ReservedNodeId
+          in: query
+          required: false
+          description: The identifier of the reserved node.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: TargetReservedNodeOfferingId
+          in: query
+          required: false
+          description: The identifier of the target reserved node offering.
+          schema:
+            type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -15115,6 +15773,42 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/LimitExceededFault'
+        '489':
+          description: ReservedNodeNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeNotFoundFault'
+        '490':
+          description: InvalidReservedNodeStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidReservedNodeStateFault'
+        '491':
+          description: ReservedNodeAlreadyMigratedFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeAlreadyMigratedFault'
+        '492':
+          description: ReservedNodeOfferingNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeOfferingNotFoundFault'
+        '493':
+          description: DependentServiceUnavailableFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DependentServiceUnavailableFault'
+        '494':
+          description: ReservedNodeAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeAlreadyExistsFault'
       requestBody:
         content:
           text/xml:
@@ -15297,6 +15991,48 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidTagFault'
+        '505':
+          description: ReservedNodeNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeNotFoundFault'
+        '506':
+          description: InvalidReservedNodeStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidReservedNodeStateFault'
+        '507':
+          description: ReservedNodeAlreadyMigratedFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeAlreadyMigratedFault'
+        '508':
+          description: ReservedNodeOfferingNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeOfferingNotFoundFault'
+        '509':
+          description: DependentServiceUnavailableFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DependentServiceUnavailableFault'
+        '510':
+          description: ReservedNodeAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeAlreadyExistsFault'
+        '511':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
       parameters:
         - name: ClusterIdentifier
           in: query
@@ -15307,8 +16043,15 @@ paths:
             maxLength: 2147483647
         - name: SnapshotIdentifier
           in: query
-          required: true
-          description: '<p>The name of the snapshot from which to create the new cluster. This parameter isn''t case sensitive.</p> <p>Example: <code>my-snapshot-id</code> </p>'
+          required: false
+          description: '<p>The name of the snapshot from which to create the new cluster. This parameter isn''t case sensitive. You must specify this parameter or <code>snapshotArn</code>, but not both.</p> <p>Example: <code>my-snapshot-id</code> </p>'
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: SnapshotArn
+          in: query
+          required: false
+          description: 'The Amazon Resource Name (ARN) of the snapshot associated with the message to restore from a cluster. You must specify this parameter or <code>snapshotIdentifier</code>, but not both.'
           schema:
             type: string
             maxLength: 2147483647
@@ -15375,7 +16118,7 @@ paths:
         - name: ElasticIp
           in: query
           required: false
-          description: The elastic IP (EIP) address for the cluster.
+          description: The Elastic IP (EIP) address for the cluster. Don't specify the Elastic IP address for a publicly accessible cluster with availability zone relocation turned on.
           schema:
             type: string
             maxLength: 2147483647
@@ -15430,7 +16173,7 @@ paths:
         - name: KmsKeyId
           in: query
           required: false
-          description: The Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster that you restore from a shared snapshot.
+          description: 'The Key Management Service (KMS) key ID of the encryption key that encrypts data in the cluster restored from a shared snapshot. You can also provide the key ID when you restore from an unencrypted snapshot to an encrypted cluster in the same account. Additionally, you can specify a new KMS key ID when you restore from an encrypted snapshot in the same account in order to change it. In that case, the restored cluster is encrypted with the new KMS key ID.'
           schema:
             type: string
             maxLength: 2147483647
@@ -15457,7 +16200,7 @@ paths:
         - name: IamRoles
           in: query
           required: false
-          description: <p>A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request.</p> <p>A cluster can have up to 10 IAM roles associated at any time.</p>
+          description: '<p>A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. </p> <p>The maximum number of IAM roles that you can associate is subject to a quota. For more information, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Quotas and limits</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
           schema:
             type: array
             items:
@@ -15494,13 +16237,40 @@ paths:
         - name: AquaConfigurationStatus
           in: query
           required: false
-          description: <p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
+          description: This parameter is retired. It does not set the AQUA configuration status. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
           schema:
             type: string
             enum:
               - enabled
               - disabled
               - auto
+        - name: DefaultIamRoleArn
+          in: query
+          required: false
+          description: The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was last modified while it was restored from a snapshot.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: ReservedNodeId
+          in: query
+          required: false
+          description: The identifier of the target reserved node offering.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: TargetReservedNodeOfferingId
+          in: query
+          required: false
+          description: The identifier of the target reserved node offering.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Encrypted
+          in: query
+          required: false
+          description: Enables support for restoring an unencrypted snapshot to a cluster encrypted with Key Management Service (KMS) and a customer managed key.
+          schema:
+            type: boolean
         - name: Action
           in: query
           required: true
@@ -15684,6 +16454,48 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidTagFault'
+        '505':
+          description: ReservedNodeNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeNotFoundFault'
+        '506':
+          description: InvalidReservedNodeStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidReservedNodeStateFault'
+        '507':
+          description: ReservedNodeAlreadyMigratedFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeAlreadyMigratedFault'
+        '508':
+          description: ReservedNodeOfferingNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeOfferingNotFoundFault'
+        '509':
+          description: DependentServiceUnavailableFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DependentServiceUnavailableFault'
+        '510':
+          description: ReservedNodeAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeAlreadyExistsFault'
+        '511':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
       requestBody:
         content:
           text/xml:
@@ -15708,7 +16520,7 @@ paths:
     get:
       x-aws-operation-name: RestoreTableFromClusterSnapshot
       operationId: GET_RestoreTableFromClusterSnapshot
-      description: '<p>Creates a new table from a table in an Amazon Redshift cluster snapshot. You must create the new table within the Amazon Redshift cluster that the snapshot was taken from.</p> <p>You cannot use <code>RestoreTableFromClusterSnapshot</code> to restore a table with the same name as an existing table in an Amazon Redshift cluster. That is, you cannot overwrite an existing table in a cluster with a restored table. If you want to replace your original table with a new, restored table, then rename or drop your original table before you call <code>RestoreTableFromClusterSnapshot</code>. When you have renamed your original table, then you can pass the original name of the table as the <code>NewTableName</code> parameter value in the call to <code>RestoreTableFromClusterSnapshot</code>. This way, you can replace the original table with the table created from the snapshot.</p>'
+      description: '<p>Creates a new table from a table in an Amazon Redshift cluster snapshot. You must create the new table within the Amazon Redshift cluster that the snapshot was taken from.</p> <p>You cannot use <code>RestoreTableFromClusterSnapshot</code> to restore a table with the same name as an existing table in an Amazon Redshift cluster. That is, you cannot overwrite an existing table in a cluster with a restored table. If you want to replace your original table with a new, restored table, then rename or drop your original table before you call <code>RestoreTableFromClusterSnapshot</code>. When you have renamed your original table, then you can pass the original name of the table as the <code>NewTableName</code> parameter value in the call to <code>RestoreTableFromClusterSnapshot</code>. This way, you can replace the original table with the table created from the snapshot.</p> <p>You can''t use this operation to restore tables with <a href="https://docs.aws.amazon.com/redshift/latest/dg/t_Sorting_data.html#t_Sorting_data-interleaved">interleaved sort keys</a>.</p>'
       responses:
         '200':
           description: Success
@@ -15846,7 +16658,7 @@ paths:
     post:
       x-aws-operation-name: RestoreTableFromClusterSnapshot
       operationId: POST_RestoreTableFromClusterSnapshot
-      description: '<p>Creates a new table from a table in an Amazon Redshift cluster snapshot. You must create the new table within the Amazon Redshift cluster that the snapshot was taken from.</p> <p>You cannot use <code>RestoreTableFromClusterSnapshot</code> to restore a table with the same name as an existing table in an Amazon Redshift cluster. That is, you cannot overwrite an existing table in a cluster with a restored table. If you want to replace your original table with a new, restored table, then rename or drop your original table before you call <code>RestoreTableFromClusterSnapshot</code>. When you have renamed your original table, then you can pass the original name of the table as the <code>NewTableName</code> parameter value in the call to <code>RestoreTableFromClusterSnapshot</code>. This way, you can replace the original table with the table created from the snapshot.</p>'
+      description: '<p>Creates a new table from a table in an Amazon Redshift cluster snapshot. You must create the new table within the Amazon Redshift cluster that the snapshot was taken from.</p> <p>You cannot use <code>RestoreTableFromClusterSnapshot</code> to restore a table with the same name as an existing table in an Amazon Redshift cluster. That is, you cannot overwrite an existing table in a cluster with a restored table. If you want to replace your original table with a new, restored table, then rename or drop your original table before you call <code>RestoreTableFromClusterSnapshot</code>. When you have renamed your original table, then you can pass the original name of the table as the <code>NewTableName</code> parameter value in the call to <code>RestoreTableFromClusterSnapshot</code>. This way, you can replace the original table with the table created from the snapshot.</p> <p>You can''t use this operation to restore tables with <a href="https://docs.aws.amazon.com/redshift/latest/dg/t_Sorting_data.html#t_Sorting_data-interleaved">interleaved sort keys</a>.</p>'
       responses:
         '200':
           description: Success
@@ -16366,11 +17178,24 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ClusterSnapshotNotFoundFault'
+        '483':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
       parameters:
         - name: SnapshotIdentifier
           in: query
-          required: true
+          required: false
           description: The identifier of the snapshot that the account can no longer access.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: SnapshotArn
+          in: query
+          required: false
+          description: The Amazon Resource Name (ARN) of the snapshot associated with the message to revoke access.
           schema:
             type: string
             maxLength: 2147483647
@@ -16439,6 +17264,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ClusterSnapshotNotFoundFault'
+        '483':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
       requestBody:
         content:
           text/xml:
@@ -16820,7 +17651,11 @@ components:
         DataShareAssociations:
           allOf:
             - $ref: '#/components/schemas/DataShareAssociationList'
-            - description: A value that specifies when the datashare has an association between a producer and data consumers.
+            - description: A value that specifies when the datashare has an association between producer and data consumers.
+        ManagedBy:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of a datashare to show its managing entity.
     InvalidDataShareFault: {}
     InvalidNamespaceFault: {}
     AuthorizeClusterSecurityGroupIngressResult:
@@ -17220,6 +18055,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: 'A boolean value indicating whether the resize operation is using the classic resize process. If you don''t provide this parameter or set the value to <code>false</code>, the resize type is elastic. '
+        ReservedNodeId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the reserved node.
+        TargetReservedNodeOfferingId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the target reserved node offering.
       description: 'Describes a resize cluster operation. For example, a scheduled action to run the <code>ResizeCluster</code> API operation. '
     PauseClusterMessage:
       type: object
@@ -17504,7 +18347,7 @@ components:
         Marker:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+            - description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
     DescribeDataSharesForConsumerResult:
       type: object
       properties:
@@ -17515,7 +18358,7 @@ components:
         Marker:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForConsumer</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+            - description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForConsumer</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
     DescribeDataSharesForProducerResult:
       type: object
       properties:
@@ -17526,7 +18369,7 @@ components:
         Marker:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForProducer</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+            - description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForProducer</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
     DescribeDefaultClusterParametersResult:
       type: object
       properties:
@@ -17637,6 +18480,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The message indicating that logs failed to be delivered.
+        LogDestinationType:
+          allOf:
+            - $ref: '#/components/schemas/LogDestinationType'
+            - description: The log destination type. An enum with possible values of <code>s3</code> and <code>cloudwatch</code>.
+        LogExports:
+          allOf:
+            - $ref: '#/components/schemas/LogTypeList'
+            - description: 'The collection of exported log types. Possible values are <code>connectionlog</code>, <code>useractivitylog</code>, and <code>userlog</code>.'
       description: Describes the status of logging for a cluster.
     NodeConfigurationOptionsMessage:
       type: object
@@ -17687,6 +18538,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/PartnerIntegrationInfoList'
             - description: A list of partner integrations.
+    DescribeReservedNodeExchangeStatusOutputMessage:
+      type: object
+      properties:
+        ReservedNodeExchangeStatusDetails:
+          allOf:
+            - $ref: '#/components/schemas/ReservedNodeExchangeStatusList'
+            - description: 'The details of the reserved-node exchange request, including the status, request time, source reserved-node identifier, and additional details.'
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A pagination token provided by a previous <code>DescribeReservedNodeExchangeStatus</code> request.
+    ReservedNodeExchangeNotFoundFault: {}
     ReservedNodeOfferingsMessage:
       type: object
       properties:
@@ -17832,7 +18695,7 @@ components:
         DbUser:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A database user name that is authorized to log on to the database <code>DbName</code> using the password <code>DbPassword</code>. If the specified DbUser exists in the database, the new user name has the same database privileges as the the user named in DbUser. By default, the user is added to PUBLIC. If the <code>DbGroups</code> parameter is specifed, <code>DbUser</code> is added to the listed groups for any sessions created using these credentials.'
+            - description: 'A database user name that is authorized to log on to the database <code>DbName</code> using the password <code>DbPassword</code>. If the specified DbUser exists in the database, the new user name has the same database permissions as the the user named in DbUser. By default, the user is added to PUBLIC. If the <code>DbGroups</code> parameter is specifed, <code>DbUser</code> is added to the listed groups for any sessions created using these credentials.'
         DbPassword:
           allOf:
             - $ref: '#/components/schemas/SensitiveString'
@@ -17842,6 +18705,36 @@ components:
             - $ref: '#/components/schemas/TStamp'
             - description: The date and time the password in <code>DbPassword</code> expires.
       description: 'Temporary credentials with authorization to log on to an Amazon Redshift database. '
+    ClusterExtendedCredentials:
+      type: object
+      properties:
+        DbUser:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A database user name that you provide when you connect to a database. The database user is mapped 1:1 to the source IAM identity. '
+        DbPassword:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: A temporary password that you provide when you connect to a database.
+        Expiration:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: 'The time (UTC) when the temporary password expires. After this timestamp, a log in with the temporary password fails.'
+        NextRefreshTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: Reserved for future use.
+    GetReservedNodeExchangeConfigurationOptionsOutputMessage:
+      type: object
+      properties:
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A pagination token provided by a previous <code>GetReservedNodeExchangeConfigurationOptions</code> request.
+        ReservedNodeConfigurationOptionList:
+          allOf:
+            - $ref: '#/components/schemas/ReservedNodeConfigurationOptionList'
+            - description: 'the configuration options for the reserved-node exchange. These options include information about the source reserved node and target reserved node. Details include the node type, the price, the node count, and the offering type.'
     GetReservedNodeExchangeOfferingsOutputMessage:
       type: object
       properties:
@@ -17859,7 +18752,7 @@ components:
         AquaConfiguration:
           allOf:
             - $ref: '#/components/schemas/AquaConfiguration'
-            - description: 'The updated AQUA configuration of the cluster. '
+            - description: 'This parameter is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator). '
     ModifyAuthenticationProfileResult:
       type: object
       properties:
@@ -18165,12 +19058,12 @@ components:
         AquaStatus:
           allOf:
             - $ref: '#/components/schemas/AquaStatus'
-            - description: <p>The value indicates the status of AQUA on the cluster. Possible values include the following.</p> <ul> <li> <p>enabled - AQUA is enabled.</p> </li> <li> <p>disabled - AQUA is not enabled. </p> </li> <li> <p>applying - AQUA status is being applied. </p> </li> </ul>
+            - description: This field is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
         AquaConfigurationStatus:
           allOf:
             - $ref: '#/components/schemas/AquaConfigurationStatus'
-            - description: <p>The value represents how the cluster is configured to use AQUA. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
-      description: The AQUA (Advanced Query Accelerator) configuration of the cluster.
+            - description: This field is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
+      description: The operation that uses this structure is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
     BooleanOptional:
       type: boolean
     AssociateDataShareConsumerMessage:
@@ -18191,6 +19084,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The Amazon Resource Name (ARN) of the consumer that is associated with the datashare.
+        ConsumerRegion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'From a datashare consumer account, associates a datashare with all existing and future namespaces in the specified Amazon Web Services Region.'
     ClusterAssociatedToSchedule:
       type: object
       properties:
@@ -18311,7 +19208,7 @@ components:
         ConsumerIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The identifier of the data consumer that is authorized to access the datashare. This identifier is an AWS account ID.
+            - description: 'The identifier of the data consumer that is authorized to access the datashare. This identifier is an Amazon Web Services account ID or a keyword, such as ADX.'
     VpcIdentifierList:
       type: array
       items:
@@ -18340,7 +19237,6 @@ components:
     AuthorizeSnapshotAccessMessage:
       type: object
       required:
-        - SnapshotIdentifier
         - AccountWithRestoreAccess
       title: AuthorizeSnapshotAccessMessage
       properties:
@@ -18348,6 +19244,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The identifier of the snapshot the account is authorized to restore.
+        SnapshotArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the snapshot to authorize access to.
         SnapshotClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -18856,6 +19756,46 @@ components:
       description: Describes a resize operation.
     LongOptional:
       type: integer
+    ReservedNodeExchangeStatus:
+      type: object
+      properties:
+        ReservedNodeExchangeRequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the reserved-node exchange request.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ReservedNodeExchangeStatusType'
+            - description: The status of the reserved-node exchange request. Statuses include in-progress and requested.
+        RequestTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: A date and time that indicate when the reserved-node exchange was requested.
+        SourceReservedNodeId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the source reserved node.
+        SourceReservedNodeType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The source reserved-node type, for example ds2.xlarge.'
+        SourceReservedNodeCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The source reserved-node count in the cluster.
+        TargetReservedNodeOfferingId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the target reserved node offering.
+        TargetReservedNodeType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The node type of the target reserved node, for example ra3.4xlarge.'
+        TargetReservedNodeCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The count of target reserved nodes in the cluster.
+      description: 'Reserved-node status details, such as the source reserved-node identifier, the target reserved-node identifier, the node type, the node count, and other details.'
     Cluster:
       type: object
       properties:
@@ -19058,7 +19998,15 @@ components:
         AquaConfiguration:
           allOf:
             - $ref: '#/components/schemas/AquaConfiguration'
-            - description: The AQUA (Advanced Query Accelerator) configuration of the cluster.
+            - description: This field is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
+        DefaultIamRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) for the IAM role set as default for the cluster.
+        ReservedNodeExchangeStatus:
+          allOf:
+            - $ref: '#/components/schemas/ReservedNodeExchangeStatus'
+            - description: The status of the reserved-node exchange request. Statuses include in-progress and requested.
       description: Describes a cluster.
     SensitiveString:
       type: string
@@ -19390,11 +20338,11 @@ components:
         MasterUsername:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The user name associated with the admin user account for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 - 128 alphanumeric characters. The user name can''t be <code>PUBLIC</code>.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide. </p> </li> </ul>'
+            - description: '<p>The user name associated with the admin user account for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 - 128 alphanumeric characters or hyphens. The user name can''t be <code>PUBLIC</code>.</p> </li> <li> <p>Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Must not contain a colon (:) or a slash (/).</p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide. </p> </li> </ul>'
         MasterUserPassword:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The password associated with the admin user account for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33 to 126) except '' (single quote), " (double quote), \, /, @, or space.</p> </li> </ul>'
+            - description: '<p>The password associated with the admin user account for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33-126) except <code>''</code> (single quote), <code>"</code> (double quote), <code>\</code>, <code>/</code>, or <code>@</code>.</p> </li> </ul>'
         ClusterSecurityGroups:
           allOf:
             - $ref: '#/components/schemas/ClusterSecurityGroupNameList'
@@ -19462,7 +20410,7 @@ components:
         ElasticIp:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The Elastic IP (EIP) address for the cluster.</p> <p>Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible through an Internet gateway. For more information about provisioning clusters in EC2-VPC, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms">Supported Platforms to Launch Your Cluster</a> in the Amazon Redshift Cluster Management Guide.</p>'
+            - description: '<p>The Elastic IP (EIP) address for the cluster.</p> <p>Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible through an Internet gateway. Don''t specify the Elastic IP address for a publicly accessible cluster with availability zone relocation turned on. For more information about provisioning clusters in EC2-VPC, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms">Supported Platforms to Launch Your Cluster</a> in the Amazon Redshift Cluster Management Guide.</p>'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -19482,7 +20430,7 @@ components:
         IamRoles:
           allOf:
             - $ref: '#/components/schemas/IamRoleArnList'
-            - description: <p>A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request.</p> <p>A cluster can have up to 10 IAM roles associated with it at any time.</p>
+            - description: '<p>A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. </p> <p>The maximum number of IAM roles that you can associate is subject to a quota. For more information, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Quotas and limits</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
         MaintenanceTrackName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -19498,7 +20446,15 @@ components:
         AquaConfigurationStatus:
           allOf:
             - $ref: '#/components/schemas/AquaConfigurationStatus'
-            - description: <p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
+            - description: This parameter is retired. It does not set the AQUA configuration status. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
+        DefaultIamRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was created. '
+        LoadSampleData:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A flag that specifies whether to load sample data once the cluster is created.
       description: <p/>
     CreateClusterParameterGroupMessage:
       type: object
@@ -19895,7 +20851,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The unique identifier of the customer master key (CMK) to which to grant Amazon Redshift permission. If no key is specified, the default key is used.'
+            - description: 'The unique identifier of the encrypted symmetric key to which to grant Amazon Redshift permission. If no key is specified, the default key is used.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -19911,12 +20867,12 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The unique identifier of the customer master key (CMK) in Amazon Web Services KMS to which Amazon Redshift is granted permission.
+            - description: The unique identifier of the encrypted symmetric key in Amazon Web Services KMS to which Amazon Redshift is granted permission.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: A list of tag instances.
-      description: '<p>The snapshot copy grant that grants Amazon Redshift permission to encrypt copied snapshots with the specified customer master key (CMK) from Amazon Web Services KMS in the destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
+      description: '<p>The snapshot copy grant that grants Amazon Redshift permission to encrypt copied snapshots with the specified encrypted symmetric key from Amazon Web Services KMS in the destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
     ScheduleDefinitionList:
       type: array
       items:
@@ -19973,6 +20929,7 @@ components:
       enum:
         - spectrum
         - concurrency-scaling
+        - cross-region-datasharing
     UsageLimitLimitType:
       type: string
       enum:
@@ -20010,7 +20967,7 @@ components:
         LimitType:
           allOf:
             - $ref: '#/components/schemas/UsageLimitLimitType'
-            - description: 'The type of limit. Depending on the feature type, this can be based on a time duration or data size. If <code>FeatureType</code> is <code>spectrum</code>, then <code>LimitType</code> must be <code>data-scanned</code>. If <code>FeatureType</code> is <code>concurrency-scaling</code>, then <code>LimitType</code> must be <code>time</code>. '
+            - description: 'The type of limit. Depending on the feature type, this can be based on a time duration or data size. If <code>FeatureType</code> is <code>spectrum</code>, then <code>LimitType</code> must be <code>data-scanned</code>. If <code>FeatureType</code> is <code>concurrency-scaling</code>, then <code>LimitType</code> must be <code>time</code>. If <code>FeatureType</code> is <code>cross-region-datasharing</code>, then <code>LimitType</code> must be <code>data-scanned</code>. '
         Amount:
           allOf:
             - $ref: '#/components/schemas/Long'
@@ -20054,6 +21011,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataShareStatus'
             - description: The status of the datashare that is associated.
+        ConsumerRegion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services Region of the consumer accounts that have an association with a producer datashare.
         CreatedDate:
           allOf:
             - $ref: '#/components/schemas/TStamp'
@@ -20104,7 +21065,7 @@ components:
         ConsumerIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The identifier of the data consumer that is to have authorization removed from the datashare. This identifier is an AWS account ID.
+            - description: 'The identifier of the data consumer that is to have authorization removed from the datashare. This identifier is an Amazon Web Services account ID or a keyword, such as ADX.'
     DefaultClusterParameters:
       type: object
       properties:
@@ -20404,7 +21365,7 @@ components:
         ClusterSecurityGroupName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The name of a cluster security group for which you are requesting details. You can specify either the <b>Marker</b> parameter or a <b>ClusterSecurityGroupName</b> parameter, but not both. </p> <p> Example: <code>securitygroup1</code> </p>'
+            - description: '<p>The name of a cluster security group for which you are requesting details. You must specify either the <b>Marker</b> parameter or a <b>ClusterSecurityGroupName</b> parameter, but not both. </p> <p> Example: <code>securitygroup1</code> </p>'
         MaxRecords:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -20412,7 +21373,7 @@ components:
         Marker:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterSecurityGroups</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p> <p>Constraints: You can specify either the <b>ClusterSecurityGroupName</b> parameter or the <b>Marker</b> parameter, but not both. </p>'
+            - description: '<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterSecurityGroups</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p> <p>Constraints: You must specify either the <b>ClusterSecurityGroupName</b> parameter or the <b>Marker</b> parameter, but not both. </p>'
         TagKeys:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
@@ -20441,6 +21402,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The snapshot identifier of the snapshot about which to return information.
+        SnapshotArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the snapshot associated with the message to describe cluster snapshots.
         SnapshotType:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -20588,7 +21553,7 @@ components:
         Marker:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForConsumer</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+            - description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForConsumer</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
     DescribeDataSharesForProducerMessage:
       type: object
       title: DescribeDataSharesForProducerMessage
@@ -20608,7 +21573,7 @@ components:
         Marker:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForProducer</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+            - description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForProducer</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
     DescribeDataSharesMessage:
       type: object
       title: DescribeDataSharesMessage
@@ -20624,7 +21589,7 @@ components:
         Marker:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+            - description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
     DescribeDefaultClusterParametersMessage:
       type: object
       required:
@@ -20683,7 +21648,7 @@ components:
         Account:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The AAmazon Web Services account ID of either the cluster owner (grantor) or grantee. If <code>Grantee</code> parameter is true, then the <code>Account</code> value is of the grantor.'
+            - description: 'The Amazon Web Services account ID of either the cluster owner (grantor) or grantee. If <code>Grantee</code> parameter is true, then the <code>Account</code> value is of the grantor.'
         Grantee:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -20857,6 +21822,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The identifier of the snapshot to evaluate for possible node configurations.
+        SnapshotArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the snapshot associated with the message to describe node configuration.
         OwnerAccount:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -20943,6 +21912,33 @@ components:
           - $ref: '#/components/schemas/PartnerIntegrationInfo'
           - xml:
               name: PartnerIntegrationInfo
+    DescribeReservedNodeExchangeStatusInputMessage:
+      type: object
+      title: DescribeReservedNodeExchangeStatusInputMessage
+      properties:
+        ReservedNodeId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the source reserved node in a reserved-node exchange request.
+        ReservedNodeExchangeRequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the reserved-node exchange request.
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>Marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.'
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional pagination token provided by a previous <code>DescribeReservedNodeExchangeStatus</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the <code>MaxRecords</code> parameter. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request.'
+    ReservedNodeExchangeStatusList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/ReservedNodeExchangeStatus'
+          - xml:
+              name: ReservedNodeExchangeStatus
     DescribeReservedNodeOfferingsMessage:
       type: object
       title: DescribeReservedNodeOfferingsMessage
@@ -21219,6 +22215,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The Amazon Resource Name (ARN) of the consumer that association for the datashare is removed from.
+        ConsumerRegion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'From a datashare consumer account, removes association of a datashare from all the existing and future namespaces in the specified Amazon Web Services Region.'
     EC2SecurityGroup:
       type: object
       properties:
@@ -21262,11 +22262,19 @@ components:
           - $ref: '#/components/schemas/UpdateTarget'
           - xml:
               name: UpdateTarget
+    LogDestinationType:
+      type: string
+      enum:
+        - s3
+        - cloudwatch
+    LogTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
     EnableLoggingMessage:
       type: object
       required:
         - ClusterIdentifier
-        - BucketName
       title: EnableLoggingMessage
       properties:
         ClusterIdentifier:
@@ -21281,6 +22289,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: '<p>The prefix applied to the log file names.</p> <p>Constraints:</p> <ul> <li> <p>Cannot exceed 512 characters</p> </li> <li> <p>Cannot contain spaces( ), double quotes ("), single quotes (''), a backslash (\), or control characters. The hexadecimal codes for invalid characters are: </p> <ul> <li> <p>x00 to x20</p> </li> <li> <p>x22</p> </li> <li> <p>x27</p> </li> <li> <p>x5c</p> </li> <li> <p>x7f or larger</p> </li> </ul> </li> </ul>'
+        LogDestinationType:
+          allOf:
+            - $ref: '#/components/schemas/LogDestinationType'
+            - description: The log destination type. An enum with possible values of <code>s3</code> and <code>cloudwatch</code>.
+        LogExports:
+          allOf:
+            - $ref: '#/components/schemas/LogTypeList'
+            - description: 'The collection of exported log types. Possible values are <code>connectionlog</code>, <code>useractivitylog</code>, and <code>userlog</code>.'
       description: <p/>
     EnableSnapshotCopyMessage:
       type: object
@@ -21443,15 +22459,15 @@ components:
         DbUser:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The name of a database user. If a user name matching <code>DbUser</code> exists in the database, the temporary user credentials have the same permissions as the existing user. If <code>DbUser</code> doesn''t exist in the database and <code>Autocreate</code> is <code>True</code>, a new user is created using the value for <code>DbUser</code> with PUBLIC permissions. If a database user matching the value for <code>DbUser</code> doesn''t exist and <code>Autocreate</code> is <code>False</code>, then the command succeeds but the connection attempt will fail because the user doesn''t exist in the database.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html">CREATE USER</a> in the Amazon Redshift Database Developer Guide. </p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 64 alphanumeric characters or hyphens. The user name can''t be <code>PUBLIC</code>.</p> </li> <li> <p>Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Must not contain a colon ( : ) or slash ( / ). </p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide.</p> </li> </ul>'
+            - description: '<p>The name of a database user. If a user name matching <code>DbUser</code> exists in the database, the temporary user credentials have the same permissions as the existing user. If <code>DbUser</code> doesn''t exist in the database and <code>Autocreate</code> is <code>True</code>, a new user is created using the value for <code>DbUser</code> with PUBLIC permissions. If a database user matching the value for <code>DbUser</code> doesn''t exist and <code>Autocreate</code> is <code>False</code>, then the command succeeds but the connection attempt will fail because the user doesn''t exist in the database.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html">CREATE USER</a> in the Amazon Redshift Database Developer Guide. </p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 64 alphanumeric characters or hyphens. The user name can''t be <code>PUBLIC</code>.</p> </li> <li> <p>Must contain uppercase or lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Must not contain a colon ( : ) or slash ( / ). </p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide.</p> </li> </ul>'
         DbName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The name of a database that <code>DbUser</code> is authorized to log on to. If <code>DbName</code> is not specified, <code>DbUser</code> can log on to any existing database.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 64 alphanumeric characters or hyphens</p> </li> <li> <p>Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Must not contain a colon ( : ) or slash ( / ). </p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide.</p> </li> </ul>'
+            - description: '<p>The name of a database that <code>DbUser</code> is authorized to log on to. If <code>DbName</code> is not specified, <code>DbUser</code> can log on to any existing database.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 64 alphanumeric characters or hyphens</p> </li> <li> <p>Must contain uppercase or lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Must not contain a colon ( : ) or slash ( / ). </p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide.</p> </li> </ul>'
         ClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The unique identifier of the cluster that contains the database for which your are requesting credentials. This parameter is case sensitive.
+            - description: The unique identifier of the cluster that contains the database for which you are requesting credentials. This parameter is case sensitive.
         DurationSeconds:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -21465,6 +22481,62 @@ components:
             - $ref: '#/components/schemas/DbGroupList'
             - description: '<p>A list of the names of existing database groups that the user named in <code>DbUser</code> will join for the current session, in addition to any group memberships for an existing user. If not specified, a new user is added only to PUBLIC.</p> <p>Database group name constraints</p> <ul> <li> <p>Must be 1 to 64 alphanumeric characters or hyphens</p> </li> <li> <p>Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Must not contain a colon ( : ) or slash ( / ). </p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide.</p> </li> </ul>'
       description: The request parameters to get cluster credentials.
+    GetClusterCredentialsWithIAMMessage:
+      type: object
+      required:
+        - ClusterIdentifier
+      title: GetClusterCredentialsWithIAMMessage
+      properties:
+        DbName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name of the database for which you are requesting credentials. If the database name is specified, the IAM policy must allow access to the resource <code>dbname</code> for the specified database name. If the database name is not specified, access to all databases is allowed.'
+        ClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The unique identifier of the cluster that contains the database for which you are requesting credentials. '
+        DurationSeconds:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: '<p>The number of seconds until the returned temporary password expires.</p> <p>Range: 900-3600. Default: 900.</p>'
+    ReservedNodeExchangeActionType:
+      type: string
+      enum:
+        - restore-cluster
+        - resize-cluster
+    GetReservedNodeExchangeConfigurationOptionsInputMessage:
+      type: object
+      required:
+        - ActionType
+      title: GetReservedNodeExchangeConfigurationOptionsInputMessage
+      properties:
+        ActionType:
+          allOf:
+            - $ref: '#/components/schemas/ReservedNodeExchangeActionType'
+            - description: The action type of the reserved-node configuration. The action type can be an exchange initiated from either a snapshot or a resize.
+        ClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for the cluster that is the source for a reserved-node exchange.
+        SnapshotIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for the snapshot that is the source for the reserved-node exchange.
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>Marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.'
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional pagination token provided by a previous <code>GetReservedNodeExchangeConfigurationOptions</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the <code>MaxRecords</code> parameter. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request.'
+    ReservedNodeConfigurationOptionList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/ReservedNodeConfigurationOption'
+          - xml:
+              name: ReservedNodeConfigurationOption
     GetReservedNodeExchangeOfferingsInputMessage:
       type: object
       required:
@@ -21567,7 +22639,7 @@ components:
         AquaConfigurationStatus:
           allOf:
             - $ref: '#/components/schemas/AquaConfigurationStatus'
-            - description: <p>The new value of AQUA configuration status. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
+            - description: This parameter is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
     ModifyAuthenticationProfileMessage:
       type: object
       required:
@@ -21611,11 +22683,15 @@ components:
         AddIamRoles:
           allOf:
             - $ref: '#/components/schemas/IamRoleArnList'
-            - description: Zero or more IAM roles to associate with the cluster. The roles must be in their Amazon Resource Name (ARN) format. You can associate up to 10 IAM roles with a single cluster in a single request.
+            - description: 'Zero or more IAM roles to associate with the cluster. The roles must be in their Amazon Resource Name (ARN) format. '
         RemoveIamRoles:
           allOf:
             - $ref: '#/components/schemas/IamRoleArnList'
-            - description: Zero or more IAM roles in ARN format to disassociate from the cluster. You can disassociate up to 10 IAM roles from a single cluster in a single request.
+            - description: 'Zero or more IAM roles in ARN format to disassociate from the cluster. '
+        DefaultIamRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was last modified.
       description: <p/>
     ModifyClusterMaintenanceMessage:
       type: object
@@ -21680,7 +22756,7 @@ components:
         MasterUserPassword:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The new password for the cluster admin user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the <code>MasterUserPassword</code> element exists in the <code>PendingModifiedValues</code> element of the operation response. </p> <note> <p>Operations never return the password, so this operation provides a way to regain access to the admin user account for a cluster if the password is lost.</p> </note> <p>Default: Uses existing setting.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33 to 126) except '' (single quote), " (double quote), \, /, @, or space.</p> </li> </ul>'
+            - description: '<p>The new password for the cluster admin user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the <code>MasterUserPassword</code> element exists in the <code>PendingModifiedValues</code> element of the operation response. </p> <note> <p>Operations never return the password, so this operation provides a way to regain access to the admin user account for a cluster if the password is lost.</p> </note> <p>Default: Uses existing setting.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33-126) except <code>''</code> (single quote), <code>"</code> (double quote), <code>\</code>, <code>/</code>, or <code>@</code>.</p> </li> </ul>'
         ClusterParameterGroupName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -22200,13 +23276,6 @@ components:
       enum:
         - Regular
         - Upgradable
-    ReservedNodeList:
-      type: array
-      items:
-        allOf:
-          - $ref: '#/components/schemas/ReservedNode'
-          - xml:
-              name: ReservedNode
     ReservedNodeOffering:
       type: object
       properties:
@@ -22247,6 +23316,34 @@ components:
             - $ref: '#/components/schemas/ReservedNodeOfferingType'
             - description: <p/>
       description: Describes a reserved node offering.
+    ReservedNodeConfigurationOption:
+      type: object
+      properties:
+        SourceReservedNode:
+          $ref: '#/components/schemas/ReservedNode'
+        TargetReservedNodeCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The target reserved-node count.
+        TargetReservedNodeOffering:
+          $ref: '#/components/schemas/ReservedNodeOffering'
+      description: 'Details for a reserved-node exchange. Examples include the node type for a reserved node, the price for a node, the node''s state, and other details.'
+    ReservedNodeExchangeStatusType:
+      type: string
+      enum:
+        - REQUESTED
+        - PENDING
+        - IN_PROGRESS
+        - RETRYING
+        - SUCCEEDED
+        - FAILED
+    ReservedNodeList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/ReservedNode'
+          - xml:
+              name: ReservedNode
     ResetClusterParameterGroupMessage:
       type: object
       required:
@@ -22277,7 +23374,6 @@ components:
       type: object
       required:
         - ClusterIdentifier
-        - SnapshotIdentifier
       title: RestoreFromClusterSnapshotMessage
       properties:
         ClusterIdentifier:
@@ -22287,7 +23383,11 @@ components:
         SnapshotIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The name of the snapshot from which to create the new cluster. This parameter isn''t case sensitive.</p> <p>Example: <code>my-snapshot-id</code> </p>'
+            - description: '<p>The name of the snapshot from which to create the new cluster. This parameter isn''t case sensitive. You must specify this parameter or <code>snapshotArn</code>, but not both.</p> <p>Example: <code>my-snapshot-id</code> </p>'
+        SnapshotArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Amazon Resource Name (ARN) of the snapshot associated with the message to restore from a cluster. You must specify this parameter or <code>snapshotIdentifier</code>, but not both.'
         SnapshotClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -22327,7 +23427,7 @@ components:
         ElasticIp:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The elastic IP (EIP) address for the cluster.
+            - description: The Elastic IP (EIP) address for the cluster. Don't specify the Elastic IP address for a publicly accessible cluster with availability zone relocation turned on.
         ClusterParameterGroupName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -22355,7 +23455,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster that you restore from a shared snapshot.
+            - description: 'The Key Management Service (KMS) key ID of the encryption key that encrypts data in the cluster restored from a shared snapshot. You can also provide the key ID when you restore from an unencrypted snapshot to an encrypted cluster in the same account. Additionally, you can specify a new KMS key ID when you restore from an encrypted snapshot in the same account in order to change it. In that case, the restored cluster is encrypted with the new KMS key ID.'
         NodeType:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -22371,7 +23471,7 @@ components:
         IamRoles:
           allOf:
             - $ref: '#/components/schemas/IamRoleArnList'
-            - description: <p>A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request.</p> <p>A cluster can have up to 10 IAM roles associated at any time.</p>
+            - description: '<p>A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. </p> <p>The maximum number of IAM roles that you can associate is subject to a quota. For more information, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html">Quotas and limits</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
         MaintenanceTrackName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -22391,7 +23491,23 @@ components:
         AquaConfigurationStatus:
           allOf:
             - $ref: '#/components/schemas/AquaConfigurationStatus'
-            - description: <p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
+            - description: This parameter is retired. It does not set the AQUA configuration status. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
+        DefaultIamRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was last modified while it was restored from a snapshot.
+        ReservedNodeId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the target reserved node offering.
+        TargetReservedNodeOfferingId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the target reserved node offering.
+        Encrypted:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: Enables support for restoring an unencrypted snapshot to a cluster encrypted with Key Management Service (KMS) and a customer managed key.
       description: <p/>
     RestoreTableFromClusterSnapshotMessage:
       type: object
@@ -22562,7 +23678,6 @@ components:
     RevokeSnapshotAccessMessage:
       type: object
       required:
-        - SnapshotIdentifier
         - AccountWithRestoreAccess
       title: RevokeSnapshotAccessMessage
       properties:
@@ -22570,6 +23685,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The identifier of the snapshot that the account can no longer access.
+        SnapshotArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the snapshot associated with the message to revoke access.
         SnapshotClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'

@@ -1,0 +1,2913 @@
+openapi: 3.0.0
+info:
+  version: '2021-12-03'
+  x-release: v4
+  title: AWS Private 5G
+  description: 'Amazon Web Services Private 5G is a managed service that makes it easy to deploy, operate, and scale your own private mobile network at your on-premises location. Private 5G provides the pre-configured hardware and software for mobile networks, helps automate setup, and scales capacity on demand to support additional devices as needed.'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: privatenetworks
+  x-aws-signingName: private-networks
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/privatenetworks-2021-12-03.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/private-networks/'
+servers:
+  - url: 'http://private-networks.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Private 5G multi-region endpoint
+  - url: 'https://private-networks.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Private 5G multi-region endpoint
+  - url: 'http://private-networks.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Private 5G endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://private-networks.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Private 5G endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /v1/orders/acknowledge:
+    post:
+      operationId: AcknowledgeOrderReceipt
+      description: Acknowledges that the specified network order was received.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcknowledgeOrderReceiptResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - orderArn
+              properties:
+                orderArn:
+                  description: The Amazon Resource Name (ARN) of the order.
+                  type: string
+                  pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/device-identifiers/activate:
+    post:
+      operationId: ActivateDeviceIdentifier
+      description: Activates the specified device identifier.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivateDeviceIdentifierResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - deviceIdentifierArn
+              properties:
+                clientToken:
+                  description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">How to ensure idempotency</a>.'
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                deviceIdentifierArn:
+                  description: The Amazon Resource Name (ARN) of the device identifier.
+                  type: string
+                  pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/network-sites/activate:
+    post:
+      operationId: ActivateNetworkSite
+      description: Activates the specified network site.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivateNetworkSiteResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - networkSiteArn
+                - shippingAddress
+              properties:
+                clientToken:
+                  description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">How to ensure idempotency</a>.'
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                networkSiteArn:
+                  description: The Amazon Resource Name (ARN) of the network site.
+                  type: string
+                  pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+                shippingAddress:
+                  description: Information about an address.
+                  type: object
+                  properties:
+                    city:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The city for this address.
+                    company:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The company name for this address.
+                    country:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The country for this address.
+                    name:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The recipient's name for this address.
+                    phoneNumber:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The phone number for this address.
+                    postalCode:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The postal code for this address.
+                    stateOrProvince:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The state or province for this address.
+                    street1:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The first line of the street address.
+                    street2:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The second line of the street address.
+                    street3:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The third line of the street address.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/network-resources/configure:
+    post:
+      operationId: ConfigureAccessPoint
+      description: '<p>Configures the specified network resource. </p> <p> Use this action to specify the geographic position of the hardware. You must provide Certified Professional Installer (CPI) credentials in the request so that we can obtain spectrum grants. For more information, see <a href="https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html">Radio units</a> in the <i>Amazon Web Services Private 5G User Guide</i>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigureAccessPointResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - accessPointArn
+              properties:
+                accessPointArn:
+                  description: The Amazon Resource Name (ARN) of the network resource.
+                  type: string
+                  pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+                cpiSecretKey:
+                  description: 'A Base64 encoded string of the CPI certificate associated with the CPI user who is certifying the coordinates of the network resource. '
+                  type: string
+                  minLength: 1
+                  maxLength: 100000
+                  format: password
+                cpiUserId:
+                  description: 'The CPI user ID of the CPI user who is certifying the coordinates of the network resource. '
+                  type: string
+                  minLength: 1
+                  maxLength: 4096
+                  format: password
+                cpiUserPassword:
+                  description: The CPI password associated with the CPI certificate in <code>cpiSecretKey</code>.
+                  type: string
+                  minLength: 1
+                  maxLength: 4096
+                  format: password
+                cpiUsername:
+                  description: The CPI user name of the CPI user who is certifying the coordinates of the radio unit.
+                  type: string
+                  minLength: 1
+                  maxLength: 4096
+                  format: password
+                position:
+                  description: Information about a position.
+                  type: object
+                  properties:
+                    elevation:
+                      allOf:
+                        - $ref: '#/components/schemas/Double'
+                        - description: The elevation of the equipment at this position.
+                    elevationReference:
+                      allOf:
+                        - $ref: '#/components/schemas/ElevationReference'
+                        - description: The reference point from which elevation is reported.
+                    elevationUnit:
+                      allOf:
+                        - $ref: '#/components/schemas/ElevationUnit'
+                        - description: The units used to measure the elevation of the position.
+                    latitude:
+                      allOf:
+                        - $ref: '#/components/schemas/Double'
+                        - description: The latitude of the position.
+                    longitude:
+                      allOf:
+                        - $ref: '#/components/schemas/Double'
+                        - description: The longitude of the position.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/networks:
+    post:
+      operationId: CreateNetwork
+      description: Creates a network.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateNetworkResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - networkName
+              properties:
+                clientToken:
+                  description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">How to ensure idempotency</a>.'
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                description:
+                  description: The description of the network.
+                  type: string
+                  minLength: 0
+                  maxLength: 100
+                networkName:
+                  description: The name of the network. You can't change the name after you create the network.
+                  type: string
+                  pattern: '^[0-9a-zA-Z-]*$'
+                  minLength: 1
+                  maxLength: 64
+                tags:
+                  description: ' The tags to apply to the network. '
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/network-sites:
+    post:
+      operationId: CreateNetworkSite
+      description: Creates a network site.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateNetworkSiteResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - networkArn
+                - networkSiteName
+              properties:
+                availabilityZone:
+                  description: The Availability Zone that is the parent of this site. You can't change the Availability Zone after you create the site.
+                  type: string
+                availabilityZoneId:
+                  description: The ID of the Availability Zone that is the parent of this site. You can't change the Availability Zone after you create the site.
+                  type: string
+                clientToken:
+                  description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">How to ensure idempotency</a>.'
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                description:
+                  description: The description of the site.
+                  type: string
+                  minLength: 0
+                  maxLength: 100
+                networkArn:
+                  description: The Amazon Resource Name (ARN) of the network.
+                  type: string
+                  pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+                networkSiteName:
+                  description: The name of the site. You can't change the name after you create the site.
+                  type: string
+                  pattern: '^[0-9a-zA-Z-]*$'
+                  minLength: 1
+                  maxLength: 64
+                pendingPlan:
+                  description: Information about a site plan.
+                  type: object
+                  properties:
+                    options:
+                      allOf:
+                        - $ref: '#/components/schemas/Options'
+                        - description: The options of the plan.
+                    resourceDefinitions:
+                      allOf:
+                        - $ref: '#/components/schemas/NetworkResourceDefinitions'
+                        - description: The resource definitions of the plan.
+                tags:
+                  description: ' The tags to apply to the network site. '
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/device-identifiers/deactivate:
+    post:
+      operationId: DeactivateDeviceIdentifier
+      description: Deactivates the specified device identifier.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeactivateDeviceIdentifierResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - deviceIdentifierArn
+              properties:
+                clientToken:
+                  description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">How to ensure idempotency</a>.'
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                deviceIdentifierArn:
+                  description: The Amazon Resource Name (ARN) of the device identifier.
+                  type: string
+                  pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/networks/{networkArn}':
+    delete:
+      operationId: DeleteNetwork
+      description: 'Deletes the specified network. You must delete network sites before you delete the network. For more information, see <a href="https://docs.aws.amazon.com/private-networks/latest/APIReference/API_DeleteNetworkSite.html">DeleteNetworkSite</a> in the <i>API Reference for Amazon Web Services Private 5G</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteNetworkResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: clientToken
+          in: query
+          required: false
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">How to ensure idempotency</a>.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: networkArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the network.
+          schema:
+            type: string
+            pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetNetwork
+      description: Gets the specified network.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetNetworkResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: networkArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the network.
+          schema:
+            type: string
+            pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+  '/v1/network-sites/{networkSiteArn}':
+    delete:
+      operationId: DeleteNetworkSite
+      description: 'Deletes the specified network site. Return the hardware after you delete the network site. You are responsible for minimum charges. For more information, see <a href="https://docs.aws.amazon.com/private-networks/latest/userguide/hardware-maintenance.html">Hardware returns</a> in the <i>Amazon Web Services Private 5G User Guide</i>. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteNetworkSiteResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: clientToken
+          in: query
+          required: false
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">How to ensure idempotency</a>.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: networkSiteArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the network site.
+          schema:
+            type: string
+            pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetNetworkSite
+      description: Gets the specified network site.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetNetworkSiteResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: networkSiteArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the network site.
+          schema:
+            type: string
+            pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+  '/v1/device-identifiers/{deviceIdentifierArn}':
+    get:
+      operationId: GetDeviceIdentifier
+      description: Gets the specified device identifier.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDeviceIdentifierResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: deviceIdentifierArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the device identifier.
+          schema:
+            type: string
+            pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/network-resources/{networkResourceArn}':
+    get:
+      operationId: GetNetworkResource
+      description: Gets the specified network resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetNetworkResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: networkResourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the network resource.
+          schema:
+            type: string
+            pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/orders/{orderArn}':
+    get:
+      operationId: GetOrder
+      description: Gets the specified order.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOrderResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: orderArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the order.
+          schema:
+            type: string
+            pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/device-identifiers/list:
+    post:
+      operationId: ListDeviceIdentifiers
+      description: '<p>Lists device identifiers. Add filters to your request to return a more specific list of results. Use filters to match the Amazon Resource Name (ARN) of an order, the status of device identifiers, or the ARN of the traffic group.</p> <pre><code> &lt;p&gt;If you specify multiple filters, filters are joined with an OR, and the request </code></pre> <p>returns results that match all of the specified filters.</p></p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDeviceIdentifiersResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: startToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - networkArn
+              properties:
+                filters:
+                  description: '<p>The filters.</p> <ul> <li> <p> <code>ORDER</code> - The Amazon Resource Name (ARN) of the order.</p> </li> <li> <p> <code>STATUS</code> - The status (<code>ACTIVE</code> | <code>INACTIVE</code>).</p> </li> <li> <p> <code>TRAFFIC_GROUP</code> - The Amazon Resource Name (ARN) of the traffic group.</p> </li> </ul> <p>Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an <code>OR</code>, and the request returns all results that match any of the specified values.</p>'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/DeviceIdentifierFilterValues'
+                maxResults:
+                  description: The maximum number of results to return.
+                  type: integer
+                  minimum: 1
+                  maximum: 20
+                networkArn:
+                  description: The Amazon Resource Name (ARN) of the network.
+                  type: string
+                  pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+                startToken:
+                  description: The token for the next page of results.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/network-resources:
+    post:
+      operationId: ListNetworkResources
+      description: '<p>Lists network resources. Add filters to your request to return a more specific list of results. Use filters to match the Amazon Resource Name (ARN) of an order or the status of network resources.</p> <p>If you specify multiple filters, filters are joined with an OR, and the request returns results that match all of the specified filters.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListNetworkResourcesResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: startToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - networkArn
+              properties:
+                filters:
+                  description: '<p>The filters.</p> <ul> <li> <p> <code>ORDER</code> - The Amazon Resource Name (ARN) of the order.</p> </li> <li> <p> <code>STATUS</code> - The status (<code>AVAILABLE</code> | <code>DELETED</code> | <code>DELETING</code> | <code>PENDING</code> | <code>PENDING_RETURN</code> | <code>PROVISIONING</code> | <code>SHIPPED</code>).</p> </li> </ul> <p>Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an <code>OR</code>, and the request returns all results that match any of the specified values.</p>'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/NetworkResourceFilterValues'
+                maxResults:
+                  description: The maximum number of results to return.
+                  type: integer
+                  minimum: 1
+                  maximum: 20
+                networkArn:
+                  description: The Amazon Resource Name (ARN) of the network.
+                  type: string
+                  pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+                startToken:
+                  description: The token for the next page of results.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/network-sites/list:
+    post:
+      operationId: ListNetworkSites
+      description: Lists network sites. Add filters to your request to return a more specific list of results. Use filters to match the status of the network site.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListNetworkSitesResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: startToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - networkArn
+              properties:
+                filters:
+                  description: '<p>The filters. Add filters to your request to return a more specific list of results. Use filters to match the status of the network sites.</p> <ul> <li> <p> <code>STATUS</code> - The status (<code>AVAILABLE</code> | <code>CREATED</code> | <code>DELETED</code> | <code>DEPROVISIONING</code> | <code>PROVISIONING</code>).</p> </li> </ul> <p>Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an <code>OR</code>, and the request returns all results that match any of the specified values.</p>'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/NetworkSiteFilterValues'
+                maxResults:
+                  description: The maximum number of results to return.
+                  type: integer
+                  minimum: 1
+                  maximum: 20
+                networkArn:
+                  description: The Amazon Resource Name (ARN) of the network.
+                  type: string
+                  pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+                startToken:
+                  description: The token for the next page of results.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/networks/list:
+    post:
+      operationId: ListNetworks
+      description: Lists networks. Add filters to your request to return a more specific list of results. Use filters to match the status of the network.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListNetworksResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: startToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filters:
+                  description: '<p>The filters.</p> <ul> <li> <p> <code>STATUS</code> - The status (<code>AVAILABLE</code> | <code>CREATED</code> | <code>DELETED</code> | <code>DEPROVISIONING</code> | <code>PROVISIONING</code>).</p> </li> </ul> <p>Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an <code>OR</code>, and the request returns all results that match any of the specified values.</p>'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/NetworkFilterValues'
+                maxResults:
+                  description: The maximum number of results to return.
+                  type: integer
+                  minimum: 1
+                  maximum: 20
+                startToken:
+                  description: The token for the next page of results.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/orders/list:
+    post:
+      operationId: ListOrders
+      description: '<p>Lists orders. Add filters to your request to return a more specific list of results. Use filters to match the Amazon Resource Name (ARN) of the network site or the status of the order.</p> <p>If you specify multiple filters, filters are joined with an OR, and the request returns results that match all of the specified filters.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOrdersResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: startToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - networkArn
+              properties:
+                filters:
+                  description: '<p>The filters.</p> <ul> <li> <p> <code>NETWORK_SITE</code> - The Amazon Resource Name (ARN) of the network site.</p> </li> <li> <p> <code>STATUS</code> - The status (<code>ACKNOWLEDGING</code> | <code>ACKNOWLEDGED</code> | <code>UNACKNOWLEDGED</code>).</p> </li> </ul> <p>Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an <code>OR</code>, and the request returns all results that match any of the specified values.</p>'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/OrderFilterValues'
+                maxResults:
+                  description: The maximum number of results to return.
+                  type: integer
+                  minimum: 1
+                  maximum: 20
+                networkArn:
+                  description: The Amazon Resource Name (ARN) of the network.
+                  type: string
+                  pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+                startToken:
+                  description: The token for the next page of results.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags for the specified resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          schema:
+            type: string
+            pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: ' Adds tags to the specified resource. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: ' The Amazon Resource Name (ARN) of the resource. '
+          schema:
+            type: string
+            pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: The tags to add to the resource.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  /ping:
+    get:
+      operationId: Ping
+      description: Checks the health of the service.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PingResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes tags from the specified resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          schema:
+            type: string
+            pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+        - name: tagKeys
+          in: query
+          required: true
+          description: The tag keys.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 1
+            maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/network-sites/site:
+    put:
+      operationId: UpdateNetworkSite
+      description: Updates the specified network site.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateNetworkSiteResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - networkSiteArn
+              properties:
+                clientToken:
+                  description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">How to ensure idempotency</a>.'
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                description:
+                  description: The description.
+                  type: string
+                  minLength: 0
+                  maxLength: 100
+                networkSiteArn:
+                  description: The Amazon Resource Name (ARN) of the network site.
+                  type: string
+                  pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/network-sites/plan:
+    put:
+      operationId: UpdateNetworkSitePlan
+      description: Updates the specified network site plan.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateNetworkSiteResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - networkSiteArn
+                - pendingPlan
+              properties:
+                clientToken:
+                  description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">How to ensure idempotency</a>.'
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                networkSiteArn:
+                  description: The Amazon Resource Name (ARN) of the network site.
+                  type: string
+                  pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+                pendingPlan:
+                  description: Information about a site plan.
+                  type: object
+                  properties:
+                    options:
+                      allOf:
+                        - $ref: '#/components/schemas/Options'
+                        - description: The options of the plan.
+                    resourceDefinitions:
+                      allOf:
+                        - $ref: '#/components/schemas/NetworkResourceDefinitions'
+                        - description: The resource definitions of the plan.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    AcknowledgeOrderReceiptResponse:
+      type: object
+      required:
+        - order
+      properties:
+        order:
+          allOf:
+            - $ref: '#/components/schemas/Order'
+            - description: Information about the order.
+    ResourceNotFoundException: {}
+    ValidationException: {}
+    InternalServerException: {}
+    ActivateDeviceIdentifierResponse:
+      type: object
+      required:
+        - deviceIdentifier
+      properties:
+        deviceIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/DeviceIdentifier'
+            - description: Information about the device identifier.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The tags on the device identifier. '
+    ActivateNetworkSiteResponse:
+      type: object
+      properties:
+        networkSite:
+          allOf:
+            - $ref: '#/components/schemas/NetworkSite'
+            - description: Information about the network site.
+    AddressContent:
+      type: string
+      minLength: 1
+      maxLength: 1024
+      format: password
+    ConfigureAccessPointResponse:
+      type: object
+      required:
+        - accessPoint
+      properties:
+        accessPoint:
+          allOf:
+            - $ref: '#/components/schemas/NetworkResource'
+            - description: Information about the network resource.
+    Double:
+      type: number
+      format: double
+    ElevationReference:
+      type: string
+      enum:
+        - AGL
+        - AMSL
+    ElevationUnit:
+      type: string
+      enum:
+        - FEET
+    CreateNetworkResponse:
+      type: object
+      required:
+        - network
+      properties:
+        network:
+          allOf:
+            - $ref: '#/components/schemas/Network'
+            - description: Information about the network.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The network tags. '
+    TagValue:
+      type: string
+      pattern: '^[^\x00-\x1f\x22]*$'
+      minLength: 0
+      maxLength: 256
+    LimitExceededException: {}
+    CreateNetworkSiteResponse:
+      type: object
+      properties:
+        networkSite:
+          allOf:
+            - $ref: '#/components/schemas/NetworkSite'
+            - description: Information about the network site.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The network site tags. '
+    Options:
+      type: array
+      items:
+        $ref: '#/components/schemas/NameValuePair'
+    NetworkResourceDefinitions:
+      type: array
+      items:
+        $ref: '#/components/schemas/NetworkResourceDefinition'
+    DeactivateDeviceIdentifierResponse:
+      type: object
+      required:
+        - deviceIdentifier
+      properties:
+        deviceIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/DeviceIdentifier'
+            - description: Information about the device identifier.
+    DeleteNetworkResponse:
+      type: object
+      required:
+        - network
+      properties:
+        network:
+          allOf:
+            - $ref: '#/components/schemas/Network'
+            - description: Information about the network.
+    DeleteNetworkSiteResponse:
+      type: object
+      properties:
+        networkSite:
+          allOf:
+            - $ref: '#/components/schemas/NetworkSite'
+            - description: Information about the network site.
+    GetDeviceIdentifierResponse:
+      type: object
+      properties:
+        deviceIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/DeviceIdentifier'
+            - description: Information about the device identifier.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The device identifier tags. '
+    GetNetworkResponse:
+      type: object
+      required:
+        - network
+      properties:
+        network:
+          allOf:
+            - $ref: '#/components/schemas/Network'
+            - description: Information about the network.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The network tags. '
+    GetNetworkResourceResponse:
+      type: object
+      required:
+        - networkResource
+      properties:
+        networkResource:
+          allOf:
+            - $ref: '#/components/schemas/NetworkResource'
+            - description: Information about the network resource.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The network resource tags. '
+    GetNetworkSiteResponse:
+      type: object
+      properties:
+        networkSite:
+          allOf:
+            - $ref: '#/components/schemas/NetworkSite'
+            - description: Information about the network site.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The network site tags. '
+    GetOrderResponse:
+      type: object
+      required:
+        - order
+      properties:
+        order:
+          allOf:
+            - $ref: '#/components/schemas/Order'
+            - description: Information about the order.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The order tags. '
+    ListDeviceIdentifiersResponse:
+      type: object
+      properties:
+        deviceIdentifiers:
+          allOf:
+            - $ref: '#/components/schemas/DeviceIdentifierList'
+            - description: Information about the device identifiers.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token for the next page of results.
+    DeviceIdentifierFilterValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    ListNetworkResourcesResponse:
+      type: object
+      properties:
+        networkResources:
+          allOf:
+            - $ref: '#/components/schemas/NetworkResourceList'
+            - description: Information about network resources.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token for the next page of results.
+    NetworkResourceFilterValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    ListNetworkSitesResponse:
+      type: object
+      properties:
+        networkSites:
+          allOf:
+            - $ref: '#/components/schemas/NetworkSiteList'
+            - description: Information about the network sites.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token for the next page of results.
+    NetworkSiteFilterValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    ListNetworksResponse:
+      type: object
+      properties:
+        networks:
+          allOf:
+            - $ref: '#/components/schemas/NetworkList'
+            - description: The networks.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token for the next page of results.
+    NetworkFilterValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    ListOrdersResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token for the next page of results.
+        orders:
+          allOf:
+            - $ref: '#/components/schemas/OrderList'
+            - description: Information about the orders.
+    OrderFilterValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The resource tags.
+    AccessDeniedException: {}
+    ThrottlingException: {}
+    PingResponse:
+      type: object
+      properties:
+        status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Information about the health of the service.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      pattern: '^(?!aws:)[^\x00-\x1f\x22]+$'
+      minLength: 1
+      maxLength: 128
+    UpdateNetworkSiteResponse:
+      type: object
+      properties:
+        networkSite:
+          allOf:
+            - $ref: '#/components/schemas/NetworkSite'
+            - description: Information about the network site.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The network site tags. '
+    Arn:
+      type: string
+      pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+    AcknowledgeOrderReceiptRequest:
+      type: object
+      required:
+        - orderArn
+      title: AcknowledgeOrderReceiptRequest
+      properties:
+        orderArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the order.
+    Order:
+      type: object
+      properties:
+        acknowledgmentStatus:
+          allOf:
+            - $ref: '#/components/schemas/AcknowledgmentStatus'
+            - description: The acknowledgement status of the order.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation time of the order.
+        networkArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the network associated with this order.
+        networkSiteArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the network site associated with this order.
+        orderArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the order.
+        shippingAddress:
+          allOf:
+            - $ref: '#/components/schemas/Address'
+            - description: The shipping address of the order.
+        trackingInformation:
+          allOf:
+            - $ref: '#/components/schemas/TrackingInformationList'
+            - description: The tracking information of the order.
+      description: Information about an order.
+    AcknowledgmentStatus:
+      type: string
+      enum:
+        - ACKNOWLEDGING
+        - ACKNOWLEDGED
+        - UNACKNOWLEDGED
+    ClientToken:
+      type: string
+      minLength: 1
+      maxLength: 100
+    ActivateDeviceIdentifierRequest:
+      type: object
+      required:
+        - deviceIdentifierArn
+      title: ActivateDeviceIdentifierRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">How to ensure idempotency</a>.'
+        deviceIdentifierArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the device identifier.
+    DeviceIdentifier:
+      type: object
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation time of this device identifier.
+        deviceIdentifierArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the device identifier.
+        iccid:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Integrated Circuit Card Identifier of the device identifier.
+        imsi:
+          allOf:
+            - $ref: '#/components/schemas/DeviceIdentifierImsiString'
+            - description: The International Mobile Subscriber Identity of the device identifier.
+        networkArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the network on which the device identifier appears.
+        orderArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the order used to purchase the device identifier.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/DeviceIdentifierStatus'
+            - description: The status of the device identifier.
+        trafficGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the traffic group to which the device identifier belongs.
+        vendor:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The vendor of the device identifier.
+      description: Information about a subscriber of a device that can use a network.
+    TagMap:
+      type: object
+      minProperties: 1
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    Address:
+      type: object
+      required:
+        - city
+        - country
+        - name
+        - postalCode
+        - stateOrProvince
+        - street1
+      properties:
+        city:
+          allOf:
+            - $ref: '#/components/schemas/AddressContent'
+            - description: The city for this address.
+        company:
+          allOf:
+            - $ref: '#/components/schemas/AddressContent'
+            - description: The company name for this address.
+        country:
+          allOf:
+            - $ref: '#/components/schemas/AddressContent'
+            - description: The country for this address.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AddressContent'
+            - description: The recipient's name for this address.
+        phoneNumber:
+          allOf:
+            - $ref: '#/components/schemas/AddressContent'
+            - description: The phone number for this address.
+        postalCode:
+          allOf:
+            - $ref: '#/components/schemas/AddressContent'
+            - description: The postal code for this address.
+        stateOrProvince:
+          allOf:
+            - $ref: '#/components/schemas/AddressContent'
+            - description: The state or province for this address.
+        street1:
+          allOf:
+            - $ref: '#/components/schemas/AddressContent'
+            - description: The first line of the street address.
+        street2:
+          allOf:
+            - $ref: '#/components/schemas/AddressContent'
+            - description: The second line of the street address.
+        street3:
+          allOf:
+            - $ref: '#/components/schemas/AddressContent'
+            - description: The third line of the street address.
+      description: Information about an address.
+    ActivateNetworkSiteRequest:
+      type: object
+      required:
+        - networkSiteArn
+        - shippingAddress
+      title: ActivateNetworkSiteRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">How to ensure idempotency</a>.'
+        networkSiteArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the network site.
+        shippingAddress:
+          allOf:
+            - $ref: '#/components/schemas/Address'
+            - description: The shipping address of the network site.
+    NetworkSite:
+      type: object
+      required:
+        - networkArn
+        - networkSiteArn
+        - networkSiteName
+        - status
+      properties:
+        availabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The parent Availability Zone for the network site. '
+        availabilityZoneId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The parent Availability Zone ID for the network site. '
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation time of the network site.
+        currentPlan:
+          allOf:
+            - $ref: '#/components/schemas/SitePlan'
+            - description: The current plan of the network site.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the network site.
+        networkArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the network to which the network site belongs.
+        networkSiteArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the network site.
+        networkSiteName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the network site.
+        pendingPlan:
+          allOf:
+            - $ref: '#/components/schemas/SitePlan'
+            - description: The pending plan of the network site.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/NetworkSiteStatus'
+            - description: The status of the network site.
+        statusReason:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status reason of the network site.
+      description: Information about a network site.
+    ConfigureAccessPointRequestCpiSecretKeyString:
+      type: string
+      minLength: 1
+      maxLength: 100000
+      format: password
+    ConfigureAccessPointRequestCpiUserIdString:
+      type: string
+      minLength: 1
+      maxLength: 4096
+      format: password
+    ConfigureAccessPointRequestCpiUserPasswordString:
+      type: string
+      minLength: 1
+      maxLength: 4096
+      format: password
+    ConfigureAccessPointRequestCpiUsernameString:
+      type: string
+      minLength: 1
+      maxLength: 4096
+      format: password
+    Position:
+      type: object
+      properties:
+        elevation:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The elevation of the equipment at this position.
+        elevationReference:
+          allOf:
+            - $ref: '#/components/schemas/ElevationReference'
+            - description: The reference point from which elevation is reported.
+        elevationUnit:
+          allOf:
+            - $ref: '#/components/schemas/ElevationUnit'
+            - description: The units used to measure the elevation of the position.
+        latitude:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The latitude of the position.
+        longitude:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The longitude of the position.
+      description: Information about a position.
+    ConfigureAccessPointRequest:
+      type: object
+      required:
+        - accessPointArn
+      title: ConfigureAccessPointRequest
+      properties:
+        accessPointArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the network resource.
+        cpiSecretKey:
+          allOf:
+            - $ref: '#/components/schemas/ConfigureAccessPointRequestCpiSecretKeyString'
+            - description: 'A Base64 encoded string of the CPI certificate associated with the CPI user who is certifying the coordinates of the network resource. '
+        cpiUserId:
+          allOf:
+            - $ref: '#/components/schemas/ConfigureAccessPointRequestCpiUserIdString'
+            - description: 'The CPI user ID of the CPI user who is certifying the coordinates of the network resource. '
+        cpiUserPassword:
+          allOf:
+            - $ref: '#/components/schemas/ConfigureAccessPointRequestCpiUserPasswordString'
+            - description: The CPI password associated with the CPI certificate in <code>cpiSecretKey</code>.
+        cpiUsername:
+          allOf:
+            - $ref: '#/components/schemas/ConfigureAccessPointRequestCpiUsernameString'
+            - description: The CPI user name of the CPI user who is certifying the coordinates of the radio unit.
+        position:
+          allOf:
+            - $ref: '#/components/schemas/Position'
+            - description: The position of the network resource.
+    NetworkResource:
+      type: object
+      properties:
+        attributes:
+          allOf:
+            - $ref: '#/components/schemas/NameValuePairs'
+            - description: The attributes of the network resource.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation time of the network resource.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the network resource.
+        health:
+          allOf:
+            - $ref: '#/components/schemas/HealthStatus'
+            - description: The health of the network resource.
+        model:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The model of the network resource.
+        networkArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the network on which this network resource appears.
+        networkResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the network resource.
+        networkSiteArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the network site on which this network resource appears.
+        orderArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the order used to purchase this network resource.
+        position:
+          allOf:
+            - $ref: '#/components/schemas/Position'
+            - description: The position of the network resource.
+        serialNumber:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The serial number of the network resource.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/NetworkResourceStatus'
+            - description: The status of the network resource.
+        statusReason:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status reason of the network resource.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/NetworkResourceType'
+            - description: The type of the network resource.
+        vendor:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The vendor of the network resource.
+      description: Information about a network resource.
+    Description:
+      type: string
+      minLength: 0
+      maxLength: 100
+    Name:
+      type: string
+      pattern: '^[0-9a-zA-Z-]*$'
+      minLength: 1
+      maxLength: 64
+    CreateNetworkRequest:
+      type: object
+      required:
+        - networkName
+      title: CreateNetworkRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">How to ensure idempotency</a>.'
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the network.
+        networkName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the network. You can't change the name after you create the network.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The tags to apply to the network. '
+    Network:
+      type: object
+      required:
+        - networkArn
+        - networkName
+        - status
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation time of the network.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the network.
+        networkArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the network.
+        networkName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the network.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/NetworkStatus'
+            - description: The status of the network.
+        statusReason:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status reason of the network.
+      description: Information about a network.
+    String:
+      type: string
+    SitePlan:
+      type: object
+      properties:
+        options:
+          allOf:
+            - $ref: '#/components/schemas/Options'
+            - description: The options of the plan.
+        resourceDefinitions:
+          allOf:
+            - $ref: '#/components/schemas/NetworkResourceDefinitions'
+            - description: The resource definitions of the plan.
+      description: Information about a site plan.
+    CreateNetworkSiteRequest:
+      type: object
+      required:
+        - networkArn
+        - networkSiteName
+      title: CreateNetworkSiteRequest
+      properties:
+        availabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Availability Zone that is the parent of this site. You can't change the Availability Zone after you create the site.
+        availabilityZoneId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the Availability Zone that is the parent of this site. You can't change the Availability Zone after you create the site.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">How to ensure idempotency</a>.'
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the site.
+        networkArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the network.
+        networkSiteName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the site. You can't change the name after you create the site.
+        pendingPlan:
+          allOf:
+            - $ref: '#/components/schemas/SitePlan'
+            - description: Information about the pending plan for this site.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The tags to apply to the network site. '
+    DeactivateDeviceIdentifierRequest:
+      type: object
+      required:
+        - deviceIdentifierArn
+      title: DeactivateDeviceIdentifierRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">How to ensure idempotency</a>.'
+        deviceIdentifierArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the device identifier.
+    DeleteNetworkRequest:
+      type: object
+      title: DeleteNetworkRequest
+      properties: {}
+    DeleteNetworkSiteRequest:
+      type: object
+      title: DeleteNetworkSiteRequest
+      properties: {}
+    Timestamp:
+      type: string
+      format: date-time
+    DeviceIdentifierImsiString:
+      type: string
+      pattern: '^[0-9]{15}$'
+      format: password
+    DeviceIdentifierStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - INACTIVE
+    DeviceIdentifierFilterKeys:
+      type: string
+      enum:
+        - STATUS
+        - ORDER
+        - TRAFFIC_GROUP
+    DeviceIdentifierFilters:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/DeviceIdentifierFilterValues'
+    DeviceIdentifierList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeviceIdentifier'
+    GetDeviceIdentifierRequest:
+      type: object
+      title: GetDeviceIdentifierRequest
+      properties: {}
+    GetNetworkRequest:
+      type: object
+      title: GetNetworkRequest
+      properties: {}
+    GetNetworkResourceRequest:
+      type: object
+      title: GetNetworkResourceRequest
+      properties: {}
+    GetNetworkSiteRequest:
+      type: object
+      title: GetNetworkSiteRequest
+      properties: {}
+    GetOrderRequest:
+      type: object
+      title: GetOrderRequest
+      properties: {}
+    HealthStatus:
+      type: string
+      enum:
+        - INITIAL
+        - HEALTHY
+        - UNHEALTHY
+    ListDeviceIdentifiersRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 20
+    PaginationToken:
+      type: string
+    ListDeviceIdentifiersRequest:
+      type: object
+      required:
+        - networkArn
+      title: ListDeviceIdentifiersRequest
+      properties:
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/DeviceIdentifierFilters'
+            - description: '<p>The filters.</p> <ul> <li> <p> <code>ORDER</code> - The Amazon Resource Name (ARN) of the order.</p> </li> <li> <p> <code>STATUS</code> - The status (<code>ACTIVE</code> | <code>INACTIVE</code>).</p> </li> <li> <p> <code>TRAFFIC_GROUP</code> - The Amazon Resource Name (ARN) of the traffic group.</p> </li> </ul> <p>Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an <code>OR</code>, and the request returns all results that match any of the specified values.</p>'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListDeviceIdentifiersRequestMaxResultsInteger'
+            - description: The maximum number of results to return.
+        networkArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the network.
+        startToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token for the next page of results.
+    NetworkResourceFilters:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/NetworkResourceFilterValues'
+    ListNetworkResourcesRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 20
+    ListNetworkResourcesRequest:
+      type: object
+      required:
+        - networkArn
+      title: ListNetworkResourcesRequest
+      properties:
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/NetworkResourceFilters'
+            - description: '<p>The filters.</p> <ul> <li> <p> <code>ORDER</code> - The Amazon Resource Name (ARN) of the order.</p> </li> <li> <p> <code>STATUS</code> - The status (<code>AVAILABLE</code> | <code>DELETED</code> | <code>DELETING</code> | <code>PENDING</code> | <code>PENDING_RETURN</code> | <code>PROVISIONING</code> | <code>SHIPPED</code>).</p> </li> </ul> <p>Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an <code>OR</code>, and the request returns all results that match any of the specified values.</p>'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListNetworkResourcesRequestMaxResultsInteger'
+            - description: The maximum number of results to return.
+        networkArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the network.
+        startToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token for the next page of results.
+    NetworkResourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NetworkResource'
+    NetworkSiteFilters:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/NetworkSiteFilterValues'
+    ListNetworkSitesRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 20
+    ListNetworkSitesRequest:
+      type: object
+      required:
+        - networkArn
+      title: ListNetworkSitesRequest
+      properties:
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/NetworkSiteFilters'
+            - description: '<p>The filters. Add filters to your request to return a more specific list of results. Use filters to match the status of the network sites.</p> <ul> <li> <p> <code>STATUS</code> - The status (<code>AVAILABLE</code> | <code>CREATED</code> | <code>DELETED</code> | <code>DEPROVISIONING</code> | <code>PROVISIONING</code>).</p> </li> </ul> <p>Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an <code>OR</code>, and the request returns all results that match any of the specified values.</p>'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListNetworkSitesRequestMaxResultsInteger'
+            - description: The maximum number of results to return.
+        networkArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the network.
+        startToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token for the next page of results.
+    NetworkSiteList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NetworkSite'
+    NetworkFilters:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/NetworkFilterValues'
+    ListNetworksRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 20
+    ListNetworksRequest:
+      type: object
+      title: ListNetworksRequest
+      properties:
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/NetworkFilters'
+            - description: '<p>The filters.</p> <ul> <li> <p> <code>STATUS</code> - The status (<code>AVAILABLE</code> | <code>CREATED</code> | <code>DELETED</code> | <code>DEPROVISIONING</code> | <code>PROVISIONING</code>).</p> </li> </ul> <p>Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an <code>OR</code>, and the request returns all results that match any of the specified values.</p>'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListNetworksRequestMaxResultsInteger'
+            - description: The maximum number of results to return.
+        startToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token for the next page of results.
+    NetworkList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Network'
+    OrderFilters:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/OrderFilterValues'
+    ListOrdersRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 20
+    ListOrdersRequest:
+      type: object
+      required:
+        - networkArn
+      title: ListOrdersRequest
+      properties:
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/OrderFilters'
+            - description: '<p>The filters.</p> <ul> <li> <p> <code>NETWORK_SITE</code> - The Amazon Resource Name (ARN) of the network site.</p> </li> <li> <p> <code>STATUS</code> - The status (<code>ACKNOWLEDGING</code> | <code>ACKNOWLEDGED</code> | <code>UNACKNOWLEDGED</code>).</p> </li> </ul> <p>Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an <code>OR</code>, and the request returns all results that match any of the specified values.</p>'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListOrdersRequestMaxResultsInteger'
+            - description: The maximum number of results to return.
+        networkArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the network.
+        startToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token for the next page of results.
+    OrderList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Order'
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    NameValuePair:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the pair.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The value of the pair.
+      description: Information about a name/value pair.
+    NameValuePairs:
+      type: array
+      items:
+        $ref: '#/components/schemas/NameValuePair'
+    NetworkStatus:
+      type: string
+      enum:
+        - CREATED
+        - PROVISIONING
+        - AVAILABLE
+        - DEPROVISIONING
+        - DELETED
+    NetworkFilterKeys:
+      type: string
+      enum:
+        - STATUS
+    NetworkResourceStatus:
+      type: string
+      enum:
+        - PENDING
+        - SHIPPED
+        - PROVISIONING
+        - PROVISIONED
+        - AVAILABLE
+        - DELETING
+        - PENDING_RETURN
+        - DELETED
+    NetworkResourceType:
+      type: string
+      enum:
+        - RADIO_UNIT
+    NetworkResourceDefinitionCountInteger:
+      type: integer
+      minimum: 0
+    NetworkResourceDefinitionType:
+      type: string
+      enum:
+        - RADIO_UNIT
+        - DEVICE_IDENTIFIER
+    NetworkResourceDefinition:
+      type: object
+      required:
+        - count
+        - type
+      properties:
+        count:
+          allOf:
+            - $ref: '#/components/schemas/NetworkResourceDefinitionCountInteger'
+            - description: The count in the network resource definition.
+        options:
+          allOf:
+            - $ref: '#/components/schemas/Options'
+            - description: The options in the network resource definition.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/NetworkResourceDefinitionType'
+            - description: The type in the network resource definition.
+      description: Information about a network resource definition.
+    NetworkResourceFilterKeys:
+      type: string
+      enum:
+        - ORDER
+        - STATUS
+    NetworkSiteStatus:
+      type: string
+      enum:
+        - CREATED
+        - PROVISIONING
+        - AVAILABLE
+        - DEPROVISIONING
+        - DELETED
+    NetworkSiteFilterKeys:
+      type: string
+      enum:
+        - STATUS
+    TrackingInformationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TrackingInformation'
+    OrderFilterKeys:
+      type: string
+      enum:
+        - STATUS
+        - NETWORK_SITE
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 1
+      maxItems: 50
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags to add to the resource.
+    TrackingInformation:
+      type: object
+      properties:
+        trackingNumber:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The tracking number of the shipment.
+      description: Information about tracking a shipment.
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+    UpdateNetworkSitePlanRequest:
+      type: object
+      required:
+        - networkSiteArn
+        - pendingPlan
+      title: UpdateNetworkSitePlanRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">How to ensure idempotency</a>.'
+        networkSiteArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the network site.
+        pendingPlan:
+          allOf:
+            - $ref: '#/components/schemas/SitePlan'
+            - description: The pending plan.
+    UpdateNetworkSiteRequest:
+      type: object
+      required:
+        - networkSiteArn
+      title: UpdateNetworkSiteRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">How to ensure idempotency</a>.'
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description.
+        networkSiteArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the network site.
+security:
+  - hmac: []

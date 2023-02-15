@@ -1626,6 +1626,22 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/__boolean'
                         - description: Specifies whether a journey should be refreshed on segment update.
+                    JourneyChannelSettings:
+                      allOf:
+                        - $ref: '#/components/schemas/JourneyChannelSettings'
+                        - description: The channel-specific configurations for the journey.
+                    SendingSchedule:
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - description: Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This flag should be set to true in order to allow (OpenHours and ClosedDays)
+                    OpenHours:
+                      allOf:
+                        - $ref: '#/components/schemas/OpenHours'
+                        - description: The time when journey allow to send messages. QuietTime should be configured first and SendingSchedule should be set to true.
+                    ClosedDays:
+                      allOf:
+                        - $ref: '#/components/schemas/ClosedDays'
+                        - description: The time when journey will stop sending messages. QuietTime should be configured first and SendingSchedule should be set to true.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5992,6 +6008,22 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/__boolean'
                         - description: Specifies whether a journey should be refreshed on segment update.
+                    JourneyChannelSettings:
+                      allOf:
+                        - $ref: '#/components/schemas/JourneyChannelSettings'
+                        - description: The channel-specific configurations for the journey.
+                    SendingSchedule:
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - description: Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This flag should be set to true in order to allow (OpenHours and ClosedDays)
+                    OpenHours:
+                      allOf:
+                        - $ref: '#/components/schemas/OpenHours'
+                        - description: The time when journey allow to send messages. QuietTime should be configured first and SendingSchedule should be set to true.
+                    ClosedDays:
+                      allOf:
+                        - $ref: '#/components/schemas/ClosedDays'
+                        - description: The time when journey will stop sending messages. QuietTime should be configured first and SendingSchedule should be set to true.
   '/v1/recommenders/{recommender-id}':
     delete:
       operationId: DeleteRecommenderConfiguration
@@ -9121,6 +9153,131 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/otp':
+    post:
+      operationId: SendOTPMessage
+      description: Send an OTP message
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendOTPMessageResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: PayloadTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadTooLargeException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - SendOTPMessageRequestParameters
+              properties:
+                SendOTPMessageRequestParameters:
+                  description: Send OTP message request parameters.
+                  type: object
+                  properties:
+                    AllowedAttempts:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - description: The attempts allowed to validate an OTP.
+                    BrandName:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: The brand name that will be substituted into the OTP message body. Should be owned by calling AWS account.
+                    Channel:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: 'Channel type for the OTP message. Supported values: [SMS].'
+                    CodeLength:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - description: The number of characters in the generated OTP.
+                    DestinationIdentity:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: The destination identity to send OTP to.
+                    EntityId:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: A unique Entity ID received from DLT after entity registration is approved.
+                    Language:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: The language to be used for the outgoing message body containing the OTP.
+                    OriginationIdentity:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: The origination identity used to send OTP from.
+                    ReferenceId:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: Developer-specified reference identifier. Required to match during OTP verification.
+                    TemplateId:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: A unique Template ID received from DLT after entity registration is approved.
+                    ValidityPeriod:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - description: The time in minutes before the OTP is no longer valid.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v1/apps/{application-id}/users-messages':
     post:
       operationId: SendUsersMessages
@@ -9519,6 +9676,99 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/verify-otp':
+    post:
+      operationId: VerifyOTPMessage
+      description: Verify an OTP
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyOTPMessageResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: PayloadTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayloadTooLargeException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: application-id
+          in: path
+          required: true
+          description: The unique ID of your Amazon Pinpoint application.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - VerifyOTPMessageRequestParameters
+              properties:
+                VerifyOTPMessageRequestParameters:
+                  description: Verify OTP message request.
+                  type: object
+                  properties:
+                    DestinationIdentity:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: The destination identity to send OTP to.
+                    Otp:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: The OTP the end user provided for verification.
+                    ReferenceId:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: The reference identifier provided when the OTP was previously sent.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -9892,6 +10142,66 @@ components:
         - CANCELLED
         - CLOSED
         - PAUSED
+    JourneyChannelSettings:
+      type: object
+      properties:
+        ConnectCampaignArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: Amazon Resource Name (ARN) of the Connect Campaign.
+        ConnectCampaignExecutionRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: IAM role ARN to be assumed when invoking Connect campaign execution APIs for dialing.
+      description: The channel-specific configurations for the journey.
+    OpenHours:
+      type: object
+      properties:
+        EMAIL:
+          allOf:
+            - $ref: '#/components/schemas/MapOfListOfOpenHoursRules'
+            - description: Rules for Email Channel.
+        SMS:
+          allOf:
+            - $ref: '#/components/schemas/MapOfListOfOpenHoursRules'
+            - description: Rules for SMS Channel.
+        PUSH:
+          allOf:
+            - $ref: '#/components/schemas/MapOfListOfOpenHoursRules'
+            - description: Rules for Push Channel.
+        VOICE:
+          allOf:
+            - $ref: '#/components/schemas/MapOfListOfOpenHoursRules'
+            - description: Rules for Voice Channel.
+        CUSTOM:
+          allOf:
+            - $ref: '#/components/schemas/MapOfListOfOpenHoursRules'
+            - description: Rules for Custom Channel.
+      description: The time when journey allow to send messages. QuietTime should be configured first and SendingSchedule should be set to true.
+    ClosedDays:
+      type: object
+      properties:
+        EMAIL:
+          allOf:
+            - $ref: '#/components/schemas/ListOfClosedDaysRules'
+            - description: Rules for Email Channel.
+        SMS:
+          allOf:
+            - $ref: '#/components/schemas/ListOfClosedDaysRules'
+            - description: Rules for SMS Channel.
+        PUSH:
+          allOf:
+            - $ref: '#/components/schemas/ListOfClosedDaysRules'
+            - description: Rules for Push Channel.
+        VOICE:
+          allOf:
+            - $ref: '#/components/schemas/ListOfClosedDaysRules'
+            - description: Rules for Voice Channel.
+        CUSTOM:
+          allOf:
+            - $ref: '#/components/schemas/ListOfClosedDaysRules'
+            - description: Rules for Custom Channel.
+      description: The time when journey will stop sending messages.
     CreatePushTemplateResponse:
       type: object
       required:
@@ -10665,6 +10975,13 @@ components:
             - $ref: '#/components/schemas/VoiceMessage'
             - description: The default message for the voice channel. This message overrides the default message (DefaultMessage).
       description: Specifies the settings and content for the default message and any default messages that you tailored for specific channels.
+    SendOTPMessageResponse:
+      type: object
+      required:
+        - MessageResponse
+      properties:
+        MessageResponse:
+          $ref: '#/components/schemas/MessageResponse'
     SendUsersMessagesResponse:
       type: object
       required:
@@ -10945,6 +11262,13 @@ components:
       properties:
         MessageBody:
           $ref: '#/components/schemas/MessageBody'
+    VerifyOTPMessageResponse:
+      type: object
+      required:
+        - VerificationResponse
+      properties:
+        VerificationResponse:
+          $ref: '#/components/schemas/VerificationResponse'
     ADMChannelRequest:
       type: object
       required:
@@ -11696,6 +12020,13 @@ components:
             - $ref: '#/components/schemas/WaitTime'
             - description: The amount of time to wait or the date and time when the activity moves participants to the next activity in the journey.
       description: Specifies the settings for a wait activity in a journey. This type of activity waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.
+    ContactCenterActivity:
+      type: object
+      properties:
+        NextActivity:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The unique identifier for the next activity to perform after the this activity.
     Activity:
       type: object
       properties:
@@ -11739,6 +12070,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/WaitActivity'
             - description: The settings for a wait activity. This type of activity waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.
+        ContactCenter:
+          allOf:
+            - $ref: '#/components/schemas/ContactCenterActivity'
+            - description: The settings for a connect activity. This type of activity initiates a contact center call to participants.
       description: Specifies the configuration and other settings for an activity in a journey.
     ActivityResponse:
       type: object
@@ -11904,6 +12239,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MapOf__string'
             - description: A string-to-string map of key-value pairs that identifies the tags that are associated with the application. Each tag consists of a required tag key and an associated tag value.
+        CreationDate:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The date and time when the Application was created.
       description: Provides information about an application.
     ApplicationSettingsResource:
       type: object
@@ -13002,6 +13341,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/__boolean'
             - description: Specifies whether a journey should be refreshed on segment update.
+        JourneyChannelSettings:
+          allOf:
+            - $ref: '#/components/schemas/JourneyChannelSettings'
+            - description: The channel-specific configurations for the journey.
+        SendingSchedule:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This flag should be set to true in order to allow (OpenHours and ClosedDays)
+        OpenHours:
+          allOf:
+            - $ref: '#/components/schemas/OpenHours'
+            - description: The time when journey allow to send messages. QuietTime should be configured first and SendingSchedule should be set to true.
+        ClosedDays:
+          allOf:
+            - $ref: '#/components/schemas/ClosedDays'
+            - description: The time when journey will stop sending messages. QuietTime should be configured first and SendingSchedule should be set to true.
       description: Specifies the configuration and other settings for a journey.
     CreateJourneyRequest:
       type: object
@@ -13086,6 +13441,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/__boolean'
             - description: Specifies whether a journey should be refreshed on segment update.
+        JourneyChannelSettings:
+          allOf:
+            - $ref: '#/components/schemas/JourneyChannelSettings'
+            - description: The channel-specific configurations for the journey.
+        SendingSchedule:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This flag should be set to true in order to allow (OpenHours and ClosedDays)
+        OpenHours:
+          allOf:
+            - $ref: '#/components/schemas/OpenHours'
+            - description: The time when journey allow to send messages. QuietTime should be configured first and SendingSchedule should be set to true.
+        ClosedDays:
+          allOf:
+            - $ref: '#/components/schemas/ClosedDays'
+            - description: The time when journey will stop sending messages. QuietTime should be configured first and SendingSchedule should be set to true.
       description: 'Provides information about the status, configuration, and other settings for a journey.'
     PushNotificationTemplateRequest:
       type: object
@@ -16272,6 +16643,68 @@ components:
       properties:
         MessageRequest:
           $ref: '#/components/schemas/MessageRequest'
+    SendOTPMessageRequestParameters:
+      type: object
+      required:
+        - BrandName
+        - ReferenceId
+        - Channel
+        - DestinationIdentity
+        - OriginationIdentity
+      properties:
+        AllowedAttempts:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: The attempts allowed to validate an OTP.
+        BrandName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The brand name that will be substituted into the OTP message body. Should be owned by calling AWS account.
+        Channel:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'Channel type for the OTP message. Supported values: [SMS].'
+        CodeLength:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: The number of characters in the generated OTP.
+        DestinationIdentity:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The destination identity to send OTP to.
+        EntityId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: A unique Entity ID received from DLT after entity registration is approved.
+        Language:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The language to be used for the outgoing message body containing the OTP.
+        OriginationIdentity:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The origination identity used to send OTP from.
+        ReferenceId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: Developer-specified reference identifier. Required to match during OTP verification.
+        TemplateId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: A unique Template ID received from DLT after entity registration is approved.
+        ValidityPeriod:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: The time in minutes before the OTP is no longer valid.
+      description: Send OTP message request parameters.
+    SendOTPMessageRequest:
+      type: object
+      required:
+        - SendOTPMessageRequestParameters
+      title: SendOTPMessageRequest
+      properties:
+        SendOTPMessageRequestParameters:
+          $ref: '#/components/schemas/SendOTPMessageRequestParameters'
     SendUsersMessageRequest:
       type: object
       required:
@@ -16771,6 +17204,42 @@ components:
       properties:
         VoiceTemplateRequest:
           $ref: '#/components/schemas/VoiceTemplateRequest'
+    VerificationResponse:
+      type: object
+      properties:
+        Valid:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: Specifies whether the OTP is valid or not.
+      description: Verify OTP Message Response.
+    VerifyOTPMessageRequestParameters:
+      type: object
+      required:
+        - ReferenceId
+        - Otp
+        - DestinationIdentity
+      properties:
+        DestinationIdentity:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The destination identity to send OTP to.
+        Otp:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The OTP the end user provided for verification.
+        ReferenceId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The reference identifier provided when the OTP was previously sent.
+      description: Verify OTP message request.
+    VerifyOTPMessageRequest:
+      type: object
+      required:
+        - VerifyOTPMessageRequestParameters
+      title: VerifyOTPMessageRequest
+      properties:
+        VerifyOTPMessageRequestParameters:
+          $ref: '#/components/schemas/VerifyOTPMessageRequestParameters'
     WriteTreatmentResource:
       type: object
       required:
@@ -16821,5 +17290,59 @@ components:
         - BAIDU
         - CUSTOM
         - IN_APP
+    DayOfWeek:
+      type: string
+      enum:
+        - MONDAY
+        - TUESDAY
+        - WEDNESDAY
+        - THURSDAY
+        - FRIDAY
+        - SATURDAY
+        - SUNDAY
+    OpenHoursRule:
+      type: object
+      properties:
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: Local start time in ISO 8601 format.
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: Local start time in ISO 8601 format.
+      description: List of OpenHours Rules.
+    ListOfOpenHoursRules:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/OpenHoursRule'
+          - description: Open Hour Rule Details.
+    MapOfListOfOpenHoursRules:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/ListOfOpenHoursRules'
+    ClosedDaysRule:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: Name of the rule.
+        StartDateTime:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: Start Datetime in ISO 8601 format.
+        EndDateTime:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: End Datetime in ISO 8601 format.
+      description: Closed Days Rule. Part of Journey sending schedule.
+    ListOfClosedDaysRules:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/ClosedDaysRule'
+          - description: ClosedDays rule details.
 security:
   - hmac: []

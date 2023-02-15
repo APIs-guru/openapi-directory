@@ -256,7 +256,7 @@ paths:
   /#X-Amz-Target=KinesisAnalytics_20180523.AddApplicationInputProcessingConfiguration:
     post:
       operationId: AddApplicationInputProcessingConfiguration
-      description: 'Adds an <a>InputProcessingConfiguration</a> to a SQL-based Kinesis Data Analytics application. An input processor pre-processes records on the input stream before the application''s SQL code executes. Currently, the only input processor available is <a href="https://docs.aws.amazon.com/lambda/">AWS Lambda</a>.'
+      description: 'Adds an <a>InputProcessingConfiguration</a> to a SQL-based Kinesis Data Analytics application. An input processor pre-processes records on the input stream before the application''s SQL code executes. Currently, the only input processor available is <a href="https://docs.aws.amazon.com/lambda/">Amazon Lambda</a>.'
       responses:
         '200':
           description: Success
@@ -319,7 +319,7 @@ paths:
   /#X-Amz-Target=KinesisAnalytics_20180523.AddApplicationOutput:
     post:
       operationId: AddApplicationOutput
-      description: '<p>Adds an external destination to your SQL-based Kinesis Data Analytics application.</p> <p>If you want Kinesis Data Analytics to deliver data from an in-application stream within your application to an external destination (such as an Kinesis data stream, a Kinesis Data Firehose delivery stream, or an AWS Lambda function), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.</p> <p> You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors. </p> <p> Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the <a>DescribeApplication</a> operation to find the current application version.</p>'
+      description: '<p>Adds an external destination to your SQL-based Kinesis Data Analytics application.</p> <p>If you want Kinesis Data Analytics to deliver data from an in-application stream within your application to an external destination (such as an Kinesis data stream, a Kinesis Data Firehose delivery stream, or an Amazon Lambda function), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.</p> <p> You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors. </p> <p> Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the <a>DescribeApplication</a> operation to find the current application version.</p>'
       responses:
         '200':
           description: Success
@@ -558,6 +558,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConcurrentModificationException'
+        '487':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
       requestBody:
         required: true
         content:
@@ -583,7 +589,7 @@ paths:
   /#X-Amz-Target=KinesisAnalytics_20180523.CreateApplicationPresignedUrl:
     post:
       operationId: CreateApplicationPresignedUrl
-      description: '<p>Creates and returns a URL that you can use to connect to an application''s extension. Currently, the only available extension is the Apache Flink dashboard.</p> <p>The IAM role or user used to call this API defines the permissions to access the extension. After the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request that attempts to connect to the extension. </p> <p>You control the amount of time that the URL will be valid using the <code>SessionExpirationDurationInSeconds</code> parameter. If you do not provide this parameter, the returned URL is valid for twelve hours.</p> <note> <p>The URL that you get from a call to CreateApplicationPresignedUrl must be used within 3 minutes to be valid. If you first try to use the URL after the 3-minute limit expires, the service returns an HTTP 403 Forbidden error.</p> </note>'
+      description: '<p>Creates and returns a URL that you can use to connect to an application''s extension.</p> <p>The IAM role or user used to call this API defines the permissions to access the extension. After the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request that attempts to connect to the extension. </p> <p>You control the amount of time that the URL will be valid using the <code>SessionExpirationDurationInSeconds</code> parameter. If you do not provide this parameter, the returned URL is valid for twelve hours.</p> <note> <p>The URL that you get from a call to CreateApplicationPresignedUrl must be used within 3 minutes to be valid. If you first try to use the URL after the 3-minute limit expires, the service returns an HTTP 403 Forbidden error.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1074,6 +1080,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
       requestBody:
         required: true
         content:
@@ -1353,6 +1365,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidRequestException'
+        '485':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
       requestBody:
         required: true
         content:
@@ -2242,7 +2260,7 @@ components:
         Output:
           allOf:
             - $ref: '#/components/schemas/Output'
-            - description: 'An array of objects, each describing one output configuration. In the output configuration, you specify the name of an in-application stream, a destination (that is, a Kinesis data stream, a Kinesis Data Firehose delivery stream, or an AWS Lambda function), and record the formation to use when writing to the destination.'
+            - description: 'An array of objects, each describing one output configuration. In the output configuration, you specify the name of an in-application stream, a destination (that is, a Kinesis data stream, a Kinesis Data Firehose delivery stream, or an Amazon Lambda function), and record the formation to use when writing to the destination.'
     AddApplicationReferenceDataSourceResponse:
       type: object
       properties:
@@ -2344,7 +2362,7 @@ components:
         RuntimeEnvironment:
           allOf:
             - $ref: '#/components/schemas/RuntimeEnvironment'
-            - description: 'The runtime environment for the application (<code>SQL-1_0</code>, <code>FLINK-1_6</code>, <code>FLINK-1_8</code>, or <code>FLINK-1_11</code>).'
+            - description: The runtime environment for the application.
         ServiceExecutionRole:
           allOf:
             - $ref: '#/components/schemas/RoleARN'
@@ -2364,9 +2382,10 @@ components:
         ApplicationMode:
           allOf:
             - $ref: '#/components/schemas/ApplicationMode'
-            - description: 'Use the <code>STREAMING</code> mode to create a Kinesis Data Analytics Studio notebook. To create a Kinesis Data Analytics Studio notebook, use the <code>INTERACTIVE</code> mode.'
+            - description: 'Use the <code>STREAMING</code> mode to create a Kinesis Data Analytics For Flink application. To create a Kinesis Data Analytics Studio notebook, use the <code>INTERACTIVE</code> mode.'
     LimitExceededException: {}
     TooManyTagsException: {}
+    UnsupportedOperationException: {}
     CreateApplicationPresignedUrlResponse:
       type: object
       properties:
@@ -2411,7 +2430,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/SnapshotName'
             - description: An identifier for the application snapshot.
-    UnsupportedOperationException: {}
     DeleteApplicationResponse:
       type: object
       properties: {}
@@ -2772,7 +2790,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
-            - description: 'The pagination token for the next set of results, or <code>null</code> if there are no additional results. To retrieve the next set of items, pass this token into a subsequent invocation of this operation. For more information about pagination, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the AWS Command Line Interface''s Pagination Options</a>.'
+            - description: 'The pagination token for the next set of results, or <code>null</code> if there are no additional results. To retrieve the next set of items, pass this token into a subsequent invocation of this operation. For more information about pagination, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the Amazon Command Line Interface''s Pagination Options</a>.'
     ListApplicationVersionsRequest:
       type: object
       required:
@@ -2790,7 +2808,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
-            - description: 'If a previous invocation of this operation returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the AWS Command Line Interface''s Pagination Options</a>.'
+            - description: 'If a previous invocation of this operation returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the Amazon Command Line Interface''s Pagination Options</a>.'
     ListApplicationsResponse:
       type: object
       required:
@@ -2803,7 +2821,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/ApplicationName'
-            - description: 'The pagination token for the next set of results, or <code>null</code> if there are no additional results. Pass this token into a subsequent command to retrieve the next set of items For more information about pagination, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the AWS Command Line Interface''s Pagination Options</a>.'
+            - description: 'The pagination token for the next set of results, or <code>null</code> if there are no additional results. Pass this token into a subsequent command to retrieve the next set of items For more information about pagination, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the Amazon Command Line Interface''s Pagination Options</a>.'
     ListApplicationsRequest:
       type: object
       title: ListApplicationsRequest
@@ -2815,7 +2833,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/ApplicationName'
-            - description: 'If a previous command returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the AWS Command Line Interface''s Pagination Options</a>.'
+            - description: 'If a previous command returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/pagination.html">Using the Amazon Command Line Interface''s Pagination Options</a>.'
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -3041,7 +3059,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/InputLambdaProcessor'
             - description: The <a>InputLambdaProcessor</a> that is used to preprocess the records in the stream before being processed by your application code.
-      description: 'For a SQL-based Kinesis Data Analytics application, describes a processor that is used to preprocess the records in the stream before being processed by your application code. Currently, the only input processor available is <a href="https://docs.aws.amazon.com/lambda/">AWS Lambda</a>.'
+      description: 'For a SQL-based Kinesis Data Analytics application, describes a processor that is used to preprocess the records in the stream before being processed by your application code. Currently, the only input processor available is <a href="https://docs.aws.amazon.com/lambda/">Amazon Lambda</a>.'
     InputProcessingConfigurationDescription:
       type: object
       properties:
@@ -3049,7 +3067,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/InputLambdaProcessorDescription'
             - description: 'Provides configuration information about the associated <a>InputLambdaProcessorDescription</a> '
-      description: 'For a SQL-based Kinesis Data Analytics application, provides the configuration information about an input processor. Currently, the only input processor available is <a href="https://docs.aws.amazon.com/lambda/">AWS Lambda</a>.'
+      description: 'For a SQL-based Kinesis Data Analytics application, provides the configuration information about an input processor. Currently, the only input processor available is <a href="https://docs.aws.amazon.com/lambda/">Amazon Lambda</a>.'
     Input:
       type: object
       required:
@@ -3106,7 +3124,7 @@ components:
         LambdaOutput:
           allOf:
             - $ref: '#/components/schemas/LambdaOutput'
-            - description: Identifies an AWS Lambda function as the destination.
+            - description: Identifies an Amazon Lambda function as the destination.
         DestinationSchema:
           allOf:
             - $ref: '#/components/schemas/DestinationSchema'
@@ -3342,11 +3360,11 @@ components:
         CatalogConfiguration:
           allOf:
             - $ref: '#/components/schemas/CatalogConfiguration'
-            - description: The AWS Glue Data Catalog that you use in queries in a Kinesis Data Analytics Studio notebook.
+            - description: The Amazon Glue Data Catalog that you use in queries in a Kinesis Data Analytics Studio notebook.
         DeployAsApplicationConfiguration:
           allOf:
             - $ref: '#/components/schemas/DeployAsApplicationConfiguration'
-            - description: The information required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state..
+            - description: The information required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state.
         CustomArtifactsConfiguration:
           allOf:
             - $ref: '#/components/schemas/CustomArtifactsConfigurationList'
@@ -3464,11 +3482,11 @@ components:
         CatalogConfigurationDescription:
           allOf:
             - $ref: '#/components/schemas/CatalogConfigurationDescription'
-            - description: The AWS Glue Data Catalog that is associated with the Kinesis Data Analytics Studio notebook.
+            - description: The Amazon Glue Data Catalog that is associated with the Kinesis Data Analytics Studio notebook.
         DeployAsApplicationConfigurationDescription:
           allOf:
             - $ref: '#/components/schemas/DeployAsApplicationConfigurationDescription'
-            - description: The parameters required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state..
+            - description: The parameters required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state.
         CustomArtifactsConfigurationDescription:
           allOf:
             - $ref: '#/components/schemas/CustomArtifactsConfigurationDescriptionList'
@@ -3576,7 +3594,7 @@ components:
         CatalogConfigurationUpdate:
           allOf:
             - $ref: '#/components/schemas/CatalogConfigurationUpdate'
-            - description: Updates to the configuration of the AWS Glue Data Catalog that is associated with the Kinesis Data Analytics Studio notebook.
+            - description: Updates to the configuration of the Amazon Glue Data Catalog that is associated with the Kinesis Data Analytics Studio notebook.
         DeployAsApplicationConfigurationUpdate:
           $ref: '#/components/schemas/DeployAsApplicationConfigurationUpdate'
         CustomArtifactsConfigurationUpdate:
@@ -3626,8 +3644,11 @@ components:
         - SQL-1_0
         - FLINK-1_6
         - FLINK-1_8
-        - FLINK-1_11
         - ZEPPELIN-FLINK-1_0
+        - FLINK-1_11
+        - FLINK-1_13
+        - ZEPPELIN-FLINK-2_0
+        - FLINK-1_15
     RoleARN:
       type: string
       pattern: 'arn:.*'
@@ -3644,8 +3665,8 @@ components:
         - UPDATING
         - AUTOSCALING
         - FORCE_STOPPING
-        - MAINTENANCE
         - ROLLING_BACK
+        - MAINTENANCE
         - ROLLED_BACK
     Timestamp:
       type: string
@@ -3694,7 +3715,7 @@ components:
         RuntimeEnvironment:
           allOf:
             - $ref: '#/components/schemas/RuntimeEnvironment'
-            - description: 'The runtime environment for the application (<code>SQL-1_0</code>, <code>FLINK-1_6</code>, <code>FLINK-1_8</code>, or <code>FLINK-1_11</code>).'
+            - description: The runtime environment for the application.
         ServiceExecutionRole:
           allOf:
             - $ref: '#/components/schemas/RoleARN'
@@ -3912,8 +3933,8 @@ components:
         GlueDataCatalogConfiguration:
           allOf:
             - $ref: '#/components/schemas/GlueDataCatalogConfiguration'
-            - description: The configuration parameters for the default AWS Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Kinesis Data Analytics Studio notebook.
-      description: The configuration parameters for the default AWS Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.
+            - description: The configuration parameters for the default Amazon Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Kinesis Data Analytics Studio notebook.
+      description: The configuration parameters for the default Amazon Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.
     GlueDataCatalogConfigurationDescription:
       type: object
       required:
@@ -3932,10 +3953,12 @@ components:
         GlueDataCatalogConfigurationDescription:
           allOf:
             - $ref: '#/components/schemas/GlueDataCatalogConfigurationDescription'
-            - description: The configuration parameters for the default AWS Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.
-      description: The configuration parameters for the default AWS Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Kinesis Data Analytics Studio notebook.
+            - description: The configuration parameters for the default Amazon Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.
+      description: The configuration parameters for the default Amazon Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Kinesis Data Analytics Studio notebook.
     GlueDataCatalogConfigurationUpdate:
       type: object
+      required:
+        - DatabaseARNUpdate
       properties:
         DatabaseARNUpdate:
           allOf:
@@ -3950,8 +3973,8 @@ components:
         GlueDataCatalogConfigurationUpdate:
           allOf:
             - $ref: '#/components/schemas/GlueDataCatalogConfigurationUpdate'
-            - description: Updates to the configuration parameters for the default AWS Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.
-      description: 'Updates to '
+            - description: Updates to the configuration parameters for the default Amazon Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.
+      description: Updates to the configuration parameters for the default Amazon Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.
     ConfigurationType:
       type: string
       enum:
@@ -4243,7 +4266,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3ContentBaseLocation'
             - description: 'The description of an Amazon S3 object that contains the Amazon Data Analytics application, including the Amazon Resource Name (ARN) of the S3 bucket, the name of the Amazon S3 object that contains the data, and the version number of the Amazon S3 object that contains the data. '
-      description: The information required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state..
+      description: The information required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state.
     S3ContentBaseLocationDescription:
       type: object
       required:
@@ -4270,8 +4293,6 @@ components:
       description: The configuration information required to deploy an Amazon Data Analytics Studio notebook as an application with durable state.
     S3ContentBaseLocationUpdate:
       type: object
-      required:
-        - BucketARNUpdate
       properties:
         BucketARNUpdate:
           allOf:
@@ -4284,14 +4305,12 @@ components:
       description: The information required to update the S3 base location that holds the application.
     DeployAsApplicationConfigurationUpdate:
       type: object
-      required:
-        - S3ContentLocationUpdate
       properties:
         S3ContentLocationUpdate:
           allOf:
             - $ref: '#/components/schemas/S3ContentBaseLocationUpdate'
             - description: Updates to the location that holds the data required to specify an Amazon Data Analytics application.
-      description: Updates to the configuration information required to deploy an Amazon Data Analytics Studio notebook as an application with durable state..
+      description: Updates to the configuration information required to deploy an Amazon Data Analytics Studio notebook as an application with durable state.
     SnapshotDetails:
       type: object
       required:
@@ -4637,8 +4656,8 @@ components:
         ResourceARN:
           allOf:
             - $ref: '#/components/schemas/ResourceARN'
-            - description: '<p>The ARN of the AWS Lambda function that operates on records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: AWS Lambda</a> </p> </note>'
-      description: 'An object that contains the Amazon Resource Name (ARN) of the AWS Lambda function that is used to preprocess records in the stream in a SQL-based Kinesis Data Analytics application. '
+            - description: '<p>The ARN of the Amazon Lambda function that operates on records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: Amazon Lambda</a> </p> </note>'
+      description: 'An object that contains the Amazon Resource Name (ARN) of the Amazon Lambda function that is used to preprocess records in the stream in a SQL-based Kinesis Data Analytics application. '
     InputLambdaProcessorDescription:
       type: object
       required:
@@ -4647,12 +4666,12 @@ components:
         ResourceARN:
           allOf:
             - $ref: '#/components/schemas/ResourceARN'
-            - description: '<p>The ARN of the AWS Lambda function that is used to preprocess the records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: AWS Lambda</a> </p> </note>'
+            - description: '<p>The ARN of the Amazon Lambda function that is used to preprocess the records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: Amazon Lambda</a> </p> </note>'
         RoleARN:
           allOf:
             - $ref: '#/components/schemas/RoleARN'
-            - description: <p>The ARN of the IAM role that is used to access the AWS Lambda function.</p> <note> <p>Provided for backward compatibility. Applications that are created with the current API version have an application-level service execution role rather than a resource-level role.</p> </note>
-      description: 'For a SQL-based Kinesis Data Analytics application, an object that contains the Amazon Resource Name (ARN) of the AWS Lambda function that is used to preprocess records in the stream.'
+            - description: <p>The ARN of the IAM role that is used to access the Amazon Lambda function.</p> <note> <p>Provided for backward compatibility. Applications that are created with the current API version have an application-level service execution role rather than a resource-level role.</p> </note>
+      description: 'For a SQL-based Kinesis Data Analytics application, an object that contains the Amazon Resource Name (ARN) of the Amazon Lambda function that is used to preprocess records in the stream.'
     InputLambdaProcessorUpdate:
       type: object
       required:
@@ -4661,7 +4680,7 @@ components:
         ResourceARNUpdate:
           allOf:
             - $ref: '#/components/schemas/ResourceARN'
-            - description: '<p>The Amazon Resource Name (ARN) of the new AWS Lambda function that is used to preprocess the records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: AWS Lambda</a> </p> </note>'
+            - description: '<p>The Amazon Resource Name (ARN) of the new Amazon Lambda function that is used to preprocess the records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: Amazon Lambda</a> </p> </note>'
       description: 'For a SQL-based Kinesis Data Analytics application, represents an update to the <a>InputLambdaProcessor</a> that is used to preprocess the records in the stream.'
     InputParallelismCount:
       type: integer
@@ -4892,8 +4911,8 @@ components:
         ResourceARN:
           allOf:
             - $ref: '#/components/schemas/ResourceARN'
-            - description: '<p>The Amazon Resource Name (ARN) of the destination Lambda function to write to.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: AWS Lambda</a> </p> </note>'
-      description: 'When you configure a SQL-based Kinesis Data Analytics application''s output, identifies an AWS Lambda function as the destination. You provide the function Amazon Resource Name (ARN) of the Lambda function. '
+            - description: '<p>The Amazon Resource Name (ARN) of the destination Lambda function to write to.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: Amazon Lambda</a> </p> </note>'
+      description: 'When you configure a SQL-based Kinesis Data Analytics application''s output, identifies an Amazon Lambda function as the destination. You provide the function Amazon Resource Name (ARN) of the Lambda function. '
     LambdaOutputDescription:
       type: object
       required:
@@ -4907,7 +4926,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/RoleARN'
             - description: <p>The ARN of the IAM role that Kinesis Data Analytics can assume to write to the destination function.</p> <note> <p>Provided for backward compatibility. Applications that are created with the current API version have an application-level service execution role rather than a resource-level role.</p> </note>
-      description: 'For a SQL-based Kinesis Data Analytics application''s output, describes the AWS Lambda function that is configured as its destination. '
+      description: 'For a SQL-based Kinesis Data Analytics application''s output, describes the Amazon Lambda function that is configured as its destination. '
     LambdaOutputUpdate:
       type: object
       required:
@@ -4916,8 +4935,8 @@ components:
         ResourceARNUpdate:
           allOf:
             - $ref: '#/components/schemas/ResourceARN'
-            - description: '<p>The Amazon Resource Name (ARN) of the destination AWS Lambda function.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: AWS Lambda</a> </p> </note>'
-      description: 'When you update an SQL-based Kinesis Data Analytics application''s output configuration using the <a>UpdateApplication</a> operation, provides information about an AWS Lambda function that is configured as the destination.'
+            - description: '<p>The Amazon Resource Name (ARN) of the destination Amazon Lambda function.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: Amazon Lambda</a> </p> </note>'
+      description: 'When you update an SQL-based Kinesis Data Analytics application''s output configuration using the <a>UpdateApplication</a> operation, provides information about an Amazon Lambda function that is configured as the destination.'
     ListSnapshotsInputLimit:
       type: integer
       minimum: 1
@@ -5035,7 +5054,7 @@ components:
         LambdaOutputUpdate:
           allOf:
             - $ref: '#/components/schemas/LambdaOutputUpdate'
-            - description: Describes an AWS Lambda function as the destination for the output.
+            - description: Describes an Amazon Lambda function as the destination for the output.
         DestinationSchemaUpdate:
           allOf:
             - $ref: '#/components/schemas/DestinationSchema'
@@ -5314,7 +5333,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagValue'
             - description: The value of the key-value tag. The value is optional.
-      description: 'A key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html">Using Tagging</a>.'
+      description: 'A key-value pair (the value is optional) that you can define and assign to Amazon resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html">Using Tagging</a>.'
     TagKeys:
       type: array
       items:

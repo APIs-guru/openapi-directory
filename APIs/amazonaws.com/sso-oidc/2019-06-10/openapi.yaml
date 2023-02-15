@@ -3,7 +3,7 @@ info:
   version: '2019-06-10'
   x-release: v4
   title: AWS SSO OIDC
-  description: '<p>AWS Single Sign-On (SSO) OpenID Connect (OIDC) is a web service that enables a client (such as AWS CLI or a native application) to register with AWS SSO. The service also enables the client to fetch the user’s access token upon successful authentication and authorization with AWS SSO. This service conforms with the OAuth 2.0 based implementation of the device authorization grant standard (<a href="https://tools.ietf.org/html/rfc8628">https://tools.ietf.org/html/rfc8628</a>).</p> <p>For general information about AWS SSO, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html">What is AWS Single Sign-On?</a> in the <i>AWS SSO User Guide</i>.</p> <p>This API reference guide describes the AWS SSO OIDC operations that you can call programatically and includes detailed information on data types and errors.</p> <note> <p>AWS provides SDKs that consist of libraries and sample code for various programming languages and platforms such as Java, Ruby, .Net, iOS, and Android. The SDKs provide a convenient way to create programmatic access to AWS SSO and other AWS services. For more information about the AWS SDKs, including how to download and install them, see <a href="http://aws.amazon.com/tools/">Tools for Amazon Web Services</a>.</p> </note>'
+  description: '<p>AWS IAM Identity Center (successor to AWS Single Sign-On) OpenID Connect (OIDC) is a web service that enables a client (such as AWS CLI or a native application) to register with IAM Identity Center. The service also enables the client to fetch the user’s access token upon successful authentication and authorization with IAM Identity Center.</p> <note> <p>Although AWS Single Sign-On was renamed, the <code>sso</code> and <code>identitystore</code> API namespaces will continue to retain their original name for backward compatibility purposes. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html#renamed">IAM Identity Center rename</a>.</p> </note> <p> <b>Considerations for Using This Guide</b> </p> <p>Before you begin using this guide, we recommend that you first review the following important information about how the IAM Identity Center OIDC service works.</p> <ul> <li> <p>The IAM Identity Center OIDC service currently implements only the portions of the OAuth 2.0 Device Authorization Grant standard (<a href="https://tools.ietf.org/html/rfc8628">https://tools.ietf.org/html/rfc8628</a>) that are necessary to enable single sign-on authentication with the AWS CLI. Support for other OIDC flows frequently needed for native applications, such as Authorization Code Flow (+ PKCE), will be addressed in future releases.</p> </li> <li> <p>The service emits only OIDC access tokens, such that obtaining a new token (For example, token refresh) requires explicit user re-authentication.</p> </li> <li> <p>The access tokens provided by this service grant access to all AWS account entitlements assigned to an IAM Identity Center user, not just a particular application.</p> </li> <li> <p>The documentation in this guide does not describe the mechanism to convert the access token into AWS Auth (“sigv4”) credentials for use with IAM-protected AWS service endpoints. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/PortalAPIReference/API_GetRoleCredentials.html">GetRoleCredentials</a> in the <i>IAM Identity Center Portal API Reference Guide</i>.</p> </li> </ul> <p>For general information about IAM Identity Center, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html">What is IAM Identity Center?</a> in the <i>IAM Identity Center User Guide</i>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -202,7 +202,6 @@ paths:
                 - clientId
                 - clientSecret
                 - grantType
-                - deviceCode
               properties:
                 clientId:
                   description: The unique identifier string for each client. This value should come from the persisted result of the <a>RegisterClient</a> API.
@@ -211,7 +210,7 @@ paths:
                   description: A secret string generated for the client. This value should come from the persisted result of the <a>RegisterClient</a> API.
                   type: string
                 grantType:
-                  description: 'Supports grant types for authorization code, refresh token, and device code request.'
+                  description: '<p>Supports grant types for the authorization code, refresh token, and device code request. For device code requests, specify the following value:</p> <p> <code>urn:ietf:params:oauth:grant-type:<i>device_code</i> </code> </p> <p>For information about how to obtain the device code, see the <a>StartDeviceAuthorization</a> topic.</p>'
                   type: string
                 deviceCode:
                   description: Used only when calling this API for the device code grant type. This short-term code is used to identify this authentication attempt. This should come from an in-memory reference to the result of the <a>StartDeviceAuthorization</a> API.
@@ -220,7 +219,7 @@ paths:
                   description: The authorization code received from the authorization service. This parameter is required to perform an authorization grant request to get access to a token.
                   type: string
                 refreshToken:
-                  description: The token used to obtain an access token in the event that the access token is invalid or expired. This token is not issued by the service.
+                  description: '<p>Currently, <code>refreshToken</code> is not yet implemented and is not supported. For more information about the features and limitations of the current IAM Identity Center OIDC implementation, see <i>Considerations for Using this Guide</i> in the <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html">IAM Identity Center OIDC API Reference</a>.</p> <p>The token used to obtain an access token in the event that the access token is invalid or expired.</p>'
                   type: string
                 scope:
                   description: 'The list of scopes that is defined by the client. Upon authorization, this list is used to restrict permissions when granting an access token.'
@@ -241,7 +240,7 @@ paths:
   /client/register:
     post:
       operationId: RegisterClient
-      description: Registers a client with AWS SSO. This allows clients to initiate device authorization. The output should be persisted for reuse through many authentication requests.
+      description: Registers a client with IAM Identity Center. This allows clients to initiate device authorization. The output should be persisted for reuse through many authentication requests.
       responses:
         '200':
           description: Success
@@ -357,13 +356,13 @@ paths:
                 - startUrl
               properties:
                 clientId:
-                  description: The unique identifier string for the client that is registered with AWS SSO. This value should come from the persisted result of the <a>RegisterClient</a> API operation.
+                  description: The unique identifier string for the client that is registered with IAM Identity Center. This value should come from the persisted result of the <a>RegisterClient</a> API operation.
                   type: string
                 clientSecret:
                   description: A secret string that is generated for the client. This value should come from the persisted result of the <a>RegisterClient</a> API operation.
                   type: string
                 startUrl:
-                  description: 'The URL for the AWS SSO user portal. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/using-the-portal.html">Using the User Portal</a> in the <i>AWS Single Sign-On User Guide</i>.'
+                  description: 'The URL for the AWS access portal. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/using-the-portal.html">Using the AWS access portal</a> in the <i>IAM Identity Center User Guide</i>.'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -431,7 +430,7 @@ components:
         accessToken:
           allOf:
             - $ref: '#/components/schemas/AccessToken'
-            - description: An opaque token to access AWS SSO resources assigned to a user.
+            - description: An opaque token to access IAM Identity Center resources assigned to a user.
         tokenType:
           allOf:
             - $ref: '#/components/schemas/TokenType'
@@ -443,11 +442,11 @@ components:
         refreshToken:
           allOf:
             - $ref: '#/components/schemas/RefreshToken'
-            - description: 'A token that, if present, can be used to refresh a previously issued access token that might have expired.'
+            - description: '<p>Currently, <code>refreshToken</code> is not yet implemented and is not supported. For more information about the features and limitations of the current IAM Identity Center OIDC implementation, see <i>Considerations for Using this Guide</i> in the <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html">IAM Identity Center OIDC API Reference</a>.</p> <p>A token that, if present, can be used to refresh a previously issued access token that might have expired.</p>'
         idToken:
           allOf:
             - $ref: '#/components/schemas/IdToken'
-            - description: 'The identifier of the user that associated with the access token, if present.'
+            - description: '<p>Currently, <code>idToken</code> is not yet implemented and is not supported. For more information about the features and limitations of the current IAM Identity Center OIDC implementation, see <i>Considerations for Using this Guide</i> in the <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html">IAM Identity Center OIDC API Reference</a>.</p> <p>The identifier of the user that associated with the access token, if present.</p>'
     Scope:
       type: string
     InvalidRequestException: {}
@@ -546,7 +545,6 @@ components:
         - clientId
         - clientSecret
         - grantType
-        - deviceCode
       title: CreateTokenRequest
       properties:
         clientId:
@@ -560,7 +558,7 @@ components:
         grantType:
           allOf:
             - $ref: '#/components/schemas/GrantType'
-            - description: 'Supports grant types for authorization code, refresh token, and device code request.'
+            - description: '<p>Supports grant types for the authorization code, refresh token, and device code request. For device code requests, specify the following value:</p> <p> <code>urn:ietf:params:oauth:grant-type:<i>device_code</i> </code> </p> <p>For information about how to obtain the device code, see the <a>StartDeviceAuthorization</a> topic.</p>'
         deviceCode:
           allOf:
             - $ref: '#/components/schemas/DeviceCode'
@@ -572,7 +570,7 @@ components:
         refreshToken:
           allOf:
             - $ref: '#/components/schemas/RefreshToken'
-            - description: The token used to obtain an access token in the event that the access token is invalid or expired. This token is not issued by the service.
+            - description: '<p>Currently, <code>refreshToken</code> is not yet implemented and is not supported. For more information about the features and limitations of the current IAM Identity Center OIDC implementation, see <i>Considerations for Using this Guide</i> in the <a href="https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html">IAM Identity Center OIDC API Reference</a>.</p> <p>The token used to obtain an access token in the event that the access token is invalid or expired.</p>'
         scope:
           allOf:
             - $ref: '#/components/schemas/Scopes'
@@ -621,7 +619,7 @@ components:
         clientId:
           allOf:
             - $ref: '#/components/schemas/ClientId'
-            - description: The unique identifier string for the client that is registered with AWS SSO. This value should come from the persisted result of the <a>RegisterClient</a> API operation.
+            - description: The unique identifier string for the client that is registered with IAM Identity Center. This value should come from the persisted result of the <a>RegisterClient</a> API operation.
         clientSecret:
           allOf:
             - $ref: '#/components/schemas/ClientSecret'
@@ -629,7 +627,7 @@ components:
         startUrl:
           allOf:
             - $ref: '#/components/schemas/URI'
-            - description: 'The URL for the AWS SSO user portal. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/using-the-portal.html">Using the User Portal</a> in the <i>AWS Single Sign-On User Guide</i>.'
+            - description: 'The URL for the AWS access portal. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/using-the-portal.html">Using the AWS access portal</a> in the <i>IAM Identity Center User Guide</i>.'
     UserCode:
       type: string
 security:

@@ -171,7 +171,7 @@ paths:
                 - ChannelName
               properties:
                 ChannelName:
-                  description: A name for the signaling channel that you are creating. It must be unique for each AWS account and AWS Region.
+                  description: A name for the signaling channel that you are creating. It must be unique for each Amazon Web Services account and Amazon Web Services Region.
                   type: string
                   pattern: '[a-zA-Z0-9_.-]+'
                   minLength: 1
@@ -181,6 +181,7 @@ paths:
                   type: string
                   enum:
                     - SINGLE_MASTER
+                    - FULL_MESH
                 SingleMasterConfiguration:
                   description: A structure that contains the configuration for the <code>SINGLE_MASTER</code> channel type.
                   type: object
@@ -188,7 +189,7 @@ paths:
                     MessageTtlSeconds:
                       allOf:
                         - $ref: '#/components/schemas/MessageTtlSeconds'
-                        - description: The period of time a signaling channel retains underlivered messages before they are discarded.
+                        - description: The period of time a signaling channel retains undelivered messages before they are discarded.
                 Tags:
                   description: A set of tags (key-value pairs) that you want to associate with this channel.
                   type: array
@@ -286,7 +287,7 @@ paths:
                   minLength: 1
                   maxLength: 128
                 KmsKeyId:
-                  description: '<p>The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis Video Streams to use to encrypt stream data.</p> <p>If no key ID is specified, the default, Kinesis Video-managed key (<code>aws/kinesisvideo</code>) is used.</p> <p> For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">DescribeKey</a>. </p>'
+                  description: '<p>The ID of the Key Management Service (KMS) key that you want Kinesis Video Streams to use to encrypt stream data.</p> <p>If no key ID is specified, the default, Kinesis Video-managed key (<code>aws/kinesisvideo</code>) is used.</p> <p> For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">DescribeKey</a>. </p>'
                   type: string
                   pattern: .+
                   minLength: 1
@@ -370,7 +371,7 @@ paths:
                 ChannelARN:
                   description: The Amazon Resource Name (ARN) of the signaling channel that you want to delete.
                   type: string
-                  pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
                   maxLength: 1024
                 CurrentVersion:
@@ -447,7 +448,7 @@ paths:
                 StreamARN:
                   description: 'The Amazon Resource Name (ARN) of the stream that you want to delete. '
                   type: string
-                  pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
                   maxLength: 1024
                 CurrentVersion:
@@ -456,6 +457,350 @@ paths:
                   pattern: '[a-zA-Z0-9]+'
                   minLength: 1
                   maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /describeEdgeConfiguration:
+    post:
+      operationId: DescribeEdgeConfiguration
+      description: Describes a stream’s edge configuration that was set using the <code>StartEdgeConfigurationUpdate</code> API. Use this API to get the status of the configuration if the configuration is in sync with the Edge Agent.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEdgeConfigurationOutput'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ClientLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientLimitExceededException'
+        '482':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: StreamEdgeConfigurationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamEdgeConfigurationNotFoundException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                StreamName:
+                  description: 'The name of the stream whose edge configuration you want to update. Specify either the <code>StreamName</code> or the <code>StreamARN</code>. '
+                  type: string
+                  pattern: '[a-zA-Z0-9_.-]+'
+                  minLength: 1
+                  maxLength: 256
+                StreamARN:
+                  description: The Amazon Resource Name (ARN) of the stream. Specify either the <code>StreamName</code>or the <code>StreamARN</code>.
+                  type: string
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  minLength: 1
+                  maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /describeImageGenerationConfiguration:
+    post:
+      operationId: DescribeImageGenerationConfiguration
+      description: Gets the <code>ImageGenerationConfiguration</code> for a given Kinesis video stream.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeImageGenerationConfigurationOutput'
+        '480':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '481':
+          description: ClientLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientLimitExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                StreamName:
+                  description: 'The name of the stream from which to retrieve the image generation configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>. '
+                  type: string
+                  pattern: '[a-zA-Z0-9_.-]+'
+                  minLength: 1
+                  maxLength: 256
+                StreamARN:
+                  description: The Amazon Resource Name (ARN) of the Kinesis video stream from which to retrieve the image generation configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+                  type: string
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  minLength: 1
+                  maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /describeMappedResourceConfiguration:
+    post:
+      operationId: DescribeMappedResourceConfiguration
+      description: <p>Returns the most current information about the stream. Either streamName or streamARN should be provided in the input.</p> <p>Returns the most current information about the stream. The <code>streamName</code> or <code>streamARN</code> should be provided in the input.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeMappedResourceConfigurationOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ClientLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientLimitExceededException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                StreamName:
+                  description: The name of the stream.
+                  type: string
+                  pattern: '[a-zA-Z0-9_.-]+'
+                  minLength: 1
+                  maxLength: 256
+                StreamARN:
+                  description: The Amazon Resource Name (ARN) of the stream.
+                  type: string
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  minLength: 1
+                  maxLength: 1024
+                MaxResults:
+                  description: The maximum number of results to return in the response.
+                  type: integer
+                  minimum: 1
+                  maximum: 1
+                NextToken:
+                  description: 'The token to provide in your next request, to get another batch of results.'
+                  type: string
+                  pattern: '[a-zA-Z0-9+/=]*'
+                  minLength: 0
+                  maxLength: 512
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /describeMediaStorageConfiguration:
+    post:
+      operationId: DescribeMediaStorageConfiguration
+      description: Returns the most current information about the channel. Specify the <code>ChannelName</code> or <code>ChannelARN</code> in the input.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeMediaStorageConfigurationOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ClientLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientLimitExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ChannelName:
+                  description: The name of the channel.
+                  type: string
+                  pattern: '[a-zA-Z0-9_.-]+'
+                  minLength: 1
+                  maxLength: 256
+                ChannelARN:
+                  description: The Amazon Resource Name (ARN) of the channel.
+                  type: string
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  minLength: 1
+                  maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /describeNotificationConfiguration:
+    post:
+      operationId: DescribeNotificationConfiguration
+      description: Gets the <code>NotificationConfiguration</code> for a given Kinesis video stream.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeNotificationConfigurationOutput'
+        '480':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '481':
+          description: ClientLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientLimitExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                StreamName:
+                  description: The name of the stream from which to retrieve the notification configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+                  type: string
+                  pattern: '[a-zA-Z0-9_.-]+'
+                  minLength: 1
+                  maxLength: 256
+                StreamARN:
+                  description: The Amazon Resource Name (ARN) of the Kinesis video stream from where you want to retrieve the notification configuration. You must specify either the <code>StreamName</code> or the StreamARN.
+                  type: string
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  minLength: 1
+                  maxLength: 1024
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -516,7 +861,7 @@ paths:
                 ChannelARN:
                   description: The ARN of the signaling channel that you want to describe.
                   type: string
-                  pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
                   maxLength: 1024
     parameters:
@@ -579,7 +924,7 @@ paths:
                 StreamARN:
                   description: The Amazon Resource Name (ARN) of the stream.
                   type: string
-                  pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
                   maxLength: 1024
     parameters:
@@ -644,7 +989,7 @@ paths:
                 StreamARN:
                   description: 'The Amazon Resource Name (ARN) of the stream that you want to get the endpoint for. You must specify either this parameter or a <code>StreamName</code> in the request. '
                   type: string
-                  pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
                   maxLength: 1024
                 APIName:
@@ -658,6 +1003,7 @@ paths:
                     - GET_HLS_STREAMING_SESSION_URL
                     - GET_DASH_STREAMING_SESSION_URL
                     - GET_CLIP
+                    - GET_IMAGES
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -720,7 +1066,7 @@ paths:
                 ChannelARN:
                   description: The Amazon Resource Name (ARN) of the signalling channel for which you want to get an endpoint.
                   type: string
-                  pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
                   maxLength: 1024
                 SingleMasterChannelEndpointConfiguration:
@@ -951,7 +1297,7 @@ paths:
                 ResourceARN:
                   description: The Amazon Resource Name (ARN) of the signaling channel for which you want to list tags.
                   type: string
-                  pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
                   maxLength: 1024
     parameters:
@@ -1020,7 +1366,7 @@ paths:
                 StreamARN:
                   description: The Amazon Resource Name (ARN) of the stream that you want to list tags for.
                   type: string
-                  pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
                   maxLength: 1024
                 StreamName:
@@ -1037,10 +1383,107 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /startEdgeConfigurationUpdate:
+    post:
+      operationId: StartEdgeConfigurationUpdate
+      description: '<p>An asynchronous API that updates a stream’s existing edge configuration. The Kinesis Video Stream will sync the stream’s edge configuration with the Edge Agent IoT Greengrass component that runs on an IoT Hub Device, setup at your premise. The time to sync can vary and depends on the connectivity of the Hub Device. The <code>SyncStatus</code> will be updated as the edge configuration is acknowledged, and synced with the Edge Agent. </p> <p>If this API is invoked for the first time, a new edge configuration will be created for the stream, and the sync status will be set to <code>SYNCING</code>. You will have to wait for the sync status to reach a terminal state such as: <code>IN_SYNC</code>, or <code>SYNC_FAILED</code>, before using this API again. If you invoke this API during the syncing process, a <code>ResourceInUseException</code> will be thrown. The connectivity of the stream’s edge configuration and the Edge Agent will be retried for 15 minutes. After 15 minutes, the status will transition into the <code>SYNC_FAILED</code> state.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartEdgeConfigurationUpdateOutput'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ClientLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientLimitExceededException'
+        '482':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '483':
+          description: NoDataRetentionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoDataRetentionException'
+        '484':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - EdgeConfig
+              properties:
+                StreamName:
+                  description: The name of the stream whose edge configuration you want to update. Specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+                  type: string
+                  pattern: '[a-zA-Z0-9_.-]+'
+                  minLength: 1
+                  maxLength: 256
+                StreamARN:
+                  description: ' The Amazon Resource Name (ARN) of the stream. Specify either the <code>StreamName</code> or the <code>StreamARN</code>.'
+                  type: string
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  minLength: 1
+                  maxLength: 1024
+                EdgeConfig:
+                  description: A description of the stream's edge configuration that will be used to sync with the Edge Agent IoT Greengrass component. The Edge Agent component will run on an IoT Hub Device setup at your premise.
+                  type: object
+                  properties:
+                    HubDeviceArn:
+                      allOf:
+                        - $ref: '#/components/schemas/HubDeviceArn'
+                        - description: The "<b>Internet of Things (IoT) Thing</b>" Arn of the stream.
+                    RecorderConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/RecorderConfig'
+                        - description: 'The recorder configuration consists of the local <code>MediaSourceConfig</code> details, that are used as credentials to access the local media files streamed on the camera. '
+                    UploaderConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/UploaderConfig'
+                        - description: The uploader configuration contains the <code>ScheduleExpression</code> details that are used to schedule upload jobs for the recorded media files from the Edge Agent to a Kinesis Video Stream.
+                    DeletionConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/DeletionConfig'
+                        - description: The deletion configuration is made up of the retention time (<code>EdgeRetentionInHours</code>) and local size configuration (<code>LocalSizeConfig</code>) details that are used to make the deletion.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /TagResource:
     post:
       operationId: TagResource
-      description: 'Adds one or more tags to a signaling channel. A <i>tag</i> is a key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.'
+      description: 'Adds one or more tags to a signaling channel. A <i>tag</i> is a key-value pair (the value is optional) that you can define and assign to Amazon Web Services resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>Billing and Cost Management and Cost Management User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -1092,7 +1535,7 @@ paths:
                 ResourceARN:
                   description: The Amazon Resource Name (ARN) of the signaling channel to which you want to add tags.
                   type: string
-                  pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
                   maxLength: 1024
                 Tags:
@@ -1113,7 +1556,7 @@ paths:
   /tagStream:
     post:
       operationId: TagStream
-      description: '<p>Adds one or more tags to a stream. A <i>tag</i> is a key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. </p> <p>You must provide either the <code>StreamName</code> or the <code>StreamARN</code>.</p> <p>This operation requires permission for the <code>KinesisVideo:TagStream</code> action.</p> <p>Kinesis video streams support up to 50 tags.</p>'
+      description: '<p>Adds one or more tags to a stream. A <i>tag</i> is a key-value pair (the value is optional) that you can define and assign to Amazon Web Services resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>Billing and Cost Management and Cost Management User Guide</i>. </p> <p>You must provide either the <code>StreamName</code> or the <code>StreamARN</code>.</p> <p>This operation requires permission for the <code>KinesisVideo:TagStream</code> action.</p> <p>A Kinesis video stream can support up to 50 tags.</p>'
       responses:
         '200':
           description: Success
@@ -1170,7 +1613,7 @@ paths:
                 StreamARN:
                   description: The Amazon Resource Name (ARN) of the resource that you want to add the tag or tags to.
                   type: string
-                  pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
                   maxLength: 1024
                 StreamName:
@@ -1243,7 +1686,7 @@ paths:
                 ResourceARN:
                   description: The Amazon Resource Name (ARN) of the signaling channel from which you want to remove tags.
                   type: string
-                  pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
                   maxLength: 1024
                 TagKeyList:
@@ -1315,7 +1758,7 @@ paths:
                 StreamARN:
                   description: The Amazon Resource Name (ARN) of the stream that you want to remove tags from.
                   type: string
-                  pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
                   maxLength: 1024
                 StreamName:
@@ -1407,7 +1850,7 @@ paths:
                 StreamARN:
                   description: The Amazon Resource Name (ARN) of the stream whose retention period you want to change.
                   type: string
-                  pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
                   maxLength: 1024
                 CurrentVersion:
@@ -1426,6 +1869,288 @@ paths:
                   description: 'The retention period, in hours. The value you specify replaces the current value. The maximum value for this parameter is 87600 (ten years).'
                   type: integer
                   minimum: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /updateImageGenerationConfiguration:
+    post:
+      operationId: UpdateImageGenerationConfiguration
+      description: Updates the <code>StreamInfo</code> and <code>ImageProcessingConfiguration</code> fields.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateImageGenerationConfigurationOutput'
+        '480':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '481':
+          description: ClientLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientLimitExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '485':
+          description: NoDataRetentionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoDataRetentionException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                StreamName:
+                  description: The name of the stream from which to update the image generation configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+                  type: string
+                  pattern: '[a-zA-Z0-9_.-]+'
+                  minLength: 1
+                  maxLength: 256
+                StreamARN:
+                  description: The Amazon Resource Name (ARN) of the Kinesis video stream from where you want to update the image generation configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+                  type: string
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  minLength: 1
+                  maxLength: 1024
+                ImageGenerationConfiguration:
+                  description: 'The structure that contains the information required for the KVS images delivery. If null, the configuration will be deleted from the stream.'
+                  type: object
+                  properties:
+                    Status:
+                      allOf:
+                        - $ref: '#/components/schemas/ConfigurationStatus'
+                        - description: Indicates whether the <code>ContinuousImageGenerationConfigurations</code> API is enabled or disabled.
+                    ImageSelectorType:
+                      allOf:
+                        - $ref: '#/components/schemas/ImageSelectorType'
+                        - description: The origin of the Server or Producer timestamps to use to generate the images.
+                    DestinationConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/ImageGenerationDestinationConfig'
+                        - description: The structure that contains the information required to deliver images to a customer.
+                    SamplingInterval:
+                      allOf:
+                        - $ref: '#/components/schemas/SamplingInterval'
+                        - description: 'The time interval in milliseconds (ms) at which the images need to be generated from the stream. The minimum value that can be provided is 33 ms, because a camera that generates content at 30 FPS would create a frame every 33.3 ms. If the timestamp range is less than the sampling interval, the Image from the <code>StartTimestamp</code> will be returned if available. '
+                    Format:
+                      allOf:
+                        - $ref: '#/components/schemas/Format'
+                        - description: The accepted image format.
+                    FormatConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/FormatConfig'
+                        - description: 'The list of a key-value pair structure that contains extra parameters that can be applied when the image is generated. The <code>FormatConfig</code> key is the <code>JPEGQuality</code>, which indicates the JPEG quality key to be used to generate the image. The <code>FormatConfig</code> value accepts ints from 1 to 100. If the value is 1, the image will be generated with less quality and the best compression. If the value is 100, the image will be generated with the best quality and less compression. If no value is provided, the default value of the <code>JPEGQuality</code> key will be set to 80.'
+                    WidthPixels:
+                      allOf:
+                        - $ref: '#/components/schemas/WidthPixels'
+                        - description: 'The width of the output image that is used in conjunction with the <code>HeightPixels</code> parameter. When both <code>WidthPixels</code> and <code>HeightPixels</code> parameters are provided, the image will be stretched to fit the specified aspect ratio. If only the <code>WidthPixels</code> parameter is provided, its original aspect ratio will be used to calculate the <code>HeightPixels</code> ratio. If neither parameter is provided, the original image size will be returned.'
+                    HeightPixels:
+                      allOf:
+                        - $ref: '#/components/schemas/HeightPixels'
+                        - description: 'The height of the output image that is used in conjunction with the <code>WidthPixels</code> parameter. When both <code>HeightPixels</code> and <code>WidthPixels</code> parameters are provided, the image will be stretched to fit the specified aspect ratio. If only the <code>HeightPixels</code> parameter is provided, its original aspect ratio will be used to calculate the <code>WidthPixels</code> ratio. If neither parameter is provided, the original image size will be returned.'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /updateMediaStorageConfiguration:
+    post:
+      operationId: UpdateMediaStorageConfiguration
+      description: '<p>Associates a <code>SignalingChannel</code> to a stream to store the media. There are two signaling modes that can specified :</p> <ul> <li> <p>If the <code>StorageStatus</code> is disabled, no data will be stored, and the <code>StreamARN</code> parameter will not be needed. </p> </li> <li> <p>If the <code>StorageStatus</code> is enabled, the data will be stored in the <code>StreamARN</code> provided. </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateMediaStorageConfigurationOutput'
+        '480':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '481':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '482':
+          description: ClientLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientLimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: NoDataRetentionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoDataRetentionException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ChannelARN
+                - MediaStorageConfiguration
+              properties:
+                ChannelARN:
+                  description: The Amazon Resource Name (ARN) of the channel.
+                  type: string
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  minLength: 1
+                  maxLength: 1024
+                MediaStorageConfiguration:
+                  description: 'A structure that encapsulates, or contains, the media storage configuration properties.'
+                  type: object
+                  properties:
+                    StreamARN:
+                      allOf:
+                        - $ref: '#/components/schemas/ResourceARN'
+                        - description: 'The Amazon Resource Name (ARN) of the stream '
+                    Status:
+                      allOf:
+                        - $ref: '#/components/schemas/MediaStorageConfigurationStatus'
+                        - description: The status of the media storage configuration.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /updateNotificationConfiguration:
+    post:
+      operationId: UpdateNotificationConfiguration
+      description: Updates the notification information for a stream.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateNotificationConfigurationOutput'
+        '480':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '481':
+          description: ClientLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientLimitExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '485':
+          description: NoDataRetentionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoDataRetentionException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                StreamName:
+                  description: The name of the stream from which to update the notification configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+                  type: string
+                  pattern: '[a-zA-Z0-9_.-]+'
+                  minLength: 1
+                  maxLength: 256
+                StreamARN:
+                  description: The Amazon Resource Name (ARN) of the Kinesis video stream from where you want to update the notification configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+                  type: string
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  minLength: 1
+                  maxLength: 1024
+                NotificationConfiguration:
+                  description: 'The structure that contains the notification information for the KVS images delivery. If this parameter is null, the configuration will be deleted from the stream.'
+                  type: object
+                  properties:
+                    Status:
+                      allOf:
+                        - $ref: '#/components/schemas/ConfigurationStatus'
+                        - description: Indicates if a notification configuration is enabled or disabled.
+                    DestinationConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/NotificationDestinationConfig'
+                        - description: The destination information required to deliver a notification to a customer.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1495,7 +2220,7 @@ paths:
                 ChannelARN:
                   description: The Amazon Resource Name (ARN) of the signaling channel that you want to update.
                   type: string
-                  pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
                   maxLength: 1024
                 CurrentVersion:
@@ -1511,7 +2236,7 @@ paths:
                     MessageTtlSeconds:
                       allOf:
                         - $ref: '#/components/schemas/MessageTtlSeconds'
-                        - description: The period of time a signaling channel retains underlivered messages before they are discarded.
+                        - description: The period of time a signaling channel retains undelivered messages before they are discarded.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1586,7 +2311,7 @@ paths:
                 StreamARN:
                   description: The ARN of the stream whose metadata you want to update.
                   type: string
-                  pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
                   minLength: 1
                   maxLength: 1024
                 CurrentVersion:
@@ -1723,6 +2448,70 @@ components:
       type: object
       properties: {}
     NotAuthorizedException: {}
+    DescribeEdgeConfigurationOutput:
+      type: object
+      properties:
+        StreamName:
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: The name of the stream from which the edge configuration was updated.
+        StreamARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the stream.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp at which a stream’s edge configuration was first created.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp at which a stream’s edge configuration was last updated.
+        SyncStatus:
+          allOf:
+            - $ref: '#/components/schemas/SyncStatus'
+            - description: The latest status of the edge configuration update.
+        FailedStatusDetails:
+          allOf:
+            - $ref: '#/components/schemas/FailedStatusDetails'
+            - description: A description of the generated failure status.
+        EdgeConfig:
+          allOf:
+            - $ref: '#/components/schemas/EdgeConfig'
+            - description: A description of the stream's edge configuration that will be used to sync with the Edge Agent IoT Greengrass component. The Edge Agent component will run on an IoT Hub Device setup at your premise.
+    StreamEdgeConfigurationNotFoundException: {}
+    DescribeImageGenerationConfigurationOutput:
+      type: object
+      properties:
+        ImageGenerationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ImageGenerationConfiguration'
+            - description: 'The structure that contains the information required for the Kinesis video stream (KVS) images delivery. If this structure is null, the configuration will be deleted from the stream.'
+    DescribeMappedResourceConfigurationOutput:
+      type: object
+      properties:
+        MappedResourceConfigurationList:
+          allOf:
+            - $ref: '#/components/schemas/MappedResourceConfigurationList'
+            - description: 'A structure that encapsulates, or contains, the media storage configuration properties.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token that was used in the <code>NextToken</code>request to fetch the next set of results. '
+    DescribeMediaStorageConfigurationOutput:
+      type: object
+      properties:
+        MediaStorageConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/MediaStorageConfiguration'
+            - description: 'A structure that encapsulates, or contains, the media storage configuration properties.'
+    DescribeNotificationConfigurationOutput:
+      type: object
+      properties:
+        NotificationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/NotificationConfiguration'
+            - description: 'The structure that contains the information required for notifications. If the structure is null, the configuration will be deleted from the stream.'
     DescribeSignalingChannelOutput:
       type: object
       properties:
@@ -1821,6 +2610,83 @@ components:
             - $ref: '#/components/schemas/ResourceTags'
             - description: A map of tag keys and values associated with the specified stream.
     InvalidResourceFormatException: {}
+    StartEdgeConfigurationUpdateOutput:
+      type: object
+      properties:
+        StreamName:
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: The name of the stream from which the edge configuration was updated.
+        StreamARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the stream.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp at which a stream’s edge configuration was first created.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp at which a stream’s edge configuration was last updated.
+        SyncStatus:
+          allOf:
+            - $ref: '#/components/schemas/SyncStatus'
+            - description: ' The current sync status of the stream''s edge configuration. When you invoke this API, the sync status will be set to the <code>SYNCING</code> state. Use the <code>DescribeEdgeConfiguration</code> API to get the latest status of the edge configuration.'
+        FailedStatusDetails:
+          allOf:
+            - $ref: '#/components/schemas/FailedStatusDetails'
+            - description: A description of the generated failure status.
+        EdgeConfig:
+          allOf:
+            - $ref: '#/components/schemas/EdgeConfig'
+            - description: A description of the stream's edge configuration that will be used to sync with the Edge Agent IoT Greengrass component. The Edge Agent component will run on an IoT Hub Device setup at your premise.
+    HubDeviceArn:
+      type: string
+      pattern: 'arn:[a-z\d-]+:iot:[a-z0-9-]+:[0-9]+:thing/[a-zA-Z0-9_.-]+'
+      minLength: 1
+      maxLength: 1024
+    RecorderConfig:
+      type: object
+      required:
+        - MediaSourceConfig
+      properties:
+        MediaSourceConfig:
+          allOf:
+            - $ref: '#/components/schemas/MediaSourceConfig'
+            - description: 'The configuration details that consist of the credentials required (<code>MediaUriSecretArn</code> and <code>MediaUriType</code>) to access the media files streamed to the camera. '
+        ScheduleConfig:
+          allOf:
+            - $ref: '#/components/schemas/ScheduleConfig'
+            - description: 'The configuration that consists of the <code>ScheduleExpression</code> and the <code>DurationInMinutes</code> details that specify the scheduling to record from a camera, or local media file, onto the Edge Agent. If the <code>ScheduleExpression</code> attribute is not provided, then the Edge Agent will always be set to recording mode.'
+      description: 'The recorder configuration consists of the local <code>MediaSourceConfig</code> details that are used as credentials to accesss the local media files streamed on the camera. '
+    UploaderConfig:
+      type: object
+      required:
+        - ScheduleConfig
+      properties:
+        ScheduleConfig:
+          allOf:
+            - $ref: '#/components/schemas/ScheduleConfig'
+            - description: 'The configuration that consists of the <code>ScheduleExpression</code> and the <code>DurationInMinutes</code>details that specify the scheduling to record from a camera, or local media file, onto the Edge Agent. If the <code>ScheduleExpression</code> is not provided, then the Edge Agent will always be in recording mode.'
+      description: 'The configuration that consists of the <code>ScheduleExpression</code> and the <code>DurationInMinutesdetails</code>, that specify the scheduling to record from a camera, or local media file, onto the Edge Agent. If the <code>ScheduleExpression</code> is not provided, then the Edge Agent will always be in upload mode. '
+    DeletionConfig:
+      type: object
+      properties:
+        EdgeRetentionInHours:
+          allOf:
+            - $ref: '#/components/schemas/EdgeRetentionInHours'
+            - description: 'The number of hours that you want to retain the data in the stream on the Edge Agent. The default value of the retention time is 720 hours, which translates to 30 days.'
+        LocalSizeConfig:
+          allOf:
+            - $ref: '#/components/schemas/LocalSizeConfig'
+            - description: The value of the local size required in order to delete the edge configuration.
+        DeleteAfterUpload:
+          allOf:
+            - $ref: '#/components/schemas/DeleteAfterUpload'
+            - description: '<p>The <code>boolean</code> value used to indicate whether or not you want to mark the media for deletion, once it has been uploaded to the Kinesis Video Stream cloud. The media files can be deleted if any of the deletion configuration values are set to <code>true</code>, such as when the limit for the <code>EdgeRetentionInHours</code>, or the <code>MaxLocalMediaSizeInMB</code>, has been reached. </p> <p>Since the default value is set to <code>true</code>, configure the uploader schedule such that the media files are not being deleted before they are initially uploaded to AWS cloud.</p>'
+      description: The configuration details required to delete the connection of the stream from the Edge Agent.
+    NoDataRetentionException: {}
     TagResourceOutput:
       type: object
       properties: {}
@@ -1841,6 +2707,83 @@ components:
     UpdateDataRetentionOutput:
       type: object
       properties: {}
+    UpdateImageGenerationConfigurationOutput:
+      type: object
+      properties: {}
+    ConfigurationStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    ImageSelectorType:
+      type: string
+      enum:
+        - SERVER_TIMESTAMP
+        - PRODUCER_TIMESTAMP
+    ImageGenerationDestinationConfig:
+      type: object
+      required:
+        - Uri
+        - DestinationRegion
+      properties:
+        Uri:
+          allOf:
+            - $ref: '#/components/schemas/DestinationUri'
+            - description: The Uniform Resource Identifier (URI) that identifies where the images will be delivered.
+        DestinationRegion:
+          allOf:
+            - $ref: '#/components/schemas/DestinationRegion'
+            - description: The AWS Region of the S3 bucket where images will be delivered. This <code>DestinationRegion</code> must match the Region where the stream is located.
+      description: The structure that contains the information required to deliver images to a customer.
+    SamplingInterval:
+      type: integer
+      minimum: 3000
+      maximum: 20000
+    Format:
+      type: string
+      enum:
+        - JPEG
+        - PNG
+    FormatConfig:
+      type: object
+      minProperties: 1
+      maxProperties: 1
+      additionalProperties:
+        $ref: '#/components/schemas/FormatConfigValue'
+    WidthPixels:
+      type: integer
+      minimum: 1
+      maximum: 3840
+    HeightPixels:
+      type: integer
+      minimum: 1
+      maximum: 2160
+    UpdateMediaStorageConfigurationOutput:
+      type: object
+      properties: {}
+    ResourceARN:
+      type: string
+      pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+      minLength: 1
+      maxLength: 1024
+    MediaStorageConfigurationStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    UpdateNotificationConfigurationOutput:
+      type: object
+      properties: {}
+    NotificationDestinationConfig:
+      type: object
+      required:
+        - Uri
+      properties:
+        Uri:
+          allOf:
+            - $ref: '#/components/schemas/DestinationUri'
+            - description: The Uniform Resource Identifier (URI) that identifies where the images will be delivered.
+      description: The structure that contains the information required to deliver a notification to a customer.
     UpdateSignalingChannelOutput:
       type: object
       properties: {}
@@ -1857,15 +2800,12 @@ components:
         - GET_HLS_STREAMING_SESSION_URL
         - GET_DASH_STREAMING_SESSION_URL
         - GET_CLIP
-    ResourceARN:
-      type: string
-      pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
-      minLength: 1
-      maxLength: 1024
+        - GET_IMAGES
     ChannelType:
       type: string
       enum:
         - SINGLE_MASTER
+        - FULL_MESH
     Status:
       type: string
       enum:
@@ -1882,7 +2822,7 @@ components:
         MessageTtlSeconds:
           allOf:
             - $ref: '#/components/schemas/MessageTtlSeconds'
-            - description: The period of time a signaling channel retains underlivered messages before they are discarded.
+            - description: The period of time a signaling channel retains undelivered messages before they are discarded.
       description: A structure that contains the configuration for the <code>SINGLE_MASTER</code> channel type.
     Version:
       type: string
@@ -1942,6 +2882,7 @@ components:
       enum:
         - WSS
         - HTTPS
+        - WEBRTC
     TagOnCreateList:
       type: array
       items:
@@ -1957,7 +2898,7 @@ components:
         ChannelName:
           allOf:
             - $ref: '#/components/schemas/ChannelName'
-            - description: A name for the signaling channel that you are creating. It must be unique for each AWS account and AWS Region.
+            - description: A name for the signaling channel that you are creating. It must be unique for each Amazon Web Services account and Amazon Web Services Region.
         ChannelType:
           allOf:
             - $ref: '#/components/schemas/ChannelType'
@@ -2015,7 +2956,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
-            - description: '<p>The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis Video Streams to use to encrypt stream data.</p> <p>If no key ID is specified, the default, Kinesis Video-managed key (<code>aws/kinesisvideo</code>) is used.</p> <p> For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">DescribeKey</a>. </p>'
+            - description: '<p>The ID of the Key Management Service (KMS) key that you want Kinesis Video Streams to use to encrypt stream data.</p> <p>If no key ID is specified, the default, Kinesis Video-managed key (<code>aws/kinesisvideo</code>) is used.</p> <p> For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">DescribeKey</a>. </p>'
         DataRetentionInHours:
           allOf:
             - $ref: '#/components/schemas/DataRetentionInHours'
@@ -2029,6 +2970,8 @@ components:
     DataRetentionChangeInHours:
       type: integer
       minimum: 1
+    DeleteAfterUpload:
+      type: boolean
     DeleteSignalingChannelInput:
       type: object
       required:
@@ -2057,6 +3000,210 @@ components:
           allOf:
             - $ref: '#/components/schemas/Version'
             - description: '<p>Optional: The version of the stream that you want to delete. </p> <p>Specify the version as a safeguard to ensure that your are deleting the correct stream. To get the stream version, use the <code>DescribeStream</code> API.</p> <p>If not specified, only the <code>CreationTime</code> is checked before deleting the stream.</p>'
+    EdgeRetentionInHours:
+      type: integer
+      minimum: 1
+      maximum: 720
+    LocalSizeConfig:
+      type: object
+      properties:
+        MaxLocalMediaSizeInMB:
+          allOf:
+            - $ref: '#/components/schemas/MaxLocalMediaSizeInMB'
+            - description: 'The overall maximum size of the media that you want to store for a stream on the Edge Agent. '
+        StrategyOnFullSize:
+          allOf:
+            - $ref: '#/components/schemas/StrategyOnFullSize'
+            - description: The strategy to perform when a stream’s <code>MaxLocalMediaSizeInMB</code> limit is reached.
+      description: 'The configuration details that include the maximum size of the media (<code>MaxLocalMediaSizeInMB</code>) that you want to store for a stream on the Edge Agent, as well as the strategy that should be used (<code>StrategyOnFullSize</code>) when a stream''s maximum size has been reached.'
+    DescribeEdgeConfigurationInput:
+      type: object
+      title: DescribeEdgeConfigurationInput
+      properties:
+        StreamName:
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: 'The name of the stream whose edge configuration you want to update. Specify either the <code>StreamName</code> or the <code>StreamARN</code>. '
+        StreamARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the stream. Specify either the <code>StreamName</code>or the <code>StreamARN</code>.
+    SyncStatus:
+      type: string
+      enum:
+        - SYNCING
+        - ACKNOWLEDGED
+        - IN_SYNC
+        - SYNC_FAILED
+        - DELETING
+        - DELETE_FAILED
+    FailedStatusDetails:
+      type: string
+    EdgeConfig:
+      type: object
+      required:
+        - HubDeviceArn
+        - RecorderConfig
+      properties:
+        HubDeviceArn:
+          allOf:
+            - $ref: '#/components/schemas/HubDeviceArn'
+            - description: The "<b>Internet of Things (IoT) Thing</b>" Arn of the stream.
+        RecorderConfig:
+          allOf:
+            - $ref: '#/components/schemas/RecorderConfig'
+            - description: 'The recorder configuration consists of the local <code>MediaSourceConfig</code> details, that are used as credentials to access the local media files streamed on the camera. '
+        UploaderConfig:
+          allOf:
+            - $ref: '#/components/schemas/UploaderConfig'
+            - description: The uploader configuration contains the <code>ScheduleExpression</code> details that are used to schedule upload jobs for the recorded media files from the Edge Agent to a Kinesis Video Stream.
+        DeletionConfig:
+          allOf:
+            - $ref: '#/components/schemas/DeletionConfig'
+            - description: The deletion configuration is made up of the retention time (<code>EdgeRetentionInHours</code>) and local size configuration (<code>LocalSizeConfig</code>) details that are used to make the deletion.
+      description: A description of the stream's edge configuration that will be used to sync with the Edge Agent IoT Greengrass component. The Edge Agent component will run on an IoT Hub Device setup at your premise.
+    DescribeImageGenerationConfigurationInput:
+      type: object
+      title: DescribeImageGenerationConfigurationInput
+      properties:
+        StreamName:
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: 'The name of the stream from which to retrieve the image generation configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>. '
+        StreamARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the Kinesis video stream from which to retrieve the image generation configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+    ImageGenerationConfiguration:
+      type: object
+      required:
+        - Status
+        - ImageSelectorType
+        - DestinationConfig
+        - SamplingInterval
+        - Format
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationStatus'
+            - description: Indicates whether the <code>ContinuousImageGenerationConfigurations</code> API is enabled or disabled.
+        ImageSelectorType:
+          allOf:
+            - $ref: '#/components/schemas/ImageSelectorType'
+            - description: The origin of the Server or Producer timestamps to use to generate the images.
+        DestinationConfig:
+          allOf:
+            - $ref: '#/components/schemas/ImageGenerationDestinationConfig'
+            - description: The structure that contains the information required to deliver images to a customer.
+        SamplingInterval:
+          allOf:
+            - $ref: '#/components/schemas/SamplingInterval'
+            - description: 'The time interval in milliseconds (ms) at which the images need to be generated from the stream. The minimum value that can be provided is 33 ms, because a camera that generates content at 30 FPS would create a frame every 33.3 ms. If the timestamp range is less than the sampling interval, the Image from the <code>StartTimestamp</code> will be returned if available. '
+        Format:
+          allOf:
+            - $ref: '#/components/schemas/Format'
+            - description: The accepted image format.
+        FormatConfig:
+          allOf:
+            - $ref: '#/components/schemas/FormatConfig'
+            - description: 'The list of a key-value pair structure that contains extra parameters that can be applied when the image is generated. The <code>FormatConfig</code> key is the <code>JPEGQuality</code>, which indicates the JPEG quality key to be used to generate the image. The <code>FormatConfig</code> value accepts ints from 1 to 100. If the value is 1, the image will be generated with less quality and the best compression. If the value is 100, the image will be generated with the best quality and less compression. If no value is provided, the default value of the <code>JPEGQuality</code> key will be set to 80.'
+        WidthPixels:
+          allOf:
+            - $ref: '#/components/schemas/WidthPixels'
+            - description: 'The width of the output image that is used in conjunction with the <code>HeightPixels</code> parameter. When both <code>WidthPixels</code> and <code>HeightPixels</code> parameters are provided, the image will be stretched to fit the specified aspect ratio. If only the <code>WidthPixels</code> parameter is provided, its original aspect ratio will be used to calculate the <code>HeightPixels</code> ratio. If neither parameter is provided, the original image size will be returned.'
+        HeightPixels:
+          allOf:
+            - $ref: '#/components/schemas/HeightPixels'
+            - description: 'The height of the output image that is used in conjunction with the <code>WidthPixels</code> parameter. When both <code>HeightPixels</code> and <code>WidthPixels</code> parameters are provided, the image will be stretched to fit the specified aspect ratio. If only the <code>HeightPixels</code> parameter is provided, its original aspect ratio will be used to calculate the <code>WidthPixels</code> ratio. If neither parameter is provided, the original image size will be returned.'
+      description: 'The structure that contains the information required for the KVS images delivery. If null, the configuration will be deleted from the stream.'
+    MappedResourceConfigurationListLimit:
+      type: integer
+      minimum: 1
+      maximum: 1
+    NextToken:
+      type: string
+      pattern: '[a-zA-Z0-9+/=]*'
+      minLength: 0
+      maxLength: 512
+    DescribeMappedResourceConfigurationInput:
+      type: object
+      title: DescribeMappedResourceConfigurationInput
+      properties:
+        StreamName:
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: The name of the stream.
+        StreamARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the stream.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MappedResourceConfigurationListLimit'
+            - description: The maximum number of results to return in the response.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token to provide in your next request, to get another batch of results.'
+    MappedResourceConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MappedResourceConfigurationListItem'
+      minItems: 0
+      maxItems: 1
+    DescribeMediaStorageConfigurationInput:
+      type: object
+      title: DescribeMediaStorageConfigurationInput
+      properties:
+        ChannelName:
+          allOf:
+            - $ref: '#/components/schemas/ChannelName'
+            - description: The name of the channel.
+        ChannelARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the channel.
+    MediaStorageConfiguration:
+      type: object
+      required:
+        - Status
+      properties:
+        StreamARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: 'The Amazon Resource Name (ARN) of the stream '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/MediaStorageConfigurationStatus'
+            - description: The status of the media storage configuration.
+      description: 'A structure that encapsulates, or contains, the media storage configuration properties.'
+    DescribeNotificationConfigurationInput:
+      type: object
+      title: DescribeNotificationConfigurationInput
+      properties:
+        StreamName:
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: The name of the stream from which to retrieve the notification configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+        StreamARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the Kinesis video stream from where you want to retrieve the notification configuration. You must specify either the <code>StreamName</code> or the StreamARN.
+    NotificationConfiguration:
+      type: object
+      required:
+        - Status
+        - DestinationConfig
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationStatus'
+            - description: Indicates if a notification configuration is enabled or disabled.
+        DestinationConfig:
+          allOf:
+            - $ref: '#/components/schemas/NotificationDestinationConfig'
+            - description: The destination information required to deliver a notification to a customer.
+      description: 'The structure that contains the notification information for the KVS images delivery. If this parameter is null, the configuration will be deleted from the stream.'
     DescribeSignalingChannelInput:
       type: object
       title: DescribeSignalingChannelInput
@@ -2103,7 +3250,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
-            - description: The ID of the AWS Key Management Service (AWS KMS) key that Kinesis Video Streams uses to encrypt data on the stream.
+            - description: The ID of the Key Management Service (KMS) key that Kinesis Video Streams uses to encrypt data on the stream.
         Version:
           allOf:
             - $ref: '#/components/schemas/Version'
@@ -2121,6 +3268,29 @@ components:
             - $ref: '#/components/schemas/DataRetentionInHours'
             - description: 'How long the stream retains data, in hours.'
       description: An object describing a Kinesis video stream.
+    DestinationRegion:
+      type: string
+      pattern: '^[a-z]+(-[a-z]+)?-[a-z]+-[0-9]$'
+      minLength: 9
+      maxLength: 14
+    DestinationUri:
+      type: string
+      pattern: '^[a-zA-Z_0-9]+:(//)?([^/]+)/?([^*]*)$'
+      minLength: 1
+      maxLength: 255
+    DurationInSeconds:
+      type: integer
+      minimum: 60
+      maximum: 3600
+    FormatConfigValue:
+      type: string
+      pattern: '^[a-zA-Z_0-9]+'
+      minLength: 0
+      maxLength: 256
+    FormatConfigKey:
+      type: string
+      enum:
+        - JPEGQuality
     GetDataEndpointInput:
       type: object
       required:
@@ -2173,11 +3343,6 @@ components:
       type: integer
       minimum: 1
       maximum: 10000
-    NextToken:
-      type: string
-      pattern: '[a-zA-Z0-9+/=]*'
-      minLength: 0
-      maxLength: 512
     ListSignalingChannelsInput:
       type: object
       title: ListSignalingChannelsInput
@@ -2256,6 +3421,70 @@ components:
           allOf:
             - $ref: '#/components/schemas/StreamName'
             - description: The name of the stream that you want to list tags for.
+    MaxLocalMediaSizeInMB:
+      type: integer
+      minimum: 64
+      maximum: 2000000
+    StrategyOnFullSize:
+      type: string
+      enum:
+        - DELETE_OLDEST_MEDIA
+        - DENY_NEW_MEDIA
+    MappedResourceConfigurationListItem:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/Type'
+            - description: The type of the associated resource for the kinesis video stream.
+        ARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: 'The Amazon Resource Name (ARN) of the Kinesis Video Stream resource, associated with the stream.'
+      description: 'A structure that encapsulates, or contains, the media storage configuration properties.'
+    Type:
+      type: string
+    MediaUriSecretArn:
+      type: string
+      pattern: 'arn:[a-z\d-]+:secretsmanager:[a-z0-9-]+:[0-9]+:secret:[a-zA-Z0-9_.-]+'
+      minLength: 20
+      maxLength: 2048
+      format: password
+    MediaUriType:
+      type: string
+      enum:
+        - RTSP_URI
+        - FILE_URI
+    MediaSourceConfig:
+      type: object
+      required:
+        - MediaUriSecretArn
+        - MediaUriType
+      properties:
+        MediaUriSecretArn:
+          allOf:
+            - $ref: '#/components/schemas/MediaUriSecretArn'
+            - description: 'The AWS Secrets Manager ARN for the username and password of the camera, or a local media file location.'
+        MediaUriType:
+          allOf:
+            - $ref: '#/components/schemas/MediaUriType'
+            - description: <p>The Uniform Resource Identifier (URI) type. The <code>FILE_URI</code> value can be used to stream local media files.</p> <note> <p>Preview only supports the <code>RTSP_URI</code> media source URI format .</p> </note>
+      description: The configuration details that consist of the credentials required (<code>MediaUriSecretArn</code> and <code>MediaUriType</code>) to access the media files that are streamed to the camera.
+    ScheduleConfig:
+      type: object
+      required:
+        - ScheduleExpression
+        - DurationInSeconds
+      properties:
+        ScheduleExpression:
+          allOf:
+            - $ref: '#/components/schemas/ScheduleExpression'
+            - description: '<p>The Quartz cron expression that takes care of scheduling jobs to record from the camera, or local media file, onto the Edge Agent. If the <code>ScheduleExpression</code> is not provided for the <code>RecorderConfig</code>, then the Edge Agent will always be set to recording mode.</p> <p>For more information about Quartz, refer to the <a href="http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html"> <i>Cron Trigger Tutorial</i> </a> page to understand the valid expressions and its use.</p>'
+        DurationInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/DurationInSeconds'
+            - description: 'The total duration to record the media. If the <code>ScheduleExpression</code> attribute is provided, then the <code>DurationInSeconds</code> attribute should also be specified.'
+      description: '<p>This API enables you to specify the duration that the camera, or local media file, should record onto the Edge Agent. The <code>ScheduleConfig</code> consists of the <code>ScheduleExpression</code> and the <code>DurationInMinutes</code> attributes. </p> <p>If the <code>ScheduleExpression</code> is not provided, then the Edge Agent will always be set to recording mode.</p>'
     ResourceEndpoint:
       type: string
     ResourceEndpointListItem:
@@ -2270,6 +3499,29 @@ components:
             - $ref: '#/components/schemas/ResourceEndpoint'
             - description: The endpoint of the signaling channel returned by the <code>GetSignalingChannelEndpoint</code> API.
       description: An object that describes the endpoint of the signaling channel returned by the <code>GetSignalingChannelEndpoint</code> API.
+    ScheduleExpression:
+      type: string
+      pattern: '[^\n]{11,100}'
+      minLength: 11
+      maxLength: 100
+    StartEdgeConfigurationUpdateInput:
+      type: object
+      required:
+        - EdgeConfig
+      title: StartEdgeConfigurationUpdateInput
+      properties:
+        StreamName:
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: The name of the stream whose edge configuration you want to update. Specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+        StreamARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: ' The Amazon Resource Name (ARN) of the stream. Specify either the <code>StreamName</code> or the <code>StreamARN</code>.'
+        EdgeConfig:
+          allOf:
+            - $ref: '#/components/schemas/EdgeConfig'
+            - description: The edge configuration details required to invoke the update process.
     TagKeyList:
       type: array
       items:
@@ -2381,6 +3633,53 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataRetentionChangeInHours'
             - description: 'The retention period, in hours. The value you specify replaces the current value. The maximum value for this parameter is 87600 (ten years).'
+    UpdateImageGenerationConfigurationInput:
+      type: object
+      title: UpdateImageGenerationConfigurationInput
+      properties:
+        StreamName:
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: The name of the stream from which to update the image generation configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+        StreamARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the Kinesis video stream from where you want to update the image generation configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+        ImageGenerationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ImageGenerationConfiguration'
+            - description: 'The structure that contains the information required for the KVS images delivery. If the structure is null, the configuration will be deleted from the stream.'
+    UpdateMediaStorageConfigurationInput:
+      type: object
+      required:
+        - ChannelARN
+        - MediaStorageConfiguration
+      title: UpdateMediaStorageConfigurationInput
+      properties:
+        ChannelARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the channel.
+        MediaStorageConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/MediaStorageConfiguration'
+            - description: 'A structure that encapsulates, or contains, the media storage configuration properties.'
+    UpdateNotificationConfigurationInput:
+      type: object
+      title: UpdateNotificationConfigurationInput
+      properties:
+        StreamName:
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: The name of the stream from which to update the notification configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+        StreamARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the Kinesis video stream from where you want to update the notification configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+        NotificationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/NotificationConfiguration'
+            - description: 'The structure containing the information required for notifications. If the structure is null, the configuration will be deleted from the stream.'
     UpdateSignalingChannelInput:
       type: object
       required:

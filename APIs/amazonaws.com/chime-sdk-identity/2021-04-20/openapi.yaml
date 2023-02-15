@@ -1180,6 +1180,238 @@ paths:
                   minLength: 0
                   maxLength: 1024
                   format: password
+  '/app-instance-users/{appInstanceUserArn}/endpoints/{endpointId}':
+    delete:
+      operationId: DeregisterAppInstanceUserEndpoint
+      description: Deregisters an <code>AppInstanceUserEndpoint</code>.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceUserArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstanceUser</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+            format: password
+        - name: endpointId
+          in: path
+          required: true
+          description: The unique identifier of the <code>AppInstanceUserEndpoint</code>.
+          schema:
+            type: string
+            pattern: .*
+            minLength: 0
+            maxLength: 64
+            format: password
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeAppInstanceUserEndpoint
+      description: Returns the full details of an <code>AppInstanceUserEndpoint</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAppInstanceUserEndpointResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceUserArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstanceUser</code>.
+          schema:
+            type: string
+            pattern: .*
+            minLength: 0
+            maxLength: 1600
+            format: password
+        - name: endpointId
+          in: path
+          required: true
+          description: The unique identifier of the <code>AppInstanceUserEndpoint</code>.
+          schema:
+            type: string
+            pattern: .*
+            minLength: 0
+            maxLength: 64
+            format: password
+    put:
+      operationId: UpdateAppInstanceUserEndpoint
+      description: Updates the details of an <code>AppInstanceUserEndpoint</code>. You can update the name and <code>AllowMessage</code> values.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAppInstanceUserEndpointResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceUserArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstanceUser</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+            format: password
+        - name: endpointId
+          in: path
+          required: true
+          description: The unique identifier of the <code>AppInstanceUserEndpoint</code>.
+          schema:
+            type: string
+            pattern: .*
+            minLength: 0
+            maxLength: 64
+            format: password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Name:
+                  description: The name of the <code>AppInstanceUserEndpoint</code>.
+                  type: string
+                  pattern: .*
+                  minLength: 0
+                  maxLength: 1600
+                  format: password
+                AllowMessages:
+                  description: Boolean that controls whether the <code>AppInstanceUserEndpoint</code> is opted in to receive messages. <code>ALL</code> indicates the endpoint will receive all messages. <code>NONE</code> indicates the endpoint will receive no messages.
+                  type: string
+                  enum:
+                    - ALL
+                    - NONE
   '/app-instances/{appInstanceArn}/retention-settings':
     get:
       operationId: GetAppInstanceRetentionSettings
@@ -1318,6 +1550,229 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ChannelRetentionSettings'
                         - description: The length of time in days to retain the messages in a channel.
+  '/app-instance-users/{appInstanceUserArn}/endpoints':
+    get:
+      operationId: ListAppInstanceUserEndpoints
+      description: Lists all the <code>AppInstanceUserEndpoints</code> created under a single <code>AppInstanceUser</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAppInstanceUserEndpointsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceUserArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstanceUser</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+            format: password
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of endpoints that you want to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: next-token
+          in: query
+          required: false
+          description: The token passed by previous API calls until all requested endpoints are returned.
+          schema:
+            type: string
+            pattern: .*
+            minLength: 0
+            maxLength: 2048
+            format: password
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: RegisterAppInstanceUserEndpoint
+      description: 'Registers an endpoint under an Amazon Chime <code>AppInstanceUser</code>. The endpoint receives messages for a user. For push notifications, the endpoint is a mobile device used to receive mobile push notifications for a user.'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterAppInstanceUserEndpointResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceUserArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstanceUser</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+            format: password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Type
+                - ResourceArn
+                - EndpointAttributes
+                - ClientRequestToken
+              properties:
+                Name:
+                  description: The name of the <code>AppInstanceUserEndpoint</code>.
+                  type: string
+                  pattern: .*
+                  minLength: 0
+                  maxLength: 1600
+                  format: password
+                Type:
+                  description: '<p>The type of the <code>AppInstanceUserEndpoint</code>. Supported types:</p> <ul> <li> <p> <code>APNS</code>: The mobile notification service for an Apple device.</p> </li> <li> <p> <code>APNS_SANDBOX</code>: The sandbox environment of the mobile notification service for an Apple device.</p> </li> <li> <p> <code>GCM</code>: The mobile notification service for an Android device.</p> </li> </ul> <p>Populate the <code>ResourceArn</code> value of each type as <code>PinpointAppArn</code>.</p>'
+                  type: string
+                  enum:
+                    - APNS
+                    - APNS_SANDBOX
+                    - GCM
+                ResourceArn:
+                  description: The ARN of the resource to which the endpoint belongs.
+                  type: string
+                  pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+                  minLength: 5
+                  maxLength: 1600
+                  format: password
+                EndpointAttributes:
+                  description: The attributes of an <code>Endpoint</code>.
+                  type: object
+                  properties:
+                    DeviceToken:
+                      allOf:
+                        - $ref: '#/components/schemas/NonEmptySensitiveString1600'
+                        - description: 'The device token for the GCM, APNS, and APNS_SANDBOX endpoint types.'
+                    VoipDeviceToken:
+                      allOf:
+                        - $ref: '#/components/schemas/NonEmptySensitiveString1600'
+                        - description: The VOIP device token for the APNS and APNS_SANDBOX endpoint types.
+                ClientRequestToken:
+                  description: 'The idempotency token for each client request. '
+                  type: string
+                  pattern: '[-_a-zA-Z0-9]*'
+                  minLength: 2
+                  maxLength: 64
+                  format: password
+                AllowMessages:
+                  description: Boolean that controls whether the AppInstanceUserEndpoint is opted in to receive messages. <code>ALL</code> indicates the endpoint receives all messages. <code>NONE</code> indicates the endpoint receives no messages.
+                  type: string
+                  enum:
+                    - ALL
+                    - NONE
   /app-instance-users#app-instance-arn:
     get:
       operationId: ListAppInstanceUsers
@@ -1413,6 +1868,241 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /tags#arn:
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags applied to an Amazon Chime SDK identity resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: arn
+          in: query
+          required: true
+          description: The ARN of the resource.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /tags#operation=tag-resource:
+    post:
+      operationId: TagResource
+      description: Applies the specified tags to the specified Amazon Chime SDK identity resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - tag-resource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceARN
+                - Tags
+              properties:
+                ResourceARN:
+                  description: The resource ARN.
+                  type: string
+                  pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+                  minLength: 5
+                  maxLength: 1600
+                Tags:
+                  description: The tag key-value pairs.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /tags#operation=untag-resource:
+    post:
+      operationId: UntagResource
+      description: Removes the specified tags from the specified Amazon Chime SDK identity resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - untag-resource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceARN
+                - TagKeys
+              properties:
+                ResourceARN:
+                  description: The resource ARN.
+                  type: string
+                  pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+                  minLength: 5
+                  maxLength: 1600
+                TagKeys:
+                  description: The tag keys.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/TagKey'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -1481,12 +2171,12 @@ components:
         Key:
           allOf:
             - $ref: '#/components/schemas/TagKey'
-            - description: The key of the tag.
+            - description: The key in a tag.
         Value:
           allOf:
             - $ref: '#/components/schemas/TagValue'
-            - description: The value of the tag.
-      description: Describes a tag applied to a resource.
+            - description: The value in a tag.
+      description: A tag object containing a key-value pair.
     BadRequestException: {}
     ConflictException: {}
     ForbiddenException: {}
@@ -1534,6 +2224,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/AppInstanceUser'
             - description: The name of the <code>AppInstanceUser</code>.
+    DescribeAppInstanceUserEndpointResponse:
+      type: object
+      properties:
+        AppInstanceUserEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/AppInstanceUserEndpoint'
+            - description: 'The full details of an <code>AppInstanceUserEndpoint</code>: the <code>AppInstanceUserArn</code>, ID, name, type, resource ARN, attributes, allow messages, state, and created and last updated timestamps. All timestamps use epoch milliseconds.'
     GetAppInstanceRetentionSettingsResponse:
       type: object
       properties:
@@ -1560,6 +2257,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: The token returned from previous API requests until the number of administrators is reached.
+    ListAppInstanceUserEndpointsResponse:
+      type: object
+      properties:
+        AppInstanceUserEndpoints:
+          allOf:
+            - $ref: '#/components/schemas/AppInstanceUserEndpointSummaryList'
+            - description: The information for each requested <code>AppInstanceUserEndpoint</code>.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token passed by previous API calls until all requested endpoints are returned.
     ListAppInstanceUsersResponse:
       type: object
       properties:
@@ -1586,6 +2294,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: The token passed by previous API requests until the maximum number of <code>AppInstance</code>s is reached.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tag key-value pairs.
     PutAppInstanceRetentionSettingsResponse:
       type: object
       properties:
@@ -1605,6 +2320,28 @@ components:
             - $ref: '#/components/schemas/RetentionDays'
             - description: The time in days to retain the messages in a channel.
       description: The details of the retention settings for a channel.
+    RegisterAppInstanceUserEndpointResponse:
+      type: object
+      properties:
+        AppInstanceUserArn:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveChimeArn'
+            - description: The ARN of the <code>AppInstanceUser</code>.
+        EndpointId:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString64'
+            - description: The unique identifier of the <code>AppInstanceUserEndpoint</code>.
+    NonEmptySensitiveString1600:
+      type: string
+      pattern: .*
+      minLength: 1
+      maxLength: 1600
+      format: password
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+      format: password
     UpdateAppInstanceResponse:
       type: object
       properties:
@@ -1619,6 +2356,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
             - description: The ARN of the <code>AppInstanceUser</code>.
+    UpdateAppInstanceUserEndpointResponse:
+      type: object
+      properties:
+        AppInstanceUserArn:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveChimeArn'
+            - description: The ARN of the <code>AppInstanceUser</code>.
+        EndpointId:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString64'
+            - description: The unique identifier of the <code>AppInstanceUserEndpoint</code>.
+    AllowMessages:
+      type: string
+      enum:
+        - ALL
+        - NONE
     ChimeArn:
       type: string
       pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -1761,6 +2514,134 @@ components:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time at which the <code>AppInstanceUser</code> was last updated.
       description: The details of an <code>AppInstanceUser</code>.
+    SensitiveChimeArn:
+      type: string
+      pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+      minLength: 5
+      maxLength: 1600
+      format: password
+    SensitiveString64:
+      type: string
+      pattern: .*
+      minLength: 0
+      maxLength: 64
+      format: password
+    SensitiveString1600:
+      type: string
+      pattern: .*
+      minLength: 0
+      maxLength: 1600
+      format: password
+    AppInstanceUserEndpointType:
+      type: string
+      enum:
+        - APNS
+        - APNS_SANDBOX
+        - GCM
+    EndpointAttributes:
+      type: object
+      required:
+        - DeviceToken
+      properties:
+        DeviceToken:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptySensitiveString1600'
+            - description: 'The device token for the GCM, APNS, and APNS_SANDBOX endpoint types.'
+        VoipDeviceToken:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptySensitiveString1600'
+            - description: The VOIP device token for the APNS and APNS_SANDBOX endpoint types.
+      description: The attributes of an <code>Endpoint</code>.
+    EndpointState:
+      type: object
+      required:
+        - Status
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/EndpointStatus'
+            - description: Enum that indicates the Status of an <code>AppInstanceUserEndpoint</code>.
+        StatusReason:
+          allOf:
+            - $ref: '#/components/schemas/EndpointStatusReason'
+            - description: The reason for the <code>EndpointStatus</code>.
+      description: '<p>A read-only field that represents the state of an <code>AppInstanceUserEndpoint</code>. Supported values:</p> <ul> <li> <p> <code>ACTIVE</code>: The <code>AppInstanceUserEndpoint</code> is active and able to receive messages. When <code>ACTIVE</code>, the <code>EndpointStatusReason</code> remains empty.</p> </li> <li> <p> <code>INACTIVE</code>: The <code>AppInstanceUserEndpoint</code> is inactive and can''t receive message. When INACTIVE, the corresponding reason will be conveyed through EndpointStatusReason.</p> </li> <li> <p> <code>INVALID_DEVICE_TOKEN</code> indicates that an <code>AppInstanceUserEndpoint</code> is <code>INACTIVE</code> due to invalid device token</p> </li> <li> <p> <code>INVALID_PINPOINT_ARN</code> indicates that an <code>AppInstanceUserEndpoint</code> is <code>INACTIVE</code> due to an invalid pinpoint ARN that was input through the <code>ResourceArn</code> field.</p> </li> </ul>'
+    AppInstanceUserEndpoint:
+      type: object
+      properties:
+        AppInstanceUserArn:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveChimeArn'
+            - description: The ARN of the <code>AppInstanceUser</code>.
+        EndpointId:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString64'
+            - description: The unique identifier of the <code>AppInstanceUserEndpoint</code>.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString1600'
+            - description: The name of the <code>AppInstanceUserEndpoint</code>.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/AppInstanceUserEndpointType'
+            - description: The type of the <code>AppInstanceUserEndpoint</code>.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveChimeArn'
+            - description: The ARN of the resource to which the endpoint belongs.
+        EndpointAttributes:
+          allOf:
+            - $ref: '#/components/schemas/EndpointAttributes'
+            - description: The attributes of an <code>Endpoint</code>.
+        CreatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which an <code>AppInstanceUserEndpoint</code> was created.
+        LastUpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which an <code>AppInstanceUserEndpoint</code> was last updated.
+        AllowMessages:
+          allOf:
+            - $ref: '#/components/schemas/AllowMessages'
+            - description: Boolean that controls whether the <code>AppInstanceUserEndpoint</code> is opted in to receive messages. <code>ALL</code> indicates the endpoint will receive all messages. <code>NONE</code> indicates the endpoint will receive no messages.
+        EndpointState:
+          allOf:
+            - $ref: '#/components/schemas/EndpointState'
+            - description: '<p>A read-only field that represents the state of an <code>AppInstanceUserEndpoint</code>. Supported values:</p> <ul> <li> <p> <code>ACTIVE</code>: The <code>AppInstanceUserEndpoint</code> is active and able to receive messages. When <code>ACTIVE</code>, the <code>EndpointStatusReason</code> remains empty.</p> </li> <li> <p> <code>INACTIVE</code>: The <code>AppInstanceUserEndpoint</code> is inactive and can''t receive message. When <code>INACTIVE</code>, the corresponding reason will be conveyed through <code>EndpointStatusReason</code>.</p> </li> <li> <p> <code>INVALID_DEVICE_TOKEN</code> indicates that an <code>AppInstanceUserEndpoint</code> is <code>INACTIVE</code> due to invalid device token</p> </li> <li> <p> <code>INVALID_PINPOINT_ARN</code> indicates that an <code>AppInstanceUserEndpoint</code> is <code>INACTIVE</code> due to an invalid pinpoint ARN that was input through the <code>ResourceArn</code> field.</p> </li> </ul>'
+      description: 'An endpoint under an Amazon Chime <code>AppInstanceUser</code> that receives messages for a user. For push notifications, the endpoint is a mobile device used to receive mobile push notifications for a user.'
+    AppInstanceUserEndpointSummary:
+      type: object
+      properties:
+        AppInstanceUserArn:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveChimeArn'
+            - description: The ARN of the <code>AppInstanceUser</code>.
+        EndpointId:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString64'
+            - description: The unique identifier of the <code>AppInstanceUserEndpoint</code>.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString1600'
+            - description: The name of the <code>AppInstanceUserEndpoint</code>.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/AppInstanceUserEndpointType'
+            - description: The type of the <code>AppInstanceUserEndpoint</code>.
+        AllowMessages:
+          allOf:
+            - $ref: '#/components/schemas/AllowMessages'
+            - description: BBoolean that controls whether the <code>AppInstanceUserEndpoint</code> is opted in to receive messages. <code>ALL</code> indicates the endpoint will receive all messages. <code>NONE</code> indicates the endpoint will receive no messages.
+        EndpointState:
+          allOf:
+            - $ref: '#/components/schemas/EndpointState'
+            - description: A read-only field that represent the state of an <code>AppInstanceUserEndpoint</code>.
+      description: Summary of the details of an <code>AppInstanceUserEndpoint</code>.
+    AppInstanceUserEndpointSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AppInstanceUserEndpointSummary'
     AppInstanceUserSummary:
       type: object
       properties:
@@ -1881,6 +2762,10 @@ components:
       type: object
       title: DeleteAppInstanceUserRequest
       properties: {}
+    DeregisterAppInstanceUserEndpointRequest:
+      type: object
+      title: DeregisterAppInstanceUserEndpointRequest
+      properties: {}
     DescribeAppInstanceAdminRequest:
       type: object
       title: DescribeAppInstanceAdminRequest
@@ -1889,10 +2774,24 @@ components:
       type: object
       title: DescribeAppInstanceRequest
       properties: {}
+    DescribeAppInstanceUserEndpointRequest:
+      type: object
+      title: DescribeAppInstanceUserEndpointRequest
+      properties: {}
     DescribeAppInstanceUserRequest:
       type: object
       title: DescribeAppInstanceUserRequest
       properties: {}
+    EndpointStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - INACTIVE
+    EndpointStatusReason:
+      type: string
+      enum:
+        - INVALID_DEVICE_TOKEN
+        - INVALID_PINPOINT_ARN
     GetAppInstanceRetentionSettingsRequest:
       type: object
       title: GetAppInstanceRetentionSettingsRequest
@@ -1917,6 +2816,10 @@ components:
       type: object
       title: ListAppInstanceAdminsRequest
       properties: {}
+    ListAppInstanceUserEndpointsRequest:
+      type: object
+      title: ListAppInstanceUserEndpointsRequest
+      properties: {}
     ListAppInstanceUsersRequest:
       type: object
       title: ListAppInstanceUsersRequest
@@ -1924,6 +2827,10 @@ components:
     ListAppInstancesRequest:
       type: object
       title: ListAppInstancesRequest
+      properties: {}
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
       properties: {}
     PutAppInstanceRetentionSettingsRequest:
       type: object
@@ -1935,16 +2842,80 @@ components:
           allOf:
             - $ref: '#/components/schemas/AppInstanceRetentionSettings'
             - description: 'The time in days to retain data. Data type: number.'
-    TagKey:
-      type: string
-      minLength: 1
-      maxLength: 128
-      format: password
+    RegisterAppInstanceUserEndpointRequest:
+      type: object
+      required:
+        - Type
+        - ResourceArn
+        - EndpointAttributes
+        - ClientRequestToken
+      title: RegisterAppInstanceUserEndpointRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString1600'
+            - description: The name of the <code>AppInstanceUserEndpoint</code>.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/AppInstanceUserEndpointType'
+            - description: '<p>The type of the <code>AppInstanceUserEndpoint</code>. Supported types:</p> <ul> <li> <p> <code>APNS</code>: The mobile notification service for an Apple device.</p> </li> <li> <p> <code>APNS_SANDBOX</code>: The sandbox environment of the mobile notification service for an Apple device.</p> </li> <li> <p> <code>GCM</code>: The mobile notification service for an Android device.</p> </li> </ul> <p>Populate the <code>ResourceArn</code> value of each type as <code>PinpointAppArn</code>.</p>'
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveChimeArn'
+            - description: The ARN of the resource to which the endpoint belongs.
+        EndpointAttributes:
+          allOf:
+            - $ref: '#/components/schemas/EndpointAttributes'
+            - description: The attributes of an <code>Endpoint</code>.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: 'The idempotency token for each client request. '
+        AllowMessages:
+          allOf:
+            - $ref: '#/components/schemas/AllowMessages'
+            - description: Boolean that controls whether the AppInstanceUserEndpoint is opted in to receive messages. <code>ALL</code> indicates the endpoint receives all messages. <code>NONE</code> indicates the endpoint receives no messages.
     TagValue:
       type: string
       minLength: 1
       maxLength: 256
       format: password
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 1
+      maxItems: 50
+    TagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - Tags
+      title: TagResourceRequest
+      properties:
+        ResourceARN:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The resource ARN.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tag key-value pairs.
+    UntagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - TagKeys
+      title: UntagResourceRequest
+      properties:
+        ResourceARN:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The resource ARN.
+        TagKeys:
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: The tag keys.
     UpdateAppInstanceRequest:
       type: object
       required:
@@ -1960,6 +2931,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/Metadata'
             - description: The metadata that you want to change.
+    UpdateAppInstanceUserEndpointRequest:
+      type: object
+      title: UpdateAppInstanceUserEndpointRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString1600'
+            - description: The name of the <code>AppInstanceUserEndpoint</code>.
+        AllowMessages:
+          allOf:
+            - $ref: '#/components/schemas/AllowMessages'
+            - description: Boolean that controls whether the <code>AppInstanceUserEndpoint</code> is opted in to receive messages. <code>ALL</code> indicates the endpoint will receive all messages. <code>NONE</code> indicates the endpoint will receive no messages.
     UpdateAppInstanceUserRequest:
       type: object
       required:

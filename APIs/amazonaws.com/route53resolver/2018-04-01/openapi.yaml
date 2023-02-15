@@ -1803,6 +1803,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.GetResolverConfig:
+    post:
+      operationId: GetResolverConfig
+      description: Retrieves the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetResolverConfigResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetResolverConfigRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.GetResolverConfig
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Route53Resolver.GetResolverDnssecConfig:
     post:
       operationId: GetResolverDnssecConfig
@@ -2788,6 +2851,87 @@ paths:
             type: string
             enum:
               - Route53Resolver.ListFirewallRules
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.ListResolverConfigs:
+    post:
+      operationId: ListResolverConfigs
+      description: Retrieves the Resolver configurations that you have defined. Route 53 Resolver uses the configurations to manage DNS resolution behavior for your VPCs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResolverConfigsResponse'
+        '480':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListResolverConfigsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.ListResolverConfigs
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4023,6 +4167,87 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.UpdateResolverConfig:
+    post:
+      operationId: UpdateResolverConfig
+      description: Updates the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateResolverConfigResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '487':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateResolverConfigRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.UpdateResolverConfig
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Route53Resolver.UpdateResolverDnssecConfig:
     post:
       operationId: UpdateResolverDnssecConfig
@@ -4908,6 +5133,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The ARN (Amazon Resource Name) for the rule group.
+    GetResolverConfigResponse:
+      type: object
+      properties:
+        ResolverConfig:
+          allOf:
+            - $ref: '#/components/schemas/ResolverConfig'
+            - description: Information about the behavior configuration of Route 53 Resolver behavior for the VPC you specified in the <code>GetResolverConfig</code> request.
+    GetResolverConfigRequest:
+      type: object
+      required:
+        - ResourceId
+      title: GetResolverConfigRequest
+      properties:
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: Resource ID of the Amazon VPC that you want to get information about.
     GetResolverDnssecConfigResponse:
       type: object
       properties:
@@ -5258,6 +5500,30 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: '<p>For the first call to this list request, omit this value.</p> <p>When you request a list of objects, Resolver returns at most the number of objects specified in <code>MaxResults</code>. If more objects are available for retrieval, Resolver returns a <code>NextToken</code> value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.</p>'
+    ListResolverConfigsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>If a response includes the last of the Resolver configurations that are associated with the current Amazon Web Services account, <code>NextToken</code> doesn''t appear in the response.</p> <p>If a response doesn''t include the last of the configurations, you can get more configurations by submitting another <code>ListResolverConfigs</code> request. Get the value of <code>NextToken</code> that Amazon Route 53 returned in the previous response and include it in <code>NextToken</code> in the next request.</p>'
+        ResolverConfigs:
+          allOf:
+            - $ref: '#/components/schemas/ResolverConfigList'
+            - description: An array that contains one <code>ResolverConfigs</code> element for each Resolver configuration that is associated with the current Amazon Web Services account.
+    ListResolverConfigsRequest:
+      type: object
+      title: ListResolverConfigsRequest
+      properties:
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListResolverConfigsMaxResult'
+            - description: 'The maximum number of Resolver configurations that you want to return in the response to a <code>ListResolverConfigs</code> request. If you don''t specify a value for <code>MaxResults</code>, up to 100 Resolver configurations are returned.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>(Optional) If the current Amazon Web Services account has more than <code>MaxResults</code> Resolver configurations, use <code>NextToken</code> to get the second and subsequent pages of results.</p> <p>For the first <code>ListResolverConfigs</code> request, omit this value.</p> <p>For the second and subsequent requests, get the value of <code>NextToken</code> from the previous response and specify that value for <code>NextToken</code> in the request.</p>'
+    InvalidNextTokenException: {}
     ListResolverDnssecConfigsResponse:
       type: object
       properties:
@@ -5285,7 +5551,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/Filters'
             - description: An optional specification to return a subset of objects.
-    InvalidNextTokenException: {}
     ListResolverEndpointIpAddressesResponse:
       type: object
       properties:
@@ -5773,6 +6038,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/Name'
             - description: The name of the rule group association.
+    UpdateResolverConfigResponse:
+      type: object
+      properties:
+        ResolverConfig:
+          allOf:
+            - $ref: '#/components/schemas/ResolverConfig'
+            - description: An array that contains settings for the specified Resolver configuration.
+    UpdateResolverConfigRequest:
+      type: object
+      required:
+        - ResourceId
+        - AutodefinedReverseFlag
+      title: UpdateResolverConfigRequest
+      properties:
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: Resource ID of the Amazon VPC that you want to update the Resolver configuration for.
+        AutodefinedReverseFlag:
+          allOf:
+            - $ref: '#/components/schemas/AutodefinedReverseFlag'
+            - description: '<p>Indicates whether or not the Resolver will create autodefined rules for reverse DNS lookups. This is enabled by default. Disabling this option will also affect EC2-Classic instances using ClassicLink. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the <i>Amazon EC2 guide</i>.</p> <note> <p>It can take some time for the status change to be completed.</p> </note> <p/>'
     UpdateResolverDnssecConfigResponse:
       type: object
       properties:
@@ -6060,6 +6347,11 @@ components:
             - $ref: '#/components/schemas/StatusMessage'
             - description: A detailed description of the status of the association between a Resolver rule and a VPC.
       description: 'In the response to an <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverRule.html">AssociateResolverRule</a>, <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DisassociateResolverRule.html">DisassociateResolverRule</a>, or <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRuleAssociations.html">ListResolverRuleAssociations</a> request, provides information about an association between a Resolver rule and a VPC. The association determines which DNS queries that originate in the VPC are forwarded to your network. '
+    AutodefinedReverseFlag:
+      type: string
+      enum:
+        - ENABLE
+        - DISABLE
     BlockOverrideDnsType:
       type: string
       enum:
@@ -6553,11 +6845,31 @@ components:
         $ref: '#/components/schemas/FirewallRuleGroupMetadata'
     FirewallRuleGroupPolicy:
       type: string
-      maxLength: 5000
+      maxLength: 30000
     FirewallRules:
       type: array
       items:
         $ref: '#/components/schemas/FirewallRule'
+    ResolverConfig:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: ID for the Resolver configuration.
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The ID of the Amazon Virtual Private Cloud VPC that you're configuring Resolver for.
+        OwnerId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The owner account ID of the Amazon Virtual Private Cloud VPC.
+        AutodefinedReverse:
+          allOf:
+            - $ref: '#/components/schemas/ResolverAutodefinedReverseStatus'
+            - description: '<p> The status of whether or not the Resolver will create autodefined rules for reverse DNS lookups. This is enabled by default. The status can be one of following:</p> <p> Status of the rules generated by VPCs based on CIDR/Region for reverse DNS resolution. The status can be one of following:</p> <ul> <li> <p> <b>ENABLING:</b> Autodefined rules for reverse DNS lookups are being enabled but are not complete.</p> </li> <li> <p> <b>ENABLED:</b> Autodefined rules for reverse DNS lookups are enabled.</p> </li> <li> <p> <b>DISABLING:</b> Autodefined rules for reverse DNS lookups are being disabled but are not complete.</p> </li> <li> <p> <b>DISABLED:</b> Autodefined rules for reverse DNS lookups are disabled.</p> </li> </ul>'
+      description: A complex type that contains information about a Resolver configuration for a VPC.
     ResolverDnssecConfig:
       type: object
       properties:
@@ -6580,7 +6892,7 @@ components:
       description: A complex type that contains information about a configuration for DNSSEC validation.
     ResolverQueryLogConfigPolicy:
       type: string
-      maxLength: 5000
+      maxLength: 30000
     ResolverRulePolicy:
       type: string
       maxLength: 5000
@@ -6671,6 +6983,14 @@ components:
       type: integer
       minimum: 1
       maximum: 100
+    ListResolverConfigsMaxResult:
+      type: integer
+      minimum: 5
+      maximum: 100
+    ResolverConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResolverConfig'
     ResolverDnssecConfigList:
       type: array
       items:
@@ -6708,6 +7028,13 @@ components:
       type: integer
       minimum: 0
       maximum: 65535
+    ResolverAutodefinedReverseStatus:
+      type: string
+      enum:
+        - ENABLING
+        - ENABLED
+        - DISABLING
+        - DISABLED
     ResolverDNSSECValidationStatus:
       type: string
       enum:

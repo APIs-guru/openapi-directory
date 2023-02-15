@@ -311,7 +311,6 @@ paths:
               type: object
               required:
                 - AlertName
-                - AlertSensitivityThreshold
                 - AnomalyDetectorArn
                 - Action
               properties:
@@ -355,6 +354,18 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+                AlertFilters:
+                  description: The configuration of the alert filters.
+                  type: object
+                  properties:
+                    MetricList:
+                      allOf:
+                        - $ref: '#/components/schemas/MetricNameList'
+                        - description: The list of measures that you want to get alerts for.
+                    DimensionFilterList:
+                      allOf:
+                        - $ref: '#/components/schemas/DimensionFilterList'
+                        - description: The list of DimensionFilter objects that are used for dimension-based filtering.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -558,7 +569,7 @@ paths:
                     $ref: '#/components/schemas/Metric'
                   minItems: 1
                 Offset:
-                  description: 'After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.'
+                  description: 'After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3, Redshift, Athena and datasources.'
                   type: integer
                   minimum: 0
                   maximum: 432000
@@ -589,7 +600,7 @@ paths:
                     - PT10M
                     - PT5M
                 MetricSource:
-                  description: Contains information about source data used to generate a metric.
+                  description: Contains information about source data used to generate metrics.
                   type: object
                   properties:
                     S3SourceConfig:
@@ -597,19 +608,23 @@ paths:
                     AppFlowConfig:
                       allOf:
                         - $ref: '#/components/schemas/AppFlowConfig'
-                        - description: An object containing information about the AppFlow configuration.
+                        - description: Details about an AppFlow datasource.
                     CloudWatchConfig:
                       allOf:
                         - $ref: '#/components/schemas/CloudWatchConfig'
-                        - description: An object containing information about the Amazon CloudWatch monitoring configuration.
+                        - description: Details about an Amazon CloudWatch monitoring datasource.
                     RDSSourceConfig:
                       allOf:
                         - $ref: '#/components/schemas/RDSSourceConfig'
-                        - description: An object containing information about the Amazon Relational Database Service (RDS) configuration.
+                        - description: Details about an Amazon Relational Database Service (RDS) datasource.
                     RedshiftSourceConfig:
                       allOf:
                         - $ref: '#/components/schemas/RedshiftSourceConfig'
-                        - description: An object containing information about the Amazon Redshift database configuration.
+                        - description: Details about an Amazon Redshift database datasource.
+                    AthenaSourceConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/AthenaSourceConfig'
+                        - description: Details about an Amazon Athena datasource.
                 Timezone:
                   description: The time zone in which your source data was recorded.
                   type: string
@@ -622,6 +637,81 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+                DimensionFilterList:
+                  description: A list of filters that specify which data is kept for anomaly detection.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MetricSetDimensionFilter'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DeactivateAnomalyDetector:
+    post:
+      operationId: DeactivateAnomalyDetector
+      description: Deactivates an anomaly detector.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeactivateAnomalyDetectorResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AnomalyDetectorArn
+              properties:
+                AnomalyDetectorArn:
+                  description: The Amazon Resource Name (ARN) of the anomaly detector.
+                  type: string
+                  pattern: 'arn:([a-z\d-]+):.*:.*:.*:.+'
+                  maxLength: 256
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1048,6 +1138,79 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DetectMetricSetConfig:
+    post:
+      operationId: DetectMetricSetConfig
+      description: 'Detects an Amazon S3 dataset''s file format, interval, and offset.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetectMetricSetConfigResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AnomalyDetectorArn
+                - AutoDetectionMetricSource
+              properties:
+                AnomalyDetectorArn:
+                  description: An anomaly detector ARN.
+                  type: string
+                  pattern: 'arn:([a-z\d-]+):.*:.*:.*:.+'
+                  maxLength: 256
+                AutoDetectionMetricSource:
+                  description: An auto detection metric source.
+                  type: object
+                  properties:
+                    S3SourceConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/AutoDetectionS3SourceConfig'
+                        - description: The source's source config.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /GetAnomalyGroup:
     post:
       operationId: GetAnomalyGroup
@@ -1107,6 +1270,75 @@ paths:
                   maxLength: 63
                 AnomalyDetectorArn:
                   description: The Amazon Resource Name (ARN) of the anomaly detector.
+                  type: string
+                  pattern: 'arn:([a-z\d-]+):.*:.*:.*:.+'
+                  maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /GetDataQualityMetrics:
+    post:
+      operationId: GetDataQualityMetrics
+      description: Returns details about the requested data quality metrics.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDataQualityMetricsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AnomalyDetectorArn
+              properties:
+                AnomalyDetectorArn:
+                  description: The Amazon Resource Name (ARN) of the anomaly detector that you want to investigate.
+                  type: string
+                  pattern: 'arn:([a-z\d-]+):.*:.*:.*:.+'
+                  maxLength: 256
+                MetricSetArn:
+                  description: The Amazon Resource Name (ARN) of a specific data quality metric set.
                   type: string
                   pattern: 'arn:([a-z\d-]+):.*:.*:.*:.+'
                   maxLength: 256
@@ -1446,6 +1678,105 @@ paths:
                   maximum: 100
                 NextToken:
                   description: 'If the result of the previous request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of results, use the token in the next request. Tokens expire after 24 hours.'
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 3000
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListAnomalyGroupRelatedMetrics:
+    post:
+      operationId: ListAnomalyGroupRelatedMetrics
+      description: Returns a list of measures that are potential causes or effects of an anomaly group.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAnomalyGroupRelatedMetricsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AnomalyDetectorArn
+                - AnomalyGroupId
+              properties:
+                AnomalyDetectorArn:
+                  description: The Amazon Resource Name (ARN) of the anomaly detector.
+                  type: string
+                  pattern: 'arn:([a-z\d-]+):.*:.*:.*:.+'
+                  maxLength: 256
+                AnomalyGroupId:
+                  description: The ID of the anomaly group.
+                  type: string
+                  pattern: '[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}'
+                  maxLength: 63
+                RelationshipTypeFilter:
+                  description: Filter for potential causes (<code>CAUSE_OF_INPUT_ANOMALY_GROUP</code>) or downstream effects (<code>EFFECT_OF_INPUT_ANOMALY_GROUP</code>) of the anomaly group.
+                  type: string
+                  enum:
+                    - CAUSE_OF_INPUT_ANOMALY_GROUP
+                    - EFFECT_OF_INPUT_ANOMALY_GROUP
+                MaxResults:
+                  description: The maximum number of results to return.
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                NextToken:
+                  description: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
                   type: string
                   pattern: .*\S.*
                   minLength: 1
@@ -1971,6 +2302,104 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /UpdateAlert:
+    post:
+      operationId: UpdateAlert
+      description: Make changes to an existing alert.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAlertResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AlertArn
+              properties:
+                AlertArn:
+                  description: The ARN of the alert to update.
+                  type: string
+                  pattern: 'arn:([a-z\d-]+):.*:.*:.*:.+'
+                  maxLength: 256
+                AlertDescription:
+                  description: A description of the alert.
+                  type: string
+                  pattern: .*\S.*
+                  maxLength: 256
+                AlertSensitivityThreshold:
+                  description: An integer from 0 to 100 specifying the alert sensitivity threshold.
+                  type: integer
+                  minimum: 0
+                  maximum: 100
+                Action:
+                  description: A configuration that specifies the action to perform when anomalies are detected.
+                  type: object
+                  properties:
+                    SNSConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/SNSConfiguration'
+                        - description: A configuration for an Amazon SNS channel.
+                    LambdaConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/LambdaConfiguration'
+                        - description: A configuration for an AWS Lambda channel.
+                AlertFilters:
+                  description: The configuration of the alert filters.
+                  type: object
+                  properties:
+                    MetricList:
+                      allOf:
+                        - $ref: '#/components/schemas/MetricNameList'
+                        - description: The list of measures that you want to get alerts for.
+                    DimensionFilterList:
+                      allOf:
+                        - $ref: '#/components/schemas/DimensionFilterList'
+                        - description: The list of DimensionFilter objects that are used for dimension-based filtering.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /UpdateAnomalyDetector:
     post:
       operationId: UpdateAnomalyDetector
@@ -2096,6 +2525,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TooManyRequestsException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
       parameters: []
       requestBody:
         required: true
@@ -2124,7 +2559,7 @@ paths:
                     $ref: '#/components/schemas/Metric'
                   minItems: 1
                 Offset:
-                  description: 'After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.'
+                  description: 'After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3, Redshift, Athena and datasources.'
                   type: integer
                   minimum: 0
                   maximum: 432000
@@ -2155,7 +2590,7 @@ paths:
                     - PT10M
                     - PT5M
                 MetricSource:
-                  description: Contains information about source data used to generate a metric.
+                  description: Contains information about source data used to generate metrics.
                   type: object
                   properties:
                     S3SourceConfig:
@@ -2163,19 +2598,28 @@ paths:
                     AppFlowConfig:
                       allOf:
                         - $ref: '#/components/schemas/AppFlowConfig'
-                        - description: An object containing information about the AppFlow configuration.
+                        - description: Details about an AppFlow datasource.
                     CloudWatchConfig:
                       allOf:
                         - $ref: '#/components/schemas/CloudWatchConfig'
-                        - description: An object containing information about the Amazon CloudWatch monitoring configuration.
+                        - description: Details about an Amazon CloudWatch monitoring datasource.
                     RDSSourceConfig:
                       allOf:
                         - $ref: '#/components/schemas/RDSSourceConfig'
-                        - description: An object containing information about the Amazon Relational Database Service (RDS) configuration.
+                        - description: Details about an Amazon Relational Database Service (RDS) datasource.
                     RedshiftSourceConfig:
                       allOf:
                         - $ref: '#/components/schemas/RedshiftSourceConfig'
-                        - description: An object containing information about the Amazon Redshift database configuration.
+                        - description: Details about an Amazon Redshift database datasource.
+                    AthenaSourceConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/AthenaSourceConfig'
+                        - description: Details about an Amazon Athena datasource.
+                DimensionFilterList:
+                  description: 'Describes a list of filters for choosing specific dimensions and specific values. Each filter consists of the dimension and one of its values that you want to include. When multiple dimensions or values are specified, the dimensions are joined with an AND operation and the values are joined with an OR operation.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MetricSetDimensionFilter'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2269,6 +2713,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The ARN of the target SNS topic.
+        SnsFormat:
+          allOf:
+            - $ref: '#/components/schemas/SnsFormat'
+            - description: <p>The format of the SNS topic.</p> <ul> <li> <p> <code>JSON</code> – Send JSON alerts with an anomaly ID and a link to the anomaly detail page. This is the default.</p> </li> <li> <p> <code>LONG_TEXT</code> – Send human-readable alerts with information about the impacted timeseries and a link to the anomaly detail page. We recommend this for email.</p> </li> <li> <p> <code>SHORT_TEXT</code> – Send human-readable alerts with a link to the anomaly detail page. We recommend this for SMS.</p> </li> </ul>
       description: Contains information about the SNS topic to which you want to send your alerts and the IAM role that has access to that topic.
     LambdaConfiguration:
       type: object
@@ -2288,6 +2736,18 @@ components:
     TagValue:
       type: string
       maxLength: 256
+    MetricNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricName'
+      minItems: 1
+      maxItems: 5
+    DimensionFilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DimensionFilter'
+      minItems: 1
+      maxItems: 5
     ServiceQuotaExceededException: {}
     CreateAnomalyDetectorResponse:
       type: object
@@ -2340,8 +2800,6 @@ components:
       maxLength: 63
     S3SourceConfig:
       type: object
-      required:
-        - RoleArn
       properties:
         RoleArn:
           allOf:
@@ -2362,9 +2820,6 @@ components:
       description: Contains information about the configuration of the S3 bucket that contains source files.
     AppFlowConfig:
       type: object
-      required:
-        - RoleArn
-        - FlowName
       properties:
         RoleArn:
           allOf:
@@ -2377,25 +2832,18 @@ components:
       description: Details about an Amazon AppFlow flow datasource.
     CloudWatchConfig:
       type: object
-      required:
-        - RoleArn
       properties:
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: An IAM role that gives Amazon Lookout for Metrics permission to access data in Amazon CloudWatch.
+        BackTestConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/BackTestConfiguration'
+            - description: Settings for backtest mode.
       description: Details about an Amazon CloudWatch datasource.
     RDSSourceConfig:
       type: object
-      required:
-        - DBInstanceIdentifier
-        - DatabaseHost
-        - DatabasePort
-        - SecretManagerArn
-        - DatabaseName
-        - TableName
-        - RoleArn
-        - VpcConfiguration
       properties:
         DBInstanceIdentifier:
           allOf:
@@ -2432,15 +2880,6 @@ components:
       description: Contains information about the Amazon Relational Database Service (RDS) configuration.
     RedshiftSourceConfig:
       type: object
-      required:
-        - ClusterIdentifier
-        - DatabaseHost
-        - DatabasePort
-        - SecretManagerArn
-        - DatabaseName
-        - TableName
-        - RoleArn
-        - VpcConfiguration
       properties:
         ClusterIdentifier:
           allOf:
@@ -2475,6 +2914,53 @@ components:
             - $ref: '#/components/schemas/VpcConfiguration'
             - description: Contains information about the Amazon Virtual Private Cloud (VPC) configuration.
       description: Provides information about the Amazon Redshift database configuration.
+    AthenaSourceConfig:
+      type: object
+      properties:
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: An IAM role that gives Amazon Lookout for Metrics permission to access the data.
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/AthenaDatabaseName'
+            - description: The database's name.
+        DataCatalog:
+          allOf:
+            - $ref: '#/components/schemas/AthenaDataCatalog'
+            - description: The database's data catalog.
+        TableName:
+          allOf:
+            - $ref: '#/components/schemas/AthenaTableName'
+            - description: The database's table name.
+        WorkGroupName:
+          allOf:
+            - $ref: '#/components/schemas/AthenaWorkGroupName'
+            - description: The database's work group name.
+        S3ResultsPath:
+          allOf:
+            - $ref: '#/components/schemas/AthenaS3ResultsPath'
+            - description: The database's results path.
+        BackTestConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/BackTestConfiguration'
+            - description: Settings for backtest mode.
+      description: Details about an Amazon Athena datasource.
+    MetricSetDimensionFilter:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ColumnName'
+            - description: The dimension that you want to filter on.
+        FilterList:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: The list of filters that you are applying.
+      description: 'Describes a list of filters for choosing a subset of dimension values. Each filter consists of the dimension and one of its values that you want to include. When multiple dimensions or values are specified, the dimensions are joined with an AND operation and the values are joined with an OR operation. '
+    DeactivateAnomalyDetectorResponse:
+      type: object
+      properties: {}
     DeleteAlertResponse:
       type: object
       properties: {}
@@ -2533,11 +3019,15 @@ components:
         FailureReason:
           allOf:
             - $ref: '#/components/schemas/ErrorMessage'
-            - description: 'The reason that the detector failed, if any.'
+            - description: The reason that the detector failed.
         KmsKeyArn:
           allOf:
             - $ref: '#/components/schemas/KmsKeyArn'
             - description: The ARN of the KMS key to use to encrypt your data.
+        FailureType:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyDetectorFailureType'
+            - description: The process that caused the detector to fail.
     DescribeMetricSetResponse:
       type: object
       properties:
@@ -2568,7 +3058,7 @@ components:
         Offset:
           allOf:
             - $ref: '#/components/schemas/Offset'
-            - description: The offset in seconds. Only supported for S3 and Redshift datasources.
+            - description: 'After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3, Redshift, Athena and datasources.'
         MetricList:
           allOf:
             - $ref: '#/components/schemas/MetricList'
@@ -2593,6 +3083,29 @@ components:
           allOf:
             - $ref: '#/components/schemas/MetricSource'
             - description: Contains information about the dataset's source data.
+        DimensionFilterList:
+          allOf:
+            - $ref: '#/components/schemas/MetricSetDimensionFilterList'
+            - description: The dimensions and their values that were used to filter the dataset.
+    DetectMetricSetConfigResponse:
+      type: object
+      properties:
+        DetectedMetricSetConfig:
+          allOf:
+            - $ref: '#/components/schemas/DetectedMetricSetConfig'
+            - description: The inferred dataset configuration for the datasource.
+    AutoDetectionS3SourceConfig:
+      type: object
+      properties:
+        TemplatedPathList:
+          allOf:
+            - $ref: '#/components/schemas/TemplatedPathList'
+            - description: The config's templated path list.
+        HistoricalDataPathList:
+          allOf:
+            - $ref: '#/components/schemas/HistoricalDataPathList'
+            - description: The config's historical data path list.
+      description: An auto detection source config.
     GetAnomalyGroupResponse:
       type: object
       properties:
@@ -2600,6 +3113,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/AnomalyGroup'
             - description: Details about the anomaly group.
+    GetDataQualityMetricsResponse:
+      type: object
+      properties:
+        AnomalyDetectorDataQualityMetricList:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyDetectorDataQualityMetricList'
+            - description: A list of the data quality metrics for the <code>AnomalyDetectorArn</code> that you requested.
     GetFeedbackResponse:
       type: object
       properties:
@@ -2680,6 +3200,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: 'If the response is truncated, the service returns this token. To retrieve the next set of results, use the token in the next request.'
+    ListAnomalyGroupRelatedMetricsResponse:
+      type: object
+      properties:
+        InterMetricImpactList:
+          allOf:
+            - $ref: '#/components/schemas/InterMetricImpactList'
+            - description: 'Aggregated details about the measures contributing to the anomaly group, and the measures potentially impacted by the anomaly group.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token that's included if more results are available.
     ListAnomalyGroupSummariesResponse:
       type: object
       properties:
@@ -2751,6 +3282,13 @@ components:
       type: string
       minLength: 1
       maxLength: 128
+    UpdateAlertResponse:
+      type: object
+      properties:
+        AlertArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the updated alert.
     UpdateAnomalyDetectorResponse:
       type: object
       properties:
@@ -2818,6 +3356,18 @@ components:
     Timestamp:
       type: string
       format: date-time
+    AlertFilters:
+      type: object
+      properties:
+        MetricList:
+          allOf:
+            - $ref: '#/components/schemas/MetricNameList'
+            - description: The list of measures that you want to get alerts for.
+        DimensionFilterList:
+          allOf:
+            - $ref: '#/components/schemas/DimensionFilterList'
+            - description: The list of DimensionFilter objects that are used for dimension-based filtering.
+      description: The configuration of the alert filters.
     Alert:
       type: object
       properties:
@@ -2861,6 +3411,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time at which the alert was created.
+        AlertFilters:
+          allOf:
+            - $ref: '#/components/schemas/AlertFilters'
+            - description: 'The configuration of the alert filters, containing MetricList and DimensionFilter.'
       description: A configuration for Amazon SNS-integrated notifications.
     TagMap:
       type: object
@@ -2941,11 +3495,38 @@ components:
             - $ref: '#/components/schemas/Frequency'
             - description: The interval at which the detector analyzes its source data.
       description: Contains information about a detector's configuration.
+    MetricSetDataQualityMetricList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricSetDataQualityMetric'
+    AnomalyDetectorDataQualityMetric:
+      type: object
+      properties:
+        StartTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The start time for the data quality metrics collection.
+        MetricSetDataQualityMetricList:
+          allOf:
+            - $ref: '#/components/schemas/MetricSetDataQualityMetricList'
+            - description: An array of <code>DataQualityMetricList</code> objects. Each object in the array contains information about a data quality metric.
+      description: Aggregated details about the data quality metrics collected for the <code>AnomalyDetectorArn</code> provided in the <a>GetDataQualityMetrics</a> object.
+    AnomalyDetectorDataQualityMetricList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnomalyDetectorDataQualityMetric'
     AnomalyDetectorDescription:
       type: string
       pattern: .*\S.*
       minLength: 1
       maxLength: 256
+    AnomalyDetectorFailureType:
+      type: string
+      enum:
+        - ACTIVATION_FAILURE
+        - BACK_TEST_ACTIVATION_FAILURE
+        - DELETION_FAILURE
+        - DEACTIVATION_FAILURE
     AnomalyDetectorName:
       type: string
       pattern: '^[a-zA-Z0-9][a-zA-Z0-9\-_]*'
@@ -2963,6 +3544,8 @@ components:
         - BACK_TEST_ACTIVATING
         - BACK_TEST_ACTIVE
         - BACK_TEST_COMPLETE
+        - DEACTIVATED
+        - DEACTIVATING
     AnomalyDetectorSummary:
       type: object
       properties:
@@ -3132,6 +3715,94 @@ components:
       type: string
       pattern: '[a-zA-Z0-9][\w!@#.-]+'
       maxLength: 256
+    AthenaDataCatalog:
+      type: string
+      minLength: 1
+      maxLength: 256
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+    AthenaDatabaseName:
+      type: string
+      pattern: '[a-zA-Z0-9_]+'
+      minLength: 1
+      maxLength: 255
+    AthenaS3ResultsPath:
+      type: string
+      pattern: '^s3://[a-z0-9].+$'
+      maxLength: 1024
+    AthenaTableName:
+      type: string
+      pattern: '[a-zA-Z0-9_]+'
+      minLength: 1
+      maxLength: 128
+    AthenaWorkGroupName:
+      type: string
+      pattern: '[a-zA-Z0-9._-]{1,128}'
+      minLength: 1
+      maxLength: 128
+    BackTestConfiguration:
+      type: object
+      required:
+        - RunBackTestMode
+      properties:
+        RunBackTestMode:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Run a backtest instead of monitoring new data.
+      description: Settings for backtest mode.
+    StringAttributeValue:
+      type: string
+    NumberAttributeValue:
+      type: string
+    BinaryAttributeValue:
+      type: string
+    StringListAttributeValue:
+      type: array
+      items:
+        $ref: '#/components/schemas/StringAttributeValue'
+    NumberListAttributeValue:
+      type: array
+      items:
+        $ref: '#/components/schemas/NumberAttributeValue'
+    BinaryListAttributeValue:
+      type: array
+      items:
+        $ref: '#/components/schemas/BinaryAttributeValue'
+    AttributeValue:
+      type: object
+      properties:
+        S:
+          allOf:
+            - $ref: '#/components/schemas/StringAttributeValue'
+            - description: A string.
+        'N':
+          allOf:
+            - $ref: '#/components/schemas/NumberAttributeValue'
+            - description: A number.
+        B:
+          allOf:
+            - $ref: '#/components/schemas/BinaryAttributeValue'
+            - description: A binary value.
+        SS:
+          allOf:
+            - $ref: '#/components/schemas/StringListAttributeValue'
+            - description: A list of strings.
+        NS:
+          allOf:
+            - $ref: '#/components/schemas/NumberListAttributeValue'
+            - description: A list of numbers.
+        BS:
+          allOf:
+            - $ref: '#/components/schemas/BinaryListAttributeValue'
+            - description: A list of binary values.
+      description: An attribute value.
+    AutoDetectionMetricSource:
+      type: object
+      properties:
+        S3SourceConfig:
+          allOf:
+            - $ref: '#/components/schemas/AutoDetectionS3SourceConfig'
+            - description: The source's source config.
+      description: An auto detection metric source.
     BackTestAnomalyDetectorRequest:
       type: object
       required:
@@ -3151,6 +3822,12 @@ components:
       type: string
       pattern: '^[a-zA-Z0-9][a-zA-Z0-9\-_]*'
       maxLength: 63
+    Confidence:
+      type: string
+      enum:
+        - HIGH
+        - LOW
+        - NONE
     DimensionContributionList:
       type: array
       items:
@@ -3167,7 +3844,6 @@ components:
       type: object
       required:
         - AlertName
-        - AlertSensitivityThreshold
         - AnomalyDetectorArn
         - Action
       title: CreateAlertRequest
@@ -3196,6 +3872,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'A list of <a href="https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html">tags</a> to apply to the alert.'
+        AlertFilters:
+          allOf:
+            - $ref: '#/components/schemas/AlertFilters'
+            - description: 'The configuration of the alert filters, containing MetricList and DimensionFilterList.'
     KmsKeyArn:
       type: string
       pattern: 'arn:aws.*:kms:.*:[0-9]{12}:key/[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}'
@@ -3272,24 +3952,32 @@ components:
         AppFlowConfig:
           allOf:
             - $ref: '#/components/schemas/AppFlowConfig'
-            - description: An object containing information about the AppFlow configuration.
+            - description: Details about an AppFlow datasource.
         CloudWatchConfig:
           allOf:
             - $ref: '#/components/schemas/CloudWatchConfig'
-            - description: An object containing information about the Amazon CloudWatch monitoring configuration.
+            - description: Details about an Amazon CloudWatch monitoring datasource.
         RDSSourceConfig:
           allOf:
             - $ref: '#/components/schemas/RDSSourceConfig'
-            - description: An object containing information about the Amazon Relational Database Service (RDS) configuration.
+            - description: Details about an Amazon Relational Database Service (RDS) datasource.
         RedshiftSourceConfig:
           allOf:
             - $ref: '#/components/schemas/RedshiftSourceConfig'
-            - description: An object containing information about the Amazon Redshift database configuration.
-      description: Contains information about source data used to generate a metric.
+            - description: Details about an Amazon Redshift database datasource.
+        AthenaSourceConfig:
+          allOf:
+            - $ref: '#/components/schemas/AthenaSourceConfig'
+            - description: Details about an Amazon Athena datasource.
+      description: Contains information about source data used to generate metrics.
     Timezone:
       type: string
       pattern: .*\S.*
       maxLength: 60
+    MetricSetDimensionFilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricSetDimensionFilter'
     CreateMetricSetRequest:
       type: object
       required:
@@ -3318,7 +4006,7 @@ components:
         Offset:
           allOf:
             - $ref: '#/components/schemas/Offset'
-            - description: 'After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.'
+            - description: 'After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3, Redshift, Athena and datasources.'
         TimestampColumn:
           allOf:
             - $ref: '#/components/schemas/TimestampColumn'
@@ -3343,6 +4031,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'A list of <a href="https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html">tags</a> to apply to the dataset.'
+        DimensionFilterList:
+          allOf:
+            - $ref: '#/components/schemas/MetricSetDimensionFilterList'
+            - description: A list of filters that specify which data is kept for anomaly detection.
     Delimiter:
       type: string
       pattern: '[^\r\n]'
@@ -3385,6 +4077,56 @@ components:
       description: Contains information about how a source CSV data file should be analyzed.
     DataItem:
       type: string
+    DataQualityMetricType:
+      type: string
+      enum:
+        - COLUMN_COMPLETENESS
+        - DIMENSION_UNIQUENESS
+        - TIME_SERIES_COUNT
+        - ROWS_PROCESSED
+        - ROWS_PARTIAL_COMPLIANCE
+        - INVALID_ROWS_COMPLIANCE
+        - BACKTEST_TRAINING_DATA_START_TIME_STAMP
+        - BACKTEST_TRAINING_DATA_END_TIME_STAMP
+        - BACKTEST_INFERENCE_DATA_START_TIME_STAMP
+        - BACKTEST_INFERENCE_DATA_END_TIME_STAMP
+    DataQualityMetricDescription:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 256
+    RelatedColumnName:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 256
+    Double:
+      type: number
+      format: double
+    DataQualityMetric:
+      type: object
+      properties:
+        MetricType:
+          allOf:
+            - $ref: '#/components/schemas/DataQualityMetricType'
+            - description: The name of the data quality metric.
+        MetricDescription:
+          allOf:
+            - $ref: '#/components/schemas/DataQualityMetricDescription'
+            - description: A description of the data quality metric.
+        RelatedColumnName:
+          allOf:
+            - $ref: '#/components/schemas/RelatedColumnName'
+            - description: The column that is being monitored.
+        MetricValue:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The value of the data quality metric.
+      description: 'An array that describes a data quality metric. Each <code>DataQualityMetric</code> object contains the data quality metric name, its value, a description of the metric, and the affected column.'
+    DataQualityMetricList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DataQualityMetric'
     DatabaseHost:
       type: string
       pattern: .*\S.*
@@ -3394,6 +4136,16 @@ components:
       type: integer
       minimum: 1
       maximum: 65535
+    DeactivateAnomalyDetectorRequest:
+      type: object
+      required:
+        - AnomalyDetectorArn
+      title: DeactivateAnomalyDetectorRequest
+      properties:
+        AnomalyDetectorArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the anomaly detector.
     DeleteAlertRequest:
       type: object
       required:
@@ -3482,6 +4234,123 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The ARN of the dataset.
+    DetectMetricSetConfigRequest:
+      type: object
+      required:
+        - AnomalyDetectorArn
+        - AutoDetectionMetricSource
+      title: DetectMetricSetConfigRequest
+      properties:
+        AnomalyDetectorArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: An anomaly detector ARN.
+        AutoDetectionMetricSource:
+          allOf:
+            - $ref: '#/components/schemas/AutoDetectionMetricSource'
+            - description: A data source.
+    DetectedMetricSetConfig:
+      type: object
+      properties:
+        Offset:
+          allOf:
+            - $ref: '#/components/schemas/DetectedField'
+            - description: The dataset's offset.
+        MetricSetFrequency:
+          allOf:
+            - $ref: '#/components/schemas/DetectedField'
+            - description: The dataset's interval.
+        MetricSource:
+          allOf:
+            - $ref: '#/components/schemas/DetectedMetricSource'
+            - description: The dataset's data source.
+      description: An inferred dataset configuration.
+    DetectedField:
+      type: object
+      properties:
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/AttributeValue'
+            - description: The field's value.
+        Confidence:
+          allOf:
+            - $ref: '#/components/schemas/Confidence'
+            - description: The field's confidence.
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/Message'
+            - description: The field's message.
+      description: An inferred field.
+    DetectedCsvFormatDescriptor:
+      type: object
+      properties:
+        FileCompression:
+          allOf:
+            - $ref: '#/components/schemas/DetectedField'
+            - description: The format's file compression.
+        Charset:
+          allOf:
+            - $ref: '#/components/schemas/DetectedField'
+            - description: The format's charset.
+        ContainsHeader:
+          allOf:
+            - $ref: '#/components/schemas/DetectedField'
+            - description: Whether the format includes a header.
+        Delimiter:
+          allOf:
+            - $ref: '#/components/schemas/DetectedField'
+            - description: The format's delimiter.
+        HeaderList:
+          allOf:
+            - $ref: '#/components/schemas/DetectedField'
+            - description: The format's header list.
+        QuoteSymbol:
+          allOf:
+            - $ref: '#/components/schemas/DetectedField'
+            - description: The format's quote symbol.
+      description: Properties of an inferred CSV format.
+    Message:
+      type: string
+    DetectedJsonFormatDescriptor:
+      type: object
+      properties:
+        FileCompression:
+          allOf:
+            - $ref: '#/components/schemas/DetectedField'
+            - description: The format's file compression.
+        Charset:
+          allOf:
+            - $ref: '#/components/schemas/DetectedField'
+            - description: The format's character set.
+      description: A detected JSON format descriptor.
+    DetectedFileFormatDescriptor:
+      type: object
+      properties:
+        CsvFormatDescriptor:
+          allOf:
+            - $ref: '#/components/schemas/DetectedCsvFormatDescriptor'
+            - description: Details about a CSV format.
+        JsonFormatDescriptor:
+          allOf:
+            - $ref: '#/components/schemas/DetectedJsonFormatDescriptor'
+            - description: Details about a JSON format.
+      description: Properties of an inferred data format.
+    DetectedMetricSource:
+      type: object
+      properties:
+        S3SourceConfig:
+          allOf:
+            - $ref: '#/components/schemas/DetectedS3SourceConfig'
+            - description: The data source's source configuration.
+      description: An inferred data source.
+    DetectedS3SourceConfig:
+      type: object
+      properties:
+        FileFormatDescriptor:
+          allOf:
+            - $ref: '#/components/schemas/DetectedFileFormatDescriptor'
+            - description: The source's file format descriptor.
+      description: An inferred source configuration.
     DimensionValueContributionList:
       type: array
       items:
@@ -3498,6 +4367,24 @@ components:
             - $ref: '#/components/schemas/DimensionValueContributionList'
             - description: A list of dimension values that contributed to the anomaly.
       description: Details about a dimension that contributed to an anomaly.
+    DimensionValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DimensionValue'
+      minItems: 1
+      maxItems: 10
+    DimensionFilter:
+      type: object
+      properties:
+        DimensionName:
+          allOf:
+            - $ref: '#/components/schemas/ColumnName'
+            - description: The name of the dimension to filter on.
+        DimensionValueList:
+          allOf:
+            - $ref: '#/components/schemas/DimensionValueList'
+            - description: The list of values for the dimension specified in DimensionName that you want to filter on.
+      description: 'The dimension filter, containing DimensionName and DimensionValueList.'
     DimensionValue:
       type: string
     DimensionNameValue:
@@ -3559,6 +4446,27 @@ components:
             - $ref: '#/components/schemas/Charset'
             - description: The character set in which the source JSON file is written.
       description: Contains information about how a source JSON data file should be analyzed.
+    FilterOperation:
+      type: string
+      enum:
+        - EQUALS
+    Filter:
+      type: object
+      properties:
+        DimensionValue:
+          allOf:
+            - $ref: '#/components/schemas/DimensionValue'
+            - description: The value that you want to include in the filter.
+        FilterOperation:
+          allOf:
+            - $ref: '#/components/schemas/FilterOperation'
+            - description: The condition to apply.
+      description: Describes a filter for choosing a subset of dimension values. Each filter consists of the dimension that you want to include and the condition statement. The condition statement is specified in the <code>FilterOperation</code> object.
+    FilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Filter'
+      minItems: 1
     GetAnomalyGroupRequest:
       type: object
       required:
@@ -3574,6 +4482,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the anomaly detector.
+    GetDataQualityMetricsRequest:
+      type: object
+      required:
+        - AnomalyDetectorArn
+      title: GetDataQualityMetricsRequest
+      properties:
+        AnomalyDetectorArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the anomaly detector that you want to investigate.
+        MetricSetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of a specific data quality metric set.
     GetFeedbackRequest:
       type: object
       required:
@@ -3644,6 +4566,40 @@ components:
       type: string
       pattern: '^s3://[a-z0-9].+$'
       maxLength: 1024
+    RelationshipType:
+      type: string
+      enum:
+        - CAUSE_OF_INPUT_ANOMALY_GROUP
+        - EFFECT_OF_INPUT_ANOMALY_GROUP
+    MetricChangePercentage:
+      type: number
+      format: double
+      minimum: 0
+      maximum: 100
+    InterMetricImpactDetails:
+      type: object
+      properties:
+        MetricName:
+          allOf:
+            - $ref: '#/components/schemas/MetricName'
+            - description: The name of the measure.
+        AnomalyGroupId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The ID of the anomaly group.
+        RelationshipType:
+          allOf:
+            - $ref: '#/components/schemas/RelationshipType'
+            - description: 'Whether a measure is a potential cause of the anomaly group (<code>CAUSE_OF_INPUT_ANOMALY_GROUP</code>), or whether the measure is impacted by the anomaly group (<code>EFFECT_OF_INPUT_ANOMALY_GROUP</code>).'
+        ContributionPercentage:
+          allOf:
+            - $ref: '#/components/schemas/MetricChangePercentage'
+            - description: 'For potential causes (<code>CAUSE_OF_INPUT_ANOMALY_GROUP</code>), the percentage contribution the measure has in causing the anomalies.'
+      description: '<p>Aggregated details about the measures contributing to the anomaly group, and the measures potentially impacted by the anomaly group.</p> <p/>'
+    InterMetricImpactList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InterMetricImpactDetails'
     ItemizedMetricStats:
       type: object
       properties:
@@ -3689,6 +4645,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: 'If the result of the previous request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of results, use the token in the next request. Tokens expire after 24 hours.'
+    ListAnomalyGroupRelatedMetricsRequest:
+      type: object
+      required:
+        - AnomalyDetectorArn
+        - AnomalyGroupId
+      title: ListAnomalyGroupRelatedMetricsRequest
+      properties:
+        AnomalyDetectorArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the anomaly detector.
+        AnomalyGroupId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The ID of the anomaly group.
+        RelationshipTypeFilter:
+          allOf:
+            - $ref: '#/components/schemas/RelationshipType'
+            - description: Filter for potential causes (<code>CAUSE_OF_INPUT_ANOMALY_GROUP</code>) or downstream effects (<code>EFFECT_OF_INPUT_ANOMALY_GROUP</code>) of the anomaly group.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of results to return.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
     ListAnomalyGroupSummariesRequest:
       type: object
       required:
@@ -3793,6 +4776,18 @@ components:
             - $ref: '#/components/schemas/ContributionMatrix'
             - description: Details about the dimensions that contributed to the anomaly.
       description: Details about a measure affected by an anomaly.
+    MetricSetDataQualityMetric:
+      type: object
+      properties:
+        MetricSetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the data quality metric array.
+        DataQualityMetricList:
+          allOf:
+            - $ref: '#/components/schemas/DataQualityMetricList'
+            - description: The array of data quality metrics contained in the data quality metric set.
+      description: An array of <code>DataQualityMetric</code> objects that describes one or more data quality metrics.
     MetricSetSummary:
       type: object
       properties:
@@ -3891,6 +4886,12 @@ components:
       pattern: '[a-zA-Z0-9_.]+'
       minLength: 1
       maxLength: 100
+    SnsFormat:
+      type: string
+      enum:
+        - LONG_TEXT
+        - SHORT_TEXT
+        - JSON
     SampleRow:
       type: array
       items:
@@ -3970,6 +4971,32 @@ components:
       type: object
       title: UntagResourceRequest
       properties: {}
+    UpdateAlertRequest:
+      type: object
+      required:
+        - AlertArn
+      title: UpdateAlertRequest
+      properties:
+        AlertArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the alert to update.
+        AlertDescription:
+          allOf:
+            - $ref: '#/components/schemas/AlertDescription'
+            - description: A description of the alert.
+        AlertSensitivityThreshold:
+          allOf:
+            - $ref: '#/components/schemas/SensitivityThreshold'
+            - description: An integer from 0 to 100 specifying the alert sensitivity threshold.
+        Action:
+          allOf:
+            - $ref: '#/components/schemas/Action'
+            - description: Action that will be triggered when there is an alert.
+        AlertFilters:
+          allOf:
+            - $ref: '#/components/schemas/AlertFilters'
+            - description: 'The configuration of the alert filters, containing MetricList and DimensionFilterList.'
     UpdateAnomalyDetectorRequest:
       type: object
       required:
@@ -4013,7 +5040,7 @@ components:
         Offset:
           allOf:
             - $ref: '#/components/schemas/Offset'
-            - description: 'After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.'
+            - description: 'After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3, Redshift, Athena and datasources.'
         TimestampColumn:
           allOf:
             - $ref: '#/components/schemas/TimestampColumn'
@@ -4028,5 +5055,9 @@ components:
             - description: The dataset's interval.
         MetricSource:
           $ref: '#/components/schemas/MetricSource'
+        DimensionFilterList:
+          allOf:
+            - $ref: '#/components/schemas/MetricSetDimensionFilterList'
+            - description: 'Describes a list of filters for choosing specific dimensions and specific values. Each filter consists of the dimension and one of its values that you want to include. When multiple dimensions or values are specified, the dimensions are joined with an AND operation and the values are joined with an OR operation.'
 security:
   - hmac: []

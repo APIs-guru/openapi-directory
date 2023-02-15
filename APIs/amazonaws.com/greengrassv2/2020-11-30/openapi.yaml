@@ -114,10 +114,88 @@ servers:
     description: The AWS GreengrassV2 endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /greengrass/servicerole:
+    put:
+      operationId: AssociateServiceRoleToAccount
+      description: 'Associates a Greengrass service role with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region. IoT Greengrass uses this role to verify the identity of client devices and manage core device connectivity information. The role must include the <a href="https://console.aws.amazon.com/iam/home#/policies/arn:awsiam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy">AWSGreengrassResourceAccessRolePolicy</a> managed policy or a custom policy that defines equivalent permissions for the IoT Greengrass features that you use. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html">Greengrass service role</a> in the <i>IoT Greengrass Version 2 Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateServiceRoleToAccountResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - RoleArn
+              properties:
+                RoleArn:
+                  description: The Amazon Resource Name (ARN) of the service role to associate with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DisassociateServiceRoleFromAccount
+      description: 'Disassociates the Greengrass service role from IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region. Without a service role, IoT Greengrass can''t verify the identity of client devices or manage core device connectivity information. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html">Greengrass service role</a> in the <i>IoT Greengrass Version 2 Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateServiceRoleFromAccountResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+    get:
+      operationId: GetServiceRoleForAccount
+      description: 'Gets the service role associated with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region. IoT Greengrass uses this role to verify the identity of client devices and manage core device connectivity information. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html">Greengrass service role</a> in the <i>IoT Greengrass Version 2 Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetServiceRoleForAccountResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
   '/greengrass/v2/coreDevices/{coreDeviceThingName}/associateClientDevices':
     post:
       operationId: BatchAssociateClientDeviceWithCoreDevice
-      description: '<p>Associate a list of client devices with a core device. Use this API operation to specify which client devices can discover a core device through cloud discovery. With cloud discovery, client devices connect to IoT Greengrass to retrieve associated core devices'' connectivity information and certificates. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-cloud-discovery.html">Configure cloud discovery</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p> <note> <p>Client devices are local IoT devices that connect to and communicate with an IoT Greengrass core device over MQTT. You can connect client devices to a core device to sync MQTT messages and data to Amazon Web Services IoT Core and interact with client devices in Greengrass components. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/interact-with-local-iot-devices.html">Interact with local IoT devices</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p> </note>'
+      description: '<p>Associates a list of client devices with a core device. Use this API operation to specify which client devices can discover a core device through cloud discovery. With cloud discovery, client devices connect to IoT Greengrass to retrieve associated core devices'' connectivity information and certificates. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-cloud-discovery.html">Configure cloud discovery</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p> <note> <p>Client devices are local IoT devices that connect to and communicate with an IoT Greengrass core device over MQTT. You can connect client devices to a core device to sync MQTT messages and data to Amazon Web Services IoT Core and interact with client devices in Greengrass components. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/interact-with-local-iot-devices.html">Interact with local IoT devices</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -189,7 +267,7 @@ paths:
   '/greengrass/v2/coreDevices/{coreDeviceThingName}/disassociateClientDevices':
     post:
       operationId: BatchDisassociateClientDeviceFromCoreDevice
-      description: 'Disassociate a list of client devices from a core device. After you disassociate a client device from a core device, the client device won''t be able to use cloud discovery to retrieve the core device''s connectivity information and certificates.'
+      description: 'Disassociates a list of client devices from a core device. After you disassociate a client device from a core device, the client device won''t be able to use cloud discovery to retrieve the core device''s connectivity information and certificates.'
       responses:
         '200':
           description: Success
@@ -324,7 +402,7 @@ paths:
   /greengrass/v2/createComponentVersion:
     post:
       operationId: CreateComponentVersion
-      description: '<p>Creates a component. Components are software that run on Greengrass core devices. After you develop and test a component on your core device, you can use this operation to upload your component to IoT Greengrass. Then, you can deploy the component to other core devices.</p> <p>You can use this operation to do the following:</p> <ul> <li> <p> <b>Create components from recipes</b> </p> <p>Create a component from a recipe, which is a file that defines the component''s metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/component-recipe-reference.html">IoT Greengrass component recipe reference</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p> <p>To create a component from a recipe, specify <code>inlineRecipe</code> when you call this operation.</p> </li> <li> <p> <b>Create components from Lambda functions</b> </p> <p>Create a component from an Lambda function that runs on IoT Greengrass. This creates a recipe and artifacts from the Lambda function''s deployment package. You can use this operation to migrate Lambda functions from IoT Greengrass V1 to IoT Greengrass V2.</p> <p>This function only accepts Lambda functions that use the following runtimes:</p> <ul> <li> <p>Python 2.7 – <code>python2.7</code> </p> </li> <li> <p>Python 3.7 – <code>python3.7</code> </p> </li> <li> <p>Python 3.8 – <code>python3.8</code> </p> </li> <li> <p>Java 8 – <code>java8</code> </p> </li> <li> <p>Node.js 10 – <code>nodejs10.x</code> </p> </li> <li> <p>Node.js 12 – <code>nodejs12.x</code> </p> </li> </ul> <p>To create a component from a Lambda function, specify <code>lambdaFunction</code> when you call this operation.</p> </li> </ul>'
+      description: '<p>Creates a component. Components are software that run on Greengrass core devices. After you develop and test a component on your core device, you can use this operation to upload your component to IoT Greengrass. Then, you can deploy the component to other core devices.</p> <p>You can use this operation to do the following:</p> <ul> <li> <p> <b>Create components from recipes</b> </p> <p>Create a component from a recipe, which is a file that defines the component''s metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/component-recipe-reference.html">IoT Greengrass component recipe reference</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p> <p>To create a component from a recipe, specify <code>inlineRecipe</code> when you call this operation.</p> </li> <li> <p> <b>Create components from Lambda functions</b> </p> <p>Create a component from an Lambda function that runs on IoT Greengrass. This creates a recipe and artifacts from the Lambda function''s deployment package. You can use this operation to migrate Lambda functions from IoT Greengrass V1 to IoT Greengrass V2.</p> <p>This function only accepts Lambda functions that use the following runtimes:</p> <ul> <li> <p>Python 2.7 – <code>python2.7</code> </p> </li> <li> <p>Python 3.7 – <code>python3.7</code> </p> </li> <li> <p>Python 3.8 – <code>python3.8</code> </p> </li> <li> <p>Python 3.9 – <code>python3.9</code> </p> </li> <li> <p>Java 8 – <code>java8</code> </p> </li> <li> <p>Java 11 – <code>java11</code> </p> </li> <li> <p>Node.js 10 – <code>nodejs10.x</code> </p> </li> <li> <p>Node.js 12 – <code>nodejs12.x</code> </p> </li> <li> <p>Node.js 14 – <code>nodejs14.x</code> </p> </li> </ul> <p>To create a component from a Lambda function, specify <code>lambdaFunction</code> when you call this operation.</p> <note> <p>IoT Greengrass currently supports Lambda functions on only Linux core devices.</p> </note> </li> </ul>'
       responses:
         '201':
           description: Success
@@ -391,7 +469,7 @@ paths:
                   properties:
                     lambdaArn:
                       allOf:
-                        - $ref: '#/components/schemas/LambdaFunctionARNWithVersionNumber'
+                        - $ref: '#/components/schemas/NonEmptyString'
                         - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the Lambda function. The ARN must include the version of the function to import. You can''t use version aliases like <code>$LATEST</code>.'
                     componentName:
                       allOf:
@@ -417,7 +495,7 @@ paths:
                   description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
                   type: object
                   minProperties: 1
-                  maxProperties: 50
+                  maxProperties: 200
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 clientToken:
@@ -437,7 +515,7 @@ paths:
   /greengrass/v2/deployments:
     post:
       operationId: CreateDeployment
-      description: '<p>Creates a continuous deployment for a target, which is a Greengrass core device or group of core devices. When you add a new core device to a group of core devices that has a deployment, IoT Greengrass deploys that group''s deployment to the new device.</p> <p>You can define one deployment for each target. When you create a new deployment for a target that has an existing deployment, you replace the previous deployment. IoT Greengrass applies the new deployment to the target devices.</p> <p>Every deployment has a revision number that indicates how many deployment revisions you define for a target. Use this operation to create a new revision of an existing deployment. This operation returns the revision number of the new deployment when you create it.</p> <p>For more information, see the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html">Create deployments</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>'
+      description: '<p>Creates a continuous deployment for a target, which is a Greengrass core device or group of core devices. When you add a new core device to a group of core devices that has a deployment, IoT Greengrass deploys that group''s deployment to the new device.</p> <p>You can define one deployment for each target. When you create a new deployment for a target that has an existing deployment, you replace the previous deployment. IoT Greengrass applies the new deployment to the target devices.</p> <p>Every deployment has a revision number that indicates how many deployment revisions you define for a target. Use this operation to create a new revision of an existing deployment.</p> <p>For more information, see the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html">Create deployments</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>'
       responses:
         '201':
           description: Success
@@ -476,6 +554,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
           description: RequestAlreadyInProgressException
           content:
             application/json:
@@ -492,13 +576,14 @@ paths:
                 - targetArn
               properties:
                 targetArn:
-                  description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the target IoT thing or thing group.'
+                  description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the target IoT thing or thing group. When creating a subdeployment, the targetARN can only be a thing group.'
                   type: string
-                  pattern: 'arn:aws(-cn|-us-gov)?:iot:[^:]+:[0-9]+:(thing|thinggroup)/.+'
+                  pattern: 'arn:[^:]*:iot:[^:]*:[0-9]+:(thing|thinggroup)/.+'
                 deploymentName:
                   description: The name of the deployment.
                   type: string
                   minLength: 1
+                  maxLength: 256
                 components:
                   description: 'The components to deploy. This is a dictionary, where each key is the name of a component, and each key''s value is the version and configuration to deploy for that component.'
                   type: object
@@ -536,11 +621,15 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/DeploymentConfigurationValidationPolicy'
                         - description: The configuration validation policy for the configuration deployment. This policy defines how long each component has to validate its configure updates.
+                parentTargetArn:
+                  description: 'The parent deployment''s target <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> within a subdeployment.'
+                  type: string
+                  pattern: 'arn:[^:]*:iot:[^:]*:[0-9]+:thinggroup/.+'
                 tags:
                   description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
                   type: object
                   minProperties: 1
-                  maxProperties: 50
+                  maxProperties: 200
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 clientToken:
@@ -598,7 +687,7 @@ paths:
           description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the target IoT thing or thing group.'
           schema:
             type: string
-            pattern: 'arn:aws(-cn|-us-gov)?:iot:[^:]+:[0-9]+:(thing|thinggroup)/.+'
+            pattern: 'arn:[^:]*:iot:[^:]*:[0-9]+:(thing|thinggroup)/.+'
         - name: historyFilter
           in: query
           required: false
@@ -608,6 +697,13 @@ paths:
             enum:
               - ALL
               - LATEST_ONLY
+        - name: parentTargetArn
+          in: query
+          required: false
+          description: 'The parent deployment''s target <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> within a subdeployment.'
+          schema:
+            type: string
+            pattern: 'arn:[^:]*:iot:[^:]*:[0-9]+:thinggroup/.+'
         - name: maxResults
           in: query
           required: false
@@ -672,7 +768,7 @@ paths:
           description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.'
           schema:
             type: string
-            pattern: 'arn:aws(-cn|-us-gov)?:greengrass:[^:]+:(aws|[0-9]+):components:[^:]+:versions:[^:]+'
+            pattern: 'arn:[^:]*:greengrass:[^:]*:(aws|[0-9]+):components:[^:]+:versions:[^:]+'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -683,7 +779,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetComponent
-      description: Gets the recipe for a version of a component. Core devices can call this operation to identify the artifacts and requirements to install a component.
+      description: Gets the recipe for a version of a component.
       responses:
         '200':
           description: Success
@@ -737,7 +833,7 @@ paths:
           description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.'
           schema:
             type: string
-            pattern: 'arn:aws(-cn|-us-gov)?:greengrass:[^:]+:(aws|[0-9]+):components:[^:]+:versions:[^:]+'
+            pattern: 'arn:[^:]*:greengrass:[^:]*:(aws|[0-9]+):components:[^:]+:versions:[^:]+'
   '/greengrass/v2/coreDevices/{coreDeviceThingName}':
     delete:
       operationId: DeleteCoreDevice
@@ -800,7 +896,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetCoreDevice
-      description: Retrieves metadata for a Greengrass core device.
+      description: '<p>Retrieves metadata for a Greengrass core device.</p> <note> <p>IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core software isn''t running on the device, or if device isn''t connected to the Amazon Web Services Cloud, then the reported status of that device might not reflect its current status. The status timestamp indicates when the device status was last updated.</p> <p>Core devices send status updates at the following times:</p> <ul> <li> <p>When the IoT Greengrass Core software starts</p> </li> <li> <p>When the core device receives a deployment from the Amazon Web Services Cloud</p> </li> <li> <p>When the status of any component on the core device becomes <code>BROKEN</code> </p> </li> <li> <p>At a <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss">regular interval that you can configure</a>, which defaults to 24 hours</p> </li> <li> <p>For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and cloud deployment</p> </li> </ul> </note>'
       responses:
         '200':
           description: Success
@@ -847,116 +943,54 @@ paths:
             type: string
             minLength: 1
             maxLength: 128
-  '/greengrass/v2/components/{arn}/metadata':
-    get:
-      operationId: DescribeComponent
-      description: Retrieves metadata for a version of a component.
+  '/greengrass/v2/deployments/{deploymentId}':
+    delete:
+      operationId: DeleteDeployment
+      description: '<p>Deletes a deployment. To delete an active deployment, you must first cancel it. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_CancelDeployment.html">CancelDeployment</a>.</p> <p>Deleting a deployment doesn''t affect core devices that run that deployment, because core devices store the deployment''s configuration on the device. Additionally, core devices can roll back to a previous deployment that has been deleted.</p>'
       responses:
-        '200':
+        '204':
           description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DescribeComponentResponse'
         '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '482':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '483':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '484':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-      parameters:
-        - name: arn
-          in: path
-          required: true
-          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.'
-          schema:
-            type: string
-            pattern: 'arn:aws(-cn|-us-gov)?:greengrass:[^:]+:(aws|[0-9]+):components:[^:]+:versions:[^:]+'
-    parameters:
-      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/components/parameters/X-Amz-Date'
-      - $ref: '#/components/parameters/X-Amz-Algorithm'
-      - $ref: '#/components/parameters/X-Amz-Credential'
-      - $ref: '#/components/parameters/X-Amz-Security-Token'
-      - $ref: '#/components/parameters/X-Amz-Signature'
-      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/greengrass/v2/components/{arn}/artifacts/{artifactName}':
-    get:
-      operationId: GetComponentVersionArtifact
-      description: Gets the pre-signed URL to download a public component artifact. Core devices call this operation to identify the URL that they can use to download an artifact to install.
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetComponentVersionArtifactResponse'
-        '480':
+        '481':
           description: ValidationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
-        '481':
+        '482':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
-        '482':
-          description: ResourceNotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
         '483':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '484':
           description: InternalServerException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
       parameters:
-        - name: arn
+        - name: deploymentId
           in: path
           required: true
-          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version. Specify the ARN of a public component version.'
-          schema:
-            type: string
-            pattern: 'arn:aws(-cn|-us-gov)?:greengrass:[^:]+:(aws|[0-9]+):components:[^:]+:versions:[^:]+'
-        - name: artifactName
-          in: path
-          required: true
-          description: '<p>The name of the artifact.</p> <p>You can use the <a href="https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetComponent.html">GetComponent</a> operation to download the component recipe, which includes the URI of the artifact. The artifact name is the section of the URI after the scheme. For example, in the artifact URI <code>greengrass:SomeArtifact.zip</code>, the artifact name is <code>SomeArtifact.zip</code>.</p>'
+          description: The ID of the deployment.
           schema:
             type: string
             minLength: 1
@@ -968,7 +1002,6 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/greengrass/v2/deployments/{deploymentId}':
     get:
       operationId: GetDeployment
       description: Gets a deployment. Deployments define the components that run on Greengrass core devices.
@@ -1017,6 +1050,55 @@ paths:
           schema:
             type: string
             minLength: 1
+  '/greengrass/v2/components/{arn}/metadata':
+    get:
+      operationId: DescribeComponent
+      description: Retrieves metadata for a version of a component.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeComponentResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: arn
+          in: path
+          required: true
+          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.'
+          schema:
+            type: string
+            pattern: 'arn:[^:]*:greengrass:[^:]*:(aws|[0-9]+):components:[^:]+:versions:[^:]+'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1025,6 +1107,155 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/greengrass/v2/components/{arn}/artifacts/{artifactName}':
+    get:
+      operationId: GetComponentVersionArtifact
+      description: Gets the pre-signed URL to download a public or a Lambda component artifact. Core devices call this operation to identify the URL that they can use to download an artifact to install.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetComponentVersionArtifactResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: arn
+          in: path
+          required: true
+          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version. Specify the ARN of a public or a Lambda component version.'
+          schema:
+            type: string
+            pattern: 'arn:[^:]*:greengrass:[^:]*:(aws|[0-9]+):components:[^:]+:versions:[^:]+'
+        - name: artifactName
+          in: path
+          required: true
+          description: '<p>The name of the artifact.</p> <p>You can use the <a href="https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetComponent.html">GetComponent</a> operation to download the component recipe, which includes the URI of the artifact. The artifact name is the section of the URI after the scheme. For example, in the artifact URI <code>greengrass:SomeArtifact.zip</code>, the artifact name is <code>SomeArtifact.zip</code>.</p>'
+          schema:
+            type: string
+            minLength: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/greengrass/things/{thingName}/connectivityInfo':
+    get:
+      operationId: GetConnectivityInfo
+      description: '<p>Retrieves connectivity information for a Greengrass core device.</p> <p>Connectivity information includes endpoints and ports where client devices can connect to an MQTT broker on the core device. When a client device calls the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-discover-api.html">IoT Greengrass discovery API</a>, IoT Greengrass returns connectivity information for all of the core devices where the client device can connect. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/connect-client-devices.html">Connect client devices to core devices</a> in the <i>IoT Greengrass Version 2 Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetConnectivityInfoResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: thingName
+          in: path
+          required: true
+          description: The name of the core device. This is also the name of the IoT thing.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateConnectivityInfo
+      description: '<p>Updates connectivity information for a Greengrass core device.</p> <p>Connectivity information includes endpoints and ports where client devices can connect to an MQTT broker on the core device. When a client device calls the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-discover-api.html">IoT Greengrass discovery API</a>, IoT Greengrass returns connectivity information for all of the core devices where the client device can connect. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/connect-client-devices.html">Connect client devices to core devices</a> in the <i>IoT Greengrass Version 2 Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateConnectivityInfoResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: thingName
+          in: path
+          required: true
+          description: The name of the core device. This is also the name of the IoT thing.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ConnectivityInfo
+              properties:
+                ConnectivityInfo:
+                  description: The connectivity information for the core device.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ConnectivityInfo'
   '/greengrass/v2/coreDevices/{coreDeviceThingName}/associatedClientDevices':
     get:
       operationId: ListClientDevicesAssociatedWithCoreDevice
@@ -1142,10 +1373,10 @@ paths:
         - name: arn
           in: path
           required: true
-          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component version.'
+          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the component.'
           schema:
             type: string
-            pattern: 'arn:aws(-cn|-us-gov)?:greengrass:[^:]+:(aws|[0-9]+):components:[^:]+'
+            pattern: 'arn:[^:]*:greengrass:[^:]*:(aws|[0-9]+):components:[^:]+'
         - name: maxResults
           in: query
           required: false
@@ -1192,12 +1423,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
           description: ThrottlingException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
-        '483':
+        '484':
           description: InternalServerException
           content:
             application/json:
@@ -1238,7 +1475,7 @@ paths:
   /greengrass/v2/coreDevices:
     get:
       operationId: ListCoreDevices
-      description: Retrieves a paginated list of Greengrass core devices.
+      description: '<p>Retrieves a paginated list of Greengrass core devices.</p> <note> <p>IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core software isn''t running on the device, or if device isn''t connected to the Amazon Web Services Cloud, then the reported status of that device might not reflect its current status. The status timestamp indicates when the device status was last updated.</p> <p>Core devices send status updates at the following times:</p> <ul> <li> <p>When the IoT Greengrass Core software starts</p> </li> <li> <p>When the core device receives a deployment from the Amazon Web Services Cloud</p> </li> <li> <p>When the status of any component on the core device becomes <code>BROKEN</code> </p> </li> <li> <p>At a <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss">regular interval that you can configure</a>, which defaults to 24 hours</p> </li> <li> <p>For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and cloud deployment</p> </li> </ul> </note>'
       responses:
         '200':
           description: Success
@@ -1274,10 +1511,10 @@ paths:
         - name: thingGroupArn
           in: query
           required: false
-          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the IoT thing group by which to filter. If you specify this parameter, the list includes only core devices that are members of this thing group.'
+          description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the IoT thing group by which to filter. If you specify this parameter, the list includes only core devices that have successfully deployed a deployment that targets the thing group. When you remove a core device from a thing group, the list continues to include that core device.'
           schema:
             type: string
-            pattern: 'arn:aws(-cn|-us-gov)?:iot:[^:]+:[0-9]+:thinggroup/.+'
+            pattern: 'arn:[^:]*:iot:[^:]*:[0-9]+:thinggroup/.+'
         - name: status
           in: query
           required: false
@@ -1384,7 +1621,7 @@ paths:
   '/greengrass/v2/coreDevices/{coreDeviceThingName}/installedComponents':
     get:
       operationId: ListInstalledComponents
-      description: Retrieves a paginated list of the components that a Greengrass core device runs.
+      description: '<p>Retrieves a paginated list of the components that a Greengrass core device runs. By default, this list doesn''t include components that are deployed as dependencies of other components. To include dependencies in the response, set the <code>topologyFilter</code> parameter to <code>ALL</code>.</p> <note> <p>IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core software isn''t running on the device, or if device isn''t connected to the Amazon Web Services Cloud, then the reported status of that device might not reflect its current status. The status timestamp indicates when the device status was last updated.</p> <p>Core devices send status updates at the following times:</p> <ul> <li> <p>When the IoT Greengrass Core software starts</p> </li> <li> <p>When the core device receives a deployment from the Amazon Web Services Cloud</p> </li> <li> <p>When the status of any component on the core device becomes <code>BROKEN</code> </p> </li> <li> <p>At a <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss">regular interval that you can configure</a>, which defaults to 24 hours</p> </li> <li> <p>For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and cloud deployment</p> </li> </ul> </note>'
       responses:
         '200':
           description: Success
@@ -1445,6 +1682,15 @@ paths:
           description: The token to be used for the next set of paginated results.
           schema:
             type: string
+        - name: topologyFilter
+          in: query
+          required: false
+          description: '<p>The filter for the list of components. Choose from the following options:</p> <ul> <li> <p> <code>ALL</code> – The list includes all components installed on the core device.</p> </li> <li> <p> <code>ROOT</code> – The list includes only <i>root</i> components, which are components that you specify in a deployment. When you choose this option, the list doesn''t include components that the core device installs as dependencies of other components.</p> </li> </ul> <p>Default: <code>ROOT</code> </p>'
+          schema:
+            type: string
+            enum:
+              - ALL
+              - ROOT
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1489,7 +1735,7 @@ paths:
           description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the resource.'
           schema:
             type: string
-            pattern: 'arn:aws(-cn|-us-gov)?:greengrass:[^:]+:(aws|[0-9]+):(components|deployments|coreDevices):.+'
+            pattern: 'arn:[^:]*:greengrass:[^:]*:(aws|[0-9]+):(components|deployments|coreDevices):.*'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1533,7 +1779,7 @@ paths:
           description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the resource to tag.'
           schema:
             type: string
-            pattern: 'arn:aws(-cn|-us-gov)?:greengrass:[^:]+:(aws|[0-9]+):(components|deployments|coreDevices):.+'
+            pattern: 'arn:[^:]*:greengrass:[^:]*:(aws|[0-9]+):(components|deployments|coreDevices):.*'
       requestBody:
         required: true
         content:
@@ -1547,7 +1793,7 @@ paths:
                   description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
                   type: object
                   minProperties: 1
-                  maxProperties: 50
+                  maxProperties: 200
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
   /greengrass/v2/resolveComponentCandidates:
@@ -1580,23 +1826,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
         '483':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '484':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '485':
           description: ConflictException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
       parameters: []
       requestBody:
         required: true
@@ -1604,9 +1850,6 @@ paths:
           application/json:
             schema:
               type: object
-              required:
-                - platform
-                - componentCandidates
               properties:
                 platform:
                   description: Contains information about a platform that a component supports.
@@ -1619,7 +1862,7 @@ paths:
                     attributes:
                       allOf:
                         - $ref: '#/components/schemas/PlatformAttributesMap'
-                        - description: 'A dictionary of attributes for the platform. The IoT Greengrass Core software defines the <code>os</code> and <code>platform</code> by default. You can specify additional platform attributes for a core device when you deploy the Greengrass nucleus component. For more information, see the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html">Greengrass nucleus component</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
+                        - description: 'A dictionary of attributes for the platform. The IoT Greengrass Core software defines the <code>os</code> and <code>architecture</code> by default. You can specify additional platform attributes for a core device when you deploy the Greengrass nucleus component. For more information, see the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html">Greengrass nucleus component</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
                 componentCandidates:
                   description: The list of components to resolve.
                   type: array
@@ -1669,7 +1912,7 @@ paths:
           description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the resource to untag.'
           schema:
             type: string
-            pattern: 'arn:aws(-cn|-us-gov)?:greengrass:[^:]+:(aws|[0-9]+):(components|deployments|coreDevices):.+'
+            pattern: 'arn:[^:]*:greengrass:[^:]*:(aws|[0-9]+):(components|deployments|coreDevices):.*'
         - name: tagKeys
           in: query
           required: true
@@ -1679,7 +1922,7 @@ paths:
             items:
               $ref: '#/components/schemas/TagKey'
             minItems: 1
-            maxItems: 50
+            maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1740,6 +1983,17 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    AssociateServiceRoleToAccountResponse:
+      type: object
+      properties:
+        associatedAt:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: AssociatedAt
+              description: The time when the service role was associated with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.
+    ValidationException: {}
+    InternalServerException: {}
     BatchAssociateClientDeviceWithCoreDeviceResponse:
       type: object
       properties:
@@ -1757,10 +2011,8 @@ components:
             - $ref: '#/components/schemas/IoTThingName'
             - description: The name of the IoT thing that represents the client device to associate.
       description: 'Contains a request to associate a client device with a core device. The <a href="https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html">BatchAssociateClientDeviceWithCoreDevice</a> operation consumes a list of these requests.'
-    ValidationException: {}
     ResourceNotFoundException: {}
     AccessDeniedException: {}
-    InternalServerException: {}
     ThrottlingException: {}
     BatchDisassociateClientDeviceFromCoreDeviceResponse:
       type: object
@@ -1768,7 +2020,7 @@ components:
         errorEntries:
           allOf:
             - $ref: '#/components/schemas/DisassociateClientDeviceFromCoreDeviceErrorList'
-            - description: The list of errors (if any) for the entries in the request. Each error entry contains the name of the IoT thing that failed to disassociate.
+            - description: The list of any errors for the entries in the request. Each error entry contains the name of the IoT thing that failed to disassociate.
     DisassociateClientDeviceFromCoreDeviceEntry:
       type: object
       required:
@@ -1815,17 +2067,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/CloudComponentStatus'
             - description: The status of the component version in IoT Greengrass V2. This status is different from the status of the component on a core device.
-    LambdaFunctionARNWithVersionNumber:
+    NonEmptyString:
       type: string
-      pattern: 'arn:aws(-cn|-us-gov)?:lambda:[^:]+:[0-9]+:function:[a-zA-Z0-9-_]+:[0-9]+'
+      minLength: 1
     ComponentNameString:
       type: string
-      pattern: '[a-zA-Z0-9-_.]+'
       minLength: 1
       maxLength: 128
     ComponentVersionString:
       type: string
-      pattern: '[0-9a-zA-Z-.+]+'
       minLength: 1
       maxLength: 64
     ComponentPlatformList:
@@ -2014,6 +2264,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
+    DisassociateServiceRoleFromAccountResponse:
+      type: object
+      properties:
+        disassociatedAt:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: DisassociatedAt
+              description: The time when the service role was disassociated from IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.
     GetComponentResponse:
       type: object
       required:
@@ -2041,6 +2300,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The URL of the artifact.
+    GetConnectivityInfoResponse:
+      type: object
+      properties:
+        connectivityInfo:
+          allOf:
+            - $ref: '#/components/schemas/connectivityInfoList'
+            - xml:
+                name: ConnectivityInfo
+              description: The connectivity information for the core device.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: Message
+              description: A message about the connectivity information request.
     GetCoreDeviceResponse:
       type: object
       properties:
@@ -2123,10 +2397,29 @@ components:
           allOf:
             - $ref: '#/components/schemas/IsLatestForTarget'
             - description: Whether or not the deployment is the latest revision for its target.
+        parentTargetArn:
+          allOf:
+            - $ref: '#/components/schemas/ThingGroupARN'
+            - description: 'The parent deployment''s target <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> within a subdeployment.'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html">Tag your resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
+    GetServiceRoleForAccountResponse:
+      type: object
+      properties:
+        associatedAt:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: AssociatedAt
+              description: The time when the service role was associated with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: RoleArn
+              description: The ARN of the service role that is associated with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.
     ListClientDevicesAssociatedWithCoreDeviceResponse:
       type: object
       properties:
@@ -2199,7 +2492,7 @@ components:
         installedComponents:
           allOf:
             - $ref: '#/components/schemas/InstalledComponentList'
-            - description: A list that summarizes each component on the core device.
+            - description: <p>A list that summarizes each component on the core device.</p> <note> <p>Greengrass nucleus v2.7.0 or later is required to get an accurate <code>lastStatusChangeTimestamp</code> response. This response can be inaccurate in earlier Greengrass nucleus versions.</p> </note> <note> <p>Greengrass nucleus v2.8.0 or later is required to get an accurate <code>lastInstallationSource</code> and <code>lastReportedTimestamp</code> response. This response can be inaccurate or null in earlier Greengrass nucleus versions.</p> </note>
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NextTokenString'
@@ -2218,9 +2511,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResolvedComponentVersionsList'
             - description: A list of components that meet the requirements that you specify in the request. This list includes each component's recipe that you can use to install the component.
-    NonEmptyString:
-      type: string
-      minLength: 1
     PlatformAttributesMap:
       type: object
       additionalProperties:
@@ -2249,9 +2539,51 @@ components:
       properties: {}
     TagKey:
       type: string
-      pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
       minLength: 1
       maxLength: 128
+    UpdateConnectivityInfoResponse:
+      type: object
+      properties:
+        version:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: Version
+              description: The new version of the connectivity information for the core device.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: Message
+              description: A message about the connectivity information update request.
+    ConnectivityInfo:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: Id
+              description: An ID for the connectivity information.
+        hostAddress:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: HostAddress
+              description: The IP address or DNS address where client devices can connect to an MQTT broker on the Greengrass core device.
+        portNumber:
+          allOf:
+            - $ref: '#/components/schemas/PortNumberInt'
+            - xml:
+                name: PortNumber
+              description: 'The port where the MQTT broker operates on the core device. This port is typically 8883, which is the default port for the MQTT broker component that runs on core devices.'
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: Metadata
+              description: Additional metadata to provide to client devices that connect to this core device.
+      description: Contains information about an endpoint and port where client devices can connect to an MQTT broker on a Greengrass core device.
     IoTThingName:
       type: string
       minLength: 1
@@ -2282,8 +2614,21 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AssociateClientDeviceWithCoreDeviceErrorEntry'
-      minItems: 1
       maxItems: 100
+    String:
+      type: string
+    AssociateServiceRoleToAccountRequest:
+      type: object
+      required:
+        - roleArn
+      title: AssociateServiceRoleToAccountRequest
+      properties:
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: RoleArn
+              description: The Amazon Resource Name (ARN) of the service role to associate with IoT Greengrass for your Amazon Web Services account in this Amazon Web Services Region.
     Timestamp:
       type: string
       format: date-time
@@ -2331,7 +2676,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DisassociateClientDeviceFromCoreDeviceErrorEntry'
-      minItems: 1
       maxItems: 100
     CPU:
       type: number
@@ -2358,25 +2702,39 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/NonEmptyString'
+    VendorGuidance:
+      type: string
+      enum:
+        - ACTIVE
+        - DISCONTINUED
+        - DELETED
     CloudComponentStatus:
       type: object
       properties:
         componentState:
           allOf:
             - $ref: '#/components/schemas/CloudComponentState'
-            - description: The state of the component.
+            - description: The state of the component version.
         message:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'A message that communicates details, such as errors, about the status of the component.'
+            - description: 'A message that communicates details, such as errors, about the status of the component version.'
         errors:
           allOf:
             - $ref: '#/components/schemas/StringMap'
-            - description: 'A dictionary of errors that communicate why the component is in an error state. For example, if IoT Greengrass can''t access an artifact for the component, then <code>errors</code> contains the artifact''s URI as a key, and the error message as the value for that key.'
-      description: Contains the status of a component in the IoT Greengrass service.
+            - description: 'A dictionary of errors that communicate why the component version is in an error state. For example, if IoT Greengrass can''t access an artifact for the component version, then <code>errors</code> contains the artifact''s URI as a key, and the error message as the value for that key.'
+        vendorGuidance:
+          allOf:
+            - $ref: '#/components/schemas/VendorGuidance'
+            - description: '<p>The vendor guidance state for the component version. This state indicates whether the component version has any issues that you should consider before you deploy it. The vendor guidance state can be:</p> <ul> <li> <p> <code>ACTIVE</code> – This component version is available and recommended for use.</p> </li> <li> <p> <code>DISCONTINUED</code> – This component version has been discontinued by its publisher. You can deploy this component version, but we recommend that you use a different version of this component.</p> </li> <li> <p> <code>DELETED</code> – This component version has been deleted by its publisher, so you can''t deploy it. If you have any existing deployments that specify this component version, those deployments will fail.</p> </li> </ul>'
+        vendorGuidanceMessage:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A message that communicates details about the vendor guidance state of the component version. This message communicates why a component version is discontinued or deleted.
+      description: Contains the status of a component version in the IoT Greengrass service.
     ComponentARN:
       type: string
-      pattern: 'arn:aws(-cn|-us-gov)?:greengrass:[^:]+:(aws|[0-9]+):components:[^:]+'
+      pattern: 'arn:[^:]*:greengrass:[^:]*:(aws|[0-9]+):components:[^:]+'
     ComponentLatestVersion:
       type: object
       properties:
@@ -2440,7 +2798,7 @@ components:
     ComponentConfigurationString:
       type: string
       minLength: 1
-      maxLength: 65536
+      maxLength: 10485760
     ComponentConfigurationUpdate:
       type: object
       properties:
@@ -2476,11 +2834,15 @@ components:
         posixUser:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The POSIX system user and (optional) group to use to run this component. Specify the user and group separated by a colon (<code>:</code>) in the following format: <code>user:group</code>. The group is optional. If you don''t specify a group, the IoT Greengrass Core software uses the primary user for the group.</p> <p>If you omit this parameter, the IoT Greengrass Core software uses the default system user and group that you configure on the Greengrass nucleus component. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user">Configure the user and group that run components</a>.</p>'
+            - description: '<p>The POSIX system user and, optionally, group to use to run this component on Linux core devices. The user, and group if specified, must exist on each Linux core device. Specify the user and group separated by a colon (<code>:</code>) in the following format: <code>user:group</code>. The group is optional. If you don''t specify a group, the IoT Greengrass Core software uses the primary user for the group.</p> <p>If you omit this parameter, the IoT Greengrass Core software uses the default system user and group that you configure on the Greengrass nucleus component. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user">Configure the user and group that run components</a>.</p>'
         systemResourceLimits:
           allOf:
             - $ref: '#/components/schemas/SystemResourceLimits'
-            - description: '<p>The system resource limits to apply to this component''s process on the core device.</p> <p>If you omit this parameter, the IoT Greengrass Core software uses the default system resource limits that you configure on the Greengrass nucleus component. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-system-resource-limits">Configure system resource limits for components</a>.</p>'
+            - description: '<p>The system resource limits to apply to this component''s process on the core device. IoT Greengrass currently supports this feature on only Linux core devices.</p> <p>If you omit this parameter, the IoT Greengrass Core software uses the default system resource limits that you configure on the Greengrass nucleus component. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-system-resource-limits">Configure system resource limits for components</a>.</p>'
+        windowsUser:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The Windows user to use to run this component on Windows core devices. The user must exist on each Windows core device, and its name and password must be in the LocalSystem account''s Credentials Manager instance.</p> <p>If you omit this parameter, the IoT Greengrass Core software uses the default Windows user that you configure on the Greengrass nucleus component. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user">Configure the user and group that run components</a>.</p>'
       description: 'Contains information system user and group that the IoT Greengrass Core software uses to run component processes on the core device. For more information, see <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user">Configure the user and group that run components</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
     ComponentDeploymentSpecifications:
       type: object
@@ -2488,7 +2850,7 @@ components:
         $ref: '#/components/schemas/ComponentDeploymentSpecification'
     ComponentVersionARN:
       type: string
-      pattern: 'arn:aws(-cn|-us-gov)?:greengrass:[^:]+:(aws|[0-9]+):components:[^:]+:versions:[^:]+'
+      pattern: 'arn:[^:]*:greengrass:[^:]*:(aws|[0-9]+):components:[^:]+:versions:[^:]+'
     ComponentList:
       type: array
       items:
@@ -2503,7 +2865,7 @@ components:
         attributes:
           allOf:
             - $ref: '#/components/schemas/PlatformAttributesMap'
-            - description: 'A dictionary of attributes for the platform. The IoT Greengrass Core software defines the <code>os</code> and <code>platform</code> by default. You can specify additional platform attributes for a core device when you deploy the Greengrass nucleus component. For more information, see the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html">Greengrass nucleus component</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
+            - description: 'A dictionary of attributes for the platform. The IoT Greengrass Core software defines the <code>os</code> and <code>architecture</code> by default. You can specify additional platform attributes for a core device when you deploy the Greengrass nucleus component. For more information, see the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html">Greengrass nucleus component</a> in the <i>IoT Greengrass V2 Developer Guide</i>.'
       description: Contains information about a platform that a component supports.
     SystemResourceLimits:
       type: object
@@ -2542,6 +2904,10 @@ components:
       enum:
         - PRIVATE
         - PUBLIC
+    PortNumberInt:
+      type: integer
+      minimum: 0
+      maximum: 65535
     CoreDeviceThingName:
       type: string
       minLength: 1
@@ -2588,7 +2954,7 @@ components:
       properties:
         lambdaArn:
           allOf:
-            - $ref: '#/components/schemas/LambdaFunctionARNWithVersionNumber'
+            - $ref: '#/components/schemas/NonEmptyString'
             - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the Lambda function. The ARN must include the version of the function to import. You can''t use version aliases like <code>$LATEST</code>.'
         componentName:
           allOf:
@@ -2614,7 +2980,7 @@ components:
     TagMap:
       type: object
       minProperties: 1
-      maxProperties: 50
+      maxProperties: 200
       additionalProperties:
         $ref: '#/components/schemas/TagValue'
     CreateComponentVersionRequest:
@@ -2639,7 +3005,11 @@ components:
             - description: 'A unique, case-sensitive identifier that you can provide to ensure that the request is idempotent. Idempotency means that the request is successfully processed only once, even if you send the request multiple times. When a request succeeds, and you specify the same client token for subsequent successful requests, the IoT Greengrass V2 service returns the successful response that it caches from the previous request. IoT Greengrass V2 caches successful responses for idempotent requests for up to 8 hours.'
     TargetARN:
       type: string
-      pattern: 'arn:aws(-cn|-us-gov)?:iot:[^:]+:[0-9]+:(thing|thinggroup)/.+'
+      pattern: 'arn:[^:]*:iot:[^:]*:[0-9]+:(thing|thinggroup)/.+'
+    DeploymentNameString:
+      type: string
+      minLength: 1
+      maxLength: 256
     DeploymentIoTJobConfiguration:
       type: object
       properties:
@@ -2672,6 +3042,9 @@ components:
             - $ref: '#/components/schemas/DeploymentConfigurationValidationPolicy'
             - description: The configuration validation policy for the configuration deployment. This policy defines how long each component has to validate its configure updates.
       description: Contains information about policies that define how a deployment updates components and handles failure.
+    ThingGroupARN:
+      type: string
+      pattern: 'arn:[^:]*:iot:[^:]*:[0-9]+:thinggroup/.+'
     CreateDeploymentRequest:
       type: object
       required:
@@ -2681,10 +3054,10 @@ components:
         targetArn:
           allOf:
             - $ref: '#/components/schemas/TargetARN'
-            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the target IoT thing or thing group.'
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the target IoT thing or thing group. When creating a subdeployment, the targetARN can only be a thing group.'
         deploymentName:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
+            - $ref: '#/components/schemas/DeploymentNameString'
             - description: The name of the deployment.
         components:
           allOf:
@@ -2698,6 +3071,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DeploymentPolicies'
             - description: The deployment policies for the deployment. These policies define how the deployment updates components and handles failure.
+        parentTargetArn:
+          allOf:
+            - $ref: '#/components/schemas/ThingGroupARN'
+            - description: 'The parent deployment''s target <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> within a subdeployment.'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -2708,7 +3085,7 @@ components:
             - description: 'A unique, case-sensitive identifier that you can provide to ensure that the request is idempotent. Idempotency means that the request is successfully processed only once, even if you send the request multiple times. When a request succeeds, and you specify the same client token for subsequent successful requests, the IoT Greengrass V2 service returns the successful response that it caches from the previous request. IoT Greengrass V2 caches successful responses for idempotent requests for up to 8 hours.'
     IoTJobARN:
       type: string
-      pattern: 'arn:aws(-cn|-us-gov)?:iot:[^:]+:[0-9]+:job/.+'
+      pattern: 'arn:[^:]*:iot:[^:]+:[0-9]+:job/.+'
     DefaultMaxResults:
       type: integer
       minimum: 1
@@ -2720,6 +3097,10 @@ components:
     DeleteCoreDeviceRequest:
       type: object
       title: DeleteCoreDeviceRequest
+      properties: {}
+    DeleteDeploymentRequest:
+      type: object
+      title: DeleteDeploymentRequest
       properties: {}
     DeploymentStatus:
       type: string
@@ -2737,7 +3118,7 @@ components:
         targetArn:
           allOf:
             - $ref: '#/components/schemas/TargetARN'
-            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the target IoT thing or thing group.'
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the target IoT thing or thing group. When creating a subdeployment, the targetARN can only be a thing group.'
         revisionId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -2762,6 +3143,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/IsLatestForTarget'
             - description: Whether or not the deployment is the latest revision for its target.
+        parentTargetArn:
+          allOf:
+            - $ref: '#/components/schemas/ThingGroupARN'
+            - description: 'The parent deployment''s target <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> within a subdeployment.'
       description: Contains information about a deployment.
     OptionalInteger:
       type: integer
@@ -2811,6 +3196,10 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: A message that provides additional information about the error.
       description: 'Contains an error that occurs from a request to disassociate a client device from a core device. The <a href="https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html">BatchDisassociateClientDeviceWithCoreDevice</a> operation returns a list of these errors.'
+    DisassociateServiceRoleFromAccountRequest:
+      type: object
+      title: DisassociateServiceRoleFromAccountRequest
+      properties: {}
     IoTJobId:
       type: string
       minLength: 1
@@ -2827,6 +3216,18 @@ components:
         - REJECTED
     Reason:
       type: string
+    EffectiveDeploymentStatusDetails:
+      type: object
+      properties:
+        errorStack:
+          allOf:
+            - $ref: '#/components/schemas/EffectiveDeploymentErrorStack'
+            - description: Contains an ordered list of short error codes that range from the most generic error to the most specific one. The error codes describe the reason for failure whenever the <code>coreDeviceExecutionStatus</code> is in a failed state. The response will be an empty list if there is no error.
+        errorTypes:
+          allOf:
+            - $ref: '#/components/schemas/EffectiveDeploymentErrorTypeList'
+            - description: Contains tags which describe the error. You can use the error types to classify errors to assist with remediating the failure. The response will be an empty list if there is no error.
+      description: <p>Contains all error-related information for the deployment record. The status details will be null if the deployment is in a success state.</p> <note> <p>Greengrass nucleus v2.8.0 or later is required to get an accurate <code>errorStack</code> and <code>errorTypes</code> response. This field will not be returned for earlier Greengrass nucleus versions.</p> </note>
     EffectiveDeployment:
       type: object
       required:
@@ -2877,7 +3278,27 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: 'The time at which the deployment job was last modified, expressed in ISO 8601 format.'
+        statusDetails:
+          allOf:
+            - $ref: '#/components/schemas/EffectiveDeploymentStatusDetails'
+            - description: The status details that explain why a deployment has an error. This response will be null if the deployment is in a success state.
       description: Contains information about a deployment job that IoT Greengrass sends to a Greengrass core device.
+    EffectiveDeploymentErrorCode:
+      type: string
+      minLength: 1
+      maxLength: 255
+    EffectiveDeploymentErrorStack:
+      type: array
+      items:
+        $ref: '#/components/schemas/EffectiveDeploymentErrorCode'
+    EffectiveDeploymentErrorType:
+      type: string
+      minLength: 1
+      maxLength: 255
+    EffectiveDeploymentErrorTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EffectiveDeploymentErrorType'
     EffectiveDeploymentsList:
       type: array
       items:
@@ -2890,7 +3311,7 @@ components:
       maxLength: 255
     GenericV2ARN:
       type: string
-      pattern: 'arn:aws(-cn|-us-gov)?:greengrass:[^:]+:(aws|[0-9]+):(components|deployments|coreDevices):.+'
+      pattern: 'arn:[^:]*:greengrass:[^:]*:(aws|[0-9]+):(components|deployments|coreDevices):.*'
     RecipeOutputFormat:
       type: string
       enum:
@@ -2904,6 +3325,14 @@ components:
       type: object
       title: GetComponentVersionArtifactRequest
       properties: {}
+    GetConnectivityInfoRequest:
+      type: object
+      title: GetConnectivityInfoRequest
+      properties: {}
+    connectivityInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConnectivityInfo'
     GetCoreDeviceRequest:
       type: object
       title: GetCoreDeviceRequest
@@ -2914,6 +3343,10 @@ components:
       properties: {}
     NullableString:
       type: string
+    GetServiceRoleForAccountRequest:
+      type: object
+      title: GetServiceRoleForAccountRequest
+      properties: {}
     InstalledComponentLifecycleState:
       type: string
       enum:
@@ -2931,6 +3364,10 @@ components:
       maxLength: 1000
     IsRoot:
       type: boolean
+    InstalledComponentLifecycleStatusCodeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstalledComponentLifecycleStatusCode'
     InstalledComponent:
       type: object
       properties:
@@ -2949,16 +3386,41 @@ components:
         lifecycleStateDetails:
           allOf:
             - $ref: '#/components/schemas/LifecycleStateDetails'
-            - description: The details about the lifecycle state of the component.
+            - description: A detailed response about the lifecycle state of the component that explains the reason why a component has an error or is broken.
         isRoot:
           allOf:
             - $ref: '#/components/schemas/IsRoot'
             - description: Whether or not the component is a root component.
+        lastStatusChangeTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: '<p>The status of how current the data is.</p> <p>This response is based off of component state changes. The status reflects component disruptions and deployments. If a component only sees a configuration update during a deployment, it might not undergo a state change and this status would not be updated.</p>'
+        lastReportedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: <p>The last time the Greengrass core device sent a message containing a certain component to the Amazon Web Services Cloud.</p> <p>A component does not need to see a state change for this field to update.</p>
+        lastInstallationSource:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The most recent deployment source that brought the component to the Greengrass core device. For a thing group deployment or thing deployment, the source will be the The ID of the deployment. and for local deployments it will be <code>LOCAL</code>.'
+        lifecycleStatusCodes:
+          allOf:
+            - $ref: '#/components/schemas/InstalledComponentLifecycleStatusCodeList'
+            - description: <p>The status codes that indicate the reason for failure whenever the <code>lifecycleState</code> has an error or is in a broken state.</p> <note> <p>Greengrass nucleus v2.8.0 or later is required to get an accurate <code>lifecycleStatusCodes</code> response. This response can be inaccurate in earlier Greengrass nucleus versions.</p> </note>
       description: Contains information about a component on a Greengrass core device.
+    InstalledComponentLifecycleStatusCode:
+      type: string
+      minLength: 1
+      maxLength: 255
     InstalledComponentList:
       type: array
       items:
         $ref: '#/components/schemas/InstalledComponent'
+    InstalledComponentTopologyFilter:
+      type: string
+      enum:
+        - ALL
+        - ROOT
     IoTJobAbortAction:
       type: string
       enum:
@@ -3110,8 +3572,6 @@ components:
       enum:
         - ro
         - rw
-    String:
-      type: string
     LambdaEnvironmentVariables:
       type: object
       additionalProperties:
@@ -3207,9 +3667,6 @@ components:
       type: object
       title: ListComponentsRequest
       properties: {}
-    ThingGroupARN:
-      type: string
-      pattern: 'arn:aws(-cn|-us-gov)?:iot:[^:]+:[0-9]+:thinggroup/.+'
     ListCoreDevicesRequest:
       type: object
       title: ListCoreDevicesRequest
@@ -3236,9 +3693,6 @@ components:
       maximum: 9223372036854772000
     ResolveComponentCandidatesRequest:
       type: object
-      required:
-        - platform
-        - componentCandidates
       title: ResolveComponentCandidatesRequest
       properties:
         platform:
@@ -3272,13 +3726,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecipeBlob'
             - description: The recipe of the component version.
+        vendorGuidance:
+          allOf:
+            - $ref: '#/components/schemas/VendorGuidance'
+            - description: '<p>The vendor guidance state for the component version. This state indicates whether the component version has any issues that you should consider before you deploy it. The vendor guidance state can be:</p> <ul> <li> <p> <code>ACTIVE</code> – This component version is available and recommended for use.</p> </li> <li> <p> <code>DISCONTINUED</code> – This component version has been discontinued by its publisher. You can deploy this component version, but we recommend that you use a different version of this component.</p> </li> <li> <p> <code>DELETED</code> – This component version has been deleted by its publisher, so you can''t deploy it. If you have any existing deployments that specify this component version, those deployments will fail.</p> </li> </ul>'
+        message:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A message that communicates details about the vendor guidance state of the component version. This message communicates why a component version is discontinued or deleted.
       description: Contains information about a component version that is compatible to run on a Greengrass core device.
     TagKeyList:
       type: array
       items:
         $ref: '#/components/schemas/TagKey'
       minItems: 1
-      maxItems: 50
+      maxItems: 200
     TagResourceRequest:
       type: object
       required:
@@ -3293,5 +3755,17 @@ components:
       type: object
       title: UntagResourceRequest
       properties: {}
+    UpdateConnectivityInfoRequest:
+      type: object
+      required:
+        - connectivityInfo
+      title: UpdateConnectivityInfoRequest
+      properties:
+        connectivityInfo:
+          allOf:
+            - $ref: '#/components/schemas/connectivityInfoList'
+            - xml:
+                name: ConnectivityInfo
+              description: The connectivity information for the core device.
 security:
   - hmac: []

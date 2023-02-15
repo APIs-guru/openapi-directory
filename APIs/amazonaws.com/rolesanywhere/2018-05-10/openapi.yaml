@@ -1,0 +1,2128 @@
+openapi: 3.0.0
+info:
+  version: '2018-05-10'
+  x-release: v4
+  title: IAM Roles Anywhere
+  description: '<p>AWS Identity and Access Management Roles Anywhere provides a secure way for your workloads such as servers, containers, and applications running outside of AWS to obtain Temporary AWS credentials. Your workloads can use the same IAM policies and roles that you have configured with native AWS applications to access AWS resources. Using IAM Roles Anywhere will eliminate the need to manage long term credentials for workloads running outside of AWS.</p> <p>To use IAM Roles Anywhere customer workloads will need to use X.509 certificates issued by their Certificate Authority (CA) . The Certificate Authority (CA) needs to be registered with IAM Roles Anywhere as a trust anchor to establish trust between customer PKI and IAM Roles Anywhere. Customers who do not manage their own PKI system can use AWS Certificate Manager Private Certificate Authority (ACM PCA) to create a Certificate Authority and use that to establish trust with IAM Roles Anywhere</p> <p>This guide describes the IAM rolesanywhere operations that you can call programmatically. For general information about IAM Roles Anywhere see <a href="https://docs.aws.amazon.com/">https://docs.aws.amazon.com/</a> </p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: rolesanywhere
+  x-aws-signingName: rolesanywhere
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/rolesanywhere-2018-05-10.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/rolesanywhere/'
+servers:
+  - url: 'http://rolesanywhere.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The IAM Roles Anywhere multi-region endpoint
+  - url: 'https://rolesanywhere.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The IAM Roles Anywhere multi-region endpoint
+  - url: 'http://rolesanywhere.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The IAM Roles Anywhere endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://rolesanywhere.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The IAM Roles Anywhere endpoint for China (Beijing) and China (Ningxia)
+paths:
+  /profiles:
+    post:
+      operationId: CreateProfile
+      description: '<p>Creates a profile. A profile is configuration resource to list the roles that RolesAnywhere service is trusted to assume. In addition, by applying a profile you can intersect permissions with IAM managed policies.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:CreateProfile</code>. </p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileDetailResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - roleArns
+              properties:
+                durationSeconds:
+                  description: ' The number of seconds the vended session credentials are valid for. '
+                  type: integer
+                  minimum: 900
+                  maximum: 43200
+                enabled:
+                  description: Specifies whether the profile is enabled.
+                  type: boolean
+                managedPolicyArns:
+                  description: 'A list of managed policy ARNs that apply to the vended session credentials. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ManagedPolicyListMemberString'
+                  minItems: 0
+                  maxItems: 50
+                name:
+                  description: The name of the profile.
+                  type: string
+                  pattern: '^[ a-zA-Z0-9-_]*$'
+                  minLength: 1
+                  maxLength: 255
+                requireInstanceProperties:
+                  description: 'Specifies whether instance properties are required in <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> requests with this profile. '
+                  type: boolean
+                roleArns:
+                  description: 'A list of IAM roles that this profile can assume in a <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RoleArn'
+                  minItems: 0
+                  maxItems: 50
+                sessionPolicy:
+                  description: 'A session policy that applies to the trust boundary of the vended session credentials. '
+                  type: string
+                tags:
+                  description: The tags to attach to the profile.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 0
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListProfiles
+      description: '<p>Lists all profiles in the authenticated account and Amazon Web Services Region.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:ListProfiles</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProfilesResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: 'A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 10000
+        - name: pageSize
+          in: query
+          required: false
+          description: 'The number of resources in the paginated list. '
+          schema:
+            type: integer
+  /trustanchors:
+    post:
+      operationId: CreateTrustAnchor
+      description: '<p>Creates a trust anchor. You establish trust between IAM Roles Anywhere and your certificate authority (CA) by configuring a trust anchor. A Trust Anchor is defined either as a reference to a AWS Certificate Manager Private Certificate Authority (ACM PCA), or by uploading a Certificate Authority (CA) certificate. Your AWS workloads can authenticate with the trust anchor using certificates issued by the trusted Certificate Authority (CA) in exchange for temporary AWS credentials.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:CreateTrustAnchor</code>. </p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrustAnchorDetailResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - source
+              properties:
+                enabled:
+                  description: Specifies whether the trust anchor is enabled.
+                  type: boolean
+                name:
+                  description: The name of the trust anchor.
+                  type: string
+                  pattern: '^[ a-zA-Z0-9-_]*$'
+                  minLength: 1
+                  maxLength: 255
+                source:
+                  description: The trust anchor type and its related certificate data.
+                  type: object
+                  properties:
+                    sourceData:
+                      allOf:
+                        - $ref: '#/components/schemas/SourceData'
+                        - description: 'The data field of the trust anchor depending on its type. '
+                    sourceType:
+                      allOf:
+                        - $ref: '#/components/schemas/TrustAnchorType'
+                        - description: 'The type of the trust anchor. '
+                tags:
+                  description: The tags to attach to the trust anchor.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 0
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListTrustAnchors
+      description: '<p>Lists the trust anchors in the authenticated account and Amazon Web Services Region.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:ListTrustAnchors</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTrustAnchorsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: 'A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 10000
+        - name: pageSize
+          in: query
+          required: false
+          description: 'The number of resources in the paginated list. '
+          schema:
+            type: integer
+  '/crl/{crlId}':
+    delete:
+      operationId: DeleteCrl
+      description: '<p>Deletes a certificate revocation list (CRL).</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DeleteCrl</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrlDetailResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: crlId
+          in: path
+          required: true
+          description: The unique identifier of the certificate revocation list (CRL).
+          schema:
+            type: string
+            pattern: '[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}'
+            minLength: 36
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetCrl
+      description: '<p>Gets a certificate revocation list (CRL).</p> <p> <b>Required permissions: </b> <code>rolesanywhere:GetCrl</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrlDetailResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: crlId
+          in: path
+          required: true
+          description: The unique identifier of the certificate revocation list (CRL).
+          schema:
+            type: string
+            pattern: '[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}'
+            minLength: 36
+            maxLength: 36
+    patch:
+      operationId: UpdateCrl
+      description: '<p>Updates the certificate revocation list (CRL). CRl is a list of certificates that have been revoked by the issuing certificate Authority (CA). IAM Roles Anywhere validates against the crl list before issuing credentials.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:UpdateCrl</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrlDetailResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: crlId
+          in: path
+          required: true
+          description: The unique identifier of the certificate revocation list (CRL).
+          schema:
+            type: string
+            pattern: '[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}'
+            minLength: 36
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                crlData:
+                  description: The x509 v3 specified certificate revocation list
+                  type: string
+                  minLength: 1
+                  maxLength: 300000
+                name:
+                  description: The name of the Crl.
+                  type: string
+                  pattern: '^[ a-zA-Z0-9-_]*$'
+                  minLength: 1
+                  maxLength: 255
+  '/profile/{profileId}':
+    delete:
+      operationId: DeleteProfile
+      description: '<p>Deletes a profile.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DeleteProfile</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileDetailResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: profileId
+          in: path
+          required: true
+          description: The unique identifier of the profile.
+          schema:
+            type: string
+            pattern: '[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}'
+            minLength: 36
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetProfile
+      description: '<p>Gets a profile.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:GetProfile</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileDetailResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: profileId
+          in: path
+          required: true
+          description: The unique identifier of the profile.
+          schema:
+            type: string
+            pattern: '[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}'
+            minLength: 36
+            maxLength: 36
+    patch:
+      operationId: UpdateProfile
+      description: '<p>Updates the profile. A profile is configuration resource to list the roles that RolesAnywhere service is trusted to assume. In addition, by applying a profile you can scope-down permissions with IAM managed policies.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:UpdateProfile</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileDetailResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: profileId
+          in: path
+          required: true
+          description: The unique identifier of the profile.
+          schema:
+            type: string
+            pattern: '[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}'
+            minLength: 36
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                durationSeconds:
+                  description: ' The number of seconds the vended session credentials are valid for. '
+                  type: integer
+                  minimum: 900
+                  maximum: 43200
+                managedPolicyArns:
+                  description: 'A list of managed policy ARNs that apply to the vended session credentials. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ManagedPolicyListMemberString'
+                  minItems: 0
+                  maxItems: 50
+                name:
+                  description: The name of the profile.
+                  type: string
+                  pattern: '^[ a-zA-Z0-9-_]*$'
+                  minLength: 1
+                  maxLength: 255
+                roleArns:
+                  description: 'A list of IAM roles that this profile can assume in a <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RoleArn'
+                  minItems: 0
+                  maxItems: 50
+                sessionPolicy:
+                  description: 'A session policy that applies to the trust boundary of the vended session credentials. '
+                  type: string
+                  minLength: 1
+                  maxLength: 100000
+  '/trustanchor/{trustAnchorId}':
+    delete:
+      operationId: DeleteTrustAnchor
+      description: '<p>Deletes a trust anchor.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DeleteTrustAnchor</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrustAnchorDetailResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: trustAnchorId
+          in: path
+          required: true
+          description: The unique identifier of the trust anchor.
+          schema:
+            type: string
+            pattern: '[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}'
+            minLength: 36
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetTrustAnchor
+      description: '<p>Gets a trust anchor.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:GetTrustAnchor</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrustAnchorDetailResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: trustAnchorId
+          in: path
+          required: true
+          description: The unique identifier of the trust anchor.
+          schema:
+            type: string
+            pattern: '[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}'
+            minLength: 36
+            maxLength: 36
+    patch:
+      operationId: UpdateTrustAnchor
+      description: '<p>Updates the trust anchor.You establish trust between IAM Roles Anywhere and your certificate authority (CA) by configuring a trust anchor. A Trust Anchor is defined either as a reference to a AWS Certificate Manager Private Certificate Authority (ACM PCA), or by uploading a Certificate Authority (CA) certificate. Your AWS workloads can authenticate with the trust anchor using certificates issued by the trusted Certificate Authority (CA) in exchange for temporary AWS credentials.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:UpdateTrustAnchor</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrustAnchorDetailResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: trustAnchorId
+          in: path
+          required: true
+          description: The unique identifier of the trust anchor.
+          schema:
+            type: string
+            pattern: '[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}'
+            minLength: 36
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: The name of the trust anchor.
+                  type: string
+                  pattern: '^[ a-zA-Z0-9-_]*$'
+                  minLength: 1
+                  maxLength: 255
+                source:
+                  description: The trust anchor type and its related certificate data.
+                  type: object
+                  properties:
+                    sourceData:
+                      allOf:
+                        - $ref: '#/components/schemas/SourceData'
+                        - description: 'The data field of the trust anchor depending on its type. '
+                    sourceType:
+                      allOf:
+                        - $ref: '#/components/schemas/TrustAnchorType'
+                        - description: 'The type of the trust anchor. '
+  '/crl/{crlId}/disable':
+    post:
+      operationId: DisableCrl
+      description: '<p>Disables a certificate revocation list (CRL).</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DisableCrl</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrlDetailResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: crlId
+          in: path
+          required: true
+          description: The unique identifier of the certificate revocation list (CRL).
+          schema:
+            type: string
+            pattern: '[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}'
+            minLength: 36
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/profile/{profileId}/disable':
+    post:
+      operationId: DisableProfile
+      description: '<p>Disables a profile. When disabled, <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> requests with this profile fail.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DisableProfile</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileDetailResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: profileId
+          in: path
+          required: true
+          description: The unique identifier of the profile.
+          schema:
+            type: string
+            pattern: '[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}'
+            minLength: 36
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/trustanchor/{trustAnchorId}/disable':
+    post:
+      operationId: DisableTrustAnchor
+      description: '<p>Disables a trust anchor. When disabled, <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> requests specifying this trust anchor are unauthorized.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DisableTrustAnchor</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrustAnchorDetailResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: trustAnchorId
+          in: path
+          required: true
+          description: The unique identifier of the trust anchor.
+          schema:
+            type: string
+            pattern: '[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}'
+            minLength: 36
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/crl/{crlId}/enable':
+    post:
+      operationId: EnableCrl
+      description: '<p>Enables a certificate revocation list (CRL). When enabled, certificates stored in the CRL are unauthorized to receive session credentials.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:EnableCrl</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrlDetailResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: crlId
+          in: path
+          required: true
+          description: The unique identifier of the certificate revocation list (CRL).
+          schema:
+            type: string
+            pattern: '[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}'
+            minLength: 36
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/profile/{profileId}/enable':
+    post:
+      operationId: EnableProfile
+      description: '<p>Enables the roles in a profile to receive session credentials in <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a>. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:EnableProfile</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileDetailResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: profileId
+          in: path
+          required: true
+          description: The unique identifier of the profile.
+          schema:
+            type: string
+            pattern: '[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}'
+            minLength: 36
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/trustanchor/{trustAnchorId}/enable':
+    post:
+      operationId: EnableTrustAnchor
+      description: '<p>Enables a trust anchor. When enabled, certificates in the trust anchor chain are authorized for trust validation. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:EnableTrustAnchor</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrustAnchorDetailResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: trustAnchorId
+          in: path
+          required: true
+          description: The unique identifier of the trust anchor.
+          schema:
+            type: string
+            pattern: '[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}'
+            minLength: 36
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/subject/{subjectId}':
+    get:
+      operationId: GetSubject
+      description: '<p>Gets a Subject. A Subject associates a certificate identity with authentication attempts by CreateSession. The Subject resources stores audit information such as status of the last authentication attempt, the certificate data used in the attempt, and the last time the associated identity attempted authentication. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:GetSubject</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubjectDetailResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: subjectId
+          in: path
+          required: true
+          description: 'The unique identifier of the subject. '
+          schema:
+            type: string
+            pattern: '[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}'
+            minLength: 36
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /crls:
+    post:
+      operationId: ImportCrl
+      description: '<p>Imports the certificate revocation list (CRL). CRl is a list of certificates that have been revoked by the issuing certificate Authority (CA). IAM Roles Anywhere validates against the crl list before issuing credentials. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:ImportCrl</code>. </p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CrlDetailResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - crlData
+                - name
+                - trustAnchorArn
+              properties:
+                crlData:
+                  description: The x509 v3 specified certificate revocation list
+                  type: string
+                  minLength: 1
+                  maxLength: 300000
+                enabled:
+                  description: Specifies whether the certificate revocation list (CRL) is enabled.
+                  type: boolean
+                name:
+                  description: The name of the certificate revocation list (CRL).
+                  type: string
+                  pattern: '^[ a-zA-Z0-9-_]*$'
+                  minLength: 1
+                  maxLength: 255
+                tags:
+                  description: A list of tags to attach to the certificate revocation list (CRL).
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 0
+                  maxItems: 50
+                trustAnchorArn:
+                  description: The ARN of the TrustAnchor the certificate revocation list (CRL) will provide revocation for.
+                  type: string
+                  pattern: '^arn:aws(-[^:]+)?:rolesanywhere(:.*){2}(:trust-anchor.*)$'
+                  minLength: 1
+                  maxLength: 1011
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListCrls
+      description: '<p>Lists all Crls in the authenticated account and Amazon Web Services Region.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:ListCrls</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCrlsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: 'A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 10000
+        - name: pageSize
+          in: query
+          required: false
+          description: 'The number of resources in the paginated list. '
+          schema:
+            type: integer
+  /subjects:
+    get:
+      operationId: ListSubjects
+      description: '<p>Lists the subjects in the authenticated account and Amazon Web Services Region.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:ListSubjects</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSubjectsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: 'A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 10000
+        - name: pageSize
+          in: query
+          required: false
+          description: 'The number of resources in the paginated list. '
+          schema:
+            type: integer
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListTagsForResource#resourceArn:
+    get:
+      operationId: ListTagsForResource
+      description: '<p>Lists the tags attached to the resource.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:ListTagsForResource</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: resourceArn
+          in: query
+          required: true
+          description: The ARN of the resource.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1011
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /TagResource:
+    post:
+      operationId: TagResource
+      description: '<p>Attaches tags to a resource.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:TagResource</code>. </p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - resourceArn
+                - tags
+              properties:
+                resourceArn:
+                  description: The ARN of the resource.
+                  type: string
+                  minLength: 1
+                  maxLength: 1011
+                tags:
+                  description: The tags to attach to the resource.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 0
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /UntagResource:
+    post:
+      operationId: UntagResource
+      description: '<p>Removes tags from the resource.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:UntagResource</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - resourceArn
+                - tagKeys
+              properties:
+                resourceArn:
+                  description: The ARN of the resource.
+                  type: string
+                  minLength: 1
+                  maxLength: 1011
+                tagKeys:
+                  description: 'A list of keys. Tag keys are the unique identifiers of tags. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/TagKey'
+                  minItems: 0
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    ProfileDetailResponse:
+      type: object
+      properties:
+        profile:
+          allOf:
+            - $ref: '#/components/schemas/ProfileDetail'
+            - description: The state of the profile after a read or write operation.
+    ManagedPolicyListMemberString:
+      type: string
+      minLength: 1
+      maxLength: 200
+    RoleArn:
+      type: string
+      pattern: '^arn:aws(-[^:]+)?:iam(:.*){2}(:role.*)$'
+      minLength: 1
+      maxLength: 1011
+    Tag:
+      type: object
+      required:
+        - key
+        - value
+      properties:
+        key:
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The tag key.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The tag value.
+      description: 'A label that consists of a key and value you define. '
+    ValidationException: {}
+    AccessDeniedException: {}
+    TrustAnchorDetailResponse:
+      type: object
+      required:
+        - trustAnchor
+      properties:
+        trustAnchor:
+          allOf:
+            - $ref: '#/components/schemas/TrustAnchorDetail'
+            - description: 'The state of the trust anchor after a read or write operation. '
+    SourceData:
+      type: object
+      properties:
+        acmPcaArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The root certificate of the Certificate Manager Private Certificate Authority specified by this ARN is used in trust validation for <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operations. Included for trust anchors of type <code>AWS_ACM_PCA</code>. '
+        x509CertificateData:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The PEM-encoded data for the certificate anchor. Included for trust anchors of type <code>CERTIFICATE_BUNDLE</code>. '
+      description: 'The data field of the trust anchor depending on its type. '
+    TrustAnchorType:
+      type: string
+      enum:
+        - AWS_ACM_PCA
+        - CERTIFICATE_BUNDLE
+        - SELF_SIGNED_REPOSITORY
+    CrlDetailResponse:
+      type: object
+      required:
+        - crl
+      properties:
+        crl:
+          allOf:
+            - $ref: '#/components/schemas/CrlDetail'
+            - description: The state of the certificate revocation list (CRL) after a read or write operation.
+    ResourceNotFoundException: {}
+    SubjectDetailResponse:
+      type: object
+      properties:
+        subject:
+          allOf:
+            - $ref: '#/components/schemas/SubjectDetail'
+            - description: The state of the subject after a read or write operation.
+    ListCrlsResponse:
+      type: object
+      properties:
+        crls:
+          allOf:
+            - $ref: '#/components/schemas/CrlDetails'
+            - description: 'A list of certificate revocation lists (CRL). '
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.'
+    ListProfilesResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.'
+        profiles:
+          allOf:
+            - $ref: '#/components/schemas/ProfileDetails'
+            - description: A list of profiles.
+    ListSubjectsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.'
+        subjects:
+          allOf:
+            - $ref: '#/components/schemas/SubjectSummaries'
+            - description: A list of subjects.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A list of tags attached to the resource.
+    ListTrustAnchorsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.'
+        trustAnchors:
+          allOf:
+            - $ref: '#/components/schemas/TrustAnchorDetails'
+            - description: A list of trust anchors.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    TooManyTagsException: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      pattern: '^[ a-zA-Z0-9_.:/=+@-]*$'
+      minLength: 1
+      maxLength: 128
+      format: password
+    AmazonResourceName:
+      type: string
+      minLength: 1
+      maxLength: 1011
+    Blob:
+      type: string
+    Boolean:
+      type: boolean
+    CreateProfileRequestDurationSecondsInteger:
+      type: integer
+      minimum: 900
+      maximum: 43200
+    ManagedPolicyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ManagedPolicyListMemberString'
+      minItems: 0
+      maxItems: 50
+    ResourceName:
+      type: string
+      pattern: '^[ a-zA-Z0-9-_]*$'
+      minLength: 1
+      maxLength: 255
+    RoleArnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RoleArn'
+      minItems: 0
+      maxItems: 50
+    String:
+      type: string
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 0
+      maxItems: 50
+    CreateProfileRequest:
+      type: object
+      required:
+        - name
+        - roleArns
+      title: CreateProfileRequest
+      properties:
+        durationSeconds:
+          allOf:
+            - $ref: '#/components/schemas/CreateProfileRequestDurationSecondsInteger'
+            - description: ' The number of seconds the vended session credentials are valid for. '
+        enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether the profile is enabled.
+        managedPolicyArns:
+          allOf:
+            - $ref: '#/components/schemas/ManagedPolicyList'
+            - description: 'A list of managed policy ARNs that apply to the vended session credentials. '
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the profile.
+        requireInstanceProperties:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Specifies whether instance properties are required in <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> requests with this profile. '
+        roleArns:
+          allOf:
+            - $ref: '#/components/schemas/RoleArnList'
+            - description: 'A list of IAM roles that this profile can assume in a <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation.'
+        sessionPolicy:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A session policy that applies to the trust boundary of the vended session credentials. '
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags to attach to the profile.
+    Source:
+      type: object
+      properties:
+        sourceData:
+          allOf:
+            - $ref: '#/components/schemas/SourceData'
+            - description: 'The data field of the trust anchor depending on its type. '
+        sourceType:
+          allOf:
+            - $ref: '#/components/schemas/TrustAnchorType'
+            - description: 'The type of the trust anchor. '
+      description: The trust anchor type and its related certificate data.
+    CreateTrustAnchorRequest:
+      type: object
+      required:
+        - name
+        - source
+      title: CreateTrustAnchorRequest
+      properties:
+        enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether the trust anchor is enabled.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the trust anchor.
+        source:
+          allOf:
+            - $ref: '#/components/schemas/Source'
+            - description: The trust anchor type and its related certificate data.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags to attach to the trust anchor.
+    CredentialSummary:
+      type: object
+      properties:
+        enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the credential is enabled.
+        failed:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Indicates whether the <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation was successful. '
+        issuer:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The fully qualified domain name of the issuing certificate for the presented end-entity certificate.
+        seenAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The ISO-8601 time stamp of when the certificate was last used in a <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation.'
+        serialNumber:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The serial number of the certificate.
+        x509CertificateData:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The PEM-encoded data of the certificate.
+      description: 'A record of a presented X509 credential to <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a>. '
+    CredentialSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/CredentialSummary'
+    SyntheticTimestamp_date_time:
+      type: string
+      format: date-time
+    Uuid:
+      type: string
+      pattern: '[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}'
+      minLength: 36
+      maxLength: 36
+    CrlDetail:
+      type: object
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The ISO-8601 timestamp when the certificate revocation list (CRL) was created. '
+        crlArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the certificate revocation list (CRL).
+        crlData:
+          allOf:
+            - $ref: '#/components/schemas/Blob'
+            - description: The state of the certificate revocation list (CRL) after a read or write operation.
+        crlId:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The unique identifier of the certificate revocation list (CRL).
+        enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the certificate revocation list (CRL) is enabled.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the certificate revocation list (CRL).
+        trustAnchorArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The ARN of the TrustAnchor the certificate revocation list (CRL) will provide revocation for. '
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The ISO-8601 timestamp when the certificate revocation list (CRL) was last updated. '
+      description: The state of the certificate revocation list (CRL) after a read or write operation.
+    CrlDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/CrlDetail'
+    ImportCrlRequestCrlDataBlob:
+      type: string
+      minLength: 1
+      maxLength: 300000
+    TrustAnchorArn:
+      type: string
+      pattern: '^arn:aws(-[^:]+)?:rolesanywhere(:.*){2}(:trust-anchor.*)$'
+      minLength: 1
+      maxLength: 1011
+    ImportCrlRequest:
+      type: object
+      required:
+        - crlData
+        - name
+        - trustAnchorArn
+      title: ImportCrlRequest
+      properties:
+        crlData:
+          allOf:
+            - $ref: '#/components/schemas/ImportCrlRequestCrlDataBlob'
+            - description: The x509 v3 specified certificate revocation list
+        enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether the certificate revocation list (CRL) is enabled.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the certificate revocation list (CRL).
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A list of tags to attach to the certificate revocation list (CRL).
+        trustAnchorArn:
+          allOf:
+            - $ref: '#/components/schemas/TrustAnchorArn'
+            - description: The ARN of the TrustAnchor the certificate revocation list (CRL) will provide revocation for.
+    InstanceProperty:
+      type: object
+      properties:
+        failed:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Indicates whether the <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation was successful. '
+        properties:
+          description: 'A list of instanceProperty objects. '
+        seenAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The ISO-8601 time stamp of when the certificate was last used in a <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation.'
+      description: A key-value pair you set that identifies a property of the authenticating instance.
+    InstanceProperties:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceProperty'
+    InstancePropertyMapValueString:
+      type: string
+      minLength: 1
+      maxLength: 200
+    InstancePropertyMap:
+      type: object
+      minProperties: 0
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/InstancePropertyMapValueString'
+    InstancePropertyMapKeyString:
+      type: string
+      minLength: 1
+      maxLength: 200
+    Integer:
+      type: integer
+    ProfileDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProfileDetail'
+    ListRequestNextTokenString:
+      type: string
+      minLength: 1
+      maxLength: 10000
+    ListRequest:
+      type: object
+      title: ListRequest
+      properties: {}
+    SubjectSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubjectSummary'
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    TrustAnchorDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/TrustAnchorDetail'
+    ProfileArn:
+      type: string
+      pattern: '^arn:aws(-[^:]+)?:rolesanywhere(:.*){2}(:profile.*)$'
+      minLength: 1
+      maxLength: 1011
+    ProfileDetail:
+      type: object
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The ISO-8601 timestamp when the profile was created. '
+        createdBy:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services account that created the profile.
+        durationSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' The number of seconds the vended session credentials are valid for. '
+        enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the profile is enabled.
+        managedPolicyArns:
+          allOf:
+            - $ref: '#/components/schemas/ManagedPolicyList'
+            - description: 'A list of managed policy ARNs that apply to the vended session credentials. '
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the profile.
+        profileArn:
+          allOf:
+            - $ref: '#/components/schemas/ProfileArn'
+            - description: The ARN of the profile.
+        profileId:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The unique identifier of the profile.
+        requireInstanceProperties:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Specifies whether instance properties are required in <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> requests with this profile. '
+        roleArns:
+          allOf:
+            - $ref: '#/components/schemas/RoleArnList'
+            - description: 'A list of IAM roles that this profile can assume in a <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation.'
+        sessionPolicy:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A session policy that applies to the trust boundary of the vended session credentials. '
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The ISO-8601 timestamp when the profile was last updated. '
+      description: The state of the profile after a read or write operation.
+    ScalarCrlRequest:
+      type: object
+      title: ScalarCrlRequest
+      properties: {}
+    ScalarProfileRequest:
+      type: object
+      title: ScalarProfileRequest
+      properties: {}
+    ScalarSubjectRequest:
+      type: object
+      title: ScalarSubjectRequest
+      properties: {}
+    ScalarTrustAnchorRequest:
+      type: object
+      title: ScalarTrustAnchorRequest
+      properties: {}
+    SubjectDetail:
+      type: object
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The ISO-8601 timestamp when the subject was created. '
+        credentials:
+          allOf:
+            - $ref: '#/components/schemas/CredentialSummaries'
+            - description: The temporary session credentials vended at the last authenticating call with this Subject.
+        enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: The enabled status of the subject.
+        instanceProperties:
+          allOf:
+            - $ref: '#/components/schemas/InstanceProperties'
+            - description: The specified instance properties associated with the request.
+        lastSeenAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The ISO-8601 timestamp of the last time this Subject requested temporary session credentials.
+        subjectArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the resource.
+        subjectId:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The id of the resource
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The ISO-8601 timestamp when the subject was last updated.
+        x509Subject:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The x509 principal identifier of the authenticating certificate.
+      description: The state of the subject after a read or write operation.
+    SubjectSummary:
+      type: object
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The ISO-8601 time stamp of when the certificate was first used in a <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation.'
+        enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'The enabled status of the Subject. '
+        lastSeenAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The ISO-8601 time stamp of when the certificate was last used in a <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation.'
+        subjectArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the resource.
+        subjectId:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The id of the resource.
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The ISO-8601 timestamp when the subject was last updated. '
+        x509Subject:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The x509 principal identifier of the authenticating certificate.
+      description: A summary representation of Subject resources returned in read operations; primarily ListSubjects.
+    TagValue:
+      type: string
+      pattern: '^[ a-zA-Z0-9_.:/=+@-]*$'
+      minLength: 0
+      maxLength: 256
+      format: password
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 0
+      maxItems: 50
+    TagResourceRequest:
+      type: object
+      required:
+        - resourceArn
+        - tags
+      title: TagResourceRequest
+      properties:
+        resourceArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The ARN of the resource.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags to attach to the resource.
+    TrustAnchorDetail:
+      type: object
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The ISO-8601 timestamp when the trust anchor was created. '
+        enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the trust anchor is enabled.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the trust anchor.
+        source:
+          allOf:
+            - $ref: '#/components/schemas/Source'
+            - description: The trust anchor type and its related certificate data.
+        trustAnchorArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the trust anchor.
+        trustAnchorId:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The unique identifier of the trust anchor.
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The ISO-8601 timestamp when the trust anchor was last updated. '
+      description: 'The state of the trust anchor after a read or write operation. '
+    UntagResourceRequest:
+      type: object
+      required:
+        - resourceArn
+        - tagKeys
+      title: UntagResourceRequest
+      properties:
+        resourceArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The ARN of the resource.
+        tagKeys:
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: 'A list of keys. Tag keys are the unique identifiers of tags. '
+    UpdateCrlRequestCrlDataBlob:
+      type: string
+      minLength: 1
+      maxLength: 300000
+    UpdateCrlRequest:
+      type: object
+      title: UpdateCrlRequest
+      properties:
+        crlData:
+          allOf:
+            - $ref: '#/components/schemas/UpdateCrlRequestCrlDataBlob'
+            - description: The x509 v3 specified certificate revocation list
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the Crl.
+    UpdateProfileRequestDurationSecondsInteger:
+      type: integer
+      minimum: 900
+      maximum: 43200
+    UpdateProfileRequestSessionPolicyString:
+      type: string
+      minLength: 1
+      maxLength: 100000
+    UpdateProfileRequest:
+      type: object
+      title: UpdateProfileRequest
+      properties:
+        durationSeconds:
+          allOf:
+            - $ref: '#/components/schemas/UpdateProfileRequestDurationSecondsInteger'
+            - description: ' The number of seconds the vended session credentials are valid for. '
+        managedPolicyArns:
+          allOf:
+            - $ref: '#/components/schemas/ManagedPolicyList'
+            - description: 'A list of managed policy ARNs that apply to the vended session credentials. '
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the profile.
+        roleArns:
+          allOf:
+            - $ref: '#/components/schemas/RoleArnList'
+            - description: 'A list of IAM roles that this profile can assume in a <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation.'
+        sessionPolicy:
+          allOf:
+            - $ref: '#/components/schemas/UpdateProfileRequestSessionPolicyString'
+            - description: 'A session policy that applies to the trust boundary of the vended session credentials. '
+    UpdateTrustAnchorRequest:
+      type: object
+      title: UpdateTrustAnchorRequest
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the trust anchor.
+        source:
+          allOf:
+            - $ref: '#/components/schemas/Source'
+            - description: The trust anchor type and its related certificate data.
+security:
+  - hmac: []

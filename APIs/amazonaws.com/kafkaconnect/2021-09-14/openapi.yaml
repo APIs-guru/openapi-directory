@@ -608,6 +608,7 @@ paths:
                 propertiesFileContent:
                   description: Base64 encoded contents of connect-distributed.properties file.
                   type: string
+                  format: password
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -817,6 +818,73 @@ paths:
           schema:
             type: string
   '/v1/custom-plugins/{customPluginArn}':
+    delete:
+      operationId: DeleteCustomPlugin
+      description: Deletes a custom plugin.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCustomPluginResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '485':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '486':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+      parameters:
+        - name: customPluginArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the custom plugin that you want to delete.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeCustomPlugin
       description: A summary description of the custom plugin.
@@ -876,14 +944,6 @@ paths:
           description: Returns information about a custom plugin.
           schema:
             type: string
-    parameters:
-      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/components/parameters/X-Amz-Date'
-      - $ref: '#/components/parameters/X-Amz-Algorithm'
-      - $ref: '#/components/parameters/X-Amz-Credential'
-      - $ref: '#/components/parameters/X-Amz-Security-Token'
-      - $ref: '#/components/parameters/X-Amz-Signature'
-      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v1/worker-configurations/{workerConfigurationArn}':
     get:
       operationId: DescribeWorkerConfiguration
@@ -1290,6 +1350,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectorState'
             - description: The state of the connector that you requested to delete.
+    DeleteCustomPluginResponse:
+      type: object
+      properties:
+        customPluginArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The Amazon Resource Name (ARN) of the custom plugin that you requested to delete.
+        customPluginState:
+          allOf:
+            - $ref: '#/components/schemas/CustomPluginState'
+            - description: The state of the custom plugin.
     DescribeConnectorResponse:
       type: object
       properties:
@@ -1303,7 +1374,7 @@ components:
             - description: The Amazon Resource Name (ARN) of the connector.
         connectorConfiguration:
           allOf:
-            - $ref: '#/components/schemas/__mapOf__string'
+            - $ref: '#/components/schemas/SyntheticDescribeConnectorResponse__mapOf__string'
             - description: A map of keys to values that represent the configuration for the connector.
         connectorDescription:
           allOf:
@@ -1353,6 +1424,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon Web Services resources.
+        stateDescription:
+          allOf:
+            - $ref: '#/components/schemas/StateDescription'
+            - description: Details about the state of a connector.
         workerConfiguration:
           allOf:
             - $ref: '#/components/schemas/WorkerConfigurationDescription'
@@ -1384,6 +1459,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: The name of the custom plugin.
+        stateDescription:
+          allOf:
+            - $ref: '#/components/schemas/StateDescription'
+            - description: Details about the state of a custom plugin.
     DescribeWorkerConfigurationResponse:
       type: object
       properties:
@@ -1823,7 +1902,7 @@ components:
             - $ref: '#/components/schemas/WorkerConfigurationDescription'
             - description: The worker configurations that are in use with the connector.
       description: Summary of a connector.
-    __mapOf__string:
+    SyntheticCreateConnectorRequest__mapOf__string:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/__string'
@@ -1914,7 +1993,7 @@ components:
             - description: Information about the capacity allocated to the connector. Exactly one of the two properties must be specified.
         connectorConfiguration:
           allOf:
-            - $ref: '#/components/schemas/__mapOf__string'
+            - $ref: '#/components/schemas/SyntheticCreateConnectorRequest__mapOf__string'
             - description: A map of keys to values that represent the configuration for the connector.
         connectorDescription:
           allOf:
@@ -2006,6 +2085,9 @@ components:
         - DELETING
     __long:
       type: integer
+    SyntheticCreateWorkerConfigurationRequest__string:
+      type: string
+      format: password
     CreateWorkerConfigurationRequest:
       type: object
       required:
@@ -2023,7 +2105,7 @@ components:
             - description: The name of the worker configuration.
         propertiesFileContent:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/SyntheticCreateWorkerConfigurationRequest__string'
             - description: Base64 encoded contents of connect-distributed.properties file.
     WorkerConfigurationRevisionSummary:
       type: object
@@ -2164,10 +2246,30 @@ components:
       type: object
       title: DeleteConnectorRequest
       properties: {}
+    DeleteCustomPluginRequest:
+      type: object
+      title: DeleteCustomPluginRequest
+      properties: {}
     DescribeConnectorRequest:
       type: object
       title: DescribeConnectorRequest
       properties: {}
+    SyntheticDescribeConnectorResponse__mapOf__string:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/__string'
+    StateDescription:
+      type: object
+      properties:
+        code:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: A code that describes the state of a resource.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: A message that describes the state of a resource.
+      description: Details about the state of a resource.
     DescribeCustomPluginRequest:
       type: object
       title: DescribeCustomPluginRequest
@@ -2189,7 +2291,7 @@ components:
             - description: The description of the worker configuration revision.
         propertiesFileContent:
           allOf:
-            - $ref: '#/components/schemas/__string'
+            - $ref: '#/components/schemas/SyntheticWorkerConfigurationRevisionDescription__string'
             - description: Base64 encoded contents of the connect-distributed.properties file.
         revision:
           allOf:
@@ -2312,6 +2414,9 @@ components:
       type: integer
       minimum: 1
       maximum: 100
+    SyntheticWorkerConfigurationRevisionDescription__string:
+      type: string
+      format: password
     UpdateConnectorRequest:
       type: object
       required:

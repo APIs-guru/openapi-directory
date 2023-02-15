@@ -326,6 +326,11 @@ paths:
               - tr-TR
               - en-NZ
               - en-ZA
+              - ca-ES
+              - de-AT
+              - yue-CN
+              - ar-AE
+              - fi-FI
         - name: IncludeAdditionalLanguageCodes
           in: query
           required: false
@@ -628,6 +633,11 @@ paths:
                     - tr-TR
                     - en-NZ
                     - en-ZA
+                    - ca-ES
+                    - de-AT
+                    - yue-CN
+                    - ar-AE
+                    - fi-FI
                 LexiconNames:
                   description: 'List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. '
                   type: array
@@ -741,6 +751,29 @@ paths:
                     - Zhiyu
                     - Aria
                     - Ayanda
+                    - Arlet
+                    - Hannah
+                    - Arthur
+                    - Daniel
+                    - Liam
+                    - Pedro
+                    - Kajal
+                    - Hiujin
+                    - Laura
+                    - Elin
+                    - Ida
+                    - Suvi
+                    - Ola
+                    - Hala
+                    - Andres
+                    - Sergio
+                    - Remi
+                    - Adriano
+                    - Thiago
+                    - Ruth
+                    - Stephen
+                    - Kazuha
+                    - Tomoko
   /v1/speech:
     post:
       operationId: SynthesizeSpeech
@@ -859,6 +892,11 @@ paths:
                     - tr-TR
                     - en-NZ
                     - en-ZA
+                    - ca-ES
+                    - de-AT
+                    - yue-CN
+                    - ar-AE
+                    - fi-FI
                 LexiconNames:
                   description: 'List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. For information about storing lexicons, see <a href="https://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html">PutLexicon</a>.'
                   type: array
@@ -960,6 +998,29 @@ paths:
                     - Zhiyu
                     - Aria
                     - Ayanda
+                    - Arlet
+                    - Hannah
+                    - Arthur
+                    - Daniel
+                    - Liam
+                    - Pedro
+                    - Kajal
+                    - Hiujin
+                    - Laura
+                    - Elin
+                    - Ida
+                    - Suvi
+                    - Ola
+                    - Hala
+                    - Andres
+                    - Sergio
+                    - Remi
+                    - Adriano
+                    - Thiago
+                    - Ruth
+                    - Stephen
+                    - Kazuha
+                    - Tomoko
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1218,6 +1279,11 @@ components:
         - tr-TR
         - en-NZ
         - en-ZA
+        - ca-ES
+        - de-AT
+        - yue-CN
+        - ar-AE
+        - fi-FI
     IncludeAdditionalLanguageCodes:
       type: boolean
     NextToken:
@@ -1530,6 +1596,29 @@ components:
         - Zhiyu
         - Aria
         - Ayanda
+        - Arlet
+        - Hannah
+        - Arthur
+        - Daniel
+        - Liam
+        - Pedro
+        - Kajal
+        - Hiujin
+        - Laura
+        - Elin
+        - Ida
+        - Suvi
+        - Ola
+        - Hala
+        - Andres
+        - Sergio
+        - Remi
+        - Adriano
+        - Thiago
+        - Ruth
+        - Stephen
+        - Kazuha
+        - Tomoko
     StartSpeechSynthesisTaskInput:
       type: object
       required:

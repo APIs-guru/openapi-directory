@@ -3,7 +3,7 @@ info:
   version: '2020-12-01'
   x-release: v4
   title: AWS Fault Injection Simulator
-  description: 'AWS Fault Injection Simulator is a managed service that enables you to perform fault injection experiments on your AWS workloads. For more information, see the <a href="https://docs.aws.amazon.com/fis/latest/userguide/">AWS Fault Injection Simulator User Guide</a>.'
+  description: 'Fault Injection Simulator is a managed service that enables you to perform fault injection experiments on your Amazon Web Services workloads. For more information, see the <a href="https://docs.aws.amazon.com/fis/latest/userguide/">Fault Injection Simulator User Guide</a>.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -117,7 +117,7 @@ paths:
   /experimentTemplates:
     post:
       operationId: CreateExperimentTemplate
-      description: '<p>Creates an experiment template. </p> <p>To create a template, specify the following information: </p> <ul> <li> <p> <b>Targets</b>: A target can be a specific resource in your AWS environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.</p> </li> <li> <p> <b>Actions</b>: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.</p> </li> <li> <p> <b>Stop conditions</b>: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.</p> </li> </ul> <p>For more information, see the <a href="https://docs.aws.amazon.com/fis/latest/userguide/">AWS Fault Injection Simulator User Guide</a>.</p>'
+      description: '<p>Creates an experiment template. </p> <p>An experiment template includes the following components:</p> <ul> <li> <p> <b>Targets</b>: A target can be a specific resource in your Amazon Web Services environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.</p> </li> <li> <p> <b>Actions</b>: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.</p> </li> <li> <p> <b>Stop conditions</b>: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/fis/latest/userguide/experiment-templates.html">Experiment templates</a> in the <i>Fault Injection Simulator User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -170,7 +170,7 @@ paths:
                   minLength: 1
                   maxLength: 1024
                 description:
-                  description: A description for the experiment template. Can contain up to 64 letters (A-Z and a-z).
+                  description: A description for the experiment template.
                   type: string
                   pattern: '[\s\S]+'
                   maxLength: 512
@@ -190,7 +190,7 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/CreateExperimentTemplateActionInput'
                 roleArn:
-                  description: The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
+                  description: The Amazon Resource Name (ARN) of an IAM role that grants the FIS service permission to perform service actions on your behalf.
                   type: string
                   pattern: '[\S]+'
                   minLength: 20
@@ -201,6 +201,22 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+                logConfiguration:
+                  description: Specifies the configuration for experiment logging.
+                  type: object
+                  properties:
+                    cloudWatchLogsConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/ExperimentTemplateCloudWatchLogsLogConfigurationInput'
+                        - description: The configuration for experiment logging to Amazon CloudWatch Logs.
+                    s3Configuration:
+                      allOf:
+                        - $ref: '#/components/schemas/ExperimentTemplateS3LogConfigurationInput'
+                        - description: The configuration for experiment logging to Amazon S3.
+                    logSchemaVersion:
+                      allOf:
+                        - $ref: '#/components/schemas/LogSchemaVersion'
+                        - description: The schema version.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -379,15 +395,31 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/UpdateExperimentTemplateActionInputItem'
                 roleArn:
-                  description: The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
+                  description: The Amazon Resource Name (ARN) of an IAM role that grants the FIS service permission to perform service actions on your behalf.
                   type: string
                   pattern: '[\S]+'
                   minLength: 20
                   maxLength: 2048
+                logConfiguration:
+                  description: Specifies the configuration for experiment logging.
+                  type: object
+                  properties:
+                    cloudWatchLogsConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/ExperimentTemplateCloudWatchLogsLogConfigurationInput'
+                        - description: The configuration for experiment logging to Amazon CloudWatch Logs.
+                    s3Configuration:
+                      allOf:
+                        - $ref: '#/components/schemas/ExperimentTemplateS3LogConfigurationInput'
+                        - description: The configuration for experiment logging to Amazon S3.
+                    logSchemaVersion:
+                      allOf:
+                        - $ref: '#/components/schemas/LogSchemaVersion'
+                        - description: The schema version.
   '/actions/{id}':
     get:
       operationId: GetAction
-      description: Gets information about the specified AWS FIS action.
+      description: Gets information about the specified FIS action.
       responses:
         '200':
           description: Success
@@ -495,10 +527,50 @@ paths:
             type: string
             pattern: '[\S]+'
             maxLength: 64
+  '/targetResourceTypes/{resourceType}':
+    get:
+      operationId: GetTargetResourceType
+      description: Gets information about the specified resource type.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTargetResourceTypeResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: resourceType
+          in: path
+          required: true
+          description: The resource type.
+          schema:
+            type: string
+            pattern: '[\S]+'
+            maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /actions:
     get:
       operationId: ListActions
-      description: Lists the available AWS FIS actions.
+      description: Lists the available FIS actions.
       responses:
         '200':
           description: Success
@@ -735,6 +807,49 @@ paths:
             type: array
             items:
               $ref: '#/components/schemas/TagKey'
+  /targetResourceTypes:
+    get:
+      operationId: ListTargetResourceTypes
+      description: Lists the target resource types.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTargetResourceTypesResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+            pattern: '[\S]+'
+            minLength: 1
+            maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -816,8 +931,8 @@ components:
       properties:
         resourceType:
           allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: The AWS resource type. The resource type must be supported for the specified action.
+            - $ref: '#/components/schemas/TargetResourceTypeId'
+            - description: The resource type. The resource type must be supported for the specified action.
         resourceArns:
           allOf:
             - $ref: '#/components/schemas/ResourceArnList'
@@ -834,7 +949,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/ExperimentTemplateTargetSelectionMode'
             - description: '<p>Scopes the identified resources to a specific count of the resources at random, or a percentage of the resources. All identified resources are included in the target.</p> <ul> <li> <p>ALL - Run the action on all identified targets. This is the default.</p> </li> <li> <p>COUNT(n) - Run the action on the specified number of targets, chosen from the identified targets at random. For example, COUNT(1) selects one of the targets.</p> </li> <li> <p>PERCENT(n) - Run the action on the specified percentage of targets, chosen from the identified targets at random. For example, PERCENT(25) selects 25% of the targets.</p> </li> </ul>'
-      description: Specifies a target for an experiment. You must specify at least one Amazon Resource Name (ARN) or at least one resource tag. You cannot specify both ARNs and tags.
+        parameters:
+          allOf:
+            - $ref: '#/components/schemas/ExperimentTemplateTargetParameterMap'
+            - description: The resource type parameters.
+      description: '<p>Specifies a target for an experiment. You must specify at least one Amazon Resource Name (ARN) or at least one resource tag. You cannot specify both ARNs and tags.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/fis/latest/userguide/targets.html">Targets</a> in the <i>Fault Injection Simulator User Guide</i>.</p>'
     CreateExperimentTemplateActionInput:
       type: object
       required:
@@ -843,7 +962,7 @@ components:
         actionId:
           allOf:
             - $ref: '#/components/schemas/ActionId'
-            - description: The ID of the action.
+            - description: 'The ID of the action. The format of the action ID is: aws:<i>service-name</i>:<i>action-type</i>.'
         description:
           allOf:
             - $ref: '#/components/schemas/ExperimentTemplateActionDescription'
@@ -860,11 +979,37 @@ components:
           allOf:
             - $ref: '#/components/schemas/ExperimentTemplateActionStartAfterList'
             - description: The name of the action that must be completed before the current action starts. Omit this parameter to run the action at the start of the experiment.
-      description: Specifies an action for an experiment template.
+      description: '<p>Specifies an action for an experiment template.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/fis/latest/userguide/actions.html">Actions</a> in the <i>Fault Injection Simulator User Guide</i>.</p>'
     TagValue:
       type: string
       pattern: '[\s\S]*'
       maxLength: 256
+    ExperimentTemplateCloudWatchLogsLogConfigurationInput:
+      type: object
+      required:
+        - logGroupArn
+      properties:
+        logGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/CloudWatchLogGroupArn'
+            - description: The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.
+      description: Specifies the configuration for experiment logging to Amazon CloudWatch Logs.
+    ExperimentTemplateS3LogConfigurationInput:
+      type: object
+      required:
+        - bucketName
+      properties:
+        bucketName:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: The name of the destination bucket.
+        prefix:
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectKey'
+            - description: The bucket prefix.
+      description: Specifies the configuration for experiment logging to Amazon S3.
+    LogSchemaVersion:
+      type: integer
     ValidationException: {}
     ConflictException: {}
     ResourceNotFoundException: {}
@@ -897,6 +1042,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/ExperimentTemplate'
             - description: Information about the experiment template.
+    GetTargetResourceTypeResponse:
+      type: object
+      properties:
+        targetResourceType:
+          allOf:
+            - $ref: '#/components/schemas/TargetResourceType'
+            - description: Information about the resource type.
     ListActionsResponse:
       type: object
       properties:
@@ -937,6 +1089,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags for the resource.
+    ListTargetResourceTypesResponse:
+      type: object
+      properties:
+        targetResourceTypes:
+          allOf:
+            - $ref: '#/components/schemas/TargetResourceTypeSummaryList'
+            - description: The target resource types.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     StartExperimentResponse:
       type: object
       properties:
@@ -990,8 +1153,8 @@ components:
       properties:
         resourceType:
           allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: The AWS resource type. The resource type must be supported for the specified action.
+            - $ref: '#/components/schemas/TargetResourceTypeId'
+            - description: The resource type. The resource type must be supported for the specified action.
         resourceArns:
           allOf:
             - $ref: '#/components/schemas/ResourceArnList'
@@ -1008,6 +1171,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ExperimentTemplateTargetSelectionMode'
             - description: Scopes the identified resources to a specific count or percentage.
+        parameters:
+          allOf:
+            - $ref: '#/components/schemas/ExperimentTemplateTargetParameterMap'
+            - description: The resource type parameters.
       description: Specifies a target for an experiment. You must specify at least one Amazon Resource Name (ARN) or at least one resource tag. You cannot specify both.
     UpdateExperimentTemplateActionInputItem:
       type: object
@@ -1077,7 +1244,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags for the action.
-      description: 'Describes an action. For more information, see <a href="https://docs.aws.amazon.com/fis/latest/userguide/fis-actions-reference.html">AWS FIS actions</a> in the <i>AWS Fault Injection Simulator User Guide</i>.'
+      description: 'Describes an action. For more information, see <a href="https://docs.aws.amazon.com/fis/latest/userguide/fis-actions-reference.html">FIS actions</a> in the <i>Fault Injection Simulator User Guide</i>.'
     ActionParameterDescription:
       type: string
       pattern: '[\s\S]+'
@@ -1124,7 +1291,7 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ActionSummary'
-    TargetResourceType:
+    TargetResourceTypeId:
       type: string
       pattern: '[\S]+'
       maxLength: 128
@@ -1133,7 +1300,7 @@ components:
       properties:
         resourceType:
           allOf:
-            - $ref: '#/components/schemas/TargetResourceType'
+            - $ref: '#/components/schemas/TargetResourceTypeId'
             - description: The resource type of the target.
       description: Describes a target for an action.
     ActionTargetName:
@@ -1145,6 +1312,11 @@ components:
       pattern: '[\S]+'
       minLength: 1
       maxLength: 1024
+    CloudWatchLogGroupArn:
+      type: string
+      pattern: '[\S]+'
+      minLength: 20
+      maxLength: 2048
     ExperimentTemplateActionDescription:
       type: string
       pattern: '[\s\S]+'
@@ -1165,6 +1337,24 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/CreateExperimentTemplateActionInput'
+    CreateExperimentTemplateLogConfigurationInput:
+      type: object
+      required:
+        - logSchemaVersion
+      properties:
+        cloudWatchLogsConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ExperimentTemplateCloudWatchLogsLogConfigurationInput'
+            - description: The configuration for experiment logging to Amazon CloudWatch Logs.
+        s3Configuration:
+          allOf:
+            - $ref: '#/components/schemas/ExperimentTemplateS3LogConfigurationInput'
+            - description: The configuration for experiment logging to Amazon S3.
+        logSchemaVersion:
+          allOf:
+            - $ref: '#/components/schemas/LogSchemaVersion'
+            - description: The schema version.
+      description: Specifies the configuration for experiment logging.
     ExperimentTemplateDescription:
       type: string
       pattern: '[\s\S]+'
@@ -1199,7 +1389,7 @@ components:
         description:
           allOf:
             - $ref: '#/components/schemas/ExperimentTemplateDescription'
-            - description: A description for the experiment template. Can contain up to 64 letters (A-Z and a-z).
+            - description: A description for the experiment template.
         stopConditions:
           allOf:
             - $ref: '#/components/schemas/CreateExperimentTemplateStopConditionInputList'
@@ -1215,11 +1405,15 @@ components:
         roleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
+            - description: The Amazon Resource Name (ARN) of an IAM role that grants the FIS service permission to perform service actions on your behalf.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags to apply to the experiment template.
+        logConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/CreateExperimentTemplateLogConfigurationInput'
+            - description: The configuration for experiment logging.
     ExperimentTemplate:
       type: object
       properties:
@@ -1259,6 +1453,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags for the experiment template.
+        logConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ExperimentTemplateLogConfiguration'
+            - description: The configuration for experiment logging.
       description: Describes an experiment template.
     StopConditionSource:
       type: string
@@ -1269,10 +1467,6 @@ components:
       pattern: '[\s\S]+'
       minLength: 20
       maxLength: 2048
-    ResourceType:
-      type: string
-      pattern: '[\S]+'
-      maxLength: 64
     ResourceArnList:
       type: array
       items:
@@ -1286,6 +1480,10 @@ components:
       type: string
       pattern: '[\S]+'
       maxLength: 64
+    ExperimentTemplateTargetParameterMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/ExperimentTemplateTargetParameterValue'
     CreationTime:
       type: string
       format: date-time
@@ -1331,6 +1529,22 @@ components:
     ExperimentEndTime:
       type: string
       format: date-time
+    ExperimentLogConfiguration:
+      type: object
+      properties:
+        cloudWatchLogsConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ExperimentCloudWatchLogsLogConfiguration'
+            - description: The configuration for experiment logging to Amazon CloudWatch Logs.
+        s3Configuration:
+          allOf:
+            - $ref: '#/components/schemas/ExperimentS3LogConfiguration'
+            - description: The configuration for experiment logging to Amazon S3.
+        logSchemaVersion:
+          allOf:
+            - $ref: '#/components/schemas/LogSchemaVersion'
+            - description: The schema version.
+      description: Describes the configuration for experiment logging.
     Experiment:
       type: object
       properties:
@@ -1345,7 +1559,7 @@ components:
         roleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
+            - description: The Amazon Resource Name (ARN) of an IAM role that grants the FIS service permission to perform service actions on your behalf.
         state:
           allOf:
             - $ref: '#/components/schemas/ExperimentState'
@@ -1365,11 +1579,11 @@ components:
         creationTime:
           allOf:
             - $ref: '#/components/schemas/CreationTime'
-            - description: The time the experiment was created.
+            - description: The time that the experiment was created.
         startTime:
           allOf:
             - $ref: '#/components/schemas/ExperimentStartTime'
-            - description: The time that the experiment was started.
+            - description: The time that the experiment started.
         endTime:
           allOf:
             - $ref: '#/components/schemas/ExperimentEndTime'
@@ -1378,6 +1592,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags for the experiment.
+        logConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ExperimentLogConfiguration'
+            - description: The configuration for experiment logging.
       description: Describes an experiment.
     ExperimentActionDescription:
       type: string
@@ -1407,6 +1625,12 @@ components:
             - $ref: '#/components/schemas/ExperimentActionStatusReason'
             - description: The reason for the state.
       description: Describes the state of an action.
+    ExperimentActionStartTime:
+      type: string
+      format: date-time
+    ExperimentActionEndTime:
+      type: string
+      format: date-time
     ExperimentAction:
       type: object
       properties:
@@ -1434,6 +1658,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/ExperimentActionState'
             - description: The state of the action.
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/ExperimentActionStartTime'
+            - description: The time that the action started.
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/ExperimentActionEndTime'
+            - description: The time that the action ended.
       description: Describes the action for an experiment.
     ExperimentActionName:
       type: string
@@ -1474,6 +1706,36 @@ components:
       type: string
       pattern: '[\S]+'
       maxLength: 64
+    ExperimentCloudWatchLogsLogConfiguration:
+      type: object
+      properties:
+        logGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/CloudWatchLogGroupArn'
+            - description: The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.
+      description: Describes the configuration for experiment logging to Amazon CloudWatch Logs.
+    ExperimentS3LogConfiguration:
+      type: object
+      properties:
+        bucketName:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: The name of the destination bucket.
+        prefix:
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectKey'
+            - description: The bucket prefix.
+      description: Describes the configuration for experiment logging to Amazon S3.
+    S3BucketName:
+      type: string
+      pattern: '[\S]+'
+      minLength: 3
+      maxLength: 63
+    S3ObjectKey:
+      type: string
+      pattern: '[\s\S]+'
+      minLength: 1
+      maxLength: 1024
     ExperimentStatus:
       type: string
       enum:
@@ -1536,12 +1798,16 @@ components:
       type: string
       pattern: '[\S]+'
       maxLength: 64
+    ExperimentTargetParameterMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/ExperimentTargetParameterValue'
     ExperimentTarget:
       type: object
       properties:
         resourceType:
           allOf:
-            - $ref: '#/components/schemas/ResourceType'
+            - $ref: '#/components/schemas/TargetResourceTypeId'
             - description: The resource type.
         resourceArns:
           allOf:
@@ -1559,6 +1825,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ExperimentTargetSelectionMode'
             - description: Scopes the identified resources to a specific count or percentage.
+        parameters:
+          allOf:
+            - $ref: '#/components/schemas/ExperimentTargetParameterMap'
+            - description: The resource type parameters.
       description: Describes a target for an experiment.
     ExperimentTargetFilterPath:
       type: string
@@ -1584,6 +1854,14 @@ components:
       type: string
       pattern: '[\S]+'
       maxLength: 128
+    ExperimentTargetParameterValue:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    ExperimentTargetParameterName:
+      type: string
+      pattern: '[\S]+'
+      maxLength: 64
     ExperimentTemplateTargetMap:
       type: object
       additionalProperties:
@@ -1599,6 +1877,22 @@ components:
     LastUpdateTime:
       type: string
       format: date-time
+    ExperimentTemplateLogConfiguration:
+      type: object
+      properties:
+        cloudWatchLogsConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ExperimentTemplateCloudWatchLogsLogConfiguration'
+            - description: The configuration for experiment logging to Amazon CloudWatch Logs.
+        s3Configuration:
+          allOf:
+            - $ref: '#/components/schemas/ExperimentTemplateS3LogConfiguration'
+            - description: The configuration for experiment logging to Amazon S3.
+        logSchemaVersion:
+          allOf:
+            - $ref: '#/components/schemas/LogSchemaVersion'
+            - description: The schema version.
+      description: Describes the configuration for experiment logging.
     ExperimentTemplateAction:
       type: object
       properties:
@@ -1647,6 +1941,26 @@ components:
       type: string
       pattern: '[\S]+'
       maxLength: 64
+    ExperimentTemplateCloudWatchLogsLogConfiguration:
+      type: object
+      properties:
+        logGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/CloudWatchLogGroupArn'
+            - description: The Amazon Resource Name (ARN) of the destination Amazon CloudWatch Logs log group.
+      description: Describes the configuration for experiment logging to Amazon CloudWatch Logs.
+    ExperimentTemplateS3LogConfiguration:
+      type: object
+      properties:
+        bucketName:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: The name of the destination bucket.
+        prefix:
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectKey'
+            - description: The bucket prefix.
+      description: Describes the configuration for experiment logging to Amazon S3.
     ExperimentTemplateStopCondition:
       type: object
       properties:
@@ -1696,7 +2010,7 @@ components:
       properties:
         resourceType:
           allOf:
-            - $ref: '#/components/schemas/ResourceType'
+            - $ref: '#/components/schemas/TargetResourceTypeId'
             - description: The resource type.
         resourceArns:
           allOf:
@@ -1714,6 +2028,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ExperimentTemplateTargetSelectionMode'
             - description: Scopes the identified resources to a specific count or percentage.
+        parameters:
+          allOf:
+            - $ref: '#/components/schemas/ExperimentTemplateTargetParameterMap'
+            - description: The resource type parameters.
       description: Describes a target for an experiment template.
     ExperimentTemplateTargetFilterPath:
       type: string
@@ -1749,11 +2067,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/ExperimentTemplateTargetFilterValues'
             - description: The attribute values for the filter.
-      description: Describes a filter used for the target resource input in an experiment template.
+      description: '<p>Specifies a filter used for the target resource input in an experiment template.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/fis/latest/userguide/targets.html#target-filters">Resource filters</a> in the <i>Fault Injection Simulator User Guide</i>.</p>'
     ExperimentTemplateTargetFilterValue:
       type: string
       pattern: '[\S]+'
       maxLength: 128
+    ExperimentTemplateTargetParameterValue:
+      type: string
+      pattern: '^[\p{L}\p{Z}\p{N}_.:/=+\-@]+$'
+      minLength: 1
+      maxLength: 1024
+    ExperimentTemplateTargetParameterName:
+      type: string
+      pattern: '[\S]+'
+      maxLength: 64
     GetActionRequest:
       type: object
       title: GetActionRequest
@@ -1766,6 +2093,26 @@ components:
       type: object
       title: GetExperimentTemplateRequest
       properties: {}
+    GetTargetResourceTypeRequest:
+      type: object
+      title: GetTargetResourceTypeRequest
+      properties: {}
+    TargetResourceType:
+      type: object
+      properties:
+        resourceType:
+          allOf:
+            - $ref: '#/components/schemas/TargetResourceTypeId'
+            - description: The resource type.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/TargetResourceTypeDescription'
+            - description: A description of the resource type.
+        parameters:
+          allOf:
+            - $ref: '#/components/schemas/TargetResourceTypeParameterMap'
+            - description: The parameters for the resource type.
+      description: Describes a resource type.
     ListActionsMaxResults:
       type: integer
       minimum: 1
@@ -1804,6 +2151,18 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    ListTargetResourceTypesMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListTargetResourceTypesRequest:
+      type: object
+      title: ListTargetResourceTypesRequest
+      properties: {}
+    TargetResourceTypeSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TargetResourceTypeSummary'
     StartExperimentRequest:
       type: object
       required:
@@ -1841,6 +2200,48 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags for the resource.
+    TargetResourceTypeDescription:
+      type: string
+      pattern: '[\s\S]+'
+      maxLength: 512
+    TargetResourceTypeParameterMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TargetResourceTypeParameter'
+    TargetResourceTypeParameterDescription:
+      type: string
+      pattern: '[\s\S]+'
+      maxLength: 512
+    TargetResourceTypeParameterRequired:
+      type: boolean
+    TargetResourceTypeParameter:
+      type: object
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/TargetResourceTypeParameterDescription'
+            - description: A description of the parameter.
+        required:
+          allOf:
+            - $ref: '#/components/schemas/TargetResourceTypeParameterRequired'
+            - description: Indicates whether the parameter is required.
+      description: Describes the parameters for a resource type. Use parameters to determine which tasks are identified during target resolution.
+    TargetResourceTypeParameterName:
+      type: string
+      pattern: '[\S]+'
+      maxLength: 64
+    TargetResourceTypeSummary:
+      type: object
+      properties:
+        resourceType:
+          allOf:
+            - $ref: '#/components/schemas/TargetResourceTypeId'
+            - description: The resource type.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/TargetResourceTypeDescription'
+            - description: A description of the resource type.
+      description: Describes a resource type.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -1849,6 +2250,22 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/UpdateExperimentTemplateActionInputItem'
+    UpdateExperimentTemplateLogConfigurationInput:
+      type: object
+      properties:
+        cloudWatchLogsConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ExperimentTemplateCloudWatchLogsLogConfigurationInput'
+            - description: The configuration for experiment logging to Amazon CloudWatch Logs.
+        s3Configuration:
+          allOf:
+            - $ref: '#/components/schemas/ExperimentTemplateS3LogConfigurationInput'
+            - description: The configuration for experiment logging to Amazon S3.
+        logSchemaVersion:
+          allOf:
+            - $ref: '#/components/schemas/LogSchemaVersion'
+            - description: The schema version.
+      description: Specifies the configuration for experiment logging.
     UpdateExperimentTemplateStopConditionInputList:
       type: array
       items:
@@ -1880,6 +2297,10 @@ components:
         roleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
+            - description: The Amazon Resource Name (ARN) of an IAM role that grants the FIS service permission to perform service actions on your behalf.
+        logConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/UpdateExperimentTemplateLogConfigurationInput'
+            - description: The configuration for experiment logging.
 security:
   - hmac: []

@@ -687,6 +687,12 @@ paths:
                         - $ref: '#/components/schemas/DashEncryption'
                         - xml:
                             name: encryption
+                    IncludeIframeOnlyStream:
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - xml:
+                            name: includeIframeOnlyStream
+                          description: 'When enabled, an I-Frame only stream will be included in the output.'
                     ManifestLayout:
                       allOf:
                         - $ref: '#/components/schemas/ManifestLayout'
@@ -726,7 +732,7 @@ paths:
                         - $ref: '#/components/schemas/Profile'
                         - xml:
                             name: profile
-                          description: 'The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.'
+                          description: 'The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled. When set to "DVB-DASH_2014", DVB-DASH 2014 compliant output is enabled.'
                     SegmentDurationSeconds:
                       allOf:
                         - $ref: '#/components/schemas/__integer'
@@ -763,7 +769,7 @@ paths:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: utcTimingUri
-                          description: Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD
+                          description: 'Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE'
                 description:
                   description: A short text description of the OriginEndpoint.
                   type: string
@@ -801,6 +807,12 @@ paths:
                         - $ref: '#/components/schemas/HlsEncryption'
                         - xml:
                             name: encryption
+                    IncludeDvbSubtitles:
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - xml:
+                            name: includeDvbSubtitles
+                          description: 'When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.'
                     IncludeIframeOnlyStream:
                       allOf:
                         - $ref: '#/components/schemas/__boolean'
@@ -1430,6 +1442,12 @@ paths:
                         - $ref: '#/components/schemas/DashEncryption'
                         - xml:
                             name: encryption
+                    IncludeIframeOnlyStream:
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - xml:
+                            name: includeIframeOnlyStream
+                          description: 'When enabled, an I-Frame only stream will be included in the output.'
                     ManifestLayout:
                       allOf:
                         - $ref: '#/components/schemas/ManifestLayout'
@@ -1469,7 +1487,7 @@ paths:
                         - $ref: '#/components/schemas/Profile'
                         - xml:
                             name: profile
-                          description: 'The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.'
+                          description: 'The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled. When set to "DVB-DASH_2014", DVB-DASH 2014 compliant output is enabled.'
                     SegmentDurationSeconds:
                       allOf:
                         - $ref: '#/components/schemas/__integer'
@@ -1506,7 +1524,7 @@ paths:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: utcTimingUri
-                          description: Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD
+                          description: 'Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE'
                 description:
                   description: A short text description of the OriginEndpoint.
                   type: string
@@ -1544,6 +1562,12 @@ paths:
                         - $ref: '#/components/schemas/HlsEncryption'
                         - xml:
                             name: encryption
+                    IncludeDvbSubtitles:
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - xml:
+                            name: includeDvbSubtitles
+                          description: 'When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.'
                     IncludeIframeOnlyStream:
                       allOf:
                         - $ref: '#/components/schemas/__boolean'
@@ -2249,6 +2273,11 @@ components:
             - xml:
                 name: constantInitializationVector
               description: 'An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don''t specify a value, then MediaPackage creates the constant initialization vector (IV).'
+        EncryptionMethod:
+          allOf:
+            - $ref: '#/components/schemas/CmafEncryptionMethod'
+            - xml:
+                name: encryptionMethod
         KeyRotationIntervalSeconds:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -2330,6 +2359,8 @@ components:
             - xml:
                 name: spekeKeyProvider
       description: A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
+    __boolean:
+      type: boolean
     ManifestLayout:
       enum:
         - FULL
@@ -2343,6 +2374,8 @@ components:
       enum:
         - NONE
         - HBBTV_1_5
+        - HYBRIDCAST
+        - DVB_DASH_2014
       type: string
     SegmentTemplateFormat:
       enum:
@@ -2355,6 +2388,7 @@ components:
         - NONE
         - HTTP-HEAD
         - HTTP-ISO
+        - HTTP-XSDATE
       type: string
     AdMarkers:
       enum:
@@ -2400,8 +2434,6 @@ components:
             - xml:
                 name: spekeKeyProvider
       description: An HTTP Live Streaming (HLS) encryption configuration.
-    __boolean:
-      type: boolean
     PlaylistType:
       enum:
         - NONE
@@ -3020,6 +3052,12 @@ components:
             - xml:
                 name: tags
       description: A Channel resource configuration.
+    CmafEncryptionMethod:
+      enum:
+        - SAMPLE_AES
+        - AES_CTR
+      type: string
+      description: The encryption method to use.
     SpekeKeyProvider:
       required:
         - ResourceId
@@ -3282,6 +3320,12 @@ components:
             - $ref: '#/components/schemas/DashEncryption'
             - xml:
                 name: encryption
+        IncludeIframeOnlyStream:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: includeIframeOnlyStream
+              description: 'When enabled, an I-Frame only stream will be included in the output.'
         ManifestLayout:
           allOf:
             - $ref: '#/components/schemas/ManifestLayout'
@@ -3321,7 +3365,7 @@ components:
             - $ref: '#/components/schemas/Profile'
             - xml:
                 name: profile
-              description: 'The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.'
+              description: 'The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled. When set to "DVB-DASH_2014", DVB-DASH 2014 compliant output is enabled.'
         SegmentDurationSeconds:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -3358,7 +3402,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: utcTimingUri
-              description: Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD
+              description: 'Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE'
       description: A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
     HlsPackage:
       type: object
@@ -3393,6 +3437,12 @@ components:
             - $ref: '#/components/schemas/HlsEncryption'
             - xml:
                 name: encryption
+        IncludeDvbSubtitles:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: includeDvbSubtitles
+              description: 'When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.'
         IncludeIframeOnlyStream:
           allOf:
             - $ref: '#/components/schemas/__boolean'
@@ -3604,10 +3654,23 @@ components:
     PresetSpeke20Audio:
       enum:
         - PRESET-AUDIO-1
+        - PRESET-AUDIO-2
+        - PRESET-AUDIO-3
+        - SHARED
+        - UNENCRYPTED
       type: string
     PresetSpeke20Video:
       enum:
         - PRESET-VIDEO-1
+        - PRESET-VIDEO-2
+        - PRESET-VIDEO-3
+        - PRESET-VIDEO-4
+        - PRESET-VIDEO-5
+        - PRESET-VIDEO-6
+        - PRESET-VIDEO-7
+        - PRESET-VIDEO-8
+        - SHARED
+        - UNENCRYPTED
       type: string
     EncryptionContractConfiguration:
       required:
@@ -3786,6 +3849,16 @@ components:
             - xml:
                 name: url
               description: The URL of the packaged OriginEndpoint for consumption.
+        AdTriggers:
+          allOf:
+            - $ref: '#/components/schemas/AdTriggers'
+            - xml:
+                name: adTriggers
+        AdsOnDeliveryRestrictions:
+          allOf:
+            - $ref: '#/components/schemas/AdsOnDeliveryRestrictions'
+            - xml:
+                name: adsOnDeliveryRestrictions
       description: A HTTP Live Streaming (HLS) manifest configuration.
     HlsManifestCreateOrUpdateParameters:
       required:

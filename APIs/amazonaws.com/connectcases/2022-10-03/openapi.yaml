@@ -1,0 +1,4209 @@
+openapi: 3.0.0
+info:
+  version: '2022-10-03'
+  x-release: v4
+  title: Amazon Connect Cases
+  description: '<p>Welcome to the Amazon Connect Cases API Reference. This guide provides information about the Amazon Connect Cases API, which you can use to create, update, get, and list Cases domains, fields, field options, layouts, templates, cases, related items, and tags.</p> <pre><code> &lt;p&gt;For more information about Amazon Connect Cases, see &lt;a href=&quot;https://docs.aws.amazon.com/connect/latest/adminguide/cases.html&quot;&gt;Amazon Connect Cases&lt;/a&gt; in the &lt;i&gt;Amazon Connect Administrator Guide&lt;/i&gt;. &lt;/p&gt; </code></pre>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: connectcases
+  x-aws-signingName: cases
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/connectcases-2022-10-03.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/cases/'
+servers:
+  - url: 'http://cases.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The ConnectCases multi-region endpoint
+  - url: 'https://cases.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The ConnectCases multi-region endpoint
+  - url: 'http://cases.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The ConnectCases endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://cases.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The ConnectCases endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  '/domains/{domainId}/fields-batch':
+    post:
+      operationId: BatchGetField
+      description: 'Returns the description for the list of fields in the request parameters. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetFieldResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - fields
+              properties:
+                fields:
+                  description: 'A list of unique field identifiers. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FieldIdentifier'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{domainId}/fields/{fieldId}/options':
+    put:
+      operationId: BatchPutFieldOptions
+      description: Creates and updates a set of field options for a single select field in a Cases domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchPutFieldOptionsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: fieldId
+          in: path
+          required: true
+          description: The unique identifier of a field.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - options
+              properties:
+                options:
+                  description: A list of <code>FieldOption</code> objects.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FieldOption'
+                  minItems: 0
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{domainId}/cases':
+    post:
+      operationId: CreateCase
+      description: <p>Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.</p> <note> <p> <code>customer_id</code> is a required field when creating a case.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCaseResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - fields
+                - templateId
+              properties:
+                clientToken:
+                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.'
+                  type: string
+                  minLength: 0
+                  maxLength: 64
+                fields:
+                  description: An array of objects with field ID (matching ListFields/DescribeField) and value union data.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FieldValue'
+                  minItems: 0
+                  maxItems: 100
+                templateId:
+                  description: A unique identifier of a template.
+                  type: string
+                  minLength: 1
+                  maxLength: 500
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /domains:
+    post:
+      operationId: CreateDomain
+      description: '<p>Creates a domain, which is a container for all case data, such as cases, fields, templates and layouts. Each Amazon Connect instance can be associated with only one Cases domain.</p> <important> <p>This will not associate your connect instance to Cases domain. Instead, use the Amazon Connect <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateIntegrationAssociation.html">CreateIntegrationAssociation</a> API.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDomainResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  description: The name for your Cases domain. It must be unique for your Amazon Web Services account.
+                  type: string
+                  pattern: '^.*[\S]$'
+                  minLength: 1
+                  maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{domainId}/fields':
+    post:
+      operationId: CreateField
+      description: 'Creates a field in the Cases domain. This field is used to define the case object model (that is, defines what data can be captured on cases) in a Cases domain. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateFieldResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - type
+              properties:
+                description:
+                  description: The description of the field.
+                  type: string
+                  minLength: 0
+                  maxLength: 255
+                name:
+                  description: The name of the field.
+                  type: string
+                  pattern: '^.*[\S]$'
+                  minLength: 1
+                  maxLength: 100
+                type:
+                  description: 'Defines the data type, some system constraints, and default display of the field.'
+                  type: string
+                  enum:
+                    - Text
+                    - Number
+                    - Boolean
+                    - DateTime
+                    - SingleSelect
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{domainId}/layouts':
+    post:
+      operationId: CreateLayout
+      description: '<p>Creates a layout in the Cases domain. Layouts define the following configuration in the top section and More Info tab of the Cases user interface:</p> <ul> <li> <p>Fields to display to the users</p> </li> <li> <p>Field ordering</p> </li> </ul> <note> <p>Title and Status fields cannot be part of layouts since they are not configurable.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateLayoutResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - content
+                - name
+              properties:
+                content:
+                  description: Object to store union of different versions of layout content.
+                  type: object
+                  properties:
+                    basic:
+                      allOf:
+                        - $ref: '#/components/schemas/BasicLayout'
+                        - description: Content specific to <code>BasicLayout</code> type. It configures fields in the top panel and More Info tab of Cases user interface.
+                name:
+                  description: The name of the layout. It must be unique for the Cases domain.
+                  type: string
+                  pattern: '^.*[\S]$'
+                  minLength: 1
+                  maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{domainId}/cases/{caseId}/related-items/':
+    post:
+      operationId: CreateRelatedItem
+      description: '<p>Creates a related item (comments, tasks, and contacts) and associates it with a case.</p> <note> <p>A Related Item is a resource that is associated with a case. It may or may not have an external identifier linking it to an external resource (for example, a <code>contactArn</code>). All Related Items have their own internal identifier, the <code>relatedItemArn</code>. Examples of related items include <code>comments</code> and <code>contacts</code>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRelatedItemResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: caseId
+          in: path
+          required: true
+          description: A unique identifier of the case.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - content
+                - type
+              properties:
+                content:
+                  description: Represents the content of a related item to be created.
+                  type: object
+                  properties:
+                    comment:
+                      allOf:
+                        - $ref: '#/components/schemas/CommentContent'
+                        - description: Represents the content of a comment to be returned to agents.
+                    contact:
+                      allOf:
+                        - $ref: '#/components/schemas/Contact'
+                        - description: Object representing a contact in Amazon Connect as an API request field.
+                type:
+                  description: The type of a related item.
+                  type: string
+                  enum:
+                    - Contact
+                    - Comment
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{domainId}/templates':
+    post:
+      operationId: CreateTemplate
+      description: 'Creates a template in the Cases domain. This template is used to define the case object model (that is, to define what data can be captured on cases) in a Cases domain. A template must have a unique name within a domain, and it must reference existing field IDs and layout IDs. Additionally, multiple fields with same IDs are not allowed within the same Template. A template can be either Active or Inactive, as indicated by its status. Inactive templates cannot be used to create cases.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTemplateResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                description:
+                  description: A brief description of the template.
+                  type: string
+                  minLength: 0
+                  maxLength: 255
+                layoutConfiguration:
+                  description: Object to store configuration of layouts associated to the template.
+                  type: object
+                  properties:
+                    defaultLayout:
+                      allOf:
+                        - $ref: '#/components/schemas/LayoutId'
+                        - description: ' Unique identifier of a layout. '
+                name:
+                  description: A name for the template. It must be unique per domain.
+                  type: string
+                  pattern: '^.*[\S]$'
+                  minLength: 1
+                  maxLength: 100
+                requiredFields:
+                  description: A list of fields that must contain a value for a case to be successfully created with this template.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RequiredField'
+                  minItems: 0
+                  maxItems: 100
+                status:
+                  description: Status of a template
+                  type: string
+                  enum:
+                    - Active
+                    - Inactive
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{domainId}/cases/{caseId}':
+    post:
+      operationId: GetCase
+      description: 'Returns information about a specific case if it exists. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCaseResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: caseId
+          in: path
+          required: true
+          description: A unique identifier of the case.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - fields
+              properties:
+                fields:
+                  description: 'A list of unique field identifiers. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FieldIdentifier'
+                  minItems: 1
+                  maxItems: 100
+                nextToken:
+                  description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+                  type: string
+                  minLength: 0
+                  maxLength: 9000
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateCase
+      description: '<p>Updates the values of fields on a case. Fields to be updated are received as an array of id/value pairs identical to the <code>CreateCase</code> input .</p> <p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateCaseResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: caseId
+          in: path
+          required: true
+          description: A unique identifier of the case.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - fields
+              properties:
+                fields:
+                  description: 'An array of objects with <code>fieldId</code> (matching ListFields/DescribeField) and value union data, structured identical to <code>CreateCase</code>.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FieldValue'
+                  minItems: 0
+                  maxItems: 100
+  '/domains/{domainId}/case-event-configuration':
+    post:
+      operationId: GetCaseEventConfiguration
+      description: Returns the case event publishing configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCaseEventConfigurationResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: PutCaseEventConfiguration
+      description: API for adding case event publishing configuration
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutCaseEventConfigurationResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - eventBridge
+              properties:
+                eventBridge:
+                  description: Configuration to enable EventBridge case event delivery and determine what data is delivered.
+                  type: object
+                  properties:
+                    enabled:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Indicates whether the to broadcast case event data to the customer.
+                    includedData:
+                      allOf:
+                        - $ref: '#/components/schemas/EventIncludedData'
+                        - description: Details of what case and related item data is published through the case event stream.
+  '/domains/{domainId}':
+    post:
+      operationId: GetDomain
+      description: 'Returns information about a specific domain if it exists. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDomainResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{domainId}/layouts/{layoutId}':
+    post:
+      operationId: GetLayout
+      description: Returns the details for the requested layout.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLayoutResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: layoutId
+          in: path
+          required: true
+          description: The unique identifier of the layout.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateLayout
+      description: '<p>Updates the attributes of an existing layout.</p> <p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p> <p>A <code>ValidationException</code> is returned when you add non-existent <code>fieldIds</code> to a layout.</p> <note> <p>Title and Status fields cannot be part of layouts because they are not configurable.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateLayoutResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: layoutId
+          in: path
+          required: true
+          description: The unique identifier of the layout.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  description: Object to store union of different versions of layout content.
+                  type: object
+                  properties:
+                    basic:
+                      allOf:
+                        - $ref: '#/components/schemas/BasicLayout'
+                        - description: Content specific to <code>BasicLayout</code> type. It configures fields in the top panel and More Info tab of Cases user interface.
+                name:
+                  description: The name of the layout. It must be unique per domain.
+                  type: string
+                  pattern: '^.*[\S]$'
+                  minLength: 1
+                  maxLength: 100
+  '/domains/{domainId}/templates/{templateId}':
+    post:
+      operationId: GetTemplate
+      description: 'Returns the details for the requested template. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTemplateResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: templateId
+          in: path
+          required: true
+          description: A unique identifier of a template.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateTemplate
+      description: 'Updates the attributes of an existing template. The template attributes that can be modified include <code>name</code>, <code>description</code>, <code>layoutConfiguration</code>, <code>requiredFields</code>, and <code>status</code>. At least one of these attributes must not be null. If a null value is provided for a given attribute, that attribute is ignored and its current value is preserved.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTemplateResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: templateId
+          in: path
+          required: true
+          description: A unique identifier for the template.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  description: A brief description of the template.
+                  type: string
+                  minLength: 0
+                  maxLength: 255
+                layoutConfiguration:
+                  description: Object to store configuration of layouts associated to the template.
+                  type: object
+                  properties:
+                    defaultLayout:
+                      allOf:
+                        - $ref: '#/components/schemas/LayoutId'
+                        - description: ' Unique identifier of a layout. '
+                name:
+                  description: The name of the template. It must be unique per domain.
+                  type: string
+                  pattern: '^.*[\S]$'
+                  minLength: 1
+                  maxLength: 100
+                requiredFields:
+                  description: A list of fields that must contain a value for a case to be successfully created with this template.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RequiredField'
+                  minItems: 0
+                  maxItems: 100
+                status:
+                  description: Status of a template
+                  type: string
+                  enum:
+                    - Active
+                    - Inactive
+  '/domains/{domainId}/list-cases-for-contact':
+    post:
+      operationId: ListCasesForContact
+      description: Lists cases for a given contact.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCasesForContactResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - contactArn
+              properties:
+                contactArn:
+                  description: A unique identifier of a contact in Amazon Connect.
+                  type: string
+                  minLength: 1
+                  maxLength: 500
+                maxResults:
+                  description: The maximum number of results to return per page.
+                  type: integer
+                  minimum: 1
+                  maximum: 10
+                nextToken:
+                  description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+                  type: string
+                  minLength: 0
+                  maxLength: 9000
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /domains-list:
+    post:
+      operationId: ListDomains
+      description: Lists all cases domains in the Amazon Web Services account. Each list item is a condensed summary object of the domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDomainsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 10
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 9000
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{domainId}/fields/{fieldId}/options-list':
+    post:
+      operationId: ListFieldOptions
+      description: 'Lists all of the field options for a field identifier in the domain. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFieldOptionsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: fieldId
+          in: path
+          required: true
+          description: The unique identifier of a field.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 9000
+        - name: values
+          in: query
+          required: false
+          description: A list of <code>FieldOption</code> values to filter on for <code>ListFieldOptions</code>.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Value'
+            minItems: 0
+            maxItems: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{domainId}/fields-list':
+    post:
+      operationId: ListFields
+      description: Lists all fields in a Cases domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFieldsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 9000
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{domainId}/layouts-list':
+    post:
+      operationId: ListLayouts
+      description: Lists all layouts in the given cases domain. Each list item is a condensed summary object of the layout.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListLayoutsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 9000
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{arn}':
+    get:
+      operationId: ListTagsForResource
+      description: Lists tags for a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: arn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN)
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Adds tags to a resource.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: arn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN)
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: 'A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/String'
+  '/domains/{domainId}/templates-list':
+    post:
+      operationId: ListTemplates
+      description: 'Lists all of the templates in a Cases domain. Each list item is a condensed summary object of the template. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTemplatesResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 9000
+        - name: status
+          in: query
+          required: false
+          description: A list of status values to filter on.
+          schema:
+            type: array
+            description: List of filters used on the ListTemplates result set
+            items:
+              $ref: '#/components/schemas/TemplateStatus'
+            minItems: 1
+            maxItems: 2
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{domainId}/cases-search':
+    post:
+      operationId: SearchCases
+      description: Searches for cases within their associated Cases domain. Search results are returned as a paginated list of abridged case documents.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchCasesResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fields:
+                  description: The list of field identifiers to be returned as part of the response.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FieldIdentifier'
+                  minItems: 0
+                  maxItems: 10
+                filter:
+                  description: A filter for cases. Only one value can be provided.
+                  type: object
+                  properties:
+                    andAll:
+                      allOf:
+                        - $ref: '#/components/schemas/CaseFilterAndAllList'
+                        - description: Provides "and all" filtering.
+                    field:
+                      allOf:
+                        - $ref: '#/components/schemas/FieldFilter'
+                        - description: A list of fields to filter on.
+                    not:
+                      $ref: '#/components/schemas/CaseFilter'
+                maxResults:
+                  description: The maximum number of cases to return. The current maximum supported value is 25. This is also the default value when no other value is provided.
+                  type: integer
+                  minimum: 1
+                  maximum: 25
+                nextToken:
+                  description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+                  type: string
+                  minLength: 0
+                  maxLength: 9000
+                searchTerm:
+                  description: A word or phrase used to perform a quick search.
+                  type: string
+                  minLength: 0
+                  maxLength: 255
+                sorts:
+                  description: /@documentation(&quot;The templateId&quot;)
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Sort'
+                  minItems: 0
+                  maxItems: 2
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{domainId}/cases/{caseId}/related-items-search':
+    post:
+      operationId: SearchRelatedItems
+      description: '<p>Searches for related items that are associated with a case.</p> <note> <p>If no filters are provided, this returns all related items associated with a case.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchRelatedItemsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: caseId
+          in: path
+          required: true
+          description: A unique identifier of the case.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filters:
+                  description: The list of types of related items and their parameters to use for filtering.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RelatedItemTypeFilter'
+                  minItems: 0
+                  maxItems: 10
+                maxResults:
+                  description: The maximum number of results to return per page.
+                  type: integer
+                  minimum: 1
+                  maximum: 25
+                nextToken:
+                  description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+                  type: string
+                  minLength: 0
+                  maxLength: 9000
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{arn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Untags a resource.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: arn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN)
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: tagKeys
+          in: query
+          required: true
+          description: List of tag keys.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 0
+            maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{domainId}/fields/{fieldId}':
+    put:
+      operationId: UpdateField
+      description: 'Updates the properties of an existing field. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFieldResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: domainId
+          in: path
+          required: true
+          description: 'The unique identifier of the Cases domain. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+        - name: fieldId
+          in: path
+          required: true
+          description: The unique identifier of a field.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 500
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  description: The description of a field.
+                  type: string
+                  minLength: 0
+                  maxLength: 255
+                name:
+                  description: The name of the field.
+                  type: string
+                  pattern: '^.*[\S]$'
+                  minLength: 1
+                  maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    BatchGetFieldResponse:
+      type: object
+      required:
+        - errors
+        - fields
+      properties:
+        errors:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetFieldResponseErrorsList'
+            - description: 'A list of field errors. '
+        fields:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetFieldResponseFieldsList'
+            - description: 'A list of detailed field information. '
+    FieldIdentifier:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/FieldId'
+            - description: Unique identifier of a field.
+      description: Object for unique identifier of a field.
+    InternalServerException: {}
+    ResourceNotFoundException: {}
+    ValidationException: {}
+    ThrottlingException: {}
+    AccessDeniedException: {}
+    BatchPutFieldOptionsResponse:
+      type: object
+      properties:
+        errors:
+          allOf:
+            - $ref: '#/components/schemas/BatchPutFieldOptionsResponseErrorsList'
+            - description: 'A list of field errors. '
+    FieldOption:
+      type: object
+      required:
+        - active
+        - name
+        - value
+      properties:
+        active:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Describes whether the <code>FieldOption</code> is active (displayed) or inactive.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/FieldOptionName'
+            - description: ' <code>FieldOptionName</code> has max length 100 and disallows trailing spaces.'
+        value:
+          allOf:
+            - $ref: '#/components/schemas/FieldOptionValue'
+            - description: ' <code>FieldOptionValue</code> has max length 100 and must be alphanumeric with hyphens and underscores.'
+      description: Object for field Options information.
+    ServiceQuotaExceededException: {}
+    CreateCaseResponse:
+      type: object
+      required:
+        - caseArn
+        - caseId
+      properties:
+        caseArn:
+          allOf:
+            - $ref: '#/components/schemas/CaseArn'
+            - description: The Amazon Resource Name (ARN) of the case.
+        caseId:
+          allOf:
+            - $ref: '#/components/schemas/CaseId'
+            - description: A unique identifier of the case.
+    FieldValue:
+      type: object
+      required:
+        - id
+        - value
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/FieldId'
+            - description: Unique identifier of a field.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/FieldValueUnion'
+            - description: Union of potential field value types.
+      description: Object for case field values.
+    ConflictException: {}
+    CreateDomainResponse:
+      type: object
+      required:
+        - domainArn
+        - domainId
+        - domainStatus
+      properties:
+        domainArn:
+          allOf:
+            - $ref: '#/components/schemas/DomainArn'
+            - description: The Amazon Resource Name (ARN) for the Cases domain.
+        domainId:
+          allOf:
+            - $ref: '#/components/schemas/DomainId'
+            - description: 'The unique identifier of the Cases domain. '
+        domainStatus:
+          allOf:
+            - $ref: '#/components/schemas/DomainStatus'
+            - description: The status of the domain.
+    CreateFieldResponse:
+      type: object
+      required:
+        - fieldArn
+        - fieldId
+      properties:
+        fieldArn:
+          allOf:
+            - $ref: '#/components/schemas/FieldArn'
+            - description: The Amazon Resource Name (ARN) of the field.
+        fieldId:
+          allOf:
+            - $ref: '#/components/schemas/FieldId'
+            - description: The unique identifier of a field.
+    CreateLayoutResponse:
+      type: object
+      required:
+        - layoutArn
+        - layoutId
+      properties:
+        layoutArn:
+          allOf:
+            - $ref: '#/components/schemas/LayoutArn'
+            - description: The Amazon Resource Name (ARN) of the newly created layout.
+        layoutId:
+          allOf:
+            - $ref: '#/components/schemas/LayoutId'
+            - description: The unique identifier of the layout.
+    BasicLayout:
+      type: object
+      properties:
+        moreInfo:
+          allOf:
+            - $ref: '#/components/schemas/LayoutSections'
+            - description: This represents sections in a tab of the page layout.
+        topPanel:
+          allOf:
+            - $ref: '#/components/schemas/LayoutSections'
+            - description: This represents sections in a panel of the page layout.
+      description: 'Content specific to <code>BasicLayout</code> type. It configures fields in the top panel and More Info tab of agent application. '
+    CreateRelatedItemResponse:
+      type: object
+      required:
+        - relatedItemArn
+        - relatedItemId
+      properties:
+        relatedItemArn:
+          allOf:
+            - $ref: '#/components/schemas/RelatedItemArn'
+            - description: The Amazon Resource Name (ARN) of the related item.
+        relatedItemId:
+          allOf:
+            - $ref: '#/components/schemas/RelatedItemId'
+            - description: The unique identifier of the related item.
+    CommentContent:
+      type: object
+      required:
+        - body
+        - contentType
+      properties:
+        body:
+          allOf:
+            - $ref: '#/components/schemas/CommentBody'
+            - description: Text in the body of a <code>Comment</code> on a case.
+        contentType:
+          allOf:
+            - $ref: '#/components/schemas/CommentBodyTextType'
+            - description: Type of the text in the box of a <code>Comment</code> on a case.
+      description: Represents the content of a <code>Comment</code> to be returned to agents.
+    Contact:
+      type: object
+      required:
+        - contactArn
+      properties:
+        contactArn:
+          allOf:
+            - $ref: '#/components/schemas/ContactArn'
+            - description: A unique identifier of a contact in Amazon Connect.
+      description: 'An object that represents an Amazon Connect contact object. '
+    CreateTemplateResponse:
+      type: object
+      required:
+        - templateArn
+        - templateId
+      properties:
+        templateArn:
+          allOf:
+            - $ref: '#/components/schemas/TemplateArn'
+            - description: The Amazon Resource Name (ARN) of the newly created template.
+        templateId:
+          allOf:
+            - $ref: '#/components/schemas/TemplateId'
+            - description: A unique identifier of a template.
+    LayoutId:
+      type: string
+      minLength: 1
+      maxLength: 500
+    RequiredField:
+      type: object
+      required:
+        - fieldId
+      properties:
+        fieldId:
+          allOf:
+            - $ref: '#/components/schemas/FieldId'
+            - description: Unique identifier of a field.
+      description: List of fields that must have a value provided to create a case.
+    GetCaseResponse:
+      type: object
+      required:
+        - fields
+        - templateId
+      properties:
+        fields:
+          allOf:
+            - $ref: '#/components/schemas/GetCaseResponseFieldsList'
+            - description: 'A list of detailed field information. '
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results. This is null if there are no more results to return.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.'
+        templateId:
+          allOf:
+            - $ref: '#/components/schemas/TemplateId'
+            - description: A unique identifier of a template.
+    GetCaseEventConfigurationResponse:
+      type: object
+      required:
+        - eventBridge
+      properties:
+        eventBridge:
+          allOf:
+            - $ref: '#/components/schemas/EventBridgeConfiguration'
+            - description: Configuration to enable EventBridge case event delivery and determine what data is delivered.
+    GetDomainResponse:
+      type: object
+      required:
+        - createdTime
+        - domainArn
+        - domainId
+        - domainStatus
+        - name
+      properties:
+        createdTime:
+          allOf:
+            - $ref: '#/components/schemas/CreatedTime'
+            - description: The timestamp when the Cases domain was created.
+        domainArn:
+          allOf:
+            - $ref: '#/components/schemas/DomainArn'
+            - description: The Amazon Resource Name (ARN) for the Cases domain.
+        domainId:
+          allOf:
+            - $ref: '#/components/schemas/DomainId'
+            - description: 'The unique identifier of the Cases domain. '
+        domainStatus:
+          allOf:
+            - $ref: '#/components/schemas/DomainStatus'
+            - description: The status of the Cases domain.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The name of the Cases domain.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.'
+    GetLayoutResponse:
+      type: object
+      required:
+        - content
+        - layoutArn
+        - layoutId
+        - name
+      properties:
+        content:
+          allOf:
+            - $ref: '#/components/schemas/LayoutContent'
+            - description: 'Information about which fields will be present in the layout, the order of the fields, and read-only attribute of the field. '
+        layoutArn:
+          allOf:
+            - $ref: '#/components/schemas/LayoutArn'
+            - description: The Amazon Resource Name (ARN) of the newly created layout.
+        layoutId:
+          allOf:
+            - $ref: '#/components/schemas/LayoutId'
+            - description: The unique identifier of the layout.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/LayoutName'
+            - description: The name of the layout. It must be unique.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.'
+    GetTemplateResponse:
+      type: object
+      required:
+        - name
+        - status
+        - templateArn
+        - templateId
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/TemplateDescription'
+            - description: A brief description of the template.
+        layoutConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/LayoutConfiguration'
+            - description: Configuration of layouts associated to the template.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/TemplateName'
+            - description: The name of the template.
+        requiredFields:
+          allOf:
+            - $ref: '#/components/schemas/RequiredFieldList'
+            - description: A list of fields that must contain a value for a case to be successfully created with this template.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/TemplateStatus'
+            - description: The status of the template.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.'
+        templateArn:
+          allOf:
+            - $ref: '#/components/schemas/TemplateArn'
+            - description: The Amazon Resource Name (ARN) of the template.
+        templateId:
+          allOf:
+            - $ref: '#/components/schemas/TemplateId'
+            - description: A unique identifier of a template.
+    ListCasesForContactResponse:
+      type: object
+      required:
+        - cases
+      properties:
+        cases:
+          allOf:
+            - $ref: '#/components/schemas/ListCasesForContactResponseCasesList'
+            - description: A list of Case summary information.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results. This is null if there are no more results to return.
+    ListDomainsResponse:
+      type: object
+      required:
+        - domains
+      properties:
+        domains:
+          allOf:
+            - $ref: '#/components/schemas/DomainSummaryList'
+            - description: The Cases domain.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results. This is null if there are no more results to return.
+    ListFieldOptionsResponse:
+      type: object
+      required:
+        - options
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results. This is null if there are no more results to return.
+        options:
+          allOf:
+            - $ref: '#/components/schemas/FieldOptionsList'
+            - description: A list of <code>FieldOption</code> objects.
+    Value:
+      type: string
+      minLength: 0
+      maxLength: 100
+    ListFieldsResponse:
+      type: object
+      required:
+        - fields
+      properties:
+        fields:
+          allOf:
+            - $ref: '#/components/schemas/ListFieldsResponseFieldsList'
+            - description: List of detailed field information.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results. This is null if there are no more results to return.
+    ListLayoutsResponse:
+      type: object
+      required:
+        - layouts
+      properties:
+        layouts:
+          allOf:
+            - $ref: '#/components/schemas/LayoutSummaryList'
+            - description: The layouts for the domain.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results. This is null if there are no more results to return.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.'
+    ListTemplatesResponse:
+      type: object
+      required:
+        - templates
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results. This is null if there are no more results to return.
+        templates:
+          allOf:
+            - $ref: '#/components/schemas/ListTemplatesResponseTemplatesList'
+            - description: List of template summary objects.
+    TemplateStatus:
+      type: string
+      enum:
+        - Active
+        - Inactive
+      description: Status of a template
+    PutCaseEventConfigurationResponse:
+      type: object
+      properties: {}
+    Boolean:
+      type: boolean
+    EventIncludedData:
+      type: object
+      properties:
+        caseData:
+          allOf:
+            - $ref: '#/components/schemas/CaseEventIncludedData'
+            - description: Details of what case data is published through the case event stream.
+        relatedItemData:
+          allOf:
+            - $ref: '#/components/schemas/RelatedItemEventIncludedData'
+            - description: Details of what related item data is published through the case event stream.
+      description: Details of what case and related item data is published through the case event stream.
+    SearchCasesResponse:
+      type: object
+      required:
+        - cases
+      properties:
+        cases:
+          allOf:
+            - $ref: '#/components/schemas/SearchCasesResponseCasesList'
+            - description: 'A list of case documents where each case contains the properties <code>CaseId</code> and <code>Fields</code> where each field is a complex union structure. '
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results. This is null if there are no more results to return.
+    CaseFilterAndAllList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CaseFilter'
+      minItems: 0
+      maxItems: 10
+    FieldFilter:
+      type: object
+      properties:
+        contains:
+          allOf:
+            - $ref: '#/components/schemas/FieldValue'
+            - description: Object containing field identifier and value information.
+        equalTo:
+          allOf:
+            - $ref: '#/components/schemas/FieldValue'
+            - description: Object containing field identifier and value information.
+        greaterThan:
+          allOf:
+            - $ref: '#/components/schemas/FieldValue'
+            - description: Object containing field identifier and value information.
+        greaterThanOrEqualTo:
+          allOf:
+            - $ref: '#/components/schemas/FieldValue'
+            - description: Object containing field identifier and value information.
+        lessThan:
+          allOf:
+            - $ref: '#/components/schemas/FieldValue'
+            - description: Object containing field identifier and value information.
+        lessThanOrEqualTo:
+          allOf:
+            - $ref: '#/components/schemas/FieldValue'
+            - description: 'Object containing field identifier and value information. '
+      description: A filter for fields. Only one value can be provided.
+    CaseFilter:
+      type: object
+      properties:
+        andAll:
+          allOf:
+            - $ref: '#/components/schemas/CaseFilterAndAllList'
+            - description: Provides "and all" filtering.
+        field:
+          allOf:
+            - $ref: '#/components/schemas/FieldFilter'
+            - description: A list of fields to filter on.
+        not:
+          $ref: '#/components/schemas/CaseFilter'
+      description: A filter for cases. Only one value can be provided.
+    Sort:
+      type: object
+      required:
+        - fieldId
+        - sortOrder
+      properties:
+        fieldId:
+          allOf:
+            - $ref: '#/components/schemas/FieldId'
+            - description: Unique identifier of a field.
+        sortOrder:
+          allOf:
+            - $ref: '#/components/schemas/Order'
+            - description: A structured set of sort terms
+      description: A structured set of sort terms.
+    SearchRelatedItemsResponse:
+      type: object
+      required:
+        - relatedItems
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results. This is null if there are no more results to return.
+        relatedItems:
+          allOf:
+            - $ref: '#/components/schemas/SearchRelatedItemsResponseRelatedItemsList'
+            - description: 'A list of items related to a case. '
+    RelatedItemTypeFilter:
+      type: object
+      properties:
+        comment:
+          allOf:
+            - $ref: '#/components/schemas/CommentFilter'
+            - description: A filter for related items of type <code>Comment</code>.
+        contact:
+          allOf:
+            - $ref: '#/components/schemas/ContactFilter'
+            - description: A filter for related items of type <code>Contact</code>.
+      description: The list of types of related items and their parameters to use for filtering.
+    String:
+      type: string
+    TagKey:
+      type: string
+      pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
+      minLength: 1
+      maxLength: 128
+    UpdateCaseResponse:
+      type: object
+      properties: {}
+    UpdateFieldResponse:
+      type: object
+      properties: {}
+    UpdateLayoutResponse:
+      type: object
+      properties: {}
+    UpdateTemplateResponse:
+      type: object
+      properties: {}
+    Arn:
+      type: string
+      minLength: 1
+      maxLength: 500
+    AssociationTime:
+      type: string
+      format: date-time
+    LayoutSections:
+      type: object
+      properties:
+        sections:
+          $ref: '#/components/schemas/SectionsList'
+      description: Ordered list containing different kinds of sections that can be added. A LayoutSections object can only contain one section.
+    BatchGetFieldIdentifierList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FieldIdentifier'
+      minItems: 1
+      maxItems: 50
+    DomainId:
+      type: string
+      minLength: 1
+      maxLength: 500
+    BatchGetFieldRequest:
+      type: object
+      required:
+        - fields
+      title: BatchGetFieldRequest
+      properties:
+        fields:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetFieldIdentifierList'
+            - description: 'A list of unique field identifiers. '
+    BatchGetFieldResponseErrorsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FieldError'
+      minItems: 0
+      maxItems: 50
+    BatchGetFieldResponseFieldsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GetFieldResponse'
+      minItems: 0
+      maxItems: 50
+    FieldError:
+      type: object
+      required:
+        - errorCode
+        - id
+      properties:
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error code from getting a field.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/FieldId'
+            - description: The field identifier that caused the error.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error message from getting a field.
+      description: Object for errors on fields.
+    GetFieldResponse:
+      type: object
+      required:
+        - fieldArn
+        - fieldId
+        - name
+        - namespace
+        - type
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/FieldDescription'
+            - description: Description of the field.
+        fieldArn:
+          allOf:
+            - $ref: '#/components/schemas/FieldArn'
+            - description: The Amazon Resource Name (ARN) of the field.
+        fieldId:
+          allOf:
+            - $ref: '#/components/schemas/FieldId'
+            - description: Unique identifier of the field.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/FieldName'
+            - description: Name of the field.
+        namespace:
+          allOf:
+            - $ref: '#/components/schemas/FieldNamespace'
+            - description: Namespace of the field.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.'
+        type:
+          allOf:
+            - $ref: '#/components/schemas/FieldType'
+            - description: Type of the field.
+      description: Object to store detailed field information.
+    FieldId:
+      type: string
+      minLength: 1
+      maxLength: 500
+    BatchPutFieldOptionsRequestOptionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FieldOption'
+      minItems: 0
+      maxItems: 50
+    BatchPutFieldOptionsRequest:
+      type: object
+      required:
+        - options
+      title: BatchPutFieldOptionsRequest
+      properties:
+        options:
+          allOf:
+            - $ref: '#/components/schemas/BatchPutFieldOptionsRequestOptionsList'
+            - description: A list of <code>FieldOption</code> objects.
+    BatchPutFieldOptionsResponseErrorsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FieldOptionError'
+      minItems: 0
+      maxItems: 50
+    FieldOptionError:
+      type: object
+      required:
+        - errorCode
+        - message
+        - value
+      properties:
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Error code from creating or updating field option.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Error message from creating or updating field option.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/FieldOptionValue'
+            - description: The field option value that caused the error.
+      description: Object for field Options errors.
+    CaseArn:
+      type: string
+      minLength: 1
+      maxLength: 500
+    CaseEventIncludedDataFieldsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FieldIdentifier'
+      minItems: 0
+      maxItems: 50
+    CaseEventIncludedData:
+      type: object
+      required:
+        - fields
+      properties:
+        fields:
+          allOf:
+            - $ref: '#/components/schemas/CaseEventIncludedDataFieldsList'
+            - description: List of field identifiers.
+      description: Details of what case data is published through the case event stream.
+    CaseId:
+      type: string
+      minLength: 1
+      maxLength: 500
+    TemplateId:
+      type: string
+      minLength: 1
+      maxLength: 500
+    CaseSummary:
+      type: object
+      required:
+        - caseId
+        - templateId
+      properties:
+        caseId:
+          allOf:
+            - $ref: '#/components/schemas/CaseId'
+            - description: A unique identifier of the case.
+        templateId:
+          allOf:
+            - $ref: '#/components/schemas/TemplateId'
+            - description: A unique identifier of a template.
+      description: Case summary information.
+    Channel:
+      type: string
+      minLength: 1
+      maxLength: 100
+    CommentBody:
+      type: string
+      minLength: 1
+      maxLength: 1000
+    CommentBodyTextType:
+      type: string
+      enum:
+        - Text/Plain
+    CommentFilter:
+      type: object
+      properties: {}
+      description: A filter for related items of type <code>Comment</code>.
+    ConnectedToSystemTime:
+      type: string
+      format: date-time
+    ContactArn:
+      type: string
+      minLength: 1
+      maxLength: 500
+    ContactContent:
+      type: object
+      required:
+        - channel
+        - connectedToSystemTime
+        - contactArn
+      properties:
+        channel:
+          allOf:
+            - $ref: '#/components/schemas/Channel'
+            - description: A list of channels to filter on for related items of type <code>Contact</code>.
+        connectedToSystemTime:
+          allOf:
+            - $ref: '#/components/schemas/ConnectedToSystemTime'
+            - description: The difference between the <code>InitiationTimestamp</code> and the <code>DisconnectTimestamp</code> of the contact.
+        contactArn:
+          allOf:
+            - $ref: '#/components/schemas/ContactArn'
+            - description: A unique identifier of a contact in Amazon Connect.
+      description: An object that represents a content of an Amazon Connect contact object.
+    ContactFilterChannelList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Channel'
+      minItems: 0
+      maxItems: 3
+    ContactFilter:
+      type: object
+      properties:
+        channel:
+          allOf:
+            - $ref: '#/components/schemas/ContactFilterChannelList'
+            - description: A list of channels to filter on for related items of type <code>Contact</code>.
+        contactArn:
+          allOf:
+            - $ref: '#/components/schemas/ContactArn'
+            - description: A unique identifier of a contact in Amazon Connect.
+      description: A filter for related items of type <code>Contact</code>.
+    CreateCaseRequestClientTokenString:
+      type: string
+      minLength: 0
+      maxLength: 64
+    CreateCaseRequestFieldsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FieldValue'
+      minItems: 0
+      maxItems: 100
+    CreateCaseRequest:
+      type: object
+      required:
+        - fields
+        - templateId
+      title: CreateCaseRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/CreateCaseRequestClientTokenString'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.'
+        fields:
+          allOf:
+            - $ref: '#/components/schemas/CreateCaseRequestFieldsList'
+            - description: An array of objects with field ID (matching ListFields/DescribeField) and value union data.
+        templateId:
+          allOf:
+            - $ref: '#/components/schemas/TemplateId'
+            - description: A unique identifier of a template.
+    DomainName:
+      type: string
+      pattern: '^.*[\S]$'
+      minLength: 1
+      maxLength: 100
+    CreateDomainRequest:
+      type: object
+      required:
+        - name
+      title: CreateDomainRequest
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The name for your Cases domain. It must be unique for your Amazon Web Services account.
+    DomainArn:
+      type: string
+      minLength: 1
+      maxLength: 500
+    DomainStatus:
+      type: string
+      enum:
+        - Active
+        - CreationInProgress
+        - CreationFailed
+    FieldDescription:
+      type: string
+      minLength: 0
+      maxLength: 255
+    FieldName:
+      type: string
+      pattern: '^.*[\S]$'
+      minLength: 1
+      maxLength: 100
+    FieldType:
+      type: string
+      enum:
+        - Text
+        - Number
+        - Boolean
+        - DateTime
+        - SingleSelect
+    CreateFieldRequest:
+      type: object
+      required:
+        - name
+        - type
+      title: CreateFieldRequest
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/FieldDescription'
+            - description: The description of the field.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/FieldName'
+            - description: The name of the field.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/FieldType'
+            - description: 'Defines the data type, some system constraints, and default display of the field.'
+    FieldArn:
+      type: string
+      minLength: 1
+      maxLength: 500
+    LayoutContent:
+      type: object
+      properties:
+        basic:
+          allOf:
+            - $ref: '#/components/schemas/BasicLayout'
+            - description: Content specific to <code>BasicLayout</code> type. It configures fields in the top panel and More Info tab of Cases user interface.
+      description: Object to store union of different versions of layout content.
+    LayoutName:
+      type: string
+      pattern: '^.*[\S]$'
+      minLength: 1
+      maxLength: 100
+    CreateLayoutRequest:
+      type: object
+      required:
+        - content
+        - name
+      title: CreateLayoutRequest
+      properties:
+        content:
+          allOf:
+            - $ref: '#/components/schemas/LayoutContent'
+            - description: 'Information about which fields will be present in the layout, and information about the order of the fields.'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/LayoutName'
+            - description: The name of the layout. It must be unique for the Cases domain.
+    LayoutArn:
+      type: string
+      minLength: 1
+      maxLength: 500
+    RelatedItemInputContent:
+      type: object
+      properties:
+        comment:
+          allOf:
+            - $ref: '#/components/schemas/CommentContent'
+            - description: Represents the content of a comment to be returned to agents.
+        contact:
+          allOf:
+            - $ref: '#/components/schemas/Contact'
+            - description: Object representing a contact in Amazon Connect as an API request field.
+      description: Represents the content of a related item to be created.
+    RelatedItemType:
+      type: string
+      enum:
+        - Contact
+        - Comment
+    CreateRelatedItemRequest:
+      type: object
+      required:
+        - content
+        - type
+      title: CreateRelatedItemRequest
+      properties:
+        content:
+          allOf:
+            - $ref: '#/components/schemas/RelatedItemInputContent'
+            - description: The content of a related item to be created.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/RelatedItemType'
+            - description: The type of a related item.
+    RelatedItemArn:
+      type: string
+      minLength: 1
+      maxLength: 500
+    RelatedItemId:
+      type: string
+      minLength: 1
+      maxLength: 500
+    TemplateDescription:
+      type: string
+      minLength: 0
+      maxLength: 255
+    LayoutConfiguration:
+      type: object
+      properties:
+        defaultLayout:
+          allOf:
+            - $ref: '#/components/schemas/LayoutId'
+            - description: ' Unique identifier of a layout. '
+      description: Object to store configuration of layouts associated to the template.
+    TemplateName:
+      type: string
+      pattern: '^.*[\S]$'
+      minLength: 1
+      maxLength: 100
+    RequiredFieldList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RequiredField'
+      minItems: 0
+      maxItems: 100
+    CreateTemplateRequest:
+      type: object
+      required:
+        - name
+      title: CreateTemplateRequest
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/TemplateDescription'
+            - description: A brief description of the template.
+        layoutConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/LayoutConfiguration'
+            - description: Configuration of layouts associated to the template.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/TemplateName'
+            - description: A name for the template. It must be unique per domain.
+        requiredFields:
+          allOf:
+            - $ref: '#/components/schemas/RequiredFieldList'
+            - description: A list of fields that must contain a value for a case to be successfully created with this template.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/TemplateStatus'
+            - description: The status of the template.
+    TemplateArn:
+      type: string
+      minLength: 1
+      maxLength: 500
+    CreatedTime:
+      type: string
+      format: date-time
+    DomainSummary:
+      type: object
+      required:
+        - domainArn
+        - domainId
+        - name
+      properties:
+        domainArn:
+          allOf:
+            - $ref: '#/components/schemas/DomainArn'
+            - description: The Amazon Resource Name (ARN) of the domain.
+        domainId:
+          allOf:
+            - $ref: '#/components/schemas/DomainId'
+            - description: The unique identifier of the domain.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The name of the domain.
+      description: Object for the summarized details of the domain.
+    DomainSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DomainSummary'
+    Double:
+      type: number
+      format: double
+    EventBridgeConfiguration:
+      type: object
+      required:
+        - enabled
+      properties:
+        enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the to broadcast case event data to the customer.
+        includedData:
+          allOf:
+            - $ref: '#/components/schemas/EventIncludedData'
+            - description: Details of what case and related item data is published through the case event stream.
+      description: Configuration to enable EventBridge case event delivery and determine what data is delivered.
+    RelatedItemEventIncludedData:
+      type: object
+      required:
+        - includeContent
+      properties:
+        includeContent:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Details of what related item data is published through the case event stream.
+      description: Details of what related item data is published through the case event stream.
+    FieldGroupFieldsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FieldItem'
+      minItems: 0
+      maxItems: 100
+    FieldGroupNameString:
+      type: string
+      minLength: 0
+      maxLength: 100
+    FieldGroup:
+      type: object
+      required:
+        - fields
+      properties:
+        fields:
+          allOf:
+            - $ref: '#/components/schemas/FieldGroupFieldsList'
+            - description: Represents an ordered list containing field related information.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/FieldGroupNameString'
+            - description: Name of the field group.
+      description: Object for a group of fields and associated properties.
+    FieldItem:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/FieldId'
+            - description: Unique identifier of a field.
+      description: Object for field related information.
+    FieldNamespace:
+      type: string
+      enum:
+        - System
+        - Custom
+    FieldOptionName:
+      type: string
+      pattern: '^.*[\S]$'
+      minLength: 1
+      maxLength: 100
+    FieldOptionValue:
+      type: string
+      pattern: '^.*[\S]$'
+      minLength: 1
+      maxLength: 100
+    FieldOptionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FieldOption'
+    FieldSummary:
+      type: object
+      required:
+        - fieldArn
+        - fieldId
+        - name
+        - namespace
+        - type
+      properties:
+        fieldArn:
+          allOf:
+            - $ref: '#/components/schemas/FieldArn'
+            - description: The Amazon Resource Name (ARN) of the field.
+        fieldId:
+          allOf:
+            - $ref: '#/components/schemas/FieldId'
+            - description: The unique identifier of a field.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/FieldName'
+            - description: Name of the field.
+        namespace:
+          allOf:
+            - $ref: '#/components/schemas/FieldNamespace'
+            - description: The namespace of a field.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/FieldType'
+            - description: The type of a field.
+      description: Object for the summarized details of the field.
+    FieldValueUnion:
+      type: object
+      properties:
+        booleanValue:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Can be either null, or have a Boolean value type. Only one value can be provided.'
+        doubleValue:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: 'Can be either null, or have a Double number value type. Only one value can be provided.'
+        stringValue:
+          allOf:
+            - $ref: '#/components/schemas/FieldValueUnionStringValueString'
+            - description: String value type.
+      description: Object to store union of Field values.
+    FieldValueUnionStringValueString:
+      type: string
+      minLength: 0
+      maxLength: 500
+    GetCaseEventConfigurationRequest:
+      type: object
+      title: GetCaseEventConfigurationRequest
+      properties: {}
+    GetCaseRequestFieldsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FieldIdentifier'
+      minItems: 1
+      maxItems: 100
+    NextToken:
+      type: string
+      minLength: 0
+      maxLength: 9000
+    GetCaseRequest:
+      type: object
+      required:
+        - fields
+      title: GetCaseRequest
+      properties:
+        fields:
+          allOf:
+            - $ref: '#/components/schemas/GetCaseRequestFieldsList'
+            - description: 'A list of unique field identifiers. '
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+    GetCaseResponseFieldsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FieldValue'
+      minItems: 0
+      maxItems: 100
+    Tags:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/String'
+    GetDomainRequest:
+      type: object
+      title: GetDomainRequest
+      properties: {}
+    GetLayoutRequest:
+      type: object
+      title: GetLayoutRequest
+      properties: {}
+    GetTemplateRequest:
+      type: object
+      title: GetTemplateRequest
+      properties: {}
+    SectionsList:
+      type: array
+      description: Ordered list containing different kinds of sections that can be added.
+      items:
+        $ref: '#/components/schemas/Section'
+      minItems: 0
+      maxItems: 1
+    LayoutSummary:
+      type: object
+      required:
+        - layoutArn
+        - layoutId
+        - name
+      properties:
+        layoutArn:
+          allOf:
+            - $ref: '#/components/schemas/LayoutArn'
+            - description: The Amazon Resource Name (ARN) of the layout.
+        layoutId:
+          allOf:
+            - $ref: '#/components/schemas/LayoutId'
+            - description: The unique identifier for of the layout.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/LayoutName'
+            - description: The name of the layout.
+      description: Object for the summarized details of the layout.
+    LayoutSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LayoutSummary'
+    ListCasesForContactRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 10
+    ListCasesForContactRequest:
+      type: object
+      required:
+        - contactArn
+      title: ListCasesForContactRequest
+      properties:
+        contactArn:
+          allOf:
+            - $ref: '#/components/schemas/ContactArn'
+            - description: A unique identifier of a contact in Amazon Connect.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListCasesForContactRequestMaxResultsInteger'
+            - description: The maximum number of results to return per page.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+    ListCasesForContactResponseCasesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CaseSummary'
+      minItems: 0
+      maxItems: 10
+    ListDomainsRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 10
+    ListDomainsRequest:
+      type: object
+      title: ListDomainsRequest
+      properties: {}
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ValuesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Value'
+      minItems: 0
+      maxItems: 1
+    ListFieldOptionsRequest:
+      type: object
+      title: ListFieldOptionsRequest
+      properties: {}
+    ListFieldsRequest:
+      type: object
+      title: ListFieldsRequest
+      properties: {}
+    ListFieldsResponseFieldsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FieldSummary'
+      minItems: 0
+      maxItems: 100
+    ListLayoutsRequest:
+      type: object
+      title: ListLayoutsRequest
+      properties: {}
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    TemplateStatusFilters:
+      type: array
+      description: List of filters used on the ListTemplates result set
+      items:
+        $ref: '#/components/schemas/TemplateStatus'
+      minItems: 1
+      maxItems: 2
+    ListTemplatesRequest:
+      type: object
+      title: ListTemplatesRequest
+      properties: {}
+    ListTemplatesResponseTemplatesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TemplateSummary'
+      minItems: 0
+      maxItems: 100
+    TemplateSummary:
+      type: object
+      required:
+        - name
+        - status
+        - templateArn
+        - templateId
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/TemplateName'
+            - description: The template name.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/TemplateStatus'
+            - description: The status of the template.
+        templateArn:
+          allOf:
+            - $ref: '#/components/schemas/TemplateArn'
+            - description: The Amazon Resource Name (ARN) of the template.
+        templateId:
+          allOf:
+            - $ref: '#/components/schemas/TemplateId'
+            - description: The unique identifier for the template.
+      description: Template summary information.
+    Order:
+      type: string
+      enum:
+        - Asc
+        - Desc
+    PutCaseEventConfigurationRequest:
+      type: object
+      required:
+        - eventBridge
+      title: PutCaseEventConfigurationRequest
+      properties:
+        eventBridge:
+          allOf:
+            - $ref: '#/components/schemas/EventBridgeConfiguration'
+            - description: Configuration to enable EventBridge case event delivery and determine what data is delivered.
+    RelatedItemContent:
+      type: object
+      properties:
+        comment:
+          allOf:
+            - $ref: '#/components/schemas/CommentContent'
+            - description: Represents the content of a comment to be returned to agents.
+        contact:
+          allOf:
+            - $ref: '#/components/schemas/ContactContent'
+            - description: Represents the content of a contact to be returned to agents.
+      description: Represents the content of a particular type of related item.
+    SearchCasesRequestFieldsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FieldIdentifier'
+      minItems: 0
+      maxItems: 10
+    SearchCasesRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 25
+    SearchCasesRequestSearchTermString:
+      type: string
+      minLength: 0
+      maxLength: 255
+    SearchCasesRequestSortsList:
+      type: array
+      description: /@documentation(&quot;The templateId&quot;)
+      items:
+        $ref: '#/components/schemas/Sort'
+      minItems: 0
+      maxItems: 2
+    SearchCasesRequest:
+      type: object
+      title: SearchCasesRequest
+      properties:
+        fields:
+          allOf:
+            - $ref: '#/components/schemas/SearchCasesRequestFieldsList'
+            - description: The list of field identifiers to be returned as part of the response.
+        filter:
+          allOf:
+            - $ref: '#/components/schemas/CaseFilter'
+            - description: A list of filter objects.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/SearchCasesRequestMaxResultsInteger'
+            - description: The maximum number of cases to return. The current maximum supported value is 25. This is also the default value when no other value is provided.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+        searchTerm:
+          allOf:
+            - $ref: '#/components/schemas/SearchCasesRequestSearchTermString'
+            - description: A word or phrase used to perform a quick search.
+        sorts:
+          allOf:
+            - $ref: '#/components/schemas/SearchCasesRequestSortsList'
+            - description: 'A list of sorts where each sort specifies a field and their sort order to be applied to the results. '
+    SearchCasesResponseCasesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchCasesResponseItem'
+      minItems: 0
+      maxItems: 25
+    SearchCasesResponseItem:
+      type: object
+      required:
+        - caseId
+        - fields
+        - templateId
+      properties:
+        caseId:
+          allOf:
+            - $ref: '#/components/schemas/CaseId'
+            - description: A unique identifier of the case.
+        fields:
+          allOf:
+            - $ref: '#/components/schemas/SearchCasesResponseItemFieldsList'
+            - description: List of case field values.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.'
+        templateId:
+          allOf:
+            - $ref: '#/components/schemas/TemplateId'
+            - description: A unique identifier of a template.
+      description: A list of items that represent cases.
+    SearchCasesResponseItemFieldsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FieldValue'
+      minItems: 0
+      maxItems: 10
+    SearchRelatedItemsRequestFiltersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RelatedItemTypeFilter'
+      minItems: 0
+      maxItems: 10
+    SearchRelatedItemsRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 25
+    SearchRelatedItemsRequest:
+      type: object
+      title: SearchRelatedItemsRequest
+      properties:
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/SearchRelatedItemsRequestFiltersList'
+            - description: The list of types of related items and their parameters to use for filtering.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/SearchRelatedItemsRequestMaxResultsInteger'
+            - description: The maximum number of results to return per page.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+    SearchRelatedItemsResponseRelatedItemsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchRelatedItemsResponseItem'
+      minItems: 0
+      maxItems: 25
+    SearchRelatedItemsResponseItem:
+      type: object
+      required:
+        - associationTime
+        - content
+        - relatedItemId
+        - type
+      properties:
+        associationTime:
+          allOf:
+            - $ref: '#/components/schemas/AssociationTime'
+            - description: Time at which a related item was associated with a case.
+        content:
+          allOf:
+            - $ref: '#/components/schemas/RelatedItemContent'
+            - description: Represents the content of a particular type of related item.
+        relatedItemId:
+          allOf:
+            - $ref: '#/components/schemas/RelatedItemId'
+            - description: Unique identifier of a related item.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.'
+        type:
+          allOf:
+            - $ref: '#/components/schemas/RelatedItemType'
+            - description: Type of a related item.
+      description: A list of items that represent RelatedItems.
+    Section:
+      type: object
+      properties:
+        fieldGroup:
+          allOf:
+            - $ref: '#/components/schemas/FieldGroup'
+            - description: Consists of a group of fields and associated properties.
+      description: This represents a sections within a panel or tab of the page layout.
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 0
+      maxItems: 50
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.'
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+    UpdateCaseRequestFieldsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FieldValue'
+      minItems: 0
+      maxItems: 100
+    UpdateCaseRequest:
+      type: object
+      required:
+        - fields
+      title: UpdateCaseRequest
+      properties:
+        fields:
+          allOf:
+            - $ref: '#/components/schemas/UpdateCaseRequestFieldsList'
+            - description: 'An array of objects with <code>fieldId</code> (matching ListFields/DescribeField) and value union data, structured identical to <code>CreateCase</code>.'
+    UpdateFieldRequest:
+      type: object
+      title: UpdateFieldRequest
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/FieldDescription'
+            - description: The description of a field.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/FieldName'
+            - description: The name of the field.
+    UpdateLayoutRequest:
+      type: object
+      title: UpdateLayoutRequest
+      properties:
+        content:
+          allOf:
+            - $ref: '#/components/schemas/LayoutContent'
+            - description: 'Information about which fields will be present in the layout, the order of the fields, and a read-only attribute of the field. '
+        name:
+          allOf:
+            - $ref: '#/components/schemas/LayoutName'
+            - description: The name of the layout. It must be unique per domain.
+    UpdateTemplateRequest:
+      type: object
+      title: UpdateTemplateRequest
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/TemplateDescription'
+            - description: A brief description of the template.
+        layoutConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/LayoutConfiguration'
+            - description: Configuration of layouts associated to the template.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/TemplateName'
+            - description: The name of the template. It must be unique per domain.
+        requiredFields:
+          allOf:
+            - $ref: '#/components/schemas/RequiredFieldList'
+            - description: A list of fields that must contain a value for a case to be successfully created with this template.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/TemplateStatus'
+            - description: The status of the template.
+security:
+  - hmac: []

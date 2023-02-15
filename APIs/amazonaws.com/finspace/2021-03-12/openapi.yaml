@@ -3,7 +3,7 @@ info:
   version: '2021-03-12'
   x-release: v4
   title: FinSpace User Environment Management service
-  description: 'The FinSpace management service provides the APIs for managing the FinSpace environments. '
+  description: The FinSpace management service provides the APIs for managing FinSpace environments.
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -231,6 +231,27 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/AttributeMap'
                         - description: 'SAML attribute name and value. The name must always be <code>Email</code> and the value should be set to the attribute definition in which user email is set. For example, name would be <code>Email</code> and value <code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress</code>. Please check your SAML 2.0 compliant identity provider (IdP) documentation for details.'
+                superuserParameters:
+                  description: Configuration information for the superuser.
+                  type: object
+                  properties:
+                    emailAddress:
+                      allOf:
+                        - $ref: '#/components/schemas/EmailId'
+                        - description: The email address of the superuser.
+                    firstName:
+                      allOf:
+                        - $ref: '#/components/schemas/NameString'
+                        - description: The first name of the superuser.
+                    lastName:
+                      allOf:
+                        - $ref: '#/components/schemas/NameString'
+                        - description: The last name of the superuser.
+                dataBundles:
+                  description: '<p>The list of Amazon Resource Names (ARN) of the data bundles to install. Currently supported data bundle ARNs:</p> <ul> <li> <p> <code>arn:aws:finspace:${Region}::data-bundle/capital-markets-sample</code> - Contains sample Capital Markets datasets, categories and controlled vocabularies.</p> </li> <li> <p> <code>arn:aws:finspace:${Region}::data-bundle/taq</code> (default) - Contains trades and quotes data in addition to sample Capital Markets data.</p> </li> </ul>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DataBundleArn'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -739,6 +760,23 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/url'
+    EmailId:
+      type: string
+      pattern: '[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+[.]+[A-Za-z]+'
+      minLength: 1
+      maxLength: 128
+      format: password
+    NameString:
+      type: string
+      pattern: '^[a-zA-Z0-9]{1,50}$'
+      minLength: 1
+      maxLength: 50
+    DataBundleArn:
+      type: string
+      pattern: '^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\d*:data-bundle/[0-9A-Za-z_-]{1,128}$'
+      description: The Amazon Resource Name (ARN) of the data bundle.
+      minLength: 20
+      maxLength: 2048
     InternalServerException: {}
     ValidationException: {}
     AccessDeniedException: {}
@@ -847,6 +885,30 @@ components:
             - $ref: '#/components/schemas/AttributeMap'
             - description: 'SAML attribute name and value. The name must always be <code>Email</code> and the value should be set to the attribute definition in which user email is set. For example, name would be <code>Email</code> and value <code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress</code>. Please check your SAML 2.0 compliant identity provider (IdP) documentation for details.'
       description: Configuration information when authentication mode is FEDERATED.
+    SuperuserParameters:
+      type: object
+      required:
+        - emailAddress
+        - firstName
+        - lastName
+      properties:
+        emailAddress:
+          allOf:
+            - $ref: '#/components/schemas/EmailId'
+            - description: The email address of the superuser.
+        firstName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The first name of the superuser.
+        lastName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The last name of the superuser.
+      description: Configuration information for the superuser.
+    DataBundleArns:
+      type: array
+      items:
+        $ref: '#/components/schemas/DataBundleArn'
     CreateEnvironmentRequest:
       type: object
       required:
@@ -877,6 +939,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/FederationParameters'
             - description: Configuration information when authentication mode is FEDERATED.
+        superuserParameters:
+          allOf:
+            - $ref: '#/components/schemas/SuperuserParameters'
+            - description: Configuration information for the superuser.
+        dataBundles:
+          allOf:
+            - $ref: '#/components/schemas/DataBundleArns'
+            - description: '<p>The list of Amazon Resource Names (ARN) of the data bundles to install. Currently supported data bundle ARNs:</p> <ul> <li> <p> <code>arn:aws:finspace:${Region}::data-bundle/capital-markets-sample</code> - Contains sample Capital Markets datasets, categories and controlled vocabularies.</p> </li> <li> <p> <code>arn:aws:finspace:${Region}::data-bundle/taq</code> (default) - Contains trades and quotes data in addition to sample Capital Markets data.</p> </li> </ul>'
     IdType:
       type: string
       pattern: '^[a-zA-Z0-9]{1,26}$'

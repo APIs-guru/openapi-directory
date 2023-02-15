@@ -1,0 +1,3337 @@
+openapi: 3.0.0
+info:
+  version: '2018-05-10'
+  x-release: v4
+  title: Amazon Security Lake
+  description: '<note> <p>Amazon Security Lake is in preview release. Your use of the Security Lake preview is subject to Section 2 of the <a href="http://aws.amazon.com/service-terms/">Amazon Web Services Service Terms</a>("Betas and Previews").</p> </note> <p>Amazon Security Lake is a fully managed security data lake service. You can use Security Lake to automatically centralize security data from cloud, on-premises, and custom sources into a data lake that''s stored in your Amazon Web Servicesaccount. Amazon Web Services Organizations is an account management service that lets you consolidate multiple Amazon Web Services accounts into an organization that you create and centrally manage. With Organizations, you can create member accounts and invite existing accounts to join your organization. Security Lake helps you analyze security data for a more complete understanding of your security posture across the entire organization. It can also help you improve the protection of your workloads, applications, and data.</p> <p>The data lake is backed by Amazon Simple Storage Service (Amazon S3) buckets, and you retain ownership over your data. </p> <p>Amazon Security Lake integrates with CloudTrail, a service that provides a record of actions taken by a user, role, or an Amazon Web Services service in Security Lake CloudTrail captures API calls for Security Lake as events. The calls captured include calls from the Security Lake console and code calls to the Security Lake API operations. If you create a trail, you can enable continuous delivery of CloudTrail events to an Amazon S3 bucket, including events for Security Lake. If you don''t configure a trail, you can still view the most recent events in the CloudTrail console in Event history. Using the information collected by CloudTrail you can determine the request that was made to Security Lake, the IP address from which the request was made, who made the request, when it was made, and additional details. To learn more about Security Lake information in CloudTrail, see the <a href="https://docs.aws.amazon.com/security-lake/latest/userguide/securitylake-cloudtrail.html">Amazon Security Lake User Guide</a>.</p> <p>Security Lake automates the collection of security-related log and event data from integrated Amazon Web Services and third-party services. It also helps you manage the lifecycle of data with customizable retention and replication settings. Security Lake converts ingested data into Apache Parquet format and a standard open-source schema called the Open Cybersecurity Schema Framework (OCSF).</p> <p>Other Amazon Web Services and third-party services can subscribe to the data that''s stored in Security Lake for incident response and security data analytics.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: securitylake
+  x-aws-signingName: securitylake
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/securitylake-2018-05-10.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/securitylake/'
+servers:
+  - url: 'http://securitylake.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon Security Lake multi-region endpoint
+  - url: 'https://securitylake.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon Security Lake multi-region endpoint
+  - url: 'http://securitylake.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Security Lake endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://securitylake.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Security Lake endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /v1/logsources/aws:
+    post:
+      operationId: CreateAwsLogSource
+      description: '<p>Adds a natively supported Amazon Web Service as an Amazon Security Lake source. Enables source types for member accounts in required Amazon Web Services Regions, based on the parameters you specify. You can choose any source type in any Region for either accounts that are part of a trusted organization or standalone accounts. At least one of the three dimensions is a mandatory input to this API. However, you can supply any combination of the three dimensions to this API. </p> <p>By default, a dimension refers to the entire set. When you don''t provide a dimension, Security Lake assumes that the missing dimension refers to the entire set. This is overridden when you supply any one of the inputs. For instance, when you do not specify members, the API enables all Security Lake member accounts for all sources. Similarly, when you do not specify Regions, Security Lake is enabled for all the Regions where Security Lake is available as a service.</p> <p>You can use this API only to enable natively supported Amazon Web Services as a source. Use <code>CreateCustomLogSource</code> to enable data collection from a custom source. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAwsLogSourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: S3Exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3Exception'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - inputOrder
+              properties:
+                enableAllDimensions:
+                  description: Enables data collection from specific Amazon Web Services sources in all specific accounts and specific Regions.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TwoDimensionsMap'
+                enableSingleDimension:
+                  description: Enables data collection from all Amazon Web Services sources in specific accounts or Regions.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SafeString'
+                enableTwoDimensions:
+                  description: Enables data collection from specific Amazon Web Services sources in specific accounts or Regions.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/ValueSet'
+                inputOrder:
+                  description: 'Specifies the input order to enable dimensions in Security Lake, namely Region, source type, and member account.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Dimension'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/logsources/custom:
+    post:
+      operationId: CreateCustomLogSource
+      description: 'Adds a third-party custom source in Amazon Security Lake, from the Amazon Web Services Region where you want to create a custom source. Security Lake can collect logs and events from third-party custom sources. After creating the appropriate IAM role to invoke Glue crawler, use this API to add a custom source name in Security Lake. This operation creates a partition in the Amazon S3 bucket for Security Lake as the target location for log files from the custom source in addition to an associated Glue table and an Glue crawler.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCustomLogSourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ConflictSourceNamesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictSourceNamesException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: BucketNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BucketNotFoundException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - customSourceName
+                - eventClass
+                - glueInvocationRoleArn
+                - logProviderAccountId
+              properties:
+                customSourceName:
+                  description: The name for a third-party custom source. This must be a Regionally unique value.
+                  type: string
+                  pattern: '^[\\\w\-_:/.]*$'
+                eventClass:
+                  description: The Open Cybersecurity Schema Framework (OCSF) event class which describes the type of data that the custom source will send to Security Lake.
+                  type: string
+                  enum:
+                    - ACCESS_ACTIVITY
+                    - FILE_ACTIVITY
+                    - KERNEL_ACTIVITY
+                    - KERNEL_EXTENSION
+                    - MEMORY_ACTIVITY
+                    - MODULE_ACTIVITY
+                    - PROCESS_ACTIVITY
+                    - REGISTRY_KEY_ACTIVITY
+                    - REGISTRY_VALUE_ACTIVITY
+                    - RESOURCE_ACTIVITY
+                    - SCHEDULED_JOB_ACTIVITY
+                    - SECURITY_FINDING
+                    - ACCOUNT_CHANGE
+                    - AUTHENTICATION
+                    - AUTHORIZATION
+                    - ENTITY_MANAGEMENT_AUDIT
+                    - DHCP_ACTIVITY
+                    - NETWORK_ACTIVITY
+                    - DNS_ACTIVITY
+                    - FTP_ACTIVITY
+                    - HTTP_ACTIVITY
+                    - RDP_ACTIVITY
+                    - SMB_ACTIVITY
+                    - SSH_ACTIVITY
+                    - CLOUD_API
+                    - CONTAINER_LIFECYCLE
+                    - DATABASE_LIFECYCLE
+                    - CONFIG_STATE
+                    - CLOUD_STORAGE
+                    - INVENTORY_INFO
+                    - RFB_ACTIVITY
+                    - SMTP_ACTIVITY
+                    - VIRTUAL_MACHINE_ACTIVITY
+                glueInvocationRoleArn:
+                  description: '<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be used by the Glue crawler. The recommended IAM policies are:</p> <ul> <li> <p>The managed policy <code>AWSGlueServiceRole</code> </p> </li> <li> <p>A custom policy granting access to your Amazon S3 Data Lake</p> </li> </ul>'
+                  type: string
+                  pattern: '^arn:.*'
+                logProviderAccountId:
+                  description: The Amazon Web Services account ID of the custom source that will write logs and events into the Amazon S3 Data Lake.
+                  type: string
+                  pattern: ^\d+$
+                  minLength: 12
+                  maxLength: 12
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/datalake:
+    post:
+      operationId: CreateDatalake
+      description: '<p>Initializes an Amazon Security Lake instance with the provided (or default) configuration. You can enable Security Lake in Amazon Web Services Regions with customized settings before enabling log collection in Regions. You can either use the <code>enableAll</code> parameter to specify all Regions or specify the Regions where you want to enable Security Lake. To specify particular Regions, use the <code>Regions</code> parameter and then configure these Regions using the <code>configurations</code> parameter. If you have already enabled Security Lake in a Region when you call this command, the command will update the Region if you provide new configuration parameters. If you have not already enabled Security Lake in the Region when you call this API, it will set up the data lake in the Region with the specified configurations.</p> <p>When you enable Security Lake, it starts ingesting security data after the <code>CreateAwsLogSource</code> call. This includes ingesting security data from sources, storing data, and making data accessible to subscribers. Security Lake also enables all the existing settings and resources that it stores or maintains for your Amazon Web Services account in the current Region, including security log and event data. For more information, see the <a href="https://docs.aws.amazon.com/security-lake/latest/userguide/what-is-security-lake.html">Amazon Security Lake User Guide</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDatalakeResponse'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                configurations:
+                  description: Specify the Region or Regions that will contribute data to the rollup region.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/LakeConfigurationRequest'
+                enableAll:
+                  description: Enable Security Lake in all Regions.
+                  type: boolean
+                metaStoreManagerRoleArn:
+                  description: The Amazon Resource Name (ARN) used to create and update the Glue table. This table contains partitions generated by the ingestion and normalization of Amazon Web Services log sources and custom sources.
+                  type: string
+                  pattern: '^arn:.*'
+                regions:
+                  description: 'Enable Security Lake in the specified Regions. To enable Security Lake in specific Amazon Web Services Regions, such as us-east-1 or ap-northeast-3, provide the Region codes. For a list of Region codes, see <a href="https://docs.aws.amazon.com/general/latest/gr/securitylake.html">Amazon Security Lake endpoints</a> in the Amazon Web Services General Reference.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Region'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteDatalake
+      description: '<p>When you delete Amazon Security Lake from your account, Security Lake is disabled in all Amazon Web Services Regions. Also, this API automatically takes steps to remove the account from Security Lake . </p> <p>This operation disables security data collection from sources, deletes data stored, and stops making data accessible to subscribers. Security Lake also deletes all the existing settings and resources that it stores or maintains for your Amazon Web Services account in the current Region, including security log and event data. The <code>DeleteDatalake</code> operation does not delete the Amazon S3 bucket, which is owned by your Amazon Web Services account. For more information, see the <a href="https://docs.aws.amazon.com/security-lake/latest/userguide/disable-security-lake.html">Amazon Security Lake User Guide</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDatalakeResponse'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters: []
+    get:
+      operationId: GetDatalake
+      description: 'Retrieves the Amazon Security Lake configuration object for the specified Amazon Web Services account ID. You can use the <code>GetDatalake</code> API to know whether Security Lake is enabled for the current Region. This API does not take input parameters. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDatalakeResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+      parameters: []
+    put:
+      operationId: UpdateDatalake
+      description: 'Specifies where to store your security data and for how long. You can add a rollup Region to consolidate data from multiple Amazon Web Services Regions. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDatalakeResponse'
+        '480':
+          description: EventBridgeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventBridgeException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - configurations
+              properties:
+                configurations:
+                  description: Specify the Region or Regions that will contribute data to the rollup region.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/LakeConfigurationRequest'
+  /v1/datalake/autoenable:
+    post:
+      operationId: CreateDatalakeAutoEnable
+      description: Automatically enables Amazon Security Lake for new member accounts in your organization. Security Lake is not automatically enabled for any existing member accounts in your organization.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDatalakeAutoEnableResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - configurationForNewAccounts
+              properties:
+                configurationForNewAccounts:
+                  description: 'Enable Security Lake with the specified configuration settings to begin collecting security data for new accounts in your organization. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AutoEnableNewRegionConfiguration'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetDatalakeAutoEnable
+      description: Retrieves the configuration that will be automatically set up for accounts added to the organization after the organization has onboarded to Amazon Security Lake. This API does not take input parameters.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDatalakeAutoEnableResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+      parameters: []
+  /v1/datalake/delegate:
+    post:
+      operationId: CreateDatalakeDelegatedAdmin
+      description: Designates the Amazon Security Lake delegated administrator account for the organization. This API can only be called by the organization management account. The organization management account cannot be the delegated administrator account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDatalakeDelegatedAdminResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - account
+              properties:
+                account:
+                  description: The Amazon Web Services account ID of the Security Lake delegated administrator.
+                  type: string
+                  pattern: '^[\\\w\-_:/.@=+]*$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/datalake/exceptions/subscription:
+    post:
+      operationId: CreateDatalakeExceptionsSubscription
+      description: Creates the specified notification subscription in Amazon Security Lake for the organization you specify.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDatalakeExceptionsSubscriptionResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - notificationEndpoint
+                - subscriptionProtocol
+              properties:
+                notificationEndpoint:
+                  description: The Amazon Web Services account where you want to receive exception notifications.
+                  type: string
+                  pattern: '^[\\\w\-_:/.@=+]*$'
+                subscriptionProtocol:
+                  description: 'The subscription protocol to which exception notifications are posted. '
+                  type: string
+                  enum:
+                    - HTTP
+                    - HTTPS
+                    - EMAIL
+                    - EMAIL_JSON
+                    - SMS
+                    - SQS
+                    - LAMBDA
+                    - APP
+                    - FIREHOSE
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteDatalakeExceptionsSubscription
+      description: Deletes the specified notification subscription in Amazon Security Lake for the organization you specify.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDatalakeExceptionsSubscriptionResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+      parameters: []
+    get:
+      operationId: GetDatalakeExceptionsSubscription
+      description: Retrieves the details of exception notifications for the account in Amazon Security Lake.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDatalakeExceptionsSubscriptionResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+      parameters: []
+    put:
+      operationId: UpdateDatalakeExceptionsSubscription
+      description: Updates the specified notification subscription in Amazon Security Lake for the organization you specify.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDatalakeExceptionsSubscriptionResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - notificationEndpoint
+                - subscriptionProtocol
+              properties:
+                notificationEndpoint:
+                  description: The account that is subscribed to receive exception notifications.
+                  type: string
+                  pattern: '^[\\\w\-_:/.@=+]*$'
+                subscriptionProtocol:
+                  description: 'The subscription protocol to which exception messages are posted. '
+                  type: string
+                  enum:
+                    - HTTP
+                    - HTTPS
+                    - EMAIL
+                    - EMAIL_JSON
+                    - SMS
+                    - SQS
+                    - LAMBDA
+                    - APP
+                    - FIREHOSE
+  /v1/subscribers:
+    post:
+      operationId: CreateSubscriber
+      description: Creates a subscription permission for accounts that are already enabled in Amazon Security Lake. You can create a subscriber with access to data in the current Amazon Web Services Region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSubscriberResponse'
+        '480':
+          description: ConflictSubscriptionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictSubscriptionException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: BucketNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BucketNotFoundException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+        '487':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - accountId
+                - externalId
+                - sourceTypes
+                - subscriberName
+              properties:
+                accessTypes:
+                  description: The Amazon S3 or Lake Formation access type.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AccessType'
+                accountId:
+                  description: The Amazon Web Services account ID used to access your data.
+                  type: string
+                  pattern: ^\d+$
+                  minLength: 12
+                  maxLength: 12
+                externalId:
+                  description: The external ID of the subscriber. This lets the user that is assuming the role assert the circumstances in which they are operating. It also provides a way for the account owner to permit the role to be assumed only under specific circumstances.
+                  type: string
+                  pattern: '^[\\\w\-_:/.@=+]*$'
+                sourceTypes:
+                  description: The supported Amazon Web Services from which logs and events are collected. Security Lake supports log and event collection for natively supported Amazon Web Services.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SourceType'
+                subscriberDescription:
+                  description: 'The description for your subscriber account in Security Lake. '
+                  type: string
+                  pattern: '^[\\\w\s\-_:/,.@=+]*$'
+                subscriberName:
+                  description: The name of your Security Lake subscriber account.
+                  type: string
+                  minLength: 0
+                  maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListSubscribers
+      description: List all subscribers for the specific Amazon Security Lake account ID. You can retrieve a list of subscriptions associated with a specific organization or Amazon Web Services account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSubscribersResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+        '485':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of accounts for which the configuration is displayed.
+          schema:
+            type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: 'If nextToken is returned, there are more results available. You can repeat the call using the returned token to retrieve the next page.'
+          schema:
+            type: string
+  '/subscription-notifications/{subscriptionId}':
+    post:
+      operationId: CreateSubscriptionNotificationConfiguration
+      description: Notifies the subscriber when new data is written to the data lake for the sources that the subscriber consumes in Security Lake.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSubscriptionNotificationConfigurationResponse'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+        '486':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+      parameters:
+        - name: subscriptionId
+          in: path
+          required: true
+          description: The subscription ID for the notification subscription/
+          schema:
+            type: string
+            pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                createSqs:
+                  description: Create an Amazon Simple Queue Service queue.
+                  type: boolean
+                httpsApiKeyName:
+                  description: The key name for the notification subscription.
+                  type: string
+                httpsApiKeyValue:
+                  description: The key value for the notification subscription.
+                  type: string
+                httpsMethod:
+                  description: 'The HTTPS method used for the notification subscription. '
+                  type: string
+                  enum:
+                    - POST
+                    - PUT
+                roleArn:
+                  description: The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role that you created.
+                  type: string
+                  pattern: '^arn:.*'
+                subscriptionEndpoint:
+                  description: 'The subscription endpoint in Security Lake. If you prefer notification with an HTTPs endpoint, populate this field.'
+                  type: string
+                  pattern: '^(arn:aws:.+$|https?://.+$)'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteSubscriptionNotificationConfiguration
+      description: Deletes the specified notification subscription in Amazon Security Lake for the organization you specify.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSubscriptionNotificationConfigurationResponse'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+        '486':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+      parameters:
+        - name: subscriptionId
+          in: path
+          required: true
+          description: The ID of the Security Lake subscriber account.
+          schema:
+            type: string
+            pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+    put:
+      operationId: UpdateSubscriptionNotificationConfiguration
+      description: Creates a new subscription notification or adds the existing subscription notification setting for the specified subscription ID.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSubscriptionNotificationConfigurationResponse'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+        '486':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+      parameters:
+        - name: subscriptionId
+          in: path
+          required: true
+          description: 'The subscription ID for which the subscription notification is specified. '
+          schema:
+            type: string
+            pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                createSqs:
+                  description: Create a new subscription notification for the specified subscription ID in Amazon Security Lake.
+                  type: boolean
+                httpsApiKeyName:
+                  description: The key name for the subscription notification.
+                  type: string
+                httpsApiKeyValue:
+                  description: The key value for the subscription notification.
+                  type: string
+                httpsMethod:
+                  description: 'The HTTPS method used for the subscription notification. '
+                  type: string
+                  enum:
+                    - POST
+                    - PUT
+                roleArn:
+                  description: 'The Amazon Resource Name (ARN) specifying the role of the subscriber. '
+                  type: string
+                  pattern: '^arn:.*'
+                subscriptionEndpoint:
+                  description: The subscription endpoint in Security Lake.
+                  type: string
+                  pattern: '^(arn:aws:.+$|https?://.+$)'
+  /v1/logsources/aws/delete:
+    post:
+      operationId: DeleteAwsLogSource
+      description: '<p>Removes a natively supported Amazon Web Service as an Amazon Security Lake source. When you remove the source, Security Lake stops collecting data from that source, and subscribers can no longer consume new data from the source. Subscribers can still consume data that Security Lake collected from the source before disablement.</p> <p>You can choose any source type in any Amazon Web Services Region for either accounts that are part of a trusted organization or standalone accounts. At least one of the three dimensions is a mandatory input to this API. However, you can supply any combination of the three dimensions to this API. </p> <p>By default, a dimension refers to the entire set. This is overridden when you supply any one of the inputs. For instance, when you do not specify members, the API disables all Security Lake member accounts for sources. Similarly, when you do not specify Regions, Security Lake is disabled for all the Regions where Security Lake is available as a service.</p> <p>When you don''t provide a dimension, Security Lake assumes that the missing dimension refers to the entire set. For example, if you don''t provide specific accounts, the API applies to the entire set of accounts in your organization.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAwsLogSourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - inputOrder
+              properties:
+                disableAllDimensions:
+                  description: Removes the specific Amazon Web Services sources from specific accounts and specific Regions.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TwoDimensionsMap'
+                disableSingleDimension:
+                  description: Removes all Amazon Web Services sources from specific accounts or Regions.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SafeString'
+                disableTwoDimensions:
+                  description: Remove a specific Amazon Web Services source from specific accounts or Regions.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/ValueSet'
+                inputOrder:
+                  description: 'This is a mandatory input. Specify the input order to disable dimensions in Security Lake, namely Region (Amazon Web Services Region code, source type, and member (account ID of a specific Amazon Web Services account). '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Dimension'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/logsources/custom#customSourceName:
+    delete:
+      operationId: DeleteCustomLogSource
+      description: Removes a custom log source from Amazon Security Lake.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCustomLogSourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ConflictSourceNamesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictSourceNamesException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: BucketNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BucketNotFoundException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+      parameters:
+        - name: customSourceName
+          in: query
+          required: true
+          description: The custom source name for the custom log source.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/datalake/autoenable/delete:
+    post:
+      operationId: DeleteDatalakeAutoEnable
+      description: '<p>Automatically deletes Amazon Security Lake to stop collecting security data. When you delete Amazon Security Lake from your account, Security Lake is disabled in all Regions. Also, this API automatically takes steps to remove the account from Security Lake . </p> <p>This operation disables security data collection from sources, deletes data stored, and stops making data accessible to subscribers. Security Lake also deletes all the existing settings and resources that it stores or maintains for your Amazon Web Services account in the current Region, including security log and event data. The <code>DeleteDatalake</code> operation does not delete the Amazon S3 bucket, which is owned by your Amazon Web Services account. For more information, see the <a href="https://docs.aws.amazon.com/security-lake/latest/userguide/disable-security-lake.html">Amazon Security Lake User Guide</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDatalakeAutoEnableResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - removeFromConfigurationForNewAccounts
+              properties:
+                removeFromConfigurationForNewAccounts:
+                  description: 'Delete Amazon Security Lake with the specified configuration settings to stop ingesting security data for new accounts in Security Lake. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AutoEnableNewRegionConfiguration'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/datalake/delegate/{account}':
+    delete:
+      operationId: DeleteDatalakeDelegatedAdmin
+      description: Deletes the Amazon Security Lake delegated administrator account for the organization. This API can only be called by the organization management account. The organization management account cannot be the delegated administrator account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDatalakeDelegatedAdminResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: account
+          in: path
+          required: true
+          description: The account ID the Security Lake delegated administrator.
+          schema:
+            type: string
+            pattern: '^[\\\w\-_:/.@=+]*$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/subscribers#id:
+    delete:
+      operationId: DeleteSubscriber
+      description: Deletes the subscription permission for accounts that are already enabled in Amazon Security Lake. You can delete a subscriber and remove access to data in the current Amazon Web Services Region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSubscriberResponse'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: BucketNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BucketNotFoundException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+        '487':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: 'A value created by Security Lake that uniquely identifies your <code>DeleteSubscriber</code> API request. '
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/datalake/exceptions/expiry:
+    get:
+      operationId: GetDatalakeExceptionsExpiry
+      description: 'Retrieves the expiration period and time-to-live (TTL) for which the exception message will remain. Exceptions are stored by default, for 2 weeks from when a record was created in Amazon Security Lake. This API does not take input parameters.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDatalakeExceptionsExpiryResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateDatalakeExceptionsExpiry
+      description: 'Update the expiration period for the exception message to your preferred time, and control the time-to-live (TTL) for the exception message to remain. Exceptions are stored by default for 2 weeks from when a record was created in Amazon Security Lake. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDatalakeExceptionsExpiryResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - exceptionMessageExpiry
+              properties:
+                exceptionMessageExpiry:
+                  description: The time-to-live (TTL) for the exception message to remain.
+                  type: integer
+                  minimum: 1
+  /v1/datalake/status:
+    post:
+      operationId: GetDatalakeStatus
+      description: 'Retrieves a snapshot of the current Region, including whether Amazon Security Lake is enabled for those accounts and which sources Security Lake is collecting data from. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDatalakeStatusResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+      parameters:
+        - name: maxAccountResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accountSet:
+                  description: 'The Amazon Web Services account ID for which a static snapshot of the current Amazon Web Services Region, including enabled accounts and log sources, is retrieved.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SafeString'
+                maxAccountResults:
+                  description: 'The maximum limit of accounts for which the static snapshot of the current Region, including enabled accounts and log sources, is retrieved.'
+                  type: integer
+                nextToken:
+                  description: <p>Lists if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged. </p> <p>Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.</p>
+                  type: string
+                  pattern: '^[\\\w\-_:/.@=+]*$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/subscribers/{id}':
+    get:
+      operationId: GetSubscriber
+      description: Retrieves the subscription information for the specified subscription ID. You can get information about a specific subscriber.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSubscriberResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+        '484':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A value created by Amazon Security Lake that uniquely identifies your <code>GetSubscriber</code> API request.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateSubscriber
+      description: 'Updates an existing subscription for the given Amazon Security Lake account ID. You can update a subscriber by changing the sources that the subscriber consumes data from. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSubscriberResponse'
+        '480':
+          description: ConflictSubscriptionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictSubscriptionException'
+        '481':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+        '486':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: 'A value created by Security Lake that uniquely identifies your subscription. '
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sourceTypes
+              properties:
+                externalId:
+                  description: The external ID of the Security Lake account.
+                  type: string
+                  pattern: '^[\\\w\-_:/.@=+]*$'
+                sourceTypes:
+                  description: 'The supported Amazon Web Services from which logs and events are collected. For the list of supported Amazon Web Services, see the <a href="https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html">Amazon Security Lake User Guide</a>.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SourceType'
+                subscriberDescription:
+                  description: The description of the Security Lake account subscriber.
+                  type: string
+                  pattern: '^[\\\w\s\-_:/,.@=+]*$'
+                subscriberName:
+                  description: 'The name of the Security Lake account subscriber. '
+                  type: string
+                  pattern: '^[\\\w\-_:/.@=+]*$'
+                  minLength: 0
+                  maxLength: 64
+  /v1/datalake/exceptions:
+    post:
+      operationId: ListDatalakeExceptions
+      description: Lists the Amazon Security Lake exceptions that you can use to find the source of problems and fix them.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDatalakeExceptionsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+      parameters:
+        - name: maxFailures
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                maxFailures:
+                  description: List the maximum number of failures in Security Lake.
+                  type: integer
+                nextToken:
+                  description: <p>List if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged. </p> <p>Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.</p>
+                  type: string
+                  pattern: '^[\\\w\-_:/.@=+]*$'
+                regionSet:
+                  description: List the Amazon Web Services Regions from which exceptions are retrieved.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Region'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/logsources/list:
+    post:
+      operationId: ListLogSources
+      description: 'Retrieves the log sources in the current Amazon Web Services Region. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListLogSourcesResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccountNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountNotFoundException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                inputOrder:
+                  description: 'Lists the log sources in input order, namely Region, source type, and member account.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Dimension'
+                listAllDimensions:
+                  description: List the view of log sources for enabled Amazon Security Lake accounts for specific Amazon Web Services sources from specific accounts and specific Regions.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TwoDimensionsMap'
+                listSingleDimension:
+                  description: List the view of log sources for enabled Security Lake accounts for all Amazon Web Services sources from specific accounts or specific Regions.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SafeString'
+                listTwoDimensions:
+                  description: Lists the view of log sources for enabled Security Lake accounts for specific Amazon Web Services sources from specific accounts or specific Regions.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/ValueSet'
+                maxResults:
+                  description: The maximum number of accounts for which the log sources are displayed.
+                  type: integer
+                nextToken:
+                  description: 'If nextToken is returned, there are more results available. You can repeat the call using the returned token to retrieve the next page.'
+                  type: string
+                  pattern: '^[\\\w\-_:/.@=+]*$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateAwsLogSourceResponse:
+      type: object
+      properties:
+        failed:
+          allOf:
+            - $ref: '#/components/schemas/AccountList'
+            - description: Lists all accounts in which enabling a natively supported Amazon Web Service as a Security Lake source failed. The failure occurred as these accounts are not part of an organization.
+        processing:
+          allOf:
+            - $ref: '#/components/schemas/AccountList'
+            - description: Lists the accounts that are in the process of enabling a natively supported Amazon Web Service as a Security Lake source.
+    TwoDimensionsMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/ValueSet'
+    SafeString:
+      type: string
+      pattern: '^[\\\w\-_:/.@=+]*$'
+    ValueSet:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    Dimension:
+      type: string
+      enum:
+        - REGION
+        - SOURCE_TYPE
+        - MEMBER
+    InternalServerException: {}
+    ValidationException: {}
+    S3Exception: {}
+    AccessDeniedException: {}
+    ResourceNotFoundException: {}
+    AccountNotFoundException: {}
+    CreateCustomLogSourceResponse:
+      type: object
+      required:
+        - customDataLocation
+        - glueCrawlerName
+        - glueDatabaseName
+        - glueTableName
+        - logProviderAccessRoleArn
+      properties:
+        customDataLocation:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The location of the partition in the Amazon S3 bucket for Security Lake.
+        glueCrawlerName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Glue crawler.
+        glueDatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Glue database where results are written, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.'
+        glueTableName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The table name of the Glue crawler.
+        logProviderAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The ARN of the IAM role to be used by the entity putting logs into your custom source partition. Security Lake will apply the correct access policies to this role, but you must first manually create the trust policy for this role. The IAM role name must start with the text ''Security Lake''. The IAM role must trust the <code>logProviderAccountId</code> to assume the role.'
+    ConflictSourceNamesException: {}
+    BucketNotFoundException: {}
+    CreateDatalakeResponse:
+      type: object
+      properties: {}
+    LakeConfigurationRequest:
+      type: object
+      properties:
+        encryptionKey:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The type of encryption key used by Amazon Security Lake to encrypt the Security Lake configuration object.
+        replicationDestinationRegions:
+          allOf:
+            - $ref: '#/components/schemas/RegionSet'
+            - description: '<p>Replication enables automatic, asynchronous copying of objects across Amazon S3 buckets. Amazon S3 buckets that are configured for object replication can be owned by the same Amazon Web Services account or by different accounts. You can replicate objects to a single destination bucket or to multiple destination buckets. The destination buckets can be in different Amazon Web Services Regions or within the same Region as the source bucket.</p> <p>Set up one or more rollup Regions by providing the Region or Regions that should contribute to the central rollup Region. </p>'
+        replicationRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: 'Replication settings for the Amazon S3 buckets. This parameter uses the Identity and Access Management (IAM) role you created that is managed by Security Lake, to ensure the replication setting is correct. '
+        retentionSettings:
+          allOf:
+            - $ref: '#/components/schemas/RetentionSettingList'
+            - description: 'Retention settings for the destination Amazon S3 buckets. '
+        tagsMap:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: 'A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value, both of which you define.'
+      description: Provides details of Amazon Security Lake configuration object.
+    Region:
+      type: string
+      enum:
+        - us-east-1
+        - us-west-2
+        - eu-central-1
+        - us-east-2
+        - eu-west-1
+        - ap-northeast-1
+        - ap-southeast-2
+    ServiceQuotaExceededException: {}
+    ConflictException: {}
+    ThrottlingException: {}
+    CreateDatalakeAutoEnableResponse:
+      type: object
+      properties: {}
+    AutoEnableNewRegionConfiguration:
+      type: object
+      required:
+        - region
+        - sources
+      properties:
+        region:
+          allOf:
+            - $ref: '#/components/schemas/Region'
+            - description: The Amazon Web Services Regions where Security Lake is automatically enabled.
+        sources:
+          allOf:
+            - $ref: '#/components/schemas/AwsSourceTypeList'
+            - description: The Amazon Web Services sources that are automatically enabled in Security Lake.
+      description: Automatically enable new organization accounts as member accounts from an Amazon Security Lake administrator account.
+    CreateDatalakeDelegatedAdminResponse:
+      type: object
+      properties: {}
+    CreateDatalakeExceptionsSubscriptionResponse:
+      type: object
+      properties: {}
+    CreateSubscriberResponse:
+      type: object
+      required:
+        - subscriptionId
+      properties:
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: 'The Amazon Resource Name (ARN) created by you to provide to the subscriber. For more information about ARNs and how to use them in policies, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html">IAM identifiers in the Identity and Access Management (IAM) User Guide</a>. .'
+        s3BucketArn:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketArn'
+            - description: 'The ARN for the Amazon S3 bucket. '
+        snsArn:
+          allOf:
+            - $ref: '#/components/schemas/SnsTopicArn'
+            - description: The ARN for the Amazon Simple Notification Service.
+        subscriptionId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The <code>subscriptionId</code> created by the <code>CreateSubscriber</code> API call.
+    AccessType:
+      type: string
+      enum:
+        - LAKEFORMATION
+        - S3
+    SourceType:
+      type: object
+      properties:
+        awsSourceType:
+          allOf:
+            - $ref: '#/components/schemas/AwsLogSourceType'
+            - description: 'Amazon Security Lake supports log and event collection for natively supported Amazon Web Services. '
+        customSourceType:
+          allOf:
+            - $ref: '#/components/schemas/CustomSourceType'
+            - description: 'Amazon Security Lake supports custom source types. For a detailed list, see the Amazon Security Lake User Guide.'
+      description: 'The supported source types from which logs and events are collected in Amazon Security Lake. For the list of supported Amazon Web Services, see the <a href="https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html">Amazon Security Lake User Guide</a>.'
+    ConflictSubscriptionException: {}
+    InvalidInputException: {}
+    CreateSubscriptionNotificationConfigurationResponse:
+      type: object
+      properties:
+        queueArn:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: Returns the Amazon Resource Name (ARN) of the queue.
+    ConcurrentModificationException: {}
+    DeleteAwsLogSourceResponse:
+      type: object
+      properties:
+        failed:
+          allOf:
+            - $ref: '#/components/schemas/AccountList'
+            - description: Deletion of the Amazon Web Services sources failed as the account is not a part of the organization.
+        processing:
+          allOf:
+            - $ref: '#/components/schemas/AccountList'
+            - description: Deletion of the Amazon Web Services sources is in progress.
+    DeleteCustomLogSourceResponse:
+      type: object
+      required:
+        - customDataLocation
+      properties:
+        customDataLocation:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The location of the partition in the Amazon S3 bucket for Security Lake.
+    DeleteDatalakeResponse:
+      type: object
+      properties: {}
+    DeleteDatalakeAutoEnableResponse:
+      type: object
+      properties: {}
+    DeleteDatalakeDelegatedAdminResponse:
+      type: object
+      properties: {}
+    DeleteDatalakeExceptionsSubscriptionResponse:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: 'Retrieves the status of the delete Security Lake operation for an account. '
+    DeleteSubscriberResponse:
+      type: object
+      properties: {}
+    DeleteSubscriptionNotificationConfigurationResponse:
+      type: object
+      properties: {}
+    GetDatalakeResponse:
+      type: object
+      required:
+        - configurations
+      properties:
+        configurations:
+          allOf:
+            - $ref: '#/components/schemas/LakeConfigurationResponseMap'
+            - description: 'Retrieves the Security Lake configuration object. '
+    GetDatalakeAutoEnableResponse:
+      type: object
+      required:
+        - autoEnableNewAccounts
+      properties:
+        autoEnableNewAccounts:
+          allOf:
+            - $ref: '#/components/schemas/AutoEnableNewRegionConfigurationList'
+            - description: The configuration for new accounts.
+    GetDatalakeExceptionsExpiryResponse:
+      type: object
+      required:
+        - exceptionMessageExpiry
+      properties:
+        exceptionMessageExpiry:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The expiration period and time-to-live (TTL).
+    GetDatalakeExceptionsSubscriptionResponse:
+      type: object
+      required:
+        - protocolAndNotificationEndpoint
+      properties:
+        protocolAndNotificationEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/ProtocolAndNotificationEndpoint'
+            - description: Retrieves the exception notification subscription information.
+    GetDatalakeStatusResponse:
+      type: object
+      required:
+        - accountSourcesList
+      properties:
+        accountSourcesList:
+          allOf:
+            - $ref: '#/components/schemas/AccountSourcesList'
+            - description: The list of enabled accounts and enabled sources.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: <p>Lists if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged. </p> <p>Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.</p>
+    GetSubscriberResponse:
+      type: object
+      properties:
+        subscriber:
+          allOf:
+            - $ref: '#/components/schemas/SubscriberResource'
+            - description: The subscription information for the specified subscription ID.
+    ListDatalakeExceptionsResponse:
+      type: object
+      required:
+        - nonRetryableFailures
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: <p>List if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged. </p> <p>Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.</p>
+        nonRetryableFailures:
+          allOf:
+            - $ref: '#/components/schemas/FailuresResponseList'
+            - description: Lists the failures that cannot be retried in the current Region.
+    ListLogSourcesResponse:
+      type: object
+      required:
+        - regionSourceTypesAccountsList
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'If nextToken is returned, there are more results available. You can repeat the call using the returned token to retrieve the next page.'
+        regionSourceTypesAccountsList:
+          allOf:
+            - $ref: '#/components/schemas/RegionSourceTypesAccountsList'
+            - description: Lists the log sources by Regions for enabled Security Lake accounts.
+    ListSubscribersResponse:
+      type: object
+      required:
+        - subscribers
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'If nextToken is returned, there are more results available. You can repeat the call using the returned token to retrieve the next page.'
+        subscribers:
+          allOf:
+            - $ref: '#/components/schemas/SubscriberList'
+            - description: The subscribers available for the specified Security Lake account ID.
+    UpdateDatalakeResponse:
+      type: object
+      properties: {}
+    EventBridgeException: {}
+    UpdateDatalakeExceptionsExpiryResponse:
+      type: object
+      properties: {}
+    UpdateDatalakeExceptionsSubscriptionResponse:
+      type: object
+      properties: {}
+    UpdateSubscriberResponse:
+      type: object
+      properties:
+        subscriber:
+          allOf:
+            - $ref: '#/components/schemas/SubscriberResource'
+            - description: The account of the subscriber.
+    UpdateSubscriptionNotificationConfigurationResponse:
+      type: object
+      properties:
+        queueArn:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: Returns the ARN of the queue.
+    AccessTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccessType'
+    String:
+      type: string
+    AccountList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    OcsfEventClass:
+      type: string
+      enum:
+        - ACCESS_ACTIVITY
+        - FILE_ACTIVITY
+        - KERNEL_ACTIVITY
+        - KERNEL_EXTENSION
+        - MEMORY_ACTIVITY
+        - MODULE_ACTIVITY
+        - PROCESS_ACTIVITY
+        - REGISTRY_KEY_ACTIVITY
+        - REGISTRY_VALUE_ACTIVITY
+        - RESOURCE_ACTIVITY
+        - SCHEDULED_JOB_ACTIVITY
+        - SECURITY_FINDING
+        - ACCOUNT_CHANGE
+        - AUTHENTICATION
+        - AUTHORIZATION
+        - ENTITY_MANAGEMENT_AUDIT
+        - DHCP_ACTIVITY
+        - NETWORK_ACTIVITY
+        - DNS_ACTIVITY
+        - FTP_ACTIVITY
+        - HTTP_ACTIVITY
+        - RDP_ACTIVITY
+        - SMB_ACTIVITY
+        - SSH_ACTIVITY
+        - CLOUD_API
+        - CONTAINER_LIFECYCLE
+        - DATABASE_LIFECYCLE
+        - CONFIG_STATE
+        - CLOUD_STORAGE
+        - INVENTORY_INFO
+        - RFB_ACTIVITY
+        - SMTP_ACTIVITY
+        - VIRTUAL_MACHINE_ACTIVITY
+    LogsStatusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LogsStatus'
+    AccountSources:
+      type: object
+      required:
+        - account
+        - sourceType
+      properties:
+        account:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the Security Lake account for which logs are collected.
+        eventClass:
+          allOf:
+            - $ref: '#/components/schemas/OcsfEventClass'
+            - description: Initializes a new instance of the Event class.
+        logsStatus:
+          allOf:
+            - $ref: '#/components/schemas/LogsStatusList'
+            - description: The log status for the Security Lake account.
+        sourceType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The supported Amazon Web Services from which logs and events are collected. Amazon Security Lake supports log and event collection for natively supported Amazon Web Services. '
+      description: 'Amazon Security Lake collects logs and events from supported Amazon Web Services and custom sources. For the list of supported Amazon Web Services, see the <a href="https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html">Amazon Security Lake User Guide</a>.'
+    AccountSourcesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccountSources'
+    AllDimensionsMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TwoDimensionsMap'
+    AwsSourceTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsLogSourceType'
+    AutoEnableNewRegionConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AutoEnableNewRegionConfiguration'
+    AwsAccountId:
+      type: string
+      pattern: ^\d+$
+      minLength: 12
+      maxLength: 12
+    AwsLogSourceType:
+      type: string
+      enum:
+        - ROUTE53
+        - VPC_FLOW
+        - CLOUD_TRAIL
+        - SH_FINDINGS
+    Boolean:
+      type: boolean
+    InputSet:
+      type: array
+      items:
+        $ref: '#/components/schemas/SafeString'
+    DimensionSet:
+      type: array
+      items:
+        $ref: '#/components/schemas/Dimension'
+    CreateAwsLogSourceRequest:
+      type: object
+      required:
+        - inputOrder
+      title: CreateAwsLogSourceRequest
+      properties:
+        enableAllDimensions:
+          allOf:
+            - $ref: '#/components/schemas/AllDimensionsMap'
+            - description: Enables data collection from specific Amazon Web Services sources in all specific accounts and specific Regions.
+        enableSingleDimension:
+          allOf:
+            - $ref: '#/components/schemas/InputSet'
+            - description: Enables data collection from all Amazon Web Services sources in specific accounts or Regions.
+        enableTwoDimensions:
+          allOf:
+            - $ref: '#/components/schemas/TwoDimensionsMap'
+            - description: Enables data collection from specific Amazon Web Services sources in specific accounts or Regions.
+        inputOrder:
+          allOf:
+            - $ref: '#/components/schemas/DimensionSet'
+            - description: 'Specifies the input order to enable dimensions in Security Lake, namely Region, source type, and member account.'
+    CustomSourceType:
+      type: string
+      pattern: '^[\\\w\-_:/.]*$'
+    RoleArn:
+      type: string
+      pattern: '^arn:.*'
+    CreateCustomLogSourceRequest:
+      type: object
+      required:
+        - customSourceName
+        - eventClass
+        - glueInvocationRoleArn
+        - logProviderAccountId
+      title: CreateCustomLogSourceRequest
+      properties:
+        customSourceName:
+          allOf:
+            - $ref: '#/components/schemas/CustomSourceType'
+            - description: The name for a third-party custom source. This must be a Regionally unique value.
+        eventClass:
+          allOf:
+            - $ref: '#/components/schemas/OcsfEventClass'
+            - description: The Open Cybersecurity Schema Framework (OCSF) event class which describes the type of data that the custom source will send to Security Lake.
+        glueInvocationRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: '<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be used by the Glue crawler. The recommended IAM policies are:</p> <ul> <li> <p>The managed policy <code>AWSGlueServiceRole</code> </p> </li> <li> <p>A custom policy granting access to your Amazon S3 Data Lake</p> </li> </ul>'
+        logProviderAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AwsAccountId'
+            - description: The Amazon Web Services account ID of the custom source that will write logs and events into the Amazon S3 Data Lake.
+    CreateDatalakeAutoEnableRequest:
+      type: object
+      required:
+        - configurationForNewAccounts
+      title: CreateDatalakeAutoEnableRequest
+      properties:
+        configurationForNewAccounts:
+          allOf:
+            - $ref: '#/components/schemas/AutoEnableNewRegionConfigurationList'
+            - description: 'Enable Security Lake with the specified configuration settings to begin collecting security data for new accounts in your organization. '
+    CreateDatalakeDelegatedAdminRequest:
+      type: object
+      required:
+        - account
+      title: CreateDatalakeDelegatedAdminRequest
+      properties:
+        account:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: The Amazon Web Services account ID of the Security Lake delegated administrator.
+    SubscriptionProtocolType:
+      type: string
+      enum:
+        - HTTP
+        - HTTPS
+        - EMAIL
+        - EMAIL_JSON
+        - SMS
+        - SQS
+        - LAMBDA
+        - APP
+        - FIREHOSE
+    CreateDatalakeExceptionsSubscriptionRequest:
+      type: object
+      required:
+        - notificationEndpoint
+        - subscriptionProtocol
+      title: CreateDatalakeExceptionsSubscriptionRequest
+      properties:
+        notificationEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: The Amazon Web Services account where you want to receive exception notifications.
+        subscriptionProtocol:
+          allOf:
+            - $ref: '#/components/schemas/SubscriptionProtocolType'
+            - description: 'The subscription protocol to which exception notifications are posted. '
+    LakeConfigurationRequestMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/LakeConfigurationRequest'
+    RegionSet:
+      type: array
+      items:
+        $ref: '#/components/schemas/Region'
+    CreateDatalakeRequest:
+      type: object
+      title: CreateDatalakeRequest
+      properties:
+        configurations:
+          allOf:
+            - $ref: '#/components/schemas/LakeConfigurationRequestMap'
+            - description: Specify the Region or Regions that will contribute data to the rollup region.
+        enableAll:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Enable Security Lake in all Regions.
+        metaStoreManagerRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) used to create and update the Glue table. This table contains partitions generated by the ingestion and normalization of Amazon Web Services log sources and custom sources.
+        regions:
+          allOf:
+            - $ref: '#/components/schemas/RegionSet'
+            - description: 'Enable Security Lake in the specified Regions. To enable Security Lake in specific Amazon Web Services Regions, such as us-east-1 or ap-northeast-3, provide the Region codes. For a list of Region codes, see <a href="https://docs.aws.amazon.com/general/latest/gr/securitylake.html">Amazon Security Lake endpoints</a> in the Amazon Web Services General Reference.'
+    SourceTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SourceType'
+    DescriptionString:
+      type: string
+      pattern: '^[\\\w\s\-_:/,.@=+]*$'
+    CreateSubscriberRequestSubscriberNameString:
+      type: string
+      minLength: 0
+      maxLength: 64
+    CreateSubscriberRequest:
+      type: object
+      required:
+        - accountId
+        - externalId
+        - sourceTypes
+        - subscriberName
+      title: CreateSubscriberRequest
+      properties:
+        accessTypes:
+          allOf:
+            - $ref: '#/components/schemas/AccessTypeList'
+            - description: The Amazon S3 or Lake Formation access type.
+        accountId:
+          allOf:
+            - $ref: '#/components/schemas/AwsAccountId'
+            - description: The Amazon Web Services account ID used to access your data.
+        externalId:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: The external ID of the subscriber. This lets the user that is assuming the role assert the circumstances in which they are operating. It also provides a way for the account owner to permit the role to be assumed only under specific circumstances.
+        sourceTypes:
+          allOf:
+            - $ref: '#/components/schemas/SourceTypeList'
+            - description: The supported Amazon Web Services from which logs and events are collected. Security Lake supports log and event collection for natively supported Amazon Web Services.
+        subscriberDescription:
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: 'The description for your subscriber account in Security Lake. '
+        subscriberName:
+          allOf:
+            - $ref: '#/components/schemas/CreateSubscriberRequestSubscriberNameString'
+            - description: The name of your Security Lake subscriber account.
+    S3BucketArn:
+      type: string
+    SnsTopicArn:
+      type: string
+    UUID:
+      type: string
+      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+    HttpsMethod:
+      type: string
+      enum:
+        - POST
+        - PUT
+    CreateSubscriptionNotificationConfigurationRequestSubscriptionEndpointString:
+      type: string
+      pattern: '^(arn:aws:.+$|https?://.+$)'
+    CreateSubscriptionNotificationConfigurationRequest:
+      type: object
+      title: CreateSubscriptionNotificationConfigurationRequest
+      properties:
+        createSqs:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Create an Amazon Simple Queue Service queue.
+        httpsApiKeyName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The key name for the notification subscription.
+        httpsApiKeyValue:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The key value for the notification subscription.
+        httpsMethod:
+          allOf:
+            - $ref: '#/components/schemas/HttpsMethod'
+            - description: 'The HTTPS method used for the notification subscription. '
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role that you created.
+        subscriptionEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/CreateSubscriptionNotificationConfigurationRequestSubscriptionEndpointString'
+            - description: 'The subscription endpoint in Security Lake. If you prefer notification with an HTTPs endpoint, populate this field.'
+    DeleteAwsLogSourceRequest:
+      type: object
+      required:
+        - inputOrder
+      title: DeleteAwsLogSourceRequest
+      properties:
+        disableAllDimensions:
+          allOf:
+            - $ref: '#/components/schemas/AllDimensionsMap'
+            - description: Removes the specific Amazon Web Services sources from specific accounts and specific Regions.
+        disableSingleDimension:
+          allOf:
+            - $ref: '#/components/schemas/InputSet'
+            - description: Removes all Amazon Web Services sources from specific accounts or Regions.
+        disableTwoDimensions:
+          allOf:
+            - $ref: '#/components/schemas/TwoDimensionsMap'
+            - description: Remove a specific Amazon Web Services source from specific accounts or Regions.
+        inputOrder:
+          allOf:
+            - $ref: '#/components/schemas/DimensionSet'
+            - description: 'This is a mandatory input. Specify the input order to disable dimensions in Security Lake, namely Region (Amazon Web Services Region code, source type, and member (account ID of a specific Amazon Web Services account). '
+    DeleteCustomLogSourceRequest:
+      type: object
+      title: DeleteCustomLogSourceRequest
+      properties: {}
+    DeleteDatalakeAutoEnableRequest:
+      type: object
+      required:
+        - removeFromConfigurationForNewAccounts
+      title: DeleteDatalakeAutoEnableRequest
+      properties:
+        removeFromConfigurationForNewAccounts:
+          allOf:
+            - $ref: '#/components/schemas/AutoEnableNewRegionConfigurationList'
+            - description: 'Delete Amazon Security Lake with the specified configuration settings to stop ingesting security data for new accounts in Security Lake. '
+    DeleteDatalakeDelegatedAdminRequest:
+      type: object
+      title: DeleteDatalakeDelegatedAdminRequest
+      properties: {}
+    DeleteDatalakeExceptionsSubscriptionRequest:
+      type: object
+      title: DeleteDatalakeExceptionsSubscriptionRequest
+      properties: {}
+    DeleteDatalakeRequest:
+      type: object
+      title: DeleteDatalakeRequest
+      properties: {}
+    DeleteSubscriberRequest:
+      type: object
+      title: DeleteSubscriberRequest
+      properties: {}
+    DeleteSubscriptionNotificationConfigurationRequest:
+      type: object
+      title: DeleteSubscriptionNotificationConfigurationRequest
+      properties: {}
+    EndpointProtocol:
+      type: string
+      enum:
+        - HTTPS
+        - SQS
+    SyntheticTimestamp_date_time:
+      type: string
+      format: date-time
+    Failures:
+      type: object
+      required:
+        - exceptionMessage
+        - remediation
+        - timestamp
+      properties:
+        exceptionMessage:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: List of all exception messages.
+        remediation:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: List of all remediation steps for failures.
+        timestamp:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'This error can occur if you configure the wrong timestamp format, or if the subset of entries used for validation had errors or missing values.'
+      description: List of all failures.
+    Failureslist:
+      type: array
+      items:
+        $ref: '#/components/schemas/Failures'
+    FailuresResponse:
+      type: object
+      properties:
+        failures:
+          allOf:
+            - $ref: '#/components/schemas/Failureslist'
+            - description: 'List of all failures. '
+        region:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: 'List of Amazon Web Services Regions where the failure occurred. '
+      description: 'Response element for actions that make changes, namely create, update, or delete actions. '
+    FailuresResponseList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FailuresResponse'
+    GetDatalakeAutoEnableRequest:
+      type: object
+      title: GetDatalakeAutoEnableRequest
+      properties: {}
+    GetDatalakeExceptionsExpiryRequest:
+      type: object
+      title: GetDatalakeExceptionsExpiryRequest
+      properties: {}
+    Long:
+      type: integer
+    GetDatalakeExceptionsSubscriptionRequest:
+      type: object
+      title: GetDatalakeExceptionsSubscriptionRequest
+      properties: {}
+    ProtocolAndNotificationEndpoint:
+      type: object
+      properties:
+        endpoint:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: 'The account that is subscribed to receive exception notifications. '
+        protocol:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: 'The protocol to which notification messages are posted. '
+      description: 'Protocol used in Amazon Security Lake that dictates how notifications are posted at the endpoint. '
+    GetDatalakeRequest:
+      type: object
+      title: GetDatalakeRequest
+      properties: {}
+    LakeConfigurationResponseMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/LakeConfigurationResponse'
+    Integer:
+      type: integer
+    GetDatalakeStatusRequest:
+      type: object
+      title: GetDatalakeStatusRequest
+      properties:
+        accountSet:
+          allOf:
+            - $ref: '#/components/schemas/InputSet'
+            - description: 'The Amazon Web Services account ID for which a static snapshot of the current Amazon Web Services Region, including enabled accounts and log sources, is retrieved.'
+        maxAccountResults:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The maximum limit of accounts for which the static snapshot of the current Region, including enabled accounts and log sources, is retrieved.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: <p>Lists if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged. </p> <p>Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.</p>
+    GetSubscriberRequest:
+      type: object
+      title: GetSubscriberRequest
+      properties: {}
+    SubscriberResource:
+      type: object
+      required:
+        - accountId
+        - sourceTypes
+        - subscriptionId
+      properties:
+        accessTypes:
+          allOf:
+            - $ref: '#/components/schemas/AccessTypeList'
+            - description: <p>You can choose to notify subscribers of new objects with an Amazon Simple Queue Service (Amazon SQS) queue or through messaging to an HTTPS endpoint provided by the subscriber. </p> <p> Subscribers can consume data by directly querying Lake Formation tables in your Amazon S3 bucket through services like Amazon Athena. This subscription type is defined as <code>LAKEFORMATION</code>. </p>
+        accountId:
+          allOf:
+            - $ref: '#/components/schemas/AwsAccountId'
+            - description: The Amazon Web Services account ID you are using to create your Amazon Security Lake account.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The date and time when the subscription was created. '
+        externalId:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: The external ID of the subscriber. The external ID lets the user that is assuming the role assert the circumstances in which they are operating. It also provides a way for the account owner to permit the role to be assumed only under specific circumstances.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) specifying the role of the subscriber.
+        s3BucketArn:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketArn'
+            - description: 'The ARN for the Amazon S3 bucket. '
+        snsArn:
+          allOf:
+            - $ref: '#/components/schemas/SnsTopicArn'
+            - description: The ARN for the Amazon Simple Notification Service.
+        sourceTypes:
+          allOf:
+            - $ref: '#/components/schemas/SourceTypeList'
+            - description: 'Amazon Security Lake supports log and event collection for natively supported Amazon Web Services. For more information, see the Amazon Security Lake User Guide.'
+        subscriberDescription:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: 'The subscriber descriptions for a subscriber account. The description for a subscriber includes <code>subscriberName</code>, <code>accountID</code>, <code>externalID</code>, and <code>subscriptionId</code>.'
+        subscriberName:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: The name of your Amazon Security Lake subscriber account.
+        subscriptionEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The subscription endpoint to which exception messages are posted. '
+        subscriptionId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The subscription ID of the Amazon Security Lake subscriber account.
+        subscriptionProtocol:
+          allOf:
+            - $ref: '#/components/schemas/EndpointProtocol'
+            - description: 'The subscription protocol to which exception messages are posted. '
+        subscriptionStatus:
+          allOf:
+            - $ref: '#/components/schemas/SubscriptionStatus'
+            - description: The subscription status of the Amazon Security Lake subscriber account.
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The date and time when the subscription was created. '
+      description: 'Provides details about the Amazon Security Lake account subscription. Subscribers are notified of new objects for a source as the data is written to your Amazon S3 bucket for Security Lake. '
+    RetentionSettingList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RetentionSetting'
+    TagsMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/String'
+    settingsStatus:
+      type: string
+      enum:
+        - INITIALIZED
+        - PENDING
+        - COMPLETED
+        - FAILED
+    LakeConfigurationResponse:
+      type: object
+      properties:
+        encryptionKey:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The type of encryption key used by secure the Security Lake configuration object.
+        replicationDestinationRegions:
+          allOf:
+            - $ref: '#/components/schemas/RegionSet'
+            - description: '<p>Replication enables automatic, asynchronous copying of objects across Amazon S3 buckets. Amazon S3 buckets that are configured for object replication can be owned by the same Amazon Web Services account or by different accounts. You can replicate objects to a single destination bucket or to multiple destination buckets. The destination buckets can be in different Amazon Web Services Regions or within the same Region as the source bucket.</p> <p>Set up one or more rollup Regions by providing the Region or Regions that should contribute to the central rollup Region. </p>'
+        replicationRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: 'Replication settings for the Amazon S3 buckets. This parameter uses the IAM role you created that is managed by Security Lake, to ensure the replication setting is correct. '
+        retentionSettings:
+          allOf:
+            - $ref: '#/components/schemas/RetentionSettingList'
+            - description: 'Retention settings for the destination Amazon S3 buckets. '
+        s3BucketArn:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketArn'
+            - description: 'Amazon Resource Names (ARNs) uniquely identify Amazon Web Services resources. Security Lake requires an ARN when you need to specify a resource unambiguously across all of Amazon Web Services, such as in IAM policies, Amazon Relational Database Service (Amazon RDS) tags, and API calls. '
+        status:
+          allOf:
+            - $ref: '#/components/schemas/settingsStatus'
+            - description: 'Retrieves the status of the configuration operation for an account in Amazon Security Lake. '
+        tagsMap:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: 'A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value, both of which you define.'
+      description: Provides details of Amazon Security Lake lake configuration object.
+    ListDatalakeExceptionsRequest:
+      type: object
+      title: ListDatalakeExceptionsRequest
+      properties:
+        maxFailures:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: List the maximum number of failures in Security Lake.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: <p>List if there are more results available. The value of nextToken is a unique pagination token for each page. Repeat the call using the returned token to retrieve the next page. Keep all other arguments unchanged. </p> <p>Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.</p>
+        regionSet:
+          allOf:
+            - $ref: '#/components/schemas/RegionSet'
+            - description: List the Amazon Web Services Regions from which exceptions are retrieved.
+    ListLogSourcesRequest:
+      type: object
+      title: ListLogSourcesRequest
+      properties:
+        inputOrder:
+          allOf:
+            - $ref: '#/components/schemas/DimensionSet'
+            - description: 'Lists the log sources in input order, namely Region, source type, and member account.'
+        listAllDimensions:
+          allOf:
+            - $ref: '#/components/schemas/AllDimensionsMap'
+            - description: List the view of log sources for enabled Amazon Security Lake accounts for specific Amazon Web Services sources from specific accounts and specific Regions.
+        listSingleDimension:
+          allOf:
+            - $ref: '#/components/schemas/InputSet'
+            - description: List the view of log sources for enabled Security Lake accounts for all Amazon Web Services sources from specific accounts or specific Regions.
+        listTwoDimensions:
+          allOf:
+            - $ref: '#/components/schemas/TwoDimensionsMap'
+            - description: Lists the view of log sources for enabled Security Lake accounts for specific Amazon Web Services sources from specific accounts or specific Regions.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The maximum number of accounts for which the log sources are displayed.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: 'If nextToken is returned, there are more results available. You can repeat the call using the returned token to retrieve the next page.'
+    RegionSourceTypesAccountsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AllDimensionsMap'
+    ListSubscribersRequest:
+      type: object
+      title: ListSubscribersRequest
+      properties: {}
+    SubscriberList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubscriberResource'
+    SourceStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - DEACTIVATED
+        - PENDING
+    LogsStatus:
+      type: object
+      required:
+        - healthStatus
+        - pathToLogs
+      properties:
+        healthStatus:
+          allOf:
+            - $ref: '#/components/schemas/SourceStatus'
+            - description: 'The health status of services, including error codes and patterns.'
+        pathToLogs:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Defines path the stored logs are available which has information on your systems, applications, and services. '
+      description: Retrieves the Logs status for the Amazon Security Lake account.
+    RetentionSettingRetentionPeriodInteger:
+      type: integer
+      minimum: 1
+    StorageClass:
+      type: string
+      enum:
+        - STANDARD_IA
+        - ONEZONE_IA
+        - INTELLIGENT_TIERING
+        - GLACIER_IR
+        - GLACIER
+        - DEEP_ARCHIVE
+        - EXPIRE
+    RetentionSetting:
+      type: object
+      properties:
+        retentionPeriod:
+          allOf:
+            - $ref: '#/components/schemas/RetentionSettingRetentionPeriodInteger'
+            - description: 'The retention period specifies a fixed period of time during which the Security Lake object remains locked. You can specify the retention period in days for one or more sources. '
+        storageClass:
+          allOf:
+            - $ref: '#/components/schemas/StorageClass'
+            - description: 'The range of storage classes that you can choose from based on the data access, resiliency, and cost requirements of your workloads.'
+      description: 'Retention settings for the destination Amazon S3 buckets in Amazon Security Lake. '
+    SubscriptionStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - DEACTIVATED
+        - PENDING
+        - READY
+    UpdateDatalakeExceptionsExpiryRequestExceptionMessageExpiryLong:
+      type: integer
+      minimum: 1
+    UpdateDatalakeExceptionsExpiryRequest:
+      type: object
+      required:
+        - exceptionMessageExpiry
+      title: UpdateDatalakeExceptionsExpiryRequest
+      properties:
+        exceptionMessageExpiry:
+          allOf:
+            - $ref: '#/components/schemas/UpdateDatalakeExceptionsExpiryRequestExceptionMessageExpiryLong'
+            - description: The time-to-live (TTL) for the exception message to remain.
+    UpdateDatalakeExceptionsSubscriptionRequest:
+      type: object
+      required:
+        - notificationEndpoint
+        - subscriptionProtocol
+      title: UpdateDatalakeExceptionsSubscriptionRequest
+      properties:
+        notificationEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: The account that is subscribed to receive exception notifications.
+        subscriptionProtocol:
+          allOf:
+            - $ref: '#/components/schemas/SubscriptionProtocolType'
+            - description: 'The subscription protocol to which exception messages are posted. '
+    UpdateDatalakeRequest:
+      type: object
+      required:
+        - configurations
+      title: UpdateDatalakeRequest
+      properties:
+        configurations:
+          allOf:
+            - $ref: '#/components/schemas/LakeConfigurationRequestMap'
+            - description: Specify the Region or Regions that will contribute data to the rollup region.
+    UpdateSubscriberRequestSubscriberNameString:
+      type: string
+      pattern: '^[\\\w\-_:/.@=+]*$'
+      minLength: 0
+      maxLength: 64
+    UpdateSubscriberRequest:
+      type: object
+      required:
+        - sourceTypes
+      title: UpdateSubscriberRequest
+      properties:
+        externalId:
+          allOf:
+            - $ref: '#/components/schemas/SafeString'
+            - description: The external ID of the Security Lake account.
+        sourceTypes:
+          allOf:
+            - $ref: '#/components/schemas/SourceTypeList'
+            - description: 'The supported Amazon Web Services from which logs and events are collected. For the list of supported Amazon Web Services, see the <a href="https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html">Amazon Security Lake User Guide</a>.'
+        subscriberDescription:
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: The description of the Security Lake account subscriber.
+        subscriberName:
+          allOf:
+            - $ref: '#/components/schemas/UpdateSubscriberRequestSubscriberNameString'
+            - description: 'The name of the Security Lake account subscriber. '
+    UpdateSubscriptionNotificationConfigurationRequestSubscriptionEndpointString:
+      type: string
+      pattern: '^(arn:aws:.+$|https?://.+$)'
+    UpdateSubscriptionNotificationConfigurationRequest:
+      type: object
+      title: UpdateSubscriptionNotificationConfigurationRequest
+      properties:
+        createSqs:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Create a new subscription notification for the specified subscription ID in Amazon Security Lake.
+        httpsApiKeyName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The key name for the subscription notification.
+        httpsApiKeyValue:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The key value for the subscription notification.
+        httpsMethod:
+          allOf:
+            - $ref: '#/components/schemas/HttpsMethod'
+            - description: 'The HTTPS method used for the subscription notification. '
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: 'The Amazon Resource Name (ARN) specifying the role of the subscriber. '
+        subscriptionEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/UpdateSubscriptionNotificationConfigurationRequestSubscriptionEndpointString'
+            - description: The subscription endpoint in Security Lake.
+security:
+  - hmac: []

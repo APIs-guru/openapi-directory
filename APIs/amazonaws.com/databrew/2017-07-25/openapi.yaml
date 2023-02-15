@@ -236,6 +236,7 @@ paths:
                     - JSON
                     - PARQUET
                     - EXCEL
+                    - ORC
                 FormatOptions:
                   description: 'Represents a set of options that define the structure of either comma-separated value (CSV), Excel, or JSON input.'
                   type: object
@@ -268,6 +269,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/DatabaseInputDefinition'
                         - description: Connection information for dataset input files stored in a database.
+                    Metadata:
+                      allOf:
+                        - $ref: '#/components/schemas/Metadata'
+                        - description: Contains additional resource information needed for specific datasets.
                 PathOptions:
                   description: Represents a set of options that define how DataBrew selects files for a given Amazon S3 path in a dataset.
                   type: object
@@ -433,7 +438,7 @@ paths:
                   type: integer
                   minimum: 0
                 OutputLocation:
-                  description: 'Represents an Amazon S3 location (bucket name and object key) where DataBrew can read input data, or write output from a job.'
+                  description: 'Represents an Amazon S3 location (bucket name, bucket owner, and object key) where DataBrew can read input data, or write output from a job.'
                   type: object
                   properties:
                     Bucket:
@@ -444,6 +449,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/Key'
                         - description: The unique name of the object in the bucket.
+                    BucketOwner:
+                      allOf:
+                        - $ref: '#/components/schemas/BucketOwner'
+                        - description: The Amazon Web Services account ID of the bucket owner.
                 Configuration:
                   description: 'Configuration for profile jobs. Configuration can be used to select columns, do evaluations, and override default parameters of evaluations. When configuration is undefined, the profile job will apply default settings to all supported columns. '
                   type: object
@@ -460,6 +469,16 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ColumnStatisticsConfigurationList'
                         - description: 'List of configurations for column evaluations. ColumnStatisticsConfigurations are used to select evaluations and override parameters of evaluations for particular columns. When ColumnStatisticsConfigurations is undefined, the profile job will profile all supported columns and run all supported evaluations. '
+                    EntityDetectorConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/EntityDetectorConfiguration'
+                        - description: 'Configuration of entity detection for a profile job. When undefined, entity detection is disabled.'
+                ValidationConfigurations:
+                  description: List of validation configurations that are applied to the profile job.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ValidationConfiguration'
+                  minItems: 1
                 RoleArn:
                   description: The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
                   type: string
@@ -903,6 +922,141 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /rulesets:
+    post:
+      operationId: CreateRuleset
+      description: Creates a new ruleset that can be used in a profile job to validate the data quality of a dataset.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRulesetResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - TargetArn
+                - Rules
+              properties:
+                Name:
+                  description: 'The name of the ruleset to be created. Valid characters are alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.'
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                Description:
+                  description: The description of the ruleset.
+                  type: string
+                  maxLength: 1024
+                TargetArn:
+                  description: The Amazon Resource Name (ARN) of a resource (dataset) that the ruleset is associated with.
+                  type: string
+                  minLength: 20
+                  maxLength: 2048
+                Rules:
+                  description: A list of rules that are defined with the ruleset. A rule includes one or more checks to be validated on a DataBrew dataset.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Rule'
+                  minItems: 1
+                Tags:
+                  description: Metadata tags to apply to the ruleset.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListRulesets
+      description: List all rulesets available in the current account or rulesets associated with a specific resource (dataset).
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRulesetsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: targetArn
+          in: query
+          required: false
+          description: The Amazon Resource Name (ARN) of a resource (dataset). Using this parameter indicates to return only those rulesets that are associated with the specified resource.
+          schema:
+            type: string
+            minLength: 20
+            maxLength: 2048
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return in this request.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'A token generated by DataBrew that specifies where to continue pagination if a previous request was truncated. To get the next set of pages, pass in the NextToken value from the response object of the previous page call.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 2000
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
   /schedules:
     post:
       operationId: CreateSchedule
@@ -1158,6 +1312,7 @@ paths:
                     - JSON
                     - PARQUET
                     - EXCEL
+                    - ORC
                 FormatOptions:
                   description: 'Represents a set of options that define the structure of either comma-separated value (CSV), Excel, or JSON input.'
                   type: object
@@ -1190,6 +1345,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/DatabaseInputDefinition'
                         - description: Connection information for dataset input files stored in a database.
+                    Metadata:
+                      allOf:
+                        - $ref: '#/components/schemas/Metadata'
+                        - description: Contains additional resource information needed for specific datasets.
                 PathOptions:
                   description: Represents a set of options that define how DataBrew selects files for a given Amazon S3 path in a dataset.
                   type: object
@@ -1471,6 +1630,133 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/rulesets/{name}':
+    delete:
+      operationId: DeleteRuleset
+      description: Deletes a ruleset.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRulesetResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the ruleset to be deleted.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeRuleset
+      description: Retrieves detailed information about the ruleset.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeRulesetResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the ruleset to be described.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+    put:
+      operationId: UpdateRuleset
+      description: Updates specified ruleset.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRulesetResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the ruleset to be updated.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Rules
+              properties:
+                Description:
+                  description: The description of the ruleset.
+                  type: string
+                  maxLength: 1024
+                Rules:
+                  description: A list of rules that are defined with the ruleset. A rule includes one or more checks to be validated on a DataBrew dataset.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Rule'
+                  minItems: 1
   '/schedules/{name}':
     delete:
       operationId: DeleteSchedule
@@ -2168,6 +2454,7 @@ paths:
                   pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]*$'
                   minLength: 1
                   maxLength: 255
+                  format: password
                 ViewFrame:
                   description: Represents the data being transformed during an action.
                   type: object
@@ -2184,6 +2471,18 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/HiddenColumnList'
                         - description: A list of columns to hide in the view frame.
+                    StartRowIndex:
+                      allOf:
+                        - $ref: '#/components/schemas/StartRowIndex'
+                        - description: The starting index for the range of rows to return in the view frame.
+                    RowRange:
+                      allOf:
+                        - $ref: '#/components/schemas/RowRange'
+                        - description: 'The number of rows to include in the view frame, beginning with the <code>StartRowIndex</code> value.'
+                    Analytics:
+                      allOf:
+                        - $ref: '#/components/schemas/AnalyticsMode'
+                        - description: Controls if analytics computation is enabled or disabled. Enabled by default.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2474,6 +2773,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ColumnStatisticsConfigurationList'
                         - description: 'List of configurations for column evaluations. ColumnStatisticsConfigurations are used to select evaluations and override parameters of evaluations for particular columns. When ColumnStatisticsConfigurations is undefined, the profile job will profile all supported columns and run all supported evaluations. '
+                    EntityDetectorConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/EntityDetectorConfiguration'
+                        - description: 'Configuration of entity detection for a profile job. When undefined, entity detection is disabled.'
                 EncryptionKeyArn:
                   description: The Amazon Resource Name (ARN) of an encryption key that is used to protect the job.
                   type: string
@@ -2499,7 +2802,7 @@ paths:
                   type: integer
                   minimum: 0
                 OutputLocation:
-                  description: 'Represents an Amazon S3 location (bucket name and object key) where DataBrew can read input data, or write output from a job.'
+                  description: 'Represents an Amazon S3 location (bucket name, bucket owner, and object key) where DataBrew can read input data, or write output from a job.'
                   type: object
                   properties:
                     Bucket:
@@ -2510,6 +2813,16 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/Key'
                         - description: The unique name of the object in the bucket.
+                    BucketOwner:
+                      allOf:
+                        - $ref: '#/components/schemas/BucketOwner'
+                        - description: The Amazon Web Services account ID of the bucket owner.
+                ValidationConfigurations:
+                  description: List of validation configurations that are applied to the profile job.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ValidationConfiguration'
+                  minItems: 1
                 RoleArn:
                   description: The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
                   type: string
@@ -2775,7 +3088,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/Key'
             - description: The unique name of the object in the bucket.
-      description: 'Represents an Amazon S3 location (bucket name and object key) where DataBrew can read input data, or write output from a job.'
+        BucketOwner:
+          allOf:
+            - $ref: '#/components/schemas/BucketOwner'
+            - description: The Amazon Web Services account ID of the bucket owner.
+      description: 'Represents an Amazon S3 location (bucket name, bucket owner, and object key) where DataBrew can read input data, or write output from a job.'
     DataCatalogInputDefinition:
       type: object
       required:
@@ -2803,7 +3120,6 @@ components:
       type: object
       required:
         - GlueConnectionName
-        - DatabaseTableName
       properties:
         GlueConnectionName:
           allOf:
@@ -2815,7 +3131,19 @@ components:
             - description: The table within the target database.
         TempDirectory:
           $ref: '#/components/schemas/S3Location'
+        QueryString:
+          allOf:
+            - $ref: '#/components/schemas/QueryString'
+            - description: Custom SQL to run against the provided Glue connection. This SQL will be used as the input for DataBrew projects and jobs.
       description: Connection information for dataset input files stored in a database.
+    Metadata:
+      type: object
+      properties:
+        SourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The Amazon Resource Name (ARN) associated with the dataset. Currently, DataBrew only supports ARNs from Amazon AppFlow.'
+      description: Contains additional resource information needed for specific datasets.
     FilterExpression:
       type: object
       required:
@@ -2830,7 +3158,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ValuesMap'
             - description: The map of substitution variable names to their values used in this filter expression.
-      description: 'Represents a structure for defining parameter conditions. Supported conditions are described here: <a href="https://docs-aws.amazon.com/databrew/latest/dg/datasets.multiple-files.html#conditions.for.dynamic.datasets">Supported conditions for dynamic datasets</a> in the <i>Glue DataBrew Developer Guide</i>.'
+      description: 'Represents a structure for defining parameter conditions. Supported conditions are described here: <a href="https://docs.aws.amazon.com/databrew/latest/dg/datasets.multiple-files.html#conditions.for.dynamic.datasets">Supported conditions for dynamic datasets</a> in the <i>Glue DataBrew Developer Guide</i>.'
     FilesLimit:
       type: object
       required:
@@ -2847,7 +3175,7 @@ components:
         Order:
           allOf:
             - $ref: '#/components/schemas/Order'
-            - description: 'A criteria to use for Amazon S3 files sorting before their selection. By default uses DESCENDING order, i.e. most recent files are selected first. Anotherpossible value is ASCENDING.'
+            - description: 'A criteria to use for Amazon S3 files sorting before their selection. By default uses DESCENDING order, i.e. most recent files are selected first. Another possible value is ASCENDING.'
       description: Represents a limit imposed on number of Amazon S3 files that should be selected for a dataset from a connected Amazon S3 path.
     PathParametersMap:
       type: object
@@ -2878,6 +3206,11 @@ components:
       type: string
       minLength: 1
       maxLength: 1280
+    BucketOwner:
+      type: string
+      pattern: '^[0-9]{12}$'
+      minLength: 12
+      maxLength: 12
     StatisticsConfiguration:
       type: object
       properties:
@@ -2900,6 +3233,34 @@ components:
       items:
         $ref: '#/components/schemas/ColumnStatisticsConfiguration'
       minItems: 1
+    EntityDetectorConfiguration:
+      type: object
+      required:
+        - EntityTypes
+      properties:
+        EntityTypes:
+          allOf:
+            - $ref: '#/components/schemas/EntityTypeList'
+            - description: '<p>Entity types to detect. Can be any of the following:</p> <ul> <li> <p>USA_SSN</p> </li> <li> <p>EMAIL</p> </li> <li> <p>USA_ITIN</p> </li> <li> <p>USA_PASSPORT_NUMBER</p> </li> <li> <p>PHONE_NUMBER</p> </li> <li> <p>USA_DRIVING_LICENSE</p> </li> <li> <p>BANK_ACCOUNT</p> </li> <li> <p>CREDIT_CARD</p> </li> <li> <p>IP_ADDRESS</p> </li> <li> <p>MAC_ADDRESS</p> </li> <li> <p>USA_DEA_NUMBER</p> </li> <li> <p>USA_HCPCS_CODE</p> </li> <li> <p>USA_NATIONAL_PROVIDER_IDENTIFIER</p> </li> <li> <p>USA_NATIONAL_DRUG_CODE</p> </li> <li> <p>USA_HEALTH_INSURANCE_CLAIM_NUMBER</p> </li> <li> <p>USA_MEDICARE_BENEFICIARY_IDENTIFIER</p> </li> <li> <p>USA_CPT_CODE</p> </li> <li> <p>PERSON_NAME</p> </li> <li> <p>DATE</p> </li> </ul> <p>The Entity type group USA_ALL is also supported, and includes all of the above entity types except PERSON_NAME and DATE.</p>'
+        AllowedStatistics:
+          allOf:
+            - $ref: '#/components/schemas/AllowedStatisticList'
+            - description: 'Configuration of statistics that are allowed to be run on columns that contain detected entities. When undefined, no statistics will be computed on columns that contain detected entities.'
+      description: 'Configuration of entity detection for a profile job. When undefined, entity detection is disabled.'
+    ValidationConfiguration:
+      type: object
+      required:
+        - RulesetArn
+      properties:
+        RulesetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the ruleset to be validated in the profile job. The TargetArn of the selected ruleset should be the same as the Amazon Resource Name (ARN) of the dataset that is associated with the profile job.
+        ValidationMode:
+          allOf:
+            - $ref: '#/components/schemas/ValidationMode'
+            - description: Mode of data quality validation. Default mode is “CHECK_ALL” which verifies all rules defined in the selected ruleset.
+      description: 'Configuration for data quality validation. Used to select the Rulesets and Validation Mode to be used in the profile job. When ValidationConfiguration is null, the profile job will run without data quality validation.'
     SampleMode:
       type: string
       enum:
@@ -2988,6 +3349,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/OutputFormatOptions'
             - description: Represents options that define how DataBrew formats job output files.
+        MaxOutputFiles:
+          allOf:
+            - $ref: '#/components/schemas/MaxOutputFiles'
+            - description: 'Maximum number of files to be generated by the job and written to the output folder. For output partitioned by column(s), the MaxOutputFiles value is the maximum number of files per partition.'
       description: Represents options that specify how and where in Amazon S3 DataBrew writes the output generated by recipe jobs or profile jobs.
     DataCatalogOutput:
       type: object
@@ -3043,6 +3408,46 @@ components:
       type: string
       minLength: 1
       maxLength: 255
+    CreateRulesetResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RulesetName'
+            - description: The unique name of the created ruleset.
+    Rule:
+      type: object
+      required:
+        - Name
+        - CheckExpression
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RuleName'
+            - description: The name of the rule.
+        Disabled:
+          allOf:
+            - $ref: '#/components/schemas/Disabled'
+            - description: 'A value that specifies whether the rule is disabled. Once a rule is disabled, a profile job will not validate it during a job run. Default value is false.'
+        CheckExpression:
+          allOf:
+            - $ref: '#/components/schemas/Expression'
+            - description: '<p>The expression which includes column references, condition names followed by variable references, possibly grouped and combined with other conditions. For example, <code>(:col1 starts_with :prefix1 or :col1 starts_with :prefix2) and (:col1 ends_with :suffix1 or :col1 ends_with :suffix2)</code>. Column and value references are substitution variables that should start with the '':'' symbol. Depending on the context, substitution variables'' values can be either an actual value or a column name. These values are defined in the SubstitutionMap. If a CheckExpression starts with a column reference, then ColumnSelectors in the rule should be null. If ColumnSelectors has been defined, then there should be no column reference in the left side of a condition, for example, <code>is_between :val1 and :val2</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/profile.data-quality-available-checks.html">Available checks</a> </p>'
+        SubstitutionMap:
+          allOf:
+            - $ref: '#/components/schemas/ValuesMap'
+            - description: 'The map of substitution variable names to their values used in a check expression. Variable names should start with a '':'' (colon). Variable values can either be actual values or column names. To differentiate between the two, column names should be enclosed in backticks, for example, <code>":col1": "`Column A`".</code> '
+        Threshold:
+          allOf:
+            - $ref: '#/components/schemas/Threshold'
+            - description: 'The threshold used with a non-aggregate check expression. Non-aggregate check expressions will be applied to each row in a specific column, and the threshold will be used to determine whether the validation succeeds.'
+        ColumnSelectors:
+          allOf:
+            - $ref: '#/components/schemas/ColumnSelectorList'
+            - description: List of column selectors. Selectors can be used to select columns using a name or regular expression from the dataset. Rule will be applied to selected columns.
+      description: Represents a single data quality requirement that should be validated in the scope of this dataset.
     CreateScheduleResponse:
       type: object
       required:
@@ -3097,6 +3502,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecipeVersion'
             - description: The version of the recipe that was deleted.
+    DeleteRulesetResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RulesetName'
+            - description: The name of the deleted ruleset.
     DeleteScheduleResponse:
       type: object
       required:
@@ -3229,6 +3643,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProfileConfiguration'
             - description: 'Configuration for profile jobs. Used to select columns, do evaluations, and override default parameters of evaluations. When configuration is null, the profile job will run with default settings.'
+        ValidationConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/ValidationConfigurationList'
+            - description: List of validation configurations that are applied to the profile job.
         RecipeReference:
           $ref: '#/components/schemas/RecipeReference'
         ResourceArn:
@@ -3284,6 +3702,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProfileConfiguration'
             - description: 'Configuration for profile jobs. Used to select columns, do evaluations, and override default parameters of evaluations. When configuration is null, the profile job will run with default settings.'
+        ValidationConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/ValidationConfigurationList'
+            - description: List of validation configurations that are applied to the profile job.
         RunId:
           allOf:
             - $ref: '#/components/schemas/JobRunId'
@@ -3442,6 +3864,51 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecipeVersion'
             - description: The recipe version identifier.
+    DescribeRulesetResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RulesetName'
+            - description: The name of the ruleset.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/RulesetDescription'
+            - description: The description of the ruleset.
+        TargetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of a resource (dataset) that the ruleset is associated with.
+        Rules:
+          allOf:
+            - $ref: '#/components/schemas/RuleList'
+            - description: A list of rules that are defined with the ruleset. A rule includes one or more checks to be validated on a DataBrew dataset.
+        CreateDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that the ruleset was created.
+        CreatedBy:
+          allOf:
+            - $ref: '#/components/schemas/CreatedBy'
+            - description: The Amazon Resource Name (ARN) of the user who created the ruleset.
+        LastModifiedBy:
+          allOf:
+            - $ref: '#/components/schemas/LastModifiedBy'
+            - description: The Amazon Resource Name (ARN) of the user who last modified the ruleset.
+        LastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The modification date and time of the ruleset.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the ruleset.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata tags that have been applied to the ruleset.
     DescribeScheduleResponse:
       type: object
       required:
@@ -3561,6 +4028,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: A token that you can use in a subsequent call to retrieve the next set of results.
+    ListRulesetsResponse:
+      type: object
+      required:
+        - Rulesets
+      properties:
+        Rulesets:
+          allOf:
+            - $ref: '#/components/schemas/RulesetItemList'
+            - description: A list of RulesetItem. RulesetItem contains meta data of a ruleset.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: A token that you can use in a subsequent call to retrieve the next set of results.
     ListSchedulesResponse:
       type: object
       required:
@@ -3636,6 +4116,16 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ColumnName'
+    StartRowIndex:
+      type: integer
+      minimum: 0
+    RowRange:
+      type: integer
+    AnalyticsMode:
+      type: string
+      enum:
+        - ENABLE
+        - DISABLE
     StartJobRunResponse:
       type: object
       required:
@@ -3726,6 +4216,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobName'
             - description: The name of the job that you updated.
+    UpdateRulesetResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RulesetName'
+            - description: The name of the updated ruleset.
     UpdateScheduleResponse:
       type: object
       required:
@@ -3740,6 +4239,26 @@ components:
       maxLength: 255
     ActionId:
       type: integer
+    AllowedStatistics:
+      type: object
+      required:
+        - Statistics
+      properties:
+        Statistics:
+          allOf:
+            - $ref: '#/components/schemas/StatisticList'
+            - description: One or more column statistics to allow for columns that contain detected entities.
+      description: 'Configuration of statistics that are allowed to be run on columns that contain detected entities. When undefined, no statistics will be computed on columns that contain detected entities.'
+    AllowedStatisticList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AllowedStatistics'
+      minItems: 1
+    StatisticList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Statistic'
+      minItems: 1
     Arn:
       type: string
       minLength: 20
@@ -3777,6 +4296,7 @@ components:
       pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]*$'
       minLength: 1
       maxLength: 255
+      format: password
     ColumnName:
       type: string
       minLength: 1
@@ -3868,6 +4388,7 @@ components:
         - JSON
         - PARQUET
         - EXCEL
+        - ORC
     FormatOptions:
       type: object
       properties:
@@ -3899,6 +4420,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DatabaseInputDefinition'
             - description: Connection information for dataset input files stored in a database.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: Contains additional resource information needed for specific datasets.
       description: 'Represents information on how DataBrew can find data, in either the Glue Data Catalog or Amazon S3.'
     PathOptions:
       type: object
@@ -3983,7 +4508,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/ColumnStatisticsConfigurationList'
             - description: 'List of configurations for column evaluations. ColumnStatisticsConfigurations are used to select evaluations and override parameters of evaluations for particular columns. When ColumnStatisticsConfigurations is undefined, the profile job will profile all supported columns and run all supported evaluations. '
+        EntityDetectorConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/EntityDetectorConfiguration'
+            - description: 'Configuration of entity detection for a profile job. When undefined, entity detection is disabled.'
       description: 'Configuration for profile jobs. Configuration can be used to select columns, do evaluations, and override default parameters of evaluations. When configuration is undefined, the profile job will apply default settings to all supported columns. '
+    ValidationConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ValidationConfiguration'
+      minItems: 1
     Timeout:
       type: integer
       minimum: 0
@@ -4042,6 +4576,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProfileConfiguration'
             - description: 'Configuration for profile jobs. Used to select columns, do evaluations, and override default parameters of evaluations. When configuration is null, the profile job will run with default settings.'
+        ValidationConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/ValidationConfigurationList'
+            - description: List of validation configurations that are applied to the profile job.
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -4231,6 +4769,46 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: Metadata tags to apply to this recipe.
+    RulesetName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    RulesetDescription:
+      type: string
+      maxLength: 1024
+    RuleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Rule'
+      minItems: 1
+    CreateRulesetRequest:
+      type: object
+      required:
+        - Name
+        - TargetArn
+        - Rules
+      title: CreateRulesetRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RulesetName'
+            - description: 'The name of the ruleset to be created. Valid characters are alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/RulesetDescription'
+            - description: The description of the ruleset.
+        TargetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of a resource (dataset) that the ruleset is associated with.
+        Rules:
+          allOf:
+            - $ref: '#/components/schemas/RuleList'
+            - description: A list of rules that are defined with the ruleset. A rule includes one or more checks to be validated on a DataBrew dataset.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata tags to apply to the ruleset.
     JobNameList:
       type: array
       items:
@@ -4325,6 +4903,10 @@ components:
       type: string
       minLength: 1
       maxLength: 255
+    QueryString:
+      type: string
+      minLength: 1
+      maxLength: 10000
     DatabaseOutputMode:
       type: string
       enum:
@@ -4457,7 +5039,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/FilterExpression'
             - description: The optional filter expression structure to apply additional matching criteria to the parameter.
-      description: Represents a dataset paramater that defines type and conditions for a parameter in the Amazon S3 path of the dataset.
+      description: Represents a dataset parameter that defines type and conditions for a parameter in the Amazon S3 path of the dataset.
     DatetimeFormat:
       type: string
       minLength: 2
@@ -4487,6 +5069,10 @@ components:
     DeleteRecipeVersionRequest:
       type: object
       title: DeleteRecipeVersionRequest
+      properties: {}
+    DeleteRulesetRequest:
+      type: object
+      title: DeleteRulesetRequest
       properties: {}
     DeleteScheduleRequest:
       type: object
@@ -4558,10 +5144,26 @@ components:
       properties: {}
     PublishedBy:
       type: string
+    DescribeRulesetRequest:
+      type: object
+      title: DescribeRulesetRequest
+      properties: {}
     DescribeScheduleRequest:
       type: object
       title: DescribeScheduleRequest
       properties: {}
+    Disabled:
+      type: boolean
+    EntityTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EntityType'
+      minItems: 1
+    EntityType:
+      type: string
+      pattern: '^[A-Z_][A-Z\\d_]*$'
+      minLength: 1
+      maxLength: 128
     ErrorCode:
       type: string
       pattern: '^[1-5][0-9][0-9]$'
@@ -4579,7 +5181,7 @@ components:
       maxItems: 1
     Expression:
       type: string
-      pattern: '^[<>0-9A-Za-z_:)(!= ]+$'
+      pattern: '^[<>0-9A-Za-z_.,:)(!= ]+$'
       minLength: 4
       maxLength: 1024
     MaxFiles:
@@ -4695,6 +5297,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobSample'
             - description: 'A sample configuration for profile jobs only, which determines the number of rows on which the profile job is run. If a <code>JobSample</code> value isn''t provided, the default value is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the size parameter.'
+        ValidationConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/ValidationConfigurationList'
+            - description: List of validation configurations that are applied to the profile job.
       description: Represents all of the attributes of a DataBrew job.
     JobList:
       type: array
@@ -4771,6 +5377,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobSample'
             - description: 'A sample configuration for profile jobs only, which determines the number of rows on which the profile job is run. If a <code>JobSample</code> value isn''t provided, the default is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the size parameter.'
+        ValidationConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/ValidationConfigurationList'
+            - description: List of validation configurations that are applied to the profile job run.
       description: Represents one run of a DataBrew job.
     JobRunList:
       type: array
@@ -4818,6 +5428,14 @@ components:
       type: object
       title: ListRecipesRequest
       properties: {}
+    ListRulesetsRequest:
+      type: object
+      title: ListRulesetsRequest
+      properties: {}
+    RulesetItemList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RulesetItem'
     ListSchedulesRequest:
       type: object
       title: ListSchedulesRequest
@@ -4830,6 +5448,10 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    MaxOutputFiles:
+      type: integer
+      minimum: 1
+      maximum: 999
     Operation:
       type: string
       pattern: '^[A-Z\_]+$'
@@ -5018,6 +5640,82 @@ components:
       type: string
     Result:
       type: string
+    RuleName:
+      type: string
+      minLength: 1
+      maxLength: 128
+    Threshold:
+      type: object
+      required:
+        - Value
+      properties:
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/ThresholdValue'
+            - description: The value of a threshold.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ThresholdType'
+            - description: The type of a threshold. Used for comparison of an actual count of rows that satisfy the rule to the threshold value.
+        Unit:
+          allOf:
+            - $ref: '#/components/schemas/ThresholdUnit'
+            - description: Unit of threshold value. Can be either a COUNT or PERCENTAGE of the full sample size used for validation.
+      description: The threshold used with a non-aggregate check expression. The non-aggregate check expression will be applied to each row in a specific column. Then the threshold will be used to determine whether the validation succeeds.
+    RuleCount:
+      type: integer
+      minimum: 0
+    RulesetItem:
+      type: object
+      required:
+        - Name
+        - TargetArn
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The ID of the Amazon Web Services account that owns the ruleset.
+        CreatedBy:
+          allOf:
+            - $ref: '#/components/schemas/CreatedBy'
+            - description: The Amazon Resource Name (ARN) of the user who created the ruleset.
+        CreateDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that the ruleset was created.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/RulesetDescription'
+            - description: The description of the ruleset.
+        LastModifiedBy:
+          allOf:
+            - $ref: '#/components/schemas/LastModifiedBy'
+            - description: The Amazon Resource Name (ARN) of the user who last modified the ruleset.
+        LastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The modification date and time of the ruleset.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RulesetName'
+            - description: The name of the ruleset.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the ruleset.
+        RuleCount:
+          allOf:
+            - $ref: '#/components/schemas/RuleCount'
+            - description: The number of rules that are defined in the ruleset.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata tags that have been applied to the ruleset.
+        TargetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of a resource (dataset) that the ruleset is associated with.
+      description: Contains metadata about the ruleset.
     Schedule:
       type: object
       required:
@@ -5084,6 +5782,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/HiddenColumnList'
             - description: A list of columns to hide in the view frame.
+        StartRowIndex:
+          allOf:
+            - $ref: '#/components/schemas/StartRowIndex'
+            - description: The starting index for the range of rows to return in the view frame.
+        RowRange:
+          allOf:
+            - $ref: '#/components/schemas/RowRange'
+            - description: 'The number of rows to include in the view frame, beginning with the <code>StartRowIndex</code> value.'
+        Analytics:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsMode'
+            - description: Controls if analytics computation is enabled or disabled. Enabled by default.
       description: Represents the data being transformed during an action.
     SendProjectSessionActionRequest:
       type: object
@@ -5130,11 +5840,6 @@ components:
       pattern: '^[A-Z\_]+$'
       minLength: 1
       maxLength: 128
-    StatisticList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Statistic'
-      minItems: 1
     StatisticOverride:
       type: object
       required:
@@ -5175,6 +5880,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: One or more tags to be assigned to the resource.
+    ThresholdValue:
+      type: number
+      format: double
+      minimum: 0
+    ThresholdType:
+      type: string
+      enum:
+        - GREATER_THAN_OR_EQUAL
+        - LESS_THAN_OR_EQUAL
+        - GREATER_THAN
+        - LESS_THAN
+    ThresholdUnit:
+      type: string
+      enum:
+        - COUNT
+        - PERCENTAGE
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -5230,6 +5951,10 @@ components:
             - description: The maximum number of times to retry the job after a job run fails.
         OutputLocation:
           $ref: '#/components/schemas/S3Location'
+        ValidationConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/ValidationConfigurationList'
+            - description: List of validation configurations that are applied to the profile job.
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -5312,6 +6037,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecipeStepList'
             - description: 'One or more steps to be performed by the recipe. Each step consists of an action, and the conditions under which the action should succeed.'
+    UpdateRulesetRequest:
+      type: object
+      required:
+        - Rules
+      title: UpdateRulesetRequest
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/RulesetDescription'
+            - description: The description of the ruleset.
+        Rules:
+          allOf:
+            - $ref: '#/components/schemas/RuleList'
+            - description: A list of rules that are defined with the ruleset. A rule includes one or more checks to be validated on a DataBrew dataset.
     UpdateScheduleRequest:
       type: object
       required:
@@ -5326,6 +6065,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CronExpression'
             - description: 'The date or dates and time or times when the jobs are to be run. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html">Cron expressions</a> in the <i>Glue DataBrew Developer Guide</i>.'
+    ValidationMode:
+      type: string
+      enum:
+        - CHECK_ALL
     ValueReference:
       type: string
       pattern: '^:[A-Za-z0-9_]+$'

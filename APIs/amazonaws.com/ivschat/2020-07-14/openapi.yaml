@@ -1,0 +1,2290 @@
+openapi: 3.0.0
+info:
+  version: '2020-07-14'
+  x-release: v4
+  title: Amazon Interactive Video Service Chat
+  description: '<p> <b>Introduction</b> </p> <p>The Amazon IVS Chat control-plane API enables you to create and manage Amazon IVS Chat resources. You also need to integrate with the <a href="https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/chat-messaging-api.html"> Amazon IVS Chat Messaging API</a>, to enable users to interact with chat rooms in real time.</p> <p>The API is an AWS regional service. For a list of supported regions and Amazon IVS Chat HTTPS service endpoints, see the Amazon IVS Chat information on the <a href="https://docs.aws.amazon.com/general/latest/gr/ivs.html">Amazon IVS page</a> in the <i>AWS General Reference</i>. </p> <p> <b>Notes on terminology:</b> </p> <ul> <li> <p>You create service applications using the Amazon IVS Chat API. We refer to these as <i>applications</i>.</p> </li> <li> <p>You create front-end client applications (browser and Android/iOS apps) using the Amazon IVS Chat Messaging API. We refer to these as <i>clients</i>. </p> </li> </ul> <p> <b>Resources</b> </p> <p>The following resources are part of Amazon IVS Chat:</p> <ul> <li> <p> <b>LoggingConfiguration</b> — A configuration that allows customers to store and record sent messages in a chat room. See the Logging Configuration endpoints for more information.</p> </li> <li> <p> <b>Room</b> — The central Amazon IVS Chat resource through which clients connect to and exchange chat messages. See the Room endpoints for more information.</p> </li> </ul> <p> <b>Tagging</b> </p> <p>A <i>tag</i> is a metadata label that you assign to an AWS resource. A tag comprises a <i>key</i> and a <i>value</i>, both set by you. For example, you might set a tag as <code>topic:nature</code> to label a particular video category. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS Chat has no service-specific constraints beyond what is documented there.</p> <p>Tags can help you identify and organize your AWS resources. For example, you can use the same tag for different resources to indicate that they are related. You can also use tags to manage access (see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html">Access Tags</a>).</p> <p>The Amazon IVS Chat API has these tag-related endpoints: <a>TagResource</a>, <a>UntagResource</a>, and <a>ListTagsForResource</a>. The following resource supports tagging: Room.</p> <p>At most 50 tags can be applied to a resource.</p> <p> <b>API Access Security</b> </p> <p>Your Amazon IVS Chat applications (service applications and clients) must be authenticated and authorized to access Amazon IVS Chat resources. Note the differences between these concepts:</p> <ul> <li> <p> <i>Authentication</i> is about verifying identity. Requests to the Amazon IVS Chat API must be signed to verify your identity.</p> </li> <li> <p> <i>Authorization</i> is about granting permissions. Your IAM roles need to have permissions for Amazon IVS Chat API requests.</p> </li> </ul> <p>Users (viewers) connect to a room using secure access tokens that you create using the <a>CreateChatToken</a> endpoint through the AWS SDK. You call CreateChatToken for every user’s chat session, passing identity and authorization information about the user.</p> <p> <b>Signing API Requests</b> </p> <p>HTTP API requests must be signed with an AWS SigV4 signature using your AWS security credentials. The AWS Command Line Interface (CLI) and the AWS SDKs take care of signing the underlying API calls for you. However, if your application calls the Amazon IVS Chat HTTP API directly, it’s your responsibility to sign the requests.</p> <p>You generate a signature using valid AWS credentials for an IAM role that has permission to perform the requested action. For example, DeleteMessage requests must be made using an IAM role that has the <code>ivschat:DeleteMessage</code> permission.</p> <p>For more information:</p> <ul> <li> <p>Authentication and generating signatures — See <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html">Authenticating Requests (Amazon Web Services Signature Version 4)</a> in the <i>Amazon Web Services General Reference</i>.</p> </li> <li> <p>Managing Amazon IVS permissions — See <a href="https://docs.aws.amazon.com/ivs/latest/userguide/security-iam.html">Identity and Access Management</a> on the Security page of the <i>Amazon IVS User Guide</i>.</p> </li> </ul> <p> <b>Amazon Resource Names (ARNs)</b> </p> <p>ARNs uniquely identify AWS resources. An ARN is required when you need to specify a resource unambiguously across all of AWS, such as in IAM policies and API calls. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names</a> in the <i>AWS General Reference</i>.</p> <p> <b>Messaging Endpoints</b> </p> <ul> <li> <p> <a>DeleteMessage</a> — Sends an event to a specific room which directs clients to delete a specific message; that is, unrender it from view and delete it from the client’s chat history. This event’s <code>EventName</code> is <code>aws:DELETE_MESSAGE</code>. This replicates the <a href="https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-deletemessage-publish.html"> DeleteMessage</a> WebSocket operation in the Amazon IVS Chat Messaging API.</p> </li> <li> <p> <a>DisconnectUser</a> — Disconnects all connections using a specified user ID from a room. This replicates the <a href="https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-disconnectuser-publish.html"> DisconnectUser</a> WebSocket operation in the Amazon IVS Chat Messaging API.</p> </li> <li> <p> <a>SendEvent</a> — Sends an event to a room. Use this within your application’s business logic to send events to clients of a room; e.g., to notify clients to change the way the chat UI is rendered.</p> </li> </ul> <p> <b>Chat Token Endpoint</b> </p> <ul> <li> <p> <a>CreateChatToken</a> — Creates an encrypted token that is used by a chat participant to establish an individual WebSocket chat connection to a room. When the token is used to connect to chat, the connection is valid for the session duration specified in the request. The token becomes invalid at the token-expiration timestamp included in the response.</p> </li> </ul> <p> <b>Room Endpoints</b> </p> <ul> <li> <p> <a>CreateRoom</a> — Creates a room that allows clients to connect and pass messages.</p> </li> <li> <p> <a>DeleteRoom</a> — Deletes the specified room.</p> </li> <li> <p> <a>GetRoom</a> — Gets the specified room.</p> </li> <li> <p> <a>ListRooms</a> — Gets summary information about all your rooms in the AWS region where the API request is processed. </p> </li> <li> <p> <a>UpdateRoom</a> — Updates a room’s configuration.</p> </li> </ul> <p> <b>Logging Configuration Endpoints</b> </p> <ul> <li> <p> <a>CreateLoggingConfiguration</a> — Creates a logging configuration that allows clients to store and record sent messages.</p> </li> <li> <p> <a>DeleteLoggingConfiguration</a> — Deletes the specified logging configuration.</p> </li> <li> <p> <a>GetLoggingConfiguration</a> — Gets the specified logging configuration.</p> </li> <li> <p> <a>ListLoggingConfigurations</a> — Gets summary information about all your logging configurations in the AWS region where the API request is processed.</p> </li> <li> <p> <a>UpdateLoggingConfiguration</a> — Updates a specified logging configuration.</p> </li> </ul> <p> <b>Tags Endpoints</b> </p> <ul> <li> <p> <a>ListTagsForResource</a> — Gets information about AWS tags for the specified ARN.</p> </li> <li> <p> <a>TagResource</a> — Adds or updates tags for the AWS resource with the specified ARN.</p> </li> <li> <p> <a>UntagResource</a> — Removes tags from the resource with the specified ARN.</p> </li> </ul> <p>All the above are HTTP operations. There is a separate <i>messaging</i> API for managing Chat resources; see the <a href="https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/chat-messaging-api.html"> Amazon IVS Chat Messaging API Reference</a>.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: ivschat
+  x-aws-signingName: ivschat
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/ivschat-2020-07-14.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/ivschat/'
+servers:
+  - url: 'http://ivschat.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The ivschat multi-region endpoint
+  - url: 'https://ivschat.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The ivschat multi-region endpoint
+  - url: 'http://ivschat.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The ivschat endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://ivschat.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The ivschat endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /CreateChatToken:
+    post:
+      operationId: CreateChatToken
+      description: '<p>Creates an encrypted token that is used by a chat participant to establish an individual WebSocket chat connection to a room. When the token is used to connect to chat, the connection is valid for the session duration specified in the request. The token becomes invalid at the token-expiration timestamp included in the response.</p> <p>Use the <code>capabilities</code> field to permit an end user to send messages or moderate a room.</p> <p>The <code>attributes</code> field securely attaches structured data to the chat session; the data is included within each message sent by the end user and received by other participants in the room. Common use cases for attributes include passing end-user profile data like an icon, display name, colors, badges, and other display features.</p> <p>Encryption keys are owned by Amazon IVS Chat and never used directly by your application.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateChatTokenResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: PendingVerification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingVerification'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - roomIdentifier
+                - userId
+              properties:
+                attributes:
+                  description: Application-provided attributes to encode into the token and attach to a chat session. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/String'
+                capabilities:
+                  description: 'Set of capabilities that the user is allowed to perform in the room. Default: None (the capability to view messages is implicitly included in all requests).'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ChatTokenCapability'
+                roomIdentifier:
+                  description: 'Identifier of the room that the client is trying to access. Currently this must be an ARN. '
+                  type: string
+                  pattern: '^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:room/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+                sessionDurationInMinutes:
+                  description: 'Session duration (in minutes), after which the session expires. Default: 60 (1 hour).'
+                  type: integer
+                  minimum: 1
+                  maximum: 180
+                userId:
+                  description: Application-provided ID that uniquely identifies the user associated with this token. This can be any UTF-8 encoded text.
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /CreateLoggingConfiguration:
+    post:
+      operationId: CreateLoggingConfiguration
+      description: Creates a logging configuration that allows clients to store and record sent messages.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateLoggingConfigurationResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: PendingVerification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingVerification'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - destinationConfiguration
+              properties:
+                destinationConfiguration:
+                  description: 'A complex type that describes a location where chat logs will be stored. Each member represents the configuration of one log destination. For logging, you define only one type of destination (for CloudWatch Logs, Kinesis Firehose, or S3).'
+                  type: object
+                  properties:
+                    cloudWatchLogs:
+                      allOf:
+                        - $ref: '#/components/schemas/CloudWatchLogsDestinationConfiguration'
+                        - description: An Amazon CloudWatch Logs destination configuration where chat activity will be logged.
+                    firehose:
+                      allOf:
+                        - $ref: '#/components/schemas/FirehoseDestinationConfiguration'
+                        - description: An Amazon Kinesis Data Firehose destination configuration where chat activity will be logged.
+                    s3:
+                      allOf:
+                        - $ref: '#/components/schemas/S3DestinationConfiguration'
+                        - description: An Amazon S3 destination configuration where chat activity will be logged.
+                name:
+                  description: Logging-configuration name. The value does not need to be unique.
+                  type: string
+                  pattern: '^[a-zA-Z0-9-_]*$'
+                  minLength: 0
+                  maxLength: 128
+                tags:
+                  description: 'Tags to attach to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS Chat has no constraints on tags beyond what is documented there.'
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /CreateRoom:
+    post:
+      operationId: CreateRoom
+      description: Creates a room that allows clients to connect and pass messages.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRoomResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: PendingVerification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingVerification'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                loggingConfigurationIdentifiers:
+                  description: Array of logging-configuration identifiers attached to the room.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/LoggingConfigurationIdentifier'
+                  minItems: 0
+                  maxItems: 3
+                maximumMessageLength:
+                  description: 'Maximum number of characters in a single message. Messages are expected to be UTF-8 encoded and this limit applies specifically to rune/code-point count, not number of bytes. Default: 500.'
+                  type: integer
+                  minimum: 1
+                  maximum: 500
+                maximumMessageRatePerSecond:
+                  description: 'Maximum number of messages per second that can be sent to the room (by all clients). Default: 10. '
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                messageReviewHandler:
+                  description: Configuration information for optional message review.
+                  type: object
+                  properties:
+                    fallbackResult:
+                      allOf:
+                        - $ref: '#/components/schemas/FallbackResult'
+                        - description: 'Specifies the fallback behavior (whether the message is allowed or denied) if the handler does not return a valid response, encounters an error, or times out. (For the timeout period, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/service-quotas.html"> Service Quotas</a>.) If allowed, the message is delivered with returned content to all users connected to the room. If denied, the message is not delivered to any user. Default: <code>ALLOW</code>.'
+                    uri:
+                      allOf:
+                        - $ref: '#/components/schemas/LambdaArn'
+                        - description: Identifier of the message review handler. Currently this must be an ARN of a lambda function.
+                name:
+                  description: Room name. The value does not need to be unique.
+                  type: string
+                  pattern: '^[a-zA-Z0-9-_]*$'
+                  minLength: 0
+                  maxLength: 128
+                tags:
+                  description: 'Tags to attach to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS Chat has no constraints beyond what is documented there.'
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DeleteLoggingConfiguration:
+    post:
+      operationId: DeleteLoggingConfiguration
+      description: Deletes the specified logging configuration.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: PendingVerification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingVerification'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - identifier
+              properties:
+                identifier:
+                  description: Identifier of the logging configuration to be deleted.
+                  type: string
+                  pattern: '^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:logging-configuration/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DeleteMessage:
+    post:
+      operationId: DeleteMessage
+      description: 'Sends an event to a specific room which directs clients to delete a specific message; that is, unrender it from view and delete it from the client’s chat history. This event’s <code>EventName</code> is <code>aws:DELETE_MESSAGE</code>. This replicates the <a href="https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-deletemessage-publish.html"> DeleteMessage</a> WebSocket operation in the Amazon IVS Chat Messaging API.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteMessageResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: PendingVerification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingVerification'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - roomIdentifier
+              properties:
+                id:
+                  description: 'ID of the message to be deleted. This is the <code>Id</code> field in the received message (see <a href="https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-message-subscribe.html"> Message (Subscribe)</a> in the Chat Messaging API).'
+                  type: string
+                  pattern: '^[a-zA-Z0-9]+$'
+                  minLength: 12
+                  maxLength: 12
+                reason:
+                  description: Reason for deleting the message.
+                  type: string
+                  minLength: 1
+                  maxLength: 256
+                roomIdentifier:
+                  description: 'Identifier of the room where the message should be deleted. Currently this must be an ARN. '
+                  type: string
+                  pattern: '^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:room/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DeleteRoom:
+    post:
+      operationId: DeleteRoom
+      description: Deletes the specified room.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: PendingVerification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingVerification'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - identifier
+              properties:
+                identifier:
+                  description: Identifier of the room to be deleted. Currently this must be an ARN.
+                  type: string
+                  pattern: '^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:room/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DisconnectUser:
+    post:
+      operationId: DisconnectUser
+      description: 'Disconnects all connections using a specified user ID from a room. This replicates the <a href="https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-disconnectuser-publish.html"> DisconnectUser</a> WebSocket operation in the Amazon IVS Chat Messaging API.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisconnectUserResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: PendingVerification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingVerification'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - roomIdentifier
+                - userId
+              properties:
+                reason:
+                  description: Reason for disconnecting the user.
+                  type: string
+                  minLength: 1
+                  maxLength: 256
+                roomIdentifier:
+                  description: Identifier of the room from which the user's clients should be disconnected. Currently this must be an ARN.
+                  type: string
+                  pattern: '^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:room/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+                userId:
+                  description: ID of the user (connection) to disconnect from the room.
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /GetLoggingConfiguration:
+    post:
+      operationId: GetLoggingConfiguration
+      description: Gets the specified logging configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLoggingConfigurationResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - identifier
+              properties:
+                identifier:
+                  description: Identifier of the logging configuration to be retrieved.
+                  type: string
+                  pattern: '^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:logging-configuration/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /GetRoom:
+    post:
+      operationId: GetRoom
+      description: Gets the specified room.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRoomResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - identifier
+              properties:
+                identifier:
+                  description: Identifier of the room for which the configuration is to be retrieved. Currently this must be an ARN.
+                  type: string
+                  pattern: '^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:room/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListLoggingConfigurations:
+    post:
+      operationId: ListLoggingConfigurations
+      description: Gets summary information about all your logging configurations in the AWS region where the API request is processed.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListLoggingConfigurationsResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                maxResults:
+                  description: 'Maximum number of logging configurations to return. Default: 50.'
+                  type: integer
+                  minimum: 1
+                  maximum: 50
+                nextToken:
+                  description: The first logging configurations to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+                  type: string
+                  minLength: 0
+                  maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListRooms:
+    post:
+      operationId: ListRooms
+      description: Gets summary information about all your rooms in the AWS region where the API request is processed. Results are sorted in descending order of <code>updateTime</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRoomsResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                loggingConfigurationIdentifier:
+                  description: Logging-configuration identifier.
+                  type: string
+                  pattern: '^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:logging-configuration/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+                maxResults:
+                  description: 'Maximum number of rooms to return. Default: 50.'
+                  type: integer
+                  minimum: 1
+                  maximum: 50
+                messageReviewHandlerUri:
+                  description: Filters the list to match the specified message review handler URI.
+                  type: string
+                  pattern: '^$|^arn:aws:lambda:[a-z0-9-]+:[0-9]{12}:function:.+'
+                  minLength: 0
+                  maxLength: 170
+                name:
+                  description: Filters the list to match the specified room name.
+                  type: string
+                  pattern: '^[a-zA-Z0-9-_]*$'
+                  minLength: 0
+                  maxLength: 128
+                nextToken:
+                  description: The first room to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+                  type: string
+                  minLength: 0
+                  maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Gets information about AWS tags for the specified ARN.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the resource to be retrieved. The ARN must be URL-encoded.
+          schema:
+            type: string
+            pattern: '^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:[a-z-]/[a-zA-Z0-9-]+$'
+            minLength: 1
+            maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Adds or updates tags for the AWS resource with the specified ARN.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the resource to be tagged. The ARN must be URL-encoded.
+          schema:
+            type: string
+            pattern: '^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:[a-z-]/[a-zA-Z0-9-]+$'
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: 'Array of tags to be added or updated. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS Chat has no constraints beyond what is documented there.'
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  /SendEvent:
+    post:
+      operationId: SendEvent
+      description: 'Sends an event to a room. Use this within your application’s business logic to send events to clients of a room; e.g., to notify clients to change the way the chat UI is rendered.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendEventResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: PendingVerification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingVerification'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - eventName
+                - roomIdentifier
+              properties:
+                attributes:
+                  description: Application-defined metadata to attach to the event sent to clients. The maximum length of the metadata is 1 KB total.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/String'
+                eventName:
+                  description: Application-defined name of the event to send to clients.
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                roomIdentifier:
+                  description: Identifier of the room to which the event will be sent. Currently this must be an ARN.
+                  type: string
+                  pattern: '^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:room/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes tags from the resource with the specified ARN.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the resource to be untagged. The ARN must be URL-encoded.
+          schema:
+            type: string
+            pattern: '^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:[a-z-]/[a-zA-Z0-9-]+$'
+            minLength: 1
+            maxLength: 128
+        - name: tagKeys
+          in: query
+          required: true
+          description: 'Array of tags to be removed. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS Chat has no constraints beyond what is documented there.'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 0
+            maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /UpdateLoggingConfiguration:
+    post:
+      operationId: UpdateLoggingConfiguration
+      description: Updates a specified logging configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateLoggingConfigurationResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: PendingVerification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingVerification'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - identifier
+              properties:
+                destinationConfiguration:
+                  description: 'A complex type that describes a location where chat logs will be stored. Each member represents the configuration of one log destination. For logging, you define only one type of destination (for CloudWatch Logs, Kinesis Firehose, or S3).'
+                  type: object
+                  properties:
+                    cloudWatchLogs:
+                      allOf:
+                        - $ref: '#/components/schemas/CloudWatchLogsDestinationConfiguration'
+                        - description: An Amazon CloudWatch Logs destination configuration where chat activity will be logged.
+                    firehose:
+                      allOf:
+                        - $ref: '#/components/schemas/FirehoseDestinationConfiguration'
+                        - description: An Amazon Kinesis Data Firehose destination configuration where chat activity will be logged.
+                    s3:
+                      allOf:
+                        - $ref: '#/components/schemas/S3DestinationConfiguration'
+                        - description: An Amazon S3 destination configuration where chat activity will be logged.
+                identifier:
+                  description: Identifier of the logging configuration to be updated.
+                  type: string
+                  pattern: '^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:logging-configuration/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+                name:
+                  description: Logging-configuration name. The value does not need to be unique.
+                  type: string
+                  pattern: '^[a-zA-Z0-9-_]*$'
+                  minLength: 0
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /UpdateRoom:
+    post:
+      operationId: UpdateRoom
+      description: Updates a room’s configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRoomResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: PendingVerification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingVerification'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - identifier
+              properties:
+                identifier:
+                  description: Identifier of the room to be updated. Currently this must be an ARN.
+                  type: string
+                  pattern: '^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:room/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+                loggingConfigurationIdentifiers:
+                  description: Array of logging-configuration identifiers attached to the room.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/LoggingConfigurationIdentifier'
+                  minItems: 0
+                  maxItems: 3
+                maximumMessageLength:
+                  description: 'The maximum number of characters in a single message. Messages are expected to be UTF-8 encoded and this limit applies specifically to rune/code-point count, not number of bytes. Default: 500.'
+                  type: integer
+                  minimum: 1
+                  maximum: 500
+                maximumMessageRatePerSecond:
+                  description: 'Maximum number of messages per second that can be sent to the room (by all clients). Default: 10.'
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                messageReviewHandler:
+                  description: Configuration information for optional message review.
+                  type: object
+                  properties:
+                    fallbackResult:
+                      allOf:
+                        - $ref: '#/components/schemas/FallbackResult'
+                        - description: 'Specifies the fallback behavior (whether the message is allowed or denied) if the handler does not return a valid response, encounters an error, or times out. (For the timeout period, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/service-quotas.html"> Service Quotas</a>.) If allowed, the message is delivered with returned content to all users connected to the room. If denied, the message is not delivered to any user. Default: <code>ALLOW</code>.'
+                    uri:
+                      allOf:
+                        - $ref: '#/components/schemas/LambdaArn'
+                        - description: Identifier of the message review handler. Currently this must be an ARN of a lambda function.
+                name:
+                  description: Room name. The value does not need to be unique.
+                  type: string
+                  pattern: '^[a-zA-Z0-9-_]*$'
+                  minLength: 0
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateChatTokenResponse:
+      type: object
+      properties:
+        sessionExpirationTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: Time after which an end user's session is no longer valid. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.
+        token:
+          allOf:
+            - $ref: '#/components/schemas/ChatToken'
+            - description: 'The issued client token, encrypted.'
+        tokenExpirationTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: Time after which the token is no longer valid and cannot be used to connect to a room. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.
+    String:
+      type: string
+    ChatTokenCapability:
+      type: string
+      enum:
+        - SEND_MESSAGE
+        - DISCONNECT_USER
+        - DELETE_MESSAGE
+    AccessDeniedException: {}
+    ResourceNotFoundException: {}
+    PendingVerification: {}
+    ValidationException: {}
+    CreateLoggingConfigurationResponse:
+      type: object
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationArn'
+            - description: 'Logging-configuration ARN, assigned by the system.'
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: Time when the logging configuration was created. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.
+        destinationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/DestinationConfiguration'
+            - description: 'A complex type that contains a destination configuration for where chat content will be logged, from the request. There is only one type of destination (<code>cloudWatchLogs</code>, <code>firehose</code>, or <code>s3</code>) in a <code>destinationConfiguration</code>.'
+        id:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationID'
+            - description: 'Logging-configuration ID, generated by the system. This is a relative identifier, the part of the ARN that uniquely identifies the logging configuration.'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationName'
+            - description: 'Logging-configuration name, from the request (if specified).'
+        state:
+          allOf:
+            - $ref: '#/components/schemas/CreateLoggingConfigurationState'
+            - description: 'The state of the logging configuration. When the state is <code>ACTIVE</code>, the configuration is ready to log chat content.'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Tags attached to the resource, from the request (if specified). Array of maps, each of the form <code>string:string (key:value)</code>.'
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: Time of the logging configuration’s last update. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.
+    CloudWatchLogsDestinationConfiguration:
+      type: object
+      required:
+        - logGroupName
+      properties:
+        logGroupName:
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: Name of the Amazon Cloudwatch Logs destination where chat activity will be logged.
+      description: Specifies a CloudWatch Logs location where chat logs will be stored.
+    FirehoseDestinationConfiguration:
+      type: object
+      required:
+        - deliveryStreamName
+      properties:
+        deliveryStreamName:
+          allOf:
+            - $ref: '#/components/schemas/DeliveryStreamName'
+            - description: Name of the Amazon Kinesis Firehose delivery stream where chat activity will be logged.
+      description: Specifies a Kinesis Firehose location where chat logs will be stored.
+    S3DestinationConfiguration:
+      type: object
+      required:
+        - bucketName
+      properties:
+        bucketName:
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: Name of the Amazon S3 bucket where chat activity will be logged.
+      description: Specifies an S3 location where chat logs will be stored.
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    ConflictException: {}
+    ServiceQuotaExceededException: {}
+    CreateRoomResponse:
+      type: object
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/RoomArn'
+            - description: 'Room ARN, assigned by the system.'
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: Time when the room was created. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/RoomID'
+            - description: 'Room ID, generated by the system. This is a relative identifier, the part of the ARN that uniquely identifies the room.'
+        loggingConfigurationIdentifiers:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationIdentifierList'
+            - description: 'Array of logging configurations attached to the room, from the request (if specified).'
+        maximumMessageLength:
+          allOf:
+            - $ref: '#/components/schemas/RoomMaxMessageLength'
+            - description: 'Maximum number of characters in a single message, from the request (if specified).'
+        maximumMessageRatePerSecond:
+          allOf:
+            - $ref: '#/components/schemas/RoomMaxMessageRatePerSecond'
+            - description: 'Maximum number of messages per second that can be sent to the room (by all clients), from the request (if specified).'
+        messageReviewHandler:
+          allOf:
+            - $ref: '#/components/schemas/MessageReviewHandler'
+            - description: Configuration information for optional review of messages.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/RoomName'
+            - description: 'Room name, from the request (if specified).'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Tags attached to the resource, from the request (if specified).'
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: Time of the room’s last update. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.
+    LoggingConfigurationIdentifier:
+      type: string
+      pattern: '^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:logging-configuration/[a-zA-Z0-9-]+$'
+      minLength: 1
+      maxLength: 128
+    FallbackResult:
+      type: string
+      enum:
+        - ALLOW
+        - DENY
+    LambdaArn:
+      type: string
+      pattern: '^$|^arn:aws:lambda:[a-z0-9-]+:[0-9]{12}:function:.+'
+      minLength: 0
+      maxLength: 170
+    DeleteMessageResponse:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: 'Operation identifier, generated by Amazon IVS Chat.'
+    ThrottlingException: {}
+    DisconnectUserResponse:
+      type: object
+      properties: {}
+    GetLoggingConfigurationResponse:
+      type: object
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationArn'
+            - description: 'Logging-configuration ARN, from the request (if <code>identifier</code> was an ARN).'
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: Time when the logging configuration was created. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.
+        destinationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/DestinationConfiguration'
+            - description: 'A complex type that contains a destination configuration for where chat content will be logged. There is only one type of destination (<code>cloudWatchLogs</code>, <code>firehose</code>, or <code>s3</code>) in a <code>destinationConfiguration</code>.'
+        id:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationID'
+            - description: 'Logging-configuration ID, generated by the system. This is a relative identifier, the part of the ARN that uniquely identifies the logging configuration.'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationName'
+            - description: Logging-configuration name. This value does not need to be unique.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationState'
+            - description: 'The state of the logging configuration. When the state is <code>ACTIVE</code>, the configuration is ready to log chat content.'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>.'
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: Time of the logging configuration’s last update. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.
+    GetRoomResponse:
+      type: object
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/RoomArn'
+            - description: 'Room ARN, from the request (if <code>identifier</code> was an ARN).'
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: Time when the room was created. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/RoomID'
+            - description: 'Room ID, generated by the system. This is a relative identifier, the part of the ARN that uniquely identifies the room.'
+        loggingConfigurationIdentifiers:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationIdentifierList'
+            - description: Array of logging configurations attached to the room.
+        maximumMessageLength:
+          allOf:
+            - $ref: '#/components/schemas/RoomMaxMessageLength'
+            - description: 'Maximum number of characters in a single message. Messages are expected to be UTF-8 encoded and this limit applies specifically to rune/code-point count, not number of bytes. Default: 500.'
+        maximumMessageRatePerSecond:
+          allOf:
+            - $ref: '#/components/schemas/RoomMaxMessageRatePerSecond'
+            - description: 'Maximum number of messages per second that can be sent to the room (by all clients). Default: 10.'
+        messageReviewHandler:
+          allOf:
+            - $ref: '#/components/schemas/MessageReviewHandler'
+            - description: Configuration information for optional review of messages.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/RoomName'
+            - description: Room name. The value does not need to be unique.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>.'
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: Time of the room’s last update. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.
+    ListLoggingConfigurationsResponse:
+      type: object
+      required:
+        - loggingConfigurations
+      properties:
+        loggingConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationList'
+            - description: 'List of the matching logging configurations (summary information only). There is only one type of destination (<code>cloudWatchLogs</code>, <code>firehose</code>, or <code>s3</code>) in a <code>destinationConfiguration</code>.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If there are more logging configurations than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.'
+    ListRoomsResponse:
+      type: object
+      required:
+        - rooms
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If there are more rooms than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.'
+        rooms:
+          allOf:
+            - $ref: '#/components/schemas/RoomList'
+            - description: List of the matching rooms (summary information only).
+    ListTagsForResourceResponse:
+      type: object
+      required:
+        - tags
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>.'
+    InternalServerException: {}
+    SendEventResponse:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: 'An identifier generated by Amazon IVS Chat. This identifier must be used in subsequent operations for this message, such as DeleteMessage.'
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    UpdateLoggingConfigurationResponse:
+      type: object
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationArn'
+            - description: 'Logging-configuration ARN, from the request (if <code>identifier</code> was an ARN).'
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: Time when the logging configuration was created. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.
+        destinationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/DestinationConfiguration'
+            - description: 'A complex type that contains a destination configuration for where chat content will be logged, from the request. There is only one type of destination (<code>cloudWatchLogs</code>, <code>firehose</code>, or <code>s3</code>) in a <code>destinationConfiguration</code>.'
+        id:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationID'
+            - description: 'Logging-configuration ID, generated by the system. This is a relative identifier, the part of the ARN that uniquely identifies the room.'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationName'
+            - description: 'Logging-configuration name, from the request (if specified).'
+        state:
+          allOf:
+            - $ref: '#/components/schemas/UpdateLoggingConfigurationState'
+            - description: 'The state of the logging configuration. When the state is <code>ACTIVE</code>, the configuration is ready to log chat content.'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. '
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: Time of the logging configuration’s last update. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.
+    UpdateRoomResponse:
+      type: object
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/RoomArn'
+            - description: 'Room ARN, from the request (if <code>identifier</code> was an ARN).'
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: Time when the room was created. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/RoomID'
+            - description: 'Room ID, generated by the system. This is a relative identifier, the part of the ARN that uniquely identifies the room.'
+        loggingConfigurationIdentifiers:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationIdentifierList'
+            - description: 'Array of logging configurations attached to the room, from the request (if specified).'
+        maximumMessageLength:
+          allOf:
+            - $ref: '#/components/schemas/RoomMaxMessageLength'
+            - description: 'Maximum number of characters in a single message, from the request (if specified).'
+        maximumMessageRatePerSecond:
+          allOf:
+            - $ref: '#/components/schemas/RoomMaxMessageRatePerSecond'
+            - description: 'Maximum number of messages per second that can be sent to the room (by all clients), from the request (if specified).'
+        messageReviewHandler:
+          allOf:
+            - $ref: '#/components/schemas/MessageReviewHandler'
+            - description: Configuration information for optional review of messages.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/RoomName'
+            - description: 'Room name, from the request (if specified).'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>.'
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: Time of the room’s last update. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.
+    BucketName:
+      type: string
+      pattern: '^[a-z0-9-.]+$'
+      minLength: 3
+      maxLength: 63
+    ChatToken:
+      type: string
+    ChatTokenAttributes:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/String'
+    ChatTokenCapabilities:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChatTokenCapability'
+    LogGroupName:
+      type: string
+      pattern: '^[\.\-_/#A-Za-z0-9]+$'
+      minLength: 1
+      maxLength: 512
+    RoomIdentifier:
+      type: string
+      pattern: '^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:room/[a-zA-Z0-9-]+$'
+      minLength: 1
+      maxLength: 128
+    SessionDurationInMinutes:
+      type: integer
+      minimum: 1
+      maximum: 180
+    UserID:
+      type: string
+      minLength: 1
+      maxLength: 128
+    CreateChatTokenRequest:
+      type: object
+      required:
+        - roomIdentifier
+        - userId
+      title: CreateChatTokenRequest
+      properties:
+        attributes:
+          allOf:
+            - $ref: '#/components/schemas/ChatTokenAttributes'
+            - description: Application-provided attributes to encode into the token and attach to a chat session. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total.
+        capabilities:
+          allOf:
+            - $ref: '#/components/schemas/ChatTokenCapabilities'
+            - description: 'Set of capabilities that the user is allowed to perform in the room. Default: None (the capability to view messages is implicitly included in all requests).'
+        roomIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/RoomIdentifier'
+            - description: 'Identifier of the room that the client is trying to access. Currently this must be an ARN. '
+        sessionDurationInMinutes:
+          allOf:
+            - $ref: '#/components/schemas/SessionDurationInMinutes'
+            - description: 'Session duration (in minutes), after which the session expires. Default: 60 (1 hour).'
+        userId:
+          allOf:
+            - $ref: '#/components/schemas/UserID'
+            - description: Application-provided ID that uniquely identifies the user associated with this token. This can be any UTF-8 encoded text.
+    Time:
+      type: string
+      format: date-time
+    DestinationConfiguration:
+      type: object
+      properties:
+        cloudWatchLogs:
+          allOf:
+            - $ref: '#/components/schemas/CloudWatchLogsDestinationConfiguration'
+            - description: An Amazon CloudWatch Logs destination configuration where chat activity will be logged.
+        firehose:
+          allOf:
+            - $ref: '#/components/schemas/FirehoseDestinationConfiguration'
+            - description: An Amazon Kinesis Data Firehose destination configuration where chat activity will be logged.
+        s3:
+          allOf:
+            - $ref: '#/components/schemas/S3DestinationConfiguration'
+            - description: An Amazon S3 destination configuration where chat activity will be logged.
+      description: 'A complex type that describes a location where chat logs will be stored. Each member represents the configuration of one log destination. For logging, you define only one type of destination (for CloudWatch Logs, Kinesis Firehose, or S3).'
+    LoggingConfigurationName:
+      type: string
+      pattern: '^[a-zA-Z0-9-_]*$'
+      minLength: 0
+      maxLength: 128
+    Tags:
+      type: object
+      minProperties: 0
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    CreateLoggingConfigurationRequest:
+      type: object
+      required:
+        - destinationConfiguration
+      title: CreateLoggingConfigurationRequest
+      properties:
+        destinationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/DestinationConfiguration'
+            - description: 'A complex type that contains a destination configuration for where chat content will be logged. There can be only one type of destination (<code>cloudWatchLogs</code>, <code>firehose</code>, or <code>s3</code>) in a <code>destinationConfiguration</code>.'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationName'
+            - description: Logging-configuration name. The value does not need to be unique.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Tags to attach to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS Chat has no constraints on tags beyond what is documented there.'
+    LoggingConfigurationArn:
+      type: string
+      pattern: '^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:logging-configuration/[a-zA-Z0-9-]+$'
+      minLength: 1
+      maxLength: 128
+    LoggingConfigurationID:
+      type: string
+      pattern: '^[a-zA-Z0-9]+$'
+      minLength: 12
+      maxLength: 12
+    CreateLoggingConfigurationState:
+      type: string
+      enum:
+        - ACTIVE
+    LoggingConfigurationIdentifierList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LoggingConfigurationIdentifier'
+      minItems: 0
+      maxItems: 3
+    RoomMaxMessageLength:
+      type: integer
+      minimum: 1
+      maximum: 500
+    RoomMaxMessageRatePerSecond:
+      type: integer
+      minimum: 1
+      maximum: 100
+    MessageReviewHandler:
+      type: object
+      properties:
+        fallbackResult:
+          allOf:
+            - $ref: '#/components/schemas/FallbackResult'
+            - description: 'Specifies the fallback behavior (whether the message is allowed or denied) if the handler does not return a valid response, encounters an error, or times out. (For the timeout period, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/service-quotas.html"> Service Quotas</a>.) If allowed, the message is delivered with returned content to all users connected to the room. If denied, the message is not delivered to any user. Default: <code>ALLOW</code>.'
+        uri:
+          allOf:
+            - $ref: '#/components/schemas/LambdaArn'
+            - description: Identifier of the message review handler. Currently this must be an ARN of a lambda function.
+      description: Configuration information for optional message review.
+    RoomName:
+      type: string
+      pattern: '^[a-zA-Z0-9-_]*$'
+      minLength: 0
+      maxLength: 128
+    CreateRoomRequest:
+      type: object
+      title: CreateRoomRequest
+      properties:
+        loggingConfigurationIdentifiers:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationIdentifierList'
+            - description: Array of logging-configuration identifiers attached to the room.
+        maximumMessageLength:
+          allOf:
+            - $ref: '#/components/schemas/RoomMaxMessageLength'
+            - description: 'Maximum number of characters in a single message. Messages are expected to be UTF-8 encoded and this limit applies specifically to rune/code-point count, not number of bytes. Default: 500.'
+        maximumMessageRatePerSecond:
+          allOf:
+            - $ref: '#/components/schemas/RoomMaxMessageRatePerSecond'
+            - description: 'Maximum number of messages per second that can be sent to the room (by all clients). Default: 10. '
+        messageReviewHandler:
+          allOf:
+            - $ref: '#/components/schemas/MessageReviewHandler'
+            - description: Configuration information for optional review of messages.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/RoomName'
+            - description: Room name. The value does not need to be unique.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Tags to attach to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS Chat has no constraints beyond what is documented there.'
+    RoomArn:
+      type: string
+      pattern: '^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:room/[a-zA-Z0-9-]+$'
+      minLength: 1
+      maxLength: 128
+    RoomID:
+      type: string
+      pattern: '^[a-zA-Z0-9]+$'
+      minLength: 12
+      maxLength: 12
+    DeleteLoggingConfigurationRequest:
+      type: object
+      required:
+        - identifier
+      title: DeleteLoggingConfigurationRequest
+      properties:
+        identifier:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationIdentifier'
+            - description: Identifier of the logging configuration to be deleted.
+    MessageID:
+      type: string
+      pattern: '^[a-zA-Z0-9]+$'
+      minLength: 12
+      maxLength: 12
+    Reason:
+      type: string
+      minLength: 1
+      maxLength: 256
+    DeleteMessageRequest:
+      type: object
+      required:
+        - id
+        - roomIdentifier
+      title: DeleteMessageRequest
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/MessageID'
+            - description: 'ID of the message to be deleted. This is the <code>Id</code> field in the received message (see <a href="https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-message-subscribe.html"> Message (Subscribe)</a> in the Chat Messaging API).'
+        reason:
+          allOf:
+            - $ref: '#/components/schemas/Reason'
+            - description: Reason for deleting the message.
+        roomIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/RoomIdentifier'
+            - description: 'Identifier of the room where the message should be deleted. Currently this must be an ARN. '
+    ID:
+      type: string
+      pattern: '^[a-zA-Z0-9]+$'
+      minLength: 12
+      maxLength: 12
+    DeleteRoomRequest:
+      type: object
+      required:
+        - identifier
+      title: DeleteRoomRequest
+      properties:
+        identifier:
+          allOf:
+            - $ref: '#/components/schemas/RoomIdentifier'
+            - description: Identifier of the room to be deleted. Currently this must be an ARN.
+    DeliveryStreamName:
+      type: string
+      pattern: '^[a-zA-Z0-9_.-]+$'
+      minLength: 1
+      maxLength: 64
+    DisconnectUserRequest:
+      type: object
+      required:
+        - roomIdentifier
+        - userId
+      title: DisconnectUserRequest
+      properties:
+        reason:
+          allOf:
+            - $ref: '#/components/schemas/Reason'
+            - description: Reason for disconnecting the user.
+        roomIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/RoomIdentifier'
+            - description: Identifier of the room from which the user's clients should be disconnected. Currently this must be an ARN.
+        userId:
+          allOf:
+            - $ref: '#/components/schemas/UserID'
+            - description: ID of the user (connection) to disconnect from the room.
+    EventAttributes:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/String'
+    EventName:
+      type: string
+      minLength: 1
+      maxLength: 100
+    GetLoggingConfigurationRequest:
+      type: object
+      required:
+        - identifier
+      title: GetLoggingConfigurationRequest
+      properties:
+        identifier:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationIdentifier'
+            - description: Identifier of the logging configuration to be retrieved.
+    LoggingConfigurationState:
+      type: string
+      enum:
+        - CREATING
+        - CREATE_FAILED
+        - DELETING
+        - DELETE_FAILED
+        - UPDATING
+        - UPDATE_FAILED
+        - ACTIVE
+    GetRoomRequest:
+      type: object
+      required:
+        - identifier
+      title: GetRoomRequest
+      properties:
+        identifier:
+          allOf:
+            - $ref: '#/components/schemas/RoomIdentifier'
+            - description: Identifier of the room for which the configuration is to be retrieved. Currently this must be an ARN.
+    MaxLoggingConfigurationResults:
+      type: integer
+      minimum: 1
+      maximum: 50
+    PaginationToken:
+      type: string
+      minLength: 0
+      maxLength: 1024
+    ListLoggingConfigurationsRequest:
+      type: object
+      title: ListLoggingConfigurationsRequest
+      properties:
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxLoggingConfigurationResults'
+            - description: 'Maximum number of logging configurations to return. Default: 50.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The first logging configurations to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+    LoggingConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LoggingConfigurationSummary'
+    MaxRoomResults:
+      type: integer
+      minimum: 1
+      maximum: 50
+    ListRoomsRequest:
+      type: object
+      title: ListRoomsRequest
+      properties:
+        loggingConfigurationIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationIdentifier'
+            - description: Logging-configuration identifier.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxRoomResults'
+            - description: 'Maximum number of rooms to return. Default: 50.'
+        messageReviewHandlerUri:
+          allOf:
+            - $ref: '#/components/schemas/LambdaArn'
+            - description: Filters the list to match the specified message review handler URI.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/RoomName'
+            - description: Filters the list to match the specified room name.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The first room to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+    RoomList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RoomSummary'
+    ResourceArn:
+      type: string
+      pattern: '^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:[a-z-]/[a-zA-Z0-9-]+$'
+      minLength: 1
+      maxLength: 128
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    LoggingConfigurationSummary:
+      type: object
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationArn'
+            - description: Logging-configuration ARN.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: Time when the logging configuration was created. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.
+        destinationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/DestinationConfiguration'
+            - description: A complex type that contains a destination configuration for where chat content will be logged.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationID'
+            - description: 'Logging-configuration ID, generated by the system. This is a relative identifier, the part of the ARN that uniquely identifies the room.'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationName'
+            - description: Logging-configuration name. The value does not need to be unique.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationState'
+            - description: 'The state of the logging configuration. When this is <code>ACTIVE</code>, the configuration is ready for logging chat content.'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Tags to attach to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS Chat has no constraints on tags beyond what is documented there.'
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: Time of the logging configuration’s last update. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.
+      description: Summary information about a logging configuration.
+    RoomSummary:
+      type: object
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/RoomArn'
+            - description: Room ARN.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: 'Time when the room was created. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>. '
+        id:
+          allOf:
+            - $ref: '#/components/schemas/RoomID'
+            - description: 'Room ID, generated by the system. This is a relative identifier, the part of the ARN that uniquely identifies the room.'
+        loggingConfigurationIdentifiers:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationIdentifierList'
+            - description: List of logging-configuration identifiers attached to the room.
+        messageReviewHandler:
+          allOf:
+            - $ref: '#/components/schemas/MessageReviewHandler'
+            - description: Configuration information for optional review of messages.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/RoomName'
+            - description: Room name. The value does not need to be unique.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS Chat has no constraints beyond what is documented there.'
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: 'Time of the room’s last update. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>. '
+      description: Summary information about a room.
+    SendEventRequest:
+      type: object
+      required:
+        - eventName
+        - roomIdentifier
+      title: SendEventRequest
+      properties:
+        attributes:
+          allOf:
+            - $ref: '#/components/schemas/EventAttributes'
+            - description: Application-defined metadata to attach to the event sent to clients. The maximum length of the metadata is 1 KB total.
+        eventName:
+          allOf:
+            - $ref: '#/components/schemas/EventName'
+            - description: Application-defined name of the event to send to clients.
+        roomIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/RoomIdentifier'
+            - description: Identifier of the room to which the event will be sent. Currently this must be an ARN.
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 0
+      maxItems: 50
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Array of tags to be added or updated. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS Chat has no constraints beyond what is documented there.'
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+    UpdateLoggingConfigurationRequest:
+      type: object
+      required:
+        - identifier
+      title: UpdateLoggingConfigurationRequest
+      properties:
+        destinationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/DestinationConfiguration'
+            - description: 'A complex type that contains a destination configuration for where chat content will be logged. There can be only one type of destination (<code>cloudWatchLogs</code>, <code>firehose</code>, or <code>s3</code>) in a <code>destinationConfiguration</code>.'
+        identifier:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationIdentifier'
+            - description: Identifier of the logging configuration to be updated.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationName'
+            - description: Logging-configuration name. The value does not need to be unique.
+    UpdateLoggingConfigurationState:
+      type: string
+      enum:
+        - ACTIVE
+    UpdateRoomRequest:
+      type: object
+      required:
+        - identifier
+      title: UpdateRoomRequest
+      properties:
+        identifier:
+          allOf:
+            - $ref: '#/components/schemas/RoomIdentifier'
+            - description: Identifier of the room to be updated. Currently this must be an ARN.
+        loggingConfigurationIdentifiers:
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfigurationIdentifierList'
+            - description: Array of logging-configuration identifiers attached to the room.
+        maximumMessageLength:
+          allOf:
+            - $ref: '#/components/schemas/RoomMaxMessageLength'
+            - description: 'The maximum number of characters in a single message. Messages are expected to be UTF-8 encoded and this limit applies specifically to rune/code-point count, not number of bytes. Default: 500.'
+        maximumMessageRatePerSecond:
+          allOf:
+            - $ref: '#/components/schemas/RoomMaxMessageRatePerSecond'
+            - description: 'Maximum number of messages per second that can be sent to the room (by all clients). Default: 10.'
+        messageReviewHandler:
+          allOf:
+            - $ref: '#/components/schemas/MessageReviewHandler'
+            - description: Configuration information for optional review of messages. Specify an empty <code>uri</code> string to disassociate a message review handler from the specified room.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/RoomName'
+            - description: Room name. The value does not need to be unique.
+security:
+  - hmac: []

@@ -619,7 +619,7 @@ components:
         L:
           allOf:
             - $ref: '#/components/schemas/ListAttributeValue'
-            - description: '<p>An attribute of type List. For example:</p> <p> <code>"L": [ {"S": "Cookies"} , {"S": "Coffee"}, {"N", "3.14159"}]</code> </p>'
+            - description: '<p>An attribute of type List. For example:</p> <p> <code>"L": [ {"S": "Cookies"} , {"S": "Coffee"}, {"N": "3.14159"}]</code> </p>'
         'NULL':
           allOf:
             - $ref: '#/components/schemas/NullAttributeValue'

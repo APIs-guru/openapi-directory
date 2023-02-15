@@ -115,6 +115,258 @@ servers:
     description: The mgn endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /ArchiveApplication:
+    post:
+      operationId: ArchiveApplication
+      description: Archive application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - applicationID
+              properties:
+                applicationID:
+                  description: Application ID.
+                  type: string
+                  pattern: '^app-[0-9a-zA-Z]{17}$'
+                  minLength: 21
+                  maxLength: 21
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ArchiveWave:
+    post:
+      operationId: ArchiveWave
+      description: Archive wave.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wave'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - waveID
+              properties:
+                waveID:
+                  description: Wave ID.
+                  type: string
+                  pattern: '^wave-[0-9a-zA-Z]{17}$'
+                  minLength: 22
+                  maxLength: 22
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /AssociateApplications:
+    post:
+      operationId: AssociateApplications
+      description: Associate applications to wave.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateApplicationsResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - applicationIDs
+                - waveID
+              properties:
+                applicationIDs:
+                  description: Application IDs list.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ApplicationID'
+                  minItems: 1
+                  maxItems: 50
+                waveID:
+                  description: Wave ID.
+                  type: string
+                  pattern: '^wave-[0-9a-zA-Z]{17}$'
+                  minLength: 22
+                  maxLength: 22
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /AssociateSourceServers:
+    post:
+      operationId: AssociateSourceServers
+      description: Associate source servers to application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateSourceServersResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - applicationID
+                - sourceServerIDs
+              properties:
+                applicationID:
+                  description: Application ID.
+                  type: string
+                  pattern: '^app-[0-9a-zA-Z]{17}$'
+                  minLength: 21
+                  maxLength: 21
+                sourceServerIDs:
+                  description: Source server IDs list.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SourceServerID'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /ChangeServerLifeCycleState:
     post:
       operationId: ChangeServerLifeCycleState
@@ -175,6 +427,223 @@ paths:
                   pattern: '^s-[0-9a-zA-Z]{17}$'
                   minLength: 19
                   maxLength: 19
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /CreateApplication:
+    post:
+      operationId: CreateApplication
+      description: Create application.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                description:
+                  description: Application description.
+                  type: string
+                  pattern: '^[^\x00]*$'
+                  minLength: 0
+                  maxLength: 600
+                name:
+                  description: Application name.
+                  type: string
+                  pattern: '^[^\s\x00]( *[^\s\x00])*$'
+                  minLength: 1
+                  maxLength: 256
+                tags:
+                  description: Application tags.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /CreateLaunchConfigurationTemplate:
+    post:
+      operationId: CreateLaunchConfigurationTemplate
+      description: Creates a new Launch Configuration Template.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LaunchConfigurationTemplate'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                associatePublicIpAddress:
+                  description: Associate public Ip address.
+                  type: boolean
+                bootMode:
+                  description: Launch configuration template boot mode.
+                  type: string
+                  enum:
+                    - LEGACY_BIOS
+                    - UEFI
+                copyPrivateIp:
+                  description: Copy private Ip.
+                  type: boolean
+                copyTags:
+                  description: Copy tags.
+                  type: boolean
+                enableMapAutoTagging:
+                  description: Enable map auto tagging.
+                  type: boolean
+                largeVolumeConf:
+                  description: Launch template disk configuration.
+                  type: object
+                  properties:
+                    iops:
+                      allOf:
+                        - $ref: '#/components/schemas/PositiveInteger'
+                        - description: Launch template disk iops configuration.
+                    throughput:
+                      allOf:
+                        - $ref: '#/components/schemas/PositiveInteger'
+                        - description: Launch template disk throughput configuration.
+                    volumeType:
+                      allOf:
+                        - $ref: '#/components/schemas/VolumeType'
+                        - description: Launch template disk volume type configuration.
+                launchDisposition:
+                  description: Launch disposition.
+                  type: string
+                  enum:
+                    - STOPPED
+                    - STARTED
+                licensing:
+                  description: Configure Licensing.
+                  type: object
+                  properties:
+                    osByol:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Configure BYOL OS licensing.
+                mapAutoTaggingMpeID:
+                  description: Launch configuration template map auto tagging MPE ID.
+                  type: string
+                  minLength: 0
+                  maxLength: 256
+                postLaunchActions:
+                  description: Post Launch Actions to executed on the Test or Cutover instance.
+                  type: object
+                  properties:
+                    cloudWatchLogGroupName:
+                      allOf:
+                        - $ref: '#/components/schemas/CloudWatchLogGroupName'
+                        - description: AWS Systems Manager Command's CloudWatch log group name.
+                    deployment:
+                      allOf:
+                        - $ref: '#/components/schemas/PostLaunchActionsDeploymentType'
+                        - description: Deployment type in which AWS Systems Manager Documents will be executed.
+                    s3LogBucket:
+                      allOf:
+                        - $ref: '#/components/schemas/S3LogBucketName'
+                        - description: AWS Systems Manager Command's logs S3 log bucket.
+                    s3OutputKeyPrefix:
+                      allOf:
+                        - $ref: '#/components/schemas/BoundedString'
+                        - description: AWS Systems Manager Command's logs S3 output key prefix.
+                    ssmDocuments:
+                      allOf:
+                        - $ref: '#/components/schemas/SsmDocuments'
+                        - description: AWS Systems Manager Documents.
+                smallVolumeConf:
+                  description: Launch template disk configuration.
+                  type: object
+                  properties:
+                    iops:
+                      allOf:
+                        - $ref: '#/components/schemas/PositiveInteger'
+                        - description: Launch template disk iops configuration.
+                    throughput:
+                      allOf:
+                        - $ref: '#/components/schemas/PositiveInteger'
+                        - description: Launch template disk throughput configuration.
+                    volumeType:
+                      allOf:
+                        - $ref: '#/components/schemas/VolumeType'
+                        - description: Launch template disk volume type configuration.
+                smallVolumeMaxSize:
+                  description: Small volume maximum size.
+                  type: integer
+                  minimum: 0
+                tags:
+                  description: Request to associate tags during creation of a Launch Configuration Template.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+                targetInstanceTypeRightSizingMethod:
+                  description: Target instance type right-sizing method.
+                  type: string
+                  enum:
+                    - NONE
+                    - BASIC
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -249,19 +718,20 @@ paths:
                     - PRIVATE_IP
                     - PUBLIC_IP
                 defaultLargeStagingDiskType:
-                  description: Request to configure the Staging Disk EBS volume type to "gp2" during Replication Settings template creation.
+                  description: Request to configure the default large staging disk EBS volume type during Replication Settings template creation.
                   type: string
                   enum:
                     - GP2
                     - ST1
+                    - GP3
                 ebsEncryption:
-                  description: Request to configure EBS enryption during Replication Settings template creation.
+                  description: Request to configure EBS encryption during Replication Settings template creation.
                   type: string
                   enum:
                     - DEFAULT
                     - CUSTOM
                 ebsEncryptionKeyArn:
-                  description: Request to configure an EBS enryption key during Replication Settings template creation.
+                  description: Request to configure an EBS encryption key during Replication Settings template creation.
                   type: string
                   minLength: 20
                   maxLength: 2048
@@ -271,7 +741,7 @@ paths:
                   minLength: 0
                   maxLength: 255
                 replicationServersSecurityGroupsIDs:
-                  description: Request to configure the Replication Server Secuirity group ID during Replication Settings template creation.
+                  description: Request to configure the Replication Server Security group ID during Replication Settings template creation.
                   type: array
                   items:
                     $ref: '#/components/schemas/SecurityGroupID'
@@ -284,7 +754,7 @@ paths:
                   minLength: 0
                   maxLength: 255
                 stagingAreaTags:
-                  description: Request to configure Staiging Area tags during Replication Settings template creation.
+                  description: Request to configure Staging Area tags during Replication Settings template creation.
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
@@ -296,6 +766,123 @@ paths:
                 useDedicatedReplicationServer:
                   description: Request to use Dedicated Replication Servers during Replication Settings template creation.
                   type: boolean
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /CreateWave:
+    post:
+      operationId: CreateWave
+      description: Create wave.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wave'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                description:
+                  description: Wave description.
+                  type: string
+                  pattern: '^[^\x00]*$'
+                  minLength: 0
+                  maxLength: 600
+                name:
+                  description: Wave name.
+                  type: string
+                  pattern: '^[^\s\x00]( *[^\s\x00])*$'
+                  minLength: 1
+                  maxLength: 256
+                tags:
+                  description: Wave tags.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DeleteApplication:
+    post:
+      operationId: DeleteApplication
+      description: Delete application.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteApplicationResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - applicationID
+              properties:
+                applicationID:
+                  description: Application ID.
+                  type: string
+                  pattern: '^app-[0-9a-zA-Z]{17}$'
+                  minLength: 21
+                  maxLength: 21
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -349,6 +936,59 @@ paths:
                   pattern: '^mgnjob-[0-9a-zA-Z]{17}$'
                   minLength: 24
                   maxLength: 24
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DeleteLaunchConfigurationTemplate:
+    post:
+      operationId: DeleteLaunchConfigurationTemplate
+      description: Deletes a single Launch Configuration Template by ID.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteLaunchConfigurationTemplateResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - launchConfigurationTemplateID
+              properties:
+                launchConfigurationTemplateID:
+                  description: ID of resource to be deleted.
+                  type: string
+                  pattern: '^lct-[0-9a-zA-Z]{17}$'
+                  minLength: 21
+                  maxLength: 21
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -463,10 +1103,112 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DeleteVcenterClient:
+    post:
+      operationId: DeleteVcenterClient
+      description: Deletes a given vCenter client by ID.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - vcenterClientID
+              properties:
+                vcenterClientID:
+                  description: ID of resource to be deleted.
+                  type: string
+                  pattern: '^vcc-[0-9a-zA-Z]{17}$'
+                  minLength: 21
+                  maxLength: 21
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DeleteWave:
+    post:
+      operationId: DeleteWave
+      description: Delete wave.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteWaveResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - waveID
+              properties:
+                waveID:
+                  description: Wave ID.
+                  type: string
+                  pattern: '^wave-[0-9a-zA-Z]{17}$'
+                  minLength: 22
+                  maxLength: 22
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /DescribeJobLogItems:
     post:
       operationId: DescribeJobLogItems
-      description: Retrieves detailed Job log with paging.
+      description: Retrieves detailed job log items with paging.
       responses:
         '200':
           description: Success
@@ -518,6 +1260,7 @@ paths:
                   description: Request to describe Job log item maximum results.
                   type: integer
                   minimum: 1
+                  maximum: 1000
                 nextToken:
                   description: Request to describe Job log next token.
                   type: string
@@ -534,7 +1277,7 @@ paths:
   /DescribeJobs:
     post:
       operationId: DescribeJobs
-      description: 'Returns a list of Jobs. Use the JobsID and fromDate and toData filters to limit which jobs are returned. The response is sorted by creationDataTime - latest date first. Jobs are normaly created by the StartTest, StartCutover, and TerminateTargetInstances APIs. Jobs are also created by DiagnosticLaunch and TerminateDiagnosticInstances, which are APIs available only to *Support* and only used in response to relevant support tickets.'
+      description: 'Returns a list of Jobs. Use the JobsID and fromDate and toData filters to limit which jobs are returned. The response is sorted by creationDataTime - latest date first. Jobs are normally created by the StartTest, StartCutover, and TerminateTargetInstances APIs. Jobs are also created by DiagnosticLaunch and TerminateDiagnosticInstances, which are APIs available only to *Support* and only used in response to relevant support tickets.'
       responses:
         '200':
           description: Success
@@ -573,8 +1316,6 @@ paths:
           application/json:
             schema:
               type: object
-              required:
-                - filters
               properties:
                 filters:
                   description: Request to describe Job log filters.
@@ -591,13 +1332,88 @@ paths:
                     toDate:
                       allOf:
                         - $ref: '#/components/schemas/ISO8601DatetimeString'
-                        - description: Request to describe Job log by last date.
+                        - description: Request to describe job log items by last date.
                 maxResults:
-                  description: Request to describe Job log by max results.
+                  description: Request to describe job log items by max results.
                   type: integer
                   minimum: 1
+                  maximum: 1000
                 nextToken:
-                  description: Request to describe Job logby next token.
+                  description: Request to describe job log items by next token.
+                  type: string
+                  minLength: 0
+                  maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DescribeLaunchConfigurationTemplates:
+    post:
+      operationId: DescribeLaunchConfigurationTemplates
+      description: 'Lists all Launch Configuration Templates, filtered by Launch Configuration Template IDs'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeLaunchConfigurationTemplatesResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                launchConfigurationTemplateIDs:
+                  description: Request to filter Launch Configuration Templates list by Launch Configuration Template ID.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/LaunchConfigurationTemplateID'
+                  minItems: 0
+                  maxItems: 200
+                maxResults:
+                  description: Maximum results to be returned in DescribeLaunchConfigurationTemplates.
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: Next pagination token returned from DescribeLaunchConfigurationTemplates.
                   type: string
                   minLength: 0
                   maxLength: 2048
@@ -657,13 +1473,12 @@ paths:
           application/json:
             schema:
               type: object
-              required:
-                - replicationConfigurationTemplateIDs
               properties:
                 maxResults:
                   description: Request to describe Replication Configuration template by max results.
                   type: integer
                   minimum: 1
+                  maximum: 1000
                 nextToken:
                   description: Request to describe Replication Configuration template by next token.
                   type: string
@@ -726,17 +1541,27 @@ paths:
           application/json:
             schema:
               type: object
-              required:
-                - filters
               properties:
                 filters:
                   description: Request to filter Source Servers list.
                   type: object
                   properties:
+                    applicationIDs:
+                      allOf:
+                        - $ref: '#/components/schemas/DescribeSourceServersRequestApplicationIDs'
+                        - description: Request to filter Source Servers list by application IDs.
                     isArchived:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
                         - description: Request to filter Source Servers list by archived.
+                    lifeCycleStates:
+                      allOf:
+                        - $ref: '#/components/schemas/LifeCycleStates'
+                        - description: Request to filter Source Servers list by life cycle states.
+                    replicationTypes:
+                      allOf:
+                        - $ref: '#/components/schemas/ReplicationTypes'
+                        - description: Request to filter Source Servers list by replication type.
                     sourceServerIDs:
                       allOf:
                         - $ref: '#/components/schemas/DescribeSourceServersRequestFiltersIDs'
@@ -745,6 +1570,7 @@ paths:
                   description: Request to filter Source Servers list by maximum results.
                   type: integer
                   minimum: 1
+                  maximum: 1000
                 nextToken:
                   description: Request to filter Source Servers list by next token.
                   type: string
@@ -758,10 +1584,186 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DescribeVcenterClients:
+    get:
+      operationId: DescribeVcenterClients
+      description: Returns a list of the installed vCenter clients.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeVcenterClientsResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Maximum results to be returned in DescribeVcenterClients.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: Next pagination token to be provided for DescribeVcenterClients.
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DisassociateApplications:
+    post:
+      operationId: DisassociateApplications
+      description: Disassociate applications from wave.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateApplicationsResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - applicationIDs
+                - waveID
+              properties:
+                applicationIDs:
+                  description: Application IDs list.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ApplicationID'
+                  minItems: 1
+                  maxItems: 50
+                waveID:
+                  description: Wave ID.
+                  type: string
+                  pattern: '^wave-[0-9a-zA-Z]{17}$'
+                  minLength: 22
+                  maxLength: 22
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DisassociateSourceServers:
+    post:
+      operationId: DisassociateSourceServers
+      description: Disassociate source servers from application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateSourceServersResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - applicationID
+                - sourceServerIDs
+              properties:
+                applicationID:
+                  description: Application ID.
+                  type: string
+                  pattern: '^app-[0-9a-zA-Z]{17}$'
+                  minLength: 21
+                  maxLength: 21
+                sourceServerIDs:
+                  description: Source server IDs list.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SourceServerID'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /DisconnectFromService:
     post:
       operationId: DisconnectFromService
-      description: 'Disconnects specific Source Servers from Application Migration Service. Data replication is stopped immediately. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. If the agent on the source server has not been prevented from communciating with the Application Migration Service service, then it will receive a command to uninstall itself (within approximately 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDurationwill be nullified.'
+      description: 'Disconnects specific Source Servers from Application Migration Service. Data replication is stopped immediately. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. If the agent on the source server has not been prevented from communicating with the Application Migration Service service, then it will receive a command to uninstall itself (within approximately 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be nullified.'
       responses:
         '200':
           description: Success
@@ -814,7 +1816,7 @@ paths:
   /FinalizeCutover:
     post:
       operationId: FinalizeCutover
-      description: 'Finalizes the cutover immediately for specific Source Servers. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. The AWS Replication Agent will receive a command to uninstall itself (within 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be to DISCONNECTED; The SourceServer.lifeCycle.state will be changed to CUTOVER; The totalStorageBytes property fo each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDurationwill be nullified.'
+      description: 'Finalizes the cutover immediately for specific Source Servers. All AWS resources created by Application Migration Service for enabling the replication of these source servers will be terminated / deleted within 90 minutes. Launched Test or Cutover instances will NOT be terminated. The AWS Replication Agent will receive a command to uninstall itself (within 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be changed to DISCONNECTED; The SourceServer.lifeCycle.state will be changed to CUTOVER; The totalStorageBytes property fo each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be nullified.'
       responses:
         '200':
           description: Success
@@ -857,7 +1859,7 @@ paths:
                 - sourceServerID
               properties:
                 sourceServerID:
-                  description: Request to finalize Cutover by Soure Server ID.
+                  description: Request to finalize Cutover by Source Server ID.
                   type: string
                   pattern: '^s-[0-9a-zA-Z]{17}$'
                   minLength: 19
@@ -951,7 +1953,7 @@ paths:
                 - sourceServerID
               properties:
                 sourceServerID:
-                  description: Request to get Replication Configuaration by Source Server ID.
+                  description: Request to get Replication Configuration by Source Server ID.
                   type: string
                   pattern: '^s-[0-9a-zA-Z]{17}$'
                   minLength: 19
@@ -988,6 +1990,154 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
       parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListApplications:
+    post:
+      operationId: ListApplications
+      description: Retrieves all applications or multiple applications by ID.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListApplicationsResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filters:
+                  description: Applications list filters.
+                  type: object
+                  properties:
+                    applicationIDs:
+                      allOf:
+                        - $ref: '#/components/schemas/ApplicationIDsFilter'
+                        - description: Filter applications list by application ID.
+                    isArchived:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Filter applications list by archival status.
+                    waveIDs:
+                      allOf:
+                        - $ref: '#/components/schemas/WaveIDsFilter'
+                        - description: Filter applications list by wave ID.
+                maxResults:
+                  description: Maximum results to return when listing applications.
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: Request next token.
+                  type: string
+                  minLength: 0
+                  maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListSourceServerActions:
+    post:
+      operationId: ListSourceServerActions
+      description: List source server post migration custom actions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSourceServerActionsResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sourceServerID
+              properties:
+                filters:
+                  description: Source server post migration custom action filters.
+                  type: object
+                  properties:
+                    actionIDs:
+                      allOf:
+                        - $ref: '#/components/schemas/ActionIDs'
+                        - description: Action IDs to filter source server post migration custom actions by.
+                maxResults:
+                  description: Maximum amount of items to return when listing source server post migration custom actions.
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: Next token to use when listing source server post migration custom actions.
+                  type: string
+                  minLength: 0
+                  maxLength: 2048
+                sourceServerID:
+                  description: Source server ID.
+                  type: string
+                  pattern: '^s-[0-9a-zA-Z]{17}$'
+                  minLength: 19
+                  maxLength: 19
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1113,10 +2263,154 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+  /ListTemplateActions:
+    post:
+      operationId: ListTemplateActions
+      description: List template post migration custom actions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTemplateActionsResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - launchConfigurationTemplateID
+              properties:
+                filters:
+                  description: Template post migration custom action filters.
+                  type: object
+                  properties:
+                    actionIDs:
+                      allOf:
+                        - $ref: '#/components/schemas/ActionIDs'
+                        - description: Action IDs to filter template post migration custom actions by.
+                launchConfigurationTemplateID:
+                  description: Launch configuration template ID.
+                  type: string
+                  pattern: '^lct-[0-9a-zA-Z]{17}$'
+                  minLength: 21
+                  maxLength: 21
+                maxResults:
+                  description: Maximum amount of items to return when listing template post migration custom actions.
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: Next token to use when listing template post migration custom actions.
+                  type: string
+                  minLength: 0
+                  maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListWaves:
+    post:
+      operationId: ListWaves
+      description: Retrieves all waves or multiple waves by ID.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWavesResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filters:
+                  description: Waves list filters.
+                  type: object
+                  properties:
+                    isArchived:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Filter waves list by archival status.
+                    waveIDs:
+                      allOf:
+                        - $ref: '#/components/schemas/WaveIDsFilter'
+                        - description: Filter waves list by wave ID.
+                maxResults:
+                  description: Maximum results to return when listing waves.
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: Request next token.
+                  type: string
+                  minLength: 0
+                  maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /MarkAsArchived:
     post:
       operationId: MarkAsArchived
-      description: Archives specific Source Servers by setting the SourceServer.isArchived property to true for specified SourceServers by ID. This command only works for SourceServers with a lifecycle.state which equals DISCONNECTED or CUTOVER.
+      description: Archives specific Source Servers by setting the SourceServer.isArchived property to true for specified SourceServers by ID. This command only works for SourceServers with a lifecycle. state which equals DISCONNECTED or CUTOVER.
       responses:
         '200':
           description: Success
@@ -1158,6 +2452,341 @@ paths:
                   pattern: '^s-[0-9a-zA-Z]{17}$'
                   minLength: 19
                   maxLength: 19
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /PutSourceServerAction:
+    post:
+      operationId: PutSourceServerAction
+      description: Put source server post migration custom action.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceServerActionDocument'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - actionID
+                - actionName
+                - documentIdentifier
+                - order
+                - sourceServerID
+              properties:
+                actionID:
+                  description: Source server post migration custom action ID.
+                  type: string
+                  pattern: '[0-9a-zA-Z]$'
+                  minLength: 1
+                  maxLength: 64
+                actionName:
+                  description: Source server post migration custom action name.
+                  type: string
+                  pattern: '^[^\s\x00]( *[^\s\x00])*$'
+                  minLength: 1
+                  maxLength: 256
+                active:
+                  description: Source server post migration custom action active status.
+                  type: boolean
+                documentIdentifier:
+                  description: Source server post migration custom action document identifier.
+                  type: string
+                  minLength: 0
+                  maxLength: 256
+                documentVersion:
+                  description: Source server post migration custom action document version.
+                  type: string
+                  pattern: '^(\$DEFAULT|\$LATEST|[0-9]+)$'
+                mustSucceedForCutover:
+                  description: Source server post migration custom action must succeed for cutover.
+                  type: boolean
+                order:
+                  description: Source server post migration custom action order.
+                  type: integer
+                  minimum: 1001
+                  maximum: 10000
+                parameters:
+                  description: Source server post migration custom action parameters.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 20
+                  additionalProperties:
+                    $ref: '#/components/schemas/SsmParameterStoreParameters'
+                sourceServerID:
+                  description: Source server ID.
+                  type: string
+                  pattern: '^s-[0-9a-zA-Z]{17}$'
+                  minLength: 19
+                  maxLength: 19
+                timeoutSeconds:
+                  description: Source server post migration custom action timeout in seconds.
+                  type: integer
+                  minimum: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /PutTemplateAction:
+    post:
+      operationId: PutTemplateAction
+      description: Put template post migration custom action.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateActionDocument'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - actionID
+                - actionName
+                - documentIdentifier
+                - launchConfigurationTemplateID
+                - order
+              properties:
+                actionID:
+                  description: Template post migration custom action ID.
+                  type: string
+                  pattern: '[0-9a-zA-Z]$'
+                  minLength: 1
+                  maxLength: 64
+                actionName:
+                  description: Template post migration custom action name.
+                  type: string
+                  minLength: 0
+                  maxLength: 256
+                active:
+                  description: Template post migration custom action active status.
+                  type: boolean
+                documentIdentifier:
+                  description: Template post migration custom action document identifier.
+                  type: string
+                  minLength: 0
+                  maxLength: 256
+                documentVersion:
+                  description: Template post migration custom action document version.
+                  type: string
+                  pattern: '^(\$DEFAULT|\$LATEST|[0-9]+)$'
+                launchConfigurationTemplateID:
+                  description: Launch configuration template ID.
+                  type: string
+                  pattern: '^lct-[0-9a-zA-Z]{17}$'
+                  minLength: 21
+                  maxLength: 21
+                mustSucceedForCutover:
+                  description: Template post migration custom action must succeed for cutover.
+                  type: boolean
+                operatingSystem:
+                  description: Operating system eligible for this template post migration custom action.
+                  type: string
+                  pattern: ^(linux|windows)$
+                order:
+                  description: Template post migration custom action order.
+                  type: integer
+                  minimum: 1001
+                  maximum: 10000
+                parameters:
+                  description: Template post migration custom action parameters.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 20
+                  additionalProperties:
+                    $ref: '#/components/schemas/SsmParameterStoreParameters'
+                timeoutSeconds:
+                  description: Template post migration custom action timeout in seconds.
+                  type: integer
+                  minimum: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /RemoveSourceServerAction:
+    post:
+      operationId: RemoveSourceServerAction
+      description: Remove source server post migration custom action.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveSourceServerActionResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - actionID
+                - sourceServerID
+              properties:
+                actionID:
+                  description: Source server post migration custom action ID to remove.
+                  type: string
+                  pattern: '[0-9a-zA-Z]$'
+                  minLength: 1
+                  maxLength: 64
+                sourceServerID:
+                  description: Source server ID of the post migration custom action to remove.
+                  type: string
+                  pattern: '^s-[0-9a-zA-Z]{17}$'
+                  minLength: 19
+                  maxLength: 19
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /RemoveTemplateAction:
+    post:
+      operationId: RemoveTemplateAction
+      description: Remove template post migration custom action.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveTemplateActionResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - actionID
+                - launchConfigurationTemplateID
+              properties:
+                actionID:
+                  description: Template post migration custom action ID to remove.
+                  type: string
+                  pattern: '[0-9a-zA-Z]$'
+                  minLength: 1
+                  maxLength: 64
+                launchConfigurationTemplateID:
+                  description: Launch configuration template ID of the post migration custom action to remove.
+                  type: string
+                  pattern: '^lct-[0-9a-zA-Z]{17}$'
+                  minLength: 21
+                  maxLength: 21
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1278,10 +2907,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /StartReplication:
+    post:
+      operationId: StartReplication
+      description: Starts replication for SNAPSHOT_SHIPPING agents.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceServer'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sourceServerID
+              properties:
+                sourceServerID:
+                  description: ID of source server on which to start replication.
+                  type: string
+                  pattern: '^s-[0-9a-zA-Z]{17}$'
+                  minLength: 19
+                  maxLength: 19
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /StartTest:
     post:
       operationId: StartTest
-      description: Lauches a Test Instance for specific Source Servers. This command starts a LAUNCH job whose initiatedBy property is StartTest and changes the SourceServer.lifeCycle.state property to TESTING.
+      description: Launches a Test Instance for specific Source Servers. This command starts a LAUNCH job whose initiatedBy property is StartTest and changes the SourceServer.lifeCycle.state property to TESTING.
       responses:
         '202':
           description: Success
@@ -1396,6 +3090,112 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /UnarchiveApplication:
+    post:
+      operationId: UnarchiveApplication
+      description: Unarchive application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - applicationID
+              properties:
+                applicationID:
+                  description: Application ID.
+                  type: string
+                  pattern: '^app-[0-9a-zA-Z]{17}$'
+                  minLength: 21
+                  maxLength: 21
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /UnarchiveWave:
+    post:
+      operationId: UnarchiveWave
+      description: Unarchive wave.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wave'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - waveID
+              properties:
+                waveID:
+                  description: Wave ID.
+                  type: string
+                  pattern: '^wave-[0-9a-zA-Z]{17}$'
+                  minLength: 22
+                  maxLength: 22
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/tags/{resourceArn}#tagKeys':
     delete:
       operationId: UntagResource
@@ -1458,6 +3258,71 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /UpdateApplication:
+    post:
+      operationId: UpdateApplication
+      description: Update application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - applicationID
+              properties:
+                applicationID:
+                  description: Application ID.
+                  type: string
+                  pattern: '^app-[0-9a-zA-Z]{17}$'
+                  minLength: 21
+                  maxLength: 21
+                description:
+                  description: Application description.
+                  type: string
+                  pattern: '^[^\x00]*$'
+                  minLength: 0
+                  maxLength: 600
+                name:
+                  description: Application name.
+                  type: string
+                  pattern: '^[^\s\x00]( *[^\s\x00])*$'
+                  minLength: 1
+                  maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /UpdateLaunchConfiguration:
     post:
       operationId: UpdateLaunchConfiguration
@@ -1503,11 +3368,20 @@ paths:
               required:
                 - sourceServerID
               properties:
+                bootMode:
+                  description: Update Launch configuration boot mode request.
+                  type: string
+                  enum:
+                    - LEGACY_BIOS
+                    - UEFI
                 copyPrivateIp:
                   description: Update Launch configuration copy Private IP request.
                   type: boolean
                 copyTags:
                   description: Update Launch configuration copy Tags request.
+                  type: boolean
+                enableMapAutoTagging:
+                  description: Enable map auto tagging.
                   type: boolean
                 launchDisposition:
                   description: Update Launch configuration launch disposition request.
@@ -1523,11 +3397,40 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
                         - description: Configure BYOL OS licensing.
+                mapAutoTaggingMpeID:
+                  description: Launch configuration map auto tagging MPE ID.
+                  type: string
+                  minLength: 0
+                  maxLength: 256
                 name:
                   description: Update Launch configuration name request.
                   type: string
                   minLength: 0
                   maxLength: 128
+                postLaunchActions:
+                  description: Post Launch Actions to executed on the Test or Cutover instance.
+                  type: object
+                  properties:
+                    cloudWatchLogGroupName:
+                      allOf:
+                        - $ref: '#/components/schemas/CloudWatchLogGroupName'
+                        - description: AWS Systems Manager Command's CloudWatch log group name.
+                    deployment:
+                      allOf:
+                        - $ref: '#/components/schemas/PostLaunchActionsDeploymentType'
+                        - description: Deployment type in which AWS Systems Manager Documents will be executed.
+                    s3LogBucket:
+                      allOf:
+                        - $ref: '#/components/schemas/S3LogBucketName'
+                        - description: AWS Systems Manager Command's logs S3 log bucket.
+                    s3OutputKeyPrefix:
+                      allOf:
+                        - $ref: '#/components/schemas/BoundedString'
+                        - description: AWS Systems Manager Command's logs S3 output key prefix.
+                    ssmDocuments:
+                      allOf:
+                        - $ref: '#/components/schemas/SsmDocuments'
+                        - description: AWS Systems Manager Documents.
                 sourceServerID:
                   description: Update Launch configuration by Source Server ID request.
                   type: string
@@ -1536,6 +3439,168 @@ paths:
                   maxLength: 19
                 targetInstanceTypeRightSizingMethod:
                   description: Update Launch configuration Target instance right sizing request.
+                  type: string
+                  enum:
+                    - NONE
+                    - BASIC
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /UpdateLaunchConfigurationTemplate:
+    post:
+      operationId: UpdateLaunchConfigurationTemplate
+      description: Updates an existing Launch Configuration Template by ID.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LaunchConfigurationTemplate'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - launchConfigurationTemplateID
+              properties:
+                associatePublicIpAddress:
+                  description: Associate public Ip address.
+                  type: boolean
+                bootMode:
+                  description: Launch configuration template boot mode.
+                  type: string
+                  enum:
+                    - LEGACY_BIOS
+                    - UEFI
+                copyPrivateIp:
+                  description: Copy private Ip.
+                  type: boolean
+                copyTags:
+                  description: Copy tags.
+                  type: boolean
+                enableMapAutoTagging:
+                  description: Enable map auto tagging.
+                  type: boolean
+                largeVolumeConf:
+                  description: Launch template disk configuration.
+                  type: object
+                  properties:
+                    iops:
+                      allOf:
+                        - $ref: '#/components/schemas/PositiveInteger'
+                        - description: Launch template disk iops configuration.
+                    throughput:
+                      allOf:
+                        - $ref: '#/components/schemas/PositiveInteger'
+                        - description: Launch template disk throughput configuration.
+                    volumeType:
+                      allOf:
+                        - $ref: '#/components/schemas/VolumeType'
+                        - description: Launch template disk volume type configuration.
+                launchConfigurationTemplateID:
+                  description: Launch Configuration Template ID.
+                  type: string
+                  pattern: '^lct-[0-9a-zA-Z]{17}$'
+                  minLength: 21
+                  maxLength: 21
+                launchDisposition:
+                  description: Launch disposition.
+                  type: string
+                  enum:
+                    - STOPPED
+                    - STARTED
+                licensing:
+                  description: Configure Licensing.
+                  type: object
+                  properties:
+                    osByol:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Configure BYOL OS licensing.
+                mapAutoTaggingMpeID:
+                  description: Launch configuration template map auto tagging MPE ID.
+                  type: string
+                  minLength: 0
+                  maxLength: 256
+                postLaunchActions:
+                  description: Post Launch Actions to executed on the Test or Cutover instance.
+                  type: object
+                  properties:
+                    cloudWatchLogGroupName:
+                      allOf:
+                        - $ref: '#/components/schemas/CloudWatchLogGroupName'
+                        - description: AWS Systems Manager Command's CloudWatch log group name.
+                    deployment:
+                      allOf:
+                        - $ref: '#/components/schemas/PostLaunchActionsDeploymentType'
+                        - description: Deployment type in which AWS Systems Manager Documents will be executed.
+                    s3LogBucket:
+                      allOf:
+                        - $ref: '#/components/schemas/S3LogBucketName'
+                        - description: AWS Systems Manager Command's logs S3 log bucket.
+                    s3OutputKeyPrefix:
+                      allOf:
+                        - $ref: '#/components/schemas/BoundedString'
+                        - description: AWS Systems Manager Command's logs S3 output key prefix.
+                    ssmDocuments:
+                      allOf:
+                        - $ref: '#/components/schemas/SsmDocuments'
+                        - description: AWS Systems Manager Documents.
+                smallVolumeConf:
+                  description: Launch template disk configuration.
+                  type: object
+                  properties:
+                    iops:
+                      allOf:
+                        - $ref: '#/components/schemas/PositiveInteger'
+                        - description: Launch template disk iops configuration.
+                    throughput:
+                      allOf:
+                        - $ref: '#/components/schemas/PositiveInteger'
+                        - description: Launch template disk throughput configuration.
+                    volumeType:
+                      allOf:
+                        - $ref: '#/components/schemas/VolumeType'
+                        - description: Launch template disk volume type configuration.
+                smallVolumeMaxSize:
+                  description: Small volume maximum size.
+                  type: integer
+                  minimum: 0
+                targetInstanceTypeRightSizingMethod:
+                  description: Target instance type right-sizing method.
                   type: string
                   enum:
                     - NONE
@@ -1621,6 +3686,7 @@ paths:
                   enum:
                     - GP2
                     - ST1
+                    - GP3
                 ebsEncryption:
                   description: Update replication configuration EBS encryption request.
                   type: string
@@ -1756,6 +3822,7 @@ paths:
                   enum:
                     - GP2
                     - ST1
+                    - GP3
                 ebsEncryption:
                   description: Update replication configuration template EBS encryption request.
                   type: string
@@ -1799,6 +3866,137 @@ paths:
                 useDedicatedReplicationServer:
                   description: Update replication configuration template use dedicated Replication Server request.
                   type: boolean
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /UpdateSourceServerReplicationType:
+    post:
+      operationId: UpdateSourceServerReplicationType
+      description: Allows you to change between the AGENT_BASED replication type and the SNAPSHOT_SHIPPING replication type.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceServer'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - replicationType
+                - sourceServerID
+              properties:
+                replicationType:
+                  description: Replication type to which to update source server.
+                  type: string
+                  enum:
+                    - AGENT_BASED
+                    - SNAPSHOT_SHIPPING
+                sourceServerID:
+                  description: ID of source server on which to update replication type.
+                  type: string
+                  pattern: '^s-[0-9a-zA-Z]{17}$'
+                  minLength: 19
+                  maxLength: 19
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /UpdateWave:
+    post:
+      operationId: UpdateWave
+      description: Update wave.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wave'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - waveID
+              properties:
+                description:
+                  description: Wave description.
+                  type: string
+                  pattern: '^[^\x00]*$'
+                  minLength: 0
+                  maxLength: 600
+                name:
+                  description: Wave name.
+                  type: string
+                  pattern: '^[^\s\x00]( *[^\s\x00])*$'
+                  minLength: 1
+                  maxLength: 256
+                waveID:
+                  description: Wave ID.
+                  type: string
+                  pattern: '^wave-[0-9a-zA-Z]{17}$'
+                  minLength: 22
+                  maxLength: 22
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1859,9 +4057,115 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    Application:
+      type: object
+      properties:
+        applicationAggregatedStatus:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationAggregatedStatus'
+            - description: Application aggregated status.
+        applicationID:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationID'
+            - description: Application ID.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: Application ARN.
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DatetimeString'
+            - description: Application creation dateTime.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationDescription'
+            - description: Application description.
+        isArchived:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Application archival status.
+        lastModifiedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DatetimeString'
+            - description: Application last modified dateTime.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: Application name.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: Application tags.
+        waveID:
+          allOf:
+            - $ref: '#/components/schemas/WaveID'
+            - description: Application wave ID.
+    UninitializedAccountException: {}
+    ResourceNotFoundException: {}
+    ServiceQuotaExceededException: {}
+    ConflictException: {}
+    Wave:
+      type: object
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: Wave ARN.
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DatetimeString'
+            - description: Wave creation dateTime.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/WaveDescription'
+            - description: Wave description.
+        isArchived:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Wave archival status.
+        lastModifiedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DatetimeString'
+            - description: Wave last modified dateTime.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/WaveName'
+            - description: Wave name.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: Wave tags.
+        waveAggregatedStatus:
+          allOf:
+            - $ref: '#/components/schemas/WaveAggregatedStatus'
+            - description: Wave aggregated status.
+        waveID:
+          allOf:
+            - $ref: '#/components/schemas/WaveID'
+            - description: Wave ID.
+    AssociateApplicationsResponse:
+      type: object
+      properties: {}
+    ApplicationID:
+      type: string
+      pattern: '^app-[0-9a-zA-Z]{17}$'
+      minLength: 21
+      maxLength: 21
+    AssociateSourceServersResponse:
+      type: object
+      properties: {}
+    SourceServerID:
+      type: string
+      pattern: '^s-[0-9a-zA-Z]{17}$'
+      minLength: 19
+      maxLength: 19
     SourceServer:
       type: object
       properties:
+        applicationID:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationID'
+            - description: Source server application ID.
         arn:
           allOf:
             - $ref: '#/components/schemas/ARN'
@@ -1882,6 +4186,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LifeCycle'
             - description: Source server lifecycle state.
+        replicationType:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationType'
+            - description: Source server replication type.
         sourceProperties:
           allOf:
             - $ref: '#/components/schemas/SourceProperties'
@@ -1894,16 +4202,133 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
             - description: Source server Tags.
+        vcenterClientID:
+          allOf:
+            - $ref: '#/components/schemas/VcenterClientID'
+            - description: Source server vCenter client id.
     ChangeServerLifeCycleStateSourceServerLifecycleState:
       type: string
       enum:
         - READY_FOR_TEST
         - READY_FOR_CUTOVER
         - CUTOVER
-    UninitializedAccountException: {}
-    ResourceNotFoundException: {}
     ValidationException: {}
-    ConflictException: {}
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    LaunchConfigurationTemplate:
+      type: object
+      required:
+        - launchConfigurationTemplateID
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: ARN of the Launch Configuration Template.
+        associatePublicIpAddress:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Associate public Ip address.
+        bootMode:
+          allOf:
+            - $ref: '#/components/schemas/BootMode'
+            - description: Launch configuration template boot mode.
+        copyPrivateIp:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Copy private Ip.
+        copyTags:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Copy tags.
+        ec2LaunchTemplateID:
+          allOf:
+            - $ref: '#/components/schemas/EC2LaunchConfigurationTemplateID'
+            - description: EC2 launch template ID.
+        enableMapAutoTagging:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Enable map auto tagging.
+        largeVolumeConf:
+          allOf:
+            - $ref: '#/components/schemas/LaunchTemplateDiskConf'
+            - description: Large volume config.
+        launchConfigurationTemplateID:
+          allOf:
+            - $ref: '#/components/schemas/LaunchConfigurationTemplateID'
+            - description: ID of the Launch Configuration Template.
+        launchDisposition:
+          allOf:
+            - $ref: '#/components/schemas/LaunchDisposition'
+            - description: Launch disposition.
+        licensing:
+          $ref: '#/components/schemas/Licensing'
+        mapAutoTaggingMpeID:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: Launch configuration template map auto tagging MPE ID.
+        postLaunchActions:
+          allOf:
+            - $ref: '#/components/schemas/PostLaunchActions'
+            - description: Post Launch Actions of the Launch Configuration Template.
+        smallVolumeConf:
+          allOf:
+            - $ref: '#/components/schemas/LaunchTemplateDiskConf'
+            - description: Small volume config.
+        smallVolumeMaxSize:
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: Small volume maximum size.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: Tags of the Launch Configuration Template.
+        targetInstanceTypeRightSizingMethod:
+          allOf:
+            - $ref: '#/components/schemas/TargetInstanceTypeRightSizingMethod'
+            - description: Target instance type right-sizing method.
+    PositiveInteger:
+      type: integer
+      minimum: 0
+    VolumeType:
+      type: string
+      enum:
+        - io1
+        - io2
+        - gp3
+        - gp2
+        - st1
+        - sc1
+        - standard
+    Boolean:
+      type: boolean
+    CloudWatchLogGroupName:
+      type: string
+      pattern: '^[\.\-_/#A-Za-z0-9]+$'
+      minLength: 1
+      maxLength: 512
+    PostLaunchActionsDeploymentType:
+      type: string
+      enum:
+        - TEST_AND_CUTOVER
+        - CUTOVER_ONLY
+        - TEST_ONLY
+    S3LogBucketName:
+      type: string
+      minLength: 3
+      maxLength: 63
+    BoundedString:
+      type: string
+      minLength: 0
+      maxLength: 256
+    SsmDocuments:
+      type: array
+      items:
+        $ref: '#/components/schemas/SsmDocument'
+      minItems: 0
+      maxItems: 10
+    AccessDeniedException: {}
     ReplicationConfigurationTemplate:
       type: object
       required:
@@ -1920,7 +4345,7 @@ components:
         bandwidthThrottling:
           allOf:
             - $ref: '#/components/schemas/PositiveInteger'
-            - description: Replication Configuration template bandwidth throtting.
+            - description: Replication Configuration template bandwidth throttling.
         createPublicIP:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -1932,7 +4357,7 @@ components:
         defaultLargeStagingDiskType:
           allOf:
             - $ref: '#/components/schemas/ReplicationConfigurationDefaultLargeStagingDiskType'
-            - description: Replication Configuration template use dedault large Staging Disk type.
+            - description: Replication Configuration template use default large Staging Disk type.
         ebsEncryption:
           allOf:
             - $ref: '#/components/schemas/ReplicationConfigurationEbsEncryption'
@@ -1944,7 +4369,7 @@ components:
         replicationConfigurationTemplateID:
           allOf:
             - $ref: '#/components/schemas/ReplicationConfigurationTemplateID'
-            - description: Replication Configuration template template ID.
+            - description: Replication Configuration template ID.
         replicationServerInstanceType:
           allOf:
             - $ref: '#/components/schemas/EC2InstanceType'
@@ -1974,18 +4399,22 @@ components:
       pattern: '^sg-[0-9a-fA-F]{8,}$'
       minLength: 0
       maxLength: 255
-    TagValue:
-      type: string
-      minLength: 0
-      maxLength: 256
-    AccessDeniedException: {}
+    DeleteApplicationResponse:
+      type: object
+      properties: {}
     DeleteJobResponse:
+      type: object
+      properties: {}
+    DeleteLaunchConfigurationTemplateResponse:
       type: object
       properties: {}
     DeleteReplicationConfigurationTemplateResponse:
       type: object
       properties: {}
     DeleteSourceServerResponse:
+      type: object
+      properties: {}
+    DeleteWaveResponse:
       type: object
       properties: {}
     DescribeJobLogItemsResponse:
@@ -2021,6 +4450,22 @@ components:
         $ref: '#/components/schemas/JobID'
       minItems: 0
       maxItems: 1000
+    DescribeLaunchConfigurationTemplatesResponse:
+      type: object
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/LaunchConfigurationTemplates'
+            - description: List of items returned by DescribeLaunchConfigurationTemplates.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: Next pagination token returned from DescribeLaunchConfigurationTemplates.
+    LaunchConfigurationTemplateID:
+      type: string
+      pattern: '^lct-[0-9a-zA-Z]{17}$'
+      minLength: 21
+      maxLength: 21
     DescribeReplicationConfigurationTemplatesResponse:
       type: object
       properties:
@@ -2048,17 +4493,54 @@ components:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: Request to filter Source Servers next token.
-    Boolean:
-      type: boolean
+    DescribeSourceServersRequestApplicationIDs:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationID'
+      minItems: 0
+      maxItems: 200
+    LifeCycleStates:
+      type: array
+      items:
+        $ref: '#/components/schemas/LifeCycleState'
+      minItems: 0
+      maxItems: 10
+    ReplicationTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReplicationType'
+      minItems: 0
+      maxItems: 2
     DescribeSourceServersRequestFiltersIDs:
       type: array
       items:
         $ref: '#/components/schemas/SourceServerID'
       minItems: 0
       maxItems: 200
+    DescribeVcenterClientsResponse:
+      type: object
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/VcenterClientList'
+            - description: List of items returned by DescribeVcenterClients.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: Next pagination token returned from DescribeVcenterClients.
+    DisassociateApplicationsResponse:
+      type: object
+      properties: {}
+    DisassociateSourceServersResponse:
+      type: object
+      properties: {}
     LaunchConfiguration:
       type: object
       properties:
+        bootMode:
+          allOf:
+            - $ref: '#/components/schemas/BootMode'
+            - description: Launch configuration boot mode.
         copyPrivateIp:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -2070,27 +4552,37 @@ components:
         ec2LaunchTemplateID:
           allOf:
             - $ref: '#/components/schemas/BoundedString'
-            - description: Configure EC2 lauch configuration template ID.
+            - description: Launch configuration EC2 Launch template ID.
+        enableMapAutoTagging:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Enable map auto tagging.
         launchDisposition:
           allOf:
             - $ref: '#/components/schemas/LaunchDisposition'
-            - description: Configure launch dispostion for launch configuration.
+            - description: Launch disposition for launch configuration.
         licensing:
           allOf:
             - $ref: '#/components/schemas/Licensing'
-            - description: Configure launch configuration OS licensing.
+            - description: Launch configuration OS licensing.
+        mapAutoTaggingMpeID:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: Map auto tagging MPE ID.
         name:
           allOf:
             - $ref: '#/components/schemas/SmallBoundedString'
-            - description: Configure launch configuration name.
+            - description: Launch configuration name.
+        postLaunchActions:
+          $ref: '#/components/schemas/PostLaunchActions'
         sourceServerID:
           allOf:
             - $ref: '#/components/schemas/SourceServerID'
-            - description: Configure launch configuration Source Server ID.
+            - description: Launch configuration Source Server ID.
         targetInstanceTypeRightSizingMethod:
           allOf:
             - $ref: '#/components/schemas/TargetInstanceTypeRightSizingMethod'
-            - description: Configure launch configuration Target instance type right sizing method.
+            - description: Launch configuration Target instance type right sizing method.
     ReplicationConfiguration:
       type: object
       properties:
@@ -2157,6 +4649,46 @@ components:
     InitializeServiceResponse:
       type: object
       properties: {}
+    ListApplicationsResponse:
+      type: object
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationsList'
+            - description: Applications list.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: Response next token.
+    ApplicationIDsFilter:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationID'
+      minItems: 0
+      maxItems: 200
+    WaveIDsFilter:
+      type: array
+      items:
+        $ref: '#/components/schemas/WaveID'
+      minItems: 0
+      maxItems: 200
+    ListSourceServerActionsResponse:
+      type: object
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/SourceServerActionDocuments'
+            - description: List of source server post migration custom actions.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: Next token returned when listing source server post migration custom actions.
+    ActionIDs:
+      type: array
+      items:
+        $ref: '#/components/schemas/ActionID'
+      minItems: 0
+      maxItems: 100
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -2166,6 +4698,122 @@ components:
             - description: List tags for resource response.
     ThrottlingException: {}
     InternalServerException: {}
+    ListTemplateActionsResponse:
+      type: object
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/TemplateActionDocuments'
+            - description: List of template post migration custom actions.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: Next token returned when listing template post migration custom actions.
+    ListWavesResponse:
+      type: object
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/WavesList'
+            - description: Waves list.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: Response next token.
+    SourceServerActionDocument:
+      type: object
+      properties:
+        actionID:
+          allOf:
+            - $ref: '#/components/schemas/ActionID'
+            - description: Source server post migration custom action ID.
+        actionName:
+          allOf:
+            - $ref: '#/components/schemas/ActionName'
+            - description: Source server post migration custom action name.
+        active:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Source server post migration custom action active status.
+        documentIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/BoundedString'
+            - description: Source server post migration custom action document identifier.
+        documentVersion:
+          allOf:
+            - $ref: '#/components/schemas/DocumentVersion'
+            - description: Source server post migration custom action document version.
+        mustSucceedForCutover:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Source server post migration custom action must succeed for cutover.
+        order:
+          allOf:
+            - $ref: '#/components/schemas/OrderType'
+            - description: Source server post migration custom action order.
+        parameters:
+          allOf:
+            - $ref: '#/components/schemas/SsmDocumentParameters'
+            - description: Source server post migration custom action parameters.
+        timeoutSeconds:
+          allOf:
+            - $ref: '#/components/schemas/StrictlyPositiveInteger'
+            - description: Source server post migration custom action timeout in seconds.
+    SsmParameterStoreParameters:
+      type: array
+      items:
+        $ref: '#/components/schemas/SsmParameterStoreParameter'
+      minItems: 0
+      maxItems: 10
+    TemplateActionDocument:
+      type: object
+      properties:
+        actionID:
+          allOf:
+            - $ref: '#/components/schemas/ActionID'
+            - description: Template post migration custom action ID.
+        actionName:
+          allOf:
+            - $ref: '#/components/schemas/BoundedString'
+            - description: Template post migration custom action name.
+        active:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Template post migration custom action active status.
+        documentIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/BoundedString'
+            - description: Template post migration custom action document identifier.
+        documentVersion:
+          allOf:
+            - $ref: '#/components/schemas/DocumentVersion'
+            - description: Template post migration custom action document version.
+        mustSucceedForCutover:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Template post migration custom action must succeed for cutover.
+        operatingSystem:
+          allOf:
+            - $ref: '#/components/schemas/OperatingSystemString'
+            - description: Operating system eligible for this template post migration custom action.
+        order:
+          allOf:
+            - $ref: '#/components/schemas/OrderType'
+            - description: Template post migration custom action order.
+        parameters:
+          allOf:
+            - $ref: '#/components/schemas/SsmDocumentParameters'
+            - description: Template post migration custom action parameters.
+        timeoutSeconds:
+          allOf:
+            - $ref: '#/components/schemas/StrictlyPositiveInteger'
+            - description: Template post migration custom action timeout in seconds.
+    RemoveSourceServerActionResponse:
+      type: object
+      properties: {}
+    RemoveTemplateActionResponse:
+      type: object
+      properties: {}
     StartCutoverResponse:
       type: object
       properties:
@@ -2173,11 +4821,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/Job'
             - description: Start Cutover Job response.
-    SourceServerID:
-      type: string
-      pattern: '^s-[0-9a-zA-Z]{17}$'
-      minLength: 19
-      maxLength: 19
     StartTestResponse:
       type: object
       properties:
@@ -2215,18 +4858,147 @@ components:
           allOf:
             - $ref: '#/components/schemas/ReplicationConfigurationReplicatedDiskStagingDiskType'
             - description: Replication Configuration replicated disk staging disk type.
+        throughput:
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: Replication Configuration replicated disk throughput.
       description: Replication Configuration replicated disk.
     ARN:
       type: string
       minLength: 20
       maxLength: 2048
-    BoundedString:
+    ActionID:
       type: string
-      minLength: 0
+      pattern: '[0-9a-zA-Z]$'
+      minLength: 1
+      maxLength: 64
+    ActionName:
+      type: string
+      pattern: '^[^\s\x00]( *[^\s\x00])*$'
+      minLength: 1
       maxLength: 256
-    PositiveInteger:
-      type: integer
-      minimum: 0
+    ApplicationAggregatedStatus:
+      type: object
+      properties:
+        healthStatus:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationHealthStatus'
+            - description: Application aggregated status health status.
+        lastUpdateDateTime:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DatetimeString'
+            - description: Application aggregated status last update dateTime.
+        progressStatus:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationProgressStatus'
+            - description: Application aggregated status progress status.
+        totalSourceServers:
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: Application aggregated status total source servers amount.
+      description: Application aggregated status.
+    ApplicationDescription:
+      type: string
+      pattern: '^[^\x00]*$'
+      minLength: 0
+      maxLength: 600
+    ApplicationName:
+      type: string
+      pattern: '^[^\s\x00]( *[^\s\x00])*$'
+      minLength: 1
+      maxLength: 256
+    TagsMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    WaveID:
+      type: string
+      pattern: '^wave-[0-9a-zA-Z]{17}$'
+      minLength: 22
+      maxLength: 22
+    ApplicationHealthStatus:
+      type: string
+      enum:
+        - HEALTHY
+        - LAGGING
+        - ERROR
+    ApplicationProgressStatus:
+      type: string
+      enum:
+        - NOT_STARTED
+        - IN_PROGRESS
+        - COMPLETED
+    ApplicationIDs:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationID'
+      minItems: 1
+      maxItems: 50
+    ApplicationsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Application'
+    ArchiveApplicationRequest:
+      type: object
+      required:
+        - applicationID
+      title: ArchiveApplicationRequest
+      properties:
+        applicationID:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationID'
+            - description: Application ID.
+    ArchiveWaveRequest:
+      type: object
+      required:
+        - waveID
+      title: ArchiveWaveRequest
+      properties:
+        waveID:
+          allOf:
+            - $ref: '#/components/schemas/WaveID'
+            - description: Wave ID.
+    AssociateApplicationsRequest:
+      type: object
+      required:
+        - applicationIDs
+        - waveID
+      title: AssociateApplicationsRequest
+      properties:
+        applicationIDs:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationIDs'
+            - description: Application IDs list.
+        waveID:
+          allOf:
+            - $ref: '#/components/schemas/WaveID'
+            - description: Wave ID.
+    AssociateSourceServersRequestSourceServerIDs:
+      type: array
+      items:
+        $ref: '#/components/schemas/SourceServerID'
+      minItems: 1
+      maxItems: 50
+    AssociateSourceServersRequest:
+      type: object
+      required:
+        - applicationID
+        - sourceServerIDs
+      title: AssociateSourceServersRequest
+      properties:
+        applicationID:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationID'
+            - description: Application ID.
+        sourceServerIDs:
+          allOf:
+            - $ref: '#/components/schemas/AssociateSourceServersRequestSourceServerIDs'
+            - description: Source server IDs list.
+    BootMode:
+      type: string
+      enum:
+        - LEGACY_BIOS
+        - UEFI
     CPU:
       type: object
       properties:
@@ -2270,6 +5042,140 @@ components:
         $ref: '#/components/schemas/CPU'
       minItems: 0
       maxItems: 256
+    CreateApplicationRequest:
+      type: object
+      required:
+        - name
+      title: CreateApplicationRequest
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationDescription'
+            - description: Application description.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: Application name.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: Application tags.
+    LaunchTemplateDiskConf:
+      type: object
+      properties:
+        iops:
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: Launch template disk iops configuration.
+        throughput:
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: Launch template disk throughput configuration.
+        volumeType:
+          allOf:
+            - $ref: '#/components/schemas/VolumeType'
+            - description: Launch template disk volume type configuration.
+      description: Launch template disk configuration.
+    LaunchDisposition:
+      type: string
+      enum:
+        - STOPPED
+        - STARTED
+    Licensing:
+      type: object
+      properties:
+        osByol:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Configure BYOL OS licensing.
+      description: Configure Licensing.
+    PostLaunchActions:
+      type: object
+      properties:
+        cloudWatchLogGroupName:
+          allOf:
+            - $ref: '#/components/schemas/CloudWatchLogGroupName'
+            - description: AWS Systems Manager Command's CloudWatch log group name.
+        deployment:
+          allOf:
+            - $ref: '#/components/schemas/PostLaunchActionsDeploymentType'
+            - description: Deployment type in which AWS Systems Manager Documents will be executed.
+        s3LogBucket:
+          allOf:
+            - $ref: '#/components/schemas/S3LogBucketName'
+            - description: AWS Systems Manager Command's logs S3 log bucket.
+        s3OutputKeyPrefix:
+          allOf:
+            - $ref: '#/components/schemas/BoundedString'
+            - description: AWS Systems Manager Command's logs S3 output key prefix.
+        ssmDocuments:
+          allOf:
+            - $ref: '#/components/schemas/SsmDocuments'
+            - description: AWS Systems Manager Documents.
+      description: Post Launch Actions to executed on the Test or Cutover instance.
+    TargetInstanceTypeRightSizingMethod:
+      type: string
+      enum:
+        - NONE
+        - BASIC
+    CreateLaunchConfigurationTemplateRequest:
+      type: object
+      title: CreateLaunchConfigurationTemplateRequest
+      properties:
+        associatePublicIpAddress:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Associate public Ip address.
+        bootMode:
+          allOf:
+            - $ref: '#/components/schemas/BootMode'
+            - description: Launch configuration template boot mode.
+        copyPrivateIp:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Copy private Ip.
+        copyTags:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Copy tags.
+        enableMapAutoTagging:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Enable map auto tagging.
+        largeVolumeConf:
+          allOf:
+            - $ref: '#/components/schemas/LaunchTemplateDiskConf'
+            - description: Large volume config.
+        launchDisposition:
+          allOf:
+            - $ref: '#/components/schemas/LaunchDisposition'
+            - description: Launch disposition.
+        licensing:
+          $ref: '#/components/schemas/Licensing'
+        mapAutoTaggingMpeID:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: Launch configuration template map auto tagging MPE ID.
+        postLaunchActions:
+          allOf:
+            - $ref: '#/components/schemas/PostLaunchActions'
+            - description: Launch configuration template post launch actions.
+        smallVolumeConf:
+          allOf:
+            - $ref: '#/components/schemas/LaunchTemplateDiskConf'
+            - description: Small volume config.
+        smallVolumeMaxSize:
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: Small volume maximum size.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: Request to associate tags during creation of a Launch Configuration Template.
+        targetInstanceTypeRightSizingMethod:
+          allOf:
+            - $ref: '#/components/schemas/TargetInstanceTypeRightSizingMethod'
+            - description: Target instance type right-sizing method.
     ReplicationConfigurationDataPlaneRouting:
       type: string
       enum:
@@ -2280,6 +5186,7 @@ components:
       enum:
         - GP2
         - ST1
+        - GP3
     ReplicationConfigurationEbsEncryption:
       type: string
       enum:
@@ -2300,10 +5207,6 @@ components:
       pattern: '^subnet-[0-9a-fA-F]{8,}$'
       minLength: 0
       maxLength: 255
-    TagsMap:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/TagValue'
     CreateReplicationConfigurationTemplateRequest:
       type: object
       required:
@@ -2339,15 +5242,15 @@ components:
         defaultLargeStagingDiskType:
           allOf:
             - $ref: '#/components/schemas/ReplicationConfigurationDefaultLargeStagingDiskType'
-            - description: Request to configure the Staging Disk EBS volume type to "gp2" during Replication Settings template creation.
+            - description: Request to configure the default large staging disk EBS volume type during Replication Settings template creation.
         ebsEncryption:
           allOf:
             - $ref: '#/components/schemas/ReplicationConfigurationEbsEncryption'
-            - description: Request to configure EBS enryption during Replication Settings template creation.
+            - description: Request to configure EBS encryption during Replication Settings template creation.
         ebsEncryptionKeyArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
-            - description: Request to configure an EBS enryption key during Replication Settings template creation.
+            - description: Request to configure an EBS encryption key during Replication Settings template creation.
         replicationServerInstanceType:
           allOf:
             - $ref: '#/components/schemas/EC2InstanceType'
@@ -2355,7 +5258,7 @@ components:
         replicationServersSecurityGroupsIDs:
           allOf:
             - $ref: '#/components/schemas/ReplicationServersSecurityGroupsIDs'
-            - description: Request to configure the Replication Server Secuirity group ID during Replication Settings template creation.
+            - description: Request to configure the Replication Server Security group ID during Replication Settings template creation.
         stagingAreaSubnetId:
           allOf:
             - $ref: '#/components/schemas/SubnetID'
@@ -2363,7 +5266,7 @@ components:
         stagingAreaTags:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
-            - description: Request to configure Staiging Area tags during Replication Settings template creation.
+            - description: Request to configure Staging Area tags during Replication Settings template creation.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
@@ -2372,6 +5275,34 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Request to use Dedicated Replication Servers during Replication Settings template creation.
+    WaveDescription:
+      type: string
+      pattern: '^[^\x00]*$'
+      minLength: 0
+      maxLength: 600
+    WaveName:
+      type: string
+      pattern: '^[^\s\x00]( *[^\s\x00])*$'
+      minLength: 1
+      maxLength: 256
+    CreateWaveRequest:
+      type: object
+      required:
+        - name
+      title: CreateWaveRequest
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/WaveDescription'
+            - description: Wave description.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/WaveName'
+            - description: Wave name.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: Wave tags.
     DataReplicationErrorString:
       type: string
       enum:
@@ -2389,6 +5320,8 @@ components:
         - FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT
         - FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER
         - FAILED_TO_START_DATA_TRANSFER
+        - UNSUPPORTED_VM_CONFIGURATION
+        - LAST_SNAPSHOT_JOB_FAILED
     LargeBoundedString:
       type: string
       minLength: 0
@@ -2434,6 +5367,12 @@ components:
         - RESCAN
         - STALLED
         - DISCONNECTED
+        - PENDING_SNAPSHOT_SHIPPING
+        - SHIPPING_SNAPSHOT
+    ISO8601DurationString:
+      type: string
+      minLength: 1
+      maxLength: 64
     DataReplicationInfoReplicatedDisks:
       type: array
       items:
@@ -2461,8 +5400,12 @@ components:
             - description: Request to query the time when data replication will be complete.
         lagDuration:
           allOf:
+            - $ref: '#/components/schemas/ISO8601DurationString'
+            - description: Request to query data replication lag duration.
+        lastSnapshotDateTime:
+          allOf:
             - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Request to query data replication lag durating.
+            - description: Request to query data replication last snapshot time.
         replicatedDisks:
           allOf:
             - $ref: '#/components/schemas/DataReplicationInfoReplicatedDisks'
@@ -2529,7 +5472,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataReplicationInitiationStepStatus'
             - description: Request to query data initiation status.
-      description: Data replication intiation step.
+      description: Data replication initiation step.
+    DeleteApplicationRequest:
+      type: object
+      required:
+        - applicationID
+      title: DeleteApplicationRequest
+      properties:
+        applicationID:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationID'
+            - description: Application ID.
     JobID:
       type: string
       pattern: '^mgnjob-[0-9a-zA-Z]{17}$'
@@ -2545,6 +5498,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobID'
             - description: Request to delete Job from service by Job ID.
+    DeleteLaunchConfigurationTemplateRequest:
+      type: object
+      required:
+        - launchConfigurationTemplateID
+      title: DeleteLaunchConfigurationTemplateRequest
+      properties:
+        launchConfigurationTemplateID:
+          allOf:
+            - $ref: '#/components/schemas/LaunchConfigurationTemplateID'
+            - description: ID of resource to be deleted.
     DeleteReplicationConfigurationTemplateRequest:
       type: object
       required:
@@ -2565,9 +5528,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/SourceServerID'
             - description: Request to delete Source Server from service by Server ID.
-    StrictlyPositiveInteger:
+    VcenterClientID:
+      type: string
+      pattern: '^vcc-[0-9a-zA-Z]{17}$'
+      minLength: 21
+      maxLength: 21
+    DeleteVcenterClientRequest:
+      type: object
+      required:
+        - vcenterClientID
+      title: DeleteVcenterClientRequest
+      properties:
+        vcenterClientID:
+          allOf:
+            - $ref: '#/components/schemas/VcenterClientID'
+            - description: ID of resource to be deleted.
+    DeleteWaveRequest:
+      type: object
+      required:
+        - waveID
+      title: DeleteWaveRequest
+      properties:
+        waveID:
+          allOf:
+            - $ref: '#/components/schemas/WaveID'
+            - description: Wave ID.
+    MaxResultsType:
       type: integer
       minimum: 1
+      maximum: 1000
     PaginationToken:
       type: string
       minLength: 0
@@ -2584,7 +5573,7 @@ components:
             - description: Request to describe Job log job ID.
         maxResults:
           allOf:
-            - $ref: '#/components/schemas/StrictlyPositiveInteger'
+            - $ref: '#/components/schemas/MaxResultsType'
             - description: Request to describe Job log item maximum results.
         nextToken:
           allOf:
@@ -2608,12 +5597,10 @@ components:
         toDate:
           allOf:
             - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: Request to describe Job log by last date.
+            - description: Request to describe job log items by last date.
       description: Request to describe Job log filters.
     DescribeJobsRequest:
       type: object
-      required:
-        - filters
       title: DescribeJobsRequest
       properties:
         filters:
@@ -2622,16 +5609,44 @@ components:
             - description: Request to describe Job log filters.
         maxResults:
           allOf:
-            - $ref: '#/components/schemas/StrictlyPositiveInteger'
-            - description: Request to describe Job log by max results.
+            - $ref: '#/components/schemas/MaxResultsType'
+            - description: Request to describe job log items by max results.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: Request to describe Job logby next token.
+            - description: Request to describe job log items by next token.
     JobsList:
       type: array
       items:
         $ref: '#/components/schemas/Job'
+    LaunchConfigurationTemplateIDs:
+      type: array
+      items:
+        $ref: '#/components/schemas/LaunchConfigurationTemplateID'
+      minItems: 0
+      maxItems: 200
+    DescribeLaunchConfigurationTemplatesRequest:
+      type: object
+      title: DescribeLaunchConfigurationTemplatesRequest
+      properties:
+        launchConfigurationTemplateIDs:
+          allOf:
+            - $ref: '#/components/schemas/LaunchConfigurationTemplateIDs'
+            - description: Request to filter Launch Configuration Templates list by Launch Configuration Template ID.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsType'
+            - description: Maximum results to be returned in DescribeLaunchConfigurationTemplates.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: Next pagination token returned from DescribeLaunchConfigurationTemplates.
+    LaunchConfigurationTemplates:
+      type: array
+      items:
+        $ref: '#/components/schemas/LaunchConfigurationTemplate'
+      minItems: 0
+      maxItems: 200
     ReplicationConfigurationTemplateIDs:
       type: array
       items:
@@ -2640,13 +5655,11 @@ components:
       maxItems: 200
     DescribeReplicationConfigurationTemplatesRequest:
       type: object
-      required:
-        - replicationConfigurationTemplateIDs
       title: DescribeReplicationConfigurationTemplatesRequest
       properties:
         maxResults:
           allOf:
-            - $ref: '#/components/schemas/StrictlyPositiveInteger'
+            - $ref: '#/components/schemas/MaxResultsType'
             - description: Request to describe Replication Configuration template by max results.
         nextToken:
           allOf:
@@ -2663,10 +5676,22 @@ components:
     DescribeSourceServersRequestFilters:
       type: object
       properties:
+        applicationIDs:
+          allOf:
+            - $ref: '#/components/schemas/DescribeSourceServersRequestApplicationIDs'
+            - description: Request to filter Source Servers list by application IDs.
         isArchived:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Request to filter Source Servers list by archived.
+        lifeCycleStates:
+          allOf:
+            - $ref: '#/components/schemas/LifeCycleStates'
+            - description: Request to filter Source Servers list by life cycle states.
+        replicationTypes:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationTypes'
+            - description: Request to filter Source Servers list by replication type.
         sourceServerIDs:
           allOf:
             - $ref: '#/components/schemas/DescribeSourceServersRequestFiltersIDs'
@@ -2674,8 +5699,6 @@ components:
       description: Request to filter Source Servers list.
     DescribeSourceServersRequest:
       type: object
-      required:
-        - filters
       title: DescribeSourceServersRequest
       properties:
         filters:
@@ -2684,7 +5707,7 @@ components:
             - description: Request to filter Source Servers list.
         maxResults:
           allOf:
-            - $ref: '#/components/schemas/StrictlyPositiveInteger'
+            - $ref: '#/components/schemas/MaxResultsType'
             - description: Request to filter Source Servers list by maximum results.
         nextToken:
           allOf:
@@ -2694,6 +5717,50 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SourceServer'
+    DescribeVcenterClientsRequest:
+      type: object
+      title: DescribeVcenterClientsRequest
+      properties: {}
+    VcenterClientList:
+      type: array
+      items:
+        $ref: '#/components/schemas/VcenterClient'
+    DisassociateApplicationsRequest:
+      type: object
+      required:
+        - applicationIDs
+        - waveID
+      title: DisassociateApplicationsRequest
+      properties:
+        applicationIDs:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationIDs'
+            - description: Application IDs list.
+        waveID:
+          allOf:
+            - $ref: '#/components/schemas/WaveID'
+            - description: Wave ID.
+    DisassociateSourceServersRequestSourceServerIDs:
+      type: array
+      items:
+        $ref: '#/components/schemas/SourceServerID'
+      minItems: 1
+      maxItems: 50
+    DisassociateSourceServersRequest:
+      type: object
+      required:
+        - applicationID
+        - sourceServerIDs
+      title: DisassociateSourceServersRequest
+      properties:
+        applicationID:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationID'
+            - description: Application ID.
+        sourceServerIDs:
+          allOf:
+            - $ref: '#/components/schemas/DisassociateSourceServersRequestSourceServerIDs'
+            - description: Source server IDs list.
     DisconnectFromServiceRequest:
       type: object
       required:
@@ -2722,11 +5789,19 @@ components:
         $ref: '#/components/schemas/Disk'
       minItems: 0
       maxItems: 1000
+    DocumentVersion:
+      type: string
+      pattern: '^(\$DEFAULT|\$LATEST|[0-9]+)$'
     EC2InstanceID:
       type: string
       pattern: '^i-[0-9a-fA-F]{8,}$'
       minLength: 0
       maxLength: 255
+    EC2LaunchConfigurationTemplateID:
+      type: string
+      pattern: '^lt-[0-9a-z]{17}$'
+      minLength: 20
+      maxLength: 20
     FinalizeCutoverRequest:
       type: object
       required:
@@ -2736,7 +5811,7 @@ components:
         sourceServerID:
           allOf:
             - $ref: '#/components/schemas/SourceServerID'
-            - description: Request to finalize Cutover by Soure Server ID.
+            - description: Request to finalize Cutover by Source Server ID.
     FirstBoot:
       type: string
       enum:
@@ -2763,7 +5838,7 @@ components:
         sourceServerID:
           allOf:
             - $ref: '#/components/schemas/SourceServerID'
-            - description: Request to get Replication Configuaration by Source Server ID.
+            - description: Request to get Replication Configuration by Source Server ID.
     IPsList:
       type: array
       items:
@@ -2783,6 +5858,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BoundedString'
             - description: Hostname identification hint.
+        vmPath:
+          allOf:
+            - $ref: '#/components/schemas/BoundedString'
+            - description: vCenter VM path identification hint.
         vmWareUuid:
           allOf:
             - $ref: '#/components/schemas/BoundedString'
@@ -2850,7 +5929,7 @@ components:
         tags:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
-            - description: Tags associated with spcific Job.
+            - description: Tags associated with specific Job.
         type:
           allOf:
             - $ref: '#/components/schemas/JobType'
@@ -2911,28 +5990,72 @@ components:
             - $ref: '#/components/schemas/ISO8601DatetimeString'
             - description: Job log event date and time.
       description: Job log.
-    LaunchDisposition:
+    PostLaunchActionExecutionStatus:
       type: string
       enum:
-        - STOPPED
-        - STARTED
-    Licensing:
+        - IN_PROGRESS
+        - SUCCESS
+        - FAILED
+    SsmDocument:
       type: object
+      required:
+        - actionName
+        - ssmDocumentName
       properties:
-        osByol:
+        actionName:
+          allOf:
+            - $ref: '#/components/schemas/BoundedString'
+            - description: User-friendly name for the AWS Systems Manager Document.
+        mustSucceedForCutover:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Configure BYOL OS licensing.
-      description: Configure Licensing.
+            - description: 'If true, Cutover will not be enabled if the document has failed.'
+        parameters:
+          allOf:
+            - $ref: '#/components/schemas/SsmDocumentParameters'
+            - description: AWS Systems Manager Document parameters.
+        ssmDocumentName:
+          allOf:
+            - $ref: '#/components/schemas/SsmDocumentName'
+            - description: AWS Systems Manager Document name or full ARN.
+        timeoutSeconds:
+          allOf:
+            - $ref: '#/components/schemas/StrictlyPositiveInteger'
+            - description: AWS Systems Manager Document timeout seconds.
+      description: AWS Systems Manager Document.
+    SsmDocumentType:
+      type: string
+      enum:
+        - AUTOMATION
+        - COMMAND
+    JobPostLaunchActionsLaunchStatus:
+      type: object
+      properties:
+        executionID:
+          allOf:
+            - $ref: '#/components/schemas/BoundedString'
+            - description: AWS Systems Manager Document's execution ID of the of the Job Post Launch Actions.
+        executionStatus:
+          allOf:
+            - $ref: '#/components/schemas/PostLaunchActionExecutionStatus'
+            - description: AWS Systems Manager Document's execution status.
+        failureReason:
+          allOf:
+            - $ref: '#/components/schemas/BoundedString'
+            - description: AWS Systems Manager Document's failure reason.
+        ssmDocument:
+          allOf:
+            - $ref: '#/components/schemas/SsmDocument'
+            - description: AWS Systems Manager's Document of the of the Job Post Launch Actions.
+        ssmDocumentType:
+          allOf:
+            - $ref: '#/components/schemas/SsmDocumentType'
+            - description: AWS Systems Manager Document type.
+      description: Launch Status of the Job Post Launch Actions.
     SmallBoundedString:
       type: string
       minLength: 0
       maxLength: 128
-    TargetInstanceTypeRightSizingMethod:
-      type: string
-      enum:
-        - NONE
-        - BASIC
     LaunchStatus:
       type: string
       enum:
@@ -2947,16 +6070,16 @@ components:
         ec2InstanceID:
           allOf:
             - $ref: '#/components/schemas/EC2InstanceID'
-            - description: Configure launced instance EC2 ID.
+            - description: Launched instance EC2 ID.
         firstBoot:
           allOf:
             - $ref: '#/components/schemas/FirstBoot'
-            - description: Configure launced instance first boot.
+            - description: Launched instance first boot.
         jobID:
           allOf:
             - $ref: '#/components/schemas/JobID'
-            - description: Configure launced instance Job ID.
-      description: Configure launced instance.
+            - description: Launched instance Job ID.
+      description: Launched instance.
     LifeCycleLastCutover:
       type: object
       properties:
@@ -2979,7 +6102,7 @@ components:
         finalized:
           allOf:
             - $ref: '#/components/schemas/LifeCycleLastTestFinalized'
-            - description: Lifecycle last Test finlized.
+            - description: Lifecycle last Test finalized.
         initiated:
           allOf:
             - $ref: '#/components/schemas/LifeCycleLastTestInitiated'
@@ -3000,6 +6123,7 @@ components:
         - CUTTING_OVER
         - CUTOVER
         - DISCONNECTED
+        - DISCOVERED
     LifeCycle:
       type: object
       properties:
@@ -3009,7 +6133,7 @@ components:
             - description: Lifecycle added to service data and time.
         elapsedReplicationDuration:
           allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
+            - $ref: '#/components/schemas/ISO8601DurationString'
             - description: Lifecycle elapsed time and duration.
         firstByteDateTime:
           allOf:
@@ -3067,7 +6191,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ISO8601DatetimeString'
             - description: Lifecycle Test failed API call date and time.
-      description: Lifecycle last Test finlized.
+      description: Lifecycle last Test finalized.
     LifeCycleLastTestInitiated:
       type: object
       properties:
@@ -3088,10 +6212,146 @@ components:
             - $ref: '#/components/schemas/ISO8601DatetimeString'
             - description: Lifecycle last Test reverted API call date and time.
       description: Lifecycle last Test reverted.
+    ListApplicationsRequestFilters:
+      type: object
+      properties:
+        applicationIDs:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationIDsFilter'
+            - description: Filter applications list by application ID.
+        isArchived:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Filter applications list by archival status.
+        waveIDs:
+          allOf:
+            - $ref: '#/components/schemas/WaveIDsFilter'
+            - description: Filter applications list by wave ID.
+      description: Applications list filters.
+    ListApplicationsRequest:
+      type: object
+      title: ListApplicationsRequest
+      properties:
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/ListApplicationsRequestFilters'
+            - description: Applications list filters.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsType'
+            - description: Maximum results to return when listing applications.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: Request next token.
+    SourceServerActionsRequestFilters:
+      type: object
+      properties:
+        actionIDs:
+          allOf:
+            - $ref: '#/components/schemas/ActionIDs'
+            - description: Action IDs to filter source server post migration custom actions by.
+      description: Source server post migration custom action filters.
+    ListSourceServerActionsRequest:
+      type: object
+      required:
+        - sourceServerID
+      title: ListSourceServerActionsRequest
+      properties:
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/SourceServerActionsRequestFilters'
+            - description: Filters to apply when listing source server post migration custom actions.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsType'
+            - description: Maximum amount of items to return when listing source server post migration custom actions.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: Next token to use when listing source server post migration custom actions.
+        sourceServerID:
+          allOf:
+            - $ref: '#/components/schemas/SourceServerID'
+            - description: Source server ID.
+    SourceServerActionDocuments:
+      type: array
+      items:
+        $ref: '#/components/schemas/SourceServerActionDocument'
+      minItems: 0
+      maxItems: 100
     ListTagsForResourceRequest:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    TemplateActionsRequestFilters:
+      type: object
+      properties:
+        actionIDs:
+          allOf:
+            - $ref: '#/components/schemas/ActionIDs'
+            - description: Action IDs to filter template post migration custom actions by.
+      description: Template post migration custom action filters.
+    ListTemplateActionsRequest:
+      type: object
+      required:
+        - launchConfigurationTemplateID
+      title: ListTemplateActionsRequest
+      properties:
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/TemplateActionsRequestFilters'
+            - description: Filters to apply when listing template post migration custom actions.
+        launchConfigurationTemplateID:
+          allOf:
+            - $ref: '#/components/schemas/LaunchConfigurationTemplateID'
+            - description: Launch configuration template ID.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsType'
+            - description: Maximum amount of items to return when listing template post migration custom actions.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: Next token to use when listing template post migration custom actions.
+    TemplateActionDocuments:
+      type: array
+      items:
+        $ref: '#/components/schemas/TemplateActionDocument'
+      minItems: 0
+      maxItems: 100
+    ListWavesRequestFilters:
+      type: object
+      properties:
+        isArchived:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Filter waves list by archival status.
+        waveIDs:
+          allOf:
+            - $ref: '#/components/schemas/WaveIDsFilter'
+            - description: Filter waves list by wave ID.
+      description: Waves list filters.
+    ListWavesRequest:
+      type: object
+      title: ListWavesRequest
+      properties:
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/ListWavesRequestFilters'
+            - description: Waves list filters.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsType'
+            - description: Maximum results to return when listing waves.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: Request next token.
+    WavesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Wave'
     MarkAsArchivedRequest:
       type: object
       required:
@@ -3132,18 +6392,194 @@ components:
             - $ref: '#/components/schemas/BoundedString'
             - description: OS full string.
       description: Operating System.
+    OperatingSystemString:
+      type: string
+      pattern: ^(linux|windows)$
+    OrderType:
+      type: integer
+      minimum: 1001
+      maximum: 10000
+    PostLaunchActionsStatus:
+      type: object
+      properties:
+        postLaunchActionsLaunchStatusList:
+          allOf:
+            - $ref: '#/components/schemas/PostLaunchActionsLaunchStatusList'
+            - description: List of Post Launch Action status.
+        ssmAgentDiscoveryDatetime:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DatetimeString'
+            - description: Time where the AWS Systems Manager was detected as running on the Test or Cutover instance.
+      description: Status of the Post Launch Actions running on the Test or Cutover instance.
     ParticipatingServer:
       type: object
+      required:
+        - sourceServerID
       properties:
         launchStatus:
           allOf:
             - $ref: '#/components/schemas/LaunchStatus'
             - description: Participating server launch status.
+        launchedEc2InstanceID:
+          allOf:
+            - $ref: '#/components/schemas/EC2InstanceID'
+            - description: Participating server's launched ec2 instance ID.
+        postLaunchActionsStatus:
+          allOf:
+            - $ref: '#/components/schemas/PostLaunchActionsStatus'
+            - description: Participating server's Post Launch Actions Status.
         sourceServerID:
           allOf:
             - $ref: '#/components/schemas/SourceServerID'
             - description: Participating server Source Server ID.
       description: Server participating in Job.
+    PostLaunchActionsLaunchStatusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/JobPostLaunchActionsLaunchStatus'
+    SsmDocumentParameters:
+      type: object
+      minProperties: 0
+      maxProperties: 20
+      additionalProperties:
+        $ref: '#/components/schemas/SsmParameterStoreParameters'
+    StrictlyPositiveInteger:
+      type: integer
+      minimum: 1
+    PutSourceServerActionRequest:
+      type: object
+      required:
+        - actionID
+        - actionName
+        - documentIdentifier
+        - order
+        - sourceServerID
+      title: PutSourceServerActionRequest
+      properties:
+        actionID:
+          allOf:
+            - $ref: '#/components/schemas/ActionID'
+            - description: Source server post migration custom action ID.
+        actionName:
+          allOf:
+            - $ref: '#/components/schemas/ActionName'
+            - description: Source server post migration custom action name.
+        active:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Source server post migration custom action active status.
+        documentIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/BoundedString'
+            - description: Source server post migration custom action document identifier.
+        documentVersion:
+          allOf:
+            - $ref: '#/components/schemas/DocumentVersion'
+            - description: Source server post migration custom action document version.
+        mustSucceedForCutover:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Source server post migration custom action must succeed for cutover.
+        order:
+          allOf:
+            - $ref: '#/components/schemas/OrderType'
+            - description: Source server post migration custom action order.
+        parameters:
+          allOf:
+            - $ref: '#/components/schemas/SsmDocumentParameters'
+            - description: Source server post migration custom action parameters.
+        sourceServerID:
+          allOf:
+            - $ref: '#/components/schemas/SourceServerID'
+            - description: Source server ID.
+        timeoutSeconds:
+          allOf:
+            - $ref: '#/components/schemas/StrictlyPositiveInteger'
+            - description: Source server post migration custom action timeout in seconds.
+    PutTemplateActionRequest:
+      type: object
+      required:
+        - actionID
+        - actionName
+        - documentIdentifier
+        - launchConfigurationTemplateID
+        - order
+      title: PutTemplateActionRequest
+      properties:
+        actionID:
+          allOf:
+            - $ref: '#/components/schemas/ActionID'
+            - description: Template post migration custom action ID.
+        actionName:
+          allOf:
+            - $ref: '#/components/schemas/BoundedString'
+            - description: Template post migration custom action name.
+        active:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Template post migration custom action active status.
+        documentIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/BoundedString'
+            - description: Template post migration custom action document identifier.
+        documentVersion:
+          allOf:
+            - $ref: '#/components/schemas/DocumentVersion'
+            - description: Template post migration custom action document version.
+        launchConfigurationTemplateID:
+          allOf:
+            - $ref: '#/components/schemas/LaunchConfigurationTemplateID'
+            - description: Launch configuration template ID.
+        mustSucceedForCutover:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Template post migration custom action must succeed for cutover.
+        operatingSystem:
+          allOf:
+            - $ref: '#/components/schemas/OperatingSystemString'
+            - description: Operating system eligible for this template post migration custom action.
+        order:
+          allOf:
+            - $ref: '#/components/schemas/OrderType'
+            - description: Template post migration custom action order.
+        parameters:
+          allOf:
+            - $ref: '#/components/schemas/SsmDocumentParameters'
+            - description: Template post migration custom action parameters.
+        timeoutSeconds:
+          allOf:
+            - $ref: '#/components/schemas/StrictlyPositiveInteger'
+            - description: Template post migration custom action timeout in seconds.
+    RemoveSourceServerActionRequest:
+      type: object
+      required:
+        - actionID
+        - sourceServerID
+      title: RemoveSourceServerActionRequest
+      properties:
+        actionID:
+          allOf:
+            - $ref: '#/components/schemas/ActionID'
+            - description: Source server post migration custom action ID to remove.
+        sourceServerID:
+          allOf:
+            - $ref: '#/components/schemas/SourceServerID'
+            - description: Source server ID of the post migration custom action to remove.
+    RemoveTemplateActionRequest:
+      type: object
+      required:
+        - actionID
+        - launchConfigurationTemplateID
+      title: RemoveTemplateActionRequest
+      properties:
+        actionID:
+          allOf:
+            - $ref: '#/components/schemas/ActionID'
+            - description: Template post migration custom action ID to remove.
+        launchConfigurationTemplateID:
+          allOf:
+            - $ref: '#/components/schemas/LaunchConfigurationTemplateID'
+            - description: Launch configuration template ID of the post migration custom action to remove.
     ReplicationConfigurationReplicatedDisks:
       type: array
       items:
@@ -3159,6 +6595,13 @@ components:
         - SC1
         - ST1
         - STANDARD
+        - GP3
+        - IO2
+    ReplicationType:
+      type: string
+      enum:
+        - AGENT_BASED
+        - SNAPSHOT_SHIPPING
     RetryDataReplicationRequest:
       type: object
       required:
@@ -3205,6 +6648,40 @@ components:
             - $ref: '#/components/schemas/EC2InstanceType'
             - description: Source server recommended instance type.
       description: Source server properties.
+    SsmDocumentName:
+      type: string
+      pattern: '^([A-Za-z0-9/:_\.-])+$'
+      minLength: 3
+      maxLength: 172
+    SsmDocumentParameterName:
+      type: string
+      pattern: '^([A-Za-z0-9])+$'
+      minLength: 1
+      maxLength: 1011
+    SsmParameterStoreParameterName:
+      type: string
+      pattern: '^([A-Za-z0-9_\.-])+$'
+      minLength: 1
+      maxLength: 1011
+    SsmParameterStoreParameterType:
+      type: string
+      enum:
+        - STRING
+    SsmParameterStoreParameter:
+      type: object
+      required:
+        - parameterName
+        - parameterType
+      properties:
+        parameterName:
+          allOf:
+            - $ref: '#/components/schemas/SsmParameterStoreParameterName'
+            - description: AWS Systems Manager Parameter Store parameter name.
+        parameterType:
+          allOf:
+            - $ref: '#/components/schemas/SsmParameterStoreParameterType'
+            - description: AWS Systems Manager Parameter Store parameter type.
+      description: AWS Systems Manager Parameter Store parameter.
     StartCutoverRequestSourceServerIDs:
       type: array
       items:
@@ -3225,6 +6702,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
             - description: Start Cutover by Tags.
+    StartReplicationRequest:
+      type: object
+      required:
+        - sourceServerID
+      title: StartReplicationRequest
+      properties:
+        sourceServerID:
+          allOf:
+            - $ref: '#/components/schemas/SourceServerID'
+            - description: ID of source server on which to start replication.
     StartTestRequestSourceServerIDs:
       type: array
       items:
@@ -3279,16 +6766,58 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
             - description: Terminate Target instance by Tags.
+    UnarchiveApplicationRequest:
+      type: object
+      required:
+        - applicationID
+      title: UnarchiveApplicationRequest
+      properties:
+        applicationID:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationID'
+            - description: Application ID.
+    UnarchiveWaveRequest:
+      type: object
+      required:
+        - waveID
+      title: UnarchiveWaveRequest
+      properties:
+        waveID:
+          allOf:
+            - $ref: '#/components/schemas/WaveID'
+            - description: Wave ID.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
       properties: {}
+    UpdateApplicationRequest:
+      type: object
+      required:
+        - applicationID
+      title: UpdateApplicationRequest
+      properties:
+        applicationID:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationID'
+            - description: Application ID.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationDescription'
+            - description: Application description.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: Application name.
     UpdateLaunchConfigurationRequest:
       type: object
       required:
         - sourceServerID
       title: UpdateLaunchConfigurationRequest
       properties:
+        bootMode:
+          allOf:
+            - $ref: '#/components/schemas/BootMode'
+            - description: Update Launch configuration boot mode request.
         copyPrivateIp:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -3297,6 +6826,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Update Launch configuration copy Tags request.
+        enableMapAutoTagging:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Enable map auto tagging.
         launchDisposition:
           allOf:
             - $ref: '#/components/schemas/LaunchDisposition'
@@ -3305,10 +6838,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/Licensing'
             - description: Update Launch configuration licensing request.
+        mapAutoTaggingMpeID:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: Launch configuration map auto tagging MPE ID.
         name:
           allOf:
             - $ref: '#/components/schemas/SmallBoundedString'
             - description: Update Launch configuration name request.
+        postLaunchActions:
+          $ref: '#/components/schemas/PostLaunchActions'
         sourceServerID:
           allOf:
             - $ref: '#/components/schemas/SourceServerID'
@@ -3317,6 +6856,66 @@ components:
           allOf:
             - $ref: '#/components/schemas/TargetInstanceTypeRightSizingMethod'
             - description: Update Launch configuration Target instance right sizing request.
+    UpdateLaunchConfigurationTemplateRequest:
+      type: object
+      required:
+        - launchConfigurationTemplateID
+      title: UpdateLaunchConfigurationTemplateRequest
+      properties:
+        associatePublicIpAddress:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Associate public Ip address.
+        bootMode:
+          allOf:
+            - $ref: '#/components/schemas/BootMode'
+            - description: Launch configuration template boot mode.
+        copyPrivateIp:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Copy private Ip.
+        copyTags:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Copy tags.
+        enableMapAutoTagging:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Enable map auto tagging.
+        largeVolumeConf:
+          allOf:
+            - $ref: '#/components/schemas/LaunchTemplateDiskConf'
+            - description: Large volume config.
+        launchConfigurationTemplateID:
+          allOf:
+            - $ref: '#/components/schemas/LaunchConfigurationTemplateID'
+            - description: Launch Configuration Template ID.
+        launchDisposition:
+          allOf:
+            - $ref: '#/components/schemas/LaunchDisposition'
+            - description: Launch disposition.
+        licensing:
+          $ref: '#/components/schemas/Licensing'
+        mapAutoTaggingMpeID:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: Launch configuration template map auto tagging MPE ID.
+        postLaunchActions:
+          allOf:
+            - $ref: '#/components/schemas/PostLaunchActions'
+            - description: Post Launch Action to execute on the Test or Cutover instance.
+        smallVolumeConf:
+          allOf:
+            - $ref: '#/components/schemas/LaunchTemplateDiskConf'
+            - description: Small volume config.
+        smallVolumeMaxSize:
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: Small volume maximum size.
+        targetInstanceTypeRightSizingMethod:
+          allOf:
+            - $ref: '#/components/schemas/TargetInstanceTypeRightSizingMethod'
+            - description: Target instance type right-sizing method.
     UpdateReplicationConfigurationRequest:
       type: object
       required:
@@ -3445,5 +7044,110 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Update replication configuration template use dedicated Replication Server request.
+    UpdateSourceServerReplicationTypeRequest:
+      type: object
+      required:
+        - replicationType
+        - sourceServerID
+      title: UpdateSourceServerReplicationTypeRequest
+      properties:
+        replicationType:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationType'
+            - description: Replication type to which to update source server.
+        sourceServerID:
+          allOf:
+            - $ref: '#/components/schemas/SourceServerID'
+            - description: ID of source server on which to update replication type.
+    UpdateWaveRequest:
+      type: object
+      required:
+        - waveID
+      title: UpdateWaveRequest
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/WaveDescription'
+            - description: Wave description.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/WaveName'
+            - description: Wave name.
+        waveID:
+          allOf:
+            - $ref: '#/components/schemas/WaveID'
+            - description: Wave ID.
+    VcenterClient:
+      type: object
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: Arn of vCenter client.
+        datacenterName:
+          allOf:
+            - $ref: '#/components/schemas/BoundedString'
+            - description: Datacenter name of vCenter client.
+        hostname:
+          allOf:
+            - $ref: '#/components/schemas/BoundedString'
+            - description: Hostname of vCenter client .
+        lastSeenDatetime:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DatetimeString'
+            - description: Last seen time of vCenter client.
+        sourceServerTags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: Tags for Source Server of vCenter client.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: Tags for vCenter client.
+        vcenterClientID:
+          allOf:
+            - $ref: '#/components/schemas/VcenterClientID'
+            - description: ID of vCenter client.
+        vcenterUUID:
+          allOf:
+            - $ref: '#/components/schemas/BoundedString'
+            - description: Vcenter UUID of vCenter client.
+      description: vCenter client.
+    WaveAggregatedStatus:
+      type: object
+      properties:
+        healthStatus:
+          allOf:
+            - $ref: '#/components/schemas/WaveHealthStatus'
+            - description: Wave aggregated status health status.
+        lastUpdateDateTime:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DatetimeString'
+            - description: Wave aggregated status last update dateTime.
+        progressStatus:
+          allOf:
+            - $ref: '#/components/schemas/WaveProgressStatus'
+            - description: Wave aggregated status progress status.
+        replicationStartedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DatetimeString'
+            - description: DateTime marking when the first source server in the wave started replication.
+        totalApplications:
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: Wave aggregated status total applications amount.
+      description: Wave aggregated status.
+    WaveHealthStatus:
+      type: string
+      enum:
+        - HEALTHY
+        - LAGGING
+        - ERROR
+    WaveProgressStatus:
+      type: string
+      enum:
+        - NOT_STARTED
+        - IN_PROGRESS
+        - COMPLETED
 security:
   - hmac: []

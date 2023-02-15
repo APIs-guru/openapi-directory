@@ -1,0 +1,2141 @@
+openapi: 3.0.0
+info:
+  version: '2021-07-15'
+  x-release: v4
+  title: Amazon Chime SDK Media Pipelines
+  description: 'The Amazon Chime SDK media pipeline APIs in this section allow software developers to create Amazon Chime SDK media pipelines that capture, concatenate, or stream your Amazon Chime SDK meetings. For more information about media pipleines, see <a href="http://amazonaws.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_Media_Pipelines.html">Amazon Chime SDK media pipelines</a>. '
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: chime-sdk-media-pipelines
+  x-aws-signingName: chime
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/chime-sdk-media-pipelines-2021-07-15.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/media-pipelines-chime/'
+servers:
+  - url: 'http://media-pipelines-chime.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon Chime SDK Media Pipelines multi-region endpoint
+  - url: 'https://media-pipelines-chime.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon Chime SDK Media Pipelines multi-region endpoint
+  - url: 'http://media-pipelines-chime.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Chime SDK Media Pipelines endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://media-pipelines-chime.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Chime SDK Media Pipelines endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /sdk-media-capture-pipelines:
+    post:
+      operationId: CreateMediaCapturePipeline
+      description: Creates a media pipeline.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMediaCapturePipelineResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - SourceType
+                - SourceArn
+                - SinkType
+                - SinkArn
+              properties:
+                SourceType:
+                  description: Source type from which the media artifacts are captured. A Chime SDK Meeting is the only supported source.
+                  type: string
+                  enum:
+                    - ChimeSdkMeeting
+                SourceArn:
+                  description: ARN of the source from which the media artifacts are captured.
+                  type: string
+                  pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+                  minLength: 1
+                  maxLength: 1024
+                  format: password
+                SinkType:
+                  description: Destination type to which the media artifacts are saved. You must use an S3 bucket.
+                  type: string
+                  enum:
+                    - S3Bucket
+                SinkArn:
+                  description: The ARN of the sink type.
+                  type: string
+                  pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+                  minLength: 1
+                  maxLength: 1024
+                  format: password
+                ClientRequestToken:
+                  description: The unique identifier for the client request. The token makes the API request idempotent. Use a unique token for each media pipeline request.
+                  type: string
+                  pattern: '[-_a-zA-Z0-9]*'
+                  minLength: 2
+                  maxLength: 64
+                  format: password
+                ChimeSdkMeetingConfiguration:
+                  description: The configuration object of the Amazon Chime SDK meeting for a specified media pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.
+                  type: object
+                  properties:
+                    SourceConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/SourceConfiguration'
+                        - description: The source configuration for a specified media pipline.
+                    ArtifactsConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/ArtifactsConfiguration'
+                        - description: The configuration for the artifacts in an Amazon Chime SDK meeting.
+                Tags:
+                  description: The tag key-value pairs.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListMediaCapturePipelines
+      description: Returns a list of media pipelines.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMediaCapturePipelinesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: next-token
+          in: query
+          required: false
+          description: The token used to retrieve the next page of results.
+          schema:
+            type: string
+            pattern: .*
+            maxLength: 4096
+        - name: max-results
+          in: query
+          required: false
+          description: 'The maximum number of results to return in a single call. Valid Range: 1 - 99.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  /sdk-media-concatenation-pipelines:
+    post:
+      operationId: CreateMediaConcatenationPipeline
+      description: Creates a media concatenation pipeline.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMediaConcatenationPipelineResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Sources
+                - Sinks
+              properties:
+                Sources:
+                  description: An object that specifies the sources for the media concatenation pipeline.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ConcatenationSource'
+                  minItems: 1
+                  maxItems: 1
+                Sinks:
+                  description: An object that specifies the data sinks for the media concatenation pipeline.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ConcatenationSink'
+                  minItems: 1
+                  maxItems: 1
+                ClientRequestToken:
+                  description: The unique identifier for the client request. The token makes the API request idempotent. Use a unique token for each media concatenation pipeline request.
+                  type: string
+                  pattern: '[-_a-zA-Z0-9]*'
+                  minLength: 2
+                  maxLength: 64
+                  format: password
+                Tags:
+                  description: The tags associated with the media concatenation pipeline.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /sdk-media-live-connector-pipelines:
+    post:
+      operationId: CreateMediaLiveConnectorPipeline
+      description: Creates a streaming media pipeline in an Amazon Chime SDK meeting.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMediaLiveConnectorPipelineResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Sources
+                - Sinks
+              properties:
+                Sources:
+                  description: The media pipeline's data sources.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/LiveConnectorSourceConfiguration'
+                  minItems: 1
+                  maxItems: 1
+                Sinks:
+                  description: The media pipeline's data sinks.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/LiveConnectorSinkConfiguration'
+                  minItems: 1
+                  maxItems: 1
+                ClientRequestToken:
+                  description: The token assigned to the client making the request.
+                  type: string
+                  pattern: '[-_a-zA-Z0-9]*'
+                  minLength: 2
+                  maxLength: 64
+                  format: password
+                Tags:
+                  description: The tags associated with the media pipeline.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/sdk-media-capture-pipelines/{mediaPipelineId}':
+    delete:
+      operationId: DeleteMediaCapturePipeline
+      description: Deletes the media pipeline.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: mediaPipelineId
+          in: path
+          required: true
+          description: 'The ID of the media pipeline being deleted. '
+          schema:
+            type: string
+            pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+            minLength: 36
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetMediaCapturePipeline
+      description: Gets an existing media pipeline.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMediaCapturePipelineResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: mediaPipelineId
+          in: path
+          required: true
+          description: The ID of the pipeline that you want to get.
+          schema:
+            type: string
+            pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+            minLength: 36
+            maxLength: 36
+  '/sdk-media-pipelines/{mediaPipelineId}':
+    delete:
+      operationId: DeleteMediaPipeline
+      description: Deletes the media pipeline.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: mediaPipelineId
+          in: path
+          required: true
+          description: The ID of the media pipeline to delete.
+          schema:
+            type: string
+            pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+            minLength: 36
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetMediaPipeline
+      description: Gets an existing media pipeline.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMediaPipelineResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: mediaPipelineId
+          in: path
+          required: true
+          description: The ID of the pipeline that you want to get.
+          schema:
+            type: string
+            pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+            minLength: 36
+            maxLength: 36
+  /sdk-media-pipelines:
+    get:
+      operationId: ListMediaPipelines
+      description: Returns a list of media pipelines.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMediaPipelinesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: next-token
+          in: query
+          required: false
+          description: The token used to retrieve the next page of results.
+          schema:
+            type: string
+            pattern: .*
+            maxLength: 4096
+        - name: max-results
+          in: query
+          required: false
+          description: 'The maximum number of results to return in a single call. Valid Range: 1 - 99.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /tags#arn:
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags available for a media pipeline.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: arn
+          in: query
+          required: true
+          description: 'The ARN of the media pipeline associated with any tags. The ARN consists of the pipeline''s region, resource ID, and pipeline ID.'
+          schema:
+            type: string
+            pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+            minLength: 1
+            maxLength: 1011
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /tags#operation=tag-resource:
+    post:
+      operationId: TagResource
+      description: 'The ARN of the media pipeline that you want to tag. Consists of he pipeline''s endpoint region, resource ID, and pipeline ID.'
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - tag-resource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceARN
+                - Tags
+              properties:
+                ResourceARN:
+                  description: 'The ARN of the media pipeline associated with any tags. The ARN consists of the pipeline''s endpoint region, resource ID, and pipeline ID.'
+                  type: string
+                  pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+                  minLength: 1
+                  maxLength: 1011
+                Tags:
+                  description: The tags associated with the specified media pipeline.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /tags#operation=untag-resource:
+    post:
+      operationId: UntagResource
+      description: Removes any tags from a media pipeline.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - untag-resource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceARN
+                - TagKeys
+              properties:
+                ResourceARN:
+                  description: The ARN of the pipeline that you want to untag.
+                  type: string
+                  pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+                  minLength: 1
+                  maxLength: 1011
+                TagKeys:
+                  description: The key/value pairs in the tag that you want to remove.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/TagKey'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateMediaCapturePipelineResponse:
+      type: object
+      properties:
+        MediaCapturePipeline:
+          allOf:
+            - $ref: '#/components/schemas/MediaCapturePipeline'
+            - description: 'A media pipeline object, the ID, source type, source ARN, sink type, and sink ARN of a media pipeline object.'
+    SourceConfiguration:
+      type: object
+      properties:
+        SelectedVideoStreams:
+          allOf:
+            - $ref: '#/components/schemas/SelectedVideoStreams'
+            - description: The selected video streams for a specified media pipeline. The number of video streams can't exceed 25.
+      description: Source configuration for a specified media pipeline.
+    ArtifactsConfiguration:
+      type: object
+      required:
+        - Audio
+        - Video
+        - Content
+      properties:
+        Audio:
+          allOf:
+            - $ref: '#/components/schemas/AudioArtifactsConfiguration'
+            - description: The configuration for the audio artifacts.
+        Video:
+          allOf:
+            - $ref: '#/components/schemas/VideoArtifactsConfiguration'
+            - description: The configuration for the video artifacts.
+        Content:
+          allOf:
+            - $ref: '#/components/schemas/ContentArtifactsConfiguration'
+            - description: The configuration for the content artifacts.
+        CompositedVideo:
+          allOf:
+            - $ref: '#/components/schemas/CompositedVideoArtifactsConfiguration'
+            - description: Enables video compositing.
+      description: The configuration for the artifacts.
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The key half of a tag.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The value half of a tag.
+      description: A key/value pair that grants users access to meeting resources.
+    BadRequestException: {}
+    ForbiddenException: {}
+    UnauthorizedClientException: {}
+    ThrottledClientException: {}
+    ResourceLimitExceededException: {}
+    ServiceUnavailableException: {}
+    ServiceFailureException: {}
+    CreateMediaConcatenationPipelineResponse:
+      type: object
+      properties:
+        MediaConcatenationPipeline:
+          allOf:
+            - $ref: '#/components/schemas/MediaConcatenationPipeline'
+            - description: 'A media concatenation pipeline object, the ID, source type, <code>MediaPipelineARN</code>, and sink of a media concatenation pipeline object.'
+    ConcatenationSource:
+      type: object
+      required:
+        - Type
+        - MediaCapturePipelineSourceConfiguration
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ConcatenationSourceType'
+            - description: The type of concatenation source in a configuration object.
+        MediaCapturePipelineSourceConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/MediaCapturePipelineSourceConfiguration'
+            - description: The concatenation settings for the media pipeline in a configuration object.
+      description: The source type and media pipeline configuration settings in a configuration object.
+    ConcatenationSink:
+      type: object
+      required:
+        - Type
+        - S3BucketSinkConfiguration
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ConcatenationSinkType'
+            - description: The type of data sink in the configuration object.
+        S3BucketSinkConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketSinkConfiguration'
+            - description: The configuration settings for an Amazon S3 bucket sink.
+      description: The data sink of the configuration object.
+    CreateMediaLiveConnectorPipelineResponse:
+      type: object
+      properties:
+        MediaLiveConnectorPipeline:
+          allOf:
+            - $ref: '#/components/schemas/MediaLiveConnectorPipeline'
+            - description: The new media pipeline.
+    LiveConnectorSourceConfiguration:
+      type: object
+      required:
+        - SourceType
+        - ChimeSdkMeetingLiveConnectorConfiguration
+      properties:
+        SourceType:
+          allOf:
+            - $ref: '#/components/schemas/LiveConnectorSourceType'
+            - description: The source configuration's media source type.
+        ChimeSdkMeetingLiveConnectorConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ChimeSdkMeetingLiveConnectorConfiguration'
+            - description: The configuration settings of the connector pipeline.
+      description: The data source configuration object of a streaming media pipeline.
+    LiveConnectorSinkConfiguration:
+      type: object
+      required:
+        - SinkType
+        - RTMPConfiguration
+      properties:
+        SinkType:
+          allOf:
+            - $ref: '#/components/schemas/LiveConnectorSinkType'
+            - description: The sink configuration's sink type.
+        RTMPConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/LiveConnectorRTMPConfiguration'
+            - description: The sink configuration's RTMP configuration setttings.
+      description: The media pipeline's sink configuration settings.
+    NotFoundException: {}
+    GetMediaCapturePipelineResponse:
+      type: object
+      properties:
+        MediaCapturePipeline:
+          allOf:
+            - $ref: '#/components/schemas/MediaCapturePipeline'
+            - description: The media pipeline object.
+    GetMediaPipelineResponse:
+      type: object
+      properties:
+        MediaPipeline:
+          allOf:
+            - $ref: '#/components/schemas/MediaPipeline'
+            - description: The media pipeline object.
+    ListMediaCapturePipelinesResponse:
+      type: object
+      properties:
+        MediaCapturePipelines:
+          allOf:
+            - $ref: '#/components/schemas/MediaCapturePipelineSummaryList'
+            - description: The media pipeline objects in the list.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The token used to retrieve the next page of results. '
+    ListMediaPipelinesResponse:
+      type: object
+      properties:
+        MediaPipelines:
+          allOf:
+            - $ref: '#/components/schemas/MediaPipelineList'
+            - description: The media pipeline objects in the list.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The token used to retrieve the next page of results. '
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags associated with the specified media pipeline.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    AmazonResourceName:
+      type: string
+      pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+      minLength: 1
+      maxLength: 1011
+    Arn:
+      type: string
+      pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
+      minLength: 1
+      maxLength: 1024
+      format: password
+    AudioConcatenationConfiguration:
+      type: object
+      required:
+        - State
+      properties:
+        State:
+          allOf:
+            - $ref: '#/components/schemas/AudioArtifactsConcatenationState'
+            - description: 'Enables the <i>name</i> object, where <i>name</i> is the name of the configuration object, such as <code>AudioConcatenation</code>.'
+      description: The audio artifact concatenation configuration object.
+    VideoConcatenationConfiguration:
+      type: object
+      required:
+        - State
+      properties:
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactsConcatenationState'
+            - description: Enables or disables the configuration object.
+      description: The configuration object of a video contacatentation pipeline.
+    ContentConcatenationConfiguration:
+      type: object
+      required:
+        - State
+      properties:
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactsConcatenationState'
+            - description: Enables or disables the configuration object.
+      description: 'The composited content configuration object for a specified media pipeline. '
+    DataChannelConcatenationConfiguration:
+      type: object
+      required:
+        - State
+      properties:
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactsConcatenationState'
+            - description: Enables or disables the configuration object.
+      description: The content configuration object's data channel.
+    TranscriptionMessagesConcatenationConfiguration:
+      type: object
+      required:
+        - State
+      properties:
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactsConcatenationState'
+            - description: Enables or disables the configuration object.
+      description: The configuration object for concatenating transcription messages.
+    MeetingEventsConcatenationConfiguration:
+      type: object
+      required:
+        - State
+      properties:
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactsConcatenationState'
+            - description: Enables or disables the configuration object.
+      description: The configuration object for an event concatenation pipeline.
+    CompositedVideoConcatenationConfiguration:
+      type: object
+      required:
+        - State
+      properties:
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactsConcatenationState'
+            - description: Enables or disables the configuration object.
+      description: The composited video configuration object for a specified media pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.
+    ArtifactsConcatenationConfiguration:
+      type: object
+      required:
+        - Audio
+        - Video
+        - Content
+        - DataChannel
+        - TranscriptionMessages
+        - MeetingEvents
+        - CompositedVideo
+      properties:
+        Audio:
+          allOf:
+            - $ref: '#/components/schemas/AudioConcatenationConfiguration'
+            - description: The configuration for the audio artifacts concatenation.
+        Video:
+          allOf:
+            - $ref: '#/components/schemas/VideoConcatenationConfiguration'
+            - description: The configuration for the video artifacts concatenation.
+        Content:
+          allOf:
+            - $ref: '#/components/schemas/ContentConcatenationConfiguration'
+            - description: The configuration for the content artifacts concatenation.
+        DataChannel:
+          allOf:
+            - $ref: '#/components/schemas/DataChannelConcatenationConfiguration'
+            - description: The configuration for the data channel artifacts concatenation.
+        TranscriptionMessages:
+          allOf:
+            - $ref: '#/components/schemas/TranscriptionMessagesConcatenationConfiguration'
+            - description: The configuration for the transcription messages artifacts concatenation.
+        MeetingEvents:
+          allOf:
+            - $ref: '#/components/schemas/MeetingEventsConcatenationConfiguration'
+            - description: The configuration for the meeting events artifacts concatenation.
+        CompositedVideo:
+          allOf:
+            - $ref: '#/components/schemas/CompositedVideoConcatenationConfiguration'
+            - description: The configuration for the composited video artifacts concatenation.
+      description: The configuration for the artifacts concatenation.
+    ArtifactsConcatenationState:
+      type: string
+      enum:
+        - Enabled
+        - Disabled
+    AudioArtifactsConfiguration:
+      type: object
+      required:
+        - MuxType
+      properties:
+        MuxType:
+          allOf:
+            - $ref: '#/components/schemas/AudioMuxType'
+            - description: The MUX type of the audio artifact configuration object.
+      description: The audio artifact configuration object.
+    VideoArtifactsConfiguration:
+      type: object
+      required:
+        - State
+      properties:
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactsState'
+            - description: Indicates whether the video artifact is enabled or disabled.
+        MuxType:
+          allOf:
+            - $ref: '#/components/schemas/VideoMuxType'
+            - description: The MUX type of the video artifact configuration object.
+      description: The video artifact configuration object.
+    ContentArtifactsConfiguration:
+      type: object
+      required:
+        - State
+      properties:
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactsState'
+            - description: Indicates whether the content artifact is enabled or disabled.
+        MuxType:
+          allOf:
+            - $ref: '#/components/schemas/ContentMuxType'
+            - description: The MUX type of the artifact configuration.
+      description: The content artifact object.
+    CompositedVideoArtifactsConfiguration:
+      type: object
+      required:
+        - GridViewConfiguration
+      properties:
+        Layout:
+          allOf:
+            - $ref: '#/components/schemas/LayoutOption'
+            - description: 'The layout setting, such as <code>GridView</code> in the configuration object.'
+        Resolution:
+          allOf:
+            - $ref: '#/components/schemas/ResolutionOption'
+            - description: 'The video resolution setting in the configuration object. Default: HD at 1280 x 720. FHD resolution: 1920 x 1080.'
+        GridViewConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/GridViewConfiguration'
+            - description: The <code>GridView</code> configuration setting.
+      description: Describes the configuration for the composited video artifacts.
+    ArtifactsState:
+      type: string
+      enum:
+        - Enabled
+        - Disabled
+    GuidString:
+      type: string
+      pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+      minLength: 36
+      maxLength: 36
+    AttendeeIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GuidString'
+      minItems: 1
+    AudioArtifactsConcatenationState:
+      type: string
+      enum:
+        - Enabled
+    AudioMuxType:
+      type: string
+      enum:
+        - AudioOnly
+        - AudioWithActiveSpeakerVideo
+        - AudioWithCompositedVideo
+    AudioChannelsOption:
+      type: string
+      enum:
+        - Stereo
+        - Mono
+    AudioSampleRateOption:
+      type: string
+      pattern: 44100|48000
+    ChimeSdkMeetingConcatenationConfiguration:
+      type: object
+      required:
+        - ArtifactsConfiguration
+      properties:
+        ArtifactsConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactsConcatenationConfiguration'
+            - description: The configuration for the artifacts in an Amazon Chime SDK meeting concatenation.
+      description: The configuration object of the Amazon Chime SDK meeting concatenation for a specified media pipeline.
+    ChimeSdkMeetingConfiguration:
+      type: object
+      properties:
+        SourceConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SourceConfiguration'
+            - description: The source configuration for a specified media pipline.
+        ArtifactsConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactsConfiguration'
+            - description: The configuration for the artifacts in an Amazon Chime SDK meeting.
+      description: The configuration object of the Amazon Chime SDK meeting for a specified media pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.
+    LiveConnectorMuxType:
+      type: string
+      enum:
+        - AudioWithCompositedVideo
+        - AudioWithActiveSpeakerVideo
+    ChimeSdkMeetingLiveConnectorConfiguration:
+      type: object
+      required:
+        - Arn
+        - MuxType
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The configuration object's Chime SDK meeting ARN.
+        MuxType:
+          allOf:
+            - $ref: '#/components/schemas/LiveConnectorMuxType'
+            - description: The configuration object's multiplex type.
+        CompositedVideo:
+          allOf:
+            - $ref: '#/components/schemas/CompositedVideoArtifactsConfiguration'
+            - description: The media pipeline's composited video.
+        SourceConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SourceConfiguration'
+            - description: The source configuration settings of the media pipeline's configuration object.
+      description: The media pipeline's configuration object.
+    ClientRequestToken:
+      type: string
+      pattern: '[-_a-zA-Z0-9]*'
+      minLength: 2
+      maxLength: 64
+      format: password
+    LayoutOption:
+      type: string
+      enum:
+        - GridView
+    ResolutionOption:
+      type: string
+      enum:
+        - HD
+        - FHD
+    GridViewConfiguration:
+      type: object
+      required:
+        - ContentShareLayout
+      properties:
+        ContentShareLayout:
+          allOf:
+            - $ref: '#/components/schemas/ContentShareLayoutOption'
+            - description: Defines the layout of the video tiles when content sharing is enabled.
+        PresenterOnlyConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/PresenterOnlyConfiguration'
+            - description: Defines the configuration options for a presenter only video tile.
+      description: Specifies the type of grid layout.
+    ConcatenationSinkType:
+      type: string
+      enum:
+        - S3Bucket
+    S3BucketSinkConfiguration:
+      type: object
+      required:
+        - Destination
+      properties:
+        Destination:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The destination URL of the S3 bucket.
+      description: The configuration settings for the S3 bucket.
+    ConcatenationSinkList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConcatenationSink'
+      minItems: 1
+      maxItems: 1
+    ConcatenationSourceType:
+      type: string
+      enum:
+        - MediaCapturePipeline
+    MediaCapturePipelineSourceConfiguration:
+      type: object
+      required:
+        - MediaPipelineArn
+        - ChimeSdkMeetingConfiguration
+      properties:
+        MediaPipelineArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The media pipeline ARN in the configuration object of a media capture pipeline.
+        ChimeSdkMeetingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ChimeSdkMeetingConcatenationConfiguration'
+            - description: 'The meeting configuration settings in a media capture pipeline configuration object. '
+      description: The source configuration object of a media capture pipeline.
+    ConcatenationSourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConcatenationSource'
+      minItems: 1
+      maxItems: 1
+    ContentMuxType:
+      type: string
+      enum:
+        - ContentOnly
+    ContentShareLayoutOption:
+      type: string
+      enum:
+        - PresenterOnly
+        - Horizontal
+        - Vertical
+    MediaPipelineSourceType:
+      type: string
+      enum:
+        - ChimeSdkMeeting
+    MediaPipelineSinkType:
+      type: string
+      enum:
+        - S3Bucket
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 1
+      maxItems: 50
+    CreateMediaCapturePipelineRequest:
+      type: object
+      required:
+        - SourceType
+        - SourceArn
+        - SinkType
+        - SinkArn
+      title: CreateMediaCapturePipelineRequest
+      properties:
+        SourceType:
+          allOf:
+            - $ref: '#/components/schemas/MediaPipelineSourceType'
+            - description: Source type from which the media artifacts are captured. A Chime SDK Meeting is the only supported source.
+        SourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: ARN of the source from which the media artifacts are captured.
+        SinkType:
+          allOf:
+            - $ref: '#/components/schemas/MediaPipelineSinkType'
+            - description: Destination type to which the media artifacts are saved. You must use an S3 bucket.
+        SinkArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the sink type.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: The unique identifier for the client request. The token makes the API request idempotent. Use a unique token for each media pipeline request.
+        ChimeSdkMeetingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ChimeSdkMeetingConfiguration'
+            - description: The configuration for a specified media pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tag key-value pairs.
+    MediaCapturePipeline:
+      type: object
+      properties:
+        MediaPipelineId:
+          allOf:
+            - $ref: '#/components/schemas/GuidString'
+            - description: The ID of a media pipeline.
+        MediaPipelineArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The ARN of the media capture pipeline
+        SourceType:
+          allOf:
+            - $ref: '#/components/schemas/MediaPipelineSourceType'
+            - description: Source type from which media artifacts are saved. You must use <code>ChimeMeeting</code>.
+        SourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: ARN of the source from which the media artifacts are saved.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/MediaPipelineStatus'
+            - description: The status of the media pipeline.
+        SinkType:
+          allOf:
+            - $ref: '#/components/schemas/MediaPipelineSinkType'
+            - description: Destination type to which the media artifacts are saved. You must use an S3 Bucket.
+        SinkArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: ARN of the destination to which the media artifacts are saved.
+        CreatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The time at which the pipeline was created, in ISO 8601 format.'
+        UpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The time at which the pipeline was updated, in ISO 8601 format.'
+        ChimeSdkMeetingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ChimeSdkMeetingConfiguration'
+            - description: The configuration for a specified media pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.
+      description: 'A media pipeline object consisting of an ID, source type, source ARN, a sink type, a sink ARN, and a configuration object.'
+    CreateMediaConcatenationPipelineRequest:
+      type: object
+      required:
+        - Sources
+        - Sinks
+      title: CreateMediaConcatenationPipelineRequest
+      properties:
+        Sources:
+          allOf:
+            - $ref: '#/components/schemas/ConcatenationSourceList'
+            - description: An object that specifies the sources for the media concatenation pipeline.
+        Sinks:
+          allOf:
+            - $ref: '#/components/schemas/ConcatenationSinkList'
+            - description: An object that specifies the data sinks for the media concatenation pipeline.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: The unique identifier for the client request. The token makes the API request idempotent. Use a unique token for each media concatenation pipeline request.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags associated with the media concatenation pipeline.
+    MediaConcatenationPipeline:
+      type: object
+      properties:
+        MediaPipelineId:
+          allOf:
+            - $ref: '#/components/schemas/GuidString'
+            - description: The ID of the media pipeline being concatenated.
+        MediaPipelineArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The ARN of the media pipeline that you specify in the <code>SourceConfiguration</code> object.
+        Sources:
+          allOf:
+            - $ref: '#/components/schemas/ConcatenationSourceList'
+            - description: The data sources being concatnated.
+        Sinks:
+          allOf:
+            - $ref: '#/components/schemas/ConcatenationSinkList'
+            - description: The data sinks of the concatenation pipeline.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/MediaPipelineStatus'
+            - description: The status of the concatenation pipeline.
+        CreatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: The time at which the concatenation pipeline was created.
+        UpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: The time at which the concatenation pipeline was last updated.
+      description: Concatenates audio and video data from one or more data streams.
+    LiveConnectorSourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LiveConnectorSourceConfiguration'
+      minItems: 1
+      maxItems: 1
+    LiveConnectorSinkList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LiveConnectorSinkConfiguration'
+      minItems: 1
+      maxItems: 1
+    CreateMediaLiveConnectorPipelineRequest:
+      type: object
+      required:
+        - Sources
+        - Sinks
+      title: CreateMediaLiveConnectorPipelineRequest
+      properties:
+        Sources:
+          allOf:
+            - $ref: '#/components/schemas/LiveConnectorSourceList'
+            - description: The media pipeline's data sources.
+        Sinks:
+          allOf:
+            - $ref: '#/components/schemas/LiveConnectorSinkList'
+            - description: The media pipeline's data sinks.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: The token assigned to the client making the request.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags associated with the media pipeline.
+    MediaLiveConnectorPipeline:
+      type: object
+      properties:
+        Sources:
+          allOf:
+            - $ref: '#/components/schemas/LiveConnectorSourceList'
+            - description: The connector pipeline's data sources.
+        Sinks:
+          allOf:
+            - $ref: '#/components/schemas/LiveConnectorSinkList'
+            - description: The connector pipeline's data sinks.
+        MediaPipelineId:
+          allOf:
+            - $ref: '#/components/schemas/GuidString'
+            - description: The connector pipeline's ID.
+        MediaPipelineArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The connector pipeline's ARN.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/MediaPipelineStatus'
+            - description: The connector pipeline's status.
+        CreatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: Thetime at which the connector pipeline was created.
+        UpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: The time at which the connector pipeline was last updated.
+      description: The connector pipeline.
+    DeleteMediaCapturePipelineRequest:
+      type: object
+      title: DeleteMediaCapturePipelineRequest
+      properties: {}
+    DeleteMediaPipelineRequest:
+      type: object
+      title: DeleteMediaPipelineRequest
+      properties: {}
+    ExternalUserIdType:
+      type: string
+      minLength: 2
+      maxLength: 64
+      format: password
+    ExternalUserIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExternalUserIdType'
+      minItems: 1
+    GetMediaCapturePipelineRequest:
+      type: object
+      title: GetMediaCapturePipelineRequest
+      properties: {}
+    GetMediaPipelineRequest:
+      type: object
+      title: GetMediaPipelineRequest
+      properties: {}
+    MediaPipeline:
+      type: object
+      properties:
+        MediaCapturePipeline:
+          allOf:
+            - $ref: '#/components/schemas/MediaCapturePipeline'
+            - description: A pipeline that enables users to capture audio and video.
+        MediaLiveConnectorPipeline:
+          allOf:
+            - $ref: '#/components/schemas/MediaLiveConnectorPipeline'
+            - description: The connector pipeline of the media pipeline.
+        MediaConcatenationPipeline:
+          allOf:
+            - $ref: '#/components/schemas/MediaConcatenationPipeline'
+            - description: The media concatenation pipeline in a media pipeline.
+      description: 'A pipeline consisting of a media capture, media concatenation, or live-streaming pipeline.'
+    PresenterOnlyConfiguration:
+      type: object
+      properties:
+        PresenterPosition:
+          allOf:
+            - $ref: '#/components/schemas/PresenterPosition'
+            - description: 'Defines the position of the presenter video tile. Default: <code>TopRight</code>.'
+      description: Defines the configuration for a presenter only video tile.
+    Iso8601Timestamp:
+      type: string
+      format: date-time
+    String:
+      type: string
+      pattern: .*
+      maxLength: 4096
+    ResultMax:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListMediaCapturePipelinesRequest:
+      type: object
+      title: ListMediaCapturePipelinesRequest
+      properties: {}
+    MediaCapturePipelineSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MediaCapturePipelineSummary'
+    ListMediaPipelinesRequest:
+      type: object
+      title: ListMediaPipelinesRequest
+      properties: {}
+    MediaPipelineList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MediaPipelineSummary'
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    SensitiveString:
+      type: string
+      minLength: 1
+      maxLength: 1024
+      format: password
+    LiveConnectorRTMPConfiguration:
+      type: object
+      required:
+        - Url
+      properties:
+        Url:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: The URL of the RTMP configuration.
+        AudioChannels:
+          allOf:
+            - $ref: '#/components/schemas/AudioChannelsOption'
+            - description: The audio channels set for the RTMP configuration
+        AudioSampleRate:
+          allOf:
+            - $ref: '#/components/schemas/AudioSampleRateOption'
+            - description: 'The audio sample rate set for the RTMP configuration. Default: 48000.'
+      description: The media pipeline's RTMP configuration object.
+    LiveConnectorSinkType:
+      type: string
+      enum:
+        - RTMP
+    LiveConnectorSourceType:
+      type: string
+      enum:
+        - ChimeSdkMeeting
+    MediaPipelineStatus:
+      type: string
+      enum:
+        - Initializing
+        - InProgress
+        - Failed
+        - Stopping
+        - Stopped
+    MediaCapturePipelineSummary:
+      type: object
+      properties:
+        MediaPipelineId:
+          allOf:
+            - $ref: '#/components/schemas/GuidString'
+            - description: The ID of the media pipeline in the summary.
+        MediaPipelineArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The ARN of the media pipeline in the summary.
+      description: The summary data of a media capture pipeline.
+    MediaPipelineSummary:
+      type: object
+      properties:
+        MediaPipelineId:
+          allOf:
+            - $ref: '#/components/schemas/GuidString'
+            - description: The ID of the media pipeline in the summary.
+        MediaPipelineArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The ARN of the media pipeline in the summary.
+      description: The summary of the media pipeline.
+    PresenterPosition:
+      type: string
+      enum:
+        - TopLeft
+        - TopRight
+        - BottomLeft
+        - BottomRight
+    SelectedVideoStreams:
+      type: object
+      properties:
+        AttendeeIds:
+          allOf:
+            - $ref: '#/components/schemas/AttendeeIdList'
+            - description: 'The attendee IDs of the streams selected for a media pipeline. '
+        ExternalUserIds:
+          allOf:
+            - $ref: '#/components/schemas/ExternalUserIdList'
+            - description: The external user IDs of the streams selected for a media pipeline.
+      description: The video streams for a specified media pipeline. The total number of video streams can't exceed 25.
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 1
+      maxItems: 50
+    TagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - Tags
+      title: TagResourceRequest
+      properties:
+        ResourceARN:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: 'The ARN of the media pipeline associated with any tags. The ARN consists of the pipeline''s endpoint region, resource ID, and pipeline ID.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags associated with the specified media pipeline.
+    UntagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - TagKeys
+      title: UntagResourceRequest
+      properties:
+        ResourceARN:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The ARN of the pipeline that you want to untag.
+        TagKeys:
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: The key/value pairs in the tag that you want to remove.
+    VideoMuxType:
+      type: string
+      enum:
+        - VideoOnly
+security:
+  - hmac: []

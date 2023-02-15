@@ -1614,6 +1614,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeClientAuthenticationSettingsRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1746,6 +1758,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeDirectoriesRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1953,6 +1977,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeLDAPSSettingsRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -2028,6 +2064,12 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeRegionsRequest'
       parameters:
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -2035,6 +2077,75 @@ paths:
             type: string
             enum:
               - DirectoryService_20150416.DescribeRegions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=DirectoryService_20150416.DescribeSettings:
+    post:
+      operationId: DescribeSettings
+      description: Retrieves information about the configurable settings for the specified directory.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeSettingsResult'
+        '480':
+          description: DirectoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryDoesNotExistException'
+        '481':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '484':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '485':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeSettingsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - DirectoryService_20150416.DescribeSettings
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2097,6 +2208,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeSharedDirectoriesRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -2160,6 +2283,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeSnapshotsRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -2229,6 +2364,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeTrustsRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -2236,6 +2383,81 @@ paths:
             type: string
             enum:
               - DirectoryService_20150416.DescribeTrusts
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=DirectoryService_20150416.DescribeUpdateDirectory:
+    post:
+      operationId: DescribeUpdateDirectory
+      description: ' Describes the updates of a directory for a particular update type. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeUpdateDirectoryResult'
+        '480':
+          description: DirectoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryDoesNotExistException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '484':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '485':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeUpdateDirectoryRequest'
+      parameters:
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - DirectoryService_20150416.DescribeUpdateDirectory
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2940,6 +3162,18 @@ paths:
             schema:
               $ref: '#/components/schemas/ListCertificatesRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -3003,6 +3237,18 @@ paths:
             schema:
               $ref: '#/components/schemas/ListIpRoutesRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -3060,6 +3306,18 @@ paths:
             schema:
               $ref: '#/components/schemas/ListLogSubscriptionsRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -3117,6 +3375,18 @@ paths:
             schema:
               $ref: '#/components/schemas/ListSchemaExtensionsRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -3180,6 +3450,18 @@ paths:
             schema:
               $ref: '#/components/schemas/ListTagsForResourceRequest'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -4017,6 +4299,93 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=DirectoryService_20150416.UpdateDirectorySetup:
+    post:
+      operationId: UpdateDirectorySetup
+      description: ' Updates the directory for a particular update type. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDirectorySetupResult'
+        '480':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '481':
+          description: DirectoryInDesiredStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryInDesiredStateException'
+        '482':
+          description: DirectoryUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryUnavailableException'
+        '483':
+          description: SnapshotLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotLimitExceededException'
+        '484':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '485':
+          description: DirectoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryDoesNotExistException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '487':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '488':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDirectorySetupRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - DirectoryService_20150416.UpdateDirectorySetup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=DirectoryService_20150416.UpdateNumberOfDomainControllers:
     post:
       operationId: UpdateNumberOfDomainControllers
@@ -4141,6 +4510,87 @@ paths:
             type: string
             enum:
               - DirectoryService_20150416.UpdateRadius
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=DirectoryService_20150416.UpdateSettings:
+    post:
+      operationId: UpdateSettings
+      description: Updates the configurable settings for the specified directory.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSettingsResult'
+        '480':
+          description: DirectoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryDoesNotExistException'
+        '481':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '482':
+          description: DirectoryUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryUnavailableException'
+        '483':
+          description: IncompatibleSettingsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncompatibleSettingsException'
+        '484':
+          description: UnsupportedSettingsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedSettingsException'
+        '485':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '486':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '487':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSettingsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - DirectoryService_20150416.UpdateSettings
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5106,6 +5556,39 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: The <code>DescribeRegionsResult.NextToken</code> value from a previous call to <a>DescribeRegions</a>. Pass null if this is the first call.
+    DescribeSettingsResult:
+      type: object
+      properties:
+        DirectoryId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The identifier of the directory.
+        SettingEntries:
+          allOf:
+            - $ref: '#/components/schemas/SettingEntries'
+            - description: '<p>The list of <a>SettingEntry</a> objects that were retrieved.</p> <p>It is possible that this list contains less than the number of items specified in the <code>Limit</code> member of the request. This occurs if there are less than the requested number of items left to retrieve, or if the limitations of the operation have been exceeded.</p>'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If not null, token that indicates that more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <code>DescribeSettings</code> to retrieve the next set of items. '
+    DescribeSettingsRequest:
+      type: object
+      required:
+        - DirectoryId
+      title: DescribeSettingsRequest
+      properties:
+        DirectoryId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The identifier of the directory for which to retrieve information.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryConfigurationStatus'
+            - description: The status of the directory settings for which to retrieve information.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The <code>DescribeSettingsResult.NextToken</code> value from a previous call to <a>DescribeSettings</a>. Pass null if this is the first call.
     DescribeSharedDirectoriesResult:
       type: object
       properties:
@@ -5205,6 +5688,40 @@ components:
             - $ref: '#/components/schemas/Limit'
             - description: The maximum number of objects to return.
       description: 'Describes the trust relationships for a particular Managed Microsoft AD directory. If no input parameters are provided, such as directory ID or trust ID, this request describes all the trust relationships.'
+    DescribeUpdateDirectoryResult:
+      type: object
+      properties:
+        UpdateActivities:
+          allOf:
+            - $ref: '#/components/schemas/UpdateActivities'
+            - description: ' The list of update activities on a directory for the requested update type. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' If not null, more results are available. Pass this value for the <code>NextToken</code> parameter. '
+    DescribeUpdateDirectoryRequest:
+      type: object
+      required:
+        - DirectoryId
+        - UpdateType
+      title: DescribeUpdateDirectoryRequest
+      properties:
+        DirectoryId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: ' The unique identifier of the directory. '
+        UpdateType:
+          allOf:
+            - $ref: '#/components/schemas/UpdateType'
+            - description: ' The type of updates you want to describe for the directory. '
+        RegionName:
+          allOf:
+            - $ref: '#/components/schemas/RegionName'
+            - description: ' The name of the Region. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' The <code>DescribeUpdateDirectoryResult</code>. NextToken value from a previous call to <a>DescribeUpdateDirectory</a>. Pass null if this is the first call. '
     DisableClientAuthenticationResult:
       type: object
       properties: {}
@@ -5809,6 +6326,33 @@ components:
             - $ref: '#/components/schemas/DnsIpAddrs'
             - description: The updated IP addresses of the remote DNS server associated with the conditional forwarder.
       description: Updates a conditional forwarder.
+    UpdateDirectorySetupResult:
+      type: object
+      properties: {}
+    UpdateDirectorySetupRequest:
+      type: object
+      required:
+        - DirectoryId
+        - UpdateType
+      title: UpdateDirectorySetupRequest
+      properties:
+        DirectoryId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: ' The identifier of the directory on which you want to perform the update. '
+        UpdateType:
+          allOf:
+            - $ref: '#/components/schemas/UpdateType'
+            - description: ' The type of update that needs to be performed on the directory. For example, OS. '
+        OSUpdateSettings:
+          allOf:
+            - $ref: '#/components/schemas/OSUpdateSettings'
+            - description: ' The settings for the OS update that needs to be performed on the directory. '
+        CreateSnapshotBeforeUpdate:
+          allOf:
+            - $ref: '#/components/schemas/CreateSnapshotBeforeUpdate'
+            - description: ' The boolean that specifies if a snapshot for the directory needs to be taken before updating the directory. '
+    DirectoryInDesiredStateException: {}
     UpdateNumberOfDomainControllersResult:
       type: object
       properties: {}
@@ -5848,6 +6392,30 @@ components:
             - $ref: '#/components/schemas/RadiusSettings'
             - description: A <a>RadiusSettings</a> object that contains information about the RADIUS server.
       description: Contains the inputs for the <a>UpdateRadius</a> operation.
+    UpdateSettingsResult:
+      type: object
+      properties:
+        DirectoryId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The identifier of the directory.
+    UpdateSettingsRequest:
+      type: object
+      required:
+        - DirectoryId
+        - Settings
+      title: UpdateSettingsRequest
+      properties:
+        DirectoryId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The identifier of the directory for which to update settings.
+        Settings:
+          allOf:
+            - $ref: '#/components/schemas/Settings'
+            - description: The list of <a>Setting</a> objects.
+    IncompatibleSettingsException: {}
+    UnsupportedSettingsException: {}
     UpdateTrustResult:
       type: object
       properties:
@@ -6125,6 +6693,7 @@ components:
       type: string
       enum:
         - SmartCard
+        - SmartCardOrPassword
     ClientAuthenticationStatus:
       type: string
       enum:
@@ -6290,6 +6859,8 @@ components:
         - Standard
     CreateSnapshotBeforeSchemaExtension:
       type: boolean
+    CreateSnapshotBeforeUpdate:
+      type: boolean
     SnapshotName:
       type: string
       pattern: '^([a-zA-Z0-9_])[\\a-zA-Z0-9_@#%*+=:?./!\s-]*$'
@@ -6300,7 +6871,7 @@ components:
       pattern: '^s-[0-9a-f]{10}$'
     TrustPassword:
       type: string
-      pattern: (.|\s)*\S(.|\s)*
+      pattern: '^(\p{LD}|\p{Punct}| )+$'
       minLength: 1
       maxLength: 128
       format: password
@@ -6392,6 +6963,18 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/RegionDescription'
+    DirectoryConfigurationStatus:
+      type: string
+      enum:
+        - Requested
+        - Updating
+        - Updated
+        - Failed
+        - Default
+    SettingEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/SettingEntry'
     SharedDirectories:
       type: array
       items:
@@ -6414,9 +6997,43 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Trust'
+    UpdateType:
+      type: string
+      enum:
+        - OS
+    UpdateActivities:
+      type: array
+      items:
+        $ref: '#/components/schemas/UpdateInfoEntry'
     DesiredNumberOfDomainControllers:
       type: integer
       minimum: 2
+    DirectoryConfigurationSettingAllowedValues:
+      type: string
+    DirectoryConfigurationSettingLastRequestedDateTime:
+      type: string
+      format: date-time
+    DirectoryConfigurationSettingLastUpdatedDateTime:
+      type: string
+      format: date-time
+    DirectoryConfigurationSettingName:
+      type: string
+      pattern: '^[a-zA-Z0-9-/. _]*$'
+      minLength: 1
+      maxLength: 255
+    DirectoryConfigurationSettingRequestDetailedStatus:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/DirectoryConfigurationStatus'
+    DirectoryConfigurationSettingRequestStatusMessage:
+      type: string
+    DirectoryConfigurationSettingType:
+      type: string
+    DirectoryConfigurationSettingValue:
+      type: string
+      pattern: '^[a-zA-Z0-9]*$'
+      minLength: 1
+      maxLength: 255
     VpcId:
       type: string
       pattern: '^(vpc-[0-9a-f]{8}|vpc-[0-9a-f]{17})$'
@@ -6614,6 +7231,11 @@ components:
             - $ref: '#/components/schemas/AdditionalRegions'
             - description: 'Lists the Regions where the directory has been replicated, excluding the primary Region.'
       description: Provides information about the Regions that are configured for multi-Region replication.
+    OSVersion:
+      type: string
+      enum:
+        - SERVER_2012
+        - SERVER_2019
     DirectoryDescription:
       type: object
       properties:
@@ -6717,6 +7339,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RegionsInfo'
             - description: Lists the Regions where the directory has replicated.
+        OsVersion:
+          allOf:
+            - $ref: '#/components/schemas/OSVersion'
+            - description: The operating system (OS) version of the directory.
       description: Contains information about an Directory Service directory.
     DirectoryLimits:
       type: object
@@ -6875,6 +7501,8 @@ components:
             - $ref: '#/components/schemas/ManualSnapshotsLimitReached'
             - description: Indicates if the manual snapshot limit has been reached.
       description: Contains manual snapshot limit information for a directory.
+    InitiatedBy:
+      type: string
     IpRoute:
       type: object
       properties:
@@ -6988,6 +7616,14 @@ components:
       description: 'Represents a log subscription, which tracks real-time data from a chosen log group to a specified destination.'
     ManualSnapshotsLimitReached:
       type: boolean
+    OSUpdateSettings:
+      type: object
+      properties:
+        OSVersion:
+          allOf:
+            - $ref: '#/components/schemas/OSVersion'
+            - description: ' OS version that the directory needs to be updated to. '
+      description: ' OS version that the directory needs to be updated to. '
     PortNumber:
       type: integer
       minimum: 1025
@@ -7135,6 +7771,69 @@ components:
       type: string
       minLength: 1
       maxLength: 256
+    Setting:
+      type: object
+      required:
+        - Name
+        - Value
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryConfigurationSettingName'
+            - description: '<p>The name of the directory setting. For example:</p> <p> <code>TLS_1_0</code> </p>'
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryConfigurationSettingValue'
+            - description: 'The value of the directory setting for which to retrieve information. For example, for <code>TLS_1_0</code>, the valid values are: <code>Enable</code> and <code>Disable</code>.'
+      description: Contains information about the configurable settings for a directory.
+    SettingEntry:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryConfigurationSettingType'
+            - description: 'The type of directory setting. For example, <code>Protocol</code> or <code>Cipher</code>.'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryConfigurationSettingName'
+            - description: '<p>The name of the directory setting. For example:</p> <p> <code>TLS_1_0</code> </p>'
+        AllowedValues:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryConfigurationSettingAllowedValues'
+            - description: The valid range of values for the directory setting.
+        AppliedValue:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryConfigurationSettingValue'
+            - description: The value of the directory setting that is applied to the directory.
+        RequestedValue:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryConfigurationSettingValue'
+            - description: The value that was last requested for the directory setting.
+        RequestStatus:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryConfigurationStatus'
+            - description: 'The overall status of the request to update the directory setting request. If the directory setting is deployed in more than one region, and the request fails in any region, the overall status is <code>Failed</code>.'
+        RequestDetailedStatus:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryConfigurationSettingRequestDetailedStatus'
+            - description: 'Details about the status of the request to update the directory setting. If the directory setting is deployed in more than one region, status is returned for the request in each region where the setting is deployed.'
+        RequestStatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryConfigurationSettingRequestStatusMessage'
+            - description: The last status message for the directory status request.
+        LastUpdatedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryConfigurationSettingLastUpdatedDateTime'
+            - description: The date and time when the directory setting was last updated.
+        LastRequestedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryConfigurationSettingLastRequestedDateTime'
+            - description: The date and time when the request to update a directory setting was last submitted.
+      description: Contains information about the specified configurable setting for a directory.
+    Settings:
+      type: array
+      items:
+        $ref: '#/components/schemas/Setting'
     ShareTarget:
       type: object
       required:
@@ -7304,5 +8003,57 @@ components:
             - $ref: '#/components/schemas/TargetType'
             - description: Type of identifier to be used in the <i>Id</i> field.
       description: Identifier that contains details about the directory consumer account with whom the directory is being unshared.
+    UpdateInfoEntry:
+      type: object
+      properties:
+        Region:
+          allOf:
+            - $ref: '#/components/schemas/RegionName'
+            - description: ' The name of the Region. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/UpdateStatus'
+            - description: ' The status of the update performed on the directory. '
+        StatusReason:
+          allOf:
+            - $ref: '#/components/schemas/UpdateStatusReason'
+            - description: ' The reason for the current status of the update type activity. '
+        InitiatedBy:
+          allOf:
+            - $ref: '#/components/schemas/InitiatedBy'
+            - description: ' This specifies if the update was initiated by the customer or by the service team. '
+        NewValue:
+          allOf:
+            - $ref: '#/components/schemas/UpdateValue'
+            - description: ' The new value of the target setting. '
+        PreviousValue:
+          allOf:
+            - $ref: '#/components/schemas/UpdateValue'
+            - description: ' The old value of the target setting. '
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/StartDateTime'
+            - description: ' The start time of the <code>UpdateDirectorySetup</code> for the particular type. '
+        LastUpdatedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/LastUpdatedDateTime'
+            - description: ' The last updated date and time of a particular directory setting. '
+      description: ' An entry of update information related to a requested update type. '
+    UpdateStatus:
+      type: string
+      enum:
+        - Updated
+        - Updating
+        - UpdateFailed
+    UpdateStatusReason:
+      type: string
+    UpdateValue:
+      type: object
+      properties:
+        OSUpdateSettings:
+          allOf:
+            - $ref: '#/components/schemas/OSUpdateSettings'
+            - description: ' The OS update related settings. '
+      description: ' The value for a given type of <code>UpdateSettings</code>. '
 security:
   - hmac: []

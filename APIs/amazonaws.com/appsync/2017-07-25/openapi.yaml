@@ -115,6 +115,165 @@ servers:
     description: The AWSAppSync endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  '/v1/domainnames/{domainName}/apiassociation':
+    post:
+      operationId: AssociateApi
+      description: Maps an endpoint to your custom domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateApiResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      parameters:
+        - name: domainName
+          in: path
+          required: true
+          description: The domain name.
+          schema:
+            type: string
+            pattern: '^(\*[\w\d-]*\.)?([\w\d-]+\.)+[\w\d-]+$'
+            minLength: 1
+            maxLength: 253
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - apiId
+              properties:
+                apiId:
+                  description: The API ID.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DisassociateApi
+      description: Removes an <code>ApiAssociation</code> object from a custom domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateApiResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      parameters:
+        - name: domainName
+          in: path
+          required: true
+          description: The domain name.
+          schema:
+            type: string
+            pattern: '^(\*[\w\d-]*\.)?([\w\d-]+\.)+[\w\d-]+$'
+            minLength: 1
+            maxLength: 253
+    get:
+      operationId: GetApiAssociation
+      description: Retrieves an <code>ApiAssociation</code> object.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetApiAssociationResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      parameters:
+        - name: domainName
+          in: path
+          required: true
+          description: The domain name.
+          schema:
+            type: string
+            pattern: '^(\*[\w\d-]*\.)?([\w\d-]+\.)+[\w\d-]+$'
+            minLength: 1
+            maxLength: 253
   '/v1/apis/{apiId}/ApiCaches':
     post:
       operationId: CreateApiCache
@@ -160,7 +319,7 @@ paths:
         - name: apiId
           in: path
           required: true
-          description: The GraphQL API Id.
+          description: The GraphQL API ID.
           schema:
             type: string
       requestBody:
@@ -175,13 +334,13 @@ paths:
                 - type
               properties:
                 ttl:
-                  description: <p>TTL in seconds for cache entries.</p> <p>Valid values are between 1 and 3600 seconds.</p>
+                  description: '<p>TTL in seconds for cache entries.</p> <p>Valid values are 1–3,600 seconds.</p>'
                   type: integer
                 transitEncryptionEnabled:
-                  description: Transit encryption flag when connecting to cache. This setting cannot be updated after creation.
+                  description: Transit encryption flag when connecting to cache. You cannot update this setting after creation.
                   type: boolean
                 atRestEncryptionEnabled:
-                  description: At rest encryption flag for cache. This setting cannot be updated after creation.
+                  description: At-rest encryption flag for cache. You cannot update this setting after creation.
                   type: boolean
                 apiCachingBehavior:
                   description: '<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests are fully cached.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resolvers that you specify are cached.</p> </li> </ul>'
@@ -313,7 +472,7 @@ paths:
   '/v1/apis/{apiId}/apikeys':
     post:
       operationId: CreateApiKey
-      description: Creates a unique key that you can distribute to clients who are executing your API.
+      description: Creates a unique key that you can distribute to clients who invoke your API.
       responses:
         '200':
           description: Success
@@ -387,7 +546,7 @@ paths:
                   description: A description of the purpose of the API key.
                   type: string
                 expires:
-                  description: 'The time from creation time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour. The default value for this parameter is 7 days from creation time. For more information, see .'
+                  description: 'From the creation time, the time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour. The default value for this parameter is 7 days from creation time. For more information, see .'
                   type: integer
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -441,7 +600,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
+          description: 'An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.'
           schema:
             type: string
             pattern: '[\\S]+'
@@ -450,7 +609,7 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: The maximum number of results you want the request to return.
+          description: The maximum number of results that you want the request to return.
           schema:
             type: integer
             minimum: 0
@@ -532,8 +691,10 @@ paths:
                     - NONE
                     - HTTP
                     - RELATIONAL_DATABASE
+                    - AMAZON_OPENSEARCH_SERVICE
+                    - AMAZON_EVENTBRIDGE
                 serviceRoleArn:
-                  description: The Identity and Access Management service role ARN for the data source. The system assumes this role when accessing the data source.
+                  description: The Identity and Access Management (IAM) service role Amazon Resource Name (ARN) for the data source. The system assumes this role when accessing the data source.
                   type: string
                 dynamodbConfig:
                   description: Describes an Amazon DynamoDB data source configuration.
@@ -554,21 +715,33 @@ paths:
                     deltaSyncConfig:
                       allOf:
                         - $ref: '#/components/schemas/DeltaSyncConfig'
-                        - description: The <code>DeltaSyncConfig</code> for a versioned datasource.
+                        - description: The <code>DeltaSyncConfig</code> for a versioned data source.
                     versioned:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
                         - description: Set to TRUE to use Conflict Detection and Resolution with this data source.
                 lambdaConfig:
-                  description: Describes an Amazon Web Services Lambda data source configuration.
+                  description: Describes an Lambda data source configuration.
                   type: object
                   properties:
                     lambdaFunctionArn:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: The ARN for the Lambda function.
+                        - description: The Amazon Resource Name (ARN) for the Lambda function.
                 elasticsearchConfig:
-                  description: Describes an Elasticsearch data source configuration.
+                  description: '<p>Describes an OpenSearch data source configuration.</p> <p>As of September 2021, Amazon Elasticsearch service is Amazon OpenSearch Service. This configuration is deprecated. For new data sources, use <a>OpenSearchServiceDataSourceConfig</a> to specify an OpenSearch data source.</p>'
+                  type: object
+                  properties:
+                    endpoint:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: The endpoint.
+                    awsRegion:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: The Amazon Web Services Region.
+                openSearchServiceConfig:
+                  description: Describes an OpenSearch data source configuration.
                   type: object
                   properties:
                     endpoint:
@@ -586,11 +759,11 @@ paths:
                     endpoint:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: 'The HTTP URL endpoint. You can either specify the domain name or IP, and port combination, and the URL scheme must be HTTP or HTTPS. If the port is not specified, AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS endpoints.'
+                        - description: 'The HTTP URL endpoint. You can specify either the domain name or IP, and port combination, and the URL scheme must be HTTP or HTTPS. If you don''t specify the port, AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS endpoints.'
                     authorizationConfig:
                       allOf:
                         - $ref: '#/components/schemas/AuthorizationConfig'
-                        - description: The authorization config in case the HTTP endpoint requires authorization.
+                        - description: The authorization configuration in case the HTTP endpoint requires authorization.
                 relationalDatabaseConfig:
                   description: Describes a relational database data source configuration.
                   type: object
@@ -598,11 +771,19 @@ paths:
                     relationalDatabaseSourceType:
                       allOf:
                         - $ref: '#/components/schemas/RelationalDatabaseSourceType'
-                        - description: '<p>Source type for the relational database.</p> <ul> <li> <p> <b>RDS_HTTP_ENDPOINT</b>: The relational database source type is an Amazon RDS HTTP endpoint.</p> </li> </ul>'
+                        - description: '<p>Source type for the relational database.</p> <ul> <li> <p> <b>RDS_HTTP_ENDPOINT</b>: The relational database source type is an Amazon Relational Database Service (Amazon RDS) HTTP endpoint.</p> </li> </ul>'
                     rdsHttpEndpointConfig:
                       allOf:
                         - $ref: '#/components/schemas/RdsHttpEndpointConfig'
                         - description: Amazon RDS HTTP endpoint settings.
+                eventBridgeConfig:
+                  description: Describes an Amazon EventBridge bus data source configuration.
+                  type: object
+                  properties:
+                    eventBusArn:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: 'The ARN of the event bus. For more information about event buses, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus.html">Amazon EventBridge event buses</a>.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -655,7 +836,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list. '
+          description: 'An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.'
           schema:
             type: string
             pattern: '[\\S]+'
@@ -664,7 +845,119 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: The maximum number of results you want the request to return.
+          description: The maximum number of results that you want the request to return.
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 25
+  /v1/domainnames:
+    post:
+      operationId: CreateDomainName
+      description: Creates a custom <code>DomainName</code> object.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDomainNameResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - domainName
+                - certificateArn
+              properties:
+                domainName:
+                  description: The domain name.
+                  type: string
+                  pattern: '^(\*[\w\d-]*\.)?([\w\d-]+\.)+[\w\d-]+$'
+                  minLength: 1
+                  maxLength: 253
+                certificateArn:
+                  description: The Amazon Resource Name (ARN) of the certificate. This can be an Certificate Manager (ACM) certificate or an Identity and Access Management (IAM) server certificate.
+                  type: string
+                  pattern: '^arn:[a-z-]*:(acm|iam):[a-z0-9-]*:\d{12}:(certificate|server-certificate)/[0-9A-Za-z_/-]*$'
+                  minLength: 20
+                  maxLength: 2048
+                description:
+                  description: A description of the <code>DomainName</code>.
+                  type: string
+                  pattern: ^.*$
+                  minLength: 0
+                  maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListDomainNames
+      description: Lists multiple custom domain names.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDomainNamesResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: The API token.
+          schema:
+            type: string
+            pattern: '[\\S]+'
+            minLength: 1
+            maxLength: 65536
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results that you want the request to return.
           schema:
             type: integer
             minimum: 0
@@ -672,7 +965,7 @@ paths:
   '/v1/apis/{apiId}/functions':
     post:
       operationId: CreateFunction
-      description: <p>Creates a <code>Function</code> object.</p> <p>A function is a reusable entity. Multiple functions can be used to compose the resolver logic.</p>
+      description: <p>Creates a <code>Function</code> object.</p> <p>A function is a reusable entity. You can use multiple functions to compose the resolver logic.</p>
       responses:
         '200':
           description: Success
@@ -720,7 +1013,6 @@ paths:
               required:
                 - name
                 - dataSourceName
-                - functionVersion
               properties:
                 name:
                   description: The <code>Function</code> name. The function name does not have to be unique.
@@ -740,32 +1032,56 @@ paths:
                 requestMappingTemplate:
                   description: The <code>Function</code> request mapping template. Functions support only the 2018-05-29 version of the request mapping template.
                   type: string
+                  pattern: ^.*$
                   minLength: 1
                   maxLength: 65536
                 responseMappingTemplate:
-                  description: 'The <code>Function</code> response mapping template. '
+                  description: The <code>Function</code> response mapping template.
                   type: string
+                  pattern: ^.*$
                   minLength: 1
                   maxLength: 65536
                 functionVersion:
-                  description: 'The <code>version</code> of the request mapping template. Currently the supported value is 2018-05-29. '
+                  description: 'The <code>version</code> of the request mapping template. Currently, the supported value is 2018-05-29. Note that when using VTL and mapping templates, the <code>functionVersion</code> is required.'
                   type: string
                 syncConfig:
-                  description: <p>Describes a Sync configuration for a resolver.</p> <p>Contains information on which Conflict Detection as well as Resolution strategy should be performed when the resolver is invoked.</p>
+                  description: <p>Describes a Sync configuration for a resolver.</p> <p>Specifies which Conflict Detection strategy and Resolution strategy to use when the resolver is invoked.</p>
                   type: object
                   properties:
                     conflictHandler:
                       allOf:
                         - $ref: '#/components/schemas/ConflictHandlerType'
-                        - description: '<p>The Conflict Resolution strategy to perform in the event of a conflict.</p> <ul> <li> <p> <b>OPTIMISTIC_CONCURRENCY</b>: Resolve conflicts by rejecting mutations when versions do not match the latest version at the server.</p> </li> <li> <p> <b>AUTOMERGE</b>: Resolve conflicts with the Automerge conflict resolution strategy.</p> </li> <li> <p> <b>LAMBDA</b>: Resolve conflicts with a Lambda function supplied in the LambdaConflictHandlerConfig.</p> </li> </ul>'
+                        - description: '<p>The Conflict Resolution strategy to perform in the event of a conflict.</p> <ul> <li> <p> <b>OPTIMISTIC_CONCURRENCY</b>: Resolve conflicts by rejecting mutations when versions don''t match the latest version at the server.</p> </li> <li> <p> <b>AUTOMERGE</b>: Resolve conflicts with the Automerge conflict resolution strategy.</p> </li> <li> <p> <b>LAMBDA</b>: Resolve conflicts with an Lambda function supplied in the <code>LambdaConflictHandlerConfig</code>.</p> </li> </ul>'
                     conflictDetection:
                       allOf:
                         - $ref: '#/components/schemas/ConflictDetectionType'
-                        - description: '<p>The Conflict Detection strategy to use.</p> <ul> <li> <p> <b>VERSION</b>: Detect conflicts based on object versions for this resolver.</p> </li> <li> <p> <b>NONE</b>: Do not detect conflicts when executing this resolver.</p> </li> </ul>'
+                        - description: '<p>The Conflict Detection strategy to use.</p> <ul> <li> <p> <b>VERSION</b>: Detect conflicts based on object versions for this resolver.</p> </li> <li> <p> <b>NONE</b>: Do not detect conflicts when invoking this resolver.</p> </li> </ul>'
                     lambdaConflictHandlerConfig:
                       allOf:
                         - $ref: '#/components/schemas/LambdaConflictHandlerConfig'
-                        - description: The <code>LambdaConflictHandlerConfig</code> when configuring LAMBDA as the Conflict Handler.
+                        - description: The <code>LambdaConflictHandlerConfig</code> when configuring <code>LAMBDA</code> as the Conflict Handler.
+                maxBatchSize:
+                  description: The maximum batching size for a resolver.
+                  type: integer
+                  minimum: 0
+                  maximum: 2000
+                runtime:
+                  description: 'Describes a runtime used by an Amazon Web Services AppSync pipeline resolver or Amazon Web Services AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified.'
+                  type: object
+                  properties:
+                    name:
+                      allOf:
+                        - $ref: '#/components/schemas/RuntimeName'
+                        - description: 'The <code>name</code> of the runtime to use. Currently, the only allowed value is <code>APPSYNC_JS</code>.'
+                    runtimeVersion:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: 'The <code>version</code> of the runtime to use. Currently, the only allowed version is <code>1.0.0</code>.'
+                code:
+                  description: 'The <code>function</code> code that contains the request and response functions. When code is used, the <code>runtime</code> is required. The <code>runtime</code> value must be <code>APPSYNC_JS</code>.'
+                  type: string
+                  minLength: 1
+                  maxLength: 32768
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -818,7 +1134,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
+          description: 'An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.'
           schema:
             type: string
             pattern: '[\\S]+'
@@ -827,7 +1143,7 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: The maximum number of results you want the request to return.
+          description: The maximum number of results that you want the request to return.
           schema:
             type: integer
             minimum: 0
@@ -894,23 +1210,23 @@ paths:
                   description: A user-supplied name for the <code>GraphqlApi</code>.
                   type: string
                 logConfig:
-                  description: The CloudWatch Logs configuration.
+                  description: The Amazon CloudWatch Logs configuration.
                   type: object
                   properties:
                     fieldLogLevel:
                       allOf:
                         - $ref: '#/components/schemas/FieldLogLevel'
-                        - description: '<p>The field logging level. Values can be NONE, ERROR, or ALL. </p> <ul> <li> <p> <b>NONE</b>: No field-level logs are captured.</p> </li> <li> <p> <b>ERROR</b>: Logs the following information only for the fields that are in error:</p> <ul> <li> <p>The error section in the server response.</p> </li> <li> <p>Field-level errors.</p> </li> <li> <p>The generated request/response functions that got resolved for error fields.</p> </li> </ul> </li> <li> <p> <b>ALL</b>: The following information is logged for all fields in the query:</p> <ul> <li> <p>Field-level tracing information.</p> </li> <li> <p>The generated request/response functions that got resolved for each field.</p> </li> </ul> </li> </ul>'
+                        - description: '<p>The field logging level. Values can be NONE, ERROR, or ALL.</p> <ul> <li> <p> <b>NONE</b>: No field-level logs are captured.</p> </li> <li> <p> <b>ERROR</b>: Logs the following information only for the fields that are in error:</p> <ul> <li> <p>The error section in the server response.</p> </li> <li> <p>Field-level errors.</p> </li> <li> <p>The generated request/response functions that got resolved for error fields.</p> </li> </ul> </li> <li> <p> <b>ALL</b>: The following information is logged for all fields in the query:</p> <ul> <li> <p>Field-level tracing information.</p> </li> <li> <p>The generated request/response functions that got resolved for each field.</p> </li> </ul> </li> </ul>'
                     cloudWatchLogsRoleArn:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: 'The service role that AppSync will assume to publish to Amazon CloudWatch logs in your account. '
+                        - description: The service role that AppSync assumes to publish to CloudWatch logs in your account.
                     excludeVerboseContent:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
                         - description: 'Set to TRUE to exclude sections that contain information such as headers, context, and evaluated mapping templates, regardless of logging level.'
                 authenticationType:
-                  description: 'The authentication type: API key, Identity and Access Management, OIDC, or Amazon Cognito user pools.'
+                  description: 'The authentication type: API key, Identity and Access Management (IAM), OpenID Connect (OIDC), Amazon Cognito user pools, or Lambda.'
                   type: string
                   enum:
                     - API_KEY
@@ -937,27 +1253,27 @@ paths:
                     appIdClientRegex:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: A regular expression for validating the incoming Amazon Cognito user pool app client ID.
+                        - description: 'A regular expression for validating the incoming Amazon Cognito user pool app client ID. If this value isn''t set, no filtering is applied.'
                 openIDConnectConfig:
-                  description: Describes an OpenID Connect configuration.
+                  description: Describes an OpenID Connect (OIDC) configuration.
                   type: object
                   properties:
                     issuer:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: The issuer for the OpenID Connect configuration. The issuer returned by discovery must exactly match the value of <code>iss</code> in the ID token.
+                        - description: The issuer for the OIDC configuration. The issuer returned by discovery must exactly match the value of <code>iss</code> in the ID token.
                     clientId:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: The client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AppSync can validate against multiple client identifiers at a time.
+                        - description: The client identifier of the relying party at the OpenID identity provider. This identifier is typically obtained when the relying party is registered with the OpenID identity provider. You can specify a regular expression so that AppSync can validate against multiple client identifiers at a time.
                     iatTTL:
                       allOf:
                         - $ref: '#/components/schemas/Long'
-                        - description: The number of milliseconds a token is valid after being issued to a user.
+                        - description: The number of milliseconds that a token is valid after it's issued to a user.
                     authTTL:
                       allOf:
                         - $ref: '#/components/schemas/Long'
-                        - description: The number of milliseconds a token is valid after being authenticated.
+                        - description: The number of milliseconds that a token is valid after being authenticated.
                 tags:
                   description: A map with keys of <code>TagKey</code> objects and values of <code>TagValue</code> objects.
                   type: object
@@ -971,10 +1287,10 @@ paths:
                   items:
                     $ref: '#/components/schemas/AdditionalAuthenticationProvider'
                 xrayEnabled:
-                  description: A flag indicating whether to enable X-Ray tracing for the <code>GraphqlApi</code>.
+                  description: A flag indicating whether to use X-Ray tracing for the <code>GraphqlApi</code>.
                   type: boolean
                 lambdaAuthorizerConfig:
-                  description: A <code>LambdaAuthorizerConfig</code> holds configuration on how to authorize AppSync API access when using the <code>AWS_LAMBDA</code> authorizer mode. Be aware that an AppSync API may have only one Lambda authorizer configured at a time.
+                  description: A <code>LambdaAuthorizerConfig</code> specifies how to authorize AppSync API access when using the <code>AWS_LAMBDA</code> authorizer mode. Be aware that an AppSync API can have only one Lambda authorizer configured at a time.
                   type: object
                   properties:
                     authorizerResultTtlInSeconds:
@@ -984,11 +1300,11 @@ paths:
                     authorizerUri:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: '<p>The ARN of the lambda function to be called for authorization. This may be a standard Lambda ARN, a version ARN (<code>.../v3</code>) or alias ARN. </p> <p> <i>Note</i>: This Lambda function must have the following resource-based policy assigned to it. When configuring Lambda authorizers in the Console, this is done for you. To do so with the AWS CLI, run the following:</p> <p> <code>aws lambda add-permission --function-name "arn:aws:lambda:us-east-2:111122223333:function:my-function" --statement-id "appsync" --principal appsync.amazonaws.com --action lambda:InvokeFunction</code> </p>'
+                        - description: '<p>The Amazon Resource Name (ARN) of the Lambda function to be called for authorization. This can be a standard Lambda ARN, a version ARN (<code>.../v3</code>), or an alias ARN. </p> <p> <b>Note</b>: This Lambda function must have the following resource-based policy assigned to it. When configuring Lambda authorizers in the console, this is done for you. To use the Command Line Interface (CLI), run the following:</p> <p> <code>aws lambda add-permission --function-name "arn:aws:lambda:us-east-2:111122223333:function:my-function" --statement-id "appsync" --principal appsync.amazonaws.com --action lambda:InvokeFunction</code> </p>'
                     identityValidationExpression:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: A regular expression for validation of tokens before the Lambda Function is called.
+                        - description: A regular expression for validation of tokens before the Lambda function is called.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1029,7 +1345,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list. '
+          description: 'An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.'
           schema:
             type: string
             pattern: '[\\S]+'
@@ -1038,7 +1354,7 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: The maximum number of results you want the request to return.
+          description: The maximum number of results that you want the request to return.
           schema:
             type: integer
             minimum: 0
@@ -1046,7 +1362,7 @@ paths:
   '/v1/apis/{apiId}/types/{typeName}/resolvers':
     post:
       operationId: CreateResolver
-      description: <p>Creates a <code>Resolver</code> object.</p> <p>A resolver converts incoming requests into a format that a data source can understand and converts the data source's responses into GraphQL.</p>
+      description: '<p>Creates a <code>Resolver</code> object.</p> <p>A resolver converts incoming requests into a format that a data source can understand, and converts the data source''s responses into GraphQL.</p>'
       responses:
         '200':
           description: Success
@@ -1078,6 +1394,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
       parameters:
         - name: apiId
           in: path
@@ -1116,17 +1438,19 @@ paths:
                   minLength: 1
                   maxLength: 65536
                 requestMappingTemplate:
-                  description: '<p>The mapping template to be used for requests.</p> <p>A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p> <p>VTL request mapping templates are optional when using a Lambda data source. For all other data sources, VTL request and response mapping templates are required.</p>'
+                  description: '<p>The mapping template to use for requests.</p> <p>A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p> <p>VTL request mapping templates are optional when using an Lambda data source. For all other data sources, VTL request and response mapping templates are required.</p>'
                   type: string
+                  pattern: ^.*$
                   minLength: 1
                   maxLength: 65536
                 responseMappingTemplate:
-                  description: The mapping template to be used for responses from the data source.
+                  description: The mapping template to use for responses from the data source.
                   type: string
+                  pattern: ^.*$
                   minLength: 1
                   maxLength: 65536
                 kind:
-                  description: '<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is the default resolver type. A UNIT resolver enables you to execute a GraphQL query against a single data source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type. A PIPELINE resolver enables you to execute a series of <code>Function</code> in a serial manner. You can use a pipeline resolver to execute a GraphQL query against multiple data sources.</p> </li> </ul>'
+                  description: '<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of <code>Function</code> objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources.</p> </li> </ul>'
                   type: string
                   enum:
                     - UNIT
@@ -1140,33 +1464,55 @@ paths:
                         - $ref: '#/components/schemas/FunctionsIds'
                         - description: A list of <code>Function</code> objects.
                 syncConfig:
-                  description: <p>Describes a Sync configuration for a resolver.</p> <p>Contains information on which Conflict Detection as well as Resolution strategy should be performed when the resolver is invoked.</p>
+                  description: <p>Describes a Sync configuration for a resolver.</p> <p>Specifies which Conflict Detection strategy and Resolution strategy to use when the resolver is invoked.</p>
                   type: object
                   properties:
                     conflictHandler:
                       allOf:
                         - $ref: '#/components/schemas/ConflictHandlerType'
-                        - description: '<p>The Conflict Resolution strategy to perform in the event of a conflict.</p> <ul> <li> <p> <b>OPTIMISTIC_CONCURRENCY</b>: Resolve conflicts by rejecting mutations when versions do not match the latest version at the server.</p> </li> <li> <p> <b>AUTOMERGE</b>: Resolve conflicts with the Automerge conflict resolution strategy.</p> </li> <li> <p> <b>LAMBDA</b>: Resolve conflicts with a Lambda function supplied in the LambdaConflictHandlerConfig.</p> </li> </ul>'
+                        - description: '<p>The Conflict Resolution strategy to perform in the event of a conflict.</p> <ul> <li> <p> <b>OPTIMISTIC_CONCURRENCY</b>: Resolve conflicts by rejecting mutations when versions don''t match the latest version at the server.</p> </li> <li> <p> <b>AUTOMERGE</b>: Resolve conflicts with the Automerge conflict resolution strategy.</p> </li> <li> <p> <b>LAMBDA</b>: Resolve conflicts with an Lambda function supplied in the <code>LambdaConflictHandlerConfig</code>.</p> </li> </ul>'
                     conflictDetection:
                       allOf:
                         - $ref: '#/components/schemas/ConflictDetectionType'
-                        - description: '<p>The Conflict Detection strategy to use.</p> <ul> <li> <p> <b>VERSION</b>: Detect conflicts based on object versions for this resolver.</p> </li> <li> <p> <b>NONE</b>: Do not detect conflicts when executing this resolver.</p> </li> </ul>'
+                        - description: '<p>The Conflict Detection strategy to use.</p> <ul> <li> <p> <b>VERSION</b>: Detect conflicts based on object versions for this resolver.</p> </li> <li> <p> <b>NONE</b>: Do not detect conflicts when invoking this resolver.</p> </li> </ul>'
                     lambdaConflictHandlerConfig:
                       allOf:
                         - $ref: '#/components/schemas/LambdaConflictHandlerConfig'
-                        - description: The <code>LambdaConflictHandlerConfig</code> when configuring LAMBDA as the Conflict Handler.
+                        - description: The <code>LambdaConflictHandlerConfig</code> when configuring <code>LAMBDA</code> as the Conflict Handler.
                 cachingConfig:
-                  description: The caching configuration for a resolver that has caching enabled.
+                  description: The caching configuration for a resolver that has caching activated.
                   type: object
                   properties:
                     ttl:
                       allOf:
                         - $ref: '#/components/schemas/Long'
-                        - description: <p>The TTL in seconds for a resolver that has caching enabled.</p> <p>Valid values are between 1 and 3600 seconds.</p>
+                        - description: '<p>The TTL in seconds for a resolver that has caching activated.</p> <p>Valid values are 1–3,600 seconds.</p>'
                     cachingKeys:
                       allOf:
                         - $ref: '#/components/schemas/CachingKeys'
-                        - description: '<p>The caching keys for a resolver that has caching enabled.</p> <p>Valid values are entries from the <code>$context.arguments</code>, <code>$context.source</code>, and <code>$context.identity</code> maps.</p>'
+                        - description: '<p>The caching keys for a resolver that has caching activated.</p> <p>Valid values are entries from the <code>$context.arguments</code>, <code>$context.source</code>, and <code>$context.identity</code> maps.</p>'
+                maxBatchSize:
+                  description: The maximum batching size for a resolver.
+                  type: integer
+                  minimum: 0
+                  maximum: 2000
+                runtime:
+                  description: 'Describes a runtime used by an Amazon Web Services AppSync pipeline resolver or Amazon Web Services AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified.'
+                  type: object
+                  properties:
+                    name:
+                      allOf:
+                        - $ref: '#/components/schemas/RuntimeName'
+                        - description: 'The <code>name</code> of the runtime to use. Currently, the only allowed value is <code>APPSYNC_JS</code>.'
+                    runtimeVersion:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: 'The <code>version</code> of the runtime to use. Currently, the only allowed version is <code>1.0.0</code>.'
+                code:
+                  description: 'The <code>resolver</code> code that contains the request and response functions. When code is used, the <code>runtime</code> is required. The <code>runtime</code> value must be <code>APPSYNC_JS</code>.'
+                  type: string
+                  minLength: 1
+                  maxLength: 32768
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1225,7 +1571,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list. '
+          description: 'An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.'
           schema:
             type: string
             pattern: '[\\S]+'
@@ -1234,7 +1580,7 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: The maximum number of results you want the request to return.
+          description: The maximum number of results that you want the request to return.
           schema:
             type: integer
             minimum: 0
@@ -1372,7 +1718,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: UpdateApiKey
-      description: Updates an API key. The key can be updated while it is not deleted.
+      description: Updates an API key. You can update the key as long as it's not deleted.
       responses:
         '200':
           description: Success
@@ -1440,7 +1786,7 @@ paths:
                   description: A description of the purpose of the API key.
                   type: string
                 expires:
-                  description: 'The time from update time after which the API key expires. The date is represented as seconds since the epoch. For more information, see .'
+                  description: 'From the update time, the time after which the API key expires. The date is represented as seconds since the epoch. For more information, see .'
                   type: integer
   '/v1/apis/{apiId}/datasources/{name}':
     delete:
@@ -1641,8 +1987,10 @@ paths:
                     - NONE
                     - HTTP
                     - RELATIONAL_DATABASE
+                    - AMAZON_OPENSEARCH_SERVICE
+                    - AMAZON_EVENTBRIDGE
                 serviceRoleArn:
-                  description: The new service role ARN for the data source.
+                  description: The new service role Amazon Resource Name (ARN) for the data source.
                   type: string
                 dynamodbConfig:
                   description: Describes an Amazon DynamoDB data source configuration.
@@ -1663,21 +2011,33 @@ paths:
                     deltaSyncConfig:
                       allOf:
                         - $ref: '#/components/schemas/DeltaSyncConfig'
-                        - description: The <code>DeltaSyncConfig</code> for a versioned datasource.
+                        - description: The <code>DeltaSyncConfig</code> for a versioned data source.
                     versioned:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
                         - description: Set to TRUE to use Conflict Detection and Resolution with this data source.
                 lambdaConfig:
-                  description: Describes an Amazon Web Services Lambda data source configuration.
+                  description: Describes an Lambda data source configuration.
                   type: object
                   properties:
                     lambdaFunctionArn:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: The ARN for the Lambda function.
+                        - description: The Amazon Resource Name (ARN) for the Lambda function.
                 elasticsearchConfig:
-                  description: Describes an Elasticsearch data source configuration.
+                  description: '<p>Describes an OpenSearch data source configuration.</p> <p>As of September 2021, Amazon Elasticsearch service is Amazon OpenSearch Service. This configuration is deprecated. For new data sources, use <a>OpenSearchServiceDataSourceConfig</a> to specify an OpenSearch data source.</p>'
+                  type: object
+                  properties:
+                    endpoint:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: The endpoint.
+                    awsRegion:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: The Amazon Web Services Region.
+                openSearchServiceConfig:
+                  description: Describes an OpenSearch data source configuration.
                   type: object
                   properties:
                     endpoint:
@@ -1695,11 +2055,11 @@ paths:
                     endpoint:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: 'The HTTP URL endpoint. You can either specify the domain name or IP, and port combination, and the URL scheme must be HTTP or HTTPS. If the port is not specified, AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS endpoints.'
+                        - description: 'The HTTP URL endpoint. You can specify either the domain name or IP, and port combination, and the URL scheme must be HTTP or HTTPS. If you don''t specify the port, AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS endpoints.'
                     authorizationConfig:
                       allOf:
                         - $ref: '#/components/schemas/AuthorizationConfig'
-                        - description: The authorization config in case the HTTP endpoint requires authorization.
+                        - description: The authorization configuration in case the HTTP endpoint requires authorization.
                 relationalDatabaseConfig:
                   description: Describes a relational database data source configuration.
                   type: object
@@ -1707,11 +2067,185 @@ paths:
                     relationalDatabaseSourceType:
                       allOf:
                         - $ref: '#/components/schemas/RelationalDatabaseSourceType'
-                        - description: '<p>Source type for the relational database.</p> <ul> <li> <p> <b>RDS_HTTP_ENDPOINT</b>: The relational database source type is an Amazon RDS HTTP endpoint.</p> </li> </ul>'
+                        - description: '<p>Source type for the relational database.</p> <ul> <li> <p> <b>RDS_HTTP_ENDPOINT</b>: The relational database source type is an Amazon Relational Database Service (Amazon RDS) HTTP endpoint.</p> </li> </ul>'
                     rdsHttpEndpointConfig:
                       allOf:
                         - $ref: '#/components/schemas/RdsHttpEndpointConfig'
                         - description: Amazon RDS HTTP endpoint settings.
+                eventBridgeConfig:
+                  description: Describes an Amazon EventBridge bus data source configuration.
+                  type: object
+                  properties:
+                    eventBusArn:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: 'The ARN of the event bus. For more information about event buses, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus.html">Amazon EventBridge event buses</a>.'
+  '/v1/domainnames/{domainName}':
+    delete:
+      operationId: DeleteDomainName
+      description: Deletes a custom <code>DomainName</code> object.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDomainNameResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      parameters:
+        - name: domainName
+          in: path
+          required: true
+          description: The domain name.
+          schema:
+            type: string
+            pattern: '^(\*[\w\d-]*\.)?([\w\d-]+\.)+[\w\d-]+$'
+            minLength: 1
+            maxLength: 253
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetDomainName
+      description: Retrieves a custom <code>DomainName</code> object.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDomainNameResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      parameters:
+        - name: domainName
+          in: path
+          required: true
+          description: The domain name.
+          schema:
+            type: string
+            pattern: '^(\*[\w\d-]*\.)?([\w\d-]+\.)+[\w\d-]+$'
+            minLength: 1
+            maxLength: 253
+    post:
+      operationId: UpdateDomainName
+      description: Updates a custom <code>DomainName</code> object.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDomainNameResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      parameters:
+        - name: domainName
+          in: path
+          required: true
+          description: The domain name.
+          schema:
+            type: string
+            pattern: '^(\*[\w\d-]*\.)?([\w\d-]+\.)+[\w\d-]+$'
+            minLength: 1
+            maxLength: 253
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  description: A description of the <code>DomainName</code>.
+                  type: string
+                  pattern: ^.*$
+                  minLength: 0
+                  maxLength: 255
   '/v1/apis/{apiId}/functions/{functionId}':
     delete:
       operationId: DeleteFunction
@@ -1874,7 +2408,6 @@ paths:
               required:
                 - name
                 - dataSourceName
-                - functionVersion
               properties:
                 name:
                   description: The <code>Function</code> name.
@@ -1894,32 +2427,56 @@ paths:
                 requestMappingTemplate:
                   description: The <code>Function</code> request mapping template. Functions support only the 2018-05-29 version of the request mapping template.
                   type: string
+                  pattern: ^.*$
                   minLength: 1
                   maxLength: 65536
                 responseMappingTemplate:
-                  description: 'The <code>Function</code> request mapping template. '
+                  description: The <code>Function</code> request mapping template.
                   type: string
+                  pattern: ^.*$
                   minLength: 1
                   maxLength: 65536
                 functionVersion:
-                  description: 'The <code>version</code> of the request mapping template. Currently the supported value is 2018-05-29. '
+                  description: 'The <code>version</code> of the request mapping template. Currently, the supported value is 2018-05-29. Note that when using VTL and mapping templates, the <code>functionVersion</code> is required.'
                   type: string
                 syncConfig:
-                  description: <p>Describes a Sync configuration for a resolver.</p> <p>Contains information on which Conflict Detection as well as Resolution strategy should be performed when the resolver is invoked.</p>
+                  description: <p>Describes a Sync configuration for a resolver.</p> <p>Specifies which Conflict Detection strategy and Resolution strategy to use when the resolver is invoked.</p>
                   type: object
                   properties:
                     conflictHandler:
                       allOf:
                         - $ref: '#/components/schemas/ConflictHandlerType'
-                        - description: '<p>The Conflict Resolution strategy to perform in the event of a conflict.</p> <ul> <li> <p> <b>OPTIMISTIC_CONCURRENCY</b>: Resolve conflicts by rejecting mutations when versions do not match the latest version at the server.</p> </li> <li> <p> <b>AUTOMERGE</b>: Resolve conflicts with the Automerge conflict resolution strategy.</p> </li> <li> <p> <b>LAMBDA</b>: Resolve conflicts with a Lambda function supplied in the LambdaConflictHandlerConfig.</p> </li> </ul>'
+                        - description: '<p>The Conflict Resolution strategy to perform in the event of a conflict.</p> <ul> <li> <p> <b>OPTIMISTIC_CONCURRENCY</b>: Resolve conflicts by rejecting mutations when versions don''t match the latest version at the server.</p> </li> <li> <p> <b>AUTOMERGE</b>: Resolve conflicts with the Automerge conflict resolution strategy.</p> </li> <li> <p> <b>LAMBDA</b>: Resolve conflicts with an Lambda function supplied in the <code>LambdaConflictHandlerConfig</code>.</p> </li> </ul>'
                     conflictDetection:
                       allOf:
                         - $ref: '#/components/schemas/ConflictDetectionType'
-                        - description: '<p>The Conflict Detection strategy to use.</p> <ul> <li> <p> <b>VERSION</b>: Detect conflicts based on object versions for this resolver.</p> </li> <li> <p> <b>NONE</b>: Do not detect conflicts when executing this resolver.</p> </li> </ul>'
+                        - description: '<p>The Conflict Detection strategy to use.</p> <ul> <li> <p> <b>VERSION</b>: Detect conflicts based on object versions for this resolver.</p> </li> <li> <p> <b>NONE</b>: Do not detect conflicts when invoking this resolver.</p> </li> </ul>'
                     lambdaConflictHandlerConfig:
                       allOf:
                         - $ref: '#/components/schemas/LambdaConflictHandlerConfig'
-                        - description: The <code>LambdaConflictHandlerConfig</code> when configuring LAMBDA as the Conflict Handler.
+                        - description: The <code>LambdaConflictHandlerConfig</code> when configuring <code>LAMBDA</code> as the Conflict Handler.
+                maxBatchSize:
+                  description: The maximum batching size for a resolver.
+                  type: integer
+                  minimum: 0
+                  maximum: 2000
+                runtime:
+                  description: 'Describes a runtime used by an Amazon Web Services AppSync pipeline resolver or Amazon Web Services AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified.'
+                  type: object
+                  properties:
+                    name:
+                      allOf:
+                        - $ref: '#/components/schemas/RuntimeName'
+                        - description: 'The <code>name</code> of the runtime to use. Currently, the only allowed value is <code>APPSYNC_JS</code>.'
+                    runtimeVersion:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: 'The <code>version</code> of the runtime to use. Currently, the only allowed version is <code>1.0.0</code>.'
+                code:
+                  description: 'The <code>function</code> code that contains the request and response functions. When code is used, the <code>runtime</code> is required. The <code>runtime</code> value must be <code>APPSYNC_JS</code>.'
+                  type: string
+                  minLength: 1
+                  maxLength: 32768
   '/v1/apis/{apiId}':
     delete:
       operationId: DeleteGraphqlApi
@@ -2095,17 +2652,17 @@ paths:
                   description: The new name for the <code>GraphqlApi</code> object.
                   type: string
                 logConfig:
-                  description: The CloudWatch Logs configuration.
+                  description: The Amazon CloudWatch Logs configuration.
                   type: object
                   properties:
                     fieldLogLevel:
                       allOf:
                         - $ref: '#/components/schemas/FieldLogLevel'
-                        - description: '<p>The field logging level. Values can be NONE, ERROR, or ALL. </p> <ul> <li> <p> <b>NONE</b>: No field-level logs are captured.</p> </li> <li> <p> <b>ERROR</b>: Logs the following information only for the fields that are in error:</p> <ul> <li> <p>The error section in the server response.</p> </li> <li> <p>Field-level errors.</p> </li> <li> <p>The generated request/response functions that got resolved for error fields.</p> </li> </ul> </li> <li> <p> <b>ALL</b>: The following information is logged for all fields in the query:</p> <ul> <li> <p>Field-level tracing information.</p> </li> <li> <p>The generated request/response functions that got resolved for each field.</p> </li> </ul> </li> </ul>'
+                        - description: '<p>The field logging level. Values can be NONE, ERROR, or ALL.</p> <ul> <li> <p> <b>NONE</b>: No field-level logs are captured.</p> </li> <li> <p> <b>ERROR</b>: Logs the following information only for the fields that are in error:</p> <ul> <li> <p>The error section in the server response.</p> </li> <li> <p>Field-level errors.</p> </li> <li> <p>The generated request/response functions that got resolved for error fields.</p> </li> </ul> </li> <li> <p> <b>ALL</b>: The following information is logged for all fields in the query:</p> <ul> <li> <p>Field-level tracing information.</p> </li> <li> <p>The generated request/response functions that got resolved for each field.</p> </li> </ul> </li> </ul>'
                     cloudWatchLogsRoleArn:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: 'The service role that AppSync will assume to publish to Amazon CloudWatch logs in your account. '
+                        - description: The service role that AppSync assumes to publish to CloudWatch logs in your account.
                     excludeVerboseContent:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
@@ -2138,37 +2695,37 @@ paths:
                     appIdClientRegex:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: A regular expression for validating the incoming Amazon Cognito user pool app client ID.
+                        - description: 'A regular expression for validating the incoming Amazon Cognito user pool app client ID. If this value isn''t set, no filtering is applied.'
                 openIDConnectConfig:
-                  description: Describes an OpenID Connect configuration.
+                  description: Describes an OpenID Connect (OIDC) configuration.
                   type: object
                   properties:
                     issuer:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: The issuer for the OpenID Connect configuration. The issuer returned by discovery must exactly match the value of <code>iss</code> in the ID token.
+                        - description: The issuer for the OIDC configuration. The issuer returned by discovery must exactly match the value of <code>iss</code> in the ID token.
                     clientId:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: The client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AppSync can validate against multiple client identifiers at a time.
+                        - description: The client identifier of the relying party at the OpenID identity provider. This identifier is typically obtained when the relying party is registered with the OpenID identity provider. You can specify a regular expression so that AppSync can validate against multiple client identifiers at a time.
                     iatTTL:
                       allOf:
                         - $ref: '#/components/schemas/Long'
-                        - description: The number of milliseconds a token is valid after being issued to a user.
+                        - description: The number of milliseconds that a token is valid after it's issued to a user.
                     authTTL:
                       allOf:
                         - $ref: '#/components/schemas/Long'
-                        - description: The number of milliseconds a token is valid after being authenticated.
+                        - description: The number of milliseconds that a token is valid after being authenticated.
                 additionalAuthenticationProviders:
                   description: A list of additional authentication providers for the <code>GraphqlApi</code> API.
                   type: array
                   items:
                     $ref: '#/components/schemas/AdditionalAuthenticationProvider'
                 xrayEnabled:
-                  description: A flag indicating whether to enable X-Ray tracing for the <code>GraphqlApi</code>.
+                  description: A flag indicating whether to use X-Ray tracing for the <code>GraphqlApi</code>.
                   type: boolean
                 lambdaAuthorizerConfig:
-                  description: A <code>LambdaAuthorizerConfig</code> holds configuration on how to authorize AppSync API access when using the <code>AWS_LAMBDA</code> authorizer mode. Be aware that an AppSync API may have only one Lambda authorizer configured at a time.
+                  description: A <code>LambdaAuthorizerConfig</code> specifies how to authorize AppSync API access when using the <code>AWS_LAMBDA</code> authorizer mode. Be aware that an AppSync API can have only one Lambda authorizer configured at a time.
                   type: object
                   properties:
                     authorizerResultTtlInSeconds:
@@ -2178,11 +2735,11 @@ paths:
                     authorizerUri:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: '<p>The ARN of the lambda function to be called for authorization. This may be a standard Lambda ARN, a version ARN (<code>.../v3</code>) or alias ARN. </p> <p> <i>Note</i>: This Lambda function must have the following resource-based policy assigned to it. When configuring Lambda authorizers in the Console, this is done for you. To do so with the AWS CLI, run the following:</p> <p> <code>aws lambda add-permission --function-name "arn:aws:lambda:us-east-2:111122223333:function:my-function" --statement-id "appsync" --principal appsync.amazonaws.com --action lambda:InvokeFunction</code> </p>'
+                        - description: '<p>The Amazon Resource Name (ARN) of the Lambda function to be called for authorization. This can be a standard Lambda ARN, a version ARN (<code>.../v3</code>), or an alias ARN. </p> <p> <b>Note</b>: This Lambda function must have the following resource-based policy assigned to it. When configuring Lambda authorizers in the console, this is done for you. To use the Command Line Interface (CLI), run the following:</p> <p> <code>aws lambda add-permission --function-name "arn:aws:lambda:us-east-2:111122223333:function:my-function" --statement-id "appsync" --principal appsync.amazonaws.com --action lambda:InvokeFunction</code> </p>'
                     identityValidationExpression:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: A regular expression for validation of tokens before the Lambda Function is called.
+                        - description: A regular expression for validation of tokens before the Lambda function is called.
   '/v1/apis/{apiId}/types/{typeName}/resolvers/{fieldName}':
     delete:
       operationId: DeleteResolver
@@ -2218,6 +2775,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
       parameters:
         - name: apiId
           in: path
@@ -2338,6 +2901,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
       parameters:
         - name: apiId
           in: path
@@ -2377,17 +2946,19 @@ paths:
                   minLength: 1
                   maxLength: 65536
                 requestMappingTemplate:
-                  description: '<p>The new request mapping template.</p> <p>A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p> <p>VTL request mapping templates are optional when using a Lambda data source. For all other data sources, VTL request and response mapping templates are required.</p>'
+                  description: '<p>The new request mapping template.</p> <p>A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p> <p>VTL request mapping templates are optional when using an Lambda data source. For all other data sources, VTL request and response mapping templates are required.</p>'
                   type: string
+                  pattern: ^.*$
                   minLength: 1
                   maxLength: 65536
                 responseMappingTemplate:
                   description: The new response mapping template.
                   type: string
+                  pattern: ^.*$
                   minLength: 1
                   maxLength: 65536
                 kind:
-                  description: '<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is the default resolver type. A UNIT resolver enables you to execute a GraphQL query against a single data source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type. A PIPELINE resolver enables you to execute a series of <code>Function</code> in a serial manner. You can use a pipeline resolver to execute a GraphQL query against multiple data sources.</p> </li> </ul>'
+                  description: '<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of <code>Function</code> objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources.</p> </li> </ul>'
                   type: string
                   enum:
                     - UNIT
@@ -2401,33 +2972,55 @@ paths:
                         - $ref: '#/components/schemas/FunctionsIds'
                         - description: A list of <code>Function</code> objects.
                 syncConfig:
-                  description: <p>Describes a Sync configuration for a resolver.</p> <p>Contains information on which Conflict Detection as well as Resolution strategy should be performed when the resolver is invoked.</p>
+                  description: <p>Describes a Sync configuration for a resolver.</p> <p>Specifies which Conflict Detection strategy and Resolution strategy to use when the resolver is invoked.</p>
                   type: object
                   properties:
                     conflictHandler:
                       allOf:
                         - $ref: '#/components/schemas/ConflictHandlerType'
-                        - description: '<p>The Conflict Resolution strategy to perform in the event of a conflict.</p> <ul> <li> <p> <b>OPTIMISTIC_CONCURRENCY</b>: Resolve conflicts by rejecting mutations when versions do not match the latest version at the server.</p> </li> <li> <p> <b>AUTOMERGE</b>: Resolve conflicts with the Automerge conflict resolution strategy.</p> </li> <li> <p> <b>LAMBDA</b>: Resolve conflicts with a Lambda function supplied in the LambdaConflictHandlerConfig.</p> </li> </ul>'
+                        - description: '<p>The Conflict Resolution strategy to perform in the event of a conflict.</p> <ul> <li> <p> <b>OPTIMISTIC_CONCURRENCY</b>: Resolve conflicts by rejecting mutations when versions don''t match the latest version at the server.</p> </li> <li> <p> <b>AUTOMERGE</b>: Resolve conflicts with the Automerge conflict resolution strategy.</p> </li> <li> <p> <b>LAMBDA</b>: Resolve conflicts with an Lambda function supplied in the <code>LambdaConflictHandlerConfig</code>.</p> </li> </ul>'
                     conflictDetection:
                       allOf:
                         - $ref: '#/components/schemas/ConflictDetectionType'
-                        - description: '<p>The Conflict Detection strategy to use.</p> <ul> <li> <p> <b>VERSION</b>: Detect conflicts based on object versions for this resolver.</p> </li> <li> <p> <b>NONE</b>: Do not detect conflicts when executing this resolver.</p> </li> </ul>'
+                        - description: '<p>The Conflict Detection strategy to use.</p> <ul> <li> <p> <b>VERSION</b>: Detect conflicts based on object versions for this resolver.</p> </li> <li> <p> <b>NONE</b>: Do not detect conflicts when invoking this resolver.</p> </li> </ul>'
                     lambdaConflictHandlerConfig:
                       allOf:
                         - $ref: '#/components/schemas/LambdaConflictHandlerConfig'
-                        - description: The <code>LambdaConflictHandlerConfig</code> when configuring LAMBDA as the Conflict Handler.
+                        - description: The <code>LambdaConflictHandlerConfig</code> when configuring <code>LAMBDA</code> as the Conflict Handler.
                 cachingConfig:
-                  description: The caching configuration for a resolver that has caching enabled.
+                  description: The caching configuration for a resolver that has caching activated.
                   type: object
                   properties:
                     ttl:
                       allOf:
                         - $ref: '#/components/schemas/Long'
-                        - description: <p>The TTL in seconds for a resolver that has caching enabled.</p> <p>Valid values are between 1 and 3600 seconds.</p>
+                        - description: '<p>The TTL in seconds for a resolver that has caching activated.</p> <p>Valid values are 1–3,600 seconds.</p>'
                     cachingKeys:
                       allOf:
                         - $ref: '#/components/schemas/CachingKeys'
-                        - description: '<p>The caching keys for a resolver that has caching enabled.</p> <p>Valid values are entries from the <code>$context.arguments</code>, <code>$context.source</code>, and <code>$context.identity</code> maps.</p>'
+                        - description: '<p>The caching keys for a resolver that has caching activated.</p> <p>Valid values are entries from the <code>$context.arguments</code>, <code>$context.source</code>, and <code>$context.identity</code> maps.</p>'
+                maxBatchSize:
+                  description: The maximum batching size for a resolver.
+                  type: integer
+                  minimum: 0
+                  maximum: 2000
+                runtime:
+                  description: 'Describes a runtime used by an Amazon Web Services AppSync pipeline resolver or Amazon Web Services AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified.'
+                  type: object
+                  properties:
+                    name:
+                      allOf:
+                        - $ref: '#/components/schemas/RuntimeName'
+                        - description: 'The <code>name</code> of the runtime to use. Currently, the only allowed value is <code>APPSYNC_JS</code>.'
+                    runtimeVersion:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: 'The <code>version</code> of the runtime to use. Currently, the only allowed version is <code>1.0.0</code>.'
+                code:
+                  description: 'The <code>resolver</code> code that contains the request and response functions. When code is used, the <code>runtime</code> is required. The <code>runtime</code> value must be <code>APPSYNC_JS</code>.'
+                  type: string
+                  minLength: 1
+                  maxLength: 32768
   '/v1/apis/{apiId}/types/{typeName}':
     delete:
       operationId: DeleteType
@@ -2567,6 +3160,141 @@ paths:
                   enum:
                     - SDL
                     - JSON
+  /v1/dataplane-evaluatecode:
+    post:
+      operationId: EvaluateCode
+      description: 'Evaluates the given code and returns the response. The code definition requirements depend on the specified runtime. For <code>APPSYNC_JS</code> runtimes, the code defines the request and response functions. The request function takes the incoming request after a GraphQL operation is parsed and converts it into a request configuration for the selected data source operation. The response function interprets responses from the data source and maps it to the shape of the GraphQL field output type. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluateCodeResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - runtime
+                - code
+                - context
+              properties:
+                runtime:
+                  description: 'Describes a runtime used by an Amazon Web Services AppSync pipeline resolver or Amazon Web Services AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified.'
+                  type: object
+                  properties:
+                    name:
+                      allOf:
+                        - $ref: '#/components/schemas/RuntimeName'
+                        - description: 'The <code>name</code> of the runtime to use. Currently, the only allowed value is <code>APPSYNC_JS</code>.'
+                    runtimeVersion:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: 'The <code>version</code> of the runtime to use. Currently, the only allowed version is <code>1.0.0</code>.'
+                code:
+                  description: The code definition to be evaluated. Note that <code>code</code> and <code>runtime</code> are both required for this action. The <code>runtime</code> value must be <code>APPSYNC_JS</code>.
+                  type: string
+                  minLength: 1
+                  maxLength: 32768
+                context:
+                  description: The map that holds all of the contextual information for your resolver invocation. A <code>context</code> is required for this action.
+                  type: string
+                  pattern: '^[\s\S]*$'
+                  minLength: 2
+                  maxLength: 28000
+                function:
+                  description: 'The function within the code to be evaluated. If provided, the valid values are <code>request</code> and <code>response</code>.'
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/dataplane-evaluatetemplate:
+    post:
+      operationId: EvaluateMappingTemplate
+      description: <p>Evaluates a given template and returns the response. The mapping template can be a request or response template.</p> <p>Request templates take the incoming request after a GraphQL operation is parsed and convert it into a request configuration for the selected data source operation. Response templates interpret responses from the data source and map it to the shape of the GraphQL field output type.</p> <p>Mapping templates are written in the Apache Velocity Template Language (VTL).</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluateMappingTemplateResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - template
+                - context
+              properties:
+                template:
+                  description: The mapping template; this can be a request or response template. A <code>template</code> is required for this action.
+                  type: string
+                  pattern: '^[\s\S]*$'
+                  minLength: 2
+                  maxLength: 65536
+                context:
+                  description: The map that holds all of the contextual information for your resolver invocation. A <code>context</code> is required for this action.
+                  type: string
+                  pattern: '^[\s\S]*$'
+                  minLength: 2
+                  maxLength: 28000
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v1/apis/{apiId}/FlushCache':
     delete:
       operationId: FlushApiCache
@@ -2916,7 +3644,7 @@ paths:
         - name: functionId
           in: path
           required: true
-          description: The Function ID.
+          description: The function ID.
           schema:
             type: string
         - name: nextToken
@@ -2931,7 +3659,7 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: The maximum number of results you want the request to return.
+          description: The maximum number of results that you want the request to return.
           schema:
             type: integer
             minimum: 0
@@ -2995,7 +3723,7 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: The <code>GraphqlApi</code> ARN.
+          description: The <code>GraphqlApi</code> Amazon Resource Name (ARN).
           schema:
             type: string
             pattern: '^arn:aws:appsync:[A-Za-z0-9_/.-]{0,63}:\d{12}:apis/[0-9A-Za-z_-]{26}$'
@@ -3059,7 +3787,7 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: The <code>GraphqlApi</code> ARN.
+          description: The <code>GraphqlApi</code> Amazon Resource Name (ARN).
           schema:
             type: string
             pattern: '^arn:aws:appsync:[A-Za-z0-9_/.-]{0,63}:\d{12}:apis/[0-9A-Za-z_-]{26}$'
@@ -3141,7 +3869,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list. '
+          description: 'An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.'
           schema:
             type: string
             pattern: '[\\S]+'
@@ -3150,7 +3878,7 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: The maximum number of results you want the request to return.
+          description: The maximum number of results that you want the request to return.
           schema:
             type: integer
             minimum: 0
@@ -3214,7 +3942,7 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: The <code>GraphqlApi</code> ARN.
+          description: The <code>GraphqlApi</code> Amazon Resource Name (ARN).
           schema:
             type: string
             pattern: '^arn:aws:appsync:[A-Za-z0-9_/.-]{0,63}:\d{12}:apis/[0-9A-Za-z_-]{26}$'
@@ -3283,7 +4011,7 @@ paths:
         - name: apiId
           in: path
           required: true
-          description: The GraphQL API Id.
+          description: The GraphQL API ID.
           schema:
             type: string
       requestBody:
@@ -3298,7 +4026,7 @@ paths:
                 - type
               properties:
                 ttl:
-                  description: <p>TTL in seconds for cache entries.</p> <p>Valid values are between 1 and 3600 seconds.</p>
+                  description: '<p>TTL in seconds for cache entries.</p> <p>Valid values are 1–3,600 seconds.</p>'
                   type: integer
                 apiCachingBehavior:
                   description: '<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests are fully cached.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resolvers that you specify are cached.</p> </li> </ul>'
@@ -3385,6 +4113,17 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    AssociateApiResponse:
+      type: object
+      properties:
+        apiAssociation:
+          allOf:
+            - $ref: '#/components/schemas/ApiAssociation'
+            - description: The <code>ApiAssociation</code> object.
+    AccessDeniedException: {}
+    BadRequestException: {}
+    InternalFailureException: {}
+    NotFoundException: {}
     CreateApiCacheResponse:
       type: object
       properties:
@@ -3393,11 +4132,8 @@ components:
             - $ref: '#/components/schemas/ApiCache'
             - description: The <code>ApiCache</code> object.
       description: Represents the output of a <code>CreateApiCache</code> operation.
-    BadRequestException: {}
     ConcurrentModificationException: {}
-    NotFoundException: {}
     UnauthorizedException: {}
-    InternalFailureException: {}
     CreateApiKeyResponse:
       type: object
       properties:
@@ -3425,7 +4161,7 @@ components:
         baseTableTTL:
           allOf:
             - $ref: '#/components/schemas/Long'
-            - description: The number of minutes an Item is stored in the datasource.
+            - description: The number of minutes that an Item is stored in the data source.
         deltaSyncTableName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3433,7 +4169,7 @@ components:
         deltaSyncTableTTL:
           allOf:
             - $ref: '#/components/schemas/Long'
-            - description: The number of minutes a Delta Sync log entry is stored in the Delta Sync table.
+            - description: The number of minutes that a Delta Sync log entry is stored in the Delta Sync table.
       description: Describes a Delta Sync configuration.
     AuthorizationConfig:
       type: object
@@ -3443,12 +4179,12 @@ components:
         authorizationType:
           allOf:
             - $ref: '#/components/schemas/AuthorizationType'
-            - description: '<p>The authorization type required by the HTTP endpoint.</p> <ul> <li> <p> <b>AWS_IAM</b>: The authorization type is Sigv4.</p> </li> </ul>'
+            - description: '<p>The authorization type that the HTTP endpoint requires.</p> <ul> <li> <p> <b>AWS_IAM</b>: The authorization type is Signature Version 4 (SigV4).</p> </li> </ul>'
         awsIamConfig:
           allOf:
             - $ref: '#/components/schemas/AwsIamConfig'
-            - description: The Identity and Access Management settings.
-      description: The authorization config in case the HTTP endpoint requires authorization.
+            - description: The Identity and Access Management (IAM) settings.
+      description: The authorization configuration in case the HTTP endpoint requires authorization.
     RelationalDatabaseSourceType:
       type: string
       enum:
@@ -3459,11 +4195,11 @@ components:
         awsRegion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Amazon Web Services Region for RDS HTTP endpoint.
+            - description: Amazon Web Services Region for Amazon RDS HTTP endpoint.
         dbClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Amazon RDS cluster ARN.
+            - description: Amazon RDS cluster Amazon Resource Name (ARN).
         databaseName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3475,8 +4211,15 @@ components:
         awsSecretStoreArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Amazon Web Services secret store ARN for database credentials.
-      description: The Amazon RDS HTTP endpoint configuration.
+            - description: Amazon Web Services secret store Amazon Resource Name (ARN) for database credentials.
+      description: The Amazon Relational Database Service (Amazon RDS) HTTP endpoint configuration.
+    CreateDomainNameResponse:
+      type: object
+      properties:
+        domainNameConfig:
+          allOf:
+            - $ref: '#/components/schemas/DomainNameConfig'
+            - description: The configuration for the <code>DomainName</code>.
     CreateFunctionResponse:
       type: object
       properties:
@@ -3502,8 +4245,12 @@ components:
         lambdaConflictHandlerArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Arn for the Lambda function to use as the Conflict Handler.
-      description: The <code>LambdaConflictHandlerConfig</code> object when configuring LAMBDA as the Conflict Handler.
+            - description: The Amazon Resource Name (ARN) for the Lambda function to use as the Conflict Handler.
+      description: The <code>LambdaConflictHandlerConfig</code> object when configuring <code>LAMBDA</code> as the Conflict Handler.
+    RuntimeName:
+      type: string
+      enum:
+        - APPSYNC_JS
     CreateGraphqlApiResponse:
       type: object
       properties:
@@ -3526,6 +4273,7 @@ components:
       type: integer
     TagValue:
       type: string
+      pattern: '^[\s\w+-=\.:/@]*$'
       description: The value for the tag.
       maxLength: 256
     AdditionalAuthenticationProvider:
@@ -3534,11 +4282,11 @@ components:
         authenticationType:
           allOf:
             - $ref: '#/components/schemas/AuthenticationType'
-            - description: 'The authentication type: API key, Identity and Access Management, OIDC, or Amazon Cognito user pools.'
+            - description: 'The authentication type: API key, Identity and Access Management (IAM), OpenID Connect (OIDC), Amazon Cognito user pools, or Lambda.'
         openIDConnectConfig:
           allOf:
             - $ref: '#/components/schemas/OpenIDConnectConfig'
-            - description: The OpenID Connect configuration.
+            - description: The OIDC configuration.
         userPoolConfig:
           allOf:
             - $ref: '#/components/schemas/CognitoUserPoolConfig'
@@ -3546,7 +4294,7 @@ components:
         lambdaAuthorizerConfig:
           allOf:
             - $ref: '#/components/schemas/LambdaAuthorizerConfig'
-            - description: Configuration for AWS Lambda function authorization.
+            - description: Configuration for Lambda function authorization.
       description: Describes an additional authentication provider.
     TTL:
       type: integer
@@ -3585,23 +4333,65 @@ components:
     DeleteDataSourceResponse:
       type: object
       properties: {}
+    DeleteDomainNameResponse:
+      type: object
+      properties: {}
     DeleteFunctionResponse:
       type: object
       properties: {}
     DeleteGraphqlApiResponse:
       type: object
       properties: {}
-    AccessDeniedException: {}
     DeleteResolverResponse:
       type: object
       properties: {}
     DeleteTypeResponse:
       type: object
       properties: {}
+    DisassociateApiResponse:
+      type: object
+      properties: {}
+    EvaluateCodeResponse:
+      type: object
+      properties:
+        evaluationResult:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationResult'
+            - description: The result of the evaluation operation.
+        error:
+          allOf:
+            - $ref: '#/components/schemas/EvaluateCodeErrorDetail'
+            - description: Contains the payload of the response error.
+        logs:
+          allOf:
+            - $ref: '#/components/schemas/Logs'
+            - description: A list of logs that were generated by calls to <code>util.log.info</code> and <code>util.log.error</code> in the evaluated code.
+    EvaluateMappingTemplateResponse:
+      type: object
+      properties:
+        evaluationResult:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationResult'
+            - description: The mapping template; this can be a request or response template.
+        error:
+          allOf:
+            - $ref: '#/components/schemas/ErrorDetail'
+            - description: The <code>ErrorDetail</code> object.
+        logs:
+          allOf:
+            - $ref: '#/components/schemas/Logs'
+            - description: A list of logs that were generated by calls to <code>util.log.info</code> and <code>util.log.error</code> in the evaluated code.
     FlushApiCacheResponse:
       type: object
       properties: {}
       description: Represents the output of a <code>FlushApiCache</code> operation.
+    GetApiAssociationResponse:
+      type: object
+      properties:
+        apiAssociation:
+          allOf:
+            - $ref: '#/components/schemas/ApiAssociation'
+            - description: The <code>ApiAssociation</code> object.
     GetApiCacheResponse:
       type: object
       properties:
@@ -3617,6 +4407,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataSource'
             - description: The <code>DataSource</code> object.
+    GetDomainNameResponse:
+      type: object
+      properties:
+        domainNameConfig:
+          allOf:
+            - $ref: '#/components/schemas/DomainNameConfig'
+            - description: The configuration for the <code>DomainName</code>.
     GetFunctionResponse:
       type: object
       properties:
@@ -3674,7 +4471,7 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: An identifier to be passed in the next request to this operation to return the next set of items in the list.
+            - description: An identifier to pass in the next request to this operation to return the next set of items in the list.
     ListDataSourcesResponse:
       type: object
       properties:
@@ -3685,7 +4482,18 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: An identifier to be passed in the next request to this operation to return the next set of items in the list.
+            - description: An identifier to pass in the next request to this operation to return the next set of items in the list.
+    ListDomainNamesResponse:
+      type: object
+      properties:
+        domainNameConfigs:
+          allOf:
+            - $ref: '#/components/schemas/DomainNameConfigs'
+            - description: Lists configurations for multiple domain names.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The API token.
     ListFunctionsResponse:
       type: object
       properties:
@@ -3696,7 +4504,7 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.'
+            - description: 'An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.'
     ListGraphqlApisResponse:
       type: object
       properties:
@@ -3707,7 +4515,7 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: An identifier to be passed in the next request to this operation to return the next set of items in the list.
+            - description: An identifier to pass in the next request to this operation to return the next set of items in the list.
     ListResolversResponse:
       type: object
       properties:
@@ -3718,7 +4526,7 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: An identifier to be passed in the next request to this operation to return the next set of items in the list.
+            - description: An identifier to pass in the next request to this operation to return the next set of items in the list.
     ListResolversByFunctionResponse:
       type: object
       properties:
@@ -3729,7 +4537,7 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: An identifier that can be used to return the next set of items in the list.
+            - description: An identifier that you can use to return the next set of items in the list.
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -3747,7 +4555,7 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: An identifier to be passed in the next request to this operation to return the next set of items in the list.
+            - description: An identifier to pass in the next request to this operation to return the next set of items in the list.
     StartSchemaCreationResponse:
       type: object
       properties:
@@ -3789,6 +4597,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataSource'
             - description: The updated <code>DataSource</code> object.
+    UpdateDomainNameResponse:
+      type: object
+      properties:
+        domainNameConfig:
+          allOf:
+            - $ref: '#/components/schemas/DomainNameConfig'
+            - description: The configuration for the <code>DomainName</code>.
     UpdateFunctionResponse:
       type: object
       properties:
@@ -3833,20 +4648,20 @@ components:
         issuer:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The issuer for the OpenID Connect configuration. The issuer returned by discovery must exactly match the value of <code>iss</code> in the ID token.
+            - description: The issuer for the OIDC configuration. The issuer returned by discovery must exactly match the value of <code>iss</code> in the ID token.
         clientId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AppSync can validate against multiple client identifiers at a time.
+            - description: The client identifier of the relying party at the OpenID identity provider. This identifier is typically obtained when the relying party is registered with the OpenID identity provider. You can specify a regular expression so that AppSync can validate against multiple client identifiers at a time.
         iatTTL:
           allOf:
             - $ref: '#/components/schemas/Long'
-            - description: The number of milliseconds a token is valid after being issued to a user.
+            - description: The number of milliseconds that a token is valid after it's issued to a user.
         authTTL:
           allOf:
             - $ref: '#/components/schemas/Long'
-            - description: The number of milliseconds a token is valid after being authenticated.
-      description: Describes an OpenID Connect configuration.
+            - description: The number of milliseconds that a token is valid after being authenticated.
+      description: Describes an OpenID Connect (OIDC) configuration.
     CognitoUserPoolConfig:
       type: object
       required:
@@ -3864,7 +4679,7 @@ components:
         appIdClientRegex:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: A regular expression for validating the incoming Amazon Cognito user pool app client ID.
+            - description: 'A regular expression for validating the incoming Amazon Cognito user pool app client ID. If this value isn''t set, no filtering is applied.'
       description: Describes an Amazon Cognito user pool configuration.
     LambdaAuthorizerConfig:
       type: object
@@ -3878,16 +4693,47 @@ components:
         authorizerUri:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The ARN of the lambda function to be called for authorization. This may be a standard Lambda ARN, a version ARN (<code>.../v3</code>) or alias ARN. </p> <p> <i>Note</i>: This Lambda function must have the following resource-based policy assigned to it. When configuring Lambda authorizers in the Console, this is done for you. To do so with the AWS CLI, run the following:</p> <p> <code>aws lambda add-permission --function-name "arn:aws:lambda:us-east-2:111122223333:function:my-function" --statement-id "appsync" --principal appsync.amazonaws.com --action lambda:InvokeFunction</code> </p>'
+            - description: '<p>The Amazon Resource Name (ARN) of the Lambda function to be called for authorization. This can be a standard Lambda ARN, a version ARN (<code>.../v3</code>), or an alias ARN. </p> <p> <b>Note</b>: This Lambda function must have the following resource-based policy assigned to it. When configuring Lambda authorizers in the console, this is done for you. To use the Command Line Interface (CLI), run the following:</p> <p> <code>aws lambda add-permission --function-name "arn:aws:lambda:us-east-2:111122223333:function:my-function" --statement-id "appsync" --principal appsync.amazonaws.com --action lambda:InvokeFunction</code> </p>'
         identityValidationExpression:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: A regular expression for validation of tokens before the Lambda Function is called.
-      description: A <code>LambdaAuthorizerConfig</code> holds configuration on how to authorize AppSync API access when using the <code>AWS_LAMBDA</code> authorizer mode. Be aware that an AppSync API may have only one Lambda authorizer configured at a time.
+            - description: A regular expression for validation of tokens before the Lambda function is called.
+      description: A <code>LambdaAuthorizerConfig</code> specifies how to authorize AppSync API access when using the <code>AWS_LAMBDA</code> authorizer mode. Be aware that an AppSync API can have only one Lambda authorizer configured at a time.
     AdditionalAuthenticationProviders:
       type: array
       items:
         $ref: '#/components/schemas/AdditionalAuthenticationProvider'
+    DomainName:
+      type: string
+      pattern: '^(\*[\w\d-]*\.)?([\w\d-]+\.)+[\w\d-]+$'
+      minLength: 1
+      maxLength: 253
+    AssociationStatus:
+      type: string
+      enum:
+        - PROCESSING
+        - FAILED
+        - SUCCESS
+    ApiAssociation:
+      type: object
+      properties:
+        domainName:
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The domain name.
+        apiId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The API ID.
+        associationStatus:
+          allOf:
+            - $ref: '#/components/schemas/AssociationStatus'
+            - description: '<p>Identifies the status of an association.</p> <ul> <li> <p> <b>PROCESSING</b>: The API association is being created. You cannot modify association requests during processing.</p> </li> <li> <p> <b>SUCCESS</b>: The API association was successful. You can modify associations after success.</p> </li> <li> <p> <b>FAILED</b>: The API association has failed. You can modify associations after failure.</p> </li> </ul>'
+        deploymentDetail:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Details about the last deployment status.
+      description: Describes an <code>ApiAssociation</code> object.
     ApiCachingBehavior:
       type: string
       enum:
@@ -3925,7 +4771,7 @@ components:
         ttl:
           allOf:
             - $ref: '#/components/schemas/Long'
-            - description: <p>TTL in seconds for cache entries.</p> <p>Valid values are between 1 and 3600 seconds.</p>
+            - description: '<p>TTL in seconds for cache entries.</p> <p>Valid values are 1–3,600 seconds.</p>'
         apiCachingBehavior:
           allOf:
             - $ref: '#/components/schemas/ApiCachingBehavior'
@@ -3933,11 +4779,11 @@ components:
         transitEncryptionEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Transit encryption flag when connecting to cache. This setting cannot be updated after creation.
+            - description: Transit encryption flag when connecting to cache. You cannot update this setting after creation.
         atRestEncryptionEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: At rest encryption flag for cache. This setting cannot be updated after creation.
+            - description: At-rest encryption flag for cache. You cannot update this setting after creation.
         type:
           allOf:
             - $ref: '#/components/schemas/ApiCacheType'
@@ -3966,11 +4812,36 @@ components:
           allOf:
             - $ref: '#/components/schemas/Long'
             - description: 'The time after which the API key is deleted. The date is represented as seconds since the epoch, rounded down to the nearest hour.'
-      description: '<p>Describes an API key.</p> <p>Customers invoke AppSync GraphQL API operations with API keys as an identity mechanism. There are two key versions:</p> <p> <b>da1</b>: This version was introduced at launch in November 2017. These keys always expire after 7 days. Key expiration is managed by Amazon DynamoDB TTL. The keys ceased to be valid after February 21, 2018 and should not be used after that date.</p> <ul> <li> <p> <code>ListApiKeys</code> returns the expiration time in milliseconds.</p> </li> <li> <p> <code>CreateApiKey</code> returns the expiration time in milliseconds.</p> </li> <li> <p> <code>UpdateApiKey</code> is not available for this key version.</p> </li> <li> <p> <code>DeleteApiKey</code> deletes the item from the table.</p> </li> <li> <p>Expiration is stored in Amazon DynamoDB as milliseconds. This results in a bug where keys are not automatically deleted because DynamoDB expects the TTL to be stored in seconds. As a one-time action, we will delete these keys from the table after February 21, 2018.</p> </li> </ul> <p> <b>da2</b>: This version was introduced in February 2018 when AppSync added support to extend key expiration.</p> <ul> <li> <p> <code>ListApiKeys</code> returns the expiration time and deletion time in seconds.</p> </li> <li> <p> <code>CreateApiKey</code> returns the expiration time and deletion time in seconds and accepts a user-provided expiration time in seconds.</p> </li> <li> <p> <code>UpdateApiKey</code> returns the expiration time and and deletion time in seconds and accepts a user-provided expiration time in seconds. Expired API keys are kept for 60 days after the expiration time. Key expiration time can be updated while the key is not deleted. </p> </li> <li> <p> <code>DeleteApiKey</code> deletes the item from the table.</p> </li> <li> <p>Expiration is stored in Amazon DynamoDB as seconds. After the expiration time, using the key to authenticate will fail. But the key can be reinstated before deletion.</p> </li> <li> <p>Deletion is stored in Amazon DynamoDB as seconds. The key will be deleted after deletion time. </p> </li> </ul>'
+      description: '<p>Describes an API key.</p> <p>Customers invoke AppSync GraphQL API operations with API keys as an identity mechanism. There are two key versions:</p> <p> <b>da1</b>: We introduced this version at launch in November 2017. These keys always expire after 7 days. Amazon DynamoDB TTL manages key expiration. These keys ceased to be valid after February 21, 2018, and they should no longer be used.</p> <ul> <li> <p> <code>ListApiKeys</code> returns the expiration time in milliseconds.</p> </li> <li> <p> <code>CreateApiKey</code> returns the expiration time in milliseconds.</p> </li> <li> <p> <code>UpdateApiKey</code> is not available for this key version.</p> </li> <li> <p> <code>DeleteApiKey</code> deletes the item from the table.</p> </li> <li> <p>Expiration is stored in DynamoDB as milliseconds. This results in a bug where keys are not automatically deleted because DynamoDB expects the TTL to be stored in seconds. As a one-time action, we deleted these keys from the table on February 21, 2018.</p> </li> </ul> <p> <b>da2</b>: We introduced this version in February 2018 when AppSync added support to extend key expiration.</p> <ul> <li> <p> <code>ListApiKeys</code> returns the expiration time and deletion time in seconds.</p> </li> <li> <p> <code>CreateApiKey</code> returns the expiration time and deletion time in seconds and accepts a user-provided expiration time in seconds.</p> </li> <li> <p> <code>UpdateApiKey</code> returns the expiration time and and deletion time in seconds and accepts a user-provided expiration time in seconds. Expired API keys are kept for 60 days after the expiration time. You can update the key expiration time as long as the key isn''t deleted.</p> </li> <li> <p> <code>DeleteApiKey</code> deletes the item from the table.</p> </li> <li> <p>Expiration is stored in DynamoDB as seconds. After the expiration time, using the key to authenticate will fail. However, you can reinstate the key before deletion.</p> </li> <li> <p>Deletion is stored in DynamoDB as seconds. The key is deleted after deletion time.</p> </li> </ul>'
     ApiKeys:
       type: array
       items:
         $ref: '#/components/schemas/ApiKey'
+    AppSyncRuntime:
+      type: object
+      required:
+        - name
+        - runtimeVersion
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/RuntimeName'
+            - description: 'The <code>name</code> of the runtime to use. Currently, the only allowed value is <code>APPSYNC_JS</code>.'
+        runtimeVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The <code>version</code> of the runtime to use. Currently, the only allowed version is <code>1.0.0</code>.'
+      description: 'Describes a runtime used by an Amazon Web Services AppSync pipeline resolver or Amazon Web Services AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified.'
+    AssociateApiRequest:
+      type: object
+      required:
+        - apiId
+      title: AssociateApiRequest
+      properties:
+        apiId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The API ID.
     AuthorizationType:
       type: string
       enum:
@@ -3981,28 +4852,86 @@ components:
         signingRegion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The signing region for Identity and Access Management authorization.
+            - description: The signing Amazon Web Services Region for IAM authorization.
         signingServiceName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The signing service name for Identity and Access Management authorization.
-      description: The Identity and Access Management configuration.
+            - description: The signing service name for IAM authorization.
+      description: The Identity and Access Management (IAM) configuration.
     Blob:
       type: string
     BooleanValue:
       type: boolean
     CachingConfig:
       type: object
+      required:
+        - ttl
       properties:
         ttl:
           allOf:
             - $ref: '#/components/schemas/Long'
-            - description: <p>The TTL in seconds for a resolver that has caching enabled.</p> <p>Valid values are between 1 and 3600 seconds.</p>
+            - description: '<p>The TTL in seconds for a resolver that has caching activated.</p> <p>Valid values are 1–3,600 seconds.</p>'
         cachingKeys:
           allOf:
             - $ref: '#/components/schemas/CachingKeys'
-            - description: '<p>The caching keys for a resolver that has caching enabled.</p> <p>Valid values are entries from the <code>$context.arguments</code>, <code>$context.source</code>, and <code>$context.identity</code> maps.</p>'
-      description: The caching configuration for a resolver that has caching enabled.
+            - description: '<p>The caching keys for a resolver that has caching activated.</p> <p>Valid values are entries from the <code>$context.arguments</code>, <code>$context.source</code>, and <code>$context.identity</code> maps.</p>'
+      description: The caching configuration for a resolver that has caching activated.
+    CertificateArn:
+      type: string
+      pattern: '^arn:[a-z-]*:(acm|iam):[a-z0-9-]*:\d{12}:(certificate|server-certificate)/[0-9A-Za-z_/-]*$'
+      minLength: 20
+      maxLength: 2048
+    Code:
+      type: string
+      minLength: 1
+      maxLength: 32768
+    CodeErrorLocation:
+      type: object
+      properties:
+        line:
+          allOf:
+            - $ref: '#/components/schemas/CodeErrorLine'
+            - description: The line number in the code. Defaults to <code>0</code> if unknown.
+        column:
+          allOf:
+            - $ref: '#/components/schemas/CodeErrorColumn'
+            - description: The column number in the code. Defaults to <code>0</code> if unknown.
+        span:
+          allOf:
+            - $ref: '#/components/schemas/CodeErrorSpan'
+            - description: The span/length of the error. Defaults to <code>-1</code> if unknown.
+      description: Describes the location of the error in a code sample.
+    CodeError:
+      type: object
+      properties:
+        errorType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The type of code error. </p> <p>Examples include, but aren''t limited to: <code>LINT_ERROR</code>, <code>PARSER_ERROR</code>.</p>'
+        value:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>A user presentable error.</p> <p>Examples include, but aren''t limited to: <code>Parsing error: Unterminated string literal</code>.</p>'
+        location:
+          allOf:
+            - $ref: '#/components/schemas/CodeErrorLocation'
+            - description: 'The line, column, and span location of the error in the code.'
+      description: Describes an AppSync error.
+    CodeErrorColumn:
+      type: integer
+    CodeErrorLine:
+      type: integer
+    CodeErrorSpan:
+      type: integer
+    CodeErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/CodeError'
+    Context:
+      type: string
+      pattern: '^[\s\S]*$'
+      minLength: 2
+      maxLength: 28000
     CreateApiCacheRequest:
       type: object
       required:
@@ -4014,15 +4943,15 @@ components:
         ttl:
           allOf:
             - $ref: '#/components/schemas/Long'
-            - description: <p>TTL in seconds for cache entries.</p> <p>Valid values are between 1 and 3600 seconds.</p>
+            - description: '<p>TTL in seconds for cache entries.</p> <p>Valid values are 1–3,600 seconds.</p>'
         transitEncryptionEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Transit encryption flag when connecting to cache. This setting cannot be updated after creation.
+            - description: Transit encryption flag when connecting to cache. You cannot update this setting after creation.
         atRestEncryptionEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: At rest encryption flag for cache. This setting cannot be updated after creation.
+            - description: At-rest encryption flag for cache. You cannot update this setting after creation.
         apiCachingBehavior:
           allOf:
             - $ref: '#/components/schemas/ApiCachingBehavior'
@@ -4043,7 +4972,7 @@ components:
         expires:
           allOf:
             - $ref: '#/components/schemas/Long'
-            - description: 'The time from creation time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour. The default value for this parameter is 7 days from creation time. For more information, see .'
+            - description: 'From the creation time, the time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour. The default value for this parameter is 7 days from creation time. For more information, see .'
     ResourceName:
       type: string
       pattern: '[_A-Za-z][_0-9A-Za-z]*'
@@ -4058,6 +4987,8 @@ components:
         - NONE
         - HTTP
         - RELATIONAL_DATABASE
+        - AMAZON_OPENSEARCH_SERVICE
+        - AMAZON_EVENTBRIDGE
     DynamodbDataSourceConfig:
       type: object
       required:
@@ -4079,7 +5010,7 @@ components:
         deltaSyncConfig:
           allOf:
             - $ref: '#/components/schemas/DeltaSyncConfig'
-            - description: The <code>DeltaSyncConfig</code> for a versioned datasource.
+            - description: The <code>DeltaSyncConfig</code> for a versioned data source.
         versioned:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -4093,8 +5024,8 @@ components:
         lambdaFunctionArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The ARN for the Lambda function.
-      description: Describes an Amazon Web Services Lambda data source configuration.
+            - description: The Amazon Resource Name (ARN) for the Lambda function.
+      description: Describes an Lambda data source configuration.
     ElasticsearchDataSourceConfig:
       type: object
       required:
@@ -4109,18 +5040,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The Amazon Web Services Region.
-      description: Describes an Elasticsearch data source configuration.
+      description: '<p>Describes an OpenSearch data source configuration.</p> <p>As of September 2021, Amazon Elasticsearch service is Amazon OpenSearch Service. This configuration is deprecated. For new data sources, use <a>OpenSearchServiceDataSourceConfig</a> to specify an OpenSearch data source.</p>'
+    OpenSearchServiceDataSourceConfig:
+      type: object
+      required:
+        - endpoint
+        - awsRegion
+      properties:
+        endpoint:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The endpoint.
+        awsRegion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services Region.
+      description: Describes an OpenSearch data source configuration.
     HttpDataSourceConfig:
       type: object
       properties:
         endpoint:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The HTTP URL endpoint. You can either specify the domain name or IP, and port combination, and the URL scheme must be HTTP or HTTPS. If the port is not specified, AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS endpoints.'
+            - description: 'The HTTP URL endpoint. You can specify either the domain name or IP, and port combination, and the URL scheme must be HTTP or HTTPS. If you don''t specify the port, AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS endpoints.'
         authorizationConfig:
           allOf:
             - $ref: '#/components/schemas/AuthorizationConfig'
-            - description: The authorization config in case the HTTP endpoint requires authorization.
+            - description: The authorization configuration in case the HTTP endpoint requires authorization.
       description: Describes an HTTP data source configuration.
     RelationalDatabaseDataSourceConfig:
       type: object
@@ -4128,12 +5074,22 @@ components:
         relationalDatabaseSourceType:
           allOf:
             - $ref: '#/components/schemas/RelationalDatabaseSourceType'
-            - description: '<p>Source type for the relational database.</p> <ul> <li> <p> <b>RDS_HTTP_ENDPOINT</b>: The relational database source type is an Amazon RDS HTTP endpoint.</p> </li> </ul>'
+            - description: '<p>Source type for the relational database.</p> <ul> <li> <p> <b>RDS_HTTP_ENDPOINT</b>: The relational database source type is an Amazon Relational Database Service (Amazon RDS) HTTP endpoint.</p> </li> </ul>'
         rdsHttpEndpointConfig:
           allOf:
             - $ref: '#/components/schemas/RdsHttpEndpointConfig'
             - description: Amazon RDS HTTP endpoint settings.
       description: Describes a relational database data source configuration.
+    EventBridgeDataSourceConfig:
+      type: object
+      required:
+        - eventBusArn
+      properties:
+        eventBusArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The ARN of the event bus. For more information about event buses, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus.html">Amazon EventBridge event buses</a>.'
+      description: Describes an Amazon EventBridge bus data source configuration.
     CreateDataSourceRequest:
       type: object
       required:
@@ -4156,7 +5112,7 @@ components:
         serviceRoleArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Identity and Access Management service role ARN for the data source. The system assumes this role when accessing the data source.
+            - description: The Identity and Access Management (IAM) service role Amazon Resource Name (ARN) for the data source. The system assumes this role when accessing the data source.
         dynamodbConfig:
           allOf:
             - $ref: '#/components/schemas/DynamodbDataSourceConfig'
@@ -4164,11 +5120,15 @@ components:
         lambdaConfig:
           allOf:
             - $ref: '#/components/schemas/LambdaDataSourceConfig'
-            - description: Amazon Web Services Lambda settings.
+            - description: Lambda settings.
         elasticsearchConfig:
           allOf:
             - $ref: '#/components/schemas/ElasticsearchDataSourceConfig'
-            - description: Amazon Elasticsearch Service settings.
+            - description: '<p>Amazon OpenSearch Service settings.</p> <p>As of September 2021, Amazon Elasticsearch service is Amazon OpenSearch Service. This configuration is deprecated. For new data sources, use <a>CreateDataSourceRequest$openSearchServiceConfig</a> to create an OpenSearch data source.</p>'
+        openSearchServiceConfig:
+          allOf:
+            - $ref: '#/components/schemas/OpenSearchServiceDataSourceConfig'
+            - description: Amazon OpenSearch Service settings.
         httpConfig:
           allOf:
             - $ref: '#/components/schemas/HttpDataSourceConfig'
@@ -4177,13 +5137,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/RelationalDatabaseDataSourceConfig'
             - description: Relational database settings.
+        eventBridgeConfig:
+          allOf:
+            - $ref: '#/components/schemas/EventBridgeDataSourceConfig'
+            - description: Amazon EventBridge settings.
     DataSource:
       type: object
       properties:
         dataSourceArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The data source ARN.
+            - description: The data source Amazon Resource Name (ARN).
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
@@ -4195,23 +5159,27 @@ components:
         type:
           allOf:
             - $ref: '#/components/schemas/DataSourceType'
-            - description: '<p>The type of the data source.</p> <ul> <li> <p> <b>AMAZON_DYNAMODB</b>: The data source is an Amazon DynamoDB table.</p> </li> <li> <p> <b>AMAZON_ELASTICSEARCH</b>: The data source is an Amazon Elasticsearch Service domain.</p> </li> <li> <p> <b>AWS_LAMBDA</b>: The data source is an Amazon Web Services Lambda function.</p> </li> <li> <p> <b>NONE</b>: There is no data source. This type is used when you wish to invoke a GraphQL operation without connecting to a data source, such as performing data transformation with resolvers or triggering a subscription to be invoked from a mutation.</p> </li> <li> <p> <b>HTTP</b>: The data source is an HTTP endpoint.</p> </li> <li> <p> <b>RELATIONAL_DATABASE</b>: The data source is a relational database.</p> </li> </ul>'
+            - description: '<p>The type of the data source.</p> <ul> <li> <p> <b>AWS_LAMBDA</b>: The data source is an Lambda function.</p> </li> <li> <p> <b>AMAZON_DYNAMODB</b>: The data source is an Amazon DynamoDB table.</p> </li> <li> <p> <b>AMAZON_ELASTICSEARCH</b>: The data source is an Amazon OpenSearch Service domain.</p> </li> <li> <p> <b>AMAZON_OPENSEARCH_SERVICE</b>: The data source is an Amazon OpenSearch Service domain.</p> </li> <li> <p> <b>AMAZON_EVENTBRIDGE</b>: The data source is an Amazon EventBridge configuration.</p> </li> <li> <p> <b>NONE</b>: There is no data source. Use this type when you want to invoke a GraphQL operation without connecting to a data source, such as when you''re performing data transformation with resolvers or invoking a subscription from a mutation.</p> </li> <li> <p> <b>HTTP</b>: The data source is an HTTP endpoint.</p> </li> <li> <p> <b>RELATIONAL_DATABASE</b>: The data source is a relational database.</p> </li> </ul>'
         serviceRoleArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Identity and Access Management service role ARN for the data source. The system assumes this role when accessing the data source.
+            - description: The Identity and Access Management (IAM) service role Amazon Resource Name (ARN) for the data source. The system assumes this role when accessing the data source.
         dynamodbConfig:
           allOf:
             - $ref: '#/components/schemas/DynamodbDataSourceConfig'
-            - description: Amazon DynamoDB settings.
+            - description: DynamoDB settings.
         lambdaConfig:
           allOf:
             - $ref: '#/components/schemas/LambdaDataSourceConfig'
-            - description: Amazon Web Services Lambda settings.
+            - description: Lambda settings.
         elasticsearchConfig:
           allOf:
             - $ref: '#/components/schemas/ElasticsearchDataSourceConfig'
-            - description: Amazon Elasticsearch Service settings.
+            - description: Amazon OpenSearch Service settings.
+        openSearchServiceConfig:
+          allOf:
+            - $ref: '#/components/schemas/OpenSearchServiceDataSourceConfig'
+            - description: Amazon OpenSearch Service settings.
         httpConfig:
           allOf:
             - $ref: '#/components/schemas/HttpDataSourceConfig'
@@ -4220,9 +5188,62 @@ components:
           allOf:
             - $ref: '#/components/schemas/RelationalDatabaseDataSourceConfig'
             - description: Relational database settings.
+        eventBridgeConfig:
+          allOf:
+            - $ref: '#/components/schemas/EventBridgeDataSourceConfig'
+            - description: Amazon EventBridge settings.
       description: Describes a data source.
+    Description:
+      type: string
+      pattern: ^.*$
+      minLength: 0
+      maxLength: 255
+    CreateDomainNameRequest:
+      type: object
+      required:
+        - domainName
+        - certificateArn
+      title: CreateDomainNameRequest
+      properties:
+        domainName:
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The domain name.
+        certificateArn:
+          allOf:
+            - $ref: '#/components/schemas/CertificateArn'
+            - description: The Amazon Resource Name (ARN) of the certificate. This can be an Certificate Manager (ACM) certificate or an Identity and Access Management (IAM) server certificate.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the <code>DomainName</code>.
+    DomainNameConfig:
+      type: object
+      properties:
+        domainName:
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The domain name.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the <code>DomainName</code> configuration.
+        certificateArn:
+          allOf:
+            - $ref: '#/components/schemas/CertificateArn'
+            - description: The Amazon Resource Name (ARN) of the certificate. This can be an Certificate Manager (ACM) certificate or an Identity and Access Management (IAM) server certificate.
+        appsyncDomainName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The domain name that AppSync provides.
+        hostedZoneId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: "The ID of your Amazon Route\_53 hosted zone."
+      description: Describes a configuration for a custom domain.
     MappingTemplate:
       type: string
+      pattern: ^.*$
       minLength: 1
       maxLength: 65536
     SyncConfig:
@@ -4231,22 +5252,25 @@ components:
         conflictHandler:
           allOf:
             - $ref: '#/components/schemas/ConflictHandlerType'
-            - description: '<p>The Conflict Resolution strategy to perform in the event of a conflict.</p> <ul> <li> <p> <b>OPTIMISTIC_CONCURRENCY</b>: Resolve conflicts by rejecting mutations when versions do not match the latest version at the server.</p> </li> <li> <p> <b>AUTOMERGE</b>: Resolve conflicts with the Automerge conflict resolution strategy.</p> </li> <li> <p> <b>LAMBDA</b>: Resolve conflicts with a Lambda function supplied in the LambdaConflictHandlerConfig.</p> </li> </ul>'
+            - description: '<p>The Conflict Resolution strategy to perform in the event of a conflict.</p> <ul> <li> <p> <b>OPTIMISTIC_CONCURRENCY</b>: Resolve conflicts by rejecting mutations when versions don''t match the latest version at the server.</p> </li> <li> <p> <b>AUTOMERGE</b>: Resolve conflicts with the Automerge conflict resolution strategy.</p> </li> <li> <p> <b>LAMBDA</b>: Resolve conflicts with an Lambda function supplied in the <code>LambdaConflictHandlerConfig</code>.</p> </li> </ul>'
         conflictDetection:
           allOf:
             - $ref: '#/components/schemas/ConflictDetectionType'
-            - description: '<p>The Conflict Detection strategy to use.</p> <ul> <li> <p> <b>VERSION</b>: Detect conflicts based on object versions for this resolver.</p> </li> <li> <p> <b>NONE</b>: Do not detect conflicts when executing this resolver.</p> </li> </ul>'
+            - description: '<p>The Conflict Detection strategy to use.</p> <ul> <li> <p> <b>VERSION</b>: Detect conflicts based on object versions for this resolver.</p> </li> <li> <p> <b>NONE</b>: Do not detect conflicts when invoking this resolver.</p> </li> </ul>'
         lambdaConflictHandlerConfig:
           allOf:
             - $ref: '#/components/schemas/LambdaConflictHandlerConfig'
-            - description: The <code>LambdaConflictHandlerConfig</code> when configuring LAMBDA as the Conflict Handler.
-      description: <p>Describes a Sync configuration for a resolver.</p> <p>Contains information on which Conflict Detection as well as Resolution strategy should be performed when the resolver is invoked.</p>
+            - description: The <code>LambdaConflictHandlerConfig</code> when configuring <code>LAMBDA</code> as the Conflict Handler.
+      description: <p>Describes a Sync configuration for a resolver.</p> <p>Specifies which Conflict Detection strategy and Resolution strategy to use when the resolver is invoked.</p>
+    MaxBatchSize:
+      type: integer
+      minimum: 0
+      maximum: 2000
     CreateFunctionRequest:
       type: object
       required:
         - name
         - dataSourceName
-        - functionVersion
       title: CreateFunctionRequest
       properties:
         name:
@@ -4268,13 +5292,23 @@ components:
         responseMappingTemplate:
           allOf:
             - $ref: '#/components/schemas/MappingTemplate'
-            - description: 'The <code>Function</code> response mapping template. '
+            - description: The <code>Function</code> response mapping template.
         functionVersion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The <code>version</code> of the request mapping template. Currently the supported value is 2018-05-29. '
+            - description: 'The <code>version</code> of the request mapping template. Currently, the supported value is 2018-05-29. Note that when using VTL and mapping templates, the <code>functionVersion</code> is required.'
         syncConfig:
           $ref: '#/components/schemas/SyncConfig'
+        maxBatchSize:
+          allOf:
+            - $ref: '#/components/schemas/MaxBatchSize'
+            - description: The maximum batching size for a resolver.
+        runtime:
+          $ref: '#/components/schemas/AppSyncRuntime'
+        code:
+          allOf:
+            - $ref: '#/components/schemas/Code'
+            - description: 'The <code>function</code> code that contains the request and response functions. When code is used, the <code>runtime</code> is required. The <code>runtime</code> value must be <code>APPSYNC_JS</code>.'
     FunctionConfiguration:
       type: object
       properties:
@@ -4285,7 +5319,7 @@ components:
         functionArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The ARN of the <code>Function</code> object.
+            - description: The Amazon Resource Name (ARN) of the <code>Function</code> object.
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
@@ -4309,10 +5343,20 @@ components:
         functionVersion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The version of the request mapping template. Currently only the 2018-05-29 version of the template is supported.
+            - description: 'The version of the request mapping template. Currently, only the 2018-05-29 version of the template is supported.'
         syncConfig:
           $ref: '#/components/schemas/SyncConfig'
-      description: A function is a reusable entity. Multiple functions can be used to compose the resolver logic.
+        maxBatchSize:
+          allOf:
+            - $ref: '#/components/schemas/MaxBatchSize'
+            - description: The maximum batching size for a resolver.
+        runtime:
+          $ref: '#/components/schemas/AppSyncRuntime'
+        code:
+          allOf:
+            - $ref: '#/components/schemas/Code'
+            - description: 'The <code>function</code> code that contains the request and response functions. When code is used, the <code>runtime</code> is required. The <code>runtime</code> value must be <code>APPSYNC_JS</code>.'
+      description: A function is a reusable entity. You can use multiple functions to compose the resolver logic.
     LogConfig:
       type: object
       required:
@@ -4322,16 +5366,16 @@ components:
         fieldLogLevel:
           allOf:
             - $ref: '#/components/schemas/FieldLogLevel'
-            - description: '<p>The field logging level. Values can be NONE, ERROR, or ALL. </p> <ul> <li> <p> <b>NONE</b>: No field-level logs are captured.</p> </li> <li> <p> <b>ERROR</b>: Logs the following information only for the fields that are in error:</p> <ul> <li> <p>The error section in the server response.</p> </li> <li> <p>Field-level errors.</p> </li> <li> <p>The generated request/response functions that got resolved for error fields.</p> </li> </ul> </li> <li> <p> <b>ALL</b>: The following information is logged for all fields in the query:</p> <ul> <li> <p>Field-level tracing information.</p> </li> <li> <p>The generated request/response functions that got resolved for each field.</p> </li> </ul> </li> </ul>'
+            - description: '<p>The field logging level. Values can be NONE, ERROR, or ALL.</p> <ul> <li> <p> <b>NONE</b>: No field-level logs are captured.</p> </li> <li> <p> <b>ERROR</b>: Logs the following information only for the fields that are in error:</p> <ul> <li> <p>The error section in the server response.</p> </li> <li> <p>Field-level errors.</p> </li> <li> <p>The generated request/response functions that got resolved for error fields.</p> </li> </ul> </li> <li> <p> <b>ALL</b>: The following information is logged for all fields in the query:</p> <ul> <li> <p>Field-level tracing information.</p> </li> <li> <p>The generated request/response functions that got resolved for each field.</p> </li> </ul> </li> </ul>'
         cloudWatchLogsRoleArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The service role that AppSync will assume to publish to Amazon CloudWatch logs in your account. '
+            - description: The service role that AppSync assumes to publish to CloudWatch logs in your account.
         excludeVerboseContent:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'Set to TRUE to exclude sections that contain information such as headers, context, and evaluated mapping templates, regardless of logging level.'
-      description: The CloudWatch Logs configuration.
+      description: The Amazon CloudWatch Logs configuration.
     UserPoolConfig:
       type: object
       required:
@@ -4354,7 +5398,7 @@ components:
         appIdClientRegex:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: A regular expression for validating the incoming Amazon Cognito user pool app client ID.
+            - description: 'A regular expression for validating the incoming Amazon Cognito user pool app client ID. If this value isn''t set, no filtering is applied.'
       description: Describes an Amazon Cognito user pool configuration.
     TagMap:
       type: object
@@ -4381,7 +5425,7 @@ components:
         authenticationType:
           allOf:
             - $ref: '#/components/schemas/AuthenticationType'
-            - description: 'The authentication type: API key, Identity and Access Management, OIDC, or Amazon Cognito user pools.'
+            - description: 'The authentication type: API key, Identity and Access Management (IAM), OpenID Connect (OIDC), Amazon Cognito user pools, or Lambda.'
         userPoolConfig:
           allOf:
             - $ref: '#/components/schemas/UserPoolConfig'
@@ -4389,7 +5433,7 @@ components:
         openIDConnectConfig:
           allOf:
             - $ref: '#/components/schemas/OpenIDConnectConfig'
-            - description: The OpenID Connect configuration.
+            - description: The OIDC configuration.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -4401,11 +5445,11 @@ components:
         xrayEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: A flag indicating whether to enable X-Ray tracing for the <code>GraphqlApi</code>.
+            - description: A flag indicating whether to use X-Ray tracing for the <code>GraphqlApi</code>.
         lambdaAuthorizerConfig:
           allOf:
             - $ref: '#/components/schemas/LambdaAuthorizerConfig'
-            - description: Configuration for AWS Lambda function authorization.
+            - description: Configuration for Lambda function authorization.
     GraphqlApi:
       type: object
       properties:
@@ -4436,7 +5480,7 @@ components:
         arn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The ARN.
+            - description: The Amazon Resource Name (ARN).
         uris:
           allOf:
             - $ref: '#/components/schemas/MapOfStringToString'
@@ -4452,15 +5496,15 @@ components:
         xrayEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: A flag representing whether X-Ray tracing is enabled for this <code>GraphqlApi</code>.
+            - description: A flag indicating whether to use X-Ray tracing for this <code>GraphqlApi</code>.
         wafWebAclArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The ARN of the WAF ACL associated with this <code>GraphqlApi</code>, if one exists.'
+            - description: 'The ARN of the WAF access control list (ACL) associated with this <code>GraphqlApi</code>, if one exists.'
         lambdaAuthorizerConfig:
           allOf:
             - $ref: '#/components/schemas/LambdaAuthorizerConfig'
-            - description: <p/> <p>Configuration for AWS Lambda function authorization.</p>
+            - description: Configuration for Lambda function authorization.
       description: Describes a GraphQL API.
     ResolverKind:
       type: string
@@ -4492,15 +5536,15 @@ components:
         requestMappingTemplate:
           allOf:
             - $ref: '#/components/schemas/MappingTemplate'
-            - description: '<p>The mapping template to be used for requests.</p> <p>A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p> <p>VTL request mapping templates are optional when using a Lambda data source. For all other data sources, VTL request and response mapping templates are required.</p>'
+            - description: '<p>The mapping template to use for requests.</p> <p>A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p> <p>VTL request mapping templates are optional when using an Lambda data source. For all other data sources, VTL request and response mapping templates are required.</p>'
         responseMappingTemplate:
           allOf:
             - $ref: '#/components/schemas/MappingTemplate'
-            - description: The mapping template to be used for responses from the data source.
+            - description: The mapping template to use for responses from the data source.
         kind:
           allOf:
             - $ref: '#/components/schemas/ResolverKind'
-            - description: '<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is the default resolver type. A UNIT resolver enables you to execute a GraphQL query against a single data source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type. A PIPELINE resolver enables you to execute a series of <code>Function</code> in a serial manner. You can use a pipeline resolver to execute a GraphQL query against multiple data sources.</p> </li> </ul>'
+            - description: '<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of <code>Function</code> objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources.</p> </li> </ul>'
         pipelineConfig:
           allOf:
             - $ref: '#/components/schemas/PipelineConfig'
@@ -4508,11 +5552,21 @@ components:
         syncConfig:
           allOf:
             - $ref: '#/components/schemas/SyncConfig'
-            - description: The <code>SyncConfig</code> for a resolver attached to a versioned datasource.
+            - description: The <code>SyncConfig</code> for a resolver attached to a versioned data source.
         cachingConfig:
           allOf:
             - $ref: '#/components/schemas/CachingConfig'
             - description: The caching configuration for the resolver.
+        maxBatchSize:
+          allOf:
+            - $ref: '#/components/schemas/MaxBatchSize'
+            - description: The maximum batching size for a resolver.
+        runtime:
+          $ref: '#/components/schemas/AppSyncRuntime'
+        code:
+          allOf:
+            - $ref: '#/components/schemas/Code'
+            - description: 'The <code>resolver</code> code that contains the request and response functions. When code is used, the <code>runtime</code> is required. The <code>runtime</code> value must be <code>APPSYNC_JS</code>.'
     Resolver:
       type: object
       properties:
@@ -4531,7 +5585,7 @@ components:
         resolverArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The resolver ARN.
+            - description: The resolver Amazon Resource Name (ARN).
         requestMappingTemplate:
           allOf:
             - $ref: '#/components/schemas/MappingTemplate'
@@ -4543,7 +5597,7 @@ components:
         kind:
           allOf:
             - $ref: '#/components/schemas/ResolverKind'
-            - description: '<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is the default resolver type. A UNIT resolver enables you to execute a GraphQL query against a single data source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type. A PIPELINE resolver enables you to execute a series of <code>Function</code> in a serial manner. You can use a pipeline resolver to execute a GraphQL query against multiple data sources.</p> </li> </ul>'
+            - description: '<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of <code>Function</code> objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources.</p> </li> </ul>'
         pipelineConfig:
           allOf:
             - $ref: '#/components/schemas/PipelineConfig'
@@ -4551,11 +5605,21 @@ components:
         syncConfig:
           allOf:
             - $ref: '#/components/schemas/SyncConfig'
-            - description: The <code>SyncConfig</code> for a resolver attached to a versioned datasource.
+            - description: The <code>SyncConfig</code> for a resolver attached to a versioned data source.
         cachingConfig:
           allOf:
             - $ref: '#/components/schemas/CachingConfig'
             - description: The caching configuration for the resolver.
+        maxBatchSize:
+          allOf:
+            - $ref: '#/components/schemas/MaxBatchSize'
+            - description: The maximum batching size for a resolver.
+        runtime:
+          $ref: '#/components/schemas/AppSyncRuntime'
+        code:
+          allOf:
+            - $ref: '#/components/schemas/Code'
+            - description: 'The <code>resolver</code> code that contains the request and response functions. When code is used, the <code>runtime</code> is required. The <code>runtime</code> value must be <code>APPSYNC_JS</code>.'
       description: Describes a resolver.
     TypeDefinitionFormat:
       type: string
@@ -4591,7 +5655,7 @@ components:
         arn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The type ARN.
+            - description: The type Amazon Resource Name (ARN).
         definition:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -4618,6 +5682,10 @@ components:
       type: object
       title: DeleteDataSourceRequest
       properties: {}
+    DeleteDomainNameRequest:
+      type: object
+      title: DeleteDomainNameRequest
+      properties: {}
     DeleteFunctionRequest:
       type: object
       title: DeleteFunctionRequest
@@ -4634,6 +5702,89 @@ components:
       type: object
       title: DeleteTypeRequest
       properties: {}
+    DisassociateApiRequest:
+      type: object
+      title: DisassociateApiRequest
+      properties: {}
+    DomainNameConfigs:
+      type: array
+      items:
+        $ref: '#/components/schemas/DomainNameConfig'
+    ErrorMessage:
+      type: string
+    ErrorDetail:
+      type: object
+      properties:
+        message:
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: The error payload.
+      description: 'Contains the list of errors generated. When using JavaScript, this will apply to the request or response function evaluation.'
+    EvaluateCodeErrorDetail:
+      type: object
+      properties:
+        message:
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: The error payload.
+        codeErrors:
+          allOf:
+            - $ref: '#/components/schemas/CodeErrors'
+            - description: Contains the list of <code>CodeError</code> objects.
+      description: Contains the list of errors from a code evaluation response.
+    EvaluateCodeRequest:
+      type: object
+      required:
+        - runtime
+        - code
+        - context
+      title: EvaluateCodeRequest
+      properties:
+        runtime:
+          allOf:
+            - $ref: '#/components/schemas/AppSyncRuntime'
+            - description: 'The runtime to be used when evaluating the code. Currently, only the <code>APPSYNC_JS</code> runtime is supported.'
+        code:
+          allOf:
+            - $ref: '#/components/schemas/Code'
+            - description: The code definition to be evaluated. Note that <code>code</code> and <code>runtime</code> are both required for this action. The <code>runtime</code> value must be <code>APPSYNC_JS</code>.
+        context:
+          allOf:
+            - $ref: '#/components/schemas/Context'
+            - description: The map that holds all of the contextual information for your resolver invocation. A <code>context</code> is required for this action.
+        function:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The function within the code to be evaluated. If provided, the valid values are <code>request</code> and <code>response</code>.'
+    EvaluationResult:
+      type: string
+      pattern: '^[\s\S]*$'
+      minLength: 0
+      maxLength: 65536
+    Logs:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    Template:
+      type: string
+      pattern: '^[\s\S]*$'
+      minLength: 2
+      maxLength: 65536
+    EvaluateMappingTemplateRequest:
+      type: object
+      required:
+        - template
+        - context
+      title: EvaluateMappingTemplateRequest
+      properties:
+        template:
+          allOf:
+            - $ref: '#/components/schemas/Template'
+            - description: The mapping template; this can be a request or response template. A <code>template</code> is required for this action.
+        context:
+          allOf:
+            - $ref: '#/components/schemas/Context'
+            - description: The map that holds all of the contextual information for your resolver invocation. A <code>context</code> is required for this action.
     FlushApiCacheRequest:
       type: object
       title: FlushApiCacheRequest
@@ -4643,6 +5794,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/FunctionConfiguration'
+    GetApiAssociationRequest:
+      type: object
+      title: GetApiAssociationRequest
+      properties: {}
     GetApiCacheRequest:
       type: object
       title: GetApiCacheRequest
@@ -4651,6 +5806,10 @@ components:
     GetDataSourceRequest:
       type: object
       title: GetDataSourceRequest
+      properties: {}
+    GetDomainNameRequest:
+      type: object
+      title: GetDomainNameRequest
       properties: {}
     GetFunctionRequest:
       type: object
@@ -4714,6 +5873,10 @@ components:
     ListDataSourcesRequest:
       type: object
       title: ListDataSourcesRequest
+      properties: {}
+    ListDomainNamesRequest:
+      type: object
+      title: ListDomainNamesRequest
       properties: {}
     ListFunctionsRequest:
       type: object
@@ -4793,7 +5956,7 @@ components:
         ttl:
           allOf:
             - $ref: '#/components/schemas/Long'
-            - description: <p>TTL in seconds for cache entries.</p> <p>Valid values are between 1 and 3600 seconds.</p>
+            - description: '<p>TTL in seconds for cache entries.</p> <p>Valid values are 1–3,600 seconds.</p>'
         apiCachingBehavior:
           allOf:
             - $ref: '#/components/schemas/ApiCachingBehavior'
@@ -4814,7 +5977,7 @@ components:
         expires:
           allOf:
             - $ref: '#/components/schemas/Long'
-            - description: 'The time from update time after which the API key expires. The date is represented as seconds since the epoch. For more information, see .'
+            - description: 'From the update time, the time after which the API key expires. The date is represented as seconds since the epoch. For more information, see .'
     UpdateDataSourceRequest:
       type: object
       required:
@@ -4832,7 +5995,7 @@ components:
         serviceRoleArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The new service role ARN for the data source.
+            - description: The new service role Amazon Resource Name (ARN) for the data source.
         dynamodbConfig:
           allOf:
             - $ref: '#/components/schemas/DynamodbDataSourceConfig'
@@ -4840,11 +6003,15 @@ components:
         lambdaConfig:
           allOf:
             - $ref: '#/components/schemas/LambdaDataSourceConfig'
-            - description: The new Amazon Web Services Lambda configuration.
+            - description: The new Lambda configuration.
         elasticsearchConfig:
           allOf:
             - $ref: '#/components/schemas/ElasticsearchDataSourceConfig'
-            - description: The new Elasticsearch Service configuration.
+            - description: '<p>The new OpenSearch configuration.</p> <p>As of September 2021, Amazon Elasticsearch service is Amazon OpenSearch Service. This configuration is deprecated. Instead, use <a>UpdateDataSourceRequest$openSearchServiceConfig</a> to update an OpenSearch data source.</p>'
+        openSearchServiceConfig:
+          allOf:
+            - $ref: '#/components/schemas/OpenSearchServiceDataSourceConfig'
+            - description: The new OpenSearch configuration.
         httpConfig:
           allOf:
             - $ref: '#/components/schemas/HttpDataSourceConfig'
@@ -4853,12 +6020,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/RelationalDatabaseDataSourceConfig'
             - description: The new relational database configuration.
+        eventBridgeConfig:
+          allOf:
+            - $ref: '#/components/schemas/EventBridgeDataSourceConfig'
+            - description: The new Amazon EventBridge settings.
+    UpdateDomainNameRequest:
+      type: object
+      title: UpdateDomainNameRequest
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the <code>DomainName</code>.
     UpdateFunctionRequest:
       type: object
       required:
         - name
         - dataSourceName
-        - functionVersion
       title: UpdateFunctionRequest
       properties:
         name:
@@ -4880,13 +6058,23 @@ components:
         responseMappingTemplate:
           allOf:
             - $ref: '#/components/schemas/MappingTemplate'
-            - description: 'The <code>Function</code> request mapping template. '
+            - description: The <code>Function</code> request mapping template.
         functionVersion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The <code>version</code> of the request mapping template. Currently the supported value is 2018-05-29. '
+            - description: 'The <code>version</code> of the request mapping template. Currently, the supported value is 2018-05-29. Note that when using VTL and mapping templates, the <code>functionVersion</code> is required.'
         syncConfig:
           $ref: '#/components/schemas/SyncConfig'
+        maxBatchSize:
+          allOf:
+            - $ref: '#/components/schemas/MaxBatchSize'
+            - description: The maximum batching size for a resolver.
+        runtime:
+          $ref: '#/components/schemas/AppSyncRuntime'
+        code:
+          allOf:
+            - $ref: '#/components/schemas/Code'
+            - description: 'The <code>function</code> code that contains the request and response functions. When code is used, the <code>runtime</code> is required. The <code>runtime</code> value must be <code>APPSYNC_JS</code>.'
     UpdateGraphqlApiRequest:
       type: object
       required:
@@ -4908,7 +6096,7 @@ components:
         userPoolConfig:
           allOf:
             - $ref: '#/components/schemas/UserPoolConfig'
-            - description: The new Amazon Cognito user pool configuration for the <code>GraphqlApi</code> object.
+            - description: The new Amazon Cognito user pool configuration for the <code>~GraphqlApi</code> object.
         openIDConnectConfig:
           allOf:
             - $ref: '#/components/schemas/OpenIDConnectConfig'
@@ -4920,11 +6108,11 @@ components:
         xrayEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: A flag indicating whether to enable X-Ray tracing for the <code>GraphqlApi</code>.
+            - description: A flag indicating whether to use X-Ray tracing for the <code>GraphqlApi</code>.
         lambdaAuthorizerConfig:
           allOf:
             - $ref: '#/components/schemas/LambdaAuthorizerConfig'
-            - description: Configuration for AWS Lambda function authorization.
+            - description: Configuration for Lambda function authorization.
     UpdateResolverRequest:
       type: object
       title: UpdateResolverRequest
@@ -4936,7 +6124,7 @@ components:
         requestMappingTemplate:
           allOf:
             - $ref: '#/components/schemas/MappingTemplate'
-            - description: '<p>The new request mapping template.</p> <p>A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p> <p>VTL request mapping templates are optional when using a Lambda data source. For all other data sources, VTL request and response mapping templates are required.</p>'
+            - description: '<p>The new request mapping template.</p> <p>A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).</p> <p>VTL request mapping templates are optional when using an Lambda data source. For all other data sources, VTL request and response mapping templates are required.</p>'
         responseMappingTemplate:
           allOf:
             - $ref: '#/components/schemas/MappingTemplate'
@@ -4944,7 +6132,7 @@ components:
         kind:
           allOf:
             - $ref: '#/components/schemas/ResolverKind'
-            - description: '<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is the default resolver type. A UNIT resolver enables you to execute a GraphQL query against a single data source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type. A PIPELINE resolver enables you to execute a series of <code>Function</code> in a serial manner. You can use a pipeline resolver to execute a GraphQL query against multiple data sources.</p> </li> </ul>'
+            - description: '<p>The resolver type.</p> <ul> <li> <p> <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.</p> </li> <li> <p> <b>PIPELINE</b>: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of <code>Function</code> objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources.</p> </li> </ul>'
         pipelineConfig:
           allOf:
             - $ref: '#/components/schemas/PipelineConfig'
@@ -4952,11 +6140,21 @@ components:
         syncConfig:
           allOf:
             - $ref: '#/components/schemas/SyncConfig'
-            - description: The <code>SyncConfig</code> for a resolver attached to a versioned datasource.
+            - description: The <code>SyncConfig</code> for a resolver attached to a versioned data source.
         cachingConfig:
           allOf:
             - $ref: '#/components/schemas/CachingConfig'
             - description: The caching configuration for the resolver.
+        maxBatchSize:
+          allOf:
+            - $ref: '#/components/schemas/MaxBatchSize'
+            - description: The maximum batching size for a resolver.
+        runtime:
+          $ref: '#/components/schemas/AppSyncRuntime'
+        code:
+          allOf:
+            - $ref: '#/components/schemas/Code'
+            - description: 'The <code>resolver</code> code that contains the request and response functions. When code is used, the <code>runtime</code> is required. The <code>runtime</code> value must be <code>APPSYNC_JS</code>.'
     UpdateTypeRequest:
       type: object
       required:

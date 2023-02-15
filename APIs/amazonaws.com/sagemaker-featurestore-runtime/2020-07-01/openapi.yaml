@@ -178,7 +178,7 @@ paths:
   '/FeatureGroup/{FeatureGroupName}#RecordIdentifierValueAsString&EventTime':
     delete:
       operationId: DeleteRecord
-      description: Deletes a <code>Record</code> from a <code>FeatureGroup</code>. A new record will show up in the <code>OfflineStore</code> when the <code>DeleteRecord</code> API is called. This record will have a value of <code>True</code> in the <code>is_deleted</code> column.
+      description: Deletes a <code>Record</code> from a <code>FeatureGroup</code>. When the <code>DeleteRecord</code> API is called a new record will be added to the <code>OfflineStore</code> and the <code>Record</code> will be removed from the <code>OnlineStore</code>. This record will have a value of <code>True</code> in the <code>is_deleted</code> column.
       responses:
         '200':
           description: Success
@@ -213,7 +213,7 @@ paths:
           description: 'The name of the feature group to delete the record from. '
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+            pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}'
             minLength: 1
             maxLength: 64
         - name: RecordIdentifierValueAsString
@@ -232,6 +232,16 @@ paths:
             type: string
             pattern: .*
             maxLength: 358400
+        - name: TargetStores
+          in: query
+          required: false
+          description: 'A list of stores from which you''re deleting the record. By default, Feature Store deletes the record from all of the stores that you''re using for the <code>FeatureGroup</code>.'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TargetStore'
+            minItems: 1
+            maxItems: 2
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -285,10 +295,10 @@ paths:
         - name: FeatureGroupName
           in: path
           required: true
-          description: The name of the feature group in which you want to put the records.
+          description: The name of the feature group from which you want to retrieve a record.
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+            pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}'
             minLength: 1
             maxLength: 64
         - name: RecordIdentifierValueAsString
@@ -354,7 +364,7 @@ paths:
           description: The name of the feature group that you want to insert the record into.
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+            pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}'
             minLength: 1
             maxLength: 64
       requestBody:
@@ -372,6 +382,13 @@ paths:
                   items:
                     $ref: '#/components/schemas/FeatureValue'
                   minItems: 1
+                TargetStores:
+                  description: 'A list of stores to which you''re adding the record. By default, Feature Store adds the record to all of the stores that you''re using for the <code>FeatureGroup</code>.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/TargetStore'
+                  minItems: 1
+                  maxItems: 2
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -446,7 +463,7 @@ components:
         Errors:
           allOf:
             - $ref: '#/components/schemas/BatchGetRecordErrors'
-            - description: A list of errors that have occured when retrieving a batch of Records.
+            - description: A list of errors that have occurred when retrieving a batch of Records.
         UnprocessedIdentifiers:
           allOf:
             - $ref: '#/components/schemas/UnprocessedIdentifiers'
@@ -474,6 +491,11 @@ components:
     InternalFailure: {}
     ServiceUnavailable: {}
     AccessForbidden: {}
+    TargetStore:
+      type: string
+      enum:
+        - OnlineStore
+        - OfflineStore
     GetRecordResponse:
       type: object
       properties:
@@ -483,7 +505,7 @@ components:
             - description: The record you requested. A list of <code>FeatureValues</code>.
     FeatureName:
       type: string
-      pattern: '^[a-zA-Z0-9]([-_]*[a-zA-Z0-9])*'
+      pattern: '^[a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63}'
       minLength: 1
       maxLength: 64
     ResourceNotFound: {}
@@ -528,7 +550,7 @@ components:
         ErrorCode:
           allOf:
             - $ref: '#/components/schemas/ValueAsString'
-            - description: 'The error code of an error that has occured when attempting to retrieve a batch of Records. For more information on errors, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_GetRecord.html#API_feature_store_GetRecord_Errors"> Errors</a>.'
+            - description: 'The error code of an error that has occured when attempting to retrieve a batch of Records. For more information on errors, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_GetRecord.html#API_feature_store_GetRecord_Errors">Errors</a>.'
         ErrorMessage:
           allOf:
             - $ref: '#/components/schemas/Message'
@@ -541,7 +563,7 @@ components:
       minItems: 0
     FeatureGroupName:
       type: string
-      pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+      pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}'
       minLength: 1
       maxLength: 64
     RecordIdentifiers:
@@ -606,6 +628,12 @@ components:
             - $ref: '#/components/schemas/Record'
             - description: The <code>Record</code> retrieved.
       description: The output of Records that have been retrieved in a batch.
+    TargetStores:
+      type: array
+      items:
+        $ref: '#/components/schemas/TargetStore'
+      minItems: 1
+      maxItems: 2
     DeleteRecordRequest:
       type: object
       title: DeleteRecordRequest
@@ -624,5 +652,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/Record'
             - description: '<p>List of FeatureValues to be inserted. This will be a full over-write. If you only want to update few of the feature values, do the following:</p> <ul> <li> <p>Use <code>GetRecord</code> to retrieve the latest record.</p> </li> <li> <p>Update the record returned from <code>GetRecord</code>. </p> </li> <li> <p>Use <code>PutRecord</code> to update feature values.</p> </li> </ul>'
+        TargetStores:
+          allOf:
+            - $ref: '#/components/schemas/TargetStores'
+            - description: 'A list of stores to which you''re adding the record. By default, Feature Store adds the record to all of the stores that you''re using for the <code>FeatureGroup</code>.'
 security:
   - hmac: []

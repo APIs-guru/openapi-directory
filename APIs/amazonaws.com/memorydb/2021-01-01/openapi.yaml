@@ -1123,6 +1123,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeACLsRequest'
       parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1180,6 +1192,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeClustersRequest'
       parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1231,6 +1255,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeEngineVersionsRequest'
       parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1282,6 +1318,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeEventsRequest'
       parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1339,6 +1387,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeParameterGroupsRequest'
       parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1396,6 +1456,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeParametersRequest'
       parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1403,6 +1475,144 @@ paths:
             type: string
             enum:
               - AmazonMemoryDB.DescribeParameters
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.DescribeReservedNodes:
+    post:
+      operationId: DescribeReservedNodes
+      description: 'Returns information about reserved nodes for this account, or about a specified reserved node.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeReservedNodesResponse'
+        '480':
+          description: ReservedNodeNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeNotFoundFault'
+        '481':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeReservedNodesRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.DescribeReservedNodes
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.DescribeReservedNodesOfferings:
+    post:
+      operationId: DescribeReservedNodesOfferings
+      description: Lists available reserved node offerings.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeReservedNodesOfferingsResponse'
+        '480':
+          description: ReservedNodesOfferingNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReservedNodesOfferingNotFoundFault'
+        '481':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeReservedNodesOfferingsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.DescribeReservedNodesOfferings
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1441,6 +1651,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeServiceUpdatesRequest'
       parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1498,6 +1720,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeSnapshotsRequest'
       parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1543,6 +1777,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeSubnetGroupsRequest'
       parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1588,6 +1834,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeUsersRequest'
       parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -1606,7 +1864,7 @@ paths:
   /#X-Amz-Target=AmazonMemoryDB.FailoverShard:
     post:
       operationId: FailoverShard
-      description: Used to failover a shard
+      description: 'Used to failover a shard. This API is designed for testing the behavior of your application in case of MemoryDB failover. It is not designed to be used as a production-level tool for initiating a failover to overcome a problem you may have with the cluster. Moreover, in certain conditions such as large scale operational events, Amazon may block this API. '
       responses:
         '200':
           description: Success
@@ -1820,6 +2078,81 @@ paths:
             type: string
             enum:
               - AmazonMemoryDB.ListTags
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonMemoryDB.PurchaseReservedNodesOffering:
+    post:
+      operationId: PurchaseReservedNodesOffering
+      description: Allows you to purchase a reserved node offering. Reserved nodes are not eligible for cancellation and are non-refundable.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseReservedNodesOfferingResponse'
+        '480':
+          description: ReservedNodesOfferingNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReservedNodesOfferingNotFoundFault'
+        '481':
+          description: ReservedNodeAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeAlreadyExistsFault'
+        '482':
+          description: ReservedNodeQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReservedNodeQuotaExceededFault'
+        '483':
+          description: ServiceLinkedRoleNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLinkedRoleNotFoundFault'
+        '484':
+          description: TagQuotaPerResourceExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+        '485':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '486':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseReservedNodesOfferingRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonMemoryDB.PurchaseReservedNodesOffering
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2670,7 +3003,7 @@ components:
         MaintenanceWindow:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format <code>ddd:hh24:mi-ddd:hh24:mi</code> (24H Clock UTC). The minimum maintenance window is a 60 minute period.'
+            - description: '<p>Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.</p> <p>Valid values for <code>ddd</code> are:</p> <ul> <li> <p> <code>sun</code> </p> </li> <li> <p> <code>mon</code> </p> </li> <li> <p> <code>tue</code> </p> </li> <li> <p> <code>wed</code> </p> </li> <li> <p> <code>thu</code> </p> </li> <li> <p> <code>fri</code> </p> </li> <li> <p> <code>sat</code> </p> </li> </ul> <p>Example: <code>sun:23:00-mon:01:30</code> </p>'
         Port:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -2719,6 +3052,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: 'When set to true, the cluster will automatically receive minor engine version upgrades after launch.'
+        DataTiering:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: 'Enables data tiering. Data tiering is only supported for clusters using the r6gd node type. This parameter must be set when using r6gd nodes. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html">Data tiering</a>.'
     ClusterAlreadyExistsFault: {}
     SubnetGroupNotFoundFault: {}
     ClusterQuotaForCustomerExceededFault: {}
@@ -3164,6 +3501,90 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'An optional argument to pass in case the total number of records exceeds the value of MaxResults. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+    DescribeReservedNodesResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.'
+        ReservedNodes:
+          allOf:
+            - $ref: '#/components/schemas/ReservedNodeList'
+            - description: 'Returns information about reserved nodes for this account, or about a specified reserved node.'
+    DescribeReservedNodesRequest:
+      type: object
+      title: DescribeReservedNodesRequest
+      properties:
+        ReservationId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The reserved node identifier filter value. Use this parameter to show only the reservation that matches the specified reservation ID.
+        ReservedNodesOfferingId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The offering identifier filter value. Use this parameter to show only purchased reservations matching the specified offering identifier.
+        NodeType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The node type filter value. Use this parameter to show only those reservations matching the specified node type. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported">Supported node types</a>.'
+        Duration:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The duration filter value, specified in years or seconds. Use this parameter to show only reservations for this duration.'
+        OfferingType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type. Valid values: "All Upfront"|"Partial Upfront"| "No Upfront"'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.'
+    ReservedNodeNotFoundFault: {}
+    DescribeReservedNodesOfferingsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.'
+        ReservedNodesOfferings:
+          allOf:
+            - $ref: '#/components/schemas/ReservedNodesOfferingList'
+            - description: Lists available reserved node offerings.
+    DescribeReservedNodesOfferingsRequest:
+      type: object
+      title: DescribeReservedNodesOfferingsRequest
+      properties:
+        ReservedNodesOfferingId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The offering identifier filter value. Use this parameter to show only the available offering that matches the specified reservation identifier.
+        NodeType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The node type for the reserved nodes. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported">Supported node types</a>.'
+        Duration:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Duration filter value, specified in years or seconds. Use this parameter to show only reservations for a given duration.'
+        OfferingType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type. Valid values: "All Upfront"|"Partial Upfront"| "No Upfront"'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.'
+    ReservedNodesOfferingNotFoundFault: {}
     DescribeServiceUpdatesResponse:
       type: object
       properties:
@@ -3361,6 +3782,37 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The Amazon Resource Name (ARN) of the resource for which you want the list of tags
     InvalidARNFault: {}
+    PurchaseReservedNodesOfferingResponse:
+      type: object
+      properties:
+        ReservedNode:
+          allOf:
+            - $ref: '#/components/schemas/ReservedNode'
+            - description: Represents the output of a <code>PurchaseReservedNodesOffering</code> operation.
+    PurchaseReservedNodesOfferingRequest:
+      type: object
+      required:
+        - ReservedNodesOfferingId
+      title: PurchaseReservedNodesOfferingRequest
+      properties:
+        ReservedNodesOfferingId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the reserved node offering to purchase.
+        ReservationId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A customer-specified identifier to track this reservation.
+        NodeCount:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The number of node instances to reserve.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.'
+    ReservedNodeAlreadyExistsFault: {}
+    ReservedNodeQuotaExceededFault: {}
     ResetParameterGroupResponse:
       type: object
       properties:
@@ -3484,7 +3936,7 @@ components:
         MaintenanceWindow:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The maintenance window to update
+            - description: '<p>Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.</p> <p>Valid values for <code>ddd</code> are:</p> <ul> <li> <p> <code>sun</code> </p> </li> <li> <p> <code>mon</code> </p> </li> <li> <p> <code>tue</code> </p> </li> <li> <p> <code>wed</code> </p> </li> <li> <p> <code>thu</code> </p> </li> <li> <p> <code>fri</code> </p> </li> <li> <p> <code>sat</code> </p> </li> </ul> <p>Example: <code>sun:23:00-mon:01:30</code> </p>'
         SnsTopicArn:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3791,6 +4243,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SecurityGroupMembership'
+    DataTieringStatus:
+      type: string
+      enum:
+        - 'true'
+        - 'false'
     Cluster:
       type: object
       properties:
@@ -3894,6 +4351,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: 'When set to true, the cluster will automatically receive minor engine version upgrades after launch.'
+        DataTiering:
+          allOf:
+            - $ref: '#/components/schemas/DataTieringStatus'
+            - description: 'Enables data tiering. Data tiering is only supported for clusters using the r6gd node type. This parameter must be set when using r6gd nodes. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html">Data tiering</a>.'
       description: Contains all of the attributes of a specific cluster.
     ShardDetails:
       type: array
@@ -4010,6 +4471,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClusterConfiguration'
             - description: The configuration of the cluster from which the snapshot was taken
+        DataTiering:
+          allOf:
+            - $ref: '#/components/schemas/DataTieringStatus'
+            - description: 'Enables data tiering. Data tiering is only supported for clusters using the r6gd node type. This parameter must be set when using r6gd nodes. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html">Data tiering</a>.'
       description: Represents a copy of an entire cluster as of the time when the snapshot was taken.
     UserNameListInput:
       type: array
@@ -4136,6 +4601,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Parameter'
+    ReservedNodesOfferingList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReservedNodesOffering'
+    ReservedNodeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReservedNode'
     ServiceUpdateStatusList:
       type: array
       items:
@@ -4331,6 +4804,70 @@ components:
             - $ref: '#/components/schemas/ServiceUpdateStatus'
             - description: The status of the service update
       description: Update action that has yet to be processed for the corresponding apply/stop request
+    ReservedNode:
+      type: object
+      properties:
+        ReservationId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A customer-specified identifier to track this reservation.
+        ReservedNodesOfferingId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the reserved node offering to purchase.
+        NodeType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The node type for the reserved nodes.
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The time the reservation started.
+        Duration:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The duration of the reservation in seconds.
+        FixedPrice:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The fixed price charged for this reserved node.
+        NodeCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of nodes that have been reserved.
+        OfferingType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The offering type of this reserved node.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The state of the reserved node.
+        RecurringCharges:
+          allOf:
+            - $ref: '#/components/schemas/RecurringChargeList'
+            - description: The recurring price charged to run this reserved node.
+        ARN:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the reserved node.
+      description: Represents the output of a <code>PurchaseReservedNodesOffering</code> operation.
+    RecurringCharge:
+      type: object
+      properties:
+        RecurringChargeAmount:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The amount of the recurring charge to run this reserved node.
+        RecurringChargeFrequency:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The frequency of the recurring price charged to run this reserved node.
+      description: The recurring charge to run this reserved node.
+    RecurringChargeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecurringCharge'
     ReplicaConfigurationRequest:
       type: object
       properties:
@@ -4339,6 +4876,34 @@ components:
             - $ref: '#/components/schemas/Integer'
             - description: The number of replicas to scale up or down to
       description: A request to configure the number of replicas in a shard
+    ReservedNodesOffering:
+      type: object
+      properties:
+        ReservedNodesOfferingId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The offering identifier.
+        NodeType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The node type for the reserved nodes. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported">Supported node types</a>.'
+        Duration:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The duration of the reservation in seconds.
+        FixedPrice:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The fixed price charged for this reserved node.
+        OfferingType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The offering type of this reserved node.
+        RecurringCharges:
+          allOf:
+            - $ref: '#/components/schemas/RecurringChargeList'
+            - description: The recurring price charged to run this reserved node.
+      description: The offering type of this node.
     SlotMigration:
       type: object
       properties:

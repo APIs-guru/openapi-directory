@@ -1,0 +1,2277 @@
+openapi: 3.0.0
+info:
+  version: '2021-01-30'
+  x-release: v4
+  title: AmazonConnectCampaignService
+  description: Provide APIs to create and manage Amazon Connect Campaigns.
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: connectcampaigns
+  x-aws-signingName: connect-campaigns
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/connectcampaigns-2021-01-30.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/connect-campaigns/'
+servers:
+  - url: 'http://connect-campaigns.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AmazonConnectCampaignService multi-region endpoint
+  - url: 'https://connect-campaigns.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AmazonConnectCampaignService multi-region endpoint
+  - url: 'http://connect-campaigns.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AmazonConnectCampaignService endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://connect-campaigns.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AmazonConnectCampaignService endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /campaigns:
+    put:
+      operationId: CreateCampaign
+      description: Creates a campaign for the specified Amazon Connect account. This API is idempotent.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCampaignResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - connectInstanceId
+                - dialerConfig
+                - name
+                - outboundCallConfig
+              properties:
+                connectInstanceId:
+                  description: Amazon Connect Instance Id
+                  type: string
+                  minLength: 0
+                  maxLength: 256
+                dialerConfig:
+                  description: The possible types of dialer config parameters
+                  type: object
+                  properties:
+                    predictiveDialerConfig:
+                      $ref: '#/components/schemas/PredictiveDialerConfig'
+                    progressiveDialerConfig:
+                      $ref: '#/components/schemas/ProgressiveDialerConfig'
+                name:
+                  description: The name of an Amazon Connect Campaign name.
+                  type: string
+                  minLength: 1
+                  maxLength: 127
+                outboundCallConfig:
+                  description: The configuration used for outbound calls.
+                  type: object
+                  properties:
+                    answerMachineDetectionConfig:
+                      $ref: '#/components/schemas/AnswerMachineDetectionConfig'
+                    connectContactFlowId:
+                      $ref: '#/components/schemas/ContactFlowId'
+                    connectQueueId:
+                      $ref: '#/components/schemas/QueueId'
+                    connectSourcePhoneNumber:
+                      $ref: '#/components/schemas/SourcePhoneNumber'
+                tags:
+                  description: Tag map with key and value.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/campaigns/{id}':
+    delete:
+      operationId: DeleteCampaign
+      description: Deletes a campaign from the specified Amazon Connect account.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: Identifier representing a Campaign
+            minLength: 0
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeCampaign
+      description: Describes the specific campaign.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeCampaignResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: Identifier representing a Campaign
+            minLength: 0
+            maxLength: 256
+  '/connect-instance/{connectInstanceId}/config':
+    delete:
+      operationId: DeleteConnectInstanceConfig
+      description: Deletes a connect instance config from the specified AWS account.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidStateException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: connectInstanceId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: Amazon Connect Instance Id
+            minLength: 0
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetConnectInstanceConfig
+      description: Get the specific Connect instance config.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetConnectInstanceConfigResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: connectInstanceId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: Amazon Connect Instance Id
+            minLength: 0
+            maxLength: 256
+  '/connect-instance/{connectInstanceId}/onboarding':
+    delete:
+      operationId: DeleteInstanceOnboardingJob
+      description: Delete the Connect Campaigns onboarding job for the specified Amazon Connect instance.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidStateException'
+      parameters:
+        - name: connectInstanceId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: Amazon Connect Instance Id
+            minLength: 0
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetInstanceOnboardingJobStatus
+      description: Get the specific instance onboarding job status.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInstanceOnboardingJobStatusResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: connectInstanceId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: Amazon Connect Instance Id
+            minLength: 0
+            maxLength: 256
+    put:
+      operationId: StartInstanceOnboardingJob
+      description: Onboard the specific Amazon Connect instance to Connect Campaigns.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartInstanceOnboardingJobResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: connectInstanceId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: Amazon Connect Instance Id
+            minLength: 0
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - encryptionConfig
+              properties:
+                encryptionConfig:
+                  description: 'Encryption config for Connect Instance. Note that sensitive data will always be encrypted. If disabled, service will perform encryption with its own key. If enabled, a KMS key id needs to be provided and KMS charges will apply. KMS is only type supported'
+                  type: object
+                  properties:
+                    enabled:
+                      $ref: '#/components/schemas/Enabled'
+                    encryptionType:
+                      $ref: '#/components/schemas/EncryptionType'
+                    keyArn:
+                      $ref: '#/components/schemas/EncryptionKey'
+  '/campaigns/{id}/state':
+    get:
+      operationId: GetCampaignState
+      description: Get state of a campaign for the specified Amazon Connect account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCampaignStateResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: Identifier representing a Campaign
+            minLength: 0
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /campaigns-state:
+    post:
+      operationId: GetCampaignStateBatch
+      description: Get state of campaigns for the specified Amazon Connect account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCampaignStateBatchResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - campaignIds
+              properties:
+                campaignIds:
+                  description: List of CampaignId
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CampaignId'
+                  minItems: 1
+                  maxItems: 25
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /campaigns-summary:
+    post:
+      operationId: ListCampaigns
+      description: Provides summary information about the campaigns under the specified Amazon Connect account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCampaignsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filters:
+                  description: Filter model by type
+                  type: object
+                  properties:
+                    instanceIdFilter:
+                      $ref: '#/components/schemas/InstanceIdFilter'
+                maxResults:
+                  description: The maximum number of results to return per page.
+                  type: integer
+                  minimum: 1
+                  maximum: 50
+                nextToken:
+                  description: The token for the next set of results.
+                  type: string
+                  minLength: 0
+                  maxLength: 1000
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{arn}':
+    get:
+      operationId: ListTagsForResource
+      description: List tags for a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: arn
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: '^arn:.*'
+            description: Arn
+            minLength: 20
+            maxLength: 500
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Tag a resource.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: arn
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: '^arn:.*'
+            description: Arn
+            minLength: 20
+            maxLength: 500
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: Tag map with key and value.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  '/campaigns/{id}/pause':
+    post:
+      operationId: PauseCampaign
+      description: Pauses a campaign for the specified Amazon Connect account.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InvalidCampaignStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCampaignStateException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: Identifier representing a Campaign
+            minLength: 0
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/campaigns/{id}/dial-requests':
+    put:
+      operationId: PutDialRequestBatch
+      description: Creates dials requests for the specified campaign Amazon Connect account. This API is idempotent.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutDialRequestBatchResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InvalidCampaignStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCampaignStateException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: Identifier representing a Campaign
+            minLength: 0
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - dialRequests
+              properties:
+                dialRequests:
+                  description: A list of dial requests.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DialRequest'
+                  minItems: 1
+                  maxItems: 25
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/campaigns/{id}/resume':
+    post:
+      operationId: ResumeCampaign
+      description: Stops a campaign for the specified Amazon Connect account.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InvalidCampaignStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCampaignStateException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: Identifier representing a Campaign
+            minLength: 0
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/campaigns/{id}/start':
+    post:
+      operationId: StartCampaign
+      description: Starts a campaign for the specified Amazon Connect account.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InvalidCampaignStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCampaignStateException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: Identifier representing a Campaign
+            minLength: 0
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/campaigns/{id}/stop':
+    post:
+      operationId: StopCampaign
+      description: Stops a campaign for the specified Amazon Connect account.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InvalidCampaignStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCampaignStateException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: Identifier representing a Campaign
+            minLength: 0
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{arn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Untag a resource.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: arn
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: '^arn:.*'
+            description: Arn
+            minLength: 20
+            maxLength: 500
+        - name: tagKeys
+          in: query
+          required: true
+          description: ''
+          schema:
+            type: array
+            description: List of tag keys.
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 0
+            maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/campaigns/{id}/dialer-config':
+    post:
+      operationId: UpdateCampaignDialerConfig
+      description: Updates the dialer config of a campaign. This API is idempotent.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: Identifier representing a Campaign
+            minLength: 0
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - dialerConfig
+              properties:
+                dialerConfig:
+                  description: The possible types of dialer config parameters
+                  type: object
+                  properties:
+                    predictiveDialerConfig:
+                      $ref: '#/components/schemas/PredictiveDialerConfig'
+                    progressiveDialerConfig:
+                      $ref: '#/components/schemas/ProgressiveDialerConfig'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/campaigns/{id}/name':
+    post:
+      operationId: UpdateCampaignName
+      description: Updates the name of a campaign. This API is idempotent.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: Identifier representing a Campaign
+            minLength: 0
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  description: The name of an Amazon Connect Campaign name.
+                  type: string
+                  minLength: 1
+                  maxLength: 127
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/campaigns/{id}/outbound-call-config':
+    post:
+      operationId: UpdateCampaignOutboundCallConfig
+      description: Updates the outbound call config of a campaign. This API is idempotent.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: Identifier representing a Campaign
+            minLength: 0
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                answerMachineDetectionConfig:
+                  description: Answering Machine Detection config
+                  type: object
+                  properties:
+                    enableAnswerMachineDetection:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Enable or disable answering machine detection
+                connectContactFlowId:
+                  description: The identifier of the contact flow for the outbound call.
+                  type: string
+                  minLength: 0
+                  maxLength: 500
+                connectSourcePhoneNumber:
+                  description: 'The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.'
+                  type: string
+                  minLength: 0
+                  maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateCampaignResponse:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/CampaignArn'
+        id:
+          $ref: '#/components/schemas/CampaignId'
+        tags:
+          $ref: '#/components/schemas/TagMap'
+      description: The response for Create Campaign API
+    PredictiveDialerConfig:
+      type: object
+      required:
+        - bandwidthAllocation
+      properties:
+        bandwidthAllocation:
+          $ref: '#/components/schemas/BandwidthAllocation'
+      description: Predictive Dialer config
+    ProgressiveDialerConfig:
+      type: object
+      required:
+        - bandwidthAllocation
+      properties:
+        bandwidthAllocation:
+          $ref: '#/components/schemas/BandwidthAllocation'
+      description: Progressive Dialer config
+    AnswerMachineDetectionConfig:
+      type: object
+      required:
+        - enableAnswerMachineDetection
+      properties:
+        enableAnswerMachineDetection:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Enable or disable answering machine detection
+      description: Answering Machine Detection config
+    ContactFlowId:
+      type: string
+      description: The identifier of the contact flow for the outbound call.
+      minLength: 0
+      maxLength: 500
+    QueueId:
+      type: string
+      description: 'The queue for the call. If you specify a queue, the phone displayed for caller ID is the phone number specified in the queue. If you do not specify a queue, the queue defined in the contact flow is used. If you do not specify a queue, you must specify a source phone number.'
+      minLength: 0
+      maxLength: 500
+    SourcePhoneNumber:
+      type: string
+      description: 'The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.'
+      minLength: 0
+      maxLength: 100
+    TagValue:
+      type: string
+      description: Tag value.
+      minLength: 0
+      maxLength: 256
+    InternalServerException: {}
+    ResourceNotFoundException: {}
+    ValidationException: {}
+    ConflictException: {}
+    AccessDeniedException: {}
+    ServiceQuotaExceededException: {}
+    ThrottlingException: {}
+    InvalidStateException: {}
+    DescribeCampaignResponse:
+      type: object
+      properties:
+        campaign:
+          $ref: '#/components/schemas/Campaign'
+      description: DescribeCampaignResponse
+    GetCampaignStateResponse:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/CampaignState'
+      description: GetCampaignStateResponse
+    GetCampaignStateBatchResponse:
+      type: object
+      properties:
+        failedRequests:
+          $ref: '#/components/schemas/FailedCampaignStateResponseList'
+        successfulRequests:
+          $ref: '#/components/schemas/SuccessfulCampaignStateResponseList'
+      description: GetCampaignStateBatchResponse
+    CampaignId:
+      type: string
+      description: Identifier representing a Campaign
+      minLength: 0
+      maxLength: 256
+    GetConnectInstanceConfigResponse:
+      type: object
+      properties:
+        connectInstanceConfig:
+          $ref: '#/components/schemas/InstanceConfig'
+      description: GetConnectInstanceConfigResponse
+    GetInstanceOnboardingJobStatusResponse:
+      type: object
+      properties:
+        connectInstanceOnboardingJobStatus:
+          $ref: '#/components/schemas/InstanceOnboardingJobStatus'
+      description: GetInstanceOnboardingJobStatusResponse
+    ListCampaignsResponse:
+      type: object
+      properties:
+        campaignSummaryList:
+          $ref: '#/components/schemas/CampaignSummaryList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: ListCampaignsResponse
+    InstanceIdFilter:
+      type: object
+      required:
+        - operator
+        - value
+      properties:
+        operator:
+          $ref: '#/components/schemas/InstanceIdFilterOperator'
+        value:
+          $ref: '#/components/schemas/InstanceId'
+      description: Connect instance identifier filter
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          $ref: '#/components/schemas/TagMap'
+      description: ListTagsForResponse
+    InvalidCampaignStateException: {}
+    PutDialRequestBatchResponse:
+      type: object
+      properties:
+        failedRequests:
+          $ref: '#/components/schemas/FailedRequestList'
+        successfulRequests:
+          $ref: '#/components/schemas/SuccessfulRequestList'
+      description: PutDialRequestBatchResponse
+    DialRequest:
+      type: object
+      required:
+        - attributes
+        - clientToken
+        - expirationTime
+        - phoneNumber
+      properties:
+        attributes:
+          $ref: '#/components/schemas/Attributes'
+        clientToken:
+          $ref: '#/components/schemas/ClientToken'
+        expirationTime:
+          $ref: '#/components/schemas/TimeStamp'
+        phoneNumber:
+          $ref: '#/components/schemas/DestinationPhoneNumber'
+      description: A dial request for a campaign.
+    StartInstanceOnboardingJobResponse:
+      type: object
+      properties:
+        connectInstanceOnboardingJobStatus:
+          $ref: '#/components/schemas/InstanceOnboardingJobStatus'
+      description: The response for StartInstanceOnboardingJob API.
+    Enabled:
+      type: boolean
+      description: Boolean to indicate if custom encryption has been enabled.
+    EncryptionType:
+      type: string
+      enum:
+        - KMS
+      description: Server-side encryption type.
+    EncryptionKey:
+      type: string
+      description: KMS key id/arn for encryption config.
+      minLength: 0
+      maxLength: 500
+    TagKey:
+      type: string
+      pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
+      description: Tag key.
+      minLength: 1
+      maxLength: 128
+    Boolean:
+      type: boolean
+    Arn:
+      type: string
+      pattern: '^arn:.*'
+      description: Arn
+      minLength: 20
+      maxLength: 500
+    AttributeName:
+      type: string
+      pattern: '^[a-zA-Z0-9\-_]+$'
+      description: 'The key of the attribute. Attribute keys can include only alphanumeric, dash, and underscore characters.'
+      minLength: 0
+      maxLength: 32767
+    AttributeValue:
+      type: string
+      description: The value of the attribute.
+      minLength: 0
+      maxLength: 32767
+    Attributes:
+      type: object
+      description: 'A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes.'
+      additionalProperties:
+        $ref: '#/components/schemas/AttributeValue'
+    BandwidthAllocation:
+      type: number
+      description: The bandwidth allocation of a queue resource.
+      format: double
+      minimum: 0
+      maximum: 1
+    CampaignArn:
+      type: string
+      description: The resource name of an Amazon Connect campaign.
+      minLength: 20
+      maxLength: 500
+    InstanceId:
+      type: string
+      description: Amazon Connect Instance Id
+      minLength: 0
+      maxLength: 256
+    DialerConfig:
+      type: object
+      properties:
+        predictiveDialerConfig:
+          $ref: '#/components/schemas/PredictiveDialerConfig'
+        progressiveDialerConfig:
+          $ref: '#/components/schemas/ProgressiveDialerConfig'
+      description: The possible types of dialer config parameters
+    CampaignName:
+      type: string
+      description: The name of an Amazon Connect Campaign name.
+      minLength: 1
+      maxLength: 127
+    OutboundCallConfig:
+      type: object
+      required:
+        - connectContactFlowId
+        - connectQueueId
+      properties:
+        answerMachineDetectionConfig:
+          $ref: '#/components/schemas/AnswerMachineDetectionConfig'
+        connectContactFlowId:
+          $ref: '#/components/schemas/ContactFlowId'
+        connectQueueId:
+          $ref: '#/components/schemas/QueueId'
+        connectSourcePhoneNumber:
+          $ref: '#/components/schemas/SourcePhoneNumber'
+      description: The configuration used for outbound calls.
+    TagMap:
+      type: object
+      description: Tag map with key and value.
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    Campaign:
+      type: object
+      required:
+        - arn
+        - connectInstanceId
+        - dialerConfig
+        - id
+        - name
+        - outboundCallConfig
+      properties:
+        arn:
+          $ref: '#/components/schemas/CampaignArn'
+        connectInstanceId:
+          $ref: '#/components/schemas/InstanceId'
+        dialerConfig:
+          $ref: '#/components/schemas/DialerConfig'
+        id:
+          $ref: '#/components/schemas/CampaignId'
+        name:
+          $ref: '#/components/schemas/CampaignName'
+        outboundCallConfig:
+          $ref: '#/components/schemas/OutboundCallConfig'
+        tags:
+          $ref: '#/components/schemas/TagMap'
+      description: An Amazon Connect campaign.
+    CampaignFilters:
+      type: object
+      properties:
+        instanceIdFilter:
+          $ref: '#/components/schemas/InstanceIdFilter'
+      description: Filter model by type
+    CampaignState:
+      type: string
+      enum:
+        - Initialized
+        - Running
+        - Paused
+        - Stopped
+        - Failed
+      description: State of a campaign
+    CampaignSummary:
+      type: object
+      required:
+        - arn
+        - connectInstanceId
+        - id
+        - name
+      properties:
+        arn:
+          $ref: '#/components/schemas/CampaignArn'
+        connectInstanceId:
+          $ref: '#/components/schemas/InstanceId'
+        id:
+          $ref: '#/components/schemas/CampaignId'
+        name:
+          $ref: '#/components/schemas/CampaignName'
+      description: An Amazon Connect campaign summary.
+    CampaignSummaryList:
+      type: array
+      description: A list of Amazon Connect campaigns.
+      items:
+        $ref: '#/components/schemas/CampaignSummary'
+    ClientToken:
+      type: string
+      description: Client provided parameter used for idempotency. Its value must be unique for each request.
+      minLength: 0
+      maxLength: 64
+    CreateCampaignRequest:
+      type: object
+      required:
+        - connectInstanceId
+        - dialerConfig
+        - name
+        - outboundCallConfig
+      title: CreateCampaignRequest
+      properties:
+        connectInstanceId:
+          $ref: '#/components/schemas/InstanceId'
+        dialerConfig:
+          $ref: '#/components/schemas/DialerConfig'
+        name:
+          $ref: '#/components/schemas/CampaignName'
+        outboundCallConfig:
+          $ref: '#/components/schemas/OutboundCallConfig'
+        tags:
+          $ref: '#/components/schemas/TagMap'
+      description: The request for Create Campaign API.
+    DeleteCampaignRequest:
+      type: object
+      title: DeleteCampaignRequest
+      properties: {}
+      description: DeleteCampaignRequest
+    DeleteConnectInstanceConfigRequest:
+      type: object
+      title: DeleteConnectInstanceConfigRequest
+      properties: {}
+      description: DeleteCampaignRequest
+    DeleteInstanceOnboardingJobRequest:
+      type: object
+      title: DeleteInstanceOnboardingJobRequest
+      properties: {}
+      description: The request for DeleteInstanceOnboardingJob API.
+    DescribeCampaignRequest:
+      type: object
+      title: DescribeCampaignRequest
+      properties: {}
+      description: DescribeCampaignRequests
+    DestinationPhoneNumber:
+      type: string
+      description: 'The phone number of the customer, in E.164 format.'
+      minLength: 0
+      maxLength: 20
+      format: password
+    TimeStamp:
+      type: string
+      description: Timestamp with no UTC offset or timezone
+      format: date-time
+    DialRequestId:
+      type: string
+      description: Identifier representing a Dial request
+    DialRequestList:
+      type: array
+      description: A list of dial requests.
+      items:
+        $ref: '#/components/schemas/DialRequest'
+      minItems: 1
+      maxItems: 25
+    EncryptionConfig:
+      type: object
+      required:
+        - enabled
+      properties:
+        enabled:
+          $ref: '#/components/schemas/Enabled'
+        encryptionType:
+          $ref: '#/components/schemas/EncryptionType'
+        keyArn:
+          $ref: '#/components/schemas/EncryptionKey'
+      description: 'Encryption config for Connect Instance. Note that sensitive data will always be encrypted. If disabled, service will perform encryption with its own key. If enabled, a KMS key id needs to be provided and KMS charges will apply. KMS is only type supported'
+    GetCampaignStateBatchFailureCode:
+      type: string
+      enum:
+        - ResourceNotFound
+        - UnknownError
+      description: A predefined code indicating the error that caused the failure in getting state of campaigns
+    FailedCampaignStateResponse:
+      type: object
+      properties:
+        campaignId:
+          $ref: '#/components/schemas/CampaignId'
+        failureCode:
+          $ref: '#/components/schemas/GetCampaignStateBatchFailureCode'
+      description: Failed response of campaign state
+    FailedCampaignStateResponseList:
+      type: array
+      description: List of failed requests of campaign state
+      items:
+        $ref: '#/components/schemas/FailedCampaignStateResponse'
+      minItems: 0
+      maxItems: 25
+    FailureCode:
+      type: string
+      enum:
+        - InvalidInput
+        - RequestThrottled
+        - UnknownError
+      description: A predefined code indicating the error that caused the failure.
+    FailedRequest:
+      type: object
+      properties:
+        clientToken:
+          $ref: '#/components/schemas/ClientToken'
+        failureCode:
+          $ref: '#/components/schemas/FailureCode'
+        id:
+          $ref: '#/components/schemas/DialRequestId'
+      description: A failed request identified by the unique client token.
+    FailedRequestList:
+      type: array
+      description: A list of failed requests.
+      items:
+        $ref: '#/components/schemas/FailedRequest'
+      minItems: 0
+      maxItems: 25
+    GetCampaignStateBatchRequestCampaignIdsList:
+      type: array
+      description: List of CampaignId
+      items:
+        $ref: '#/components/schemas/CampaignId'
+      minItems: 1
+      maxItems: 25
+    GetCampaignStateBatchRequest:
+      type: object
+      required:
+        - campaignIds
+      title: GetCampaignStateBatchRequest
+      properties:
+        campaignIds:
+          $ref: '#/components/schemas/GetCampaignStateBatchRequestCampaignIdsList'
+      description: GetCampaignStateBatchRequest
+    SuccessfulCampaignStateResponseList:
+      type: array
+      description: List of successful response of campaign state
+      items:
+        $ref: '#/components/schemas/SuccessfulCampaignStateResponse'
+      minItems: 0
+      maxItems: 25
+    GetCampaignStateRequest:
+      type: object
+      title: GetCampaignStateRequest
+      properties: {}
+      description: GetCampaignStateRequest
+    GetConnectInstanceConfigRequest:
+      type: object
+      title: GetConnectInstanceConfigRequest
+      properties: {}
+      description: GetConnectInstanceConfigRequest
+    InstanceConfig:
+      type: object
+      required:
+        - connectInstanceId
+        - encryptionConfig
+        - serviceLinkedRoleArn
+      properties:
+        connectInstanceId:
+          $ref: '#/components/schemas/InstanceId'
+        encryptionConfig:
+          $ref: '#/components/schemas/EncryptionConfig'
+        serviceLinkedRoleArn:
+          $ref: '#/components/schemas/ServiceLinkedRoleArn'
+      description: Instance config object
+    GetInstanceOnboardingJobStatusRequest:
+      type: object
+      title: GetInstanceOnboardingJobStatusRequest
+      properties: {}
+      description: GetInstanceOnboardingJobStatusRequest
+    InstanceOnboardingJobStatus:
+      type: object
+      required:
+        - connectInstanceId
+        - status
+      properties:
+        connectInstanceId:
+          $ref: '#/components/schemas/InstanceId'
+        failureCode:
+          $ref: '#/components/schemas/InstanceOnboardingJobFailureCode'
+        status:
+          $ref: '#/components/schemas/InstanceOnboardingJobStatusCode'
+      description: Instance onboarding job status object
+    ServiceLinkedRoleArn:
+      type: string
+      description: Service linked role arn
+      minLength: 0
+      maxLength: 256
+    InstanceIdFilterOperator:
+      type: string
+      enum:
+        - Eq
+      description: Operators for Connect instance identifier filter
+    InstanceOnboardingJobFailureCode:
+      type: string
+      enum:
+        - EVENT_BRIDGE_ACCESS_DENIED
+        - EVENT_BRIDGE_MANAGED_RULE_LIMIT_EXCEEDED
+        - IAM_ACCESS_DENIED
+        - KMS_ACCESS_DENIED
+        - KMS_KEY_NOT_FOUND
+        - INTERNAL_FAILURE
+      description: Enumeration of the possible failure codes for instance onboarding job
+    InstanceOnboardingJobStatusCode:
+      type: string
+      enum:
+        - IN_PROGRESS
+        - SUCCEEDED
+        - FAILED
+      description: Enumeration of the possible states for instance onboarding job
+    MaxResults:
+      type: integer
+      description: The maximum number of results to return per page.
+      minimum: 1
+      maximum: 50
+    NextToken:
+      type: string
+      description: The token for the next set of results.
+      minLength: 0
+      maxLength: 1000
+    ListCampaignsRequest:
+      type: object
+      title: ListCampaignsRequest
+      properties:
+        filters:
+          $ref: '#/components/schemas/CampaignFilters'
+        maxResults:
+          $ref: '#/components/schemas/MaxResults'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: ListCampaignsRequest
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+      description: ListTagsForResource
+    PauseCampaignRequest:
+      type: object
+      title: PauseCampaignRequest
+      properties: {}
+      description: PauseCampaignRequest
+    PutDialRequestBatchRequest:
+      type: object
+      required:
+        - dialRequests
+      title: PutDialRequestBatchRequest
+      properties:
+        dialRequests:
+          $ref: '#/components/schemas/DialRequestList'
+      description: PutDialRequestBatchRequest
+    SuccessfulRequestList:
+      type: array
+      description: A list of successful requests identified by the unique client token.
+      items:
+        $ref: '#/components/schemas/SuccessfulRequest'
+      minItems: 0
+      maxItems: 25
+    ResumeCampaignRequest:
+      type: object
+      title: ResumeCampaignRequest
+      properties: {}
+      description: ResumeCampaignRequest
+    StartCampaignRequest:
+      type: object
+      title: StartCampaignRequest
+      properties: {}
+      description: StartCampaignRequest
+    StartInstanceOnboardingJobRequest:
+      type: object
+      required:
+        - encryptionConfig
+      title: StartInstanceOnboardingJobRequest
+      properties:
+        encryptionConfig:
+          $ref: '#/components/schemas/EncryptionConfig'
+      description: The request for StartInstanceOnboardingJob API.
+    StopCampaignRequest:
+      type: object
+      title: StopCampaignRequest
+      properties: {}
+      description: StopCampaignRequest
+    SuccessfulCampaignStateResponse:
+      type: object
+      properties:
+        campaignId:
+          $ref: '#/components/schemas/CampaignId'
+        state:
+          $ref: '#/components/schemas/CampaignState'
+      description: Successful response of campaign state
+    SuccessfulRequest:
+      type: object
+      properties:
+        clientToken:
+          $ref: '#/components/schemas/ClientToken'
+        id:
+          $ref: '#/components/schemas/DialRequestId'
+      description: A successful request identified by the unique client token.
+    TagKeyList:
+      type: array
+      description: List of tag keys.
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 0
+      maxItems: 50
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          $ref: '#/components/schemas/TagMap'
+      description: TagResourceRequest
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+      description: UntagResourceRequest
+    UpdateCampaignDialerConfigRequest:
+      type: object
+      required:
+        - dialerConfig
+      title: UpdateCampaignDialerConfigRequest
+      properties:
+        dialerConfig:
+          $ref: '#/components/schemas/DialerConfig'
+      description: UpdateCampaignDialerConfigRequest
+    UpdateCampaignNameRequest:
+      type: object
+      required:
+        - name
+      title: UpdateCampaignNameRequest
+      properties:
+        name:
+          $ref: '#/components/schemas/CampaignName'
+      description: UpdateCampaignNameRequest
+    UpdateCampaignOutboundCallConfigRequest:
+      type: object
+      title: UpdateCampaignOutboundCallConfigRequest
+      properties:
+        answerMachineDetectionConfig:
+          $ref: '#/components/schemas/AnswerMachineDetectionConfig'
+        connectContactFlowId:
+          $ref: '#/components/schemas/ContactFlowId'
+        connectSourcePhoneNumber:
+          $ref: '#/components/schemas/SourcePhoneNumber'
+      description: UpdateCampaignOutboundCallConfigRequest
+security:
+  - hmac: []

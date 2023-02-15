@@ -115,10 +115,83 @@ servers:
     description: The Synthetics endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  '/group/{groupIdentifier}/associate':
+    patch:
+      operationId: AssociateResource
+      description: '<p>Associates a canary with a group. Using groups can help you with managing and automating your canaries, and you can also view aggregated run results and statistics for all canaries in a group. </p> <p>You must run this operation in the Region where the canary exists.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: groupIdentifier
+          in: path
+          required: true
+          description: 'Specifies the group. You can specify the group name, the ARN, or the group ID as the <code>GroupIdentifier</code>.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceArn
+              properties:
+                ResourceArn:
+                  description: The ARN of the canary that you want to associate with the specified group.
+                  type: string
+                  pattern: 'arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:canary:[0-9a-z_\-]{1,21}'
+                  minLength: 1
+                  maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /canary:
     post:
       operationId: CreateCanary
-      description: '<p>Creates a canary. Canaries are scripts that monitor your endpoints and APIs from the outside-in. Canaries help you check the availability and latency of your web services and troubleshoot anomalies by investigating load time data, screenshots of the UI, logs, and metrics. You can set up a canary to run continuously or just once. </p> <p>Do not use <code>CreateCanary</code> to modify an existing canary. Use <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_UpdateCanary.html">UpdateCanary</a> instead.</p> <p>To create canaries, you must have the <code>CloudWatchSyntheticsFullAccess</code> policy. If you are creating a new IAM role for the canary, you also need the the <code>iam:CreateRole</code>, <code>iam:CreatePolicy</code> and <code>iam:AttachRolePolicy</code> permissions. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Roles">Necessary Roles and Permissions</a>.</p> <p>Do not include secrets or proprietary information in your canary names. The canary name makes up part of the Amazon Resource Name (ARN) for the canary, and the ARN is included in outbound calls over the internet. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html">Security Considerations for Synthetics Canaries</a>.</p>'
+      description: '<p>Creates a canary. Canaries are scripts that monitor your endpoints and APIs from the outside-in. Canaries help you check the availability and latency of your web services and troubleshoot anomalies by investigating load time data, screenshots of the UI, logs, and metrics. You can set up a canary to run continuously or just once. </p> <p>Do not use <code>CreateCanary</code> to modify an existing canary. Use <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_UpdateCanary.html">UpdateCanary</a> instead.</p> <p>To create canaries, you must have the <code>CloudWatchSyntheticsFullAccess</code> policy. If you are creating a new IAM role for the canary, you also need the <code>iam:CreateRole</code>, <code>iam:CreatePolicy</code> and <code>iam:AttachRolePolicy</code> permissions. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Roles">Necessary Roles and Permissions</a>.</p> <p>Do not include secrets or proprietary information in your canary names. The canary name makes up part of the Amazon Resource Name (ARN) for the canary, and the ARN is included in outbound calls over the internet. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html">Security Considerations for Synthetics Canaries</a>.</p>'
       responses:
         '200':
           description: Success
@@ -138,6 +211,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: RequestEntityTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestEntityTooLargeException'
       parameters: []
       requestBody:
         required: true
@@ -178,11 +257,11 @@ paths:
                     ZipFile:
                       allOf:
                         - $ref: '#/components/schemas/Blob'
-                        - description: 'If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the base64-encoded contents of the .zip file that contains the script. It must be smaller than 256 Kb.'
+                        - description: '<p>If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the base64-encoded contents of the .zip file that contains the script. It must be smaller than 225 Kb.</p> <p>For large canary scripts, we recommend that you use an S3 location instead of inputting it directly with this parameter.</p>'
                     Handler:
                       allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: The entry point to use for the source code when running the canary. This value must end with the string <code>.handler</code>. The string is limited to 29 characters or fewer.
+                        - $ref: '#/components/schemas/CodeHandler'
+                        - description: 'The entry point to use for the source code when running the canary. For canaries that use the <code>syn-python-selenium-1.0</code> runtime or a <code>syn-nodejs.puppeteer</code> runtime earlier than <code>syn-nodejs.puppeteer-3.4</code>, the handler must be specified as <code> <i>fileName</i>.handler</code>. For <code>syn-python-selenium-1.1</code>, <code>syn-nodejs.puppeteer-3.4</code>, and later runtimes, the handler can be specified as <code> <i>fileName</i>.<i>functionName</i> </code>, or you can specify a folder where canary scripts reside as <code> <i>folder</i>/<i>fileName</i>.<i>functionName</i> </code>.'
                 ArtifactS3Location:
                   description: 'The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files. The name of the S3 bucket can''t include a period (.).'
                   type: string
@@ -225,7 +304,7 @@ paths:
                     EnvironmentVariables:
                       allOf:
                         - $ref: '#/components/schemas/EnvironmentVariablesMap'
-                        - description: '<p>Specifies the keys and values to use for any environment variables used in the canary script. Use the following format:</p> <p>{ "key1" : "value1", "key2" : "value2", ...}</p> <p>Keys must start with a letter and be at least two characters. The total size of your environment variables cannot exceed 4 KB. You can''t specify any Lambda reserved environment variables as the keys for your environment variables. For more information about reserved keys, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime"> Runtime environment variables</a>.</p>'
+                        - description: '<p>Specifies the keys and values to use for any environment variables used in the canary script. Use the following format:</p> <p>{ "key1" : "value1", "key2" : "value2", ...}</p> <p>Keys must start with a letter and be at least two characters. The total size of your environment variables cannot exceed 4 KB. You can''t specify any Lambda reserved environment variables as the keys for your environment variables. For more information about reserved keys, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime"> Runtime environment variables</a>.</p> <important> <p>The environment variables keys and values are not encrypted. Do not store sensitive information in this field.</p> </important>'
                 SuccessRetentionPeriodInDays:
                   description: 'The number of days to retain data about successful runs of this canary. If you omit this field, the default of 31 days is used. The valid range is 1 to 455 days.'
                   type: integer
@@ -260,6 +339,79 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+                ArtifactConfig:
+                  description: 'A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.'
+                  type: object
+                  properties:
+                    S3Encryption:
+                      allOf:
+                        - $ref: '#/components/schemas/S3EncryptionConfig'
+                        - description: 'A structure that contains the configuration of the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3. Artifact encryption functionality is available only for canaries that use Synthetics runtime version syn-nodejs-puppeteer-3.3 or later. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html">Encrypting canary artifacts</a> '
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /group:
+    post:
+      operationId: CreateGroup
+      description: '<p>Creates a group which you can use to associate canaries with each other, including cross-Region canaries. Using groups can help you with managing and automating your canaries, and you can also view aggregated run results and statistics for all canaries in a group. </p> <p>Groups are global resources. When you create a group, it is replicated across Amazon Web Services Regions, and you can view it and add canaries to it from any Region. Although the group ARN format reflects the Region name where it was created, a group is not constrained to any Region. This means that you can put canaries from multiple Regions into the same group, and then use that group to view and manage all of those canaries in a single view.</p> <p>Groups are supported in all Regions except the Regions that are disabled by default. For more information about these Regions, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable">Enabling a Region</a>.</p> <p>Each group can contain as many as 10 canaries. You can have as many as 20 groups in your account. Any single canary can be a member of up to 10 groups.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateGroupResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+              properties:
+                Name:
+                  description: '<p>The name for the group. It can include any Unicode characters.</p> <p>The names for all groups in your account, across all Regions, must be unique.</p>'
+                  type: string
+                  minLength: 1
+                  maxLength: 64
+                Tags:
+                  description: '<p>A list of key-value pairs to associate with the group. You can associate as many as 50 tags with a group.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only the resources that have certain tag values.</p>'
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -271,7 +423,7 @@ paths:
   '/canary/{name}':
     delete:
       operationId: DeleteCanary
-      description: '<p>Permanently deletes the specified canary.</p> <p>When you delete a canary, resources used and created by the canary are not automatically deleted. After you delete a canary that you do not intend to use again, you should also delete the following:</p> <ul> <li> <p>The Lambda functions and layers used by this canary. These have the prefix <code>cwsyn-<i>MyCanaryName</i> </code>.</p> </li> <li> <p>The CloudWatch alarms created for this canary. These alarms have a name of <code>Synthetics-SharpDrop-Alarm-<i>MyCanaryName</i> </code>.</p> </li> <li> <p>Amazon S3 objects and buckets, such as the canary''s artifact location.</p> </li> <li> <p>IAM roles created for the canary. If they were created in the console, these roles have the name <code> role/service-role/CloudWatchSyntheticsRole-<i>MyCanaryName</i> </code>.</p> </li> <li> <p>CloudWatch Logs log groups created for the canary. These logs groups have the name <code>/aws/lambda/cwsyn-<i>MyCanaryName</i> </code>. </p> </li> </ul> <p>Before you delete a canary, you might want to use <code>GetCanary</code> to display the information about this canary. Make note of the information returned by this operation so that you can delete these resources after you delete the canary.</p>'
+      description: '<p>Permanently deletes the specified canary.</p> <p>If you specify <code>DeleteLambda</code> to <code>true</code>, CloudWatch Synthetics also deletes the Lambda functions and layers that are used by the canary.</p> <p>Other resources used and created by the canary are not automatically deleted. After you delete a canary that you do not intend to use again, you should also delete the following:</p> <ul> <li> <p>The CloudWatch alarms created for this canary. These alarms have a name of <code>Synthetics-SharpDrop-Alarm-<i>MyCanaryName</i> </code>.</p> </li> <li> <p>Amazon S3 objects and buckets, such as the canary''s artifact location.</p> </li> <li> <p>IAM roles created for the canary. If they were created in the console, these roles have the name <code> role/service-role/CloudWatchSyntheticsRole-<i>MyCanaryName</i> </code>.</p> </li> <li> <p>CloudWatch Logs log groups created for the canary. These logs groups have the name <code>/aws/lambda/cwsyn-<i>MyCanaryName</i> </code>. </p> </li> </ul> <p>Before you delete a canary, you might want to use <code>GetCanary</code> to display the information about this canary. Make note of the information returned by this operation so that you can delete these resources after you delete the canary.</p>'
       responses:
         '200':
           description: Success
@@ -313,6 +465,12 @@ paths:
             pattern: '^[0-9a-z_\-]+$'
             minLength: 1
             maxLength: 21
+        - name: deleteLambda
+          in: query
+          required: false
+          description: '<p>Specifies whether to also delete the Lambda functions and layers used by this canary. The default is false.</p> <p>Type: Boolean</p>'
+          schema:
+            type: boolean
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -355,7 +513,7 @@ paths:
             maxLength: 21
     patch:
       operationId: UpdateCanary
-      description: '<p>Use this operation to change the settings of a canary that has already been created.</p> <p>You can''t use this operation to update the tags of an existing canary. To change the tags of an existing canary, use <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_TagResource.html">TagResource</a>.</p>'
+      description: '<p>Updates the configuration of a canary that has already been created.</p> <p>You can''t use this operation to update the tags of an existing canary. To change the tags of an existing canary, use <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_TagResource.html">TagResource</a>.</p>'
       responses:
         '200':
           description: Success
@@ -387,6 +545,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: RequestEntityTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestEntityTooLargeException'
       parameters:
         - name: name
           in: path
@@ -423,11 +587,11 @@ paths:
                     ZipFile:
                       allOf:
                         - $ref: '#/components/schemas/Blob'
-                        - description: 'If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the base64-encoded contents of the .zip file that contains the script. It must be smaller than 256 Kb.'
+                        - description: '<p>If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the base64-encoded contents of the .zip file that contains the script. It must be smaller than 225 Kb.</p> <p>For large canary scripts, we recommend that you use an S3 location instead of inputting it directly with this parameter.</p>'
                     Handler:
                       allOf:
-                        - $ref: '#/components/schemas/String'
-                        - description: The entry point to use for the source code when running the canary. This value must end with the string <code>.handler</code>. The string is limited to 29 characters or fewer.
+                        - $ref: '#/components/schemas/CodeHandler'
+                        - description: 'The entry point to use for the source code when running the canary. For canaries that use the <code>syn-python-selenium-1.0</code> runtime or a <code>syn-nodejs.puppeteer</code> runtime earlier than <code>syn-nodejs.puppeteer-3.4</code>, the handler must be specified as <code> <i>fileName</i>.handler</code>. For <code>syn-python-selenium-1.1</code>, <code>syn-nodejs.puppeteer-3.4</code>, and later runtimes, the handler can be specified as <code> <i>fileName</i>.<i>functionName</i> </code>, or you can specify a folder where canary scripts reside as <code> <i>folder</i>/<i>fileName</i>.<i>functionName</i> </code>.'
                 ExecutionRoleArn:
                   description: '<p>The ARN of the IAM role to be used to run the canary. This role must already exist, and must include <code>lambda.amazonaws.com</code> as a principal in the trust policy. The role must also have the following permissions:</p> <ul> <li> <p> <code>s3:PutObject</code> </p> </li> <li> <p> <code>s3:GetBucketLocation</code> </p> </li> <li> <p> <code>s3:ListAllMyBuckets</code> </p> </li> <li> <p> <code>cloudwatch:PutMetricData</code> </p> </li> <li> <p> <code>logs:CreateLogGroup</code> </p> </li> <li> <p> <code>logs:CreateLogStream</code> </p> </li> <li> <p> <code>logs:CreateLogStream</code> </p> </li> </ul>'
                   type: string
@@ -470,7 +634,7 @@ paths:
                     EnvironmentVariables:
                       allOf:
                         - $ref: '#/components/schemas/EnvironmentVariablesMap'
-                        - description: '<p>Specifies the keys and values to use for any environment variables used in the canary script. Use the following format:</p> <p>{ "key1" : "value1", "key2" : "value2", ...}</p> <p>Keys must start with a letter and be at least two characters. The total size of your environment variables cannot exceed 4 KB. You can''t specify any Lambda reserved environment variables as the keys for your environment variables. For more information about reserved keys, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime"> Runtime environment variables</a>.</p>'
+                        - description: '<p>Specifies the keys and values to use for any environment variables used in the canary script. Use the following format:</p> <p>{ "key1" : "value1", "key2" : "value2", ...}</p> <p>Keys must start with a letter and be at least two characters. The total size of your environment variables cannot exceed 4 KB. You can''t specify any Lambda reserved environment variables as the keys for your environment variables. For more information about reserved keys, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime"> Runtime environment variables</a>.</p> <important> <p>The environment variables keys and values are not encrypted. Do not store sensitive information in this field.</p> </important>'
                 SuccessRetentionPeriodInDays:
                   description: The number of days to retain data about successful runs of this canary.
                   type: integer
@@ -494,7 +658,7 @@ paths:
                         - $ref: '#/components/schemas/SecurityGroupIds'
                         - description: The IDs of the security groups for this canary.
                 VisualReference:
-                  description: '<p>An object that specifies what screenshots to use as a baseline for visual monitoring by this canary, and optionally the parts of the screenshots to ignore during the visual monitoring comparison.</p> <p>Visual monitoring is supported only on canaries running the <b>syn-puppeteer-node-3.2</b> runtime or later. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html"> Visual monitoring</a> and <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html"> Visual monitoring blueprint</a> </p>'
+                  description: '<p>An object that specifies what screenshots to use as a baseline for visual monitoring by this canary. It can optionally also specify parts of the screenshots to ignore during the visual monitoring comparison.</p> <p>Visual monitoring is supported only on canaries running the <b>syn-puppeteer-node-3.2</b> runtime or later. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html"> Visual monitoring</a> and <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html"> Visual monitoring blueprint</a> </p>'
                   type: object
                   properties:
                     BaseScreenshots:
@@ -505,10 +669,118 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/String'
                         - description: 'Specifies which canary run to use the screenshots from as the baseline for future visual monitoring with this canary. Valid values are <code>nextrun</code> to use the screenshots from the next run after this update is made, <code>lastrun</code> to use the screenshots from the most recent run before this update was made, or the value of <code>Id</code> in the <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRun.html"> CanaryRun</a> from any past run of this canary.'
+                ArtifactS3Location:
+                  description: 'The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files. The name of the S3 bucket can''t include a period (.).'
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
+                ArtifactConfig:
+                  description: 'A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.'
+                  type: object
+                  properties:
+                    S3Encryption:
+                      allOf:
+                        - $ref: '#/components/schemas/S3EncryptionConfig'
+                        - description: 'A structure that contains the configuration of the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3. Artifact encryption functionality is available only for canaries that use Synthetics runtime version syn-nodejs-puppeteer-3.3 or later. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html">Encrypting canary artifacts</a> '
+  '/group/{groupIdentifier}':
+    delete:
+      operationId: DeleteGroup
+      description: '<p>Deletes a group. The group doesn''t need to be empty to be deleted. If there are canaries in the group, they are not deleted when you delete the group. </p> <p>Groups are a global resource that appear in all Regions, but the request to delete a group must be made from its home Region. You can find the home Region of a group within its ARN.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteGroupResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: groupIdentifier
+          in: path
+          required: true
+          description: 'Specifies which group to delete. You can specify the group name, the ARN, or the group ID as the <code>GroupIdentifier</code>.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetGroup
+      description: 'Returns information about one group. Groups are a global resource, so you can use this operation from any Region.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetGroupResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: groupIdentifier
+          in: path
+          required: true
+          description: 'Specifies the group to return information for. You can specify the group name, the ARN, or the group ID as the <code>GroupIdentifier</code>.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
   /canaries:
     post:
       operationId: DescribeCanaries
-      description: '<p>This operation returns a list of the canaries in your account, along with full details about each canary.</p> <p>This operation does not have resource-level authorization, so if a user is able to use <code>DescribeCanaries</code>, the user can see all of the canaries in the account. A deny policy can only be used to restrict access to all canaries. It cannot be used on specific resources. </p>'
+      description: '<p>This operation returns a list of the canaries in your account, along with full details about each canary.</p> <p>This operation supports resource-level authorization using an IAM policy and the <code>Names</code> parameter. If you specify the <code>Names</code> parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response.</p> <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html"> Limiting a user to viewing specific canaries</a>.</p>'
       responses:
         '200':
           description: Success
@@ -558,6 +830,13 @@ paths:
                   type: integer
                   minimum: 1
                   maximum: 20
+                Names:
+                  description: '<p>Use this parameter to return only canaries that match the names that you specify here. You can specify as many as five canary names.</p> <p>If you specify this parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response.</p> <p>You are required to use this parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html"> Limiting a user to viewing specific canaries</a>.</p>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CanaryName'
+                  minItems: 1
+                  maxItems: 5
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -569,7 +848,7 @@ paths:
   /canaries/last-run:
     post:
       operationId: DescribeCanariesLastRun
-      description: Use this operation to see information from the most recent run of each canary that you have created.
+      description: '<p>Use this operation to see information from the most recent run of each canary that you have created.</p> <p>This operation supports resource-level authorization using an IAM policy and the <code>Names</code> parameter. If you specify the <code>Names</code> parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response.</p> <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html"> Limiting a user to viewing specific canaries</a>.</p>'
       responses:
         '200':
           description: Success
@@ -610,7 +889,7 @@ paths:
               type: object
               properties:
                 NextToken:
-                  description: A token that indicates that there is more data available. You can use this token in a subsequent <code>DescribeCanaries</code> operation to retrieve the next set of results.
+                  description: A token that indicates that there is more data available. You can use this token in a subsequent <code>DescribeCanariesLastRun</code> operation to retrieve the next set of results.
                   type: string
                   minLength: 4
                   maxLength: 252
@@ -619,6 +898,13 @@ paths:
                   type: integer
                   minimum: 1
                   maximum: 100
+                Names:
+                  description: '<p>Use this parameter to return only canaries that match the names that you specify here. You can specify as many as five canary names.</p> <p>If you specify this parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response.</p> <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html"> Limiting a user to viewing specific canaries</a>.</p>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CanaryName'
+                  minItems: 1
+                  maxItems: 5
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -680,6 +966,73 @@ paths:
                   type: integer
                   minimum: 1
                   maximum: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/group/{groupIdentifier}/disassociate':
+    patch:
+      operationId: DisassociateResource
+      description: Removes a canary from a group. You must run this operation in the Region where the canary exists.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: groupIdentifier
+          in: path
+          required: true
+          description: 'Specifies the group. You can specify the group name, the ARN, or the group ID as the <code>GroupIdentifier</code>.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceArn
+              properties:
+                ResourceArn:
+                  description: The ARN of the canary that you want to remove from the specified group.
+                  type: string
+                  pattern: 'arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:canary:[0-9a-z_\-]{1,21}'
+                  minLength: 1
+                  maxLength: 2048
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -764,10 +1117,231 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/resource/{resourceArn}/groups':
+    post:
+      operationId: ListAssociatedGroups
+      description: Returns a list of the groups that the specified canary is associated with. The canary that you specify must be in the current Region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAssociatedGroupsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the canary that you want to view groups for.
+          schema:
+            type: string
+            pattern: 'arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:canary:[0-9a-z_\-]{1,21}'
+            minLength: 1
+            maxLength: 2048
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                NextToken:
+                  description: A token that indicates that there is more data available. You can use this token in a subsequent operation to retrieve the next set of results.
+                  type: string
+                  pattern: ^.+$
+                  minLength: 1
+                  maxLength: 512
+                MaxResults:
+                  description: 'Specify this parameter to limit how many groups are returned each time you use the <code>ListAssociatedGroups</code> operation. If you omit this parameter, the default of 20 is used.'
+                  type: integer
+                  minimum: 1
+                  maximum: 20
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/group/{groupIdentifier}/resources':
+    post:
+      operationId: ListGroupResources
+      description: This operation returns a list of the ARNs of the canaries that are associated with the specified group.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListGroupResourcesResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: groupIdentifier
+          in: path
+          required: true
+          description: 'Specifies the group to return information for. You can specify the group name, the ARN, or the group ID as the <code>GroupIdentifier</code>.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                NextToken:
+                  description: A token that indicates that there is more data available. You can use this token in a subsequent operation to retrieve the next set of results.
+                  type: string
+                  pattern: ^.+$
+                  minLength: 1
+                  maxLength: 512
+                MaxResults:
+                  description: 'Specify this parameter to limit how many canary ARNs are returned each time you use the <code>ListGroupResources</code> operation. If you omit this parameter, the default of 20 is used.'
+                  type: integer
+                  minimum: 1
+                  maximum: 20
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /groups:
+    post:
+      operationId: ListGroups
+      description: 'Returns a list of all groups in the account, displaying their names, unique IDs, and ARNs. The groups from all Regions are returned.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListGroupsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                NextToken:
+                  description: A token that indicates that there is more data available. You can use this token in a subsequent operation to retrieve the next set of results.
+                  type: string
+                  pattern: ^.+$
+                  minLength: 1
+                  maxLength: 512
+                MaxResults:
+                  description: 'Specify this parameter to limit how many groups are returned each time you use the <code>ListGroups</code> operation. If you omit this parameter, the default of 20 is used.'
+                  type: integer
+                  minimum: 1
+                  maximum: 20
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
-      description: Displays the tags associated with a canary.
+      description: Displays the tags associated with a canary or group.
       responses:
         '200':
           description: Success
@@ -776,31 +1350,43 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListTagsForResourceResponse'
         '480':
-          description: InternalServerException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: ResourceNotFoundException
+          description: NotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/NotFoundException'
         '482':
-          description: ValidationException
+          description: TooManyRequestsException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
       parameters:
         - name: resourceArn
           in: path
           required: true
-          description: '<p>The ARN of the canary that you want to view tags for.</p> <p>The ARN format of a canary is <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:canary:<i>canary-name</i> </code>.</p>'
+          description: '<p>The ARN of the canary or group that you want to view tags for.</p> <p>The ARN format of a canary is <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:canary:<i>canary-name</i> </code>.</p> <p>The ARN format of a group is <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:group:<i>group-name</i> </code> </p>'
           schema:
             type: string
-            pattern: 'arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:canary:[0-9a-z_\-]{1,21}'
+            pattern: 'arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:(canary|group):[0-9a-z_\-]+'
             minLength: 1
             maxLength: 2048
     parameters:
@@ -813,7 +1399,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: '<p>Assigns one or more tags (key-value pairs) to the specified canary. </p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don''t have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a canary.</p>'
+      description: '<p>Assigns one or more tags (key-value pairs) to the specified canary or group. </p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don''t have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a canary or group.</p>'
       responses:
         '200':
           description: Success
@@ -822,31 +1408,43 @@ paths:
               schema:
                 $ref: '#/components/schemas/TagResourceResponse'
         '480':
-          description: InternalServerException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: ResourceNotFoundException
+          description: NotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/NotFoundException'
         '482':
-          description: ValidationException
+          description: TooManyRequestsException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
       parameters:
         - name: resourceArn
           in: path
           required: true
-          description: '<p>The ARN of the canary that you''re adding tags to.</p> <p>The ARN format of a canary is <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:canary:<i>canary-name</i> </code>.</p>'
+          description: '<p>The ARN of the canary or group that you''re adding tags to.</p> <p>The ARN format of a canary is <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:canary:<i>canary-name</i> </code>.</p> <p>The ARN format of a group is <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:group:<i>group-name</i> </code> </p>'
           schema:
             type: string
-            pattern: 'arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:canary:[0-9a-z_\-]{1,21}'
+            pattern: 'arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:(canary|group):[0-9a-z_\-]+'
             minLength: 1
             maxLength: 2048
       requestBody:
@@ -859,7 +1457,7 @@ paths:
                 - Tags
               properties:
                 Tags:
-                  description: The list of key-value pairs to associate with the canary.
+                  description: The list of key-value pairs to associate with the resource.
                   type: object
                   minProperties: 1
                   maxProperties: 50
@@ -921,7 +1519,7 @@ paths:
   '/canary/{name}/stop':
     post:
       operationId: StopCanary
-      description: '<p>Stops the canary to prevent all future runs. If the canary is currently running, Synthetics stops waiting for the current run of the specified canary to complete. The run that is in progress completes on its own, publishes metrics, and uploads artifacts, but it is not recorded in Synthetics as a completed run.</p> <p>You can use <code>StartCanary</code> to start it running again with the canary’s current schedule at any point in the future. </p>'
+      description: '<p>Stops the canary to prevent all future runs. If the canary is currently running,the run that is in progress completes on its own, publishes metrics, and uploads artifacts, but it is not recorded in Synthetics as a completed run.</p> <p>You can use <code>StartCanary</code> to start it running again with the canary’s current schedule at any point in the future. </p>'
       responses:
         '200':
           description: Success
@@ -957,7 +1555,7 @@ paths:
         - name: name
           in: path
           required: true
-          description: 'The name of the canary that you want to stop. To find the names of your canaries, use <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html">DescribeCanaries</a>.'
+          description: 'The name of the canary that you want to stop. To find the names of your canaries, use <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html">ListCanaries</a>.'
           schema:
             type: string
             pattern: '^[0-9a-z_\-]+$'
@@ -974,7 +1572,7 @@ paths:
   '/tags/{resourceArn}#tagKeys':
     delete:
       operationId: UntagResource
-      description: Removes one or more tags from the specified canary.
+      description: Removes one or more tags from the specified resource.
       responses:
         '200':
           description: Success
@@ -983,31 +1581,43 @@ paths:
               schema:
                 $ref: '#/components/schemas/UntagResourceResponse'
         '480':
-          description: InternalServerException
+          description: BadRequestException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerException'
+                $ref: '#/components/schemas/BadRequestException'
         '481':
-          description: ResourceNotFoundException
+          description: NotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/NotFoundException'
         '482':
-          description: ValidationException
+          description: TooManyRequestsException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
       parameters:
         - name: resourceArn
           in: path
           required: true
-          description: '<p>The ARN of the canary that you''re removing tags from.</p> <p>The ARN format of a canary is <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:canary:<i>canary-name</i> </code>.</p>'
+          description: '<p>The ARN of the canary or group that you''re removing tags from.</p> <p>The ARN format of a canary is <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:canary:<i>canary-name</i> </code>.</p> <p>The ARN format of a group is <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:group:<i>group-name</i> </code> </p>'
           schema:
             type: string
-            pattern: 'arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:canary:[0-9a-z_\-]{1,21}'
+            pattern: 'arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:(canary|group):[0-9a-z_\-]+'
             minLength: 1
             maxLength: 2048
         - name: tagKeys
@@ -1080,6 +1690,14 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    AssociateResourceResponse:
+      type: object
+      properties: {}
+    InternalServerException: {}
+    ValidationException: {}
+    ResourceNotFoundException: {}
+    ConflictException: {}
+    ServiceQuotaExceededException: {}
     CreateCanaryResponse:
       type: object
       properties:
@@ -1095,6 +1713,11 @@ components:
       type: string
       minLength: 1
       maxLength: 10000000
+    CodeHandler:
+      type: string
+      pattern: '^([0-9a-zA-Z_-]+\/)*[0-9A-Za-z_\\-]+\.[A-Za-z_][A-Za-z0-9_]*$'
+      minLength: 1
+      maxLength: 128
     MaxOneYearInSeconds:
       type: integer
       minimum: 0
@@ -1128,13 +1751,32 @@ components:
     TagValue:
       type: string
       maxLength: 256
-    InternalServerException: {}
-    ValidationException: {}
+    S3EncryptionConfig:
+      type: object
+      properties:
+        EncryptionMode:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionMode'
+            - description: '<p> The encryption method to use for artifacts created by this canary. Specify <code>SSE_S3</code> to use server-side encryption (SSE) with an Amazon S3-managed key. Specify <code>SSE-KMS</code> to use server-side encryption with a customer-managed KMS key.</p> <p>If you omit this parameter, an Amazon Web Services-managed KMS key is used. </p>'
+        KmsKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyArn'
+            - description: 'The ARN of the customer-managed KMS key to use, if you specify <code>SSE-KMS</code> for <code>EncryptionMode</code> '
+      description: '<p>A structure that contains the configuration of encryption-at-rest settings for canary artifacts that the canary uploads to Amazon S3. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html">Encrypting canary artifacts</a> </p>'
+    RequestEntityTooLargeException: {}
+    CreateGroupResponse:
+      type: object
+      properties:
+        Group:
+          allOf:
+            - $ref: '#/components/schemas/Group'
+            - description: A structure that contains information about the group that was just created.
     DeleteCanaryResponse:
       type: object
       properties: {}
-    ResourceNotFoundException: {}
-    ConflictException: {}
+    DeleteGroupResponse:
+      type: object
+      properties: {}
     DescribeCanariesResponse:
       type: object
       properties:
@@ -1146,6 +1788,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/Token'
             - description: A token that indicates that there is more data available. You can use this token in a subsequent <code>DescribeCanaries</code> operation to retrieve the next set of results.
+    CanaryName:
+      type: string
+      pattern: '^[0-9a-z_\-]+$'
+      minLength: 1
+      maxLength: 21
     DescribeCanariesLastRunResponse:
       type: object
       properties:
@@ -1168,13 +1815,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/Token'
             - description: A token that indicates that there is more data available. You can use this token in a subsequent <code>DescribeRuntimeVersions</code> operation to retrieve the next set of results.
+    DisassociateResourceResponse:
+      type: object
+      properties: {}
     GetCanaryResponse:
       type: object
       properties:
         Canary:
           allOf:
             - $ref: '#/components/schemas/Canary'
-            - description: A strucure that contains the full information about the canary.
+            - description: A structure that contains the full information about the canary.
     GetCanaryRunsResponse:
       type: object
       properties:
@@ -1186,13 +1836,57 @@ components:
           allOf:
             - $ref: '#/components/schemas/Token'
             - description: A token that indicates that there is more data available. You can use this token in a subsequent <code>GetCanaryRuns</code> operation to retrieve the next set of results.
+    GetGroupResponse:
+      type: object
+      properties:
+        Group:
+          allOf:
+            - $ref: '#/components/schemas/Group'
+            - description: A structure that contains information about the group.
+    ListAssociatedGroupsResponse:
+      type: object
+      properties:
+        Groups:
+          allOf:
+            - $ref: '#/components/schemas/GroupSummaryList'
+            - description: An array of structures that contain information about the groups that this canary is associated with.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: A token that indicates that there is more data available. You can use this token in a subsequent <code>ListAssociatedGroups</code> operation to retrieve the next set of results.
+    ListGroupResourcesResponse:
+      type: object
+      properties:
+        Resources:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: An array of ARNs. These ARNs are for the canaries that are associated with the group.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: A token that indicates that there is more data available. You can use this token in a subsequent <code>ListGroupResources</code> operation to retrieve the next set of results.
+    ListGroupsResponse:
+      type: object
+      properties:
+        Groups:
+          allOf:
+            - $ref: '#/components/schemas/GroupSummaryList'
+            - description: An array of structures that each contain information about one group.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: A token that indicates that there is more data available. You can use this token in a subsequent <code>ListGroups</code> operation to retrieve the next set of results.
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: The list of tag keys and values associated with the canary that you specified.
+            - description: The list of tag keys and values associated with the resource that you specified.
+    BadRequestException: {}
+    NotFoundException: {}
+    TooManyRequestsException: {}
+    InternalFailureException: {}
     StartCanaryResponse:
       type: object
       properties: {}
@@ -1217,6 +1911,41 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/BaseScreenshot'
+    ArtifactConfigInput:
+      type: object
+      properties:
+        S3Encryption:
+          allOf:
+            - $ref: '#/components/schemas/S3EncryptionConfig'
+            - description: 'A structure that contains the configuration of the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3. Artifact encryption functionality is available only for canaries that use Synthetics runtime version syn-nodejs-puppeteer-3.3 or later. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html">Encrypting canary artifacts</a> '
+      description: 'A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.'
+    ArtifactConfigOutput:
+      type: object
+      properties:
+        S3Encryption:
+          allOf:
+            - $ref: '#/components/schemas/S3EncryptionConfig'
+            - description: 'A structure that contains the configuration of encryption settings for canary artifacts that are stored in Amazon S3. '
+      description: 'A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.'
+    GroupIdentifier:
+      type: string
+      minLength: 1
+      maxLength: 128
+    CanaryArn:
+      type: string
+      pattern: 'arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:canary:[0-9a-z_\-]{1,21}'
+      minLength: 1
+      maxLength: 2048
+    AssociateResourceRequest:
+      type: object
+      required:
+        - ResourceArn
+      title: AssociateResourceRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/CanaryArn'
+            - description: The ARN of the canary that you want to associate with the specified group.
     BaseScreenshotIgnoreCoordinates:
       type: array
       items:
@@ -1235,7 +1964,7 @@ components:
         IgnoreCoordinates:
           allOf:
             - $ref: '#/components/schemas/BaseScreenshotIgnoreCoordinates'
-            - description: 'Coordinates that define the part of a screen to ignore during screenshot comparisons. To obtain the coordinates to use here, use the CloudWatch Logs console to draw the boundaries on the screen. For more information, see {LINK}'
+            - description: 'Coordinates that define the part of a screen to ignore during screenshot comparisons. To obtain the coordinates to use here, use the CloudWatch console to draw the boundaries on the screen. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/synthetics_canaries_deletion.html"> Editing or deleting a canary</a> '
       description: A structure representing a screenshot that is used as a baseline during visual monitoring comparisons made by the canary.
     BaseScreenshotConfigIgnoreCoordinate:
       type: string
@@ -1301,6 +2030,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The list of key-value pairs that are associated with the canary.
+        ArtifactConfig:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactConfigOutput'
+            - description: 'A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.'
       description: This structure contains all information about one canary in your account.
     Canaries:
       type: array
@@ -1325,11 +2058,6 @@ components:
     UUID:
       type: string
       pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
-    CanaryName:
-      type: string
-      pattern: '^[0-9a-z_\-]+$'
-      minLength: 1
-      maxLength: 21
     CanaryCodeOutput:
       type: object
       properties:
@@ -1446,7 +2174,7 @@ components:
         BaseCanaryRunId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The ID of the canary run that produced the screenshots that are used as the baseline for visual monitoring comparisons during future runs of this canary.
+            - description: The ID of the canary run that produced the baseline screenshots that are used for visual monitoring comparisons by this canary.
       description: '<p>If this canary performs visual monitoring by comparing screenshots, this structure contains the ID of the canary run that is used as the baseline for screenshots, and the coordinates of any parts of those screenshots that are ignored during visual monitoring comparison.</p> <p>Visual monitoring is supported only on canaries running the <b>syn-puppeteer-node-3.2</b> runtime or later.</p>'
     TagMap:
       type: object
@@ -1454,11 +2182,6 @@ components:
       maxProperties: 50
       additionalProperties:
         $ref: '#/components/schemas/TagValue'
-    CanaryArn:
-      type: string
-      pattern: 'arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:canary:[0-9a-z_\-]{1,21}'
-      minLength: 1
-      maxLength: 2048
     CanaryCodeInput:
       type: object
       required:
@@ -1479,11 +2202,11 @@ components:
         ZipFile:
           allOf:
             - $ref: '#/components/schemas/Blob'
-            - description: 'If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the base64-encoded contents of the .zip file that contains the script. It must be smaller than 256 Kb.'
+            - description: '<p>If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the base64-encoded contents of the .zip file that contains the script. It must be smaller than 225 Kb.</p> <p>For large canary scripts, we recommend that you use an S3 location instead of inputting it directly with this parameter.</p>'
         Handler:
           allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The entry point to use for the source code when running the canary. This value must end with the string <code>.handler</code>. The string is limited to 29 characters or fewer.
+            - $ref: '#/components/schemas/CodeHandler'
+            - description: 'The entry point to use for the source code when running the canary. For canaries that use the <code>syn-python-selenium-1.0</code> runtime or a <code>syn-nodejs.puppeteer</code> runtime earlier than <code>syn-nodejs.puppeteer-3.4</code>, the handler must be specified as <code> <i>fileName</i>.handler</code>. For <code>syn-python-selenium-1.1</code>, <code>syn-nodejs.puppeteer-3.4</code>, and later runtimes, the handler can be specified as <code> <i>fileName</i>.<i>functionName</i> </code>, or you can specify a folder where canary scripts reside as <code> <i>folder</i>/<i>fileName</i>.<i>functionName</i> </code>.'
       description: 'Use this structure to input your script code for the canary. This structure contains the Lambda handler with the location where the canary should start running the script. If the script is stored in an S3 bucket, the bucket name, key, and version are also included. If the script was passed into the canary directly, the script code is contained in the value of <code>Zipfile</code>. '
     CanaryRun:
       type: object
@@ -1555,7 +2278,7 @@ components:
         EnvironmentVariables:
           allOf:
             - $ref: '#/components/schemas/EnvironmentVariablesMap'
-            - description: '<p>Specifies the keys and values to use for any environment variables used in the canary script. Use the following format:</p> <p>{ "key1" : "value1", "key2" : "value2", ...}</p> <p>Keys must start with a letter and be at least two characters. The total size of your environment variables cannot exceed 4 KB. You can''t specify any Lambda reserved environment variables as the keys for your environment variables. For more information about reserved keys, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime"> Runtime environment variables</a>.</p>'
+            - description: '<p>Specifies the keys and values to use for any environment variables used in the canary script. Use the following format:</p> <p>{ "key1" : "value1", "key2" : "value2", ...}</p> <p>Keys must start with a letter and be at least two characters. The total size of your environment variables cannot exceed 4 KB. You can''t specify any Lambda reserved environment variables as the keys for your environment variables. For more information about reserved keys, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime"> Runtime environment variables</a>.</p> <important> <p>The environment variables keys and values are not encrypted. Do not store sensitive information in this field.</p> </important>'
       description: A structure that contains input information for a canary run.
     CanaryRunState:
       type: string
@@ -1605,6 +2328,17 @@ components:
       type: string
       enum:
         - INVALID_PERMISSIONS
+        - CREATE_PENDING
+        - CREATE_IN_PROGRESS
+        - CREATE_FAILED
+        - UPDATE_PENDING
+        - UPDATE_IN_PROGRESS
+        - UPDATE_COMPLETE
+        - ROLLBACK_COMPLETE
+        - ROLLBACK_FAILED
+        - DELETE_IN_PROGRESS
+        - DELETE_FAILED
+        - SYNC_DELETE_IN_PROGRESS
     VpcConfigInput:
       type: object
       properties:
@@ -1651,7 +2385,7 @@ components:
         RunConfig:
           allOf:
             - $ref: '#/components/schemas/CanaryRunConfigInput'
-            - description: 'A structure that contains the configuration for individual canary runs, such as timeout value.'
+            - description: '<p>A structure that contains the configuration for individual canary runs, such as timeout value and environment variables.</p> <important> <p>The environment variables keys and values are not encrypted. Do not store sensitive information in this field.</p> </important>'
         SuccessRetentionPeriodInDays:
           allOf:
             - $ref: '#/components/schemas/MaxSize1024'
@@ -1672,10 +2406,72 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: '<p>A list of key-value pairs to associate with the canary. You can associate as many as 50 tags with a canary.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only the resources that have certain tag values.</p>'
+        ArtifactConfig:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactConfigInput'
+            - description: 'A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.'
+    GroupName:
+      type: string
+      minLength: 1
+      maxLength: 64
+    CreateGroupRequest:
+      type: object
+      required:
+        - Name
+      title: CreateGroupRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/GroupName'
+            - description: '<p>The name for the group. It can include any Unicode characters.</p> <p>The names for all groups in your account, across all Regions, must be unique.</p>'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: '<p>A list of key-value pairs to associate with the group. You can associate as many as 50 tags with a group.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only the resources that have certain tag values.</p>'
+    Group:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique ID of the group.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/GroupName'
+            - description: The name of the group.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/GroupArn'
+            - description: The ARN of the group.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The list of key-value pairs that are associated with the canary.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the group was created.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the group was most recently updated.
+      description: This structure contains information about one group.
+    boolean:
+      type: boolean
     DeleteCanaryRequest:
       type: object
       title: DeleteCanaryRequest
       properties: {}
+    DeleteGroupRequest:
+      type: object
+      title: DeleteGroupRequest
+      properties: {}
+    DescribeCanariesLastRunNameFilter:
+      type: array
+      items:
+        $ref: '#/components/schemas/CanaryName'
+      minItems: 1
+      maxItems: 5
     Token:
       type: string
       minLength: 4
@@ -1691,11 +2487,21 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
-            - description: A token that indicates that there is more data available. You can use this token in a subsequent <code>DescribeCanaries</code> operation to retrieve the next set of results.
+            - description: A token that indicates that there is more data available. You can use this token in a subsequent <code>DescribeCanariesLastRun</code> operation to retrieve the next set of results.
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxSize100'
             - description: 'Specify this parameter to limit how many runs are returned each time you use the <code>DescribeLastRun</code> operation. If you omit this parameter, the default of 100 is used.'
+        Names:
+          allOf:
+            - $ref: '#/components/schemas/DescribeCanariesLastRunNameFilter'
+            - description: '<p>Use this parameter to return only canaries that match the names that you specify here. You can specify as many as five canary names.</p> <p>If you specify this parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response.</p> <p>You are required to use the <code>Names</code> parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html"> Limiting a user to viewing specific canaries</a>.</p>'
+    DescribeCanariesNameFilter:
+      type: array
+      items:
+        $ref: '#/components/schemas/CanaryName'
+      minItems: 1
+      maxItems: 5
     MaxCanaryResults:
       type: integer
       minimum: 1
@@ -1712,6 +2518,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxCanaryResults'
             - description: 'Specify this parameter to limit how many canaries are returned each time you use the <code>DescribeCanaries</code> operation. If you omit this parameter, the default of 100 is used.'
+        Names:
+          allOf:
+            - $ref: '#/components/schemas/DescribeCanariesNameFilter'
+            - description: '<p>Use this parameter to return only canaries that match the names that you specify here. You can specify as many as five canary names.</p> <p>If you specify this parameter, the operation is successful only if you have authorization to view all the canaries that you specify in your request. If you do not have permission to view any of the canaries, the request fails with a 403 response.</p> <p>You are required to use this parameter if you are logged on to a user or role that has an IAM policy that restricts which canaries that you are allowed to view. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html"> Limiting a user to viewing specific canaries</a>.</p>'
     DescribeRuntimeVersionsRequest:
       type: object
       title: DescribeRuntimeVersionsRequest
@@ -1728,6 +2538,21 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/RuntimeVersion'
+    DisassociateResourceRequest:
+      type: object
+      required:
+        - ResourceArn
+      title: DisassociateResourceRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/CanaryArn'
+            - description: The ARN of the canary that you want to remove from the specified group.
+    EncryptionMode:
+      type: string
+      enum:
+        - SSE_S3
+        - SSE_KMS
     EnvironmentVariableName:
       type: string
       pattern: '[a-zA-Z]([a-zA-Z0-9_])+'
@@ -1749,6 +2574,94 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxSize100'
             - description: 'Specify this parameter to limit how many runs are returned each time you use the <code>GetCanaryRuns</code> operation. If you omit this parameter, the default of 100 is used.'
+    GetGroupRequest:
+      type: object
+      title: GetGroupRequest
+      properties: {}
+    GroupArn:
+      type: string
+      pattern: 'arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:group:[0-9a-z]+'
+      minLength: 1
+      maxLength: 128
+    GroupSummary:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique ID of the group.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/GroupName'
+            - description: The name of the group.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/GroupArn'
+            - description: The ARN of the group.
+      description: A structure containing some information about a group.
+    GroupSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GroupSummary'
+    KmsKeyArn:
+      type: string
+      pattern: 'arn:(aws[a-zA-Z-]*)?:kms:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:key/[\w\-\/]+'
+      minLength: 1
+      maxLength: 2048
+    PaginationToken:
+      type: string
+      pattern: ^.+$
+      minLength: 1
+      maxLength: 512
+    MaxGroupResults:
+      type: integer
+      minimum: 1
+      maximum: 20
+    ListAssociatedGroupsRequest:
+      type: object
+      title: ListAssociatedGroupsRequest
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: A token that indicates that there is more data available. You can use this token in a subsequent operation to retrieve the next set of results.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxGroupResults'
+            - description: 'Specify this parameter to limit how many groups are returned each time you use the <code>ListAssociatedGroups</code> operation. If you omit this parameter, the default of 20 is used.'
+    ListGroupResourcesRequest:
+      type: object
+      title: ListGroupResourcesRequest
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: A token that indicates that there is more data available. You can use this token in a subsequent operation to retrieve the next set of results.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxGroupResults'
+            - description: 'Specify this parameter to limit how many canary ARNs are returned each time you use the <code>ListGroupResources</code> operation. If you omit this parameter, the default of 20 is used.'
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    ListGroupsRequest:
+      type: object
+      title: ListGroupsRequest
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: A token that indicates that there is more data available. You can use this token in a subsequent operation to retrieve the next set of results.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxGroupResults'
+            - description: 'Specify this parameter to limit how many groups are returned each time you use the <code>ListGroups</code> operation. If you omit this parameter, the default of 20 is used.'
+    ResourceArn:
+      type: string
+      pattern: 'arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:(canary|group):[0-9a-z_\-]+'
+      minLength: 1
+      maxLength: 2048
     ListTagsForResourceRequest:
       type: object
       title: ListTagsForResourceRequest
@@ -1800,7 +2713,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: The list of key-value pairs to associate with the canary.
+            - description: The list of key-value pairs to associate with the resource.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -1818,7 +2731,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'Specifies which canary run to use the screenshots from as the baseline for future visual monitoring with this canary. Valid values are <code>nextrun</code> to use the screenshots from the next run after this update is made, <code>lastrun</code> to use the screenshots from the most recent run before this update was made, or the value of <code>Id</code> in the <a href="https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRun.html"> CanaryRun</a> from any past run of this canary.'
-      description: '<p>An object that specifies what screenshots to use as a baseline for visual monitoring by this canary, and optionally the parts of the screenshots to ignore during the visual monitoring comparison.</p> <p>Visual monitoring is supported only on canaries running the <b>syn-puppeteer-node-3.2</b> runtime or later. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html"> Visual monitoring</a> and <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html"> Visual monitoring blueprint</a> </p>'
+      description: '<p>An object that specifies what screenshots to use as a baseline for visual monitoring by this canary. It can optionally also specify parts of the screenshots to ignore during the visual monitoring comparison.</p> <p>Visual monitoring is supported only on canaries running the <b>syn-puppeteer-node-3.2</b> runtime or later. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html"> Visual monitoring</a> and <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html"> Visual monitoring blueprint</a> </p>'
     UpdateCanaryRequest:
       type: object
       title: UpdateCanaryRequest
@@ -1842,7 +2755,7 @@ components:
         RunConfig:
           allOf:
             - $ref: '#/components/schemas/CanaryRunConfigInput'
-            - description: A structure that contains the timeout value that is used for each individual run of the canary.
+            - description: <p>A structure that contains the timeout value that is used for each individual run of the canary.</p> <important> <p>The environment variables keys and values are not encrypted. Do not store sensitive information in this field.</p> </important>
         SuccessRetentionPeriodInDays:
           allOf:
             - $ref: '#/components/schemas/MaxSize1024'
@@ -1859,6 +2772,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/VisualReferenceInput'
             - description: '<p>Defines the screenshots to use as the baseline for comparisons during visual monitoring comparisons during future runs of this canary. If you omit this parameter, no changes are made to any baseline screenshots that the canary might be using already.</p> <p>Visual monitoring is supported only on canaries running the <b>syn-puppeteer-node-3.2</b> runtime or later. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html"> Visual monitoring</a> and <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html"> Visual monitoring blueprint</a> </p>'
+        ArtifactS3Location:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files. The name of the S3 bucket can''t include a period (.).'
+        ArtifactConfig:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactConfigInput'
+            - description: 'A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.'
     VpcId:
       type: string
 security:

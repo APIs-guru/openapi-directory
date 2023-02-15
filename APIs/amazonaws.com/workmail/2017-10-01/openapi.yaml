@@ -3,7 +3,7 @@ info:
   version: '2017-10-01'
   x-release: v4
   title: Amazon WorkMail
-  description: '<p>Amazon WorkMail is a secure, managed business email and calendaring service with support for existing desktop and mobile email clients. You can access your email, contacts, and calendars using Microsoft Outlook, your browser, or other native iOS and Android email applications. You can integrate WorkMail with your existing corporate directory and control both the keys that encrypt your data and the location in which your data is stored.</p> <p>The WorkMail API is designed for the following scenarios:</p> <ul> <li> <p>Listing and describing organizations</p> </li> </ul> <ul> <li> <p>Managing users</p> </li> </ul> <ul> <li> <p>Managing groups</p> </li> </ul> <ul> <li> <p>Managing resources</p> </li> </ul> <p>All WorkMail API operations are Amazon-authenticated and certificate-signed. They not only require the use of the AWS SDK, but also allow for the exclusive use of AWS Identity and Access Management users and roles to help facilitate access, trust, and permission policies. By creating a role and allowing an IAM user to access the WorkMail site, the IAM user gains full administrative visibility into the entire WorkMail organization (or as set in the IAM policy). This includes, but is not limited to, the ability to create, update, and delete users, groups, and resources. This allows developers to perform the scenarios listed above, as well as give users the ability to grant access on a selective basis using the IAM model.</p>'
+  description: '<p>WorkMail is a secure, managed business email and calendaring service with support for existing desktop and mobile email clients. You can access your email, contacts, and calendars using Microsoft Outlook, your browser, or other native iOS and Android email applications. You can integrate WorkMail with your existing corporate directory and control both the keys that encrypt your data and the location in which your data is stored.</p> <p>The WorkMail API is designed for the following scenarios:</p> <ul> <li> <p>Listing and describing organizations</p> </li> </ul> <ul> <li> <p>Managing users</p> </li> </ul> <ul> <li> <p>Managing groups</p> </li> </ul> <ul> <li> <p>Managing resources</p> </li> </ul> <p>All WorkMail API operations are Amazon-authenticated and certificate-signed. They not only require the use of the AWS SDK, but also allow for the exclusive use of AWS Identity and Access Management users and roles to help facilitate access, trust, and permission policies. By creating a role and allowing an IAM user to access the WorkMail site, the IAM user gains full administrative visibility into the entire WorkMail organization (or as set in the IAM policy). This includes, but is not limited to, the ability to create, update, and delete users, groups, and resources. This allows developers to perform the scenarios listed above, as well as give users the ability to grant access on a selective basis using the IAM model.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -258,6 +258,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.AssumeImpersonationRole:
+    post:
+      operationId: AssumeImpersonationRole
+      description: Assumes an impersonation role for the given WorkMail organization. This method returns an authentication token you can use to make impersonated calls.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssumeImpersonationRoleResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssumeImpersonationRoleRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.AssumeImpersonationRole
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkMailService.CancelMailboxExportJob:
     post:
       operationId: CancelMailboxExportJob
@@ -318,7 +375,7 @@ paths:
   /#X-Amz-Target=WorkMailService.CreateAlias:
     post:
       operationId: CreateAlias
-      description: Adds an alias to the set of a given member (user or group) of Amazon WorkMail.
+      description: Adds an alias to the set of a given member (user or group) of WorkMail.
       responses:
         '200':
           description: Success
@@ -402,10 +459,73 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.CreateAvailabilityConfiguration:
+    post:
+      operationId: CreateAvailabilityConfiguration
+      description: Creates an <code>AvailabilityConfiguration</code> for the given WorkMail organization and domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAvailabilityConfigurationResponse'
+        '480':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '481':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '482':
+          description: NameAvailabilityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NameAvailabilityException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAvailabilityConfigurationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.CreateAvailabilityConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkMailService.CreateGroup:
     post:
       operationId: CreateGroup
-      description: Creates a group that can be used in Amazon WorkMail by calling the <a>RegisterToWorkMail</a> operation.
+      description: Creates a group that can be used in WorkMail by calling the <a>RegisterToWorkMail</a> operation.
       responses:
         '200':
           description: Success
@@ -483,10 +603,79 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.CreateImpersonationRole:
+    post:
+      operationId: CreateImpersonationRole
+      description: '<p>Creates an impersonation role for the given WorkMail organization.</p> <p> <i>Idempotency</i> ensures that an API request completes no more than one time. With an idempotent request, if the original request completes successfully, any subsequent retries also complete successfully without performing any further actions.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateImpersonationRoleResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '483':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '484':
+          description: EntityStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityStateException'
+        '485':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateImpersonationRoleRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.CreateImpersonationRole
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkMailService.CreateMobileDeviceAccessRule:
     post:
       operationId: CreateMobileDeviceAccessRule
-      description: Creates a new mobile device access rule for the specified Amazon WorkMail organization.
+      description: Creates a new mobile device access rule for the specified WorkMail organization.
       responses:
         '200':
           description: Success
@@ -543,7 +732,7 @@ paths:
   /#X-Amz-Target=WorkMailService.CreateOrganization:
     post:
       operationId: CreateOrganization
-      description: '<p>Creates a new Amazon WorkMail organization. Optionally, you can choose to associate an existing AWS Directory Service directory with your organization. If an AWS Directory Service directory ID is specified, the organization alias must match the directory alias. If you choose not to associate an existing directory with your organization, then we create a new Amazon WorkMail directory for you. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/add_new_organization.html">Adding an organization</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p> <p>You can associate multiple email domains with an organization, then set your default email domain from the Amazon WorkMail console. You can also associate a domain that is managed in an Amazon Route 53 public hosted zone. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html">Adding a domain</a> and <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/default_domain.html">Choosing the default domain</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p> <p>Optionally, you can use a customer managed master key from AWS Key Management Service (AWS KMS) to encrypt email for your organization. If you don''t associate an AWS KMS key, Amazon WorkMail creates a default AWS managed master key for you.</p>'
+      description: '<p>Creates a new WorkMail organization. Optionally, you can choose to associate an existing AWS Directory Service directory with your organization. If an AWS Directory Service directory ID is specified, the organization alias must match the directory alias. If you choose not to associate an existing directory with your organization, then we create a new WorkMail directory for you. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/add_new_organization.html">Adding an organization</a> in the <i>WorkMail Administrator Guide</i>.</p> <p>You can associate multiple email domains with an organization, then choose your default email domain from the WorkMail console. You can also associate a domain that is managed in an Amazon Route 53 public hosted zone. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html">Adding a domain</a> and <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/default_domain.html">Choosing the default domain</a> in the <i>WorkMail Administrator Guide</i>.</p> <p>Optionally, you can use a customer managed key from AWS Key Management Service (AWS KMS) to encrypt email for your organization. If you don''t associate an AWS KMS key, WorkMail creates a default, AWS managed key for you.</p>'
       responses:
         '200':
           description: Success
@@ -606,7 +795,7 @@ paths:
   /#X-Amz-Target=WorkMailService.CreateResource:
     post:
       operationId: CreateResource
-      description: 'Creates a new Amazon WorkMail resource. '
+      description: Creates a new WorkMail resource.
       responses:
         '200':
           description: Success
@@ -681,7 +870,7 @@ paths:
   /#X-Amz-Target=WorkMailService.CreateUser:
     post:
       operationId: CreateUser
-      description: Creates a user who can be used in Amazon WorkMail by calling the <a>RegisterToWorkMail</a> operation.
+      description: Creates a user who can be used in WorkMail by calling the <a>RegisterToWorkMail</a> operation.
       responses:
         '200':
           description: Success
@@ -768,7 +957,7 @@ paths:
   /#X-Amz-Target=WorkMailService.DeleteAccessControlRule:
     post:
       operationId: DeleteAccessControlRule
-      description: Deletes an access control rule for the specified WorkMail organization.
+      description: '<p>Deletes an access control rule for the specified WorkMail organization.</p> <note> <p>Deleting already deleted and non-existing rules does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body.</p> </note>'
       responses:
         '200':
           description: Success
@@ -873,10 +1062,106 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.DeleteAvailabilityConfiguration:
+    post:
+      operationId: DeleteAvailabilityConfiguration
+      description: Deletes the <code>AvailabilityConfiguration</code> for the given WorkMail organization and domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAvailabilityConfigurationResponse'
+        '480':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '481':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteAvailabilityConfigurationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.DeleteAvailabilityConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.DeleteEmailMonitoringConfiguration:
+    post:
+      operationId: DeleteEmailMonitoringConfiguration
+      description: Deletes the email monitoring configuration for a specified organization.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteEmailMonitoringConfigurationResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteEmailMonitoringConfigurationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.DeleteEmailMonitoringConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkMailService.DeleteGroup:
     post:
       operationId: DeleteGroup
-      description: Deletes a group from Amazon WorkMail.
+      description: Deletes a group from WorkMail.
       responses:
         '200':
           description: Success
@@ -948,6 +1233,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.DeleteImpersonationRole:
+    post:
+      operationId: DeleteImpersonationRole
+      description: Deletes an impersonation role for the given WorkMail organization.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteImpersonationRoleResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteImpersonationRoleRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.DeleteImpersonationRole
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkMailService.DeleteMailboxPermissions:
     post:
       operationId: DeleteMailboxPermissions
@@ -1011,10 +1347,67 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.DeleteMobileDeviceAccessOverride:
+    post:
+      operationId: DeleteMobileDeviceAccessOverride
+      description: '<p>Deletes the mobile device access override for the given WorkMail organization, user, and device.</p> <note> <p>Deleting already deleted and non-existing overrides does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteMobileDeviceAccessOverrideResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '483':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteMobileDeviceAccessOverrideRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.DeleteMobileDeviceAccessOverride
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkMailService.DeleteMobileDeviceAccessRule:
     post:
       operationId: DeleteMobileDeviceAccessRule
-      description: Deletes a mobile device access rule for the specified Amazon WorkMail organization.
+      description: '<p>Deletes a mobile device access rule for the specified WorkMail organization.</p> <note> <p>Deleting already deleted and non-existing rules does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1065,7 +1458,7 @@ paths:
   /#X-Amz-Target=WorkMailService.DeleteOrganization:
     post:
       operationId: DeleteOrganization
-      description: 'Deletes an Amazon WorkMail organization and all underlying AWS resources managed by Amazon WorkMail as part of the organization. You can choose whether to delete the associated directory. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/remove_organization.html">Removing an organization</a> in the <i>Amazon WorkMail Administrator Guide</i>.'
+      description: 'Deletes an WorkMail organization and all underlying AWS resources managed by WorkMail as part of the organization. You can choose whether to delete the associated directory. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/remove_organization.html">Removing an organization</a> in the <i>WorkMail Administrator Guide</i>.'
       responses:
         '200':
           description: Success
@@ -1116,7 +1509,7 @@ paths:
   /#X-Amz-Target=WorkMailService.DeleteResource:
     post:
       operationId: DeleteResource
-      description: 'Deletes the specified resource. '
+      description: Deletes the specified resource.
       responses:
         '200':
           description: Success
@@ -1224,7 +1617,7 @@ paths:
   /#X-Amz-Target=WorkMailService.DeleteUser:
     post:
       operationId: DeleteUser
-      description: '<p>Deletes a user from Amazon WorkMail and all subsequent systems. Before you can delete a user, the user state must be <code>DISABLED</code>. Use the <a>DescribeUser</a> action to confirm the user state.</p> <p>Deleting a user is permanent and cannot be undone. WorkMail archives user mailboxes for 30 days before they are permanently removed.</p>'
+      description: '<p>Deletes a user from WorkMail and all subsequent systems. Before you can delete a user, the user state must be <code>DISABLED</code>. Use the <a>DescribeUser</a> action to confirm the user state.</p> <p>Deleting a user is permanent and cannot be undone. WorkMail archives user mailboxes for 30 days before they are permanently removed.</p>'
       responses:
         '200':
           description: Success
@@ -1299,7 +1692,7 @@ paths:
   /#X-Amz-Target=WorkMailService.DeregisterFromWorkMail:
     post:
       operationId: DeregisterFromWorkMail
-      description: 'Mark a user, group, or resource as no longer used in Amazon WorkMail. This action disassociates the mailbox and schedules it for clean-up. WorkMail keeps mailboxes for 30 days before they are permanently removed. The functionality in the console is <i>Disable</i>.'
+      description: 'Mark a user, group, or resource as no longer used in WorkMail. This action disassociates the mailbox and schedules it for clean-up. WorkMail keeps mailboxes for 30 days before they are permanently removed. The functionality in the console is <i>Disable</i>.'
       responses:
         '200':
           description: Success
@@ -1359,6 +1752,126 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.DeregisterMailDomain:
+    post:
+      operationId: DeregisterMailDomain
+      description: 'Removes a domain from WorkMail, stops email routing to WorkMail, and removes the authorization allowing WorkMail use. SES keeps the domain because other applications may use it. You must first remove any email address used by WorkMail entities before you remove the domain.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeregisterMailDomainResponse'
+        '480':
+          description: MailDomainInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MailDomainInUseException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: InvalidCustomSesConfigurationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCustomSesConfigurationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeregisterMailDomainRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.DeregisterMailDomain
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.DescribeEmailMonitoringConfiguration:
+    post:
+      operationId: DescribeEmailMonitoringConfiguration
+      description: Describes the current email monitoring configuration for a specified organization.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEmailMonitoringConfigurationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '483':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEmailMonitoringConfigurationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.DescribeEmailMonitoringConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkMailService.DescribeGroup:
     post:
       operationId: DescribeGroup
@@ -1408,6 +1921,51 @@ paths:
             type: string
             enum:
               - WorkMailService.DescribeGroup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.DescribeInboundDmarcSettings:
+    post:
+      operationId: DescribeInboundDmarcSettings
+      description: Lists the settings in a DMARC policy for a specified organization.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeInboundDmarcSettingsResponse'
+        '480':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '481':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeInboundDmarcSettingsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.DescribeInboundDmarcSettings
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1779,7 +2337,7 @@ paths:
   /#X-Amz-Target=WorkMailService.GetAccessControlEffect:
     post:
       operationId: GetAccessControlEffect
-      description: 'Gets the effects of an organization''s access control rules as they apply to a specified IPv4 address, access protocol action, or user ID. '
+      description: 'Gets the effects of an organization''s access control rules as they apply to a specified IPv4 address, access protocol action, and user ID or impersonation role ID. You must provide either the user ID or impersonation role ID. Impersonation role ID can only be used with Action EWS.'
       responses:
         '200':
           description: Success
@@ -1794,18 +2352,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/EntityNotFoundException'
         '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
           description: InvalidParameterException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidParameterException'
-        '482':
+        '483':
           description: OrganizationNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/OrganizationNotFoundException'
-        '483':
+        '484':
           description: OrganizationStateException
           content:
             application/json:
@@ -1890,6 +2454,189 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.GetImpersonationRole:
+    post:
+      operationId: GetImpersonationRole
+      description: Gets the impersonation role details for the given WorkMail organization.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetImpersonationRoleResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetImpersonationRoleRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.GetImpersonationRole
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.GetImpersonationRoleEffect:
+    post:
+      operationId: GetImpersonationRoleEffect
+      description: Tests whether the given impersonation role can impersonate a target user.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetImpersonationRoleEffectResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '485':
+          description: EntityStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityStateException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetImpersonationRoleEffectRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.GetImpersonationRoleEffect
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.GetMailDomain:
+    post:
+      operationId: GetMailDomain
+      description: 'Gets details for a mail domain, including domain records required to configure your domain with recommended security.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMailDomainResponse'
+        '480':
+          description: MailDomainNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MailDomainNotFoundException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMailDomainRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.GetMailDomain
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkMailService.GetMailboxDetails:
     post:
       operationId: GetMailboxDetails
@@ -1944,7 +2691,7 @@ paths:
   /#X-Amz-Target=WorkMailService.GetMobileDeviceAccessEffect:
     post:
       operationId: GetMobileDeviceAccessEffect
-      description: Simulates the effect of the mobile device access rules for the given attributes of a sample access event. Use this method to test the effects of the current set of mobile device access rules for the Amazon WorkMail organization for a particular user's attributes.
+      description: Simulates the effect of the mobile device access rules for the given attributes of a sample access event. Use this method to test the effects of the current set of mobile device access rules for the WorkMail organization for a particular user's attributes.
       responses:
         '200':
           description: Success
@@ -1984,6 +2731,69 @@ paths:
             type: string
             enum:
               - WorkMailService.GetMobileDeviceAccessEffect
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.GetMobileDeviceAccessOverride:
+    post:
+      operationId: GetMobileDeviceAccessOverride
+      description: 'Gets the mobile device access override for the given WorkMail organization, user, and device.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMobileDeviceAccessOverrideResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '483':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMobileDeviceAccessOverrideRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.GetMobileDeviceAccessOverride
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2104,6 +2914,63 @@ paths:
             type: string
             enum:
               - WorkMailService.ListAliases
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.ListAvailabilityConfigurations:
+    post:
+      operationId: ListAvailabilityConfigurations
+      description: List all the <code>AvailabilityConfiguration</code>'s for the given WorkMail organization.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAvailabilityConfigurationsResponse'
+        '480':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '481':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListAvailabilityConfigurationsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.ListAvailabilityConfigurations
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2256,6 +3123,132 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.ListImpersonationRoles:
+    post:
+      operationId: ListImpersonationRoles
+      description: Lists all the impersonation roles for the given WorkMail organization.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListImpersonationRolesResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListImpersonationRolesRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.ListImpersonationRoles
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.ListMailDomains:
+    post:
+      operationId: ListMailDomains
+      description: Lists the mail domains in a given WorkMail organization.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMailDomainsResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListMailDomainsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.ListMailDomains
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkMailService.ListMailboxExportJobs:
     post:
       operationId: ListMailboxExportJobs
@@ -2388,10 +3381,79 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.ListMobileDeviceAccessOverrides:
+    post:
+      operationId: ListMobileDeviceAccessOverrides
+      description: 'Lists all the mobile device access overrides for any given combination of WorkMail organization, user, or device.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMobileDeviceAccessOverridesResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '483':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListMobileDeviceAccessOverridesRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.ListMobileDeviceAccessOverrides
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkMailService.ListMobileDeviceAccessRules:
     post:
       operationId: ListMobileDeviceAccessRules
-      description: Lists the mobile device access rules for the specified Amazon WorkMail organization.
+      description: Lists the mobile device access rules for the specified WorkMail organization.
       responses:
         '200':
           description: Success
@@ -2631,7 +3693,7 @@ paths:
   /#X-Amz-Target=WorkMailService.ListTagsForResource:
     post:
       operationId: ListTagsForResource
-      description: Lists the tags applied to an Amazon WorkMail organization resource.
+      description: Lists the tags applied to an WorkMail organization resource.
       responses:
         '200':
           description: Success
@@ -2733,7 +3795,7 @@ paths:
   /#X-Amz-Target=WorkMailService.PutAccessControlRule:
     post:
       operationId: PutAccessControlRule
-      description: 'Adds a new access control rule for the specified organization. The rule allows or denies access to the organization for the specified IPv4 addresses, access protocol actions, and user IDs. Adding a new rule with the same name as an existing rule replaces the older rule.'
+      description: 'Adds a new access control rule for the specified organization. The rule allows or denies access to the organization for the specified IPv4 addresses, access protocol actions, user IDs and impersonation IDs. Adding a new rule with the same name as an existing rule replaces the older rule.'
       responses:
         '200':
           description: Success
@@ -2760,12 +3822,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/EntityNotFoundException'
         '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
           description: OrganizationNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/OrganizationNotFoundException'
-        '484':
+        '485':
           description: OrganizationStateException
           content:
             application/json:
@@ -2785,6 +3853,108 @@ paths:
             type: string
             enum:
               - WorkMailService.PutAccessControlRule
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.PutEmailMonitoringConfiguration:
+    post:
+      operationId: PutEmailMonitoringConfiguration
+      description: Creates or updates the email monitoring configuration for a specified organization.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutEmailMonitoringConfigurationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '483':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutEmailMonitoringConfigurationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.PutEmailMonitoringConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.PutInboundDmarcSettings:
+    post:
+      operationId: PutInboundDmarcSettings
+      description: Enables or disables a DMARC policy for a given organization.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutInboundDmarcSettingsResponse'
+        '480':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '481':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutInboundDmarcSettingsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.PutInboundDmarcSettings
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2856,6 +4026,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.PutMobileDeviceAccessOverride:
+    post:
+      operationId: PutMobileDeviceAccessOverride
+      description: 'Creates or updates a mobile device access override for the given WorkMail organization, user, and device.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutMobileDeviceAccessOverrideResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '483':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '484':
+          description: EntityStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityStateException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutMobileDeviceAccessOverrideRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.PutMobileDeviceAccessOverride
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkMailService.PutRetentionPolicy:
     post:
       operationId: PutRetentionPolicy
@@ -2913,10 +4146,73 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.RegisterMailDomain:
+    post:
+      operationId: RegisterMailDomain
+      description: 'Registers a new domain in WorkMail and SES, and configures it for use by WorkMail. Emails received by SES for this domain are routed to the specified WorkMail organization, and WorkMail has permanent permission to use the specified domain for sending your users'' emails.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterMailDomainResponse'
+        '480':
+          description: MailDomainInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MailDomainInUseException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterMailDomainRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.RegisterMailDomain
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkMailService.RegisterToWorkMail:
     post:
       operationId: RegisterToWorkMail
-      description: '<p>Registers an existing and disabled user, group, or resource for Amazon WorkMail use by associating a mailbox and calendaring capabilities. It performs no change if the user, group, or resource is enabled and fails if the user, group, or resource is deleted. This operation results in the accumulation of costs. For more information, see <a href="https://aws.amazon.com/workmail/pricing">Pricing</a>. The equivalent console functionality for this operation is <i>Enable</i>. </p> <p>Users can either be created by calling the <a>CreateUser</a> API operation or they can be synchronized from your directory. For more information, see <a>DeregisterFromWorkMail</a>.</p>'
+      description: '<p>Registers an existing and disabled user, group, or resource for WorkMail use by associating a mailbox and calendaring capabilities. It performs no change if the user, group, or resource is enabled and fails if the user, group, or resource is deleted. This operation results in the accumulation of costs. For more information, see <a href="https://aws.amazon.com/workmail/pricing">Pricing</a>. The equivalent console functionality for this operation is <i>Enable</i>.</p> <p>Users can either be created by calling the <a>CreateUser</a> API operation or they can be synchronized from your directory. For more information, see <a>DeregisterFromWorkMail</a>.</p>'
       responses:
         '200':
           description: Success
@@ -3102,7 +4398,7 @@ paths:
   /#X-Amz-Target=WorkMailService.StartMailboxExportJob:
     post:
       operationId: StartMailboxExportJob
-      description: 'Starts a mailbox export job to export MIME-format email messages and calendar items from the specified mailbox to the specified Amazon Simple Storage Service (Amazon S3) bucket. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/mail-export.html">Exporting mailbox content</a> in the <i>Amazon WorkMail Administrator Guide</i>.'
+      description: 'Starts a mailbox export job to export MIME-format email messages and calendar items from the specified mailbox to the specified Amazon Simple Storage Service (Amazon S3) bucket. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/mail-export.html">Exporting mailbox content</a> in the <i>WorkMail Administrator Guide</i>.'
       responses:
         '200':
           description: Success
@@ -3165,7 +4461,7 @@ paths:
   /#X-Amz-Target=WorkMailService.TagResource:
     post:
       operationId: TagResource
-      description: Applies the specified tags to the specified Amazon WorkMail organization resource.
+      description: Applies the specified tags to the specified WorkMailorganization resource.
       responses:
         '200':
           description: Success
@@ -3213,10 +4509,67 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.TestAvailabilityConfiguration:
+    post:
+      operationId: TestAvailabilityConfiguration
+      description: '<p>Performs a test on an availability provider to ensure that access is allowed. For EWS, it verifies the provided credentials can be used to successfully log in. For Lambda, it verifies that the Lambda function can be invoked and that the resource access policy was configured to deny anonymous access. An anonymous invocation is one done without providing either a <code>SourceArn</code> or <code>SourceAccount</code> header.</p> <note> <p>The request must contain either one provider definition (<code>EwsProvider</code> or <code>LambdaProvider</code>) or the <code>DomainName</code> parameter. If the <code>DomainName</code> parameter is provided, the configuration stored under the <code>DomainName</code> will be tested.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestAvailabilityConfigurationResponse'
+        '480':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '481':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestAvailabilityConfigurationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.TestAvailabilityConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkMailService.UntagResource:
     post:
       operationId: UntagResource
-      description: Untags the specified tags from the specified Amazon WorkMail organization resource.
+      description: Untags the specified tags from the specified WorkMail organization resource.
       responses:
         '200':
           description: Success
@@ -3244,6 +4597,201 @@ paths:
             type: string
             enum:
               - WorkMailService.UntagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.UpdateAvailabilityConfiguration:
+    post:
+      operationId: UpdateAvailabilityConfiguration
+      description: Updates an existing <code>AvailabilityConfiguration</code> for the given WorkMail organization and domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAvailabilityConfigurationResponse'
+        '480':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '481':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAvailabilityConfigurationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.UpdateAvailabilityConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.UpdateDefaultMailDomain:
+    post:
+      operationId: UpdateDefaultMailDomain
+      description: Updates the default mail domain for an organization. The default mail domain is used by the WorkMail AWS Console to suggest an email address when enabling a mail user. You can only have one default domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDefaultMailDomainResponse'
+        '480':
+          description: MailDomainNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MailDomainNotFoundException'
+        '481':
+          description: MailDomainStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MailDomainStateException'
+        '482':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '483':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '484':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDefaultMailDomainRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.UpdateDefaultMailDomain
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.UpdateImpersonationRole:
+    post:
+      operationId: UpdateImpersonationRole
+      description: Updates an impersonation role for the given WorkMail organization.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateImpersonationRoleResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '485':
+          description: EntityStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityStateException'
+        '486':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateImpersonationRoleRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.UpdateImpersonationRole
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3318,7 +4866,7 @@ paths:
   /#X-Amz-Target=WorkMailService.UpdateMobileDeviceAccessRule:
     post:
       operationId: UpdateMobileDeviceAccessRule
-      description: Updates a mobile device access rule for the specified Amazon WorkMail organization.
+      description: Updates a mobile device access rule for the specified WorkMail organization.
       responses:
         '200':
           description: Success
@@ -3676,6 +5224,33 @@ components:
     DirectoryServiceAuthenticationFailedException: {}
     DirectoryUnavailableException: {}
     UnsupportedOperationException: {}
+    AssumeImpersonationRoleResponse:
+      type: object
+      properties:
+        Token:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationToken'
+            - description: The authentication token for the impersonation role.
+        ExpiresIn:
+          allOf:
+            - $ref: '#/components/schemas/ExpiresIn'
+            - description: 'The authentication token''s validity, in seconds.'
+    AssumeImpersonationRoleRequest:
+      type: object
+      required:
+        - OrganizationId
+        - ImpersonationRoleId
+      title: AssumeImpersonationRoleRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The WorkMail organization under which the impersonation role will be assumed.
+        ImpersonationRoleId:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleId'
+            - description: The impersonation role ID to assume.
+    ResourceNotFoundException: {}
     CancelMailboxExportJobResponse:
       type: object
       properties: {}
@@ -3726,6 +5301,37 @@ components:
     MailDomainNotFoundException: {}
     MailDomainStateException: {}
     LimitExceededException: {}
+    CreateAvailabilityConfigurationResponse:
+      type: object
+      properties: {}
+    CreateAvailabilityConfigurationRequest:
+      type: object
+      required:
+        - OrganizationId
+        - DomainName
+      title: CreateAvailabilityConfigurationRequest
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyClientToken'
+            - description: An idempotent token that ensures that an API request is executed only once.
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The WorkMail organization for which the <code>AvailabilityConfiguration</code> will be created.
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The domain to which the provider applies.
+        EwsProvider:
+          allOf:
+            - $ref: '#/components/schemas/EwsAvailabilityProvider'
+            - description: 'Exchange Web Services (EWS) availability provider definition. The request must contain exactly one provider definition, either <code>EwsProvider</code> or <code>LambdaProvider</code>.'
+        LambdaProvider:
+          allOf:
+            - $ref: '#/components/schemas/LambdaAvailabilityProvider'
+            - description: 'Lambda availability provider definition. The request must contain exactly one provider definition, either <code>EwsProvider</code> or <code>LambdaProvider</code>.'
+    NameAvailabilityException: {}
     CreateGroupResponse:
       type: object
       properties:
@@ -3748,8 +5354,47 @@ components:
           allOf:
             - $ref: '#/components/schemas/GroupName'
             - description: The name of the group.
-    NameAvailabilityException: {}
     ReservedNameException: {}
+    CreateImpersonationRoleResponse:
+      type: object
+      properties:
+        ImpersonationRoleId:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleId'
+            - description: The new impersonation role ID.
+    CreateImpersonationRoleRequest:
+      type: object
+      required:
+        - OrganizationId
+        - Name
+        - Type
+        - Rules
+      title: CreateImpersonationRoleRequest
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyClientToken'
+            - description: The idempotency token for the client request.
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The WorkMail organization to create the new impersonation role within.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleName'
+            - description: The name of the new impersonation role.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleType'
+            - description: The impersonation role's type. The available impersonation role types are <code>READ_ONLY</code> or <code>FULL_ACCESS</code>.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleDescription'
+            - description: The description of the new impersonation role.
+        Rules:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRuleList'
+            - description: The list of rules for the impersonation role.
     CreateMobileDeviceAccessRuleResponse:
       type: object
       properties:
@@ -3768,7 +5413,7 @@ components:
         OrganizationId:
           allOf:
             - $ref: '#/components/schemas/OrganizationId'
-            - description: The Amazon WorkMail organization under which the rule will be created.
+            - description: The WorkMail organization under which the rule will be created.
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/IdempotencyClientToken'
@@ -3849,11 +5494,11 @@ components:
         KmsKeyArn:
           allOf:
             - $ref: '#/components/schemas/KmsKeyArn'
-            - description: The Amazon Resource Name (ARN) of a customer managed master key from AWS KMS.
+            - description: The Amazon Resource Name (ARN) of a customer managed key from AWS KMS.
         EnableInteroperability:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'When <code>true</code>, allows organization interoperability between Amazon WorkMail and Microsoft Exchange. Can only be set to <code>true</code> if an AD Connector directory ID is included in the request.'
+            - description: 'When <code>true</code>, allows organization interoperability between WorkMail and Microsoft Exchange. If <code>true</code>, you must include a AD Connector directory ID in the request.'
     DirectoryInUseException: {}
     CreateResourceResponse:
       type: object
@@ -3956,6 +5601,37 @@ components:
           allOf:
             - $ref: '#/components/schemas/EmailAddress'
             - description: The aliases to be removed from the user's set of aliases. Duplicate entries in the list are collapsed into single entries (the list is transformed into a set).
+    DeleteAvailabilityConfigurationResponse:
+      type: object
+      properties: {}
+    DeleteAvailabilityConfigurationRequest:
+      type: object
+      required:
+        - OrganizationId
+        - DomainName
+      title: DeleteAvailabilityConfigurationRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The WorkMail organization for which the <code>AvailabilityConfiguration</code> will be deleted.
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The domain for which the <code>AvailabilityConfiguration</code> will be deleted.
+    DeleteEmailMonitoringConfigurationResponse:
+      type: object
+      properties: {}
+    DeleteEmailMonitoringConfigurationRequest:
+      type: object
+      required:
+        - OrganizationId
+      title: DeleteEmailMonitoringConfigurationRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The ID of the organization from which the email monitoring configuration is deleted.
     DeleteGroupResponse:
       type: object
       properties: {}
@@ -3974,6 +5650,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkMailIdentifier'
             - description: The identifier of the group to be deleted.
+    DeleteImpersonationRoleResponse:
+      type: object
+      properties: {}
+    DeleteImpersonationRoleRequest:
+      type: object
+      required:
+        - OrganizationId
+        - ImpersonationRoleId
+      title: DeleteImpersonationRoleRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The WorkMail organization from which to delete the impersonation role.
+        ImpersonationRoleId:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleId'
+            - description: The ID of the impersonation role to delete.
     DeleteMailboxPermissionsResponse:
       type: object
       properties: {}
@@ -3997,6 +5691,29 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkMailIdentifier'
             - description: The identifier of the member (user or group) for which to delete granted permissions.
+    DeleteMobileDeviceAccessOverrideResponse:
+      type: object
+      properties: {}
+    DeleteMobileDeviceAccessOverrideRequest:
+      type: object
+      required:
+        - OrganizationId
+        - UserId
+        - DeviceId
+      title: DeleteMobileDeviceAccessOverrideRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The WorkMail organization for which the access override will be deleted.
+        UserId:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: '<p>The WorkMail user for which you want to delete the override. Accepts the following types of user identities:</p> <ul> <li> <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> </p> </li> <li> <p>Email address: <code>user@domain.tld</code> </p> </li> <li> <p>User name: <code>user</code> </p> </li> </ul>'
+        DeviceId:
+          allOf:
+            - $ref: '#/components/schemas/DeviceId'
+            - description: The mobile device for which you delete the override. <code>DeviceId</code> is case insensitive.
     DeleteMobileDeviceAccessRuleResponse:
       type: object
       properties: {}
@@ -4010,7 +5727,7 @@ components:
         OrganizationId:
           allOf:
             - $ref: '#/components/schemas/OrganizationId'
-            - description: The Amazon WorkMail organization under which the rule will be deleted.
+            - description: The WorkMail organization under which the rule will be deleted.
         MobileDeviceAccessRuleId:
           allOf:
             - $ref: '#/components/schemas/MobileDeviceAccessRuleId'
@@ -4112,11 +5829,52 @@ components:
         OrganizationId:
           allOf:
             - $ref: '#/components/schemas/OrganizationId'
-            - description: The identifier for the organization under which the Amazon WorkMail entity exists.
+            - description: The identifier for the organization under which the WorkMail entity exists.
         EntityId:
           allOf:
             - $ref: '#/components/schemas/WorkMailIdentifier'
             - description: The identifier for the member (user or group) to be updated.
+    DeregisterMailDomainResponse:
+      type: object
+      properties: {}
+    DeregisterMailDomainRequest:
+      type: object
+      required:
+        - OrganizationId
+        - DomainName
+      title: DeregisterMailDomainRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The WorkMail organization for which the domain will be deregistered.
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/WorkMailDomainName'
+            - description: The domain to deregister in WorkMail and SES.
+    MailDomainInUseException: {}
+    InvalidCustomSesConfigurationException: {}
+    DescribeEmailMonitoringConfigurationResponse:
+      type: object
+      properties:
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of the IAM Role associated with the email monitoring configuration.
+        LogGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/LogGroupArn'
+            - description: The Amazon Resource Name (ARN) of the CloudWatch Log group associated with the email monitoring configuration.
+    DescribeEmailMonitoringConfigurationRequest:
+      type: object
+      required:
+        - OrganizationId
+      title: DescribeEmailMonitoringConfigurationRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The ID of the organization for which the email monitoring configuration is described.
     DescribeGroupResponse:
       type: object
       properties:
@@ -4135,7 +5893,7 @@ components:
         State:
           allOf:
             - $ref: '#/components/schemas/EntityState'
-            - description: 'The state of the user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).'
+            - description: 'The state of the user: enabled (registered to WorkMail) or disabled (deregistered or never registered to WorkMail).'
         EnabledDate:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -4159,6 +5917,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkMailIdentifier'
             - description: The identifier for the group to be described.
+    DescribeInboundDmarcSettingsResponse:
+      type: object
+      properties:
+        Enforced:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Lists the enforcement setting of the applied policy.
+    DescribeInboundDmarcSettingsRequest:
+      type: object
+      required:
+        - OrganizationId
+      title: DescribeInboundDmarcSettingsRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: Lists the ID of the given organization.
     DescribeMailboxExportJobResponse:
       type: object
       properties:
@@ -4243,7 +6018,7 @@ components:
         DirectoryId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The identifier for the directory associated with an Amazon WorkMail organization.
+            - description: The identifier for the directory associated with an WorkMail organization.
         DirectoryType:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -4300,7 +6075,7 @@ components:
         State:
           allOf:
             - $ref: '#/components/schemas/EntityState'
-            - description: 'The state of the resource: enabled (registered to Amazon WorkMail), disabled (deregistered or never registered to WorkMail), or deleted.'
+            - description: 'The state of the resource: enabled (registered to WorkMail), disabled (deregistered or never registered to WorkMail), or deleted.'
         EnabledDate:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -4346,19 +6121,19 @@ components:
         State:
           allOf:
             - $ref: '#/components/schemas/EntityState'
-            - description: 'The state of a user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).'
+            - description: 'The state of a user: enabled (registered to WorkMail) or disabled (deregistered or never registered to WorkMail).'
         UserRole:
           allOf:
             - $ref: '#/components/schemas/UserRole'
-            - description: 'In certain cases, other entities are modeled as users. If interoperability is enabled, resources are imported into Amazon WorkMail as users. Because different WorkMail organizations rely on different directory types, administrators can distinguish between an unregistered user (account is disabled and has a user role) and the directory administrators. The values are USER, RESOURCE, and SYSTEM_USER.'
+            - description: 'In certain cases, other entities are modeled as users. If interoperability is enabled, resources are imported into WorkMail as users. Because different WorkMail organizations rely on different directory types, administrators can distinguish between an unregistered user (account is disabled and has a user role) and the directory administrators. The values are USER, RESOURCE, and SYSTEM_USER.'
         EnabledDate:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time at which the user was enabled for Amazon WorkMail usage, in UNIX epoch time format.'
+            - description: 'The date and time at which the user was enabled for WorkMailusage, in UNIX epoch time format.'
         DisabledDate:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: 'The date and time at which the user was disabled for Amazon WorkMail usage, in UNIX epoch time format.'
+            - description: 'The date and time at which the user was disabled for WorkMail usage, in UNIX epoch time format.'
     DescribeUserRequest:
       type: object
       required:
@@ -4437,7 +6212,6 @@ components:
         - OrganizationId
         - IpAddress
         - Action
-        - UserId
       title: GetAccessControlEffectRequest
       properties:
         OrganizationId:
@@ -4456,6 +6230,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkMailIdentifier'
             - description: The user ID.
+        ImpersonationRoleId:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleId'
+            - description: The impersonation role ID.
     GetDefaultRetentionPolicyResponse:
       type: object
       properties:
@@ -4485,6 +6263,125 @@ components:
           allOf:
             - $ref: '#/components/schemas/OrganizationId'
             - description: The organization ID.
+    GetImpersonationRoleResponse:
+      type: object
+      properties:
+        ImpersonationRoleId:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleId'
+            - description: The impersonation role ID.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleName'
+            - description: The impersonation role name.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleType'
+            - description: The impersonation role type.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleDescription'
+            - description: The impersonation role description.
+        Rules:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRuleList'
+            - description: The list of rules for the given impersonation role.
+        DateCreated:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date when the impersonation role was created.
+        DateModified:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date when the impersonation role was last modified.
+    GetImpersonationRoleRequest:
+      type: object
+      required:
+        - OrganizationId
+        - ImpersonationRoleId
+      title: GetImpersonationRoleRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The WorkMail organization from which to retrieve the impersonation role.
+        ImpersonationRoleId:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleId'
+            - description: The impersonation role ID to retrieve.
+    GetImpersonationRoleEffectResponse:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleType'
+            - description: The impersonation role type.
+        Effect:
+          allOf:
+            - $ref: '#/components/schemas/AccessEffect'
+            - description: ' <code/>Effect of the impersonation role on the target user based on its rules. Available effects are <code>ALLOW</code> or <code>DENY</code>.'
+        MatchedRules:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationMatchedRuleList'
+            - description: A list of the rules that match the input and produce the configured effect.
+    GetImpersonationRoleEffectRequest:
+      type: object
+      required:
+        - OrganizationId
+        - ImpersonationRoleId
+        - TargetUser
+      title: GetImpersonationRoleEffectRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The WorkMail organization where the impersonation role is defined.
+        ImpersonationRoleId:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleId'
+            - description: The impersonation role ID to test.
+        TargetUser:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: '<p>The WorkMail organization user chosen to test the impersonation role. The following identity formats are available:</p> <ul> <li> <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> </p> </li> <li> <p>Email address: <code>user@domain.tld</code> </p> </li> <li> <p>User name: <code>user</code> </p> </li> </ul>'
+    GetMailDomainResponse:
+      type: object
+      properties:
+        Records:
+          allOf:
+            - $ref: '#/components/schemas/DnsRecords'
+            - description: 'A list of the DNS records that WorkMail recommends adding in your DNS provider for the best user experience. The records configure your domain with DMARC, SPF, DKIM, and direct incoming email traffic to SES. See admin guide for more details.'
+        IsTestDomain:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Specifies whether the domain is a test domain provided by WorkMail, or a custom domain.'
+        IsDefault:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether the domain is the default domain for your organization.
+        OwnershipVerificationStatus:
+          allOf:
+            - $ref: '#/components/schemas/DnsRecordVerificationStatus'
+            - description: ' Indicates the status of the domain ownership verification.'
+        DkimVerificationStatus:
+          allOf:
+            - $ref: '#/components/schemas/DnsRecordVerificationStatus'
+            - description: Indicates the status of a DKIM verification.
+    GetMailDomainRequest:
+      type: object
+      required:
+        - OrganizationId
+        - DomainName
+      title: GetMailDomainRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The WorkMail organization for which the domain is retrieved.
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/WorkMailDomainName'
+            - description: The domain from which you want to retrieve details.
     GetMailboxDetailsResponse:
       type: object
       properties:
@@ -4517,7 +6414,7 @@ components:
         Effect:
           allOf:
             - $ref: '#/components/schemas/MobileDeviceAccessRuleEffect'
-            - description: 'The effect of the simulated access, <code>ALLOW</code> or <code>DENY</code>, after evaluating mobile device access rules in the Amazon WorkMail organization for the simulated user parameters.'
+            - description: 'The effect of the simulated access, <code>ALLOW</code> or <code>DENY</code>, after evaluating mobile device access rules in the WorkMail organization for the simulated user parameters.'
         MatchedRules:
           allOf:
             - $ref: '#/components/schemas/MobileDeviceAccessMatchedRuleList'
@@ -4531,7 +6428,7 @@ components:
         OrganizationId:
           allOf:
             - $ref: '#/components/schemas/OrganizationId'
-            - description: The Amazon WorkMail organization to simulate the access effect for.
+            - description: The WorkMail organization to simulate the access effect for.
         DeviceType:
           allOf:
             - $ref: '#/components/schemas/DeviceType'
@@ -4548,6 +6445,53 @@ components:
           allOf:
             - $ref: '#/components/schemas/DeviceUserAgent'
             - description: Device user agent the simulated user will report.
+    GetMobileDeviceAccessOverrideResponse:
+      type: object
+      properties:
+        UserId:
+          allOf:
+            - $ref: '#/components/schemas/WorkMailIdentifier'
+            - description: The WorkMail user to which the access override applies.
+        DeviceId:
+          allOf:
+            - $ref: '#/components/schemas/DeviceId'
+            - description: The device to which the access override applies.
+        Effect:
+          allOf:
+            - $ref: '#/components/schemas/MobileDeviceAccessRuleEffect'
+            - description: 'The effect of the override, <code>ALLOW</code> or <code>DENY</code>.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/MobileDeviceAccessRuleDescription'
+            - description: A description of the override.
+        DateCreated:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date the override was first created.
+        DateModified:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date the description was last modified.
+    GetMobileDeviceAccessOverrideRequest:
+      type: object
+      required:
+        - OrganizationId
+        - UserId
+        - DeviceId
+      title: GetMobileDeviceAccessOverrideRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The WorkMail organization to which you want to apply the override.
+        UserId:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: '<p>Identifies the WorkMail user for the override. Accepts the following types of user identities: </p> <ul> <li> <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> </p> </li> <li> <p>Email address: <code>user@domain.tld</code> </p> </li> <li> <p>User name: <code>user</code> </p> </li> </ul>'
+        DeviceId:
+          allOf:
+            - $ref: '#/components/schemas/DeviceId'
+            - description: The mobile device to which the override applies. <code>DeviceId</code> is case insensitive.
     ListAccessControlRulesResponse:
       type: object
       properties:
@@ -4599,6 +6543,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: The maximum number of results to return in a single call.
+    ListAvailabilityConfigurationsResponse:
+      type: object
+      properties:
+        AvailabilityConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityConfigurationList'
+            - description: The list of <code>AvailabilityConfiguration</code>'s that exist for the specified WorkMail organization.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to use to retrieve the next page of results. The value is <code>null</code> when there are no further results to return.
+    ListAvailabilityConfigurationsRequest:
+      type: object
+      required:
+        - OrganizationId
+      title: ListAvailabilityConfigurationsRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The WorkMail organization for which the <code>AvailabilityConfiguration</code>'s will be listed.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of results to return in a single call.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to use to retrieve the next page of results. The first call does not require a token.
     ListGroupMembersResponse:
       type: object
       properties:
@@ -4662,6 +6635,64 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: The maximum number of results to return in a single call.
+    ListImpersonationRolesResponse:
+      type: object
+      properties:
+        Roles:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleList'
+            - description: The list of impersonation roles under the given WorkMail organization.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to retrieve the next page of results. The value is <code>null</code> when there are no results to return.
+    ListImpersonationRolesRequest:
+      type: object
+      required:
+        - OrganizationId
+      title: ListImpersonationRolesRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The WorkMail organization to which the listed impersonation roles belong.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token used to retrieve the next page of results. The first call doesn't require a token.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of results returned in a single call.
+    ListMailDomainsResponse:
+      type: object
+      properties:
+        MailDomains:
+          allOf:
+            - $ref: '#/components/schemas/MailDomains'
+            - description: 'The list of mail domain summaries, specifying domains that exist in the specified WorkMail organization, along with the information about whether the domain is or isn''t the default.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to use to retrieve the next page of results. The value becomes <code>null</code> when there are no more results to return.
+    ListMailDomainsRequest:
+      type: object
+      required:
+        - OrganizationId
+      title: ListMailDomainsRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The WorkMail organization for which to list domains.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of results to return in a single call.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to use to retrieve the next page of results. The first call does not require a token.
     ListMailboxExportJobsResponse:
       type: object
       properties:
@@ -4725,13 +6756,50 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: The maximum number of results to return in a single call.
+    ListMobileDeviceAccessOverridesResponse:
+      type: object
+      properties:
+        Overrides:
+          allOf:
+            - $ref: '#/components/schemas/MobileDeviceAccessOverridesList'
+            - description: The list of mobile device access overrides that exist for the specified WorkMail organization and user.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to use to retrieve the next page of results. The value is “null” when there are no more results to return.
+    ListMobileDeviceAccessOverridesRequest:
+      type: object
+      required:
+        - OrganizationId
+      title: ListMobileDeviceAccessOverridesRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The WorkMail organization under which to list mobile device access overrides.
+        UserId:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: '<p>The WorkMail user under which you list the mobile device access overrides. Accepts the following types of user identities:</p> <ul> <li> <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> </p> </li> <li> <p>Email address: <code>user@domain.tld</code> </p> </li> <li> <p>User name: <code>user</code> </p> </li> </ul>'
+        DeviceId:
+          allOf:
+            - $ref: '#/components/schemas/DeviceId'
+            - description: The mobile device to which the access override applies.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to use to retrieve the next page of results. The first call does not require a token.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of results to return in a single call.
     ListMobileDeviceAccessRulesResponse:
       type: object
       properties:
         Rules:
           allOf:
             - $ref: '#/components/schemas/MobileDeviceAccessRulesList'
-            - description: The list of mobile device access rules that exist under the specified Amazon WorkMail organization.
+            - description: The list of mobile device access rules that exist under the specified WorkMail organization.
     ListMobileDeviceAccessRulesRequest:
       type: object
       required:
@@ -4741,7 +6809,7 @@ components:
         OrganizationId:
           allOf:
             - $ref: '#/components/schemas/OrganizationId'
-            - description: The Amazon WorkMail organization for which to list the rules.
+            - description: The WorkMail organization for which to list the rules.
     ListOrganizationsResponse:
       type: object
       properties:
@@ -4775,7 +6843,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
-            - description: 'The token used to paginate through the delegates associated with a resource. While results are still available, it has an associated value. When the last page is reached, the token is empty. '
+            - description: 'The token used to paginate through the delegates associated with a resource. While results are still available, it has an associated value. When the last page is reached, the token is empty.'
     ListResourceDelegatesRequest:
       type: object
       required:
@@ -4845,7 +6913,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
             - description: The resource ARN.
-    ResourceNotFoundException: {}
     ListUsersResponse:
       type: object
       properties:
@@ -4927,6 +6994,55 @@ components:
           allOf:
             - $ref: '#/components/schemas/OrganizationId'
             - description: The identifier of the organization.
+        ImpersonationRoleIds:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleIdList'
+            - description: Impersonation role IDs to include in the rule.
+        NotImpersonationRoleIds:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleIdList'
+            - description: Impersonation role IDs to exclude from the rule.
+    PutEmailMonitoringConfigurationResponse:
+      type: object
+      properties: {}
+    PutEmailMonitoringConfigurationRequest:
+      type: object
+      required:
+        - OrganizationId
+        - RoleArn
+        - LogGroupArn
+      title: PutEmailMonitoringConfigurationRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The ID of the organization for which the email monitoring configuration is set.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of the IAM Role associated with the email monitoring configuration.
+        LogGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/LogGroupArn'
+            - description: The Amazon Resource Name (ARN) of the CloudWatch Log group associated with the email monitoring configuration.
+    PutInboundDmarcSettingsResponse:
+      type: object
+      properties: {}
+    PutInboundDmarcSettingsRequest:
+      type: object
+      required:
+        - OrganizationId
+        - Enforced
+      title: PutInboundDmarcSettingsRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The ID of the organization that you are applying the DMARC policy to.
+        Enforced:
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: Enforces or suspends a policy after it's applied.
     PutMailboxPermissionsResponse:
       type: object
       properties: {}
@@ -4955,6 +7071,38 @@ components:
           allOf:
             - $ref: '#/components/schemas/PermissionValues'
             - description: 'The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.'
+    PutMobileDeviceAccessOverrideResponse:
+      type: object
+      properties: {}
+    PutMobileDeviceAccessOverrideRequest:
+      type: object
+      required:
+        - OrganizationId
+        - UserId
+        - DeviceId
+        - Effect
+      title: PutMobileDeviceAccessOverrideRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: Identifies the WorkMail organization for which you create the override.
+        UserId:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: '<p>The WorkMail user for which you create the override. Accepts the following types of user identities:</p> <ul> <li> <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> </p> </li> <li> <p>Email address: <code>user@domain.tld</code> </p> </li> <li> <p>User name: <code>user</code> </p> </li> </ul>'
+        DeviceId:
+          allOf:
+            - $ref: '#/components/schemas/DeviceId'
+            - description: The mobile device for which you create the override. <code>DeviceId</code> is case insensitive.
+        Effect:
+          allOf:
+            - $ref: '#/components/schemas/MobileDeviceAccessRuleEffect'
+            - description: 'The effect of the override, <code>ALLOW</code> or <code>DENY</code>.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/MobileDeviceAccessRuleDescription'
+            - description: A description of the override.
     PutRetentionPolicyResponse:
       type: object
       properties: {}
@@ -4986,6 +7134,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/FolderConfigurations'
             - description: The retention policy folder configurations.
+    RegisterMailDomainResponse:
+      type: object
+      properties: {}
+    RegisterMailDomainRequest:
+      type: object
+      required:
+        - OrganizationId
+        - DomainName
+      title: RegisterMailDomainRequest
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyClientToken'
+            - description: Idempotency token used when retrying requests.
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The WorkMail organization under which you're creating the domain.
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/WorkMailDomainName'
+            - description: The name of the mail domain to create in WorkMail and SES.
     RegisterToWorkMailResponse:
       type: object
       properties: {}
@@ -5103,6 +7273,35 @@ components:
             - $ref: '#/components/schemas/TagList'
             - description: The tag key-value pairs.
     TooManyTagsException: {}
+    TestAvailabilityConfigurationResponse:
+      type: object
+      properties:
+        TestPassed:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Boolean indicating whether the test passed or failed.
+        FailureReason:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: String containing the reason for a failed test if <code>TestPassed</code> is false.
+    TestAvailabilityConfigurationRequest:
+      type: object
+      required:
+        - OrganizationId
+      title: TestAvailabilityConfigurationRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The WorkMail organization where the availability provider will be tested.
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: 'The domain to which the provider applies. If this field is provided, a stored availability provider associated to this domain name will be tested.'
+        EwsProvider:
+          $ref: '#/components/schemas/EwsAvailabilityProvider'
+        LambdaProvider:
+          $ref: '#/components/schemas/LambdaAvailabilityProvider'
     UntagResourceResponse:
       type: object
       properties: {}
@@ -5121,6 +7320,87 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
             - description: The tag keys.
+    UpdateAvailabilityConfigurationResponse:
+      type: object
+      properties: {}
+    UpdateAvailabilityConfigurationRequest:
+      type: object
+      required:
+        - OrganizationId
+        - DomainName
+      title: UpdateAvailabilityConfigurationRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The WorkMail organization for which the <code>AvailabilityConfiguration</code> will be updated.
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The domain to which the provider applies the availability configuration.
+        EwsProvider:
+          allOf:
+            - $ref: '#/components/schemas/EwsAvailabilityProvider'
+            - description: 'The EWS availability provider definition. The request must contain exactly one provider definition, either <code>EwsProvider</code> or <code>LambdaProvider</code>. The previously stored provider will be overridden by the one provided.'
+        LambdaProvider:
+          allOf:
+            - $ref: '#/components/schemas/LambdaAvailabilityProvider'
+            - description: 'The Lambda availability provider definition. The request must contain exactly one provider definition, either <code>EwsProvider</code> or <code>LambdaProvider</code>. The previously stored provider will be overridden by the one provided.'
+    UpdateDefaultMailDomainResponse:
+      type: object
+      properties: {}
+    UpdateDefaultMailDomainRequest:
+      type: object
+      required:
+        - OrganizationId
+        - DomainName
+      title: UpdateDefaultMailDomainRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The WorkMail organization for which to list domains.
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/WorkMailDomainName'
+            - description: The domain name that will become the default domain.
+    UpdateImpersonationRoleResponse:
+      type: object
+      properties: {}
+    UpdateImpersonationRoleRequest:
+      type: object
+      required:
+        - OrganizationId
+        - ImpersonationRoleId
+        - Name
+        - Type
+        - Rules
+      title: UpdateImpersonationRoleRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The WorkMail organization that contains the impersonation role to update.
+        ImpersonationRoleId:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleId'
+            - description: The ID of the impersonation role to update.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleName'
+            - description: The updated impersonation role name.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleType'
+            - description: The updated impersonation role type.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleDescription'
+            - description: The updated impersonation role description.
+        Rules:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRuleList'
+            - description: The updated list of rules.
     UpdateMailboxQuotaResponse:
       type: object
       properties: {}
@@ -5159,7 +7439,7 @@ components:
         OrganizationId:
           allOf:
             - $ref: '#/components/schemas/OrganizationId'
-            - description: The Amazon WorkMail organization under which the rule will be updated.
+            - description: The WorkMail organization under which the rule will be updated.
         MobileDeviceAccessRuleId:
           allOf:
             - $ref: '#/components/schemas/MobileDeviceAccessRuleId'
@@ -5294,6 +7574,12 @@ components:
     Timestamp:
       type: string
       format: date-time
+    ImpersonationRoleIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImpersonationRoleId'
+      minItems: 0
+      maxItems: 10
     AccessControlRule:
       type: object
       properties:
@@ -5341,7 +7627,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The date that the rule was modified.
-      description: A rule that controls access to an Amazon WorkMail organization.
+        ImpersonationRoleIds:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleIdList'
+            - description: Impersonation role IDs to include in the rule.
+        NotImpersonationRoleIds:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleIdList'
+            - description: Impersonation role IDs to exclude from the rule.
+      description: A rule that controls access to an WorkMail organization.
     AccessControlRuleAction:
       type: string
       pattern: '[a-zA-Z]+'
@@ -5359,6 +7653,11 @@ components:
         $ref: '#/components/schemas/AccessControlRule'
       minItems: 0
       maxItems: 10
+    AccessEffect:
+      type: string
+      enum:
+        - ALLOW
+        - DENY
     EmailAddress:
       type: string
       pattern: '[a-zA-Z0-9._%+-]{1,64}@[a-zA-Z0-9.-]+\.[a-zA-Z-]{2,}'
@@ -5386,6 +7685,82 @@ components:
       type: string
       minLength: 12
       maxLength: 256
+    ImpersonationRoleId:
+      type: string
+      pattern: '[a-zA-Z0-9_-]+'
+      minLength: 1
+      maxLength: 64
+    ImpersonationToken:
+      type: string
+      pattern: '[\x21-\x7e]+'
+      minLength: 1
+      maxLength: 256
+    ExpiresIn:
+      type: integer
+    DomainName:
+      type: string
+      pattern: '[a-zA-Z0-9.-]+\.[a-zA-Z-]{2,}'
+      minLength: 3
+      maxLength: 255
+    AvailabilityProviderType:
+      type: string
+      enum:
+        - EWS
+        - LAMBDA
+    RedactedEwsAvailabilityProvider:
+      type: object
+      properties:
+        EwsEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: The endpoint of the remote EWS server.
+        EwsUsername:
+          allOf:
+            - $ref: '#/components/schemas/ExternalUserName'
+            - description: The username used to authenticate the remote EWS server.
+      description: Describes an EWS based availability provider when returned from the service. It does not contain the password of the endpoint.
+    LambdaAvailabilityProvider:
+      type: object
+      required:
+        - LambdaArn
+      properties:
+        LambdaArn:
+          allOf:
+            - $ref: '#/components/schemas/LambdaArn'
+            - description: The Amazon Resource Name (ARN) of the Lambda that acts as the availability provider.
+      description: Describes a Lambda based availability provider.
+    AvailabilityConfiguration:
+      type: object
+      properties:
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: Displays the domain to which the provider applies.
+        ProviderType:
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityProviderType'
+            - description: Displays the provider type that applies to this domain.
+        EwsProvider:
+          allOf:
+            - $ref: '#/components/schemas/RedactedEwsAvailabilityProvider'
+            - description: 'If <code>ProviderType</code> is <code>EWS</code>, then this field contains <code>RedactedEwsAvailabilityProvider</code>. Otherwise, it is not required.'
+        LambdaProvider:
+          allOf:
+            - $ref: '#/components/schemas/LambdaAvailabilityProvider'
+            - description: 'If ProviderType is <code>LAMBDA</code> then this field contains <code>LambdaAvailabilityProvider</code>. Otherwise, it is not required.'
+        DateCreated:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time at which the availability configuration was created.
+        DateModified:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time at which the availability configuration was last modified.
+      description: List all the <code>AvailabilityConfiguration</code>'s for the given WorkMail organization.
+    AvailabilityConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AvailabilityConfiguration'
     Boolean:
       type: boolean
     BookingOptions:
@@ -5404,6 +7779,8 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: The resource's ability to automatically decline any conflicting requests.
       description: At least one delegate must be associated to the resource to disable automatic replies from the resource.
+    BooleanObject:
+      type: boolean
     IdempotencyClientToken:
       type: string
       pattern: '[\x21-\x7e]+'
@@ -5414,11 +7791,52 @@ components:
       pattern: '[A-Za-z0-9-]+'
       minLength: 1
       maxLength: 63
+    EwsAvailabilityProvider:
+      type: object
+      required:
+        - EwsEndpoint
+        - EwsUsername
+        - EwsPassword
+      properties:
+        EwsEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: The endpoint of the remote EWS server.
+        EwsUsername:
+          allOf:
+            - $ref: '#/components/schemas/ExternalUserName'
+            - description: The username used to authenticate the remote EWS server.
+        EwsPassword:
+          allOf:
+            - $ref: '#/components/schemas/Password'
+            - description: The password used to authenticate the remote EWS server.
+      description: Describes an EWS based availability provider. This is only used as input to the service.
     GroupName:
       type: string
       pattern: '[\u0020-\u00FF]+'
       minLength: 1
       maxLength: 256
+    ImpersonationRoleName:
+      type: string
+      pattern: '[^\x00-\x1F\x7F\x3C\x3E\x5C]+'
+      minLength: 1
+      maxLength: 64
+    ImpersonationRoleType:
+      type: string
+      enum:
+        - FULL_ACCESS
+        - READ_ONLY
+    ImpersonationRoleDescription:
+      type: string
+      pattern: '[^\x00-\x09\x0B\x0C\x0E-\x1F\x7F\x3C\x3E\x5C]+'
+      minLength: 1
+      maxLength: 256
+    ImpersonationRuleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImpersonationRule'
+      minItems: 0
+      maxItems: 10
     MobileDeviceAccessRuleName:
       type: string
       pattern: '[\S\s]+'
@@ -5527,11 +7945,35 @@ components:
             - $ref: '#/components/schemas/MemberType'
             - description: 'The type of the delegate: user or group.'
       description: 'The name of the attribute, which is one of the values defined in the UserAttribute enumeration.'
+    EntityIdentifier:
+      type: string
+      pattern: '[a-zA-Z0-9._%+@-]+'
+      minLength: 1
+      maxLength: 256
+    DeviceId:
+      type: string
+      pattern: '[A-Za-z0-9]+'
+      minLength: 1
+      maxLength: 32
     ShortString:
       type: string
       pattern: '[a-zA-Z0-9_-]+'
       minLength: 1
       maxLength: 64
+    WorkMailDomainName:
+      type: string
+      pattern: '[a-zA-Z0-9.-]+\.[a-zA-Z-]{2,}'
+      minLength: 3
+      maxLength: 209
+    RoleArn:
+      type: string
+      minLength: 20
+      maxLength: 2048
+    LogGroupArn:
+      type: string
+      pattern: 'arn:aws:logs:[a-z\-0-9]*:[0-9]{12}:log-group:([\.\-_/#A-Za-z0-9]+):\*$'
+      minLength: 47
+      maxLength: 562
     EntityState:
       type: string
       enum:
@@ -5543,10 +7985,6 @@ components:
       pattern: '[\S\s]*'
       minLength: 0
       maxLength: 1023
-    RoleArn:
-      type: string
-      minLength: 20
-      maxLength: 2048
     S3BucketName:
       type: string
       pattern: '[A-Za-z0-9.-]+'
@@ -5599,11 +8037,32 @@ components:
       pattern: '[\u0020-\u00FF]+'
       minLength: 1
       maxLength: 256
-    DomainName:
+    DnsRecord:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The RFC 1035 record type. Possible values: <code>CNAME</code>, <code>A</code>, <code>MX</code>.'
+        Hostname:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The DNS hostname.- For example, <code>domain.example.com</code>.'
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The value returned by the DNS for a query to that hostname and record type.
+      description: A DNS record uploaded to your DNS provider.
+    DnsRecordVerificationStatus:
       type: string
-      pattern: '[a-zA-Z0-9.-]+\.[a-zA-Z-]{2,}'
-      minLength: 3
-      maxLength: 255
+      enum:
+        - PENDING
+        - VERIFIED
+        - FAILED
+    DnsRecords:
+      type: array
+      items:
+        $ref: '#/components/schemas/DnsRecord'
     HostedZoneId:
       type: string
       pattern: '[\S\s]*'
@@ -5620,7 +8079,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/HostedZoneId'
             - description: The hosted zone ID for a domain hosted in Route 53. Required when configuring a domain hosted in Route 53.
-      description: '<p>The domain to associate with an Amazon WorkMail organization.</p> <p>When you configure a domain hosted in Amazon Route 53 (Route 53), all recommended DNS records are added to the organization when you create it. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html">Adding a domain</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p>'
+      description: '<p>The domain to associate with an WorkMail organization.</p> <p>When you configure a domain hosted in Amazon Route 53 (Route 53), all recommended DNS records are added to the organization when you create it. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html">Adding a domain</a> in the <i>WorkMail Administrator Guide</i>.</p>'
+    Url:
+      type: string
+      pattern: 'https?://[A-Za-z0-9.-]+(:[0-9]+)?/.*'
+      maxLength: 256
+    ExternalUserName:
+      type: string
+      pattern: '[\u0020-\u00FF]+'
+      maxLength: 256
     FolderName:
       type: string
       enum:
@@ -5656,7 +8123,7 @@ components:
         Period:
           allOf:
             - $ref: '#/components/schemas/RetentionPeriod'
-            - description: The period of time at which the folder configuration action is applied.
+            - description: The number of days for which the folder-configuration action applies.
       description: The configuration applied to an organization's folders by its retention policy.
     FolderConfigurations:
       type: array
@@ -5667,6 +8134,12 @@ components:
       pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
       minLength: 1
       maxLength: 15
+    ImpersonationMatchedRuleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImpersonationMatchedRule'
+      minItems: 0
+      maxItems: 10
     MailboxQuota:
       type: integer
       minimum: 1
@@ -5702,16 +8175,110 @@ components:
         EnabledDate:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The date indicating when the group was enabled for Amazon WorkMail use.
+            - description: The date indicating when the group was enabled for WorkMail use.
         DisabledDate:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The date indicating when the group was disabled from Amazon WorkMail use.
-      description: The representation of an Amazon WorkMail group.
+            - description: The date indicating when the group was disabled from WorkMail use.
+      description: The representation of an WorkMail group.
     Groups:
       type: array
       items:
         $ref: '#/components/schemas/Group'
+    ImpersonationRuleId:
+      type: string
+      pattern: '[a-zA-Z0-9_-]+'
+      minLength: 1
+      maxLength: 64
+    ImpersonationRuleName:
+      type: string
+      pattern: '[^\x00-\x1F\x7F\x3C\x3E\x5C]+'
+      minLength: 1
+      maxLength: 64
+    ImpersonationMatchedRule:
+      type: object
+      properties:
+        ImpersonationRuleId:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRuleId'
+            - description: The ID of the rule that matched the input
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRuleName'
+            - description: The name of the rule that matched the input.
+      description: The impersonation rule that matched the input.
+    ImpersonationRole:
+      type: object
+      properties:
+        ImpersonationRoleId:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleId'
+            - description: The identifier of the impersonation role.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleName'
+            - description: The impersonation role name.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRoleType'
+            - description: The impersonation role type.
+        DateCreated:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date when the impersonation role was created.
+        DateModified:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date when the impersonation role was last modified.
+      description: An impersonation role for the given WorkMail organization.
+    ImpersonationRoleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImpersonationRole'
+      minItems: 0
+      maxItems: 20
+    ImpersonationRuleDescription:
+      type: string
+      pattern: '[^\x00-\x09\x0B\x0C\x0E-\x1F\x7F\x3C\x3E\x5C]+'
+      minLength: 1
+      maxLength: 256
+    TargetUsers:
+      type: array
+      items:
+        $ref: '#/components/schemas/EntityIdentifier'
+      minItems: 1
+      maxItems: 10
+    ImpersonationRule:
+      type: object
+      required:
+        - ImpersonationRuleId
+        - Effect
+      properties:
+        ImpersonationRuleId:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRuleId'
+            - description: The identifier of the rule.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRuleName'
+            - description: The rule name.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ImpersonationRuleDescription'
+            - description: The rule description.
+        Effect:
+          allOf:
+            - $ref: '#/components/schemas/AccessEffect'
+            - description: The effect of the rule when it matches the input. Allowed effect values are <code>ALLOW</code> or <code>DENY</code>.
+        TargetUsers:
+          allOf:
+            - $ref: '#/components/schemas/TargetUsers'
+            - description: A list of user IDs that match the rule.
+        NotTargetUsers:
+          allOf:
+            - $ref: '#/components/schemas/TargetUsers'
+            - description: A list of user IDs that don't match the rule.
+      description: The rules for the given impersonation role.
     IpRange:
       type: string
       pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])/([0-9]|[12][0-9]|3[0-2])$'
@@ -5761,6 +8328,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/MailboxExportJob'
+    LambdaArn:
+      type: string
+      pattern: 'arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9\-_\.]+(:(\$LATEST|[a-zA-Z0-9\-_]+))?'
+      minLength: 49
+      maxLength: 256
     NextToken:
       type: string
       pattern: '[\S\s]*|[a-zA-Z0-9/+=]{1,1024}'
@@ -5774,10 +8346,18 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Member'
+    MailDomains:
+      type: array
+      items:
+        $ref: '#/components/schemas/MailDomainSummary'
     Permissions:
       type: array
       items:
         $ref: '#/components/schemas/Permission'
+    MobileDeviceAccessOverridesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MobileDeviceAccessOverride'
     MobileDeviceAccessRulesList:
       type: array
       items:
@@ -5806,6 +8386,18 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/User'
+    MailDomainSummary:
+      type: object
+      properties:
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The domain name.
+        DefaultDomain:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the domain is default or not.
+      description: The data for a given domain.
     Member:
       type: object
       properties:
@@ -5828,11 +8420,11 @@ components:
         EnabledDate:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The date indicating when the member was enabled for Amazon WorkMail use.
+            - description: The date indicating when the member was enabled for WorkMail use.
         DisabledDate:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The date indicating when the member was disabled from Amazon WorkMail use.
+            - description: The date indicating when the member was disabled from WorkMail use.
       description: The representation of a user or group.
     MobileDeviceAccessMatchedRule:
       type: object
@@ -5846,13 +8438,41 @@ components:
             - $ref: '#/components/schemas/MobileDeviceAccessRuleName'
             - description: Name of a rule that a simulated user matches.
       description: The rule that a simulated user matches.
+    MobileDeviceAccessOverride:
+      type: object
+      properties:
+        UserId:
+          allOf:
+            - $ref: '#/components/schemas/WorkMailIdentifier'
+            - description: The WorkMail user to which the access override applies.
+        DeviceId:
+          allOf:
+            - $ref: '#/components/schemas/DeviceId'
+            - description: The device to which the override applies.
+        Effect:
+          allOf:
+            - $ref: '#/components/schemas/MobileDeviceAccessRuleEffect'
+            - description: 'The effect of the override, <code>ALLOW</code> or <code>DENY</code>.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/MobileDeviceAccessRuleDescription'
+            - description: A description of the override.
+        DateCreated:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date the override was first created.
+        DateModified:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date the override was last modified.
+      description: The override object.
     MobileDeviceAccessRule:
       type: object
       properties:
         MobileDeviceAccessRuleId:
           allOf:
             - $ref: '#/components/schemas/MobileDeviceAccessRuleId'
-            - description: 'The ID assigned to a mobile access rule. '
+            - description: The ID assigned to a mobile access rule.
         Name:
           allOf:
             - $ref: '#/components/schemas/MobileDeviceAccessRuleName'
@@ -5868,7 +8488,7 @@ components:
         DeviceTypes:
           allOf:
             - $ref: '#/components/schemas/DeviceTypeList'
-            - description: 'Device types that a rule will match. '
+            - description: Device types that a rule will match.
         NotDeviceTypes:
           allOf:
             - $ref: '#/components/schemas/DeviceTypeList'
@@ -5905,7 +8525,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The date and time at which an access rule was modified.
-      description: A rule that controls access to mobile devices for an Amazon WorkMail group.
+      description: A rule that controls access to mobile devices for an WorkMail group.
     OrganizationSummary:
       type: object
       properties:
@@ -5991,11 +8611,11 @@ components:
         EnabledDate:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The date indicating when the resource was enabled for Amazon WorkMail use.
+            - description: The date indicating when the resource was enabled for WorkMail use.
         DisabledDate:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The date indicating when the resource was disabled from Amazon WorkMail use.
+            - description: The date indicating when the resource was disabled from WorkMail use.
       description: The representation of a resource.
     TagKey:
       type: string
@@ -6056,11 +8676,11 @@ components:
         EnabledDate:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The date indicating when the user was enabled for Amazon WorkMail use.
+            - description: The date indicating when the user was enabled for WorkMail use.
         DisabledDate:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The date indicating when the user was disabled from Amazon WorkMail use.
-      description: The representation of an Amazon WorkMail user.
+            - description: The date indicating when the user was disabled from WorkMail use.
+      description: The representation of an WorkMail user.
 security:
   - hmac: []

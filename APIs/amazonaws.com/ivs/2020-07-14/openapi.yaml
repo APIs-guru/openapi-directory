@@ -3,7 +3,7 @@ info:
   version: '2020-07-14'
   x-release: v4
   title: Amazon Interactive Video Service
-  description: '<p> <b>Introduction</b> </p> <p>The Amazon Interactive Video Service (IVS) API is REST compatible, using a standard HTTP API and an AWS EventBridge event stream for responses. JSON is used for both requests and responses, including errors.</p> <p>The API is an AWS regional service, currently in these regions: us-west-2, us-east-1, and eu-west-1.</p> <p> <i> <b>All API request parameters and URLs are case sensitive. </b> </i> </p> <p>For a summary of notable documentation changes in each release, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/doc-history.html"> Document History</a>.</p> <p> <b>Service Endpoints</b> </p> <p>The following are the Amazon IVS service endpoints (all HTTPS): </p> <p>Region name: US West (Oregon)</p> <ul> <li> <p>Region: <code>us-west-2</code> </p> </li> <li> <p>Endpoint: <code>ivs.us-west-2.amazonaws.com</code> </p> </li> </ul> <p>Region name: US East (Virginia)</p> <ul> <li> <p>Region: <code>us-east-1</code> </p> </li> <li> <p>Endpoint: <code>ivs.us-east-1.amazonaws.com</code> </p> </li> </ul> <p>Region name: EU West (Dublin)</p> <ul> <li> <p>Region: <code>eu-west-1</code> </p> </li> <li> <p>Endpoint: <code>ivs.eu-west-1.amazonaws.com</code> </p> </li> </ul> <p> <b>Allowed Header Values</b> </p> <ul> <li> <p> <code> <b>Accept:</b> </code> application/json</p> </li> <li> <p> <code> <b>Accept-Encoding:</b> </code> gzip, deflate</p> </li> <li> <p> <code> <b>Content-Type:</b> </code>application/json</p> </li> </ul> <p> <b>Resources</b> </p> <p>The following resources contain information about your IVS live stream (see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/getting-started.html"> Getting Started with Amazon IVS</a>):</p> <ul> <li> <p>Channel — Stores configuration data related to your live stream. You first create a channel and then use the channel’s stream key to start your live stream. See the Channel endpoints for more information. </p> </li> <li> <p>Stream key — An identifier assigned by Amazon IVS when you create a channel, which is then used to authorize streaming. See the StreamKey endpoints for more information. <i> <b>Treat the stream key like a secret, since it allows anyone to stream to the channel.</b> </i> </p> </li> <li> <p>Playback key pair — Video playback may be restricted using playback-authorization tokens, which use public-key encryption. A playback key pair is the public-private pair of keys used to sign and validate the playback-authorization token. See the PlaybackKeyPair endpoints for more information.</p> </li> <li> <p>Recording configuration — Stores configuration related to recording a live stream and where to store the recorded content. Multiple channels can reference the same recording configuration. See the Recording Configuration endpoints for more information.</p> </li> </ul> <p> <b>Tagging</b> </p> <p>A <i>tag</i> is a metadata label that you assign to an AWS resource. A tag comprises a <i>key</i> and a <i>value</i>, both set by you. For example, you might set a tag as <code>topic:nature</code> to label a particular video category. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for more information, including restrictions that apply to tags.</p> <p>Tags can help you identify and organize your AWS resources. For example, you can use the same tag for different resources to indicate that they are related. You can also use tags to manage access (see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html"> Access Tags</a>). </p> <p>The Amazon IVS API has these tag-related endpoints: <a>TagResource</a>, <a>UntagResource</a>, and <a>ListTagsForResource</a>. The following resources support tagging: Channels, Stream Keys, Playback Key Pairs, and Recording Configurations.</p> <p> <b>Authentication versus Authorization</b> </p> <p>Note the differences between these concepts:</p> <ul> <li> <p> <i>Authentication</i> is about verifying identity. You need to be authenticated to sign Amazon IVS API requests.</p> </li> <li> <p> <i>Authorization</i> is about granting permissions. You need to be authorized to view <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Amazon IVS private channels</a>. (Private channels are channels that are enabled for "playback authorization.")</p> </li> </ul> <p> <b>Authentication</b> </p> <p>All Amazon IVS API requests must be authenticated with a signature. The AWS Command-Line Interface (CLI) and Amazon IVS Player SDKs take care of signing the underlying API calls for you. However, if your application calls the Amazon IVS API directly, it’s your responsibility to sign the requests.</p> <p>You generate a signature using valid AWS credentials that have permission to perform the requested action. For example, you must sign PutMetadata requests with a signature generated from an IAM user account that has the <code>ivs:PutMetadata</code> permission.</p> <p>For more information:</p> <ul> <li> <p>Authentication and generating signatures — See <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html">Authenticating Requests (AWS Signature Version 4)</a> in the <i>AWS General Reference</i>.</p> </li> <li> <p>Managing Amazon IVS permissions — See <a href="https://docs.aws.amazon.com/ivs/latest/userguide/security-iam.html">Identity and Access Management</a> on the Security page of the <i>Amazon IVS User Guide</i>.</p> </li> </ul> <p> <b>Channel Endpoints</b> </p> <ul> <li> <p> <a>CreateChannel</a> — Creates a new channel and an associated stream key to start streaming.</p> </li> <li> <p> <a>GetChannel</a> — Gets the channel configuration for the specified channel ARN (Amazon Resource Name).</p> </li> <li> <p> <a>BatchGetChannel</a> — Performs <a>GetChannel</a> on multiple ARNs simultaneously.</p> </li> <li> <p> <a>ListChannels</a> — Gets summary information about all channels in your account, in the AWS region where the API request is processed. This list can be filtered to match a specified name or recording-configuration ARN. Filters are mutually exclusive and cannot be used together. If you try to use both filters, you will get an error (409 Conflict Exception).</p> </li> <li> <p> <a>UpdateChannel</a> — Updates a channel''s configuration. This does not affect an ongoing stream of this channel. You must stop and restart the stream for the changes to take effect.</p> </li> <li> <p> <a>DeleteChannel</a> — Deletes the specified channel.</p> </li> </ul> <p> <b>StreamKey Endpoints</b> </p> <ul> <li> <p> <a>CreateStreamKey</a> — Creates a stream key, used to initiate a stream, for the specified channel ARN.</p> </li> <li> <p> <a>GetStreamKey</a> — Gets stream key information for the specified ARN.</p> </li> <li> <p> <a>BatchGetStreamKey</a> — Performs <a>GetStreamKey</a> on multiple ARNs simultaneously.</p> </li> <li> <p> <a>ListStreamKeys</a> — Gets summary information about stream keys for the specified channel.</p> </li> <li> <p> <a>DeleteStreamKey</a> — Deletes the stream key for the specified ARN, so it can no longer be used to stream.</p> </li> </ul> <p> <b>Stream Endpoints</b> </p> <ul> <li> <p> <a>GetStream</a> — Gets information about the active (live) stream on a specified channel.</p> </li> <li> <p> <a>ListStreams</a> — Gets summary information about live streams in your account, in the AWS region where the API request is processed.</p> </li> <li> <p> <a>StopStream</a> — Disconnects the incoming RTMPS stream for the specified channel. Can be used in conjunction with <a>DeleteStreamKey</a> to prevent further streaming to a channel.</p> </li> <li> <p> <a>PutMetadata</a> — Inserts metadata into the active stream of the specified channel. A maximum of 5 requests per second per channel is allowed, each with a maximum 1 KB payload. (If 5 TPS is not sufficient for your needs, we recommend batching your data into a single PutMetadata call.)</p> </li> </ul> <p> <b>PlaybackKeyPair Endpoints</b> </p> <p>For more information, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Setting Up Private Channels</a> in the <i>Amazon IVS User Guide</i>.</p> <ul> <li> <p> <a>ImportPlaybackKeyPair</a> — Imports the public portion of a new key pair and returns its <code>arn</code> and <code>fingerprint</code>. The <code>privateKey</code> can then be used to generate viewer authorization tokens, to grant viewers access to private channels (channels enabled for playback authorization).</p> </li> <li> <p> <a>GetPlaybackKeyPair</a> — Gets a specified playback authorization key pair and returns the <code>arn</code> and <code>fingerprint</code>. The <code>privateKey</code> held by the caller can be used to generate viewer authorization tokens, to grant viewers access to private channels.</p> </li> <li> <p> <a>ListPlaybackKeyPairs</a> — Gets summary information about playback key pairs.</p> </li> <li> <p> <a>DeletePlaybackKeyPair</a> — Deletes a specified authorization key pair. This invalidates future viewer tokens generated using the key pair’s <code>privateKey</code>.</p> </li> </ul> <p> <b>RecordingConfiguration Endpoints</b> </p> <ul> <li> <p> <a>CreateRecordingConfiguration</a> — Creates a new recording configuration, used to enable recording to Amazon S3.</p> </li> <li> <p> <a>GetRecordingConfiguration</a> — Gets the recording-configuration metadata for the specified ARN.</p> </li> <li> <p> <a>ListRecordingConfigurations</a> — Gets summary information about all recording configurations in your account, in the AWS region where the API request is processed.</p> </li> <li> <p> <a>DeleteRecordingConfiguration</a> — Deletes the recording configuration for the specified ARN.</p> </li> </ul> <p> <b>AWS Tags Endpoints</b> </p> <ul> <li> <p> <a>TagResource</a> — Adds or updates tags for the AWS resource with the specified ARN.</p> </li> <li> <p> <a>UntagResource</a> — Removes tags from the resource with the specified ARN.</p> </li> <li> <p> <a>ListTagsForResource</a> — Gets information about AWS tags for the specified ARN.</p> </li> </ul>'
+  description: '<p> <b>Introduction</b> </p> <p>The Amazon Interactive Video Service (IVS) API is REST compatible, using a standard HTTP API and an Amazon Web Services EventBridge event stream for responses. JSON is used for both requests and responses, including errors.</p> <p>The API is an Amazon Web Services regional service. For a list of supported regions and Amazon IVS HTTPS service endpoints, see the <a href="https://docs.aws.amazon.com/general/latest/gr/ivs.html">Amazon IVS page</a> in the <i>Amazon Web Services General Reference</i>.</p> <p> <i> <b>All API request parameters and URLs are case sensitive. </b> </i> </p> <p>For a summary of notable documentation changes in each release, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/doc-history.html"> Document History</a>.</p> <p> <b>Allowed Header Values</b> </p> <ul> <li> <p> <code> <b>Accept:</b> </code> application/json</p> </li> <li> <p> <code> <b>Accept-Encoding:</b> </code> gzip, deflate</p> </li> <li> <p> <code> <b>Content-Type:</b> </code>application/json</p> </li> </ul> <p> <b>Resources</b> </p> <p>The following resources contain information about your IVS live stream (see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/getting-started.html"> Getting Started with Amazon IVS</a>):</p> <ul> <li> <p>Channel — Stores configuration data related to your live stream. You first create a channel and then use the channel’s stream key to start your live stream. See the Channel endpoints for more information. </p> </li> <li> <p>Stream key — An identifier assigned by Amazon IVS when you create a channel, which is then used to authorize streaming. See the StreamKey endpoints for more information. <i> <b>Treat the stream key like a secret, since it allows anyone to stream to the channel.</b> </i> </p> </li> <li> <p>Playback key pair — Video playback may be restricted using playback-authorization tokens, which use public-key encryption. A playback key pair is the public-private pair of keys used to sign and validate the playback-authorization token. See the PlaybackKeyPair endpoints for more information.</p> </li> <li> <p>Recording configuration — Stores configuration related to recording a live stream and where to store the recorded content. Multiple channels can reference the same recording configuration. See the Recording Configuration endpoints for more information.</p> </li> </ul> <p> <b>Tagging</b> </p> <p>A <i>tag</i> is a metadata label that you assign to an Amazon Web Services resource. A tag comprises a <i>key</i> and a <i>value</i>, both set by you. For example, you might set a tag as <code>topic:nature</code> to label a particular video category. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.</p> <p>Tags can help you identify and organize your Amazon Web Services resources. For example, you can use the same tag for different resources to indicate that they are related. You can also use tags to manage access (see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html"> Access Tags</a>). </p> <p>The Amazon IVS API has these tag-related endpoints: <a>TagResource</a>, <a>UntagResource</a>, and <a>ListTagsForResource</a>. The following resources support tagging: Channels, Stream Keys, Playback Key Pairs, and Recording Configurations.</p> <p>At most 50 tags can be applied to a resource. </p> <p> <b>Authentication versus Authorization</b> </p> <p>Note the differences between these concepts:</p> <ul> <li> <p> <i>Authentication</i> is about verifying identity. You need to be authenticated to sign Amazon IVS API requests.</p> </li> <li> <p> <i>Authorization</i> is about granting permissions. Your IAM roles need to have permissions for Amazon IVS API requests. In addition, authorization is needed to view <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Amazon IVS private channels</a>. (Private channels are channels that are enabled for "playback authorization.")</p> </li> </ul> <p> <b>Authentication</b> </p> <p>All Amazon IVS API requests must be authenticated with a signature. The Amazon Web Services Command-Line Interface (CLI) and Amazon IVS Player SDKs take care of signing the underlying API calls for you. However, if your application calls the Amazon IVS API directly, it’s your responsibility to sign the requests.</p> <p>You generate a signature using valid Amazon Web Services credentials that have permission to perform the requested action. For example, you must sign PutMetadata requests with a signature generated from an IAM user account that has the <code>ivs:PutMetadata</code> permission.</p> <p>For more information:</p> <ul> <li> <p>Authentication and generating signatures — See <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html">Authenticating Requests (Amazon Web Services Signature Version 4)</a> in the <i>Amazon Web Services General Reference</i>.</p> </li> <li> <p>Managing Amazon IVS permissions — See <a href="https://docs.aws.amazon.com/ivs/latest/userguide/security-iam.html">Identity and Access Management</a> on the Security page of the <i>Amazon IVS User Guide</i>.</p> </li> </ul> <p> <b>Amazon Resource Names (ARNs)</b> </p> <p>ARNs uniquely identify AWS resources. An ARN is required when you need to specify a resource unambiguously across all of AWS, such as in IAM policies and API calls. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names</a> in the <i>AWS General Reference</i>.</p> <p> <b>Channel Endpoints</b> </p> <ul> <li> <p> <a>CreateChannel</a> — Creates a new channel and an associated stream key to start streaming.</p> </li> <li> <p> <a>GetChannel</a> — Gets the channel configuration for the specified channel ARN.</p> </li> <li> <p> <a>BatchGetChannel</a> — Performs <a>GetChannel</a> on multiple ARNs simultaneously.</p> </li> <li> <p> <a>ListChannels</a> — Gets summary information about all channels in your account, in the Amazon Web Services region where the API request is processed. This list can be filtered to match a specified name or recording-configuration ARN. Filters are mutually exclusive and cannot be used together. If you try to use both filters, you will get an error (409 Conflict Exception).</p> </li> <li> <p> <a>UpdateChannel</a> — Updates a channel''s configuration. This does not affect an ongoing stream of this channel. You must stop and restart the stream for the changes to take effect.</p> </li> <li> <p> <a>DeleteChannel</a> — Deletes the specified channel.</p> </li> </ul> <p> <b>StreamKey Endpoints</b> </p> <ul> <li> <p> <a>CreateStreamKey</a> — Creates a stream key, used to initiate a stream, for the specified channel ARN.</p> </li> <li> <p> <a>GetStreamKey</a> — Gets stream key information for the specified ARN.</p> </li> <li> <p> <a>BatchGetStreamKey</a> — Performs <a>GetStreamKey</a> on multiple ARNs simultaneously.</p> </li> <li> <p> <a>ListStreamKeys</a> — Gets summary information about stream keys for the specified channel.</p> </li> <li> <p> <a>DeleteStreamKey</a> — Deletes the stream key for the specified ARN, so it can no longer be used to stream.</p> </li> </ul> <p> <b>Stream Endpoints</b> </p> <ul> <li> <p> <a>GetStream</a> — Gets information about the active (live) stream on a specified channel.</p> </li> <li> <p> <a>GetStreamSession</a> — Gets metadata on a specified stream.</p> </li> <li> <p> <a>ListStreams</a> — Gets summary information about live streams in your account, in the Amazon Web Services region where the API request is processed.</p> </li> <li> <p> <a>ListStreamSessions</a> — Gets a summary of current and previous streams for a specified channel in your account, in the AWS region where the API request is processed.</p> </li> <li> <p> <a>StopStream</a> — Disconnects the incoming RTMPS stream for the specified channel. Can be used in conjunction with <a>DeleteStreamKey</a> to prevent further streaming to a channel.</p> </li> <li> <p> <a>PutMetadata</a> — Inserts metadata into the active stream of the specified channel. At most 5 requests per second per channel are allowed, each with a maximum 1 KB payload. (If 5 TPS is not sufficient for your needs, we recommend batching your data into a single PutMetadata call.) At most 155 requests per second per account are allowed.</p> </li> </ul> <p> <b>PlaybackKeyPair Endpoints</b> </p> <p>For more information, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html">Setting Up Private Channels</a> in the <i>Amazon IVS User Guide</i>.</p> <ul> <li> <p> <a>ImportPlaybackKeyPair</a> — Imports the public portion of a new key pair and returns its <code>arn</code> and <code>fingerprint</code>. The <code>privateKey</code> can then be used to generate viewer authorization tokens, to grant viewers access to private channels (channels enabled for playback authorization).</p> </li> <li> <p> <a>GetPlaybackKeyPair</a> — Gets a specified playback authorization key pair and returns the <code>arn</code> and <code>fingerprint</code>. The <code>privateKey</code> held by the caller can be used to generate viewer authorization tokens, to grant viewers access to private channels.</p> </li> <li> <p> <a>ListPlaybackKeyPairs</a> — Gets summary information about playback key pairs.</p> </li> <li> <p> <a>DeletePlaybackKeyPair</a> — Deletes a specified authorization key pair. This invalidates future viewer tokens generated using the key pair’s <code>privateKey</code>.</p> </li> </ul> <p> <b>RecordingConfiguration Endpoints</b> </p> <ul> <li> <p> <a>CreateRecordingConfiguration</a> — Creates a new recording configuration, used to enable recording to Amazon S3.</p> </li> <li> <p> <a>GetRecordingConfiguration</a> — Gets the recording-configuration metadata for the specified ARN.</p> </li> <li> <p> <a>ListRecordingConfigurations</a> — Gets summary information about all recording configurations in your account, in the Amazon Web Services region where the API request is processed.</p> </li> <li> <p> <a>DeleteRecordingConfiguration</a> — Deletes the recording configuration for the specified ARN.</p> </li> </ul> <p> <b>Amazon Web Services Tags Endpoints</b> </p> <ul> <li> <p> <a>TagResource</a> — Adds or updates tags for the Amazon Web Services resource with the specified ARN.</p> </li> <li> <p> <a>UntagResource</a> — Removes tags from the resource with the specified ARN.</p> </li> <li> <p> <a>ListTagsForResource</a> — Gets information about Amazon Web Services tags for the specified ARN.</p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -173,7 +173,7 @@ paths:
                 - arns
               properties:
                 arns:
-                  description: 'Array of ARNs, one per channel.'
+                  description: 'Array of ARNs, one per stream key.'
                   type: array
                   items:
                     $ref: '#/components/schemas/StreamKeyArn'
@@ -199,11 +199,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateChannelResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
           description: AccessDeniedException
           content:
@@ -211,23 +211,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '482':
-          description: ResourceNotFoundException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/ValidationException'
         '483':
-          description: ServiceQuotaExceededException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServiceQuotaExceededException'
-        '484':
           description: PendingVerification
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PendingVerification'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
       parameters: []
       requestBody:
         required: true
@@ -236,27 +236,21 @@ paths:
             schema:
               type: object
               properties:
-                name:
-                  description: Channel name.
-                  type: string
-                  pattern: '^[a-zA-Z0-9-_]*$'
-                  minLength: 0
-                  maxLength: 128
+                authorized:
+                  description: 'Whether the channel is private (enabled for playback authorization). Default: <code>false</code>.'
+                  type: boolean
                 latencyMode:
                   description: 'Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. (Note: In the Amazon IVS console, <code>LOW</code> and <code>NORMAL</code> correspond to Ultra-low and Standard, respectively.) Default: <code>LOW</code>.'
                   type: string
                   enum:
                     - NORMAL
                     - LOW
-                type:
-                  description: '<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.</i> Default: <code>STANDARD</code>. Valid values:</p> <ul> <li> <p> <code>STANDARD</code>: Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.</p> </li> <li> <p> <code>BASIC</code>: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps.</p> </li> </ul>'
+                name:
+                  description: Channel name.
                   type: string
-                  enum:
-                    - BASIC
-                    - STANDARD
-                authorized:
-                  description: 'Whether the channel is private (enabled for playback authorization). Default: <code>false</code>.'
-                  type: boolean
+                  pattern: '^[a-zA-Z0-9-_]*$'
+                  minLength: 0
+                  maxLength: 128
                 recordingConfigurationArn:
                   description: 'Recording-configuration ARN. Default: "" (empty string, recording is disabled).'
                   type: string
@@ -264,12 +258,18 @@ paths:
                   minLength: 0
                   maxLength: 128
                 tags:
-                  description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
+                  description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
                   type: object
                   minProperties: 0
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+                type:
+                  description: '<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.</i> Default: <code>STANDARD</code>. Valid values:</p> <ul> <li> <p> <code>STANDARD</code>: Video is transcoded: multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Transcoding allows higher playback quality across a range of download speeds. Resolution can be up to 1080p and bitrate can be up to 8.5 Mbps. Audio is transcoded only for renditions 360p and below; above that, audio is passed through. This is the default.</p> </li> <li> <p> <code>BASIC</code>: Video is transmuxed: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Resolution can be up to 1080p and bitrate can be up to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions between 480p and 1080p.</p> </li> </ul>'
+                  type: string
+                  enum:
+                    - BASIC
+                    - STANDARD
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -281,7 +281,7 @@ paths:
   /CreateRecordingConfiguration:
     post:
       operationId: CreateRecordingConfiguration
-      description: '<p>Creates a new recording configuration, used to enable recording to Amazon S3.</p> <p> <b>Known issue:</b> In the us-east-1 region, if you use the AWS CLI to create a recording configuration, it returns success even if the S3 bucket is in a different region. In this case, the <code>state</code> of the recording configuration is <code>CREATE_FAILED</code> (instead of <code>ACTIVE</code>). (In other regions, the CLI correctly returns failure if the bucket is in a different region.)</p> <p> <b>Workaround:</b> Ensure that your S3 bucket is in the same region as the recording configuration. If you create a recording configuration in a different region as your S3 bucket, delete that recording configuration and create a new one with an S3 bucket from the correct region.</p>'
+      description: '<p>Creates a new recording configuration, used to enable recording to Amazon S3.</p> <p> <b>Known issue:</b> In the us-east-1 region, if you use the Amazon Web Services CLI to create a recording configuration, it returns success even if the S3 bucket is in a different region. In this case, the <code>state</code> of the recording configuration is <code>CREATE_FAILED</code> (instead of <code>ACTIVE</code>). (In other regions, the CLI correctly returns failure if the bucket is in a different region.)</p> <p> <b>Workaround:</b> Ensure that your S3 bucket is in the same region as the recording configuration. If you create a recording configuration in a different region as your S3 bucket, delete that recording configuration and create a new one with an S3 bucket from the correct region.</p>'
       responses:
         '200':
           description: Success
@@ -290,23 +290,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateRecordingConfigurationResponse'
         '480':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '481':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '482':
           description: InternalServerException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
         '483':
           description: PendingVerification
           content:
@@ -314,17 +314,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/PendingVerification'
         '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
           description: ServiceQuotaExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceQuotaExceededException'
-        '485':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
       parameters: []
       requestBody:
         required: true
@@ -335,12 +335,6 @@ paths:
               required:
                 - destinationConfiguration
               properties:
-                name:
-                  description: An arbitrary string (a nickname) that helps the customer identify that resource. The value does not need to be unique.
-                  type: string
-                  pattern: '^[a-zA-Z0-9-_]*$'
-                  minLength: 0
-                  maxLength: 128
                 destinationConfiguration:
                   description: 'A complex type that describes a location where recorded videos will be stored. Each member represents a type of destination configuration. For recording, you define one and only one type of destination configuration.'
                   type: object
@@ -349,13 +343,36 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/S3DestinationConfiguration'
                         - description: An S3 destination configuration where recorded videos will be stored.
+                name:
+                  description: Recording-configuration name. The value does not need to be unique.
+                  type: string
+                  pattern: '^[a-zA-Z0-9-_]*$'
+                  minLength: 0
+                  maxLength: 128
+                recordingReconnectWindowSeconds:
+                  description: 'If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together. Default: 0.'
+                  type: integer
+                  minimum: 0
+                  maximum: 300
                 tags:
-                  description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
+                  description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
                   type: object
                   minProperties: 0
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+                thumbnailConfiguration:
+                  description: An object representing a configuration of thumbnails for recorded video.
+                  type: object
+                  properties:
+                    recordingMode:
+                      allOf:
+                        - $ref: '#/components/schemas/RecordingMode'
+                        - description: 'Thumbnail recording mode. Default: <code>INTERVAL</code>.'
+                    targetIntervalSeconds:
+                      allOf:
+                        - $ref: '#/components/schemas/TargetIntervalSeconds'
+                        - description: '<p>The targeted thumbnail-generation interval in seconds. This is configurable (and required) only if <code>recordingMode</code> is <code>INTERVAL</code>. Default: 60.</p> <p> <b>Important:</b> Setting a value for <code>targetIntervalSeconds</code> does not guarantee that thumbnails are generated at the specified interval. For thumbnails to be generated at the <code>targetIntervalSeconds</code> interval, the <code>IDR/Keyframe</code> value for the input video must be less than the <code>targetIntervalSeconds</code> value. See <a href="https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html"> Amazon IVS Streaming Configuration</a> for information on setting <code>IDR/Keyframe</code> to the recommended value in video-encoder settings.</p>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -376,11 +393,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateStreamKeyResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
           description: AccessDeniedException
           content:
@@ -388,23 +405,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '482':
-          description: ResourceNotFoundException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/ValidationException'
         '483':
-          description: ServiceQuotaExceededException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServiceQuotaExceededException'
-        '484':
           description: PendingVerification
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PendingVerification'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
       parameters: []
       requestBody:
         required: true
@@ -422,7 +439,7 @@ paths:
                   minLength: 1
                   maxLength: 128
                 tags:
-                  description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
+                  description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
                   type: object
                   minProperties: 0
                   maxProperties: 50
@@ -444,11 +461,11 @@ paths:
         '204':
           description: Success
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
           description: AccessDeniedException
           content:
@@ -456,23 +473,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '482':
-          description: ResourceNotFoundException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/ValidationException'
         '483':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '484':
           description: PendingVerification
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PendingVerification'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       parameters: []
       requestBody:
         required: true
@@ -509,11 +526,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeletePlaybackKeyPairResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
           description: AccessDeniedException
           content:
@@ -521,11 +538,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '482':
-          description: ResourceNotFoundException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/ValidationException'
         '483':
           description: PendingVerification
           content:
@@ -564,35 +581,35 @@ paths:
         '200':
           description: Success
         '480':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '481':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '482':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '483':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '484':
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
           description: ValidationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       parameters: []
       requestBody:
         required: true
@@ -625,11 +642,11 @@ paths:
         '204':
           description: Success
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
           description: AccessDeniedException
           content:
@@ -637,11 +654,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '482':
-          description: ResourceNotFoundException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/ValidationException'
         '483':
           description: PendingVerification
           content:
@@ -684,11 +701,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetChannelResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
           description: AccessDeniedException
           content:
@@ -696,11 +713,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '482':
-          description: ResourceNotFoundException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/ValidationException'
       parameters: []
       requestBody:
         required: true
@@ -737,11 +754,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetPlaybackKeyPairResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
           description: AccessDeniedException
           content:
@@ -749,11 +766,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '482':
-          description: ResourceNotFoundException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/ValidationException'
       parameters: []
       requestBody:
         required: true
@@ -790,11 +807,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetRecordingConfigurationResponse'
         '480':
-          description: AccessDeniedException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccessDeniedException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
           description: InternalServerException
           content:
@@ -802,11 +819,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '482':
-          description: ResourceNotFoundException
+          description: AccessDeniedException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/AccessDeniedException'
         '483':
           description: ValidationException
           content:
@@ -855,17 +872,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '482':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
         '483':
           description: ChannelNotBroadcasting
           content:
@@ -908,11 +925,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetStreamKeyResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
           description: AccessDeniedException
           content:
@@ -920,11 +937,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '482':
-          description: ResourceNotFoundException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/ValidationException'
       parameters: []
       requestBody:
         required: true
@@ -949,6 +966,65 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /GetStreamSession:
+    post:
+      operationId: GetStreamSession
+      description: Gets metadata on a specified stream.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetStreamSessionResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - channelArn
+              properties:
+                channelArn:
+                  description: ARN of the channel resource
+                  type: string
+                  pattern: '^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:channel/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+                streamId:
+                  description: 'Unique identifier for a live or previously live stream in the specified channel. If no <code>streamId</code> is provided, this returns the most recent stream session for the channel, if it exists.'
+                  type: string
+                  pattern: '^st-[a-zA-Z0-9]+$'
+                  minLength: 26
+                  maxLength: 26
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /ImportPlaybackKeyPair:
     post:
       operationId: ImportPlaybackKeyPair
@@ -961,35 +1037,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/ImportPlaybackKeyPairResponse'
         '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '482':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
-        '483':
-          description: ServiceQuotaExceededException
+        '481':
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServiceQuotaExceededException'
-        '484':
+                $ref: '#/components/schemas/ValidationException'
+        '482':
           description: PendingVerification
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PendingVerification'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
       parameters: []
       requestBody:
         required: true
@@ -1000,17 +1076,17 @@ paths:
               required:
                 - publicKeyMaterial
               properties:
-                publicKeyMaterial:
-                  description: The public portion of a customer-generated key pair.
-                  type: string
                 name:
-                  description: An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.
+                  description: Playback-key-pair name. The value does not need to be unique.
                   type: string
                   pattern: '^[a-zA-Z0-9-_]*$'
                   minLength: 0
                   maxLength: 128
+                publicKeyMaterial:
+                  description: The public portion of a customer-generated key pair.
+                  type: string
                 tags:
-                  description: Any tags provided with the request are added to the playback key pair tags.
+                  description: 'Any tags provided with the request are added to the playback key pair tags. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
                   type: object
                   minProperties: 0
                   maxProperties: 50
@@ -1027,7 +1103,7 @@ paths:
   /ListChannels:
     post:
       operationId: ListChannels
-      description: 'Gets summary information about all channels in your account, in the AWS region where the API request is processed. This list can be filtered to match a specified name or recording-configuration ARN. Filters are mutually exclusive and cannot be used together. If you try to use both filters, you will get an error (409 ConflictException).'
+      description: 'Gets summary information about all channels in your account, in the Amazon Web Services region where the API request is processed. This list can be filtered to match a specified name or recording-configuration ARN. Filters are mutually exclusive and cannot be used together. If you try to use both filters, you will get an error (409 ConflictException).'
       responses:
         '200':
           description: Success
@@ -1036,17 +1112,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListChannelsResponse'
         '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
         '482':
           description: ConflictException
           content:
@@ -1085,16 +1161,17 @@ paths:
                   pattern: '^$|^arn:aws:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$'
                   minLength: 0
                   maxLength: 128
+                maxResults:
+                  description: 'Maximum number of channels to return. Default: 100.'
+                  type: integer
+                  minimum: 1
+                  maximum: 100
                 nextToken:
                   description: The first channel to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
                   type: string
+                  pattern: '^[a-zA-Z0-9+/=_-]*$'
                   minLength: 0
-                  maxLength: 500
-                maxResults:
-                  description: 'Maximum number of channels to return. Default: 50.'
-                  type: integer
-                  minimum: 1
-                  maximum: 50
+                  maxLength: 1024
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1115,17 +1192,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListPlaybackKeyPairsResponse'
         '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters:
         - name: maxResults
           in: query
@@ -1146,16 +1223,17 @@ paths:
             schema:
               type: object
               properties:
-                nextToken:
-                  description: Maximum number of key pairs to return.
-                  type: string
-                  minLength: 0
-                  maxLength: 500
                 maxResults:
-                  description: 'The first key pair to retrieve. This is used for pagination; see the <code>nextToken</code> response field. Default: 50.'
+                  description: 'Maximum number of key pairs to return. Default: your service quota or 100, whichever is smaller.'
                   type: integer
                   minimum: 1
-                  maximum: 50
+                  maximum: 100
+                nextToken:
+                  description: The first key pair to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+                  type: string
+                  pattern: '^[a-zA-Z0-9+/=_-]*$'
+                  minLength: 0
+                  maxLength: 1024
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1167,7 +1245,7 @@ paths:
   /ListRecordingConfigurations:
     post:
       operationId: ListRecordingConfigurations
-      description: 'Gets summary information about all recording configurations in your account, in the AWS region where the API request is processed.'
+      description: 'Gets summary information about all recording configurations in your account, in the Amazon Web Services region where the API request is processed.'
       responses:
         '200':
           description: Success
@@ -1176,17 +1254,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListRecordingConfigurationsResponse'
         '480':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '481':
           description: InternalServerException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
         '482':
           description: ValidationException
           content:
@@ -1213,16 +1291,17 @@ paths:
             schema:
               type: object
               properties:
+                maxResults:
+                  description: 'Maximum number of recording configurations to return. Default: your service quota or 100, whichever is smaller. '
+                  type: integer
+                  minimum: 1
+                  maximum: 100
                 nextToken:
                   description: The first recording configuration to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
                   type: string
+                  pattern: '^[a-zA-Z0-9+/=_-]*$'
                   minLength: 0
-                  maxLength: 500
-                maxResults:
-                  description: 'Maximum number of recording configurations to return. Default: 50. '
-                  type: integer
-                  minimum: 1
-                  maximum: 50
+                  maxLength: 1024
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1243,11 +1322,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListStreamKeysResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
           description: AccessDeniedException
           content:
@@ -1255,11 +1334,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '482':
-          description: ResourceNotFoundException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/ValidationException'
       parameters:
         - name: maxResults
           in: query
@@ -1288,16 +1367,93 @@ paths:
                   pattern: '^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:channel/[a-zA-Z0-9-]+$'
                   minLength: 1
                   maxLength: 128
-                nextToken:
-                  description: The first stream key to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
-                  type: string
-                  minLength: 0
-                  maxLength: 500
                 maxResults:
-                  description: 'Maximum number of streamKeys to return. Default: 50.'
+                  description: 'Maximum number of streamKeys to return. Default: 1.'
                   type: integer
                   minimum: 1
                   maximum: 50
+                nextToken:
+                  description: The first stream key to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+                  type: string
+                  pattern: '^[a-zA-Z0-9+/=_-]*$'
+                  minLength: 0
+                  maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListStreamSessions:
+    post:
+      operationId: ListStreamSessions
+      description: 'Gets a summary of current and previous streams for a specified channel in your account, in the AWS region where the API request is processed.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListStreamSessionsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - channelArn
+              properties:
+                channelArn:
+                  description: Channel ARN used to filter the list.
+                  type: string
+                  pattern: '^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:channel/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+                maxResults:
+                  description: 'Maximum number of streams to return. Default: 100.'
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                nextToken:
+                  description: The first stream to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+                  type: string
+                  pattern: '^[a-zA-Z0-9+/=_-]*$'
+                  minLength: 0
+                  maxLength: 1024
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1309,7 +1465,7 @@ paths:
   /ListStreams:
     post:
       operationId: ListStreams
-      description: 'Gets summary information about live streams in your account, in the AWS region where the API request is processed.'
+      description: 'Gets summary information about live streams in your account, in the Amazon Web Services region where the API request is processed.'
       responses:
         '200':
           description: Success
@@ -1323,6 +1479,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters:
         - name: maxResults
           in: query
@@ -1343,16 +1505,25 @@ paths:
             schema:
               type: object
               properties:
+                filterBy:
+                  description: Object specifying the stream attribute on which to filter.
+                  type: object
+                  properties:
+                    health:
+                      allOf:
+                        - $ref: '#/components/schemas/StreamHealth'
+                        - description: The stream’s health.
+                maxResults:
+                  description: 'Maximum number of streams to return. Default: 100.'
+                  type: integer
+                  minimum: 1
+                  maximum: 100
                 nextToken:
                   description: The first stream to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
                   type: string
+                  pattern: '^[a-zA-Z0-9+/=_-]*$'
                   minLength: 0
-                  maxLength: 500
-                maxResults:
-                  description: 'Maximum number of streams to return. Default: 50.'
-                  type: integer
-                  minimum: 1
-                  maximum: 50
+                  maxLength: 1024
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1364,7 +1535,7 @@ paths:
   '/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
-      description: Gets information about AWS tags for the specified ARN.
+      description: Gets information about Amazon Web Services tags for the specified ARN.
       responses:
         '200':
           description: Success
@@ -1373,60 +1544,33 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListTagsForResourceResponse'
         '480':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '481':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '482':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters:
         - name: resourceArn
           in: path
           required: true
-          description: The ARN of the resource to be retrieved.
+          description: The ARN of the resource to be retrieved. The ARN must be URL-encoded.
           schema:
             type: string
             pattern: '^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:[a-z-]/[a-zA-Z0-9-]+$'
             minLength: 1
             maxLength: 128
-        - name: maxResults
-          in: query
-          schema:
-            type: string
-          description: Pagination limit
-          required: false
-        - name: nextToken
-          in: query
-          schema:
-            type: string
-          description: Pagination token
-          required: false
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                nextToken:
-                  description: The first tag to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
-                  type: string
-                maxResults:
-                  description: 'Maximum number of tags to return. Default: 50.'
-                  type: integer
-                  minimum: 1
-                  maximum: 50
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1437,7 +1581,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: Adds or updates tags for the AWS resource with the specified ARN.
+      description: Adds or updates tags for the Amazon Web Services resource with the specified ARN.
       responses:
         '200':
           description: Success
@@ -1446,28 +1590,28 @@ paths:
               schema:
                 $ref: '#/components/schemas/TagResourceResponse'
         '480':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '481':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '482':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters:
         - name: resourceArn
           in: path
           required: true
-          description: ARN of the resource for which tags are to be added or updated.
+          description: ARN of the resource for which tags are to be added or updated. The ARN must be URL-encoded.
           schema:
             type: string
             pattern: '^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:[a-z-]/[a-zA-Z0-9-]+$'
@@ -1483,7 +1627,7 @@ paths:
                 - tags
               properties:
                 tags:
-                  description: Array of tags to be added or updated.
+                  description: 'Array of tags to be added or updated. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
                   type: object
                   minProperties: 0
                   maxProperties: 50
@@ -1492,40 +1636,40 @@ paths:
   /PutMetadata:
     post:
       operationId: PutMetadata
-      description: 'Inserts metadata into the active stream of the specified channel. A maximum of 5 requests per second per channel is allowed, each with a maximum 1 KB payload. (If 5 TPS is not sufficient for your needs, we recommend batching your data into a single PutMetadata call.) Also see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/metadata.html">Embedding Metadata within a Video Stream</a> in the <i>Amazon IVS User Guide</i>.'
+      description: 'Inserts metadata into the active stream of the specified channel. At most 5 requests per second per channel are allowed, each with a maximum 1 KB payload. (If 5 TPS is not sufficient for your needs, we recommend batching your data into a single PutMetadata call.) At most 155 requests per second per account are allowed. Also see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/metadata.html">Embedding Metadata within a Video Stream</a> in the <i>Amazon IVS User Guide</i>.'
       responses:
         '200':
           description: Success
         '480':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '481':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '482':
-          description: ChannelNotBroadcasting
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ChannelNotBroadcasting'
-        '483':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '484':
+        '481':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ChannelNotBroadcasting
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelNotBroadcasting'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
       parameters: []
       requestBody:
         required: true
@@ -1547,6 +1691,7 @@ paths:
                   description: 'Metadata to insert into the stream. Maximum: 1 KB per request.'
                   type: string
                   minLength: 1
+                  format: password
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1573,11 +1718,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
-          description: ChannelNotBroadcasting
+          description: AccessDeniedException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ChannelNotBroadcasting'
+                $ref: '#/components/schemas/AccessDeniedException'
         '482':
           description: ValidationException
           content:
@@ -1585,11 +1730,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/ValidationException'
         '483':
-          description: AccessDeniedException
+          description: ChannelNotBroadcasting
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccessDeniedException'
+                $ref: '#/components/schemas/ChannelNotBroadcasting'
         '484':
           description: StreamUnavailable
           content:
@@ -1632,28 +1777,28 @@ paths:
               schema:
                 $ref: '#/components/schemas/UntagResourceResponse'
         '480':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '481':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '482':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters:
         - name: resourceArn
           in: path
           required: true
-          description: ARN of the resource for which tags are to be removed.
+          description: ARN of the resource for which tags are to be removed. The ARN must be URL-encoded.
           schema:
             type: string
             pattern: '^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:[a-z-]/[a-zA-Z0-9-]+$'
@@ -1662,7 +1807,7 @@ paths:
         - name: tagKeys
           in: query
           required: true
-          description: Array of tags to be removed.
+          description: 'Array of tags to be removed. Array of maps, each of the form s<code>tring:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
           schema:
             type: array
             items:
@@ -1689,11 +1834,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/UpdateChannelResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
           description: AccessDeniedException
           content:
@@ -1701,23 +1846,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '482':
-          description: ResourceNotFoundException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/ValidationException'
         '483':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '484':
           description: PendingVerification
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PendingVerification'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       parameters: []
       requestBody:
         required: true
@@ -1734,33 +1879,33 @@ paths:
                   pattern: '^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:channel/[a-zA-Z0-9-]+$'
                   minLength: 1
                   maxLength: 128
-                name:
-                  description: Channel name.
-                  type: string
-                  pattern: '^[a-zA-Z0-9-_]*$'
-                  minLength: 0
-                  maxLength: 128
+                authorized:
+                  description: Whether the channel is private (enabled for playback authorization).
+                  type: boolean
                 latencyMode:
                   description: 'Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. (Note: In the Amazon IVS console, <code>LOW</code> and <code>NORMAL</code> correspond to Ultra-low and Standard, respectively.)'
                   type: string
                   enum:
                     - NORMAL
                     - LOW
-                type:
-                  description: '<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately</i>. Valid values:</p> <ul> <li> <p> <code>STANDARD</code>: Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.</p> </li> <li> <p> <code>BASIC</code>: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps.</p> </li> </ul>'
+                name:
+                  description: Channel name.
                   type: string
-                  enum:
-                    - BASIC
-                    - STANDARD
-                authorized:
-                  description: Whether the channel is private (enabled for playback authorization).
-                  type: boolean
+                  pattern: '^[a-zA-Z0-9-_]*$'
+                  minLength: 0
+                  maxLength: 128
                 recordingConfigurationArn:
                   description: 'Recording-configuration ARN. If this is set to an empty string, recording is disabled. A value other than an empty string indicates that recording is enabled'
                   type: string
                   pattern: '^$|^arn:aws:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$'
                   minLength: 0
                   maxLength: 128
+                type:
+                  description: '<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately</i>. Valid values:</p> <ul> <li> <p> <code>STANDARD</code>: Video is transcoded: multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Transcoding allows higher playback quality across a range of download speeds. Resolution can be up to 1080p and bitrate can be up to 8.5 Mbps. Audio is transcoded only for renditions 360p and below; above that, audio is passed through. This is the default.</p> </li> <li> <p> <code>BASIC</code>: Video is transmuxed: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Resolution can be up to 1080p and bitrate can be up to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions between 480p and 1080p.</p> </li> </ul>'
+                  type: string
+                  enum:
+                    - BASIC
+                    - STANDARD
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1825,7 +1970,9 @@ components:
       type: object
       properties:
         channels:
-          $ref: '#/components/schemas/Channels'
+          allOf:
+            - $ref: '#/components/schemas/Channels'
+            - description: <p/>
         errors:
           allOf:
             - $ref: '#/components/schemas/BatchErrors'
@@ -1838,10 +1985,14 @@ components:
     BatchGetStreamKeyResponse:
       type: object
       properties:
-        streamKeys:
-          $ref: '#/components/schemas/StreamKeys'
         errors:
-          $ref: '#/components/schemas/BatchErrors'
+          allOf:
+            - $ref: '#/components/schemas/BatchErrors'
+            - description: <p/>
+        streamKeys:
+          allOf:
+            - $ref: '#/components/schemas/StreamKeys'
+            - description: <p/>
     StreamKeyArn:
       type: string
       pattern: '^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:stream-key/[a-zA-Z0-9-]+$'
@@ -1851,22 +2002,29 @@ components:
       type: object
       properties:
         channel:
-          $ref: '#/components/schemas/Channel'
+          allOf:
+            - $ref: '#/components/schemas/Channel'
+            - description: <p/>
         streamKey:
-          $ref: '#/components/schemas/StreamKey'
+          allOf:
+            - $ref: '#/components/schemas/StreamKey'
+            - description: <p/>
     TagValue:
       type: string
+      minLength: 0
       maxLength: 256
-    ValidationException: {}
-    AccessDeniedException: {}
     ResourceNotFoundException: {}
-    ServiceQuotaExceededException: {}
+    AccessDeniedException: {}
+    ValidationException: {}
     PendingVerification: {}
+    ServiceQuotaExceededException: {}
     CreateRecordingConfigurationResponse:
       type: object
       properties:
         recordingConfiguration:
-          $ref: '#/components/schemas/RecordingConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/RecordingConfiguration'
+            - description: <zonbook></zonbook><xhtml></xhtml>
     S3DestinationConfiguration:
       type: object
       required:
@@ -1877,8 +2035,17 @@ components:
             - $ref: '#/components/schemas/S3DestinationBucketName'
             - description: Location (S3 bucket name) where recorded videos will be stored.
       description: A complex type that describes an S3 location where recorded videos will be stored.
-    ConflictException: {}
+    RecordingMode:
+      type: string
+      enum:
+        - DISABLED
+        - INTERVAL
+    TargetIntervalSeconds:
+      type: integer
+      minimum: 5
+      maximum: 60
     InternalServerException: {}
+    ConflictException: {}
     CreateStreamKeyResponse:
       type: object
       properties:
@@ -1893,33 +2060,52 @@ components:
       type: object
       properties:
         channel:
-          $ref: '#/components/schemas/Channel'
+          allOf:
+            - $ref: '#/components/schemas/Channel'
+            - description: <p/>
     GetPlaybackKeyPairResponse:
       type: object
       properties:
         keyPair:
-          $ref: '#/components/schemas/PlaybackKeyPair'
+          allOf:
+            - $ref: '#/components/schemas/PlaybackKeyPair'
+            - description: <zonbook></zonbook><xhtml></xhtml>
     GetRecordingConfigurationResponse:
       type: object
       properties:
         recordingConfiguration:
-          $ref: '#/components/schemas/RecordingConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/RecordingConfiguration'
+            - description: <zonbook></zonbook><xhtml></xhtml>
     GetStreamResponse:
       type: object
       properties:
         stream:
-          $ref: '#/components/schemas/Stream'
+          allOf:
+            - $ref: '#/components/schemas/Stream'
+            - description: <p/>
     ChannelNotBroadcasting: {}
     GetStreamKeyResponse:
       type: object
       properties:
         streamKey:
-          $ref: '#/components/schemas/StreamKey'
+          allOf:
+            - $ref: '#/components/schemas/StreamKey'
+            - description: <zonbook></zonbook><xhtml></xhtml>
+    GetStreamSessionResponse:
+      type: object
+      properties:
+        streamSession:
+          allOf:
+            - $ref: '#/components/schemas/StreamSession'
+            - description: List of stream details.
     ImportPlaybackKeyPairResponse:
       type: object
       properties:
         keyPair:
-          $ref: '#/components/schemas/PlaybackKeyPair'
+          allOf:
+            - $ref: '#/components/schemas/PlaybackKeyPair'
+            - description: <p/>
     ListChannelsResponse:
       type: object
       required:
@@ -1951,51 +2137,68 @@ components:
       required:
         - recordingConfigurations
       properties:
-        recordingConfigurations:
-          allOf:
-            - $ref: '#/components/schemas/RecordingConfigurationList'
-            - description: List of the matching recording configurations.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: 'If there are more recording configurations than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.'
+        recordingConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/RecordingConfigurationList'
+            - description: List of the matching recording configurations.
     ListStreamKeysResponse:
       type: object
       required:
         - streamKeys
       properties:
-        streamKeys:
-          allOf:
-            - $ref: '#/components/schemas/StreamKeyList'
-            - description: List of stream keys.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: 'If there are more stream keys than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.'
+        streamKeys:
+          allOf:
+            - $ref: '#/components/schemas/StreamKeyList'
+            - description: List of stream keys.
+    ListStreamSessionsResponse:
+      type: object
+      required:
+        - streamSessions
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If there are more streams than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.'
+        streamSessions:
+          allOf:
+            - $ref: '#/components/schemas/StreamSessionList'
+            - description: List of stream sessions.
     ListStreamsResponse:
       type: object
       required:
         - streams
       properties:
-        streams:
-          allOf:
-            - $ref: '#/components/schemas/StreamList'
-            - description: List of streams.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: 'If there are more streams than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.'
+        streams:
+          allOf:
+            - $ref: '#/components/schemas/StreamList'
+            - description: List of streams.
+    StreamHealth:
+      type: string
+      enum:
+        - HEALTHY
+        - STARVING
+        - UNKNOWN
     ListTagsForResourceResponse:
       type: object
       required:
         - tags
       properties:
         tags:
-          $ref: '#/components/schemas/Tags'
-        nextToken:
           allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'If there are more tags than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.'
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>.'
     ThrottlingException: {}
     StopStreamResponse:
       type: object
@@ -2016,6 +2219,30 @@ components:
       properties:
         channel:
           $ref: '#/components/schemas/Channel'
+    Integer:
+      type: integer
+    String:
+      type: string
+    AudioConfiguration:
+      type: object
+      properties:
+        channels:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: Number of audio channels.
+        codec:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Codec used for the audio encoding.
+        sampleRate:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: Number of audio samples recorded per second.
+        targetBitrate:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The expected ingest bitrate (bits per second). This is configured in the encoder.
+      description: 'Object specifying a stream’s audio configuration, as set up by the broadcaster (usually in an encoder). This is part of the <a>IngestConfiguration</a> object and used for monitoring stream health.'
     ResourceArn:
       type: string
       pattern: '^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:[a-z-]/[a-zA-Z0-9-]+$'
@@ -2080,45 +2307,45 @@ components:
         arns:
           allOf:
             - $ref: '#/components/schemas/StreamKeyArnList'
-            - description: 'Array of ARNs, one per channel.'
+            - description: 'Array of ARNs, one per stream key.'
     StreamKeys:
       type: array
       items:
         $ref: '#/components/schemas/StreamKey'
     Boolean:
       type: boolean
-    ChannelName:
+    IsAuthorized:
+      type: boolean
+    IngestEndpoint:
       type: string
-      pattern: '^[a-zA-Z0-9-_]*$'
-      minLength: 0
-      maxLength: 128
     ChannelLatencyMode:
       type: string
       enum:
         - NORMAL
         - LOW
-    ChannelType:
+    ChannelName:
       type: string
-      enum:
-        - BASIC
-        - STANDARD
+      pattern: '^[a-zA-Z0-9-_]*$'
+      minLength: 0
+      maxLength: 128
+    PlaybackURL:
+      type: string
     ChannelRecordingConfigurationArn:
       type: string
       pattern: '^$|^arn:aws:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$'
       minLength: 0
       maxLength: 128
-    IngestEndpoint:
-      type: string
-    PlaybackURL:
-      type: string
-    IsAuthorized:
-      type: boolean
     Tags:
       type: object
       minProperties: 0
       maxProperties: 50
       additionalProperties:
         $ref: '#/components/schemas/TagValue'
+    ChannelType:
+      type: string
+      enum:
+        - BASIC
+        - STANDARD
     Channel:
       type: object
       properties:
@@ -2126,38 +2353,38 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChannelArn'
             - description: Channel ARN.
-        name:
-          allOf:
-            - $ref: '#/components/schemas/ChannelName'
-            - description: Channel name.
-        latencyMode:
-          allOf:
-            - $ref: '#/components/schemas/ChannelLatencyMode'
-            - description: 'Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. Default: <code>LOW</code>. (Note: In the Amazon IVS console, <code>LOW</code> and <code>NORMAL</code> correspond to Ultra-low and Standard, respectively.)'
-        type:
-          allOf:
-            - $ref: '#/components/schemas/ChannelType'
-            - description: '<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.</i> Default: <code>STANDARD</code>. Valid values:</p> <ul> <li> <p> <code>STANDARD</code>: Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.</p> </li> <li> <p> <code>BASIC</code>: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps.</p> </li> </ul>'
-        recordingConfigurationArn:
-          allOf:
-            - $ref: '#/components/schemas/ChannelRecordingConfigurationArn'
-            - description: 'Recording-configuration ARN. A value other than an empty string indicates that recording is enabled. Default: "" (empty string, recording is disabled).'
-        ingestEndpoint:
-          allOf:
-            - $ref: '#/components/schemas/IngestEndpoint'
-            - description: 'Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.'
-        playbackUrl:
-          allOf:
-            - $ref: '#/components/schemas/PlaybackURL'
-            - description: Channel playback URL.
         authorized:
           allOf:
             - $ref: '#/components/schemas/IsAuthorized'
             - description: 'Whether the channel is private (enabled for playback authorization). Default: <code>false</code>.'
+        ingestEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/IngestEndpoint'
+            - description: 'Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.'
+        latencyMode:
+          allOf:
+            - $ref: '#/components/schemas/ChannelLatencyMode'
+            - description: 'Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. Default: <code>LOW</code>. (Note: In the Amazon IVS console, <code>LOW</code> and <code>NORMAL</code> correspond to Ultra-low and Standard, respectively.)'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ChannelName'
+            - description: Channel name.
+        playbackUrl:
+          allOf:
+            - $ref: '#/components/schemas/PlaybackURL'
+            - description: Channel playback URL.
+        recordingConfigurationArn:
+          allOf:
+            - $ref: '#/components/schemas/ChannelRecordingConfigurationArn'
+            - description: 'Recording-configuration ARN. A value other than an empty string indicates that recording is enabled. Default: "" (empty string, recording is disabled).'
         tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
+            - description: 'Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ChannelType'
+            - description: '<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.</i> Default: <code>STANDARD</code>. Valid values:</p> <ul> <li> <p> <code>STANDARD</code>: Video is transcoded: multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Transcoding allows higher playback quality across a range of download speeds. Resolution can be up to 1080p and bitrate can be up to 8.5 Mbps. Audio is transcoded only for renditions 360p and below; above that, audio is passed through. This is the default.</p> </li> <li> <p> <code>BASIC</code>: Video is transmuxed: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Resolution can be up to 1080p and bitrate can be up to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions between 480p and 1080p.</p> </li> </ul>'
       description: Object specifying a channel.
     ChannelSummary:
       type: object
@@ -2166,18 +2393,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChannelArn'
             - description: Channel ARN.
-        name:
-          allOf:
-            - $ref: '#/components/schemas/ChannelName'
-            - description: Channel name.
-        latencyMode:
-          allOf:
-            - $ref: '#/components/schemas/ChannelLatencyMode'
-            - description: 'Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. Default: <code>LOW</code>. (Note: In the Amazon IVS console, <code>LOW</code> and <code>NORMAL</code> correspond to Ultra-low and Standard, respectively.)'
         authorized:
           allOf:
             - $ref: '#/components/schemas/IsAuthorized'
             - description: 'Whether the channel is private (enabled for playback authorization). Default: <code>false</code>.'
+        latencyMode:
+          allOf:
+            - $ref: '#/components/schemas/ChannelLatencyMode'
+            - description: 'Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. Default: <code>LOW</code>. (Note: In the Amazon IVS console, <code>LOW</code> and <code>NORMAL</code> correspond to Ultra-low and Standard, respectively.)'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ChannelName'
+            - description: Channel name.
         recordingConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/ChannelRecordingConfigurationArn'
@@ -2185,7 +2412,7 @@ components:
         tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
+            - description: 'Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
       description: Summary information about a channel.
     ChannelList:
       type: array
@@ -2195,22 +2422,18 @@ components:
       type: object
       title: CreateChannelRequest
       properties:
-        name:
-          allOf:
-            - $ref: '#/components/schemas/ChannelName'
-            - description: Channel name.
-        latencyMode:
-          allOf:
-            - $ref: '#/components/schemas/ChannelLatencyMode'
-            - description: 'Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. (Note: In the Amazon IVS console, <code>LOW</code> and <code>NORMAL</code> correspond to Ultra-low and Standard, respectively.) Default: <code>LOW</code>.'
-        type:
-          allOf:
-            - $ref: '#/components/schemas/ChannelType'
-            - description: '<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.</i> Default: <code>STANDARD</code>. Valid values:</p> <ul> <li> <p> <code>STANDARD</code>: Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.</p> </li> <li> <p> <code>BASIC</code>: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps.</p> </li> </ul>'
         authorized:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'Whether the channel is private (enabled for playback authorization). Default: <code>false</code>.'
+        latencyMode:
+          allOf:
+            - $ref: '#/components/schemas/ChannelLatencyMode'
+            - description: 'Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. (Note: In the Amazon IVS console, <code>LOW</code> and <code>NORMAL</code> correspond to Ultra-low and Standard, respectively.) Default: <code>LOW</code>.'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ChannelName'
+            - description: Channel name.
         recordingConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/ChannelRecordingConfigurationArn'
@@ -2218,7 +2441,11 @@ components:
         tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
+            - description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ChannelType'
+            - description: '<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.</i> Default: <code>STANDARD</code>. Valid values:</p> <ul> <li> <p> <code>STANDARD</code>: Video is transcoded: multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Transcoding allows higher playback quality across a range of download speeds. Resolution can be up to 1080p and bitrate can be up to 8.5 Mbps. Audio is transcoded only for renditions 360p and below; above that, audio is passed through. This is the default.</p> </li> <li> <p> <code>BASIC</code>: Video is transmuxed: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Resolution can be up to 1080p and bitrate can be up to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions between 480p and 1080p.</p> </li> </ul>'
     StreamKey:
       type: object
       properties:
@@ -2226,10 +2453,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/StreamKeyArn'
             - description: Stream-key ARN.
-        value:
-          allOf:
-            - $ref: '#/components/schemas/StreamKeyValue'
-            - description: Stream-key value.
         channelArn:
           allOf:
             - $ref: '#/components/schemas/ChannelArn'
@@ -2237,13 +2460,12 @@ components:
         tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
+            - description: 'Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
+        value:
+          allOf:
+            - $ref: '#/components/schemas/StreamKeyValue'
+            - description: Stream-key value.
       description: Object specifying a stream key.
-    RecordingConfigurationName:
-      type: string
-      pattern: '^[a-zA-Z0-9-_]*$'
-      minLength: 0
-      maxLength: 128
     DestinationConfiguration:
       type: object
       properties:
@@ -2252,24 +2474,53 @@ components:
             - $ref: '#/components/schemas/S3DestinationConfiguration'
             - description: An S3 destination configuration where recorded videos will be stored.
       description: 'A complex type that describes a location where recorded videos will be stored. Each member represents a type of destination configuration. For recording, you define one and only one type of destination configuration.'
+    RecordingConfigurationName:
+      type: string
+      pattern: '^[a-zA-Z0-9-_]*$'
+      minLength: 0
+      maxLength: 128
+    RecordingReconnectWindowSeconds:
+      type: integer
+      minimum: 0
+      maximum: 300
+    ThumbnailConfiguration:
+      type: object
+      properties:
+        recordingMode:
+          allOf:
+            - $ref: '#/components/schemas/RecordingMode'
+            - description: 'Thumbnail recording mode. Default: <code>INTERVAL</code>.'
+        targetIntervalSeconds:
+          allOf:
+            - $ref: '#/components/schemas/TargetIntervalSeconds'
+            - description: '<p>The targeted thumbnail-generation interval in seconds. This is configurable (and required) only if <code>recordingMode</code> is <code>INTERVAL</code>. Default: 60.</p> <p> <b>Important:</b> Setting a value for <code>targetIntervalSeconds</code> does not guarantee that thumbnails are generated at the specified interval. For thumbnails to be generated at the <code>targetIntervalSeconds</code> interval, the <code>IDR/Keyframe</code> value for the input video must be less than the <code>targetIntervalSeconds</code> value. See <a href="https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html"> Amazon IVS Streaming Configuration</a> for information on setting <code>IDR/Keyframe</code> to the recommended value in video-encoder settings.</p>'
+      description: An object representing a configuration of thumbnails for recorded video.
     CreateRecordingConfigurationRequest:
       type: object
       required:
         - destinationConfiguration
       title: CreateRecordingConfigurationRequest
       properties:
-        name:
-          allOf:
-            - $ref: '#/components/schemas/RecordingConfigurationName'
-            - description: An arbitrary string (a nickname) that helps the customer identify that resource. The value does not need to be unique.
         destinationConfiguration:
           allOf:
             - $ref: '#/components/schemas/DestinationConfiguration'
             - description: A complex type that contains a destination configuration for where recorded video will be stored.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/RecordingConfigurationName'
+            - description: Recording-configuration name. The value does not need to be unique.
+        recordingReconnectWindowSeconds:
+          allOf:
+            - $ref: '#/components/schemas/RecordingReconnectWindowSeconds'
+            - description: 'If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together. Default: 0.'
         tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
+            - description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
+        thumbnailConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ThumbnailConfiguration'
+            - description: A complex type that allows you to enable/disable the recording of thumbnails for a live session and modify the interval at which thumbnails are generated for the live session.
     RecordingConfiguration:
       type: object
       required:
@@ -2281,14 +2532,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecordingConfigurationArn'
             - description: Recording-configuration ARN.
-        name:
-          allOf:
-            - $ref: '#/components/schemas/RecordingConfigurationName'
-            - description: An arbitrary string (a nickname) assigned to a recording configuration that helps the customer identify that resource. The value does not need to be unique.
         destinationConfiguration:
           allOf:
             - $ref: '#/components/schemas/DestinationConfiguration'
             - description: A complex type that contains information about where recorded video will be stored.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/RecordingConfigurationName'
+            - description: Recording-configuration name. The value does not need to be unique.
+        recordingReconnectWindowSeconds:
+          allOf:
+            - $ref: '#/components/schemas/RecordingReconnectWindowSeconds'
+            - description: 'If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together. Default: 0.'
         state:
           allOf:
             - $ref: '#/components/schemas/RecordingConfigurationState'
@@ -2296,7 +2551,11 @@ components:
         tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
+            - description: 'Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
+        thumbnailConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ThumbnailConfiguration'
+            - description: A complex type that allows you to enable/disable the recording of thumbnails for a live session and modify the interval at which thumbnails are generated for the live session.
       description: An object representing a configuration to record a channel stream.
     CreateStreamKeyRequest:
       type: object
@@ -2311,7 +2570,7 @@ components:
         tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
+            - description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
     DeleteChannelRequest:
       type: object
       required:
@@ -2389,18 +2648,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/PlaybackKeyPairArn'
             - description: Key-pair ARN.
-        name:
-          allOf:
-            - $ref: '#/components/schemas/PlaybackKeyPairName'
-            - description: An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.
         fingerprint:
           allOf:
             - $ref: '#/components/schemas/PlaybackKeyPairFingerprint'
             - description: Key-pair identifier.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/PlaybackKeyPairName'
+            - description: Playback-key-pair name. The value does not need to be unique.
         tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
+            - description: 'Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
       description: A key pair used to sign and validate a playback authorization token.
     GetRecordingConfigurationRequest:
       type: object
@@ -2439,6 +2698,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChannelArn'
             - description: Channel ARN for the stream.
+        health:
+          allOf:
+            - $ref: '#/components/schemas/StreamHealth'
+            - description: The stream’s health.
         playbackUrl:
           allOf:
             - $ref: '#/components/schemas/PlaybackURL'
@@ -2446,53 +2709,153 @@ components:
         startTime:
           allOf:
             - $ref: '#/components/schemas/StreamStartTime'
-            - description: ISO-8601 formatted timestamp of the stream’s start.
+            - description: Time of the stream’s start. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.
         state:
           allOf:
             - $ref: '#/components/schemas/StreamState'
             - description: The stream’s state.
-        health:
+        streamId:
           allOf:
-            - $ref: '#/components/schemas/StreamHealth'
-            - description: The stream’s health.
+            - $ref: '#/components/schemas/StreamId'
+            - description: Unique identifier for a live or previously live stream in the specified channel.
         viewerCount:
           allOf:
             - $ref: '#/components/schemas/StreamViewerCount'
-            - description: 'Number of current viewers of the stream. A value of -1 indicates that the request timed out; in this case, retry.'
+            - description: 'A count of concurrent views of the stream. Typically, a new view appears in <code>viewerCount</code> within 15 seconds of when video playback starts and a view is removed from <code>viewerCount</code> within 1 minute of when video playback ends. A value of -1 indicates that the request timed out; in this case, retry.'
       description: Specifies a live video stream that has been ingested and distributed.
-    PlaybackPublicKeyMaterial:
+    StreamId:
       type: string
+      pattern: '^st-[a-zA-Z0-9]+$'
+      minLength: 26
+      maxLength: 26
+    GetStreamSessionRequest:
+      type: object
+      required:
+        - channelArn
+      title: GetStreamSessionRequest
+      properties:
+        channelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChannelArn'
+            - description: ARN of the channel resource
+        streamId:
+          allOf:
+            - $ref: '#/components/schemas/StreamId'
+            - description: 'Unique identifier for a live or previously live stream in the specified channel. If no <code>streamId</code> is provided, this returns the most recent stream session for the channel, if it exists.'
+    StreamSession:
+      type: object
+      properties:
+        channel:
+          allOf:
+            - $ref: '#/components/schemas/Channel'
+            - description: The properties of the channel at the time of going live.
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: 'Time when the channel went offline. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>. For live streams, this is <code>NULL</code>.'
+        ingestConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/IngestConfiguration'
+            - description: The properties of the incoming RTMP stream for the stream.
+        recordingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/RecordingConfiguration'
+            - description: The properties of recording the live stream.
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: Time when the channel went live. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.
+        streamId:
+          allOf:
+            - $ref: '#/components/schemas/StreamId'
+            - description: Unique identifier for a live or previously live stream in the specified channel.
+        truncatedEvents:
+          allOf:
+            - $ref: '#/components/schemas/StreamEvents'
+            - description: 'List of Amazon IVS events that the stream encountered. The list is sorted by most recent events and contains up to 500 events. For Amazon IVS events, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html">Using Amazon EventBridge with Amazon IVS</a>.'
+      description: 'Object that captures the Amazon IVS configuration that the customer provisioned, the ingest configurations that the broadcaster used, and the most recent Amazon IVS stream events it encountered.'
     PlaybackKeyPairName:
       type: string
       pattern: '^[a-zA-Z0-9-_]*$'
       minLength: 0
       maxLength: 128
+    PlaybackPublicKeyMaterial:
+      type: string
     ImportPlaybackKeyPairRequest:
       type: object
       required:
         - publicKeyMaterial
       title: ImportPlaybackKeyPairRequest
       properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/PlaybackKeyPairName'
+            - description: Playback-key-pair name. The value does not need to be unique.
         publicKeyMaterial:
           allOf:
             - $ref: '#/components/schemas/PlaybackPublicKeyMaterial'
             - description: The public portion of a customer-generated key pair.
-        name:
-          allOf:
-            - $ref: '#/components/schemas/PlaybackKeyPairName'
-            - description: An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.
         tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: Any tags provided with the request are added to the playback key pair tags.
-    PaginationToken:
-      type: string
-      minLength: 0
-      maxLength: 500
+            - description: 'Any tags provided with the request are added to the playback key pair tags. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
+    VideoConfiguration:
+      type: object
+      properties:
+        avcLevel:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Indicates the degree of required decoder performance for a profile. Normally this is set automatically by the encoder. For details, see the H.264 specification.'
+        avcProfile:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Indicates to the decoder the requirements for decoding the stream. For definitions of the valid values, see the H.264 specification.'
+        codec:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Codec used for the video encoding.
+        encoder:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Software or hardware used to encode the video.
+        targetBitrate:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The expected ingest bitrate (bits per second). This is configured in the encoder.
+        targetFramerate:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The expected ingest framerate. This is configured in the encoder.
+        videoHeight:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: Video-resolution height in pixels.
+        videoWidth:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: Video-resolution width in pixels.
+      description: 'Object specifying a stream’s video configuration, as set up by the broadcaster (usually in an encoder). This is part of the <a>IngestConfiguration</a> object and used for monitoring stream health.'
+    IngestConfiguration:
+      type: object
+      properties:
+        audio:
+          allOf:
+            - $ref: '#/components/schemas/AudioConfiguration'
+            - description: Encoder settings for audio.
+        video:
+          allOf:
+            - $ref: '#/components/schemas/VideoConfiguration'
+            - description: Encoder settings for video.
+      description: 'Object specifying the ingest configuration set up by the broadcaster, usually in an encoder.'
     MaxChannelResults:
       type: integer
       minimum: 1
-      maximum: 50
+      maximum: 100
+    PaginationToken:
+      type: string
+      pattern: '^[a-zA-Z0-9+/=_-]*$'
+      minLength: 0
+      maxLength: 1024
     ListChannelsRequest:
       type: object
       title: ListChannelsRequest
@@ -2505,30 +2868,30 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChannelRecordingConfigurationArn'
             - description: Filters the channel list to match the specified recording-configuration ARN.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxChannelResults'
+            - description: 'Maximum number of channels to return. Default: 100.'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: The first channel to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
-        maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxChannelResults'
-            - description: 'Maximum number of channels to return. Default: 50.'
     MaxPlaybackKeyPairResults:
       type: integer
       minimum: 1
-      maximum: 50
+      maximum: 100
     ListPlaybackKeyPairsRequest:
       type: object
       title: ListPlaybackKeyPairsRequest
       properties:
-        nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: Maximum number of key pairs to return.
         maxResults:
           allOf:
             - $ref: '#/components/schemas/MaxPlaybackKeyPairResults'
-            - description: 'The first key pair to retrieve. This is used for pagination; see the <code>nextToken</code> response field. Default: 50.'
+            - description: 'Maximum number of key pairs to return. Default: your service quota or 100, whichever is smaller.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The first key pair to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
     PlaybackKeyPairList:
       type: array
       items:
@@ -2536,19 +2899,19 @@ components:
     MaxRecordingConfigurationResults:
       type: integer
       minimum: 1
-      maximum: 50
+      maximum: 100
     ListRecordingConfigurationsRequest:
       type: object
       title: ListRecordingConfigurationsRequest
       properties:
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxRecordingConfigurationResults'
+            - description: 'Maximum number of recording configurations to return. Default: your service quota or 100, whichever is smaller. '
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: The first recording configuration to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
-        maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxRecordingConfigurationResults'
-            - description: 'Maximum number of recording configurations to return. Default: 50. '
     RecordingConfigurationList:
       type: array
       items:
@@ -2567,14 +2930,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChannelArn'
             - description: Channel ARN used to filter the list.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxStreamKeyResults'
+            - description: 'Maximum number of streamKeys to return. Default: 1.'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: The first stream key to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
-        maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxStreamKeyResults'
-            - description: 'Maximum number of streamKeys to return. Default: 50.'
     StreamKeyList:
       type: array
       items:
@@ -2582,41 +2945,61 @@ components:
     MaxStreamResults:
       type: integer
       minimum: 1
-      maximum: 50
-    ListStreamsRequest:
+      maximum: 100
+    ListStreamSessionsRequest:
       type: object
-      title: ListStreamsRequest
+      required:
+        - channelArn
+      title: ListStreamSessionsRequest
       properties:
+        channelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChannelArn'
+            - description: Channel ARN used to filter the list.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxStreamResults'
+            - description: 'Maximum number of streams to return. Default: 100.'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: The first stream to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+    StreamSessionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StreamSessionSummary'
+    StreamFilters:
+      type: object
+      properties:
+        health:
+          allOf:
+            - $ref: '#/components/schemas/StreamHealth'
+            - description: The stream’s health.
+      description: Object specifying the stream attribute on which to filter.
+    ListStreamsRequest:
+      type: object
+      title: ListStreamsRequest
+      properties:
+        filterBy:
+          allOf:
+            - $ref: '#/components/schemas/StreamFilters'
+            - description: Filters the stream list to match the specified criterion.
         maxResults:
           allOf:
             - $ref: '#/components/schemas/MaxStreamResults'
-            - description: 'Maximum number of streams to return. Default: 50.'
+            - description: 'Maximum number of streams to return. Default: 100.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The first stream to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
     StreamList:
       type: array
       items:
         $ref: '#/components/schemas/StreamSummary'
-    String:
-      type: string
-    MaxTagResults:
-      type: integer
-      minimum: 1
-      maximum: 50
     ListTagsForResourceRequest:
       type: object
       title: ListTagsForResourceRequest
-      properties:
-        nextToken:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The first tag to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
-        maxResults:
-          allOf:
-            - $ref: '#/components/schemas/MaxTagResults'
-            - description: 'Maximum number of tags to return. Default: 50.'
+      properties: {}
     PlaybackKeyPairFingerprint:
       type: string
     PlaybackKeyPairSummary:
@@ -2629,15 +3012,16 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/PlaybackKeyPairName'
-            - description: An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.
+            - description: Playback-key-pair name. The value does not need to be unique.
         tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
+            - description: 'Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
       description: Summary information about a playback key pair.
     StreamMetadata:
       type: string
       minLength: 1
+      format: password
     PutMetadataRequest:
       type: object
       required:
@@ -2670,14 +3054,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecordingConfigurationArn'
             - description: Recording-configuration ARN.
-        name:
-          allOf:
-            - $ref: '#/components/schemas/RecordingConfigurationName'
-            - description: An arbitrary string (a nickname) assigned to a recording configuration that helps the customer identify that resource. The value does not need to be unique.
         destinationConfiguration:
           allOf:
             - $ref: '#/components/schemas/DestinationConfiguration'
             - description: A complex type that contains information about where recorded video will be stored.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/RecordingConfigurationName'
+            - description: Recording-configuration name. The value does not need to be unique.
         state:
           allOf:
             - $ref: '#/components/schemas/RecordingConfigurationState'
@@ -2685,7 +3069,7 @@ components:
         tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
+            - description: 'Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
       description: Summary information about a RecordingConfiguration.
     S3DestinationBucketName:
       type: string
@@ -2710,16 +3094,36 @@ components:
       enum:
         - LIVE
         - OFFLINE
-    StreamHealth:
-      type: string
-      enum:
-        - HEALTHY
-        - STARVING
-        - UNKNOWN
     StreamViewerCount:
       type: integer
+    Time:
+      type: string
+      format: date-time
+    StreamEvent:
+      type: object
+      properties:
+        eventTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: Time when the event occurred. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Name that identifies the stream event within a <code>type</code>.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Logical group for certain events.
+      description: 'Object specifying a stream’s events. For a list of events, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html">Using Amazon EventBridge with Amazon IVS</a>.'
+    StreamEvents:
+      type: array
+      items:
+        $ref: '#/components/schemas/StreamEvent'
+      minItems: 0
+      maxItems: 500
     StreamKeyValue:
       type: string
+      format: password
     StreamKeySummary:
       type: object
       properties:
@@ -2734,7 +3138,7 @@ components:
         tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
+            - description: 'Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
       description: Summary information about a stream key.
     StreamSummary:
       type: object
@@ -2743,23 +3147,47 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChannelArn'
             - description: Channel ARN for the stream.
-        state:
-          allOf:
-            - $ref: '#/components/schemas/StreamState'
-            - description: The stream’s state.
         health:
           allOf:
             - $ref: '#/components/schemas/StreamHealth'
             - description: The stream’s health.
-        viewerCount:
-          allOf:
-            - $ref: '#/components/schemas/StreamViewerCount'
-            - description: 'Number of current viewers of the stream. A value of -1 indicates that the request timed out; in this case, retry.'
         startTime:
           allOf:
             - $ref: '#/components/schemas/StreamStartTime'
-            - description: ISO-8601 formatted timestamp of the stream’s start.
+            - description: 'Time of the stream’s start. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>. '
+        state:
+          allOf:
+            - $ref: '#/components/schemas/StreamState'
+            - description: The stream’s state.
+        streamId:
+          allOf:
+            - $ref: '#/components/schemas/StreamId'
+            - description: Unique identifier for a live or previously live stream in the specified channel.
+        viewerCount:
+          allOf:
+            - $ref: '#/components/schemas/StreamViewerCount'
+            - description: 'A count of concurrent views of the stream. Typically, a new view appears in <code>viewerCount</code> within 15 seconds of when video playback starts and a view is removed from <code>viewerCount</code> within 1 minute of when video playback ends. A value of -1 indicates that the request timed out; in this case, retry.'
       description: Summary information about a stream.
+    StreamSessionSummary:
+      type: object
+      properties:
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: 'Time when the channel went offline. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>. For live streams, this is <code>NULL</code>.'
+        hasErrorEvent:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'If <code>true</code>, this stream encountered a quota breach or failure.'
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: Time when the channel went live. This is an ISO 8601 timestamp; <i>note that this is returned as a string</i>.
+        streamId:
+          allOf:
+            - $ref: '#/components/schemas/StreamId'
+            - description: Unique identifier for a live or previously live stream in the specified channel.
+      description: Summary information about a stream session.
     TagKeyList:
       type: array
       items:
@@ -2775,7 +3203,7 @@ components:
         tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: Array of tags to be added or updated.
+            - description: 'Array of tags to be added or updated. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -2790,25 +3218,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChannelArn'
             - description: ARN of the channel to be updated.
-        name:
-          allOf:
-            - $ref: '#/components/schemas/ChannelName'
-            - description: Channel name.
-        latencyMode:
-          allOf:
-            - $ref: '#/components/schemas/ChannelLatencyMode'
-            - description: 'Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. (Note: In the Amazon IVS console, <code>LOW</code> and <code>NORMAL</code> correspond to Ultra-low and Standard, respectively.)'
-        type:
-          allOf:
-            - $ref: '#/components/schemas/ChannelType'
-            - description: '<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately</i>. Valid values:</p> <ul> <li> <p> <code>STANDARD</code>: Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.</p> </li> <li> <p> <code>BASIC</code>: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps.</p> </li> </ul>'
         authorized:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Whether the channel is private (enabled for playback authorization).
+        latencyMode:
+          allOf:
+            - $ref: '#/components/schemas/ChannelLatencyMode'
+            - description: 'Channel latency mode. Use <code>NORMAL</code> to broadcast and deliver live video up to Full HD. Use <code>LOW</code> for near-real-time interaction with viewers. (Note: In the Amazon IVS console, <code>LOW</code> and <code>NORMAL</code> correspond to Ultra-low and Standard, respectively.)'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ChannelName'
+            - description: Channel name.
         recordingConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/ChannelRecordingConfigurationArn'
             - description: 'Recording-configuration ARN. If this is set to an empty string, recording is disabled. A value other than an empty string indicates that recording is enabled'
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ChannelType'
+            - description: '<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately</i>. Valid values:</p> <ul> <li> <p> <code>STANDARD</code>: Video is transcoded: multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Transcoding allows higher playback quality across a range of download speeds. Resolution can be up to 1080p and bitrate can be up to 8.5 Mbps. Audio is transcoded only for renditions 360p and below; above that, audio is passed through. This is the default.</p> </li> <li> <p> <code>BASIC</code>: Video is transmuxed: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Resolution can be up to 1080p and bitrate can be up to 1.5 Mbps for 480p and up to 3.5 Mbps for resolutions between 480p and 1080p.</p> </li> </ul>'
 security:
   - hmac: []

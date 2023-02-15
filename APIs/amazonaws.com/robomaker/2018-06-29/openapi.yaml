@@ -231,8 +231,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /cancelDeploymentJob:
     post:
+      deprecated: true
       operationId: CancelDeploymentJob
-      description: Cancels the specified deployment job.
+      description: '<p>Cancels the specified deployment job.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>'
       responses:
         '200':
           description: Success
@@ -526,8 +527,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /createDeploymentJob:
     post:
+      deprecated: true
       operationId: CreateDeploymentJob
-      description: '<p>Deploys a specific version of a robot application to robots in a fleet.</p> <p>The robot application must have a numbered <code>applicationVersion</code> for consistency reasons. To create a new version, use <code>CreateRobotApplicationVersion</code> or see <a href="https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html">Creating a Robot Application Version</a>. </p> <note> <p>After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible. </p> </note>'
+      description: '<p>Deploys a specific version of a robot application to robots in a fleet.</p> <important> <p>This API is no longer supported and will throw an error if used.</p> </important> <p>The robot application must have a numbered <code>applicationVersion</code> for consistency reasons. To create a new version, use <code>CreateRobotApplicationVersion</code> or see <a href="https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html">Creating a Robot Application Version</a>. </p> <note> <p>After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible. </p> </note>'
       responses:
         '200':
           description: Success
@@ -645,8 +647,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /createFleet:
     post:
+      deprecated: true
       operationId: CreateFleet
-      description: 'Creates a fleet, a logical group of robots running the same robot application.'
+      description: '<p>Creates a fleet, a logical group of robots running the same robot application.</p> <important> <p>This API is no longer supported and will throw an error if used.</p> </important>'
       responses:
         '200':
           description: Success
@@ -711,8 +714,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /createRobot:
     post:
+      deprecated: true
       operationId: CreateRobot
-      description: Creates a robot.
+      description: <p>Creates a robot.</p> <important> <p>This API is no longer supported and will throw an error if used.</p> </important>
       responses:
         '200':
           description: Success
@@ -1282,7 +1286,8 @@ paths:
                     recordAllRosTopics:
                       allOf:
                         - $ref: '#/components/schemas/BoxedBoolean'
-                        - description: A boolean indicating whether to record all ROS topics.
+                        - deprecated: true
+                          description: '<p>A boolean indicating whether to record all ROS topics.</p> <important> <p>This API is no longer supported and will throw an error if used.</p> </important>AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html.'
                 maxJobDurationInSeconds:
                   description: 'The maximum simulation job duration in seconds (up to 14 days or 1,209,600 seconds. When <code>maxJobDurationInSeconds</code> is reached, the simulation job will status will transition to <code>Completed</code>.'
                   type: integer
@@ -1318,7 +1323,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/DataSourceConfig'
                   minItems: 1
-                  maxItems: 5
+                  maxItems: 6
                 tags:
                   description: A map that contains tag keys and tag values that are attached to the simulation job.
                   type: object
@@ -1349,7 +1354,15 @@ paths:
                     simulationUnitLimit:
                       allOf:
                         - $ref: '#/components/schemas/SimulationUnit'
-                        - description: 'The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. The default is 15. '
+                        - description: 'The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximum value provided. The default is 15. '
+                    computeType:
+                      allOf:
+                        - $ref: '#/components/schemas/ComputeType'
+                        - description: Compute type information for the simulation job.
+                    gpuUnitLimit:
+                      allOf:
+                        - $ref: '#/components/schemas/GPUUnit'
+                        - description: Compute GPU unit limit for the simulation job. It is the same as the number of GPUs allocated to the SimulationJob.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1675,8 +1688,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /deleteFleet:
     post:
+      deprecated: true
       operationId: DeleteFleet
-      description: Deletes a fleet.
+      description: '<p>Deletes a fleet.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>'
       responses:
         '200':
           description: Success
@@ -1728,8 +1742,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /deleteRobot:
     post:
+      deprecated: true
       operationId: DeleteRobot
-      description: Deletes a robot.
+      description: '<p>Deletes a robot.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>'
       responses:
         '200':
           description: Success
@@ -1958,8 +1973,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /deregisterRobot:
     post:
+      deprecated: true
       operationId: DeregisterRobot
-      description: Deregisters a robot.
+      description: '<p>Deregisters a robot.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>'
       responses:
         '200':
           description: Success
@@ -2024,8 +2040,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /describeDeploymentJob:
     post:
+      deprecated: true
       operationId: DescribeDeploymentJob
-      description: Describes a deployment job.
+      description: '<p>Describes a deployment job.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>'
       responses:
         '200':
           description: Success
@@ -2083,8 +2100,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /describeFleet:
     post:
+      deprecated: true
       operationId: DescribeFleet
-      description: Describes a fleet.
+      description: '<p>Describes a fleet.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>'
       responses:
         '200':
           description: Success
@@ -2142,8 +2160,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /describeRobot:
     post:
+      deprecated: true
       operationId: DescribeRobot
-      description: Describes a robot.
+      description: '<p>Describes a robot.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>'
       responses:
         '200':
           description: Success
@@ -2742,8 +2761,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /listDeploymentJobs:
     post:
+      deprecated: true
       operationId: ListDeploymentJobs
-      description: 'Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. '
+      description: '<p>Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>'
       responses:
         '200':
           description: Success
@@ -2821,8 +2841,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /listFleets:
     post:
+      deprecated: true
       operationId: ListFleets
-      description: 'Returns a list of fleets. You can optionally provide filters to retrieve specific fleets. '
+      description: '<p>Returns a list of fleets. You can optionally provide filters to retrieve specific fleets.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>'
       responses:
         '200':
           description: Success
@@ -2979,8 +3000,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /listRobots:
     post:
+      deprecated: true
       operationId: ListRobots
-      description: Returns a list of robots. You can optionally provide filters to retrieve specific robots.
+      description: '<p>Returns a list of robots. You can optionally provide filters to retrieve specific robots.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>'
       responses:
         '200':
           description: Success
@@ -3675,8 +3697,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /registerRobot:
     post:
+      deprecated: true
       operationId: RegisterRobot
-      description: Registers a robot with a fleet.
+      description: <p>Registers a robot with a fleet.</p> <important> <p>This API is no longer supported and will throw an error if used.</p> </important>
       responses:
         '200':
           description: Success
@@ -3903,8 +3926,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /syncDeploymentJob:
     post:
+      deprecated: true
       operationId: SyncDeploymentJob
-      description: Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.
+      description: '<p>Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.</p> <important> <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p> </important>'
       responses:
         '200':
           description: Success
@@ -4429,7 +4453,9 @@ components:
     ResourceNotFoundException: {}
     CancelDeploymentJobResponse:
       type: object
+      deprecated: true
       properties: {}
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     CancelSimulationJobResponse:
       type: object
       properties: {}
@@ -4444,6 +4470,7 @@ components:
       properties: {}
     CreateDeploymentJobResponse:
       type: object
+      deprecated: true
       properties:
         arn:
           allOf:
@@ -4481,6 +4508,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The list of all tags added to the deployment job.
+      description: 'AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     Percentage:
       type: integer
       minimum: 1
@@ -4536,6 +4564,7 @@ components:
     IdempotentParameterMismatchException: {}
     CreateFleetResponse:
       type: object
+      deprecated: true
       properties:
         arn:
           allOf:
@@ -4553,8 +4582,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The list of all tags added to the fleet.
+      description: 'AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     CreateRobotResponse:
       type: object
+      deprecated: true
       properties:
         arn:
           allOf:
@@ -4580,6 +4611,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The list of all tags added to the robot.
+      description: 'AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     ResourceAlreadyExistsException: {}
     CreateRobotApplicationResponse:
       type: object
@@ -4641,6 +4673,7 @@ components:
       enum:
         - ROS
         - ROS2
+        - General
     RobotSoftwareSuiteVersionType:
       type: string
       enum:
@@ -4742,6 +4775,7 @@ components:
       enum:
         - Gazebo
         - RosbagPlay
+        - SimulationRuntime
     SimulationSoftwareSuiteVersionType:
       type: string
       pattern: 7|9|11|Kinetic|Melodic|Dashing|Foxy
@@ -4911,7 +4945,8 @@ components:
         useDefaultUploadConfigurations:
           allOf:
             - $ref: '#/components/schemas/BoxedBoolean'
-            - description: '<p>A Boolean indicating whether to use default upload configurations. By default, <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application terminates and all ROS topics will be recorded.</p> <p>If you set this value, you must specify an <code>outputLocation</code>. </p>'
+            - deprecated: true
+              description: '<p>A Boolean indicating whether to use default upload configurations. By default, <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application terminates and all ROS topics will be recorded.</p> <p>If you set this value, you must specify an <code>outputLocation</code>.</p> <important> <p>This API is no longer supported and will throw an error if used.</p> </important>AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html.'
         tools:
           allOf:
             - $ref: '#/components/schemas/Tools'
@@ -4919,7 +4954,8 @@ components:
         useDefaultTools:
           allOf:
             - $ref: '#/components/schemas/BoxedBoolean'
-            - description: 'A Boolean indicating whether to use default robot application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is <code>False</code>. '
+            - deprecated: true
+              description: '<p>A Boolean indicating whether to use default robot application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is <code>False</code>.</p> <important> <p>This API is no longer supported and will throw an error if used.</p> </important>AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html.'
       description: Application configuration information for a robot.
     SimulationApplicationConfig:
       type: object
@@ -4950,7 +4986,8 @@ components:
         useDefaultUploadConfigurations:
           allOf:
             - $ref: '#/components/schemas/BoxedBoolean'
-            - description: '<p>A Boolean indicating whether to use default upload configurations. By default, <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application terminates and all ROS topics will be recorded.</p> <p>If you set this value, you must specify an <code>outputLocation</code>. </p>'
+            - deprecated: true
+              description: '<p>A Boolean indicating whether to use default upload configurations. By default, <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application terminates and all ROS topics will be recorded.</p> <p>If you set this value, you must specify an <code>outputLocation</code>.</p> <important> <p>This API is no longer supported and will throw an error if used.</p> </important>AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html.'
         tools:
           allOf:
             - $ref: '#/components/schemas/Tools'
@@ -4958,7 +4995,8 @@ components:
         useDefaultTools:
           allOf:
             - $ref: '#/components/schemas/BoxedBoolean'
-            - description: 'A Boolean indicating whether to use default simulation application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is <code>False</code>. '
+            - deprecated: true
+              description: '<p>A Boolean indicating whether to use default simulation application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is <code>False</code>.</p> <important> <p>This API is no longer supported and will throw an error if used.</p> </important>AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html.'
       description: Information about a simulation application configuration.
     DataSourceConfig:
       type: object
@@ -4977,8 +5015,16 @@ components:
             - description: The S3 bucket where the data files are located.
         s3Keys:
           allOf:
-            - $ref: '#/components/schemas/S3Keys'
+            - $ref: '#/components/schemas/S3KeysOrPrefixes'
             - description: The list of S3 keys identifying the data source files.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceType'
+            - description: '<p>The data type for the data source that you''re using for your container image or simulation job. You can use this field to specify whether your data source is an Archive, an Amazon S3 prefix, or a file.</p> <p>If you don''t specify a field, the default value is <code>File</code>.</p>'
+        destination:
+          allOf:
+            - $ref: '#/components/schemas/Path'
+            - description: '<p>The location where your files are mounted in the container image.</p> <p>If you''ve specified the <code>type</code> of the data source as an <code>Archive</code>, you must provide an Amazon S3 object key to your archive. The object key must point to either a <code>.zip</code> or <code>.tar.gz</code> file.</p> <p>If you''ve specified the <code>type</code> of the data source as a <code>Prefix</code>, you provide the Amazon S3 prefix that points to the files that you are using for your data source.</p> <p>If you''ve specified the <code>type</code> of the data source as a <code>File</code>, you provide the Amazon S3 path to the file that you''re using as your data source.</p>'
       description: Information about a data source.
     Subnets:
       type: array
@@ -4998,6 +5044,15 @@ components:
       type: integer
       minimum: 1
       maximum: 15
+    ComputeType:
+      type: string
+      enum:
+        - CPU
+        - GPU_AND_CPU
+    GPUUnit:
+      type: integer
+      minimum: 0
+      maximum: 1
     ServiceUnavailableException: {}
     CreateWorldExportJobResponse:
       type: object
@@ -5100,10 +5155,14 @@ components:
             - description: A map that contains tag keys and tag values that are attached to the world template.
     DeleteFleetResponse:
       type: object
+      deprecated: true
       properties: {}
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     DeleteRobotResponse:
       type: object
+      deprecated: true
       properties: {}
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     DeleteRobotApplicationResponse:
       type: object
       properties: {}
@@ -5115,6 +5174,7 @@ components:
       properties: {}
     DeregisterRobotResponse:
       type: object
+      deprecated: true
       properties:
         fleet:
           allOf:
@@ -5124,8 +5184,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the robot.
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     DescribeDeploymentJobResponse:
       type: object
+      deprecated: true
       properties:
         arn:
           allOf:
@@ -5167,8 +5229,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The list of all tags added to the specified deployment job.
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     DescribeFleetResponse:
       type: object
+      deprecated: true
       properties:
         name:
           allOf:
@@ -5202,8 +5266,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The list of all tags added to the specified fleet.
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     DescribeRobotResponse:
       type: object
+      deprecated: true
       properties:
         arn:
           allOf:
@@ -5245,6 +5311,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The list of all tags added to the specified robot.
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     DescribeRobotApplicationResponse:
       type: object
       properties:
@@ -5632,6 +5699,7 @@ components:
             - description: The world template body.
     ListDeploymentJobsResponse:
       type: object
+      deprecated: true
       properties:
         deploymentJobs:
           allOf:
@@ -5641,6 +5709,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListDeploymentJobs</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     Filter:
       type: object
       properties:
@@ -5655,6 +5724,7 @@ components:
       description: Information about a filter.
     ListFleetsResponse:
       type: object
+      deprecated: true
       properties:
         fleetDetails:
           allOf:
@@ -5664,6 +5734,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListFleets</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     ListRobotApplicationsResponse:
       type: object
       properties:
@@ -5677,6 +5748,7 @@ components:
             - description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListRobotApplications</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
     ListRobotsResponse:
       type: object
+      deprecated: true
       properties:
         robots:
           allOf:
@@ -5686,6 +5758,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListRobots</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     ListSimulationApplicationsResponse:
       type: object
       properties:
@@ -5778,6 +5851,7 @@ components:
             - description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorlds</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
     RegisterRobotResponse:
       type: object
+      deprecated: true
       properties:
         fleet:
           allOf:
@@ -5787,6 +5861,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: Information about the robot registration.
+      description: 'AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     RestartSimulationJobResponse:
       type: object
       properties: {}
@@ -5891,6 +5966,7 @@ components:
       description: Information about a simulation job request.
     SyncDeploymentJobResponse:
       type: object
+      deprecated: true
       properties:
         arn:
           allOf:
@@ -5924,6 +6000,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CreatedAt'
             - description: 'The time, in milliseconds since the epoch, when the fleet was created.'
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     TagResourceResponse:
       type: object
       properties: {}
@@ -6084,12 +6161,14 @@ components:
       type: object
       required:
         - job
+      deprecated: true
       title: CancelDeploymentJobRequest
       properties:
         job:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The deployment job ARN to cancel.
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     CancelSimulationJobBatchRequest:
       type: object
       required:
@@ -6140,13 +6219,30 @@ components:
       pattern: '[a-zA-Z0-9_.\-]*'
       minLength: 1
       maxLength: 1024
+    NonEmptyString:
+      type: string
+      pattern: .+
+      minLength: 1
+      maxLength: 255
+    CommandList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
     Compute:
       type: object
       properties:
         simulationUnitLimit:
           allOf:
             - $ref: '#/components/schemas/SimulationUnit'
-            - description: 'The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. The default is 15. '
+            - description: 'The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximum value provided. The default is 15. '
+        computeType:
+          allOf:
+            - $ref: '#/components/schemas/ComputeType'
+            - description: Compute type information for the simulation job.
+        gpuUnitLimit:
+          allOf:
+            - $ref: '#/components/schemas/GPUUnit'
+            - description: Compute GPU unit limit for the simulation job. It is the same as the number of GPUs allocated to the SimulationJob.
       description: Compute information for the simulation job.
     ComputeResponse:
       type: object
@@ -6154,7 +6250,15 @@ components:
         simulationUnitLimit:
           allOf:
             - $ref: '#/components/schemas/SimulationUnit'
-            - description: 'The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. The default is 15. '
+            - description: 'The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximum value provided. The default is 15. '
+        computeType:
+          allOf:
+            - $ref: '#/components/schemas/ComputeType'
+            - description: Compute type response information for the simulation job.
+        gpuUnitLimit:
+          allOf:
+            - $ref: '#/components/schemas/GPUUnit'
+            - description: Compute GPU unit limit for the simulation job. It is the same as the number of GPUs allocated to the SimulationJob.
       description: Compute information for the simulation job
     DeploymentConfig:
       type: object
@@ -6194,6 +6298,7 @@ components:
         - clientRequestToken
         - fleet
         - deploymentApplicationConfigs
+      deprecated: true
       title: CreateDeploymentJobRequest
       properties:
         deploymentConfig:
@@ -6216,6 +6321,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: A map that contains tag keys and tag values that are attached to the deployment job.
+      description: 'AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     DeploymentStatus:
       type: string
       enum:
@@ -6269,6 +6375,7 @@ components:
       type: object
       required:
         - name
+      deprecated: true
       title: CreateFleetRequest
       properties:
         name:
@@ -6279,6 +6386,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: A map that contains tag keys and tag values that are attached to the fleet.
+      description: 'AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     SourceConfigs:
       type: array
       items:
@@ -6389,6 +6497,7 @@ components:
         - name
         - architecture
         - greengrassGroupId
+      deprecated: true
       title: CreateRobotRequest
       properties:
         name:
@@ -6407,6 +6516,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: A map that contains tag keys and tag values that are attached to the robot.
+      description: 'AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     SimulationSoftwareSuite:
       type: object
       properties:
@@ -6503,13 +6613,12 @@ components:
       description: The output location.
     LoggingConfig:
       type: object
-      required:
-        - recordAllRosTopics
       properties:
         recordAllRosTopics:
           allOf:
             - $ref: '#/components/schemas/BoxedBoolean'
-            - description: A boolean indicating whether to record all ROS topics.
+            - deprecated: true
+              description: '<p>A boolean indicating whether to record all ROS topics.</p> <important> <p>This API is no longer supported and will throw an error if used.</p> </important>AWS RoboMaker is ending support for ROS software suite. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/software-support-policy.html.'
       description: The logging configuration.
     JobDuration:
       type: integer
@@ -6540,7 +6649,7 @@ components:
       items:
         $ref: '#/components/schemas/DataSourceConfig'
       minItems: 1
-      maxItems: 5
+      maxItems: 6
     VPCConfig:
       type: object
       required:
@@ -6851,6 +6960,17 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/S3KeyOutput'
+    DataSourceType:
+      type: string
+      enum:
+        - Prefix
+        - Archive
+        - File
+    Path:
+      type: string
+      pattern: .*
+      minLength: 1
+      maxLength: 1024
     DataSource:
       type: object
       properties:
@@ -6866,11 +6986,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3KeyOutputs'
             - description: The list of S3 keys identifying the data source files.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceType'
+            - description: '<p>The data type for the data source that you''re using for your container image or simulation job. You can use this field to specify whether your data source is an Archive, an Amazon S3 prefix, or a file.</p> <p>If you don''t specify a field, the default value is <code>File</code>.</p>'
+        destination:
+          allOf:
+            - $ref: '#/components/schemas/Path'
+            - description: '<p>The location where your files are mounted in the container image.</p> <p>If you''ve specified the <code>type</code> of the data source as an <code>Archive</code>, you must provide an Amazon S3 object key to your archive. The object key must point to either a <code>.zip</code> or <code>.tar.gz</code> file.</p> <p>If you''ve specified the <code>type</code> of the data source as a <code>Prefix</code>, you provide the Amazon S3 prefix that points to the files that you are using for your data source.</p> <p>If you''ve specified the <code>type</code> of the data source as a <code>File</code>, you provide the Amazon S3 path to the file that you''re using as your data source.</p>'
       description: Information about a data source.
-    S3Keys:
+    S3KeysOrPrefixes:
       type: array
       items:
-        $ref: '#/components/schemas/S3Key'
+        $ref: '#/components/schemas/S3KeyOrPrefix'
       minItems: 1
       maxItems: 100
     DataSourceNames:
@@ -6881,12 +7009,14 @@ components:
       type: object
       required:
         - fleet
+      deprecated: true
       title: DeleteFleetRequest
       properties:
         fleet:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the fleet.
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     DeleteRobotApplicationRequest:
       type: object
       required:
@@ -6905,12 +7035,14 @@ components:
       type: object
       required:
         - robot
+      deprecated: true
       title: DeleteRobotRequest
       properties:
         robot:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the robot.
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     DeleteSimulationApplicationRequest:
       type: object
       required:
@@ -7009,15 +7141,10 @@ components:
         $ref: '#/components/schemas/DeploymentJob'
       minItems: 0
       maxItems: 200
-    Path:
-      type: string
-      pattern: .*
-      minLength: 1
-      maxLength: 1024
     EnvironmentVariableMap:
       type: object
       minProperties: 0
-      maxProperties: 16
+      maxProperties: 20
       additionalProperties:
         $ref: '#/components/schemas/EnvironmentVariableValue'
     DeregisterRobotRequest:
@@ -7025,6 +7152,7 @@ components:
       required:
         - fleet
         - robot
+      deprecated: true
       title: DeregisterRobotRequest
       properties:
         fleet:
@@ -7035,16 +7163,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the robot.
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     DescribeDeploymentJobRequest:
       type: object
       required:
         - job
+      deprecated: true
       title: DescribeDeploymentJobRequest
       properties:
         job:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the deployment job.
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     RobotDeploymentSummary:
       type: array
       items:
@@ -7053,12 +7184,14 @@ components:
       type: object
       required:
         - fleet
+      deprecated: true
       title: DescribeFleetRequest
       properties:
         fleet:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the fleet.
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     Robots:
       type: array
       items:
@@ -7083,12 +7216,14 @@ components:
       type: object
       required:
         - robot
+      deprecated: true
       title: DescribeRobotRequest
       properties:
         robot:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the robot to be described.
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     RobotStatus:
       type: string
       enum:
@@ -7359,9 +7494,6 @@ components:
       description: Configuration information for port forwarding.
     LaunchConfig:
       type: object
-      required:
-        - packageName
-        - launchFile
       properties:
         packageName:
           allOf:
@@ -7383,6 +7515,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'Boolean indicating whether a streaming session will be configured for the application. If <code>True</code>, AWS RoboMaker will configure a connection so you can interact with your application as it is running in the simulation. You must configure and launch the component. It must have a graphical user interface. '
+        command:
+          allOf:
+            - $ref: '#/components/schemas/CommandList'
+            - description: '<p>If you''ve specified <code>General</code> as the value for your <code>RobotSoftwareSuite</code>, you can use this field to specify a list of commands for your container image.</p> <p>If you''ve specified <code>SimulationRuntime</code> as the value for your <code>SimulationSoftwareSuite</code>, you can use this field to specify a list of commands for your container image.</p>'
       description: Information about a launch configuration.
     PaginationToken:
       type: string
@@ -7393,6 +7529,7 @@ components:
       type: integer
     ListDeploymentJobsRequest:
       type: object
+      deprecated: true
       title: ListDeploymentJobsRequest
       properties:
         filters:
@@ -7407,8 +7544,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: 'When this parameter is used, <code>ListDeploymentJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListDeploymentJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 200. If this parameter is not used, then <code>ListDeploymentJobs</code> returns up to 200 results and a <code>nextToken</code> value if applicable. '
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     ListFleetsRequest:
       type: object
+      deprecated: true
       title: ListFleetsRequest
       properties:
         nextToken:
@@ -7423,6 +7562,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Filters'
             - description: '<p>Optional filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     VersionQualifier:
       type: string
       pattern: ALL
@@ -7456,6 +7596,7 @@ components:
       maxItems: 100
     ListRobotsRequest:
       type: object
+      deprecated: true
       title: ListRobotsRequest
       properties:
         nextToken:
@@ -7470,6 +7611,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Filters'
             - description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>Registered</code> or the status <code>Available</code>.</p>'
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     ListSimulationApplicationsRequest:
       type: object
       title: ListSimulationApplicationsRequest
@@ -7616,11 +7758,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/WorldSummary'
-    NonEmptyString:
-      type: string
-      pattern: .+
-      minLength: 1
-      maxLength: 255
     NonSystemPort:
       type: integer
       minimum: 1024
@@ -7694,6 +7831,7 @@ components:
       required:
         - fleet
         - robot
+      deprecated: true
       title: RegisterRobotRequest
       properties:
         fleet:
@@ -7704,6 +7842,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the robot.
+      description: 'AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     RestartSimulationJobRequest:
       type: object
       required:
@@ -7826,12 +7965,17 @@ components:
             - $ref: '#/components/schemas/DeploymentJobErrorCode'
             - description: The robot deployment failure code.
       description: Information about a robot deployment.
+    S3KeyOrPrefix:
+      type: string
+      pattern: .*
+      minLength: 0
+      maxLength: 1024
     S3KeyOutput:
       type: object
       properties:
         s3Key:
           allOf:
-            - $ref: '#/components/schemas/S3Key'
+            - $ref: '#/components/schemas/S3KeyOrPrefix'
             - description: The S3 key.
         etag:
           allOf:
@@ -8027,6 +8171,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataSourceNames'
             - description: The names of the data sources.
+        computeType:
+          allOf:
+            - $ref: '#/components/schemas/ComputeType'
+            - description: The compute type for the simulation job summary.
       description: Summary information for a simulation job.
     Source:
       type: object
@@ -8075,6 +8223,7 @@ components:
       required:
         - clientRequestToken
         - fleet
+      deprecated: true
       title: SyncDeploymentJobRequest
       properties:
         clientRequestToken:
@@ -8085,6 +8234,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The target fleet for the synchronization.
+      description: 'Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.'
     TagKeyList:
       type: array
       items:
@@ -8296,6 +8446,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arns'
             - description: A list of worlds.
+        outputLocation:
+          $ref: '#/components/schemas/OutputLocation'
       description: Information about a world export job.
     WorldFailure:
       type: object

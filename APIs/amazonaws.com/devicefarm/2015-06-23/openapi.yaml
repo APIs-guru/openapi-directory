@@ -4816,6 +4816,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobTimeoutMinutes'
             - description: Sets the execution timeout value (in minutes) for a project. All test runs in this project use the specified execution timeout value unless overridden when scheduling a run.
+        vpcConfig:
+          allOf:
+            - $ref: '#/components/schemas/VpcConfig'
+            - description: The VPC security groups and subnets that are attached to a project.
       description: Represents a request to the create project operation.
     TagOperationException: {}
     CreateRemoteAccessSessionResult:
@@ -4882,7 +4886,7 @@ components:
         skipAppResign:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public devices, Device Farm always signs your apps again.</p> <p>For more information on how Device Farm modifies your uploads during tests, see <a href="https://aws.amazon.com/device-farm/faq/">Do you modify my app?</a> </p>'
+            - description: '<p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public devices, Device Farm always signs your apps again.</p> <p>For more information on how Device Farm modifies your uploads during tests, see <a href="http://aws.amazon.com/device-farm/faqs/">Do you modify my app?</a> </p>'
       description: Creates and submits a request to start a remote access session.
     CreateTestGridProjectResult:
       type: object
@@ -6841,6 +6845,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobTimeoutMinutes'
             - description: The number of minutes a test run in the project executes before it times out.
+        vpcConfig:
+          allOf:
+            - $ref: '#/components/schemas/VpcConfig'
+            - description: The VPC security groups and subnets that are attached to a project.
       description: Represents a request to the update project operation.
     UpdateTestGridProjectResult:
       type: object
@@ -6995,7 +7003,7 @@ components:
         skipAppResign:
           allOf:
             - $ref: '#/components/schemas/SkipAppResign'
-            - description: '<p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public devices, Device Farm always signs your apps again.</p> <p>For more information about how Device Farm re-signs your apps, see <a href="https://aws.amazon.com/device-farm/faq/">Do you modify my app?</a> in the <i>AWS Device Farm FAQs</i>.</p>'
+            - description: '<p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public devices, Device Farm always signs your apps again.</p> <p>For more information about how Device Farm re-signs your apps, see <a href="http://aws.amazon.com/device-farm/faqs/">Do you modify my app?</a> in the <i>AWS Device Farm FAQs</i>.</p>'
       description: A container for account-level settings in AWS Device Farm.
     AccountsCleanup:
       type: boolean
@@ -7288,6 +7296,26 @@ components:
             - $ref: '#/components/schemas/PercentInteger'
             - description: Proportion of received packets that fail to arrive from 0 to 100 percent.
       description: An array of settings that describes characteristics of a network profile.
+    VpcConfig:
+      type: object
+      required:
+        - securityGroupIds
+        - subnetIds
+        - vpcId
+      properties:
+        securityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/VpcSecurityGroupIds'
+            - description: An array of one or more security groups IDs in your Amazon VPC.
+        subnetIds:
+          allOf:
+            - $ref: '#/components/schemas/VpcSubnetIds'
+            - description: An array of one or more subnet IDs in your Amazon VPC.
+        vpcId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ID of the Amazon VPC.
+      description: Contains the VPC configuration data necessary to interface with AWS Device Farm's services.
     Project:
       type: object
       properties:
@@ -7307,6 +7335,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DateTime'
             - description: When the project was created.
+        vpcConfig:
+          allOf:
+            - $ref: '#/components/schemas/VpcConfig'
+            - description: The VPC security groups and subnets that are attached to a project.
       description: Represents an operating-system neutral workspace for running and managing tests.
     CreateRemoteAccessSessionConfiguration:
       type: object
@@ -7418,7 +7450,11 @@ components:
         skipAppResign:
           allOf:
             - $ref: '#/components/schemas/SkipAppResign'
-            - description: '<p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public devices, Device Farm always signs your apps again.</p> <p>For more information about how Device Farm re-signs your apps, see <a href="https://aws.amazon.com/device-farm/faq/">Do you modify my app?</a> in the <i>AWS Device Farm FAQs</i>.</p>'
+            - description: '<p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public devices, Device Farm always signs your apps again.</p> <p>For more information about how Device Farm re-signs your apps, see <a href="http://aws.amazon.com/device-farm/faqs/">Do you modify my app?</a> in the <i>AWS Device Farm FAQs</i>.</p>'
+        vpcConfig:
+          allOf:
+            - $ref: '#/components/schemas/VpcConfig'
+            - description: The VPC security groups and subnets that are attached to a project.
       description: Represents information about the remote access session.
     ResourceName:
       type: string
@@ -7974,7 +8010,7 @@ components:
         skipAppResign:
           allOf:
             - $ref: '#/components/schemas/SkipAppResign'
-            - description: '<p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public devices, Device Farm always signs your apps again.</p> <p>For more information about how Device Farm re-signs your apps, see <a href="https://aws.amazon.com/device-farm/faq/">Do you modify my app?</a> in the <i>AWS Device Farm FAQs</i>.</p>'
+            - description: '<p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public devices, Device Farm always signs your apps again.</p> <p>For more information about how Device Farm re-signs your apps, see <a href="http://aws.amazon.com/device-farm/faqs/">Do you modify my app?</a> in the <i>AWS Device Farm FAQs</i>.</p>'
       description: 'Represents configuration information about a test run, such as the execution timeout (in minutes).'
     ExecutionResult:
       type: string
@@ -8287,7 +8323,7 @@ components:
         skipAppResign:
           allOf:
             - $ref: '#/components/schemas/SkipAppResign'
-            - description: '<p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public devices, Device Farm always signs your apps again.</p> <p>For more information about how Device Farm re-signs your apps, see <a href="https://aws.amazon.com/device-farm/faq/">Do you modify my app?</a> in the <i>AWS Device Farm FAQs</i>.</p>'
+            - description: '<p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public devices, Device Farm always signs your apps again.</p> <p>For more information about how Device Farm re-signs your apps, see <a href="http://aws.amazon.com/device-farm/faqs/">Do you modify my app?</a> in the <i>AWS Device Farm FAQs</i>.</p>'
         testSpecArn:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
@@ -8296,6 +8332,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DeviceSelectionResult'
             - description: The results of a device filter used to select the devices for a test run.
+        vpcConfig:
+          allOf:
+            - $ref: '#/components/schemas/VpcConfig'
+            - description: The VPC security groups and subnets that are attached to a project.
       description: 'Represents a test run on a set of devices with a given app package, test parameters, and so on.'
     Suite:
       type: object
@@ -8816,6 +8856,11 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/String'
+    SecurityGroupId:
+      type: string
+      pattern: '^sg-[0-9a-fA-F]{8,}$'
+      minLength: 1
+      maxLength: 4096
     SecurityGroupIds:
       type: array
       items:
@@ -8827,6 +8872,11 @@ components:
       minLength: 0
       maxLength: 2048
       format: password
+    SubnetId:
+      type: string
+      pattern: '^subnet-[0-9a-fA-F]{8,}$'
+      minLength: 1
+      maxLength: 4096
     SubnetIds:
       type: array
       items:
@@ -8935,5 +8985,17 @@ components:
       enum:
         - CURATED
         - PRIVATE
+    VpcSecurityGroupIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityGroupId'
+      minItems: 1
+      maxItems: 5
+    VpcSubnetIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubnetId'
+      minItems: 1
+      maxItems: 8
 security:
   - hmac: []

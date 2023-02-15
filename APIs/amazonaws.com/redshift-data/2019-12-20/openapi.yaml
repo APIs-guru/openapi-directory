@@ -3,7 +3,7 @@ info:
   version: '2019-12-20'
   x-release: v4
   title: Redshift Data API Service
-  description: '<p>You can use the Amazon Redshift Data API to run queries on Amazon Redshift tables. You can run SQL statements, which are committed if the statement succeeds. </p> <p>For more information about the Amazon Redshift Data API, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
+  description: '<p>You can use the Amazon Redshift Data API to run queries on Amazon Redshift tables. You can run SQL statements, which are committed if the statement succeeds. </p> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -118,7 +118,7 @@ paths:
   /#X-Amz-Target=RedshiftData.BatchExecuteStatement:
     post:
       operationId: BatchExecuteStatement
-      description: '<p>Runs one or more SQL statements, which can be data manipulation language (DML) or data definition language (DDL). Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. </p> </li> <li> <p>Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the <code>redshift:GetClusterCredentials</code> operation is required to use this method. </p> </li> </ul>'
+      description: '<p>Runs one or more SQL statements, which can be data manipulation language (DML) or data definition language (DDL). Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p> </li> <li> <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required. When connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p> </li> </ul> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>'
       responses:
         '200':
           description: Success
@@ -169,7 +169,7 @@ paths:
   /#X-Amz-Target=RedshiftData.CancelStatement:
     post:
       operationId: CancelStatement
-      description: 'Cancels a running query. To be canceled, a query must be running. '
+      description: '<p>Cancels a running query. To be canceled, a query must be running. </p> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>'
       responses:
         '200':
           description: Success
@@ -195,6 +195,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: DatabaseConnectionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatabaseConnectionException'
       requestBody:
         required: true
         content:
@@ -220,7 +226,7 @@ paths:
   /#X-Amz-Target=RedshiftData.DescribeStatement:
     post:
       operationId: DescribeStatement
-      description: 'Describes the details about a specific instance when a query was run by the Amazon Redshift Data API. The information includes when the query started, when it finished, the query status, the number of rows returned, and the SQL statement. '
+      description: '<p>Describes the details about a specific instance when a query was run by the Amazon Redshift Data API. The information includes when the query started, when it finished, the query status, the number of rows returned, and the SQL statement. </p> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>'
       responses:
         '200':
           description: Success
@@ -271,7 +277,7 @@ paths:
   /#X-Amz-Target=RedshiftData.DescribeTable:
     post:
       operationId: DescribeTable
-      description: '<p>Describes the detailed information about a table from metadata in the cluster. The information includes its columns. A token is returned to page through the column list. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. </p> </li> <li> <p>Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the <code>redshift:GetClusterCredentials</code> operation is required to use this method. </p> </li> </ul>'
+      description: '<p>Describes the detailed information about a table from metadata in the cluster. The information includes its columns. A token is returned to page through the column list. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p> </li> <li> <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required. When connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p> </li> </ul> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>'
       responses:
         '200':
           description: Success
@@ -291,6 +297,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: DatabaseConnectionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatabaseConnectionException'
       requestBody:
         required: true
         content:
@@ -328,7 +340,7 @@ paths:
   /#X-Amz-Target=RedshiftData.ExecuteStatement:
     post:
       operationId: ExecuteStatement
-      description: '<p>Runs an SQL statement, which can be data manipulation language (DML) or data definition language (DDL). This statement must be a single SQL statement. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. </p> </li> <li> <p>Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the <code>redshift:GetClusterCredentials</code> operation is required to use this method. </p> </li> </ul>'
+      description: '<p>Runs an SQL statement, which can be data manipulation language (DML) or data definition language (DDL). This statement must be a single SQL statement. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p> </li> <li> <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required. When connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p> </li> </ul> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>'
       responses:
         '200':
           description: Success
@@ -379,7 +391,7 @@ paths:
   /#X-Amz-Target=RedshiftData.GetStatementResult:
     post:
       operationId: GetStatementResult
-      description: 'Fetches the temporarily cached result of an SQL statement. A token is returned to page through the statement results. '
+      description: '<p>Fetches the temporarily cached result of an SQL statement. A token is returned to page through the statement results. </p> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>'
       responses:
         '200':
           description: Success
@@ -436,7 +448,7 @@ paths:
   /#X-Amz-Target=RedshiftData.ListDatabases:
     post:
       operationId: ListDatabases
-      description: '<p>List the databases in a cluster. A token is returned to page through the database list. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. </p> </li> <li> <p>Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the <code>redshift:GetClusterCredentials</code> operation is required to use this method. </p> </li> </ul>'
+      description: '<p>List the databases in a cluster. A token is returned to page through the database list. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p> </li> <li> <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required. When connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p> </li> </ul> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>'
       responses:
         '200':
           description: Success
@@ -456,6 +468,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: DatabaseConnectionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatabaseConnectionException'
       requestBody:
         required: true
         content:
@@ -493,7 +511,7 @@ paths:
   /#X-Amz-Target=RedshiftData.ListSchemas:
     post:
       operationId: ListSchemas
-      description: '<p>Lists the schemas in a database. A token is returned to page through the schema list. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. </p> </li> <li> <p>Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the <code>redshift:GetClusterCredentials</code> operation is required to use this method. </p> </li> </ul>'
+      description: '<p>Lists the schemas in a database. A token is returned to page through the schema list. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p> </li> <li> <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required. When connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p> </li> </ul> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>'
       responses:
         '200':
           description: Success
@@ -513,6 +531,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: DatabaseConnectionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatabaseConnectionException'
       requestBody:
         required: true
         content:
@@ -550,7 +574,7 @@ paths:
   /#X-Amz-Target=RedshiftData.ListStatements:
     post:
       operationId: ListStatements
-      description: 'List of SQL statements. By default, only finished statements are shown. A token is returned to page through the statement list. '
+      description: '<p>List of SQL statements. By default, only finished statements are shown. A token is returned to page through the statement list. </p> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>'
       responses:
         '200':
           description: Success
@@ -607,7 +631,7 @@ paths:
   /#X-Amz-Target=RedshiftData.ListTables:
     post:
       operationId: ListTables
-      description: '<p>List the tables in a database. If neither <code>SchemaPattern</code> nor <code>TablePattern</code> are specified, then all tables in the database are returned. A token is returned to page through the table list. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. </p> </li> <li> <p>Temporary credentials - specify the cluster identifier, the database name, and the database user name. Permission to call the <code>redshift:GetClusterCredentials</code> operation is required to use this method. </p> </li> </ul>'
+      description: '<p>List the tables in a database. If neither <code>SchemaPattern</code> nor <code>TablePattern</code> are specified, then all tables in the database are returned. A token is returned to page through the table list. Depending on the authorization method, use one of the following combinations of request parameters: </p> <ul> <li> <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret. When connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p> </li> <li> <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. Also, permission to call the <code>redshift:GetClusterCredentials</code> operation is required. When connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p> </li> </ul> <p>For more information about the Amazon Redshift Data API and CLI usage examples, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Management Guide</i>. </p>'
       responses:
         '200':
           description: Success
@@ -627,6 +651,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: DatabaseConnectionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatabaseConnectionException'
       requestBody:
         required: true
         content:
@@ -719,7 +749,7 @@ components:
         ClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/Location'
-            - description: 'The cluster identifier. '
+            - description: 'The cluster identifier. This element is not returned when connecting to a serverless workgroup. '
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -740,18 +770,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/SecretArn'
             - description: 'The name or ARN of the secret that enables access to the database. '
+        WorkgroupName:
+          allOf:
+            - $ref: '#/components/schemas/WorkgroupNameString'
+            - description: The serverless workgroup name. This element is not returned when connecting to a provisioned cluster.
     BatchExecuteStatementInput:
       type: object
       required:
-        - ClusterIdentifier
         - Database
         - Sqls
       title: BatchExecuteStatementInput
       properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         ClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/Location'
-            - description: 'The cluster identifier. This parameter is required when authenticating using either Secrets Manager or temporary credentials. '
+            - description: 'The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. '
         Database:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -759,7 +796,7 @@ components:
         DbUser:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The database user name. This parameter is required when authenticating using temporary credentials. '
+            - description: 'The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. '
         SecretArn:
           allOf:
             - $ref: '#/components/schemas/SecretArn'
@@ -767,7 +804,7 @@ components:
         Sqls:
           allOf:
             - $ref: '#/components/schemas/SqlList'
-            - description: 'One or more SQL statements to run. '
+            - description: 'One or more SQL statements to run. <pre><code> The SQL statements are run as a single transaction. They run serially in the order of the array. Subsequent SQL statements don''t start until the previous statement in the array completes. If any SQL statement fails, then because they are run as one transaction, all work is rolled back.&lt;/p&gt; </code></pre>'
         StatementName:
           allOf:
             - $ref: '#/components/schemas/StatementNameString'
@@ -776,6 +813,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'A value that indicates whether to send an event to the Amazon EventBridge event bus after the SQL statements run. '
+        WorkgroupName:
+          allOf:
+            - $ref: '#/components/schemas/WorkgroupNameString'
+            - description: The serverless workgroup name. This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
     ValidationException: {}
     ActiveStatementsExceededException: {}
     BatchExecuteStatementException: {}
@@ -798,6 +839,7 @@ components:
             - description: 'The identifier of the SQL statement to cancel. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. This identifier is returned by <code>BatchExecuteStatment</code>, <code>ExecuteStatment</code>, and <code>ListStatements</code>. '
     ResourceNotFoundException: {}
     InternalServerException: {}
+    DatabaseConnectionException: {}
     DescribeStatementResponse:
       type: object
       required:
@@ -830,7 +872,7 @@ components:
         HasResultSet:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'A value that indicates whether the statement has a result set. The result set can be empty. '
+            - description: A value that indicates whether the statement has a result set. The result set can be empty. The value is true for an empty result set. The value is true if any substatement returns a result set.
         Id:
           allOf:
             - $ref: '#/components/schemas/StatementId'
@@ -875,6 +917,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: 'The date and time (UTC) that the metadata for the SQL statement was last updated. An example is the time the status last changed. '
+        WorkgroupName:
+          allOf:
+            - $ref: '#/components/schemas/WorkgroupNameString'
+            - description: The serverless workgroup name.
     DescribeStatementRequest:
       type: object
       required:
@@ -903,14 +949,13 @@ components:
     DescribeTableRequest:
       type: object
       required:
-        - ClusterIdentifier
         - Database
       title: DescribeTableRequest
       properties:
         ClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/Location'
-            - description: 'The cluster identifier. This parameter is required when authenticating using either Secrets Manager or temporary credentials. '
+            - description: 'The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. '
         ConnectedDatabase:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -922,7 +967,7 @@ components:
         DbUser:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The database user name. This parameter is required when authenticating using temporary credentials. '
+            - description: 'The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. '
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/PageSize'
@@ -943,13 +988,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The table name. If no table is specified, then all tables for all matching schemas are returned. If no table and no schema is specified, then all tables for all schemas in the database are returned'
+        WorkgroupName:
+          allOf:
+            - $ref: '#/components/schemas/WorkgroupNameString'
+            - description: The serverless workgroup name. This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
     ExecuteStatementOutput:
       type: object
       properties:
         ClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/Location'
-            - description: 'The cluster identifier. '
+            - description: 'The cluster identifier. This element is not returned when connecting to a serverless workgroup. '
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -970,18 +1019,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/SecretArn'
             - description: 'The name or ARN of the secret that enables access to the database. '
+        WorkgroupName:
+          allOf:
+            - $ref: '#/components/schemas/WorkgroupNameString'
+            - description: The serverless workgroup name. This element is not returned when connecting to a provisioned cluster.
     ExecuteStatementInput:
       type: object
       required:
-        - ClusterIdentifier
         - Database
         - Sql
       title: ExecuteStatementInput
       properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         ClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/Location'
-            - description: 'The cluster identifier. This parameter is required when authenticating using either Secrets Manager or temporary credentials. '
+            - description: 'The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. '
         Database:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -989,7 +1045,7 @@ components:
         DbUser:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The database user name. This parameter is required when authenticating using temporary credentials. '
+            - description: 'The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. '
         Parameters:
           allOf:
             - $ref: '#/components/schemas/SqlParametersList'
@@ -1010,6 +1066,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'A value that indicates whether to send an event to the Amazon EventBridge event bus after the SQL statement runs. '
+        WorkgroupName:
+          allOf:
+            - $ref: '#/components/schemas/WorkgroupNameString'
+            - description: The serverless workgroup name. This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
     ExecuteStatementException: {}
     GetStatementResultResponse:
       type: object
@@ -1060,14 +1120,13 @@ components:
     ListDatabasesRequest:
       type: object
       required:
-        - ClusterIdentifier
         - Database
       title: ListDatabasesRequest
       properties:
         ClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/Location'
-            - description: 'The cluster identifier. This parameter is required when authenticating using either Secrets Manager or temporary credentials. '
+            - description: 'The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. '
         Database:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1075,7 +1134,7 @@ components:
         DbUser:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The database user name. This parameter is required when authenticating using temporary credentials. '
+            - description: 'The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. '
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/PageSize'
@@ -1088,6 +1147,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SecretArn'
             - description: 'The name or ARN of the secret that enables access to the database. This parameter is required when authenticating using Secrets Manager. '
+        WorkgroupName:
+          allOf:
+            - $ref: '#/components/schemas/WorkgroupNameString'
+            - description: The serverless workgroup name. This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
     ListSchemasResponse:
       type: object
       properties:
@@ -1102,14 +1165,13 @@ components:
     ListSchemasRequest:
       type: object
       required:
-        - ClusterIdentifier
         - Database
       title: ListSchemasRequest
       properties:
         ClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/Location'
-            - description: 'The cluster identifier. This parameter is required when authenticating using either Secrets Manager or temporary credentials. '
+            - description: 'The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. '
         ConnectedDatabase:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1121,7 +1183,7 @@ components:
         DbUser:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The database user name. This parameter is required when authenticating using temporary credentials. '
+            - description: 'The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. '
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/PageSize'
@@ -1138,6 +1200,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SecretArn'
             - description: 'The name or ARN of the secret that enables access to the database. This parameter is required when authenticating using Secrets Manager. '
+        WorkgroupName:
+          allOf:
+            - $ref: '#/components/schemas/WorkgroupNameString'
+            - description: The serverless workgroup name. This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
     ListStatementsResponse:
       type: object
       required:
@@ -1189,14 +1255,13 @@ components:
     ListTablesRequest:
       type: object
       required:
-        - ClusterIdentifier
         - Database
       title: ListTablesRequest
       properties:
         ClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/Location'
-            - description: 'The cluster identifier. This parameter is required when authenticating using either Secrets Manager or temporary credentials. '
+            - description: 'The cluster identifier. This parameter is required when connecting to a cluster and authenticating using either Secrets Manager or temporary credentials. '
         ConnectedDatabase:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1208,7 +1273,7 @@ components:
         DbUser:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The database user name. This parameter is required when authenticating using temporary credentials. '
+            - description: 'The database user name. This parameter is required when connecting to a cluster and authenticating using temporary credentials. '
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/PageSize'
@@ -1229,6 +1294,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'A pattern to filter results by table name. Within a table pattern, "%" means match any substring of 0 or more characters and "_" means match any one character. Only table name entries matching the search pattern are returned. If <code>TablePattern</code> is not specified, then all tables that match <code>SchemaPattern</code>are returned. If neither <code>SchemaPattern</code> or <code>TablePattern</code> are specified, then all tables are returned. '
+        WorkgroupName:
+          allOf:
+            - $ref: '#/components/schemas/WorkgroupNameString'
+            - description: The serverless workgroup name. This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.
+    ClientToken:
+      type: string
+      minLength: 1
+      maxLength: 64
     Location:
       type: string
     String:
@@ -1247,6 +1320,11 @@ components:
       maxLength: 500
     Boolean:
       type: boolean
+    WorkgroupNameString:
+      type: string
+      pattern: '^[a-z0-9-]+$'
+      minLength: 3
+      maxLength: 64
     Timestamp:
       type: string
       format: date-time
@@ -1432,7 +1510,7 @@ components:
         value:
           allOf:
             - $ref: '#/components/schemas/ParameterValue'
-            - description: 'The value of the parameter. Amazon Redshift implicitly converts to the proper data type. For more inforation, see <a href="https://docs.aws.amazon.com/redshift/latest/dg/c_Supported_data_types.html">Data types</a> in the <i>Amazon Redshift Database Developer Guide</i>. '
+            - description: 'The value of the parameter. Amazon Redshift implicitly converts to the proper data type. For more information, see <a href="https://docs.aws.amazon.com/redshift/latest/dg/c_Supported_data_types.html">Data types</a> in the <i>Amazon Redshift Database Developer Guide</i>. '
       description: A parameter used in a SQL statement.
     StatementStringList:
       type: array
@@ -1513,7 +1591,7 @@ components:
         HasResultSet:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: A value that indicates whether the statement has a result set. The result set can be empty.
+            - description: A value that indicates whether the statement has a result set. The result set can be empty. The value is true for an empty result set.
         Id:
           allOf:
             - $ref: '#/components/schemas/StatementId'

@@ -1,0 +1,311 @@
+openapi: 3.0.0
+info:
+  version: '2022-09-30'
+  x-release: v4
+  title: Amazon SageMaker Metrics Service
+  description: '<p>Contains all data plane API operations and data types for Amazon SageMaker Metrics. Use these APIs to put and retrieve (get) features related to your training run.</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_metrics_BatchPutMetrics.html">BatchPutMetrics</a> </p> </li> </ul>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: sagemaker-metrics
+  x-aws-signingName: sagemaker
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/sagemaker-metrics-2022-09-30.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/sagemaker/'
+servers:
+  - url: 'http://metrics.sagemaker.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The SageMaker Metrics multi-region endpoint
+  - url: 'https://metrics.sagemaker.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The SageMaker Metrics multi-region endpoint
+  - url: 'http://metrics.sagemaker.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The SageMaker Metrics endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://metrics.sagemaker.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The SageMaker Metrics endpoint for China (Beijing) and China (Ningxia)
+paths:
+  /BatchPutMetrics:
+    put:
+      operationId: BatchPutMetrics
+      description: 'Used to ingest training metrics into SageMaker. These metrics can be visualized in SageMaker Studio and retrieved with the <code>GetMetrics</code> API. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchPutMetricsResponse'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - TrialComponentName
+                - MetricData
+              properties:
+                TrialComponentName:
+                  description: The name of the Trial Component to associate with the metrics.
+                  type: string
+                  pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,119}'
+                  minLength: 1
+                  maxLength: 120
+                MetricData:
+                  description: A list of raw metric values to put.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RawMetricData'
+                  minItems: 1
+                  maxItems: 10
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    BatchPutMetricsResponse:
+      type: object
+      properties:
+        Errors:
+          allOf:
+            - $ref: '#/components/schemas/BatchPutMetricsErrorList'
+            - description: Lists any errors that occur when inserting metric data.
+    RawMetricData:
+      type: object
+      required:
+        - MetricName
+        - Timestamp
+        - Value
+      properties:
+        MetricName:
+          allOf:
+            - $ref: '#/components/schemas/MetricName'
+            - description: The name of the metric.
+        Timestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the metric was recorded.
+        Step:
+          allOf:
+            - $ref: '#/components/schemas/Step'
+            - description: 'The metric step (epoch). '
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The metric value.
+      description: The raw metric data to associate with the resource.
+    PutMetricsErrorCode:
+      type: string
+      enum:
+        - METRIC_LIMIT_EXCEEDED
+        - INTERNAL_ERROR
+        - VALIDATION_ERROR
+        - CONFLICT_ERROR
+    Integer:
+      type: integer
+    BatchPutMetricsError:
+      type: object
+      properties:
+        Code:
+          allOf:
+            - $ref: '#/components/schemas/PutMetricsErrorCode'
+            - description: '<p>The error code of an error that occured when attempting to put metrics.</p> <ul> <li> <p> <code>METRIC_LIMIT_EXCEEDED</code>: The maximum amount of metrics per resource is exceeded.</p> </li> <li> <p> <code>INTERNAL_ERROR</code>: An internal error occured.</p> </li> <li> <p> <code>VALIDATION_ERROR</code>: The metric data failed validation.</p> </li> <li> <p> <code>CONFLICT_ERROR</code>: Multiple requests attempted to modify the same data simultaneously.</p> </li> </ul>'
+        MetricIndex:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: An index that corresponds to the metric in the request.
+      description: An error that occured when putting the metric data.
+    BatchPutMetricsErrorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchPutMetricsError'
+      minItems: 1
+      maxItems: 10
+    ExperimentEntityName:
+      type: string
+      pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,119}'
+      minLength: 1
+      maxLength: 120
+    RawMetricDataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RawMetricData'
+      minItems: 1
+      maxItems: 10
+    BatchPutMetricsRequest:
+      type: object
+      required:
+        - TrialComponentName
+        - MetricData
+      title: BatchPutMetricsRequest
+      properties:
+        TrialComponentName:
+          allOf:
+            - $ref: '#/components/schemas/ExperimentEntityName'
+            - description: The name of the Trial Component to associate with the metrics.
+        MetricData:
+          allOf:
+            - $ref: '#/components/schemas/RawMetricDataList'
+            - description: A list of raw metric values to put.
+    Double:
+      type: number
+      format: double
+    MetricName:
+      type: string
+      pattern: .+
+      minLength: 1
+      maxLength: 255
+    Timestamp:
+      type: string
+      format: date-time
+    Step:
+      type: integer
+      minimum: 0
+security:
+  - hmac: []

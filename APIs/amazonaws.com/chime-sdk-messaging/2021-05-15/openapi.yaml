@@ -3,7 +3,7 @@ info:
   version: '2021-05-15'
   x-release: v4
   title: Amazon Chime SDK Messaging
-  description: 'The Amazon Chime SDK Messaging APIs in this section allow software developers to send and receive messages in custom messaging applications. These APIs depend on the frameworks provided by the Amazon Chime SDK Identity APIs. For more information about the messaging APIs, see <a href="https://docs.aws.amazon.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_Messaging">Amazon Chime SDK messaging</a> '
+  description: 'The Amazon Chime SDK Messaging APIs in this section allow software developers to send and receive messages in custom messaging applications. These APIs depend on the frameworks provided by the Amazon Chime SDK Identity APIs. For more information about the messaging APIs, see <a href="https://docs.aws.amazon.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_Messaging.html">Amazon Chime SDK messaging</a>.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -115,6 +115,103 @@ servers:
     description: The Amazon Chime SDK Messaging endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  '/channels/{channelArn}/channel-flow#x-amz-chime-bearer':
+    put:
+      operationId: AssociateChannelFlow
+      description: '<p>Associates a channel flow with a channel. Once associated, all messages to that channel go through channel flow processors. To stop processing, use the <code>DisassociateChannelFlow</code> API.</p> <note> <p>Only administrators or channel moderators can associate a channel flow. The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user making the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ChannelFlowArn
+              properties:
+                ChannelFlowArn:
+                  description: The ARN of the channel flow.
+                  type: string
+                  pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+                  minLength: 5
+                  maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/channels/{channelArn}/memberships#operation=batch-create&x-amz-chime-bearer':
     post:
       operationId: BatchCreateChannelMembership
@@ -151,17 +248,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
           description: ForbiddenException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ForbiddenException'
-        '485':
+        '486':
           description: ThrottledClientException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottledClientException'
+        '487':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
       parameters:
         - name: channelArn
           in: path
@@ -204,12 +313,142 @@ paths:
                     - DEFAULT
                     - HIDDEN
                 MemberArns:
-                  description: The ARNs of the members you want to add to the channel.
+                  description: The <code>AppInstanceUserArn</code>s of the members you want to add to the channel.
                   type: array
                   items:
                     $ref: '#/components/schemas/ChimeArn'
                   minItems: 1
                   maxItems: 100
+                SubChannelId:
+                  description: <p>The ID of the SubChannel in the request. </p> <note> <p>Only required when creating membership in a SubChannel for a moderator in an elastic channel.</p> </note>
+                  type: string
+                  pattern: '[-_a-zA-Z0-9]*'
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/channels/{channelArn}#operation=channel-flow-callback':
+    post:
+      operationId: ChannelFlowCallback
+      description: '<p>Calls back Chime SDK Messaging with a processing response message. This should be invoked from the processor Lambda. This is a developer API.</p> <p>You can return one of the following processing responses:</p> <ul> <li> <p>Update message content or metadata</p> </li> <li> <p>Deny a message</p> </li> <li> <p>Make no changes to the message</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelFlowCallbackResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - channel-flow-callback
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - CallbackId
+                - ChannelMessage
+              properties:
+                CallbackId:
+                  description: The identifier passed to the processor by the service when invoked. Use the identifier to call back the service.
+                  type: string
+                  minLength: 32
+                  maxLength: 64
+                DeleteResource:
+                  description: 'When a processor determines that a message needs to be <code>DENIED</code>, pass this parameter with a value of true.'
+                  type: boolean
+                ChannelMessage:
+                  description: Stores information about a callback.
+                  type: object
+                  properties:
+                    MessageId:
+                      allOf:
+                        - $ref: '#/components/schemas/MessageId'
+                        - description: The message ID.
+                    Content:
+                      allOf:
+                        - $ref: '#/components/schemas/NonEmptyContent'
+                        - description: The message content.
+                    Metadata:
+                      allOf:
+                        - $ref: '#/components/schemas/Metadata'
+                        - description: The message metadata.
+                    PushNotification:
+                      allOf:
+                        - $ref: '#/components/schemas/PushNotificationConfiguration'
+                        - description: The push notification configuration of the message.
+                    MessageAttributes:
+                      allOf:
+                        - $ref: '#/components/schemas/MessageAttributeMap'
+                        - description: 'The attributes for the message, used for message filtering along with a <code>FilterRule</code> defined in the <code>PushNotificationPreferences</code>. '
+                    SubChannelId:
+                      allOf:
+                        - $ref: '#/components/schemas/SubChannelId'
+                        - description: The ID of the SubChannel.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -344,6 +583,43 @@ paths:
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
                   maxItems: 50
+                ChannelId:
+                  description: The ID of the channel in the request.
+                  type: string
+                  pattern: '[A-Za-z0-9]([A-Za-z0-9\:\-\_\.\@]{0,62}[A-Za-z0-9])?'
+                  minLength: 1
+                  maxLength: 64
+                  format: password
+                MemberArns:
+                  description: The ARNs of the channel members in the request.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ChimeArn'
+                  minItems: 1
+                  maxItems: 10
+                ModeratorArns:
+                  description: The ARNs of the channel moderators in the request.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ChimeArn'
+                  minItems: 1
+                  maxItems: 10
+                ElasticChannelConfiguration:
+                  description: The attributes required to configure and create an elastic channel. An elastic channel can support a maximum of 1-million members.
+                  type: object
+                  properties:
+                    MaximumSubChannels:
+                      allOf:
+                        - $ref: '#/components/schemas/MaximumSubChannels'
+                        - description: The maximum number of SubChannels that you want to allow in the elastic channel.
+                    TargetMembershipsPerSubChannel:
+                      allOf:
+                        - $ref: '#/components/schemas/TargetMembershipsPerSubChannel'
+                        - description: The maximum number of members allowed in a SubChannel.
+                    MinimumMembershipPercentage:
+                      allOf:
+                        - $ref: '#/components/schemas/MinimumMembershipPercentage'
+                        - description: The minimum allowed percentage of TargetMembershipsPerSubChannel users. Ceil of the calculated value is used in balancing members among SubChannels of the elastic channel.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -440,7 +716,7 @@ paths:
                 - MemberArn
               properties:
                 MemberArn:
-                  description: The ARN of the member being banned.
+                  description: The <code>AppInstanceUserArn</code> of the member being banned.
                   type: string
                   pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
                   minLength: 5
@@ -548,17 +824,17 @@ paths:
             type: string
           description: Pagination token
           required: false
-  '/channels/{channelArn}/memberships#x-amz-chime-bearer':
+  /channel-flows:
     post:
-      operationId: CreateChannelMembership
-      description: '<p>Adds a user to a channel. The <code>InvitedBy</code> response field is derived from the request header. A channel member can:</p> <ul> <li> <p>List messages</p> </li> <li> <p>Send messages</p> </li> <li> <p>Receive messages</p> </li> <li> <p>Edit their own messages</p> </li> <li> <p>Leave the channel</p> </li> </ul> <p>Privacy settings impact this action as follows:</p> <ul> <li> <p>Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.</p> </li> <li> <p>Private Channels: You must be a member to list or send messages.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      operationId: CreateChannelFlow
+      description: '<p>Creates a channel flow, a container for processors. Processors are AWS Lambda functions that perform actions on chat messages, such as stripping out profanity. You can associate channel flows with channels, and the processors in the channel flow then take action on all messages sent to that channel. This is a developer API.</p> <p>Channel flows process the following items:</p> <ol> <li> <p>New and updated messages</p> </li> <li> <p>Persistent and non-persistent messages</p> </li> <li> <p>The Standard message type</p> </li> </ol> <note> <p>Channel flows don''t process Control or System messages. For more information about the message types provided by Chime SDK Messaging, refer to <a href="https://docs.aws.amazon.com/chime/latest/dg/using-the-messaging-sdk.html#msg-types">Message types</a> in the <i>Amazon Chime developer guide</i>.</p> </note>'
       responses:
         '201':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateChannelMembershipResponse'
+                $ref: '#/components/schemas/CreateChannelFlowResponse'
         '480':
           description: BadRequestException
           content:
@@ -607,6 +883,126 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceFailureException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AppInstanceArn
+                - Processors
+                - Name
+                - ClientRequestToken
+              properties:
+                AppInstanceArn:
+                  description: The ARN of the channel flow request.
+                  type: string
+                  pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+                  minLength: 5
+                  maxLength: 1600
+                Processors:
+                  description: Information about the processor Lambda functions.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Processor'
+                  minItems: 1
+                  maxItems: 3
+                Name:
+                  description: The name of the channel flow.
+                  type: string
+                  pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+                  minLength: 1
+                  maxLength: 256
+                  format: password
+                Tags:
+                  description: The tags for the creation request.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
+                ClientRequestToken:
+                  description: The client token for the request. An Idempotency token.
+                  type: string
+                  pattern: '[-_a-zA-Z0-9]*'
+                  minLength: 2
+                  maxLength: 64
+                  format: password
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/channels/{channelArn}/memberships#x-amz-chime-bearer':
+    post:
+      operationId: CreateChannelMembership
+      description: '<p>Adds a user to a channel. The <code>InvitedBy</code> field in <code>ChannelMembership</code> is derived from the request header. A channel member can:</p> <ul> <li> <p>List messages</p> </li> <li> <p>Send messages</p> </li> <li> <p>Receive messages</p> </li> <li> <p>Edit their own messages</p> </li> <li> <p>Leave the channel</p> </li> </ul> <p>Privacy settings impact this action as follows:</p> <ul> <li> <p>Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.</p> </li> <li> <p>Private Channels: You must be a member to list or send messages.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateChannelMembershipResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '486':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '487':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '488':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
       parameters:
         - name: channelArn
           in: path
@@ -637,7 +1033,7 @@ paths:
                 - Type
               properties:
                 MemberArn:
-                  description: The ARN of the member you want to add to the channel.
+                  description: The <code>AppInstanceUserArn</code> of the member you want to add to the channel.
                   type: string
                   pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
                   minLength: 5
@@ -648,6 +1044,12 @@ paths:
                   enum:
                     - DEFAULT
                     - HIDDEN
+                SubChannelId:
+                  description: <p>The ID of the SubChannel in the request.</p> <note> <p>Only required when creating membership in a SubChannel for a moderator in an elastic channel.</p> </note>
+                  type: string
+                  pattern: '[-_a-zA-Z0-9]*'
+                  minLength: 1
+                  maxLength: 128
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -658,7 +1060,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListChannelMemberships
-      description: <p>Lists all channel memberships in a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p>Lists all channel memberships in a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <p>If you want to list the channels to which a specific app instance user belongs, see the <a href="https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html">ListChannelMembershipsForAppInstanceUser</a> API.</p>'
       responses:
         '200':
           description: Success
@@ -715,7 +1117,7 @@ paths:
         - name: type
           in: query
           required: false
-          description: 'The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals <code>HIDDEN</code>. Otherwise hidden members are not returned.'
+          description: 'The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are returned as part of <code>ListChannelMemberships</code> if no type is specified. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals <code>HIDDEN</code>.'
           schema:
             type: string
             enum:
@@ -748,6 +1150,15 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+        - name: sub-channel-id
+          in: query
+          required: false
+          description: <p>The ID of the SubChannel in the request.</p> <note> <p>Only required when listing a user's memberships in a particular sub-channel of an elastic channel.</p> </note>
+          schema:
+            type: string
+            pattern: '[-_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 128
         - name: MaxResults
           in: query
           schema:
@@ -848,7 +1259,7 @@ paths:
                 - ChannelModeratorArn
               properties:
                 ChannelModeratorArn:
-                  description: The ARN of the moderator.
+                  description: The <code>AppInstanceUserArn</code> of the moderator.
                   type: string
                   pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
                   minLength: 5
@@ -1018,6 +1429,15 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+        - name: sub-channel-id
+          in: query
+          required: false
+          description: The ID of the SubChannel in the request.
+          schema:
+            type: string
+            pattern: '[-_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 128
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1168,9 +1588,6 @@ paths:
           application/json:
             schema:
               type: object
-              required:
-                - Name
-                - Mode
               properties:
                 Name:
                   description: The name of the channel.
@@ -1336,7 +1753,7 @@ paths:
         - name: memberArn
           in: path
           required: true
-          description: The ARN of the member being banned.
+          description: The <code>AppInstanceUserArn</code> of the member being banned.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -1351,6 +1768,215 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+  '/channel-flows/{channelFlowArn}':
+    delete:
+      operationId: DeleteChannelFlow
+      description: '<p>Deletes a channel flow, an irreversible process. This is a developer API.</p> <note> <p> This API works only when the channel flow is not associated with any channel. To get a list of all channels that a channel flow is associated with, use the <code>ListChannelsAssociatedWithChannelFlow</code> API. Use the <code>DisassociateChannelFlow</code> API to disassociate a channel flow from all channels. </p> </note>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelFlowArn
+          in: path
+          required: true
+          description: The ARN of the channel flow.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeChannelFlow
+      description: Returns the full details of a channel flow in an Amazon Chime <code>AppInstance</code>. This is a developer API.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeChannelFlowResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelFlowArn
+          in: path
+          required: true
+          description: The ARN of the channel flow.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    put:
+      operationId: UpdateChannelFlow
+      description: Updates channel flow attributes. This is a developer API.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateChannelFlowResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelFlowArn
+          in: path
+          required: true
+          description: The ARN of the channel flow.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Processors
+                - Name
+              properties:
+                Processors:
+                  description: 'Information about the processor Lambda functions '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Processor'
+                  minItems: 1
+                  maxItems: 3
+                Name:
+                  description: The name of the channel flow.
+                  type: string
+                  pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+                  minLength: 1
+                  maxLength: 256
+                  format: password
   '/channels/{channelArn}/memberships/{memberArn}#x-amz-chime-bearer':
     delete:
       operationId: DeleteChannelMembership
@@ -1413,7 +2039,7 @@ paths:
         - name: memberArn
           in: path
           required: true
-          description: The ARN of the member that you're removing from the channel.
+          description: The <code>AppInstanceUserArn</code> of the member that you're removing from the channel.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -1428,6 +2054,15 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+        - name: sub-channel-id
+          in: query
+          required: false
+          description: <p>The ID of the SubChannel in the request.</p> <note> <p>Only for use by moderators.</p> </note>
+          schema:
+            type: string
+            pattern: '[-_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 128
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1501,7 +2136,7 @@ paths:
         - name: memberArn
           in: path
           required: true
-          description: The ARN of the member.
+          description: The <code>AppInstanceUserArn</code> of the member.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -1516,6 +2151,15 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+        - name: sub-channel-id
+          in: query
+          required: false
+          description: <p>The ID of the SubChannel in the request. The response contains an <code>ElasticChannelConfiguration</code> object.</p> <note> <p>Only required to get a user’s SubChannel membership details.</p> </note>
+          schema:
+            type: string
+            pattern: '[-_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 128
   '/channels/{channelArn}/messages/{messageId}#x-amz-chime-bearer':
     delete:
       operationId: DeleteChannelMessage
@@ -1587,6 +2231,15 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+        - name: sub-channel-id
+          in: query
+          required: false
+          description: <p>The ID of the SubChannel in the request.</p> <note> <p>Only required when deleting messages in a SubChannel that the user belongs to.</p> </note>
+          schema:
+            type: string
+            pattern: '[-_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 128
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1675,6 +2328,15 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+        - name: sub-channel-id
+          in: query
+          required: false
+          description: <p>The ID of the SubChannel in the request.</p> <note> <p>Only required when getting messages in a SubChannel that the user belongs to.</p> </note>
+          schema:
+            type: string
+            pattern: '[-_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 128
     put:
       operationId: UpdateChannelMessage
       description: <p>Updates the content of a message.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
@@ -1776,6 +2438,12 @@ paths:
                   minLength: 0
                   maxLength: 1024
                   format: password
+                SubChannelId:
+                  description: <p>The ID of the SubChannel in the request.</p> <note> <p>Only required when updating messages in a SubChannel that the user belongs to.</p> </note>
+                  type: string
+                  pattern: '[-_a-zA-Z0-9]*'
+                  minLength: 1
+                  maxLength: 128
   '/channels/{channelArn}/moderators/{channelModeratorArn}#x-amz-chime-bearer':
     delete:
       operationId: DeleteChannelModerator
@@ -1832,7 +2500,7 @@ paths:
         - name: channelModeratorArn
           in: path
           required: true
-          description: The ARN of the moderator being deleted.
+          description: The <code>AppInstanceUserArn</code> of the moderator being deleted.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -1920,7 +2588,7 @@ paths:
         - name: channelModeratorArn
           in: path
           required: true
-          description: The ARN of the channel moderator.
+          description: The <code>AppInstanceUserArn</code> of the channel moderator.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -2115,6 +2783,376 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/channels/{channelArn}/channel-flow/{channelFlowArn}#x-amz-chime-bearer':
+    delete:
+      operationId: DisassociateChannelFlow
+      description: '<p>Disassociates a channel flow from all its channels. Once disassociated, all messages to that channel stop going through the channel flow processor.</p> <note> <p>Only administrators or channel moderators can disassociate a channel flow. The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: channelFlowArn
+          in: path
+          required: true
+          description: The ARN of the channel flow.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user making the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/channels/{channelArn}/memberships/{memberArn}/preferences#x-amz-chime-bearer':
+    get:
+      operationId: GetChannelMembershipPreferences
+      description: Gets the membership preferences of an <code>AppInstanceUser</code> for the specified channel. The <code>AppInstanceUser</code> must be a member of the channel. Only the <code>AppInstanceUser</code> who owns the membership can retrieve preferences. Users in the <code>AppInstanceAdmin</code> and channel moderator roles can't retrieve preferences for other users. Banned users can't retrieve membership preferences for the channel from which they are banned.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetChannelMembershipPreferencesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: memberArn
+          in: path
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the member retrieving the preferences.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserARN</code> of the user making the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: PutChannelMembershipPreferences
+      description: Sets the membership preferences of an <code>AppInstanceUser</code> for the specified channel. The <code>AppInstanceUser</code> must be a member of the channel. Only the <code>AppInstanceUser</code> who owns the membership can set preferences. Users in the <code>AppInstanceAdmin</code> and channel moderator roles can't set preferences for other users. Banned users can't set membership preferences for the channel from which they are banned.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutChannelMembershipPreferencesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: memberArn
+          in: path
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the member setting the preferences.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserARN</code> of the user making the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Preferences
+              properties:
+                Preferences:
+                  description: The channel membership preferences for an <code>AppInstanceUser</code>.
+                  type: object
+                  properties:
+                    PushNotifications:
+                      allOf:
+                        - $ref: '#/components/schemas/PushNotificationPreferences'
+                        - description: The push notification configuration of a message.
+  '/channels/{channelArn}/messages/{messageId}#scope=message-status&x-amz-chime-bearer':
+    get:
+      operationId: GetChannelMessageStatus
+      description: '<p>Gets message status for a specified <code>messageId</code>. Use this API to determine the intermediate status of messages going through channel flow processing. The API provides an alternative to retrieving message status if the event was not received because a client wasn''t connected to a websocket. </p> <p>Messages can have any one of these statuses.</p> <dl> <dt>SENT</dt> <dd> <p>Message processed successfully</p> </dd> <dt>PENDING</dt> <dd> <p>Ongoing processing</p> </dd> <dt>FAILED</dt> <dd> <p>Processing failed</p> </dd> <dt>DENIED</dt> <dd> <p>Messasge denied by the processor</p> </dd> </dl> <note> <ul> <li> <p>This API does not return statuses for denied messages, because we don''t store them once the processor denies them. </p> </li> <li> <p>Only the message sender can invoke this API.</p> </li> <li> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header</p> </li> </ul> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetChannelMessageStatusResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: messageId
+          in: path
+          required: true
+          description: The ID of the message.
+          schema:
+            type: string
+            pattern: '[-_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 128
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user making the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: sub-channel-id
+          in: query
+          required: false
+          description: <p>The ID of the SubChannel in the request.</p> <note> <p>Only required when getting message status in a SubChannel that the user belongs to.</p> </note>
+          schema:
+            type: string
+            pattern: '[-_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 128
+        - name: scope
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - message-status
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /endpoints/messaging-session:
     get:
       operationId: GetMessagingSessionEndpoint
@@ -2157,6 +3195,101 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServiceFailureException'
       parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /channel-flows#app-instance-arn:
+    get:
+      operationId: ListChannelFlows
+      description: Returns a paginated lists of all the channel flows created under a single Chime. This is a developer API.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListChannelFlowsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: app-instance-arn
+          in: query
+          required: true
+          description: The ARN of the app instance.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of channel flows that you want to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: next-token
+          in: query
+          required: false
+          description: The token passed by previous API calls until all requested channel flows are returned.
+          schema:
+            type: string
+            pattern: .*
+            minLength: 0
+            maxLength: 2048
+            format: password
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2383,6 +3516,15 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+        - name: sub-channel-id
+          in: query
+          required: false
+          description: <p>The ID of the SubChannel in the request.</p> <note> <p>Only required when listing the messages in a SubChannel that the user belongs to.</p> </note>
+          schema:
+            type: string
+            pattern: '[-_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 128
         - name: MaxResults
           in: query
           schema:
@@ -2518,6 +3660,33 @@ paths:
                   minLength: 2
                   maxLength: 64
                   format: password
+                PushNotification:
+                  description: The push notification configuration of the message.
+                  type: object
+                  properties:
+                    Title:
+                      allOf:
+                        - $ref: '#/components/schemas/PushNotificationTitle'
+                        - description: The title of the push notification.
+                    Body:
+                      allOf:
+                        - $ref: '#/components/schemas/PushNotificationBody'
+                        - description: The body of the push notification.
+                    Type:
+                      allOf:
+                        - $ref: '#/components/schemas/PushNotificationType'
+                        - description: 'Enum value that indicates the type of the push notification for a message. <code>DEFAULT</code>: Normal mobile push notification. <code>VOIP</code>: VOIP mobile push notification.'
+                MessageAttributes:
+                  description: 'The attributes for the message, used for message filtering along with a <code>FilterRule</code> defined in the <code>PushNotificationPreferences</code>.'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/MessageAttributeValue'
+                SubChannelId:
+                  description: The ID of the SubChannel in the request.
+                  type: string
+                  pattern: '[-_a-zA-Z0-9]*'
+                  minLength: 1
+                  maxLength: 128
   /channels#app-instance-arn&x-amz-chime-bearer:
     get:
       operationId: ListChannels
@@ -2623,6 +3792,108 @@ paths:
             type: string
           description: Pagination token
           required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /channels#scope=channel-flow-associations&channel-flow-arn:
+    get:
+      operationId: ListChannelsAssociatedWithChannelFlow
+      description: 'Lists all channels associated with a specified channel flow. You can associate a channel flow with multiple channels, but you can only associate a channel with one channel flow. This is a developer API.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListChannelsAssociatedWithChannelFlowResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channel-flow-arn
+          in: query
+          required: true
+          description: The ARN of the channel flow.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of channels that you want to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: next-token
+          in: query
+          required: false
+          description: The token passed by previous API calls until all requested channels are returned.
+          schema:
+            type: string
+            pattern: .*
+            minLength: 0
+            maxLength: 2048
+            format: password
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: scope
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - channel-flow-associations
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2742,17 +4013,17 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/channels/{channelArn}/messages/{messageId}#operation=redact&x-amz-chime-bearer':
-    post:
-      operationId: RedactChannelMessage
-      description: '<p>Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+  '/channels/{channelArn}/subchannels#x-amz-chime-bearer':
+    get:
+      operationId: ListSubChannels
+      description: Lists all the SubChannels in an elastic channel when given a channel ID. Available only to the app instance admins and channel moderators of elastic channels.
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RedactChannelMessageResponse'
+                $ref: '#/components/schemas/ListSubChannelsResponse'
         '480':
           description: BadRequestException
           content:
@@ -2793,6 +4064,181 @@ paths:
         - name: channelArn
           in: path
           required: true
+          description: The ARN of elastic channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user making the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of sub-channels that you want to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: next-token
+          in: query
+          required: false
+          description: The token passed by previous API calls until all requested sub-channels are returned.
+          schema:
+            type: string
+            pattern: .*
+            minLength: 0
+            maxLength: 2048
+            format: password
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /tags#arn:
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags applied to an Amazon Chime SDK messaging resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: arn
+          in: query
+          required: true
+          description: The ARN of the resource.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/channels/{channelArn}/messages/{messageId}#operation=redact&x-amz-chime-bearer':
+    post:
+      operationId: RedactChannelMessage
+      description: '<p>Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RedactChannelMessageResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
           description: The ARN of the channel containing the messages that you want to redact.
           schema:
             type: string
@@ -2824,6 +4270,307 @@ paths:
             type: string
             enum:
               - redact
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SubChannelId:
+                  description: The ID of the SubChannel in the request.
+                  type: string
+                  pattern: '[-_a-zA-Z0-9]*'
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /channels#operation=search:
+    post:
+      operationId: SearchChannels
+      description: Allows <code>ChimeBearer</code> to search channels by channel members. AppInstanceUsers can search across the channels that they belong to. AppInstanceAdmins can search across all channels.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchChannelsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user making the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of channels that you want returned.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: next-token
+          in: query
+          required: false
+          description: The token returned from previous API requests until the number of channels is reached.
+          schema:
+            type: string
+            pattern: .*
+            minLength: 0
+            maxLength: 2048
+            format: password
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - search
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Fields
+              properties:
+                Fields:
+                  description: A list of the <code>Field</code> objects in the channel being searched.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SearchField'
+                  minItems: 1
+                  maxItems: 20
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /tags#operation=tag-resource:
+    post:
+      operationId: TagResource
+      description: Applies the specified tags to the specified Amazon Chime SDK messaging resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - tag-resource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceARN
+                - Tags
+              properties:
+                ResourceARN:
+                  description: The resource ARN.
+                  type: string
+                  pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+                  minLength: 5
+                  maxLength: 1600
+                Tags:
+                  description: The tag key-value pairs.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /tags#operation=untag-resource:
+    post:
+      operationId: UntagResource
+      description: Removes the specified tags from the specified Amazon Chime SDK messaging resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - untag-resource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceARN
+                - TagKeys
+              properties:
+                ResourceARN:
+                  description: The resource ARN.
+                  type: string
+                  pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+                  minLength: 5
+                  maxLength: 1600
+                TagKeys:
+                  description: The tag keys.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/TagKey'
+                  minItems: 1
+                  maxItems: 50
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2904,6 +4651,19 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SubChannelId:
+                  description: The ID of the SubChannel in the request.
+                  type: string
+                  pattern: '[-_a-zA-Z0-9]*'
+                  minLength: 1
+                  maxLength: 128
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2964,6 +4724,14 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    BadRequestException: {}
+    ForbiddenException: {}
+    NotFoundException: {}
+    UnauthorizedClientException: {}
+    ConflictException: {}
+    ThrottledClientException: {}
+    ServiceUnavailableException: {}
+    ServiceFailureException: {}
     BatchCreateChannelMembershipResponse:
       type: object
       properties:
@@ -2980,12 +4748,59 @@ components:
       pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
       minLength: 5
       maxLength: 1600
-    ServiceFailureException: {}
-    ServiceUnavailableException: {}
-    UnauthorizedClientException: {}
-    BadRequestException: {}
-    ForbiddenException: {}
-    ThrottledClientException: {}
+    ResourceLimitExceededException: {}
+    ChannelFlowCallbackResponse:
+      type: object
+      properties:
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel.
+        CallbackId:
+          allOf:
+            - $ref: '#/components/schemas/CallbackIdType'
+            - description: The call back ID passed in the request.
+    MessageId:
+      type: string
+      pattern: '[-_a-zA-Z0-9]*'
+      minLength: 1
+      maxLength: 128
+    NonEmptyContent:
+      type: string
+      pattern: '[\s\S]*'
+      minLength: 1
+      format: password
+    Metadata:
+      type: string
+      pattern: .*
+      minLength: 0
+      maxLength: 1024
+      format: password
+    PushNotificationConfiguration:
+      type: object
+      properties:
+        Title:
+          allOf:
+            - $ref: '#/components/schemas/PushNotificationTitle'
+            - description: The title of the push notification.
+        Body:
+          allOf:
+            - $ref: '#/components/schemas/PushNotificationBody'
+            - description: The body of the push notification.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/PushNotificationType'
+            - description: 'Enum value that indicates the type of the push notification for a message. <code>DEFAULT</code>: Normal mobile push notification. <code>VOIP</code>: VOIP mobile push notification.'
+      description: The push notification configuration of the message.
+    MessageAttributeMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/MessageAttributeValue'
+    SubChannelId:
+      type: string
+      pattern: '[-_a-zA-Z0-9]*'
+      minLength: 1
+      maxLength: 128
     CreateChannelResponse:
       type: object
       properties:
@@ -3002,14 +4817,22 @@ components:
         Key:
           allOf:
             - $ref: '#/components/schemas/TagKey'
-            - description: The key of the tag.
+            - description: The key in a tag.
         Value:
           allOf:
             - $ref: '#/components/schemas/TagValue'
-            - description: The value of the tag.
-      description: Describes a tag applied to a resource.
-    ConflictException: {}
-    ResourceLimitExceededException: {}
+            - description: The value in a tag.
+      description: A tag object containing a key-value pair.
+    MaximumSubChannels:
+      type: integer
+      minimum: 2
+    TargetMembershipsPerSubChannel:
+      type: integer
+      minimum: 2
+    MinimumMembershipPercentage:
+      type: integer
+      minimum: 1
+      maximum: 40
     CreateChannelBanResponse:
       type: object
       properties:
@@ -3021,6 +4844,38 @@ components:
           allOf:
             - $ref: '#/components/schemas/Identity'
             - description: The <code>ChannelArn</code> and <code>BannedIdentity</code> of the member in the ban response.
+    CreateChannelFlowResponse:
+      type: object
+      properties:
+        ChannelFlowArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel flow.
+    Processor:
+      type: object
+      required:
+        - Name
+        - Configuration
+        - ExecutionOrder
+        - FallbackAction
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyResourceName'
+            - description: The name of the channel flow.
+        Configuration:
+          allOf:
+            - $ref: '#/components/schemas/ProcessorConfiguration'
+            - description: The information about the type of processor and its identifier.
+        ExecutionOrder:
+          allOf:
+            - $ref: '#/components/schemas/ChannelFlowExecutionOrder'
+            - description: 'The sequence in which processors run. If you have multiple processors in a channel flow, message processing goes through each processor in the sequence. The value determines the sequence. At this point, we support only 1 processor within a flow.'
+        FallbackAction:
+          allOf:
+            - $ref: '#/components/schemas/FallbackAction'
+            - description: 'Determines whether to continue with message processing or stop it in cases where communication with a processor fails. If a processor has a fallback action of <code>ABORT</code> and communication with it fails, the processor sets the message status to <code>FAILED</code> and does not send the message to any recipients. Note that if the last processor in the channel flow sequence has a fallback action of <code>CONTINUE</code> and communication with the processor fails, then the message is considered processed and sent to recipients of the channel.'
+      description: The information about a processor in a channel flow.
     CreateChannelMembershipResponse:
       type: object
       properties:
@@ -3032,6 +4887,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Identity'
             - description: The ARN and metadata of the member being added.
+        SubChannelId:
+          allOf:
+            - $ref: '#/components/schemas/SubChannelId'
+            - description: The ID of the SubChannel in the response.
     CreateChannelModeratorResponse:
       type: object
       properties:
@@ -3057,7 +4916,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChannelBan'
             - description: The details of the ban.
-    NotFoundException: {}
+    DescribeChannelFlowResponse:
+      type: object
+      properties:
+        ChannelFlow:
+          allOf:
+            - $ref: '#/components/schemas/ChannelFlow'
+            - description: The channel flow details.
     DescribeChannelMembershipResponse:
       type: object
       properties:
@@ -3086,6 +4951,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChannelModerator'
             - description: The details of the channel moderator.
+    GetChannelMembershipPreferencesResponse:
+      type: object
+      properties:
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel.
+        Member:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The details of a user.
+        Preferences:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMembershipPreferences'
+            - description: The channel membership preferences for an <code>AppInstanceUser</code> .
     GetChannelMessageResponse:
       type: object
       properties:
@@ -3093,6 +4973,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChannelMessage'
             - description: The details of and content in the message.
+    GetChannelMessageStatusResponse:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMessageStatusStructure'
+            - description: The message status and details.
     GetMessagingSessionEndpointResponse:
       type: object
       properties:
@@ -3115,6 +5002,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChannelBanSummaryList'
             - description: The information for each requested ban.
+    ListChannelFlowsResponse:
+      type: object
+      properties:
+        ChannelFlows:
+          allOf:
+            - $ref: '#/components/schemas/ChannelFlowSummaryList'
+            - description: The information about each channel flow.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token passed by previous API calls until all requested channels are returned.
     ListChannelMembershipsResponse:
       type: object
       properties:
@@ -3136,7 +5034,7 @@ components:
         ChannelMemberships:
           allOf:
             - $ref: '#/components/schemas/ChannelMembershipForAppInstanceUserSummaryList'
-            - description: The token passed by previous API calls until all requested users are returned.
+            - description: The information for the requested channel memberships.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -3156,6 +5054,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChannelMessageSummaryList'
             - description: 'The information about, and content of, each requested message.'
+        SubChannelId:
+          allOf:
+            - $ref: '#/components/schemas/SubChannelId'
+            - description: The ID of the SubChannel in the response.
     ListChannelModeratorsResponse:
       type: object
       properties:
@@ -3182,6 +5084,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: The token returned from previous API requests until the number of channels is reached.
+    ListChannelsAssociatedWithChannelFlowResponse:
+      type: object
+      properties:
+        Channels:
+          allOf:
+            - $ref: '#/components/schemas/ChannelAssociatedWithFlowSummaryList'
+            - description: The information about each channel.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token passed by previous API calls until all requested channels are returned.
     ListChannelsModeratedByAppInstanceUserResponse:
       type: object
       properties:
@@ -3193,6 +5106,57 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: The token returned from previous API requests until the number of channels moderated by the user is reached.
+    ListSubChannelsResponse:
+      type: object
+      properties:
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of elastic channel.
+        SubChannels:
+          allOf:
+            - $ref: '#/components/schemas/SubChannelSummaryList'
+            - description: The information about each sub-channel.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token passed by previous API calls until all requested sub-channels are returned.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tag key-value pairs.
+    PutChannelMembershipPreferencesResponse:
+      type: object
+      properties:
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel.
+        Member:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The details of a user.
+        Preferences:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMembershipPreferences'
+            - description: The ARN and metadata of the member being added.
+    PushNotificationPreferences:
+      type: object
+      required:
+        - AllowNotifications
+      properties:
+        AllowNotifications:
+          allOf:
+            - $ref: '#/components/schemas/AllowNotifications'
+            - description: 'Enum value that indicates which push notifications to send to the requested member of a channel. <code>ALL</code> sends all push notifications, <code>NONE</code> sends no push notifications, <code>FILTERED</code> sends only filtered push notifications. '
+        FilterRule:
+          allOf:
+            - $ref: '#/components/schemas/FilterRule'
+            - description: The simple JSON object used to send a subset of a push notification to the requested member.
+      description: The channel membership preferences for push notification.
     RedactChannelMessageResponse:
       type: object
       properties:
@@ -3204,6 +5168,41 @@ components:
           allOf:
             - $ref: '#/components/schemas/MessageId'
             - description: The ID of the message being redacted.
+        SubChannelId:
+          allOf:
+            - $ref: '#/components/schemas/SubChannelId'
+            - description: <p>The ID of the SubChannel in the response.</p> <note> <p>Only required when redacting messages in a SubChannel that the user belongs to.</p> </note>
+    SearchChannelsResponse:
+      type: object
+      properties:
+        Channels:
+          allOf:
+            - $ref: '#/components/schemas/ChannelSummaryList'
+            - description: A list of the channels in the request.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token returned from previous API responses until the number of channels is reached.
+    SearchField:
+      type: object
+      required:
+        - Key
+        - Values
+        - Operator
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/SearchFieldKey'
+            - description: 'An <code>enum</code> value that indicates the key to search the channel on. <code>MEMBERS</code> allows you to search channels based on memberships. You can use it with the <code>EQUALS</code> operator to get channels whose memberships are equal to the specified values, and with the <code>INCLUDES</code> operator to get channels whose memberships include the specified values.'
+        Values:
+          allOf:
+            - $ref: '#/components/schemas/SearchFieldValues'
+            - description: '<p>The values that you want to search for, a list of strings. The values must be <code>AppInstanceUserArns</code> specified as a list of strings.</p> <note> <p>This operation isn''t supported for <code>AppInstanceUsers</code> with large number of memberships.</p> </note>'
+        Operator:
+          allOf:
+            - $ref: '#/components/schemas/SearchFieldOperator'
+            - description: 'The operator used to compare field values, currently <code>EQUALS</code> or <code>INCLUDES</code>. Use the <code>EQUALS</code> operator to find channels whose memberships equal the specified values. Use the <code>INCLUDES</code> operator to find channels whose memberships include the specified values.'
+      description: A <code>Field</code> of the channel that you want to search.
     SendChannelMessageResponse:
       type: object
       properties:
@@ -3215,6 +5214,44 @@ components:
           allOf:
             - $ref: '#/components/schemas/MessageId'
             - description: The ID string assigned to each message.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMessageStatusStructure'
+            - description: The status of the channel message.
+        SubChannelId:
+          allOf:
+            - $ref: '#/components/schemas/SubChannelId'
+            - description: The ID of the SubChannel in the response.
+    PushNotificationTitle:
+      type: string
+      pattern: .*
+      minLength: 0
+      maxLength: 50
+      format: password
+    PushNotificationBody:
+      type: string
+      pattern: '[\s\S]*'
+      minLength: 0
+      maxLength: 150
+      format: password
+    PushNotificationType:
+      type: string
+      enum:
+        - DEFAULT
+        - VOIP
+    MessageAttributeValue:
+      type: object
+      properties:
+        StringValues:
+          allOf:
+            - $ref: '#/components/schemas/MessageAttributeStringValues'
+            - description: The strings in a message attribute value.
+      description: A list of message attribute values.
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+      format: password
     UpdateChannelResponse:
       type: object
       properties:
@@ -3222,6 +5259,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
             - description: The ARN of the channel.
+    UpdateChannelFlowResponse:
+      type: object
+      properties:
+        ChannelFlowArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel flow.
     UpdateChannelMessageResponse:
       type: object
       properties:
@@ -3233,6 +5277,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/MessageId'
             - description: The ID string of the message being updated.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMessageStatusStructure'
+            - description: The status of the message update.
+        SubChannelId:
+          allOf:
+            - $ref: '#/components/schemas/SubChannelId'
+            - description: The ID of the SubChannel in the response.
     UpdateChannelReadMarkerResponse:
       type: object
       properties:
@@ -3240,6 +5292,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
             - description: The ARN of the channel.
+        SubChannelId:
+          allOf:
+            - $ref: '#/components/schemas/SubChannelId'
+            - description: The ID of the SubChannel in the response.
+    AllowNotifications:
+      type: string
+      enum:
+        - ALL
+        - NONE
+        - FILTERED
     ChannelMembershipType:
       type: string
       enum:
@@ -3258,8 +5320,22 @@ components:
         ReadMarkerTimestamp:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which a message was last read.
+            - description: The time at which an <code>AppInstanceUser</code> last marked a channel as read.
+        SubChannelId:
+          allOf:
+            - $ref: '#/components/schemas/SubChannelId'
+            - description: The ID of the SubChannel that the <code>AppInstanceUser</code> is a member of.
       description: Summary of the membership details of an <code>AppInstanceUser</code>.
+    AssociateChannelFlowRequest:
+      type: object
+      required:
+        - ChannelFlowArn
+      title: AssociateChannelFlowRequest
+      properties:
+        ChannelFlowArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel flow.
     Identity:
       type: object
       properties:
@@ -3295,6 +5371,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
             - description: The ARN of the channel to which you're adding users.
+        SubChannelId:
+          allOf:
+            - $ref: '#/components/schemas/SubChannelId'
+            - description: The ID of the SubChannel.
       description: 'The membership information, including member ARNs, the channel ARN, and membership types.'
     ErrorCode:
       type: string
@@ -3322,7 +5402,7 @@ components:
         MemberArn:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the member that the service couldn't add.
+            - description: The <code>AppInstanceUserArn</code> of the member that the service couldn't add.
         ErrorCode:
           allOf:
             - $ref: '#/components/schemas/ErrorCode'
@@ -3355,7 +5435,15 @@ components:
         MemberArns:
           allOf:
             - $ref: '#/components/schemas/MemberArns'
-            - description: The ARNs of the members you want to add to the channel.
+            - description: The <code>AppInstanceUserArn</code>s of the members you want to add to the channel.
+        SubChannelId:
+          allOf:
+            - $ref: '#/components/schemas/SubChannelId'
+            - description: <p>The ID of the SubChannel in the request. </p> <note> <p>Only required when creating membership in a SubChannel for a moderator in an elastic channel.</p> </note>
+    CallbackIdType:
+      type: string
+      minLength: 32
+      maxLength: 64
     NonEmptyResourceName:
       type: string
       pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
@@ -3372,12 +5460,26 @@ components:
       enum:
         - PUBLIC
         - PRIVATE
-    Metadata:
-      type: string
-      pattern: .*
-      minLength: 0
-      maxLength: 1024
-      format: password
+    ElasticChannelConfiguration:
+      type: object
+      required:
+        - MaximumSubChannels
+        - TargetMembershipsPerSubChannel
+        - MinimumMembershipPercentage
+      properties:
+        MaximumSubChannels:
+          allOf:
+            - $ref: '#/components/schemas/MaximumSubChannels'
+            - description: The maximum number of SubChannels that you want to allow in the elastic channel.
+        TargetMembershipsPerSubChannel:
+          allOf:
+            - $ref: '#/components/schemas/TargetMembershipsPerSubChannel'
+            - description: The maximum number of members allowed in a SubChannel.
+        MinimumMembershipPercentage:
+          allOf:
+            - $ref: '#/components/schemas/MinimumMembershipPercentage'
+            - description: The minimum allowed percentage of TargetMembershipsPerSubChannel users. Ceil of the calculated value is used in balancing members among SubChannels of the elastic channel.
+      description: The attributes required to configure and create an elastic channel. An elastic channel can support a maximum of 1-million members.
     Channel:
       type: object
       properties:
@@ -3417,7 +5519,43 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time at which a channel was last updated.
+        ChannelFlowArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel flow.
+        ElasticChannelConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ElasticChannelConfiguration'
+            - description: The attributes required to configure and create an elastic channel. An elastic channel can support a maximum of 1-million members.
       description: The details of a channel.
+    ChannelAssociatedWithFlowSummary:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyResourceName'
+            - description: The name of the channel flow.
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel.
+        Mode:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMode'
+            - description: The mode of the channel.
+        Privacy:
+          allOf:
+            - $ref: '#/components/schemas/ChannelPrivacy'
+            - description: The channel's privacy setting.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The channel's metadata.
+      description: Summary of details of a channel associated with channel flow.
+    ChannelAssociatedWithFlowSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChannelAssociatedWithFlowSummary'
     ChannelBan:
       type: object
       properties:
@@ -3450,6 +5588,123 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ChannelBanSummary'
+    ProcessorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Processor'
+      minItems: 1
+      maxItems: 3
+    ChannelFlow:
+      type: object
+      properties:
+        ChannelFlowArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel flow.
+        Processors:
+          allOf:
+            - $ref: '#/components/schemas/ProcessorList'
+            - description: Information about the processor Lambda functions.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyResourceName'
+            - description: The name of the channel flow.
+        CreatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the channel flow was created.
+        LastUpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which a channel flow was updated.
+      description: The details of a channel flow.
+    NonNullableBoolean:
+      type: boolean
+    ChannelMessageCallback:
+      type: object
+      required:
+        - MessageId
+      properties:
+        MessageId:
+          allOf:
+            - $ref: '#/components/schemas/MessageId'
+            - description: The message ID.
+        Content:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyContent'
+            - description: The message content.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The message metadata.
+        PushNotification:
+          allOf:
+            - $ref: '#/components/schemas/PushNotificationConfiguration'
+            - description: The push notification configuration of the message.
+        MessageAttributes:
+          allOf:
+            - $ref: '#/components/schemas/MessageAttributeMap'
+            - description: 'The attributes for the message, used for message filtering along with a <code>FilterRule</code> defined in the <code>PushNotificationPreferences</code>. '
+        SubChannelId:
+          allOf:
+            - $ref: '#/components/schemas/SubChannelId'
+            - description: The ID of the SubChannel.
+      description: Stores information about a callback.
+    ChannelFlowCallbackRequest:
+      type: object
+      required:
+        - CallbackId
+        - ChannelMessage
+      title: ChannelFlowCallbackRequest
+      properties:
+        CallbackId:
+          allOf:
+            - $ref: '#/components/schemas/CallbackIdType'
+            - description: The identifier passed to the processor by the service when invoked. Use the identifier to call back the service.
+        DeleteResource:
+          allOf:
+            - $ref: '#/components/schemas/NonNullableBoolean'
+            - description: 'When a processor determines that a message needs to be <code>DENIED</code>, pass this parameter with a value of true.'
+        ChannelMessage:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMessageCallback'
+            - description: Stores information about the processed message.
+    ChannelFlowExecutionOrder:
+      type: integer
+      minimum: 1
+      maximum: 3
+    ChannelFlowSummary:
+      type: object
+      properties:
+        ChannelFlowArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel flow.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyResourceName'
+            - description: The name of the channel flow.
+        Processors:
+          allOf:
+            - $ref: '#/components/schemas/ProcessorList'
+            - description: Information about the processor Lambda functions.
+      description: Summary of details of a channel flow.
+    ChannelFlowSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChannelFlowSummary'
+    ChannelId:
+      type: string
+      pattern: '[A-Za-z0-9]([A-Za-z0-9\:\-\_\.\@]{0,62}[A-Za-z0-9])?'
+      minLength: 1
+      maxLength: 64
+      format: password
+    ChannelMemberArns:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChimeArn'
+      minItems: 1
+      maxItems: 10
     ChannelMembership:
       type: object
       properties:
@@ -3477,6 +5732,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time at which a channel membership was last updated.
+        SubChannelId:
+          allOf:
+            - $ref: '#/components/schemas/SubChannelId'
+            - description: The ID of the SubChannel that a user belongs to.
       description: The details of a channel member.
     ChannelSummary:
       type: object
@@ -3504,7 +5763,7 @@ components:
         LastMessageTimestamp:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the last message in a channel was sent.
+            - description: The time at which the last persistent message in a channel was sent.
       description: Summary of the details of a <code>Channel</code>.
     ChannelMembershipForAppInstanceUserSummary:
       type: object
@@ -3522,6 +5781,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ChannelMembershipForAppInstanceUserSummary'
+    ChannelMembershipPreferences:
+      type: object
+      properties:
+        PushNotifications:
+          allOf:
+            - $ref: '#/components/schemas/PushNotificationPreferences'
+            - description: The push notification configuration of a message.
+      description: The channel membership preferences for an <code>AppInstanceUser</code>.
     ChannelMembershipSummary:
       type: object
       properties:
@@ -3534,11 +5801,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ChannelMembershipSummary'
-    MessageId:
-      type: string
-      pattern: '[-_a-zA-Z0-9]*'
-      minLength: 1
-      maxLength: 128
     Content:
       type: string
       pattern: '[\s\S]*'
@@ -3550,13 +5812,23 @@ components:
       enum:
         - STANDARD
         - CONTROL
-    NonNullableBoolean:
-      type: boolean
     ChannelMessagePersistenceType:
       type: string
       enum:
         - PERSISTENT
         - NON_PERSISTENT
+    ChannelMessageStatusStructure:
+      type: object
+      properties:
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMessageStatus'
+            - description: The message status value.
+        Detail:
+          allOf:
+            - $ref: '#/components/schemas/StatusDetail'
+            - description: Contains more details about the messasge status.
+      description: Stores information about a message status.
     ChannelMessage:
       type: object
       properties:
@@ -3604,7 +5876,31 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChannelMessagePersistenceType'
             - description: The persistence setting for a channel message.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMessageStatusStructure'
+            - description: The status of the channel message.
+        MessageAttributes:
+          allOf:
+            - $ref: '#/components/schemas/MessageAttributeMap'
+            - description: 'The attributes for the message, used for message filtering along with a <code>FilterRule</code> defined in the <code>PushNotificationPreferences</code>.'
+        SubChannelId:
+          allOf:
+            - $ref: '#/components/schemas/SubChannelId'
+            - description: The ID of the SubChannel.
       description: The details of a message in a channel.
+    ChannelMessageStatus:
+      type: string
+      enum:
+        - SENT
+        - PENDING
+        - FAILED
+        - DENIED
+    StatusDetail:
+      type: string
+      pattern: '[\s\S]*'
+      minLength: 0
+      maxLength: 256
     ChannelMessageSummary:
       type: object
       properties:
@@ -3644,6 +5940,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonNullableBoolean'
             - description: Indicates whether a message was redacted.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMessageStatusStructure'
+            - description: 'The message status. The status value is <code>SENT</code> for messages sent to a channel without a channel flow. For channels associated with channel flow, the value determines the processing stage.'
+        MessageAttributes:
+          allOf:
+            - $ref: '#/components/schemas/MessageAttributeMap'
+            - description: The message attribues listed in a the summary of a channel message.
       description: Summary of the messages in a <code>Channel</code>.
     ChannelMessageSummaryList:
       type: array
@@ -3681,6 +5985,12 @@ components:
             - $ref: '#/components/schemas/Identity'
             - description: The <code>AppInstanceUser</code> who created the moderator.
       description: The details of a channel moderator.
+    ChannelModeratorArns:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChimeArn'
+      minItems: 1
+      maxItems: 10
     ChannelModeratorSummary:
       type: object
       properties:
@@ -3712,7 +6022,42 @@ components:
         MemberArn:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the member being banned.
+            - description: The <code>AppInstanceUserArn</code> of the member being banned.
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 1
+      maxItems: 50
+    CreateChannelFlowRequest:
+      type: object
+      required:
+        - AppInstanceArn
+        - Processors
+        - Name
+        - ClientRequestToken
+      title: CreateChannelFlowRequest
+      properties:
+        AppInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel flow request.
+        Processors:
+          allOf:
+            - $ref: '#/components/schemas/ProcessorList'
+            - description: Information about the processor Lambda functions.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyResourceName'
+            - description: The name of the channel flow.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags for the creation request.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: The client token for the request. An Idempotency token.
     CreateChannelMembershipRequest:
       type: object
       required:
@@ -3723,11 +6068,15 @@ components:
         MemberArn:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the member you want to add to the channel.
+            - description: The <code>AppInstanceUserArn</code> of the member you want to add to the channel.
         Type:
           allOf:
             - $ref: '#/components/schemas/ChannelMembershipType'
             - description: 'The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals <code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported by moderators.'
+        SubChannelId:
+          allOf:
+            - $ref: '#/components/schemas/SubChannelId'
+            - description: <p>The ID of the SubChannel in the request.</p> <note> <p>Only required when creating membership in a SubChannel for a moderator in an elastic channel.</p> </note>
     CreateChannelModeratorRequest:
       type: object
       required:
@@ -3737,13 +6086,7 @@ components:
         ChannelModeratorArn:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the moderator.
-    TagList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Tag'
-      minItems: 1
-      maxItems: 50
+            - description: The <code>AppInstanceUserArn</code> of the moderator.
     CreateChannelRequest:
       type: object
       required:
@@ -3780,9 +6123,29 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: The tags for the creation request.
+        ChannelId:
+          allOf:
+            - $ref: '#/components/schemas/ChannelId'
+            - description: The ID of the channel in the request.
+        MemberArns:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMemberArns'
+            - description: The ARNs of the channel members in the request.
+        ModeratorArns:
+          allOf:
+            - $ref: '#/components/schemas/ChannelModeratorArns'
+            - description: The ARNs of the channel moderators in the request.
+        ElasticChannelConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ElasticChannelConfiguration'
+            - description: 'The attributes required to configure and create an elastic channel. An elastic channel can support a maximum of 1-million users, excluding moderators.'
     DeleteChannelBanRequest:
       type: object
       title: DeleteChannelBanRequest
+      properties: {}
+    DeleteChannelFlowRequest:
+      type: object
+      title: DeleteChannelFlowRequest
       properties: {}
     DeleteChannelMembershipRequest:
       type: object
@@ -3804,6 +6167,10 @@ components:
       type: object
       title: DescribeChannelBanRequest
       properties: {}
+    DescribeChannelFlowRequest:
+      type: object
+      title: DescribeChannelFlowRequest
+      properties: {}
     DescribeChannelMembershipForAppInstanceUserRequest:
       type: object
       title: DescribeChannelMembershipForAppInstanceUserRequest
@@ -3824,9 +6191,31 @@ components:
       type: object
       title: DescribeChannelRequest
       properties: {}
+    DisassociateChannelFlowRequest:
+      type: object
+      title: DisassociateChannelFlowRequest
+      properties: {}
+    FallbackAction:
+      type: string
+      enum:
+        - CONTINUE
+        - ABORT
+    FilterRule:
+      type: string
+      pattern: '[\s\S]*'
+      minLength: 1
+      format: password
+    GetChannelMembershipPreferencesRequest:
+      type: object
+      title: GetChannelMembershipPreferencesRequest
+      properties: {}
     GetChannelMessageRequest:
       type: object
       title: GetChannelMessageRequest
+      properties: {}
+    GetChannelMessageStatusRequest:
+      type: object
+      title: GetChannelMessageStatusRequest
       properties: {}
     GetMessagingSessionEndpointRequest:
       type: object
@@ -3846,6 +6235,30 @@ components:
       minLength: 0
       maxLength: 256
       format: password
+    InvocationType:
+      type: string
+      enum:
+        - ASYNC
+    LambdaFunctionArn:
+      type: string
+      pattern: 'arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9\-_\.]+(:(\$LATEST|[a-zA-Z0-9\-_]+))?'
+      minLength: 15
+      maxLength: 2048
+    LambdaConfiguration:
+      type: object
+      required:
+        - ResourceArn
+        - InvocationType
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/LambdaFunctionArn'
+            - description: The ARN of the Lambda message processing function.
+        InvocationType:
+          allOf:
+            - $ref: '#/components/schemas/InvocationType'
+            - description: Controls how the Lambda function is invoked.
+      description: Stores metadata about a Lambda processor.
     MaxResults:
       type: integer
       minimum: 1
@@ -3859,6 +6272,10 @@ components:
     ListChannelBansRequest:
       type: object
       title: ListChannelBansRequest
+      properties: {}
+    ListChannelFlowsRequest:
+      type: object
+      title: ListChannelFlowsRequest
       properties: {}
     ListChannelMembershipsForAppInstanceUserRequest:
       type: object
@@ -3881,6 +6298,10 @@ components:
       type: object
       title: ListChannelModeratorsRequest
       properties: {}
+    ListChannelsAssociatedWithChannelFlowRequest:
+      type: object
+      title: ListChannelsAssociatedWithChannelFlowRequest
+      properties: {}
     ListChannelsModeratedByAppInstanceUserRequest:
       type: object
       title: ListChannelsModeratedByAppInstanceUserRequest
@@ -3889,18 +6310,103 @@ components:
       type: object
       title: ListChannelsRequest
       properties: {}
-    UrlType:
-      type: string
-      maxLength: 4096
-    NonEmptyContent:
+    ListSubChannelsRequest:
+      type: object
+      title: ListSubChannelsRequest
+      properties: {}
+    SubChannelSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubChannelSummary'
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    MembershipCount:
+      type: integer
+    MessageAttributeName:
       type: string
       pattern: '[\s\S]*'
       minLength: 1
+      maxLength: 64
       format: password
+    MessageAttributeStringValue:
+      type: string
+      pattern: '[\s\S]*'
+      minLength: 1
+      maxLength: 512
+      format: password
+    MessageAttributeStringValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/MessageAttributeStringValue'
+    UrlType:
+      type: string
+      maxLength: 4096
+    ProcessorConfiguration:
+      type: object
+      required:
+        - Lambda
+      properties:
+        Lambda:
+          allOf:
+            - $ref: '#/components/schemas/LambdaConfiguration'
+            - description: Indicates that the processor is of type Lambda.
+      description: A processor's metadata.
+    PutChannelMembershipPreferencesRequest:
+      type: object
+      required:
+        - Preferences
+      title: PutChannelMembershipPreferencesRequest
+      properties:
+        Preferences:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMembershipPreferences'
+            - description: The channel membership preferences of an <code>AppInstanceUser</code> .
     RedactChannelMessageRequest:
       type: object
       title: RedactChannelMessageRequest
-      properties: {}
+      properties:
+        SubChannelId:
+          allOf:
+            - $ref: '#/components/schemas/SubChannelId'
+            - description: The ID of the SubChannel in the request.
+    SearchFields:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchField'
+      minItems: 1
+      maxItems: 20
+    SearchChannelsRequest:
+      type: object
+      required:
+        - Fields
+      title: SearchChannelsRequest
+      properties:
+        Fields:
+          allOf:
+            - $ref: '#/components/schemas/SearchFields'
+            - description: A list of the <code>Field</code> objects in the channel being searched.
+    SearchFieldKey:
+      type: string
+      enum:
+        - MEMBERS
+    SearchFieldValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchFieldValue'
+      minItems: 1
+      maxItems: 20
+    SearchFieldOperator:
+      type: string
+      enum:
+        - EQUALS
+        - INCLUDES
+    SearchFieldValue:
+      type: string
+      pattern: '[\s\S]*'
+      minLength: 1
+      maxLength: 512
     SendChannelMessageRequest:
       type: object
       required:
@@ -3930,16 +6436,86 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
             - description: The <code>Idempotency</code> token for each client request.
-    TagKey:
-      type: string
-      minLength: 1
-      maxLength: 128
-      format: password
+        PushNotification:
+          allOf:
+            - $ref: '#/components/schemas/PushNotificationConfiguration'
+            - description: The push notification configuration of the message.
+        MessageAttributes:
+          allOf:
+            - $ref: '#/components/schemas/MessageAttributeMap'
+            - description: 'The attributes for the message, used for message filtering along with a <code>FilterRule</code> defined in the <code>PushNotificationPreferences</code>.'
+        SubChannelId:
+          allOf:
+            - $ref: '#/components/schemas/SubChannelId'
+            - description: The ID of the SubChannel in the request.
+    SubChannelSummary:
+      type: object
+      properties:
+        SubChannelId:
+          allOf:
+            - $ref: '#/components/schemas/SubChannelId'
+            - description: The unique ID of a SubChannel.
+        MembershipCount:
+          allOf:
+            - $ref: '#/components/schemas/MembershipCount'
+            - description: The number of members in a SubChannel.
+      description: Summary of the sub-channels associated with the elastic channel.
     TagValue:
       type: string
       minLength: 1
       maxLength: 256
       format: password
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 1
+      maxItems: 50
+    TagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - Tags
+      title: TagResourceRequest
+      properties:
+        ResourceARN:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The resource ARN.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tag key-value pairs.
+    UntagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - TagKeys
+      title: UntagResourceRequest
+      properties:
+        ResourceARN:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The resource ARN.
+        TagKeys:
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: The tag keys.
+    UpdateChannelFlowRequest:
+      type: object
+      required:
+        - Processors
+        - Name
+      title: UpdateChannelFlowRequest
+      properties:
+        Processors:
+          allOf:
+            - $ref: '#/components/schemas/ProcessorList'
+            - description: 'Information about the processor Lambda functions '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyResourceName'
+            - description: The name of the channel flow.
     UpdateChannelMessageRequest:
       type: object
       title: UpdateChannelMessageRequest
@@ -3952,15 +6528,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/Metadata'
             - description: The metadata of the message being updated.
+        SubChannelId:
+          allOf:
+            - $ref: '#/components/schemas/SubChannelId'
+            - description: <p>The ID of the SubChannel in the request.</p> <note> <p>Only required when updating messages in a SubChannel that the user belongs to.</p> </note>
     UpdateChannelReadMarkerRequest:
       type: object
       title: UpdateChannelReadMarkerRequest
-      properties: {}
+      properties:
+        SubChannelId:
+          allOf:
+            - $ref: '#/components/schemas/SubChannelId'
+            - description: The ID of the SubChannel in the request.
     UpdateChannelRequest:
       type: object
-      required:
-        - Name
-        - Mode
       title: UpdateChannelRequest
       properties:
         Name:

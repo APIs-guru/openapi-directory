@@ -3,7 +3,7 @@ info:
   version: '2018-05-01'
   x-release: v4
   title: Amazon Chime
-  description: '<p>The Amazon Chime API (application programming interface) is designed for developers to perform key tasks, such as creating and managing Amazon Chime accounts, users, and Voice Connectors. This guide provides detailed information about the Amazon Chime API, including operations, types, inputs and outputs, and error codes. It also includes some server-side API actions to use with the Amazon Chime SDK. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html"> Using the Amazon Chime SDK </a> in the <i>Amazon Chime Developer Guide</i>.</p> <p>You can use an AWS SDK, the AWS Command Line Interface (AWS CLI), or the REST API to make API calls. We recommend using an AWS SDK or the AWS CLI. Each API operation includes links to information about using it with a language-specific AWS SDK or the AWS CLI.</p> <dl> <dt>Using an AWS SDK</dt> <dd> <p> You don''t need to write code to calculate a signature for request authentication. The SDK clients authenticate your requests by using access keys that you provide. For more information about AWS SDKs, see the <a href="http://aws.amazon.com/developer/">AWS Developer Center</a>. </p> </dd> <dt>Using the AWS CLI</dt> <dd> <p>Use your access keys with the AWS CLI to make API calls. For information about setting up the AWS CLI, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/installing.html">Installing the AWS Command Line Interface</a> in the <i>AWS Command Line Interface User Guide</i>. For a list of available Amazon Chime commands, see the <a href="https://docs.aws.amazon.com/cli/latest/reference/chime/index.html">Amazon Chime commands</a> in the <i>AWS CLI Command Reference</i>. </p> </dd> <dt>Using REST APIs</dt> <dd> <p>If you use REST to make API calls, you must authenticate your request by providing a signature. Amazon Chime supports signature version 4. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>When making REST API calls, use the service name <code>chime</code> and REST endpoint <code>https://service.chime.aws.amazon.com</code>.</p> </dd> </dl> <p>Administrative permissions are controlled using AWS Identity and Access Management (IAM). For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ag/security-iam.html">Identity and Access Management for Amazon Chime</a> in the <i>Amazon Chime Administration Guide</i>.</p>'
+  description: '<p>The Amazon Chime API (application programming interface) is designed for developers to perform key tasks, such as creating and managing Amazon Chime accounts, users, and Voice Connectors. This guide provides detailed information about the Amazon Chime API, including operations, types, inputs and outputs, and error codes. It also includes API actions for use with the Amazon Chime SDK, which developers use to build their own communication applications. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html"> Using the Amazon Chime SDK </a> in the <i>Amazon Chime Developer Guide</i>.</p> <p>You can use an AWS SDK, the AWS Command Line Interface (AWS CLI), or the REST API to make API calls. We recommend using an AWS SDK or the AWS CLI. Each API operation includes links to information about using it with a language-specific AWS SDK or the AWS CLI.</p> <dl> <dt>Using an AWS SDK</dt> <dd> <p> You don''t need to write code to calculate a signature for request authentication. The SDK clients authenticate your requests by using access keys that you provide. For more information about AWS SDKs, see the <a href="http://aws.amazon.com/developer/">AWS Developer Center</a>. </p> </dd> <dt>Using the AWS CLI</dt> <dd> <p>Use your access keys with the AWS CLI to make API calls. For information about setting up the AWS CLI, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/installing.html">Installing the AWS Command Line Interface</a> in the <i>AWS Command Line Interface User Guide</i>. For a list of available Amazon Chime commands, see the <a href="https://docs.aws.amazon.com/cli/latest/reference/chime/index.html">Amazon Chime commands</a> in the <i>AWS CLI Command Reference</i>. </p> </dd> <dt>Using REST APIs</dt> <dd> <p>If you use REST to make API calls, you must authenticate your request by providing a signature. Amazon Chime supports signature version 4. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>When making REST API calls, use the service name <code>chime</code> and REST endpoint <code>https://service.chime.aws.amazon.com</code>.</p> </dd> </dl> <p>Administrative permissions are controlled using AWS Identity and Access Management (IAM). For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ag/security-iam.html">Identity and Access Management for Amazon Chime</a> in the <i>Amazon Chime Administration Guide</i>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -1547,7 +1547,7 @@ paths:
                   maxLength: 64
                   format: password
                 Tags:
-                  description: Tags assigned to the <code>AppInstanceUser</code>.
+                  description: Tags assigned to the <code>AppInstance</code>.
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
@@ -3133,6 +3133,18 @@ paths:
                   minLength: 2
                   maxLength: 64
                   format: password
+                ChimeSdkMeetingConfiguration:
+                  description: The configuration object of the Amazon Chime SDK meeting for a specified media capture pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.
+                  type: object
+                  properties:
+                    SourceConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/SourceConfiguration'
+                        - description: The source configuration for a specified media capture pipline.
+                    ArtifactsConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/ArtifactsConfiguration'
+                        - description: The configuration for the artifacts in an Amazon Chime SDK meeting.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3441,12 +3453,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/UnauthorizedClientException'
         '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
           description: ServiceUnavailableException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableException'
-        '486':
+        '487':
           description: ServiceFailureException
           content:
             application/json:
@@ -8008,12 +8026,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThrottledClientException'
         '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
           description: ServiceUnavailableException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableException'
-        '486':
+        '487':
           description: ServiceFailureException
           content:
             application/json:
@@ -10293,7 +10317,7 @@ paths:
             pattern: .*\S.*
     put:
       operationId: PutVoiceConnectorStreamingConfiguration
-      description: 'Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Indonesians. It also sets the retention period, in hours, for the Amazon Kinesis data.'
+      description: 'Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Kinesis. It also sets the retention period, in hours, for the Amazon Kinesis data.'
       responses:
         '200':
           description: Success
@@ -11787,9 +11811,6 @@ paths:
           application/json:
             schema:
               type: object
-              required:
-                - BusinessCalling
-                - VoiceConnector
               properties:
                 BusinessCalling:
                   description: The Amazon Chime Business Calling settings for the administrator's AWS account. Includes any Amazon S3 buckets designated for storing call detail records.
@@ -12812,6 +12833,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
                         - description: 'When true, enables SIP message logs for sending to Amazon CloudWatch Logs.'
+                    EnableMediaMetricLogs:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Boolean that enables the logging of Voice Connector metrics to Cloudwatch.
   '/voice-connectors/{voiceConnectorId}/termination/health':
     get:
       operationId: GetVoiceConnectorTerminationHealth
@@ -15774,7 +15799,7 @@ paths:
   '/sip-media-applications/{sipMediaApplicationId}/calls/{transactionId}':
     post:
       operationId: UpdateSipMediaApplicationCall
-      description: 'Allows you to trigger a Lambda function at any time while a call is active, and replace the current actions with new actions returned by the invocation.'
+      description: Invokes the AWS Lambda function associated with the SIP media application and transaction ID in an update request. The Lambda function can then return a new set of actions.
       responses:
         '202':
           description: Success
@@ -15861,6 +15886,117 @@ paths:
                   maxProperties: 20
                   additionalProperties:
                     $ref: '#/components/schemas/SensitiveString'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /emergency-calling/address:
+    post:
+      operationId: ValidateE911Address
+      description: Validates an address to be used for 911 calls made with Amazon Chime Voice Connectors. You can use validated addresses in a Presence Information Data Format Location Object file that you include in SIP requests. That helps ensure that addresses are routed to the appropriate Public Safety Answering Point.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateE911AddressResponse'
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AwsAccountId
+                - StreetNumber
+                - StreetInfo
+                - City
+                - State
+                - Country
+                - PostalCode
+              properties:
+                AwsAccountId:
+                  description: The AWS account ID.
+                  type: string
+                  pattern: .*\S.*
+                StreetNumber:
+                  description: 'The address street number, such as <code>200</code> or <code>2121</code>.'
+                  type: string
+                  pattern: .*\S.*
+                  format: password
+                StreetInfo:
+                  description: 'The address street information, such as <code>8th Avenue</code>.'
+                  type: string
+                  pattern: .*\S.*
+                  format: password
+                City:
+                  description: 'The address city, such as <code>Portland</code>.'
+                  type: string
+                  pattern: .*\S.*
+                  format: password
+                State:
+                  description: 'The address state, such as <code>ME</code>.'
+                  type: string
+                  pattern: .*\S.*
+                  format: password
+                Country:
+                  description: 'The address country, such as <code>US</code>. '
+                  type: string
+                  pattern: .*\S.*
+                  format: password
+                PostalCode:
+                  description: 'The address postal code, such as <code>04352</code>.'
+                  type: string
+                  pattern: .*\S.*
+                  format: password
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -16211,6 +16347,34 @@ components:
           allOf:
             - $ref: '#/components/schemas/MediaCapturePipeline'
             - description: 'A media capture pipeline object, the ID, source type, source ARN, sink type, and sink ARN of a media capture pipeline object.'
+    SourceConfiguration:
+      type: object
+      properties:
+        SelectedVideoStreams:
+          allOf:
+            - $ref: '#/components/schemas/SelectedVideoStreams'
+            - description: The selected video streams to capture for a specified media capture pipeline. The number of video streams can't exceed 25.
+      description: Source configuration for a specified media capture pipeline.
+    ArtifactsConfiguration:
+      type: object
+      required:
+        - Audio
+        - Video
+        - Content
+      properties:
+        Audio:
+          allOf:
+            - $ref: '#/components/schemas/AudioArtifactsConfiguration'
+            - description: The configuration for the audio artifacts.
+        Video:
+          allOf:
+            - $ref: '#/components/schemas/VideoArtifactsConfiguration'
+            - description: The configuration for the video artifacts.
+        Content:
+          allOf:
+            - $ref: '#/components/schemas/ContentArtifactsConfiguration'
+            - description: The configuration for the content artifacts.
+      description: The configuration for the artifacts.
     CreateMeetingResponse:
       type: object
       properties:
@@ -17288,6 +17452,30 @@ components:
           allOf:
             - $ref: '#/components/schemas/TranscribeRegion'
             - description: 'The AWS Region passed to Amazon Transcribe. If you don''t specify a Region, Amazon Chime uses the meeting''s Region.'
+        EnablePartialResultsStabilization:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Generates partial transcription results that are less likely to change as meeting attendees speak. It does so by only allowing the last few words from the partial results to change.
+        PartialResultsStability:
+          allOf:
+            - $ref: '#/components/schemas/TranscribePartialResultsStability'
+            - description: The stabity level of a partial results transcription. Determines how stable you want the transcription results to be. A higher level means the transcription results are less likely to change.
+        ContentIdentificationType:
+          allOf:
+            - $ref: '#/components/schemas/TranscribeContentIdentificationType'
+            - description: Set this field to <code>PII</code> to identify personally identifiable information in the transcription output.
+        ContentRedactionType:
+          allOf:
+            - $ref: '#/components/schemas/TranscribeContentRedactionType'
+            - description: Set this field to <code>PII</code> to redact personally identifiable information in the transcription output. Content redaction is performed only upon complete transcription of the audio segments.
+        PiiEntityTypes:
+          allOf:
+            - $ref: '#/components/schemas/TranscribePiiEntityTypes'
+            - description: '<p>Lists the PII entity types you want to identify or redact. To specify entity types, you must enable <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>.</p> <p> <code>PIIEntityTypes</code> must be comma-separated. The available values are: <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING, CREDIT_DEBIT_NUMBER</code>, <code>CREDIT_DEBIT_CVV</code>, <code>CREDIT_DEBIT_EXPIRY</code>, <code>PIN</code>, <code>EMAIL</code>, <code>ADDRESS</code>, <code>NAME</code>, <code>PHONE</code>, <code>SSN</code>, and <code>ALL</code>.</p> <p> <code>PiiEntityTypes</code> is an optional parameter with a default value of <code>ALL</code>.</p>'
+        LanguageModelName:
+          allOf:
+            - $ref: '#/components/schemas/TranscribeLanguageModelName'
+            - description: The name of the language model used during transcription.
       description: Settings specific to the Amazon Transcribe engine.
     EngineTranscribeMedicalSettings:
       type: object
@@ -17316,6 +17504,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TranscribeMedicalRegion'
             - description: 'The AWS Region passed to Amazon Transcribe Medical. If you don''t specify a Region, Amazon Chime uses the meeting''s Region.'
+        ContentIdentificationType:
+          allOf:
+            - $ref: '#/components/schemas/TranscribeMedicalContentIdentificationType'
+            - description: Set this field to <code>PHI</code> to identify personal health information in the transcription output.
       description: Settings specific to the Amazon Transcribe Medical engine.
     StopMeetingTranscriptionResponse:
       type: object
@@ -17469,6 +17661,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/VoiceConnectorGroup'
             - description: The updated Amazon Chime Voice Connector group details.
+    ValidateE911AddressResponse:
+      type: object
+      properties:
+        ValidationResult:
+          allOf:
+            - $ref: '#/components/schemas/ValidationResult'
+            - description: Number indicating the result of address validation. <code>0</code> means the address was perfect as is and successfully validated. <code>1</code> means the address was corrected. <code>2</code> means the address sent was not close enough and was not validated.
+        AddressExternalId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID that represents the address.
+        Address:
+          allOf:
+            - $ref: '#/components/schemas/Address'
+            - description: The validated address.
+        CandidateAddressList:
+          allOf:
+            - $ref: '#/components/schemas/CandidateAddressList'
+            - description: The list of address suggestions.
     AccountType:
       type: string
       enum:
@@ -17564,6 +17775,54 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: 'Setting that allows meeting participants to choose the <b>Call me at a phone number</b> option. For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html">Join a Meeting without the Amazon Chime App</a>.'
       description: 'Settings related to the Amazon Chime account. This includes settings that start or stop remote control of shared screens, or start or stop the dial-out option in the Amazon Chime web application. For more information about these settings, see <a href="https://docs.aws.amazon.com/chime/latest/ag/policies.html">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.'
+    SensitiveNonEmptyString:
+      type: string
+      pattern: .*\S.*
+      format: password
+    Address:
+      type: object
+      properties:
+        streetName:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: 'The address street, such as <code>8th Avenue</code>.'
+        streetSuffix:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: 'The address suffix, such as the <code>N</code> in <code>8th Avenue N</code>.'
+        postDirectional:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: 'An address suffix location, such as the <code>S. Unit A</code> in <code>Central Park S. Unit A</code>.'
+        preDirectional:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: 'An address prefix location, such as the <code>N</code> in <code>N. Third St.</code>.'
+        streetNumber:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: The numeric portion of an address.
+        city:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: The city of an address.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: The state of an address.
+        postalCode:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: The postal code of an address.
+        postalCodePlus4:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: The Zip + 4 or postal code + 4 of an address.
+        country:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: 'The country of an address. '
+      description: A validated address.
     AlexaForBusinessMetadata:
       type: object
       properties:
@@ -17764,6 +18023,49 @@ components:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time at which a message was last read.
       description: Summary of the membership details of an <code>AppInstanceUser</code>.
+    AudioArtifactsConfiguration:
+      type: object
+      required:
+        - MuxType
+      properties:
+        MuxType:
+          allOf:
+            - $ref: '#/components/schemas/AudioMuxType'
+            - description: The MUX type of the audio artifact configuration object.
+      description: The audio artifact configuration object.
+    VideoArtifactsConfiguration:
+      type: object
+      required:
+        - State
+      properties:
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactsState'
+            - description: Indicates whether the video artifact is enabled or disabled.
+        MuxType:
+          allOf:
+            - $ref: '#/components/schemas/VideoMuxType'
+            - description: The MUX type of the video artifact configuration object.
+      description: The video artifact configuration object.
+    ContentArtifactsConfiguration:
+      type: object
+      required:
+        - State
+      properties:
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactsState'
+            - description: Indicates whether the content artifact is enabled or disabled.
+        MuxType:
+          allOf:
+            - $ref: '#/components/schemas/ContentMuxType'
+            - description: The MUX type of the artifact configuration.
+      description: The content artifact object.
+    ArtifactsState:
+      type: string
+      enum:
+        - Enabled
+        - Disabled
     AssociatePhoneNumberWithUserRequest:
       type: object
       required:
@@ -17852,6 +18154,11 @@ components:
             - $ref: '#/components/schemas/JoinTokenString'
             - description: The join token used by the Amazon Chime SDK attendee.
       description: '<p> An Amazon Chime SDK meeting attendee. Includes a unique <code>AttendeeId</code> and <code>JoinToken</code> . The <code>JoinToken</code> allows a client to authenticate and join as the specified attendee. The <code>JoinToken</code> expires when the meeting ends or when <a>DeleteAttendee</a> is called. After that, the attendee is unable to join the meeting. </p> <p>We recommend securely transferring each <code>JoinToken</code> from your server application to the client so that no other client has access to the token except for the one authorized to represent the attendee.</p>'
+    AttendeeIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GuidString'
+      minItems: 1
     AttendeeList:
       type: array
       items:
@@ -17868,6 +18175,11 @@ components:
         $ref: '#/components/schemas/Tag'
       minItems: 1
       maxItems: 10
+    AudioMuxType:
+      type: string
+      enum:
+        - AudioOnly
+        - AudioWithActiveSpeakerVideo
     Members:
       type: array
       items:
@@ -18145,6 +18457,42 @@ components:
         - UpdateFailed
     CallingRegion:
       type: string
+    CandidateAddress:
+      type: object
+      properties:
+        streetInfo:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: The street information of a candidate address
+        streetNumber:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: The numeric portion of a candidate address.
+        city:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: The city of a candidate address.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: The state of a candidate address.
+        postalCode:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: The postal code of a candidate address.
+        postalCodePlus4:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: The Zip + 4 or postal code + 4 of a candidate address.
+        country:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: The country of a candidate address.
+      description: A suggested address.
+    CandidateAddressList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CandidateAddress'
     CapabilityList:
       type: array
       items:
@@ -18478,12 +18826,28 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ChannelSummary'
+    ChimeSdkMeetingConfiguration:
+      type: object
+      properties:
+        SourceConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SourceConfiguration'
+            - description: The source configuration for a specified media capture pipline.
+        ArtifactsConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactsConfiguration'
+            - description: The configuration for the artifacts in an Amazon Chime SDK meeting.
+      description: The configuration object of the Amazon Chime SDK meeting for a specified media capture pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.
     ClientRequestToken:
       type: string
       pattern: '[-_a-zA-Z0-9]*'
       minLength: 2
       maxLength: 64
       format: password
+    ContentMuxType:
+      type: string
+      enum:
+        - ContentOnly
     CountryList:
       type: array
       items:
@@ -18538,7 +18902,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: Tags assigned to the <code>AppInstanceUser</code>.
+            - description: Tags assigned to the <code>AppInstance</code>.
     UserId:
       type: string
       pattern: '[A-Za-z0-9]([A-Za-z0-9\:\-\_\.\@]{0,62}[A-Za-z0-9])?'
@@ -18714,6 +19078,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
             - description: The token assigned to the client making the pipeline request.
+        ChimeSdkMeetingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ChimeSdkMeetingConfiguration'
+            - description: The configuration for a specified media capture pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.
     MediaCapturePipeline:
       type: object
       properties:
@@ -18749,7 +19117,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/Iso8601Timestamp'
             - description: 'The time at which the capture pipeline was updated, in ISO 8601 format.'
-      description: 'A media capture pipeline object. A string consisting of an ID, source type, a source ARN, a sink type, and a sink ARN.'
+        ChimeSdkMeetingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ChimeSdkMeetingConfiguration'
+            - description: The configuration for a specified media capture pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.
+      description: 'A media capture pipeline object consisting of an ID, source type, source ARN, a sink type, a sink ARN, and a configuration object.'
     CreateMeetingDialOutRequest:
       type: object
       required:
@@ -19442,6 +19814,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Iso8601Timestamp'
             - description: 'The updated Amazon Chime Voice Connector group time stamp, in ISO 8601 format.'
+        VoiceConnectorGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the specified Amazon Chime Voice Connector group.
       description: 'The Amazon Chime Voice Connector group configuration, including associated Amazon Chime Voice Connectors. You can include Amazon Chime Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.'
     VoiceConnectorName:
       type: string
@@ -19502,6 +19878,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Iso8601Timestamp'
             - description: 'The updated Amazon Chime Voice Connector timestamp, in ISO 8601 format.'
+        VoiceConnectorArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the specified Amazon Chime Voice Connector.
       description: 'The Amazon Chime Voice Connector configuration, including outbound host name and encryption settings.'
     CredentialList:
       type: array
@@ -19760,6 +20140,10 @@ components:
         - ca-central-1
         - eu-west-1
         - auto
+    TranscribeMedicalContentIdentificationType:
+      type: string
+      enum:
+        - PHI
     TranscribeLanguageCode:
       type: string
       enum:
@@ -19796,6 +20180,30 @@ components:
         - eu-west-2
         - sa-east-1
         - auto
+    TranscribePartialResultsStability:
+      type: string
+      enum:
+        - low
+        - medium
+        - high
+    TranscribeContentIdentificationType:
+      type: string
+      enum:
+        - PII
+    TranscribeContentRedactionType:
+      type: string
+      enum:
+        - PII
+    TranscribePiiEntityTypes:
+      type: string
+      pattern: '^[A-Z_, ]+'
+      minLength: 1
+      maxLength: 300
+    TranscribeLanguageModelName:
+      type: string
+      pattern: '^[0-9a-zA-Z._-]+'
+      minLength: 1
+      maxLength: 200
     EventsConfiguration:
       type: object
       properties:
@@ -19812,6 +20220,11 @@ components:
             - $ref: '#/components/schemas/SensitiveString'
             - description: Lambda function ARN that allows a bot to receive outgoing events.
       description: The configuration that allows a bot to receive outgoing events. Can be either an HTTPS endpoint or a Lambda function ARN.
+    ExternalUserIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExternalUserIdType'
+      minItems: 1
     FunctionArn:
       type: string
       pattern: 'arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?'
@@ -20022,6 +20435,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'When true, enables SIP message logs for sending to Amazon CloudWatch Logs.'
+        EnableMediaMetricLogs:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Boolean that enables the logging of Voice Connector metrics to Cloudwatch.
       description: The logging configuration associated with an Amazon Chime Voice Connector. Specifies whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.
     GetVoiceConnectorOriginationRequest:
       type: object
@@ -20462,7 +20879,7 @@ components:
         EventIngestionUrl:
           allOf:
             - $ref: '#/components/schemas/UriType'
-            - description: The URL of the S3 bucket used to store the captured media.
+            - description: The event ingestion URL to which you send client meeting events.
       description: A set of endpoints used by clients to connect to the media service group for an Amazon Chime SDK meeting.
     MeetingTagKeyList:
       type: array
@@ -20884,6 +21301,18 @@ components:
       type: object
       title: SearchAvailablePhoneNumbersRequest
       properties: {}
+    SelectedVideoStreams:
+      type: object
+      properties:
+        AttendeeIds:
+          allOf:
+            - $ref: '#/components/schemas/AttendeeIdList'
+            - description: 'The attendee IDs of the streams selected for a media capture pipeline. '
+        ExternalUserIds:
+          allOf:
+            - $ref: '#/components/schemas/ExternalUserIdList'
+            - description: The external user IDs of the streams selected for a media capture pipeline.
+      description: The video streams to capture for a specified media capture pipeline. The total number of video streams can't exceed 25.
     SendChannelMessageRequest:
       type: object
       required:
@@ -21128,9 +21557,6 @@ components:
             - description: The metadata for the update request.
     UpdateGlobalSettingsRequest:
       type: object
-      required:
-        - BusinessCalling
-        - VoiceConnector
       title: UpdateGlobalSettingsRequest
       properties:
         BusinessCalling:
@@ -21305,6 +21731,54 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The error message.
       description: 'The list of errors returned when errors are encountered during the <a>BatchSuspendUser</a>, <a>BatchUnsuspendUser</a>, or <a>BatchUpdateUser</a> actions. This includes user IDs, error codes, and error messages.'
+    ValidateE911AddressRequest:
+      type: object
+      required:
+        - AwsAccountId
+        - StreetNumber
+        - StreetInfo
+        - City
+        - State
+        - Country
+        - PostalCode
+      title: ValidateE911AddressRequest
+      properties:
+        AwsAccountId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The AWS account ID.
+        StreetNumber:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: 'The address street number, such as <code>200</code> or <code>2121</code>.'
+        StreetInfo:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: 'The address street information, such as <code>8th Avenue</code>.'
+        City:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: 'The address city, such as <code>Portland</code>.'
+        State:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: 'The address state, such as <code>ME</code>.'
+        Country:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: 'The address country, such as <code>US</code>. '
+        PostalCode:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveNonEmptyString'
+            - description: 'The address postal code, such as <code>04352</code>.'
+    ValidationResult:
+      type: integer
+      minimum: 0
+      maximum: 2
+    VideoMuxType:
+      type: string
+      enum:
+        - VideoOnly
     VoiceConnectorItemPriority:
       type: integer
       minimum: 1

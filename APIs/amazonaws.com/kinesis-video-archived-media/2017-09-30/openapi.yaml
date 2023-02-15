@@ -483,6 +483,140 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /getImages:
+    post:
+      operationId: GetImages
+      description: 'Retrieves a list of Images corresponding to each timestamp for a given time range, sampling interval, and image format configuration.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetImagesOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '482':
+          description: ClientLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientLimitExceededException'
+        '483':
+          description: NotAuthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ImageSelectorType
+                - StartTimestamp
+                - EndTimestamp
+                - SamplingInterval
+                - Format
+              properties:
+                StreamName:
+                  description: The name of the stream from which to retrieve the images. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+                  type: string
+                  pattern: '[a-zA-Z0-9_.-]+'
+                  minLength: 1
+                  maxLength: 256
+                StreamARN:
+                  description: The Amazon Resource Name (ARN) of the stream from which to retrieve the images. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+                  type: string
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  minLength: 1
+                  maxLength: 1024
+                ImageSelectorType:
+                  description: The origin of the Server or Producer timestamps to use to generate the images.
+                  type: string
+                  enum:
+                    - PRODUCER_TIMESTAMP
+                    - SERVER_TIMESTAMP
+                StartTimestamp:
+                  description: The starting point from which the images should be generated. This <code>StartTimestamp</code> must be within an inclusive range of timestamps for an image to be returned.
+                  type: string
+                  format: date-time
+                EndTimestamp:
+                  description: The end timestamp for the range of images to be generated.
+                  type: string
+                  format: date-time
+                SamplingInterval:
+                  description: '<p>The time interval in milliseconds (ms) at which the images need to be generated from the stream. The minimum value that can be provided is 3000 ms. If the timestamp range is less than the sampling interval, the Image from the <code>startTimestamp</code> will be returned if available. </p> <note> <p>The minimum value of 3000 ms is a soft limit. If needed, a lower sampling frequency can be requested.</p> </note>'
+                  type: integer
+                  minimum: 3000
+                  maximum: 20000
+                Format:
+                  description: The format that will be used to encode the image.
+                  type: string
+                  enum:
+                    - JPEG
+                    - PNG
+                FormatConfig:
+                  description: 'The list of a key-value pair structure that contains extra parameters that can be applied when the image is generated. The <code>FormatConfig</code> key is the <code>JPEGQuality</code>, which indicates the JPEG quality key to be used to generate the image. The <code>FormatConfig</code> value accepts ints from 1 to 100. If the value is 1, the image will be generated with less quality and the best compression. If the value is 100, the image will be generated with the best quality and less compression. If no value is provided, the default value of the <code>JPEGQuality</code> key will be set to 80.'
+                  type: object
+                  minProperties: 1
+                  maxProperties: 1
+                  additionalProperties:
+                    $ref: '#/components/schemas/FormatConfigValue'
+                WidthPixels:
+                  description: 'The width of the output image that is used in conjunction with the <code>HeightPixels</code> parameter. When both <code>WidthPixels</code> and <code>HeightPixels</code> parameters are provided, the image will be stretched to fit the specified aspect ratio. If only the <code>WidthPixels</code> parameter is provided or if only the <code>HeightPixels</code> is provided, a <code>ValidationException</code> will be thrown. If neither parameter is provided, the original image size from the stream will be returned.'
+                  type: integer
+                  minimum: 1
+                  maximum: 3840
+                HeightPixels:
+                  description: 'The height of the output image that is used in conjunction with the <code>WidthPixels</code> parameter. When both <code>HeightPixels</code> and <code>WidthPixels</code> parameters are provided, the image will be stretched to fit the specified aspect ratio. If only the <code>HeightPixels</code> parameter is provided, its original aspect ratio will be used to calculate the <code>WidthPixels</code> ratio. If neither parameter is provided, the original image size will be returned.'
+                  type: integer
+                  minimum: 1
+                  maximum: 2160
+                MaxResults:
+                  description: <p>The maximum number of images to be returned by the API. </p> <note> <p>The default limit is 100 images per API response. The additional results will be paginated. </p> </note>
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                NextToken:
+                  description: 'A token that specifies where to start paginating the next set of Images. This is the <code>GetImages:NextToken</code> from a previously truncated response.'
+                  type: string
+                  pattern: '[a-zA-Z0-9+/]+={0,2}'
+                  minLength: 1
+                  maxLength: 4096
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /getMediaForFragmentList:
     post:
       operationId: GetMediaForFragmentList
@@ -789,6 +923,22 @@ components:
             - $ref: '#/components/schemas/Timestamp'
             - description: '<p>The end of the timestamp range for the requested media. This value must be within 24 hours of the specified <code>StartTimestamp</code>, and it must be later than the <code>StartTimestamp</code> value.</p> <p>If <code>FragmentSelectorType</code> for the request is <code>SERVER_TIMESTAMP</code>, this value must be in the past.</p> <p>The <code>EndTimestamp</code> value is required for <code>ON_DEMAND</code> mode, but optional for <code>LIVE_REPLAY</code> mode. If the <code>EndTimestamp</code> is not set for <code>LIVE_REPLAY</code> mode then the session will continue to include newly ingested fragments until the session expires.</p> <note> <p>This value is inclusive. The <code>EndTimestamp</code> is compared to the (starting) timestamp of the fragment. Fragments that start before the <code>EndTimestamp</code> value and continue past it are included in the session.</p> </note>'
       description: <p>The start and end of the timestamp range for the requested media.</p> <p>This value should not be present if <code>PlaybackType</code> is <code>LIVE</code>.</p>
+    GetImagesOutput:
+      type: object
+      properties:
+        Images:
+          allOf:
+            - $ref: '#/components/schemas/Images'
+            - description: 'The list of images generated from the video stream. If there is no media available for the given timestamp, the <code>NO_MEDIA</code> error will be listed in the output. If an error occurs while the image is being generated, the <code>MEDIA_ERROR</code> will be listed in the output as the cause of the missing image. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The encrypted token that was used in the request to get more images.
+    FormatConfigValue:
+      type: string
+      pattern: '^[a-zA-Z_0-9]+'
+      minLength: 0
+      maxLength: 256
     GetMediaForFragmentListOutput:
       type: object
       properties:
@@ -898,6 +1048,21 @@ components:
       type: integer
       minimum: 300
       maximum: 43200
+    Format:
+      type: string
+      enum:
+        - JPEG
+        - PNG
+    FormatConfig:
+      type: object
+      minProperties: 1
+      maxProperties: 1
+      additionalProperties:
+        $ref: '#/components/schemas/FormatConfigValue'
+    FormatConfigKey:
+      type: string
+      enum:
+        - JPEGQuality
     Long:
       type: integer
     Fragment:
@@ -1090,6 +1255,94 @@ components:
             - description: '<p>The maximum number of fragments that are returned in the HLS media playlists.</p> <p>When the <code>PlaybackMode</code> is <code>LIVE</code>, the most recent fragments are returned up to this value. When the <code>PlaybackMode</code> is <code>ON_DEMAND</code>, the oldest fragments are returned, up to this maximum number.</p> <p>When there are a higher number of fragments available in a live HLS media playlist, video players often buffer content before starting playback. Increasing the buffer size increases the playback latency, but it decreases the likelihood that rebuffering will occur during playback. We recommend that a live HLS media playlist have a minimum of 3 fragments and a maximum of 10 fragments.</p> <p>The default is 5 fragments if <code>PlaybackMode</code> is <code>LIVE</code> or <code>LIVE_REPLAY</code>, and 1,000 if <code>PlaybackMode</code> is <code>ON_DEMAND</code>. </p> <p>The maximum value of 5,000 fragments corresponds to more than 80 minutes of video on streams with 1-second fragments, and more than 13 hours of video on streams with 10-second fragments.</p>'
     HLSStreamingSessionURL:
       type: string
+    ImageSelectorType:
+      type: string
+      enum:
+        - PRODUCER_TIMESTAMP
+        - SERVER_TIMESTAMP
+    SamplingInterval:
+      type: integer
+      minimum: 3000
+      maximum: 20000
+    WidthPixels:
+      type: integer
+      minimum: 1
+      maximum: 3840
+    HeightPixels:
+      type: integer
+      minimum: 1
+      maximum: 2160
+    GetImagesMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    NextToken:
+      type: string
+      pattern: '[a-zA-Z0-9+/]+={0,2}'
+      minLength: 1
+      maxLength: 4096
+    GetImagesInput:
+      type: object
+      required:
+        - ImageSelectorType
+        - StartTimestamp
+        - EndTimestamp
+        - SamplingInterval
+        - Format
+      title: GetImagesInput
+      properties:
+        StreamName:
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: The name of the stream from which to retrieve the images. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+        StreamARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the stream from which to retrieve the images. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+        ImageSelectorType:
+          allOf:
+            - $ref: '#/components/schemas/ImageSelectorType'
+            - description: The origin of the Server or Producer timestamps to use to generate the images.
+        StartTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The starting point from which the images should be generated. This <code>StartTimestamp</code> must be within an inclusive range of timestamps for an image to be returned.
+        EndTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The end timestamp for the range of images to be generated.
+        SamplingInterval:
+          allOf:
+            - $ref: '#/components/schemas/SamplingInterval'
+            - description: '<p>The time interval in milliseconds (ms) at which the images need to be generated from the stream. The minimum value that can be provided is 3000 ms. If the timestamp range is less than the sampling interval, the Image from the <code>startTimestamp</code> will be returned if available. </p> <note> <p>The minimum value of 3000 ms is a soft limit. If needed, a lower sampling frequency can be requested.</p> </note>'
+        Format:
+          allOf:
+            - $ref: '#/components/schemas/Format'
+            - description: The format that will be used to encode the image.
+        FormatConfig:
+          allOf:
+            - $ref: '#/components/schemas/FormatConfig'
+            - description: 'The list of a key-value pair structure that contains extra parameters that can be applied when the image is generated. The <code>FormatConfig</code> key is the <code>JPEGQuality</code>, which indicates the JPEG quality key to be used to generate the image. The <code>FormatConfig</code> value accepts ints from 1 to 100. If the value is 1, the image will be generated with less quality and the best compression. If the value is 100, the image will be generated with the best quality and less compression. If no value is provided, the default value of the <code>JPEGQuality</code> key will be set to 80.'
+        WidthPixels:
+          allOf:
+            - $ref: '#/components/schemas/WidthPixels'
+            - description: 'The width of the output image that is used in conjunction with the <code>HeightPixels</code> parameter. When both <code>WidthPixels</code> and <code>HeightPixels</code> parameters are provided, the image will be stretched to fit the specified aspect ratio. If only the <code>WidthPixels</code> parameter is provided or if only the <code>HeightPixels</code> is provided, a <code>ValidationException</code> will be thrown. If neither parameter is provided, the original image size from the stream will be returned.'
+        HeightPixels:
+          allOf:
+            - $ref: '#/components/schemas/HeightPixels'
+            - description: 'The height of the output image that is used in conjunction with the <code>WidthPixels</code> parameter. When both <code>HeightPixels</code> and <code>WidthPixels</code> parameters are provided, the image will be stretched to fit the specified aspect ratio. If only the <code>HeightPixels</code> parameter is provided, its original aspect ratio will be used to calculate the <code>WidthPixels</code> ratio. If neither parameter is provided, the original image size will be returned.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/GetImagesMaxResults'
+            - description: <p>The maximum number of images to be returned by the API. </p> <note> <p>The default limit is 100 images per API response. The additional results will be paginated. </p> </note>
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token that specifies where to start paginating the next set of Images. This is the <code>GetImages:NextToken</code> from a previously truncated response.'
+    Images:
+      type: array
+      items:
+        $ref: '#/components/schemas/Image'
     GetMediaForFragmentListInput:
       type: object
       required:
@@ -1108,15 +1361,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/FragmentNumberList'
             - description: A list of the numbers of fragments for which to retrieve media. You retrieve these values with <a>ListFragments</a>.
+    ImageError:
+      type: string
+      enum:
+        - NO_MEDIA
+        - MEDIA_ERROR
+    ImageContent:
+      type: string
+      minLength: 1
+      maxLength: 6291456
+    Image:
+      type: object
+      properties:
+        TimeStamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: An attribute of the <code>Image</code> object that is used to extract an image from the video stream. This field is used to manage gaps on images or to better understand the pagination window.
+        Error:
+          allOf:
+            - $ref: '#/components/schemas/ImageError'
+            - description: '<p>The error message shown when the image for the provided timestamp was not extracted due to a non-tryable error. An error will be returned if: </p> <ul> <li> <p>There is no media that exists for the specified <code>Timestamp</code>.</p> </li> </ul> <ul> <li> <p>The media for the specified time does not allow an image to be extracted. In this case the media is audio only, or the incorrect media has been ingested.</p> </li> </ul>'
+        ImageContent:
+          allOf:
+            - $ref: '#/components/schemas/ImageContent'
+            - description: An attribute of the <code>Image</code> object that is Base64 encoded.
+      description: 'A structure that contains the <code>Timestamp</code>, <code>Error</code>, and <code>ImageContent</code>.'
     ListFragmentsMaxResults:
       type: integer
       minimum: 1
       maximum: 1000
-    NextToken:
-      type: string
-      pattern: '[a-zA-Z0-9+/]+={0,2}'
-      minLength: 1
-      maxLength: 4096
     ListFragmentsInput:
       type: object
       title: ListFragmentsInput

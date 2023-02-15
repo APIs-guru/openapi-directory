@@ -118,7 +118,7 @@ paths:
   /create-connector-profile:
     post:
       operationId: CreateConnectorProfile
-      description: ' Creates a new connector profile associated with your Amazon Web Services account. There is a soft quota of 100 connector profiles per Amazon Web Services account. If you need more connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. '
+      description: ' Creates a new connector profile associated with your Amazon Web Services account. There is a soft quota of 100 connector profiles per Amazon Web Services account. If you need more connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. In each connector profile that you create, you can provide the credentials and properties for only one connector.'
       responses:
         '200':
           description: Success
@@ -206,6 +206,13 @@ paths:
                     - Honeycode
                     - CustomerProfiles
                     - SAPOData
+                    - CustomConnector
+                    - Pardot
+                connectorLabel:
+                  description: The label of the connector. The label is unique for each <code>ConnectorRegistration</code> in your Amazon Web Services account. Only needed if calling for CUSTOMCONNECTOR connector type/.
+                  type: string
+                  pattern: '[a-zA-Z0-9][\w!@#.-]+'
+                  maxLength: 256
                 connectionMode:
                   description: ' Indicates the connection mode and specifies whether it is public or private. Private flows use Amazon Web Services PrivateLink to route data over Amazon Web Services infrastructure without exposing it to the public internet. '
                   type: string
@@ -335,6 +342,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ConnectorType'
                         - description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
+                    apiVersion:
+                      allOf:
+                        - $ref: '#/components/schemas/ApiVersion'
+                        - description: The API version of the connector when it's used as a source in the flow.
                     connectorProfileName:
                       allOf:
                         - $ref: '#/components/schemas/ConnectorProfileName'
@@ -364,6 +375,14 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+                metadataCatalogConfig:
+                  description: 'Specifies the configuration that Amazon AppFlow uses when it catalogs your data. When Amazon AppFlow catalogs your data, it stores metadata in a data catalog.'
+                  type: object
+                  properties:
+                    glueDataCatalog:
+                      allOf:
+                        - $ref: '#/components/schemas/GlueDataCatalogConfig'
+                        - description: Specifies the configuration that Amazon AppFlow uses when it catalogs your data with the Glue Data Catalog.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -482,10 +501,90 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /describe-connector:
+    post:
+      operationId: DescribeConnector
+      description: Describes the given custom connector registered in your Amazon Web Services account. This API can be used for custom connectors that are registered in your account and also for Amazon authored connectors.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeConnectorResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - connectorType
+              properties:
+                connectorType:
+                  description: 'The connector type, such as CUSTOMCONNECTOR, Saleforce, Marketo. Please choose CUSTOMCONNECTOR for Lambda based custom connectors.'
+                  type: string
+                  enum:
+                    - Salesforce
+                    - Singular
+                    - Slack
+                    - Redshift
+                    - S3
+                    - Marketo
+                    - Googleanalytics
+                    - Zendesk
+                    - Servicenow
+                    - Datadog
+                    - Trendmicro
+                    - Snowflake
+                    - Dynatrace
+                    - Infornexus
+                    - Amplitude
+                    - Veeva
+                    - EventBridge
+                    - LookoutMetrics
+                    - Upsolver
+                    - Honeycode
+                    - CustomerProfiles
+                    - SAPOData
+                    - CustomConnector
+                    - Pardot
+                connectorLabel:
+                  description: The label of the connector. The label is unique for each <code>ConnectorRegistration</code> in your Amazon Web Services account. Only needed if calling for CUSTOMCONNECTOR connector type/.
+                  type: string
+                  pattern: '[a-zA-Z0-9][\w!@#.-]+'
+                  maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /describe-connector-entity:
     post:
       operationId: DescribeConnectorEntity
-      description: ' Provides details regarding the entity used with the connector, with a description of the data model for each entity. '
+      description: ' Provides details regarding the entity used with the connector, with a description of the data model for each field in that entity. '
       responses:
         '200':
           description: Success
@@ -537,7 +636,7 @@ paths:
                   description: ' The entity name for that connector. '
                   type: string
                   pattern: \S+
-                  maxLength: 128
+                  maxLength: 1024
                 connectorType:
                   description: ' The type of connector application, such as Salesforce, Amplitude, and so on. '
                   type: string
@@ -564,10 +663,17 @@ paths:
                     - Honeycode
                     - CustomerProfiles
                     - SAPOData
+                    - CustomConnector
+                    - Pardot
                 connectorProfileName:
                   description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the Amazon Web Services account. '
                   type: string
                   pattern: '[\w/!@#+=.-]+'
+                  maxLength: 256
+                apiVersion:
+                  description: The version of the API that's used by the connector.
+                  type: string
+                  pattern: \S+
                   maxLength: 256
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -653,6 +759,13 @@ paths:
                     - Honeycode
                     - CustomerProfiles
                     - SAPOData
+                    - CustomConnector
+                    - Pardot
+                connectorLabel:
+                  description: The name of the connector. The name is unique for each <code>ConnectorRegistration</code> in your Amazon Web Services account. Only needed if calling for CUSTOMCONNECTOR connector type/.
+                  type: string
+                  pattern: '[a-zA-Z0-9][\w!@#.-]+'
+                  maxLength: 256
                 maxResults:
                   description: ' Specifies the maximum number of items that should be returned in the result set. The default for <code>maxResults</code> is 20 (for all paginated API operations). '
                   type: integer
@@ -695,6 +808,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
       parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
         - name: nextToken
           in: query
           schema:
@@ -715,6 +834,11 @@ paths:
                     $ref: '#/components/schemas/ConnectorType'
                   minItems: 0
                   maxItems: 100
+                maxResults:
+                  description: The maximum number of items that should be returned in the result set. The default is 20.
+                  type: integer
+                  minimum: 1
+                  maximum: 100
                 nextToken:
                   description: ' The pagination token for the next page of data. '
                   type: string
@@ -928,11 +1052,89 @@ paths:
                     - Honeycode
                     - CustomerProfiles
                     - SAPOData
+                    - CustomConnector
+                    - Pardot
                 entitiesPath:
                   description: ' This optional parameter is specific to connector implementation. Some connectors support multiple levels or categories of entities. You can find out the list of roots for such providers by sending a request without the <code>entitiesPath</code> parameter. If the connector supports entities at different roots, this initial request returns the list of roots. Otherwise, this request returns all entities supported by the provider. '
                   type: string
-                  pattern: '[\s\w/!@#+=.-]*'
+                  pattern: '[\s\w/!@#+=,.-]*'
                   maxLength: 256
+                apiVersion:
+                  description: The version of the API that's used by the connector.
+                  type: string
+                  pattern: \S+
+                  maxLength: 256
+                maxResults:
+                  description: The maximum number of items that the operation returns in the response.
+                  type: integer
+                  minimum: 1
+                  maximum: 10000
+                nextToken:
+                  description: A token that was provided by your prior <code>ListConnectorEntities</code> operation if the response was too big for the page size. You specify this token to get the next page of results in paginated response.
+                  type: string
+                  pattern: \S+
+                  maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /list-connectors:
+    post:
+      operationId: ListConnectors
+      description: 'Returns the list of all registered custom connectors in your Amazon Web Services account. This API lists only custom connectors registered in this account, not the Amazon Web Services authored connectors. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListConnectorsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                maxResults:
+                  description: Specifies the maximum number of items that should be returned in the result set. The default for <code>maxResults</code> is 20 (for all paginated API operations).
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                nextToken:
+                  description: The pagination token for the next page of data.
+                  type: string
+                  pattern: \S+
+                  maxLength: 2048
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1101,6 +1303,110 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+  /register-connector:
+    post:
+      operationId: RegisterConnector
+      description: 'Registers a new custom connector with your Amazon Web Services account. Before you can register the connector, you must deploy the associated AWS lambda function in your account.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterConnectorResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '487':
+          description: ConnectorServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorServerException'
+        '488':
+          description: ConnectorAuthenticationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorAuthenticationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                connectorLabel:
+                  description: ' The name of the connector. The name is unique for each <code>ConnectorRegistration</code> in your Amazon Web Services account.'
+                  type: string
+                  pattern: '[a-zA-Z0-9][\w!@#.-]+'
+                  maxLength: 256
+                description:
+                  description: A description about the connector that's being registered.
+                  type: string
+                  pattern: '[\s\w/!@#+=.-]*'
+                  maxLength: 1024
+                connectorProvisioningType:
+                  description: 'The type of provisioning that the connector supports, such as Lambda.'
+                  type: string
+                  enum:
+                    - LAMBDA
+                connectorProvisioningConfig:
+                  description: Contains information about the configuration of the connector being registered.
+                  type: object
+                  properties:
+                    lambda:
+                      allOf:
+                        - $ref: '#/components/schemas/LambdaConnectorProvisioningConfig'
+                        - description: Contains information about the configuration of the lambda which is being registered as the connector.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /start-flow:
     post:
       operationId: StartFlow
@@ -1209,6 +1515,61 @@ paths:
                   type: string
                   pattern: '[a-zA-Z0-9][\w!@#.-]+'
                   maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /unregister-connector:
+    post:
+      operationId: UnregisterConnector
+      description: Unregisters the custom connector registered in your account that matches the connector label provided in the request.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnregisterConnectorResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - connectorLabel
+              properties:
+                connectorLabel:
+                  description: The label of the connector. The label is unique for each <code>ConnectorRegistration</code> in your Amazon Web Services account.
+                  type: string
+                  pattern: '[a-zA-Z0-9][\w!@#.-]+'
+                  maxLength: 256
+                forceDelete:
+                  description: 'Indicates whether Amazon AppFlow should unregister the connector, even if it is currently in use in one or more connector profiles. The default value is false.'
+                  type: boolean
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1357,6 +1718,107 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /update-connector-registration:
+    post:
+      operationId: UpdateConnectorRegistration
+      description: '<p>Updates a custom connector that you''ve previously registered. This operation updates the connector with one of the following:</p> <ul> <li> <p>The latest version of the AWS Lambda function that''s assigned to the connector</p> </li> <li> <p>A new AWS Lambda function that you specify</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateConnectorRegistrationResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '487':
+          description: ConnectorServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorServerException'
+        '488':
+          description: ConnectorAuthenticationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorAuthenticationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - connectorLabel
+              properties:
+                connectorLabel:
+                  description: The name of the connector. The name is unique for each connector registration in your AWS account.
+                  type: string
+                  pattern: '[a-zA-Z0-9][\w!@#.-]+'
+                  maxLength: 256
+                description:
+                  description: A description about the update that you're applying to the connector.
+                  type: string
+                  pattern: '[\s\w/!@#+=.-]*'
+                  maxLength: 1024
+                connectorProvisioningConfig:
+                  description: Contains information about the configuration of the connector being registered.
+                  type: object
+                  properties:
+                    lambda:
+                      allOf:
+                        - $ref: '#/components/schemas/LambdaConnectorProvisioningConfig'
+                        - description: Contains information about the configuration of the lambda which is being registered as the connector.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /update-flow:
     post:
       operationId: UpdateFlow
@@ -1454,6 +1916,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ConnectorType'
                         - description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
+                    apiVersion:
+                      allOf:
+                        - $ref: '#/components/schemas/ApiVersion'
+                        - description: The API version of the connector when it's used as a source in the flow.
                     connectorProfileName:
                       allOf:
                         - $ref: '#/components/schemas/ConnectorProfileName'
@@ -1476,6 +1942,14 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/Task'
+                metadataCatalogConfig:
+                  description: 'Specifies the configuration that Amazon AppFlow uses when it catalogs your data. When Amazon AppFlow catalogs your data, it stores metadata in a data catalog.'
+                  type: object
+                  properties:
+                    glueDataCatalog:
+                      allOf:
+                        - $ref: '#/components/schemas/GlueDataCatalogConfig'
+                        - description: Specifies the configuration that Amazon AppFlow uses when it catalogs your data with the Glue Data Catalog.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1612,6 +2086,14 @@ components:
             - description: ' The connector-specific properties required by Zendesk. '
         SAPOData:
           $ref: '#/components/schemas/SAPODataConnectorProfileProperties'
+        CustomConnector:
+          allOf:
+            - $ref: '#/components/schemas/CustomConnectorProfileProperties'
+            - description: The properties required by the custom connector.
+        Pardot:
+          allOf:
+            - $ref: '#/components/schemas/PardotConnectorProfileProperties'
+            - description: The connector-specific properties required by Salesforce Pardot.
       description: ' The connector-specific profile properties required by each connector. '
     ConnectorProfileCredentials:
       type: object
@@ -1682,6 +2164,12 @@ components:
             - description: ' The connector-specific credentials required when using Zendesk. '
         SAPOData:
           $ref: '#/components/schemas/SAPODataConnectorProfileCredentials'
+        CustomConnector:
+          $ref: '#/components/schemas/CustomConnectorProfileCredentials'
+        Pardot:
+          allOf:
+            - $ref: '#/components/schemas/PardotConnectorProfileCredentials'
+            - description: The connector-specific credentials required when using Salesforce Pardot.
       description: ' The connector-specific credentials required by a connector. '
     ValidationException: {}
     ConflictException: {}
@@ -1738,6 +2226,12 @@ components:
         - Honeycode
         - CustomerProfiles
         - SAPOData
+        - CustomConnector
+        - Pardot
+    ApiVersion:
+      type: string
+      pattern: \S+
+      maxLength: 256
     ConnectorProfileName:
       type: string
       pattern: '[\w/!@#+=.-]+'
@@ -1803,6 +2297,12 @@ components:
             - description: ' Specifies the information that is required for querying Zendesk. '
         SAPOData:
           $ref: '#/components/schemas/SAPODataSourceProperties'
+        CustomConnector:
+          $ref: '#/components/schemas/CustomConnectorSourceProperties'
+        Pardot:
+          allOf:
+            - $ref: '#/components/schemas/PardotSourceProperties'
+            - description: Specifies the information that is required for querying Salesforce Pardot.
       description: ' Specifies the information that is required to query a particular connector. '
     IncrementalPullConfig:
       type: object
@@ -1822,6 +2322,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectorType'
             - description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
+        apiVersion:
+          allOf:
+            - $ref: '#/components/schemas/ApiVersion'
+            - description: The API version that the destination connector uses.
         connectorProfileName:
           allOf:
             - $ref: '#/components/schemas/ConnectorProfileName'
@@ -1862,6 +2366,26 @@ components:
       type: string
       pattern: '[\s\w+-=\.:/@]*'
       maxLength: 256
+    GlueDataCatalogConfig:
+      type: object
+      required:
+        - roleArn
+        - databaseName
+        - tablePrefix
+      properties:
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/GlueDataCatalogIAMRole'
+            - description: '<p>The Amazon Resource Name (ARN) of an IAM role that grants Amazon AppFlow the permissions it needs to create Data Catalog tables, databases, and partitions.</p> <p>For an example IAM policy that has the required permissions, see <a href="https://docs.aws.amazon.com/appflow/latest/userguide/security_iam_id-based-policy-examples.html">Identity-based policy examples for Amazon AppFlow</a>.</p>'
+        databaseName:
+          allOf:
+            - $ref: '#/components/schemas/GlueDataCatalogDatabaseName'
+            - description: '<p>The name of the Data Catalog database that stores the metadata tables that Amazon AppFlow creates in your Amazon Web Services account. These tables contain metadata for the data that''s transferred by the flow that you configure with this parameter.</p> <note> <p>When you configure a new flow with this parameter, you must specify an existing database.</p> </note>'
+        tablePrefix:
+          allOf:
+            - $ref: '#/components/schemas/GlueDataCatalogTablePrefix'
+            - description: A naming prefix for each Data Catalog table that Amazon AppFlow creates for the flow that you configure with this setting. Amazon AppFlow adds the prefix to the beginning of the each table name.
+      description: '<p>Specifies the configuration that Amazon AppFlow uses when it catalogs your data with the Glue Data Catalog. When Amazon AppFlow catalogs your data, it stores metadata in Data Catalog tables. This metadata represents the data that''s transferred by the flow that you configure with these settings.</p> <note> <p>You can configure a flow with these settings only when the flow destination is Amazon S3.</p> </note>'
     ResourceNotFoundException: {}
     ConnectorServerException: {}
     DeleteConnectorProfileResponse:
@@ -1870,6 +2394,13 @@ components:
     DeleteFlowResponse:
       type: object
       properties: {}
+    DescribeConnectorResponse:
+      type: object
+      properties:
+        connectorConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorConfiguration'
+            - description: Configuration info of all the connectors that the user requested.
     DescribeConnectorEntityResponse:
       type: object
       required:
@@ -1897,6 +2428,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectorConfigurationsMap'
             - description: ' The configuration that is applied to the connectors used in the flow. '
+        connectors:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorList'
+            - description: Information about the connectors supported in Amazon AppFlow.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -1968,6 +2503,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: ' The tags used to organize, track, or control access for your flow. '
+        metadataCatalogConfig:
+          allOf:
+            - $ref: '#/components/schemas/MetadataCatalogConfig'
+            - description: 'Specifies the configuration that Amazon AppFlow uses when it catalogs the data that''s transferred by the associated flow. When Amazon AppFlow catalogs the data from a flow, it stores metadata in a data catalog.'
+        lastRunMetadataCatalogDetails:
+          allOf:
+            - $ref: '#/components/schemas/MetadataCatalogDetails'
+            - description: 'Describes the metadata catalog, metadata table, and data partitions that Amazon AppFlow used for the associated flow run.'
+        schemaVersion:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: '<p>The version number of your data schema. Amazon AppFlow assigns this version number. The version number increases by one when you change any of the following settings in your flow configuration:</p> <ul> <li> <p>Source-to-destination field mappings</p> </li> <li> <p>Field data types</p> </li> <li> <p>Partition keys</p> </li> </ul>'
     DescribeFlowExecutionRecordsResponse:
       type: object
       properties:
@@ -1988,6 +2535,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectorEntityMap'
             - description: ' The response of <code>ListConnectorEntities</code> lists entities grouped by category. This map''s key represents the group name, and its value contains the list of entities belonging to that group. '
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: A token that you specify in your next <code>ListConnectorEntities</code> operation to get the next page of results in paginated response. The <code>ListConnectorEntities</code> operation provides this token if the response is too big for the page size.
+    ListConnectorsResponse:
+      type: object
+      properties:
+        connectors:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorList'
+            - description: Contains information about the connectors supported by Amazon AppFlow.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The pagination token for the next page of data. If nextToken=null, this means that all records have been fetched.'
     ListFlowsResponse:
       type: object
       properties:
@@ -2006,6 +2568,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: ' The tags used to organize, track, or control access for your flow. '
+    RegisterConnectorResponse:
+      type: object
+      properties:
+        connectorArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The ARN of the connector being registered.
+    LambdaConnectorProvisioningConfig:
+      type: object
+      required:
+        - lambdaArn
+      properties:
+        lambdaArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: Lambda ARN of the connector being registered.
+      description: Contains information about the configuration of the lambda which is being registered as the connector.
+    AccessDeniedException: {}
+    ThrottlingException: {}
     StartFlowResponse:
       type: object
       properties:
@@ -2036,6 +2617,9 @@ components:
     TagResourceResponse:
       type: object
       properties: {}
+    UnregisterConnectorResponse:
+      type: object
+      properties: {}
     UntagResourceResponse:
       type: object
       properties: {}
@@ -2051,6 +2635,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectorProfileArn'
             - description: ' The Amazon Resource Name (ARN) of the connector profile. '
+    UpdateConnectorRegistrationResponse:
+      type: object
+      properties:
+        connectorArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The ARN of the connector being updated.
     UpdateFlowResponse:
       type: object
       properties:
@@ -2070,7 +2661,7 @@ components:
     AccessToken:
       type: string
       pattern: \S+
-      maxLength: 512
+      maxLength: 4096
       format: password
     AccountName:
       type: string
@@ -2081,6 +2672,8 @@ components:
       enum:
         - None
         - SingleFile
+    Long:
+      type: integer
     AggregationConfig:
       type: object
       properties:
@@ -2088,6 +2681,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AggregationType'
             - description: ' Specifies whether Amazon AppFlow aggregates the flow records into a single file, or leave them unaggregated. '
+        targetFileSize:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'The desired file size, in MB, for each output file that Amazon AppFlow writes to the flow destination. For each file, Amazon AppFlow attempts to achieve the size that you specify. The actual file sizes might differ from this target based on the number and size of the records that each file contains.'
       description: ' The aggregation settings that you can use to customize the output format of your flow data. '
     AmplitudeConnectorOperator:
       type: string
@@ -2097,6 +2694,7 @@ components:
       type: string
       pattern: \S+
       maxLength: 256
+      format: password
     SecretKey:
       type: string
       pattern: \S+
@@ -2144,6 +2742,20 @@ components:
       pattern: \S+
       maxLength: 256
       format: password
+    ApiKeyCredentials:
+      type: object
+      required:
+        - apiKey
+      properties:
+        apiKey:
+          allOf:
+            - $ref: '#/components/schemas/ApiKey'
+            - description: The API key required for API key authentication.
+        apiSecretKey:
+          allOf:
+            - $ref: '#/components/schemas/ApiSecretKey'
+            - description: The API secret key required for API key authentication.
+      description: The API key credentials required for API key authentication.
     ApiToken:
       type: string
       pattern: \S+
@@ -2160,14 +2772,135 @@ components:
       type: string
       pattern: \S+
       maxLength: 512
-    AuthCode:
+    ApplicationType:
       type: string
       pattern: \S+
       maxLength: 512
+    AuthCode:
+      type: string
+      pattern: \S+
+      maxLength: 2048
     AuthCodeUrl:
       type: string
       pattern: '^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]'
       maxLength: 256
+    AuthCodeUrlList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AuthCodeUrl'
+    Key:
+      type: string
+      pattern: \S+
+      maxLength: 512
+    Boolean:
+      type: boolean
+    Label:
+      type: string
+      pattern: .*
+      maxLength: 128
+    Description:
+      type: string
+      pattern: '[\s\w/!@#+=.-]*'
+      maxLength: 1024
+    ConnectorSuppliedValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConnectorSuppliedValue'
+    AuthParameter:
+      type: object
+      properties:
+        key:
+          allOf:
+            - $ref: '#/components/schemas/Key'
+            - description: The authentication key required to authenticate with the connector.
+        isRequired:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether this authentication parameter is required.
+        label:
+          allOf:
+            - $ref: '#/components/schemas/Label'
+            - description: Label used for authentication parameter.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description about the authentication parameter.
+        isSensitiveField:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether this authentication parameter is a sensitive field.
+        connectorSuppliedValues:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorSuppliedValueList'
+            - description: Contains default values for this authentication parameter that are supplied by the connector.
+      description: Information about required authentication parameters.
+    AuthParameterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AuthParameter'
+    OAuth2Defaults:
+      type: object
+      properties:
+        oauthScopes:
+          allOf:
+            - $ref: '#/components/schemas/OAuthScopeList'
+            - description: OAuth 2.0 scopes that the connector supports.
+        tokenUrls:
+          allOf:
+            - $ref: '#/components/schemas/TokenUrlList'
+            - description: Token URLs that can be used for OAuth 2.0 authentication.
+        authCodeUrls:
+          allOf:
+            - $ref: '#/components/schemas/AuthCodeUrlList'
+            - description: Auth code URLs that can be used for OAuth 2.0 authentication.
+        oauth2GrantTypesSupported:
+          allOf:
+            - $ref: '#/components/schemas/OAuth2GrantTypeSupportedList'
+            - description: OAuth 2.0 grant types supported by the connector.
+        oauth2CustomProperties:
+          allOf:
+            - $ref: '#/components/schemas/OAuth2CustomPropertiesList'
+            - description: List of custom parameters required for OAuth 2.0 authentication.
+      description: Contains the default values required for OAuth 2.0 authentication.
+    CustomAuthConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CustomAuthConfig'
+    AuthenticationConfig:
+      type: object
+      properties:
+        isBasicAuthSupported:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether basic authentication is supported by the connector.
+        isApiKeyAuthSupported:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether API key authentication is supported by the connector
+        isOAuth2Supported:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether OAuth 2.0 authentication is supported by the connector.
+        isCustomAuthSupported:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether custom authentication is supported by the connector
+        oAuth2Defaults:
+          allOf:
+            - $ref: '#/components/schemas/OAuth2Defaults'
+            - description: Contains the default values required for OAuth 2.0 authentication.
+        customAuthConfigs:
+          allOf:
+            - $ref: '#/components/schemas/CustomAuthConfigList'
+            - description: Contains information required for custom authentication.
+      description: Contains information about the authentication config that the connector supports.
+    AuthenticationType:
+      type: string
+      enum:
+        - OAUTH2
+        - APIKEY
+        - BASIC
+        - CUSTOM
     Username:
       type: string
       pattern: \S+
@@ -2192,8 +2925,6 @@ components:
             - $ref: '#/components/schemas/Password'
             - description: ' The password to use to connect to a resource.'
       description: ' The basic auth credentials required for basic authentication. '
-    Boolean:
-      type: boolean
     BucketName:
       type: string
       pattern: \S+
@@ -2203,6 +2934,14 @@ components:
       type: string
       pattern: .*
       maxLength: 512
+    BusinessUnitId:
+      type: string
+      pattern: \S+
+      maxLength: 18
+    CatalogType:
+      type: string
+      enum:
+        - GLUE
     ClientCredentialsArn:
       type: string
       pattern: 'arn:aws:secretsmanager:.*:[0-9]+:.*'
@@ -2223,6 +2962,10 @@ components:
       pattern: \S+
       maxLength: 512
       format: password
+    ClusterIdentifier:
+      type: string
+      pattern: \S+
+      maxLength: 512
     ConnectionMode:
       type: string
       enum:
@@ -2327,7 +3070,75 @@ components:
             - description: ' The connector metadata specific to Amazon Honeycode. '
         SAPOData:
           $ref: '#/components/schemas/SAPODataMetadata'
+        Pardot:
+          allOf:
+            - $ref: '#/components/schemas/PardotMetadata'
+            - description: The connector metadata specific to Salesforce Pardot.
       description: ' A structure to specify connector-specific metadata such as <code>oAuthScopes</code>, <code>supportedRegions</code>, <code>privateLinkServiceUrl</code>, and so on. '
+    ConnectorLabel:
+      type: string
+      pattern: '[a-zA-Z0-9][\w!@#.-]+'
+      maxLength: 256
+    ConnectorDescription:
+      type: string
+      pattern: '[\w!@#\-.?,\s]*'
+      maxLength: 2048
+    ConnectorOwner:
+      type: string
+      pattern: .*
+      maxLength: 256
+    ConnectorName:
+      type: string
+      pattern: .*
+      maxLength: 256
+    ConnectorVersion:
+      type: string
+      pattern: \S+
+      maxLength: 256
+    ConnectorModeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConnectorMode'
+    ConnectorRuntimeSettingList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConnectorRuntimeSetting'
+    SupportedApiVersionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SupportedApiVersion'
+    SupportedOperatorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Operators'
+    SupportedWriteOperationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/WriteOperationType'
+    ConnectorProvisioningType:
+      type: string
+      enum:
+        - LAMBDA
+      description: 'The type of provisioning that the connector supports, such as Lambda.'
+    ConnectorProvisioningConfig:
+      type: object
+      properties:
+        lambda:
+          allOf:
+            - $ref: '#/components/schemas/LambdaConnectorProvisioningConfig'
+            - description: Contains information about the configuration of the lambda which is being registered as the connector.
+      description: Contains information about the configuration of the connector being registered.
+    LogoURL:
+      type: string
+      pattern: '^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]'
+      maxLength: 256
+    Date:
+      type: string
+      format: date-time
+    RegisteredBy:
+      type: string
+      pattern: \S+
+      maxLength: 512
     ConnectorConfiguration:
       type: object
       properties:
@@ -2363,18 +3174,134 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectorMetadata'
             - description: ' Specifies connector-specific metadata such as <code>oAuthScopes</code>, <code>supportedRegions</code>, <code>privateLinkServiceUrl</code>, and so on. '
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorType'
+            - description: The connector type.
+        connectorLabel:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorLabel'
+            - description: The label used for registering the connector.
+        connectorDescription:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorDescription'
+            - description: A description about the connector.
+        connectorOwner:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorOwner'
+            - description: The owner who developed the connector.
+        connectorName:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorName'
+            - description: The connector name.
+        connectorVersion:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorVersion'
+            - description: The connector version.
+        connectorArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) for the registered connector.
+        connectorModes:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorModeList'
+            - description: The connection modes that the connector supports.
+        authenticationConfig:
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationConfig'
+            - description: The authentication config required for the connector.
+        connectorRuntimeSettings:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorRuntimeSettingList'
+            - description: The required connector runtime settings.
+        supportedApiVersions:
+          allOf:
+            - $ref: '#/components/schemas/SupportedApiVersionList'
+            - description: A list of API versions that are supported by the connector.
+        supportedOperators:
+          allOf:
+            - $ref: '#/components/schemas/SupportedOperatorList'
+            - description: A list of operators supported by the connector.
+        supportedWriteOperations:
+          allOf:
+            - $ref: '#/components/schemas/SupportedWriteOperationList'
+            - description: A list of write operations supported by the connector.
+        connectorProvisioningType:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProvisioningType'
+            - description: The provisioning type used to register the connector.
+        connectorProvisioningConfig:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProvisioningConfig'
+            - description: The configuration required for registering the connector.
+        logoURL:
+          allOf:
+            - $ref: '#/components/schemas/LogoURL'
+            - description: Logo URL of the connector.
+        registeredAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date on which the connector was registered.
+        registeredBy:
+          allOf:
+            - $ref: '#/components/schemas/RegisteredBy'
+            - description: Information about who registered the connector.
       description: ' The configuration settings related to a given connector. '
     ConnectorConfigurationsMap:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/ConnectorConfiguration'
+    ConnectorDetail:
+      type: object
+      properties:
+        connectorDescription:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorDescription'
+            - description: A description about the registered connector.
+        connectorName:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorName'
+            - description: The name of the connector.
+        connectorOwner:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorOwner'
+            - description: The owner of the connector.
+        connectorVersion:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorVersion'
+            - description: The connector version.
+        applicationType:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationType'
+            - description: The application type of the connector.
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorType'
+            - description: The connector type.
+        connectorLabel:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorLabel'
+            - description: A label used for the connector.
+        registeredAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The time at which the connector was registered.
+        registeredBy:
+          allOf:
+            - $ref: '#/components/schemas/RegisteredBy'
+            - description: The user who registered the connector.
+        connectorProvisioningType:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProvisioningType'
+            - description: The provisioning type that the connector uses.
+        connectorModes:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorModeList'
+            - description: The connection mode that the connector supports.
+      description: Information about the registered connector.
     Name:
       type: string
       pattern: \S+
-      maxLength: 128
-    Label:
-      type: string
-      pattern: .*
       maxLength: 128
     ConnectorEntity:
       type: object
@@ -2398,6 +3325,10 @@ components:
       type: string
       pattern: \S+
       maxLength: 128
+    String:
+      type: string
+      pattern: .*
+      maxLength: 2048
     SupportedFieldTypeDetails:
       type: object
       required:
@@ -2408,10 +3339,6 @@ components:
             - $ref: '#/components/schemas/FieldTypeDetails'
             - description: ' The initial supported version for <code>fieldType</code>. If this is later changed to a different version, v2 will be introduced. '
       description: ' Contains details regarding all the supported <code>FieldTypes</code> and their corresponding <code>filterOperators</code> and <code>supportedValues</code>. '
-    Description:
-      type: string
-      pattern: '[\s\w/!@#+=.-]*'
-      maxLength: 1024
     SourceFieldProperties:
       type: object
       properties:
@@ -2423,6 +3350,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: ' Indicates if the field can be queried. '
+        isTimestampFieldForIncrementalQueries:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates if this timestamp field can be used for incremental queries.
       description: ' The properties that can be applied to a field when the connector is being used as a source. '
     DestinationFieldProperties:
       type: object
@@ -2443,11 +3374,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: ' Specifies whether the field can be updated during an <code>UPDATE</code> or <code>UPSERT</code> write operation. '
+        isDefaultedOnCreate:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether the field can use the default value during a Create operation.
         supportedWriteOperations:
           allOf:
             - $ref: '#/components/schemas/SupportedWriteOperationList'
             - description: ' A list of supported write operations. For each write operation listed, this field can be used in <code>idFieldNames</code> when that write operation is present as a destination option. '
       description: ' The properties that can be applied to a field when connector is being used as a destination. '
+    CustomProperties:
+      type: object
+      minProperties: 0
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/CustomPropertyValue'
     ConnectorEntityField:
       type: object
       required:
@@ -2457,10 +3398,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/Identifier'
             - description: ' The unique identifier of the connector field. '
+        parentIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/Identifier'
+            - description: The parent identifier of the connector field.
         label:
           allOf:
             - $ref: '#/components/schemas/Label'
             - description: ' The label applied to a connector entity field. '
+        isPrimaryKey:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Booelan value that indicates whether this field can be used as a primary key.
+        defaultValue:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Default value that can be assigned to this field.
+        isDeprecated:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Booelan value that indicates whether this field is deprecated or not.
         supportedFieldTypeDetails:
           allOf:
             - $ref: '#/components/schemas/SupportedFieldTypeDetails'
@@ -2477,6 +3434,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DestinationFieldProperties'
             - description: ' The properties applied to a field when the connector is being used as a destination. '
+        customProperties:
+          allOf:
+            - $ref: '#/components/schemas/CustomProperties'
+            - description: A map that has specific properties related to the ConnectorEntityField.
       description: ' Describes the data model of a connector field. For example, for an <i>account</i> entity, the fields would be <i>account name</i>, <i>account ID</i>, and so on. '
     ConnectorEntityFieldList:
       type: array
@@ -2490,6 +3451,10 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/ConnectorEntityList'
+    ConnectorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConnectorDetail'
     DatadogMetadata:
       type: object
       properties: {}
@@ -2529,6 +3494,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/OAuthScopeList'
             - description: ' The desired authorization scope for the Salesforce account. '
+        dataTransferApis:
+          allOf:
+            - $ref: '#/components/schemas/SalesforceDataTransferApiList'
+            - description: The Salesforce APIs that you can have Amazon AppFlow use when your flows transfers data to or from Salesforce.
       description: ' The connector metadata specific to Salesforce. '
     ServiceNowMetadata:
       type: object
@@ -2594,6 +3563,14 @@ components:
       type: object
       properties: {}
       description: ' The connector metadata specific to SAPOData. '
+    PardotMetadata:
+      type: object
+      properties: {}
+      description: The connector metadata specific to Salesforce Pardot.
+    ConnectorMode:
+      type: string
+      pattern: \S+
+      maxLength: 256
     RedirectUri:
       type: string
       pattern: \S+
@@ -2880,6 +3857,47 @@ components:
         - VALIDATE_NON_NEGATIVE
         - VALIDATE_NUMERIC
         - NO_OP
+    Operator:
+      type: string
+      enum:
+        - PROJECTION
+        - LESS_THAN
+        - GREATER_THAN
+        - CONTAINS
+        - BETWEEN
+        - LESS_THAN_OR_EQUAL_TO
+        - GREATER_THAN_OR_EQUAL_TO
+        - EQUAL_TO
+        - NOT_EQUAL_TO
+        - ADDITION
+        - MULTIPLICATION
+        - DIVISION
+        - SUBTRACTION
+        - MASK_ALL
+        - MASK_FIRST_N
+        - MASK_LAST_N
+        - VALIDATE_NON_NULL
+        - VALIDATE_NON_ZERO
+        - VALIDATE_NON_NEGATIVE
+        - VALIDATE_NUMERIC
+        - NO_OP
+    PardotConnectorOperator:
+      type: string
+      enum:
+        - PROJECTION
+        - EQUAL_TO
+        - NO_OP
+        - ADDITION
+        - MULTIPLICATION
+        - DIVISION
+        - SUBTRACTION
+        - MASK_ALL
+        - MASK_FIRST_N
+        - MASK_LAST_N
+        - VALIDATE_NON_NULL
+        - VALIDATE_NON_ZERO
+        - VALIDATE_NON_NEGATIVE
+        - VALIDATE_NUMERIC
     ConnectorOperator:
       type: object
       properties:
@@ -2943,14 +3961,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/SAPODataConnectorOperator'
             - description: ' The operation to be performed on the provided SAPOData source fields. '
+        CustomConnector:
+          allOf:
+            - $ref: '#/components/schemas/Operator'
+            - description: Operators supported by the custom connector.
+        Pardot:
+          allOf:
+            - $ref: '#/components/schemas/PardotConnectorOperator'
+            - description: The operation to be performed on the provided Salesforce Pardot source fields.
       description: ' The operation to be performed on the provided source fields. '
     ConnectorProfileArn:
       type: string
-      pattern: 'arn:aws:kms:.*:[0-9]+:.*'
+      pattern: 'arn:aws:appflow:.*:[0-9]+:.*'
       maxLength: 512
-    Date:
-      type: string
-      format: date-time
     PrivateConnectionProvisioningState:
       type: object
       properties:
@@ -2982,6 +4005,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectorType'
             - description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
+        connectorLabel:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorLabel'
+            - description: The label for the connector profile being created.
         connectionMode:
           allOf:
             - $ref: '#/components/schemas/ConnectionMode'
@@ -3011,7 +4038,6 @@ components:
       type: object
       required:
         - connectorProfileProperties
-        - connectorProfileCredentials
       properties:
         connectorProfileProperties:
           allOf:
@@ -3138,13 +4164,10 @@ components:
       description: ' The connector-specific profile credentials required by Marketo. '
     RedshiftConnectorProfileCredentials:
       type: object
-      required:
-        - username
-        - password
       properties:
         username:
           allOf:
-            - $ref: '#/components/schemas/Username'
+            - $ref: '#/components/schemas/String'
             - description: ' The name of the user. '
         password:
           allOf:
@@ -3294,6 +4317,50 @@ components:
             - $ref: '#/components/schemas/OAuthCredentials'
             - description: ' The SAPOData OAuth type authentication credentials. '
       description: ' The connector-specific profile credentials required when using SAPOData. '
+    CustomConnectorProfileCredentials:
+      type: object
+      required:
+        - authenticationType
+      properties:
+        authenticationType:
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationType'
+            - description: The authentication type that the custom connector uses for authenticating while creating a connector profile.
+        basic:
+          allOf:
+            - $ref: '#/components/schemas/BasicAuthCredentials'
+            - description: The basic credentials that are required for the authentication of the user.
+        oauth2:
+          allOf:
+            - $ref: '#/components/schemas/OAuth2Credentials'
+            - description: The OAuth 2.0 credentials required for the authentication of the user.
+        apiKey:
+          allOf:
+            - $ref: '#/components/schemas/ApiKeyCredentials'
+            - description: The API keys required for the authentication of the user.
+        custom:
+          allOf:
+            - $ref: '#/components/schemas/CustomAuthCredentials'
+            - description: 'If the connector uses the custom authentication mechanism, this holds the required credentials.'
+      description: The connector-specific profile credentials that are required when using the custom connector.
+    PardotConnectorProfileCredentials:
+      type: object
+      properties:
+        accessToken:
+          allOf:
+            - $ref: '#/components/schemas/AccessToken'
+            - description: The credentials used to access protected Salesforce Pardot resources.
+        refreshToken:
+          allOf:
+            - $ref: '#/components/schemas/RefreshToken'
+            - description: The credentials used to acquire new access tokens.
+        oAuthRequest:
+          $ref: '#/components/schemas/ConnectorOAuthRequest'
+        clientCredentialsArn:
+          allOf:
+            - $ref: '#/components/schemas/ClientCredentialsArn'
+            - description: 'The secret manager ARN, which contains the client ID and client secret of the connected app.'
+      description: The connector-specific profile credentials required when using Salesforce Pardot.
     ConnectorProfileDetailList:
       type: array
       items:
@@ -3355,7 +4422,6 @@ components:
     RedshiftConnectorProfileProperties:
       type: object
       required:
-        - databaseUrl
         - bucketName
         - roleArn
       properties:
@@ -3374,7 +4440,27 @@ components:
         roleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: ' The Amazon Resource Name (ARN) of the IAM role. '
+            - description: ' The Amazon Resource Name (ARN) of IAM role that grants Amazon Redshift read-only access to Amazon S3. For more information, and for the polices that you attach to this role, see <a href="https://docs.aws.amazon.com/appflow/latest/userguide/security_iam_service-role-policies.html#redshift-access-s3">Allow Amazon Redshift to access your Amazon AppFlow data in Amazon S3</a>.'
+        dataApiRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/DataApiRoleArn'
+            - description: 'The Amazon Resource Name (ARN) of an IAM role that permits Amazon AppFlow to access your Amazon Redshift database through the Data API. For more information, and for the polices that you attach to this role, see <a href="https://docs.aws.amazon.com/appflow/latest/userguide/security_iam_service-role-policies.html#access-redshift">Allow Amazon AppFlow to access Amazon Redshift databases with the Data API</a>.'
+        isRedshiftServerless:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the connector profile defines a connection to an Amazon Redshift Serverless data warehouse.
+        clusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/ClusterIdentifier'
+            - description: The unique ID that's assigned to an Amazon Redshift cluster.
+        workgroupName:
+          allOf:
+            - $ref: '#/components/schemas/WorkgroupName'
+            - description: The name of an Amazon Redshift workgroup.
+        databaseName:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseName'
+            - description: The name of an Amazon Redshift database.
       description: ' The connector-specific profile properties when using Amazon Redshift. '
     SalesforceConnectorProfileProperties:
       type: object
@@ -3509,6 +4595,80 @@ components:
             - $ref: '#/components/schemas/OAuthProperties'
             - description: ' The SAPOData OAuth properties required for OAuth type authentication. '
       description: ' The connector-specific profile properties required when using SAPOData. '
+    CustomConnectorProfileProperties:
+      type: object
+      properties:
+        profileProperties:
+          allOf:
+            - $ref: '#/components/schemas/ProfilePropertiesMap'
+            - description: A map of properties that are required to create a profile for the custom connector.
+        oAuth2Properties:
+          $ref: '#/components/schemas/OAuth2Properties'
+      description: The profile properties required by the custom connector.
+    PardotConnectorProfileProperties:
+      type: object
+      properties:
+        instanceUrl:
+          allOf:
+            - $ref: '#/components/schemas/InstanceUrl'
+            - description: The location of the Salesforce Pardot resource.
+        isSandboxEnvironment:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the connector profile applies to a sandbox or production environment.
+        businessUnitId:
+          allOf:
+            - $ref: '#/components/schemas/BusinessUnitId'
+            - description: The business unit id of Salesforce Pardot instance.
+      description: The connector-specific profile properties required when using Salesforce Pardot.
+    ConnectorRuntimeSettingDataType:
+      type: string
+      pattern: \S+
+      maxLength: 256
+    ConnectorRuntimeSettingScope:
+      type: string
+      pattern: \S+
+      maxLength: 256
+    ConnectorSuppliedValueOptionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConnectorSuppliedValue'
+    ConnectorRuntimeSetting:
+      type: object
+      properties:
+        key:
+          allOf:
+            - $ref: '#/components/schemas/Key'
+            - description: Contains value information about the connector runtime setting.
+        dataType:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorRuntimeSettingDataType'
+            - description: Data type of the connector runtime setting.
+        isRequired:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether this connector runtime setting is required.
+        label:
+          allOf:
+            - $ref: '#/components/schemas/Label'
+            - description: A label used for connector runtime setting.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description about the connector runtime setting.
+        scope:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorRuntimeSettingScope'
+            - description: Indicates the scope of the connector runtime setting.
+        connectorSuppliedValueOptions:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorSuppliedValueOptionList'
+            - description: Contains default values for the connector runtime setting that are supplied by the connector.
+      description: Contains information about the connector runtime settings that are required for flow execution.
+    ConnectorSuppliedValue:
+      type: string
+      pattern: \S+
+      maxLength: 256
     KMSArn:
       type: string
       pattern: 'arn:aws:kms:.*:[0-9]+:.*'
@@ -3535,6 +4695,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectorType'
             - description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
+        connectorLabel:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorLabel'
+            - description: The label of the connector. The label is unique for each <code>ConnectorRegistration</code> in your Amazon Web Services account. Only needed if calling for CUSTOMCONNECTOR connector type/.
         connectionMode:
           allOf:
             - $ref: '#/components/schemas/ConnectionMode'
@@ -3575,6 +4739,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectorType'
             - description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
+        apiVersion:
+          allOf:
+            - $ref: '#/components/schemas/ApiVersion'
+            - description: The API version of the connector when it's used as a source in the flow.
         connectorProfileName:
           allOf:
             - $ref: '#/components/schemas/ConnectorProfileName'
@@ -3602,6 +4770,14 @@ components:
       maxProperties: 50
       additionalProperties:
         $ref: '#/components/schemas/TagValue'
+    MetadataCatalogConfig:
+      type: object
+      properties:
+        glueDataCatalog:
+          allOf:
+            - $ref: '#/components/schemas/GlueDataCatalogConfig'
+            - description: Specifies the configuration that Amazon AppFlow uses when it catalogs your data with the Glue Data Catalog.
+      description: 'Specifies the configuration that Amazon AppFlow uses when it catalogs your data. When Amazon AppFlow catalogs your data, it stores metadata in a data catalog.'
     CreateFlowRequest:
       type: object
       required:
@@ -3644,6 +4820,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: ' The tags used to organize, track, or control access for your flow. '
+        metadataCatalogConfig:
+          allOf:
+            - $ref: '#/components/schemas/MetadataCatalogConfig'
+            - description: 'Specifies the configuration that Amazon AppFlow uses when it catalogs the data that''s transferred by the associated flow. When Amazon AppFlow catalogs the data from a flow, it stores metadata in a data catalog.'
     FlowArn:
       type: string
       pattern: 'arn:aws:appflow:.*:[0-9]+:.*'
@@ -3661,6 +4841,183 @@ components:
       type: string
       pattern: \S+
       maxLength: 256
+    CredentialsMapValue:
+      type: string
+      pattern: \S+
+      maxLength: 2048
+      format: password
+    CredentialsMap:
+      type: object
+      minProperties: 0
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/CredentialsMapValue'
+    CredentialsMapKey:
+      type: string
+      pattern: '[\w]+'
+      minLength: 1
+      maxLength: 128
+      format: password
+    CustomAuthenticationType:
+      type: string
+      pattern: \S+
+      maxLength: 256
+    CustomAuthConfig:
+      type: object
+      properties:
+        customAuthenticationType:
+          allOf:
+            - $ref: '#/components/schemas/CustomAuthenticationType'
+            - description: The authentication type that the custom connector uses.
+        authParameters:
+          allOf:
+            - $ref: '#/components/schemas/AuthParameterList'
+            - description: Information about authentication parameters required for authentication.
+      description: Configuration information required for custom authentication.
+    CustomAuthCredentials:
+      type: object
+      required:
+        - customAuthenticationType
+      properties:
+        customAuthenticationType:
+          allOf:
+            - $ref: '#/components/schemas/CustomAuthenticationType'
+            - description: The custom authentication type that the connector uses.
+        credentialsMap:
+          allOf:
+            - $ref: '#/components/schemas/CredentialsMap'
+            - description: A map that holds custom authentication credentials.
+      description: The custom credentials required for custom authentication.
+    EntityName:
+      type: string
+      pattern: \S+
+      maxLength: 1024
+    ErrorHandlingConfig:
+      type: object
+      properties:
+        failOnFirstDestinationError:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Specifies if the flow should fail after the first instance of a failure when attempting to place data in the destination. '
+        bucketPrefix:
+          allOf:
+            - $ref: '#/components/schemas/BucketPrefix'
+            - description: ' Specifies the Amazon S3 bucket prefix. '
+        bucketName:
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: ' Specifies the name of the Amazon S3 bucket. '
+      description: ' The settings that determine how Amazon AppFlow handles an error when placing data in the destination. For example, this setting would determine if the flow should fail after one insertion error, or continue and attempt to insert every record regardless of the initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector details. '
+    WriteOperationType:
+      type: string
+      enum:
+        - INSERT
+        - UPSERT
+        - UPDATE
+        - DELETE
+      description: ' The possible write operations in the destination connector. When this value is not provided, this defaults to the <code>INSERT</code> operation. '
+    IdFieldNameList:
+      type: array
+      description: ' A list of field names that can be used as an ID field when performing a write operation. '
+      items:
+        $ref: '#/components/schemas/Name'
+      minItems: 0
+    CustomConnectorDestinationProperties:
+      type: object
+      required:
+        - entityName
+      properties:
+        entityName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The entity specified in the custom connector as a destination in the flow.
+        errorHandlingConfig:
+          allOf:
+            - $ref: '#/components/schemas/ErrorHandlingConfig'
+            - description: The settings that determine how Amazon AppFlow handles an error when placing data in the custom connector as destination.
+        writeOperationType:
+          allOf:
+            - $ref: '#/components/schemas/WriteOperationType'
+            - description: Specifies the type of write operation to be performed in the custom connector when it's used as destination.
+        idFieldNames:
+          allOf:
+            - $ref: '#/components/schemas/IdFieldNameList'
+            - description: 'The name of the field that Amazon AppFlow uses as an ID when performing a write operation such as update, delete, or upsert.'
+        customProperties:
+          allOf:
+            - $ref: '#/components/schemas/CustomProperties'
+            - description: The custom properties that are specific to the connector when it's used as a destination in the flow.
+      description: The properties that are applied when the custom connector is being used as a destination.
+    OAuth2Credentials:
+      type: object
+      properties:
+        clientId:
+          allOf:
+            - $ref: '#/components/schemas/ClientId'
+            - description: The identifier for the desired client.
+        clientSecret:
+          allOf:
+            - $ref: '#/components/schemas/ClientSecret'
+            - description: The client secret used by the OAuth client to authenticate to the authorization server.
+        accessToken:
+          allOf:
+            - $ref: '#/components/schemas/AccessToken'
+            - description: The access token used to access the connector on your behalf.
+        refreshToken:
+          allOf:
+            - $ref: '#/components/schemas/RefreshToken'
+            - description: The refresh token used to refresh an expired access token.
+        oAuthRequest:
+          $ref: '#/components/schemas/ConnectorOAuthRequest'
+      description: The OAuth 2.0 credentials required for OAuth 2.0 authentication.
+    ProfilePropertiesMap:
+      type: object
+      minProperties: 0
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/ProfilePropertyValue'
+    OAuth2Properties:
+      type: object
+      required:
+        - tokenUrl
+        - oAuth2GrantType
+      properties:
+        tokenUrl:
+          allOf:
+            - $ref: '#/components/schemas/TokenUrl'
+            - description: The token URL required for OAuth 2.0 authentication.
+        oAuth2GrantType:
+          allOf:
+            - $ref: '#/components/schemas/OAuth2GrantType'
+            - description: The OAuth 2.0 grant type used by connector for OAuth 2.0 authentication.
+        tokenUrlCustomProperties:
+          allOf:
+            - $ref: '#/components/schemas/TokenUrlCustomProperties'
+            - description: Associates your token URL with a map of properties that you define. Use this parameter to provide any additional details that the connector requires to authenticate your request.
+      description: The OAuth 2.0 properties required for OAuth 2.0 authentication.
+    CustomConnectorSourceProperties:
+      type: object
+      required:
+        - entityName
+      properties:
+        entityName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The entity specified in the custom connector as a source in the flow.
+        customProperties:
+          allOf:
+            - $ref: '#/components/schemas/CustomProperties'
+            - description: Custom properties that are required to use the custom connector as a source.
+      description: The properties that are applied when the custom connector is being used as a source.
+    CustomPropertyValue:
+      type: string
+      pattern: \S+
+      maxLength: 2048
+    CustomPropertyKey:
+      type: string
+      pattern: '[\w]+'
+      minLength: 1
+      maxLength: 128
     DomainName:
       type: string
       pattern: \S+
@@ -3683,11 +5040,19 @@ components:
             - $ref: '#/components/schemas/ObjectTypeName'
             - description: ' The object specified in the Amazon Connect Customer Profiles flow destination. '
       description: ' The properties that are applied when Amazon Connect Customer Profiles is used as a destination. '
+    DataApiRoleArn:
+      type: string
+      pattern: 'arn:aws:iam:.*:[0-9]+:.*'
+      maxLength: 512
     DataPullMode:
       type: string
       enum:
         - Incremental
         - Complete
+    DatabaseName:
+      type: string
+      pattern: \S+
+      maxLength: 512
     DatabaseUrl:
       type: string
       pattern: \S+
@@ -3746,7 +5111,7 @@ components:
       properties:
         connectorEntityName:
           allOf:
-            - $ref: '#/components/schemas/Name'
+            - $ref: '#/components/schemas/EntityName'
             - description: ' The entity name for that connector. '
         connectorType:
           allOf:
@@ -3756,6 +5121,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectorProfileName'
             - description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the Amazon Web Services account. '
+        apiVersion:
+          allOf:
+            - $ref: '#/components/schemas/ApiVersion'
+            - description: The version of the API that's used by the connector.
     MaxResults:
       type: integer
       minimum: 1
@@ -3776,6 +5145,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectorType'
             - description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
+        connectorLabel:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorLabel'
+            - description: The name of the connector. The name is unique for each <code>ConnectorRegistration</code> in your Amazon Web Services account. Only needed if calling for CUSTOMCONNECTOR connector type/.
         maxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
@@ -3784,6 +5157,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: ' The pagination token for the next page of data. '
+    DescribeConnectorRequest:
+      type: object
+      required:
+        - connectorType
+      title: DescribeConnectorRequest
+      properties:
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorType'
+            - description: 'The connector type, such as CUSTOMCONNECTOR, Saleforce, Marketo. Please choose CUSTOMCONNECTOR for Lambda based custom connectors.'
+        connectorLabel:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorLabel'
+            - description: The label of the connector. The label is unique for each <code>ConnectorRegistration</code> in your Amazon Web Services account. Only needed if calling for CUSTOMCONNECTOR connector type/.
     DescribeConnectorsRequest:
       type: object
       title: DescribeConnectorsRequest
@@ -3792,6 +5179,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectorTypeList'
             - description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of items that should be returned in the result set. The default is 20.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -3852,6 +5243,10 @@ components:
       type: string
       pattern: \S+
       maxLength: 256
+    MetadataCatalogDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetadataCatalogDetail'
     RedshiftDestinationProperties:
       type: object
       required:
@@ -3912,6 +5307,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/WriteOperationType'
             - description: ' This specifies the type of write operation to be performed in Salesforce. When the value is <code>UPSERT</code>, then <code>idFieldNames</code> is required. '
+        dataTransferApi:
+          allOf:
+            - $ref: '#/components/schemas/SalesforceDataTransferApi'
+            - description: '<p>Specifies which Salesforce API is used by Amazon AppFlow when your flow transfers data to Salesforce.</p> <dl> <dt>AUTOMATIC</dt> <dd> <p>The default. Amazon AppFlow selects which API to use based on the number of records that your flow transfers to Salesforce. If your flow transfers fewer than 1,000 records, Amazon AppFlow uses Salesforce REST API. If your flow transfers 1,000 records or more, Amazon AppFlow uses Salesforce Bulk API 2.0.</p> <p>Each of these Salesforce APIs structures data differently. If Amazon AppFlow selects the API automatically, be aware that, for recurring flows, the data output might vary from one flow run to the next. For example, if a flow runs daily, it might use REST API on one day to transfer 900 records, and it might use Bulk API 2.0 on the next day to transfer 1,100 records. For each of these flow runs, the respective Salesforce API formats the data differently. Some of the differences include how dates are formatted and null values are represented. Also, Bulk API 2.0 doesn''t transfer Salesforce compound fields.</p> <p>By choosing this option, you optimize flow performance for both small and large data transfers, but the tradeoff is inconsistent formatting in the output.</p> </dd> <dt>BULKV2</dt> <dd> <p>Amazon AppFlow uses only Salesforce Bulk API 2.0. This API runs asynchronous data transfers, and it''s optimal for large sets of data. By choosing this option, you ensure that your flow writes consistent output, but you optimize performance only for large data transfers.</p> <p>Note that Bulk API 2.0 does not transfer Salesforce compound fields.</p> </dd> <dt>REST_SYNC</dt> <dd> <p>Amazon AppFlow uses only Salesforce REST API. By choosing this option, you ensure that your flow writes consistent output, but you decrease performance for large data transfers that are better suited for Bulk API 2.0. In some cases, if your flow attempts to transfer a vary large set of data, it might fail with a timed out error.</p> </dd> </dl>'
       description: ' The properties that are applied when Salesforce is being used as a destination. '
     SnowflakeDestinationProperties:
       type: object
@@ -3999,6 +5398,38 @@ components:
         writeOperationType:
           $ref: '#/components/schemas/WriteOperationType'
       description: The properties that are applied when Zendesk is used as a destination.
+    MarketoDestinationProperties:
+      type: object
+      required:
+        - object
+      properties:
+        object:
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: The object specified in the Marketo flow destination.
+        errorHandlingConfig:
+          $ref: '#/components/schemas/ErrorHandlingConfig'
+      description: The properties that Amazon AppFlow applies when you use Marketo as a flow destination.
+    SAPODataDestinationProperties:
+      type: object
+      required:
+        - objectPath
+      properties:
+        objectPath:
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: The object path specified in the SAPOData flow destination.
+        successResponseHandlingConfig:
+          allOf:
+            - $ref: '#/components/schemas/SuccessResponseHandlingConfig'
+            - description: '<p>Determines how Amazon AppFlow handles the success response that it gets from the connector after placing data.</p> <p>For example, this setting would determine where to write the response from a destination connector upon a successful insert operation.</p>'
+        idFieldNames:
+          $ref: '#/components/schemas/IdFieldNameList'
+        errorHandlingConfig:
+          $ref: '#/components/schemas/ErrorHandlingConfig'
+        writeOperationType:
+          $ref: '#/components/schemas/WriteOperationType'
+      description: The properties that are applied when using SAPOData as a flow destination
     DestinationConnectorProperties:
       type: object
       properties:
@@ -4042,19 +5473,30 @@ components:
           allOf:
             - $ref: '#/components/schemas/ZendeskDestinationProperties'
             - description: The properties required to query Zendesk.
+        Marketo:
+          allOf:
+            - $ref: '#/components/schemas/MarketoDestinationProperties'
+            - description: The properties required to query Marketo.
+        CustomConnector:
+          allOf:
+            - $ref: '#/components/schemas/CustomConnectorDestinationProperties'
+            - description: The properties that are required to query the custom Connector.
+        SAPOData:
+          allOf:
+            - $ref: '#/components/schemas/SAPODataDestinationProperties'
+            - description: The properties required to query SAPOData.
       description: ' This stores the information that is required to query a particular connector. '
     DestinationField:
       type: string
       pattern: .*
       maxLength: 256
-    SupportedWriteOperationList:
-      type: array
-      items:
-        $ref: '#/components/schemas/WriteOperationType'
     DocumentType:
       type: string
       pattern: '[\s\w_-]+'
       maxLength: 512
+    Double:
+      type: number
+      format: double
     DynatraceSourceProperties:
       type: object
       required:
@@ -4067,26 +5509,8 @@ components:
       description: ' The properties that are applied when Dynatrace is being used as a source. '
     EntitiesPath:
       type: string
-      pattern: '[\s\w/!@#+=.-]*'
+      pattern: '[\s\w/!@#+=,.-]*'
       maxLength: 256
-    ErrorHandlingConfig:
-      type: object
-      properties:
-        failOnFirstDestinationError:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: ' Specifies if the flow should fail after the first instance of a failure when attempting to place data in the destination. '
-        bucketPrefix:
-          allOf:
-            - $ref: '#/components/schemas/BucketPrefix'
-            - description: ' Specifies the Amazon S3 bucket prefix. '
-        bucketName:
-          allOf:
-            - $ref: '#/components/schemas/BucketName'
-            - description: ' Specifies the name of the Amazon S3 bucket. '
-      description: ' The settings that determine how Amazon AppFlow handles an error when placing data in the destination. For example, this setting would determine if the flow should fail after one insertion error, or continue and attempt to insert every record regardless of the initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector details. '
-    Long:
-      type: integer
     ExecutionMessage:
       type: string
       pattern: '[\s\w/!@#+=.-]*'
@@ -4168,6 +5592,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Date'
             - description: ' The timestamp that indicates the last new or updated record to be transferred in the flow run. '
+        metadataCatalogDetails:
+          allOf:
+            - $ref: '#/components/schemas/MetadataCatalogDetails'
+            - description: 'Describes the metadata catalog, metadata table, and data partitions that Amazon AppFlow used for the associated flow run.'
       description: ' Specifies information about the past flow run instances for a given flow. '
     FieldType:
       type: string
@@ -4179,6 +5607,18 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Value'
+    Range:
+      type: object
+      properties:
+        maximum:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: Maximum value supported by the field.
+        minimum:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: Minimum value supported by the field.
+      description: The range of values that the property supports.
     FieldTypeDetails:
       type: object
       required:
@@ -4197,6 +5637,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/SupportedValueList'
             - description: ' The list of values that a field can contain. For example, a Boolean <code>fieldType</code> can have two values: "true" and "false". '
+        valueRegexPattern:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The regular expression pattern for the field name.
+        supportedDateFormat:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The date format that the field supports.
+        fieldValueRange:
+          allOf:
+            - $ref: '#/components/schemas/Range'
+            - description: The range of values this field can hold.
+        fieldLengthRange:
+          allOf:
+            - $ref: '#/components/schemas/Range'
+            - description: This is the allowable length range for this field's value.
       description: ' Contains details regarding the supported field type and the operators that can be applied for filtering. '
     FileType:
       type: string
@@ -4204,30 +5660,6 @@ components:
         - CSV
         - JSON
         - PARQUET
-    Operator:
-      type: string
-      enum:
-        - PROJECTION
-        - LESS_THAN
-        - GREATER_THAN
-        - CONTAINS
-        - BETWEEN
-        - LESS_THAN_OR_EQUAL_TO
-        - GREATER_THAN_OR_EQUAL_TO
-        - EQUAL_TO
-        - NOT_EQUAL_TO
-        - ADDITION
-        - MULTIPLICATION
-        - DIVISION
-        - SUBTRACTION
-        - MASK_ALL
-        - MASK_FIRST_N
-        - MASK_LAST_N
-        - VALIDATE_NON_NULL
-        - VALIDATE_NON_ZERO
-        - VALIDATE_NON_NEGATIVE
-        - VALIDATE_NUMERIC
-        - NO_OP
     FlowDefinition:
       type: object
       properties:
@@ -4251,10 +5683,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectorType'
             - description: ' Specifies the source connector type, such as Salesforce, Amazon S3, Amplitude, and so on. '
+        sourceConnectorLabel:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorLabel'
+            - description: The label of the source connector in the flow.
         destinationConnectorType:
           allOf:
             - $ref: '#/components/schemas/ConnectorType'
             - description: ' Specifies the destination connector type, such as Salesforce, Amazon S3, Amplitude, and so on. '
+        destinationConnectorLabel:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorLabel'
+            - description: The label of the destination connector in the flow.
         triggerType:
           allOf:
             - $ref: '#/components/schemas/TriggerType'
@@ -4284,14 +5724,30 @@ components:
             - $ref: '#/components/schemas/ExecutionDetails'
             - description: ' Describes the details of the most recent flow run. '
       description: ' The properties of the flow, such as its source, destination, trigger type, and so on. '
+    FlowErrorDeactivationThreshold:
+      type: integer
+      minimum: 1
+      maximum: 100
     FlowList:
       type: array
       items:
         $ref: '#/components/schemas/FlowDefinition'
+    GlueDataCatalogIAMRole:
+      type: string
+      pattern: 'arn:aws:iam:.*:[0-9]+:.*'
+      maxLength: 512
+    GlueDataCatalogDatabaseName:
+      type: string
+      maxLength: 255
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+    GlueDataCatalogTablePrefix:
+      type: string
+      maxLength: 128
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
     RefreshToken:
       type: string
       pattern: \S+
-      maxLength: 512
+      maxLength: 2048
     OAuthScopeList:
       type: array
       items:
@@ -4310,17 +5766,6 @@ components:
       type: string
       pattern: \S+
       maxLength: 128
-    IdFieldNameList:
-      type: array
-      description: ' A list of field names that can be used as an ID field when performing a write operation. '
-      items:
-        $ref: '#/components/schemas/Name'
-      minItems: 0
-      maxItems: 1
-    Key:
-      type: string
-      pattern: \S+
-      maxLength: 512
     InforNexusSourceProperties:
       type: object
       required:
@@ -4331,6 +5776,12 @@ components:
             - $ref: '#/components/schemas/Object'
             - description: ' The object specified in the Infor Nexus flow source. '
       description: ' The properties that are applied when Infor Nexus is being used as a source. '
+    JavaBoolean:
+      type: boolean
+    ListEntitiesMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 10000
     ListConnectorEntitiesRequest:
       type: object
       title: ListConnectorEntitiesRequest
@@ -4347,6 +5798,30 @@ components:
           allOf:
             - $ref: '#/components/schemas/EntitiesPath'
             - description: ' This optional parameter is specific to connector implementation. Some connectors support multiple levels or categories of entities. You can find out the list of roots for such providers by sending a request without the <code>entitiesPath</code> parameter. If the connector supports entities at different roots, this initial request returns the list of roots. Otherwise, this request returns all entities supported by the provider. '
+        apiVersion:
+          allOf:
+            - $ref: '#/components/schemas/ApiVersion'
+            - description: The version of the API that's used by the connector.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListEntitiesMaxResults'
+            - description: The maximum number of items that the operation returns in the response.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: A token that was provided by your prior <code>ListConnectorEntities</code> operation if the response was too big for the page size. You specify this token to get the next page of results in paginated response.
+    ListConnectorsRequest:
+      type: object
+      title: ListConnectorsRequest
+      properties:
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: Specifies the maximum number of items that should be returned in the result set. The default for <code>maxResults</code> is 20 (for all paginated API operations).
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token for the next page of data.
     ListFlowsRequest:
       type: object
       title: ListFlowsRequest
@@ -4377,6 +5852,106 @@ components:
             - $ref: '#/components/schemas/Object'
             - description: ' The object specified in the Marketo flow source. '
       description: ' The properties that are applied when Marketo is being used as a source. '
+    RegistrationOutput:
+      type: object
+      properties:
+        message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Explains the status of the registration attempt from Amazon AppFlow. If the attempt fails, the message explains why.'
+        result:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Indicates the number of resources that Amazon AppFlow created or updated. Possible resources include metadata tables and data partitions.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ExecutionStatus'
+            - description: Indicates the status of the registration attempt from Amazon AppFlow.
+      description: '<p>Describes the status of an attempt from Amazon AppFlow to register a resource.</p> <p>When you run a flow that you''ve configured to use a metadata catalog, Amazon AppFlow registers a metadata table and data partitions with that catalog. This operation provides the status of that registration attempt. The operation also indicates how many related resources Amazon AppFlow created or updated.</p>'
+    MetadataCatalogDetail:
+      type: object
+      properties:
+        catalogType:
+          allOf:
+            - $ref: '#/components/schemas/CatalogType'
+            - description: '<p>The type of metadata catalog that Amazon AppFlow used for the associated flow run. This parameter returns the following value:</p> <dl> <dt>GLUE</dt> <dd> <p>The metadata catalog is provided by the Glue Data Catalog. Glue includes the Glue Data Catalog as a component.</p> </dd> </dl>'
+        tableName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the table that stores the metadata for the associated flow run. The table stores metadata that represents the data that the flow transferred. Amazon AppFlow stores the table in the metadata catalog.
+        tableRegistrationOutput:
+          allOf:
+            - $ref: '#/components/schemas/RegistrationOutput'
+            - description: Describes the status of the attempt from Amazon AppFlow to register the metadata table with the metadata catalog. Amazon AppFlow creates or updates this table for the associated flow run.
+        partitionRegistrationOutput:
+          allOf:
+            - $ref: '#/components/schemas/RegistrationOutput'
+            - description: 'Describes the status of the attempt from Amazon AppFlow to register the data partitions with the metadata catalog. The data partitions organize the flow output into a hierarchical path, such as a folder path in an S3 bucket. Amazon AppFlow creates the partitions (if they don''t already exist) based on your flow configuration.'
+      description: 'Describes the metadata catalog, metadata table, and data partitions that Amazon AppFlow used for the associated flow run.'
+    OAuth2CustomPropType:
+      type: string
+      enum:
+        - TOKEN_URL
+        - AUTH_URL
+    OAuth2CustomParameter:
+      type: object
+      properties:
+        key:
+          allOf:
+            - $ref: '#/components/schemas/Key'
+            - description: The key of the custom parameter required for OAuth 2.0 authentication.
+        isRequired:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the custom parameter for OAuth 2.0 authentication is required.
+        label:
+          allOf:
+            - $ref: '#/components/schemas/Label'
+            - description: The label of the custom parameter used for OAuth 2.0 authentication.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description about the custom parameter used for OAuth 2.0 authentication.
+        isSensitiveField:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether this authentication custom parameter is a sensitive field.
+        connectorSuppliedValues:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorSuppliedValueList'
+            - description: Contains default values for this authentication parameter that are supplied by the connector.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/OAuth2CustomPropType'
+            - description: Indicates whether custom parameter is used with TokenUrl or AuthUrl.
+      description: Custom parameter required for OAuth 2.0 authentication.
+    OAuth2CustomPropertiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OAuth2CustomParameter'
+    TokenUrlList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TokenUrl'
+    OAuth2GrantTypeSupportedList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OAuth2GrantType'
+    OAuth2GrantType:
+      type: string
+      enum:
+        - CLIENT_CREDENTIALS
+        - AUTHORIZATION_CODE
+    TokenUrl:
+      type: string
+      pattern: '^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]'
+      maxLength: 256
+    TokenUrlCustomProperties:
+      type: object
+      minProperties: 0
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/CustomPropertyValue'
     OAuthCredentials:
       type: object
       required:
@@ -4404,10 +5979,6 @@ components:
             - $ref: '#/components/schemas/ConnectorOAuthRequest'
             - description: ' The OAuth requirement needed to request security tokens from the connector endpoint. '
       description: ' The OAuth credentials required for OAuth type authentication. '
-    TokenUrl:
-      type: string
-      pattern: '^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]'
-      maxLength: 256
     OAuthProperties:
       type: object
       required:
@@ -4430,7 +6001,7 @@ components:
       description: ' The OAuth properties required for OAuth type authentication. '
     OAuthScope:
       type: string
-      pattern: '[/\w]*'
+      pattern: \S+
       maxLength: 128
     OperatorPropertiesKeys:
       type: string
@@ -4450,6 +6021,51 @@ components:
         - CONCAT_FORMAT
         - SUBFIELD_CATEGORY_MAP
         - EXCLUDE_SOURCE_FIELDS_LIST
+        - INCLUDE_NEW_FIELDS
+        - ORDERED_PARTITION_KEYS_LIST
+    Operators:
+      type: string
+      enum:
+        - PROJECTION
+        - LESS_THAN
+        - GREATER_THAN
+        - CONTAINS
+        - BETWEEN
+        - LESS_THAN_OR_EQUAL_TO
+        - GREATER_THAN_OR_EQUAL_TO
+        - EQUAL_TO
+        - NOT_EQUAL_TO
+        - ADDITION
+        - MULTIPLICATION
+        - DIVISION
+        - SUBTRACTION
+        - MASK_ALL
+        - MASK_FIRST_N
+        - MASK_LAST_N
+        - VALIDATE_NON_NULL
+        - VALIDATE_NON_ZERO
+        - VALIDATE_NON_NEGATIVE
+        - VALIDATE_NUMERIC
+        - NO_OP
+    PardotSourceProperties:
+      type: object
+      required:
+        - object
+      properties:
+        object:
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: The object specified in the Salesforce Pardot flow source.
+      description: The properties that are applied when Salesforce Pardot is being used as a source.
+    PathPrefix:
+      type: string
+      enum:
+        - EXECUTION_ID
+        - SCHEMA_VERSION
+    PathPrefixHierarchy:
+      type: array
+      items:
+        $ref: '#/components/schemas/PathPrefix'
     PortNumber:
       type: integer
       minimum: 1
@@ -4474,12 +6090,16 @@ components:
         prefixType:
           allOf:
             - $ref: '#/components/schemas/PrefixType'
-            - description: ' Determines the format of the prefix, and whether it applies to the file name, file path, or both. '
+            - description: 'Determines the format of the prefix, and whether it applies to the file name, file path, or both. '
         prefixFormat:
           allOf:
             - $ref: '#/components/schemas/PrefixFormat'
-            - description: ' Determines the level of granularity that''s included in the prefix. '
-      description: ' Determines the prefix that Amazon AppFlow applies to the destination folder name. You can name your destination folders according to the flow frequency and date. '
+            - description: 'Determines the level of granularity for the date and time that''s included in the prefix. '
+        pathPrefixHierarchy:
+          allOf:
+            - $ref: '#/components/schemas/PathPrefixHierarchy'
+            - description: '<p>Specifies whether the destination file path includes either or both of the following elements:</p> <dl> <dt>EXECUTION_ID</dt> <dd> <p>The ID that Amazon AppFlow assigns to the flow run.</p> </dd> <dt>SCHEMA_VERSION</dt> <dd> <p>The version number of your data schema. Amazon AppFlow assigns this version number. The version number increases by one when you change any of the following settings in your flow configuration:</p> <ul> <li> <p>Source-to-destination field mappings</p> </li> <li> <p>Field data types</p> </li> <li> <p>Partition keys</p> </li> </ul> </dd> </dl>'
+      description: Specifies elements that Amazon AppFlow includes in the file and folder names in the flow destination.
     PrivateConnectionProvisioningFailureCause:
       type: string
       enum:
@@ -4502,6 +6122,15 @@ components:
       type: string
       pattern: '^$|com.amazonaws.vpce.[\w/!:@#.\-]+'
       maxLength: 512
+    ProfilePropertyValue:
+      type: string
+      pattern: \S+
+      maxLength: 2048
+    ProfilePropertyKey:
+      type: string
+      pattern: '[\w]+'
+      minLength: 1
+      maxLength: 128
     Property:
       type: string
       pattern: .+
@@ -4509,6 +6138,10 @@ components:
     RoleArn:
       type: string
       pattern: 'arn:aws:iam:.*:[0-9]+:.*'
+      maxLength: 512
+    WorkgroupName:
+      type: string
+      pattern: \S+
       maxLength: 512
     Region:
       type: string
@@ -4518,6 +6151,26 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Region'
+    RegisterConnectorRequest:
+      type: object
+      title: RegisterConnectorRequest
+      properties:
+        connectorLabel:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorLabel'
+            - description: ' The name of the connector. The name is unique for each <code>ConnectorRegistration</code> in your Amazon Web Services account.'
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description about the connector that's being registered.
+        connectorProvisioningType:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProvisioningType'
+            - description: 'The provisioning type of the connector. Currently the only supported value is LAMBDA. '
+        connectorProvisioningConfig:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProvisioningConfig'
+            - description: The provisioning type of the connector. Currently the only supported value is LAMBDA.
     S3OutputFormatConfig:
       type: object
       properties:
@@ -4531,7 +6184,24 @@ components:
             - description: ' Determines the prefix that Amazon AppFlow applies to the folder name in the Amazon S3 bucket. You can name folders according to the flow frequency and date. '
         aggregationConfig:
           $ref: '#/components/schemas/AggregationConfig'
+        preserveSourceDataTyping:
+          allOf:
+            - $ref: '#/components/schemas/JavaBoolean'
+            - description: '<p>If your file output format is Parquet, use this parameter to set whether Amazon AppFlow preserves the data types in your source data when it writes the output to Amazon S3. </p> <ul> <li> <p> <code>true</code>: Amazon AppFlow preserves the data types when it writes to Amazon S3. For example, an integer or <code>1</code> in your source data is still an integer in your output.</p> </li> <li> <p> <code>false</code>: Amazon AppFlow converts all of the source data into strings when it writes to Amazon S3. For example, an integer of <code>1</code> in your source data becomes the string <code>"1"</code> in the output.</p> </li> </ul>'
       description: ' The configuration that determines how Amazon AppFlow should format the flow output data when Amazon S3 is used as the destination. '
+    S3InputFileType:
+      type: string
+      enum:
+        - CSV
+        - JSON
+    S3InputFormatConfig:
+      type: object
+      properties:
+        s3InputFileType:
+          allOf:
+            - $ref: '#/components/schemas/S3InputFileType'
+            - description: ' The file type that Amazon AppFlow gets from your Amazon S3 bucket. '
+      description: ' When you use Amazon S3 as the source, the configuration format that you provide the flow input data. '
     S3SourceProperties:
       type: object
       required:
@@ -4545,7 +6215,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/BucketPrefix'
             - description: ' The object key for the Amazon S3 bucket in which the source files are stored. '
+        s3InputFormatConfig:
+          $ref: '#/components/schemas/S3InputFormatConfig'
       description: ' The properties that are applied when Amazon S3 is being used as the flow source. '
+    SuccessResponseHandlingConfig:
+      type: object
+      properties:
+        bucketPrefix:
+          allOf:
+            - $ref: '#/components/schemas/BucketPrefix'
+            - description: The Amazon S3 bucket prefix.
+        bucketName:
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: The name of the Amazon S3 bucket.
+      description: '<p>Determines how Amazon AppFlow handles the success response that it gets from the connector after placing data.</p> <p>For example, this setting would determine where to write the response from the destination connector upon a successful insert operation.</p>'
     SAPODataSourceProperties:
       type: object
       properties:
@@ -4554,13 +6238,16 @@ components:
             - $ref: '#/components/schemas/Object'
             - description: ' The object path specified in the SAPOData flow source. '
       description: ' The properties that are applied when using SAPOData as a flow source. '
-    WriteOperationType:
+    SalesforceDataTransferApi:
       type: string
       enum:
-        - INSERT
-        - UPSERT
-        - UPDATE
-      description: ' The possible write operations in the destination connector. When this value is not provided, this defaults to the <code>INSERT</code> operation. '
+        - AUTOMATIC
+        - BULKV2
+        - REST_SYNC
+    SalesforceDataTransferApiList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SalesforceDataTransferApi'
     SalesforceSourceProperties:
       type: object
       required:
@@ -4578,6 +6265,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: ' Indicates whether Amazon AppFlow includes deleted files in the flow run. '
+        dataTransferApi:
+          allOf:
+            - $ref: '#/components/schemas/SalesforceDataTransferApi'
+            - description: '<p>Specifies which Salesforce API is used by Amazon AppFlow when your flow transfers data from Salesforce.</p> <dl> <dt>AUTOMATIC</dt> <dd> <p>The default. Amazon AppFlow selects which API to use based on the number of records that your flow transfers from Salesforce. If your flow transfers fewer than 1,000,000 records, Amazon AppFlow uses Salesforce REST API. If your flow transfers 1,000,000 records or more, Amazon AppFlow uses Salesforce Bulk API 2.0.</p> <p>Each of these Salesforce APIs structures data differently. If Amazon AppFlow selects the API automatically, be aware that, for recurring flows, the data output might vary from one flow run to the next. For example, if a flow runs daily, it might use REST API on one day to transfer 900,000 records, and it might use Bulk API 2.0 on the next day to transfer 1,100,000 records. For each of these flow runs, the respective Salesforce API formats the data differently. Some of the differences include how dates are formatted and null values are represented. Also, Bulk API 2.0 doesn''t transfer Salesforce compound fields.</p> <p>By choosing this option, you optimize flow performance for both small and large data transfers, but the tradeoff is inconsistent formatting in the output.</p> </dd> <dt>BULKV2</dt> <dd> <p>Amazon AppFlow uses only Salesforce Bulk API 2.0. This API runs asynchronous data transfers, and it''s optimal for large sets of data. By choosing this option, you ensure that your flow writes consistent output, but you optimize performance only for large data transfers.</p> <p>Note that Bulk API 2.0 does not transfer Salesforce compound fields.</p> </dd> <dt>REST_SYNC</dt> <dd> <p>Amazon AppFlow uses only Salesforce REST API. By choosing this option, you ensure that your flow writes consistent output, but you decrease performance for large data transfers that are better suited for Bulk API 2.0. In some cases, if your flow attempts to transfer a vary large set of data, it might fail wituh a timed out error.</p> </dd> </dl>'
       description: ' The properties that are applied when Salesforce is being used as a source. '
     ScheduleExpression:
       type: string
@@ -4616,15 +6307,15 @@ components:
         scheduleStartTime:
           allOf:
             - $ref: '#/components/schemas/Date'
-            - description: ' Specifies the scheduled start time for a schedule-triggered flow. '
+            - description: 'The time at which the scheduled flow starts. The time is formatted as a timestamp that follows the ISO 8601 standard, such as <code>2022-04-26T13:00:00-07:00</code>.'
         scheduleEndTime:
           allOf:
             - $ref: '#/components/schemas/Date'
-            - description: ' Specifies the scheduled end time for a schedule-triggered flow. '
+            - description: 'The time at which the scheduled flow ends. The time is formatted as a timestamp that follows the ISO 8601 standard, such as <code>2022-04-27T13:00:00-07:00</code>.'
         timezone:
           allOf:
             - $ref: '#/components/schemas/Timezone'
-            - description: ' Specifies the time zone used when referring to the date and time of a scheduled-triggered flow, such as <code>America/New_York</code>. '
+            - description: '<p>Specifies the time zone used when referring to the dates and times of a scheduled flow, such as <code>America/New_York</code>. This time zone is only a descriptive label. It doesn''t affect how Amazon AppFlow interprets the timestamps that you specify to schedule the flow.</p> <p>If you want to schedule a flow by using times in a particular time zone, indicate the time zone as a UTC offset in your timestamps. For example, the UTC offsets for the <code>America/New_York</code> timezone are <code>-04:00</code> EDT and <code>-05:00 EST</code>.</p>'
         scheduleOffset:
           allOf:
             - $ref: '#/components/schemas/ScheduleOffset'
@@ -4633,6 +6324,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Date'
             - description: ' Specifies the date range for the records to import from the connector in the first flow run. '
+        flowErrorDeactivationThreshold:
+          allOf:
+            - $ref: '#/components/schemas/FlowErrorDeactivationThreshold'
+            - description: Defines how many times a scheduled flow fails consecutively before Amazon AppFlow deactivates it.
       description: ' Specifies the configuration details of a schedule-triggered flow as defined by the user. Currently, these settings only apply to the <code>Scheduled</code> trigger type. '
     ServiceNowSourceProperties:
       type: object
@@ -4718,10 +6413,6 @@ components:
             - $ref: '#/components/schemas/Object'
             - description: ' The object specified in the Zendesk flow source. '
       description: ' The properties that are applied when using Zendesk as a flow source. '
-    String:
-      type: string
-      pattern: .*
-      maxLength: 2048
     SourceFields:
       type: array
       items:
@@ -4746,6 +6437,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/FlowName'
             - description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
+    SupportedApiVersion:
+      type: string
+      pattern: \S+
+      maxLength: 256
     Value:
       type: string
       pattern: \S+
@@ -4775,12 +6470,28 @@ components:
         - Map_all
         - Mask
         - Merge
+        - Passthrough
         - Truncate
         - Validate
+        - Partition
     TaskPropertiesMap:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/Property'
+    UnregisterConnectorRequest:
+      type: object
+      required:
+        - connectorLabel
+      title: UnregisterConnectorRequest
+      properties:
+        connectorLabel:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorLabel'
+            - description: The label of the connector. The label is unique for each <code>ConnectorRegistration</code> in your Amazon Web Services account.
+        forceDelete:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Indicates whether Amazon AppFlow should unregister the connector, even if it is currently in use in one or more connector profiles. The default value is false.'
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -4805,6 +6516,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectorProfileConfig'
             - description: ' Defines the connector-specific profile configuration and credentials. '
+    UpdateConnectorRegistrationRequest:
+      type: object
+      required:
+        - connectorLabel
+      title: UpdateConnectorRegistrationRequest
+      properties:
+        connectorLabel:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorLabel'
+            - description: The name of the connector. The name is unique for each connector registration in your AWS account.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description about the update that you're applying to the connector.
+        connectorProvisioningConfig:
+          $ref: '#/components/schemas/ConnectorProvisioningConfig'
     UpdateFlowRequest:
       type: object
       required:
@@ -4837,6 +6564,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Tasks'
             - description: ' A list of tasks that Amazon AppFlow performs while transferring the data in the flow run. '
+        metadataCatalogConfig:
+          allOf:
+            - $ref: '#/components/schemas/MetadataCatalogConfig'
+            - description: 'Specifies the configuration that Amazon AppFlow uses when it catalogs the data that''s transferred by the associated flow. When Amazon AppFlow catalogs the data from a flow, it stores metadata in a data catalog.'
     UpsolverBucketName:
       type: string
       pattern: ^(upsolver-appflow)\S*

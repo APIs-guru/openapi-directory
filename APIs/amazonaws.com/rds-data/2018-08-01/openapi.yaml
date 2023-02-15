@@ -3,7 +3,7 @@ info:
   version: '2018-08-01'
   x-release: v4
   title: AWS RDS DataService
-  description: '<p><fullname>Amazon RDS Data Service</fullname> <p>Amazon RDS provides an HTTP endpoint to run SQL statements on an Amazon Aurora Serverless DB cluster. To run these statements, you work with the Data Service API.</p> <p>For more information about the Data Service API, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html">Using the Data API for Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p></p>'
+  description: '<p><fullname>Amazon RDS Data Service</fullname> <p>Amazon RDS provides an HTTP endpoint to run SQL statements on an Amazon Aurora Serverless v1 DB cluster. To run these statements, you work with the Data Service API.</p> <note> <p>The Data Service API isn''t supported on Amazon Aurora Serverless v2 DB clusters.</p> </note> <p>For more information about the Data Service API, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html">Using the Data API</a> in the <i>Amazon Aurora User Guide</i>.</p></p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -117,7 +117,7 @@ paths:
   /BatchExecute:
     post:
       operationId: BatchExecuteStatement
-      description: '<p>Runs a batch SQL statement over an array of data.</p> <p>You can run bulk update and insert operations for multiple records using a DML statement with different parameter sets. Bulk operations can provide a significant performance improvement over individual insert and update operations.</p> <important> <p>If a call isn''t part of a transaction because it doesn''t include the <code>transactionID</code> parameter, changes that result from the call are committed automatically.</p> </important>'
+      description: '<p>Runs a batch SQL statement over an array of data.</p> <p>You can run bulk update and insert operations for multiple records using a DML statement with different parameter sets. Bulk operations can provide a significant performance improvement over individual insert and update operations.</p> <note> <p>If a call isn''t part of a transaction because it doesn''t include the <code>transactionID</code> parameter, changes that result from the call are committed automatically.</p> <p>There isn''t a fixed upper limit on the number of parameter sets. However, the maximum size of the HTTP request submitted through the Data API is 4 MiB. If the request exceeds this limit, the Data API returns an error and doesn''t process the request. This 4-MiB limit includes the size of the HTTP headers and the JSON notation in the request. Thus, the number of parameter sets that you can include depends on a combination of factors, such as the size of the SQL statement and the size of each parameter set.</p> <p>The response size limit is 1 MiB. If the call returns more than 1 MiB of response data, the call is terminated.</p> </note>'
       responses:
         '200':
           description: Success
@@ -126,30 +126,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/BatchExecuteStatementResponse'
         '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '481':
+        '482':
           description: StatementTimeoutException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/StatementTimeoutException'
-        '482':
+        '483':
           description: InternalServerErrorException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerErrorException'
-        '483':
+        '484':
           description: ForbiddenException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ForbiddenException'
-        '484':
+        '485':
           description: ServiceUnavailableError
           content:
             application/json:
@@ -167,8 +173,28 @@ paths:
                 - secretArn
                 - sql
               properties:
+                resourceArn:
+                  description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+                  type: string
+                  minLength: 11
+                  maxLength: 100
+                secretArn:
+                  description: '<p>The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret.</p> <p>For information about creating the secret, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html">Create a database secret</a>.</p>'
+                  type: string
+                  minLength: 11
+                  maxLength: 100
+                sql:
+                  description: The SQL statement to run. Don't include a semicolon (;) at the end of the SQL statement.
+                  type: string
+                  minLength: 0
+                  maxLength: 65536
                 database:
                   description: The name of the database.
+                  type: string
+                  minLength: 0
+                  maxLength: 64
+                schema:
+                  description: '<p>The name of the database schema.</p> <note> <p>Currently, the <code>schema</code> parameter isn''t supported.</p> </note>'
                   type: string
                   minLength: 0
                   maxLength: 64
@@ -177,26 +203,6 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/SqlParametersList'
-                resourceArn:
-                  description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-                  type: string
-                  minLength: 11
-                  maxLength: 100
-                schema:
-                  description: The name of the database schema.
-                  type: string
-                  minLength: 0
-                  maxLength: 64
-                secretArn:
-                  description: The name or ARN of the secret that enables access to the DB cluster.
-                  type: string
-                  minLength: 11
-                  maxLength: 100
-                sql:
-                  description: The SQL statement to run.
-                  type: string
-                  minLength: 0
-                  maxLength: 65536
                 transactionId:
                   description: '<p>The identifier of a transaction that was started by using the <code>BeginTransaction</code> operation. Specify the transaction ID of the transaction that you want to include the SQL statement in.</p> <p>If the SQL statement is not part of a transaction, don''t set this parameter.</p>'
                   type: string
@@ -213,7 +219,7 @@ paths:
   /BeginTransaction:
     post:
       operationId: BeginTransaction
-      description: '<p>Starts a SQL transaction.</p> <pre><code> &lt;important&gt; &lt;p&gt;A transaction can run for a maximum of 24 hours. A transaction is terminated and rolled back automatically after 24 hours.&lt;/p&gt; &lt;p&gt;A transaction times out if no calls use its transaction ID in three minutes. If a transaction times out before it''s committed, it''s rolled back automatically.&lt;/p&gt; &lt;p&gt;DDL statements inside a transaction cause an implicit commit. We recommend that you run each DDL statement in a separate &lt;code&gt;ExecuteStatement&lt;/code&gt; call with &lt;code&gt;continueAfterTimeout&lt;/code&gt; enabled.&lt;/p&gt; &lt;/important&gt; </code></pre>'
+      description: '<p>Starts a SQL transaction.</p> <note> <p>A transaction can run for a maximum of 24 hours. A transaction is terminated and rolled back automatically after 24 hours.</p> <p>A transaction times out if no calls use its transaction ID in three minutes. If a transaction times out before it''s committed, it''s rolled back automatically.</p> <p>DDL statements inside a transaction cause an implicit commit. We recommend that you run each DDL statement in a separate <code>ExecuteStatement</code> call with <code>continueAfterTimeout</code> enabled.</p> </note>'
       responses:
         '200':
           description: Success
@@ -222,30 +228,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/BeginTransactionResponse'
         '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '481':
+        '482':
           description: StatementTimeoutException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/StatementTimeoutException'
-        '482':
+        '483':
           description: InternalServerErrorException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerErrorException'
-        '483':
+        '484':
           description: ForbiddenException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ForbiddenException'
-        '484':
+        '485':
           description: ServiceUnavailableError
           content:
             application/json:
@@ -262,26 +274,26 @@ paths:
                 - resourceArn
                 - secretArn
               properties:
-                database:
-                  description: The name of the database.
-                  type: string
-                  minLength: 0
-                  maxLength: 64
                 resourceArn:
                   description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
                   type: string
                   minLength: 11
                   maxLength: 100
-                schema:
-                  description: The name of the database schema.
-                  type: string
-                  minLength: 0
-                  maxLength: 64
                 secretArn:
                   description: The name or ARN of the secret that enables access to the DB cluster.
                   type: string
                   minLength: 11
                   maxLength: 100
+                database:
+                  description: The name of the database.
+                  type: string
+                  minLength: 0
+                  maxLength: 64
+                schema:
+                  description: The name of the database schema.
+                  type: string
+                  minLength: 0
+                  maxLength: 64
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -302,36 +314,42 @@ paths:
               schema:
                 $ref: '#/components/schemas/CommitTransactionResponse'
         '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '481':
+        '482':
           description: StatementTimeoutException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/StatementTimeoutException'
-        '482':
+        '483':
           description: InternalServerErrorException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerErrorException'
-        '483':
+        '484':
           description: ForbiddenException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ForbiddenException'
-        '484':
+        '485':
           description: ServiceUnavailableError
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableError'
-        '485':
+        '486':
           description: NotFoundException
           content:
             application/json:
@@ -376,7 +394,7 @@ paths:
     post:
       deprecated: true
       operationId: ExecuteSql
-      description: <p>Runs one or more SQL statements.</p> <important> <p>This operation is deprecated. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation.</p> </important>
+      description: <p>Runs one or more SQL statements.</p> <note> <p>This operation is deprecated. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation.</p> </note>
       responses:
         '200':
           description: Success
@@ -385,97 +403,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExecuteSqlResponse'
         '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '481':
-          description: InternalServerErrorException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerErrorException'
-        '482':
-          description: ForbiddenException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ForbiddenException'
-        '483':
-          description: ServiceUnavailableError
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServiceUnavailableError'
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - awsSecretStoreArn
-                - dbClusterOrInstanceArn
-                - sqlStatements
-              properties:
-                awsSecretStoreArn:
-                  description: The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster.
-                  type: string
-                  minLength: 11
-                  maxLength: 100
-                database:
-                  description: The name of the database.
-                  type: string
-                  minLength: 0
-                  maxLength: 64
-                dbClusterOrInstanceArn:
-                  description: The ARN of the Aurora Serverless DB cluster.
-                  type: string
-                  minLength: 11
-                  maxLength: 100
-                schema:
-                  description: The name of the database schema.
-                  type: string
-                  minLength: 0
-                  maxLength: 64
-                sqlStatements:
-                  description: '<p>One or more SQL statements to run on the DB cluster.</p> <p>You can separate SQL statements from each other with a semicolon (;). Any valid SQL statement is permitted, including data definition, data manipulation, and commit statements. </p>'
-                  type: string
-                  minLength: 0
-                  maxLength: 65536
-    parameters:
-      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/components/parameters/X-Amz-Date'
-      - $ref: '#/components/parameters/X-Amz-Algorithm'
-      - $ref: '#/components/parameters/X-Amz-Credential'
-      - $ref: '#/components/parameters/X-Amz-Security-Token'
-      - $ref: '#/components/parameters/X-Amz-Signature'
-      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  /Execute:
-    post:
-      operationId: ExecuteStatement
-      description: '<p>Runs a SQL statement against a database.</p> <important> <p>If a call isn''t part of a transaction because it doesn''t include the <code>transactionID</code> parameter, changes that result from the call are committed automatically.</p> </important> <p>The response size limit is 1 MB. If the call returns more than 1 MB of response data, the call is terminated.</p>'
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExecuteStatementResponse'
-        '480':
-          description: BadRequestException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequestException'
-        '481':
-          description: StatementTimeoutException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/StatementTimeoutException'
         '482':
           description: InternalServerErrorException
           content:
@@ -502,46 +440,109 @@ paths:
             schema:
               type: object
               required:
-                - resourceArn
-                - secretArn
-                - sql
+                - dbClusterOrInstanceArn
+                - awsSecretStoreArn
+                - sqlStatements
               properties:
-                continueAfterTimeout:
-                  description: '<p>A value that indicates whether to continue running the statement after the call times out. By default, the statement stops running when the call times out.</p> <important> <p>For DDL statements, we recommend continuing to run the statement after the call times out. When a DDL statement terminates before it is finished running, it can result in errors and possibly corrupted data structures.</p> </important>'
-                  type: boolean
+                dbClusterOrInstanceArn:
+                  description: The ARN of the Aurora Serverless DB cluster.
+                  type: string
+                  minLength: 11
+                  maxLength: 100
+                awsSecretStoreArn:
+                  description: '<p>The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret.</p> <p>For information about creating the secret, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html">Create a database secret</a>.</p>'
+                  type: string
+                  minLength: 11
+                  maxLength: 100
+                sqlStatements:
+                  description: '<p>One or more SQL statements to run on the DB cluster.</p> <p>You can separate SQL statements from each other with a semicolon (;). Any valid SQL statement is permitted, including data definition, data manipulation, and commit statements. </p>'
+                  type: string
+                  minLength: 0
+                  maxLength: 65536
                 database:
                   description: The name of the database.
                   type: string
                   minLength: 0
                   maxLength: 64
-                includeResultMetadata:
-                  description: A value that indicates whether to include metadata in the results.
-                  type: boolean
-                parameters:
-                  description: <p>The parameters for the SQL statement.</p> <note> <p>Array parameters are not supported.</p> </note>
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/SqlParameter'
+                schema:
+                  description: The name of the database schema.
+                  type: string
+                  minLength: 0
+                  maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /Execute:
+    post:
+      operationId: ExecuteStatement
+      description: '<p>Runs a SQL statement against a database.</p> <note> <p>If a call isn''t part of a transaction because it doesn''t include the <code>transactionID</code> parameter, changes that result from the call are committed automatically.</p> <p>If the binary response data from the database is more than 1 MB, the call is terminated.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecuteStatementResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: StatementTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatementTimeoutException'
+        '483':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '485':
+          description: ServiceUnavailableError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableError'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - resourceArn
+                - secretArn
+                - sql
+              properties:
                 resourceArn:
                   description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
                   type: string
                   minLength: 11
                   maxLength: 100
-                resultSetOptions:
-                  description: Options that control how the result set is returned.
-                  type: object
-                  properties:
-                    decimalReturnType:
-                      allOf:
-                        - $ref: '#/components/schemas/DecimalReturnType'
-                        - description: '<p>A value that indicates how a field of <code>DECIMAL</code> type is represented in the response. The value of <code>STRING</code>, the default, specifies that it is converted to a String value. The value of <code>DOUBLE_OR_LONG</code> specifies that it is converted to a Long value if its scale is 0, or to a Double value otherwise.</p> <important> <p>Conversion to Double or Long can result in roundoff errors due to precision loss. We recommend converting to String, especially when working with currency values.</p> </important>'
-                schema:
-                  description: '<p>The name of the database schema.</p> <note> <p>Currently, the <code>schema</code> parameter isn''t supported.</p> </note>'
-                  type: string
-                  minLength: 0
-                  maxLength: 64
                 secretArn:
-                  description: The name or ARN of the secret that enables access to the DB cluster.
+                  description: '<p>The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret.</p> <p>For information about creating the secret, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html">Create a database secret</a>.</p>'
                   type: string
                   minLength: 11
                   maxLength: 100
@@ -550,11 +551,50 @@ paths:
                   type: string
                   minLength: 0
                   maxLength: 65536
+                database:
+                  description: The name of the database.
+                  type: string
+                  minLength: 0
+                  maxLength: 64
+                schema:
+                  description: '<p>The name of the database schema.</p> <note> <p>Currently, the <code>schema</code> parameter isn''t supported.</p> </note>'
+                  type: string
+                  minLength: 0
+                  maxLength: 64
+                parameters:
+                  description: <p>The parameters for the SQL statement.</p> <note> <p>Array parameters are not supported.</p> </note>
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SqlParameter'
                 transactionId:
                   description: '<p>The identifier of a transaction that was started by using the <code>BeginTransaction</code> operation. Specify the transaction ID of the transaction that you want to include the SQL statement in.</p> <p>If the SQL statement is not part of a transaction, don''t set this parameter.</p>'
                   type: string
                   minLength: 0
                   maxLength: 192
+                includeResultMetadata:
+                  description: A value that indicates whether to include metadata in the results.
+                  type: boolean
+                continueAfterTimeout:
+                  description: '<p>A value that indicates whether to continue running the statement after the call times out. By default, the statement stops running when the call times out.</p> <note> <p>For DDL statements, we recommend continuing to run the statement after the call times out. When a DDL statement terminates before it is finished running, it can result in errors and possibly corrupted data structures.</p> </note>'
+                  type: boolean
+                resultSetOptions:
+                  description: Options that control how the result set is returned.
+                  type: object
+                  properties:
+                    decimalReturnType:
+                      allOf:
+                        - $ref: '#/components/schemas/DecimalReturnType'
+                        - description: '<p>A value that indicates how a field of <code>DECIMAL</code> type is represented in the response. The value of <code>STRING</code>, the default, specifies that it is converted to a String value. The value of <code>DOUBLE_OR_LONG</code> specifies that it is converted to a Long value if its scale is 0, or to a Double value otherwise.</p> <note> <p>Conversion to Double or Long can result in roundoff errors due to precision loss. We recommend converting to String, especially when working with currency values.</p> </note>'
+                    longReturnType:
+                      allOf:
+                        - $ref: '#/components/schemas/LongReturnType'
+                        - description: 'A value that indicates how a field of <code>LONG</code> type is represented. Allowed values are <code>LONG</code> and <code>STRING</code>. The default is <code>LONG</code>. Specify <code>STRING</code> if the length or precision of numeric values might cause truncation or rounding errors. '
+                formatRecordsAs:
+                  description: '<p>A value that indicates whether to format the result set as a single JSON string. This parameter only applies to <code>SELECT</code> statements and is ignored for other types of statements. Allowed values are <code>NONE</code> and <code>JSON</code>. The default value is <code>NONE</code>. The result is returned in the <code>formattedRecords</code> field.</p> <p>For usage information about the JSON format for result sets, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html">Using the Data API</a> in the <i>Amazon Aurora User Guide</i>.</p>'
+                  type: string
+                  enum:
+                    - NONE
+                    - JSON
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -575,36 +615,42 @@ paths:
               schema:
                 $ref: '#/components/schemas/RollbackTransactionResponse'
         '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
           description: BadRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
-        '481':
+        '482':
           description: StatementTimeoutException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/StatementTimeoutException'
-        '482':
+        '483':
           description: InternalServerErrorException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerErrorException'
-        '483':
+        '484':
           description: ForbiddenException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ForbiddenException'
-        '484':
+        '485':
           description: ServiceUnavailableError
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableError'
-        '485':
+        '486':
           description: NotFoundException
           content:
             application/json:
@@ -709,6 +755,7 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SqlParameter'
+    AccessDeniedException: {}
     BadRequestException: {}
     StatementTimeoutException: {}
     InternalServerErrorException: {}
@@ -742,22 +789,26 @@ components:
     ExecuteStatementResponse:
       type: object
       properties:
+        records:
+          allOf:
+            - $ref: '#/components/schemas/SqlRecords'
+            - description: The records returned by the SQL statement. This field is blank if the <code>formatRecordsAs</code> parameter is set to <code>JSON</code>.
         columnMetadata:
           allOf:
             - $ref: '#/components/schemas/Metadata'
-            - description: Metadata for the columns included in the results.
-        generatedFields:
-          allOf:
-            - $ref: '#/components/schemas/FieldList'
-            - description: '<p>Values for fields generated during the request.</p> <pre><code> &lt;note&gt; &lt;p&gt;The &lt;code&gt;generatedFields&lt;/code&gt; data isn''t supported by Aurora PostgreSQL. To get the values of generated fields, use the &lt;code&gt;RETURNING&lt;/code&gt; clause. For more information, see &lt;a href=&quot;https://www.postgresql.org/docs/10/dml-returning.html&quot;&gt;Returning Data From Modified Rows&lt;/a&gt; in the PostgreSQL documentation.&lt;/p&gt; &lt;/note&gt; </code></pre>'
+            - description: Metadata for the columns included in the results. This field is blank if the <code>formatRecordsAs</code> parameter is set to <code>JSON</code>.
         numberOfRecordsUpdated:
           allOf:
             - $ref: '#/components/schemas/RecordsUpdated'
             - description: The number of records updated by the request.
-        records:
+        generatedFields:
           allOf:
-            - $ref: '#/components/schemas/SqlRecords'
-            - description: The records returned by the SQL statement.
+            - $ref: '#/components/schemas/FieldList'
+            - description: '<p>Values for fields generated during a DML request.</p> <pre><code> &lt;note&gt; &lt;p&gt;The &lt;code&gt;generatedFields&lt;/code&gt; data isn''t supported by Aurora PostgreSQL. To get the values of generated fields, use the &lt;code&gt;RETURNING&lt;/code&gt; clause. For more information, see &lt;a href=&quot;https://www.postgresql.org/docs/10/dml-returning.html&quot;&gt;Returning Data From Modified Rows&lt;/a&gt; in the PostgreSQL documentation.&lt;/p&gt; &lt;/note&gt; </code></pre>'
+        formattedRecords:
+          allOf:
+            - $ref: '#/components/schemas/FormattedSqlRecords'
+            - description: '<p>A string value that represents the result set of a <code>SELECT</code> statement in JSON format. This value is only present when the <code>formatRecordsAs</code> parameter is set to <code>JSON</code>.</p> <p>The size limit for this field is currently 10 MB. If the JSON-formatted string representing the result set requires more than 10 MB, the call returns an error.</p>'
       description: The response elements represent the output of a request to run a SQL statement against a database.
     SqlParameter:
       type: object
@@ -766,20 +817,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/ParameterName'
             - description: The name of the parameter.
-        typeHint:
-          allOf:
-            - $ref: '#/components/schemas/TypeHint'
-            - description: '<p>A hint that specifies the correct object type for data type mapping. Possible values are as follows:</p> <ul> <li> <p> <code>DATE</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>DATE</code> type to the database. The accepted format is <code>YYYY-MM-DD</code>.</p> </li> <li> <p> <code>DECIMAL</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>DECIMAL</code> type to the database.</p> </li> <li> <p> <code>JSON</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>JSON</code> type to the database.</p> </li> <li> <p> <code>TIME</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>TIME</code> type to the database. The accepted format is <code>HH:MM:SS[.FFF]</code>.</p> </li> <li> <p> <code>TIMESTAMP</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>TIMESTAMP</code> type to the database. The accepted format is <code>YYYY-MM-DD HH:MM:SS[.FFF]</code>.</p> </li> <li> <p> <code>UUID</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>UUID</code> type to the database. </p> </li> </ul>'
         value:
           allOf:
             - $ref: '#/components/schemas/Field'
             - description: The value of the parameter.
+        typeHint:
+          allOf:
+            - $ref: '#/components/schemas/TypeHint'
+            - description: '<p>A hint that specifies the correct object type for data type mapping. Possible values are as follows:</p> <ul> <li> <p> <code>DATE</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>DATE</code> type to the database. The accepted format is <code>YYYY-MM-DD</code>.</p> </li> <li> <p> <code>DECIMAL</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>DECIMAL</code> type to the database.</p> </li> <li> <p> <code>JSON</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>JSON</code> type to the database.</p> </li> <li> <p> <code>TIME</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>TIME</code> type to the database. The accepted format is <code>HH:MM:SS[.FFF]</code>.</p> </li> <li> <p> <code>TIMESTAMP</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>TIMESTAMP</code> type to the database. The accepted format is <code>YYYY-MM-DD HH:MM:SS[.FFF]</code>.</p> </li> <li> <p> <code>UUID</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>UUID</code> type to the database. </p> </li> </ul>'
       description: A parameter used in a SQL statement.
     DecimalReturnType:
       type: string
       enum:
         - STRING
         - DOUBLE_OR_LONG
+    LongReturnType:
+      type: string
+      enum:
+        - STRING
+        - LONG
     RollbackTransactionResponse:
       type: object
       properties:
@@ -795,26 +851,26 @@ components:
     ArrayValue:
       type: object
       properties:
-        arrayValues:
-          allOf:
-            - $ref: '#/components/schemas/ArrayOfArray'
-            - description: An array of arrays.
         booleanValues:
           allOf:
             - $ref: '#/components/schemas/BooleanArray'
             - description: An array of Boolean values.
-        doubleValues:
-          allOf:
-            - $ref: '#/components/schemas/DoubleArray'
-            - description: An array of integers.
         longValues:
           allOf:
             - $ref: '#/components/schemas/LongArray'
-            - description: An array of floating point numbers.
+            - description: An array of integers.
+        doubleValues:
+          allOf:
+            - $ref: '#/components/schemas/DoubleArray'
+            - description: An array of floating-point numbers.
         stringValues:
           allOf:
             - $ref: '#/components/schemas/StringArray'
             - description: An array of strings.
+        arrayValues:
+          allOf:
+            - $ref: '#/components/schemas/ArrayOfArray'
+            - description: An array of arrays.
       description: Contains an array.
     ArrayOfArray:
       type: array
@@ -826,16 +882,16 @@ components:
       description: <p>An array of Boolean values.</p> <note> <p>Some array entries can be null.</p> </note>
       items:
         $ref: '#/components/schemas/BoxedBoolean'
-    DoubleArray:
-      type: array
-      description: <p>An array of floating point numbers.</p> <note> <p>Some array entries can be null.</p> </note>
-      items:
-        $ref: '#/components/schemas/BoxedDouble'
     LongArray:
       type: array
       description: <p>An array of integers.</p> <note> <p>Some array entries can be null.</p> </note>
       items:
         $ref: '#/components/schemas/BoxedLong'
+    DoubleArray:
+      type: array
+      description: <p>An array of floating-point numbers.</p> <note> <p>Some array entries can be null.</p> </note>
+      items:
+        $ref: '#/components/schemas/BoxedDouble'
     StringArray:
       type: array
       description: <p>An array of strings.</p> <note> <p>Some array entries can be null.</p> </note>
@@ -844,34 +900,26 @@ components:
     Value:
       type: object
       properties:
-        arrayValues:
-          allOf:
-            - $ref: '#/components/schemas/ArrayValueList'
-            - description: An array of column values.
-        bigIntValue:
-          allOf:
-            - $ref: '#/components/schemas/BoxedLong'
-            - description: A value for a column of big integer data type.
-        bitValue:
-          allOf:
-            - $ref: '#/components/schemas/BoxedBoolean'
-            - description: A value for a column of BIT data type.
-        blobValue:
-          allOf:
-            - $ref: '#/components/schemas/Blob'
-            - description: A value for a column of BLOB data type.
-        doubleValue:
-          allOf:
-            - $ref: '#/components/schemas/BoxedDouble'
-            - description: A value for a column of double data type.
-        intValue:
-          allOf:
-            - $ref: '#/components/schemas/BoxedInteger'
-            - description: A value for a column of integer data type.
         isNull:
           allOf:
             - $ref: '#/components/schemas/BoxedBoolean'
             - description: A NULL value.
+        bitValue:
+          allOf:
+            - $ref: '#/components/schemas/BoxedBoolean'
+            - description: A value for a column of BIT data type.
+        bigIntValue:
+          allOf:
+            - $ref: '#/components/schemas/BoxedLong'
+            - description: A value for a column of big integer data type.
+        intValue:
+          allOf:
+            - $ref: '#/components/schemas/BoxedInteger'
+            - description: A value for a column of integer data type.
+        doubleValue:
+          allOf:
+            - $ref: '#/components/schemas/BoxedDouble'
+            - description: A value for a column of double data type.
         realValue:
           allOf:
             - $ref: '#/components/schemas/BoxedFloat'
@@ -880,15 +928,27 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: A value for a column of string data type.
+        blobValue:
+          allOf:
+            - $ref: '#/components/schemas/Blob'
+            - description: A value for a column of BLOB data type.
+        arrayValues:
+          allOf:
+            - $ref: '#/components/schemas/ArrayValueList'
+            - description: An array of column values.
         structValue:
           allOf:
             - $ref: '#/components/schemas/StructValue'
             - description: A value for a column of STRUCT data type.
-      description: <p>Contains the value of a column.</p> <pre><code> &lt;important&gt; &lt;p&gt;This data type is deprecated.&lt;/p&gt; &lt;/important&gt; </code></pre>
+      description: <p>Contains the value of a column.</p> <pre><code> &lt;note&gt; &lt;p&gt;This data structure is only used with the deprecated &lt;code&gt;ExecuteSql&lt;/code&gt; operation. Use the &lt;code&gt;BatchExecuteStatement&lt;/code&gt; or &lt;code&gt;ExecuteStatement&lt;/code&gt; operation instead.&lt;/p&gt; &lt;/note&gt; </code></pre>
     ArrayValueList:
       type: array
       items:
         $ref: '#/components/schemas/Value'
+    SqlStatement:
+      type: string
+      minLength: 0
+      maxLength: 65536
     DbName:
       type: string
       minLength: 0
@@ -897,10 +957,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SqlParametersList'
-    SqlStatement:
-      type: string
-      minLength: 0
-      maxLength: 65536
     Id:
       type: string
       minLength: 0
@@ -913,30 +969,30 @@ components:
         - sql
       title: BatchExecuteStatementRequest
       properties:
-        database:
-          allOf:
-            - $ref: '#/components/schemas/DbName'
-            - description: The name of the database.
-        parameterSets:
-          allOf:
-            - $ref: '#/components/schemas/SqlParameterSets'
-            - description: '<p>The parameter set for the batch operation.</p> <p>The SQL statement is executed as many times as the number of parameter sets provided. To execute a SQL statement with no parameters, use one of the following options:</p> <ul> <li> <p>Specify one or more empty parameter sets.</p> </li> <li> <p>Use the <code>ExecuteStatement</code> operation instead of the <code>BatchExecuteStatement</code> operation.</p> </li> </ul> <note> <p>Array parameters are not supported.</p> </note>'
         resourceArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-        schema:
-          allOf:
-            - $ref: '#/components/schemas/DbName'
-            - description: The name of the database schema.
         secretArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The name or ARN of the secret that enables access to the DB cluster.
+            - description: '<p>The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret.</p> <p>For information about creating the secret, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html">Create a database secret</a>.</p>'
         sql:
           allOf:
             - $ref: '#/components/schemas/SqlStatement'
-            - description: The SQL statement to run.
+            - description: The SQL statement to run. Don't include a semicolon (;) at the end of the SQL statement.
+        database:
+          allOf:
+            - $ref: '#/components/schemas/DbName'
+            - description: The name of the database.
+        schema:
+          allOf:
+            - $ref: '#/components/schemas/DbName'
+            - description: '<p>The name of the database schema.</p> <note> <p>Currently, the <code>schema</code> parameter isn''t supported.</p> </note>'
+        parameterSets:
+          allOf:
+            - $ref: '#/components/schemas/SqlParameterSets'
+            - description: '<p>The parameter set for the batch operation.</p> <p>The SQL statement is executed as many times as the number of parameter sets provided. To execute a SQL statement with no parameters, use one of the following options:</p> <ul> <li> <p>Specify one or more empty parameter sets.</p> </li> <li> <p>Use the <code>ExecuteStatement</code> operation instead of the <code>BatchExecuteStatement</code> operation.</p> </li> </ul> <note> <p>Array parameters are not supported.</p> </note>'
         transactionId:
           allOf:
             - $ref: '#/components/schemas/Id'
@@ -953,22 +1009,22 @@ components:
         - secretArn
       title: BeginTransactionRequest
       properties:
-        database:
-          allOf:
-            - $ref: '#/components/schemas/DbName'
-            - description: The name of the database.
         resourceArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-        schema:
-          allOf:
-            - $ref: '#/components/schemas/DbName'
-            - description: The name of the database schema.
         secretArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The name or ARN of the secret that enables access to the DB cluster.
+        database:
+          allOf:
+            - $ref: '#/components/schemas/DbName'
+            - description: The name of the database.
+        schema:
+          allOf:
+            - $ref: '#/components/schemas/DbName'
+            - description: The name of the database schema.
       description: The request parameters represent the input of a request to start a SQL transaction.
     Blob:
       type: string
@@ -986,41 +1042,53 @@ components:
       type: integer
     BoxedLong:
       type: integer
-    Integer:
-      type: integer
     String:
       type: string
+    Integer:
+      type: integer
     ColumnMetadata:
       type: object
       properties:
-        arrayBaseColumnType:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - description: The type of the column.
-        isAutoIncrement:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: A value that indicates whether the column increments automatically.
-        isCaseSensitive:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: A value that indicates whether the column is case-sensitive.
-        isCurrency:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: A value that indicates whether the column contains currency values.
-        isSigned:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: A value that indicates whether an integer column is signed.
-        label:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The label for the column.
         name:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The name of the column.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The type of the column.
+        typeName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The database-specific data type of the column.
+        label:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The label for the column.
+        schemaName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the schema that owns the table that includes the column.
+        tableName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the table that includes the column.
+        isAutoIncrement:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A value that indicates whether the column increments automatically.
+        isSigned:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A value that indicates whether an integer column is signed.
+        isCurrency:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A value that indicates whether the column contains currency values.
+        isCaseSensitive:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A value that indicates whether the column is case-sensitive.
         nullable:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -1033,22 +1101,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Integer'
             - description: The scale value of a decimal number column.
-        schemaName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the schema that owns the table that includes the column.
-        tableName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the table that includes the column.
-        type:
+        arrayBaseColumnType:
           allOf:
             - $ref: '#/components/schemas/Integer'
             - description: The type of the column.
-        typeName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The database-specific data type of the column.
       description: Contains the metadata for a column.
     CommitTransactionRequest:
       type: object
@@ -1078,31 +1134,31 @@ components:
     ExecuteSqlRequest:
       type: object
       required:
-        - awsSecretStoreArn
         - dbClusterOrInstanceArn
+        - awsSecretStoreArn
         - sqlStatements
       title: ExecuteSqlRequest
       properties:
-        awsSecretStoreArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster.
-        database:
-          allOf:
-            - $ref: '#/components/schemas/DbName'
-            - description: The name of the database.
         dbClusterOrInstanceArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The ARN of the Aurora Serverless DB cluster.
-        schema:
+        awsSecretStoreArn:
           allOf:
-            - $ref: '#/components/schemas/DbName'
-            - description: The name of the database schema.
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret.</p> <p>For information about creating the secret, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html">Create a database secret</a>.</p>'
         sqlStatements:
           allOf:
             - $ref: '#/components/schemas/SqlStatement'
             - description: '<p>One or more SQL statements to run on the DB cluster.</p> <p>You can separate SQL statements from each other with a semicolon (;). Any valid SQL statement is permitted, including data definition, data manipulation, and commit statements. </p>'
+        database:
+          allOf:
+            - $ref: '#/components/schemas/DbName'
+            - description: The name of the database.
+        schema:
+          allOf:
+            - $ref: '#/components/schemas/DbName'
+            - description: The name of the database schema.
       description: The request parameters represent the input of a request to run one or more SQL statements.
     SqlStatementResults:
       type: array
@@ -1114,8 +1170,17 @@ components:
         decimalReturnType:
           allOf:
             - $ref: '#/components/schemas/DecimalReturnType'
-            - description: '<p>A value that indicates how a field of <code>DECIMAL</code> type is represented in the response. The value of <code>STRING</code>, the default, specifies that it is converted to a String value. The value of <code>DOUBLE_OR_LONG</code> specifies that it is converted to a Long value if its scale is 0, or to a Double value otherwise.</p> <important> <p>Conversion to Double or Long can result in roundoff errors due to precision loss. We recommend converting to String, especially when working with currency values.</p> </important>'
+            - description: '<p>A value that indicates how a field of <code>DECIMAL</code> type is represented in the response. The value of <code>STRING</code>, the default, specifies that it is converted to a String value. The value of <code>DOUBLE_OR_LONG</code> specifies that it is converted to a Long value if its scale is 0, or to a Double value otherwise.</p> <note> <p>Conversion to Double or Long can result in roundoff errors due to precision loss. We recommend converting to String, especially when working with currency values.</p> </note>'
+        longReturnType:
+          allOf:
+            - $ref: '#/components/schemas/LongReturnType'
+            - description: 'A value that indicates how a field of <code>LONG</code> type is represented. Allowed values are <code>LONG</code> and <code>STRING</code>. The default is <code>LONG</code>. Specify <code>STRING</code> if the length or precision of numeric values might cause truncation or rounding errors. '
       description: Options that control how the result set is returned.
+    RecordsFormatType:
+      type: string
+      enum:
+        - NONE
+        - JSON
     ExecuteStatementRequest:
       type: object
       required:
@@ -1124,92 +1189,98 @@ components:
         - sql
       title: ExecuteStatementRequest
       properties:
-        continueAfterTimeout:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: '<p>A value that indicates whether to continue running the statement after the call times out. By default, the statement stops running when the call times out.</p> <important> <p>For DDL statements, we recommend continuing to run the statement after the call times out. When a DDL statement terminates before it is finished running, it can result in errors and possibly corrupted data structures.</p> </important>'
-        database:
-          allOf:
-            - $ref: '#/components/schemas/DbName'
-            - description: The name of the database.
-        includeResultMetadata:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: A value that indicates whether to include metadata in the results.
-        parameters:
-          allOf:
-            - $ref: '#/components/schemas/SqlParametersList'
-            - description: <p>The parameters for the SQL statement.</p> <note> <p>Array parameters are not supported.</p> </note>
         resourceArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-        resultSetOptions:
-          allOf:
-            - $ref: '#/components/schemas/ResultSetOptions'
-            - description: Options that control how the result set is returned.
-        schema:
-          allOf:
-            - $ref: '#/components/schemas/DbName'
-            - description: '<p>The name of the database schema.</p> <note> <p>Currently, the <code>schema</code> parameter isn''t supported.</p> </note>'
         secretArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The name or ARN of the secret that enables access to the DB cluster.
+            - description: '<p>The ARN of the secret that enables access to the DB cluster. Enter the database user name and password for the credentials in the secret.</p> <p>For information about creating the secret, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html">Create a database secret</a>.</p>'
         sql:
           allOf:
             - $ref: '#/components/schemas/SqlStatement'
             - description: The SQL statement to run.
+        database:
+          allOf:
+            - $ref: '#/components/schemas/DbName'
+            - description: The name of the database.
+        schema:
+          allOf:
+            - $ref: '#/components/schemas/DbName'
+            - description: '<p>The name of the database schema.</p> <note> <p>Currently, the <code>schema</code> parameter isn''t supported.</p> </note>'
+        parameters:
+          allOf:
+            - $ref: '#/components/schemas/SqlParametersList'
+            - description: <p>The parameters for the SQL statement.</p> <note> <p>Array parameters are not supported.</p> </note>
         transactionId:
           allOf:
             - $ref: '#/components/schemas/Id'
             - description: '<p>The identifier of a transaction that was started by using the <code>BeginTransaction</code> operation. Specify the transaction ID of the transaction that you want to include the SQL statement in.</p> <p>If the SQL statement is not part of a transaction, don''t set this parameter.</p>'
+        includeResultMetadata:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A value that indicates whether to include metadata in the results.
+        continueAfterTimeout:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>A value that indicates whether to continue running the statement after the call times out. By default, the statement stops running when the call times out.</p> <note> <p>For DDL statements, we recommend continuing to run the statement after the call times out. When a DDL statement terminates before it is finished running, it can result in errors and possibly corrupted data structures.</p> </note>'
+        resultSetOptions:
+          allOf:
+            - $ref: '#/components/schemas/ResultSetOptions'
+            - description: Options that control how the result set is returned.
+        formatRecordsAs:
+          allOf:
+            - $ref: '#/components/schemas/RecordsFormatType'
+            - description: '<p>A value that indicates whether to format the result set as a single JSON string. This parameter only applies to <code>SELECT</code> statements and is ignored for other types of statements. Allowed values are <code>NONE</code> and <code>JSON</code>. The default value is <code>NONE</code>. The result is returned in the <code>formattedRecords</code> field.</p> <p>For usage information about the JSON format for result sets, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html">Using the Data API</a> in the <i>Amazon Aurora User Guide</i>.</p>'
       description: The request parameters represent the input of a request to run a SQL statement against a database.
-    Metadata:
-      type: array
-      items:
-        $ref: '#/components/schemas/ColumnMetadata'
-    FieldList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Field'
-    RecordsUpdated:
-      type: integer
     SqlRecords:
       type: array
       items:
         $ref: '#/components/schemas/FieldList'
+    Metadata:
+      type: array
+      items:
+        $ref: '#/components/schemas/ColumnMetadata'
+    RecordsUpdated:
+      type: integer
+    FieldList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Field'
+    FormattedSqlRecords:
+      type: string
     Field:
       type: object
       properties:
-        arrayValue:
-          allOf:
-            - $ref: '#/components/schemas/ArrayValue'
-            - description: An array of values.
-        blobValue:
-          allOf:
-            - $ref: '#/components/schemas/Blob'
-            - description: A value of BLOB data type.
-        booleanValue:
-          allOf:
-            - $ref: '#/components/schemas/BoxedBoolean'
-            - description: A value of Boolean data type.
-        doubleValue:
-          allOf:
-            - $ref: '#/components/schemas/BoxedDouble'
-            - description: A value of double data type.
         isNull:
           allOf:
             - $ref: '#/components/schemas/BoxedBoolean'
             - description: A NULL value.
+        booleanValue:
+          allOf:
+            - $ref: '#/components/schemas/BoxedBoolean'
+            - description: A value of Boolean data type.
         longValue:
           allOf:
             - $ref: '#/components/schemas/BoxedLong'
             - description: A value of long data type.
+        doubleValue:
+          allOf:
+            - $ref: '#/components/schemas/BoxedDouble'
+            - description: A value of double data type.
         stringValue:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: A value of string data type.
+        blobValue:
+          allOf:
+            - $ref: '#/components/schemas/Blob'
+            - description: A value of BLOB data type.
+        arrayValue:
+          allOf:
+            - $ref: '#/components/schemas/ArrayValue'
+            - description: An array of values.
       description: Contains a value.
     Long:
       type: integer
@@ -1226,7 +1297,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Row'
             - description: The values returned in the record.
-      description: A record returned by a call.
+      description: <p>A record returned by a call.</p> <note> <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p> </note>
     Records:
       type: array
       items:
@@ -1246,15 +1317,15 @@ components:
     ResultFrame:
       type: object
       properties:
-        records:
-          allOf:
-            - $ref: '#/components/schemas/Records'
-            - description: The records in the result set.
         resultSetMetadata:
           allOf:
             - $ref: '#/components/schemas/ResultSetMetadata'
             - description: The result-set metadata in the result set.
-      description: The result set returned by a SQL statement.
+        records:
+          allOf:
+            - $ref: '#/components/schemas/Records'
+            - description: The records in the result set.
+      description: <p>The result set returned by a SQL statement.</p> <note> <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p> </note>
     RollbackTransactionRequest:
       type: object
       required:
@@ -1288,15 +1359,15 @@ components:
     SqlStatementResult:
       type: object
       properties:
-        numberOfRecordsUpdated:
-          allOf:
-            - $ref: '#/components/schemas/RecordsUpdated'
-            - description: The number of records updated by a SQL statement.
         resultFrame:
           allOf:
             - $ref: '#/components/schemas/ResultFrame'
             - description: The result set of the SQL statement.
-      description: <p>The result of a SQL statement.</p> <pre><code> &lt;important&gt; &lt;p&gt;This data type is deprecated.&lt;/p&gt; &lt;/important&gt; </code></pre>
+        numberOfRecordsUpdated:
+          allOf:
+            - $ref: '#/components/schemas/RecordsUpdated'
+            - description: The number of records updated by a SQL statement.
+      description: <p>The result of a SQL statement.</p> <pre><code> &lt;note&gt; &lt;p&gt;This data structure is only used with the deprecated &lt;code&gt;ExecuteSql&lt;/code&gt; operation. Use the &lt;code&gt;BatchExecuteStatement&lt;/code&gt; or &lt;code&gt;ExecuteStatement&lt;/code&gt; operation instead.&lt;/p&gt; &lt;/note&gt; </code></pre>
     StructValue:
       type: object
       properties:
@@ -1304,7 +1375,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ArrayValueList'
             - description: The attributes returned in the record.
-      description: A structure value returned by a call.
+      description: <p>A structure value returned by a call.</p> <note> <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation. Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p> </note>
     UpdateResult:
       type: object
       properties:

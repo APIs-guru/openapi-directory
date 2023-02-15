@@ -117,7 +117,7 @@ paths:
   /#X-Amz-Target=AWSShield_20160616.AssociateDRTLogBucket:
     post:
       operationId: AssociateDRTLogBucket
-      description: '<p>Authorizes the Shield Response Team (SRT) to access the specified Amazon S3 bucket containing log data such as Application Load Balancer access logs, CloudFront logs, or logs from third party sources. You can associate up to 10 Amazon S3 buckets with your subscription.</p> <p>To use the services of the SRT and make an <code>AssociateDRTLogBucket</code> request, you must be subscribed to the <a href="https://aws.amazon.com/premiumsupport/business-support/">Business Support plan</a> or the <a href="https://aws.amazon.com/premiumsupport/enterprise-support/">Enterprise Support plan</a>.</p>'
+      description: '<p>Authorizes the Shield Response Team (SRT) to access the specified Amazon S3 bucket containing log data such as Application Load Balancer access logs, CloudFront logs, or logs from third party sources. You can associate up to 10 Amazon S3 buckets with your subscription.</p> <p>To use the services of the SRT and make an <code>AssociateDRTLogBucket</code> request, you must be subscribed to the <a href="http://aws.amazon.com/premiumsupport/business-support/">Business Support plan</a> or the <a href="http://aws.amazon.com/premiumsupport/enterprise-support/">Enterprise Support plan</a>.</p>'
       responses:
         '200':
           description: Success
@@ -198,7 +198,7 @@ paths:
   /#X-Amz-Target=AWSShield_20160616.AssociateDRTRole:
     post:
       operationId: AssociateDRTRole
-      description: '<p>Authorizes the Shield Response Team (SRT) using the specified role, to access your Amazon Web Services account to assist with DDoS attack mitigation during potential attacks. This enables the SRT to inspect your WAF configuration and create or update WAF rules and web ACLs.</p> <p>You can associate only one <code>RoleArn</code> with your subscription. If you submit an <code>AssociateDRTRole</code> request for an account that already has an associated role, the new <code>RoleArn</code> will replace the existing <code>RoleArn</code>. </p> <p>Prior to making the <code>AssociateDRTRole</code> request, you must attach the <a href="https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy">AWSShieldDRTAccessPolicy</a> managed policy to the role you will specify in the request. For more information see <a href=" https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html">Attaching and Detaching IAM Policies</a>. The role must also trust the service principal <code> drt.shield.amazonaws.com</code>. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html">IAM JSON Policy Elements: Principal</a>.</p> <p>The SRT will have access only to your WAF and Shield resources. By submitting this request, you authorize the SRT to inspect your WAF and Shield configuration and create and update WAF rules and web ACLs on your behalf. The SRT takes these actions only if explicitly authorized by you.</p> <p>You must have the <code>iam:PassRole</code> permission to make an <code>AssociateDRTRole</code> request. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html">Granting a User Permissions to Pass a Role to an Amazon Web Services Service</a>. </p> <p>To use the services of the SRT and make an <code>AssociateDRTRole</code> request, you must be subscribed to the <a href="https://aws.amazon.com/premiumsupport/business-support/">Business Support plan</a> or the <a href="https://aws.amazon.com/premiumsupport/enterprise-support/">Enterprise Support plan</a>.</p>'
+      description: '<p>Authorizes the Shield Response Team (SRT) using the specified role, to access your Amazon Web Services account to assist with DDoS attack mitigation during potential attacks. This enables the SRT to inspect your WAF configuration and create or update WAF rules and web ACLs.</p> <p>You can associate only one <code>RoleArn</code> with your subscription. If you submit an <code>AssociateDRTRole</code> request for an account that already has an associated role, the new <code>RoleArn</code> will replace the existing <code>RoleArn</code>. </p> <p>Prior to making the <code>AssociateDRTRole</code> request, you must attach the <code>AWSShieldDRTAccessPolicy</code> managed policy to the role that you''ll specify in the request. You can access this policy in the IAM console at <a href="https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy">AWSShieldDRTAccessPolicy</a>. For more information see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html">Adding and removing IAM identity permissions</a>. The role must also trust the service principal <code>drt.shield.amazonaws.com</code>. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html">IAM JSON policy elements: Principal</a>.</p> <p>The SRT will have access only to your WAF and Shield resources. By submitting this request, you authorize the SRT to inspect your WAF and Shield configuration and create and update WAF rules and web ACLs on your behalf. The SRT takes these actions only if explicitly authorized by you.</p> <p>You must have the <code>iam:PassRole</code> permission to make an <code>AssociateDRTRole</code> request. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html">Granting a user permissions to pass a role to an Amazon Web Services service</a>. </p> <p>To use the services of the SRT and make an <code>AssociateDRTRole</code> request, you must be subscribed to the <a href="http://aws.amazon.com/premiumsupport/business-support/">Business Support plan</a> or the <a href="http://aws.amazon.com/premiumsupport/enterprise-support/">Enterprise Support plan</a>.</p>'
       responses:
         '200':
           description: Success
@@ -267,7 +267,7 @@ paths:
   /#X-Amz-Target=AWSShield_20160616.AssociateHealthCheck:
     post:
       operationId: AssociateHealthCheck
-      description: '<p>Adds health-based detection to the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your Amazon Web Services resource to improve responsiveness and accuracy in attack detection and mitigation. </p> <p>You define the health check in Route 53 and then associate it with your Shield Advanced protection. For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option">Shield Advanced Health-Based Detection</a> in the <i>WAF Developer Guide</i>. </p>'
+      description: "<p>Adds health-based detection to the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your Amazon Web Services resource to improve responsiveness and accuracy in attack detection and response. </p> <p>You define the health check in Route\_53 and then associate it with your Shield Advanced protection. For more information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option\">Shield Advanced Health-Based Detection</a> in the <i>WAF Developer Guide</i>. </p>"
       responses:
         '200':
           description: Success
@@ -305,6 +305,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OptimisticLockException'
+        '485':
+          description: InvalidResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceException'
       requestBody:
         required: true
         content:
@@ -393,7 +399,7 @@ paths:
   /#X-Amz-Target=AWSShield_20160616.CreateProtection:
     post:
       operationId: CreateProtection
-      description: '<p>Enables Shield Advanced for a specific Amazon Web Services resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, Global Accelerator accelerator, Elastic IP Address, or an Amazon Route 53 hosted zone.</p> <p>You can add protection to only a single resource with each CreateProtection request. If you want to add protection to multiple resources at once, use the <a href="https://console.aws.amazon.com/waf/">WAF console</a>. For more information see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html">Getting Started with Shield Advanced</a> and <a href="https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html">Add Shield Advanced Protection to more Amazon Web Services Resources</a>.</p>'
+      description: "<p>Enables Shield Advanced for a specific Amazon Web Services resource. The resource can be an Amazon CloudFront distribution, Amazon Route\_53 hosted zone, Global Accelerator standard accelerator, Elastic IP Address, Application Load Balancer, or a Classic Load Balancer. You can protect Amazon EC2 instances and Network Load Balancers by association with protected Amazon EC2 Elastic IP addresses.</p> <p>You can add protection to only a single resource with each <code>CreateProtection</code> request. You can add protection to multiple resources at once through the Shield Advanced console at <a href=\"https://console.aws.amazon.com/wafv2/shieldv2#/\">https://console.aws.amazon.com/wafv2/shieldv2#/</a>. For more information see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html\">Getting Started with Shield Advanced</a> and <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html\">Adding Shield Advanced protection to Amazon Web Services resources</a>.</p>"
       responses:
         '200':
           description: Success
@@ -543,7 +549,7 @@ paths:
   /#X-Amz-Target=AWSShield_20160616.CreateSubscription:
     post:
       operationId: CreateSubscription
-      description: '<p>Activates Shield Advanced for an account.</p> <p>When you initally create a subscription, your subscription is set to be automatically renewed at the end of the existing subscription period. You can change this by submitting an <code>UpdateSubscription</code> request. </p>'
+      description: '<p>Activates Shield Advanced for an account.</p> <note> <p>For accounts that are members of an Organizations organization, Shield Advanced subscriptions are billed against the organization''s payer account, regardless of whether the payer account itself is subscribed. </p> </note> <p>When you initially create a subscription, your subscription is set to be automatically renewed at the end of the existing subscription period. You can change this by submitting an <code>UpdateSubscription</code> request. </p>'
       responses:
         '200':
           description: Success
@@ -1054,6 +1060,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSShield_20160616.DisableApplicationLayerAutomaticResponse:
+    post:
+      operationId: DisableApplicationLayerAutomaticResponse
+      description: 'Disable the Shield Advanced automatic application layer DDoS mitigation feature for the protected resource. This stops Shield Advanced from creating, verifying, and applying WAF rules for attacks that it detects for the resource. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisableApplicationLayerAutomaticResponseResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: OptimisticLockException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptimisticLockException'
+        '484':
+          description: InvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidOperationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisableApplicationLayerAutomaticResponseRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShield_20160616.DisableApplicationLayerAutomaticResponse
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSShield_20160616.DisableProactiveEngagement:
     post:
       operationId: DisableProactiveEngagement
@@ -1120,7 +1189,7 @@ paths:
   /#X-Amz-Target=AWSShield_20160616.DisassociateDRTLogBucket:
     post:
       operationId: DisassociateDRTLogBucket
-      description: '<p>Removes the Shield Response Team''s (SRT) access to the specified Amazon S3 bucket containing the logs that you shared previously.</p> <p>To make a <code>DisassociateDRTLogBucket</code> request, you must be subscribed to the <a href="https://aws.amazon.com/premiumsupport/business-support/">Business Support plan</a> or the <a href="https://aws.amazon.com/premiumsupport/enterprise-support/">Enterprise Support plan</a>. However, if you are not subscribed to one of these support plans, but had been previously and had granted the SRT access to your account, you can submit a <code>DisassociateDRTLogBucket</code> request to remove this access.</p>'
+      description: Removes the Shield Response Team's (SRT) access to the specified Amazon S3 bucket containing the logs that you shared previously.
       responses:
         '200':
           description: Success
@@ -1189,7 +1258,7 @@ paths:
   /#X-Amz-Target=AWSShield_20160616.DisassociateDRTRole:
     post:
       operationId: DisassociateDRTRole
-      description: '<p>Removes the Shield Response Team''s (SRT) access to your Amazon Web Services account.</p> <p>To make a <code>DisassociateDRTRole</code> request, you must be subscribed to the <a href="https://aws.amazon.com/premiumsupport/business-support/">Business Support plan</a> or the <a href="https://aws.amazon.com/premiumsupport/enterprise-support/">Enterprise Support plan</a>. However, if you are not subscribed to one of these support plans, but had been previously and had granted the SRT access to your account, you can submit a <code>DisassociateDRTRole</code> request to remove this access.</p>'
+      description: Removes the Shield Response Team's (SRT) access to your Amazon Web Services account.
       responses:
         '200':
           description: Success
@@ -1246,7 +1315,7 @@ paths:
   /#X-Amz-Target=AWSShield_20160616.DisassociateHealthCheck:
     post:
       operationId: DisassociateHealthCheck
-      description: '<p>Removes health-based detection from the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your Amazon Web Services resource to improve responsiveness and accuracy in attack detection and mitigation. </p> <p>You define the health check in Route 53 and then associate or disassociate it with your Shield Advanced protection. For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option">Shield Advanced Health-Based Detection</a> in the <i>WAF Developer Guide</i>. </p>'
+      description: "<p>Removes health-based detection from the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your Amazon Web Services resource to improve responsiveness and accuracy in attack detection and response. </p> <p>You define the health check in Route\_53 and then associate or disassociate it with your Shield Advanced protection. For more information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option\">Shield Advanced Health-Based Detection</a> in the <i>WAF Developer Guide</i>. </p>"
       responses:
         '200':
           description: Success
@@ -1278,6 +1347,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OptimisticLockException'
+        '484':
+          description: InvalidResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceException'
       requestBody:
         required: true
         content:
@@ -1292,6 +1367,75 @@ paths:
             type: string
             enum:
               - AWSShield_20160616.DisassociateHealthCheck
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSShield_20160616.EnableApplicationLayerAutomaticResponse:
+    post:
+      operationId: EnableApplicationLayerAutomaticResponse
+      description: '<p>Enable the Shield Advanced automatic application layer DDoS mitigation for the protected resource. </p> <note> <p>This feature is available for Amazon CloudFront distributions and Application Load Balancers only.</p> </note> <p>This causes Shield Advanced to create, verify, and apply WAF rules for DDoS attacks that it detects for the resource. Shield Advanced applies the rules in a Shield rule group inside the web ACL that you''ve associated with the resource. For information about how automatic mitigation works and the requirements for using it, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/ddos-advanced-automatic-app-layer-response.html">Shield Advanced automatic application layer DDoS mitigation</a>.</p> <note> <p>Don''t use this action to make changes to automatic mitigation settings when it''s already enabled for a resource. Instead, use <a>UpdateApplicationLayerAutomaticResponse</a>.</p> </note> <p>To use this feature, you must associate a web ACL with the protected resource. The web ACL must be created using the latest version of WAF (v2). You can associate the web ACL through the Shield Advanced console at <a href="https://console.aws.amazon.com/wafv2/shieldv2#/">https://console.aws.amazon.com/wafv2/shieldv2#/</a>. For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html">Getting Started with Shield Advanced</a>. You can also associate the web ACL to the resource through the WAF console or the WAF API, but you must manage Shield Advanced automatic mitigation through Shield Advanced. For information about WAF, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/">WAF Developer Guide</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnableApplicationLayerAutomaticResponseResponse'
+        '480':
+          description: LimitsExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitsExceededException'
+        '481':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: OptimisticLockException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptimisticLockException'
+        '485':
+          description: InvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidOperationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnableApplicationLayerAutomaticResponseRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShield_20160616.EnableApplicationLayerAutomaticResponse
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1468,7 +1612,7 @@ paths:
   /#X-Amz-Target=AWSShield_20160616.ListProtectionGroups:
     post:
       operationId: ListProtectionGroups
-      description: Retrieves the <a>ProtectionGroup</a> objects for the account.
+      description: 'Retrieves <a>ProtectionGroup</a> objects for the account. You can retrieve all protection groups or you can provide filtering criteria and retrieve just the subset of protection groups that match the criteria. '
       responses:
         '200':
           description: Success
@@ -1531,7 +1675,7 @@ paths:
   /#X-Amz-Target=AWSShield_20160616.ListProtections:
     post:
       operationId: ListProtections
-      description: Lists all <a>Protection</a> objects for the account.
+      description: 'Retrieves <a>Protection</a> objects for the account. You can retrieve all protections or you can provide filtering criteria and retrieve just the subset of protections that match the criteria. '
       responses:
         '200':
           description: Success
@@ -1819,6 +1963,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSShield_20160616.UpdateApplicationLayerAutomaticResponse:
+    post:
+      operationId: UpdateApplicationLayerAutomaticResponse
+      description: Updates an existing Shield Advanced automatic application layer DDoS mitigation configuration for the specified resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateApplicationLayerAutomaticResponseResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: OptimisticLockException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptimisticLockException'
+        '484':
+          description: InvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidOperationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApplicationLayerAutomaticResponseRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShield_20160616.UpdateApplicationLayerAutomaticResponse
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSShield_20160616.UpdateEmergencyContactSettings:
     post:
       operationId: UpdateEmergencyContactSettings
@@ -1936,7 +2143,7 @@ paths:
   /#X-Amz-Target=AWSShield_20160616.UpdateSubscription:
     post:
       operationId: UpdateSubscription
-      description: Updates the details of an existing subscription. Only enter values for parameters you want to change. Empty parameters are not updated.
+      description: '<p>Updates the details of an existing subscription. Only enter values for parameters you want to change. Empty parameters are not updated.</p> <note> <p>For accounts that are members of an Organizations organization, Shield Advanced subscriptions are billed against the organization''s payer account, regardless of whether the payer account itself is subscribed. </p> </note>'
       responses:
         '200':
           description: Success
@@ -2100,6 +2307,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/HealthCheckArn'
             - description: The Amazon Resource Name (ARN) of the health check to associate with the protection.
+    InvalidResourceException: {}
     AssociateProactiveEngagementDetailsResponse:
       type: object
       properties: {}
@@ -2134,12 +2342,11 @@ components:
         ResourceArn:
           allOf:
             - $ref: '#/components/schemas/ResourceArn'
-            - description: '<p>The ARN (Amazon Resource Name) of the resource to be protected.</p> <p>The ARN should be in one of the following formats:</p> <ul> <li> <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i> </code> </p> </li> <li> <p>For an Elastic Load Balancer (Classic Load Balancer): <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/<i>load-balancer-name</i> </code> </p> </li> <li> <p>For an Amazon CloudFront distribution: <code>arn:aws:cloudfront::<i>account-id</i>:distribution/<i>distribution-id</i> </code> </p> </li> <li> <p>For an Global Accelerator accelerator: <code>arn:aws:globalaccelerator::<i>account-id</i>:accelerator/<i>accelerator-id</i> </code> </p> </li> <li> <p>For Amazon Route 53: <code>arn:aws:route53:::hostedzone/<i>hosted-zone-id</i> </code> </p> </li> <li> <p>For an Elastic IP address: <code>arn:aws:ec2:<i>region</i>:<i>account-id</i>:eip-allocation/<i>allocation-id</i> </code> </p> </li> </ul>'
+            - description: "<p>The ARN (Amazon Resource Name) of the resource to be protected.</p> <p>The ARN should be in one of the following formats:</p> <ul> <li> <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i> </code> </p> </li> <li> <p>For an Elastic Load Balancer (Classic Load Balancer): <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/<i>load-balancer-name</i> </code> </p> </li> <li> <p>For an Amazon CloudFront distribution: <code>arn:aws:cloudfront::<i>account-id</i>:distribution/<i>distribution-id</i> </code> </p> </li> <li> <p>For an Global Accelerator standard accelerator: <code>arn:aws:globalaccelerator::<i>account-id</i>:accelerator/<i>accelerator-id</i> </code> </p> </li> <li> <p>For Amazon Route\_53: <code>arn:aws:route53:::hostedzone/<i>hosted-zone-id</i> </code> </p> </li> <li> <p>For an Elastic IP address: <code>arn:aws:ec2:<i>region</i>:<i>account-id</i>:eip-allocation/<i>allocation-id</i> </code> </p> </li> </ul>"
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: One or more tag key-value pairs for the <a>Protection</a> object that is created.
-    InvalidResourceException: {}
     ResourceAlreadyExistsException: {}
     CreateProtectionGroupResponse:
       type: object
@@ -2225,7 +2432,7 @@ components:
         Attack:
           allOf:
             - $ref: '#/components/schemas/AttackDetail'
-            - description: The attack that is described.
+            - description: 'The attack that you requested. '
     DescribeAttackRequest:
       type: object
       required:
@@ -2235,7 +2442,7 @@ components:
         AttackId:
           allOf:
             - $ref: '#/components/schemas/AttackId'
-            - description: The unique identifier (ID) for the attack that to be described.
+            - description: The unique identifier (ID) for the attack.
     AccessDeniedException: {}
     DescribeAttackStatisticsResponse:
       type: object
@@ -2244,7 +2451,9 @@ components:
         - DataItems
       properties:
         TimeRange:
-          $ref: '#/components/schemas/TimeRange'
+          allOf:
+            - $ref: '#/components/schemas/TimeRange'
+            - description: The time range of the attack.
         DataItems:
           allOf:
             - $ref: '#/components/schemas/AttackStatisticsDataList'
@@ -2285,7 +2494,7 @@ components:
         Protection:
           allOf:
             - $ref: '#/components/schemas/Protection'
-            - description: The <a>Protection</a> object that is described.
+            - description: 'The <a>Protection</a> that you requested. '
     DescribeProtectionRequest:
       type: object
       title: DescribeProtectionRequest
@@ -2293,11 +2502,11 @@ components:
         ProtectionId:
           allOf:
             - $ref: '#/components/schemas/ProtectionId'
-            - description: 'The unique identifier (ID) for the <a>Protection</a> object that is described. When submitting the <code>DescribeProtection</code> request you must provide either the <code>ResourceArn</code> or the <code>ProtectionID</code>, but not both.'
+            - description: 'The unique identifier (ID) for the <a>Protection</a> object to describe. You must provide either the <code>ResourceArn</code> of the protected resource or the <code>ProtectionID</code> of the protection, but not both.'
         ResourceArn:
           allOf:
             - $ref: '#/components/schemas/ResourceArn'
-            - description: 'The ARN (Amazon Resource Name) of the Amazon Web Services resource for the <a>Protection</a> object that is described. When submitting the <code>DescribeProtection</code> request you must provide either the <code>ResourceArn</code> or the <code>ProtectionID</code>, but not both.'
+            - description: 'The ARN (Amazon Resource Name) of the protected Amazon Web Services resource. You must provide either the <code>ResourceArn</code> of the protected resource or the <code>ProtectionID</code> of the protection, but not both.'
     DescribeProtectionGroupResponse:
       type: object
       required:
@@ -2328,6 +2537,19 @@ components:
       type: object
       title: DescribeSubscriptionRequest
       properties: {}
+    DisableApplicationLayerAutomaticResponseResponse:
+      type: object
+      properties: {}
+    DisableApplicationLayerAutomaticResponseRequest:
+      type: object
+      required:
+        - ResourceArn
+      title: DisableApplicationLayerAutomaticResponseRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The ARN (Amazon Resource Name) of the protected resource.
     DisableProactiveEngagementResponse:
       type: object
       properties: {}
@@ -2373,6 +2595,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/HealthCheckArn'
             - description: The Amazon Resource Name (ARN) of the health check that is associated with the protection.
+    EnableApplicationLayerAutomaticResponseResponse:
+      type: object
+      properties: {}
+    EnableApplicationLayerAutomaticResponseRequest:
+      type: object
+      required:
+        - ResourceArn
+        - Action
+      title: EnableApplicationLayerAutomaticResponseRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The ARN (Amazon Resource Name) of the protected resource.
+        Action:
+          allOf:
+            - $ref: '#/components/schemas/ResponseAction'
+            - description: 'Specifies the action setting that Shield Advanced should use in the WAF rules that it creates on behalf of the protected resource in response to DDoS attacks. You specify this as part of the configuration for the automatic application layer DDoS mitigation feature, when you enable or update automatic mitigation. Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group, inside the web ACL that you have associated with the resource. '
     EnableProactiveEngagementResponse:
       type: object
       properties: {}
@@ -2403,7 +2643,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
-            - description: '<p>The token returned by a previous call to indicate that there is more data available. If not null, more results are available. Pass this value for the <code>NextMarker</code> parameter in a subsequent call to <code>ListAttacks</code> to retrieve the next set of items.</p> <p>Shield Advanced might return the list of <a>AttackSummary</a> objects in batches smaller than the number specified by MaxResults. If there are more attack summary objects to return, Shield Advanced will always also return a <code>NextToken</code>.</p>'
+            - description: '<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and providing the token that was returned by the prior call in your request. </p> <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code> setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p> <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>'
     ListAttacksRequest:
       type: object
       title: ListAttacksRequest
@@ -2411,23 +2651,23 @@ components:
         ResourceArns:
           allOf:
             - $ref: '#/components/schemas/ResourceArnFilterList'
-            - description: 'The ARN (Amazon Resource Name) of the resource that was attacked. If this is left blank, all applicable resources for this account will be included.'
+            - description: 'The ARNs (Amazon Resource Names) of the resources that were attacked. If you leave this blank, all applicable resources for this account will be included.'
         StartTime:
           allOf:
             - $ref: '#/components/schemas/TimeRange'
-            - description: 'The start of the time period for the attacks. This is a <code>timestamp</code> type. The sample request above indicates a <code>number</code> type because the default used by WAF is Unix time in seconds. However any valid <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp format</a> is allowed. '
+            - description: 'The start of the time period for the attacks. This is a <code>timestamp</code> type. The request syntax listing for this call indicates a <code>number</code> type, but you can provide the time in any valid <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp">timestamp format</a> setting. '
         EndTime:
           allOf:
             - $ref: '#/components/schemas/TimeRange'
-            - description: 'The end of the time period for the attacks. This is a <code>timestamp</code> type. The sample request above indicates a <code>number</code> type because the default used by WAF is Unix time in seconds. However any valid <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp format</a> is allowed. '
+            - description: 'The end of the time period for the attacks. This is a <code>timestamp</code> type. The request syntax listing for this call indicates a <code>number</code> type, but you can provide the time in any valid <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp">timestamp format</a> setting. '
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
-            - description: The <code>ListAttacksRequest.NextMarker</code> value from a previous call to <code>ListAttacksRequest</code>. Pass null if this is the first call.
+            - description: '<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and providing the token that was returned by the prior call in your request. </p> <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code> setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p> <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p> <p>On your first call to a list operation, leave this setting empty.</p>'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: '<p>The maximum number of <a>AttackSummary</a> objects to return. If you leave this blank, Shield Advanced returns the first 20 results.</p> <p>This is a maximum value. Shield Advanced might return the results in smaller batches. That is, the number of objects returned could be less than <code>MaxResults</code>, even if there are still more objects yet to return. If there are more objects to return, Shield Advanced returns a value in <code>NextToken</code> that you can use in your next request, to get the next batch of objects.</p>'
+            - description: '<p>The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a <code>NextToken</code> value in the response.</p> <p>The default setting is 20.</p>'
     ListProtectionGroupsResponse:
       type: object
       required:
@@ -2440,7 +2680,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
-            - description: 'If you specify a value for <code>MaxResults</code> and you have more protection groups than the value of MaxResults, Shield Advanced returns this token that you can use in your next request, to get the next batch of objects. '
+            - description: '<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and providing the token that was returned by the prior call in your request. </p> <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code> setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p> <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>'
     ListProtectionGroupsRequest:
       type: object
       title: ListProtectionGroupsRequest
@@ -2448,11 +2688,15 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
-            - description: The next token value from a previous call to <code>ListProtectionGroups</code>. Pass null if this is the first call.
+            - description: '<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and providing the token that was returned by the prior call in your request. </p> <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code> setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p> <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p> <p>On your first call to a list operation, leave this setting empty.</p>'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: '<p>The maximum number of <a>ProtectionGroup</a> objects to return. If you leave this blank, Shield Advanced returns the first 20 results.</p> <p>This is a maximum value. Shield Advanced might return the results in smaller batches. That is, the number of objects returned could be less than <code>MaxResults</code>, even if there are still more objects yet to return. If there are more objects to return, Shield Advanced returns a value in <code>NextToken</code> that you can use in your next request, to get the next batch of objects.</p>'
+            - description: '<p>The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a <code>NextToken</code> value in the response.</p> <p>The default setting is 20.</p>'
+        InclusionFilters:
+          allOf:
+            - $ref: '#/components/schemas/InclusionProtectionGroupFilters'
+            - description: Narrows the set of protection groups that the call retrieves. You can retrieve a single protection group by its name and you can retrieve all protection groups that are configured with specific pattern or aggregation settings. You can provide up to one criteria per filter type. Shield Advanced returns the protection groups that exactly match all of the search criteria that you provide.
     InvalidPaginationTokenException: {}
     ListProtectionsResponse:
       type: object
@@ -2464,7 +2708,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
-            - description: '<p>If you specify a value for <code>MaxResults</code> and you have more Protections than the value of MaxResults, Shield Advanced returns a NextToken value in the response that allows you to list another group of Protections. For the second and subsequent ListProtections requests, specify the value of NextToken from the previous response to get information about another batch of Protections.</p> <p>Shield Advanced might return the list of <a>Protection</a> objects in batches smaller than the number specified by MaxResults. If there are more <a>Protection</a> objects to return, Shield Advanced will always also return a <code>NextToken</code>.</p>'
+            - description: '<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and providing the token that was returned by the prior call in your request. </p> <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code> setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p> <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>'
     ListProtectionsRequest:
       type: object
       title: ListProtectionsRequest
@@ -2472,11 +2716,15 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
-            - description: The <code>ListProtectionsRequest.NextToken</code> value from a previous call to <code>ListProtections</code>. Pass null if this is the first call.
+            - description: '<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and providing the token that was returned by the prior call in your request. </p> <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code> setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p> <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p> <p>On your first call to a list operation, leave this setting empty.</p>'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: '<p>The maximum number of <a>Protection</a> objects to return. If you leave this blank, Shield Advanced returns the first 20 results.</p> <p>This is a maximum value. Shield Advanced might return the results in smaller batches. That is, the number of objects returned could be less than <code>MaxResults</code>, even if there are still more objects yet to return. If there are more objects to return, Shield Advanced returns a value in <code>NextToken</code> that you can use in your next request, to get the next batch of objects.</p>'
+            - description: '<p>The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a <code>NextToken</code> value in the response.</p> <p>The default setting is 20.</p>'
+        InclusionFilters:
+          allOf:
+            - $ref: '#/components/schemas/InclusionProtectionFilters'
+            - description: Narrows the set of protections that the call retrieves. You can retrieve a single protection by providing its name or the ARN (Amazon Resource Name) of its protected resource. You can also retrieve all protections for a specific resource type. You can provide up to one criteria per filter type. Shield Advanced returns protections that exactly match all of the filter criteria that you provide.
     ListResourcesInProtectionGroupResponse:
       type: object
       required:
@@ -2489,7 +2737,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
-            - description: 'If you specify a value for <code>MaxResults</code> and you have more resources in the protection group than the value of MaxResults, Shield Advanced returns this token that you can use in your next request, to get the next batch of objects. '
+            - description: '<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and providing the token that was returned by the prior call in your request. </p> <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code> setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p> <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p>'
     ListResourcesInProtectionGroupRequest:
       type: object
       required:
@@ -2503,11 +2751,11 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
-            - description: The next token value from a previous call to <code>ListResourcesInProtectionGroup</code>. Pass null if this is the first call.
+            - description: '<p>When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, Shield Advanced includes a <code>NextToken</code> value in the response. You can retrieve the next batch of objects by requesting the list again and providing the token that was returned by the prior call in your request. </p> <p>You can indicate the maximum number of objects that you want Shield Advanced to return for a single call with the <code>MaxResults</code> setting. Shield Advanced will not return more than <code>MaxResults</code> objects, but may return fewer, even if more objects are still available.</p> <p>Whenever more objects remain that Shield Advanced has not yet returned to you, the response will include a <code>NextToken</code> value.</p> <p>On your first call to a list operation, leave this setting empty.</p>'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: '<p>The maximum number of resource ARN objects to return. If you leave this blank, Shield Advanced returns the first 20 results.</p> <p>This is a maximum value. Shield Advanced might return the results in smaller batches. That is, the number of objects returned could be less than <code>MaxResults</code>, even if there are still more objects yet to return. If there are more objects to return, Shield Advanced returns a value in <code>NextToken</code> that you can use in your next request, to get the next batch of objects.</p>'
+            - description: '<p>The greatest number of objects that you want Shield Advanced to return to the list request. Shield Advanced might return fewer objects than you indicate in this setting, even if more objects are available. If there are more objects remaining, Shield Advanced will always also return a <code>NextToken</code> value in the response.</p> <p>The default setting is 20.</p>'
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -2561,6 +2809,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
             - description: The tag key for each tag that you want to remove from the resource.
+    UpdateApplicationLayerAutomaticResponseResponse:
+      type: object
+      properties: {}
+    UpdateApplicationLayerAutomaticResponseRequest:
+      type: object
+      required:
+        - ResourceArn
+        - Action
+      title: UpdateApplicationLayerAutomaticResponseRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The ARN (Amazon Resource Name) of the resource.
+        Action:
+          allOf:
+            - $ref: '#/components/schemas/ResponseAction'
+            - description: 'Specifies the action setting that Shield Advanced should use in the WAF rules that it creates on behalf of the protected resource in response to DDoS attacks. You specify this as part of the configuration for the automatic application layer DDoS mitigation feature, when you enable or update automatic mitigation. Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group, inside the web ACL that you have associated with the resource. '
     UpdateEmergencyContactSettingsResponse:
       type: object
       properties: {}
@@ -2614,6 +2880,38 @@ components:
           allOf:
             - $ref: '#/components/schemas/AutoRenew'
             - description: 'When you initally create a subscription, <code>AutoRenew</code> is set to <code>ENABLED</code>. If <code>ENABLED</code>, the subscription will be automatically renewed at the end of the existing subscription period. You can change this by submitting an <code>UpdateSubscription</code> request. If the <code>UpdateSubscription</code> request does not included a value for <code>AutoRenew</code>, the existing value for <code>AutoRenew</code> remains unchanged.'
+    ApplicationLayerAutomaticResponseStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    ResponseAction:
+      type: object
+      properties:
+        Block:
+          allOf:
+            - $ref: '#/components/schemas/BlockAction'
+            - description: '<p>Specifies that Shield Advanced should configure its WAF rules with the WAF <code>Block</code> action. </p> <p>You must specify exactly one action, either <code>Block</code> or <code>Count</code>.</p>'
+        Count:
+          allOf:
+            - $ref: '#/components/schemas/CountAction'
+            - description: '<p>Specifies that Shield Advanced should configure its WAF rules with the WAF <code>Count</code> action. </p> <p>You must specify exactly one action, either <code>Block</code> or <code>Count</code>.</p>'
+      description: 'Specifies the action setting that Shield Advanced should use in the WAF rules that it creates on behalf of the protected resource in response to DDoS attacks. You specify this as part of the configuration for the automatic application layer DDoS mitigation feature, when you enable or update automatic mitigation. Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group, inside the web ACL that you have associated with the resource. '
+    ApplicationLayerAutomaticResponseConfiguration:
+      type: object
+      required:
+        - Status
+        - Action
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationLayerAutomaticResponseStatus'
+            - description: 'Indicates whether automatic application layer DDoS mitigation is enabled for the protection. '
+        Action:
+          allOf:
+            - $ref: '#/components/schemas/ResponseAction'
+            - description: 'Specifies the action setting that Shield Advanced should use in the WAF rules that it creates on behalf of the protected resource in response to DDoS attacks. You specify this as part of the configuration for the automatic application layer DDoS mitigation feature, when you enable or update automatic mitigation. Shield Advanced creates the WAF rules in a Shield Advanced-managed rule group, inside the web ACL that you have associated with the resource. '
+      description: 'The automatic application layer DDoS mitigation settings for a <a>Protection</a>. This configuration determines whether Shield Advanced automatically manages rules in the web ACL in order to respond to application layer events that Shield Advanced determines to be DDoS attacks. '
     LogBucket:
       type: string
       pattern: '^([a-z]|(\d(?!\d{0,2}\.\d{1,3}\.\d{1,3}\.\d{1,3})))([a-z\d]|(\.(?!(\.|-)))|(-(?!\.))){1,61}[a-z\d]$'
@@ -2627,7 +2925,7 @@ components:
     ProtectionId:
       type: string
       pattern: '[a-zA-Z0-9\\-]*'
-      minLength: 1
+      minLength: 36
       maxLength: 36
     HealthCheckArn:
       type: string
@@ -2687,11 +2985,11 @@ components:
         StartTime:
           allOf:
             - $ref: '#/components/schemas/AttackTimestamp'
-            - description: 'The time the attack started, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
+            - description: 'The time the attack started, in Unix time in seconds. '
         EndTime:
           allOf:
             - $ref: '#/components/schemas/AttackTimestamp'
-            - description: 'The time the attack ended, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
+            - description: 'The time the attack ended, in Unix time in seconds. '
         AttackCounters:
           allOf:
             - $ref: '#/components/schemas/SummarizedCounterList'
@@ -2699,7 +2997,7 @@ components:
         AttackProperties:
           allOf:
             - $ref: '#/components/schemas/AttackProperties'
-            - description: '<p>The array of objects that provide details of the Shield event. </p> <p>For infrastructure layer events (L3 and L4 events) after January 25, 2021, you can view metrics for top contributors in Amazon CloudWatch metrics. For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms">Shield metrics and alarms</a> in the <i>WAF Developer Guide</i>. </p>'
+            - description: '<p>The array of objects that provide details of the Shield event. </p> <p>For infrastructure layer events (L3 and L4 events), you can view metrics for top contributors in Amazon CloudWatch metrics. For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms">Shield metrics and alarms</a> in the <i>WAF Developer Guide</i>. </p>'
         Mitigations:
           allOf:
             - $ref: '#/components/schemas/MitigationList'
@@ -2716,7 +3014,7 @@ components:
         AttackLayer:
           allOf:
             - $ref: '#/components/schemas/AttackLayer'
-            - description: '<p>The type of Shield event that was observed. <code>NETWORK</code> indicates layer 3 and layer 4 events and <code>APPLICATION</code> indicates layer 7 events.</p> <p>For infrastructure layer events (L3 and L4 events) after January 25, 2021, you can view metrics for top contributors in Amazon CloudWatch metrics. For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms">Shield metrics and alarms</a> in the <i>WAF Developer Guide</i>. </p>'
+            - description: '<p>The type of Shield event that was observed. <code>NETWORK</code> indicates layer 3 and layer 4 events and <code>APPLICATION</code> indicates layer 7 events.</p> <p>For infrastructure layer events (L3 and L4 events), you can view metrics for top contributors in Amazon CloudWatch metrics. For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms">Shield metrics and alarms</a> in the <i>WAF Developer Guide</i>. </p>'
         AttackPropertyIdentifier:
           allOf:
             - $ref: '#/components/schemas/AttackPropertyIdentifier'
@@ -2724,7 +3022,7 @@ components:
         TopContributors:
           allOf:
             - $ref: '#/components/schemas/TopContributors'
-            - description: 'Contributor objects for the top five contributors to a Shield event. '
+            - description: Contributor objects for the top five contributors to a Shield event. A contributor is a source of traffic that Shield Advanced identifies as responsible for some or all of an event.
         Unit:
           allOf:
             - $ref: '#/components/schemas/Unit'
@@ -2806,11 +3104,11 @@ components:
         StartTime:
           allOf:
             - $ref: '#/components/schemas/AttackTimestamp'
-            - description: 'The start time of the attack, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
+            - description: 'The start time of the attack, in Unix time in seconds. '
         EndTime:
           allOf:
             - $ref: '#/components/schemas/AttackTimestamp'
-            - description: 'The end time of the attack, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
+            - description: 'The end time of the attack, in Unix time in seconds. '
         AttackVectors:
           allOf:
             - $ref: '#/components/schemas/AttackVectorDescriptionList'
@@ -2854,6 +3152,10 @@ components:
       enum:
         - ENABLED
         - DISABLED
+    BlockAction:
+      type: object
+      properties: {}
+      description: '<p>Specifies that Shield Advanced should configure its WAF rules with the WAF <code>Block</code> action. </p> <p>This is only used in the context of the <code>ResponseAction</code> setting. </p> <p>JSON specification: <code>"Block": {}</code> </p>'
     ContactNotes:
       type: string
       pattern: '^[\w\s\.\-,:/()+@]*$'
@@ -2865,12 +3167,16 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The name of the contributor. This is dependent on the <code>AttackPropertyIdentifier</code>. For example, if the <code>AttackPropertyIdentifier</code> is <code>SOURCE_COUNTRY</code>, the <code>Name</code> could be <code>United States</code>.'
+            - description: 'The name of the contributor. The type of name that you''ll find here depends on the <code>AttackPropertyIdentifier</code> setting in the <code>AttackProperty</code> where this contributor is defined. For example, if the <code>AttackPropertyIdentifier</code> is <code>SOURCE_COUNTRY</code>, the <code>Name</code> could be <code>United States</code>.'
         Value:
           allOf:
             - $ref: '#/components/schemas/Long'
             - description: 'The contribution of this contributor expressed in <a>Protection</a> units. For example <code>10,000</code>.'
-      description: A contributor to the attack and their contribution.
+      description: 'A contributor to the attack and their contribution. '
+    CountAction:
+      type: object
+      properties: {}
+      description: '<p>Specifies that Shield Advanced should configure its WAF rules with the WAF <code>Count</code> action. </p> <p>This is only used in the context of the <code>ResponseAction</code> setting. </p> <p>JSON specification: <code>"Count": {}</code> </p>'
     ProtectionGroupId:
       type: string
       pattern: '[a-zA-Z0-9\\-]*'
@@ -2919,12 +3225,12 @@ components:
       properties:
         FromInclusive:
           allOf:
-            - $ref: '#/components/schemas/AttackTimestamp'
-            - description: 'The start time, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The start time, in Unix time in seconds. '
         ToExclusive:
           allOf:
-            - $ref: '#/components/schemas/AttackTimestamp'
-            - description: 'The end time, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The end time, in Unix time in seconds. '
       description: 'The time range. '
     LogBucketList:
       type: array
@@ -2951,7 +3257,7 @@ components:
         Pattern:
           allOf:
             - $ref: '#/components/schemas/ProtectionGroupPattern'
-            - description: 'The criteria to use to choose the protected resources for inclusion in the group. You can include all resources that have protections, provide a list of resource Amazon Resource Names (ARNs), or include all resources of a specified resource type.'
+            - description: 'The criteria to use to choose the protected resources for inclusion in the group. You can include all resources that have protections, provide a list of resource ARNs (Amazon Resource Names), or include all resources of a specified resource type.'
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ProtectedResourceType'
@@ -2959,7 +3265,7 @@ components:
         Members:
           allOf:
             - $ref: '#/components/schemas/ProtectionGroupMembers'
-            - description: 'The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set <code>Pattern</code> to <code>ARBITRARY</code> and you must not set it for any other <code>Pattern</code> setting. '
+            - description: 'The ARNs (Amazon Resource Names) of the resources to include in the protection group. You must set this when you set <code>Pattern</code> to <code>ARBITRARY</code> and you must not set it for any other <code>Pattern</code> setting. '
         ProtectionGroupArn:
           allOf:
             - $ref: '#/components/schemas/ResourceArn'
@@ -2983,11 +3289,15 @@ components:
         HealthCheckIds:
           allOf:
             - $ref: '#/components/schemas/HealthCheckIds'
-            - description: 'The unique identifier (ID) for the Route 53 health check that''s associated with the protection. '
+            - description: "The unique identifier (ID) for the Route\_53 health check that's associated with the protection. "
         ProtectionArn:
           allOf:
             - $ref: '#/components/schemas/ResourceArn'
             - description: The ARN (Amazon Resource Name) of the protection.
+        ApplicationLayerAutomaticResponseConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationLayerAutomaticResponseConfiguration'
+            - description: 'The automatic application layer DDoS mitigation settings for the protection. This configuration determines whether Shield Advanced automatically manages rules in the web ACL in order to respond to application layer events that Shield Advanced determines to be DDoS attacks. '
       description: An object that represents a resource that is under DDoS protection.
     Subscription:
       type: object
@@ -2997,7 +3307,7 @@ components:
         StartTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: 'The start time of the subscription, in Unix time in seconds. For more information see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types">timestamp</a>.'
+            - description: 'The start time of the subscription, in Unix time in seconds. '
         EndTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -3069,6 +3379,78 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/HealthCheckId'
+    ResourceArnFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceArn'
+      minItems: 1
+      maxItems: 1
+    ProtectionNameFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProtectionName'
+      minItems: 1
+      maxItems: 1
+    ProtectedResourceTypeFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProtectedResourceType'
+      minItems: 1
+      maxItems: 1
+    InclusionProtectionFilters:
+      type: object
+      properties:
+        ResourceArns:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArnFilters'
+            - description: 'The ARN (Amazon Resource Name) of the resource whose protection you want to retrieve. '
+        ProtectionNames:
+          allOf:
+            - $ref: '#/components/schemas/ProtectionNameFilters'
+            - description: 'The name of the protection that you want to retrieve. '
+        ResourceTypes:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedResourceTypeFilters'
+            - description: 'The type of protected resource whose protections you want to retrieve. '
+      description: Narrows the set of protections that the call retrieves. You can retrieve a single protection by providing its name or the ARN (Amazon Resource Name) of its protected resource. You can also retrieve all protections for a specific resource type. You can provide up to one criteria per filter type. Shield Advanced returns protections that exactly match all of the filter criteria that you provide.
+    ProtectionGroupIdFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProtectionGroupId'
+      minItems: 1
+      maxItems: 1
+    ProtectionGroupPatternFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProtectionGroupPattern'
+      minItems: 1
+      maxItems: 1
+    ProtectionGroupAggregationFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProtectionGroupAggregation'
+      minItems: 1
+      maxItems: 1
+    InclusionProtectionGroupFilters:
+      type: object
+      properties:
+        ProtectionGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/ProtectionGroupIdFilters'
+            - description: 'The ID of the protection group that you want to retrieve. '
+        Patterns:
+          allOf:
+            - $ref: '#/components/schemas/ProtectionGroupPatternFilters'
+            - description: 'The pattern specification of the protection groups that you want to retrieve. '
+        ResourceTypes:
+          allOf:
+            - $ref: '#/components/schemas/ProtectedResourceTypeFilters'
+            - description: 'The resource type configuration of the protection groups that you want to retrieve. In the protection group configuration, you specify the resource type when you set the group''s <code>Pattern</code> to <code>BY_RESOURCE_TYPE</code>. '
+        Aggregations:
+          allOf:
+            - $ref: '#/components/schemas/ProtectionGroupAggregationFilters'
+            - description: 'The aggregation setting of the protection groups that you want to retrieve. '
+      description: 'Narrows the set of protection groups that the call retrieves. You can retrieve a single protection group by its name and you can retrieve all protection groups that are configured with a specific pattern, aggregation, or resource type. You can provide up to one criteria per filter type. Shield Advanced returns the protection groups that exactly match all of the search criteria that you provide.'
     Integer:
       type: integer
     Limit:

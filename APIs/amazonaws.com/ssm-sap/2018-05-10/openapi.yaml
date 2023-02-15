@@ -1,0 +1,2085 @@
+openapi: 3.0.0
+info:
+  version: '2018-05-10'
+  x-release: v4
+  title: AWS Systems Manager for SAP
+  description: 'This API reference provides descriptions, syntax, and other details about each of the actions and data types for AWS Systems Manager for SAP. The topic for each action shows the API request parameters and responses. '
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: ssm-sap
+  x-aws-signingName: ssm-sap
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/ssm-sap-2018-05-10.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/ssm-sap/'
+servers:
+  - url: 'http://ssm-sap.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The SsmSap multi-region endpoint
+  - url: 'https://ssm-sap.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The SsmSap multi-region endpoint
+  - url: 'http://ssm-sap.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The SsmSap endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://ssm-sap.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The SsmSap endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /delete-resource-permission:
+    post:
+      operationId: DeleteResourcePermission
+      description: Removes permissions associated with the target database.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResourcePermissionOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceArn
+              properties:
+                ActionType:
+                  description: Delete or restore the permissions on the target database.
+                  type: string
+                  enum:
+                    - RESTORE
+                SourceResourceArn:
+                  description: The Amazon Resource Name (ARN) of the source resource.
+                  type: string
+                  pattern: 'arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\/.+'
+                ResourceArn:
+                  description: The Amazon Resource Name (ARN) of the resource.
+                  type: string
+                  pattern: 'arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\/.+'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /deregister-application:
+    post:
+      operationId: DeregisterApplication
+      description: Deregister an SAP application with AWS Systems Manager for SAP. This action does not aﬀect the existing setup of your SAP workloads on Amazon EC2.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeregisterApplicationOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ApplicationId
+              properties:
+                ApplicationId:
+                  description: The ID of the application.
+                  type: string
+                  pattern: '[\w\d]{1,50}'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /get-application:
+    post:
+      operationId: GetApplication
+      description: Gets an application registered with AWS Systems Manager for SAP. It also returns the components of the application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetApplicationOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ApplicationId:
+                  description: The ID of the application.
+                  type: string
+                  pattern: '[\w\d]{1,50}'
+                ApplicationArn:
+                  description: 'The Amazon Resource Name (ARN) of the application. '
+                  type: string
+                  pattern: 'arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\/.+'
+                AppRegistryArn:
+                  description: The Amazon Resource Name (ARN) of the application registry.
+                  type: string
+                  pattern: 'arn:aws:servicecatalog:[a-z0-9:\/-]+'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /get-component:
+    post:
+      operationId: GetComponent
+      description: Gets the component of an application registered with AWS Systems Manager for SAP.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetComponentOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ApplicationId
+                - ComponentId
+              properties:
+                ApplicationId:
+                  description: The ID of the application.
+                  type: string
+                  pattern: '[\w\d]{1,50}'
+                ComponentId:
+                  description: The ID of the component.
+                  type: string
+                  pattern: '[\w\d-]+'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /get-database:
+    post:
+      operationId: GetDatabase
+      description: Gets the SAP HANA database of an application registered with AWS Systems Manager for SAP.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDatabaseOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ApplicationId:
+                  description: The ID of the application.
+                  type: string
+                  pattern: '[\w\d]{1,50}'
+                ComponentId:
+                  description: The ID of the component.
+                  type: string
+                  pattern: '[\w\d-]+'
+                DatabaseId:
+                  description: The ID of the database.
+                  type: string
+                  pattern: '.*[\w\d]+'
+                DatabaseArn:
+                  description: The Amazon Resource Name (ARN) of the database.
+                  type: string
+                  pattern: 'arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\/.+'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /get-operation:
+    post:
+      operationId: GetOperation
+      description: Gets the details of an operation by specifying the operation ID.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOperationOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - OperationId
+              properties:
+                OperationId:
+                  description: The ID of the operation.
+                  type: string
+                  pattern: '[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /get-resource-permission:
+    post:
+      operationId: GetResourcePermission
+      description: Gets permissions associated with the target database.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetResourcePermissionOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceArn
+              properties:
+                ActionType:
+                  description: <p/>
+                  type: string
+                  enum:
+                    - RESTORE
+                ResourceArn:
+                  description: The Amazon Resource Name (ARN) of the resource.
+                  type: string
+                  pattern: 'arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\/.+'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /list-applications:
+    post:
+      operationId: ListApplications
+      description: Lists all the applications registered with AWS Systems Manager for SAP.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListApplicationsOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                NextToken:
+                  description: The token for the next page of results.
+                  type: string
+                  pattern: '.{16,1024}'
+                MaxResults:
+                  description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. '
+                  type: integer
+                  minimum: 1
+                  maximum: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /list-components:
+    post:
+      operationId: ListComponents
+      description: Lists all the components registered with AWS Systems Manager for SAP.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListComponentsOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ApplicationId:
+                  description: The ID of the application.
+                  type: string
+                  pattern: '[\w\d]{1,50}'
+                NextToken:
+                  description: The token for the next page of results.
+                  type: string
+                  pattern: '.{16,1024}'
+                MaxResults:
+                  description: '<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p> <p>If you do not specify a value for MaxResults, the request returns 50 items per page by default.</p>'
+                  type: integer
+                  minimum: 1
+                  maximum: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /list-databases:
+    post:
+      operationId: ListDatabases
+      description: Lists the SAP HANA databases of an application registered with AWS Systems Manager for SAP.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDatabasesOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ApplicationId:
+                  description: The ID of the application.
+                  type: string
+                  pattern: '[\w\d]{1,50}'
+                ComponentId:
+                  description: The ID of the component.
+                  type: string
+                  pattern: '[\w\d-]+'
+                NextToken:
+                  description: 'The token for the next page of results. '
+                  type: string
+                  pattern: '.{16,1024}'
+                MaxResults:
+                  description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If you do not specify a value for MaxResults, the request returns 50 items per page by default.'
+                  type: integer
+                  minimum: 1
+                  maximum: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /list-operations:
+    post:
+      operationId: ListOperations
+      description: Lists the operations performed by AWS Systems Manager for SAP.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOperationsOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ApplicationId
+              properties:
+                ApplicationId:
+                  description: The ID of the application.
+                  type: string
+                  pattern: '[\w\d]{1,50}'
+                MaxResults:
+                  description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If you do not specify a value for MaxResults, the request returns 50 items per page by default.'
+                  type: integer
+                  minimum: 1
+                  maximum: 50
+                NextToken:
+                  description: 'The token for the next page of results. '
+                  type: string
+                  pattern: '.{16,1024}'
+                Filters:
+                  description: The filters of an operation.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Filter'
+                  minItems: 1
+                  maxItems: 10
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Lists all tags on an SAP HANA application and/or database registered with AWS Systems Manager for SAP.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          schema:
+            type: string
+            pattern: 'arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\/.+'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Creates tag for a resource by specifying the ARN.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          schema:
+            type: string
+            pattern: 'arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\/.+'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: The tags on a resource.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  /put-resource-permission:
+    post:
+      operationId: PutResourcePermission
+      description: Adds permissions to the target database.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutResourcePermissionOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ActionType
+                - SourceResourceArn
+                - ResourceArn
+              properties:
+                ActionType:
+                  description: <p/>
+                  type: string
+                  enum:
+                    - RESTORE
+                SourceResourceArn:
+                  description: <p/>
+                  type: string
+                  pattern: 'arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\/.+'
+                ResourceArn:
+                  description: <p/>
+                  type: string
+                  pattern: 'arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\/.+'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /register-application:
+    post:
+      operationId: RegisterApplication
+      description: <p>Register an SAP application with AWS Systems Manager for SAP. You must meet the following requirements before registering. </p> <p>The SAP application you want to register with AWS Systems Manager for SAP is running on Amazon EC2.</p> <p>AWS Systems Manager Agent must be setup on an Amazon EC2 instance along with the required IAM permissions.</p> <p>Amazon EC2 instance(s) must have access to the secrets created in AWS Secrets Manager to manage SAP applications and components.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterApplicationOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ApplicationId
+                - ApplicationType
+                - Instances
+                - Credentials
+              properties:
+                ApplicationId:
+                  description: The ID of the application.
+                  type: string
+                  pattern: '[\w\d]{1,50}'
+                ApplicationType:
+                  description: The type of the application.
+                  type: string
+                  enum:
+                    - HANA
+                Instances:
+                  description: The Amazon EC2 instances on which your SAP application is running.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/InstanceId'
+                  minItems: 1
+                  maxItems: 1
+                SapInstanceNumber:
+                  description: The SAP instance number of the application.
+                  type: string
+                  pattern: '[0-9]{2}'
+                Sid:
+                  description: The System ID of the application.
+                  type: string
+                  pattern: '[A-Z][A-Z0-9]{2}'
+                Tags:
+                  description: The tags to be attached to the SAP application.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+                Credentials:
+                  description: The credentials of the SAP application.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ApplicationCredential'
+                  minItems: 1
+                  maxItems: 20
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Delete the tags for a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          schema:
+            type: string
+            pattern: 'arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\/.+'
+        - name: tagKeys
+          in: query
+          required: true
+          description: Adds/updates or removes credentials for applications registered with AWS Systems Manager for SAP.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /update-application-settings:
+    post:
+      operationId: UpdateApplicationSettings
+      description: Updates the settings of an application registered with AWS Systems Manager for SAP.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateApplicationSettingsOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ApplicationId
+              properties:
+                ApplicationId:
+                  description: The ID of the application.
+                  type: string
+                  pattern: '[\w\d]{1,50}'
+                CredentialsToAddOrUpdate:
+                  description: The credentials to be added or updated.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ApplicationCredential'
+                  minItems: 1
+                  maxItems: 20
+                CredentialsToRemove:
+                  description: The credentials to be removed.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ApplicationCredential'
+                  minItems: 1
+                  maxItems: 20
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    DeleteResourcePermissionOutput:
+      type: object
+      properties:
+        Policy:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The policy that removes permissions on the target database.
+    ResourceNotFoundException: {}
+    ValidationException: {}
+    InternalServerException: {}
+    DeregisterApplicationOutput:
+      type: object
+      properties: {}
+    GetApplicationOutput:
+      type: object
+      properties:
+        Application:
+          allOf:
+            - $ref: '#/components/schemas/Application'
+            - description: Returns all of the metadata of an application registered with AWS Systems Manager for SAP.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags of a registered application.
+    GetComponentOutput:
+      type: object
+      properties:
+        Component:
+          allOf:
+            - $ref: '#/components/schemas/Component'
+            - description: The component of an application registered with AWS Systems Manager for SAP.
+    GetDatabaseOutput:
+      type: object
+      properties:
+        Database:
+          allOf:
+            - $ref: '#/components/schemas/Database'
+            - description: The SAP HANA database of an application registered with AWS Systems Manager for SAP.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags of a database.
+    GetOperationOutput:
+      type: object
+      properties:
+        Operation:
+          allOf:
+            - $ref: '#/components/schemas/Operation'
+            - description: Returns the details of an operation.
+    GetResourcePermissionOutput:
+      type: object
+      properties:
+        Policy:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
+    ListApplicationsOutput:
+      type: object
+      properties:
+        Applications:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationSummaryList'
+            - description: The applications registered with AWS Systems Manager for SAP.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+    ListComponentsOutput:
+      type: object
+      properties:
+        Components:
+          allOf:
+            - $ref: '#/components/schemas/ComponentSummaryList'
+            - description: List of components registered with AWS System Manager for SAP.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+    ListDatabasesOutput:
+      type: object
+      properties:
+        Databases:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseSummaryList'
+            - description: The SAP HANA databases of an application.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+    ListOperationsOutput:
+      type: object
+      properties:
+        Operations:
+          allOf:
+            - $ref: '#/components/schemas/OperationList'
+            - description: List of operations performed by AWS Systems Manager for SAP.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+    Filter:
+      type: object
+      required:
+        - Name
+        - Value
+        - Operator
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/FilterName'
+            - description: 'The name of the filter. Filter names are case-sensitive. '
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/FilterValue'
+            - description: 'The filter values. Filter values are case-sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values'
+        Operator:
+          allOf:
+            - $ref: '#/components/schemas/FilterOperator'
+            - description: 'The operator for the filter. '
+      description: 'A specific result obtained by specifying the name, value, and operator. '
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: <p/>
+    ConflictException: {}
+    PutResourcePermissionOutput:
+      type: object
+      properties:
+        Policy:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
+    RegisterApplicationOutput:
+      type: object
+      properties:
+        Application:
+          allOf:
+            - $ref: '#/components/schemas/Application'
+            - description: The application registered with AWS Systems Manager for SAP.
+        OperationId:
+          allOf:
+            - $ref: '#/components/schemas/OperationId'
+            - description: The ID of the operation.
+    InstanceId:
+      type: string
+      pattern: 'i-[\w\d]{8}$|^i-[\w\d]{17}'
+    TagValue:
+      type: string
+      minLength: 1
+      maxLength: 256
+    ApplicationCredential:
+      type: object
+      required:
+        - DatabaseName
+        - CredentialType
+        - SecretId
+      properties:
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseName'
+            - description: The name of the SAP HANA database.
+        CredentialType:
+          allOf:
+            - $ref: '#/components/schemas/CredentialType'
+            - description: 'The type of the application credentials. '
+        SecretId:
+          allOf:
+            - $ref: '#/components/schemas/SecretId'
+            - description: 'The secret ID created in AWS Secrets Manager to store the credentials of the SAP application. '
+      description: The credentials of your SAP application.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      pattern: '(?!aws:)[a-zA-Z+-=._:/]+'
+    UpdateApplicationSettingsOutput:
+      type: object
+      properties:
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The update message.
+        OperationIds:
+          allOf:
+            - $ref: '#/components/schemas/OperationIdList'
+            - description: The IDs of the operations.
+    AppRegistryArn:
+      type: string
+      pattern: 'arn:aws:servicecatalog:[a-z0-9:\/-]+'
+    ApplicationId:
+      type: string
+      pattern: '[\w\d]{1,50}'
+    ApplicationType:
+      type: string
+      enum:
+        - HANA
+    SsmSapArn:
+      type: string
+      pattern: 'arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\/.+'
+    ApplicationStatus:
+      type: string
+      enum:
+        - ACTIVATED
+        - STARTING
+        - STOPPED
+        - STOPPING
+        - FAILED
+        - REGISTERING
+        - DELETING
+        - UNKNOWN
+    ComponentIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ComponentId'
+    Timestamp:
+      type: string
+      format: date-time
+    String:
+      type: string
+    Application:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationType'
+            - description: The type of the application.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/SsmSapArn'
+            - description: The Amazon Resource Name (ARN) of the application.
+        AppRegistryArn:
+          allOf:
+            - $ref: '#/components/schemas/AppRegistryArn'
+            - description: The Amazon Resource Name (ARN) of the Application Registry.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationStatus'
+            - description: The status of the application.
+        Components:
+          allOf:
+            - $ref: '#/components/schemas/ComponentIdList'
+            - description: The components of the application.
+        LastUpdated:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the application was last updated.
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status message.
+      description: An SAP application registered with AWS Systems Manager for SAP.
+    DatabaseName:
+      type: string
+      minLength: 1
+      maxLength: 100
+    CredentialType:
+      type: string
+      enum:
+        - ADMIN
+    SecretId:
+      type: string
+      minLength: 1
+      maxLength: 100
+      format: password
+    ApplicationCredentialList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationCredential'
+      minItems: 1
+      maxItems: 20
+    TagMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    ApplicationSummary:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationType'
+            - description: The type of the application.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/SsmSapArn'
+            - description: The Amazon Resource Name (ARN) of the application.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags on the application.
+      description: 'The summary of the SAP application registered with AWS Systems Manager for SAP. '
+    ApplicationSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationSummary'
+    Arn:
+      type: string
+      pattern: 'arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\/.+'
+    ComponentId:
+      type: string
+      pattern: '[\w\d-]+'
+    ComponentType:
+      type: string
+      enum:
+        - HANA
+    ComponentStatus:
+      type: string
+      enum:
+        - ACTIVATED
+    DatabaseIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatabaseId'
+    HostList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Host'
+    Component:
+      type: object
+      properties:
+        ComponentId:
+          allOf:
+            - $ref: '#/components/schemas/ComponentId'
+            - description: The ID of the component.
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application.
+        ComponentType:
+          allOf:
+            - $ref: '#/components/schemas/ComponentType'
+            - description: The type of the component.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ComponentStatus'
+            - description: The status of the component.
+        Databases:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseIdList'
+            - description: The SAP HANA databases of the component.
+        Hosts:
+          allOf:
+            - $ref: '#/components/schemas/HostList'
+            - description: The hosts of the component.
+        PrimaryHost:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The primary host of the component.
+        LastUpdated:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the component was last updated.
+      description: The SAP component of your application.
+    ComponentSummary:
+      type: object
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application.
+        ComponentId:
+          allOf:
+            - $ref: '#/components/schemas/ComponentId'
+            - description: The ID of the component.
+        ComponentType:
+          allOf:
+            - $ref: '#/components/schemas/ComponentType'
+            - description: The type of the component.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags of the component.
+      description: The summary of the component.
+    ComponentSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ComponentSummary'
+    DatabaseId:
+      type: string
+      pattern: '.*[\w\d]+'
+    DatabaseType:
+      type: string
+      enum:
+        - SYSTEM
+        - TENANT
+    DatabaseStatus:
+      type: string
+      enum:
+        - RUNNING
+        - STARTING
+        - STOPPED
+        - WARNING
+        - UNKNOWN
+    Integer:
+      type: integer
+    Database:
+      type: object
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application.
+        ComponentId:
+          allOf:
+            - $ref: '#/components/schemas/ComponentId'
+            - description: The ID of the component.
+        Credentials:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationCredentialList'
+            - description: The credentials of the database.
+        DatabaseId:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseId'
+            - description: The ID of the SAP HANA database.
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the database.
+        DatabaseType:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseType'
+            - description: The type of the database.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/SsmSapArn'
+            - description: The Amazon Resource Name (ARN) of the database.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseStatus'
+            - description: The status of the database.
+        PrimaryHost:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The primary host of the database.
+        SQLPort:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The SQL port of the database.
+        LastUpdated:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the database was last updated.
+      description: The SAP HANA database of the application registered with AWS Systems Manager for SAP.
+    DatabaseSummary:
+      type: object
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application.
+        ComponentId:
+          allOf:
+            - $ref: '#/components/schemas/ComponentId'
+            - description: The ID of the component.
+        DatabaseId:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseId'
+            - description: The ID of the database.
+        DatabaseType:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseType'
+            - description: The type of the database.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/SsmSapArn'
+            - description: The Amazon Resource Name (ARN) of the database.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags of the database.
+      description: The summary of the database.
+    DatabaseSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatabaseSummary'
+    PermissionActionType:
+      type: string
+      enum:
+        - RESTORE
+    DeleteResourcePermissionInput:
+      type: object
+      required:
+        - ResourceArn
+      title: DeleteResourcePermissionInput
+      properties:
+        ActionType:
+          allOf:
+            - $ref: '#/components/schemas/PermissionActionType'
+            - description: Delete or restore the permissions on the target database.
+        SourceResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the source resource.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the resource.
+    DeregisterApplicationInput:
+      type: object
+      required:
+        - ApplicationId
+      title: DeregisterApplicationInput
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application.
+    FilterName:
+      type: string
+      minLength: 1
+      maxLength: 32
+    FilterValue:
+      type: string
+      minLength: 1
+      maxLength: 64
+    FilterOperator:
+      type: string
+      enum:
+        - Equals
+        - GreaterThanOrEquals
+        - LessThanOrEquals
+    FilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Filter'
+      minItems: 1
+      maxItems: 10
+    GetApplicationInput:
+      type: object
+      title: GetApplicationInput
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application.
+        ApplicationArn:
+          allOf:
+            - $ref: '#/components/schemas/SsmSapArn'
+            - description: 'The Amazon Resource Name (ARN) of the application. '
+        AppRegistryArn:
+          allOf:
+            - $ref: '#/components/schemas/AppRegistryArn'
+            - description: The Amazon Resource Name (ARN) of the application registry.
+    GetComponentInput:
+      type: object
+      required:
+        - ApplicationId
+        - ComponentId
+      title: GetComponentInput
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application.
+        ComponentId:
+          allOf:
+            - $ref: '#/components/schemas/ComponentId'
+            - description: The ID of the component.
+    GetDatabaseInput:
+      type: object
+      title: GetDatabaseInput
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application.
+        ComponentId:
+          allOf:
+            - $ref: '#/components/schemas/ComponentId'
+            - description: The ID of the component.
+        DatabaseId:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseId'
+            - description: The ID of the database.
+        DatabaseArn:
+          allOf:
+            - $ref: '#/components/schemas/SsmSapArn'
+            - description: The Amazon Resource Name (ARN) of the database.
+    OperationId:
+      type: string
+      pattern: '[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?'
+    GetOperationInput:
+      type: object
+      required:
+        - OperationId
+      title: GetOperationInput
+      properties:
+        OperationId:
+          allOf:
+            - $ref: '#/components/schemas/OperationId'
+            - description: The ID of the operation.
+    Operation:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/OperationId'
+            - description: The ID of the operation.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/OperationType'
+            - description: The type of the operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/OperationStatus'
+            - description: The status of the operation.
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status message of the operation.
+        Properties:
+          allOf:
+            - $ref: '#/components/schemas/OperationProperties'
+            - description: The properties of the operation.
+        ResourceType:
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: The resource type of the operation.
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The resource ID of the operation.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the operation.
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The start time of the operation.
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The end time of the operation.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the operation was last updated.
+      description: The operations performed by AWS Systems Manager for SAP.
+    GetResourcePermissionInput:
+      type: object
+      required:
+        - ResourceArn
+      title: GetResourcePermissionInput
+      properties:
+        ActionType:
+          allOf:
+            - $ref: '#/components/schemas/PermissionActionType'
+            - description: <p/>
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the resource.
+    HostRole:
+      type: string
+      enum:
+        - LEADER
+        - WORKER
+        - STANDBY
+        - UNKNOWN
+    Host:
+      type: object
+      properties:
+        HostName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Dedicated Host.
+        HostRole:
+          allOf:
+            - $ref: '#/components/schemas/HostRole'
+            - description: The role of the Dedicated Host.
+        HostIp:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The IP address of the Dedicated Host. '
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The instance ID of the instance on the Dedicated Host.
+      description: 'Describes the properties of the Dedicated Host. '
+    InstanceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceId'
+      minItems: 1
+      maxItems: 1
+    NextToken:
+      type: string
+      pattern: '.{16,1024}'
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 50
+    ListApplicationsInput:
+      type: object
+      title: ListApplicationsInput
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next page of results.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. '
+    ListComponentsInput:
+      type: object
+      title: ListComponentsInput
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next page of results.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: '<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.</p> <p>If you do not specify a value for MaxResults, the request returns 50 items per page by default.</p>'
+    ListDatabasesInput:
+      type: object
+      title: ListDatabasesInput
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application.
+        ComponentId:
+          allOf:
+            - $ref: '#/components/schemas/ComponentId'
+            - description: The ID of the component.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token for the next page of results. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If you do not specify a value for MaxResults, the request returns 50 items per page by default.'
+    ListOperationsInput:
+      type: object
+      required:
+        - ApplicationId
+      title: ListOperationsInput
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If you do not specify a value for MaxResults, the request returns 50 items per page by default.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token for the next page of results. '
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: The filters of an operation.
+    OperationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Operation'
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    OperationType:
+      type: string
+    OperationStatus:
+      type: string
+      enum:
+        - INPROGRESS
+        - SUCCESS
+        - ERROR
+    OperationProperties:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/String'
+    ResourceType:
+      type: string
+      minLength: 1
+      maxLength: 64
+    ResourceId:
+      type: string
+      minLength: 1
+      maxLength: 64
+    OperationIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OperationId'
+    PutResourcePermissionInput:
+      type: object
+      required:
+        - ActionType
+        - SourceResourceArn
+        - ResourceArn
+      title: PutResourcePermissionInput
+      properties:
+        ActionType:
+          allOf:
+            - $ref: '#/components/schemas/PermissionActionType'
+            - description: <p/>
+        SourceResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: <p/>
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: <p/>
+    SAPInstanceNumber:
+      type: string
+      pattern: '[0-9]{2}'
+    SID:
+      type: string
+      pattern: '[A-Z][A-Z0-9]{2}'
+    RegisterApplicationInput:
+      type: object
+      required:
+        - ApplicationId
+        - ApplicationType
+        - Instances
+        - Credentials
+      title: RegisterApplicationInput
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application.
+        ApplicationType:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationType'
+            - description: The type of the application.
+        Instances:
+          allOf:
+            - $ref: '#/components/schemas/InstanceList'
+            - description: The Amazon EC2 instances on which your SAP application is running.
+        SapInstanceNumber:
+          allOf:
+            - $ref: '#/components/schemas/SAPInstanceNumber'
+            - description: The SAP instance number of the application.
+        Sid:
+          allOf:
+            - $ref: '#/components/schemas/SID'
+            - description: The System ID of the application.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags to be attached to the SAP application.
+        Credentials:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationCredentialList'
+            - description: The credentials of the SAP application.
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags on a resource.
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+    UpdateApplicationSettingsInput:
+      type: object
+      required:
+        - ApplicationId
+      title: UpdateApplicationSettingsInput
+      properties:
+        ApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationId'
+            - description: The ID of the application.
+        CredentialsToAddOrUpdate:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationCredentialList'
+            - description: The credentials to be added or updated.
+        CredentialsToRemove:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationCredentialList'
+            - description: The credentials to be removed.
+security:
+  - hmac: []

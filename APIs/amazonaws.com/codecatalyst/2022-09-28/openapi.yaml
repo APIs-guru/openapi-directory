@@ -1,0 +1,3501 @@
+openapi: 3.0.0
+info:
+  version: '2022-09-28'
+  x-release: bearer
+  title: Amazon CodeCatalyst
+  description: '<note> <p> <b>Amazon CodeCatalyst is in preview release and subject to change.</b> </p> </note> <p>Welcome to the Amazon CodeCatalyst API reference. This reference provides descriptions of operations and data types for Amazon CodeCatalyst. You can use the Amazon CodeCatalyst API to work with the following objects. </p> <p>Dev Environments and the Amazon Web Services Toolkits, by calling the following:</p> <ul> <li> <p> <a>CreateAccessToken</a>, which creates a personal access token (PAT) for the current user.</p> </li> <li> <p> <a>CreateDevEnvironment</a>, which creates a Dev Environment, where you can quickly work on the code stored in the source repositories of your project.</p> </li> <li> <p> <a>CreateProject</a> which creates a project in a specified space.</p> </li> <li> <p> <a>CreateSourceRepositoryBranch</a>, which creates a branch in a specified repository where you can work on code.</p> </li> <li> <p> <a>DeleteDevEnvironment</a>, which deletes a Dev Environment.</p> </li> <li> <p> <a>GetDevEnvironment</a>, which returns information about a Dev Environment.</p> </li> <li> <p> <a>GetProject</a>, which returns information about a project.</p> </li> <li> <p> <a>GetSourceRepositoryCloneUrls</a>, which returns information about the URLs that can be used with a Git client to clone a source repository.</p> </li> <li> <p> <a>GetSubscription</a>, which returns information about the Amazon Web Services account used for billing purposes and the billing plan for the space.</p> </li> <li> <p> <a>GetUserDetails</a>, which returns information about a user in Amazon CodeCatalyst.</p> </li> <li> <p> <a>ListDevEnvironments</a>, which retrives a list of Dev Environments in a project.</p> </li> <li> <p> <a>ListProjects</a>, which retrieves a list of projects in a space.</p> </li> <li> <p> <a>ListSourceRepositories</a>, which retrieves a list of source repositories in a project.</p> </li> <li> <p> <a>ListSourceRepositoryBranches</a>, which retrieves a list of branches in a source repository.</p> </li> <li> <p> <a>ListSpaces</a>, which retrieves a list of spaces.</p> </li> <li> <p> <a>StartDevEnvironment</a>, which starts a specified Dev Environment and puts it into an active state.</p> </li> <li> <p> <a>StartDevEnvironmentSession</a>, which starts a session to a specified Dev Environment.</p> </li> <li> <p> <a>StopDevEnvironment</a>, which stops a specified Dev Environment and puts it into an stopped state.</p> </li> <li> <p> <a>UpdateDevEnvironment</a>, which changes one or more values for a Dev Environment.</p> </li> <li> <p> <a>VerifySession</a>, which verifies whether the calling user has a valid Amazon CodeCatalyst login and session.</p> </li> </ul> <p>Security, activity, and resource management in Amazon CodeCatalyst, by calling the following:</p> <ul> <li> <p> <a>DeleteAccessToken</a>, which deletes a specified personal access token (PAT).</p> </li> <li> <p> <a>ListAccessTokens</a>, which lists all personal access tokens (PATs) associated with a user.</p> </li> <li> <p> <a>ListEventLogs</a>, which retrieves a list of events that occurred during a specified time period in a space.</p> </li> </ul>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: codecatalyst
+  x-aws-signingName: codecatalyst
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/codecatalyst-2022-09-28.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/codecatalyst/'
+servers:
+  - url: 'http://codecatalyst.global.api.aws'
+    variables: {}
+    description: The general Amazon CodeCatalyst multi-region endpoint
+  - url: 'https://codecatalyst.global.api.aws'
+    variables: {}
+    description: The general Amazon CodeCatalyst multi-region endpoint
+  - url: 'http://codecatalyst.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon CodeCatalyst endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://codecatalyst.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon CodeCatalyst endpoint for China (Beijing) and China (Ningxia)
+paths:
+  /v1/accessTokens:
+    put:
+      operationId: CreateAccessToken
+      description: 'Creates a personal access token (PAT) for the current user. A personal access token (PAT) is similar to a password. It is associated with your user account. You use PATs to access Amazon CodeCatalyst resources such as source repositories from third-party applications like Git and integrated development environments (IDEs). For more information, see <a href="https://docs.aws.amazon.com/codecatalyst/latest/userguide/ipa-tokens-keys.html">Managing personal access tokens in Amazon CodeCatalyst</a>.'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAccessTokenResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  description: The friendly name of the personal access token.
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                expiresTime:
+                  description: 'The date and time the personal access token expires, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.'
+                  type: string
+                  format: date-time
+    post:
+      operationId: ListAccessTokens
+      description: Lists all personal access tokens (PATs) associated with the user who calls the API. You can only list PATs associated with your user account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAccessTokensResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                maxResults:
+                  description: 'The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a <code>NextToken</code> element, which you can use to obtain additional results.'
+                  type: integer
+                  maximum: 10
+                nextToken:
+                  description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+                  type: string
+                  minLength: 1
+                  maxLength: 10000
+  '/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments':
+    put:
+      operationId: CreateDevEnvironment
+      description: 'Creates a Dev Environment in Amazon CodeCatalyst, a cloud-based development Dev Environment that you can use to quickly work on the code stored in the source repositories of your project. By default, a Dev Environment is configured to have a 2 core processor, 4GB of RAM, and 16GB of persistent storage. '
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDevEnvironmentResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: projectName
+          in: path
+          required: true
+          description: The name of the project in the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - instanceType
+                - persistentStorage
+              properties:
+                repositories:
+                  description: 'The source repository that contains the branch to clone into the Dev Environment. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RepositoryInput'
+                clientToken:
+                  description: 'A user-specified idempotency token. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries return the result from the original successful request and have no additional effect.'
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
+                alias:
+                  description: The user-defined alias for a Dev Environment.
+                  type: string
+                  pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+                  minLength: 1
+                  maxLength: 128
+                ides:
+                  description: '<p>Information about the integrated development environment (IDE) configured for a Dev Environment.</p> <note> <p>An IDE is required to create a Dev Environment. For Dev Environment creation, this field contains configuration information and must be provided.</p> </note>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/IdeConfiguration'
+                  minItems: 0
+                  maxItems: 1
+                instanceType:
+                  description: 'The Amazon EC2 instace type to use for the Dev Environment. '
+                  type: string
+                  enum:
+                    - dev.standard1.small
+                    - dev.standard1.medium
+                    - dev.standard1.large
+                    - dev.standard1.xlarge
+                inactivityTimeoutMinutes:
+                  description: 'The amount of time the Dev Environment will run without any activity detected before stopping, in minutes. Only whole integers are allowed. Dev Environments consume compute minutes when running.'
+                  type: integer
+                  minimum: 0
+                  maximum: 1200
+                persistentStorage:
+                  description: 'Information about the configuration of persistent storage for a Dev Environment. '
+                  type: object
+                  properties:
+                    sizeInGiB:
+                      allOf:
+                        - $ref: '#/components/schemas/PersistentStorageConfigurationSizeInGiBInteger'
+                        - description: '<p>The size of the persistent storage in gigabytes (specifically GiB).</p> <note> <p>Valid values for storage are based on memory sizes in 16GB increments. Valid values are 16, 32, and 64.</p> </note>'
+    post:
+      operationId: ListDevEnvironments
+      description: Retrives a list of Dev Environments in a project.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDevEnvironmentsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: projectName
+          in: path
+          required: true
+          description: The name of the project in the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filters:
+                  description: Information about filters to apply to narrow the results returned in the list.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Filter'
+                nextToken:
+                  description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+                  type: string
+                  minLength: 1
+                  maxLength: 10000
+                maxResults:
+                  description: 'The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a <code>NextToken</code> element, which you can use to obtain additional results.'
+                  type: integer
+                  minimum: 1
+                  maximum: 50
+  '/v1/spaces/{spaceName}/projects':
+    put:
+      operationId: CreateProject
+      description: Creates a project in a specified space.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateProjectResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - displayName
+              properties:
+                displayName:
+                  description: The friendly name of the project that will be displayed to users.
+                  type: string
+                  pattern: '[a-zA-Z0-9]+(?:[-_\. ][a-zA-Z0-9]+)*'
+                  minLength: 3
+                  maxLength: 63
+                description:
+                  description: The description of the project. This description will be displayed to all users of the project. We recommend providing a brief description of the project and its intended purpose.
+                  type: string
+                  pattern: '[a-zA-Z0-9]+(?:[-_a-zA-Z0-9.,;:/\+=?&$%    ])*'
+                  minLength: 0
+                  maxLength: 200
+    post:
+      operationId: ListProjects
+      description: Retrieves a list of projects.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProjectsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nextToken:
+                  description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+                  type: string
+                  minLength: 1
+                  maxLength: 10000
+                maxResults:
+                  description: 'The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a <code>NextToken</code> element, which you can use to obtain additional results.'
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                filters:
+                  description: Information about filters to apply to narrow the results returned in the list.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ProjectListFilter'
+  '/v1/spaces/{spaceName}/projects/{projectName}/sourceRepositories/{sourceRepositoryName}/branches/{name}':
+    put:
+      operationId: CreateSourceRepositoryBranch
+      description: <p>Creates a branch in a specified source repository in Amazon CodeCatalyst. </p> <note> <p>This API only creates a branch in a source repository hosted in Amazon CodeCatalyst. You cannot use this API to create a branch in a linked repository.</p> </note>
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSourceRepositoryBranchResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: projectName
+          in: path
+          required: true
+          description: The name of the project in the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: sourceRepositoryName
+          in: path
+          required: true
+          description: The name of the repository where you want to create a branch.
+          schema:
+            type: string
+            pattern: '(?!.*[.]git$)[\w\-.]*'
+            minLength: 1
+            maxLength: 100
+        - name: name
+          in: path
+          required: true
+          description: The name for the branch you're creating.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                headCommitId:
+                  description: The commit ID in an existing branch from which you want to create the new branch.
+                  type: string
+  '/v1/accessTokens/{id}':
+    delete:
+      operationId: DeleteAccessToken
+      description: Deletes a specified personal access token (PAT). A personal access token can only be deleted by the user who created it.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAccessTokenResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the personal access token to delete. You can find the IDs of all PATs associated with your user account by calling <a>ListAccessTokens</a>.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 36
+  '/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{id}':
+    delete:
+      operationId: DeleteDevEnvironment
+      description: 'Deletes a Dev Environment. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDevEnvironmentResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: projectName
+          in: path
+          required: true
+          description: The name of the project in the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: id
+          in: path
+          required: true
+          description: 'The system-generated unique ID of the Dev Environment you want to delete. To retrieve a list of Dev Environment IDs, use <a>ListDevEnvironments</a>.'
+          schema:
+            type: string
+            pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+    get:
+      operationId: GetDevEnvironment
+      description: Returns information about a Dev Environment for a source repository in a project. Dev Environments are specific to the user who creates them.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDevEnvironmentResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: projectName
+          in: path
+          required: true
+          description: The name of the project in the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: id
+          in: path
+          required: true
+          description: 'The system-generated unique ID of the Dev Environment for which you want to view information. To retrieve a list of Dev Environment IDs, use <a>ListDevEnvironments</a>.'
+          schema:
+            type: string
+            pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+    patch:
+      operationId: UpdateDevEnvironment
+      description: Changes one or more values for a Dev Environment. Updating certain values of the Dev Environment will cause a restart.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDevEnvironmentResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: projectName
+          in: path
+          required: true
+          description: The name of the project in the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: id
+          in: path
+          required: true
+          description: 'The system-generated unique ID of the Dev Environment. '
+          schema:
+            type: string
+            pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                alias:
+                  description: The user-specified alias for the Dev Environment. Changing this value will not cause a restart.
+                  type: string
+                  pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+                  minLength: 1
+                  maxLength: 128
+                ides:
+                  description: Information about the integrated development environment (IDE) configured for a Dev Environment.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/IdeConfiguration'
+                  minItems: 0
+                  maxItems: 1
+                instanceType:
+                  description: <p>The Amazon EC2 instace type to use for the Dev Environment. </p> <note> <p>Changing this value will cause a restart of the Dev Environment if it is running.</p> </note>
+                  type: string
+                  enum:
+                    - dev.standard1.small
+                    - dev.standard1.medium
+                    - dev.standard1.large
+                    - dev.standard1.xlarge
+                inactivityTimeoutMinutes:
+                  description: '<p>The amount of time the Dev Environment will run without any activity detected before stopping, in minutes. Only whole integers are allowed. Dev Environments consume compute minutes when running.</p> <note> <p>Changing this value will cause a restart of the Dev Environment if it is running.</p> </note>'
+                  type: integer
+                  minimum: 0
+                  maximum: 1200
+                clientToken:
+                  description: 'A user-specified idempotency token. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries return the result from the original successful request and have no additional effect.'
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
+  '/v1/spaces/{spaceName}/projects/{name}':
+    get:
+      operationId: GetProject
+      description: Returns information about a project.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProjectResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: name
+          in: path
+          required: true
+          description: The name of the project in the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+  '/v1/spaces/{spaceName}/projects/{projectName}/sourceRepositories/{sourceRepositoryName}/cloneUrls':
+    get:
+      operationId: GetSourceRepositoryCloneUrls
+      description: Returns information about the URLs that can be used with a Git client to clone a source repository.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSourceRepositoryCloneUrlsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: projectName
+          in: path
+          required: true
+          description: The name of the project in the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: sourceRepositoryName
+          in: path
+          required: true
+          description: The name of the source repository.
+          schema:
+            type: string
+            pattern: '(?!.*[.]git$)[\w\-.]*'
+            minLength: 1
+            maxLength: 100
+  '/v1/spaces/{name}':
+    get:
+      operationId: GetSpace
+      description: Returns information about an space.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSpaceResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+  '/v1/spaces/{spaceName}/subscription':
+    get:
+      operationId: GetSubscription
+      description: Returns information about the Amazon Web Services account used for billing purposes and the billing plan for the space.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSubscriptionResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+  /userDetails:
+    get:
+      operationId: GetUserDetails
+      description: 'Returns information about a user. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserDetailsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: id
+          in: query
+          required: false
+          description: 'The system-generated unique ID of the user. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+        - name: userName
+          in: query
+          required: false
+          description: The name of the user as displayed in Amazon CodeCatalyst.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]{3,100}'
+            minLength: 3
+            maxLength: 100
+  '/v1/spaces/{spaceName}/eventLogs':
+    post:
+      operationId: ListEventLogs
+      description: Retrieves a list of events that occurred during a specified time period in a space. You can use these events to audit user and system activity in a space.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEventLogsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - startTime
+                - endTime
+              properties:
+                startTime:
+                  description: 'The date and time when you want to start retrieving events, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.'
+                  type: string
+                  format: date-time
+                endTime:
+                  description: 'The time after which you do not want any events retrieved, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.'
+                  type: string
+                  format: date-time
+                eventName:
+                  description: The name of the event.
+                  type: string
+                nextToken:
+                  description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+                  type: string
+                  minLength: 1
+                  maxLength: 10000
+                maxResults:
+                  description: 'The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a <code>NextToken</code> element, which you can use to obtain additional results.'
+                  type: integer
+                  minimum: 1
+                  maximum: 250
+  '/v1/spaces/{spaceName}/projects/{projectName}/sourceRepositories':
+    post:
+      operationId: ListSourceRepositories
+      description: Retrieves a list of source repositories in a project.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSourceRepositoriesResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: projectName
+          in: path
+          required: true
+          description: The name of the project in the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nextToken:
+                  description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+                  type: string
+                  minLength: 1
+                  maxLength: 10000
+                maxResults:
+                  description: 'The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a <code>NextToken</code> element, which you can use to obtain additional results.'
+                  type: integer
+                  minimum: 1
+                  maximum: 200
+  '/v1/spaces/{spaceName}/projects/{projectName}/sourceRepositories/{sourceRepositoryName}/branches':
+    post:
+      operationId: ListSourceRepositoryBranches
+      description: Retrieves a list of branches in a specified source repository.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSourceRepositoryBranchesResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: projectName
+          in: path
+          required: true
+          description: The name of the project in the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: sourceRepositoryName
+          in: path
+          required: true
+          description: The name of the source repository.
+          schema:
+            type: string
+            pattern: '(?!.*[.]git$)[\w\-.]*'
+            minLength: 1
+            maxLength: 100
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nextToken:
+                  description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+                  type: string
+                  minLength: 1
+                  maxLength: 10000
+                maxResults:
+                  description: 'The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a <code>NextToken</code> element, which you can use to obtain additional results.'
+                  type: integer
+                  minimum: 1
+                  maximum: 50
+  /v1/spaces:
+    post:
+      operationId: ListSpaces
+      description: Retrieves a list of spaces.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSpacesResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nextToken:
+                  description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+                  type: string
+                  minLength: 1
+                  maxLength: 10000
+  '/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{id}/start':
+    put:
+      operationId: StartDevEnvironment
+      description: 'Starts a specified Dev Environment and puts it into an active state. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartDevEnvironmentResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: projectName
+          in: path
+          required: true
+          description: The name of the project in the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: id
+          in: path
+          required: true
+          description: 'The system-generated unique ID of the Dev Environment. '
+          schema:
+            type: string
+            pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ides:
+                  description: 'Information about the integrated development environment (IDE) configured for a Dev Environment. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/IdeConfiguration'
+                  minItems: 0
+                  maxItems: 1
+                instanceType:
+                  description: 'The Amazon EC2 instace type to use for the Dev Environment. '
+                  type: string
+                  enum:
+                    - dev.standard1.small
+                    - dev.standard1.medium
+                    - dev.standard1.large
+                    - dev.standard1.xlarge
+                inactivityTimeoutMinutes:
+                  description: 'The amount of time the Dev Environment will run without any activity detected before stopping, in minutes. Only whole integers are allowed. Dev Environments consume compute minutes when running.'
+                  type: integer
+                  minimum: 0
+                  maximum: 1200
+  '/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{id}/session':
+    put:
+      operationId: StartDevEnvironmentSession
+      description: Starts a session for a specified Dev Environment.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartDevEnvironmentSessionResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: projectName
+          in: path
+          required: true
+          description: The name of the project in the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: id
+          in: path
+          required: true
+          description: The system-generated unique ID of the Dev Environment.
+          schema:
+            type: string
+            pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sessionConfiguration
+              properties:
+                sessionConfiguration:
+                  description: Information about the configuration of a Dev Environment session.
+                  type: object
+                  properties:
+                    sessionType:
+                      allOf:
+                        - $ref: '#/components/schemas/DevEnvironmentSessionType'
+                        - description: The type of the session.
+                    executeCommandSessionConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/ExecuteCommandSessionConfiguration'
+                        - description: Information about optional commands that will be run on the Dev Environment when the SSH session begins.
+  '/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{id}/stop':
+    put:
+      operationId: StopDevEnvironment
+      description: Pauses a specified Dev Environment and places it in a non-running state. Stopped Dev Environments do not consume compute minutes.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopDevEnvironmentResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: projectName
+          in: path
+          required: true
+          description: The name of the project in the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: id
+          in: path
+          required: true
+          description: 'The system-generated unique ID of the Dev Environment. '
+          schema:
+            type: string
+            pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+  /session:
+    get:
+      operationId: VerifySession
+      description: 'Verifies whether the calling user has a valid Amazon CodeCatalyst login and session. If successful, this returns the ID of the user in Amazon CodeCatalyst.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifySessionResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+components:
+  parameters: {}
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+  schemas:
+    CreateAccessTokenResponse:
+      type: object
+      required:
+        - secret
+      properties:
+        secret:
+          allOf:
+            - $ref: '#/components/schemas/AccessTokenSecret'
+            - description: The secret value of the personal access token.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AccessTokenName'
+            - description: The friendly name of the personal access token.
+        expiresTime:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The date and time the personal access token expires, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>. If not specified, the default is one year from creation.'
+    ThrottlingException: {}
+    ConflictException: {}
+    ValidationException: {}
+    ServiceQuotaExceededException: {}
+    ResourceNotFoundException: {}
+    AccessDeniedException: {}
+    CreateDevEnvironmentResponse:
+      type: object
+      required:
+        - spaceName
+        - projectName
+        - id
+      properties:
+        spaceName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the space.
+        projectName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the project in the space.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: 'The system-generated unique ID of the Dev Environment. '
+    RepositoryInput:
+      type: object
+      required:
+        - repositoryName
+      properties:
+        repositoryName:
+          allOf:
+            - $ref: '#/components/schemas/SourceRepositoryNameString'
+            - description: The name of the source repository.
+        branchName:
+          allOf:
+            - $ref: '#/components/schemas/SourceRepositoryBranchString'
+            - description: The name of the branch in a source repository.
+      description: Information about a repository that will be cloned to a Dev Environment.
+    IdeConfiguration:
+      type: object
+      properties:
+        runtime:
+          allOf:
+            - $ref: '#/components/schemas/IdeConfigurationRuntimeString'
+            - description: A link to the IDE runtime image.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/IdeConfigurationNameString'
+            - description: The name of the IDE.
+      description: Information about the configuration of an integrated development environment (IDE) for a Dev Environment.
+    PersistentStorageConfigurationSizeInGiBInteger:
+      type: integer
+      minimum: 0
+      maximum: 64
+    CreateProjectResponse:
+      type: object
+      required:
+        - name
+      properties:
+        spaceName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the space.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the project in the space.
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The friendly name of the project.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the project.
+    CreateSourceRepositoryBranchResponse:
+      type: object
+      properties:
+        ref:
+          allOf:
+            - $ref: '#/components/schemas/SourceRepositoryBranchRefString'
+            - description: The Git reference name of the branch.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/SourceRepositoryBranchString'
+            - description: The name of the newly created branch.
+        lastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The time the branch was last updated, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.'
+        headCommitId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The commit ID of the tip of the newly created branch.
+    DeleteAccessTokenResponse:
+      type: object
+      properties: {}
+    DeleteDevEnvironmentResponse:
+      type: object
+      required:
+        - spaceName
+        - projectName
+        - id
+      properties:
+        spaceName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the space.
+        projectName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the project in the space.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: 'The system-generated unique ID of the deleted Dev Environment. '
+    GetDevEnvironmentResponse:
+      type: object
+      required:
+        - spaceName
+        - projectName
+        - id
+        - lastUpdatedTime
+        - creatorId
+        - status
+        - repositories
+        - instanceType
+        - inactivityTimeoutMinutes
+        - persistentStorage
+      properties:
+        spaceName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the space.
+        projectName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the project in the space.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: 'The system-generated unique ID of the Dev Environment. '
+        lastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The time when the Dev Environment was last updated, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.'
+        creatorId:
+          allOf:
+            - $ref: '#/components/schemas/GetDevEnvironmentResponseCreatorIdString'
+            - description: 'The system-generated unique ID of the user who created the Dev Environment. '
+        status:
+          allOf:
+            - $ref: '#/components/schemas/DevEnvironmentStatus'
+            - description: The current status of the Dev Environment.
+        statusReason:
+          allOf:
+            - $ref: '#/components/schemas/StatusReason'
+            - description: The reason for the status.
+        repositories:
+          allOf:
+            - $ref: '#/components/schemas/DevEnvironmentRepositorySummaries'
+            - description: 'The source repository that contains the branch cloned into the Dev Environment. '
+        alias:
+          allOf:
+            - $ref: '#/components/schemas/GetDevEnvironmentResponseAliasString'
+            - description: 'The user-specified alias for the Dev Environment. '
+        ides:
+          allOf:
+            - $ref: '#/components/schemas/Ides'
+            - description: 'Information about the integrated development environment (IDE) configured for the Dev Environment. '
+        instanceType:
+          allOf:
+            - $ref: '#/components/schemas/InstanceType'
+            - description: 'The Amazon EC2 instace type to use for the Dev Environment. '
+        inactivityTimeoutMinutes:
+          allOf:
+            - $ref: '#/components/schemas/InactivityTimeoutMinutes'
+            - description: 'The amount of time the Dev Environment will run without any activity detected before stopping, in minutes.'
+        persistentStorage:
+          allOf:
+            - $ref: '#/components/schemas/PersistentStorage'
+            - description: 'Information about the amount of storage allocated to the Dev Environment. By default, a Dev Environment is configured to have 16GB of persistent storage.'
+    GetProjectResponse:
+      type: object
+      required:
+        - name
+      properties:
+        spaceName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the space.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the project in the space.
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The friendly name of the project displayed to users in Amazon CodeCatalyst.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the project.
+    GetSourceRepositoryCloneUrlsResponse:
+      type: object
+      required:
+        - https
+      properties:
+        https:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The HTTPS URL to use when cloning the source repository.
+    GetSpaceResponse:
+      type: object
+      required:
+        - name
+        - regionName
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the space.
+        regionName:
+          allOf:
+            - $ref: '#/components/schemas/RegionString'
+            - description: The Amazon Web Services Region where the space exists.
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The friendly name of the space displayed to users.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the space.
+    GetSubscriptionResponse:
+      type: object
+      properties:
+        subscriptionType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The type of the billing plan for the space.
+        awsAccountName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The display name of the Amazon Web Services account used for billing for the space.
+    GetUserDetailsResponse:
+      type: object
+      properties:
+        userId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The system-generated unique ID of the user.
+        userName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the user as displayed in Amazon CodeCatalyst.
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The friendly name displayed for the user in Amazon CodeCatalyst.
+        primaryEmail:
+          allOf:
+            - $ref: '#/components/schemas/EmailAddress'
+            - description: The email address provided by the user when they signed up.
+        version:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
+    ListAccessTokensResponse:
+      type: object
+      required:
+        - items
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/AccessTokenSummaries'
+            - description: A list of personal access tokens (PATs) associated with the calling user.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+    ListDevEnvironmentsResponse:
+      type: object
+      required:
+        - items
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/DevEnvironmentSummaryList'
+            - description: Information about the Dev Environments in a project.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+    Filter:
+      type: object
+      required:
+        - key
+        - values
+      properties:
+        key:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
+        values:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: <p/>
+        comparisonOperator:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
+      description: <p/>
+    ListEventLogsResponse:
+      type: object
+      required:
+        - items
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+        items:
+          allOf:
+            - $ref: '#/components/schemas/EventLogEntries'
+            - description: Information about each event retrieved in the list.
+    ListProjectsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+        items:
+          allOf:
+            - $ref: '#/components/schemas/ProjectSummaries'
+            - description: Information about the projects.
+    ProjectListFilter:
+      type: object
+      required:
+        - key
+        - values
+      properties:
+        key:
+          allOf:
+            - $ref: '#/components/schemas/FilterKey'
+            - description: A key that can be used to sort results.
+        values:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The value of the key.
+        comparisonOperator:
+          allOf:
+            - $ref: '#/components/schemas/ComparisonOperator'
+            - description: The operator used to compare the fields.
+      description: nformation about the filter used to narrow the results returned in a list of projects.
+    ListSourceRepositoriesResponse:
+      type: object
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/ListSourceRepositoriesItems'
+            - description: Information about the source repositories.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+    ListSourceRepositoryBranchesResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+        items:
+          allOf:
+            - $ref: '#/components/schemas/ListSourceRepositoryBranchesItems'
+            - description: Information about the source branches.
+    ListSpacesResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+        items:
+          allOf:
+            - $ref: '#/components/schemas/SpaceSummaries'
+            - description: 'Information about the space. '
+    StartDevEnvironmentResponse:
+      type: object
+      required:
+        - spaceName
+        - projectName
+        - id
+        - status
+      properties:
+        spaceName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the space.
+        projectName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the project in the space.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: 'The system-generated unique ID of the Dev Environment. '
+        status:
+          allOf:
+            - $ref: '#/components/schemas/DevEnvironmentStatus'
+            - description: 'The status of the Dev Environment. '
+    StartDevEnvironmentSessionResponse:
+      type: object
+      required:
+        - accessDetails
+        - spaceName
+        - projectName
+        - id
+      properties:
+        accessDetails:
+          $ref: '#/components/schemas/DevEnvironmentAccessDetails'
+        sessionId:
+          allOf:
+            - $ref: '#/components/schemas/StartDevEnvironmentSessionResponseSessionIdString'
+            - description: The system-generated unique ID of the Dev Environment session.
+        spaceName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the space.
+        projectName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the project in the space.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The system-generated unique ID of the Dev Environment.
+    DevEnvironmentSessionType:
+      type: string
+      enum:
+        - SSM
+        - SSH
+    ExecuteCommandSessionConfiguration:
+      type: object
+      required:
+        - command
+      properties:
+        command:
+          allOf:
+            - $ref: '#/components/schemas/ExecuteCommandSessionConfigurationCommandString'
+            - description: The command used at the beginning of the SSH session to a Dev Environment.
+        arguments:
+          allOf:
+            - $ref: '#/components/schemas/ExecuteCommandSessionConfigurationArguments'
+            - description: An array of arguments containing arguments and members.
+      description: Information about the commands that will be run on a Dev Environment when an SSH session begins.
+    StopDevEnvironmentResponse:
+      type: object
+      required:
+        - spaceName
+        - projectName
+        - id
+        - status
+      properties:
+        spaceName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the space.
+        projectName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the project in the space.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: 'The system-generated unique ID of the Dev Environment. '
+        status:
+          allOf:
+            - $ref: '#/components/schemas/DevEnvironmentStatus'
+            - description: 'The status of the Dev Environment. '
+    UpdateDevEnvironmentResponse:
+      type: object
+      required:
+        - id
+        - spaceName
+        - projectName
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: 'The system-generated unique ID of the Dev Environment. '
+        spaceName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the space.
+        projectName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the project in the space.
+        alias:
+          allOf:
+            - $ref: '#/components/schemas/UpdateDevEnvironmentResponseAliasString'
+            - description: The user-specified alias for the Dev Environment.
+        ides:
+          allOf:
+            - $ref: '#/components/schemas/IdeConfigurationList'
+            - description: Information about the integrated development environment (IDE) configured for the Dev Environment.
+        instanceType:
+          allOf:
+            - $ref: '#/components/schemas/InstanceType'
+            - description: 'The Amazon EC2 instace type to use for the Dev Environment. '
+        inactivityTimeoutMinutes:
+          allOf:
+            - $ref: '#/components/schemas/InactivityTimeoutMinutes'
+            - description: 'The amount of time the Dev Environment will run without any activity detected before stopping, in minutes. '
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'A user-specified idempotency token. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries return the result from the original successful request and have no additional effect.'
+    VerifySessionResponse:
+      type: object
+      properties:
+        identity:
+          allOf:
+            - $ref: '#/components/schemas/VerifySessionResponseIdentityString'
+            - description: The system-generated unique ID of the user in Amazon CodeCatalyst.
+    AccessTokenId:
+      type: string
+      minLength: 1
+      maxLength: 36
+    AccessTokenName:
+      type: string
+      minLength: 1
+      maxLength: 100
+    AccessTokenSecret:
+      type: string
+      minLength: 1
+      maxLength: 4000
+      format: password
+    AccessTokenSummary:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/AccessTokenId'
+            - description: The system-generated ID of the personal access token.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AccessTokenName'
+            - description: The friendly name of the personal access token.
+        expiresTime:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The date and time when the personal access token will expire, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.'
+      description: Information about a specified personal access token (PAT).
+    AccessTokenSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccessTokenSummary'
+    SyntheticTimestamp_date_time:
+      type: string
+      format: date-time
+    Boolean:
+      type: boolean
+    ClientToken:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    ComparisonOperator:
+      type: string
+      enum:
+        - EQ
+        - GT
+        - GE
+        - LT
+        - LE
+    CreateAccessTokenRequest:
+      type: object
+      required:
+        - name
+      title: CreateAccessTokenRequest
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AccessTokenName'
+            - description: The friendly name of the personal access token.
+        expiresTime:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The date and time the personal access token expires, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.'
+    NameString:
+      type: string
+      pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+      minLength: 3
+      maxLength: 63
+    RepositoriesInput:
+      type: array
+      items:
+        $ref: '#/components/schemas/RepositoryInput'
+    CreateDevEnvironmentRequestAliasString:
+      type: string
+      pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+      minLength: 1
+      maxLength: 128
+    IdeConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/IdeConfiguration'
+      minItems: 0
+      maxItems: 1
+    InstanceType:
+      type: string
+      enum:
+        - dev.standard1.small
+        - dev.standard1.medium
+        - dev.standard1.large
+        - dev.standard1.xlarge
+    InactivityTimeoutMinutes:
+      type: integer
+      minimum: 0
+      maximum: 1200
+    PersistentStorageConfiguration:
+      type: object
+      required:
+        - sizeInGiB
+      properties:
+        sizeInGiB:
+          allOf:
+            - $ref: '#/components/schemas/PersistentStorageConfigurationSizeInGiBInteger'
+            - description: '<p>The size of the persistent storage in gigabytes (specifically GiB).</p> <note> <p>Valid values for storage are based on memory sizes in 16GB increments. Valid values are 16, 32, and 64.</p> </note>'
+      description: 'Information about the configuration of persistent storage for a Dev Environment. '
+    CreateDevEnvironmentRequest:
+      type: object
+      required:
+        - instanceType
+        - persistentStorage
+      title: CreateDevEnvironmentRequest
+      properties:
+        repositories:
+          allOf:
+            - $ref: '#/components/schemas/RepositoriesInput'
+            - description: 'The source repository that contains the branch to clone into the Dev Environment. '
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'A user-specified idempotency token. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries return the result from the original successful request and have no additional effect.'
+        alias:
+          allOf:
+            - $ref: '#/components/schemas/CreateDevEnvironmentRequestAliasString'
+            - description: The user-defined alias for a Dev Environment.
+        ides:
+          allOf:
+            - $ref: '#/components/schemas/IdeConfigurationList'
+            - description: '<p>Information about the integrated development environment (IDE) configured for a Dev Environment.</p> <note> <p>An IDE is required to create a Dev Environment. For Dev Environment creation, this field contains configuration information and must be provided.</p> </note>'
+        instanceType:
+          allOf:
+            - $ref: '#/components/schemas/InstanceType'
+            - description: 'The Amazon EC2 instace type to use for the Dev Environment. '
+        inactivityTimeoutMinutes:
+          allOf:
+            - $ref: '#/components/schemas/InactivityTimeoutMinutes'
+            - description: 'The amount of time the Dev Environment will run without any activity detected before stopping, in minutes. Only whole integers are allowed. Dev Environments consume compute minutes when running.'
+        persistentStorage:
+          allOf:
+            - $ref: '#/components/schemas/PersistentStorageConfiguration'
+            - description: '<p>Information about the amount of storage allocated to the Dev Environment. By default, a Dev Environment is configured to have 16GB of persistent storage.</p> <note> <p>Valid values for persistent storage are based on memory sizes in 16GB increments. Valid values are 16, 32, and 64.</p> </note>'
+    Uuid:
+      type: string
+      pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+    ProjectDisplayName:
+      type: string
+      pattern: '[a-zA-Z0-9]+(?:[-_\. ][a-zA-Z0-9]+)*'
+      minLength: 3
+      maxLength: 63
+    ProjectDescription:
+      type: string
+      pattern: '[a-zA-Z0-9]+(?:[-_a-zA-Z0-9.,;:/\+=?&$%    ])*'
+      minLength: 0
+      maxLength: 200
+    CreateProjectRequest:
+      type: object
+      required:
+        - displayName
+      title: CreateProjectRequest
+      properties:
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/ProjectDisplayName'
+            - description: The friendly name of the project that will be displayed to users.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ProjectDescription'
+            - description: The description of the project. This description will be displayed to all users of the project. We recommend providing a brief description of the project and its intended purpose.
+    String:
+      type: string
+    SourceRepositoryNameString:
+      type: string
+      pattern: '(?!.*[.]git$)[\w\-.]*'
+      minLength: 1
+      maxLength: 100
+    SourceRepositoryBranchString:
+      type: string
+      minLength: 1
+      maxLength: 100
+    CreateSourceRepositoryBranchRequest:
+      type: object
+      title: CreateSourceRepositoryBranchRequest
+      properties:
+        headCommitId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The commit ID in an existing branch from which you want to create the new branch.
+    SourceRepositoryBranchRefString:
+      type: string
+      minLength: 1
+      maxLength: 255
+    DeleteAccessTokenRequest:
+      type: object
+      title: DeleteAccessTokenRequest
+      properties: {}
+    DeleteDevEnvironmentRequest:
+      type: object
+      title: DeleteDevEnvironmentRequest
+      properties: {}
+    SensitiveString:
+      type: string
+      format: password
+    DevEnvironmentAccessDetails:
+      type: object
+      required:
+        - streamUrl
+        - tokenValue
+      properties:
+        streamUrl:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: The URL used to send commands to and from the Dev Environment.
+        tokenValue:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: An encrypted token value that contains session and caller information used to authenticate the connection.
+      description: Information about connection details for a Dev Environment.
+    DevEnvironmentRepositorySummary:
+      type: object
+      required:
+        - repositoryName
+      properties:
+        repositoryName:
+          allOf:
+            - $ref: '#/components/schemas/SourceRepositoryNameString'
+            - description: The name of the source repository.
+        branchName:
+          allOf:
+            - $ref: '#/components/schemas/SourceRepositoryBranchString'
+            - description: 'The name of the branch in a source repository cloned into the Dev Environment. '
+      description: 'Information about the source repsitory for a Dev Environment. '
+    DevEnvironmentRepositorySummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/DevEnvironmentRepositorySummary'
+    DevEnvironmentSessionConfiguration:
+      type: object
+      required:
+        - sessionType
+      properties:
+        sessionType:
+          allOf:
+            - $ref: '#/components/schemas/DevEnvironmentSessionType'
+            - description: The type of the session.
+        executeCommandSessionConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ExecuteCommandSessionConfiguration'
+            - description: Information about optional commands that will be run on the Dev Environment when the SSH session begins.
+      description: Information about the configuration of a Dev Environment session.
+    DevEnvironmentStatus:
+      type: string
+      enum:
+        - PENDING
+        - RUNNING
+        - STARTING
+        - STOPPING
+        - STOPPED
+        - FAILED
+        - DELETING
+        - DELETED
+    DevEnvironmentSummaryCreatorIdString:
+      type: string
+      minLength: 0
+      maxLength: 1024
+    StatusReason:
+      type: string
+      minLength: 0
+      maxLength: 1024
+    DevEnvironmentSummaryAliasString:
+      type: string
+      minLength: 0
+      maxLength: 128
+    Ides:
+      type: array
+      items:
+        $ref: '#/components/schemas/Ide'
+      minItems: 0
+      maxItems: 1
+    PersistentStorage:
+      type: object
+      required:
+        - sizeInGiB
+      properties:
+        sizeInGiB:
+          allOf:
+            - $ref: '#/components/schemas/PersistentStorageSizeInGiBInteger'
+            - description: '<p>The size of the persistent storage in gigabytes (specifically GiB).</p> <note> <p>Valid values for storage are based on memory sizes in 16GB increments. Valid values are 16, 32, and 64.</p> </note>'
+      description: Information about the persistent storage for a Dev Environment.
+    DevEnvironmentSummary:
+      type: object
+      required:
+        - id
+        - lastUpdatedTime
+        - creatorId
+        - status
+        - repositories
+        - instanceType
+        - inactivityTimeoutMinutes
+        - persistentStorage
+      properties:
+        spaceName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the space.
+        projectName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the project in the space.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: 'The system-generated unique ID for the Dev Environment. '
+        lastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The time when the Dev Environment was last updated, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.'
+        creatorId:
+          allOf:
+            - $ref: '#/components/schemas/DevEnvironmentSummaryCreatorIdString'
+            - description: 'The system-generated unique ID of the user who created the Dev Environment. '
+        status:
+          allOf:
+            - $ref: '#/components/schemas/DevEnvironmentStatus'
+            - description: 'The status of the Dev Environment. '
+        statusReason:
+          allOf:
+            - $ref: '#/components/schemas/StatusReason'
+            - description: The reason for the status.
+        repositories:
+          allOf:
+            - $ref: '#/components/schemas/DevEnvironmentRepositorySummaries'
+            - description: 'Information about the repositories that will be cloned into the Dev Environment. If no rvalue is specified, no repository is cloned.'
+        alias:
+          allOf:
+            - $ref: '#/components/schemas/DevEnvironmentSummaryAliasString'
+            - description: The user-specified alias for the Dev Environment.
+        ides:
+          allOf:
+            - $ref: '#/components/schemas/Ides'
+            - description: Information about the integrated development environment (IDE) configured for a Dev Environment.
+        instanceType:
+          allOf:
+            - $ref: '#/components/schemas/InstanceType'
+            - description: 'The Amazon EC2 instace type used for the Dev Environment. '
+        inactivityTimeoutMinutes:
+          allOf:
+            - $ref: '#/components/schemas/InactivityTimeoutMinutes'
+            - description: 'The amount of time the Dev Environment will run without any activity detected before stopping, in minutes. Dev Environments consume compute minutes when running.'
+        persistentStorage:
+          allOf:
+            - $ref: '#/components/schemas/PersistentStorage'
+            - description: Information about the configuration of persistent storage for the Dev Environment.
+      description: 'Information about a Dev Environment. '
+    DevEnvironmentSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DevEnvironmentSummary'
+    EmailAddress:
+      type: object
+      properties:
+        email:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The email address.
+        verified:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the email address has been verified.
+      description: Information about an email address.
+    EventLogEntry:
+      type: object
+      required:
+        - id
+        - eventName
+        - eventType
+        - eventCategory
+        - eventSource
+        - eventTime
+        - operationType
+        - userIdentity
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The system-generated unique ID of the event.
+        eventName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the event.
+        eventType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The type of the event.
+        eventCategory:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The category for the event.
+        eventSource:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The source of the event.
+        eventTime:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The time the event took place, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.'
+        operationType:
+          allOf:
+            - $ref: '#/components/schemas/OperationType'
+            - description: The type of the event.
+        userIdentity:
+          allOf:
+            - $ref: '#/components/schemas/UserIdentity'
+            - description: The system-generated unique ID of the user whose actions are recorded in the event.
+        projectInformation:
+          allOf:
+            - $ref: '#/components/schemas/ProjectInformation'
+            - description: Information about the project where the event occurred.
+        requestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The system-generated unique ID of the request.
+        requestPayload:
+          allOf:
+            - $ref: '#/components/schemas/EventPayload'
+            - description: Information about the payload of the request.
+        responsePayload:
+          allOf:
+            - $ref: '#/components/schemas/EventPayload'
+            - description: 'Information about the payload of the response, if any.'
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The code of the error, if any.'
+        sourceIpAddress:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The IP address of the user whose actions are recorded in the event.
+        userAgent:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
+      description: Information about an entry in an event log of Amazon CodeCatalyst activity.
+    EventLogEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventLogEntry'
+    OperationType:
+      type: string
+      enum:
+        - READONLY
+        - MUTATION
+    UserIdentity:
+      type: object
+      required:
+        - userType
+        - principalId
+      properties:
+        userType:
+          allOf:
+            - $ref: '#/components/schemas/UserType'
+            - description: The role assigned to the user in a Amazon CodeCatalyst space or project when the event occurred.
+        principalId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
+        userName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The display name of the user in Amazon CodeCatalyst.
+        awsAccountId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Amazon Web Services account number of the user in Amazon Web Services, if any.'
+      description: Information about a user whose activity is recorded in an event for a space.
+    ProjectInformation:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the project in the space.
+        projectId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The system-generated unique ID of the project.
+      description: Information about a project in a space.
+    EventPayload:
+      type: object
+      properties:
+        contentType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The type of content in the event payload.
+        data:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The data included in the event payload.
+      description: Information about the payload of an event recording Amazon CodeCatalyst activity.
+    ExecuteCommandSessionConfigurationCommandString:
+      type: string
+      minLength: 1
+      maxLength: 255
+    ExecuteCommandSessionConfigurationArguments:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExecuteCommandSessionConfigurationArgumentsMemberString'
+    ExecuteCommandSessionConfigurationArgumentsMemberString:
+      type: string
+      minLength: 1
+      maxLength: 255
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    FilterKey:
+      type: string
+      enum:
+        - hasAccessTo
+    Filters:
+      type: array
+      items:
+        $ref: '#/components/schemas/Filter'
+    GetDevEnvironmentRequest:
+      type: object
+      title: GetDevEnvironmentRequest
+      properties: {}
+    GetDevEnvironmentResponseCreatorIdString:
+      type: string
+      minLength: 0
+      maxLength: 1024
+    GetDevEnvironmentResponseAliasString:
+      type: string
+      minLength: 0
+      maxLength: 128
+    GetProjectRequest:
+      type: object
+      title: GetProjectRequest
+      properties: {}
+    GetSourceRepositoryCloneUrlsRequest:
+      type: object
+      title: GetSourceRepositoryCloneUrlsRequest
+      properties: {}
+    GetSpaceRequest:
+      type: object
+      title: GetSpaceRequest
+      properties: {}
+    RegionString:
+      type: string
+      pattern: '(us(?:-gov)?|af|ap|ca|cn|eu|sa)-(central|(?:north|south)?(?:east|west)?)-(\d+)'
+      minLength: 3
+      maxLength: 16
+    GetSubscriptionRequest:
+      type: object
+      title: GetSubscriptionRequest
+      properties: {}
+    GetUserDetailsRequestIdString:
+      type: string
+      minLength: 1
+      maxLength: 256
+    GetUserDetailsRequestUserNameString:
+      type: string
+      pattern: '[a-zA-Z0-9]{3,100}'
+      minLength: 3
+      maxLength: 100
+    GetUserDetailsRequest:
+      type: object
+      title: GetUserDetailsRequest
+      properties: {}
+    IdeRuntimeString:
+      type: string
+      minLength: 1
+      maxLength: 400
+    IdeNameString:
+      type: string
+      minLength: 1
+      maxLength: 128
+    Ide:
+      type: object
+      properties:
+        runtime:
+          allOf:
+            - $ref: '#/components/schemas/IdeRuntimeString'
+            - description: A link to the IDE runtime image.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/IdeNameString'
+            - description: The name of the IDE.
+      description: Information about an integrated development environment (IDE) used in a Dev Environment.
+    IdeConfigurationRuntimeString:
+      type: string
+      minLength: 1
+      maxLength: 400
+    IdeConfigurationNameString:
+      type: string
+      minLength: 1
+      maxLength: 128
+    ListAccessTokensRequestMaxResultsInteger:
+      type: integer
+      maximum: 10
+    ListAccessTokensRequestNextTokenString:
+      type: string
+      minLength: 1
+      maxLength: 10000
+    ListAccessTokensRequest:
+      type: object
+      title: ListAccessTokensRequest
+      properties:
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListAccessTokensRequestMaxResultsInteger'
+            - description: 'The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a <code>NextToken</code> element, which you can use to obtain additional results.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/ListAccessTokensRequestNextTokenString'
+            - description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+    ListDevEnvironmentsRequestNextTokenString:
+      type: string
+      minLength: 1
+      maxLength: 10000
+    ListDevEnvironmentsRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 50
+    ListDevEnvironmentsRequest:
+      type: object
+      title: ListDevEnvironmentsRequest
+      properties:
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/Filters'
+            - description: Information about filters to apply to narrow the results returned in the list.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/ListDevEnvironmentsRequestNextTokenString'
+            - description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListDevEnvironmentsRequestMaxResultsInteger'
+            - description: 'The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a <code>NextToken</code> element, which you can use to obtain additional results.'
+    ListEventLogsRequestNextTokenString:
+      type: string
+      minLength: 1
+      maxLength: 10000
+    ListEventLogsRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 250
+    ListEventLogsRequest:
+      type: object
+      required:
+        - startTime
+        - endTime
+      title: ListEventLogsRequest
+      properties:
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The date and time when you want to start retrieving events, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.'
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The time after which you do not want any events retrieved, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.'
+        eventName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the event.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/ListEventLogsRequestNextTokenString'
+            - description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListEventLogsRequestMaxResultsInteger'
+            - description: 'The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a <code>NextToken</code> element, which you can use to obtain additional results.'
+    ListProjectsRequestNextTokenString:
+      type: string
+      minLength: 1
+      maxLength: 10000
+    ListProjectsRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ProjectListFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProjectListFilter'
+    ListProjectsRequest:
+      type: object
+      title: ListProjectsRequest
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/ListProjectsRequestNextTokenString'
+            - description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListProjectsRequestMaxResultsInteger'
+            - description: 'The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a <code>NextToken</code> element, which you can use to obtain additional results.'
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/ProjectListFilters'
+            - description: Information about filters to apply to narrow the results returned in the list.
+    ProjectSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProjectSummary'
+    SourceRepositoryIdString:
+      type: string
+      pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+    SourceRepositoryDescriptionString:
+      type: string
+      minLength: 1
+      maxLength: 255
+    Timestamp:
+      type: string
+      format: date-time
+    ListSourceRepositoriesItem:
+      type: object
+      required:
+        - id
+        - name
+        - lastUpdatedTime
+        - createdTime
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/SourceRepositoryIdString'
+            - description: The system-generated unique ID of the source repository.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/SourceRepositoryNameString'
+            - description: The name of the source repository.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/SourceRepositoryDescriptionString'
+            - description: 'The description of the repository, if any.'
+        lastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time the source repository was last updated, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.'
+        createdTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time the source repository was created, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.'
+      description: Information about a source repository returned in a list of source repositories.
+    ListSourceRepositoriesItems:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListSourceRepositoriesItem'
+    ListSourceRepositoriesRequestNextTokenString:
+      type: string
+      minLength: 1
+      maxLength: 10000
+    ListSourceRepositoriesRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 200
+    ListSourceRepositoriesRequest:
+      type: object
+      title: ListSourceRepositoriesRequest
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/ListSourceRepositoriesRequestNextTokenString'
+            - description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListSourceRepositoriesRequestMaxResultsInteger'
+            - description: 'The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a <code>NextToken</code> element, which you can use to obtain additional results.'
+    ListSourceRepositoryBranchesItem:
+      type: object
+      properties:
+        ref:
+          allOf:
+            - $ref: '#/components/schemas/SourceRepositoryBranchRefString'
+            - description: The Git reference name of the branch.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/SourceRepositoryBranchString'
+            - description: The name of the branch.
+        lastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The time the branch was last updated, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.'
+        headCommitId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The commit ID of the tip of the branch at the time of the request, also known as the head commit.'
+      description: Information about a branch of a source repository returned in a list of branches.
+    ListSourceRepositoryBranchesItems:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListSourceRepositoryBranchesItem'
+    ListSourceRepositoryBranchesRequestNextTokenString:
+      type: string
+      minLength: 1
+      maxLength: 10000
+    ListSourceRepositoryBranchesRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 50
+    ListSourceRepositoryBranchesRequest:
+      type: object
+      title: ListSourceRepositoryBranchesRequest
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/ListSourceRepositoryBranchesRequestNextTokenString'
+            - description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListSourceRepositoryBranchesRequestMaxResultsInteger'
+            - description: 'The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a <code>NextToken</code> element, which you can use to obtain additional results.'
+    ListSpacesRequestNextTokenString:
+      type: string
+      minLength: 1
+      maxLength: 10000
+    ListSpacesRequest:
+      type: object
+      title: ListSpacesRequest
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/ListSpacesRequestNextTokenString'
+            - description: 'A token returned from a call to this API to indicate the next batch of results to return, if any.'
+    SpaceSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/SpaceSummary'
+    PersistentStorageSizeInGiBInteger:
+      type: integer
+      minimum: 0
+      maximum: 64
+    ProjectSummary:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the project in the space.
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The friendly name displayed to users of the project in Amazon CodeCatalyst.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the project.
+      description: Information about a project.
+    SpaceSummary:
+      type: object
+      required:
+        - name
+        - regionName
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: ' <i>We need to know what this is and the basic usage information so that third-party developers know how to use this data type.</i> '
+        regionName:
+          allOf:
+            - $ref: '#/components/schemas/RegionString'
+            - description: The Amazon Web Services Region where the space exists.
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The friendly name of the space displayed to users.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the space.
+      description: Information about an space.
+    StartDevEnvironmentRequest:
+      type: object
+      title: StartDevEnvironmentRequest
+      properties:
+        ides:
+          allOf:
+            - $ref: '#/components/schemas/IdeConfigurationList'
+            - description: 'Information about the integrated development environment (IDE) configured for a Dev Environment. '
+        instanceType:
+          allOf:
+            - $ref: '#/components/schemas/InstanceType'
+            - description: 'The Amazon EC2 instace type to use for the Dev Environment. '
+        inactivityTimeoutMinutes:
+          allOf:
+            - $ref: '#/components/schemas/InactivityTimeoutMinutes'
+            - description: 'The amount of time the Dev Environment will run without any activity detected before stopping, in minutes. Only whole integers are allowed. Dev Environments consume compute minutes when running.'
+    StartDevEnvironmentSessionRequest:
+      type: object
+      required:
+        - sessionConfiguration
+      title: StartDevEnvironmentSessionRequest
+      properties:
+        sessionConfiguration:
+          $ref: '#/components/schemas/DevEnvironmentSessionConfiguration'
+    StartDevEnvironmentSessionResponseSessionIdString:
+      type: string
+      minLength: 1
+      maxLength: 96
+    StopDevEnvironmentRequest:
+      type: object
+      title: StopDevEnvironmentRequest
+      properties: {}
+    UpdateDevEnvironmentRequestAliasString:
+      type: string
+      pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+      minLength: 1
+      maxLength: 128
+    UpdateDevEnvironmentRequest:
+      type: object
+      title: UpdateDevEnvironmentRequest
+      properties:
+        alias:
+          allOf:
+            - $ref: '#/components/schemas/UpdateDevEnvironmentRequestAliasString'
+            - description: The user-specified alias for the Dev Environment. Changing this value will not cause a restart.
+        ides:
+          allOf:
+            - $ref: '#/components/schemas/IdeConfigurationList'
+            - description: Information about the integrated development environment (IDE) configured for a Dev Environment.
+        instanceType:
+          allOf:
+            - $ref: '#/components/schemas/InstanceType'
+            - description: <p>The Amazon EC2 instace type to use for the Dev Environment. </p> <note> <p>Changing this value will cause a restart of the Dev Environment if it is running.</p> </note>
+        inactivityTimeoutMinutes:
+          allOf:
+            - $ref: '#/components/schemas/InactivityTimeoutMinutes'
+            - description: '<p>The amount of time the Dev Environment will run without any activity detected before stopping, in minutes. Only whole integers are allowed. Dev Environments consume compute minutes when running.</p> <note> <p>Changing this value will cause a restart of the Dev Environment if it is running.</p> </note>'
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'A user-specified idempotency token. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries return the result from the original successful request and have no additional effect.'
+    UpdateDevEnvironmentResponseAliasString:
+      type: string
+      pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+      minLength: 1
+      maxLength: 128
+    UserType:
+      type: string
+      enum:
+        - USER
+        - AWS_ACCOUNT
+        - UNKNOWN
+    VerifySessionResponseIdentityString:
+      type: string
+      minLength: 1
+      maxLength: 256
+security:
+  - hmac: []

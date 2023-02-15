@@ -1661,8 +1661,6 @@ components:
             - description: Information about the application.
     CreateApplicationRequest:
       type: object
-      required:
-        - ResourceGroupName
       title: CreateApplicationRequest
       properties:
         ResourceGroupName:
@@ -1685,6 +1683,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: List of tags to add to the application. tag key (<code>Key</code>) and an associated tag value (<code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
+        AutoConfigEnabled:
+          allOf:
+            - $ref: '#/components/schemas/AutoConfigEnabled'
+            - description: ' Indicates whether Application Insights automatically configures unmonitored resources in the resource group. '
+        AutoCreate:
+          allOf:
+            - $ref: '#/components/schemas/AutoCreate'
+            - description: ' Configures all of the resources in the resource group by applying the recommended configurations. '
+        GroupingType:
+          allOf:
+            - $ref: '#/components/schemas/GroupingType'
+            - description: 'Application Insights can create applications based on a resource group or on an account. To create an account-based application using all of the resources in the account, set this parameter to <code>ACCOUNT_BASED</code>. '
     ResourceInUseException: {}
     ResourceNotFoundException: {}
     ValidationException: {}
@@ -1907,7 +1917,7 @@ components:
         Tier:
           allOf:
             - $ref: '#/components/schemas/Tier'
-            - description: 'The tier of the application component. Supported tiers include <code>DOT_NET_CORE</code>, <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.'
+            - description: The tier of the application component.
     DescribeLogPatternResponse:
       type: object
       properties:
@@ -2162,6 +2172,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: 'The token used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+        ResourceGroupName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceGroupName'
+            - description: ' The name of the resource group. '
     ListProblemsRequest:
       type: object
       title: ListProblemsRequest
@@ -2186,6 +2200,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: The token to request the next page of results.
+        ComponentName:
+          allOf:
+            - $ref: '#/components/schemas/ComponentName'
+            - description: ' The name of the component. '
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -2273,6 +2291,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RemoveSNSTopic'
             - description: ' Disassociates the SNS topic from the opsItem created for detected problems.'
+        AutoConfigEnabled:
+          allOf:
+            - $ref: '#/components/schemas/AutoConfigEnabled'
+            - description: ' Turns auto-configuration on or off. '
     UpdateComponentResponse:
       type: object
       properties: {}
@@ -2324,11 +2346,15 @@ components:
         Tier:
           allOf:
             - $ref: '#/components/schemas/Tier'
-            - description: 'The tier of the application component. Supported tiers include <code>DOT_NET_WORKER</code>, <code>DOT_NET_WEB</code>, <code>DOT_NET_CORE</code>, <code>SQL_SERVER</code>, and <code>DEFAULT</code>.'
+            - description: The tier of the application component.
         ComponentConfiguration:
           allOf:
             - $ref: '#/components/schemas/ComponentConfiguration'
             - description: 'The configuration settings of the component. The value is the escaped JSON of the configuration. For more information about the JSON format, see <a href="https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/working-with-json.html">Working with JSON</a>. You can send a request to <code>DescribeComponentConfigurationRecommendation</code> to see the recommended configuration for a component. For the complete format of the component configuration file, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/component-config.html">Component Configuration</a>.'
+        AutoConfigEnabled:
+          allOf:
+            - $ref: '#/components/schemas/AutoConfigEnabled'
+            - description: ' Automatically configures the component by applying the recommended configurations. '
     UpdateLogPatternResponse:
       type: object
       properties:
@@ -2407,6 +2433,12 @@ components:
         - POSTGRESQL
         - JAVA_JMX
         - ORACLE
+        - SAP_HANA_MULTI_NODE
+        - SAP_HANA_SINGLE_NODE
+        - SAP_HANA_HIGH_AVAILABILITY
+        - SQL_SERVER_FAILOVER_CLUSTER_INSTANCE
+        - SHAREPOINT
+        - ACTIVE_DIRECTORY
       minLength: 1
       maxLength: 50
     Monitor:
@@ -2467,6 +2499,13 @@ components:
       type: boolean
     CWEMonitorEnabled:
       type: boolean
+    AutoConfigEnabled:
+      type: boolean
+    DiscoveryType:
+      type: string
+      enum:
+        - RESOURCE_GROUP_BASED
+        - ACCOUNT_BASED
     ApplicationInfo:
       type: object
       properties:
@@ -2494,11 +2533,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/Remarks'
             - description: '<p>The issues on the user side that block Application Insights from successfully monitoring an application. Example remarks include:</p> <ul> <li> <p>“Configuring application, detected 1 Errors, 3 Warnings”</p> </li> <li> <p>“Configuring application, detected 1 Unconfigured Components”</p> </li> </ul>'
+        AutoConfigEnabled:
+          allOf:
+            - $ref: '#/components/schemas/AutoConfigEnabled'
+            - description: ' Indicates whether auto-configuration is turned on for this application. '
+        DiscoveryType:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryType'
+            - description: ' The method used by Application Insights to onboard your resources. '
       description: Describes the status of the application.
     ApplicationInfoList:
       type: array
       items:
         $ref: '#/components/schemas/ApplicationInfo'
+    AutoCreate:
+      type: boolean
     CloudWatchEventDetailType:
       type: string
     CloudWatchEventId:
@@ -2585,6 +2634,10 @@ components:
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 200
+    GroupingType:
+      type: string
+      enum:
+        - ACCOUNT_BASED
     CustomComponentName:
       type: string
       pattern: '^[\d\w\-_\.+]*$'
@@ -2876,6 +2929,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Feedback'
             - description: Feedback provided by the user about the problem.
+        RecurringCount:
+          allOf:
+            - $ref: '#/components/schemas/RecurringCount'
+            - description: ' The number of times that the same problem reoccurred after the first time it was resolved. '
+        LastRecurrenceTime:
+          allOf:
+            - $ref: '#/components/schemas/LastRecurrenceTime'
+            - description: ' The last time that the problem reoccurred after its last resolution. '
       description: Describes a problem that is detected by correlating observations.
     WorkloadMetaData:
       type: object
@@ -2921,6 +2982,9 @@ components:
       type: string
     Insights:
       type: string
+    LastRecurrenceTime:
+      type: string
+      format: date-time
     LineTime:
       type: string
       format: date-time
@@ -3015,12 +3079,16 @@ components:
         - IGNORE
         - RESOLVED
         - PENDING
+        - RECURRING
     SeverityLevel:
       type: string
       enum:
+        - Informative
         - Low
         - Medium
         - High
+    RecurringCount:
+      type: integer
     RemoveSNSTopic:
       type: boolean
     ResourceARN:

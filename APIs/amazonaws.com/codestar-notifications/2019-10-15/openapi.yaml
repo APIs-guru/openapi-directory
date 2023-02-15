@@ -3,7 +3,7 @@ info:
   version: '2019-10-15'
   x-release: v4
   title: AWS CodeStar Notifications
-  description: '<p>This AWS CodeStar Notifications API Reference provides descriptions and usage examples of the operations and data types for the AWS CodeStar Notifications API. You can use the AWS CodeStar Notifications API to work with the following objects:</p> <p>Notification rules, by calling the following: </p> <ul> <li> <p> <a>CreateNotificationRule</a>, which creates a notification rule for a resource in your account. </p> </li> <li> <p> <a>DeleteNotificationRule</a>, which deletes a notification rule. </p> </li> <li> <p> <a>DescribeNotificationRule</a>, which provides information about a notification rule. </p> </li> <li> <p> <a>ListNotificationRules</a>, which lists the notification rules associated with your account. </p> </li> <li> <p> <a>UpdateNotificationRule</a>, which changes the name, events, or targets associated with a notification rule. </p> </li> <li> <p> <a>Subscribe</a>, which subscribes a target to a notification rule. </p> </li> <li> <p> <a>Unsubscribe</a>, which removes a target from a notification rule. </p> </li> </ul> <p>Targets, by calling the following: </p> <ul> <li> <p> <a>DeleteTarget</a>, which removes a notification rule target (SNS topic) from a notification rule. </p> </li> <li> <p> <a>ListTargets</a>, which lists the targets associated with a notification rule. </p> </li> </ul> <p>Events, by calling the following: </p> <ul> <li> <p> <a>ListEventTypes</a>, which lists the event types you can include in a notification rule. </p> </li> </ul> <p>Tags, by calling the following: </p> <ul> <li> <p> <a>ListTagsForResource</a>, which lists the tags already associated with a notification rule in your account. </p> </li> <li> <p> <a>TagResource</a>, which associates a tag you provide with a notification rule in your account. </p> </li> <li> <p> <a>UntagResource</a>, which removes a tag from a notification rule in your account. </p> </li> </ul> <p> For information about how to use AWS CodeStar Notifications, see link in the CodeStarNotifications User Guide. </p>'
+  description: '<p>This AWS CodeStar Notifications API Reference provides descriptions and usage examples of the operations and data types for the AWS CodeStar Notifications API. You can use the AWS CodeStar Notifications API to work with the following objects:</p> <p>Notification rules, by calling the following: </p> <ul> <li> <p> <a>CreateNotificationRule</a>, which creates a notification rule for a resource in your account. </p> </li> <li> <p> <a>DeleteNotificationRule</a>, which deletes a notification rule. </p> </li> <li> <p> <a>DescribeNotificationRule</a>, which provides information about a notification rule. </p> </li> <li> <p> <a>ListNotificationRules</a>, which lists the notification rules associated with your account. </p> </li> <li> <p> <a>UpdateNotificationRule</a>, which changes the name, events, or targets associated with a notification rule. </p> </li> <li> <p> <a>Subscribe</a>, which subscribes a target to a notification rule. </p> </li> <li> <p> <a>Unsubscribe</a>, which removes a target from a notification rule. </p> </li> </ul> <p>Targets, by calling the following: </p> <ul> <li> <p> <a>DeleteTarget</a>, which removes a notification rule target from a notification rule. </p> </li> <li> <p> <a>ListTargets</a>, which lists the targets associated with a notification rule. </p> </li> </ul> <p>Events, by calling the following: </p> <ul> <li> <p> <a>ListEventTypes</a>, which lists the event types you can include in a notification rule. </p> </li> </ul> <p>Tags, by calling the following: </p> <ul> <li> <p> <a>ListTagsForResource</a>, which lists the tags already associated with a notification rule in your account. </p> </li> <li> <p> <a>TagResource</a>, which associates a tag you provide with a notification rule in your account. </p> </li> <li> <p> <a>UntagResource</a>, which removes a tag from a notification rule in your account. </p> </li> </ul> <p> For information about how to use AWS CodeStar Notifications, see the <a href="https://docs.aws.amazon.com/dtconsole/latest/userguide/what-is-dtconsole.html">Amazon Web Services Developer Tools Console User Guide</a>. </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -117,7 +117,7 @@ paths:
   /createNotificationRule:
     post:
       operationId: CreateNotificationRule
-      description: Creates a notification rule for a resource. The rule specifies the events you want notifications about and the targets (such as SNS topics) where you want to receive them.
+      description: Creates a notification rule for a resource. The rule specifies the events you want notifications about and the targets (such as Chatbot topics or Chatbot clients configured for Slack) where you want to receive them.
       responses:
         '200':
           description: Success
@@ -176,7 +176,7 @@ paths:
                 - DetailType
               properties:
                 Name:
-                  description: The name for the notification rule. Notifictaion rule names must be unique in your AWS account.
+                  description: The name for the notification rule. Notification rule names must be unique in your Amazon Web Services account.
                   type: string
                   pattern: '[A-Za-z0-9\-_ ]+$'
                   minLength: 1
@@ -188,34 +188,34 @@ paths:
                   items:
                     $ref: '#/components/schemas/EventTypeId'
                 Resource:
-                  description: 'The Amazon Resource Name (ARN) of the resource to associate with the notification rule. Supported resources include pipelines in AWS CodePipeline, repositories in AWS CodeCommit, and build projects in AWS CodeBuild.'
+                  description: 'The Amazon Resource Name (ARN) of the resource to associate with the notification rule. Supported resources include pipelines in CodePipeline, repositories in CodeCommit, and build projects in CodeBuild.'
                   type: string
                   pattern: '^arn:aws[^:\s]*:[^:\s]*:[^:\s]*:[0-9]{12}:[^\s]+$'
                 Targets:
-                  description: A list of Amazon Resource Names (ARNs) of SNS topics to associate with the notification rule.
+                  description: A list of Amazon Resource Names (ARNs) of Amazon Simple Notification Service topics and Chatbot clients to associate with the notification rule.
                   type: array
                   items:
                     $ref: '#/components/schemas/Target'
                   maxItems: 10
                 DetailType:
-                  description: The level of detail to include in the notifications for this resource. BASIC will include only the contents of the event as it would appear in AWS CloudWatch. FULL will include any supplemental information provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.
+                  description: The level of detail to include in the notifications for this resource. <code>BASIC</code> will include only the contents of the event as it would appear in Amazon CloudWatch. <code>FULL</code> will include any supplemental information provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.
                   type: string
                   enum:
                     - BASIC
                     - FULL
                 ClientRequestToken:
-                  description: '<p>A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request with the same parameters is received and a token is included, the request returns information about the initial request that used that token.</p> <note> <p>The AWS SDKs prepopulate client request tokens. If you are using an AWS SDK, an idempotency token is created for you.</p> </note>'
+                  description: '<p>A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request with the same parameters is received and a token is included, the request returns information about the initial request that used that token.</p> <note> <p>The Amazon Web Services SDKs prepopulate client request tokens. If you are using an Amazon Web Services SDK, an idempotency token is created for you.</p> </note>'
                   type: string
                   pattern: '^[\w:/-]+$'
                   minLength: 1
                   maxLength: 256
                 Tags:
-                  description: 'A list of tags to apply to this notification rule. Key names cannot start with "aws". '
+                  description: 'A list of tags to apply to this notification rule. Key names cannot start with "<code>aws</code>". '
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 Status:
-                  description: 'The status of the notification rule. The default value is ENABLED. If the status is set to DISABLED, notifications aren''t sent for the notification rule.'
+                  description: 'The status of the notification rule. The default value is <code>ENABLED</code>. If the status is set to <code>DISABLED</code>, notifications aren''t sent for the notification rule.'
                   type: string
                   enum:
                     - ENABLED
@@ -307,13 +307,13 @@ paths:
                 - TargetAddress
               properties:
                 TargetAddress:
-                  description: The Amazon Resource Name (ARN) of the SNS topic to delete.
+                  description: The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client to delete.
                   type: string
                   minLength: 1
                   maxLength: 320
                   format: password
                 ForceUnsubscribeAll:
-                  description: 'A Boolean value that can be used to delete all associations with this SNS topic. The default value is FALSE. If set to TRUE, all associations between that target and every notification rule in your AWS account are deleted.'
+                  description: 'A Boolean value that can be used to delete all associations with this Chatbot topic. The default value is FALSE. If set to TRUE, all associations between that target and every notification rule in your Amazon Web Services account are deleted.'
                   type: boolean
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -436,7 +436,7 @@ paths:
   /listNotificationRules:
     post:
       operationId: ListNotificationRules
-      description: Returns a list of the notification rules for an AWS account.
+      description: Returns a list of the notification rules for an Amazon Web Services account.
       responses:
         '200':
           description: Success
@@ -546,7 +546,7 @@ paths:
   /listTargets:
     post:
       operationId: ListTargets
-      description: Returns a list of the notification rule targets for an AWS account.
+      description: Returns a list of the notification rule targets for an Amazon Web Services account.
       responses:
         '200':
           description: Success
@@ -611,7 +611,7 @@ paths:
   /subscribe:
     post:
       operationId: Subscribe
-      description: Creates an association between a notification rule and an SNS topic so that the associated target can receive notifications when the events described in the rule are triggered.
+      description: Creates an association between a notification rule and an Chatbot topic or Chatbot client so that the associated target can receive notifications when the events described in the rule are triggered.
       responses:
         '200':
           description: Success
@@ -631,6 +631,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConfigurationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigurationException'
       parameters: []
       requestBody:
         required: true
@@ -647,17 +653,17 @@ paths:
                   type: string
                   pattern: '^arn:aws[^:\s]*:codestar-notifications:[^:\s]+:\d{12}:notificationrule\/(.*\S)?$'
                 Target:
-                  description: Information about the SNS topics associated with a notification rule.
+                  description: Information about the Chatbot topics or Chatbot clients associated with a notification rule.
                   type: object
                   properties:
                     TargetType:
                       allOf:
                         - $ref: '#/components/schemas/TargetType'
-                        - description: The target type. Can be an Amazon SNS topic.
+                        - description: <p>The target type. Can be an Chatbot topic or Chatbot client.</p> <ul> <li> <p>Chatbot topics are specified as <code>SNS</code>.</p> </li> <li> <p>Chatbot clients are specified as <code>AWSChatbotSlack</code>.</p> </li> </ul>
                     TargetAddress:
                       allOf:
                         - $ref: '#/components/schemas/TargetAddress'
-                        - description: The Amazon Resource Name (ARN) of the SNS topic.
+                        - description: The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client.
                 ClientRequestToken:
                   description: 'An enumeration token that, when provided in a request, returns the next batch of the results.'
                   type: string
@@ -690,12 +696,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
           description: ValidationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
-        '482':
+        '483':
           description: ConcurrentModificationException
           content:
             application/json:
@@ -717,7 +729,7 @@ paths:
                   type: string
                   pattern: '^arn:aws[^:\s]*:codestar-notifications:[^:\s]+:\d{12}:notificationrule\/(.*\S)?$'
                 Tags:
-                  description: The list of tags to associate with the resource. Tag key names cannot start with "aws".
+                  description: The list of tags to associate with the resource. Tag key names cannot start with "<code>aws</code>".
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
@@ -732,7 +744,7 @@ paths:
   /unsubscribe:
     post:
       operationId: Unsubscribe
-      description: Removes an association between a notification rule and an Amazon SNS topic so that subscribers to that topic stop receiving notifications when the events described in the rule are triggered.
+      description: Removes an association between a notification rule and an Chatbot topic so that subscribers to that topic stop receiving notifications when the events described in the rule are triggered.
       responses:
         '200':
           description: Success
@@ -762,7 +774,7 @@ paths:
                   type: string
                   pattern: '^arn:aws[^:\s]*:codestar-notifications:[^:\s]+:\d{12}:notificationrule\/(.*\S)?$'
                 TargetAddress:
-                  description: The ARN of the SNS topic to unsubscribe from the notification rule.
+                  description: The ARN of the Chatbot topic to unsubscribe from the notification rule.
                   type: string
                   minLength: 1
                   maxLength: 320
@@ -775,7 +787,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  /untagResource:
+  '/untagResource/{resourceArn}#tagKeys':
     post:
       operationId: UntagResource
       description: Removes the association between one or more provided tags and a notification rule.
@@ -793,37 +805,39 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
           description: ValidationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
-        '482':
+        '483':
           description: ConcurrentModificationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConcurrentModificationException'
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - Arn
-                - TagKeys
-              properties:
-                Arn:
-                  description: The Amazon Resource Name (ARN) of the notification rule from which to remove the tags.
-                  type: string
-                  pattern: '^arn:aws[^:\s]*:codestar-notifications:[^:\s]+:\d{12}:notificationrule\/(.*\S)?$'
-                TagKeys:
-                  description: The key names of the tags to remove.
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/TagKey'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the notification rule from which to remove the tags.
+          schema:
+            type: string
+            pattern: '^arn:aws[^:\s]*:codestar-notifications:[^:\s]+:\d{12}:notificationrule\/(.*\S)?$'
+        - name: tagKeys
+          in: query
+          required: true
+          description: The key names of the tags to remove.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -855,6 +869,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConfigurationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigurationException'
       parameters: []
       requestBody:
         required: true
@@ -883,7 +903,7 @@ paths:
                     - ENABLED
                     - DISABLED
                 EventTypeIds:
-                  description: A list of event types associated with this notification rule.
+                  description: 'A list of event types associated with this notification rule. For a complete list of event types and IDs, see <a href="https://docs.aws.amazon.com/codestar-notifications/latest/userguide/concepts.html#concepts-api">Notification concepts</a> in the <i>Developer Tools Console User Guide</i>.'
                   type: array
                   items:
                     $ref: '#/components/schemas/EventTypeId'
@@ -894,7 +914,7 @@ paths:
                     $ref: '#/components/schemas/Target'
                   maxItems: 10
                 DetailType:
-                  description: The level of detail to include in the notifications for this resource. BASIC will include only the contents of the event as it would appear in AWS CloudWatch. FULL will include any supplemental information provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.
+                  description: The level of detail to include in the notifications for this resource. BASIC will include only the contents of the event as it would appear in Amazon CloudWatch. FULL will include any supplemental information provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.
                   type: string
                   enum:
                     - BASIC
@@ -976,12 +996,12 @@ components:
         TargetType:
           allOf:
             - $ref: '#/components/schemas/TargetType'
-            - description: The target type. Can be an Amazon SNS topic.
+            - description: <p>The target type. Can be an Chatbot topic or Chatbot client.</p> <ul> <li> <p>Chatbot topics are specified as <code>SNS</code>.</p> </li> <li> <p>Chatbot clients are specified as <code>AWSChatbotSlack</code>.</p> </li> </ul>
         TargetAddress:
           allOf:
             - $ref: '#/components/schemas/TargetAddress'
-            - description: The Amazon Resource Name (ARN) of the SNS topic.
-      description: Information about the SNS topics associated with a notification rule.
+            - description: The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client.
+      description: Information about the Chatbot topics or Chatbot clients associated with a notification rule.
     TagValue:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
@@ -1026,11 +1046,11 @@ components:
         Targets:
           allOf:
             - $ref: '#/components/schemas/TargetsBatch'
-            - description: A list of the SNS topics associated with the notification rule.
+            - description: A list of the Chatbot topics and Chatbot clients associated with the notification rule.
         DetailType:
           allOf:
             - $ref: '#/components/schemas/DetailType'
-            - description: The level of detail included in the notifications for this resource. BASIC will include only the contents of the event as it would appear in AWS CloudWatch. FULL will include any supplemental information provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.
+            - description: The level of detail included in the notifications for this resource. BASIC will include only the contents of the event as it would appear in Amazon CloudWatch. FULL will include any supplemental information provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.
         CreatedBy:
           allOf:
             - $ref: '#/components/schemas/NotificationRuleCreatedBy'
@@ -1089,7 +1109,7 @@ components:
         NotificationRules:
           allOf:
             - $ref: '#/components/schemas/NotificationRuleBatch'
-            - description: 'The list of notification rules for the AWS account, by Amazon Resource Name (ARN) and ID. '
+            - description: 'The list of notification rules for the Amazon Web Services account, by Amazon Resource Name (ARN) and ID. '
     ListNotificationRulesFilter:
       type: object
       required:
@@ -1103,7 +1123,7 @@ components:
         Value:
           allOf:
             - $ref: '#/components/schemas/ListNotificationRulesFilterValue'
-            - description: 'The value of the attribute you want to use to filter the returned notification rules. For example, if you specify filtering by <i>RESOURCE</i> in Name, you might specify the ARN of a pipeline in AWS CodePipeline for the value.'
+            - description: 'The value of the attribute you want to use to filter the returned notification rules. For example, if you specify filtering by <i>RESOURCE</i> in Name, you might specify the ARN of a pipeline in CodePipeline for the value.'
       description: 'Information about a filter to apply to the list of returned notification rules. You can filter by event type, owner, resource, or target.'
     ListTagsForResourceResult:
       type: object
@@ -1136,8 +1156,8 @@ components:
         Value:
           allOf:
             - $ref: '#/components/schemas/ListTargetsFilterValue'
-            - description: 'The value of the attribute you want to use to filter the returned targets. For example, if you specify <i>SNS</i> for the Target type, you could specify an Amazon Resource Name (ARN) for a topic as the value.'
-      description: 'Information about a filter to apply to the list of returned targets. You can filter by target type, address, or status. For example, to filter results to notification rules that have active Amazon SNS topics as targets, you could specify a ListTargetsFilter Name as TargetType and a Value of SNS, and a Name of TARGET_STATUS and a Value of ACTIVE.'
+            - description: 'The value of the attribute you want to use to filter the returned targets. For example, if you specify <code>SNS</code> for the Target type, you could specify an Amazon Resource Name (ARN) for a topic as the value.'
+      description: 'Information about a filter to apply to the list of returned targets. You can filter by target type, address, or status. For example, to filter results to notification rules that have active Chatbot topics as targets, you could specify a ListTargetsFilter Name as <code>TargetType</code> and a Value of <code>SNS</code>, and a Name of <code>TARGET_STATUS</code> and a Value of <code>ACTIVE</code>.'
     SubscribeResult:
       type: object
       properties:
@@ -1230,7 +1250,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/NotificationRuleName'
-            - description: The name for the notification rule. Notifictaion rule names must be unique in your AWS account.
+            - description: The name for the notification rule. Notification rule names must be unique in your Amazon Web Services account.
         EventTypeIds:
           allOf:
             - $ref: '#/components/schemas/EventTypeIds'
@@ -1238,27 +1258,27 @@ components:
         Resource:
           allOf:
             - $ref: '#/components/schemas/NotificationRuleResource'
-            - description: 'The Amazon Resource Name (ARN) of the resource to associate with the notification rule. Supported resources include pipelines in AWS CodePipeline, repositories in AWS CodeCommit, and build projects in AWS CodeBuild.'
+            - description: 'The Amazon Resource Name (ARN) of the resource to associate with the notification rule. Supported resources include pipelines in CodePipeline, repositories in CodeCommit, and build projects in CodeBuild.'
         Targets:
           allOf:
             - $ref: '#/components/schemas/Targets'
-            - description: A list of Amazon Resource Names (ARNs) of SNS topics to associate with the notification rule.
+            - description: A list of Amazon Resource Names (ARNs) of Amazon Simple Notification Service topics and Chatbot clients to associate with the notification rule.
         DetailType:
           allOf:
             - $ref: '#/components/schemas/DetailType'
-            - description: The level of detail to include in the notifications for this resource. BASIC will include only the contents of the event as it would appear in AWS CloudWatch. FULL will include any supplemental information provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.
+            - description: The level of detail to include in the notifications for this resource. <code>BASIC</code> will include only the contents of the event as it would appear in Amazon CloudWatch. <code>FULL</code> will include any supplemental information provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
-            - description: '<p>A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request with the same parameters is received and a token is included, the request returns information about the initial request that used that token.</p> <note> <p>The AWS SDKs prepopulate client request tokens. If you are using an AWS SDK, an idempotency token is created for you.</p> </note>'
+            - description: '<p>A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request with the same parameters is received and a token is included, the request returns information about the initial request that used that token.</p> <note> <p>The Amazon Web Services SDKs prepopulate client request tokens. If you are using an Amazon Web Services SDK, an idempotency token is created for you.</p> </note>'
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: 'A list of tags to apply to this notification rule. Key names cannot start with "aws". '
+            - description: 'A list of tags to apply to this notification rule. Key names cannot start with "<code>aws</code>". '
         Status:
           allOf:
             - $ref: '#/components/schemas/NotificationRuleStatus'
-            - description: 'The status of the notification rule. The default value is ENABLED. If the status is set to DISABLED, notifications aren''t sent for the notification rule.'
+            - description: 'The status of the notification rule. The default value is <code>ENABLED</code>. If the status is set to <code>DISABLED</code>, notifications aren''t sent for the notification rule.'
     NotificationRuleArn:
       type: string
       pattern: '^arn:aws[^:\s]*:codestar-notifications:[^:\s]+:\d{12}:notificationrule\/(.*\S)?$'
@@ -1286,11 +1306,11 @@ components:
         TargetAddress:
           allOf:
             - $ref: '#/components/schemas/TargetAddress'
-            - description: The Amazon Resource Name (ARN) of the SNS topic to delete.
+            - description: The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client to delete.
         ForceUnsubscribeAll:
           allOf:
             - $ref: '#/components/schemas/ForceUnsubscribeAll'
-            - description: 'A Boolean value that can be used to delete all associations with this SNS topic. The default value is FALSE. If set to TRUE, all associations between that target and every notification rule in your AWS account are deleted.'
+            - description: 'A Boolean value that can be used to delete all associations with this Chatbot topic. The default value is FALSE. If set to TRUE, all associations between that target and every notification rule in your Amazon Web Services account are deleted.'
     DescribeNotificationRuleRequest:
       type: object
       required:
@@ -1321,7 +1341,7 @@ components:
         EventTypeId:
           allOf:
             - $ref: '#/components/schemas/EventTypeId'
-            - description: The system-generated ID of the event.
+            - description: 'The system-generated ID of the event. For a complete list of event types and IDs, see <a href="https://docs.aws.amazon.com/codestar-notifications/latest/userguide/concepts.html#concepts-api">Notification concepts</a> in the <i>Developer Tools Console User Guide</i>.'
         ServiceName:
           allOf:
             - $ref: '#/components/schemas/ServiceName'
@@ -1386,6 +1406,7 @@ components:
         - TARGET_ADDRESS
     ListNotificationRulesFilterValue:
       type: string
+      maxLength: 2048
     ListNotificationRulesFilters:
       type: array
       items:
@@ -1428,6 +1449,7 @@ components:
         - TARGET_STATUS
     ListTargetsFilterValue:
       type: string
+      maxLength: 2048
     ListTargetsFilters:
       type: array
       items:
@@ -1499,7 +1521,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: The list of tags to associate with the resource. Tag key names cannot start with "aws".
+            - description: The list of tags to associate with the resource. Tag key names cannot start with "<code>aws</code>".
     TargetStatus:
       type: string
       enum:
@@ -1514,11 +1536,11 @@ components:
         TargetAddress:
           allOf:
             - $ref: '#/components/schemas/TargetAddress'
-            - description: The Amazon Resource Name (ARN) of the SNS topic.
+            - description: The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client.
         TargetType:
           allOf:
             - $ref: '#/components/schemas/TargetType'
-            - description: 'The type of the target (for example, SNS).'
+            - description: '<p>The type of the target (for example, <code>SNS</code>).</p> <ul> <li> <p>Chatbot topics are specified as <code>SNS</code>.</p> </li> <li> <p>Chatbot clients are specified as <code>AWSChatbotSlack</code>.</p> </li> </ul>'
         TargetStatus:
           allOf:
             - $ref: '#/components/schemas/TargetStatus'
@@ -1538,22 +1560,11 @@ components:
         TargetAddress:
           allOf:
             - $ref: '#/components/schemas/TargetAddress'
-            - description: The ARN of the SNS topic to unsubscribe from the notification rule.
+            - description: The ARN of the Chatbot topic to unsubscribe from the notification rule.
     UntagResourceRequest:
       type: object
-      required:
-        - Arn
-        - TagKeys
       title: UntagResourceRequest
-      properties:
-        Arn:
-          allOf:
-            - $ref: '#/components/schemas/NotificationRuleArn'
-            - description: The Amazon Resource Name (ARN) of the notification rule from which to remove the tags.
-        TagKeys:
-          allOf:
-            - $ref: '#/components/schemas/TagKeys'
-            - description: The key names of the tags to remove.
+      properties: {}
     UpdateNotificationRuleRequest:
       type: object
       required:
@@ -1575,7 +1586,7 @@ components:
         EventTypeIds:
           allOf:
             - $ref: '#/components/schemas/EventTypeIds'
-            - description: A list of event types associated with this notification rule.
+            - description: 'A list of event types associated with this notification rule. For a complete list of event types and IDs, see <a href="https://docs.aws.amazon.com/codestar-notifications/latest/userguide/concepts.html#concepts-api">Notification concepts</a> in the <i>Developer Tools Console User Guide</i>.'
         Targets:
           allOf:
             - $ref: '#/components/schemas/Targets'
@@ -1583,6 +1594,6 @@ components:
         DetailType:
           allOf:
             - $ref: '#/components/schemas/DetailType'
-            - description: The level of detail to include in the notifications for this resource. BASIC will include only the contents of the event as it would appear in AWS CloudWatch. FULL will include any supplemental information provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.
+            - description: The level of detail to include in the notifications for this resource. BASIC will include only the contents of the event as it would appear in Amazon CloudWatch. FULL will include any supplemental information provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.
 security:
   - hmac: []

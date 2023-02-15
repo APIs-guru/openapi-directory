@@ -155,6 +155,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EC2InstanceNotFoundException'
+        '485':
+          description: EC2InstanceStateInvalidException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EC2InstanceStateInvalidException'
+        '486':
+          description: EC2InstanceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EC2InstanceUnavailableException'
       requestBody:
         required: true
         content:
@@ -242,6 +254,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SerialConsoleSessionUnavailableException'
+        '489':
+          description: EC2InstanceStateInvalidException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EC2InstanceStateInvalidException'
+        '490':
+          description: EC2InstanceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EC2InstanceUnavailableException'
       requestBody:
         required: true
         content:
@@ -336,7 +360,6 @@ components:
         - InstanceId
         - InstanceOSUser
         - SSHPublicKey
-        - AvailabilityZone
       title: SendSSHPublicKeyRequest
       properties:
         InstanceId:
@@ -360,6 +383,8 @@ components:
     ServiceException: {}
     ThrottlingException: {}
     EC2InstanceNotFoundException: {}
+    EC2InstanceStateInvalidException: {}
+    EC2InstanceUnavailableException: {}
     SendSerialConsoleSSHPublicKeyResponse:
       type: object
       properties:
@@ -413,7 +438,7 @@ components:
       type: string
     SSHPublicKey:
       type: string
-      minLength: 256
+      minLength: 80
       maxLength: 4096
     Success:
       type: boolean

@@ -2910,7 +2910,7 @@ components:
         ids:
           allOf:
             - $ref: '#/components/schemas/BuildIds'
-            - description: 'A list of build IDs for the specified build project, with each build ID representing a single build.'
+            - description: 'A list of build identifiers for the specified build project, with each build ID representing a single build.'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2928,7 +2928,7 @@ components:
         sortOrder:
           allOf:
             - $ref: '#/components/schemas/SortOrderType'
-            - description: '<p>The order to list results in. The results are sorted by build number, not the build identifier.</p> <p>Valid values include:</p> <ul> <li> <p> <code>ASCENDING</code>: List the build IDs in ascending order by build ID.</p> </li> <li> <p> <code>DESCENDING</code>: List the build IDs in descending order by build ID.</p> </li> </ul> <p>If the project has more than 100 builds, setting the sort order will result in an error. </p>'
+            - description: '<p>The order to sort the results in. The results are sorted by build number, not the build identifier. If this is not specified, the results are sorted in descending order.</p> <p>Valid values include:</p> <ul> <li> <p> <code>ASCENDING</code>: List the build identifiers in ascending order, by build number.</p> </li> <li> <p> <code>DESCENDING</code>: List the build identifiers in descending order, by build number.</p> </li> </ul> <p>If the project has more than 100 builds, setting the sort order will result in an error. </p>'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3537,7 +3537,7 @@ components:
         secondaryArtifacts:
           allOf:
             - $ref: '#/components/schemas/ProjectArtifactsList'
-            - description: ' An array of <code>ProjectSource</code> objects. '
+            - description: ' An array of <code>ProjectArtifact</code> objects. '
         cache:
           allOf:
             - $ref: '#/components/schemas/ProjectCache'
@@ -3758,6 +3758,11 @@ components:
         $ref: '#/components/schemas/Report'
       minItems: 1
       maxItems: 100
+    BatchReportModeType:
+      type: string
+      enum:
+        - REPORT_INDIVIDUAL_BUILDS
+        - REPORT_AGGREGATED_BATCH
     WrapperInt:
       type: integer
     ComputeTypesAllowed:
@@ -4217,6 +4222,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/WrapperInt'
             - description: 'Specifies the maximum amount of time, in minutes, that the batch build must be completed in.'
+        batchReportMode:
+          allOf:
+            - $ref: '#/components/schemas/BatchReportModeType'
+            - description: '<p>Specifies how build status reports are sent to the source provider for the batch build. This property is only used when the source provider for your project is Bitbucket, GitHub, or GitHub Enterprise, and your project is configured to report build statuses to the source provider.</p> <dl> <dt>REPORT_AGGREGATED_BATCH</dt> <dd> <p>(Default) Aggregate all of the build statuses into a single status report.</p> </dd> <dt>REPORT_INDIVIDUAL_BUILDS</dt> <dd> <p>Send a separate status report for each individual build.</p> </dd> </dl>'
       description: Contains configuration information about a batch build project.
     BuildGroups:
       type: array

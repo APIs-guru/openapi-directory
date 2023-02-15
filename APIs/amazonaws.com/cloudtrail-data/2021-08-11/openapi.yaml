@@ -1,0 +1,383 @@
+openapi: 3.0.0
+info:
+  version: '2021-08-11'
+  x-release: v4
+  title: AWS CloudTrail Data Service
+  description: 'The CloudTrail Data Service lets you ingest events into CloudTrail from any source in your hybrid environments, such as in-house or SaaS applications hosted on-premises or in the cloud, virtual machines, or containers. You can store, access, analyze, troubleshoot and take action on this data without maintaining multiple log aggregators and reporting tools. After you run <code>PutAuditEvents</code> to ingest your application activity into CloudTrail, you can use CloudTrail Lake to search, query, and analyze the data that is logged from your applications.'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: cloudtrail-data
+  x-aws-signingName: cloudtrail-data
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cloudtrail-data-2021-08-11.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/cloudtrail-data/'
+servers:
+  - url: 'http://cloudtrail-data.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS CloudTrail Data Service multi-region endpoint
+  - url: 'https://cloudtrail-data.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS CloudTrail Data Service multi-region endpoint
+  - url: 'http://cloudtrail-data.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS CloudTrail Data Service endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://cloudtrail-data.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS CloudTrail Data Service endpoint for China (Beijing) and China (Ningxia)
+paths:
+  /PutAuditEvents#channelArn:
+    post:
+      operationId: PutAuditEvents
+      description: 'Ingests your application events into CloudTrail Lake. A required parameter, <code>auditEvents</code>, accepts the JSON records (also called <i>payload</i>) of events that you want CloudTrail to ingest. You can add up to 100 of these events (or up to 1 MB) per <code>PutAuditEvents</code> request.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutAuditEventsResponse'
+        '480':
+          description: ChannelInsufficientPermission
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelInsufficientPermission'
+        '481':
+          description: ChannelNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelNotFound'
+        '482':
+          description: InvalidChannelARN
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidChannelARN'
+        '483':
+          description: ChannelUnsupportedSchema
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelUnsupportedSchema'
+        '484':
+          description: DuplicatedAuditEventId
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicatedAuditEventId'
+        '485':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+      parameters:
+        - name: channelArn
+          in: query
+          required: true
+          description: The ARN or ID (the ARN suffix) of a channel.
+          schema:
+            type: string
+            pattern: '^arn:.*$'
+        - name: externalId
+          in: query
+          required: false
+          description: 'A unique identifier that is conditionally required when the channel''s resource policy includes an external ID. This value can be any string, such as a passphrase or account number.'
+          schema:
+            type: string
+            pattern: '^[\w+=,.@:\/-]*$'
+            minLength: 2
+            maxLength: 1224
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - auditEvents
+              properties:
+                auditEvents:
+                  description: The JSON payload of events that you want to ingest. You can also point to the JSON event payload in a file.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AuditEvent'
+                  minItems: 1
+                  maxItems: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    PutAuditEventsResponse:
+      type: object
+      required:
+        - failed
+        - successful
+      properties:
+        failed:
+          allOf:
+            - $ref: '#/components/schemas/ResultErrorEntries'
+            - description: 'Lists events in the provided event payload that could not be ingested into CloudTrail, and includes the error code and error message returned for events that could not be ingested.'
+        successful:
+          allOf:
+            - $ref: '#/components/schemas/AuditEventResultEntries'
+            - description: Lists events in the provided event payload that were successfully ingested into CloudTrail.
+    AuditEvent:
+      type: object
+      required:
+        - eventData
+        - id
+      properties:
+        eventData:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The content of an audit event that comes from the event, such as <code>userIdentity</code>, <code>userAgent</code>, and <code>eventSource</code>.'
+        eventDataChecksum:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>A checksum is a base64-SHA256 algorithm that helps you verify that CloudTrail receives the event that matches with the checksum. Calculate the checksum by running a command like the following:</p> <p> <code>printf %s <i>$eventdata</i> | openssl dgst -binary -sha256 | base64</code> </p>'
+        id:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The original event ID from the source event.
+      description: An event from a source outside of Amazon Web Services that you want CloudTrail to log.
+    ChannelInsufficientPermission: {}
+    ChannelNotFound: {}
+    InvalidChannelARN: {}
+    ChannelUnsupportedSchema: {}
+    DuplicatedAuditEventId: {}
+    UnsupportedOperationException: {}
+    String:
+      type: string
+    Uuid:
+      type: string
+      pattern: '^[-_A-Za-z0-9]+$'
+      minLength: 1
+      maxLength: 128
+    AuditEventResultEntry:
+      type: object
+      required:
+        - eventID
+        - id
+      properties:
+        eventID:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The event ID assigned by CloudTrail.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The original event ID from the source event.
+      description: A response that includes successful and failed event results.
+    AuditEventResultEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/AuditEventResultEntry'
+      minItems: 0
+      maxItems: 100
+    AuditEvents:
+      type: array
+      items:
+        $ref: '#/components/schemas/AuditEvent'
+      minItems: 1
+      maxItems: 100
+    ChannelArn:
+      type: string
+      pattern: '^arn:.*$'
+    ErrorCode:
+      type: string
+      minLength: 1
+      maxLength: 128
+    ErrorMessage:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    ExternalId:
+      type: string
+      pattern: '^[\w+=,.@:\/-]*$'
+      minLength: 2
+      maxLength: 1224
+    PutAuditEventsRequest:
+      type: object
+      required:
+        - auditEvents
+      title: PutAuditEventsRequest
+      properties:
+        auditEvents:
+          allOf:
+            - $ref: '#/components/schemas/AuditEvents'
+            - description: The JSON payload of events that you want to ingest. You can also point to the JSON event payload in a file.
+    ResultErrorEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResultErrorEntry'
+      minItems: 0
+      maxItems: 100
+    ResultErrorEntry:
+      type: object
+      required:
+        - errorCode
+        - errorMessage
+        - id
+      properties:
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: 'The error code for events that could not be ingested by CloudTrail. Possible error codes include: <code>FieldTooLong</code>, <code>FieldNotFound</code>, <code>InvalidChecksum</code>, <code>InvalidData</code>, <code>InvalidRecipient</code>, <code>InvalidEventSource</code>, <code>AccountNotSubscribed</code>, <code>Throttling</code>, and <code>InternalFailure</code>.'
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: The message that describes the error for events that could not be ingested by CloudTrail.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The original event ID from the source event that could not be ingested by CloudTrail.
+      description: Includes the error code and error message for events that could not be ingested by CloudTrail.
+security:
+  - hmac: []

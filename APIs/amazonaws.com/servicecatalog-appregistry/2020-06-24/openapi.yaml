@@ -150,6 +150,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       parameters:
         - name: application
           in: path
@@ -259,6 +265,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters:
         - name: application
           in: path
@@ -277,6 +289,7 @@ paths:
             type: string
             enum:
               - CFN_STACK
+              - RESOURCE_TAG_VALUE
         - name: resource
           in: path
           required: true
@@ -316,6 +329,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters:
         - name: application
           in: path
@@ -334,6 +353,7 @@ paths:
             type: string
             enum:
               - CFN_STACK
+              - RESOURCE_TAG_VALUE
         - name: resource
           in: path
           required: true
@@ -389,6 +409,7 @@ paths:
             type: string
             enum:
               - CFN_STACK
+              - RESOURCE_TAG_VALUE
         - name: resource
           in: path
           required: true
@@ -427,6 +448,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters: []
       requestBody:
         required: true
@@ -508,7 +535,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-            maximum: 25
+            maximum: 100
   /attribute-groups:
     post:
       operationId: CreateAttributeGroup
@@ -632,7 +659,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-            maximum: 25
+            maximum: 100
   '/applications/{application}':
     delete:
       operationId: DeleteApplication
@@ -708,6 +735,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       parameters:
         - name: application
           in: path
@@ -741,6 +774,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ConflictException'
         '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
           description: InternalServerException
           content:
             application/json:
@@ -764,7 +803,7 @@ paths:
               type: object
               properties:
                 name:
-                  description: The new name of the application. The name must be unique in the region in which you are updating the application.
+                  description: 'Deprecated: The new name of the application. The name must be unique in the region in which you are updating the application. Please do not use this field as we have stopped supporting name updates.'
                   type: string
                   pattern: '[-.\w]+'
                   minLength: 1
@@ -848,6 +887,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       parameters:
         - name: attributeGroup
           in: path
@@ -910,7 +955,7 @@ paths:
               type: object
               properties:
                 name:
-                  description: The new name of the attribute group. The name must be unique in the region in which you are updating the attribute group.
+                  description: 'Deprecated: The new name of the attribute group. The name must be unique in the region in which you are updating the attribute group. Please do not use this field as we have stopped supporting name updates.'
                   type: string
                   pattern: '[-.\w]+'
                   minLength: 1
@@ -925,6 +970,73 @@ paths:
                   pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
                   minLength: 1
                   maxLength: 8000
+  /configuration:
+    get:
+      operationId: GetConfiguration
+      description: ' Retrieves a <code>TagKey</code> configuration from an account. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetConfigurationResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: PutConfiguration
+      description: ' Associates a <code>TagKey</code> configuration to an account. '
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - configuration
+              properties:
+                configuration:
+                  description: ' Includes all of the Service Catalog AppRegistry settings. '
+                  type: object
+                  properties:
+                    tagQueryConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/TagQueryConfiguration'
+                        - description: ' Includes the definition of a <code>tagQuery</code>. '
   '/applications/{application}/attribute-groups':
     get:
       operationId: ListAssociatedAttributeGroups
@@ -980,7 +1092,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-            maximum: 25
+            maximum: 100
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -992,7 +1104,7 @@ paths:
   '/applications/{application}/resources':
     get:
       operationId: ListAssociatedResources
-      description: Lists all resources that are associated with specified application. Results are paginated.
+      description: '<p> Lists all of the resources that are associated with the specified application. Results are paginated. </p> <note> <p> If you share an application, and a consumer account associates a tag query to the application, all of the users who can access the application can also view the tag values in all accounts that are associated with it using this API. </p> </note>'
       responses:
         '200':
           description: Success
@@ -1044,7 +1156,71 @@ paths:
           schema:
             type: integer
             minimum: 1
-            maximum: 25
+            maximum: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/applications/{application}/attribute-group-details':
+    get:
+      operationId: ListAttributeGroupsForApplication
+      description: Lists the details of all attribute groups associated with a specific application. The results display in pages.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAttributeGroupsForApplicationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: application
+          in: path
+          required: true
+          description: The name or ID of the application.
+          schema:
+            type: string
+            pattern: '[-.\w]+'
+            minLength: 1
+            maxLength: 256
+        - name: nextToken
+          in: query
+          required: false
+          description: This token retrieves the next page of results after a previous API call.
+          schema:
+            type: string
+            pattern: '[A-Za-z0-9+/=]+'
+            minLength: 1
+            maxLength: 2024
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The upper bound of the number of results to return. The value cannot exceed 25. If you omit this parameter, it defaults to 25. This value is optional.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1192,6 +1368,7 @@ paths:
             type: string
             enum:
               - CFN_STACK
+              - RESOURCE_TAG_VALUE
         - name: resource
           in: path
           required: true
@@ -1333,6 +1510,7 @@ components:
     ValidationException: {}
     InternalServerException: {}
     ServiceQuotaExceededException: {}
+    ConflictException: {}
     AssociateResourceResponse:
       type: object
       properties:
@@ -1344,7 +1522,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon resource name (ARN) that specifies the resource.
-    ConflictException: {}
     CreateApplicationResponse:
       type: object
       properties:
@@ -1437,7 +1614,7 @@ components:
         integrations:
           allOf:
             - $ref: '#/components/schemas/Integrations'
-            - description: 'The information about the integration of the application with other services, such as Resource Groups.'
+            - description: ' The information about the integration of the application with other services, such as Resource Groups. '
     GetAssociatedResourceResponse:
       type: object
       properties:
@@ -1480,6 +1657,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - description: Key-value pairs associated with the attribute group.
+    GetConfigurationResponse:
+      type: object
+      properties:
+        configuration:
+          allOf:
+            - $ref: '#/components/schemas/AppRegistryConfiguration'
+            - description: ' Retrieves <code>TagKey</code> configuration from an account. '
     ListApplicationsResponse:
       type: object
       properties:
@@ -1524,6 +1708,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: 'The token to use to get the next page of results after a previous API call. '
+    ListAttributeGroupsForApplicationResponse:
+      type: object
+      properties:
+        attributeGroupsDetails:
+          allOf:
+            - $ref: '#/components/schemas/AttributeGroupDetailsList'
+            - description: ' The details related to a specific attribute group. '
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to use to get the next page of results after a previous API call.
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -1531,6 +1726,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - description: The tags on the resource.
+    TagQueryConfiguration:
+      type: object
+      properties:
+        tagKey:
+          allOf:
+            - $ref: '#/components/schemas/TagKeyConfig'
+            - description: ' Condition in the IAM policy that associates resources to an application. '
+      description: ' The definition of <code>tagQuery</code>. Specifies which resources are associated with an application. '
     SyncResourceResponse:
       type: object
       properties:
@@ -1554,7 +1757,7 @@ components:
       properties: {}
     TagKey:
       type: string
-      pattern: '(?!aws:)[a-zA-Z+-=._:/]+'
+      pattern: '[a-zA-Z+-=._:/]+'
       minLength: 1
       maxLength: 128
     UpdateApplicationResponse:
@@ -1571,6 +1774,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/AttributeGroup'
             - description: The updated information of the attribute group.
+    AppRegistryConfiguration:
+      type: object
+      properties:
+        tagQueryConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/TagQueryConfiguration'
+            - description: ' Includes the definition of a <code>tagQuery</code>. '
+      description: ' Includes all of the Service Catalog AppRegistry settings. '
     ApplicationId:
       type: string
       pattern: '[a-z0-9]+'
@@ -1686,6 +1897,7 @@ components:
       type: string
       enum:
         - CFN_STACK
+        - RESOURCE_TAG_VALUE
     ResourceSpecifier:
       type: string
       pattern: \S+
@@ -1735,6 +1947,27 @@ components:
             - $ref: '#/components/schemas/Tags'
             - description: Key-value pairs you can use to associate with the attribute group.
       description: Represents a Amazon Web Services Service Catalog AppRegistry attribute group that is rich metadata which describes an application and its components.
+    AttributeGroupDetails:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/AttributeGroupId'
+            - description: The unique identifier of the attribute group.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/AttributeGroupArn'
+            - description: The Amazon resource name (ARN) that specifies the attribute group.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - deprecated: true
+              description: <important> <p> This field is no longer supported. We recommend you don't use the field when using <code>ListAttributeGroupsForApplication</code>. </p> </important> <p> The name of the attribute group. </p>This field is deprecated. We recommend not using the field when using ListAttributeGroupsForApplication.
+      description: ' The details related to a specific AttributeGroup. '
+    AttributeGroupDetailsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AttributeGroupDetails'
     AttributeGroupIds:
       type: array
       items:
@@ -1912,7 +2145,7 @@ components:
     MaxResults:
       type: integer
       minimum: 1
-      maximum: 25
+      maximum: 100
     ListApplicationsRequest:
       type: object
       title: ListApplicationsRequest
@@ -1929,6 +2162,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ResourceInfo'
+    ListAttributeGroupsForApplicationRequest:
+      type: object
+      title: ListAttributeGroupsForApplicationRequest
+      properties: {}
     ListAttributeGroupsRequest:
       type: object
       title: ListAttributeGroupsRequest
@@ -1937,6 +2174,16 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    PutConfigurationRequest:
+      type: object
+      required:
+        - configuration
+      title: PutConfigurationRequest
+      properties:
+        configuration:
+          allOf:
+            - $ref: '#/components/schemas/AppRegistryConfiguration'
+            - description: ' Associates a <code>TagKey</code> configuration to an account. '
     StackArn:
       type: string
       pattern: 'arn:aws[-a-z]*:cloudformation:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:stack/[a-zA-Z][-A-Za-z0-9]{0,127}/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}'
@@ -1948,6 +2195,14 @@ components:
             - $ref: '#/components/schemas/ResourceGroup'
             - description: The information about the integration of Resource Groups.
       description: The service integration information about the resource.
+    ResourceDetails:
+      type: object
+      properties:
+        tagValue:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The value of the tag.
+      description: ' The details related to the resource. '
     ResourceGroupState:
       type: string
       enum:
@@ -1968,8 +2223,16 @@ components:
             - description: The name of the resource.
         arn:
           allOf:
-            - $ref: '#/components/schemas/StackArn'
+            - $ref: '#/components/schemas/Arn'
             - description: The Amazon resource name (ARN) that specifies the resource across services.
+        resourceType:
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: ' Provides information about the Service Catalog App Registry resource type. '
+        resourceDetails:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDetails'
+            - description: ' The details related to the resource. '
       description: The information about the resource.
     SyncAction:
       type: string
@@ -1980,6 +2243,11 @@ components:
       type: object
       title: SyncResourceRequest
       properties: {}
+    TagKeyConfig:
+      type: string
+      pattern: '^(?!\s+$)[\p{L}\p{Z}\p{N}_.:/=+\-@]*'
+      minLength: 0
+      maxLength: 128
     TagKeys:
       type: array
       items:
@@ -2007,7 +2275,8 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The new name of the application. The name must be unique in the region in which you are updating the application.
+            - deprecated: true
+              description: 'Deprecated: The new name of the application. The name must be unique in the region in which you are updating the application. Please do not use this field as we have stopped supporting name updates.Name update for application is deprecated.'
         description:
           allOf:
             - $ref: '#/components/schemas/Description'
@@ -2019,7 +2288,8 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The new name of the attribute group. The name must be unique in the region in which you are updating the attribute group.
+            - deprecated: true
+              description: 'Deprecated: The new name of the attribute group. The name must be unique in the region in which you are updating the attribute group. Please do not use this field as we have stopped supporting name updates.Name update for attribute group is deprecated.'
         description:
           allOf:
             - $ref: '#/components/schemas/Description'

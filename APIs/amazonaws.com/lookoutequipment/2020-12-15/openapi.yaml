@@ -258,6 +258,150 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLookoutEquipmentFrontendService.CreateLabel:
+    post:
+      operationId: CreateLabel
+      description: ' Creates a label for an event. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateLabelResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLabelRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLookoutEquipmentFrontendService.CreateLabel
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLookoutEquipmentFrontendService.CreateLabelGroup:
+    post:
+      operationId: CreateLabelGroup
+      description: ' Creates a group of labels. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateLabelGroupResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLabelGroupRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLookoutEquipmentFrontendService.CreateLabelGroup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSLookoutEquipmentFrontendService.CreateModel:
     post:
       operationId: CreateModel
@@ -370,6 +514,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       requestBody:
         required: true
         content:
@@ -457,6 +607,136 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLookoutEquipmentFrontendService.DeleteLabel:
+    post:
+      operationId: DeleteLabel
+      description: ' Deletes a label. '
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteLabelRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLookoutEquipmentFrontendService.DeleteLabel
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLookoutEquipmentFrontendService.DeleteLabelGroup:
+    post:
+      operationId: DeleteLabelGroup
+      description: ' Deletes a group of labels. '
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteLabelGroupRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLookoutEquipmentFrontendService.DeleteLabelGroup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSLookoutEquipmentFrontendService.DeleteModel:
     post:
       operationId: DeleteModel
@@ -494,6 +774,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       requestBody:
         required: true
         content:
@@ -519,7 +805,7 @@ paths:
   /#X-Amz-Target=AWSLookoutEquipmentFrontendService.DescribeDataIngestionJob:
     post:
       operationId: DescribeDataIngestionJob
-      description: 'Provides information on a specific data ingestion job such as creation time, dataset ARN, status, and so on. '
+      description: 'Provides information on a specific data ingestion job such as creation time, dataset ARN, and status.'
       responses:
         '200':
           description: Success
@@ -582,7 +868,7 @@ paths:
   /#X-Amz-Target=AWSLookoutEquipmentFrontendService.DescribeDataset:
     post:
       operationId: DescribeDataset
-      description: 'Provides a JSON description of the data that is in each time series dataset, including names, column names, and data types.'
+      description: 'Provides a JSON description of the data in each time series dataset, including names, column names, and data types.'
       responses:
         '200':
           description: Success
@@ -697,6 +983,132 @@ paths:
             type: string
             enum:
               - AWSLookoutEquipmentFrontendService.DescribeInferenceScheduler
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLookoutEquipmentFrontendService.DescribeLabel:
+    post:
+      operationId: DescribeLabel
+      description: ' Returns the name of the label. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeLabelResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeLabelRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLookoutEquipmentFrontendService.DescribeLabel
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLookoutEquipmentFrontendService.DescribeLabelGroup:
+    post:
+      operationId: DescribeLabelGroup
+      description: ' Returns information about the label group. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeLabelGroupResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeLabelGroupRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLookoutEquipmentFrontendService.DescribeLabelGroup
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -906,6 +1318,81 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLookoutEquipmentFrontendService.ListInferenceEvents:
+    post:
+      operationId: ListInferenceEvents
+      description: ' Lists all inference events that have been found for the specified inference scheduler. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListInferenceEventsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListInferenceEventsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLookoutEquipmentFrontendService.ListInferenceEvents
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSLookoutEquipmentFrontendService.ListInferenceExecutions:
     post:
       operationId: ListInferenceExecutions
@@ -1050,6 +1537,144 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLookoutEquipmentFrontendService.ListLabelGroups:
+    post:
+      operationId: ListLabelGroups
+      description: ' Returns a list of the label groups. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListLabelGroupsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListLabelGroupsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLookoutEquipmentFrontendService.ListLabelGroups
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLookoutEquipmentFrontendService.ListLabels:
+    post:
+      operationId: ListLabels
+      description: ' Provides a list of labels. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListLabelsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListLabelsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLookoutEquipmentFrontendService.ListLabels
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSLookoutEquipmentFrontendService.ListModels:
     post:
       operationId: ListModels
@@ -1111,6 +1736,81 @@ paths:
             type: string
             enum:
               - AWSLookoutEquipmentFrontendService.ListModels
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLookoutEquipmentFrontendService.ListSensorStatistics:
+    post:
+      operationId: ListSensorStatistics
+      description: ' Lists statistics about the data collected for each of the sensors that have been successfully ingested in the particular dataset. Can also be used to retreive Sensor Statistics for a previous ingestion job. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSensorStatisticsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListSensorStatisticsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLookoutEquipmentFrontendService.ListSensorStatistics
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1592,6 +2292,71 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLookoutEquipmentFrontendService.UpdateLabelGroup:
+    post:
+      operationId: UpdateLabelGroup
+      description: ' Updates the label group. '
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLabelGroupRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLookoutEquipmentFrontendService.UpdateLabelGroup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -1663,7 +2428,6 @@ components:
       type: object
       required:
         - DatasetName
-        - DatasetSchema
         - ClientToken
       title: CreateDatasetRequest
       properties:
@@ -1731,11 +2495,11 @@ components:
         DataDelayOffsetInMinutes:
           allOf:
             - $ref: '#/components/schemas/DataDelayOffsetInMinutes'
-            - description: 'A period of time (in minutes) by which inference on the data is delayed after the data starts. For instance, if you select an offset delay time of five minutes, inference will not begin on the data until the first data measurement after the five minute mark. For example, if five minutes is selected, the inference scheduler will wake up at the configured frequency with the additional five minute delay time to check the customer S3 bucket. The customer can upload data at the same frequency and they don''t need to stop and restart the scheduler when uploading new data. '
+            - description: '<p>The interval (in minutes) of planned delay at the start of each inference segment. For example, if inference is set to run every ten minutes, the delay is set to five minutes and the time is 09:08. The inference scheduler will wake up at the configured interval (which, without a delay configured, would be 09:10) plus the additional five minute delay time (so 09:15) to check your Amazon S3 bucket. The delay provides a buffer for you to upload data at the same frequency, so that you don''t have to stop and restart the scheduler when uploading new data.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-inference-process.html">Understanding the inference process</a>.</p>'
         DataUploadFrequency:
           allOf:
             - $ref: '#/components/schemas/DataUploadFrequency'
-            - description: ' How often data is uploaded to the source S3 bucket for the input data. The value chosen is the length of time between data uploads. For instance, if you select 5 minutes, Amazon Lookout for Equipment will upload the real-time data to the source bucket once every 5 minutes. This frequency also determines how often Amazon Lookout for Equipment starts a scheduled inference on your data. In this example, it starts once every 5 minutes. '
+            - description: '<p> How often data is uploaded to the source Amazon S3 bucket for the input data. The value chosen is the length of time between data uploads. For instance, if you select 5 minutes, Amazon Lookout for Equipment will upload the real-time data to the source bucket once every 5 minutes. This frequency also determines how often Amazon Lookout for Equipment runs inference on your data.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-inference-process.html">Understanding the inference process</a>.</p>'
         DataInputConfiguration:
           allOf:
             - $ref: '#/components/schemas/InferenceInputConfiguration'
@@ -1761,6 +2525,89 @@ components:
             - $ref: '#/components/schemas/TagList'
             - description: 'Any tags associated with the inference scheduler. '
     ResourceNotFoundException: {}
+    CreateLabelResponse:
+      type: object
+      properties:
+        LabelId:
+          allOf:
+            - $ref: '#/components/schemas/LabelId'
+            - description: ' The ID of the label that you have created. '
+    CreateLabelRequest:
+      type: object
+      required:
+        - LabelGroupName
+        - StartTime
+        - EndTime
+        - Rating
+        - ClientToken
+      title: CreateLabelRequest
+      properties:
+        LabelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupName'
+            - description: <p> The name of a group of labels. </p> <p>Data in this field will be retained for service usage. Follow best practices for the security of your data. </p>
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The start time of the labeled event. '
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The end time of the labeled event. '
+        Rating:
+          allOf:
+            - $ref: '#/components/schemas/LabelRating'
+            - description: ' Indicates whether a labeled event represents an anomaly. '
+        FaultCode:
+          allOf:
+            - $ref: '#/components/schemas/FaultCode'
+            - description: <p> Provides additional information about the label. The fault code must be defined in the FaultCodes attribute of the label group.</p> <p>Data in this field will be retained for service usage. Follow best practices for the security of your data. </p>
+        Notes:
+          allOf:
+            - $ref: '#/components/schemas/Comments'
+            - description: <p> Metadata providing additional information about the label. </p> <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>
+        Equipment:
+          allOf:
+            - $ref: '#/components/schemas/Equipment'
+            - description: <p> Indicates that a label pertains to a particular piece of equipment. </p> <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotenceToken'
+            - description: ' A unique identifier for the request to create a label. If you do not set the client request token, Lookout for Equipment generates one. '
+    CreateLabelGroupResponse:
+      type: object
+      properties:
+        LabelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupName'
+            - description: ' The name of the label group that you have created. Data in this field will be retained for service usage. Follow best practices for the security of your data. '
+        LabelGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupArn'
+            - description: ' The ARN of the label group that you have created. '
+    CreateLabelGroupRequest:
+      type: object
+      required:
+        - LabelGroupName
+        - ClientToken
+      title: CreateLabelGroupRequest
+      properties:
+        LabelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupName'
+            - description: <p> Names a group of labels.</p> <p>Data in this field will be retained for service usage. Follow best practices for the security of your data. </p>
+        FaultCodes:
+          allOf:
+            - $ref: '#/components/schemas/FaultCodes'
+            - description: <p> The acceptable fault codes (indicating the type of anomaly associated with the label) that can be used with this label group.</p> <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotenceToken'
+            - description: ' A unique identifier for the request to create a label group. If you do not set the client request token, Lookout for Equipment generates one. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: <p> Tags that provide metadata about the label group you are creating. </p> <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>
     CreateModelResponse:
       type: object
       properties:
@@ -1856,6 +2703,31 @@ components:
           allOf:
             - $ref: '#/components/schemas/InferenceSchedulerIdentifier'
             - description: 'The name of the inference scheduler to be deleted. '
+    DeleteLabelRequest:
+      type: object
+      required:
+        - LabelGroupName
+        - LabelId
+      title: DeleteLabelRequest
+      properties:
+        LabelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupName'
+            - description: ' The name of the label group that contains the label that you want to delete. Data in this field will be retained for service usage. Follow best practices for the security of your data. '
+        LabelId:
+          allOf:
+            - $ref: '#/components/schemas/LabelId'
+            - description: ' The ID of the label that you want to delete. '
+    DeleteLabelGroupRequest:
+      type: object
+      required:
+        - LabelGroupName
+      title: DeleteLabelGroupRequest
+      properties:
+        LabelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupName'
+            - description: ' The name of the label group that you want to delete. Data in this field will be retained for service usage. Follow best practices for the security of your data. '
     DeleteModelRequest:
       type: object
       required:
@@ -1897,6 +2769,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/BoundedLengthString'
             - description: 'Specifies the reason for failure when a data ingestion job has failed. '
+        DataQualitySummary:
+          allOf:
+            - $ref: '#/components/schemas/DataQualitySummary'
+            - description: ' Gives statistics about a completed ingestion job. These statistics primarily relate to quantifying incorrect data such as MissingCompleteSensorData, MissingSensorData, UnsupportedDateFormats, InsufficientSensorData, and DuplicateTimeStamps. '
+        IngestedFilesSummary:
+          $ref: '#/components/schemas/IngestedFilesSummary'
+        StatusDetail:
+          allOf:
+            - $ref: '#/components/schemas/BoundedLengthString'
+            - description: ' Provides details about status of the ingestion job that is currently in progress. '
+        IngestedDataSize:
+          allOf:
+            - $ref: '#/components/schemas/DataSizeInBytes'
+            - description: ' Indicates the size of the ingested dataset. '
+        DataStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' Indicates the earliest timestamp corresponding to data that was successfully ingested during this specific ingestion job. '
+        DataEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' Indicates the latest timestamp corresponding to data that was successfully ingested during this specific ingestion job. '
     DescribeDataIngestionJobRequest:
       type: object
       required:
@@ -1921,7 +2815,7 @@ components:
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: 'Specifies the time the dataset was created in Amazon Lookout for Equipment. '
+            - description: 'Specifies the time the dataset was created in Lookout for Equipment. '
         LastUpdatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -1942,6 +2836,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/IngestionInputConfiguration'
             - description: 'Specifies the S3 location configuration for the data input for the data ingestion job. '
+        DataQualitySummary:
+          allOf:
+            - $ref: '#/components/schemas/DataQualitySummary'
+            - description: ' Gives statistics associated with the given dataset for the latest successful associated ingestion job id. These statistics primarily relate to quantifying incorrect data such as MissingCompleteSensorData, MissingSensorData, UnsupportedDateFormats, InsufficientSensorData, and DuplicateTimeStamps. '
+        IngestedFilesSummary:
+          allOf:
+            - $ref: '#/components/schemas/IngestedFilesSummary'
+            - description: ' IngestedFilesSummary associated with the given dataset for the latest successful associated ingestion job id. '
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: ' The Amazon Resource Name (ARN) of the IAM role that you are using for this the data ingestion job. '
+        DataStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' Indicates the earliest timestamp corresponding to data that was successfully ingested during the most recent ingestion of this particular dataset. '
+        DataEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' Indicates the latest timestamp corresponding to data that was successfully ingested during the most recent ingestion of this particular dataset. '
     DescribeDatasetRequest:
       type: object
       required:
@@ -2007,6 +2921,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/KmsKeyArn'
             - description: 'Provides the identifier of the KMS key used to encrypt inference scheduler data by Amazon Lookout for Equipment. '
+        LatestInferenceResult:
+          allOf:
+            - $ref: '#/components/schemas/LatestInferenceResult'
+            - description: Indicates whether the latest execution for the inference scheduler was Anomalous (anomalous events found) or Normal (no anomalous events found).
     DescribeInferenceSchedulerRequest:
       type: object
       required:
@@ -2017,6 +2935,97 @@ components:
           allOf:
             - $ref: '#/components/schemas/InferenceSchedulerIdentifier'
             - description: 'The name of the inference scheduler being described. '
+    DescribeLabelResponse:
+      type: object
+      properties:
+        LabelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupName'
+            - description: ' The name of the requested label group. '
+        LabelGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupArn'
+            - description: ' The ARN of the requested label group. '
+        LabelId:
+          allOf:
+            - $ref: '#/components/schemas/LabelId'
+            - description: ' The ID of the requested label. '
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The start time of the requested label. '
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The end time of the requested label. '
+        Rating:
+          allOf:
+            - $ref: '#/components/schemas/LabelRating'
+            - description: ' Indicates whether a labeled event represents an anomaly. '
+        FaultCode:
+          allOf:
+            - $ref: '#/components/schemas/FaultCode'
+            - description: <p> Indicates the type of anomaly associated with the label. </p> <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>
+        Notes:
+          allOf:
+            - $ref: '#/components/schemas/Comments'
+            - description: <p>Metadata providing additional information about the label.</p> <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>
+        Equipment:
+          allOf:
+            - $ref: '#/components/schemas/Equipment'
+            - description: ' Indicates that a label pertains to a particular piece of equipment. '
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time at which the label was created. '
+    DescribeLabelRequest:
+      type: object
+      required:
+        - LabelGroupName
+        - LabelId
+      title: DescribeLabelRequest
+      properties:
+        LabelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupName'
+            - description: ' Returns the name of the group containing the label. '
+        LabelId:
+          allOf:
+            - $ref: '#/components/schemas/LabelId'
+            - description: ' Returns the ID of the label. '
+    DescribeLabelGroupResponse:
+      type: object
+      properties:
+        LabelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupName'
+            - description: ' The name of the label group. '
+        LabelGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupArn'
+            - description: ' The ARN of the label group. '
+        FaultCodes:
+          allOf:
+            - $ref: '#/components/schemas/FaultCodes'
+            - description: ' Codes indicating the type of anomaly associated with the labels in the lagbel group. '
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time at which the label group was created. '
+        UpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time at which the label group was updated. '
+    DescribeLabelGroupRequest:
+      type: object
+      required:
+        - LabelGroupName
+      title: DescribeLabelGroupRequest
+      properties:
+        LabelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupName'
+            - description: ' Returns the name of the label group. '
     DescribeModelResponse:
       type: object
       properties:
@@ -2136,7 +3145,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
-            - description: ' An opaque pagination token indicating where to continue the listing of data ingestion jobs. '
+            - description: 'An opaque pagination token indicating where to continue the listing of data ingestion jobs. '
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
@@ -2172,6 +3181,45 @@ components:
           allOf:
             - $ref: '#/components/schemas/DatasetName'
             - description: 'The beginning of the name of the datasets to be listed. '
+    ListInferenceEventsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'An opaque pagination token indicating where to continue the listing of inference executions. '
+        InferenceEventSummaries:
+          allOf:
+            - $ref: '#/components/schemas/InferenceEventSummaries'
+            - description: 'Provides an array of information about the individual inference events returned from the <code>ListInferenceEvents</code> operation, including scheduler used, event start time, event end time, diagnostics, and so on. '
+    ListInferenceEventsRequest:
+      type: object
+      required:
+        - InferenceSchedulerName
+        - IntervalStartTime
+        - IntervalEndTime
+      title: ListInferenceEventsRequest
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: An opaque pagination token indicating where to continue the listing of inference events.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'Specifies the maximum number of inference events to list. '
+        InferenceSchedulerName:
+          allOf:
+            - $ref: '#/components/schemas/InferenceSchedulerIdentifier'
+            - description: 'The name of the inference scheduler for the inference events listed. '
+        IntervalStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' Lookout for Equipment will return all the inference events with an end time equal to or greater than the start time given.'
+        IntervalEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Returns all the inference events with an end start time equal to or greater than less than the end time given
     ListInferenceExecutionsResponse:
       type: object
       properties:
@@ -2244,6 +3292,82 @@ components:
           allOf:
             - $ref: '#/components/schemas/ModelName'
             - description: 'The name of the ML model used by the inference scheduler to be listed. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/InferenceSchedulerStatus'
+            - description: Specifies the current status of the inference schedulers to list.
+    ListLabelGroupsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' An opaque pagination token indicating where to continue the listing of label groups. '
+        LabelGroupSummaries:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupSummaries'
+            - description: ' A summary of the label groups. '
+    ListLabelGroupsRequest:
+      type: object
+      title: ListLabelGroupsRequest
+      properties:
+        LabelGroupNameBeginsWith:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupName'
+            - description: ' The beginning of the name of the label groups to be listed. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' An opaque pagination token indicating where to continue the listing of label groups. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: ' Specifies the maximum number of label groups to list. '
+    ListLabelsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' An opaque pagination token indicating where to continue the listing of datasets. '
+        LabelSummaries:
+          allOf:
+            - $ref: '#/components/schemas/LabelSummaries'
+            - description: ' A summary of the items in the label group. '
+    ListLabelsRequest:
+      type: object
+      required:
+        - LabelGroupName
+      title: ListLabelsRequest
+      properties:
+        LabelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupName'
+            - description: ' Retruns the name of the label group. '
+        IntervalStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' Returns all the labels with a end time equal to or later than the start time given. '
+        IntervalEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' Returns all labels with a start time earlier than the end time given. '
+        FaultCode:
+          allOf:
+            - $ref: '#/components/schemas/FaultCode'
+            - description: ' Returns labels with a particular fault code. '
+        Equipment:
+          allOf:
+            - $ref: '#/components/schemas/Equipment'
+            - description: ' Lists the labels that pertain to a particular piece of equipment. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' An opaque pagination token indicating where to continue the listing of label groups. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: ' Specifies the maximum number of labels to list. '
     ListModelsResponse:
       type: object
       properties:
@@ -2279,6 +3403,39 @@ components:
           allOf:
             - $ref: '#/components/schemas/DatasetName'
             - description: 'The beginning of the name of the dataset of the ML models to be listed. '
+    ListSensorStatisticsResponse:
+      type: object
+      properties:
+        SensorStatisticsSummaries:
+          allOf:
+            - $ref: '#/components/schemas/SensorStatisticsSummaries'
+            - description: 'Provides ingestion-based statistics regarding the specified sensor with respect to various validation types, such as whether data exists, the number and percentage of missing values, and the number and percentage of duplicate timestamps. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'An opaque pagination token indicating where to continue the listing of sensor statistics. '
+    ListSensorStatisticsRequest:
+      type: object
+      required:
+        - DatasetName
+      title: ListSensorStatisticsRequest
+      properties:
+        DatasetName:
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: ' The name of the dataset associated with the list of Sensor Statistics. '
+        IngestionJobId:
+          allOf:
+            - $ref: '#/components/schemas/IngestionJobId'
+            - description: ' The ingestion job id associated with the list of Sensor Statistics. To get sensor statistics for a particular ingestion job id, both dataset name and ingestion job id must be submitted as inputs. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'Specifies the maximum number of sensors for which to retrieve statistics. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'An opaque pagination token indicating where to continue the listing of sensor statistics. '
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -2464,20 +3621,85 @@ components:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
             - description: ' The Amazon Resource Name (ARN) of a role with permission to access the data source for the inference scheduler. '
+    UpdateLabelGroupRequest:
+      type: object
+      required:
+        - LabelGroupName
+      title: UpdateLabelGroupRequest
+      properties:
+        LabelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupName'
+            - description: ' The name of the label group to be updated. '
+        FaultCodes:
+          allOf:
+            - $ref: '#/components/schemas/FaultCodes'
+            - description: <p> Updates the code indicating the type of anomaly associated with the label. </p> <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>
     AmazonResourceArn:
       type: string
       minLength: 1
       maxLength: 1011
+    Boolean:
+      type: boolean
     BoundedLengthString:
       type: string
       pattern: '[\P{M}\p{M}]{1,5000}'
       minLength: 1
       maxLength: 5000
+    StatisticalIssueStatus:
+      type: string
+      enum:
+        - POTENTIAL_ISSUE_DETECTED
+        - NO_ISSUE_DETECTED
+    Integer:
+      type: integer
+    CategoricalValues:
+      type: object
+      required:
+        - Status
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatisticalIssueStatus'
+            - description: ' Indicates whether there is a potential data issue related to categorical values. '
+        NumberOfCategory:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' Indicates the number of categories in the data. '
+      description: ' Entity that comprises information on categorical values in data. '
+    Comments:
+      type: string
+      pattern: '[\P{M}\p{M}]{1,2560}'
+      minLength: 1
+      maxLength: 2560
+    ComponentName:
+      type: string
+      pattern: '^[0-9a-zA-Z._\-]{1,200}$'
+      minLength: 1
+      maxLength: 200
     ComponentTimestampDelimiter:
       type: string
       pattern: ^(\-|\_|\s)?$
       minLength: 0
       maxLength: 1
+    Float:
+      type: number
+      format: float
+    CountPercent:
+      type: object
+      required:
+        - Count
+        - Percentage
+      properties:
+        Count:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' Indicates the count of occurences of the given statistic. '
+        Percentage:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: ' Indicates the percentage of occurances of the given statistic. '
+      description: ' Entity that comprises information of count and percentage. '
     DatasetName:
       type: string
       pattern: '^[0-9a-zA-Z_-]{1,200}$'
@@ -2546,16 +3768,16 @@ components:
         S3InputConfiguration:
           allOf:
             - $ref: '#/components/schemas/InferenceS3InputConfiguration'
-            - description: ' Specifies configuration information for the input data for the inference, including S3 location of input data.. '
+            - description: ' Specifies configuration information for the input data for the inference, including Amazon S3 location of input data.'
         InputTimeZoneOffset:
           allOf:
             - $ref: '#/components/schemas/TimeZoneOffset'
-            - description: 'Indicates the difference between your time zone and Greenwich Mean Time (GMT). '
+            - description: Indicates the difference between your time zone and Coordinated Universal Time (UTC).
         InferenceInputNameConfiguration:
           allOf:
             - $ref: '#/components/schemas/InferenceInputNameConfiguration'
             - description: 'Specifies configuration information for the input data for the inference, including timestamp format and delimiter. '
-      description: 'Specifies configuration information for the input data for the inference, including S3 location of input data.. '
+      description: 'Specifies configuration information for the input data for the inference, including Amazon S3 location of input data.. '
     InferenceOutputConfiguration:
       type: object
       required:
@@ -2587,6 +3809,45 @@ components:
         - RUNNING
         - STOPPING
         - STOPPED
+    LabelGroupName:
+      type: string
+      pattern: '^[0-9a-zA-Z_-]{1,200}$'
+      minLength: 1
+      maxLength: 200
+    FaultCodes:
+      type: array
+      items:
+        $ref: '#/components/schemas/FaultCode'
+      minItems: 0
+      maxItems: 50
+    LabelGroupArn:
+      type: string
+      pattern: 'arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\-]*:[0-9]{12}:label-group\/.+'
+      minLength: 20
+      maxLength: 2048
+    Timestamp:
+      type: string
+      format: date-time
+    LabelRating:
+      type: string
+      enum:
+        - ANOMALY
+        - NO_ANOMALY
+        - NEUTRAL
+    FaultCode:
+      type: string
+      pattern: '[\P{M}\p{M}]{1,100}'
+      minLength: 1
+      maxLength: 100
+    Equipment:
+      type: string
+      pattern: '[\P{M}\p{M}]{1,200}'
+      minLength: 1
+      maxLength: 200
+    LabelId:
+      type: string
+      pattern: '[A-Fa-f0-9]{0,32}'
+      maxLength: 32
     DatasetIdentifier:
       type: string
       pattern: '^[0-9a-zA-Z_-]{1,200}$'
@@ -2594,17 +3855,16 @@ components:
       maxLength: 200
     LabelsInputConfiguration:
       type: object
-      required:
-        - S3InputConfiguration
       properties:
         S3InputConfiguration:
           allOf:
             - $ref: '#/components/schemas/LabelsS3InputConfiguration'
             - description: 'Contains location information for the S3 location being used for label data. '
+        LabelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupName'
+            - description: ' The name of the label group to be used for label data. '
       description: 'Contains the configuration information for the S3 location being used to hold label data. '
-    Timestamp:
-      type: string
-      format: date-time
     DataPreProcessingConfiguration:
       type: object
       properties:
@@ -2646,7 +3906,7 @@ components:
         IngestionInputConfiguration:
           allOf:
             - $ref: '#/components/schemas/IngestionInputConfiguration'
-            - description: ' Specifies information for the input data for the data inference job, including data S3 location parameters. '
+            - description: ' Specifies information for the input data for the data inference job, including data Amazon S3 location parameters. '
         Status:
           allOf:
             - $ref: '#/components/schemas/IngestionJobStatus'
@@ -2690,6 +3950,104 @@ components:
         - PT15M
         - PT30M
         - PT1H
+    InsufficientSensorData:
+      type: object
+      required:
+        - MissingCompleteSensorData
+        - SensorsWithShortDateRange
+      properties:
+        MissingCompleteSensorData:
+          allOf:
+            - $ref: '#/components/schemas/MissingCompleteSensorData'
+            - description: ' Parameter that describes the total number of sensors that have data completely missing for it. '
+        SensorsWithShortDateRange:
+          allOf:
+            - $ref: '#/components/schemas/SensorsWithShortDateRange'
+            - description: ' Parameter that describes the total number of sensors that have a short date range of less than 90 days of data overall. '
+      description: ' Entity that comprises aggregated information on sensors having insufficient data. '
+    MissingSensorData:
+      type: object
+      required:
+        - AffectedSensorCount
+        - TotalNumberOfMissingValues
+      properties:
+        AffectedSensorCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' Indicates the number of sensors that have atleast some data missing. '
+        TotalNumberOfMissingValues:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' Indicates the total number of missing values across all the sensors. '
+      description: ' Entity that comprises aggregated information on sensors having missing data. '
+    InvalidSensorData:
+      type: object
+      required:
+        - AffectedSensorCount
+        - TotalNumberOfInvalidValues
+      properties:
+        AffectedSensorCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' Indicates the number of sensors that have at least some invalid values. '
+        TotalNumberOfInvalidValues:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' Indicates the total number of invalid values across all the sensors. '
+      description: ' Entity that comprises aggregated information on sensors having insufficient data. '
+    UnsupportedTimestamps:
+      type: object
+      required:
+        - TotalNumberOfUnsupportedTimestamps
+      properties:
+        TotalNumberOfUnsupportedTimestamps:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' Indicates the total number of unsupported timestamps across the ingested data. '
+      description: ' Entity that comprises information abount unsupported timestamps in the dataset. '
+    DuplicateTimestamps:
+      type: object
+      required:
+        - TotalNumberOfDuplicateTimestamps
+      properties:
+        TotalNumberOfDuplicateTimestamps:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' Indicates the total number of duplicate timestamps. '
+      description: ' Entity that comprises information abount duplicate timestamps in the dataset. '
+    DataQualitySummary:
+      type: object
+      required:
+        - InsufficientSensorData
+        - MissingSensorData
+        - InvalidSensorData
+        - UnsupportedTimestamps
+        - DuplicateTimestamps
+      properties:
+        InsufficientSensorData:
+          allOf:
+            - $ref: '#/components/schemas/InsufficientSensorData'
+            - description: ' Parameter that gives information about insufficient data for sensors in the dataset. This includes information about those sensors that have complete data missing and those with a short date range. '
+        MissingSensorData:
+          allOf:
+            - $ref: '#/components/schemas/MissingSensorData'
+            - description: ' Parameter that gives information about data that is missing over all the sensors in the input data. '
+        InvalidSensorData:
+          allOf:
+            - $ref: '#/components/schemas/InvalidSensorData'
+            - description: ' Parameter that gives information about data that is invalid over all the sensors in the input data. '
+        UnsupportedTimestamps:
+          allOf:
+            - $ref: '#/components/schemas/UnsupportedTimestamps'
+            - description: ' Parameter that gives information about unsupported timestamps in the input data. '
+        DuplicateTimestamps:
+          allOf:
+            - $ref: '#/components/schemas/DuplicateTimestamps'
+            - description: ' Parameter that gives information about duplicate timestamps in the input data. '
+      description: ' DataQualitySummary gives aggregated statistics over all the sensors about a completed ingestion job. It primarily gives more information about statistics over different incorrect data like MissingCompleteSensorData, MissingSensorData, UnsupportedDateFormats, InsufficientSensorData, DuplicateTimeStamps. '
+    DataSizeInBytes:
+      type: integer
+      minimum: 0
     InlineDataSchema:
       type: string
       minLength: 1
@@ -2723,18 +4081,77 @@ components:
       pattern: '^[0-9a-zA-Z_-]{1,200}$'
       minLength: 1
       maxLength: 200
+    IngestedFilesSummary:
+      type: object
+      required:
+        - TotalNumberOfFiles
+        - IngestedNumberOfFiles
+      properties:
+        TotalNumberOfFiles:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: Indicates the total number of files that were submitted for ingestion.
+        IngestedNumberOfFiles:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: Indicates the number of files that were successfully ingested.
+        DiscardedFiles:
+          allOf:
+            - $ref: '#/components/schemas/ListOfDiscardedFiles'
+            - description: 'Indicates the number of files that were discarded. A file could be discarded because its format is invalid (for example, a jpg or pdf) or not readable.'
+      description: 'Gives statistics about how many files have been ingested, and which files have not been ingested, for a particular ingestion job.'
     KmsKeyArn:
       type: string
       pattern: 'arn:aws[a-z\-]*:kms:[a-z0-9\-]*:\d{12}:[\w\-\/]+'
       minLength: 1
       maxLength: 1024
+    LatestInferenceResult:
+      type: string
+      enum:
+        - ANOMALOUS
+        - NORMAL
     ModelMetrics:
       type: string
       minLength: 1
       maxLength: 50000
+    EventDurationInSeconds:
+      type: integer
+      minimum: 0
     FileNameTimestampFormat:
       type: string
       pattern: ^EPOCH|yyyy-MM-dd-HH-mm-ss|yyyyMMddHHmmss$
+    InferenceEventSummary:
+      type: object
+      properties:
+        InferenceSchedulerArn:
+          allOf:
+            - $ref: '#/components/schemas/InferenceSchedulerArn'
+            - description: ' The Amazon Resource Name (ARN) of the inference scheduler being used for the inference event. '
+        InferenceSchedulerName:
+          allOf:
+            - $ref: '#/components/schemas/InferenceSchedulerName'
+            - description: 'The name of the inference scheduler being used for the inference events. '
+        EventStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'Indicates the starting time of an inference event. '
+        EventEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'Indicates the ending time of an inference event. '
+        Diagnostics:
+          allOf:
+            - $ref: '#/components/schemas/ModelMetrics'
+            - description: ' An array which specifies the names and values of all sensors contributing to an inference event.'
+        EventDurationInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/EventDurationInSeconds'
+            - description: ' Indicates the size of an inference event in seconds. '
+      description: 'Contains information about the specific inference event, including start and end time, diagnostics information, event duration and so on.'
+    InferenceEventSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/InferenceEventSummary'
     InferenceExecutionStatus:
       type: string
       enum:
@@ -2779,7 +4196,7 @@ components:
         DataOutputConfiguration:
           allOf:
             - $ref: '#/components/schemas/InferenceOutputConfiguration'
-            - description: ' Specifies configuration information for the output results from for the inference execution, including the output S3 location. '
+            - description: ' Specifies configuration information for the output results from for the inference execution, including the output Amazon S3 location. '
         CustomerResultObject:
           allOf:
             - $ref: '#/components/schemas/S3Object'
@@ -2862,7 +4279,7 @@ components:
       maxLength: 63
     S3Prefix:
       type: string
-      pattern: '(^$)|([\P{M}\p{M}]{1,1023}/$)'
+      pattern: '(^$)|([\u0009\u000A\u000D\u0020-\u00FF]{1,1023}/$)'
       minLength: 0
       maxLength: 1024
     InferenceSchedulerSummary:
@@ -2896,11 +4313,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataUploadFrequency'
             - description: 'How often data is uploaded to the source S3 bucket for the input data. This value is the length of time between data uploads. For instance, if you select 5 minutes, Amazon Lookout for Equipment will upload the real-time data to the source bucket once every 5 minutes. This frequency also determines how often Amazon Lookout for Equipment starts a scheduled inference on your data. In this example, it starts once every 5 minutes. '
+        LatestInferenceResult:
+          allOf:
+            - $ref: '#/components/schemas/LatestInferenceResult'
+            - description: Indicates whether the latest execution for the inference scheduler was Anomalous (anomalous events found) or Normal (no anomalous events found).
       description: 'Contains information about the specific inference scheduler, including data delay offset, model name and ARN, status, and so on. '
     InferenceSchedulerSummaries:
       type: array
       items:
         $ref: '#/components/schemas/InferenceSchedulerSummary'
+    ListOfDiscardedFiles:
+      type: array
+      items:
+        $ref: '#/components/schemas/S3Object'
+      minItems: 0
     IngestionS3InputConfiguration:
       type: object
       required:
@@ -2914,7 +4340,103 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3Prefix'
             - description: 'The prefix for the S3 location being used for the input data for the data ingestion. '
+        KeyPattern:
+          allOf:
+            - $ref: '#/components/schemas/KeyPattern'
+            - description: ' Pattern for matching the Amazon S3 files which will be used for ingestion. If no KeyPattern is provided, we will use the default hierarchy file structure, which is same as KeyPattern {prefix}/{component_name}/* '
       description: ' Specifies S3 configuration information for the input data for the data ingestion job. '
+    KeyPattern:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    MissingCompleteSensorData:
+      type: object
+      required:
+        - AffectedSensorCount
+      properties:
+        AffectedSensorCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' Indicates the number of sensors that have data missing completely. '
+      description: ' Entity that comprises information on sensors that have sensor data completely missing. '
+    SensorsWithShortDateRange:
+      type: object
+      required:
+        - AffectedSensorCount
+      properties:
+        AffectedSensorCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' Indicates the number of sensors that have less than 90 days of data. '
+      description: ' Entity that comprises information on sensors that have shorter date range. '
+    LabelGroupSummary:
+      type: object
+      properties:
+        LabelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupName'
+            - description: ' The name of the label group. '
+        LabelGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupArn'
+            - description: ' The ARN of the label group. '
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time at which the label group was created. '
+        UpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time at which the label group was updated. '
+      description: ' Contains information about the label group. '
+    LabelGroupSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/LabelGroupSummary'
+    LabelSummary:
+      type: object
+      properties:
+        LabelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupName'
+            - description: ' The name of the label group. '
+        LabelId:
+          allOf:
+            - $ref: '#/components/schemas/LabelId'
+            - description: ' The ID of the label. '
+        LabelGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/LabelGroupArn'
+            - description: ' The ARN of the label group. '
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The timestamp indicating the start of the label. '
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The timestamp indicating the end of the label. '
+        Rating:
+          allOf:
+            - $ref: '#/components/schemas/LabelRating'
+            - description: ' Indicates whether a labeled event represents an anomaly. '
+        FaultCode:
+          allOf:
+            - $ref: '#/components/schemas/FaultCode'
+            - description: <p> Indicates the type of anomaly associated with the label. </p> <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>
+        Equipment:
+          allOf:
+            - $ref: '#/components/schemas/Equipment'
+            - description: ' Indicates that a label pertains to a particular piece of equipment. '
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time at which the label was created. '
+      description: ' Information about the label. '
+    LabelSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/LabelSummary'
     LabelsS3InputConfiguration:
       type: object
       required:
@@ -2929,6 +4451,24 @@ components:
             - $ref: '#/components/schemas/S3Prefix'
             - description: ' The prefix for the S3 bucket used for the label data. '
       description: 'The location information (prefix and bucket name) for the s3 location being used for label data. '
+    LargeTimestampGaps:
+      type: object
+      required:
+        - Status
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatisticalIssueStatus'
+            - description: ' Indicates whether there is a potential data issue related to large gaps in timestamps. '
+        NumberOfLargeTimestampGaps:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' Indicates the number of large timestamp gaps, if there are any. '
+        MaxTimestampGapInDays:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' Indicates the size of the largest timestamp gap, in days. '
+      description: ' Entity that comprises information on large gaps between consecutive timestamps in data. '
     NextToken:
       type: string
       pattern: '\p{ASCII}{0,8192}'
@@ -2941,6 +4481,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ModelSummary'
+    SensorStatisticsSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/SensorStatisticsSummary'
     ModelSummary:
       type: object
       properties:
@@ -2969,11 +4513,102 @@ components:
             - $ref: '#/components/schemas/Timestamp'
             - description: 'The time at which the specific model was created. '
       description: 'Provides information about the specified ML model, including dataset and model names and ARNs, as well as status. '
+    Monotonicity:
+      type: string
+      enum:
+        - DECREASING
+        - INCREASING
+        - STATIC
+    MonotonicValues:
+      type: object
+      required:
+        - Status
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatisticalIssueStatus'
+            - description: ' Indicates whether there is a potential data issue related to having monotonic values. '
+        Monotonicity:
+          allOf:
+            - $ref: '#/components/schemas/Monotonicity'
+            - description: ' Indicates the monotonicity of values. Can be INCREASING, DECREASING, or STATIC. '
+      description: ' Entity that comprises information on monotonic values in the data. '
+    MultipleOperatingModes:
+      type: object
+      required:
+        - Status
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatisticalIssueStatus'
+            - description: ' Indicates whether there is a potential data issue related to having multiple operating modes. '
+      description: ' Entity that comprises information on operating modes in data. '
     S3Key:
       type: string
       pattern: '[\P{M}\p{M}]{1,1024}[^/]$'
       minLength: 1
       maxLength: 1024
+    SensorName:
+      type: string
+      pattern: '^[0-9a-zA-Z:#$.\-_]{1,200}$'
+      minLength: 1
+      maxLength: 200
+    SensorStatisticsSummary:
+      type: object
+      properties:
+        ComponentName:
+          allOf:
+            - $ref: '#/components/schemas/ComponentName'
+            - description: ' Name of the component to which the particular sensor belongs for which the statistics belong to. '
+        SensorName:
+          allOf:
+            - $ref: '#/components/schemas/SensorName'
+            - description: ' Name of the sensor that the statistics belong to. '
+        DataExists:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Parameter that indicates whether data exists for the sensor that the statistics belong to. '
+        MissingValues:
+          allOf:
+            - $ref: '#/components/schemas/CountPercent'
+            - description: ' Parameter that describes the total number of, and percentage of, values that are missing for the sensor that the statistics belong to. '
+        InvalidValues:
+          allOf:
+            - $ref: '#/components/schemas/CountPercent'
+            - description: ' Parameter that describes the total number of, and percentage of, values that are invalid for the sensor that the statistics belong to. '
+        InvalidDateEntries:
+          allOf:
+            - $ref: '#/components/schemas/CountPercent'
+            - description: ' Parameter that describes the total number of invalid date entries associated with the sensor that the statistics belong to. '
+        DuplicateTimestamps:
+          allOf:
+            - $ref: '#/components/schemas/CountPercent'
+            - description: ' Parameter that describes the total number of duplicate timestamp records associated with the sensor that the statistics belong to. '
+        CategoricalValues:
+          allOf:
+            - $ref: '#/components/schemas/CategoricalValues'
+            - description: ' Parameter that describes potential risk about whether data associated with the sensor is categorical. '
+        MultipleOperatingModes:
+          allOf:
+            - $ref: '#/components/schemas/MultipleOperatingModes'
+            - description: ' Parameter that describes potential risk about whether data associated with the sensor has more than one operating mode. '
+        LargeTimestampGaps:
+          allOf:
+            - $ref: '#/components/schemas/LargeTimestampGaps'
+            - description: ' Parameter that describes potential risk about whether data associated with the sensor contains one or more large gaps between consecutive timestamps. '
+        MonotonicValues:
+          allOf:
+            - $ref: '#/components/schemas/MonotonicValues'
+            - description: ' Parameter that describes potential risk about whether data associated with the sensor is mostly monotonic. '
+        DataStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' Indicates the time reference to indicate the beginning of valid data associated with the sensor that the statistics belong to. '
+        DataEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' Indicates the time reference to indicate the end of valid data associated with the sensor that the statistics belong to. '
+      description: ' Summary of ingestion statistics like whether data exists, number of missing values, number of invalid values and so on related to the particular sensor. '
     TagKey:
       type: string
       pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
