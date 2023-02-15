@@ -4,7 +4,7 @@ servers:
   - url: "{Endpoint}/customvision/v3.1/training"
     variables:
       Endpoint:
-        default: ""
+        default: none
         description: Supported Cognitive Services endpoints.
         x-ms-parameter-location: client
         x-ms-skip-url-encoding: true
@@ -22,7 +22,7 @@ info:
     - format: openapi
       url: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cognitiveservices/data-plane/CustomVision/Training/stable/v3.1/Training.json
       version: "3.0"
-  x-preferred: true
+  x-preferred: false
   x-providerName: microsoft.com
   x-serviceName: cognitiveservices-Training
   x-tags:

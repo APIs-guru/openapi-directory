@@ -4,7 +4,7 @@ servers:
   - url: "{Endpoint}/customvision/v2.0/Prediction"
     variables:
       Endpoint:
-        default: ""
+        default: none
         description: Supported Cognitive Services endpoints
         x-ms-parameter-location: client
         x-ms-skip-url-encoding: true

@@ -95,9 +95,6 @@ paths:
       operationId: PredictImageWithNoStore
       parameters:
         - description: The project id
-          examples:
-            Successful Prediction with Image request:
-              value: 64b822c5-8082-4b36-a426-27225f4aa18c
           in: path
           name: projectId
           required: true
@@ -108,9 +105,6 @@ paths:
         - description: "Optional. Specifies the id of a particular iteration to evaluate against.\r
 
             \            The default iteration for the project will be used when not specified"
-          examples:
-            Successful Prediction with Image request:
-              value: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
           in: query
           name: iterationId
           required: false
@@ -132,27 +126,15 @@ paths:
         "200":
           content:
             application/json:
-              examples:
-                Successful Prediction with Image request:
-                  $ref: "#/components/examples/Successful_Prediction_with_Image_request"
               schema:
                 $ref: "#/components/schemas/ImagePredictionResultModel"
             application/xml:
-              examples:
-                Successful Prediction with Image request:
-                  $ref: "#/components/examples/Successful_Prediction_with_Image_request"
               schema:
                 $ref: "#/components/schemas/ImagePredictionResultModel"
             text/json:
-              examples:
-                Successful Prediction with Image request:
-                  $ref: "#/components/examples/Successful_Prediction_with_Image_request"
               schema:
                 $ref: "#/components/schemas/ImagePredictionResultModel"
             text/xml:
-              examples:
-                Successful Prediction with Image request:
-                  $ref: "#/components/examples/Successful_Prediction_with_Image_request"
               schema:
                 $ref: "#/components/schemas/ImagePredictionResultModel"
           description: OK
@@ -233,9 +215,6 @@ paths:
       operationId: PredictImageUrlWithNoStore
       parameters:
         - description: The project id
-          examples:
-            Successful Prediction with Url request:
-              value: 64b822c5-8082-4b36-a426-27225f4aa18c
           in: path
           name: projectId
           required: true
@@ -246,9 +225,6 @@ paths:
         - description: "Optional. Specifies the id of a particular iteration to evaluate against.\r
 
             \            The default iteration for the project will be used when not specified"
-          examples:
-            Successful Prediction with Url request:
-              value: fe1e83c4-6f50-4899-9544-6bb08cf0e15a
           in: query
           name: iterationId
           required: false
@@ -270,27 +246,15 @@ paths:
         "200":
           content:
             application/json:
-              examples:
-                Successful Prediction with Url request:
-                  $ref: "#/components/examples/Successful_Prediction_with_Url_request"
               schema:
                 $ref: "#/components/schemas/ImagePredictionResultModel"
             application/xml:
-              examples:
-                Successful Prediction with Url request:
-                  $ref: "#/components/examples/Successful_Prediction_with_Url_request"
               schema:
                 $ref: "#/components/schemas/ImagePredictionResultModel"
             text/json:
-              examples:
-                Successful Prediction with Url request:
-                  $ref: "#/components/examples/Successful_Prediction_with_Url_request"
               schema:
                 $ref: "#/components/schemas/ImagePredictionResultModel"
             text/xml:
-              examples:
-                Successful Prediction with Url request:
-                  $ref: "#/components/examples/Successful_Prediction_with_Url_request"
               schema:
                 $ref: "#/components/schemas/ImagePredictionResultModel"
           description: OK
