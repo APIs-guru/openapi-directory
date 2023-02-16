@@ -3330,24 +3330,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidParameterException'
         '489':
+          description: InsufficientEncryptionPolicyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsufficientEncryptionPolicyException'
+        '490':
           description: OperationNotPermittedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/OperationNotPermittedException'
-        '490':
+        '491':
           description: UnsupportedOperationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnsupportedOperationException'
-        '491':
+        '492':
           description: OperationNotPermittedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/OperationNotPermittedException'
-        '492':
+        '493':
           description: UnsupportedOperationException
           content:
             application/json:

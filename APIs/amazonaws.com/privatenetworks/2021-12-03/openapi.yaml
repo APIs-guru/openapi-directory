@@ -659,12 +659,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
           description: ValidationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
-        '482':
+        '483':
           description: InternalServerException
           content:
             application/json:
@@ -748,12 +754,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
           description: ValidationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
-        '482':
+        '483':
           description: InternalServerException
           content:
             application/json:
@@ -957,7 +969,7 @@ paths:
   /v1/device-identifiers/list:
     post:
       operationId: ListDeviceIdentifiers
-      description: '<p>Lists device identifiers. Add filters to your request to return a more specific list of results. Use filters to match the Amazon Resource Name (ARN) of an order, the status of device identifiers, or the ARN of the traffic group.</p> <pre><code> &lt;p&gt;If you specify multiple filters, filters are joined with an OR, and the request </code></pre> <p>returns results that match all of the specified filters.</p></p>'
+      description: '<p>Lists device identifiers. Add filters to your request to return a more specific list of results. Use filters to match the Amazon Resource Name (ARN) of an order, the status of device identifiers, or the ARN of the traffic group.</p> <p>If you specify multiple filters, filters are joined with an OR, and the request returns results that match all of the specified filters.</p>'
       responses:
         '200':
           description: Success
@@ -1474,6 +1486,113 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/network-resources/update:
+    post:
+      operationId: StartNetworkResourceUpdate
+      description: '<p>Starts an update of the specified network resource.</p> <p>After you submit a request to replace or return a network resource, the status of the network resource is <code>CREATING_SHIPPING_LABEL</code>. The shipping label is available when the status of the network resource is <code>PENDING_RETURN</code>. After the network resource is successfully returned, its status is <code>DELETED</code>. For more information, see <a href="https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit">Return a radio unit</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartNetworkResourceUpdateResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - networkResourceArn
+                - updateType
+              properties:
+                networkResourceArn:
+                  description: The Amazon Resource Name (ARN) of the network resource.
+                  type: string
+                  pattern: '^arn:aws:private-networks:[a-z0-9-]+:[^:]*:.*$'
+                returnReason:
+                  description: The reason for the return. Providing a reason for a return is optional.
+                  type: string
+                  minLength: 0
+                  maxLength: 1000
+                shippingAddress:
+                  description: Information about an address.
+                  type: object
+                  properties:
+                    city:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The city for this address.
+                    company:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The company name for this address.
+                    country:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The country for this address.
+                    name:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The recipient's name for this address.
+                    phoneNumber:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The phone number for this address.
+                    postalCode:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The postal code for this address.
+                    stateOrProvince:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The state or province for this address.
+                    street1:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The first line of the street address.
+                    street2:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The second line of the street address.
+                    street3:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The third line of the street address.
+                updateType:
+                  description: <p>The update type.</p> <ul> <li> <p> <code>REPLACE</code> - Submits a request to replace a defective radio unit. We provide a shipping label that you can use for the return process and we ship a replacement radio unit to you.</p> </li> <li> <p> <code>RETURN</code> - Submits a request to replace a radio unit that you no longer need. We provide a shipping label that you can use for the return process.</p> </li> </ul>
+                  type: string
+                  enum:
+                    - REPLACE
+                    - RETURN
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/tags/{resourceArn}#tagKeys':
     delete:
       operationId: UntagResource
@@ -1837,6 +1956,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Network'
             - description: Information about the network.
+    AccessDeniedException: {}
     DeleteNetworkSiteResponse:
       type: object
       properties:
@@ -1987,7 +2107,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The resource tags.
-    AccessDeniedException: {}
     ThrottlingException: {}
     PingResponse:
       type: object
@@ -1996,6 +2115,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: Information about the health of the service.
+    StartNetworkResourceUpdateResponse:
+      type: object
+      properties:
+        networkResource:
+          allOf:
+            - $ref: '#/components/schemas/NetworkResource'
+            - description: The network resource.
     TagResourceResponse:
       type: object
       properties: {}
@@ -2373,6 +2499,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Position'
             - description: The position of the network resource.
+        returnInformation:
+          allOf:
+            - $ref: '#/components/schemas/ReturnInformation'
+            - description: Information about a request to return the network resource.
         serialNumber:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2776,6 +2906,26 @@ components:
       type: string
       enum:
         - STATUS
+    ReturnInformation:
+      type: object
+      properties:
+        replacementOrderArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the replacement order.
+        returnReason:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The reason for the return. If the return request did not include a reason for the return, this value is null.'
+        shippingAddress:
+          allOf:
+            - $ref: '#/components/schemas/Address'
+            - description: The shipping address.
+        shippingLabel:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The URL of the shipping label. The shipping label is available for download only if the status of the network resource is <code>PENDING_RETURN</code>. For more information, see <a href="https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit">Return a radio unit</a>.'
+      description: Information about a request to return a network resource.
     NetworkResourceStatus:
       type: string
       enum:
@@ -2787,6 +2937,7 @@ components:
         - DELETING
         - PENDING_RETURN
         - DELETED
+        - CREATING_SHIPPING_LABEL
     NetworkResourceType:
       type: string
       enum:
@@ -2844,6 +2995,38 @@ components:
       enum:
         - STATUS
         - NETWORK_SITE
+    StartNetworkResourceUpdateRequestReturnReasonString:
+      type: string
+      minLength: 0
+      maxLength: 1000
+    UpdateType:
+      type: string
+      enum:
+        - REPLACE
+        - RETURN
+    StartNetworkResourceUpdateRequest:
+      type: object
+      required:
+        - networkResourceArn
+        - updateType
+      title: StartNetworkResourceUpdateRequest
+      properties:
+        networkResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the network resource.
+        returnReason:
+          allOf:
+            - $ref: '#/components/schemas/StartNetworkResourceUpdateRequestReturnReasonString'
+            - description: The reason for the return. Providing a reason for a return is optional.
+        shippingAddress:
+          allOf:
+            - $ref: '#/components/schemas/Address'
+            - description: 'The shipping address. If you don''t provide a shipping address when replacing or returning a network resource, we use the address from the original order for the network resource.'
+        updateType:
+          allOf:
+            - $ref: '#/components/schemas/UpdateType'
+            - description: <p>The update type.</p> <ul> <li> <p> <code>REPLACE</code> - Submits a request to replace a defective radio unit. We provide a shipping label that you can use for the return process and we ship a replacement radio unit to you.</p> </li> <li> <p> <code>RETURN</code> - Submits a request to replace a radio unit that you no longer need. We provide a shipping label that you can use for the return process.</p> </li> </ul>
     TagKeyList:
       type: array
       items:

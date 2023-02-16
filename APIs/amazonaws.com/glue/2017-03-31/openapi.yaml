@@ -21874,6 +21874,40 @@ components:
             - $ref: '#/components/schemas/DirectSchemaChangePolicy'
             - description: A policy that specifies update behavior for the crawler.
       description: Specifies a target that writes to a Hudi data source in Amazon S3.
+    DirectJDBCSource:
+      type: object
+      required:
+        - Name
+        - Database
+        - Table
+        - ConnectionName
+        - ConnectionType
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NodeName'
+            - description: The name of the JDBC source connection.
+        Database:
+          allOf:
+            - $ref: '#/components/schemas/EnclosedInStringProperty'
+            - description: The database of the JDBC source connection.
+        Table:
+          allOf:
+            - $ref: '#/components/schemas/EnclosedInStringProperty'
+            - description: The table of the JDBC source connection.
+        ConnectionName:
+          allOf:
+            - $ref: '#/components/schemas/EnclosedInStringProperty'
+            - description: The connection name of the JDBC source.
+        ConnectionType:
+          allOf:
+            - $ref: '#/components/schemas/JDBCConnectionType'
+            - description: The connection type of the JDBC source.
+        RedshiftTmpDir:
+          allOf:
+            - $ref: '#/components/schemas/EnclosedInStringProperty'
+            - description: The temp directory of the JDBC Redshift source.
+      description: Specifies the direct JDBC source connection.
     CodeGenConfigurationNode:
       type: object
       properties:
@@ -22105,6 +22139,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3HudiDirectTarget'
             - description: Specifies a target that writes to a Hudi data source in Amazon S3.
+        DirectJDBCSource:
+          $ref: '#/components/schemas/DirectJDBCSource'
       description: ' <code>CodeGenConfigurationNode</code> enumerates all valid Node types. One and only one of its member variables can be populated.'
     CodeGenConfigurationNodes:
       type: object
@@ -24596,6 +24632,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/NameString'
+    JDBCConnectionType:
+      type: string
+      enum:
+        - sqlserver
+        - mysql
+        - oracle
+        - postgresql
+        - redshift
     DirectSchemaChangePolicy:
       type: object
       properties:
