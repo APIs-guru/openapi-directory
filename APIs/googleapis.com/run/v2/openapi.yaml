@@ -1169,7 +1169,7 @@ components:
       description: GRPCAction describes an action involving a GRPC port.
       properties:
         port:
-          description: Port number of the gRPC service. Number must be in the range 1 to 65535. If not specified, defaults to 8080.
+          description: Port number of the gRPC service. Number must be in the range 1 to 65535. If not specified, defaults to the exposed port of the container, which is the value of container.ports[0].containerPort.
           format: int32
           type: integer
         service:
@@ -1188,7 +1188,7 @@ components:
           description: Path to access on the HTTP server. Defaults to '/'.
           type: string
         port:
-          description: Port number to access on the container. Must be in the range 1 to 65535.
+          description: Port number to access on the container. Must be in the range 1 to 65535. If not specified, defaults to the exposed port of the container, which is the value of container.ports[0].containerPort.
           format: int32
           type: integer
       type: object
@@ -1788,7 +1788,7 @@ components:
       description: TCPSocketAction describes an action based on opening a socket
       properties:
         port:
-          description: Port number to access on the container. Must be in the range 1 to 65535. If not specified, defaults to 8080.
+          description: Port number to access on the container. Must be in the range 1 to 65535. If not specified, defaults to the exposed port of the container, which is the value of container.ports[0].containerPort.
           format: int32
           type: integer
       type: object

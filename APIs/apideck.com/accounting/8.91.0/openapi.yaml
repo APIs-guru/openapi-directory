@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 8.90.0
+  version: 8.91.0
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1411,6 +1411,7 @@ paths:
                 last_name: 'Musk',
                 suffix: 'Jr.',
                 individual: true,
+                project: false,
                 addresses: [
                   {
                     id: '123',
@@ -1485,6 +1486,10 @@ paths:
                   id: '123456',
                   nominal_code: 'N091',
                   code: '453'
+                },
+                parent: {
+                  id: '12345',
+                  name: 'Windsurf Shop'
                 },
                 status: 'active',
                 row_version: '1-12345'
@@ -1658,6 +1663,7 @@ paths:
                 last_name: 'Musk',
                 suffix: 'Jr.',
                 individual: true,
+                project: false,
                 addresses: [
                   {
                     id: '123',
@@ -1732,6 +1738,10 @@ paths:
                   id: '123456',
                   nominal_code: 'N091',
                   code: '453'
+                },
+                parent: {
+                  id: '12345',
+                  name: 'Windsurf Shop'
                 },
                 status: 'active',
                 row_version: '1-12345'
@@ -5050,10 +5060,18 @@ components:
           nullable: true
           title: Notes
           type: string
+        parent:
+          $ref: "#/components/schemas/LinkedParentCustomer"
         phone_numbers:
           items:
             $ref: "#/components/schemas/PhoneNumber"
           type: array
+        project:
+          description: If true, indicates this is a Project.
+          example: false
+          nullable: true
+          title: Is project
+          type: boolean
         row_version:
           $ref: "#/components/schemas/RowVersion"
         status:
@@ -9889,6 +9907,28 @@ components:
         name: medium
         nominal_code: medium
       x-graphql-type-name: LinkedLedgerAccount
+    LinkedParentCustomer:
+      description: The parent customer this entity is linked to.
+      nullable: true
+      properties:
+        id:
+          description: The parent ID of the customer this entity is linked to.
+          example: "12345"
+          title: Customer ID
+          type: string
+        name:
+          description: The name of the parent customer.
+          example: Windsurf Shop
+          title: Name
+          type: string
+      required:
+        - id
+      title: LinkedParentCustomer
+      type: object
+      x-apideck-schema-id: LinkedParentCustomer
+      x-apideck-weights:
+        id: critical
+      x-graphql-type-name: AccountingLinkedParentCustomer
     LinkedSupplier:
       description: The supplier this entity is linked to.
       nullable: true

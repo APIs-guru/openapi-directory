@@ -3123,6 +3123,9 @@ components:
             canChangeDriveMembersOnlyRestriction:
               description: Whether the current user can change the driveMembersOnly restriction of this shared drive.
               type: boolean
+            canChangeSharingFoldersRequiresOrganizerPermissionRestriction:
+              description: Whether the current user can change the sharingFoldersRequiresOrganizerPermission restriction of this shared drive.
+              type: boolean
             canComment:
               description: Whether the current user can comment on files in this shared drive.
               type: boolean
@@ -3203,6 +3206,9 @@ components:
               type: boolean
             driveMembersOnly:
               description: Whether access to items inside this shared drive is restricted to its members.
+              type: boolean
+            sharingFoldersRequiresOrganizerPermission:
+              description: If true, only users with the organizer role can share folders. If false, users with either the organizer role or the file organizer role can share folders.
               type: boolean
           type: object
         themeId:
@@ -4217,6 +4223,9 @@ components:
             canChangeDomainUsersOnlyRestriction:
               description: Whether the current user can change the domainUsersOnly restriction of this Team Drive.
               type: boolean
+            canChangeSharingFoldersRequiresOrganizerPermissionRestriction:
+              description: Whether the current user can change the sharingFoldersRequiresOrganizerPermission restriction of this Team Drive.
+              type: boolean
             canChangeTeamDriveBackground:
               description: Whether the current user can change the background of this Team Drive.
               type: boolean
@@ -4300,6 +4309,9 @@ components:
               type: boolean
             domainUsersOnly:
               description: Whether access to this Team Drive and items inside this Team Drive is restricted to users of the domain to which this Team Drive belongs. This restriction may be overridden by other sharing policies controlled outside of this Team Drive.
+              type: boolean
+            sharingFoldersRequiresOrganizerPermission:
+              description: If true, only users with the organizer role can share folders. If false, users with either the organizer role or the file organizer role can share folders.
               type: boolean
             teamMembersOnly:
               description: Whether access to items inside this Team Drive is restricted to members of this Team Drive.

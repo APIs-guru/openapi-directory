@@ -1071,7 +1071,7 @@ components:
       description: A widget that displays text with optional decorations such as a label above or below the text, an icon in front of the text, a selection widget or a button after the text.
       properties:
         bottomLabel:
-          description: The text that appears below `text`. Always truncates. Supports simple formatting. See Text formatting for formatting details.
+          description: The text that appears below `text`. Always truncates.
           type: string
         button:
           $ref: "#/components/schemas/GoogleAppsCardV1Button"
@@ -1095,7 +1095,7 @@ components:
           description: Required. The primary text. Supports simple formatting. See Text formatting for formatting details.
           type: string
         topLabel:
-          description: The text that appears above `text`. Always truncates. Supports simple formatting. See Text formatting for formatting details.
+          description: The text that appears above `text`. Always truncates.
           type: string
         wrapText:
           description: The wrap text setting. If `true`, the text wraps and displays on multiple lines. Otherwise, the text is truncated. Only applies to `text`, not `topLabel` and `bottomLabel`.
