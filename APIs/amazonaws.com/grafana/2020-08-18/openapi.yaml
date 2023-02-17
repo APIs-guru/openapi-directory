@@ -317,6 +317,18 @@ paths:
                   type: string
                   minLength: 2
                   maxLength: 65536
+                networkAccessControl:
+                  description: '<p>The configuration settings for in-bound network access to your workspace.</p> <p>When this is configured, only listed IP addresses and VPC endpoints will be able to access your workspace. Standard Grafana authentication and authorization will still be required.</p> <p>If this is not configured, or is removed, then all IP addresses and VPC endpoints will be allowed. Standard Grafana authentication and authorization will still be required.</p>'
+                  type: object
+                  properties:
+                    prefixListIds:
+                      allOf:
+                        - $ref: '#/components/schemas/PrefixListIds'
+                        - description: '<p>An array of prefix list IDs. A prefix list is a list of CIDR ranges of IP addresses. The IP addresses specified are allowed to access your workspace. If the list is not included in the configuration then no IP addresses will be allowed to access the workspace. You create a prefix list using the Amazon VPC console.</p> <p>Prefix list IDs have the format <code>pl-<i>1a2b3c4d</i> </code>.</p> <p>For more information about prefix lists, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html">Group CIDR blocks using managed prefix lists</a>in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+                    vpceIds:
+                      allOf:
+                        - $ref: '#/components/schemas/VpceIds'
+                        - description: '<p>An array of Amazon VPC endpoint IDs for the workspace. You can create VPC endpoints to your Amazon Managed Grafana workspace for access from within a VPC. If a <code>NetworkAccessConfiguration</code> is specified then only VPC endpoints specified here will be allowed to access the workspace.</p> <p>VPC endpoint IDs have the format <code>vpce-<i>1a2b3c4d</i> </code>.</p> <p>For more information about creating an interface VPC endpoint, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/VPC-endpoints">Interface VPC endpoints</a> in the <i>Amazon Managed Grafana User Guide</i>.</p> <note> <p>The only VPC endpoints that can be specified here are interface VPC endpoints for Grafana workspaces (using the <code>com.amazonaws.[region].grafana-workspace</code> service endpoint). Other VPC endpoints will be ignored.</p> </note>'
                 organizationRoleName:
                   description: The name of an IAM role that already exists to use with Organizations to access Amazon Web Services data sources and notification channels in other accounts in an organization.
                   type: string
@@ -340,17 +352,17 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 vpcConfiguration:
-                  description: The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.
+                  description: <p>The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.</p> <note> <p>Provided <code>securityGroupIds</code> and <code>subnetIds</code> must be part of the same VPC.</p> </note>
                   type: object
                   properties:
                     securityGroupIds:
                       allOf:
                         - $ref: '#/components/schemas/SecurityGroupIds'
-                        - description: The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.
+                        - description: The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect. Duplicates not allowed.
                     subnetIds:
                       allOf:
                         - $ref: '#/components/schemas/SubnetIds'
-                        - description: The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.
+                        - description: The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect. Duplicates not allowed.
                 workspaceDataSources:
                   description: '<p>Specify the Amazon Web Services data sources that you want to be queried in this workspace. Specifying these data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow Amazon Managed Grafana to read data from these sources. You must still add them as data sources in the Grafana console in the workspace.</p> <p>If you don''t specify a data source here, you can still add it as a data source in the workspace console later. However, you will then have to manually configure permissions for it.</p>'
                   type: array
@@ -705,6 +717,18 @@ paths:
                   enum:
                     - CURRENT_ACCOUNT
                     - ORGANIZATION
+                networkAccessControl:
+                  description: '<p>The configuration settings for in-bound network access to your workspace.</p> <p>When this is configured, only listed IP addresses and VPC endpoints will be able to access your workspace. Standard Grafana authentication and authorization will still be required.</p> <p>If this is not configured, or is removed, then all IP addresses and VPC endpoints will be allowed. Standard Grafana authentication and authorization will still be required.</p>'
+                  type: object
+                  properties:
+                    prefixListIds:
+                      allOf:
+                        - $ref: '#/components/schemas/PrefixListIds'
+                        - description: '<p>An array of prefix list IDs. A prefix list is a list of CIDR ranges of IP addresses. The IP addresses specified are allowed to access your workspace. If the list is not included in the configuration then no IP addresses will be allowed to access the workspace. You create a prefix list using the Amazon VPC console.</p> <p>Prefix list IDs have the format <code>pl-<i>1a2b3c4d</i> </code>.</p> <p>For more information about prefix lists, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html">Group CIDR blocks using managed prefix lists</a>in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+                    vpceIds:
+                      allOf:
+                        - $ref: '#/components/schemas/VpceIds'
+                        - description: '<p>An array of Amazon VPC endpoint IDs for the workspace. You can create VPC endpoints to your Amazon Managed Grafana workspace for access from within a VPC. If a <code>NetworkAccessConfiguration</code> is specified then only VPC endpoints specified here will be allowed to access the workspace.</p> <p>VPC endpoint IDs have the format <code>vpce-<i>1a2b3c4d</i> </code>.</p> <p>For more information about creating an interface VPC endpoint, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/VPC-endpoints">Interface VPC endpoints</a> in the <i>Amazon Managed Grafana User Guide</i>.</p> <note> <p>The only VPC endpoints that can be specified here are interface VPC endpoints for Grafana workspaces (using the <code>com.amazonaws.[region].grafana-workspace</code> service endpoint). Other VPC endpoints will be ignored.</p> </note>'
                 organizationRoleName:
                   description: The name of an IAM role that already exists to use to access resources through Organizations.
                   type: string
@@ -712,11 +736,14 @@ paths:
                   maxLength: 2048
                   format: password
                 permissionType:
-                  description: '<p>If you specify <code>Service Managed</code>, Amazon Managed Grafana automatically creates the IAM roles and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels.</p> <p>If you specify <code>CUSTOMER_MANAGED</code>, you will manage those roles and permissions yourself. If you are creating this workspace in a member account of an organization and that account is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, you must choose <code>CUSTOMER_MANAGED</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html">Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels</a> </p>'
+                  description: '<p>If you specify <code>SERVICE_MANAGED</code>, Amazon Managed Grafana automatically creates the IAM roles and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels.</p> <p>If you specify <code>CUSTOMER_MANAGED</code>, you will manage those roles and permissions yourself. If you are creating this workspace in a member account of an organization and that account is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, you must choose <code>CUSTOMER_MANAGED</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html">Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels</a> </p>'
                   type: string
                   enum:
                     - CUSTOMER_MANAGED
                     - SERVICE_MANAGED
+                removeNetworkAccessConfiguration:
+                  description: '<p>Whether to remove the network access configuration from the workspace.</p> <p>Setting this to <code>true</code> and providing a <code>networkAccessControl</code> to set will return an error.</p> <p>If you remove this configuration by setting this to <code>true</code>, then all IP addresses and VPC endpoints will be allowed. Standard Grafana authentication and authorization will still be required.</p>'
+                  type: boolean
                 removeVpcConfiguration:
                   description: <p>Whether to remove the VPC configuration from the workspace.</p> <p>Setting this to <code>true</code> and providing a <code>vpcConfiguration</code> to set will return an error.</p>
                   type: boolean
@@ -724,17 +751,17 @@ paths:
                   description: The name of the CloudFormation stack set to use to generate IAM roles to be used for this workspace.
                   type: string
                 vpcConfiguration:
-                  description: The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.
+                  description: <p>The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.</p> <note> <p>Provided <code>securityGroupIds</code> and <code>subnetIds</code> must be part of the same VPC.</p> </note>
                   type: object
                   properties:
                     securityGroupIds:
                       allOf:
                         - $ref: '#/components/schemas/SecurityGroupIds'
-                        - description: The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.
+                        - description: The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect. Duplicates not allowed.
                     subnetIds:
                       allOf:
                         - $ref: '#/components/schemas/SubnetIds'
-                        - description: The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.
+                        - description: The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect. Duplicates not allowed.
                 workspaceDataSources:
                   description: '<p>Specify the Amazon Web Services data sources that you want to be queried in this workspace. Specifying these data sources here enables Amazon Managed Grafana to create IAM roles and permissions that allow Amazon Managed Grafana to read data from these sources. You must still add them as data sources in the Grafana console in the workspace.</p> <p>If you don''t specify a data source here, you can still add it as a data source later in the workspace console. However, you will then have to manually configure permissions for it.</p>'
                   type: array
@@ -1529,6 +1556,14 @@ components:
       enum:
         - AWS_SSO
         - SAML
+    PrefixListIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/PrefixListId'
+    VpceIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/VpceId'
     TagValue:
       type: string
       minLength: 0
@@ -1894,6 +1929,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkspaceName'
             - description: The name of the workspace.
+        networkAccessControl:
+          allOf:
+            - $ref: '#/components/schemas/NetworkAccessConfiguration'
+            - description: The configuration settings for network access to your workspace.
         notificationDestinations:
           allOf:
             - $ref: '#/components/schemas/NotificationDestinationsList'
@@ -1909,7 +1948,7 @@ components:
         permissionType:
           allOf:
             - $ref: '#/components/schemas/PermissionType'
-            - description: '<p>If this is <code>Service Managed</code>, Amazon Managed Grafana automatically creates the IAM roles and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels.</p> <p>If this is <code>CUSTOMER_MANAGED</code>, you manage those roles and permissions yourself. If you are creating this workspace in a member account of an organization and that account is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, you must choose <code>CUSTOMER_MANAGED</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html">Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels</a> </p>'
+            - description: '<p>If this is <code>SERVICE_MANAGED</code>, Amazon Managed Grafana automatically creates the IAM roles and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels.</p> <p>If this is <code>CUSTOMER_MANAGED</code>, you manage those roles and permissions yourself. If you are creating this workspace in a member account of an organization and that account is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, you must choose <code>CUSTOMER_MANAGED</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html">Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels</a> </p>'
         stackSetName:
           allOf:
             - $ref: '#/components/schemas/StackSetName'
@@ -2031,6 +2070,21 @@ components:
       type: string
       minLength: 2
       maxLength: 65536
+    NetworkAccessConfiguration:
+      type: object
+      required:
+        - prefixListIds
+        - vpceIds
+      properties:
+        prefixListIds:
+          allOf:
+            - $ref: '#/components/schemas/PrefixListIds'
+            - description: '<p>An array of prefix list IDs. A prefix list is a list of CIDR ranges of IP addresses. The IP addresses specified are allowed to access your workspace. If the list is not included in the configuration then no IP addresses will be allowed to access the workspace. You create a prefix list using the Amazon VPC console.</p> <p>Prefix list IDs have the format <code>pl-<i>1a2b3c4d</i> </code>.</p> <p>For more information about prefix lists, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html">Group CIDR blocks using managed prefix lists</a>in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+        vpceIds:
+          allOf:
+            - $ref: '#/components/schemas/VpceIds'
+            - description: '<p>An array of Amazon VPC endpoint IDs for the workspace. You can create VPC endpoints to your Amazon Managed Grafana workspace for access from within a VPC. If a <code>NetworkAccessConfiguration</code> is specified then only VPC endpoints specified here will be allowed to access the workspace.</p> <p>VPC endpoint IDs have the format <code>vpce-<i>1a2b3c4d</i> </code>.</p> <p>For more information about creating an interface VPC endpoint, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/VPC-endpoints">Interface VPC endpoints</a> in the <i>Amazon Managed Grafana User Guide</i>.</p> <note> <p>The only VPC endpoints that can be specified here are interface VPC endpoints for Grafana workspaces (using the <code>com.amazonaws.[region].grafana-workspace</code> service endpoint). Other VPC endpoints will be ignored.</p> </note>'
+      description: '<p>The configuration settings for in-bound network access to your workspace.</p> <p>When this is configured, only listed IP addresses and VPC endpoints will be able to access your workspace. Standard Grafana authentication and authorization will still be required.</p> <p>If this is not configured, or is removed, then all IP addresses and VPC endpoints will be allowed. Standard Grafana authentication and authorization will still be required.</p>'
     OrganizationRoleName:
       type: string
       minLength: 1
@@ -2058,12 +2112,12 @@ components:
         securityGroupIds:
           allOf:
             - $ref: '#/components/schemas/SecurityGroupIds'
-            - description: The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.
+            - description: The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect. Duplicates not allowed.
         subnetIds:
           allOf:
             - $ref: '#/components/schemas/SubnetIds'
-            - description: The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.
-      description: The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.
+            - description: The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect. Duplicates not allowed.
+      description: <p>The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.</p> <note> <p>Provided <code>securityGroupIds</code> and <code>subnetIds</code> must be part of the same VPC.</p> </note>
     DataSourceTypesList:
       type: array
       items:
@@ -2114,6 +2168,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/OverridableConfigurationJson'
             - description: 'The configuration string for the workspace that you create. For more information about the format and configuration options available, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html">Working in your Grafana workspace</a>.'
+        networkAccessControl:
+          allOf:
+            - $ref: '#/components/schemas/NetworkAccessConfiguration'
+            - description: '<p>Configuration for network access to your workspace.</p> <p>When this is configured, only listed IP addresses and VPC endpoints will be able to access your workspace. Standard Grafana authentication and authorization will still be required.</p> <p>If this is not configured, or is removed, then all IP addresses and VPC endpoints will be allowed. Standard Grafana authentication and authorization will still be required.</p>'
         organizationRoleName:
           allOf:
             - $ref: '#/components/schemas/OrganizationRoleName'
@@ -2269,6 +2327,10 @@ components:
             - $ref: '#/components/schemas/User'
             - description: A structure with the ID of the user or group with this role.
       description: 'A structure containing the identity of one user or group and the <code>Admin</code>, <code>Editor</code>, or <code>Viewer</code> role that they have.'
+    PrefixListId:
+      type: string
+      minLength: 1
+      maxLength: 100
     RoleValue:
       type: string
       minLength: 1
@@ -2417,6 +2479,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AccountAccessType'
             - description: 'Specifies whether the workspace can access Amazon Web Services resources in this Amazon Web Services account only, or whether it can also access Amazon Web Services resources in other accounts in the same organization. If you specify <code>ORGANIZATION</code>, you must specify which organizational units the workspace can access in the <code>workspaceOrganizationalUnits</code> parameter.'
+        networkAccessControl:
+          allOf:
+            - $ref: '#/components/schemas/NetworkAccessConfiguration'
+            - description: '<p>The configuration settings for network access to your workspace.</p> <p>When this is configured, only listed IP addresses and VPC endpoints will be able to access your workspace. Standard Grafana authentication and authorization will still be required.</p> <p>If this is not configured, or is removed, then all IP addresses and VPC endpoints will be allowed. Standard Grafana authentication and authorization will still be required.</p>'
         organizationRoleName:
           allOf:
             - $ref: '#/components/schemas/OrganizationRoleName'
@@ -2424,7 +2490,11 @@ components:
         permissionType:
           allOf:
             - $ref: '#/components/schemas/PermissionType'
-            - description: '<p>If you specify <code>Service Managed</code>, Amazon Managed Grafana automatically creates the IAM roles and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels.</p> <p>If you specify <code>CUSTOMER_MANAGED</code>, you will manage those roles and permissions yourself. If you are creating this workspace in a member account of an organization and that account is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, you must choose <code>CUSTOMER_MANAGED</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html">Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels</a> </p>'
+            - description: '<p>If you specify <code>SERVICE_MANAGED</code>, Amazon Managed Grafana automatically creates the IAM roles and provisions the permissions that the workspace needs to use Amazon Web Services data sources and notification channels.</p> <p>If you specify <code>CUSTOMER_MANAGED</code>, you will manage those roles and permissions yourself. If you are creating this workspace in a member account of an organization and that account is not a delegated administrator account, and you want the workspace to access data sources in other Amazon Web Services accounts in the organization, you must choose <code>CUSTOMER_MANAGED</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html">Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels</a> </p>'
+        removeNetworkAccessConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>Whether to remove the network access configuration from the workspace.</p> <p>Setting this to <code>true</code> and providing a <code>networkAccessControl</code> to set will return an error.</p> <p>If you remove this configuration by setting this to <code>true</code>, then all IP addresses and VPC endpoints will be allowed. Standard Grafana authentication and authorization will still be required.</p>'
         removeVpcConfiguration:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -2461,6 +2531,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
             - description: 'The workspace needs an IAM role that grants permissions to the Amazon Web Services resources that the workspace will view data from. If you already have a role that you want to use, specify it here. If you omit this field and you specify some Amazon Web Services resources in <code>workspaceDataSources</code> or <code>workspaceNotificationDestinations</code>, a new IAM role with the necessary permissions is automatically created.'
+    VpceId:
+      type: string
+      minLength: 1
+      maxLength: 100
     WorkspaceStatus:
       type: string
       enum:
