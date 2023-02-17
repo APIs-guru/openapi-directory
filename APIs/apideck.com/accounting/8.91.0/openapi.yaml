@@ -2703,7 +2703,8 @@ paths:
 
             const params = {
               journalEntry: {
-                currency_rate: 'USD',
+                title: 'Purchase Invoice-Inventory (USD): 2019/02/01 Batch Summary Entry',
+                currency_rate: 0.69,
                 currency: 'USD',
                 line_items: [
                   {
@@ -2746,7 +2747,8 @@ paths:
                   }
                 ],
                 memo: 'Thank you for your business and have a great day!',
-                posted_at: '2020-09-30T07:43:32.000Z'
+                posted_at: '2020-09-30T07:43:32.000Z',
+                journal_symbol: 'IND'
               }
             }
 
@@ -2908,7 +2910,8 @@ paths:
             const params = {
               id: 'id_example',
               journalEntry: {
-                currency_rate: 'USD',
+                title: 'Purchase Invoice-Inventory (USD): 2019/02/01 Batch Summary Entry',
+                currency_rate: 0.69,
                 currency: 'USD',
                 line_items: [
                   {
@@ -2951,7 +2954,8 @@ paths:
                   }
                 ],
                 memo: 'Thank you for your business and have a great day!',
-                posted_at: '2020-09-30T07:43:32.000Z'
+                posted_at: '2020-09-30T07:43:32.000Z',
+                journal_symbol: 'IND'
               }
             }
 
@@ -3762,6 +3766,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/suppliersFilter"
       responses:
         "200":
           $ref: "#/components/responses/GetSuppliersResponse"
@@ -4614,6 +4619,14 @@ components:
       name: x-apideck-service-id
       schema:
         type: string
+    suppliersFilter:
+      description: Apply filters
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/SuppliersFilter"
+      style: deepObject
     taxRatesFilter:
       description: Apply filters
       explode: true
@@ -9431,9 +9444,15 @@ components:
         currency:
           $ref: "#/components/schemas/Currency"
         currency_rate:
-          $ref: "#/components/schemas/Currency"
+          $ref: "#/components/schemas/CurrencyRate"
         id:
           $ref: "#/components/schemas/Id"
+        journal_symbol:
+          description: Journal symbol of the entry. For example IND for indirect costs
+          example: IND
+          nullable: true
+          title: Journal symbol
+          type: string
         line_items:
           description: Requires a minimum of 2 line items that sum to 0
           items:
@@ -9452,6 +9471,12 @@ components:
           format: date-time
           title: Posted at (timestamp)
           type: string
+        title:
+          description: Journal entry title
+          example: "Purchase Invoice-Inventory (USD): 2019/02/01 Batch Summary Entry"
+          nullable: true
+          title: Journal entry title
+          type: string
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
@@ -9465,12 +9490,21 @@ components:
       x-apideck-weights:
         created_at: medium
         created_by: edge-case
+        currency: medium
+        currency_rate: low
         id: high
+        journal_symbol: edge-case
+        line_items: medium
+        memo: low
+        posted_at: low
+        title: medium
         updated_at: medium
         updated_by: edge-case
     JournalEntryLineItem:
       additionalProperties: false
       properties:
+        department_id:
+          $ref: "#/components/schemas/Id"
         description:
           description: User defined description
           example: Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.
@@ -9481,6 +9515,8 @@ components:
           $ref: "#/components/schemas/Id"
         ledger_account:
           $ref: "#/components/schemas/LinkedLedgerAccount"
+        location_id:
+          $ref: "#/components/schemas/Id"
         tax_amount:
           description: Tax amount
           example: 27500
@@ -10834,6 +10870,25 @@ components:
         updated_by: edge-case
         websites: medium
       x-graphql-type-name: Supplier
+    SuppliersFilter:
+      additionalProperties: false
+      example:
+        company_name: SpaceX
+        email: elon@musk.com
+      properties:
+        company_name:
+          description: Company Name of supplier to search for
+          example: SpaceX
+          title: Company Name
+          type: string
+        email:
+          description: Email of supplier to search for
+          example: elon@spacex.com
+          title: Email
+          type: string
+      type: object
+      x-apideck-schema-id: SuppliersFilter
+      x-graphql-type-name: SuppliersFilter
     Tags:
       example:
         - New

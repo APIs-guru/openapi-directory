@@ -393,6 +393,130 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/{customer}/reports:countPrintJobsByPrinter":
+    get:
+      description: Get a summary of printing done by each printer.
+      operationId: chromemanagement.customers.reports.countPrintJobsByPrinter
+      parameters:
+        - description: Required. Customer ID prefixed with "customers/" or "customers/my_customer" to use the customer associated to the account making the request.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: "Query string to filter results, AND-separated fields in EBNF syntax. Note: OR operations are not supported in this filter. Note: Only >= and <= comparators are supported in this filter. Supported filter fields: * completion_time"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: "Field used to order results. If omitted, results will be ordered in ascending order of the 'printer' field. Supported order_by fields: * printer * job_count * device_count * user_count"
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Maximum number of results to return. Maximum and default are 100.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Token to specify the page of the response to be returned.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: The ID of the organizational unit for printers. If specified, only data for printers from the specified organizational unit will be returned. If omitted, data for printers from all organizational units will be returned.
+          in: query
+          name: printerOrgUnitId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleChromeManagementV1CountPrintJobsByPrinterResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chrome.management.reports.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chrome.management.reports.readonly
+      tags:
+        - customers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{customer}/reports:countPrintJobsByUser":
+    get:
+      description: Get a summary of printing done by each user.
+      operationId: chromemanagement.customers.reports.countPrintJobsByUser
+      parameters:
+        - description: Required. Customer ID prefixed with "customers/" or "customers/my_customer" to use the customer associated to the account making the request.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: "Query string to filter results, AND-separated fields in EBNF syntax. Note: OR operations are not supported in this filter. Note: Only >= and <= comparators are supported in this filter. Supported filter fields: * completion_time"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: "Field used to order results. If omitted, results will be ordered in ascending order of the 'user_email' field. Supported order_by fields: * user_email * job_count * printer_count * device_count"
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Maximum number of results to return. Maximum and default are 100.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Token to specify the page of the response to be returned.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: The ID of the organizational unit for printers. If specified, only print jobs initiated with printers from the specified organizational unit will be counted. If omitted, all print jobs will be counted.
+          in: query
+          name: printerOrgUnitId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleChromeManagementV1CountPrintJobsByUserResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chrome.management.reports.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chrome.management.reports.readonly
+      tags:
+        - customers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{customer}/reports:findInstalledAppDevices":
     get:
       description: Generate report of devices that have a specified app installed.
@@ -1323,6 +1447,38 @@ components:
           format: int32
           type: integer
       type: object
+    GoogleChromeManagementV1CountPrintJobsByPrinterResponse:
+      description: Response containing a summary printing report for each printer from the specified organizational unit for the requested time interval.
+      properties:
+        nextPageToken:
+          description: Pagination token for requesting the next page.
+          type: string
+        printerReports:
+          description: List of PrinterReports matching request.
+          items:
+            $ref: "#/components/schemas/GoogleChromeManagementV1PrinterReport"
+          type: array
+        totalSize:
+          description: Total number of printers matching request.
+          format: int64
+          type: string
+      type: object
+    GoogleChromeManagementV1CountPrintJobsByUserResponse:
+      description: Response containing a summary printing report for each user that has initiated a print job with a printer from the specified organizational unit during the requested time interval.
+      properties:
+        nextPageToken:
+          description: Pagination token for requesting the next page.
+          type: string
+        totalSize:
+          description: Total number of users matching request.
+          format: int64
+          type: string
+        userPrintReports:
+          description: List of UserPrintReports matching request.
+          items:
+            $ref: "#/components/schemas/GoogleChromeManagementV1UserPrintReport"
+          type: array
+      type: object
     GoogleChromeManagementV1CpuInfo:
       description: "CPU specifications for the device * This field provides device information, which is static and will not change over time. * Data for this field is controlled via policy: [ReportDeviceCpuInfo](https://chromeenterprise.google/policies/#ReportDeviceCpuInfo) * Data Collection Frequency: Only at Upload * Default Data Reporting Frequency: 3 hours - Policy Controlled: Yes * Cache: If the device is offline, the collected data is stored locally, and will be reported when the device is next online: No * Reported for affiliated users only: N/A"
       properties:
@@ -1950,6 +2106,31 @@ components:
             $ref: "#/components/schemas/GoogleChromeManagementV1UsbPeripheralReport"
           type: array
       type: object
+    GoogleChromeManagementV1PrinterReport:
+      description: Report for CountPrintJobsByPrinter, contains statistics on printer usage. Contains the total number of print jobs initiated with this printer, the number of users and the number of devices that have initiated at least one print job with this printer.
+      properties:
+        deviceCount:
+          description: Number of chrome devices that have been used to send print jobs to the specified printer.
+          format: int64
+          type: string
+        jobCount:
+          description: Number of print jobs sent to the printer.
+          format: int64
+          type: string
+        printer:
+          description: Printer name.
+          type: string
+        printerId:
+          description: Printer API ID.
+          type: string
+        printerModel:
+          description: Printer model.
+          type: string
+        userCount:
+          description: Number of users that have sent print jobs to the printer.
+          format: int64
+          type: string
+      type: object
     GoogleChromeManagementV1StorageInfo:
       description: "Status data for storage. * This field is telemetry information and this will change over time as the device is utilized. * Data for this field is controlled via policy: [ReportDeviceStorageStatus](https://chromeenterprise.google/policies/#ReportDeviceStorageStatus) * Data Collection Frequency: Only at Upload * Default Data Reporting Frequency: 3 hours - Policy Controlled: Yes * Cache: If the device is offline, the collected data is stored locally, and will be reported when the device is next online: No * Reported for affiliated users only: N/A"
       properties:
@@ -2341,6 +2522,28 @@ components:
           format: int32
           readOnly: true
           type: integer
+      type: object
+    GoogleChromeManagementV1UserPrintReport:
+      description: Report for CountPrintJobsByUser, contains printing statistics for a user. Contains the number of printers, the number of devices used to initiate print jobs, and the number of print jobs initiated.
+      properties:
+        deviceCount:
+          description: Number of chrome devices that have been used to initiate print jobs by the user.
+          format: int64
+          type: string
+        jobCount:
+          description: Number of print jobs initiated by the user.
+          format: int64
+          type: string
+        printerCount:
+          description: Number of printers used by the user.
+          format: int64
+          type: string
+        userEmail:
+          description: The primary e-mail address of the user.
+          type: string
+        userId:
+          description: The unique Directory API ID of the user.
+          type: string
       type: object
     GoogleRpcStatus:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."

@@ -53,7 +53,7 @@ info:
     url: https://adyen.com/.resources/adyen-website/themes/images/apple-icon-180x180.png
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/CheckoutService-v50.json
+      url: https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/CheckoutService-v50.json
       version: "3.1"
   x-preferred: false
   x-providerName: adyen.com
@@ -6873,7 +6873,12 @@ components:
         additionalData:
           additionalProperties:
             type: string
-          anyOf:
+          description: |-
+            This field contains additional data, which may be required for a particular payment request.
+
+            The `additionalData` object consists of entries, each of which includes the key and value.
+          type: object
+          x-anyOf:
             - $ref: "#/components/schemas/AdditionalData3DSecure"
             - $ref: "#/components/schemas/AdditionalDataAirline"
             - $ref: "#/components/schemas/AdditionalDataCarRental"
@@ -6889,11 +6894,6 @@ components:
             - $ref: "#/components/schemas/AdditionalDataSubMerchant"
             - $ref: "#/components/schemas/AdditionalDataTemporaryServices"
             - $ref: "#/components/schemas/AdditionalDataWallets"
-          description: |-
-            This field contains additional data, which may be required for a particular payment request.
-
-            The `additionalData` object consists of entries, each of which includes the key and value.
-          type: object
         amount:
           $ref: "#/components/schemas/Amount"
           description: The amount information for the transaction (in [minor units](https://docs.adyen.com/development-resources/currency-codes)). For [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) requests, set amount to 0 (zero).
@@ -7127,7 +7127,9 @@ components:
         additionalData:
           additionalProperties:
             type: string
-          anyOf:
+          description: "Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Developers** > **Additional data**."
+          type: object
+          x-anyOf:
             - $ref: "#/components/schemas/ResponseAdditionalData3DSecure"
             - $ref: "#/components/schemas/ResponseAdditionalDataBillingAddress"
             - $ref: "#/components/schemas/ResponseAdditionalDataCard"
@@ -7136,8 +7138,6 @@ components:
             - $ref: "#/components/schemas/ResponseAdditionalDataNetworkTokens"
             - $ref: "#/components/schemas/ResponseAdditionalDataOpi"
             - $ref: "#/components/schemas/ResponseAdditionalDataSepa"
-          description: "Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Developers** > **Additional data**."
-          type: object
         balance:
           $ref: "#/components/schemas/Amount"
           description: The balance for the payment method.
@@ -7222,7 +7222,9 @@ components:
         additionalData:
           additionalProperties:
             type: string
-          anyOf:
+          description: "Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Developers** > **Additional data**."
+          type: object
+          x-anyOf:
             - $ref: "#/components/schemas/ResponseAdditionalData3DSecure"
             - $ref: "#/components/schemas/ResponseAdditionalDataBillingAddress"
             - $ref: "#/components/schemas/ResponseAdditionalDataCard"
@@ -7231,8 +7233,6 @@ components:
             - $ref: "#/components/schemas/ResponseAdditionalDataNetworkTokens"
             - $ref: "#/components/schemas/ResponseAdditionalDataOpi"
             - $ref: "#/components/schemas/ResponseAdditionalDataSepa"
-          description: "Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Developers** > **Additional data**."
-          type: object
         expiresAt:
           description: The date that the order will expire.
           type: string
@@ -8974,7 +8974,9 @@ components:
         additionalData:
           additionalProperties:
             type: string
-          anyOf:
+          description: "Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Developers** > **Additional data**."
+          type: object
+          x-anyOf:
             - $ref: "#/components/schemas/ResponseAdditionalData3DSecure"
             - $ref: "#/components/schemas/ResponseAdditionalDataBillingAddress"
             - $ref: "#/components/schemas/ResponseAdditionalDataCard"
@@ -8983,8 +8985,6 @@ components:
             - $ref: "#/components/schemas/ResponseAdditionalDataNetworkTokens"
             - $ref: "#/components/schemas/ResponseAdditionalDataOpi"
             - $ref: "#/components/schemas/ResponseAdditionalDataSepa"
-          description: "Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Developers** > **Additional data**."
-          type: object
         authentication:
           additionalProperties:
             type: string
@@ -9081,7 +9081,12 @@ components:
         additionalData:
           additionalProperties:
             type: string
-          anyOf:
+          description: |-
+            This field contains additional data, which may be required for a particular payment request.
+
+            The `additionalData` object consists of entries, each of which includes the key and value.
+          type: object
+          x-anyOf:
             - $ref: "#/components/schemas/AdditionalData3DSecure"
             - $ref: "#/components/schemas/AdditionalDataAirline"
             - $ref: "#/components/schemas/AdditionalDataCarRental"
@@ -9097,11 +9102,6 @@ components:
             - $ref: "#/components/schemas/AdditionalDataSubMerchant"
             - $ref: "#/components/schemas/AdditionalDataTemporaryServices"
             - $ref: "#/components/schemas/AdditionalDataWallets"
-          description: |-
-            This field contains additional data, which may be required for a particular payment request.
-
-            The `additionalData` object consists of entries, each of which includes the key and value.
-          type: object
         amount:
           $ref: "#/components/schemas/Amount"
           description: The amount information for the transaction (in [minor units](https://docs.adyen.com/development-resources/currency-codes)). For [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) requests, set amount to 0 (zero).
@@ -9723,7 +9723,12 @@ components:
         additionalData:
           additionalProperties:
             type: string
-          anyOf:
+          description: |-
+            This field contains additional data, which may be required for a particular payment request.
+
+            The `additionalData` object consists of entries, each of which includes the key and value.
+          type: object
+          x-anyOf:
             - $ref: "#/components/schemas/AdditionalData3DSecure"
             - $ref: "#/components/schemas/AdditionalDataAirline"
             - $ref: "#/components/schemas/AdditionalDataCarRental"
@@ -9739,11 +9744,6 @@ components:
             - $ref: "#/components/schemas/AdditionalDataSubMerchant"
             - $ref: "#/components/schemas/AdditionalDataTemporaryServices"
             - $ref: "#/components/schemas/AdditionalDataWallets"
-          description: |-
-            This field contains additional data, which may be required for a particular payment request.
-
-            The `additionalData` object consists of entries, each of which includes the key and value.
-          type: object
         allowedPaymentMethods:
           description: |-
             List of payment methods to be presented to the shopper. To refer to payment methods, use their `paymentMethod.type` from [Payment methods overview](https://docs.adyen.com/payment-methods).
@@ -9883,7 +9883,12 @@ components:
         additionalData:
           additionalProperties:
             type: string
-          anyOf:
+          description: |-
+            This field contains additional data, which may be required for a particular payment request.
+
+            The `additionalData` object consists of entries, each of which includes the key and value.
+          type: object
+          x-anyOf:
             - $ref: "#/components/schemas/AdditionalData3DSecure"
             - $ref: "#/components/schemas/AdditionalDataAirline"
             - $ref: "#/components/schemas/AdditionalDataCarRental"
@@ -9899,11 +9904,6 @@ components:
             - $ref: "#/components/schemas/AdditionalDataSubMerchant"
             - $ref: "#/components/schemas/AdditionalDataTemporaryServices"
             - $ref: "#/components/schemas/AdditionalDataWallets"
-          description: |-
-            This field contains additional data, which may be required for a particular payment request.
-
-            The `additionalData` object consists of entries, each of which includes the key and value.
-          type: object
         amount:
           $ref: "#/components/schemas/Amount"
           description: The amount information for the transaction (in [minor units](https://docs.adyen.com/development-resources/currency-codes)). For [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) requests, set amount to 0 (zero).
@@ -10274,7 +10274,9 @@ components:
         additionalData:
           additionalProperties:
             type: string
-          anyOf:
+          description: "Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Developers** > **Additional data**."
+          type: object
+          x-anyOf:
             - $ref: "#/components/schemas/ResponseAdditionalData3DSecure"
             - $ref: "#/components/schemas/ResponseAdditionalDataBillingAddress"
             - $ref: "#/components/schemas/ResponseAdditionalDataCard"
@@ -10283,8 +10285,6 @@ components:
             - $ref: "#/components/schemas/ResponseAdditionalDataNetworkTokens"
             - $ref: "#/components/schemas/ResponseAdditionalDataOpi"
             - $ref: "#/components/schemas/ResponseAdditionalDataSepa"
-          description: "Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Developers** > **Additional data**."
-          type: object
         authentication:
           additionalProperties:
             type: string
@@ -10402,7 +10402,12 @@ components:
         additionalData:
           additionalProperties:
             type: string
-          anyOf:
+          description: |-
+            This field contains additional data, which may be required for a particular payment request.
+
+            The `additionalData` object consists of entries, each of which includes the key and value.
+          type: object
+          x-anyOf:
             - $ref: "#/components/schemas/AdditionalData3DSecure"
             - $ref: "#/components/schemas/AdditionalDataAirline"
             - $ref: "#/components/schemas/AdditionalDataCarRental"
@@ -10418,11 +10423,6 @@ components:
             - $ref: "#/components/schemas/AdditionalDataSubMerchant"
             - $ref: "#/components/schemas/AdditionalDataTemporaryServices"
             - $ref: "#/components/schemas/AdditionalDataWallets"
-          description: |-
-            This field contains additional data, which may be required for a particular payment request.
-
-            The `additionalData` object consists of entries, each of which includes the key and value.
-          type: object
         allowedPaymentMethods:
           description: |-
             List of payment methods to be presented to the shopper. To refer to payment methods, use their `paymentMethod.type`from [Payment methods overview](https://docs.adyen.com/payment-methods).
@@ -10741,7 +10741,9 @@ components:
         additionalData:
           additionalProperties:
             type: string
-          anyOf:
+          description: "Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Developers** > **Additional data**."
+          type: object
+          x-anyOf:
             - $ref: "#/components/schemas/ResponseAdditionalData3DSecure"
             - $ref: "#/components/schemas/ResponseAdditionalDataBillingAddress"
             - $ref: "#/components/schemas/ResponseAdditionalDataCard"
@@ -10750,8 +10752,6 @@ components:
             - $ref: "#/components/schemas/ResponseAdditionalDataNetworkTokens"
             - $ref: "#/components/schemas/ResponseAdditionalDataOpi"
             - $ref: "#/components/schemas/ResponseAdditionalDataSepa"
-          description: "Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Developers** > **Additional data**."
-          type: object
         fraudResult:
           $ref: "#/components/schemas/FraudResult"
           description: The fraud result properties of the payment.
@@ -11127,13 +11127,11 @@ components:
           type: string
         cvcResult:
           description: The result of CVC verification.
-          examples:
-            - 1 Matches
+          example: 1 Matches
           type: string
         cvcResultRaw:
           description: The raw result of CVC verification.
-          examples:
-            - M
+          example: M
           type: string
         dsTransID:
           description: Supported for 3D Secure 2. The unique transaction identifier assigned by the DS to identify a single transaction.
@@ -12015,8 +12013,8 @@ components:
             - A
           type: string
         cavv:
-          contentEncoding: base64
           description: The cardholder authentication value (base64 encoded, 20 bytes in a decoded form).
+          format: byte
           type: string
         cavvAlgorithm:
           description: The CAVV algorithm used. Include this only for 3D Secure 1.
@@ -12048,8 +12046,8 @@ components:
           type: string
           x-addedInVersion: "40"
         xid:
-          contentEncoding: base64
           description: Supported for 3D Secure 1. The transaction identifier (Base64-encoded, 20 bytes in a decoded form).
+          format: byte
           type: string
     UpdatePaymentLinkRequest:
       properties:
