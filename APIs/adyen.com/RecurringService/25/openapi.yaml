@@ -12,23 +12,45 @@ info:
 
     For more information, refer to our [Tokenization documentation](https://docs.adyen.com/online-payments/tokenization).
     ## Authentication
-    To connect to the Recurring API, you must use your basic authentication credentials. For this, create your web service user, as described in [How to get the WS user password](https://docs.adyen.com/development-resources/api-credentials). Then use its credentials to authenticate your request, for example:
+    You need an [API credential](https://docs.adyen.com/development-resources/api-credentials) to authenticate to the API.
+
+    If using an API key, add an `X-API-Key` header with the API key as the value, for example:
+
+     ```
+    curl
+    -H "Content-Type: application/json" \
+    -H "X-API-Key: YOUR_API_KEY" \
+    ...
+    ```
+
+    Alternatively, you can use the username and password to connect to the API using basic authentication, for example:
 
     ```
     curl
-    -U "ws@Company.YourCompany":"YourWsPassword" \
+    -U "ws@Company.YOUR_COMPANY_ACCOUNT":"YOUR_BASIC_AUTHENTICATION_PASSWORD" \
     -H "Content-Type: application/json" \
     ...
     ```
-    Note that when going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).
 
     ## Versioning
-    Recurring API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
+    Recurring API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
 
     For example:
     ```
     https://pal-test.adyen.com/pal/servlet/Recurring/v25/disable
     ```
+
+    ## Going live
+
+    To authenticate to the live endpoints, you need an [API credential](https://docs.adyen.com/development-resources/api-credentials) from your live Customer Area.
+
+    The live endpoint URLs contain a prefix which is unique to your company account:
+    ```
+
+    https://{PREFIX}-pal-live.adyenpayments.com/pal/servlet/Recurring/v25/disable
+    ```
+
+    Get your `{PREFIX}` from your live Customer Area under **Developers** > **API URLs** > **Prefix**.
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
   title: Adyen Recurring API
   version: "25"
@@ -47,6 +69,9 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: RecurringService
+  x-timestamp: 2023-02-16T11:25:28Z
+tags:
+  - name: General
 paths:
   /disable:
     post:
@@ -103,10 +128,11 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Disables stored payment details.
+      summary: Disable stored payment details
       tags:
         - General
       x-groupName: General
+      x-methodName: disable
       x-sortIndex: 2
   /listRecurringDetails:
     post:
@@ -163,11 +189,73 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Retrieves stored payment details for a shopper.
+      summary: Get stored payment details
       tags:
         - General
       x-groupName: General
+      x-methodName: listRecurringDetails
       x-sortIndex: 1
+  /notifyShopper:
+    post:
+      description: Sends a request to the issuer so they can inform the shopper about the upcoming recurring payment. This endpoint is used only for local acquiring in India. For more information, refer to [Recurring card payments in India](https://docs.adyen.com/payment-methods/cards/cards-recurring-india).
+      operationId: post-notifyShopper
+      requestBody:
+        content:
+          application/json:
+            examples:
+              notifyShopperOfUpcomingRecurringPayment:
+                $ref: "#/components/examples/post-notifyShopper-notifyShopperOfUpcomingRecurringPayment"
+            schema:
+              $ref: "#/components/schemas/NotifyShopperRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                notifyShopperOfUpcomingRecurringPayment:
+                  $ref: "#/components/examples/post-notifyShopper-notifyShopperOfUpcomingRecurringPayment-200"
+              schema:
+                $ref: "#/components/schemas/NotifyShopperResult"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Ask issuer to notify the shopper
+      tags:
+        - General
+      x-groupName: General
+      x-methodName: notifyShopper
+      x-sortIndex: 4
   /scheduleAccountUpdater:
     post:
       description: |-
@@ -225,11 +313,12 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Schedules running of the Account Updater.
+      summary: Schedule running the Account Updater
       tags:
         - General
       x-addedInVersion: "4"
       x-groupName: General
+      x-methodName: scheduleAccountUpdater
       x-sortIndex: 3
 components:
   examples:
@@ -240,12 +329,34 @@ components:
         recurringDetailReference: "8314442372419167"
         shopperReference: YOUR_UNIQUE_SHOPPER_ID
     post-listRecurringDetails-listAllRecurringDetails:
-      summary: List all recurring details
+      summary: List recurring details of the specified contract value
       value:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         recurring:
           contract: RECURRING
         shopperReference: YOUR_UNIQUE_SHOPPER_ID
+    post-notifyShopper-notifyShopperOfUpcomingRecurringPayment:
+      summary: Request issuer to notify shopper of upcoming recurring payment
+      value:
+        amount:
+          currency: INR
+          value: 1000
+        billingDate: 2021-03-16
+        displayedReference: exampleDisplayedReference
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        reference: Example reference
+        shopperReference: YOUR_SHOPPER_REFERENCE
+        storedPaymentMethodId: "8415995487234100"
+    post-notifyShopper-notifyShopperOfUpcomingRecurringPayment-200:
+      summary: Example response for request 'notifyShopper'
+      value:
+        displayedReference: exampleDisplayedReference
+        message: Request Processed Successfully
+        pspReference: M5N7TQ4TG5PFWR50
+        reference: Example reference
+        resultCode: Success
+        shopperNotificationReference: "9915003646742627"
+        storedPaymentMethodId: "8415995487234100"
     post-scheduleAccountUpdater-scheduleAccountUpdaterWithCardData:
       summary: Schedule AccountUpdater with card data
       value:
@@ -268,27 +379,30 @@ components:
       properties:
         city:
           description: "The name of the city. Maximum length: 3000 characters."
+          maxLength: 3000
           type: string
         country:
           description: |-
-            The two-character country code as defined in ISO-3166-1 alpha-2. For example, **US**.
+            The two-character ISO-3166-1 alpha-2 country code. For example, **US**.
             > If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
           type: string
         houseNumberOrName:
           description: "The number or name of the house. Maximum length: 3000 characters."
+          maxLength: 3000
           type: string
         postalCode:
           description: A maximum of five digits for an address in the US, or a maximum of ten characters for an address in all other countries.
           type: string
         stateOrProvince:
           description: |-
-            State or province codes as defined in ISO 3166-2. For example, **CA** in the US or **ON** in Canada.
+            The two-character ISO 3166-2 state or province code. For example, **CA** in the US or **ON** in Canada.
             > Required for the US and Canada.
           type: string
         street:
           description: |-
             The name of the street. Maximum length: 3000 characters.
             > The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
+          maxLength: 3000
           type: string
       required:
         - street
@@ -412,8 +526,6 @@ components:
           minLength: 4
           type: string
       required:
-        - number
-        - expiryMonth
         - expiryYear
         - holderName
     DisableRequest:
@@ -462,6 +574,66 @@ components:
       required:
         - firstName
         - lastName
+    NotifyShopperRequest:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The amount of the upcoming payment.
+        billingDate:
+          description: Date on which the subscription amount will be debited from the shopper. In YYYY-MM-DD format
+          type: string
+        billingSequenceNumber:
+          description: Sequence of the debit. Depends on Frequency and Billing Attempts Rule.
+          type: string
+        displayedReference:
+          description: Reference of Pre-debit notification that is displayed to the shopper. Optional field. Maps to reference if missing
+          type: string
+        merchantAccount:
+          description: The merchant account identifier with which you want to process the transaction.
+          type: string
+        recurringDetailReference:
+          description: This is the `recurringDetailReference` returned in the response when you created the token.
+          type: string
+        reference:
+          description: Pre-debit notification reference sent by the merchant. This is a mandatory field
+          type: string
+        shopperReference:
+          description: |-
+            The ID that uniquely identifies the shopper.
+
+            This `shopperReference` must be the same as the `shopperReference` used in the initial payment.
+          type: string
+        storedPaymentMethodId:
+          description: This is the `recurringDetailReference` returned in the response when you created the token.
+          type: string
+      required:
+        - merchantAccount
+        - shopperReference
+        - amount
+        - reference
+    NotifyShopperResult:
+      properties:
+        displayedReference:
+          description: Reference of Pre-debit notification that is displayed to the shopper
+          type: string
+        message:
+          description: A simple description of the `resultCode`.
+          type: string
+        pspReference:
+          description: The unique reference that is associated with the request.
+          type: string
+        reference:
+          description: Reference of Pre-debit notification sent in my the merchant
+          type: string
+        resultCode:
+          description: The code indicating the status of notification.
+          type: string
+        shopperNotificationReference:
+          description: The unique reference for the request sent downstream.
+          type: string
+        storedPaymentMethodId:
+          description: This is the recurringDetailReference returned in the response when token was created
+          type: string
     Recurring:
       properties:
         contract:
@@ -554,6 +726,9 @@ components:
           description: A shopper's social security number (only in countries where it is legal to collect).
           type: string
           x-addedInVersion: "4"
+        tokenDetails:
+          $ref: "#/components/schemas/TokenDetails"
+          x-addedInVersion: "2"
         variant:
           description: The payment method, such as “mc", "visa", "ideal", "paypal".
           type: string
@@ -605,7 +780,7 @@ components:
         card:
           $ref: "#/components/schemas/Card"
           description: |-
-            A container for credit card data.
+            Credit card data.
 
             Optional if `shopperReference` and `selectedRecurringDetailReference` are provided.
         merchantAccount:
@@ -658,6 +833,14 @@ components:
           description: The HTTP response status.
           format: int32
           type: integer
+    TokenDetails:
+      properties:
+        tokenData:
+          additionalProperties:
+            type: string
+          type: object
+        tokenDataType:
+          type: string
   securitySchemes:
     ApiKeyAuth:
       in: header
@@ -666,7 +849,5 @@ components:
     BasicAuth:
       scheme: basic
       type: http
-source:
-  url: {}
 x-groups:
   - General

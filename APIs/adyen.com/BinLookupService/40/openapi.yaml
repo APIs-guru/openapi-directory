@@ -7,7 +7,47 @@ info:
     name: Adyen Developer Experience team
     url: https://www.adyen.help/hc/en-us/community/topics
     x-twitter: Adyen
-  description: The BIN Lookup API provides endpoints for retrieving information, such as cost estimates, and 3D Secure supported version based on a given BIN.
+  description: |-
+    The BIN Lookup API provides endpoints for retrieving information, such as cost estimates, and 3D Secure supported version based on a given BIN.
+
+    ## Authentication
+    You need an [API credential](https://docs.adyen.com/development-resources/api-credentials) to authenticate to the API.
+
+    If using an API key, add an `X-API-Key` header with the API key as the value, for example:
+
+     ```
+    curl
+    -H "Content-Type: application/json" \
+    -H "X-API-Key: YOUR_API_KEY" \
+    ...
+    ```
+
+    Alternatively, you can use the username and password to connect to the API using basic authentication, for example:
+
+    ```
+    curl
+    -U "ws@Company.YOUR_COMPANY_ACCOUNT":"YOUR_BASIC_AUTHENTICATION_PASSWORD" \
+    -H "Content-Type: application/json" \
+    ...
+    ```
+
+    ## Versioning
+    The BinLookup API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
+
+    For example:
+    ```
+    https://pal-test.adyen.com/pal/servlet/BinLookup/v40/get3dsAvailability
+    ```## Going live
+
+    To authneticate to the live endpoints, you need an [API credential](https://docs.adyen.com/development-resources/api-credentials) from your live Customer Area.
+
+    The live endpoint URLs contain a prefix which is unique to your company account:
+    ```
+
+    https://{PREFIX}-pal-live.adyenpayments.com/pal/servlet/BinLookup/v40/get3dsAvailability
+    ```
+
+    Get your `{PREFIX}` from your live Customer Area under **Developers** > **API URLs** > **Prefix**.
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
   title: Adyen BinLookup API
   version: "40"
@@ -23,6 +63,9 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: BinLookupService
+  x-timestamp: 2023-02-16T11:25:26Z
+tags:
+  - name: General
 paths:
   /get3dsAvailability:
     post:
@@ -85,15 +128,18 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Checks 3D Secure availability.
+      summary: Check if 3D Secure is available
       tags:
         - General
       x-addedInVersion: "1"
       x-groupName: General
+      x-methodName: get3dsAvailability
       x-sortIndex: 0
   /getCostEstimate:
     post:
       description: |-
+        >This API is available only for merchants operating in Australia, the EU, and the UK.
+
         Use the Adyen Cost Estimation API to pre-calculate interchange and scheme fee costs. Knowing these costs prior actual payment authorisation gives you an opportunity to charge those costs to the cardholder, if necessary.
 
         To retrieve this information, make the call to the `/getCostEstimate` endpoint. The response to this call contains the amount of the interchange and scheme fees charged by the network for this transaction, and also which surcharging policy is possible (based on current regulations).
@@ -168,10 +214,11 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Gets a cost estimate.
+      summary: Get a fees cost estimate
       tags:
         - General
       x-groupName: General
+      x-methodName: getCostEstimate
       x-sortIndex: 0
 components:
   examples:

@@ -13,23 +13,45 @@ info:
     To learn more about the API, visit [Classic integration](https://docs.adyen.com/classic-integration).
 
     ## Authentication
-    To connect to the Payments API, you must use your basic authentication credentials. For this, create your web service user, as described in [How to get the WS user password](https://docs.adyen.com/development-resources/api-credentials). Then use its credentials to authenticate your request, for example:
+    You need an [API credential](https://docs.adyen.com/development-resources/api-credentials) to authenticate to the API.
+
+    If using an API key, add an `X-API-Key` header with the API key as the value, for example:
+
+     ```
+    curl
+    -H "Content-Type: application/json" \
+    -H "X-API-Key: YOUR_API_KEY" \
+    ...
+    ```
+
+    Alternatively, you can use the username and password to connect to the API using basic authentication, for example:
 
     ```
     curl
-    -U "ws@Company.YourCompany":"YourWsPassword" \
+    -U "ws@Company.YOUR_COMPANY_ACCOUNT":"YOUR_BASIC_AUTHENTICATION_PASSWORD" \
     -H "Content-Type: application/json" \
     ...
     ```
-    Note that when going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).
 
     ## Versioning
-    Payments API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
+    Payments API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
 
     For example:
     ```
     https://pal-test.adyen.com/pal/servlet/Payment/v30/authorise
     ```
+
+    ## Going live
+
+    To authenticate to the live endpoints, you need an [API credential](https://docs.adyen.com/development-resources/api-credentials) from your live Customer Area.
+
+    The live endpoint URLs contain a prefix which is unique to your company account:
+    ```
+
+    https://{PREFIX}-pal-live.adyenpayments.com/pal/servlet/Payment/v30/authorise
+    ```
+
+    Get your `{PREFIX}` from your live Customer Area under **Developers** > **API URLs** > **Prefix**.
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
   title: Adyen Payment API
   version: "30"
@@ -48,6 +70,10 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: PaymentService
+  x-timestamp: 2022-12-13T09:27:05Z
+tags:
+  - name: Modifications
+  - name: General
 paths:
   /adjustAuthorisation:
     post:
@@ -119,11 +145,12 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Increases or decreases the authorised amount.
+      summary: Change the authorised amount
       tags:
         - Modifications
       x-addedInVersion: "30"
       x-groupName: Modifications
+      x-methodName: changeTheAuthorisedAmount
       x-sortIndex: 6
   /authorise:
     post:
@@ -198,10 +225,11 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Creates a payment authorisation.
+      summary: Create an authorisation
       tags:
         - General
       x-groupName: General
+      x-methodName: createAuthorisation
       x-sortIndex: 1
   /authorise3d:
     post:
@@ -267,10 +295,11 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Completes a 3D Secure payment authorisation.
+      summary: Complete a 3DS authorisation
       tags:
         - General
       x-groupName: General
+      x-methodName: complete3dsAuthorisation
       x-sortIndex: 2
   /cancel:
     post:
@@ -338,10 +367,11 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Cancels an authorised payment.
+      summary: Cancel an authorisation
       tags:
         - Modifications
       x-groupName: Modifications
+      x-methodName: cancelAuthorisation
       x-sortIndex: 2
   /cancelOrRefund:
     post:
@@ -350,7 +380,7 @@ paths:
 
         Do not use this endpoint for payments that involve:
          * [Multiple partial captures](https://docs.adyen.com/online-payments/capture).
-         * [Split data](https://docs.adyen.com/platforms/processing-payments#providing-split-information) either at time of payment or capture for Adyen for Platforms.
+         * [Split data](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information) either at time of payment or capture for Adyen for Platforms.
 
          Instead, check if the payment has been captured and make a corresponding [`/refund`](https://docs.adyen.com/api-explorer/#/Payment/refund) or [`/cancel`](https://docs.adyen.com/api-explorer/#/Payment/cancel) call.
 
@@ -418,10 +448,11 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Cancels or refunds a payment.
+      summary: Cancel or refund a payment
       tags:
         - Modifications
       x-groupName: Modifications
+      x-methodName: cancelOrRefundPayment
       x-sortIndex: 4
   /capture:
     post:
@@ -495,10 +526,11 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Captures an authorised payment.
+      summary: Capture an authorisation
       tags:
         - Modifications
       x-groupName: Modifications
+      x-methodName: captureAuthorisation
       x-sortIndex: 1
   /refund:
     post:
@@ -572,10 +604,11 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Refunds a captured payment.
+      summary: Refund a captured payment
       tags:
         - Modifications
       x-groupName: Modifications
+      x-methodName: refundCapturedPayment
       x-sortIndex: 3
   /technicalCancel:
     post:
@@ -648,20 +681,21 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Cancels a payment using your custom reference.
+      summary: Cancel an authorisation using your reference
       tags:
         - Modifications
       x-addedInVersion: "30"
       x-groupName: Modifications
+      x-methodName: cancelAuthorisationUsingYourReference
       x-sortIndex: 5
   /voidPendingRefund:
     post:
       description: |-
-        This endpoint allows you to cancel the refund request before it has been completed.
+        This endpoint allows you to cancel an unreferenced refund request before it has been completed.
 
         In your call, you can refer to the original refund request either by using the `tenderReference`, or the `pspReference`. We recommend implementing based on the `tenderReference`, as this is generated for both offline and online transactions.
 
-        For more information, refer to [Cancel a refund](https://docs.adyen.com/point-of-sale/refund-payment/cancel-a-pos-refund-request).
+        For more information, refer to [Cancel an unreferenced refund](https://docs.adyen.com/point-of-sale/refund-payment/cancel-unreferenced).
       operationId: post-voidPendingRefund
       requestBody:
         content:
@@ -727,11 +761,12 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Cancels a POS refund request before it has been completed.
+      summary: Cancel an in-person refund
       tags:
         - Modifications
       x-addedInVersion: "25"
       x-groupName: Modifications
+      x-methodName: cancelInpersonRefund
       x-sortIndex: 7
 components:
   examples:
@@ -816,7 +851,7 @@ components:
         shopperEmail: s.hopper@test.com
         shopperIP: 61.294.12.12
         shopperInteraction: ContAuth
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
+        shopperReference: YOUR_UNIQUE_SHOPPER_ID
     post-authorise-authorise-recurringoneclick:
       summary: Authorise a one-click payment
       value:
@@ -833,7 +868,7 @@ components:
         shopperEmail: s.hopper@test.com
         shopperIP: 61.294.12.12
         shopperInteraction: Ecommerce
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
+        shopperReference: YOUR_UNIQUE_SHOPPER_ID
     post-authorise-authorise-recurringstore:
       summary: Store card details for recurring payments
       value:
@@ -852,7 +887,7 @@ components:
         reference: YOUR_REFERENCE
         shopperEmail: s.hopper@test.com
         shopperIP: 61.294.12.12
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
+        shopperReference: YOUR_UNIQUE_SHOPPER_ID
     post-authorise-authorise-split:
       summary: Split a payment between a sub-merchant and a platform account
       value:
@@ -976,6 +1011,24 @@ components:
             Possible values:
             * **true** - Ready to support native 3D Secure 2 authentication. Setting this to true does not mean always applying 3D Secure 2. Adyen still selects the version of 3D Secure based on configuration to optimize authorisation rates and improve the shopper's experience.
             * **false** – Not ready to support native 3D Secure 2 authentication. Adyen will not offer 3D Secure 2 to your shopper regardless of your configuration.
+          type: string
+        challengeWindowSize:
+          description: |-
+            Dimensions of the 3DS2 challenge window to be displayed to the cardholder.
+
+            Possible values:
+
+            * **01** - size of 250x400 
+            * **02** - size of 390x400
+            * **03** - size of 500x600
+            * **04** - size of 600x400
+            * **05** - Fullscreen
+          enum:
+            - "01"
+            - "02"
+            - "03"
+            - "04"
+            - "05"
           type: string
         executeThreeD:
           description: |
@@ -1385,7 +1438,7 @@ components:
 
             If you need to process a payment with an acquirer different from a default one, you can set up a corresponding configuration on the Adyen payments platform. Then you can pass a custom routing flag in a payment request's additional data to target a specific acquirer.
 
-            To enable this functionality, contact [Support](https://support.adyen.com/hc/en-us/requests/new).
+            To enable this functionality, contact [Support](https://www.adyen.help/hc/en-us/requests/new).
           type: string
         industryUsage:
           description: |-
@@ -1738,6 +1791,12 @@ components:
             The number of invoice lines included in `openinvoicedata`.
 
             There needs to be at least one line, so `numberOfLines` needs to be at least 1.
+          type: string
+        openinvoicedata.recipientFirstName:
+          description: First name of the recipient. If the delivery address and the billing address are different, specify the `recipientFirstName` and `recipientLastName` to share the delivery address with Klarna. Otherwise, only the billing address is shared with Klarna.
+          type: string
+        openinvoicedata.recipientLastName:
+          description: Last name of the recipient. If the delivery address and the billing address are different, specify the `recipientFirstName` and `recipientLastName` to share the delivery address with Klarna. Otherwise, only the billing address is shared with Klarna.
           type: string
         "openinvoicedataLine[itemNr].currencyCode":
           description: The three-character ISO currency code.
@@ -2095,27 +2154,30 @@ components:
       properties:
         city:
           description: "The name of the city. Maximum length: 3000 characters."
+          maxLength: 3000
           type: string
         country:
           description: |-
-            The two-character country code as defined in ISO-3166-1 alpha-2. For example, **US**.
+            The two-character ISO-3166-1 alpha-2 country code. For example, **US**.
             > If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
           type: string
         houseNumberOrName:
           description: "The number or name of the house. Maximum length: 3000 characters."
+          maxLength: 3000
           type: string
         postalCode:
           description: A maximum of five digits for an address in the US, or a maximum of ten characters for an address in all other countries.
           type: string
         stateOrProvince:
           description: |-
-            State or province codes as defined in ISO 3166-2. For example, **CA** in the US or **ON** in Canada.
+            The two-character ISO 3166-2 state or province code. For example, **CA** in the US or **ON** in Canada.
             > Required for the US and Canada.
           type: string
         street:
           description: |-
             The name of the street. Maximum length: 3000 characters.
             > The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
+          maxLength: 3000
           type: string
       required:
         - street
@@ -2730,7 +2792,9 @@ components:
           $ref: "#/components/schemas/Address"
           description: |-
             The address where to send the invoice.
-            > For 3D Secure 2 transactions, schemes require `billingAddress` for all browser-based and mobile implementations. Include all of the fields within this object.
+            > The `billingAddress` object is required in the following scenarios. Include all of the fields within this object.
+            >* For 3D Secure 2 transactions in all browser-based and mobile implementations.
+            >* For cross-border payouts to and from Canada.
           x-addedInVersion: "4"
         browserInfo:
           $ref: "#/components/schemas/BrowserInfo"
@@ -2875,7 +2939,7 @@ components:
           description: |-
             The shopper's IP address. In general, we recommend that you provide this data, as it is used in a number of risk checks (for instance, number of payment attempts or location-based checks).
             > For 3D Secure 2 transactions, schemes require `shopperIP` for all browser-based implementations.
-            This field is also mandatory for some merchants depending on your business model. For more information, [contact Support](https://support.adyen.com/hc/en-us/requests/new).
+            This field is also mandatory for some merchants depending on your business model. For more information, [contact Support](https://www.adyen.help/hc/en-us/requests/new).
           type: string
         shopperInteraction:
           description: |-
@@ -2909,15 +2973,16 @@ components:
           type: string
         shopperStatement:
           description: |-
-            The text to be shown on the shopper's bank statement. To enable this field, contact our [Support Team](https://support.adyen.com/hc/en-us/requests/new).
+            The text to be shown on the shopper's bank statement.
              We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.
+             Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /**.
           type: string
         socialSecurityNumber:
           description: The shopper's social security number.
           type: string
           x-addedInVersion: "4"
         store:
-          description: The ecommerce or point-of-sale store that is processing the payment. Used in [partner arrangement integrations](https://docs.adyen.com/platforms/platforms-for-partners#route-payments) for Adyen for Platforms.
+          description: The ecommerce or point-of-sale store that is processing the payment. Used in [partner model integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for Adyen for Platforms.
           maxLength: 16
           minLength: 1
           type: string
@@ -2974,7 +3039,9 @@ components:
           $ref: "#/components/schemas/Address"
           description: |-
             The address where to send the invoice.
-            > For 3D Secure 2 transactions, schemes require `billingAddress` for all browser-based and mobile implementations. Include all of the fields within this object.
+            > The `billingAddress` object is required in the following scenarios. Include all of the fields within this object.
+            >* For 3D Secure 2 transactions in all browser-based and mobile implementations.
+            >* For cross-border payouts to and from Canada.
           x-addedInVersion: "4"
         browserInfo:
           $ref: "#/components/schemas/BrowserInfo"
@@ -3102,7 +3169,7 @@ components:
           description: |-
             The shopper's IP address. In general, we recommend that you provide this data, as it is used in a number of risk checks (for instance, number of payment attempts or location-based checks).
             > For 3D Secure 2 transactions, schemes require `shopperIP` for all browser-based implementations.
-            This field is also mandatory for some merchants depending on your business model. For more information, [contact Support](https://support.adyen.com/hc/en-us/requests/new).
+            This field is also mandatory for some merchants depending on your business model. For more information, [contact Support](https://www.adyen.help/hc/en-us/requests/new).
           type: string
         shopperInteraction:
           description: |-
@@ -3136,15 +3203,16 @@ components:
           type: string
         shopperStatement:
           description: |-
-            The text to be shown on the shopper's bank statement. To enable this field, contact our [Support Team](https://support.adyen.com/hc/en-us/requests/new).
+            The text to be shown on the shopper's bank statement.
              We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.
+             Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /**.
           type: string
         socialSecurityNumber:
           description: The shopper's social security number.
           type: string
           x-addedInVersion: "4"
         store:
-          description: The ecommerce or point-of-sale store that is processing the payment. Used in [partner arrangement integrations](https://docs.adyen.com/platforms/platforms-for-partners#route-payments) for Adyen for Platforms.
+          description: The ecommerce or point-of-sale store that is processing the payment. Used in [partner model integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for Adyen for Platforms.
           maxLength: 16
           minLength: 1
           type: string
@@ -3168,14 +3236,13 @@ components:
         additionalData:
           additionalProperties:
             type: string
-          description: "Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Account** > **API URLs** > **Additional data settings**."
+          description: "Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Developers** > **Additional data**."
           type: object
           x-anyOf:
             - $ref: "#/components/schemas/ResponseAdditionalData3DSecure"
             - $ref: "#/components/schemas/ResponseAdditionalDataBillingAddress"
             - $ref: "#/components/schemas/ResponseAdditionalDataCard"
             - $ref: "#/components/schemas/ResponseAdditionalDataCommon"
-            - $ref: "#/components/schemas/ResponseAdditionalDataDeliveryAddress"
             - $ref: "#/components/schemas/ResponseAdditionalDataInstallments"
             - $ref: "#/components/schemas/ResponseAdditionalDataNetworkTokens"
             - $ref: "#/components/schemas/ResponseAdditionalDataOpi"
@@ -3190,11 +3257,11 @@ components:
           $ref: "#/components/schemas/Amount"
           description: |-
             Includes the currency of the conversion and the value of the transaction.
-            > This value only applies if you have implemented Dynamic Currency Conversion. For more information, [contact Support](https://support.adyen.com/hc/en-us/requests/new).
+            > This value only applies if you have implemented Dynamic Currency Conversion. For more information, [contact Support](https://www.adyen.help/hc/en-us/requests/new).
         dccSignature:
           description: |-
             Cryptographic signature used to verify `dccQuote`.
-            > This value only applies if you have implemented Dynamic Currency Conversion. For more information, [contact Support](https://support.adyen.com/hc/en-us/requests/new).
+            > This value only applies if you have implemented Dynamic Currency Conversion. For more information, [contact Support](https://www.adyen.help/hc/en-us/requests/new).
           type: string
         fraudResult:
           $ref: "#/components/schemas/FraudResult"
@@ -3243,6 +3310,7 @@ components:
             * **Refused** – Indicates the payment was refused. The reason is given in the `refusalReason` field. This is a final state.
           enum:
             - AuthenticationFinished
+            - AuthenticationNotRequired
             - Authorised
             - Cancelled
             - ChallengeShopper
@@ -3399,7 +3467,9 @@ components:
       properties:
         cardBin:
           description: |-
-            The Bank Identification Number of a credit card, which is the first six digits of a card number.
+            The first six digits of the card number.
+
+            This is the [Bank Identification Number (BIN)](https://docs.adyen.com/get-started-with-adyen/payment-glossary#bank-identification-number-bin) for card numbers with a six-digit BIN.
 
             Example: 521234
           type: string
@@ -3432,6 +3502,14 @@ components:
             The last four digits of a card number.
 
             > Returned only in case of a card payment.
+          type: string
+        issuerBin:
+          description: |-
+            The first eight digits of the card number. Only returned if the card number is 16 digits or more.
+
+            This is the [Bank Identification Number (BIN)](https://docs.adyen.com/get-started-with-adyen/payment-glossary#bank-identification-number-bin) for card numbers with an eight-digit BIN.
+
+            Example: 52123423
           type: string
     ResponseAdditionalDataCommon:
       properties:
@@ -3622,27 +3700,10 @@ components:
             > Contact Support Team to enable this field.
           type: string
         merchantAdviceCode:
-          description: |+
-            A code and message that issuers send to provide more details about the payment. This field is especially useful when implementing a retry logic for declined payments.
+          description: |-
+            The Merchant Advice Code (MAC) can be returned by Mastercard issuers for refused payments. If present, the MAC contains information about why the payment failed, and whether it can be retried.
 
-            Possible values:
-
-            * **01: New account information available**
-
-            * **02: Cannot approve at this time, try again later**
-
-            * **03: Do not try again**
-
-            * **04: Token requirements not fulfilled for this token type**
-
-            * **21: Payment Cancellation** (only for Mastercard)
-
-          enum:
-            - "01: New account information available"
-            - "02: Cannot approve at this time, try again later"
-            - "03: Do not try again"
-            - "04: Token requirements not fulfilled for this token type"
-            - "21: Payment Cancellation"
+            For more information see [Mastercard Merchant Advice Codes](https://docs.adyen.com/development-resources/raw-acquirer-responses#mastercard-merchant-advice-codes).
           type: string
         merchantReference:
           description: The reference provided for the transaction.
@@ -3793,35 +3854,6 @@ components:
             The 3DS transaction ID of the 3DS session sent in notifications. The value is Base64-encoded and is returned for transactions with directoryResponse 'N' or 'Y'. If you want to submit the xid in your 3D Secure 1 request, use the `mpiData.xid`, field.
 
             Example: ODgxNDc2MDg2MDExODk5MAAAAAA=
-          type: string
-    ResponseAdditionalDataDeliveryAddress:
-      properties:
-        deliveryAddress.city:
-          description: The delivery address city passed in the payment request.
-          type: string
-        deliveryAddress.country:
-          description: |-
-            The delivery address country passed in the payment request.
-
-            Example: NL
-          type: string
-        deliveryAddress.houseNumberOrName:
-          description: The delivery address house number or name passed in the payment request.
-          type: string
-        deliveryAddress.postalCode:
-          description: |-
-            The delivery address postal code passed in the payment request.
-
-            Example: 1011 DJ
-          type: string
-        deliveryAddress.stateOrProvince:
-          description: |-
-            The delivery address state or province passed in the payment request.
-
-            Example: NH
-          type: string
-        deliveryAddress.street:
-          description: The delivery address street passed in the payment request.
           type: string
     ResponseAdditionalDataInstallments:
       properties:
@@ -4088,8 +4120,6 @@ components:
     BasicAuth:
       scheme: basic
       type: http
-source:
-  url: {}
 x-groups:
   - General
   - Modifications

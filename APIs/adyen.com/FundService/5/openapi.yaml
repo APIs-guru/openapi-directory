@@ -8,49 +8,60 @@ info:
     url: https://www.adyen.help/hc/en-us/community/topics
     x-twitter: Adyen
   description: |-
-    The Fund API provides endpoints for managing the funds in the accounts on your platform. These management operations include actions such as the transfer of funds from one account to another, the payout of funds to an account holder, and the retrieval of balances in an account.
+    This API is used for the classic integration. If you are just starting your implementation, refer to our [new integration guide](https://docs.adyen.com/marketplaces-and-platforms) instead.
 
-    For more information, refer to our [documentation](https://docs.adyen.com/platforms).
+    The Fund API provides endpoints for managing the funds in the accounts on your platform. These management operations include, for example, the transfer of funds from one account to another, the payout of funds to an account holder, and the retrieval of balances in an account.
+
+    For more information, refer to our [documentation](https://docs.adyen.com/marketplaces-and-platforms/classic/).
     ## Authentication
-    To connect to the Fund API, you must use basic authentication credentials of your web service user. If you don't have one, please contact the [Adyen Support Team](https://support.adyen.com/hc/en-us/requests/new). Then use its credentials to authenticate your request, for example:
+    Your Adyen contact will provide your API credential and an API key. To connect to the API, add an `X-API-Key` header with the API key as the value, for example:
+
+     ```
+    curl
+    -H "Content-Type: application/json" \
+    -H "X-API-Key: YOUR_API_KEY" \
+    ...
+    ```
+
+    Alternatively, you can use the username and password to connect to the API using basic authentication. For example:
 
     ```
     curl
-    -U "ws@MarketPlace.YourMarketPlace":"YourWsPassword" \
+    -U "ws@MarketPlace.YOUR_PLATFORM_ACCOUNT":"YOUR_WS_PASSWORD" \
     -H "Content-Type: application/json" \
     ...
     ```
-    Note that when going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).
+    When going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).
 
     ## Versioning
-    The Fund API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
+    The Fund API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
 
     For example:
     ```
     https://cal-test.adyen.com/cal/services/Fund/v5/accountHolderBalance
     ```
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
-  title: "Adyen for Platforms: Fund API"
+  title: Fund API
   version: "5"
   x-apisguru-categories:
     - payment
   x-logo:
     url: https://twitter.com/Adyen/profile_image?size=original
   x-origin:
-    - converter:
-        url: https://github.com/mermade/oas-kit
-        version: 7.0.4
-      format: openapi
-      url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/FundService-v5.json
+    - format: openapi
+      url: https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/FundService-v5.json
       version: "3.1"
-  x-preferred: false
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: FundService
+  x-timestamp: 2022-09-27T19:26:20Z
+  x-preferred: false
+tags:
+  - name: General
 paths:
   /accountHolderBalance:
     post:
-      description: "This endpoint is used to retrieve the balance(s) of the accounts of an account holder. An account's balances are on a per-currency basis (i.e., an account may have multiple balances: one per currency)."
+      description: "Returns the account balances of an account holder. An account's balances are organized according by currencies. This mean that an account may have multiple balances: one for each currency."
       operationId: post-accountHolderBalance
       requestBody:
         content:
@@ -67,6 +78,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/AccountHolderBalanceResponse"
           description: OK - the request has succeeded.
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountHolderBalanceResponse"
+          description: Accepted - the request has been accepted for processing, but the processing has not been completed.
         "400":
           content:
             application/json:
@@ -100,14 +117,14 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Retrieve the balance(s) of an account holder.
+      summary: Get the balances of an account holder
       tags:
         - General
       x-groupName: General
       x-sortIndex: 1
   /accountHolderTransactionList:
     post:
-      description: This endpoint is used to retrieve a list of Transactions for an account holder's accounts. The accounts and Transaction Statuses to be included on the list can be specified. Each call will return a maximum of fifty (50) Transactions per account; in order to retrieve the following set of Transactions another call should be made with the 'page' value incremented. Note that Transactions are ordered with most recent first.
+      description: Returns a list of transactions for an account holder's accounts. You can specify the accounts and transaction statuses to be included on the list. The call returns a maximum of 50 transactions for each account. To retrieve all transactions, you must make another call with the 'page' value incremented. Transactions are listed in chronological order, with the most recent transaction first.
       operationId: post-accountHolderTransactionList
       requestBody:
         content:
@@ -126,6 +143,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/AccountHolderTransactionListResponse"
           description: OK - the request has succeeded.
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountHolderTransactionListResponse"
+          description: Accepted - the request has been accepted for processing, but the processing has not been completed.
         "400":
           content:
             application/json:
@@ -159,7 +182,7 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Retrieve a list of transactions.
+      summary: Get a list of transactions
       tags:
         - General
       x-groupName: General
@@ -169,17 +192,23 @@ paths:
       description: |-
         Sends a direct debit request to an account holder's bank account. If the direct debit is successful, the funds are settled in the accounts specified in the split instructions. Adyen sends the result of the direct debit in a [`DIRECT_DEBIT_INITIATED`](https://docs.adyen.com/api-explorer/#/NotificationService/latest/post/DIRECT_DEBIT_INITIATED) notification webhook.
 
-         To learn more about use cases, refer to [Top up accounts](https://docs.adyen.com/platforms/top-up-accounts).
+         To learn more about direct debits, see [Top up accounts](https://docs.adyen.com/marketplaces-and-platforms/classic/top-up-accounts).
       operationId: post-debitAccountHolder
       requestBody:
         content:
           application/json:
+            examples:
+              debit-account-holder:
+                $ref: "#/components/examples/post-debitAccountHolder-debit-account-holder"
             schema:
               $ref: "#/components/schemas/DebitAccountHolderRequest"
       responses:
         "200":
           content:
             application/json:
+              examples:
+                debit-account-holder:
+                  $ref: "#/components/examples/post-debitAccountHolder-debit-account-holder-200"
               schema:
                 $ref: "#/components/schemas/DebitAccountHolderResponse"
           description: OK - the request has succeeded.
@@ -222,14 +251,14 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Send a direct debit request.
+      summary: Send a direct debit request
       tags:
         - General
       x-groupName: General
       x-sortIndex: 8
   /payoutAccountHolder:
     post:
-      description: This endpoint is used to pay out a specified amount from an account to the bank account of the account's account holder.
+      description: Pays out a specified amount from an account to the bank account of account holder.
       operationId: post-payoutAccountHolder
       requestBody:
         content:
@@ -285,14 +314,14 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Disburse a specified amount from an account to the account holder.
+      summary: Pay out from an account to the account holder
       tags:
         - General
       x-groupName: General
       x-sortIndex: 3
   /refundFundsTransfer:
     post:
-      description: "This endpoint is used to refund funds transferred from one account to another. Both accounts must be in the same marketplace, but can have different account holders. "
+      description: "Refunds funds transferred from one account to another. Both accounts must be in the same platform, but can have different account holders. "
       operationId: post-refundFundsTransfer
       requestBody:
         content:
@@ -348,14 +377,14 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Make a refund of the existing transfer funds transfer.
+      summary: Refund a funds transfer
       tags:
         - General
       x-groupName: General
       x-sortIndex: 5
   /refundNotPaidOutTransfers:
     post:
-      description: This endpoint is used to refund all the transactions of an account which have taken place since the most recent payout. This request is on a per-account basis (as opposed to a per-payment basis), so only the portion of the payment which was made to the specified account will be refunded. The commission(s), fee(s), and payment(s) to other account(s), will remain in the accounts to which they were sent as designated by the original payment's split details.
+      description: Refunds all the transactions of an account that have taken place since the most recent payout. This request is on a account basis (as opposed to a payment basis), so only the portion of the payment that was made to the specified account is refunded. The commissions, fees, and payments to other accounts remain in the accounts to which they were sent as designated by the original payment's split details.
       operationId: post-refundNotPaidOutTransfers
       requestBody:
         content:
@@ -411,14 +440,14 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Refund all transactions of an account since the most recent payout.
+      summary: Refund all transactions of an account since the most recent payout
       tags:
         - General
       x-groupName: General
       x-sortIndex: 7
   /setupBeneficiary:
     post:
-      description: This endpoint is used to define a benefactor and a beneficiary relationship between two accounts. At the time of benefactor/beneficiary setup, the funds in the benefactor account are transferred to the beneficiary account, and any further payments to the benefactor account are automatically sent to the beneficiary account. Note that a series of benefactor/beneficiaries may not exceed four (4) beneficiaries and may not have a cycle in it.
+      description: Defines a benefactor and a beneficiary relationship between two accounts. At the time of benefactor/beneficiary setup, the funds in the benefactor account are transferred to the beneficiary account, and any further payments to the benefactor account are automatically sent to the beneficiary account. A series of benefactor/beneficiaries may not exceed four beneficiaries and may not have a cycle in it.
       operationId: post-setupBeneficiary
       requestBody:
         content:
@@ -474,14 +503,14 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Designate an account to be the beneficiary of a separate account and transfer the benefactor's current balance to the beneficiary.
+      summary: Designate a beneficiary account and transfer the benefactor's current balance
       tags:
         - General
       x-groupName: General
       x-sortIndex: 6
   /transferFunds:
     post:
-      description: This endpoint is used to transfer funds from one account to another account. Both accounts must be in the same marketplace, but can have different account holders. The transfer must include a transfer code, which should be determined by the marketplace, in compliance with local regulations.
+      description: Transfers funds from one account to another account. Both accounts must be in the same platform, but can have different account holders. The transfer must include a transfer code, which should be determined by the platform, in compliance with local regulations.
       operationId: post-transferFunds
       requestBody:
         content:
@@ -537,7 +566,7 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Transfer funds from one platform account to another.
+      summary: Transfer funds between platform accounts
       tags:
         - General
       x-groupName: General
@@ -566,6 +595,33 @@ components:
           - PendingCredit
           - Credited
           - Debited
+    post-debitAccountHolder-debit-account-holder:
+      description: Example request to send a direct debit from a bank account
+      summary: Send a bank account direct debit
+      value:
+        accountHolderCode: ACCOUNT_HOLDER_CODE
+        amount:
+          currency: USD
+          value: 6200
+        bankAccountUUID: 000b81aa-ae7e-4492-aa7e-72b2129dce0c
+        description: YOUR_DESCRIPTION
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        splits:
+          - account: "8535516988037431"
+            amount:
+              value: 6000
+            reference: YOUR_SPLIT_REFERENCE_1
+            type: MarketPlace
+          - amount:
+              value: 200
+            reference: YOUR_SPLIT_REFERENCE_2
+            type: Commission
+    post-debitAccountHolder-debit-account-holder-200:
+      description: Example response for requesting a direct debit from a bank account
+      summary: Direct debit request sent
+      value:
+        pspReference: "8816480354727275"
+        submittedAsync: "false"
     post-payoutAccountHolder-oneOff:
       summary: One-off payout
       value:
@@ -679,6 +735,8 @@ components:
           items:
             enum:
               - BalanceNotPaidOutTransfer
+              - BalancePlatformSweep
+              - BalancePlatfromSweepReturned
               - Chargeback
               - ChargebackCorrection
               - ChargebackCorrectionReceived
@@ -715,6 +773,8 @@ components:
               - PendingCredit
               - PendingDebit
               - PendingFundTransfer
+              - ReCredited
+              - ReCreditedReceived
               - SecondChargeback
               - SecondChargebackCorrection
               - SecondChargebackCorrectionReceived
@@ -774,7 +834,7 @@ components:
         accountNumber:
           description: |-
             The bank account number (without separators).
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
+            >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
         accountType:
           description: |-
@@ -782,7 +842,7 @@ components:
             Only applicable to bank accounts held in the USA.
             The permitted values are: `checking`, `savings`.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
+            >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
         bankAccountName:
           description: The name of the bank account.
@@ -805,25 +865,25 @@ components:
         bankBicSwift:
           description: |-
             The bank identifier code.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
+            >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
         bankCity:
           description: |-
             The city in which the bank branch is located.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
+            >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
         bankCode:
           description: |-
             The bank code of the banking institution with which the bank account is registered.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
+            >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
         bankName:
           description: |-
             The name of the banking institution with which the bank account is held.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
+            >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
         branchCode:
           description: |-
@@ -831,82 +891,82 @@ components:
             * United States - Routing number
             * United Kingdom - Sort code
             * Germany - Bankleitzahl
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
+            >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
         checkCode:
           description: |-
             The check code of the bank account.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
+            >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
         countryCode:
           description: |-
             The two-letter country code in which the bank account is registered.
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
+            >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
         currencyCode:
-          description: |-
+          description: |
             The currency in which the bank account deals.
             >The permitted currency codes are defined in ISO-4217 (e.g. 'EUR').
-
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         iban:
           description: |-
             The international bank account number.
             >The IBAN standard is defined in ISO-13616.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
+            >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
         ownerCity:
           description: |-
             The city of residence of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
+            >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
         ownerCountryCode:
           description: |-
             The country code of the country of residence of the bank account owner.
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
+            >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
         ownerDateOfBirth:
-          description: |
+          deprecated: true
+          description: |-
             The date of birth of the bank account owner.
+            The date should be in ISO-8601 format yyyy-mm-dd (e.g. 2000-01-31).
           type: string
         ownerHouseNumberOrName:
           description: |-
             The house name or number of the residence of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
+            >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
         ownerName:
           description: |-
             The name of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
+            >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
         ownerNationality:
           description: |-
             The country code of the country of nationality of the bank account owner.
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
+            >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
         ownerPostalCode:
           description: |-
             The postal code of the residence of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
+            >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
         ownerState:
           description: |-
             The state of residence of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
+            >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
         ownerStreet:
           description: |-
             The street name of the residence of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
+            >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
         primaryAccount:
           description: If set to true, the bank account is a primary account.
@@ -915,14 +975,14 @@ components:
           description: |-
             The tax ID number.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
+            >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
         urlForVerification:
           description: |-
             The URL to be used for bank account verification.
             This may be generated on bank account creation.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
+            >Refer to [Required information](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-process/required-information) for details on field requirements.
           type: string
     DebitAccountHolderRequest:
       properties:
@@ -1027,6 +1087,10 @@ components:
             - accountStatus
             - accountType
             - address
+            - balanceAccount
+            - balanceAccountActive
+            - balanceAccountCode
+            - balanceAccountId
             - bankAccount
             - bankAccountCode
             - bankAccountName
@@ -1051,6 +1115,7 @@ components:
             - description
             - destinationAccountCode
             - document
+            - documentContent
             - documentExpirationDate
             - documentIssuerCountry
             - documentIssuerState
@@ -1060,6 +1125,7 @@ components:
             - doingBusinessAs
             - drivingLicence
             - drivingLicenceBack
+            - drivingLicenceFront
             - drivingLicense
             - email
             - firstName
@@ -1075,8 +1141,10 @@ components:
             - idNumber
             - identityDocument
             - individualDetails
+            - infix
             - jobTitle
             - lastName
+            - lastReviewDate
             - legalArrangement
             - legalArrangementCode
             - legalArrangementEntity
@@ -1092,8 +1160,10 @@ components:
             - legalBusinessName
             - legalEntity
             - legalEntityType
+            - logo
             - merchantAccount
             - merchantCategoryCode
+            - merchantHouseNumber
             - merchantReference
             - microDeposit
             - name
@@ -1101,6 +1171,7 @@ components:
             - originalReference
             - ownerCity
             - ownerCountryCode
+            - ownerDateOfBirth
             - ownerHouseNumberOrName
             - ownerName
             - ownerPostalCode
@@ -1183,7 +1254,11 @@ components:
           type: string
         amount:
           $ref: "#/components/schemas/Amount"
-          description: The amount to pay out.
+          description: |-
+            An object containing the currency and value of the payout.
+            If the account has multiple currencies, specify the currency to be used.
+            If the `bankAccountUUID` is provided in the request, the currency supported by the bank is used.
+            If the `payoutMethodCode` is provided in the request, the specified payout method is selected.
         bankAccountUUID:
           description: |-
             The unique ID of the Bank Account held by the Account Holder to which the payout is to be made.
@@ -1191,9 +1266,9 @@ components:
           type: string
         description:
           description: |-
-            A description of the payout. Maximum 35 characters.
+            A description of the payout. Maximum 200 characters.
             Allowed: **abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/?:().,'+ ";**
-          maxLength: 35
+          maxLength: 200
           type: string
         merchantReference:
           description: A value that can be supplied at the discretion of the executing user in order to link multiple transactions to one another.
@@ -1217,7 +1292,6 @@ components:
       required:
         - accountHolderCode
         - accountCode
-        - amount
     PayoutAccountHolderResponse:
       properties:
         bankAccountUUID:
@@ -1378,13 +1452,14 @@ components:
         type:
           description: |-
             The type of split.
-            Possible values: **Default**, **PaymentFee**, **VAT**, **Commission**, **MarketPlace**, **BalanceAccount**.
+            Possible values: **Default**, **PaymentFee**, **VAT**, **Commission**, **MarketPlace**, **BalanceAccount**, **Remainder**.
           enum:
             - BalanceAccount
             - Commission
             - Default
             - MarketPlace
             - PaymentFee
+            - Remainder
             - VAT
             - Verification
           type: string
@@ -1460,6 +1535,8 @@ components:
             >Permitted values: `PendingCredit`, `CreditFailed`, `CreditClosed`, `CreditSuspended`, `Credited`, `Converted`, `PendingDebit`, `DebitFailed`, `Debited`, `DebitReversedReceived`, `DebitedReversed`, `ChargebackReceived`, `Chargeback`, `ChargebackReversedReceived`, `ChargebackReversed`, `Payout`, `PayoutReversed`, `FundTransfer`, `PendingFundTransfer`, `ManualCorrected`.
           enum:
             - BalanceNotPaidOutTransfer
+            - BalancePlatformSweep
+            - BalancePlatfromSweepReturned
             - Chargeback
             - ChargebackCorrection
             - ChargebackCorrectionReceived
@@ -1496,6 +1573,8 @@ components:
             - PendingCredit
             - PendingDebit
             - PendingFundTransfer
+            - ReCredited
+            - ReCreditedReceived
             - SecondChargeback
             - SecondChargebackCorrection
             - SecondChargebackCorrectionReceived
@@ -1575,3 +1654,4 @@ components:
       type: http
 x-groups:
   - General
+  - Migration

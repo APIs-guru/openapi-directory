@@ -8,29 +8,40 @@ info:
     url: https://www.adyen.help/hc/en-us/community/topics
     x-twitter: Adyen
   description: |-
-    The Notification Configuration API provides endpoints for setting up and testing notifications that inform you of events on your platform, for example when a KYC check or a payout has been completed.
+    This API is used for the classic integration. If you are just starting your implementation, refer to our [new integration guide](https://docs.adyen.com/marketplaces-and-platforms) instead.
 
-    For more information, refer to our [documentation](https://docs.adyen.com/platforms/notifications).
+    The Notification Configuration API provides endpoints for setting up and testing notifications that inform you of events on your platform, for example when a verification check or a payout has been completed.
+
+    For more information, refer to our [documentation](https://docs.adyen.com/marketplaces-and-platforms/classic/notifications).
     ## Authentication
-    To connect to the Notification Configuration API, you must use basic authentication credentials of your web service user. If you don't have one, contact our [Adyen Support Team](https://support.adyen.com/hc/en-us/requests/new). Then use its credentials to authenticate your request, for example:
+    Your Adyen contact will provide your API credential and an API key. To connect to the API, add an `X-API-Key` header with the API key as the value, for example:
+
+     ```
+    curl
+    -H "Content-Type: application/json" \
+    -H "X-API-Key: YOUR_API_KEY" \
+    ...
+    ```
+
+    Alternatively, you can use the username and password to connect to the API using basic authentication. For example:
 
     ```
     curl
-    -U "ws@MarketPlace.YourMarketPlace":"YourWsPassword" \
+    -U "ws@MarketPlace.YOUR_PLATFORM_ACCOUNT":"YOUR_WS_PASSWORD" \
     -H "Content-Type: application/json" \
     ...
     ```
-    Note that when going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).
+    When going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).
 
     ## Versioning
-    The Notification Configuration API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
+    The Notification Configuration API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
 
     For example:
     ```
     https://cal-test.adyen.com/cal/services/Notification/v2/createNotificationConfiguration
     ```
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
-  title: "Adyen for Platforms: Notification Configuration API"
+  title: Notification Configuration API
   version: "2"
   x-apisguru-categories:
     - payment
@@ -38,12 +49,15 @@ info:
     url: https://twitter.com/Adyen/profile_image?size=original
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/NotificationConfigurationService-v2.json
+      url: https://raw.githubusercontent.com/Adyen/adyen-openapi/main/json/NotificationConfigurationService-v2.json
       version: "3.1"
-  x-preferred: false
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: NotificationConfigurationService
+  x-timestamp: 2022-10-03T13:24:04Z
+  x-preferred: false
+tags:
+  - name: General
 paths:
   /createNotificationConfiguration:
     post:
@@ -100,24 +114,30 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Subscribe to notifications.
+      summary: Subscribe to notifications
       tags:
         - General
       x-groupName: General
       x-sortIndex: 1
   /deleteNotificationConfigurations:
     post:
-      description: This endpoint is used to delete an existing notification subscription configuration. After the subscription is deleted, no further event notifications will be sent to the URL that was in the subscription.
+      description: Deletes an existing notification subscription configuration. After the subscription is deleted, no further event notifications will be sent to the URL defined in the subscription.
       operationId: post-deleteNotificationConfigurations
       requestBody:
         content:
           application/json:
+            examples:
+              basic:
+                $ref: "#/components/examples/post-deleteNotificationConfigurations-basic"
             schema:
               $ref: "#/components/schemas/DeleteNotificationConfigurationRequest"
       responses:
         "200":
           content:
             application/json:
+              examples:
+                basic:
+                  $ref: "#/components/examples/post-deleteNotificationConfigurations-basic-200"
               schema:
                 $ref: "#/components/schemas/GenericResponse"
           description: OK - the request has succeeded.
@@ -154,24 +174,30 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Delete an existing notification subscription configuration.
+      summary: Delete a notification subscription configuration
       tags:
         - General
       x-groupName: General
       x-sortIndex: 6
   /getNotificationConfiguration:
     post:
-      description: This endpoint is used to retrieve the details of the configuration of a notification subscription.
+      description: Returns the details of the configuration of a notification subscription.
       operationId: post-getNotificationConfiguration
       requestBody:
         content:
           application/json:
+            examples:
+              basic:
+                $ref: "#/components/examples/post-getNotificationConfiguration-basic"
             schema:
               $ref: "#/components/schemas/GetNotificationConfigurationRequest"
       responses:
         "200":
           content:
             application/json:
+              examples:
+                basic:
+                  $ref: "#/components/examples/post-getNotificationConfiguration-basic-200"
               schema:
                 $ref: "#/components/schemas/GetNotificationConfigurationResponse"
           description: OK - the request has succeeded.
@@ -208,24 +234,30 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Retrieve an existing notification subscription configuration.
+      summary: Get a notification subscription configuration
       tags:
         - General
       x-groupName: General
       x-sortIndex: 2
   /getNotificationConfigurationList:
     post:
-      description: This endpoint is used to retrieve the details of the configurations of all of the notification subscriptions in the marketplace of the executing user.
+      description: Returns the details of the configurations of all of the notification subscriptions in the platform of the executing user.
       operationId: post-getNotificationConfigurationList
       requestBody:
         content:
           application/json:
+            examples:
+              basic:
+                $ref: "#/components/examples/post-getNotificationConfigurationList-basic"
             schema:
               $ref: "#/components/schemas/EmptyRequest"
       responses:
         "200":
           content:
             application/json:
+              examples:
+                basic:
+                  $ref: "#/components/examples/post-getNotificationConfigurationList-basic-200"
               schema:
                 $ref: "#/components/schemas/GetNotificationConfigurationListResponse"
           description: OK - the request has succeeded.
@@ -262,24 +294,30 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Retrieve a list of existing notification subscription configurations.
+      summary: Get a list of notification subscription configurations
       tags:
         - General
       x-groupName: General
       x-sortIndex: 3
   /testNotificationConfiguration:
     post:
-      description: This endpoint is used to test an existing notification subscription configuration. For each event type specified, a test notification will be generated and sent to the URL configured in the subscription specified.
+      description: Tests an existing notification subscription configuration. For each event type specified, a test notification will be generated and sent to the URL configured in the subscription specified.
       operationId: post-testNotificationConfiguration
       requestBody:
         content:
           application/json:
+            examples:
+              basic:
+                $ref: "#/components/examples/post-testNotificationConfiguration-basic"
             schema:
               $ref: "#/components/schemas/TestNotificationConfigurationRequest"
       responses:
         "200":
           content:
             application/json:
+              examples:
+                basic:
+                  $ref: "#/components/examples/post-testNotificationConfiguration-basic-200"
               schema:
                 $ref: "#/components/schemas/TestNotificationConfigurationResponse"
           description: OK - the request has succeeded.
@@ -316,14 +354,14 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Test an existing notification configuration.
+      summary: Test a notification configuration
       tags:
         - General
       x-groupName: General
       x-sortIndex: 4
   /updateNotificationConfiguration:
     post:
-      description: This endpoint is used to update an existing notification subscription configuration. If updating the event types, all event types desired must be provided, otherwise the previous event type configuration will be overwritten.
+      description: Updates an existing notification subscription configuration. If you are updating the event types, you must provide all event types, otherwise the previous event type configuration will be overwritten.
       operationId: post-updateNotificationConfiguration
       requestBody:
         content:
@@ -376,7 +414,7 @@ paths:
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Update an existing notification subscription configuration.
+      summary: Update a notification subscription configuration
       tags:
         - General
       x-groupName: General
@@ -416,6 +454,103 @@ components:
           sslProtocol: SSLInsecureCiphers
         pspReference: "8616178952143018"
         submittedAsync: "false"
+    post-deleteNotificationConfigurations-basic:
+      description: Deletes an existing notification subscription configuration
+      summary: Delete a notification configuration
+      value:
+        notificationIds:
+          - 27891
+    post-deleteNotificationConfigurations-basic-200:
+      description: Example response of deleting a notification configuration
+      summary: Delete a notification configuration
+      value:
+        pspReference: "8516480472498802"
+        submittedAsync: "false"
+    post-getNotificationConfiguration-basic:
+      description: Returns the details of the configuration of a notification subscription
+      summary: Get a notification configuration
+      value:
+        notificationId: 21259
+    post-getNotificationConfiguration-basic-200:
+      description: Example response with a notification configuration
+      summary: Get a notification configuration
+      value:
+        configurationDetails:
+          active: "true"
+          apiVersion: 4
+          description: test123
+          eventConfigs:
+            - NotificationEventConfiguration:
+                eventType: ACCOUNT_HOLDER_VERIFICATION
+                includeMode: INCLUDE
+          messageFormat: SOAP
+          notificationId: 50061
+          notifyURL: https://www.adyen.com/notification-handler
+          sendActionHeader: "true"
+          sslProtocol: SSLInsecureCiphers
+        pspReference: "8516480418110057"
+        submittedAsync: "false"
+    post-getNotificationConfigurationList-basic:
+      description: Returns the details of the configurations of all of the notification subscriptions in the platform of the executing user.
+      summary: Get a list of configurations
+      value: {}
+    post-getNotificationConfigurationList-basic-200:
+      description: Example response with a list of notification configurations for the executing user
+      summary: Get a list of configuration
+      value:
+        configurations:
+          - NotificationConfigurationDetails:
+              active: "true"
+              description: Unique description 12223
+              eventConfigs:
+                - NotificationEventConfiguration:
+                    eventType: ACCOUNT_HOLDER_VERIFICATION
+                    includeMode: INCLUDE
+              messageFormat: JSON
+              notificationId: 27893
+              notifyURL: https://www.adyen.com/notification-handler
+              sendActionHeader: "false"
+              sslProtocol: SSLInsecureCiphers
+          - NotificationConfigurationDetails:
+              active: "true"
+              description: just testing things
+              eventConfigs:
+                - NotificationEventConfiguration:
+                    eventType: ACCOUNT_HOLDER_VERIFICATION
+                    includeMode: INCLUDE
+              messageFormat: JSON
+              notificationId: 25032
+              notifyURL: https://www.adyen.com/notification-handler
+              sendActionHeader: "false"
+              sslProtocol: SSLInsecureCiphers
+        pspReference: "8516480434183690"
+        submittedAsync: "false"
+    post-testNotificationConfiguration-basic:
+      description: Returns the test result for a notification subscription
+      summary: Test a notification configuration
+      value:
+        eventTypes:
+          - ACCOUNT_HOLDER_VERIFICATION
+        notificationId: 25032
+    post-testNotificationConfiguration-basic-200:
+      description: Example response of a test notification configuration request
+      summary: Test a notification configuration
+      value:
+        errorMessages:
+          - The required string "[accepted]" is not in all the results
+        eventTypes:
+          - ACCOUNT_HOLDER_VERIFICATION
+        exchangeMessages:
+          - messageCode: Number
+            messageDescription: "1"
+          - messageCode: Title
+            messageDescription: "Test 1: 8616480452462678"
+        notificationId: 25032
+        okMessages:
+          - ...
+          - "ResponseTime_ms: 262"
+          - "ResponseCode: 404"
+        pspReference: "8616480452462678"
     post-updateNotificationConfiguration-basic:
       summary: Update notification configurations
       value:
@@ -590,15 +725,10 @@ components:
         sslProtocol:
           description: |-
             The SSL protocol employed by the endpoint.
-            >Permitted values: `SSL`, `SSLInsecureCiphers`, `TLS`, `TLSv10`, `TLSv10InsecureCiphers`, `TLSv11`, `TLSv12`.
+            >Permitted values: `TLSv12`, `TLSv13`.
           enum:
-            - SSL
-            - SSLInsecureCiphers
-            - TLS
-            - TLSv10
-            - TLSv10InsecureCiphers
-            - TLSv11
             - TLSv12
+            - TLSv13
           type: string
       required:
         - eventConfigs
@@ -616,6 +746,7 @@ components:
             - ACCOUNT_FUNDS_BELOW_THRESHOLD
             - ACCOUNT_HOLDER_CREATED
             - ACCOUNT_HOLDER_LIMIT_REACHED
+            - ACCOUNT_HOLDER_MIGRATED
             - ACCOUNT_HOLDER_PAYOUT
             - ACCOUNT_HOLDER_STATUS_CHANGE
             - ACCOUNT_HOLDER_STORE_STATUS_CHANGE
@@ -627,9 +758,11 @@ components:
             - COMPENSATE_NEGATIVE_BALANCE
             - DIRECT_DEBIT_INITIATED
             - PAYMENT_FAILURE
+            - PENDING_CREDIT
             - REFUND_FUNDS_TRANSFER
             - REPORT_AVAILABLE
             - SCHEDULED_REFUNDS
+            - SCORE_SIGNAL_TRIGGERED
             - TRANSFER_FUNDS
             - TRANSFER_NOT_PAIDOUT_TRANSFERS
           type: string
@@ -677,6 +810,7 @@ components:
               - ACCOUNT_FUNDS_BELOW_THRESHOLD
               - ACCOUNT_HOLDER_CREATED
               - ACCOUNT_HOLDER_LIMIT_REACHED
+              - ACCOUNT_HOLDER_MIGRATED
               - ACCOUNT_HOLDER_PAYOUT
               - ACCOUNT_HOLDER_STATUS_CHANGE
               - ACCOUNT_HOLDER_STORE_STATUS_CHANGE
@@ -688,9 +822,11 @@ components:
               - COMPENSATE_NEGATIVE_BALANCE
               - DIRECT_DEBIT_INITIATED
               - PAYMENT_FAILURE
+              - PENDING_CREDIT
               - REFUND_FUNDS_TRANSFER
               - REPORT_AVAILABLE
               - SCHEDULED_REFUNDS
+              - SCORE_SIGNAL_TRIGGERED
               - TRANSFER_FUNDS
               - TRANSFER_NOT_PAIDOUT_TRANSFERS
             type: string
@@ -719,6 +855,7 @@ components:
               - ACCOUNT_FUNDS_BELOW_THRESHOLD
               - ACCOUNT_HOLDER_CREATED
               - ACCOUNT_HOLDER_LIMIT_REACHED
+              - ACCOUNT_HOLDER_MIGRATED
               - ACCOUNT_HOLDER_PAYOUT
               - ACCOUNT_HOLDER_STATUS_CHANGE
               - ACCOUNT_HOLDER_STORE_STATUS_CHANGE
@@ -730,9 +867,11 @@ components:
               - COMPENSATE_NEGATIVE_BALANCE
               - DIRECT_DEBIT_INITIATED
               - PAYMENT_FAILURE
+              - PENDING_CREDIT
               - REFUND_FUNDS_TRANSFER
               - REPORT_AVAILABLE
               - SCHEDULED_REFUNDS
+              - SCORE_SIGNAL_TRIGGERED
               - TRANSFER_FUNDS
               - TRANSFER_NOT_PAIDOUT_TRANSFERS
             type: string
