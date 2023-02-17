@@ -55,6 +55,8 @@ You can see this in the `x-origin` property within each [openapi.yaml](https://g
 We run our update script at least weekly and automatically revalidate before committing.
 If you see some APIs are not updated for more than 2 weeks please open [an issue](https://github.com/APIs-guru/openapi-directory/issues/new).
 
+[@seriousme](https://github.com/seriousme) kindly runs a backup validation process based on the official OpenAPI-Specification [JSON Schemas](https://github.com/OAI/OpenAPI-Specification/tree/main/schemas) [here](https://github.com/seriousme/openapi-schema-validator/blob/master/test/realworld/failed.md#results-of-real-world-testing).
+
 Own-Label API Directory
 -----------------------
 
