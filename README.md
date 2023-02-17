@@ -89,6 +89,7 @@ Existing integrations
 Also used as test suite in the following projects:
  - [ReDoc](https://github.com/Redocly/redoc) - **OpenAPI-generated API Reference Documentation**
  - [swagger-parser](https://github.com/BigstickCarpet/swagger-parser) - OpenAPI parser and validator for Node and browsers
+ - [OpenAPI-schema-validator](https://github.com/seriousme/openapi-schema-validator)
  - [SwaggerProvider](https://github.com/sergey-tihon/SwaggerProvider) - F# Type Provider for Swagger
  - [ardoq-swagger-addon](https://github.com/ardoq/ardoq-swagger-addon) - Ardoq OpenAPI addon
  - [swagvali](https://github.com/subeeshcbabu/swagvali/) - Module to build validators for OpenAPI Request parameters and Response objects
