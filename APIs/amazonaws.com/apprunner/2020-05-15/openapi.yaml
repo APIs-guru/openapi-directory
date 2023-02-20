@@ -3035,7 +3035,6 @@ components:
     ASConfigMaxSize:
       type: integer
       minimum: 1
-      maximum: 25
     ASConfigMinSize:
       type: integer
       minimum: 1
@@ -3959,6 +3958,7 @@ components:
         - PAUSE_SERVICE
         - RESUME_SERVICE
         - DELETE_SERVICE
+        - UPDATE_SERVICE
     OperationSummary:
       type: object
       properties:
