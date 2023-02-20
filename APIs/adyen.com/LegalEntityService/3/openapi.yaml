@@ -45,7 +45,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: LegalEntityService
-  x-timestamp: 2023-02-16T13:58:16Z
+  x-timestamp: 2023-02-20T13:23:23Z
 tags:
   - name: Legal entities
   - name: Hosted Onboarding
@@ -2495,8 +2495,8 @@ components:
     Attachment:
       properties:
         content:
+          contentEncoding: base64
           description: The document in Base64-encoded string format.
-          format: byte
           type: string
         contentType:
           deprecated: true
@@ -2582,9 +2582,9 @@ components:
           x-addedInVersion: "3"
         salesChannels:
           description: |-
-            A list of channels where goods or services are sold. You cannot combine point of sale and ecommerce in one business line.
+            A list of channels where goods or services are sold.
 
-            Possible values and combinations:
+            Possible values:
 
             - For point of sale: **pos** and **posMoto**
 
@@ -2592,7 +2592,7 @@ components:
 
             - For Pay by Link: **payByLink**
 
-            Required only in combination with the `service` **paymentProcessing.
+            Required only in combination with the `service` **paymentProcessing**.
           items:
             type: string
           type: array
@@ -2639,9 +2639,9 @@ components:
           type: string
         salesChannels:
           description: |-
-            A list of channels where goods or services are sold. You cannot combine point of sale and ecommerce in one business line.
+            A list of channels where goods or services are sold.
 
-            Possible values and combinations:
+            Possible values:
 
             - For point of sale: **pos** and **posMoto**
 
@@ -2649,7 +2649,7 @@ components:
 
             - For Pay by Link: **payByLink**
 
-            Required only in combination with the `service` **paymentProcessing.
+            Required only in combination with the `service` **paymentProcessing**.
           items:
             type: string
           type: array
@@ -2695,9 +2695,9 @@ components:
           type: string
         salesChannels:
           description: |-
-            A list of channels where goods or services are sold. You cannot combine point of sale and ecommerce in one business line.
+            A list of channels where goods or services are sold.
 
-            Possible values and combinations:
+            Possible values:
 
             - For point of sale: **pos** and **posMoto**
 
@@ -2705,7 +2705,7 @@ components:
 
             - For Pay by Link: **payByLink**
 
-            Required only in combination with the `service` **paymentProcessing.
+            Required only in combination with the `service` **paymentProcessing**.
           items:
             type: string
           type: array
@@ -2966,7 +2966,7 @@ components:
             * For **individual**, the `type` values can be **driversLicense**, **identityCard**, **nationalIdNumber**, or **passport**.
 
             When uploading photo IDs:
-            * For **individual**, the `type` values can be **identityCard**, **driversLicense**, or **passport**.
+            * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, or **nationalIdNumber**.
 
             When uploading other documents:
             * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, or **proofOfIndustry**. 
@@ -3047,8 +3047,8 @@ components:
     GetTermsOfServiceDocumentResponse:
       properties:
         document:
+          contentEncoding: base64
           description: The Terms of Service document in Base64-encoded format.
-          format: byte
           type: string
         id:
           description: The unique identifier of the legal entity.
@@ -3132,7 +3132,7 @@ components:
             * For **individual**, the `type` values can be **driversLicense**, **identityCard**, **nationalIdNumber**, or **passport**.
 
             When uploading photo IDs:
-            * For **individual**, the `type` values can be **identityCard**, **driversLicense**, or **passport**.
+            * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, or **nationalIdNumber**.
 
             When uploading other documents:
             * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, or **proofOfIndustry**. 

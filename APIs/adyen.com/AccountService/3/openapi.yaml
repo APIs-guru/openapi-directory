@@ -2639,8 +2639,8 @@ components:
     GetTaxFormResponse:
       properties:
         content:
+          contentEncoding: base64
           description: The content of the tax form in the Base64 binary format.
-          format: byte
           type: string
         contentType:
           description: The content type of the tax form.
@@ -3277,11 +3277,11 @@ components:
             >Required if the document is being submitted in order to verify a bank account.
           type: string
         documentContent:
+          contentEncoding: base64
           description: |-
             The content of the document, in Base64-encoded string format.
 
             To learn about document requirements, refer to [Verification checks](https://docs.adyen.com/marketplaces-and-platforms/classic/verification-checks).
-          format: byte
           type: string
         documentDetail:
           $ref: "#/components/schemas/DocumentDetail"

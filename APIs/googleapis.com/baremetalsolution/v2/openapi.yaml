@@ -436,7 +436,7 @@ paths:
       description: RenameInstance sets a new name for an instance.
       operationId: baremetalsolution.projects.locations.instances.rename
       parameters:
-        - description: "Immutable. The resource name of this `Instance`. Resource names are schemeless URIs that follow the conventions in https://cloud.google.com/apis/design/resource_names. Format: `projects/{project}/locations/{location}/instances/{instance}`"
+        - description: "Required. The `name` field is used to identify the instance. Format: projects/{project}/locations/{location}/instances/{instance}"
           in: path
           name: name
           required: true
@@ -452,7 +452,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/Instance"
           description: Successful response
       security:
         - Oauth2:
@@ -2314,10 +2314,7 @@ components:
     RenameInstanceRequest:
       description: Message requesting rename of a server.
       properties:
-        instance:
-          $ref: "#/components/schemas/Instance"
-          description: "Required. The `name` field is used to identify the instance. Format: projects/{project}/locations/{location}/instances/{instance}"
-        name:
+        newName:
           description: "Required. The new `name` of the instance. Format: {instancename}"
           type: string
       type: object

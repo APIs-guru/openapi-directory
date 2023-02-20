@@ -525,8 +525,8 @@ components:
           description: The version of the mobile 3D Secure 2 SDK. For the possible values, refer to the versions in [Adyen 3DS2 Android](https://github.com/Adyen/adyen-3ds2-android/releases) and [Adyen 3DS2 iOS](https://github.com/Adyen/adyen-3ds2-ios/releases).
           type: string
         publicKey:
+          contentEncoding: base64
           description: Public key. The 3D Secure 2 SDK encrypts the device information by using the DS public key.
-          format: byte
           type: string
     MerchantDetails:
       properties:

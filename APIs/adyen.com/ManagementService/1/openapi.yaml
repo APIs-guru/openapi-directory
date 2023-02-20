@@ -14085,7 +14085,8 @@ components:
           description: References to resources linked to the allowed origin.
         domain:
           description: Domain of the allowed origin.
-          example: https://adyen.com
+          examples:
+            - https://adyen.com
           type: string
         id:
           description: Unique identifier of the allowed origin.
@@ -14513,7 +14514,8 @@ components:
           description: References to resources linked to the allowed origin.
         domain:
           description: Domain of the allowed origin.
-          example: https://adyen.com
+          examples:
+            - https://adyen.com
           type: string
         id:
           description: Unique identifier of the allowed origin.
@@ -14764,7 +14766,8 @@ components:
             - HTTP
             - JSON
             - SOAP
-          example: SOAP
+          examples:
+            - SOAP
           type: string
         description:
           description: Your description for this webhook configuration.
@@ -14831,7 +14834,8 @@ components:
             - TLSV1_2
             - TLSV1_3
             - TLSV1_INSECURE_CIPHERS
-          example: TLSv1.2
+          examples:
+            - TLSv1.2
           type: string
         type:
           description: |-
@@ -14852,7 +14856,8 @@ components:
           type: string
         url:
           description: Public URL where webhooks will be sent, for example **https://www.domain.com/webhook-endpoint**.
-          example: http://www.adyen.com
+          examples:
+            - http://www.adyen.com
           type: string
         username:
           description: Username to access the webhook URL.
@@ -14990,7 +14995,8 @@ components:
             - HTTP
             - JSON
             - SOAP
-          example: SOAP
+          examples:
+            - SOAP
           type: string
         description:
           description: Your description for this webhook configuration.
@@ -15034,7 +15040,8 @@ components:
             - TLSV1_2
             - TLSV1_3
             - TLSV1_INSECURE_CIPHERS
-          example: TLSv1.2
+          examples:
+            - TLSv1.2
           type: string
         type:
           description: |-
@@ -15055,7 +15062,8 @@ components:
           type: string
         url:
           description: Public URL where webhooks will be sent, for example **https://www.domain.com/webhook-endpoint**.
-          example: http://www.adyen.com
+          examples:
+            - http://www.adyen.com
           type: string
         username:
           description: Username to access the webhook URL.
@@ -17108,7 +17116,8 @@ components:
             The HTTP response code for your server's response to the test webhook.
 
             You can use the value of this field together with the the [`output`](https://docs.adyen.com/api-explorer/#/ManagementService/v1/post/merchants/{merchantId}/webhooks/{id}/test__resParam_data-output) field value to troubleshoot failed test webhooks.
-          example: "200"
+          examples:
+            - "200"
           type: string
         responseTime:
           description: The time between sending the test webhook and receiving the response from your server. You can use it as an indication of how long your server takes to process a webhook notification. Measured in milliseconds, for example **304 ms**.
@@ -17311,7 +17320,8 @@ components:
             - HTTP
             - JSON
             - SOAP
-          example: SOAP
+          examples:
+            - SOAP
           type: string
         description:
           description: Your description for this webhook configuration.
@@ -17378,11 +17388,13 @@ components:
             - TLSV1_2
             - TLSV1_3
             - TLSV1_INSECURE_CIPHERS
-          example: TLSv1.2
+          examples:
+            - TLSv1.2
           type: string
         url:
           description: Public URL where webhooks will be sent, for example **https://www.domain.com/webhook-endpoint**.
-          example: http://www.adyen.com
+          examples:
+            - http://www.adyen.com
           type: string
         username:
           description: Username to access the webhook URL.
@@ -17461,7 +17473,8 @@ components:
             - HTTP
             - JSON
             - SOAP
-          example: SOAP
+          examples:
+            - SOAP
           type: string
         description:
           description: Your description for this webhook configuration.
@@ -17505,11 +17518,13 @@ components:
             - TLSV1_2
             - TLSV1_3
             - TLSV1_INSECURE_CIPHERS
-          example: TLSv1.2
+          examples:
+            - TLSv1.2
           type: string
         url:
           description: Public URL where webhooks will be sent, for example **https://www.domain.com/webhook-endpoint**.
-          example: http://www.adyen.com
+          examples:
+            - http://www.adyen.com
           type: string
         username:
           description: Username to access the webhook URL.
@@ -17672,7 +17687,8 @@ components:
             - HTTP
             - JSON
             - SOAP
-          example: SOAP
+          examples:
+            - SOAP
           type: string
         description:
           description: Your description for this webhook configuration.
@@ -17743,7 +17759,8 @@ components:
             - TLSV1_2
             - TLSV1_3
             - TLSV1_INSECURE_CIPHERS
-          example: TLSv1.2
+          examples:
+            - TLSv1.2
           type: string
         type:
           description: |-
@@ -17764,7 +17781,8 @@ components:
           type: string
         url:
           description: Public URL where webhooks will be sent, for example **https://www.domain.com/webhook-endpoint**.
-          example: http://www.adyen.com
+          examples:
+            - http://www.adyen.com
           type: string
         username:
           description: Username to access the webhook URL.

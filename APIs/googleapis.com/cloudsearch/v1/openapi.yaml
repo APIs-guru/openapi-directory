@@ -3405,8 +3405,12 @@ components:
         name:
           type: string
         numMembers:
+          description: Deprecated. Use segmented_membership_counts instead which also includes other counts such as rosters.
           format: int32
           type: integer
+        segmentedMembershipCounts:
+          $ref: "#/components/schemas/AppsDynamiteSharedSegmentedMembershipCounts"
+          description: Member counts object with types of members and their respective counts.
         userMembershipState:
           description: searching user's membership state in this space
           enum:
@@ -3535,6 +3539,9 @@ components:
           items:
             $ref: "#/components/schemas/AppsDynamiteStorageActionActionParameter"
           type: array
+        persistValues:
+          description: Indicates whether form values persist after the action. The default value is `false`. If `true`, form values remain after the action is triggered. When using [LoadIndicator.NONE](workspace/add-ons/reference/rpc/google.apps.card.v1#loadindicator) for actions, `persist_values` = `true`is recommended, as it ensures that any changes made by the user after form or on change actions are sent to the server are not overwritten by the response. If `false`, the form values are cleared when the action is triggered. When `persist_values` is set to `false`, it is strongly recommended that the card use [LoadIndicator.SPINNER](workspace/add-ons/reference/rpc/google.apps.card.v1#loadindicator) for all actions, as this locks the UI to ensure no changes are made by the user while the action is being processed.
+          type: boolean
       type: object
     AppsDynamiteStorageActionActionParameter:
       description: "List of string parameters to supply when the action method is invoked. For example, consider three snooze buttons: snooze now, snooze 1 day, snooze next week. You might use action method = snooze(), passing the snooze type and snooze time in the list of string parameters."
@@ -4031,6 +4038,7 @@ components:
             - RADIO_BUTTON
             - SWITCH
             - DROPDOWN
+            - MULTI_SELECT
           type: string
       type: object
     AppsDynamiteStorageSelectionInputSelectionItem:
@@ -9126,6 +9134,11 @@ components:
           items:
             $ref: "#/components/schemas/MultiKey"
           type: array
+        wonderCardMappings:
+          description: Value of coproc's message delete history record extension that exports /wonder/message_mapping/{vertical} attribute of deleted messages which have smartmail label (eg. ^cob_sm_invoice, etc).
+          items:
+            $ref: "#/components/schemas/WonderCardDelete"
+          type: array
       type: object
     MessageId:
       description: Primary key for Message resource.
@@ -12261,6 +12274,12 @@ components:
             - MENTION_ALL
             - FAILED_TO_ADD
           type: string
+        userMentionError:
+          description: "Specific reason for the user mention failing, for fine-grained processing by clients (i.e. specific error message for space limit exceeded case) IMPORTANT: Set this only for FAILED_TO_ADD case."
+          enum:
+            - USER_MENTION_ERROR_UNSPECIFIED
+            - MEMBERSHIP_LIMIT_EXCEEDED
+          type: string
       type: object
     VPCSettings:
       properties:
@@ -12408,6 +12427,28 @@ components:
         textParagraph:
           $ref: "#/components/schemas/TextParagraph"
           description: Read-only Widgets
+      type: object
+    WonderCardDelete:
+      description: Message delete history record extension that exports /wonder/message_mapping/{vertical} attribute of deleted messages which have any smartmail label (eg. ^cob_sm_invoice). go/how-dd-card-deletion
+      properties:
+        messageMappings:
+          additionalProperties:
+            $ref: "#/components/schemas/WonderMessageMapping"
+          description: Contains <{@code WonderCardType} enum value, value of /wonder/message_mapping/{vertical} attribute of deleted message> pairs.
+          type: object
+        msgId:
+          description: Message ID of the original deleted message
+          format: uint64
+          type: string
+      type: object
+    WonderMessageMapping:
+      description: "Card mapping attached to original message as an attribute stored at /wonder/message_mapping/{vertical} Next ID: 2"
+      properties:
+        wonderCardMessageId:
+          description: List of wonder card (client-generated) message IDs generated based on the original message.
+          items:
+            type: string
+          type: array
       type: object
     WrappedResourceKey:
       description: A wrapper around a raw resource key. The secret should never be logged, and this proto annotates those secret fields to ensure that they are not. Clients are encouraged to use this proto rather than defining their own, to ensure that secrets are correctly annotated.
