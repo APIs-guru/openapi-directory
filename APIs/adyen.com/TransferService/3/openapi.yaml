@@ -55,7 +55,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: TransferService
-  x-timestamp: 2023-02-09T22:20:55Z
+  x-timestamp: 2023-02-20T18:21:55Z
 tags:
   - name: Transactions
   - name: Transfers
@@ -623,6 +623,7 @@ components:
         - type
         - accountNumber
         - bsbCode
+      type: object
     AdditionalBankIdentification:
       properties:
         code:
@@ -640,6 +641,7 @@ components:
             - gbSortCode
             - usRoutingNumber
           type: string
+      type: object
     Address-2:
       properties:
         city:
@@ -670,6 +672,7 @@ components:
           type: string
       required:
         - country
+      type: object
     Amount:
       properties:
         currency:
@@ -684,6 +687,7 @@ components:
       required:
         - value
         - currency
+      type: object
     BRLocalAccountIdentification:
       additionalProperties: false
       properties:
@@ -713,6 +717,7 @@ components:
         - branchNumber
         - accountNumber
         - bankCode
+      type: object
     BankAccountV3:
       properties:
         accountHolder:
@@ -738,6 +743,7 @@ components:
       required:
         - accountIdentification
         - accountHolder
+      type: object
     CALocalAccountIdentification:
       additionalProperties: false
       properties:
@@ -767,6 +773,7 @@ components:
         - accountNumber
         - institutionNumber
         - transitNumber
+      type: object
     CZLocalAccountIdentification:
       additionalProperties: false
       properties:
@@ -805,6 +812,7 @@ components:
         - type
         - accountNumber
         - bankCode
+      type: object
     CounterpartyInfoV3:
       properties:
         balanceAccountId:
@@ -816,6 +824,7 @@ components:
         transferInstrumentId:
           description: Unique identifier of the [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
           type: string
+      type: object
     CounterpartyV3:
       properties:
         balanceAccountId:
@@ -830,6 +839,7 @@ components:
         transferInstrumentId:
           description: Unique identifier of the [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
           type: string
+      type: object
     DKLocalAccountIdentification:
       additionalProperties: false
       properties:
@@ -853,6 +863,7 @@ components:
         - type
         - accountNumber
         - bankCode
+      type: object
     HULocalAccountIdentification:
       additionalProperties: false
       properties:
@@ -870,6 +881,7 @@ components:
       required:
         - type
         - accountNumber
+      type: object
     IbanAccountIdentification:
       additionalProperties: false
       properties:
@@ -885,6 +897,7 @@ components:
       required:
         - type
         - iban
+      type: object
     InvalidField:
       properties:
         message:
@@ -900,6 +913,7 @@ components:
         - name
         - value
         - message
+      type: object
     JSONObject:
       properties:
         paths:
@@ -908,16 +922,19 @@ components:
           type: array
         rootPath:
           $ref: "#/components/schemas/JSONPath"
+      type: object
     JSONPath:
       properties:
         content:
           items:
             type: string
           type: array
+      type: object
     Link:
       properties:
         href:
           type: string
+      type: object
     Links:
       properties:
         next:
@@ -926,6 +943,7 @@ components:
         prev:
           $ref: "#/components/schemas/Link"
           description: Contains a link to the previous page.
+      type: object
     MerchantData:
       properties:
         mcc:
@@ -940,6 +958,7 @@ components:
         postalCode:
           description: The merchant postal code.
           type: string
+      type: object
     NOLocalAccountIdentification:
       additionalProperties: false
       properties:
@@ -957,6 +976,7 @@ components:
       required:
         - type
         - accountNumber
+      type: object
     NameLocation:
       properties:
         city:
@@ -977,6 +997,7 @@ components:
         state:
           description: The state where the merchant is located.
           type: string
+      type: object
     NumberAndBicAccountIdentification:
       additionalProperties: false
       properties:
@@ -1002,6 +1023,7 @@ components:
         - type
         - accountNumber
         - bic
+      type: object
     PLLocalAccountIdentification:
       additionalProperties: false
       properties:
@@ -1019,6 +1041,7 @@ components:
       required:
         - type
         - accountNumber
+      type: object
     PartyIdentification-2:
       properties:
         address:
@@ -1046,6 +1069,7 @@ components:
           type: string
       required:
         - fullName
+      type: object
     RestServiceError:
       properties:
         detail:
@@ -1084,6 +1108,7 @@ components:
         - title
         - detail
         - status
+      type: object
     SELocalAccountIdentification:
       additionalProperties: false
       properties:
@@ -1107,6 +1132,7 @@ components:
         - type
         - accountNumber
         - clearingNumber
+      type: object
     SGLocalAccountIdentification:
       additionalProperties: false
       properties:
@@ -1129,6 +1155,7 @@ components:
       required:
         - accountNumber
         - bic
+      type: object
     Transaction:
       properties:
         accountHolderId:
@@ -1282,6 +1309,7 @@ components:
         - valueDate
         - counterparty
         - balancePlatform
+      type: object
     TransactionSearchResponse:
       properties:
         _links:
@@ -1292,6 +1320,7 @@ components:
           items:
             $ref: "#/components/schemas/Transaction"
           type: array
+      type: object
     Transfer:
       properties:
         amount:
@@ -1357,14 +1386,17 @@ components:
 
             * **wire**: Fastest way to transfer funds but has the highest fees. Recommended for high-priority, high-value transactions.
 
-            * **instant**: Instant way to transfer funds in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html)
+            * **instant**: Instant way to transfer funds in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).
 
-            .* **crossBorder**: High value transfer to receipt in a different country. 
+            * **crossBorder**: High value transfer to receipt in a different country.
+
+            * **internal**: Bank transfers to a bank account held at Adyen (by bank account number/IBAN).
           enum:
             - crossBorder
             - directDebit
             - fast
             - instant
+            - internal
             - regular
             - wire
           type: string
@@ -1477,6 +1509,7 @@ components:
         - amount
         - counterparty
         - status
+      type: object
     TransferInfo:
       properties:
         amount:
@@ -1532,14 +1565,17 @@ components:
 
             * **wire**: Fastest way to transfer funds but has the highest fees. Recommended for high-priority, high-value transactions.
 
-            * **instant**: Instant way to transfer funds in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html)
+            * **instant**: Instant way to transfer funds in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).
 
-            .* **crossBorder**: High value transfer to receipt in a different country. 
+            * **crossBorder**: High value transfer to receipt in a different country.
+
+            * **internal**: Bank transfers to a bank account held at Adyen (by bank account number/IBAN).
           enum:
             - crossBorder
             - directDebit
             - fast
             - instant
+            - internal
             - regular
             - wire
           type: string
@@ -1565,6 +1601,7 @@ components:
         - category
         - amount
         - counterparty
+      type: object
     UKLocalAccountIdentification:
       additionalProperties: false
       properties:
@@ -1588,6 +1625,7 @@ components:
         - type
         - accountNumber
         - sortCode
+      type: object
     USLocalAccountIdentification:
       additionalProperties: false
       properties:
@@ -1621,6 +1659,7 @@ components:
         - type
         - accountNumber
         - routingNumber
+      type: object
   securitySchemes:
     ApiKeyAuth:
       in: header

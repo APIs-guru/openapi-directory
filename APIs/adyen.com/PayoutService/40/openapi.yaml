@@ -1090,9 +1090,7 @@ components:
         additionalData:
           additionalProperties:
             type: string
-          description: "Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Developers** > **Additional data**."
-          type: object
-          x-anyOf:
+          anyOf:
             - $ref: "#/components/schemas/ResponseAdditionalData3DSecure"
             - $ref: "#/components/schemas/ResponseAdditionalDataBillingAddress"
             - $ref: "#/components/schemas/ResponseAdditionalDataCard"
@@ -1101,6 +1099,8 @@ components:
             - $ref: "#/components/schemas/ResponseAdditionalDataNetworkTokens"
             - $ref: "#/components/schemas/ResponseAdditionalDataOpi"
             - $ref: "#/components/schemas/ResponseAdditionalDataSepa"
+          description: "Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Developers** > **Additional data**."
+          type: object
         authCode:
           description: |-
             Authorisation code:
@@ -1391,11 +1391,13 @@ components:
           type: string
         cvcResult:
           description: The result of CVC verification.
-          example: 1 Matches
+          examples:
+            - 1 Matches
           type: string
         cvcResultRaw:
           description: The raw result of CVC verification.
-          example: M
+          examples:
+            - M
           type: string
         dsTransID:
           description: Supported for 3D Secure 2. The unique transaction identifier assigned by the DS to identify a single transaction.

@@ -45,7 +45,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: LegalEntityService
-  x-timestamp: 2023-02-20T13:23:21Z
+  x-timestamp: 2023-02-20T18:22:46Z
 tags:
   - name: Legal entities
   - name: Hosted Onboarding
@@ -2012,6 +2012,7 @@ components:
         ipAddress:
           description: The IP address of the user accepting the Terms of Service.
           type: string
+      type: object
     AcceptTermsOfServiceResponse:
       properties:
         acceptedBy:
@@ -2038,6 +2039,7 @@ components:
             - adyenForPlatformsManage
             - adyenIssuing
           type: string
+      type: object
     Address:
       properties:
         city:
@@ -2066,6 +2068,7 @@ components:
           type: string
       required:
         - country
+      type: object
     Amount:
       properties:
         currency:
@@ -2075,6 +2078,7 @@ components:
           description: Total value of amount. Must be >= 0
           format: int64
           type: integer
+      type: object
     Attachment:
       properties:
         content:
@@ -2104,6 +2108,7 @@ components:
           type: string
       required:
         - content
+      type: object
     BankAccountInfo:
       properties:
         accountNumber:
@@ -2154,11 +2159,13 @@ components:
           type: string
       required:
         - currencyCode
+      type: object
     BirthData:
       properties:
         dateOfBirth:
           description: The individual's date of birth, in YYYY-MM-DD format.
           type: string
+      type: object
     BusinessLine:
       properties:
         capability:
@@ -2206,6 +2213,7 @@ components:
         - industryCode
         - legalEntityId
         - id
+      type: object
     BusinessLineInfo:
       properties:
         capability:
@@ -2248,6 +2256,7 @@ components:
         - capability
         - industryCode
         - legalEntityId
+      type: object
     BusinessLines:
       properties:
         businessLines:
@@ -2257,6 +2266,7 @@ components:
           type: array
       required:
         - businessLines
+      type: object
     CalculateTermsOfServiceStatusResponse:
       properties:
         termsOfServiceTypes:
@@ -2270,6 +2280,7 @@ components:
               - adyenIssuing
             type: string
           type: array
+      type: object
     CapabilityProblem:
       properties:
         entity:
@@ -2278,6 +2289,7 @@ components:
           items:
             $ref: "#/components/schemas/VerificationError"
           type: array
+      type: object
     CapabilityProblemEntity:
       properties:
         id:
@@ -2290,6 +2302,7 @@ components:
             - Document
             - LegalEntity
           type: string
+      type: object
     CapabilityProblemEntity-recursive:
       properties:
         id:
@@ -2300,6 +2313,7 @@ components:
             - Document
             - LegalEntity
           type: string
+      type: object
     CapabilitySettings:
       properties:
         amountPerIndustry:
@@ -2329,6 +2343,7 @@ components:
         maxAmount:
           $ref: "#/components/schemas/Amount"
           description: The maximum amount a card holder can withdraw per day.
+      type: object
     Document:
       properties:
         attachment:
@@ -2415,11 +2430,13 @@ components:
         - owner
         - attachments
         - id
+      type: object
     EntityReference:
       properties:
         id:
           description: The unique identifier of the resource.
           type: string
+      type: object
     GetTermsOfServiceAcceptanceInfosResponse:
       properties:
         data:
@@ -2427,6 +2444,7 @@ components:
           items:
             $ref: "#/components/schemas/TermsOfServiceAcceptanceInfo"
           type: array
+      type: object
     GetTermsOfServiceDocumentRequest:
       properties:
         language:
@@ -2441,6 +2459,7 @@ components:
             - adyenForPlatformsManage
             - adyenIssuing
           type: string
+      type: object
     GetTermsOfServiceDocumentResponse:
       properties:
         document:
@@ -2465,6 +2484,7 @@ components:
             - adyenForPlatformsManage
             - adyenIssuing
           type: string
+      type: object
     IdentificationData:
       properties:
         cardNumber:
@@ -2517,6 +2537,7 @@ components:
           type: string
       required:
         - type
+      type: object
     Individual:
       properties:
         birthData:
@@ -2548,6 +2569,7 @@ components:
       required:
         - name
         - residentialAddress
+      type: object
     LegalEntity:
       properties:
         capabilities:
@@ -2602,6 +2624,7 @@ components:
           type: string
       required:
         - id
+      type: object
     LegalEntityAssociation:
       properties:
         associatorId:
@@ -2643,6 +2666,7 @@ components:
       required:
         - legalEntityId
         - type
+      type: object
     LegalEntityCapability:
       properties:
         allowed:
@@ -2712,6 +2736,7 @@ components:
             * **rejected**: Adyen has verified the information, but found reasons to not allow the capability.
           readOnly: true
           type: string
+      type: object
     LegalEntityInfo:
       properties:
         capabilities:
@@ -2746,6 +2771,7 @@ components:
             - individual
             - organization
           type: string
+      type: object
     LegalEntityInfoRequiredType:
       properties:
         capabilities:
@@ -2782,6 +2808,7 @@ components:
           type: string
       required:
         - type
+      type: object
     Name:
       properties:
         firstName:
@@ -2796,6 +2823,7 @@ components:
       required:
         - firstName
         - lastName
+      type: object
     OnboardingLink:
       properties:
         url:
@@ -2804,6 +2832,7 @@ components:
 
             If the link expires, you need to create a new link.
           type: string
+      type: object
     OnboardingLinkInfo:
       properties:
         locale:
@@ -2831,6 +2860,7 @@ components:
         themeId:
           description: The unique identifier of the hosted onboarding theme.
           type: string
+      type: object
     OnboardingTheme:
       properties:
         createdAt:
@@ -2856,6 +2886,7 @@ components:
         - properties
         - id
         - createdAt
+      type: object
     OnboardingThemes:
       properties:
         next:
@@ -2871,6 +2902,7 @@ components:
           type: array
       required:
         - themes
+      type: object
     Organization:
       properties:
         description:
@@ -2938,6 +2970,7 @@ components:
       required:
         - legalName
         - registeredAddress
+      type: object
     OwnerEntity:
       properties:
         id:
@@ -2952,6 +2985,7 @@ components:
       required:
         - id
         - type
+      type: object
     PhoneNumber:
       properties:
         countryCode:
@@ -2968,12 +3002,14 @@ components:
       required:
         - type
         - number
+      type: object
     RemediatingAction:
       properties:
         code:
           type: string
         message:
           type: string
+      type: object
     ServiceError:
       properties:
         errorCode:
@@ -2992,6 +3028,7 @@ components:
           description: The HTTP response status.
           format: int32
           type: integer
+      type: object
     SourceOfFunds:
       properties:
         acquiringBusinessLineId:
@@ -3008,6 +3045,7 @@ components:
           enum:
             - business
           type: string
+      type: object
     StockData:
       properties:
         marketIdentifier:
@@ -3019,6 +3057,7 @@ components:
         tickerSymbol:
           description: The stock ticker symbol.
           type: string
+      type: object
     SupportingEntityCapability:
       properties:
         allowed:
@@ -3053,6 +3092,7 @@ components:
             * **rejected**: Adyen has verified the information, but found reasons to not allow the capability.
           readOnly: true
           type: string
+      type: object
     TermsOfServiceAcceptanceInfo:
       properties:
         acceptedBy:
@@ -3077,6 +3117,7 @@ components:
             - adyenForPlatformsManage
             - adyenIssuing
           type: string
+      type: object
     TransferInstrument:
       properties:
         bankAccount:
@@ -3110,6 +3151,7 @@ components:
         - type
         - bankAccount
         - id
+      type: object
     TransferInstrumentInfo:
       properties:
         bankAccount:
@@ -3131,6 +3173,7 @@ components:
         - legalEntityId
         - type
         - bankAccount
+      type: object
     TransferInstrumentReference:
       properties:
         accountIdentifier:
@@ -3142,6 +3185,7 @@ components:
       required:
         - id
         - accountIdentifier
+      type: object
     VerificationError:
       properties:
         capabilities:
@@ -3223,6 +3267,7 @@ components:
             - invalidInput
             - pendingStatus
           type: string
+      type: object
     VerificationError-recursive:
       properties:
         capabilities:
@@ -3299,7 +3344,9 @@ components:
             - invalidInput
             - pendingStatus
           type: string
-    VoidResponse: {}
+      type: object
+    VoidResponse:
+      type: object
     WebData:
       properties:
         webAddress:
@@ -3309,6 +3356,7 @@ components:
           description: The unique identifier of the web address.
           readOnly: true
           type: string
+      type: object
     WebDataExemption:
       properties:
         reason:
@@ -3316,6 +3364,7 @@ components:
           enum:
             - noOnlinePresence
           type: string
+      type: object
   securitySchemes:
     ApiKeyAuth:
       in: header

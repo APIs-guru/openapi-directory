@@ -181,7 +181,7 @@ components:
         type: string
   schemas:
     AnalyzeCommentRequest:
-      description: The comment analysis request message.
+      description: "The comment analysis request message. Next ID: 11"
       properties:
         clientToken:
           description: Opaque token that is echoed from the request to the response.
@@ -197,6 +197,9 @@ components:
           description: The context of the comment.
         doNotStore:
           description: Do not store the comment or context sent in this request. By default, the service may store comments/context for debugging purposes.
+          type: boolean
+        dropUnsupportedAttributes:
+          description: If specified, any requested attribute that is requested but not supported for the language detected will be dropped from the returned scores instead of returning an error.
           type: boolean
         languages:
           description: The language(s) of the comment and context. If none are specified, we attempt to automatically detect the language. Specifying multiple languages means the text contains multiple lanugages. Both ISO and BCP-47 language codes are accepted. The server returns an error if no language was specified and language detection fails. The server also returns an error if the languages (either specified by the caller, or auto-detected) are not *all* supported by the service.

@@ -55,7 +55,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: TransferService
-  x-timestamp: 2023-02-09T22:20:55Z
+  x-timestamp: 2023-02-20T18:21:55Z
 tags:
   - name: Transactions
   - name: Transfers
@@ -348,6 +348,7 @@ components:
         - city
         - postalCode
         - country
+      type: object
     Amount:
       properties:
         currency:
@@ -362,6 +363,7 @@ components:
       required:
         - value
         - currency
+      type: object
     BankAccountInfo:
       properties:
         address:
@@ -373,6 +375,7 @@ components:
         ownerName:
           $ref: "#/components/schemas/Name"
           description: The name of the bank account owner.
+      type: object
     Counterparty:
       properties:
         balanceAccountId:
@@ -387,6 +390,7 @@ components:
         transferInstrumentId:
           description: Unique identifier of the [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/transferInstruments__resParam_id).
           type: string
+      type: object
     InternalPartyIdentification:
       properties:
         balanceAccountId:
@@ -395,6 +399,7 @@ components:
         paymentInstrumentId:
           description: Unique identifier of the [payment instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/paymentInstruments__resParam_id).
           type: string
+      type: object
     InvalidField:
       properties:
         message:
@@ -410,6 +415,7 @@ components:
         - name
         - value
         - message
+      type: object
     JSONObject:
       properties:
         paths:
@@ -418,16 +424,19 @@ components:
           type: array
         rootPath:
           $ref: "#/components/schemas/JSONPath"
+      type: object
     JSONPath:
       properties:
         content:
           items:
             type: string
           type: array
+      type: object
     Link:
       properties:
         href:
           type: string
+      type: object
     Links:
       properties:
         next:
@@ -436,6 +445,7 @@ components:
         prev:
           $ref: "#/components/schemas/Link"
           description: Contains a link to the previous page.
+      type: object
     MerchantData:
       properties:
         mcc:
@@ -450,6 +460,7 @@ components:
         postalCode:
           description: The merchant postal code.
           type: string
+      type: object
     Name:
       properties:
         firstName:
@@ -464,6 +475,7 @@ components:
         lastName:
           description: The last name.
           type: string
+      type: object
     NameLocation:
       properties:
         city:
@@ -484,6 +496,7 @@ components:
         state:
           description: The state where the merchant is located.
           type: string
+      type: object
     PartyIdentification:
       properties:
         balanceAccountId:
@@ -492,6 +505,7 @@ components:
         paymentInstrumentId:
           description: Unique identifier of the [payment instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/paymentInstruments__resParam_id).
           type: string
+      type: object
     RestServiceError:
       properties:
         detail:
@@ -530,6 +544,7 @@ components:
         - title
         - detail
         - status
+      type: object
     Transaction:
       properties:
         accountHolderId:
@@ -683,6 +698,7 @@ components:
         - valueDate
         - counterparty
         - balancePlatform
+      type: object
     TransactionSearchResponse:
       properties:
         _links:
@@ -693,6 +709,7 @@ components:
           items:
             $ref: "#/components/schemas/Transaction"
           type: array
+      type: object
     TransferInfoOld:
       properties:
         amount:
@@ -720,6 +737,7 @@ components:
         - source
         - destination
         - amount
+      type: object
     TransferOld:
       properties:
         amount:
@@ -764,6 +782,7 @@ components:
         - amount
         - id
         - resultCode
+      type: object
   securitySchemes:
     ApiKeyAuth:
       in: header

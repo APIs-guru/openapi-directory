@@ -42,7 +42,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: ManagementService
-  x-timestamp: 2023-02-06T19:25:47Z
+  x-timestamp: 2023-02-20T18:22:28Z
 tags:
   - name: API key - merchant level
   - name: Account - merchant level
@@ -14026,6 +14026,7 @@ components:
             Object containing boolean key-value pairs. The key can be any [standard webhook additional setting](https://docs.adyen.com/development-resources/webhooks/additional-settings), and the value indicates if the setting is enabled.
             For example, `captureDelayHours`: **true** means the standard notifications you get will contain the number of hours remaining until the payment will be captured.
           type: object
+      type: object
     AdditionalSettingsResponse:
       properties:
         excludeEventCodes:
@@ -14045,6 +14046,7 @@ components:
             Object containing boolean key-value pairs. The key can be any [standard webhook additional setting](https://docs.adyen.com/development-resources/webhooks/additional-settings), and the value indicates if the setting is enabled.
             For example, `captureDelayHours`: **true** means the standard notifications you get will contain the number of hours remaining until the payment will be captured.
           type: object
+      type: object
     Address:
       properties:
         city:
@@ -14078,6 +14080,7 @@ components:
         streetAddress2:
           description: Additional address details, if any.
           type: string
+      type: object
     AllowedOrigin:
       properties:
         _links:
@@ -14093,6 +14096,7 @@ components:
           type: string
       required:
         - domain
+      type: object
     AllowedOriginsResponse:
       properties:
         data:
@@ -14100,6 +14104,7 @@ components:
           items:
             $ref: "#/components/schemas/AllowedOrigin"
           type: array
+      type: object
     Amount:
       properties:
         currency:
@@ -14114,6 +14119,7 @@ components:
       required:
         - value
         - currency
+      type: object
     AndroidApp:
       properties:
         description:
@@ -14147,6 +14153,7 @@ components:
       required:
         - id
         - status
+      type: object
     AndroidAppsResponse:
       properties:
         data:
@@ -14154,6 +14161,7 @@ components:
           items:
             $ref: "#/components/schemas/AndroidApp"
           type: array
+      type: object
     AndroidCertificate:
       properties:
         description:
@@ -14181,6 +14189,7 @@ components:
           type: string
       required:
         - id
+      type: object
     AndroidCertificatesResponse:
       properties:
         data:
@@ -14188,6 +14197,7 @@ components:
           items:
             $ref: "#/components/schemas/AndroidCertificate"
           type: array
+      type: object
     ApiCredential:
       properties:
         _links:
@@ -14235,6 +14245,7 @@ components:
         - allowedIpAddresses
         - roles
         - active
+      type: object
     ApiCredentialLinks:
       properties:
         allowedOrigins:
@@ -14257,6 +14268,7 @@ components:
           description: Link to the resource itself.
       required:
         - self
+      type: object
     ApplePayInfo:
       properties:
         domains:
@@ -14267,12 +14279,15 @@ components:
           items:
             type: string
           type: array
+      type: object
     BcmcInfo:
       properties:
         enableBcmcMobile:
           description: Indicates if [Bancontact mobile](https://docs.adyen.com/payment-methods/bancontact/bancontact-mobile) is enabled.
           type: boolean
-    BigDecimal: {}
+      type: object
+    BigDecimal:
+      type: object
     BillingEntitiesResponse:
       properties:
         data:
@@ -14280,6 +14295,7 @@ components:
           items:
             $ref: "#/components/schemas/BillingEntity"
           type: array
+      type: object
     BillingEntity:
       properties:
         address:
@@ -14297,11 +14313,13 @@ components:
         taxId:
           description: The tax number of the billing entity.
           type: string
+      type: object
     CardholderReceipt:
       properties:
         headerForAuthorizedReceipt:
           description: A custom header to show on the shopper receipt for an authorised transaction. Allows one or two comma-separated header lines, and blank lines. For example, `header,header,filler`
           type: string
+      type: object
     CartesBancairesInfo:
       properties:
         siret:
@@ -14309,6 +14327,7 @@ components:
           type: string
       required:
         - siret
+      type: object
     Company:
       properties:
         _links:
@@ -14344,6 +14363,7 @@ components:
             * **Inactive**: Users can log in. Payment processing and payouts are disabled.
             * **Closed**: The company account is closed and this cannot be reversed. Users cannot log in. Payment processing and payouts are disabled.
           type: string
+      type: object
     CompanyApiCredential:
       properties:
         _links:
@@ -14398,6 +14418,7 @@ components:
         - allowedIpAddresses
         - roles
         - active
+      type: object
     CompanyLinks:
       properties:
         apiCredentials:
@@ -14411,6 +14432,7 @@ components:
           $ref: "#/components/schemas/LinksElement"
       required:
         - self
+      type: object
     CompanyUser:
       properties:
         _links:
@@ -14455,7 +14477,9 @@ components:
         - id
         - email
         - timeZoneCode
+        - username
         - roles
+      type: object
     Configuration:
       properties:
         brand:
@@ -14477,6 +14501,7 @@ components:
       required:
         - brand
         - currencies
+      type: object
     Connectivity:
       properties:
         simcardStatus:
@@ -14490,6 +14515,7 @@ components:
             - ACTIVATED
             - INVENTORY
           type: string
+      type: object
     Contact:
       properties:
         email:
@@ -14507,6 +14533,7 @@ components:
         phoneNumber:
           description: The individual's phone number, specified as 10-14 digits with an optional `+` prefix.
           type: string
+      type: object
     CreateAllowedOriginRequest:
       properties:
         _links:
@@ -14522,6 +14549,7 @@ components:
           type: string
       required:
         - domain
+      type: object
     CreateApiCredentialResponse:
       properties:
         _links:
@@ -14577,6 +14605,7 @@ components:
         - active
         - password
         - apiKey
+      type: object
     CreateCompanyApiCredentialRequest:
       properties:
         allowedOrigins:
@@ -14597,6 +14626,7 @@ components:
           items:
             type: string
           type: array
+      type: object
     CreateCompanyApiCredentialResponse:
       properties:
         _links:
@@ -14658,6 +14688,7 @@ components:
         - password
         - apiKey
         - associatedMerchantAccounts
+      type: object
     CreateCompanyUserRequest:
       properties:
         accountGroups:
@@ -14694,6 +14725,11 @@ components:
           maxLength: 255
           minLength: 1
           type: string
+      required:
+        - name
+        - email
+        - username
+      type: object
     CreateCompanyUserResponse:
       properties:
         _links:
@@ -14738,7 +14774,9 @@ components:
         - id
         - email
         - timeZoneCode
+        - username
         - roles
+      type: object
     CreateCompanyWebhookRequest:
       properties:
         acceptsExpiredCertificate:
@@ -14870,6 +14908,7 @@ components:
         - type
         - filterMerchantAccountType
         - filterMerchantAccounts
+      type: object
     CreateMerchantApiCredentialRequest:
       properties:
         allowedOrigins:
@@ -14885,6 +14924,7 @@ components:
           items:
             type: string
           type: array
+      type: object
     CreateMerchantRequest:
       properties:
         businessLineId:
@@ -14913,6 +14953,7 @@ components:
           type: array
       required:
         - companyId
+      type: object
     CreateMerchantResponse:
       properties:
         businessLineId:
@@ -14937,6 +14978,7 @@ components:
         reference:
           description: Your reference for the merchant account.
           type: string
+      type: object
     CreateMerchantUserRequest:
       properties:
         accountGroups:
@@ -14968,6 +15010,11 @@ components:
           maxLength: 255
           minLength: 1
           type: string
+      required:
+        - name
+        - email
+        - username
+      type: object
     CreateMerchantWebhookRequest:
       properties:
         acceptsExpiredCertificate:
@@ -15074,6 +15121,7 @@ components:
         - active
         - communicationFormat
         - type
+      type: object
     CreateUserResponse:
       properties:
         _links:
@@ -15113,7 +15161,9 @@ components:
         - id
         - email
         - timeZoneCode
+        - username
         - roles
+      type: object
     Currency:
       properties:
         amount:
@@ -15128,6 +15178,7 @@ components:
           description: Surcharge percentage per transaction. The maximum number of decimal places is two. For example, **1%** or **2.27%**.
       required:
         - currencyCode
+      type: object
     CustomNotification:
       properties:
         amount:
@@ -15182,6 +15233,7 @@ components:
         success:
           description: "The outcome of the event which the notification is about. Set to either **true** or **false**. "
           type: boolean
+      type: object
     DataCenter:
       properties:
         livePrefix:
@@ -15199,6 +15251,7 @@ components:
             * **EU**
             * **US**
           type: string
+      type: object
     EventUrl:
       properties:
         eventLocalUrls:
@@ -15211,6 +15264,7 @@ components:
           items:
             $ref: "#/components/schemas/Url"
           type: array
+      type: object
     ExternalTerminalAction:
       properties:
         actionType:
@@ -15239,6 +15293,7 @@ components:
         terminalId:
           description: The unique ID of the terminal that the action applies to.
           type: string
+      type: object
     File:
       properties:
         data:
@@ -15250,6 +15305,7 @@ components:
       required:
         - name
         - data
+      type: object
     GenerateApiKeyResponse:
       properties:
         apiKey:
@@ -15257,6 +15313,7 @@ components:
           type: string
       required:
         - apiKey
+      type: object
     GenerateClientKeyResponse:
       properties:
         clientKey:
@@ -15264,6 +15321,7 @@ components:
           type: string
       required:
         - clientKey
+      type: object
     GenerateHmacKeyResponse:
       properties:
         hmacKey:
@@ -15271,6 +15329,7 @@ components:
           type: string
       required:
         - hmacKey
+      type: object
     GiroPayInfo:
       properties:
         supportEmail:
@@ -15278,6 +15337,7 @@ components:
           type: string
       required:
         - supportEmail
+      type: object
     GooglePayInfo:
       properties:
         merchantId:
@@ -15285,6 +15345,7 @@ components:
           maxLength: 20
           minLength: 16
           type: string
+      type: object
     Gratuity:
       properties:
         allowCustomAmount:
@@ -15306,12 +15367,14 @@ components:
         usePredefinedTipEntries:
           description: Indicates whether the terminal shows a prompt to enter a tip (**false**), or predefined tipping options to choose from (**true**).
           type: boolean
+      type: object
     Hardware:
       properties:
         displayMaximumBackLight:
           description: The brightness of the display when the terminal is being used, expressed as a percentage.
           format: int32
           type: integer
+      type: object
     IdName:
       properties:
         id:
@@ -15320,6 +15383,7 @@ components:
         name:
           description: The name of the terminal model.
           type: string
+      type: object
     InstallAndroidAppDetails:
       additionalProperties: false
       properties:
@@ -15332,6 +15396,7 @@ components:
           enum:
             - InstallAndroidApp
           type: string
+      type: object
     InstallAndroidCertificateDetails:
       additionalProperties: false
       properties:
@@ -15344,6 +15409,7 @@ components:
           enum:
             - InstallAndroidCertificate
           type: string
+      type: object
     InvalidField:
       properties:
         message:
@@ -15359,6 +15425,7 @@ components:
         - name
         - value
         - message
+      type: object
     JSONObject:
       properties:
         paths:
@@ -15367,12 +15434,14 @@ components:
           type: array
         rootPath:
           $ref: "#/components/schemas/JSONPath"
+      type: object
     JSONPath:
       properties:
         content:
           items:
             type: string
           type: array
+      type: object
     Key:
       properties:
         identifier:
@@ -15385,6 +15454,7 @@ components:
           description: The version number of the shared key.
           format: int32
           type: integer
+      type: object
     KlarnaInfo:
       properties:
         autoCapture:
@@ -15409,6 +15479,7 @@ components:
       required:
         - supportEmail
         - disputeEmail
+      type: object
     Links:
       properties:
         self:
@@ -15416,10 +15487,12 @@ components:
           description: Link to the resource itself.
       required:
         - self
+      type: object
     LinksElement:
       properties:
         href:
           type: string
+      type: object
     ListCompanyApiCredentialsResponse:
       properties:
         _links:
@@ -15441,6 +15514,7 @@ components:
       required:
         - itemsTotal
         - pagesTotal
+      type: object
     ListCompanyResponse:
       properties:
         _links:
@@ -15462,6 +15536,7 @@ components:
       required:
         - itemsTotal
         - pagesTotal
+      type: object
     ListCompanyUsersResponse:
       properties:
         _links:
@@ -15483,6 +15558,7 @@ components:
       required:
         - itemsTotal
         - pagesTotal
+      type: object
     ListExternalTerminalActionsResponse:
       properties:
         data:
@@ -15490,6 +15566,7 @@ components:
           items:
             $ref: "#/components/schemas/ExternalTerminalAction"
           type: array
+      type: object
     ListMerchantApiCredentialsResponse:
       properties:
         _links:
@@ -15511,6 +15588,7 @@ components:
       required:
         - itemsTotal
         - pagesTotal
+      type: object
     ListMerchantResponse:
       properties:
         _links:
@@ -15532,6 +15610,7 @@ components:
       required:
         - itemsTotal
         - pagesTotal
+      type: object
     ListMerchantUsersResponse:
       properties:
         _links:
@@ -15553,6 +15632,7 @@ components:
       required:
         - itemsTotal
         - pagesTotal
+      type: object
     ListStoresResponse:
       properties:
         _links:
@@ -15574,6 +15654,7 @@ components:
       required:
         - itemsTotal
         - pagesTotal
+      type: object
     ListTerminalsResponse:
       properties:
         data:
@@ -15581,6 +15662,7 @@ components:
           items:
             $ref: "#/components/schemas/Terminal"
           type: array
+      type: object
     ListWebhooksResponse:
       properties:
         _links:
@@ -15605,12 +15687,14 @@ components:
       required:
         - itemsTotal
         - pagesTotal
+      type: object
     Logo:
       properties:
         data:
           description: The image file, converted to a Base64-encoded string, of the logo to be shown on the terminal.
           maxLength: 350000
           type: string
+      type: object
     MeApiCredential:
       properties:
         _links:
@@ -15668,6 +15752,7 @@ components:
         - allowedIpAddresses
         - roles
         - active
+      type: object
     MealVoucherFRInfo:
       properties:
         conecsId:
@@ -15687,6 +15772,7 @@ components:
         - siret
         - conecsId
         - subTypes
+      type: object
     Merchant:
       properties:
         _links:
@@ -15751,6 +15837,7 @@ components:
             * **Inactive**: Users can access the merchant account in the Customer Area. Payment processing and payouts are disabled.
             * **Closed**: The account is closed and this cannot be reversed. Users cannot log in. Payment processing and payouts are disabled.
           type: string
+      type: object
     MerchantLinks:
       properties:
         apiCredentials:
@@ -15764,6 +15851,7 @@ components:
           $ref: "#/components/schemas/LinksElement"
       required:
         - self
+      type: object
     MinorUnitsMonetaryValue:
       properties:
         amount:
@@ -15773,6 +15861,7 @@ components:
         currencyCode:
           description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).
           type: string
+      type: object
     Name:
       properties:
         firstName:
@@ -15784,6 +15873,7 @@ components:
       required:
         - firstName
         - lastName
+      type: object
     Name2:
       properties:
         firstName:
@@ -15792,6 +15882,7 @@ components:
         lastName:
           description: The last name.
           type: string
+      type: object
     Nexo:
       properties:
         displayUrls:
@@ -15811,6 +15902,7 @@ components:
           type: array
           x-deprecatedInVersion: "1"
           x-deprecatedMessage: Use `eventUrls` instead.
+      type: object
     NotificationUrl:
       properties:
         localUrls:
@@ -15823,6 +15915,7 @@ components:
           items:
             $ref: "#/components/schemas/Url"
           type: array
+      type: object
     OfflineProcessing:
       properties:
         chipFloorLimit:
@@ -15834,6 +15927,7 @@ components:
           items:
             $ref: "#/components/schemas/MinorUnitsMonetaryValue"
           type: array
+      type: object
     Opi:
       properties:
         enablePayAtTable:
@@ -15845,6 +15939,7 @@ components:
         payAtTableURL:
           description: The URL and port number used for Pay at Table communication.
           type: string
+      type: object
     OrderItem:
       properties:
         id:
@@ -15857,6 +15952,7 @@ components:
           description: The number of items with the specified product `id` included in the order.
           format: int32
           type: integer
+      type: object
     PaginationLinks:
       properties:
         first:
@@ -15878,6 +15974,7 @@ components:
         - self
         - first
         - last
+      type: object
     Passcodes:
       properties:
         adminMenuPin:
@@ -15897,6 +15994,7 @@ components:
           description: The passcode for the Transactions menu.
           maxLength: 6
           type: string
+      type: object
     PayPalInfo:
       properties:
         directCapture:
@@ -15913,6 +16011,7 @@ components:
       required:
         - subject
         - payerId
+      type: object
     PaymentMethod:
       properties:
         allowed:
@@ -16000,6 +16099,7 @@ components:
           type: string
       required:
         - id
+      type: object
     PaymentMethodResponse:
       properties:
         _links:
@@ -16070,6 +16170,7 @@ components:
       required:
         - itemsTotal
         - pagesTotal
+      type: object
     PaymentMethodSetupInfo:
       properties:
         applePay:
@@ -16185,6 +16286,7 @@ components:
             - wechatpay
             - wechatpay_pos
           type: string
+      type: object
     PayoutSettings:
       properties:
         allowed:
@@ -16250,6 +16352,7 @@ components:
       required:
         - transferInstrumentId
         - id
+      type: object
     PayoutSettingsRequest:
       properties:
         enabled:
@@ -16276,6 +16379,7 @@ components:
           type: string
       required:
         - transferInstrumentId
+      type: object
     PayoutSettingsResponse:
       properties:
         data:
@@ -16283,6 +16387,7 @@ components:
           items:
             $ref: "#/components/schemas/PayoutSettings"
           type: array
+      type: object
     Profile:
       properties:
         authType:
@@ -16345,6 +16450,7 @@ components:
         - bssType
         - authType
         - wsec
+      type: object
     ReceiptOptions:
       properties:
         logo:
@@ -16360,6 +16466,7 @@ components:
 
              For example, **http://www.example.com/order/${pspreference}/${merchantreference}**.
           type: string
+      type: object
     ReceiptPrinting:
       properties:
         merchantApproved:
@@ -16410,6 +16517,7 @@ components:
         shopperVoid:
           description: Print a shopper receipt when a previous transaction is voided.
           type: boolean
+      type: object
     ReleaseUpdateDetails:
       additionalProperties: false
       properties:
@@ -16422,6 +16530,7 @@ components:
         updateAtFirstMaintenanceCall:
           description: Boolean flag that tells if the terminal should update at the first next maintenance call. If false, terminal will update on its configured reboot time.
           type: boolean
+      type: object
     RequestActivationResponse:
       properties:
         companyId:
@@ -16430,6 +16539,7 @@ components:
         merchantId:
           description: The unique identifier of the merchant account you requested to activate.
           type: string
+      type: object
     RestServiceError:
       properties:
         detail:
@@ -16468,6 +16578,7 @@ components:
         - title
         - detail
         - status
+      type: object
     ScheduleTerminalActionsRequest:
       properties:
         actionDetails:
@@ -16493,6 +16604,7 @@ components:
           items:
             type: string
           type: array
+      type: object
     ScheduleTerminalActionsResponse:
       properties:
         actionDetails:
@@ -16542,6 +16654,7 @@ components:
           description: The number of terminals for which the action was successfully scheduled. This doesn't mean the action has happened yet.
           format: int32
           type: integer
+      type: object
     Settings:
       properties:
         band:
@@ -16554,6 +16667,7 @@ components:
           description: "The connection time-out in seconds. Minimum value: 0."
           format: int32
           type: integer
+      type: object
     ShippingLocation:
       properties:
         address:
@@ -16568,6 +16682,7 @@ components:
         name:
           description: The unique name of the shipping location.
           type: string
+      type: object
     ShippingLocationsResponse:
       properties:
         data:
@@ -16575,6 +16690,7 @@ components:
           items:
             $ref: "#/components/schemas/ShippingLocation"
           type: array
+      type: object
     ShopperStatement:
       properties:
         doingBusinessAsName:
@@ -16589,6 +16705,7 @@ components:
             - dynamic
             - fixed
           type: string
+      type: object
     Signature:
       properties:
         askSignatureOnScreen:
@@ -16604,6 +16721,7 @@ components:
         skipSignature:
           description: Skip asking for a signature. This is possible because all global card schemes (American Express, Diners, Discover, JCB, MasterCard, VISA, and UnionPay) regard a signature as optional.
           type: boolean
+      type: object
     SofortInfo:
       properties:
         currencyCode:
@@ -16615,6 +16733,7 @@ components:
       required:
         - logo
         - currencyCode
+      type: object
     Standalone:
       properties:
         currencyCode:
@@ -16625,6 +16744,7 @@ components:
         enableStandalone:
           description: Enable standalone mode.
           type: boolean
+      type: object
     Store:
       properties:
         _links:
@@ -16678,6 +16798,7 @@ components:
             - closed
             - inactive
           type: string
+      type: object
     StoreCreationRequest:
       properties:
         address:
@@ -16717,6 +16838,7 @@ components:
         - shopperStatement
         - phoneNumber
         - address
+      type: object
     StoreCreationWithMerchantCodeRequest:
       properties:
         address:
@@ -16760,6 +16882,7 @@ components:
         - phoneNumber
         - address
         - merchantId
+      type: object
     StoreLocation:
       properties:
         city:
@@ -16795,6 +16918,7 @@ components:
           type: string
       required:
         - country
+      type: object
     StoreSplitConfiguration:
       properties:
         balanceAccountId:
@@ -16803,6 +16927,7 @@ components:
         splitConfigurationId:
           description: The UUID of the [split configuration](https://docs.adyen.com/marketplaces-and-platforms/classic/split-configuration-for-stores) from the Customer Area.
           type: string
+      type: object
     Surcharge:
       properties:
         askConfirmation:
@@ -16813,6 +16938,7 @@ components:
           items:
             $ref: "#/components/schemas/Configuration"
           type: array
+      type: object
     SwishInfo:
       properties:
         swishNumber:
@@ -16820,6 +16946,7 @@ components:
           maxLength: 10
           minLength: 10
           type: string
+      type: object
     Terminal:
       properties:
         assigned:
@@ -16895,6 +17022,7 @@ components:
         wifiSsid:
           description: The SSID of the Wi-Fi network that your terminal is connected to.
           type: string
+      type: object
     TerminalActionScheduleDetail:
       properties:
         id:
@@ -16903,6 +17031,7 @@ components:
         terminalId:
           description: The unique ID of the terminal that the action applies to.
           type: string
+      type: object
     TerminalModelsResponse:
       properties:
         data:
@@ -16910,6 +17039,7 @@ components:
           items:
             $ref: "#/components/schemas/IdName"
           type: array
+      type: object
     TerminalOrder:
       properties:
         billingEntity:
@@ -16938,6 +17068,7 @@ components:
         trackingUrl:
           description: The URL, provided by the carrier company, where the shipment can be tracked.
           type: string
+      type: object
     TerminalOrderRequest:
       properties:
         billingEntityId:
@@ -16957,6 +17088,7 @@ components:
         taxId:
           description: The tax number of the billing entity.
           type: string
+      type: object
     TerminalOrdersResponse:
       properties:
         data:
@@ -16964,6 +17096,7 @@ components:
           items:
             $ref: "#/components/schemas/TerminalOrder"
           type: array
+      type: object
     TerminalProduct:
       properties:
         description:
@@ -16983,6 +17116,7 @@ components:
         price:
           $ref: "#/components/schemas/TerminalProductPrice"
           description: The price of the product.
+      type: object
     TerminalProductPrice:
       properties:
         currency:
@@ -16991,6 +17125,7 @@ components:
         value:
           $ref: "#/components/schemas/BigDecimal"
           description: The price of the item.
+      type: object
     TerminalProductsResponse:
       properties:
         data:
@@ -16998,6 +17133,7 @@ components:
           items:
             $ref: "#/components/schemas/TerminalProduct"
           type: array
+      type: object
     TerminalSettings:
       properties:
         cardholderReceipt:
@@ -17047,6 +17183,7 @@ components:
         wifiProfiles:
           $ref: "#/components/schemas/WifiProfiles"
           description: Remote Wi-Fi profiles for WPA and WPA2 PSK and EAP Wi-Fi networks.
+      type: object
     TestCompanyWebhookRequest:
       properties:
         merchantIds:
@@ -17095,6 +17232,7 @@ components:
           items:
             type: string
           type: array
+      type: object
     TestOutput:
       properties:
         merchantId:
@@ -17132,6 +17270,7 @@ components:
           type: string
       required:
         - status
+      type: object
     TestWebhookRequest:
       properties:
         notification:
@@ -17172,6 +17311,7 @@ components:
           items:
             type: string
           type: array
+      type: object
     TestWebhookResponse:
       properties:
         data:
@@ -17179,12 +17319,14 @@ components:
           items:
             $ref: "#/components/schemas/TestOutput"
           type: array
+      type: object
     Timeouts:
       properties:
         fromActiveToSleep:
           description: Indicates the number of seconds of inactivity after which the terminal display goes into sleep mode.
           format: int32
           type: integer
+      type: object
     UninstallAndroidAppDetails:
       additionalProperties: false
       properties:
@@ -17197,6 +17339,7 @@ components:
           enum:
             - UninstallAndroidApp
           type: string
+      type: object
     UninstallAndroidCertificateDetails:
       additionalProperties: false
       properties:
@@ -17209,6 +17352,7 @@ components:
           enum:
             - UninstallAndroidCertificate
           type: string
+      type: object
     UpdatableAddress:
       properties:
         city:
@@ -17239,6 +17383,7 @@ components:
             - New Zealand
             - United States
           type: string
+      type: object
     UpdateCompanyApiCredentialRequest:
       properties:
         active:
@@ -17262,6 +17407,7 @@ components:
           items:
             type: string
           type: array
+      type: object
     UpdateCompanyUserRequest:
       properties:
         accountGroups:
@@ -17293,6 +17439,7 @@ components:
         timeZoneCode:
           description: The [tz database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the time zone of the user. For example, **Europe/Amsterdam**.
           type: string
+      type: object
     UpdateCompanyWebhookRequest:
       properties:
         acceptsExpiredCertificate:
@@ -17402,6 +17549,7 @@ components:
           type: string
       required:
         - url
+      type: object
     UpdateMerchantApiCredentialRequest:
       properties:
         active:
@@ -17420,6 +17568,7 @@ components:
           items:
             type: string
           type: array
+      type: object
     UpdateMerchantUserRequest:
       properties:
         accountGroups:
@@ -17446,6 +17595,7 @@ components:
         timeZoneCode:
           description: The [tz database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) of the time zone of the user. For example, **Europe/Amsterdam**.
           type: string
+      type: object
     UpdateMerchantWebhookRequest:
       properties:
         acceptsExpiredCertificate:
@@ -17534,6 +17684,7 @@ components:
         - url
         - active
         - communicationFormat
+      type: object
     UpdatePaymentMethodInfo:
       properties:
         countries:
@@ -17557,6 +17708,7 @@ components:
         shopperStatement:
           $ref: "#/components/schemas/ShopperStatement"
           description: Information regarding the shopper statement.
+      type: object
     UpdatePayoutSettingsRequest:
       properties:
         enabled:
@@ -17565,6 +17717,7 @@ components:
 
             To receive payouts into this bank account, both `enabled` and `allowed` must be **true**.
           type: boolean
+      type: object
     UpdateStoreRequest:
       properties:
         address:
@@ -17599,6 +17752,7 @@ components:
             - closed
             - inactive
           type: string
+      type: object
     Url:
       properties:
         password:
@@ -17610,6 +17764,7 @@ components:
         username:
           description: The username for authentication of the notifications.
           type: string
+      type: object
     User:
       properties:
         _links:
@@ -17649,8 +17804,11 @@ components:
         - id
         - email
         - timeZoneCode
+        - username
         - roles
-    Void: {}
+      type: object
+    Void:
+      type: object
     Webhook:
       properties:
         _links:
@@ -17792,6 +17950,7 @@ components:
         - url
         - active
         - communicationFormat
+      type: object
     WebhookLinks:
       properties:
         company:
@@ -17813,6 +17972,7 @@ components:
         - self
         - testWebhook
         - generateHmac
+      type: object
     WifiProfiles:
       properties:
         profiles:
@@ -17823,6 +17983,7 @@ components:
         settings:
           $ref: "#/components/schemas/Settings"
           description: General Wi-Fi settings.
+      type: object
   securitySchemes:
     ApiKeyAuth:
       in: header

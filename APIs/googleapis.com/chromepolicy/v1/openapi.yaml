@@ -978,6 +978,40 @@ components:
           format: int64
           type: string
       type: object
+    GoogleChromePolicyVersionsV1PolicyModificationError:
+      description: Error information for a modification request of a specific policy on a specific target.
+      properties:
+        errors:
+          description: Output only. The non-field errors related to the modification.
+          items:
+            type: string
+          readOnly: true
+          type: array
+        fieldErrors:
+          description: Output only. The error messages related to the modification.
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyModificationFieldError"
+          readOnly: true
+          type: array
+        policySchema:
+          description: Output only. The specific policy schema modification that had an error.
+          readOnly: true
+          type: string
+        policyTargetKey:
+          $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyTargetKey"
+          description: Output only. The specific policy target modification that had error.
+          readOnly: true
+      type: object
+    GoogleChromePolicyVersionsV1PolicyModificationErrorDetails:
+      description: Details of the errors encountered during a policy modification request. This message will be returned as part of the details of a google.rpc.Status returned to the user when there is an error in their request.
+      properties:
+        modificationErrors:
+          description: Output only. List of specific policy modifications errors that may have occurred during a modifying request.
+          items:
+            $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyModificationError"
+          readOnly: true
+          type: array
+      type: object
     GoogleChromePolicyVersionsV1PolicyModificationFieldError:
       description: Error information for a modification request of a specific field on a specific policy.
       properties:
