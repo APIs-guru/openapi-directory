@@ -70,21 +70,23 @@ Existing integrations
 [![Become a partner](https://opencollective.com/openapi-directory/tiers/partner.svg?avatarHeight=36&width=600)](https://opencollective.com/openapi-directory)
 
  - [Apideck](https://apideck.com) - **Faster data integration through Unified APIs**
+ - [HTTP Toolkit](https://httptoolkit.tech/) **Beautiful & open-source tools to debug, test and develop with HTTP(S)**
+ - [OpenAPI-Directory-JS](https://github.com/httptoolkit/openapi-directory-js) - The OpenAPI directory precompiled & indexed for JS usage & searching.
  - [API Tracker](https://apitracker.io/) - Aggregates 14,000+ APIs, SDKs, API specifications, integrations and DX profiles. It aims to help developers access the information they need to integrate APIs faster.
  - [API Watch](https://www.apiwatch.io)
- - https://any-api.com - Documentation and Test Consoles for Public APIs**
- - https://datafire.io - Allows you to process and transfer data between APIs, databases, and more
  - https://pipedream.com/ - The integration platform built for developers
+ - https://any-api.com - Documentation and Test Consoles for Public APIs
+ - https://datafire.io - Allows you to process and transfer data between APIs, databases, and more
  - [https://sdks.io](https://sdks.io/Search/FindSDKs?Bridge=APIs.guru) - Explore Automatically Generated SDKs
  - [https://cenit.io](https://cenit.io/directory?spec=swagger) - Data integration platform
  - [commandcar](https://github.com/tikalk/commandcar#installing-from-api-models) - Curl on steroids
  - [Material Swagger UI Hub](https://darosh.github.io/angular-swagger-ui-material/hub/) - testing and exploring hub for Material Swagger UI demo
- - [HTTP Toolkit](https://httptoolkit.tech/) Beautiful & open-source tools to debug, test and develop with HTTP(S)
  - [Paw](https://paw.cloud/) - The most powerful HTTP client for Mac - You can import definitions and directly play with the APIs, [see how](https://paw.cloud/docs/examples/search-apis)
  - [Bitscoop](https://bitscoop.com/) - A better way to create and maintain integrations
  - [WinSwag](https://github.com/SvenEV/WinSwag) - A UWP app for loading Swagger definitions and exploring REST APIs
- - [ReadMe.io](https://preview.readme.io) - Beautiful, personalized, interactive developer hubs.
- - [OpenAPI-Directory-JS](https://github.com/httptoolkit/openapi-directory-js) - The OpenAPI directory precompiled & indexed for JS usage & searching.
+ - [ReadMe.io](https://preview.readme.io) - Beautiful, personalized, interactive developer hubs
+ - [Velosimo](https://connect.velosimo.io/open_api_directory) - Integration platform for eGovernment
+ - [Mockcoon](https://mockoon.com/mock-samples/category/all/) - API mock samples for your project
 
 Also used as test suite in the following projects:
  - [ReDoc](https://github.com/Redocly/redoc) - **OpenAPI-generated API Reference Documentation**
