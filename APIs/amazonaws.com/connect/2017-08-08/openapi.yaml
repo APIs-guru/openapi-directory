@@ -168,7 +168,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -247,7 +247,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -321,7 +321,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -398,7 +398,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -504,7 +504,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -530,6 +530,8 @@ paths:
                     - CONTACT_TRACE_RECORDS
                     - AGENT_EVENTS
                     - REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+                    - ATTACHMENTS
+                    - CONTACT_EVALUATIONS
                 StorageConfig:
                   description: The storage configuration for the instance.
                   type: object
@@ -619,7 +621,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -699,7 +701,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -788,7 +790,7 @@ paths:
                 - ContactFlowId
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -851,7 +853,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -927,7 +929,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -1019,7 +1021,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -1193,7 +1195,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -1288,7 +1290,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -1520,7 +1522,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -1628,7 +1630,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -1748,7 +1750,7 @@ paths:
                   type: string
                   pattern: '^(?!d-)([\da-zA-Z]+)([-]*[\da-zA-Z])*$'
                   minLength: 1
-                  maxLength: 62
+                  maxLength: 45
                   format: password
                 DirectoryId:
                   description: The identifier for the directory.
@@ -1864,7 +1866,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -1962,7 +1964,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -2063,7 +2065,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -2190,7 +2192,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -2294,7 +2296,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -2391,7 +2393,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -2505,7 +2507,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -2611,7 +2613,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -2721,7 +2723,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -2829,7 +2831,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -2949,7 +2951,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -3149,7 +3151,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -3230,7 +3232,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -3326,7 +3328,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -3484,7 +3486,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -3576,7 +3578,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -3700,7 +3702,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -3833,7 +3835,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -3904,7 +3906,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -3958,7 +3960,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -4021,7 +4023,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -4078,7 +4080,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -4145,7 +4147,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -4190,7 +4192,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -4230,7 +4232,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -4292,7 +4294,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -4355,7 +4357,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -4407,7 +4409,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -4472,7 +4474,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -4539,7 +4541,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -4629,7 +4631,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -4698,7 +4700,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -4749,7 +4751,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -4828,7 +4830,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -4893,7 +4895,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -4970,7 +4972,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -5171,7 +5173,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -5241,7 +5243,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -5262,7 +5264,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeUser
-      description: 'Describes the specified user account. You can find the instance ID in the console (it’s the final part of the ARN). The console does not display the user IDs. Instead, list the users and note the IDs provided in the output.'
+      description: 'Describes the specified user account. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID in the Amazon Connect console</a> (it’s the final part of the ARN). The console does not display the user IDs. Instead, list the users and note the IDs provided in the output.'
       responses:
         '200':
           description: Success
@@ -5310,7 +5312,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -5368,7 +5370,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -5431,7 +5433,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -5487,7 +5489,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -5553,7 +5555,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -5624,7 +5626,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -5711,7 +5713,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -5776,7 +5778,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -5856,7 +5858,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -5926,7 +5928,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -6007,7 +6009,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -6034,6 +6036,8 @@ paths:
               - CONTACT_TRACE_RECORDS
               - AGENT_EVENTS
               - REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+              - ATTACHMENTS
+              - CONTACT_EVALUATIONS
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -6082,7 +6086,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -6109,6 +6113,8 @@ paths:
               - CONTACT_TRACE_RECORDS
               - AGENT_EVENTS
               - REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+              - ATTACHMENTS
+              - CONTACT_EVALUATIONS
     post:
       operationId: UpdateInstanceStorageConfig
       description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates an existing configuration for a resource type. This API is idempotent.</p>
@@ -6149,7 +6155,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -6176,6 +6182,8 @@ paths:
               - CONTACT_TRACE_RECORDS
               - AGENT_EVENTS
               - REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+              - ATTACHMENTS
+              - CONTACT_EVALUATIONS
       requestBody:
         required: true
         content:
@@ -6451,7 +6459,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -6515,7 +6523,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -6579,7 +6587,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -6638,7 +6646,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -6721,7 +6729,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -6783,7 +6791,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -6844,7 +6852,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance..
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance..'
           schema:
             type: string
             minLength: 1
@@ -6906,7 +6914,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -6980,7 +6988,7 @@ paths:
         - name: instanceId
           in: query
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -7034,7 +7042,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -7110,7 +7118,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -7184,7 +7192,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -7388,7 +7396,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -7510,7 +7518,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -7627,7 +7635,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -7685,7 +7693,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -7936,7 +7944,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -8014,7 +8022,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -8113,7 +8121,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -8206,7 +8214,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -8299,7 +8307,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -8380,7 +8388,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -8495,7 +8503,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -8579,7 +8587,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -8663,7 +8671,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -8682,6 +8690,8 @@ paths:
               - CONTACT_TRACE_RECORDS
               - AGENT_EVENTS
               - REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+              - ATTACHMENTS
+              - CONTACT_EVALUATIONS
         - name: nextToken
           in: query
           required: false
@@ -8761,7 +8771,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -8845,7 +8855,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -8929,7 +8939,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -9213,7 +9223,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -9303,7 +9313,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -9396,7 +9406,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -9481,7 +9491,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -9553,7 +9563,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -9637,7 +9647,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -9727,7 +9737,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -9811,7 +9821,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -9895,7 +9905,7 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: The Amazon Resource Name (ARN) of the resource.
+          description: 'The Amazon Resource Name (ARN) of the resource. All Amazon Connect resources (instances, queues, flows, routing profiles, etc) have an ARN. To locate the ARN for an instance, for example, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">Find your Amazon Connect instance ID/ARN</a>. '
           schema:
             type: string
     parameters:
@@ -10018,7 +10028,7 @@ paths:
         - name: instanceId
           in: query
           required: false
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             pattern: '^(arn:(aws|aws-us-gov):connect:[a-z]{2}-[a-z]+-[0-9]{1}:[0-9]{1,20}:instance/)?[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
@@ -10089,7 +10099,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -10173,7 +10183,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -10367,7 +10377,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -10455,7 +10465,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: 'The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance. You can provide the <code>InstanceId</code>, or the entire ARN.'
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance. You can provide the <code>InstanceId</code>, or the entire ARN.'
           schema:
             type: string
             pattern: '^(arn:(aws|aws-us-gov):connect:[a-z]{2}-[a-z]+-[0-9]{1}:[0-9]{1,20}:instance/)?[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
@@ -10486,7 +10496,7 @@ paths:
                   type: string
                   pattern: '^(?!d-)([\da-zA-Z]+)([-]*[\da-zA-Z])*$'
                   minLength: 1
-                  maxLength: 62
+                  maxLength: 45
                   format: password
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -10538,7 +10548,7 @@ paths:
                 - InitialContactId
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -10955,7 +10965,7 @@ paths:
                 - InstanceId
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -11065,7 +11075,7 @@ paths:
                 - InstanceId
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -11171,7 +11181,7 @@ paths:
                 - InstanceId
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -11275,7 +11285,7 @@ paths:
               type: object
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -11362,7 +11372,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -11500,7 +11510,7 @@ paths:
                 - ParticipantDetails
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -11616,7 +11626,7 @@ paths:
                 - VoiceRecordingConfiguration
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -11701,7 +11711,7 @@ paths:
                 - ClientToken
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -11804,7 +11814,7 @@ paths:
                   type: string
                   maxLength: 500
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -11914,7 +11924,7 @@ paths:
                 - Name
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -12029,7 +12039,7 @@ paths:
                   minLength: 1
                   maxLength: 256
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -12083,7 +12093,7 @@ paths:
                 - InitialContactId
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -12153,7 +12163,7 @@ paths:
                 - StreamingId
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -12217,7 +12227,7 @@ paths:
                 - InitialContactId
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -12305,7 +12315,7 @@ paths:
                 - ContactFlowId
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -12453,7 +12463,7 @@ paths:
                   minLength: 1
                   maxLength: 256
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -12604,7 +12614,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -12695,7 +12705,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -12787,7 +12797,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -12978,7 +12988,7 @@ paths:
                 - ScheduledTime
               properties:
                 InstanceId:
-                  description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
                   type: string
                   minLength: 1
                   maxLength: 100
@@ -13050,7 +13060,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -13129,7 +13139,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -13201,7 +13211,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -13278,7 +13288,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -13355,7 +13365,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -13440,7 +13450,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -13515,7 +13525,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -13604,7 +13614,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -13681,7 +13691,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -13755,7 +13765,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -13833,7 +13843,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -13916,7 +13926,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -13992,7 +14002,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -14064,7 +14074,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -14157,7 +14167,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -14246,7 +14256,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -14318,7 +14328,7 @@ paths:
         - name: InstanceId
           in: path
           required: true
-          description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
           schema:
             type: string
             minLength: 1
@@ -15306,7 +15316,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         Id:
           allOf:
             - $ref: '#/components/schemas/TaskTemplateId'
@@ -16364,7 +16374,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         Id:
           allOf:
             - $ref: '#/components/schemas/TaskTemplateId'
@@ -16705,6 +16715,9 @@ components:
             - description: The domain to add to your allow list.
     LexBot:
       type: object
+      required:
+        - Name
+        - LexRegion
       properties:
         Name:
           allOf:
@@ -16781,6 +16794,8 @@ components:
         - CONTACT_TRACE_RECORDS
         - AGENT_EVENTS
         - REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+        - ATTACHMENTS
+        - CONTACT_EVALUATIONS
     InstanceStorageConfig:
       type: object
       required:
@@ -16860,7 +16875,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         ContactFlowId:
           allOf:
             - $ref: '#/components/schemas/ContactFlowId'
@@ -17591,7 +17606,7 @@ components:
       type: string
       pattern: '^(?!d-)([\da-zA-Z]+)([-]*[\da-zA-Z])*$'
       minLength: 1
-      maxLength: 62
+      maxLength: 45
       format: password
     DirectoryId:
       type: string
@@ -18420,7 +18435,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         LanguageCode:
           allOf:
             - $ref: '#/components/schemas/VocabularyLanguageCode'
@@ -18567,7 +18582,7 @@ components:
         Id:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         Arn:
           allOf:
             - $ref: '#/components/schemas/ARN'
@@ -18699,7 +18714,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         Name:
           allOf:
             - $ref: '#/components/schemas/RoutingProfileName'
@@ -19167,7 +19182,7 @@ components:
         KeyId:
           allOf:
             - $ref: '#/components/schemas/KeyId'
-            - description: '<p>The full ARN of the encryption key. </p> <note> <p>Be sure to provide the full ARN of the encryption key, not just the ID.</p> </note>'
+            - description: '<p>The full ARN of the encryption key. </p> <note> <p>Be sure to provide the full ARN of the encryption key, not just the ID.</p> <p>Amazon Connect supports only KMS keys with the default key spec of <a href="https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-symmetric-default"> <code>SYMMETRIC_DEFAULT</code> </a>. </p> </note>'
       description: The encryption configuration.
     EventBridgeActionName:
       type: string
@@ -19710,7 +19725,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         IntegrationType:
           allOf:
             - $ref: '#/components/schemas/IntegrationType'
@@ -20505,7 +20520,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         ContactId:
           allOf:
             - $ref: '#/components/schemas/ContactId'
@@ -20727,7 +20742,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken2500'
@@ -20753,7 +20768,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken2500'
@@ -20799,7 +20814,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken2500'
@@ -20853,7 +20868,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken2500'
@@ -20993,7 +21008,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         ContactFlowId:
           allOf:
             - $ref: '#/components/schemas/ContactFlowId'
@@ -21046,7 +21061,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         ContactId:
           allOf:
             - $ref: '#/components/schemas/ContactId'
@@ -21071,7 +21086,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         ContactId:
           allOf:
             - $ref: '#/components/schemas/ContactId'
@@ -21112,7 +21127,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
@@ -21151,7 +21166,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         PreviousContactId:
           allOf:
             - $ref: '#/components/schemas/ContactId'
@@ -21203,7 +21218,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         ContactId:
           allOf:
             - $ref: '#/components/schemas/ContactId'
@@ -21226,7 +21241,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
     StopContactStreamingRequest:
       type: object
       required:
@@ -21238,7 +21253,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         ContactId:
           allOf:
             - $ref: '#/components/schemas/ContactId'
@@ -21264,7 +21279,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         ContactId:
           allOf:
             - $ref: '#/components/schemas/ContactId'
@@ -21415,7 +21430,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         ContactId:
           allOf:
             - $ref: '#/components/schemas/ContactId'
@@ -21483,7 +21498,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         Attributes:
           allOf:
             - $ref: '#/components/schemas/Attributes'
@@ -21579,7 +21594,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
         ContactId:
           allOf:
             - $ref: '#/components/schemas/ContactId'

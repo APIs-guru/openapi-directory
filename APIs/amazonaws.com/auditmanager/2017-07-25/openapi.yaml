@@ -3909,6 +3909,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
       parameters:
         - name: requestId
           in: path
@@ -4027,7 +4033,7 @@ paths:
   /settings:
     put:
       operationId: UpdateSettings
-      description: ' Updates Audit Manager settings for the current user account. '
+      description: ' Updates Audit Manager settings for the current account. '
       responses:
         '200':
           description: Success
@@ -4929,7 +4935,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/AWSServiceName'
             - description: ' The name of the Amazon Web Service. '
-      description: ' An Amazon Web Service such as Amazon S3 or CloudTrail. '
+      description: '<p> An Amazon Web Service such as Amazon S3 or CloudTrail. </p> <p>For an example of how to find an Amazon Web Service name and how to define it in your assessment scope, see the following:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetServicesInScope.html#API_GetServicesInScope_Example_2">Finding an Amazon Web Service name to use in your assessment scope</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetServicesInScope.html#API_GetServicesInScope_Example_3">Defining an Amazon Web Service name in your assessment scope</a> </p> </li> </ul>'
     AccountStatus:
       type: string
       enum:
@@ -5872,7 +5878,7 @@ components:
         createdBy:
           allOf:
             - $ref: '#/components/schemas/IamArn'
-            - description: ' The IAM user or role that performed the action. '
+            - description: ' The user or role that performed the action. '
       description: ' The record of a change within Audit Manager. For example, this could be the status change of an assessment or the delegation of a control set. '
     ChangeLogs:
       type: array
@@ -5966,11 +5972,11 @@ components:
         createdBy:
           allOf:
             - $ref: '#/components/schemas/CreatedBy'
-            - description: ' The IAM user or role that created the control. '
+            - description: ' The user or role that created the control. '
         lastUpdatedBy:
           allOf:
             - $ref: '#/components/schemas/LastUpdatedBy'
-            - description: ' The IAM user or role that most recently updated the control. '
+            - description: ' The user or role that most recently updated the control. '
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -6299,11 +6305,11 @@ components:
         createdBy:
           allOf:
             - $ref: '#/components/schemas/CreatedBy'
-            - description: ' The IAM user or role that created the framework. '
+            - description: ' The user or role that created the framework. '
         lastUpdatedBy:
           allOf:
             - $ref: '#/components/schemas/LastUpdatedBy'
-            - description: ' The IAM user or role that most recently updated the framework. '
+            - description: ' The user or role that most recently updated the framework. '
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -6469,7 +6475,7 @@ components:
         createdBy:
           allOf:
             - $ref: '#/components/schemas/CreatedBy'
-            - description: ' The IAM user or role that created the delegation. '
+            - description: ' The user or role that created the delegation. '
       description: ' The assignment of a control set to a delegate for review. '
     DelegationMetadata:
       type: object
@@ -6612,7 +6618,7 @@ components:
         iamId:
           allOf:
             - $ref: '#/components/schemas/IamArn'
-            - description: ' The unique identifier for the IAM user or role that''s associated with the evidence. '
+            - description: ' The unique identifier for the user or role that''s associated with the evidence. '
         complianceCheck:
           allOf:
             - $ref: '#/components/schemas/String'
