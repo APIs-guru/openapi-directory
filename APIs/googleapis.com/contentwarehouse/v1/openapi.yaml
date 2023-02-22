@@ -2490,6 +2490,8 @@ components:
             - MONOSPACE_AFFINITY
             - MY_ACCOUNT_AFFINITY
             - NUDGEIT_CAMPAIGN_MANAGER_AFFINITY
+            - LEGAL_CONTRACTS_EXTERNAL_AFFINITY
+            - CONTACTS_TO_STAR_AFFINITY
           type: string
         containerId:
           description: The ID of the container
@@ -5874,6 +5876,17 @@ components:
             $ref: "#/components/schemas/AssistantApiCoreTypesCastAppInfo"
           type: array
       type: object
+    AssistantApiCapabilitiesHomeAppCapabilities:
+      description: Information about the readiness of Home app features on the device. As of January 2023, this is only populated by Assistant on Android.
+      properties:
+        setupState:
+          description: The app's installation and setup state. This is most pertinent for Tangor, where lock screen Smart Home queries are fulfilled by a Home app activity that may be blocked if this value is not `SETUP_STATE_COMPLETE`.
+          enum:
+            - SETUP_STATE_UNKNOWN
+            - SETUP_STATE_INCOMPLETE
+            - SETUP_STATE_COMPLETE
+          type: string
+      type: object
     AssistantApiCarAssistantCapabilities:
       description: Capabilities that are associated with Assistants on auto surfaces. This is different from other capabilities such as CarSettingsCapabilities, CloudCarCapabilities since they are specific to settings and 3P cloud information. All the auto/car Assistant specific capabilities should live here.
       properties:
@@ -7198,7 +7211,6 @@ components:
             - CHROMECAST_MANHATTAN
             - CLOUD_DEVICE
             - CROS
-            - FITBIT_OS
             - FITBIT_OS_WATCH
             - FITBIT_OS_WATCH_ANDROID
             - FITBIT_OS_WATCH_IOS
@@ -7220,6 +7232,9 @@ components:
             - PIXEL6
             - PIXEL7
             - PIXEL_BUDS
+            - PIXEL_TABLET
+            - PIXEL_TABLET_HUB_MODE
+            - PIXEL_TABLET_PERSONAL_MODE
             - PIXEL_WATCH
             - SCREENLESS
             - SMART_DISPLAY
@@ -9424,7 +9439,7 @@ components:
           type: boolean
       type: object
     AssistantApiSoftwareCapabilities:
-      description: "These capabilities represent what software features the client supports. This should be determined based on the client's various software versions (OS, GSA version, etc). Next ID: 26"
+      description: "These capabilities represent what software features the client supports. This should be determined based on the client's various software versions (OS, GSA version, etc). Next ID: 27"
       properties:
         appCapabilities:
           description: "IMPORTANT: Only one of AppCapabilities and AppCapabilitiesDelta should be in the SoftwareCapabilities. In the edge case if the client sends up both AppCapabilities and AppCapabilitiesDelta, AppCapabilitiesDelta is ignored. Complete list of app capabilities."
@@ -9457,6 +9472,9 @@ components:
           $ref: "#/components/schemas/AssistantApiGacsCapabilities"
         gcmCapabilities:
           $ref: "#/components/schemas/AssistantApiGcmCapabilities"
+        homeAppCapabilities:
+          $ref: "#/components/schemas/AssistantApiCapabilitiesHomeAppCapabilities"
+          description: Google Home app features.
         liveTvChannelCapabilities:
           $ref: "#/components/schemas/AssistantApiLiveTvChannelCapabilities"
           description: Capabilities related to live TV channels.
@@ -9639,7 +9657,7 @@ components:
           type: integer
       type: object
     AssistantApiSupportedFeatures:
-      description: "These are the set of features that are supported by the device. It's a part of the SoftwareCapabilities of the device. Next ID: 62"
+      description: "These are the set of features that are supported by the device. It's a part of the SoftwareCapabilities of the device. Next ID: 63"
       properties:
         aaeNotificationSourceSupported:
           description: Whether the client supports the alternative message notification sources on AAE, in which case notification-related operations can access it.
@@ -9672,6 +9690,9 @@ components:
           type: boolean
         clientOpResultBatchingSupported:
           description: Whether the client can batch client op results before sending them to the server.
+          type: boolean
+        confirmationBeforeReadingMultipleMessagesSupported:
+          description: Whether the client supports confirmation flow before announcement of multiple messages. If set to true the user will be prompted once and confirmation will be taken before all the messages are announced.
           type: boolean
         crossDeviceBroadcastSupported:
           description: Whether the client supports cross-device broadcast (i.e. on Torus).
@@ -11629,8 +11650,14 @@ components:
           type: integer
       type: object
     AssistantLogsProviderAnnotationLog:
-      description: Provider annotation annotated from the query.
+      description: Provider annotation annotated from the query. These fields contain the detailed information for the provider. (e.g. for Youtube, package_names contains "com.google.android.youtube", localized_names contains "youtube", and lang contains "en" from "en-US" which depends on user's setting.)
       properties:
+        lang:
+          type: string
+        localizedNames:
+          items:
+            type: string
+          type: array
         packageNames:
           items:
             type: string
@@ -11749,6 +11776,7 @@ components:
             - MANUAL_DEFINED_REASON
             - SINGLE_NEARBY_DEVICE
             - PERSONAL_RESPONSE_BIT_OPTOUT_ON_LOCKED_PHONE
+            - FURTHER_LOCAL_DEVICE
           type: string
         resultConfidenceLevel:
           enum:
@@ -11758,7 +11786,7 @@ components:
           type: string
       type: object
     AssistantPrefulfillmentRankerPrefulfillmentSignals:
-      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 39"
+      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 41"
       properties:
         bindingSetAuis:
           description: Assistant User Interaction Score for binding set.
@@ -11809,6 +11837,12 @@ components:
           type: number
         isFeasible:
           description: "Feasibility of fulfilling the binding set. Eg: For PlayMedia, this is equivalent to playability. More details: go/hgr-feasibility-feature."
+          type: boolean
+        isFullyGrounded:
+          description: Whether the intent is fully grounded.
+          type: boolean
+        isPlayGenericMusic:
+          description: Whether the intent is a PlayGenericMusic-type intent.
           type: boolean
         kscorerRank:
           description: The rank order of the interpretation as determined by kscorer. The kscorer-determined dominant interpretation, if any, gets a rank of 0. The remaining N interpretations get a rank of 1 through N.
@@ -12100,7 +12134,6 @@ components:
             - CURATED
             - ALARM
             - CUSTOM
-            - CUSTOM_SCRIPT
           type: string
         uiPayload:
           additionalProperties:
@@ -13538,8 +13571,6 @@ components:
         lastSignificantUpdate:
           $ref: "#/components/schemas/QualityTimebasedLastSignificantUpdate"
           description: 'Contains a date used for the "Date Last Modified" toolbelt restrict mode. Note: this date is a combined date and is different from the pure shingle-based signal stored in contentage.last_significant_update field.'
-        oldnessInfo:
-          $ref: "#/components/schemas/QualityTimebasedOldnessInfo"
         pagetype:
           $ref: "#/components/schemas/QualityTimebasedPageType"
       type: object
@@ -13550,7 +13581,7 @@ components:
           $ref: "#/components/schemas/IndexingConverterRobotsInfo"
       type: object
     CompressedQualitySignals:
-      description: "A message containing per doc signals that are compressed and included in Mustang and TeraGoogle. For TeraGoogle, this message is included in perdocdata which means it can be used in preliminary scoring. CAREFUL: For TeraGoogle, this data resides in very limited serving memory (Flash storage) for a huge number of documents. Next id: 40"
+      description: "A message containing per doc signals that are compressed and included in Mustang and TeraGoogle. For TeraGoogle, this message is included in perdocdata which means it can be used in preliminary scoring. CAREFUL: For TeraGoogle, this data resides in very limited serving memory (Flash storage) for a huge number of documents. Next id: 42"
       properties:
         anchorMismatchDemotion:
           description: "anchor_mismatch_demotion: converted from QualityBoost.mismatched.boost."
@@ -13660,6 +13691,14 @@ components:
           format: uint32
           type: integer
         productReviewPPromoteSite:
+          format: uint32
+          type: integer
+        productReviewPReviewPage:
+          description: Fields product_review_p_review_page and product_review_p_uhq_page are for promoting/demoting HQ/LQ review pages in NGS. See go/pr-boosts for details. The possibility of a page being a review page.
+          format: uint32
+          type: integer
+        productReviewPUhqPage:
+          description: The possibility of a page being a high quality review page.
           format: uint32
           type: integer
         scamness:
@@ -16618,6 +16657,7 @@ components:
             - TYPE_PROTO
             - TYPE_EXTENSION
             - TYPE_NESTED_STRUCT
+            - TYPE_SEMANTIC_REFERENCE
             - TYPE_LAT_LONG
             - TYPE_MEASUREMENT
             - TYPE_HAS_VALUE
@@ -17701,6 +17741,7 @@ components:
             - PROVIDER_GOOGLE_MAPFACTS_PRIVACY
             - PROVIDER_GOOGLE_GT_ALF
             - PROVIDER_GOOGLE_GT_OPERATOR_PROVENANCE
+            - PROVIDER_GOOGLE_LOCAL_SERVICES_ADS
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -18224,6 +18265,7 @@ components:
             - PROVIDER_AMPUP
             - PROVIDER_LOOP
             - PROVIDER_ZEST
+            - PROVIDER_EZVOLT
           type: string
         rawMetadata:
           description: For every key that is used in raw_data from this source, there must be a corresponding entry in raw_metadata that describes this key.
@@ -18241,6 +18283,7 @@ components:
           type: string
       type: object
     GeostoreDateTimeProto:
+      description: "WARNING: Outside of FeatureProto, please avoid in favor of a standard civil time type. Direct usage is error-prone due to the conflation of physical time and civil time (go/httat). In a protocol buffer, please use google.type.Date, with an additional google.type.TimeOfDay for precision finer-grained than a day. (For google.type.DateTime, go/prototime#types cites go/httat#zoned_datetime as a caveat). In a programming language, see go/time-devguide/languages. Additionally in C++, google3/geostore/base/public/datetime.h has conversion functions between DateTimeProto and Abseil's civil time types."
       properties:
         precision:
           description: 'This attribute describes the precision of the date and time. It would be unusual for a data provider to provide a precision along with their date. It is more likely that the precision of a date will be inferred from the date format. For example "19th century" is likely to be correct to the century, while "1800" is probably correct to the year. The precision should be semantically interpreted as a cast, so a DateTimeProto object with a seconds value corresponding to 2018-03-28 18:40:00 UTC and a precision of MONTH should be interpreted as "March 2018". The enums above are only some of the possible precision levels for dates and times. Clients may wish to add more precision enums in the future. However, these enums must be ordered by decreasing duration. Clients should be able to write date formatting code that looks like this: if (datetime.precision() <= DateTimeProto::PRECISION_CENTURY) { date = FormatCenturyDate(proto.seconds()); } else if (proto.precision() <= case DateTimeProto::PRECISION_DECADE) { date = FormatDecadeDate(proto.seconds()); } else { ... } See geostore/base/public/datetime.h for date formatting utility functions.'
@@ -20341,6 +20384,7 @@ components:
             - PROVIDER_GOOGLE_MAPFACTS_PRIVACY
             - PROVIDER_GOOGLE_GT_ALF
             - PROVIDER_GOOGLE_GT_OPERATOR_PROVENANCE
+            - PROVIDER_GOOGLE_LOCAL_SERVICES_ADS
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -20864,6 +20908,7 @@ components:
             - PROVIDER_AMPUP
             - PROVIDER_LOOP
             - PROVIDER_ZEST
+            - PROVIDER_EZVOLT
           type: string
       type: object
     GeostoreIntersectionGroupProto:
@@ -21504,6 +21549,7 @@ components:
             - PROVIDER_GOOGLE_MAPFACTS_PRIVACY
             - PROVIDER_GOOGLE_GT_ALF
             - PROVIDER_GOOGLE_GT_OPERATOR_PROVENANCE
+            - PROVIDER_GOOGLE_LOCAL_SERVICES_ADS
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -22027,6 +22073,7 @@ components:
             - PROVIDER_AMPUP
             - PROVIDER_LOOP
             - PROVIDER_ZEST
+            - PROVIDER_EZVOLT
           type: string
         sourceDataset:
           type: string
@@ -22378,7 +22425,7 @@ components:
       description: "A pose is an object's position in space, as well as its orientation. All fields except lat and lng are optional. All fields are in the WGS-84 ellipsoid, and rotations are right-hand rule (i.e. if the right hand thumb points along a vector, curled fingers indicate positive rotation direction). An un-rotated pose would be pointing due North, along the surface of the ellipsoid. Rotations are applied in the order: yaw, pitch, roll. Note that the rotation axes are rotated along with the model for each rotation step. WARNING: This proto is not meant to be used directly. Please use the provided libraries: //geostore/base/public/pose.h //java/com/google/geostore/base/Pose.java"
       properties:
         altitude:
-          description: The height of the poses above the WGS-84 ellipsoid in meters.
+          description: The height of the pose. A positive height is above the WGS-84 ellipsoid in meters; negative is below.
           format: double
           type: number
         index:
@@ -22856,6 +22903,7 @@ components:
             - PROVIDER_GOOGLE_MAPFACTS_PRIVACY
             - PROVIDER_GOOGLE_GT_ALF
             - PROVIDER_GOOGLE_GT_OPERATOR_PROVENANCE
+            - PROVIDER_GOOGLE_LOCAL_SERVICES_ADS
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -23379,6 +23427,7 @@ components:
             - PROVIDER_AMPUP
             - PROVIDER_LOOP
             - PROVIDER_ZEST
+            - PROVIDER_EZVOLT
           type: string
       type: object
     GeostoreRankDetailsProto:
@@ -26476,6 +26525,11 @@ components:
         document:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1Document"
           description: Document created after executing create request.
+        longRunningOperations:
+          description: post-processing LROs
+          items:
+            $ref: "#/components/schemas/GoogleLongrunningOperation"
+          type: array
         metadata:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ResponseMetadata"
           description: Additional information for the API invocation, such as the request tracking id.
@@ -26797,17 +26851,21 @@ components:
     GoogleCloudContentwarehouseV1ExportToCdwPipeline:
       description: The configuration of exporting documents from the Document Warehouse to CDW pipeline.
       properties:
-        documentIds:
-          description: The list of all the documents to be processed.
+        docAiDataset:
+          description: "The CDW dataset resource name. Format: projects/{project}/locations/{location}/processors/{processor}/dataset"
+          type: string
+        documents:
+          description: "The list of all the resource names of the documents to be processed. Format: projects/{project_number}/locations/{location}/documents/{document_id}."
           items:
             type: string
           type: array
         exportFolderPath:
           description: "The Cloud Storage folder path used to store the exported documents before being sent to CDW. Format: gs:///."
           type: string
-        processorInfo:
-          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
-          description: The CDW processor information.
+        trainingSplitRatio:
+          description: Ratio of training dataset split. When importing into Document AI Workbench, documents will be automatically split into training and test split category with the specified ratio.
+          format: float
+          type: number
       type: object
     GoogleCloudContentwarehouseV1FetchAclRequest:
       description: Request message for DocumentService.FetchAcl
@@ -26861,6 +26919,9 @@ components:
         inputPath:
           description: "The input Cloud Storage folder. All files under this folder will be imported to Document Warehouse. Format: gs:///."
           type: string
+        processorResultsFolderPath:
+          description: "The Cloud Storage folder path used to store the raw results from processors. Format: gs:///."
+          type: string
         schemaName:
           description: "The Document Warehouse schema resource name. All documents processed by this pipeline will use this schema. Format: projects/{project_number}/locations/{location}/documentSchemas/{document_schema_id}."
           type: string
@@ -26868,11 +26929,8 @@ components:
     GoogleCloudContentwarehouseV1GcsIngestWithDocAiProcessorsPipeline:
       description: The configuration of the document classify/split and entity/kvp extraction pipeline.
       properties:
-        classifySplitProcessorInfos:
-          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
-          description: The classify or split processor information.
         extractProcessorInfos:
-          description: The entity or key-value pair extracting processor information.
+          description: The extract processors information. One matched extract processor will be used to process documents based on the classify processor result. If no classify processor is specificied, the first extract processor will be used.
           items:
             $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
           type: array
@@ -26882,6 +26940,9 @@ components:
         processorResultsFolderPath:
           description: "The Cloud Storage folder path used to store the raw results from processors. Format: gs:///."
           type: string
+        splitClassifyProcessorInfo:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
+          description: The split and classify processor information. The split and classify result will be used to find a matched extract processor.
       type: object
     GoogleCloudContentwarehouseV1GetDocumentRequest:
       description: Request message for DocumentService.GetDocument.
@@ -27108,6 +27169,24 @@ components:
         replaceRepeatedFields:
           description: When merging repeated fields, the default behavior is to append entries from the source repeated field to the destination repeated field. If you instead want to keep only the entries from the source repeated field, set this flag to true. If you want to replace a repeated field within a message field on the destination message, you must set both replace_repeated_fields and replace_message_fields to true, otherwise the repeated fields will be appended.
           type: boolean
+      type: object
+    GoogleCloudContentwarehouseV1ProcessWithDocAi:
+      description: The configuration of processing documents in Document Warehouse with DocAi processors pipeline.
+      properties:
+        documents:
+          description: "The list of all the resource names of the documents to be processed. Format: projects/{project_number}/locations/{location}/documents/{document_id}."
+          items:
+            type: string
+          type: array
+        exportFolderPath:
+          description: "The Cloud Storage folder path used to store the exported documents before being sent to CDW. Format: gs:///."
+          type: string
+        processorInfo:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
+          description: The CDW processor information.
+        processorResultsFolderPath:
+          description: "The Cloud Storage folder path used to store the raw results from processors. Format: gs:///."
+          type: string
       type: object
     GoogleCloudContentwarehouseV1ProcessorInfo:
       description: The DocAI processor information.
@@ -27408,13 +27487,16 @@ components:
       properties:
         exportCdwPipeline:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ExportToCdwPipeline"
-          description: Export docuemnts from Document Warehouseing to CDW for training purpose.
+          description: Export docuemnts from Document Warehouse to CDW for training purpose.
         gcsIngestPipeline:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1GcsIngestPipeline"
           description: Cloud Storage ingestion pipeline.
         gcsIngestWithDocAiProcessorsPipeline:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1GcsIngestWithDocAiProcessorsPipeline"
           description: Use DocAI processors to process documents in Cloud Storage and ingest them to Document Warehouse.
+        processWithDocAiPipeline:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessWithDocAi"
+          description: Use a DocAI processor to process documents in Document Warehouse, and re-ingest the updated results into Document Warehouse.
       type: object
     GoogleCloudContentwarehouseV1SearchDocumentsRequest:
       description: Request message for DocumentService.SearchDocuments.
@@ -28620,7 +28702,7 @@ components:
           format: google-datetime
           type: string
         committedUntilIsMixed:
-          description: TODO(b/265939748) To be removed, always false from User Status Service.
+          description: TODO(b/265939748) To be removed, always false.
           type: boolean
         eventSummary:
           description: The summary of the corresponding event in Calendar.
@@ -28655,7 +28737,7 @@ components:
           format: google-datetime
           type: string
         committedUntilIsMixed:
-          description: TODO(b/265939748) To be removed, always false from User Status Service.
+          description: TODO(b/265939748) To be removed, always false.
           type: boolean
         nextAvailable:
           description: The next time when the user will be available, i.e., when their status will be neither InMeeting, CalendarBusy, DoNotDisturb, OutsideWorkingHours, nor OutOfOffice.
@@ -28678,7 +28760,7 @@ components:
           format: google-datetime
           type: string
         committedUntilIsMixed:
-          description: TODO(b/265939748) To be removed, always false from User Status Service.
+          description: TODO(b/265939748) To be removed, always false.
           type: boolean
         eventSummary:
           description: The summary of the corresponding event in Calendar.
@@ -28732,7 +28814,7 @@ components:
           format: google-datetime
           type: string
         committedUntilIsMixed:
-          description: TODO(b/265939748) To be removed, always false from User Status Service.
+          description: TODO(b/265939748) To be removed, always false.
           type: boolean
         eventSummary:
           description: The summary of the corresponding OOO block in Calendar. This is entered by the user, so we return it "as is" - no i18n.
@@ -28931,6 +29013,7 @@ components:
             - UNAUTHENTICATED_USER_ID
             - SUPPORT_CASES_ID
             - FITBIT_P11_ID
+            - SHORT_PHONE_NUMBER
           type: string
       type: object
     GoogleInternalCommunicationsInstantmessagingV1LocationHint:
@@ -31945,7 +32028,7 @@ components:
           type: array
       type: object
     ImageRepositoryContentBasedVideoMetadata:
-      description: "Next Tag: 48"
+      description: "Next Tag: 49"
       properties:
         amarnaDocid:
           description: A hash of the video bytes used as a key to Amarna's video_metadata table.
@@ -31985,6 +32068,9 @@ components:
           description: Information about the media file, such as duration, resolution, and detail about each audio/video stream. Note that it contains no PII.
         representativeFrameData:
           $ref: "#/components/schemas/ImageData"
+        s3Asr:
+          $ref: "#/components/schemas/ImageRepositoryAmarnaCloudSpeechSignals"
+          description: Trnascript generated through AMARNA_CLOUD_SPEECH asset in Venom. Note that AMARNA_CLOUD_SPEECH uses S3 as the speech engine backend, similar to YT caption's SPEECH_RECOGNIZER asset. However, they may use different S3 models.
         s3LanguageIdentification:
           $ref: "#/components/schemas/ImageRepositoryS3LangIdSignals"
         safesearchVideoContentSignals:
@@ -32014,7 +32100,7 @@ components:
           type: array
         transcriptAsr:
           $ref: "#/components/schemas/PseudoVideoData"
-          description: Speech related metadata
+          description: Speech related metadata The transcript_asr field is generated from the YT caption's SPEECH_RECOGNIZER asset.
         truncationInfo:
           $ref: "#/components/schemas/ImageRepositoryFileTruncationInfo"
           description: Data about whether or not the video was truncated.
@@ -32657,7 +32743,11 @@ components:
           type: number
       type: object
     ImageSafesearchContentOCRAnnotation:
+      description: "A protocol buffer to store the OCR annotation. Next available tag id: 10."
       properties:
+        ocrAnnotationVersion:
+          description: A string that indicates the version of SafeSearch OCR annotation.
+          type: string
         ocrProminenceScore:
           description: The score produced by Aksara geometry and spoof score. Describes the 'visibility' or 'importance' of the text on the image [0, 1]
           format: float
@@ -36602,7 +36692,7 @@ components:
           type: array
       type: object
     KnowledgeAnswersIntentQueryFunctionCallSignals:
-      description: "Next ID: 35"
+      description: "Next ID: 36"
       properties:
         argumentComposingMid:
           description: The argument mid that was used to compose the entity for a concept interpretation, along with the intent_composing_mid (one of the intent's equivalent MIDs).
@@ -36706,6 +36796,9 @@ components:
         refxSummaryNodeId:
           description: The id of the summary node if this funcall represents an mdvc interpretation
           type: string
+        responseMeaningSignals:
+          $ref: "#/components/schemas/KnowledgeAnswersIntentQueryResponseMeaningSignalsResponseMeaningSignals"
+          description: "Signal data from SRM generation. Solely used internally. See: go/srm-design."
         resultSupport:
           description: The list of result supports for this FunctionCall.
           items:
@@ -36784,8 +36877,10 @@ components:
             - UNKNOWN_ID_TYPE
             - ALARM
             - CALENDAR
+            - CALENDAR_EVENT
             - KG
             - LIST
+            - LIST_ITEM
             - NOTE
             - PROVIDER
             - STOPWATCH
@@ -36799,6 +36894,7 @@ components:
             - RECIPE
             - PERSON
             - COMM_ENDPOINT
+            - CALL_LOG
             - NEWS
             - MEDIA
             - CONCEPT
@@ -36806,6 +36902,7 @@ components:
             - ATTENTIONAL_ENTITY
             - AUDIO_MESSAGE_METADATA_ID
             - BROADCAST
+            - MESSAGE_CONTENT
           type: string
       type: object
     KnowledgeAnswersIntentQueryImpliedEntity:
@@ -37033,6 +37130,14 @@ components:
         youtubeViews:
           format: uint64
           type: string
+      type: object
+    KnowledgeAnswersIntentQueryResponseMeaningSignalsResponseMeaningSignals:
+      description: SRM signal data. Properties here should be nonsemantic. Semantic properties should be modeled directly in the SRM.
+      properties:
+        propertyValue:
+          items:
+            $ref: "#/components/schemas/FreebasePropertyValue"
+          type: array
       type: object
     KnowledgeAnswersIntentQuerySaftSignals:
       description: Signals derived from overlapping saft annotations.
@@ -42859,6 +42964,23 @@ components:
         cuisineGcid:
           type: string
       type: object
+    NlpSemanticParsingLocalEvChargingStationConnectorConstraint:
+      properties:
+        connectorType:
+          enum:
+            - OTHER
+            - J_1772
+            - MENNEKES
+            - CHADEMO
+            - CCS_COMBO_1
+            - CCS_COMBO_2
+            - TESLA_ROADSTER
+            - TESLA_S_HPWC
+            - TESLA
+            - GB_T
+            - WALL_OUTLET
+          type: string
+      type: object
     NlpSemanticParsingLocalEvChargingStationSpeedConstraint:
       description: There is an implicit AND relation if multiple EVCS constraint types are specified.
       properties:
@@ -43161,7 +43283,7 @@ components:
           $ref: "#/components/schemas/NlpSemanticParsingLocalVicinityLocation"
       type: object
     NlpSemanticParsingLocalLocationConstraint:
-      description: "All the possible location constraints. This message is associated with a location and can be nested accordingly. E.g., for a compound location the constraint may be associated with the entire location or with either of the two internal locations (loc_1 and loc_2). There is an implicit AND relation between the different constraints. Next ID: 24."
+      description: "All the possible location constraints. This message is associated with a location and can be nested accordingly. E.g., for a compound location the constraint may be associated with the entire location or with either of the two internal locations (loc_1 and loc_2). There is an implicit AND relation between the different constraints. Next ID: 25."
       properties:
         amenities:
           $ref: "#/components/schemas/NlpSemanticParsingLocalAmenities"
@@ -43170,6 +43292,9 @@ components:
           $ref: "#/components/schemas/NlpSemanticParsingLocalChainMemberConstraint"
         cuisine:
           $ref: "#/components/schemas/NlpSemanticParsingLocalCuisineConstraint"
+        evcsConnectorConstraint:
+          $ref: "#/components/schemas/NlpSemanticParsingLocalEvChargingStationConnectorConstraint"
+          description: Used for populating ElectricVehicleConnectorRefinement from QBF go/evcs-qbf-connector
         evcsSpeedConstraint:
           $ref: "#/components/schemas/NlpSemanticParsingLocalEvChargingStationSpeedConstraint"
         gcidConstraint:
@@ -47552,6 +47677,7 @@ components:
             - TRANSCONSOLE
             - MARKETPLACE
             - SPORK
+            - DASHER_SUSTAINABILITY
           type: string
         stateStatus:
           description: '* There can be multiple states based on the context: 1. AUTOCOMPLETE + Gmail - context 1 2. AUTOCOMPLETE + Chat/Dynamite - context 2 3. "SOME OTHER ACTION" + Gmail - context 3 A client should identify whether a patrticular context is present in the list and only if one is found - use the state that goes alogn with the context, otherwise the client should default to whatever is the safe assumption about "internality/externality" the application should be making (likely, consider everything not explicitly "internal" as "external").'
@@ -47883,6 +48009,9 @@ components:
         rsApplication:
           $ref: "#/components/schemas/RepositoryAnnotationsRdfaRdfaRichSnippetsApplication"
           description: Application information associated to the document.
+        s3AudioLanguage:
+          $ref: "#/components/schemas/S3AudioLanguageS3AudioLanguage"
+          description: Primary video's audio language classified by S3 based Automatic Language Identification (only for watch pages).
         saftLanguageInt:
           description: "Top document language as generated by SAFT LangID. For now we store bare minimum: just the top 1 language value, converted to the language enum, and only when different from the first value in 'languages'."
           items:
@@ -50263,6 +50392,7 @@ components:
             - REMINDER_DRAGONGLASS_ARIS
             - REMINDER_PROACTIVE_API
             - REMINDER_POST_TASK_MIGRATION
+            - REMINDER_VOLUNTARY_TASK_MIGRATION
             - REMINDER_NOTIFICATION_ENABLE_NOTICE
             - CROSS_SURFACE
             - CROSS_SURFACE_MOVIE_SHOWTIMES
@@ -52476,86 +52606,55 @@ components:
             enum:
               - NONE
               - TUTORIAL
-              - EXAMPLES
               - MAP
               - TRANSLATE
-              - MEANING
               - LISTEN
               - PROMOTION
-              - SOUNDTRACK
               - GIF
-              - EPISODES
               - REGISTER
               - EVENT_LISTING
               - RANKING
               - DISCOGRAPHY
               - DIRECTIONS
               - NEWS
-              - POPULATION
-              - BEHIND_THE_SCENES
               - SOCIAL_MEDIA
               - FAN_FICTION
-              - ADVICE
               - RECIPES
-              - CAST
-              - ONLINE_QUIZ
               - HOURS_OF_OPERATION
               - DEFINITION
               - REAL_ESTATE_LISTING
-              - FOR_KIDS
-              - BOOKS_BY_AUTHOR
               - PREVIEW
-              - BIOGRAPHY
               - PURCHASE
               - MENU
-              - BLOG
               - UNBOXING
-              - IMAGES
               - NUTRITION_FACTS
-              - SCIENTIFIC_EXPLANATION
-              - ABOUT_PAGE
-              - READ_BOOK
               - TRAVEL_GUIDE
               - SPECS
               - CALCULATOR
               - DOWNLOAD
               - SCORES
-              - SUMMARY
               - QUOTES
               - SHOWTIMES
               - CATALOG
-              - ONLINE_CLASS
               - CALENDAR
-              - ANALYSIS
               - LOCATION_FINDER
-              - COMIC
               - RENT
-              - WATCH_MOVIE_TV_SHOW
-              - CHARACTERS
               - STUDY_GUIDE
-              - WATCH_VIDEO
-              - APP
               - REVIEW
               - SHEET_MUSIC
-              - SEARCH_RESULTS
               - LOGIN
               - TRIVIA
               - CONTACT_PAGE
-              - TEMPLATE
               - RESERVATION
               - CUSTOMER_SUPPORT
               - INTERVIEW
-              - USER_COMMENTS
               - COUPON
               - FLIGHT_TRACKER
               - COMPANY_FINANCIALS
-              - WEATHER
               - FORUM
               - THESAURUS
-              - ONLINE_GAMES
               - MANUAL
               - JOB_POSTING
-              - MUSIC_VIDEO
               - LYRICS
               - SYMPTOMS
               - REPAIR
@@ -52571,6 +52670,7 @@ components:
               - MUGSHOT
               - CRIME
               - SHOPPING_TOPN
+              - AUTHENTIC
               - RESERVED_FOR_NEW_ENUM_128
               - RESERVED_FOR_NEW_ENUM_129
               - RESERVED_FOR_NEW_ENUM_130
@@ -52591,7 +52691,6 @@ components:
               - RESERVED_FOR_NEW_ENUM_145
               - RESERVED_FOR_NEW_ENUM_146
               - RESERVED_FOR_NEW_ENUM_147
-              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_97
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_98
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_99
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_100
@@ -52622,6 +52721,37 @@ components:
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_125
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_126
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_127
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_2
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_5
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_8
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_10
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_17
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_18
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_21
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_23
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_24
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_28
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_29
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_31
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_34
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_36
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_38
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_39
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_40
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_46
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_50
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_52
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_54
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_56
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_57
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_59
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_60
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_63
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_67
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_71
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_75
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_78
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_81
             type: string
           type: array
         scores:
@@ -52643,86 +52773,55 @@ components:
             enum:
               - NONE
               - TUTORIAL
-              - EXAMPLES
               - MAP
               - TRANSLATE
-              - MEANING
               - LISTEN
               - PROMOTION
-              - SOUNDTRACK
               - GIF
-              - EPISODES
               - REGISTER
               - EVENT_LISTING
               - RANKING
               - DISCOGRAPHY
               - DIRECTIONS
               - NEWS
-              - POPULATION
-              - BEHIND_THE_SCENES
               - SOCIAL_MEDIA
               - FAN_FICTION
-              - ADVICE
               - RECIPES
-              - CAST
-              - ONLINE_QUIZ
               - HOURS_OF_OPERATION
               - DEFINITION
               - REAL_ESTATE_LISTING
-              - FOR_KIDS
-              - BOOKS_BY_AUTHOR
               - PREVIEW
-              - BIOGRAPHY
               - PURCHASE
               - MENU
-              - BLOG
               - UNBOXING
-              - IMAGES
               - NUTRITION_FACTS
-              - SCIENTIFIC_EXPLANATION
-              - ABOUT_PAGE
-              - READ_BOOK
               - TRAVEL_GUIDE
               - SPECS
               - CALCULATOR
               - DOWNLOAD
               - SCORES
-              - SUMMARY
               - QUOTES
               - SHOWTIMES
               - CATALOG
-              - ONLINE_CLASS
               - CALENDAR
-              - ANALYSIS
               - LOCATION_FINDER
-              - COMIC
               - RENT
-              - WATCH_MOVIE_TV_SHOW
-              - CHARACTERS
               - STUDY_GUIDE
-              - WATCH_VIDEO
-              - APP
               - REVIEW
               - SHEET_MUSIC
-              - SEARCH_RESULTS
               - LOGIN
               - TRIVIA
               - CONTACT_PAGE
-              - TEMPLATE
               - RESERVATION
               - CUSTOMER_SUPPORT
               - INTERVIEW
-              - USER_COMMENTS
               - COUPON
               - FLIGHT_TRACKER
               - COMPANY_FINANCIALS
-              - WEATHER
               - FORUM
               - THESAURUS
-              - ONLINE_GAMES
               - MANUAL
               - JOB_POSTING
-              - MUSIC_VIDEO
               - LYRICS
               - SYMPTOMS
               - REPAIR
@@ -52738,6 +52837,7 @@ components:
               - MUGSHOT
               - CRIME
               - SHOPPING_TOPN
+              - AUTHENTIC
               - RESERVED_FOR_NEW_ENUM_128
               - RESERVED_FOR_NEW_ENUM_129
               - RESERVED_FOR_NEW_ENUM_130
@@ -52758,7 +52858,6 @@ components:
               - RESERVED_FOR_NEW_ENUM_145
               - RESERVED_FOR_NEW_ENUM_146
               - RESERVED_FOR_NEW_ENUM_147
-              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_97
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_98
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_99
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_100
@@ -52789,6 +52888,37 @@ components:
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_125
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_126
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_127
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_2
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_5
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_8
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_10
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_17
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_18
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_21
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_23
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_24
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_28
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_29
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_31
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_34
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_36
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_38
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_39
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_40
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_46
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_50
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_52
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_54
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_56
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_57
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_59
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_60
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_63
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_67
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_71
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_75
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_78
+              - RESERVED_FOR_DELETED_ENUM_DO_NOT_REUSE_81
             type: string
           type: array
         scores:
@@ -53565,6 +53695,7 @@ components:
             - MAST
             - FUZZY_MATCHER_REWRITE
             - SHOPPING_PREFERENCES_REWRITE
+            - MAGI_CONTEXT_ENGINE_REWRITE
           type: string
       type: object
     QualityQrewriteContactCalendarName:
@@ -54796,6 +54927,7 @@ components:
             - QUERY_TERM_MATCH
             - RADISH
             - BRAIN
+            - QUOTED_TERM
           type: string
       type: object
     QualitySnippetsTruncationSnippetBoldedRangePosition:
@@ -54888,12 +55020,6 @@ components:
           description: "The upperbound value derived from passage timestamps. If present, the LSU date should never exceed this value. Design doc: go/lsu-max-passage-timestamp"
           format: int64
           type: string
-      type: object
-    QualityTimebasedOldnessInfo:
-      properties:
-        isOldPage:
-          description: Set to true if this page is considered old.
-          type: boolean
       type: object
     QualityTimebasedPageType:
       properties:
@@ -57283,6 +57409,7 @@ components:
             - THEME
             - TVM_ATTRIBUTE
             - WEIGHT
+            - EXCLUSION
           type: string
         direction:
           description: Direction defines the relation between the measurable aspect and the facet.
@@ -57383,6 +57510,7 @@ components:
             - SUPERLATIVE
             - FACET_AUDIENCE
             - FACET_PURPOSE
+            - FACET_EXCLUSION
             - FACET_SETTING_BY_LOCATION
             - FACET_DECORATIVE_PATTERN
             - FACET_ELECTRONIC_DEVICE_CONNECTIVITY
@@ -58821,8 +58949,6 @@ components:
         matchingMetadata:
           $ref: "#/components/schemas/RepositoryWebrefPreprocessingUrlMatchingMetadata"
           description: Metadata related to why this doc was matched to its owning entity.
-        obsoleteAnchorsWithoutInterwiki:
-          $ref: "#/components/schemas/RepositoryWebrefSimplifiedAnchors"
         refconDocumentMetadata:
           $ref: "#/components/schemas/RepositoryWebrefRefconRefconDocumentMetadata"
           description: Additional document metadata needed by Refcon.
@@ -60908,6 +61034,213 @@ components:
         src:
           type: string
       type: object
+    S3AudioLanguageS3AudioLanguage:
+      description: S3 based Audio language information about a Watch Page.
+      properties:
+        language:
+          description: Audio language of video classified by Automatic Language Identification. It corresponds to the langid_result in S3LangIdSignals.
+          enum:
+            - ENGLISH
+            - DANISH
+            - DUTCH
+            - FINNISH
+            - FRENCH
+            - GERMAN
+            - HEBREW
+            - ITALIAN
+            - JAPANESE
+            - KOREAN
+            - NORWEGIAN
+            - POLISH
+            - PORTUGUESE
+            - RUSSIAN
+            - SPANISH
+            - SWEDISH
+            - CHINESE
+            - CZECH
+            - GREEK
+            - ICELANDIC
+            - LATVIAN
+            - LITHUANIAN
+            - ROMANIAN
+            - HUNGARIAN
+            - ESTONIAN
+            - TG_UNKNOWN_LANGUAGE
+            - UNKNOWN_LANGUAGE
+            - BULGARIAN
+            - CROATIAN
+            - SERBIAN
+            - IRISH
+            - GALICIAN
+            - TAGALOG
+            - TURKISH
+            - UKRAINIAN
+            - HINDI
+            - MACEDONIAN
+            - BENGALI
+            - INDONESIAN
+            - LATIN
+            - MALAY
+            - MALAYALAM
+            - WELSH
+            - NEPALI
+            - TELUGU
+            - ALBANIAN
+            - TAMIL
+            - BELARUSIAN
+            - JAVANESE
+            - OCCITAN
+            - URDU
+            - BIHARI
+            - GUJARATI
+            - THAI
+            - ARABIC
+            - CATALAN
+            - ESPERANTO
+            - BASQUE
+            - INTERLINGUA
+            - KANNADA
+            - PUNJABI
+            - SCOTS_GAELIC
+            - SWAHILI
+            - SLOVENIAN
+            - MARATHI
+            - MALTESE
+            - VIETNAMESE
+            - FRISIAN
+            - SLOVAK
+            - CHINESE_T
+            - FAROESE
+            - SUNDANESE
+            - UZBEK
+            - AMHARIC
+            - AZERBAIJANI
+            - GEORGIAN
+            - TIGRINYA
+            - PERSIAN
+            - BOSNIAN
+            - SINHALESE
+            - NORWEGIAN_N
+            - PORTUGUESE_P
+            - PORTUGUESE_B
+            - XHOSA
+            - ZULU
+            - GUARANI
+            - SESOTHO
+            - TURKMEN
+            - KYRGYZ
+            - BRETON
+            - TWI
+            - YIDDISH
+            - SERBO_CROATIAN
+            - SOMALI
+            - UIGHUR
+            - KURDISH
+            - MONGOLIAN
+            - ARMENIAN
+            - LAOTHIAN
+            - SINDHI
+            - RHAETO_ROMANCE
+            - AFRIKAANS
+            - LUXEMBOURGISH
+            - BURMESE
+            - KHMER
+            - TIBETAN
+            - DHIVEHI
+            - CHEROKEE
+            - SYRIAC
+            - LIMBU
+            - ORIYA
+            - ASSAMESE
+            - CORSICAN
+            - INTERLINGUE
+            - KAZAKH
+            - LINGALA
+            - MOLDAVIAN
+            - PASHTO
+            - QUECHUA
+            - SHONA
+            - TAJIK
+            - TATAR
+            - TONGA
+            - YORUBA
+            - CREOLES_AND_PIDGINS_ENGLISH_BASED
+            - CREOLES_AND_PIDGINS_FRENCH_BASED
+            - CREOLES_AND_PIDGINS_PORTUGUESE_BASED
+            - CREOLES_AND_PIDGINS_OTHER
+            - MAORI
+            - WOLOF
+            - ABKHAZIAN
+            - AFAR
+            - AYMARA
+            - BASHKIR
+            - BISLAMA
+            - DZONGKHA
+            - FIJIAN
+            - GREENLANDIC
+            - HAUSA
+            - HAITIAN_CREOLE
+            - INUPIAK
+            - INUKTITUT
+            - KASHMIRI
+            - KINYARWANDA
+            - MALAGASY
+            - NAURU
+            - OROMO
+            - RUNDI
+            - SAMOAN
+            - SANGO
+            - SANSKRIT
+            - SISWANT
+            - TSONGA
+            - TSWANA
+            - VOLAPUK
+            - ZHUANG
+            - KHASI
+            - SCOTS
+            - GANDA
+            - MANX
+            - MONTENEGRIN
+            - AKAN
+            - IGBO
+            - MAURITIAN_CREOLE
+            - HAWAIIAN
+            - CEBUANO
+            - EWE
+            - GA
+            - HMONG
+            - KRIO
+            - LOZI
+            - LUBA_LULUA
+            - LUO_KENYA_AND_TANZANIA
+            - NEWARI
+            - NYANJA
+            - OSSETIAN
+            - PAMPANGA
+            - PEDI
+            - RAJASTHANI
+            - SESELWA_CREOLE_FRENCH
+            - TUMBUKA
+            - VENDA
+            - WARAY_PHILIPPINES
+            - NUM_LANGUAGES
+          type: string
+        languageConfidence:
+          description: Confidence interval of the recognized language.
+          enum:
+            - UNKNOWN_CONFIDENCE
+            - NOT_CONFIDENT
+            - CONFIDENT
+            - HIGHLY_CONFIDENT
+          type: string
+        speechClass:
+          description: Type of detected speech.
+          enum:
+            - UNKNOWN
+            - NO_SPEECH
+            - HAS_SPEECH_FOR_ASR
+          type: string
+      type: object
     SafesearchInternalImageSignals:
       description: A proto that stores SafeSearch internal signals that are not exported to clients.
       properties:
@@ -62514,6 +62847,13 @@ components:
         inferredImageId:
           format: uint64
           type: string
+        inferredImageSource:
+          enum:
+            - INFERRED_IMAGE_SOURCE_UNKNOWN
+            - INFERRED_IMAGE_SOURCE_WEB_INDEX
+            - INFERRED_IMAGE_SOURCE_OVERLAY
+            - INFERRED_IMAGE_SOURCE_SCARAB
+          type: string
         inferredImageType:
           enum:
             - INFERRED_IMAGE_TYPE_UNKNOWN
@@ -62632,7 +62972,7 @@ components:
           format: uint64
           type: string
         adsDensityInterstitialViolationStrength:
-          description: Indicates if the page is violating mobile ads density interstitial policy and the voilation strength. See go/interstitials-for-ads and http://ariane/268642 for details. To save indexing space, we convert the double values in [0.0, 1.0] to intergers in range [0, 1000] by using floor(value * 1000).
+          description: Indicates if the page is violating mobile ads density interstitial policy and the violation strength. See go/interstitials-for-ads and http://ariane/268642 for details. To save indexing space, we convert the double values in [0.0, 1.0] to intergers in range [0, 1000] by using floor(value * 1000).
           format: int32
           type: integer
         isErrorPage:
@@ -63266,8 +63606,12 @@ components:
           type: string
       type: object
     SocialGraphApiProtoImageReference:
-      description: A reference to a photo in either Photos Backend or SGI storage. This message should be treated as an opaque blob to avoid a dependency on a specific storage backend.
+      description: A reference to a photo in either Photos Backend or SGI storage. This message should be treated as an opaque blob to avoid a dependency on a specific storage backend. This version of ImageReference is visible outside of SGBE. Do not add fields that should not be exposed outside of Profile Service and Image Service.
       properties:
+        contentVersion:
+          description: Identifies the most recent version of this photo. Use this as a FIFE param (ie -iv12) to prevent reads of a stale version.
+          format: int64
+          type: string
         mediaId:
           description: Unique identifier for the photo. For now, this will always be a Photos Backend media key.
           type: string
@@ -64281,8 +64625,13 @@ components:
           type: string
       type: object
     StorageGraphBfgLivegraphProvenanceMetadata:
-      description: "Metadata on source assertions that isn't part of the user-visible Triple payload, and that doesn't really represent data provenance, but that's used to affect the way Livegraph and possibly other horizontal KG infra systems *process* the triple. Read: fields below really shouldn't be part of the cross-system Triple proto at all. But because Triple is used both as an internal and an external KG API, we at least want to \"hide\" those fields that ought to be purely part of the internal source <-> LG contract. Next id: 5"
+      description: "Metadata on source assertions that isn't part of the user-visible Triple payload, and that doesn't really represent data provenance, but that's used to affect the way Livegraph and possibly other horizontal KG infra systems *process* the triple. Read: fields below really shouldn't be part of the cross-system Triple proto at all. But because Triple is used both as an internal and an external KG API, we at least want to \"hide\" those fields that ought to be purely part of the internal source <-> LG contract. Next id: 6"
       properties:
+        directWriteRecordIds:
+          description: "If one triple is directly-written after recon by LG without going through Composer, we add the record id it's from. Otherwise, it's empty. Note: 1) LG will dedup record ids before updating it. So this field shouldn't see duplicated record ids. 2) This is used internally by LG only. So if set by clients, they will be dropped by LG."
+          items:
+            type: string
+          type: array
         lgInternalWriterId:
           description: Identifies the LG internal writers that asserted the triple. This is the same as 'origin_id' in LG. This will only be populated by the LG writers to FactStore
           format: uint64
@@ -66592,7 +66941,6 @@ components:
               - QUERY_HAS_SELECTED_BOOTS_CHIP
               - QUERY_HAS_ONLY_UNSELECTED_BOOTS_CHIPS
               - SPONSORED_ADS_CLUSTER
-              - BOOKS_QUERY_HAS_LANGUAGE_INTENT
               - IRON_THRONE_QUERY
               - GUIDED_DISCOVERY
               - BOOKS_AUTHOR_QUERY
@@ -66606,25 +66954,13 @@ components:
               - ENTERTAINMENT_CLUSTER_CONTAINER_SEARCH_ENABLED
               - SEARCH_NAV_SPONSORED_ADS_CLUSTER
               - TOP_CHART_RANKING_INFO
-              - CLIENT_TEST_CODE_VERIFICATION
               - APPS_PUB_QUERY
               - ABUSIVE_QUERY_SQUASHING_EVENT
-              - HOME_SPONSORED_ADS_RE_ENGAGEMENT_CLUSTER_EVENT_LEVEL
-              - SEARCH_LIVE_OP_QUERY_EVENT
-              - BOOTS_ES_PT
-              - BOOTS_URUC
-              - BOOTS_URUC_PER_INSTALL
-              - GEARHEAD_VANAGON_ESCAPE_HATCH_CANDIDATE
-              - BOOTS_JP_KR_V2
-              - BOOTS_FILTERS_AT_END
               - APP_SUPPORTS_INSTANT_LAUNCH
-              - SEARCH_MDP_LIVE_OP_QUERY_EVENT
-              - BOOTS_I18N
               - LOW_RESULT_CLUSTER
               - PERSONALIZED_CLUSTER
               - GAME_SEEKING_PERSONALIZED_CLUSTER_AT_EVENT_LEVEL
               - VX_CLUSTER
-              - LOW_RESULT_LATENCY
               - MOVIES_GROOT_20
               - MOVIES_GROOT_10
               - MOVIES_GROOT_5
@@ -66634,53 +66970,25 @@ components:
               - MOVIES_MDP_SEARCH
               - MOVIES_ORGANIC_SEARCH
               - FULL_PAGE_REPLACEMENT
-              - ENTERTAINMENT_CLUSTER_TRIGGERING_UNDER_FPR
-              - ENTERTAINMENT_CLUSTER_TRIGGERING_WHEN_FPR_ENABLED
-              - ENTERTAINMENT_CLUSTER_TRIGGERING_WHEN_FPR_TRIGGERED
-              - BOOTS_I18N_V2
-              - BOOTS_I18N_V2_VS_V1
               - AUDIOBOOKS_KIDS_CATEGORICAL_SEARCH
               - ZERO_RESULT
               - BOOTS_I18N_100_THRESH
-              - BOOTS_I18N_150_THRESH
               - DISPLAY_ADS_RESPONSE_RECEIVED_EVENT_LEVEL
               - BEST_SELLER_CART_TAG_FOR_MENDEL_AT_EVENT_LEVEL
               - ABUSIVE_QUERY
-              - PARTNER_VIOLENCE_TRIGGERING
-              - BOOTS_V3
               - HOME_SPONSORED_ADS_CLUSTER_NO_ADS
               - BOOKS_XSELL_ELIGIBLE_APP
               - NAV_EXT_EVENT
-              - PGS_TEST_CODE_LOGGING_VERIFICATION
-              - ADS_CUSTOM_DETAILS_PAGE_ASSETS_PRESENT_EVENT_LEVEL
               - ADS_CUSTOM_DETAILS_PAGE_ASSETS_SERVED_EVENT_LEVEL
               - BOOKS_DETAILS_PAGE_KEYWORD_CLUSTER_EVENT_LEVEL
-              - DETAILS_PAGE_LIVE_OPS
               - BOOKS_DETAILS_PAGE_SIMILAR_CLUSTER
               - BOOKS_DETAILS_PAGE_POST_ACQUIRE_SIMILAR_CLUSTER
-              - CDP_PROMOTIONAL_DESCRIPTION_LOCALE_MISMATCH
-              - CDP_PROMOTIONAL_DESCRIPTION_LOCALE_MATCH
-              - APPS_ST_PRICE_INTENT
-              - APPS_ST_AUDIENCE_INTENT
               - APPS_PERSONALIZED_TOPIC_QUERY_EVENT_LEVEL
               - APPS_PERSONALIZED_TG_QUERY_EVENT_LEVEL
               - APPS_PERSONALIZED_ALL_GAME_QUERIES_EVENT_LEVEL
               - APPS_PERSONALIZED_CATEGORICAL_GAME_SEEKING_QUERIES_EVENT_LEVEL
               - APPS_PERSONALIZED_CATEGORICAL_NON_TG_QUERIES_EVENT_LEVEL
-              - APPS_PERSONALIZED_VERTICAL_RFY_CLUSTER_EVENT_LEVEL
-              - APPS_PERSONALIZED_NAVIGATIONAL_EVENT_LEVEL
-              - APPS_PERSONALIZED_NAVIGATIONAL_GAME_EVENT_LEVEL
-              - APPS_PERSONALIZED_MDP_EVENT_LEVEL
-              - APPS_PERSONALIZED_MDP_GAME_EVENT_LEVEL
-              - CDP_PROMOTIONAL_IMAGE_LOCALE_MATCH
-              - CDP_PROMOTIONAL_IMAGE_LOCALE_MISMATCH
-              - CDP_SCREENSHOT_LOCALE_MISMATCH
-              - CDP_SCREENSHOT_LOCALE_MATCH
-              - CDP_PROMOTIONAL_VIDEO_LOCALE_MISMATCH
-              - CDP_PROMOTIONAL_VIDEO_LOCALE_MATCH
               - BOOKS_ELIGIBLE_FOR_BUNDLE_EVENT_LEVEL
-              - BOOKS_QUERY_ELIGIBLE_FOR_APPS_CLUSTER
-              - TEST_CODE_BUILD_VERIFICATION
               - GAMES_PROFILE_CREATION_EVENT
               - MOVIES_QUERY_ELIGIBLE_FOR_APPS_CLUSTER
               - MOVIES_WALLE_SEARCH
@@ -66689,9 +66997,6 @@ components:
               - BUNDLE_SERIES_DISCOUNT
               - APPS_SEARCH_TOPIC_RFY_CLUSTER_AT_EVENT_LEVEL
               - APPS_SEARCH_MINI_TOP_CHARTS_CLUSTER_AT_EVENT_LEVEL
-              - PLAY_STORE_SHOW_CART_EVENT_LEVEL
-              - HAS_BOOK_FREQUENTLY_BOUGHT_TOGETHER_BUNDLE_EVENT_LEVEL
-              - HAS_BOOK_SERIES_BUNDLE_EVENT_LEVEL
               - APPS_SEARCH_TOPIC_RFY_CLUSTER_COUNTERFACTUAL
               - APPS_SEARCH_MINI_TOP_CHARTS_CLUSTER_COUNTERFACTUAL
               - GEARHEAD_TOOLTIP_ASSISTANT_FIRST_RUN
@@ -66702,17 +67007,9 @@ components:
               - GEARHEAD_TOOLTIP_NOTIFICATION_FIRST_RUN
               - GEARHEAD_TOOLTIP_NOTIFICATION_NEW
               - GEARHEAD_TOOLTIP_NOTIFICATION_NTH_NEW
-              - BUNDLE_DISCOUNT_SHOWN_ON_DETAIL_PAGE
               - KIDS_AGE_SCORE_BONUS_AT_EVENT_LEVEL
               - KIDS_QUALITY_TAG_SCORE_BONUS_AT_EVENT_LEVEL
-              - TEST_FOR_LEVELS_FLAG_AT_EVENT_LEVEL
               - LB_TARGETED_AT_EVENT_LEVEL
-              - LB_ABOVE_AT_EVENT_LEVEL
-              - LB_BELOW_AT_EVENT_LEVEL
-              - GEARHEAD_TOOLTIP_CONTEXTUAL_ASSISTANT_DIALER_CONTACT
-              - LB_PAGINATED_AT_EVENT_LEVEL
-              - RECS_USER_INTENT_HP_LOW_INTENT_EVENT_LEVEL
-              - RECS_USER_INTENT_HP_HIGH_INTENT_EVENT_LEVEL
               - LB_IMPRESSED_AT_EVENT_LEVEL
               - GEARHEAD_INPUT_TOUCH_PRESENT
               - GEARHEAD_INPUT_ROTARY_PRESENT
@@ -66721,65 +67018,41 @@ components:
               - GEARHEAD_INPUT_ROTARY_ABSENT
               - GEARHEAD_INPUT_TOUCHPAD_ABSENT
               - CANCEL_SUBSCRIPTION_CONFIRMATION_DIALOG_SHOWN_WHEN_ELIGIBLE_FOR_ENTITLEMENT_BENEFITS_EVENT_LEVEL_AT_EVENT_LEVEL
-              - SMART_FOP_EVENT_LEVEL_AT_EVENT_LEVEL
               - SMART_FOP_AT_EVENT_LEVEL
               - VX_CLUSTER_IN_APPS_SERP_IMPRESSION
               - KIDS_CONTENT_SEEKING_QUERY
               - KIDS_CONTENT_SEEKING_QUERY_TREATMENT_APPLIED
-              - VX_QREF_TRIGGERED_AT_EVENT_LEVEL_AT_EVENT_LEVEL
-              - VX_NAVBOOST_SUPPRESSED_AT_EVENT_LEVEL_AT_EVENT_LEVEL
-              - VX_QREF_TRIGGERED_AT_EVENT_LEVEL
-              - VX_NAVBOOST_SUPPRESSED_AT_EVENT_LEVEL
               - PREFERRED_FOP
               - REDEEM_NOT_ENROLLED_TO_LOYALTY
               - GEARHEAD_TOOLTIP_SETTINGS
-              - GEARHEAD_TOOLTIP_CALENDAR
-              - POST_RESPONSE_MDP_BUT_QCM_IS_UNKNOWN
-              - POST_RESPONSE_MDP_BUT_QCM_IS_NAVEXT
-              - POST_RESPONSE_MDP_BUT_QCM_IS_NAVIGATIONAL
-              - POST_RESPONSE_MDP_BUT_QCM_IS_MULTINAV
-              - POST_RESPONSE_MDP_BUT_QCM_IS_CATEGORITCAL
-              - ONETREE_MDP_BUT_POST_RESPONSE_NOT_MDP
               - SEARCH_MDP_TRIGGERED_EVENT_LEVEL
-              - IN_APP_MESSAGING_APP_1
               - DEVELOPER_PAGE_AT_EVENT_LEVEL
               - BOOKS_FREE_FIXED_DURATION_RENTAL_EVENT_LEVEL
               - BOOKS_FREE_FIXED_DATE_RENTAL_EVENT_LEVEL
               - BOOKS_PRICE_DROP_EVENT_LEVEL
               - TG_VALIDATED_CRISPR_TAG_AT_EVENT_LEVEL
-              - HAS_PLAY_CONSOLE_CUSTOM_STORE_LISTING
               - GEARHEAD_TOOLTIP_ASSISTANT_DIALER_FIRST_OPEN
               - GEARHEAD_TOOLTIP_ASSISTANT_MEDIA_OPEN
               - GEARHEAD_WIDESCREEN_DISPLAY
-              - GEARHEAD_MULTI_DISPLAY
               - GEARHEAD_TOOLTIP_ASSISTANT_PHONE_CALL_ENDED
               - SERIES_BUNDLE_MULTI_TIER_DISCOUNT_EVENT_LEVEL
-              - DIALER_ASSISTANT_CALL_ACTION_SHOWN
-              - DIALER_ASSISTANT_CALL_ACTION_CLICKED
               - GEARHEAD_TOOLTIP_FEEDBACK
-              - GEARHEAD_TOOLTIP_ASSISTANT_THREE_RUNS
               - GEARHEAD_TOOLTIP_ASSISTANT_MEDIA_REC_FIRST_RUN
               - GEARHEAD_WORK_PROFILE_DETECTED
               - GEARHEAD_WORK_PROFILE_DETECTED_AND_COMPATIBLE
               - GEARHEAD_WORK_PROFILE_QUERYING_ALLOWED
               - PLAY_ADS_REENGAGEMENT_COUNTERFACTUAL
-              - PLAY_ADS_THIRD_LIST_VIEW_ADS_COUNTERFACTUAL
-              - MISMATCH_BETWEEN_FINSKY_TARGETING_AND_SKELETON
               - GEARHEAD_TOOLTIP_ASSISTANT_LAUNCHER_OPEN
               - GEARHEAD_MULTIPLE_CALLABLE_PHONE_ACCOUNTS_DETECTED
               - GEARHEAD_USER_HAS_SELECTED_OUTGOING_PHONE_ACCOUNT
               - GEARHEAD_TOOLTIP_ASSISTANT_LONG_DRIVE_START
               - GEARHEAD_TOOLTIP_DIALER_MULTI_SIM
               - GEARHEAD_AUDIO_SERVICE_MIGRATION
-              - GEARHEAD_MEDIA_APP_DOWNLOAD_LEAVE_BEHIND_NOTIFICATION
               - GEARHEAD_TOOLTIP_ASSISTANT_MEDIA_REC_MEDIA_IDLE
-              - GEARHEAD_USER_DEVICE_UNPLUGGED
               - GEARHEAD_DO_NOT_DISTURB_CALLS_ENABLED
-              - GEARHEAD_DEFAULT_MEDIA_APP_SET_FROM_MULTIPLE_OPTIONS
               - REGIONAL_NAV_EXT_EVENT_LEVEL
               - GEARHEAD_TOOLTIP_BUGREPORT
               - GENERAL_QUERY_PAGINATION_EVENT_LEVEL
-              - MULTINAV_PAGINATION_EVENT_LEVEL
               - GEARHEAD_SESSION_ELIGIBLE_FOR_MEDIA_AUTOPLAY
               - GEARHEAD_AUDIO_FLOW_CONTROL_PERMIT_UNAVAILABLE
               - SHOULD_SEE_SEARCH_MEDIA_RESULT_CLUSTER
@@ -66794,37 +67067,26 @@ components:
               - NAV_TG_RELATED_QUERY_EVENT
               - PROMOTABLE_APPS_EVENT
               - PROMOTABLE_APPS_STRONG_CAT_EVENT
-              - PROMOTABLE_APPS_CAT_EVENT
               - INLINE_DETAILS_TQUALITY_CHECK_PASS
               - INLINE_DETAILS_TQUALITY_CHECK_FAIL
               - INLINE_DETAILS_IS_INLINE_URL
-              - EXPANDER_NEXT_TO_METADATA_BAR
-              - EXPANDER_NEXT_TO_PROMOTIONAL_TEXT
-              - EXPANDABLE_CLUSTER_EXPANDED
-              - EXPANDABLE_CLUSTER_COLLAPSED
-              - CLUSTER_REQUEST_LATENCY_EVENT_LEVEL
               - EDITORS_CHOICE_CLUSTER_SERP_EVENT_LEVEL
               - BESTK_CLUSTER_SERP_EVENT_LEVEL
               - LIVEOPS_CLUSTER_SERP_EVENT_LEVEL
               - QUICKPICKS_CLUSTER_SERP_EVENT_LEVEL
               - INLINE_DETAILS_AQUALITY_CHECK_PASS
               - INLINE_DETAILS_AQUALITY_CHECK_FAIL
-              - INLINE_DETAILS_IS_INLINE_URL_FRONTEND
-              - INLINE_DETAILS_TQUALITY_CHECK_PASS_FRONTEND
-              - INLINE_DETAILS_TQUALITY_CHECK_FAIL_FRONTEND
-              - INLINE_DETAILS_AQUALITY_CHECK_PASS_FRONTEND
-              - INLINE_DETAILS_AQUALITY_CHECK_FAIL_FRONTEND
-              - INLINE_DETAILS_CALLER_AQUALITY_CHECK_PASS_FRONTEND
-              - INLINE_DETAILS_CALLER_AQUALITY_CHECK_FAIL_FRONTEND
               - FRESH_RESULTS_SEEKING_CURRENT_YEAR_EVENT_LEVEL
               - FILTER_TQ_FAILURE_APP
               - EDITORIAL_CONTENT_CLUSTER_FHR_SERP_EVENT_LEVEL
-              - DETAILS_PAGE_TQUALITY_UNKNOWN_EVENT_LEVEL
-              - DETAILS_PAGE_TQUALITY_FAILED_EVENT_LEVEL
-              - DETAILS_PAGE_TQUALITY_PASSED_EVENT_LEVEL
-              - DETAILS_PAGE_AQUALITY_UNKNOWN_EVENT_LEVEL
               - DETAILS_PAGE_AQUALITY_FAILED_EVENT_LEVEL
               - DETAILS_PAGE_AQUALITY_PASSED_EVENT_LEVEL
+              - PGSS_DETAILS_PAGE_TQUALITY_UNKNOWN_EVENT_LEVEL
+              - PGSS_DETAILS_PAGE_TQUALITY_FAILED_EVENT_LEVEL
+              - PGSS_DETAILS_PAGE_TQUALITY_PASSED_EVENT_LEVEL
+              - PGSS_DETAILS_PAGE_AQUALITY_UNKNOWN_EVENT_LEVEL
+              - PGSS_DETAILS_PAGE_AQUALITY_FAILED_EVENT_LEVEL
+              - PGSS_DETAILS_PAGE_AQUALITY_PASSED_EVENT_LEVEL
               - INLINE_DETAILS_CALLER_AQUALITY_CHECK_PASS
               - INLINE_DETAILS_CALLER_AQUALITY_CHECK_FAIL
               - HSDP_AD_NETWORK_CALLER_TABLET_AQUALITY_CHECK_UNKNOWN
@@ -66840,6 +67102,9 @@ components:
               - TRUSTED_ENTITY_L2_L3_SEARCH_QUERY_EVENT
               - EXPANDED_DEV_SUCCESS_CLUSTER_EVENT_LEVEL
               - COLLAPSED_DEV_SUCCESS_CLUSTER_EVENT_LEVEL
+              - TRIGGERED_DEV_SUCCESS_CLUSTER_EVENT_LEVEL
+              - GAME_DEV_SUCCESS_CLUSTER_EVENT_LEVEL
+              - APP_DEV_SUCCESS_CLUSTER_EVENT_LEVEL
               - BROAD_INTENT_GAMES_TIMESPENT_EVENT_LEVEL
               - PLAY_STORE_IAP_SALES_MINI_DETAILS_PAGE_EAP_PARTNER_APPS_EVENT_LEVEL
               - GEARHEAD_ATTEMPT_USB_RECOVERY
@@ -66865,6 +67130,8 @@ components:
               - GEARHEAD_TOOLTIP_COOLWALK_RAIL_WIDGET
               - INLINE_DETAILS_TQUALITY_CHECK_UNKNOWN
               - INLINE_DETAILS_TQUALITY_CHECK_UNKNOWN_FRONTEND
+              - SUPERROOT_PDS_SHORT_DESCRIPTION_EVENT_LEVEL
+              - PGSS_SHORT_DESCRIPTION_DIFF_EVENT_LEVEL
               - EVENT_LEVEL_TEST_CODE_LIMIT
               - RESERVED_4
               - RESERVED_5
@@ -67443,7 +67710,6 @@ components:
               - FIRST_PARTY_PROMOTION_LIVE_OP_SESSION_LEVEL
               - CART_ABANDONMENT_SUBSCRIPTION_ONE_TIME_PASS_SESSION_LEVEL
               - LEGOLAND_INSTANT_FOP_SCREEN_SESSION_LEVEL
-              - LEGOLAND_INSTANT_FOP_SCREEN_WITH_PROMOTION_SESSION_LEVEL
               - MY_REVIEWS_PAGE_VISIT_USER_LEVEL
               - SERIES_BUNDLE_MULTI_TIER_DISCOUNT_SESSION_LEVEL
               - DEVELOPER_PROMOTIONS_ELIGIBLE_SESSION_LEVEL
@@ -67644,7 +67910,6 @@ components:
               - FRESH_RESULTS_SEEKING_CURRENT_YEAR_SESSION_LEVEL
               - FILTER_TQ_FAILURE_APP_SESSION_LEVEL
               - EDITORIAL_CONTENT_CLUSTER_FHR_SERP_SESSION_LEVEL
-              - CONNECTED_WITH_WIFI
               - CONNECTED_WITH_DATA
               - AUTOPLAY_VIDEOS_AT_ANY_TIME
               - AUTOPLAY_VIDEOS_OVER_WIFI_ONLY
@@ -67657,6 +67922,12 @@ components:
               - DETAILS_PAGE_AQUALITY_UNKNOWN_SESSION_LEVEL
               - DETAILS_PAGE_AQUALITY_FAILED_SESSION_LEVEL
               - DETAILS_PAGE_AQUALITY_PASSED_SESSION_LEVEL
+              - PGSS_DETAILS_PAGE_TQUALITY_UNKNOWN_SESSION_LEVEL
+              - PGSS_DETAILS_PAGE_TQUALITY_FAILED_SESSION_LEVEL
+              - PGSS_DETAILS_PAGE_TQUALITY_PASSED_SESSION_LEVEL
+              - PGSS_DETAILS_PAGE_AQUALITY_UNKNOWN_SESSION_LEVEL
+              - PGSS_DETAILS_PAGE_AQUALITY_FAILED_SESSION_LEVEL
+              - PGSS_DETAILS_PAGE_AQUALITY_PASSED_SESSION_LEVEL
               - QUERY_DEPENDENT_SNIPPET_SESSION_LEVEL
               - FOP_STEERING_PROMOTION_INITIAL_BILLING_PROFILE_SESSION_LEVEL
               - FOP_STEERING_PROMOTION_CART_ADD_FOP_SESSION_LEVEL
@@ -67781,6 +68052,9 @@ components:
               - TRUSTED_ENTITY_L2_L3_SEARCH_QUERY_SESSION
               - EXPANDED_DEV_SUCCESS_CLUSTER_SESSION_LEVEL
               - COLLAPSED_DEV_SUCCESS_CLUSTER_SESSION_LEVEL
+              - TRIGGERED_DEV_SUCCESS_CLUSTER_SESSION_LEVEL
+              - GAME_QUERY_DEV_SUCCESS_CLUSTER_SESSION_LEVEL
+              - APP_QUERY_DEV_SUCCESS_CLUSTER_SESSION_LEVEL
               - DOWNLOAD_COUNT_ELIGIBLE
               - PLANOGRAM_MERCH_AMERICAS_GAMES_PAYPAL_SESSION_LEVEL
               - BROAD_INTENT_GAMES_TIMESPENT_SESSION_LEVEL
@@ -67817,87 +68091,44 @@ components:
               - INLINE_DETAILS_TQUALITY_CHECK_UNKNOWN_SESSION_LEVEL
               - INLINE_DETAILS_TQUALITY_CHECK_UNKNOWN_FRONTEND_SESSION_LEVEL
               - APPS_LAUNCHER_CLUSTER_AT_SESSION_LEVEL
+              - SUPERROOT_PDS_SHORT_DESCRIPTION_SESSION_LEVEL
+              - PGSS_SHORT_DESCRIPTION_DIFF_SESSION_LEVEL
+              - WEAR_AQ_SEARCH_PHONE_DEVICE_WITH_WEAR_FILTER
+              - WEAR_AQ_SEARCH_WEAR_DEVICE
+              - NAV_ADS_DUPLICATE_SERVED_SESSION_LEVEL
+              - NAV_ADS_NON_DUPLICATE_SERVED_SESSION_LEVEL
+              - NAV_ADS_NO_AD_SERVED_SESSION_LEVEL
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - SHOULD_SEE_LIVE_OP_CLUSTER_USER_LEVEL
               - CART_ABANDONMENT_USER_LEVEL
               - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_USER_LEVEL
               - CART_ABANDONMENT_SUB_DOLLAR_USER_LEVEL
-              - CART_ABANDONMENT_V2_EXP1_USER_LEVEL
               - IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL
-              - APPS_DETAILS_PAGE_PROMOTION_USER_LEVEL
               - BOOKS_DETAILS_PAGE_PROMOTION_USER_LEVEL
-              - CART_ABANDONMENT_BOOK_NEVER_USER_LEVEL
-              - CART_ABANDONMENT_BOOK_VX_NEVER_USER_LEVEL
-              - CART_ABANDONMENT_MOVIE_NEVER_USER_LEVEL
-              - CART_ABANDONMENT_MOVIE_VX_NEVER_USER_LEVEL
-              - QUICK_FIX_EXPIRED_CREDIT_CARD_USER_LEVEL
-              - DETAILS_PAGE_PROMOTION_USER_LEVEL
               - BURNSIE_ADD_FOP_PROMOTION_USER_LEVEL
-              - CART_ABANDONMENT_HIGH_CART_USER_LEVEL
-              - WELLNET_CASH_USER_LEVEL
-              - BURNSIE_FOR_EXPIRED_CARDS_USER_LEVEL
-              - APPS_DETAILS_PAGE_EXISTING_PROMOTION_USER_LEVEL
               - BOOKS_DETAILS_PAGE_EXISTING_PROMOTION_USER_LEVEL
               - SWOOP_CAMPAIGN_10P_OFF_USER_LEVEL
               - SWOOP_CAMPAIGN_25P_OFF_USER_LEVEL
               - SWOOP_CAMPAIGN_50P_OFF_USER_LEVEL
               - SWOOP_CAMPAIGN_75P_OFF_USER_LEVEL
-              - SWOOP_CAMPAIGN_90P_OFF_USER_LEVEL
               - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_WAVE_2_USER_LEVEL
-              - SUBSCRIBE_AND_INSTALL_AVAILABLE_CLIENT_USER_LEVEL
               - CART_ABANDONMENT_ELIGIBLE_USER_LEVEL
-              - ACQUIRE_REQUEST_EXISTING_SESSION_WITHOUT_ACTION_TOKENS
               - APPS_DETAILS_PAGE_PROMOTION_EXP_2_USER_LEVEL
               - APPS_DETAILS_PAGE_EXISTING_PROMOTION_EXP_2_USER_LEVEL
               - APPS_DETAILS_PAGE_PROMOTION_EXP_2_IN_APP_ITEM_NEVERS_USER_LEVEL
-              - APPS_DETAILS_PAGE_PROMOTION_EXP_2_IN_APP_ITEM_BUYERS_USER_LEVEL
-              - APPS_DETAILS_PAGE_PROMOTION_EXP_2_PREMIUM_APP_NEVERS_USER_LEVEL
-              - APPS_DETAILS_PAGE_PROMOTION_EXP_3_PREMIUM_APP_NEVERS_USER_LEVEL
-              - APPS_DETAILS_PAGE_PROMOTION_EXP_3_IN_APP_ITEM_BUYERS_USER_LEVEL
               - APPS_PERSONALIZED_TOPIC_QUERY_USER_LEVEL
               - APPS_PERSONALIZED_TG_QUERY_USER_LEVEL
               - APPS_PERSONALIZED_ALL_GAME_QUERIES_USER_LEVEL
               - APPS_PERSONALIZED_CATEGORICAL_GAME_SEEKING_QUERIES_USER_LEVEL
               - APPS_PERSONALIZED_CATEGORICAL_NON_TG_QUERIES_USER_LEVEL
-              - APPS_PERSONALIZED_VERTICAL_RFY_CLUSTER_USER_LEVEL
-              - APPS_PERSONALIZED_NAVIGATIONAL_USER_LEVEL
-              - APPS_PERSONALIZED_NAVIGATIONAL_GAME_USER_LEVEL
-              - APPS_PERSONALIZED_MDP_USER_LEVEL
-              - APPS_PERSONALIZED_MDP_GAME_USER_LEVEL
               - SUBSCRIPTION_CANCELLATION_PROMOTION_USER_LEVEL
               - SUBSCRIPTION_UPDATE_FOP_FOR_DCB_AS_PRIMARY_SIGNUP_USER_LEVEL
               - SUBSCRIPTION_UPDATE_FOP_FOR_DCB_AS_PRIMARY_USER_LEVEL
               - SUBSCRIPTION_RETRY_FOP_FOR_DCB_AS_PRIMARY_USER_LEVEL
-              - SUBSCRIPTION_DCB_AS_DEFAULT_FOP_WITH_BETTER_FOPS_USER_LEVEL
               - SUBSCRIPTION_DCB_AS_ADD_FOP_OPTION_USER_LEVEL
-              - LOYALTY_HOME_FIRST_TAB_USER_LEVEL
-              - LOYALTY_HOME_SECOND_TAB_USER_LEVEL
-              - LOYALTY_HOME_THIRD_TAB_USER_LEVEL
-              - CART_ABANDONMENT_RETAIL_EXCELLENCE_TEXT_USER_LEVEL
               - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_1_AT_USER_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_2_AT_USER_LEVEL
               - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_3_AT_USER_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_4_AT_USER_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_5_AT_USER_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_6_AT_USER_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_7_AT_USER_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_8_AT_USER_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_9_AT_USER_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_10_AT_USER_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_11_AT_USER_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_12_AT_USER_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_13_AT_USER_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_14_AT_USER_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_15_AT_USER_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_16_AT_USER_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_17_AT_USER_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_18_AT_USER_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_19_AT_USER_LEVEL
-              - PURCHASABLE_SUBSCRIPTIONS_IN_DETAILS_PAGE_APP_20_AT_USER_LEVEL
-              - GLUE_SCORE_INTEGRATION_DETAILS_PAGE_USER_LEVEL
               - DETAILS_PAGE_PROMOTION_HOLDBACK_USER_LEVEL
-              - RECS_STALENESS_DEMOTION_1_USER_LEVEL
-              - RECS_STALENESS_DEMOTION_2_USER_LEVEL
               - RECS_STALENESS_DEMOTION_3_USER_LEVEL
               - RECS_STALENESS_DEMOTION_4_USER_LEVEL
               - RECS_STALENESS_DEMOTION_5_USER_LEVEL
@@ -67957,7 +68188,6 @@ components:
               - LOYALTY_SIGNUP_INTERSTITIAL_AT_USER_LEVEL
               - LOYALTY_SIGNUP_SUCCESS_AT_USER_LEVEL
               - PLAY_SUBMANAGEMENT_LOG_HOOK_USER_EXAMPLE
-              - FOP_OPTION_OR_EXISTING_INSTRUMENTS_MATCHED_PROMOTION_AT_USER_LEVEL
               - FOP_OPTION_MATCHED_PROMOTION_ONLY_AT_USER_LEVEL
               - PROMOTION_P13N_BANNER_ELIGIBLE_AT_USER_LEVEL
               - NEW_USER_FOP_PROMOTION_SEEN
@@ -67976,8 +68206,6 @@ components:
               - PROMOLINK_CDP_TITLE_PAGE_USER_LEVEL
               - PROMOLINK_CDP_TOPIC_PAGE_USER_LEVEL
               - PROMOLINK_CDP_GENERIC_PAGE_USER_LEVEL
-              - IN_APP_MESSAGING_APP_1_AT_USER_LEVEL
-              - POINTS_PROMOTION_CONTENT_HOME_AT_USER_LEVEL
               - POINTS_PROMOTION_CONTENT_PAGE_AT_USER_LEVEL
               - IN_APP_MESSAGING_APP_2_AT_USER_LEVEL
               - IN_APP_MESSAGING_APP_3_AT_USER_LEVEL
@@ -68010,47 +68238,15 @@ components:
               - IN_APP_OFFER_SAVED_APP_2_AT_USER_LEVEL
               - IN_APP_OFFER_SAVED_APP_3_AT_USER_LEVEL
               - IN_APP_OFFER_SAVED_APP_4_AT_USER_LEVEL
-              - PROMOLINK_CDP_CLUSTER_USER_LEVEL
-              - PROMOLINK_CDP_CLUSTER_TITLE_PAGE_USER_LEVEL
-              - PROMOLINK_CDP_CLUSTER_TOPIC_PAGE_USER_LEVEL
-              - PROMOLINK_CDP_CLUSTER_GENERIC_PAGE_USER_LEVEL
-              - PROMOLINK_CDP_CLUSTER_R2_USER_LEVEL
-              - PROMOLINK_CDP_CLUSTER_TITLE_PAGE_R2_USER_LEVEL
-              - PROMOLINK_CDP_CLUSTER_TOPIC_PAGE_R2_USER_LEVEL
-              - PROMOLINK_CDP_CLUSTER_GENERIC_PAGE_R2_USER_LEVEL
-              - FIRST_PARTY_PROMOTION_LIVE_OP_USER_LEVEL
-              - FIRST_PARTY_PROMOTION_LIVE_OP_PRE_REDEMPTION_USER_LEVEL
-              - FIRST_PARTY_PROMOTION_LIVE_OP_PRE_REDEMPTION_ABOVE_DEV_EVENTS_USER_LEVEL
-              - SHOULD_SEE_FIRST_PARTY_PROMO_LIVE_OP_CTA_USER_LEVEL
               - SHOULD_SEE_FIRST_PARTY_PROMO_LIVE_OP_ON_SERP_MDP_USER_LEVEL
-              - SHOULD_SEE_FIRST_PARTY_PROMO_LIVE_OP_ON_APP_DETAILS_PAGE_USER_LEVEL
               - SHOULD_SEE_FIRST_PARTY_PROMO_LIVE_OP_ON_APP_DP_USER_LEVEL
               - CART_ABANDONMENT_SUBSCRIPTION_ONE_TIME_PASS_USER_LEVEL
-              - LEGOLAND_INSTANT_FOP_SCREEN_USER_LEVEL
-              - LEGOLAND_INSTANT_FOP_SCREEN_WITH_PROMOTION_USER_LEVEL
-              - DEVELOPER_PROMOTIONS_ELIGIBLE_USER_LEVEL
               - GOOGLE_PROMOTIONS_ELIGIBLE_USER_LEVEL
               - USER_TRIGGERED_IAP_PROMOTION_RETRIEVAL_USER_LEVEL
               - LOYALTY_IAP_UPSELL_USER_LEVEL
               - IAP_HAS_UNREDEEMED_PROMOTIONS_CLIENT_USER_LEVEL
-              - PROMOLINK_CDP_CLUSTER_R3_USER_LEVEL
-              - PROMOLINK_CDP_CLUSTER_TITLE_PAGE_R3_USER_LEVEL
-              - PROMOLINK_CDP_CLUSTER_TOPIC_PAGE_R3_USER_LEVEL
-              - PROMOLINK_CDP_CLUSTER_GENERIC_PAGE_R3_USER_LEVEL
-              - PROMOLINK_CDP_CLUSTER_R4_USER_LEVEL
-              - PROMOLINK_CDP_CLUSTER_TITLE_PAGE_R4_USER_LEVEL
-              - PROMOLINK_CDP_CLUSTER_TOPIC_PAGE_R4_USER_LEVEL
-              - PROMOLINK_CDP_CLUSTER_GENERIC_PAGE_R4_USER_LEVEL
-              - G1_PLAY_PASS_BUNDLE_ELIGIBLE_IN_PLAY_STORE_USER_LEVEL
-              - G1_PLAY_PASS_BUNDLE_ELIGIBLE_IN_PLAY_STORE_COMBINED_CHANNEL_USER_LEVEL
               - PLAY_STORE_IAP_SALES_USER_LEVEL
               - PLAY_STORE_IAP_SALES_APP_1_USER_LEVEL
-              - PLAY_STORE_IAP_SALES_APP_2_USER_LEVEL
-              - PLAY_STORE_IAP_SALES_APP_3_USER_LEVEL
-              - PLAY_STORE_IAP_SALES_APP_4_USER_LEVEL
-              - PLAY_STORE_IAP_SALES_APP_5_USER_LEVEL
-              - PLAY_STORE_IAP_SALES_APP_6_USER_LEVEL
-              - PLAY_STORE_IAP_SALES_APP_7_USER_LEVEL
               - PLAY_STORE_IAP_SALES_APP_8_USER_LEVEL
               - PLAY_STORE_IAP_SALES_APP_9_USER_LEVEL
               - PLAY_STORE_IAP_SALES_APP_10_USER_LEVEL
@@ -68182,15 +68378,20 @@ components:
               - EDITORIAL_FCC_AT_USER_LEVEL
               - QUEST_CONTENT_CARD_IN_DEALS_HOME_USER_LEVEL
               - FOP_STEERING_PROMOTION_INITIAL_BILLING_PROFILE_USER_LEVEL
+              - FOP_STEERING_PROMOTION_INITIAL_BILLING_PROFILE_USER_LEVEL_V2
               - FOP_STEERING_PROMOTION_CART_ADD_FOP_USER_LEVEL
+              - FOP_STEERING_PROMOTION_CART_ADD_FOP_USER_LEVEL_V2
               - FOP_STEERING_PROMOTION_CART_CHANGE_FOP_USER_LEVEL
+              - FOP_STEERING_PROMOTION_CART_CHANGE_FOP_USER_LEVEL_V2
               - FOP_STEERING_PROMOTION_CART_APPLY_PROMOTION_USER_LEVEL
+              - FOP_STEERING_PROMOTION_CART_APPLY_PROMOTION_USER_LEVEL_V2
               - LOYALTY_STAMP_CARD_IN_PURCHASE_FLOW_USER_LEVEL
               - HAS_MONETIZATION_BEHAVIOR_USER_LEVEL
               - HAS_MONETIZATION_BEHAVIOR_LAST_180D_USER_LEVEL
               - HAS_LAST_28D_CART_ABANDONMENT_USER_LEVEL
               - HAS_LAST_7D_CART_ABANDONMENT_USER_LEVEL
               - LINK_BIOMETRICS_USER_LEVEL
+              - LINK_BIOMETRICS_NEW_SETUP_USER_LEVEL
               - POST_SUCCESS_ADD_BACKUP_FLOW_USER_LEVEL
               - SKIP_CHECK_MARK_SCREEN_WITH_BACKUP_FLOW_USER_LEVEL
               - IS_ELIGIBLE_FOR_ONE_CLICK_BACKUP_FOP_USER_LEVEL
@@ -68277,6 +68478,12 @@ components:
               - PLAY_ONBOARDING_QUEST_PLATFORM_SERVING_USER_LEVEL
               - APPS_LAUNCHER_CLUSTER_AT_USER_LEVEL
               - PBUY_V1_SEQUENCE_MODEL_LAUNCH_USER_LEVEL
+              - NOTIFICATION_SPEND_UPLIFT_MODEL_LAUNCH_USER_LEVEL
+              - EXPANDED_DEV_SUCCESS_CLUSTER_USER_LEVEL
+              - COLLAPSED_DEV_SUCCESS_CLUSTER_USER_LEVEL
+              - TRIGGERED_DEV_SUCCESS_CLUSTER_USER_LEVEL
+              - GAME_DEV_SUCCESS_CLUSTER_USER_LEVEL
+              - APP_DEV_SUCCESS_CLUSTER_USER_LEVEL
               - USER_LEVEL_TEST_CODE_LIMIT
             type: string
           type: array
@@ -68474,6 +68681,7 @@ components:
             - OBJECTIVE_VITAL_ASSETS_DONE
             - OBJECTIVE_SAM_FEATURES_DONE
             - OBJECTIVE_SPEECH_RECOGNITION_DONE
+            - OBJECTIVE_MULTI_TRACK_AUDIO_DONE
           type: string
         outcome:
           description: Whether the objective is reached or not. REQUIRED.
@@ -70659,6 +70867,7 @@ components:
             - SUMMARY_SEGMENT
             - OCR_EDU
             - ASR_SPAN_EDU
+            - GENERATIVE_ASR_I18N
           type: string
         contextText:
           description: Context text from ASR of long duration, used for longT5 models.
@@ -70923,6 +71132,7 @@ components:
             - SUMMARY_SEGMENT
             - OCR_EDU
             - ASR_SPAN_EDU
+            - GENERATIVE_ASR_I18N
           type: string
         entityGroupInfo:
           $ref: "#/components/schemas/VideoContentSearchEntityGroupInfo"
@@ -70987,6 +71197,7 @@ components:
               - SUMMARY_SEGMENT
               - OCR_EDU
               - ASR_SPAN_EDU
+              - GENERATIVE_ASR_I18N
             type: string
           type: array
         predictedQuerylessTocUsefulness:

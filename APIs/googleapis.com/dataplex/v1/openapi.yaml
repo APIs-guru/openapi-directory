@@ -945,6 +945,11 @@ paths:
           name: dataScanId
           schema:
             type: string
+        - description: Optional. Only validate the request, but do not perform mutations. The default is false.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
       requestBody:
         content:
           application/json:
@@ -2257,6 +2262,10 @@ components:
     GoogleCloudDataplexV1AssetResourceStatus:
       description: Status of the resource referenced by an asset.
       properties:
+        managedAccessIdentity:
+          description: Output only. Service account associated with the BigQuery Connection.
+          readOnly: true
+          type: string
         message:
           description: Additional information about the current state.
           type: string
@@ -2469,7 +2478,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDataplexV1DataAttributeBindingPath"
           type: array
         resource:
-          description: "Optional. Immutable. The resource name of the resource that is binded to attributes. Presently, only entity resource is supported in the form: projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity_id} Must belong in the same project and region as the attribute binding, and there can only exist one active binding for a resource."
+          description: "Optional. Immutable. The resource name of the resource that is associated to attributes. Presently, only entity resource is supported in the form: projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity_id} Must belong in the same project and region as the attribute binding, and there can only exist one active binding for a resource."
           type: string
         uid:
           description: Output only. System generated globally unique ID for the DataAttributeBinding. This ID will be different if the DataAttributeBinding is deleted and re-created with the same name.

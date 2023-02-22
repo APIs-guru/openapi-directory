@@ -79,6 +79,41 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1alpha1/customers:provisionDeployment:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new SAS deployment through the GCP workflow. Creates a SAS organization if an organization match is not found.
+      operationId: sasportal.customers.provisionDeployment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SasPortalProvisionDeploymentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SasPortalProvisionDeploymentResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/sasportal
+          Oauth2c:
+            - https://www.googleapis.com/auth/sasportal
+      tags:
+        - customers
   /v1alpha1/installer:generateSecret:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1368,6 +1403,17 @@ components:
         etag:
           description: "The etag is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the etag in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An etag is returned in the response to GetPolicy, and systems are expected to put that etag in the request to SetPolicy to ensure that their change will be applied to the same version of the policy. If no etag is provided in the call to GetPolicy, then the existing policy is overwritten blindly."
           format: byte
+          type: string
+      type: object
+    SasPortalProvisionDeploymentRequest:
+      description: Request for [ProvisionDeployment]. [spectrum.sas.portal.v1alpha1.Provisioning.ProvisionDeployment]. No input is needed, because GCP Project, Organization Info, and caller’s GAIA ID should be retrieved from the RPC handler, and used as inputs to create a new SAS organization (if not exists) and a new SAS deployment.
+      properties: {}
+      type: object
+    SasPortalProvisionDeploymentResponse:
+      description: Response for [ProvisionDeployment]. [spectrum.sas.portal.v1alpha1.Provisioning.ProvisionDeployment].
+      properties:
+        errorMessage:
+          description: Optional. Optional error message if the provisioning request is not successful.
           type: string
       type: object
     SasPortalSetPolicyRequest:

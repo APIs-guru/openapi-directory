@@ -1233,103 +1233,6 @@ paths:
             - https://www.googleapis.com/auth/logging.admin
       tags:
         - projects
-  "/v2/{parent}/links":
-    get:
-      description: Lists links.
-      operationId: logging.projects.locations.buckets.links.list
-      parameters:
-        - description: Required. The parent resource whose links are to be listed:"projects/PROJECT_ID/locations/LOCATION_ID/buckets/BUCKET_ID/links/" "organizations/ORGANIZATION_ID/locations/LOCATION_ID/buckets/BUCKET_ID/" "billingAccounts/BILLING_ACCOUNT_ID/locations/LOCATION_ID/buckets/BUCKET_ID/" "folders/FOLDER_ID/locations/LOCATION_ID/buckets/BUCKET_ID/
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Optional. The maximum number of results to return from this request.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListLinksResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-        - Oauth2:
-            - https://www.googleapis.com/auth/logging.admin
-          Oauth2c:
-            - https://www.googleapis.com/auth/logging.admin
-        - Oauth2:
-            - https://www.googleapis.com/auth/logging.read
-          Oauth2c:
-            - https://www.googleapis.com/auth/logging.read
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Asynchronously creates linked dataset in BigQuery which makes it possible to use BugQuery to read the logs stored in the bucket. A bucket may currently only contain one link.
-      operationId: logging.projects.locations.buckets.links.create
-      parameters:
-        - description: 'Required. The full resource name of the bucket to create a link for. "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]" "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]" "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]" '
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Required. The ID to use for the link. The link_id can have up to 100 characters. A valid link_id must only have alphanumeric characters and underscores within it.
-          in: query
-          name: linkId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Link"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/logging.admin
-          Oauth2c:
-            - https://www.googleapis.com/auth/logging.admin
-      tags:
-        - projects
   "/v2/{parent}/logs":
     get:
       description: Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.
@@ -1927,14 +1830,6 @@ components:
       schema:
         type: string
   schemas:
-    BigQueryDataset:
-      description: Describes a BigQuery dataset that was created by a link.
-      properties:
-        datasetId:
-          description: Output only. The full resource name of the BigQuery dataset. The DATASET_ID will match the ID of the link, so the link must match the naming restrictions of BigQuery datasets (alphanumeric characters and underscores only).The dataset will have a resource path of "bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID"
-          readOnly: true
-          type: string
-      type: object
     BigQueryOptions:
       description: Options that change functionality of a sink exporting data to BigQuery.
       properties:
@@ -2080,26 +1975,6 @@ components:
           description: 'Required. The resource in which to create the log bucket: "projects/[PROJECT_ID]/locations/[LOCATION_ID]" For example:"projects/my-project/locations/global"'
           type: string
       type: object
-    CreateLinkRequest:
-      description: The parameters to CreateLink.
-      properties:
-        link:
-          $ref: "#/components/schemas/Link"
-          description: Required. The new link.
-        linkId:
-          description: Required. The ID to use for the link. The link_id can have up to 100 characters. A valid link_id must only have alphanumeric characters and underscores within it.
-          type: string
-        parent:
-          description: 'Required. The full resource name of the bucket to create a link for. "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]" "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]" "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]" '
-          type: string
-      type: object
-    DeleteLinkRequest:
-      description: The parameters to DeleteLink.
-      properties:
-        name:
-          description: Required. The full resource name of the link to delete."projects/PROJECT_ID/locations/LOCATION_ID/buckets/BUCKET_ID/links/LINK_ID" "organizations/ORGANIZATION_ID/locations/LOCATION_ID/buckets/BUCKET_ID/links/LINK_ID" "billingAccounts/BILLING_ACCOUNT_ID/locations/LOCATION_ID/buckets/BUCKET_ID/links/LINK_ID" "folders/FOLDER_ID/locations/LOCATION_ID/buckets/BUCKET_ID/links/LINK_ID"
-          type: string
-      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } "
       properties: {}
@@ -2236,64 +2111,6 @@ components:
           format: double
           type: number
       type: object
-    Link:
-      description: Describes a link connected to an analytics enabled bucket.
-      properties:
-        bigqueryDataset:
-          $ref: "#/components/schemas/BigQueryDataset"
-          description: The information of a BigQuery Dataset. When a link is created, a BigQuery dataset is created along with it, in the same project as the LogBucket it's linked to. This dataset will also have BigQuery Views corresponding to the LogViews in the bucket.
-        createTime:
-          description: Output only. The creation timestamp of the link.
-          format: google-datetime
-          readOnly: true
-          type: string
-        description:
-          description: Describes this link.The maximum length of the description is 8000 characters.
-          type: string
-        lifecycleState:
-          description: Output only. The resource lifecycle state.
-          enum:
-            - LIFECYCLE_STATE_UNSPECIFIED
-            - ACTIVE
-            - DELETE_REQUESTED
-            - UPDATING
-            - CREATING
-            - FAILED
-          readOnly: true
-          type: string
-        name:
-          description: The resource name of the link. The name can have up to 100 characters. A valid link id (at the end of the link name) must only have alphanumeric characters and underscores within it. "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]" "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]" "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]" For example:`projects/my-project/locations/global/buckets/my-bucket/links/my_link
-          type: string
-      type: object
-    LinkMetadata:
-      description: Metadata for long running Link operations.
-      properties:
-        createLinkRequest:
-          $ref: "#/components/schemas/CreateLinkRequest"
-          description: CreateLink RPC request.
-        deleteLinkRequest:
-          $ref: "#/components/schemas/DeleteLinkRequest"
-          description: DeleteLink RPC request.
-        endTime:
-          description: The end time of an operation.
-          format: google-datetime
-          type: string
-        startTime:
-          description: The start time of an operation.
-          format: google-datetime
-          type: string
-        state:
-          description: State of an operation.
-          enum:
-            - OPERATION_STATE_UNSPECIFIED
-            - OPERATION_STATE_SCHEDULED
-            - OPERATION_STATE_WAITING_FOR_PERMISSIONS
-            - OPERATION_STATE_RUNNING
-            - OPERATION_STATE_SUCCEEDED
-            - OPERATION_STATE_FAILED
-            - OPERATION_STATE_CANCELLED
-          type: string
-      type: object
     ListBucketsResponse:
       description: The response from ListBuckets.
       properties:
@@ -2316,18 +2133,6 @@ components:
           type: array
         nextPageToken:
           description: If there might be more results than appear in this response, then nextPageToken is included. To get the next set of results, call the same method again using the value of nextPageToken as pageToken.
-          type: string
-      type: object
-    ListLinksResponse:
-      description: The response from ListLinks.
-      properties:
-        links:
-          description: A list of links.
-          items:
-            $ref: "#/components/schemas/Link"
-          type: array
-        nextPageToken:
-          description: If there might be more results than those appearing in this response, then nextPageToken is included. To get the next set of results, call the same method again using the value of nextPageToken as pageToken.
           type: string
       type: object
     ListLocationsResponse:
@@ -2475,13 +2280,6 @@ components:
         name:
           description: 'Resource name for the location, which may vary between implementations. For example: "projects/example-project/locations/us-east1"'
           type: string
-      type: object
-    LocationMetadata:
-      description: Cloud Logging specific location metadata.
-      properties:
-        logAnalyticsEnabled:
-          description: Indicates whether or not Log Analytics features are supported in the given location.
-          type: boolean
       type: object
     LogBucket:
       description: Describes a repository in which log entries are stored.

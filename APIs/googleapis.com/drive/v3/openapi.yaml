@@ -299,7 +299,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Subscribes to changes for a user.
+      description: Subscribes to changes for a user. To use this method, you must include the pageToken query parameter.
       operationId: drive.changes.watch
       parameters:
         - description: The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
@@ -2015,7 +2015,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Creates a permission for a file or shared drive.
+      description: Creates a permission for a file or shared drive. For more information on creating permissions, see Share files, folders & drives.
       operationId: drive.permissions.create
       parameters:
         - description: The ID of the file or shared drive.
@@ -3924,7 +3924,7 @@ components:
           type: array
       type: object
     Permission:
-      description: A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
+      description: A permission for a file. A permission grants a user, group, domain, or the world access to a file or a folder hierarchy.
       properties:
         allowFileDiscovery:
           description: Whether the permission allows the file to be discovered through search. This is only applicable for permissions of type domain or anyone.
@@ -3935,13 +3935,16 @@ components:
         displayName:
           description: |-
             The "pretty" name of the value of the permission. The following is a list of examples for each type of permission:  
-            - user - User's full name, as defined for their Google account, such as "Joe Smith." 
+            - user - User's full name, as defined for their Google Account, such as "Joe Smith." 
             - group - Name of the Google Group, such as "The Company Administrators." 
-            - domain - String domain name, such as "thecompany.com." 
+            - domain - String domain name, such as "your-company.com." 
             - anyone - No displayName is present.
           type: string
         domain:
-          description: The domain to which this permission refers.
+          description: |-
+            The domain to which this permission refers. The following options are currently allowed:  
+            - The entire domain, such as "your-company.com." 
+            - A target audience, such as "ID.audience.googledomains.com."
           type: string
         emailAddress:
           description: The email address of the user or group to which this permission refers.
@@ -3949,10 +3952,10 @@ components:
         expirationTime:
           description: |-
             The time at which this permission will expire (RFC 3339 date-time). Expiration times have the following restrictions:  
-            - They cannot be set on shared drive items 
-            - They can only be set on user and group permissions 
-            - The time must be in the future 
-            - The time cannot be more than a year in the future
+            - They cannot be set on shared drive items. 
+            - They can only be set on user and group permissions. 
+            - The time must be in the future. 
+            - The time cannot be more than one year in the future.
           format: date-time
           type: string
         id:
@@ -3963,10 +3966,10 @@ components:
           description: 'Identifies what kind of resource this is. Value: the fixed string "drive#permission".'
           type: string
         pendingOwner:
-          description: Whether the account associated with this permission is a pending owner. Only populated for user type permissions for files that are not in a shared drive.
+          description: Whether the account associated with this permission is a pending owner. Only populated for user type permissions for files that aren't in a shared drive.
           type: boolean
         permissionDetails:
-          description: Details of whether the permissions on this shared drive item are inherited or directly on this item. This is an output-only field which is present only for shared drive items.
+          description: Details of whether the permissions on this shared drive item are inherited or are directly on this item. This is an output-only field that's present only for shared drive items.
           items:
             properties:
               inherited:
@@ -3977,13 +3980,13 @@ components:
                 type: string
               permissionType:
                 description: |-
-                  The permission type for this user. While new values may be added in future, the following are currently possible:  
+                  The permission type for this user. While new values may be added in future, the following are currently allowed:  
                   - file 
                   - member
                 type: string
               role:
                 description: |-
-                  The primary role for this user. While new values may be added in the future, the following are currently possible:  
+                  The primary role for this user. While new values may be added in the future, the following are currently allowed:  
                   - organizer 
                   - fileOrganizer 
                   - writer 
@@ -4031,7 +4034,7 @@ components:
             - user 
             - group 
             - domain 
-            - anyone  When creating a permission, if type is user or group, you must provide an emailAddress for the user or group. When type is domain, you must provide a domain. There isn't extra information required for a anyone type.
+            - anyone  When creating a permission, if type is user or group, you must provide an emailAddress for the user or group. When type is domain, you must provide a domain. There isn't extra information required for the anyone type.
           type: string
         view:
           description: Indicates the view for this permission. Only populated for permissions that belong to a view. published is the only supported value.
