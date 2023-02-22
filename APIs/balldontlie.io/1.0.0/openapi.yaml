@@ -26,6 +26,11 @@ paths:
       operationId: allGames(exampleParameters)
       parameters:
         - in: query
+          name: seasons[]
+          schema:
+            example: "2018"
+            type: string
+        - in: query
           name: team_ids[]
           schema:
             example: "1"
